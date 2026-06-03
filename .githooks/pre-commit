@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
+echo "[pre-commit] Syncing data/index.json"
+node scripts/sync-data-index.mjs
+git add data/index.json
+
+echo "[pre-commit] Verifying generated catalog"
+node --input-type=module -e "JSON.parse(await (await import('node:fs/promises')).readFile('data/index.json', 'utf8'))"
+

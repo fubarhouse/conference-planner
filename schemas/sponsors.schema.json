@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Sponsor Aliases",
+  "description": "Global list of sponsor canonical names and their known aliases, used to match sponsors across events.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["title", "aliases"],
+    "properties": {
+      "title": {
+        "type": "string",
+        "minLength": 1,
+        "description": "The canonical sponsor name used for cross-event matching."
+      },
+      "aliases": {
+        "type": "array",
+        "items": { "type": "string", "minLength": 1 },
+        "minItems": 1,
+        "description": "Alternative names this sponsor has been known by."
+      }
+    }
+  }
+}

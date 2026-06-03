@@ -1,0 +1,271 @@
+{
+  "event": {
+    "designation": "DrupalSouth Community Day",
+    "location": "Canberra",
+    "year": "2023",
+    "website": "https://drupalsouth.org/events/drupalsouth-community-day-2023",
+    "region": "Australia",
+    "startDate": "2023-11-22T22:00:00Z",
+    "endDate": "2023-11-23T05:00:00Z",
+    "venue": "Canberra Rex Hotel, Canberra",
+    "timezone": "Australia/Sydney",
+    "enabled": true,
+    "sourceCache": "cache/remote/2026-04-25T12-06-45Z/drupalsouth-community-day-2023-json-community-day-2023",
+    "flickr": {
+      "enabled": true,
+      "groupUrl": "https://flic.kr/g/3gpn3e",
+      "image": "./img/flickr/drupalsouth-community-day/2023-canberra.jpg",
+      "imageAlt": "DrupalSouth logo"
+    },
+    "logo": {
+      "image": "./img/logos/drupalsouth-logo.png",
+      "imageAlt": "DrupalSouth logo",
+      "usePlate": false
+    },
+    "sponsors": [
+      {
+        "id": "sponsor-1",
+        "title": "Acquia",
+        "tier": "",
+        "row": 1,
+        "priority": 10,
+        "image": "./img/sponsors/drupalsouth-community-day/2023-canberra/sponsor-1.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://drupalsouth.org/sponsors/acquia",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-2",
+        "title": "Annex",
+        "tier": "",
+        "row": 1,
+        "priority": 20,
+        "image": "./img/sponsors/drupalsouth-community-day/2023-canberra/sponsor-2.png",
+        "imageAlt": "Annex logo",
+        "link": "https://drupalsouth.org/sponsors/annex",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-3",
+        "title": "Ironstar",
+        "tier": "",
+        "row": 1,
+        "priority": 30,
+        "image": "./img/sponsors/drupalsouth-community-day/2023-canberra/sponsor-3.png",
+        "imageAlt": "Ironstar logo",
+        "link": "https://drupalsouth.org/sponsors/ironstar",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-4",
+        "title": "Morpht",
+        "tier": "",
+        "row": 1,
+        "priority": 40,
+        "image": "./img/sponsors/drupalsouth-community-day/2023-canberra/sponsor-4.png",
+        "imageAlt": "Morpht logo",
+        "link": "https://drupalsouth.org/sponsors/morpht",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-5",
+        "title": "Pragma Partners",
+        "tier": "",
+        "row": 1,
+        "priority": 50,
+        "image": "./img/sponsors/drupalsouth-community-day/2023-canberra/sponsor-5.png",
+        "imageAlt": "Pragma Partners logo",
+        "link": "https://drupalsouth.org/sponsors/pragma",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-6",
+        "title": "PreviousNext",
+        "tier": "",
+        "row": 1,
+        "priority": 60,
+        "image": "./img/sponsors/drupalsouth-community-day/2023-canberra/sponsor-6.png",
+        "imageAlt": "PreviousNext logo",
+        "link": "https://drupalsouth.org/sponsors/previousnext",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-7",
+        "title": "Salsa Digital",
+        "tier": "",
+        "row": 1,
+        "priority": 70,
+        "image": "./img/sponsors/drupalsouth-community-day/2023-canberra/sponsor-7.png",
+        "imageAlt": "Salsa Digital logo",
+        "link": "https://drupalsouth.org/sponsors/salsa-digital",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "columns": 3,
+    "scheduleURLs": [
+      "https://drupalsouth.org/events/drupalsouth-community-day-2023/schedule"
+    ]
+  },
+  "items": [
+    {
+      "startTime": "2023-11-22T22:00:00Z",
+      "endTime": "2023-11-23T01:00:00Z",
+      "duration": "P180M",
+      "title": "Contributing to Drupal",
+      "location": "Room 1",
+      "link": "https://drupalsouth.org/events/drupalsouth-community-day-2023/schedule#contributing",
+      "track": [
+        "Non-technical"
+      ],
+      "speakers": [
+        "Owen Lansbury",
+        "Griffyn Heels"
+      ],
+      "full_description": "Fostering a culture of open source contribution is essential for any organisation that relies on Drupal.\nThis workshop will draw on our experiences at PreviousNext in becoming one of the world's leading Drupal contributors whilst remaining a small, independent company. It will delve into the culture, policies and processes that can be applied to any organisation to put open source contribution at the core of your operations and the immense benefits that it brings to your team and productivity.\nAudience requirements:\nNo prior knowledge",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-11-22T22:00:00Z",
+      "endTime": "2023-11-23T01:00:00Z",
+      "duration": "P180M",
+      "title": "ECA deep dive: Rules replacement for Drupal 10",
+      "location": "Room 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-community-day-2023/schedule#eca",
+      "track": [
+        "Technical"
+      ],
+      "speakers": [
+        "Vladimir Roudakov"
+      ],
+      "full_description": "ECA is a collection of modules and libraries for defining business rules via graphical user interface in Drupal.\nECA is uniquely poised to be the long awaited replacement for popular Drupal 7 rules.\nGrowing user base and vast library of predefined solutions for the most common business rules is setting the arena for the great user experience.\nAGENDA\nPart 1.\nIntroduction to ECA\nECA structure and building blocks\nBuilding basic rules: events, conditions, actions\nPart 2.\nIntroduction to complex rules\nRules import / export\nUsing help and rules library\nPREREQUISITES\nNo prior Drupal knowledge is required, however it is recommended that users will have content editing knowledge.\nBring your own laptop or tablet connected to the internet.\nPROVIDED\nPre-configured Drupal environment to follow the tutorial.\nTraining notes and presentation links.\nAudience requirements:\nNo prior knowledge\nOwn laptop",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-11-22T22:00:00Z",
+      "endTime": "2023-11-23T01:00:00Z",
+      "duration": "P180M",
+      "title": "Onboarding a new PaaS Site",
+      "location": "Room 3",
+      "link": "https://drupalsouth.org/events/drupalsouth-community-day-2023/schedule#onboarding",
+      "track": [
+        "Technical"
+      ],
+      "speakers": [
+        "Simon Hobbs"
+      ],
+      "full_description": "Let's take a tour around a vanilla GovCMS PaaS setup. This talk is targetted the team that has been delivered a fresh new PaaS site, but will have a lot of value for existing PaaS developers and teams, and also can help evaluators understand some of the technical (application level) the differences between GovCMS SaaS and PaaS.\nThis talk is not endorsed by Finance and only discusses open source components.\nAudience requirements:\nBasic understanding about setting up a Drupal site",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-11-22T22:00:00Z",
+      "endTime": "2023-11-23T01:00:00Z",
+      "duration": "P180M",
+      "title": "Preparing for content migrations",
+      "location": "Room 4",
+      "link": "https://drupalsouth.org/events/drupalsouth-community-day-2023/schedule#migration",
+      "track": [
+        "Non-technical"
+      ],
+      "speakers": [
+        "Margery Tongway"
+      ],
+      "full_description": "Share back experiences for site migrations or consolidations, starting with prep work that should happen before any migration work is started.\nIntroduction\nHave you done a migration recently?\nNon technical migration considerations\nHow have you done this?\nTypes of migrations we've done\nWhat has been your most challenging migration?\nMigration methods\nWhat's worked best for you?\nScheduled break\nGroup discussion/Ask me anything\nAudience requirements:\nNo prior knowledge\nSome prior knowledge",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-11-23T01:00:00Z",
+      "endTime": "2023-11-23T02:00:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "Venue",
+      "link": "",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-11-23T02:00:00Z",
+      "endTime": "2023-11-23T05:00:00Z",
+      "duration": "P180M",
+      "title": "Advanced dev - modern/headless",
+      "location": "Room 1",
+      "link": "https://drupalsouth.org/events/drupalsouth-community-day-2023/schedule#modern",
+      "track": [
+        "Technical"
+      ],
+      "speakers": [
+        "Max Pogonowski"
+      ],
+      "full_description": "Max will lead a discussion catering to the level of knowledge in the room about headless approaches including but not limited to:\nAPIs available with Drupal\nA bit of detail about my personal favourite: graphQL\nWhat makes headless a good choice for a project (not every project)\nVarious frontend technologies including React, Vue, Angular, and some of the newer generation like Next and Remix\nBuild systems like Vite and webpack\nThe difference between frontend-only frameworks and those that need their own backend\nAudience requirements:\nNo prior knowledge\nOptional:\nA headless drupal project on your own laptop to share (be prepared for feedback)",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-11-23T02:00:00Z",
+      "endTime": "2023-11-23T05:00:00Z",
+      "duration": "P180M",
+      "title": "CivicTheme design system for Drupal 10",
+      "location": "Room 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-community-day-2023/schedule#civic",
+      "track": [
+        "Technical"
+      ],
+      "speakers": [
+        "Akhil Bhandari",
+        "Alex Skrypnyk"
+      ],
+      "full_description": "CivicTheme is an open source, inclusive and component-based 'true design system'. It was created so governments and organisations can rapidly assemble modern, consistent and compliant digital experiences for its audiences. Based on atomic design, the design system includes 60 WCAG 2.1 compliant components, as both Figma visual design UI library and exactly matched codified Drupal functional components, out of the box.\nCivicTheme has been recognised as part of the Digital Transformation Agency’s Australian Government Architecture (AGA) and is optimised to work on GovCMS SaaS Drupal website projects.\nToday we'll run 3x 20-40min sessions for Technical and Non-technical audiences to learn what CivicTheme is, how to install it and how to contribute to the open source project.\nSession #1: What is CivicTheme design system\nDuration: 30 min\nPresenter: Akhil Bhandari\nSession outline:\nWhat is CivicTheme design system and how to use in Drupal projects from Design to Build\nWorking with CivicTheme Figma design files\nQnA - Ask us anything about: CivicTheme\nAudience: Non-Technical\nSession #2: How to work with and install a CivicTheme project\nDuration: 40 min\nPresenter: Alex Skrypnyk\nSession outline:\nHow a CivicTheme project works\nHow to install a CivicTheme project\nDemo of a typical installation\nQnA - Ask us anything about: CivicTheme installations\nBring your own laptops if you want to follow along\nAudience: Technical\nSession #3: How to contribute to the CivicTheme open-source project\nDuration: 20 min\nPresenter: Akhil Bhandari and Alex Skrypnyk\nSession outline:\nHow to contribute to the CivicTheme open-source project\nOpen to the floor - nominate practical topics / features that could be added to the CivicTheme roadmap\nAudience: Non-Technical",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-11-23T02:00:00Z",
+      "endTime": "2023-11-23T05:00:00Z",
+      "duration": "P180M",
+      "title": "Future roadmap including AI: Get hands on with generative AI",
+      "location": "Room 3",
+      "link": "https://drupalsouth.org/events/drupalsouth-community-day-2023/schedule#future",
+      "track": [
+        "Technical"
+      ],
+      "speakers": [
+        "Murray Woodman"
+      ],
+      "full_description": "Get hands on with generative AI\nThis session will provide a practical introduction to generative AI systems such as ChatGPT and will demonstrate how they can be leveraged in Drupal. This session will be hands on - participants will be given access to a demo Drupal site where they can build their own integrations to AI tools and expose them to editors via the UI. By the end of the session, participants should be aware of the possibilities and have a good insight as to how that can practically be introduced to Drupal.\nAn outline of the session is as follows:\nBrief introduction to generative AI and relevance to CMS.\nBrief introduction to the Augmentor module and the pricnples behind it.\nDemonstration of a simple Augmentor in the editor interface.\nIdeation session where particiapnts design an Augmentor for themselves.\nPractical session\nGetting everyone logged in\nWalking through the Augmentor interface\nTroubleshooting help will be available in a slack channel and also via Zoom\nDemonstration of some of the Augmentors which have been created.\nRecap of what was done and discussion of some of the findings.\nHopefully we will come up with some interesting things together!\nAudience requirements:\nNo prior knowledge\nOwn laptop",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-11-23T02:00:00Z",
+      "endTime": "2023-11-23T05:00:00Z",
+      "duration": "P180M",
+      "title": "Team Communication",
+      "location": "Room 4",
+      "link": "https://drupalsouth.org/events/drupalsouth-community-day-2023/schedule",
+      "track": [
+        "Non-technical"
+      ],
+      "speakers": [
+        "Julia Topliss"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    }
+  ],
+  "result": "success",
+  "url": "https://drupalsouth.org/events/drupalsouth-community-day-2023/schedule"
+}

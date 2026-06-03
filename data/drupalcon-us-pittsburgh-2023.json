@@ -1,0 +1,1793 @@
+{
+  "event": {
+    "designation": "DrupalCon",
+    "location": "Pittsburgh",
+    "year": "2023",
+    "website": "https://events.drupal.org/pittsburgh2023",
+    "region": "America",
+    "startDate": "2023-06-05T12:00:00Z",
+    "endDate": "2023-06-08T20:00:00Z",
+    "venue": "David L. Lawrence Convention Center",
+    "timezone": "America/New_York",
+    "columns": 3,
+    "enabled": false,
+    "logo": {
+      "image": "./img/logos/drupalcon-logo.svg",
+      "imageAlt": "DrupalCon logo"
+    },
+    "scheduleURLs": [
+      "https://events.drupal.org/pittsburgh2023/schedule"
+    ],
+    "flickr": null
+  },
+  "items": [
+    {
+      "startTime": "2023-06-05T12:00:00Z",
+      "endTime": "2023-06-05T21:00:00Z",
+      "duration": "P540M",
+      "title": "Registration",
+      "location": "Location Main Concourse",
+      "link": "https://events.drupal.org//pittsburgh2023/session/registration",
+      "track": [],
+      "speakers": [
+        "Drupal Association"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T12:00:00Z",
+      "endTime": "2023-06-05T21:00:00Z",
+      "duration": "P540M",
+      "title": "Birds of a Feather Sessions",
+      "location": "Location Room 326-330",
+      "link": "https://events.drupal.org//pittsburgh2023/session/birds-feather-sessions",
+      "track": [],
+      "speakers": [
+        "Drupal Association"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T12:00:00Z",
+      "endTime": "2023-06-05T12:50:00Z",
+      "duration": "P50M",
+      "title": "Scholarship Breakfast",
+      "location": "Location Room 403-405",
+      "link": "https://events.drupal.org//pittsburgh2023/session/scholarship-breakfast-0",
+      "track": [],
+      "speakers": [
+        "Drupal Association"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T12:00:00Z",
+      "endTime": "2023-06-05T21:00:00Z",
+      "duration": "P540M",
+      "title": "General Contribution",
+      "location": "Location Room 408-410",
+      "link": "https://events.drupal.org//pittsburgh2023/session/general-contribution-3",
+      "track": [],
+      "speakers": [
+        "Drupal Association"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T13:00:00Z",
+      "endTime": "2023-06-05T13:50:00Z",
+      "duration": "P50M",
+      "title": "Introducing Automatic Updates in Drupal core",
+      "location": "Location Room 301-302",
+      "link": "https://events.drupal.org//pittsburgh2023/session/introducing-automatic-updates-drupal-core",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "Adam Globus-Hoenich (phenaproxima)",
+        "tedbow"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T13:00:00Z",
+      "endTime": "2023-06-05T13:50:00Z",
+      "duration": "P50M",
+      "title": "Data lake: how Red Hat maintains data quality across multiple Drupal sites",
+      "location": "Location Room 303-305",
+      "link": "https://events.drupal.org//pittsburgh2023/session/data-lake-how-red-hat-maintains-data-quality-across-multiple-drupal-sites",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "April Sides (weekbeforenext)",
+        "Melissa Bent (merauluka)"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T13:00:00Z",
+      "endTime": "2023-06-05T13:50:00Z",
+      "duration": "P50M",
+      "title": "Playing as a Team: Strategies for Better Communication",
+      "location": "Location Room 306-307",
+      "link": "https://events.drupal.org//pittsburgh2023/session/playing-team-strategies-better-communication",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "Cori Neslund (cneslund)",
+        "Travis Porchia (T.porchia)"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T13:00:00Z",
+      "endTime": "2023-06-05T13:50:00Z",
+      "duration": "P50M",
+      "title": "The Missing Link: Taxonomists and Taxonomy Governance",
+      "location": "Location Room 310-311",
+      "link": "https://events.drupal.org//pittsburgh2023/session/missing-link-taxonomists-and-taxonomy-governance",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "Michele Ann Jenkins (micheleannj)"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T13:00:00Z",
+      "endTime": "2023-06-05T13:50:00Z",
+      "duration": "P50M",
+      "title": "Urban.org: Urban Institute: 24 research websites, one platform, three-person team",
+      "location": "Location Room 315-316",
+      "link": "https://events.drupal.org//pittsburgh2023/session/urbanorg-urban-institute-24-research-websites-one-platform-three-person-team",
+      "track": [
+        "drupal showcase"
+      ],
+      "speakers": [
+        "Josh Miller (joshmiller)",
+        "Farnoosh Johnson (Farnoosh)",
+        "Joseph Patterson (prodigyjoe)"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T13:00:00Z",
+      "endTime": "2023-06-05T13:50:00Z",
+      "duration": "P50M",
+      "title": "Neuroinclusivity in Tech: The hidden costs of neglecting soft skills",
+      "location": "Location Room 317-318",
+      "link": "https://events.drupal.org//pittsburgh2023/session/neuroinclusivity-tech-hidden-costs-neglecting-soft-skills",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "Fei Lauren (feilauren)"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T13:00:00Z",
+      "endTime": "2023-06-05T13:50:00Z",
+      "duration": "P50M",
+      "title": "Drupal's next leap: configuration validation",
+      "location": "Location Room 323",
+      "link": "https://events.drupal.org//pittsburgh2023/session/drupals-next-leap-configuration-validation",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "Wim Leers"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T13:50:00Z",
+      "endTime": "2023-06-05T14:30:00Z",
+      "duration": "P40M",
+      "title": "Expo Hall Break",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/expo-hall-break-6",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-05T14:00:00Z",
+      "endTime": "2023-06-05T14:15:00Z",
+      "duration": "P15M",
+      "title": "Sponsored Lightning Talk: How Open Source Principles Can Help Organizational Governance",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/sponsored-lightning-talk-how-open-source-principles-can-help-organizational",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "johnpicozzi"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T14:30:00Z",
+      "endTime": "2023-06-05T14:45:00Z",
+      "duration": "P15M",
+      "title": "Opening Remarks & Aaron Winborn Award Ceremony",
+      "location": "Location Spirit of Pittsburgh Ballroom",
+      "link": "https://events.drupal.org//pittsburgh2023/session/opening-remarks-aaron-winborn-award-ceremony",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-05T14:45:00Z",
+      "endTime": "2023-06-05T15:45:00Z",
+      "duration": "P60M",
+      "title": "Driesnote",
+      "location": "Location Spirit of Pittsburgh Ballroom",
+      "link": "https://events.drupal.org//pittsburgh2023/session/driesnote",
+      "track": [],
+      "speakers": [
+        "dries"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T15:45:00Z",
+      "endTime": "2023-06-05T16:00:00Z",
+      "duration": "P15M",
+      "title": "Group Photo",
+      "location": "Location Spirit of Pittsburgh Ballroom",
+      "link": "https://events.drupal.org//pittsburgh2023/session/group-photo",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-05T16:00:00Z",
+      "endTime": "2023-06-05T17:30:00Z",
+      "duration": "P90M",
+      "title": "Lunch & Expo Hall Break",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/lunch-expo-hall-break",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-05T16:30:00Z",
+      "endTime": "2023-06-05T16:45:00Z",
+      "duration": "P15M",
+      "title": "Unlocking Effortless CRM Migration with Acquia Marketing Cloud: Best Practices & Success Stories",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/unlocking-effortless-crm-migration-acquia-marketing-cloud-best-practices",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "tcruse"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T17:00:00Z",
+      "endTime": "2023-06-05T17:15:00Z",
+      "duration": "P15M",
+      "title": "Sponsored Lightning Talk - Leveraging Artificial Intelligence in Drupal 10 with OpenAI and ChatGPT",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/sponsored-lightning-talk-leveraging-artificial-intelligence-drupal-10-openai",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "Kevin Quillen (kevinquillen)"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T17:30:00Z",
+      "endTime": "2023-06-05T18:20:00Z",
+      "duration": "P50M",
+      "title": "Project Browser Strategic Initiative: Where we are and how you can help",
+      "location": "Location Room 301-302",
+      "link": "https://events.drupal.org//pittsburgh2023/session/project-browser-strategic-initiative-where-we-are-and-how-you-can-help",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "leslieg",
+        "chrisfromredfin"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T17:30:00Z",
+      "endTime": "2023-06-05T18:20:00Z",
+      "duration": "P50M",
+      "title": "Performance Audits: The Top 8 Problems We Find & How To Fix Them",
+      "location": "Location Room 303-305",
+      "link": "https://events.drupal.org//pittsburgh2023/session/performance-audits-top-8-problems-we-find-how-fix-them",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "Janez Urevc (slashrsm)"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T17:30:00Z",
+      "endTime": "2023-06-05T18:20:00Z",
+      "duration": "P50M",
+      "title": "The Big Impact of Open Source",
+      "location": "Location Room 306-307",
+      "link": "https://events.drupal.org//pittsburgh2023/session/big-impact-open-source",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "mabolek"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T17:30:00Z",
+      "endTime": "2023-06-05T18:20:00Z",
+      "duration": "P50M",
+      "title": "Marketers are our future; how to get them to choose Drupal.",
+      "location": "Location Room 310-311",
+      "link": "https://events.drupal.org//pittsburgh2023/session/marketers-are-our-future-how-get-them-choose-drupal",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "r.gladden",
+        "annie stone",
+        "jennavanoort"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T17:30:00Z",
+      "endTime": "2023-06-05T18:20:00Z",
+      "duration": "P50M",
+      "title": "Multisites, microteam: Maintaining multi-tenant web properties at Harvard Medical School",
+      "location": "Location Room 315-316",
+      "link": "https://events.drupal.org//pittsburgh2023/session/multisites-microteam-maintaining-multi-tenant-web-properties-harvard-medical",
+      "track": [
+        "drupal showcase"
+      ],
+      "speakers": [
+        "antiorario",
+        "Sam Peasley"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T17:30:00Z",
+      "endTime": "2023-06-05T18:20:00Z",
+      "duration": "P50M",
+      "title": "Wartime remote work. A superpower that we learned while being under unique circumstances",
+      "location": "Location Room 317-318",
+      "link": "https://events.drupal.org//pittsburgh2023/session/wartime-remote-work-superpower-we-learned-while-being-under-unique",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "Iryna Semenova (isemyonova)"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T17:30:00Z",
+      "endTime": "2023-06-05T18:20:00Z",
+      "duration": "P50M",
+      "title": "Drush 12 - modernized",
+      "location": "Location Room 319-321",
+      "link": "https://events.drupal.org//pittsburgh2023/session/drush-12-modernized",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "moshe weitzman",
+        "greg.1.anderson"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T17:30:00Z",
+      "endTime": "2023-06-05T18:20:00Z",
+      "duration": "P50M",
+      "title": "Ignite: Our Approach to Design Systems and Faster Site-Building",
+      "location": "Location Room 324",
+      "link": "https://events.drupal.org//pittsburgh2023/session/ignite-our-approach-design-systems-and-faster-site-building",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "drupalninja99"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T17:30:00Z",
+      "endTime": "2023-06-05T18:20:00Z",
+      "duration": "P50M",
+      "title": "Intent-Based Personalization in Drupal",
+      "location": "Location Room 325",
+      "link": "https://events.drupal.org//pittsburgh2023/session/intent-based-personalization-drupal",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-05T17:30:00Z",
+      "endTime": "2023-06-05T18:20:00Z",
+      "duration": "P50M",
+      "title": "Driesnote Q & A",
+      "location": "Location Spirit of Pittsburgh Ballroom",
+      "link": "https://events.drupal.org//pittsburgh2023/session/driesnote-q",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "Joi Garrett (JoiGarrett)",
+        "dries"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T18:20:00Z",
+      "endTime": "2023-06-05T19:00:00Z",
+      "duration": "P40M",
+      "title": "Expo Hall Break",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/expo-hall-break-7",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-05T18:30:00Z",
+      "endTime": "2023-06-05T18:45:00Z",
+      "duration": "P15M",
+      "title": "Sponsored Lightning Talk: Five tips for keeping your remote work culture healthy",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/sponsored-lightning-talk-five-tips-keeping-your-remote-work-culture-healthy",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "jds1"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T19:00:00Z",
+      "endTime": "2023-06-05T19:50:00Z",
+      "duration": "P50M",
+      "title": "Relieve pressure within OS communities with reusable systems, templates, and succession management",
+      "location": "Location Room 301-302",
+      "link": "https://events.drupal.org//pittsburgh2023/session/relieve-pressure-within-os-communities-reusable-systems-templates-and",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "Jordana Fung (jordana)",
+        "Elli Ludwigson (ekl1773)"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T19:00:00Z",
+      "endTime": "2023-06-05T19:50:00Z",
+      "duration": "P50M",
+      "title": "Upgrading to Drupal 10 using the Migrate API",
+      "location": "Location Room 303-305",
+      "link": "https://events.drupal.org//pittsburgh2023/session/upgrading-drupal-10-using-migrate-api",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "dinarcon"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T19:00:00Z",
+      "endTime": "2023-06-05T19:50:00Z",
+      "duration": "P50M",
+      "title": "Beyond WCAG Compliance: Next Steps in your Website’s Commitment to Digital Inclusion",
+      "location": "Location Room 306-307",
+      "link": "https://events.drupal.org//pittsburgh2023/session/beyond-wcag-compliance-next-steps-your-websites-commitment-digital-inclusion",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "Andrew Mallis (Andrew_Mallis)",
+        "mikemccaffrey"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T19:00:00Z",
+      "endTime": "2023-06-05T19:50:00Z",
+      "duration": "P50M",
+      "title": "Simplify and standardize with an image plan for your Drupal site",
+      "location": "Location Room 310-311",
+      "link": "https://events.drupal.org//pittsburgh2023/session/simplify-and-standardize-image-plan-your-drupal-site",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "rlhawk"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T19:00:00Z",
+      "endTime": "2023-06-05T19:50:00Z",
+      "duration": "P50M",
+      "title": "Standardize sites with Drupal Scaffolding",
+      "location": "Location Room 315-316",
+      "link": "https://events.drupal.org//pittsburgh2023/session/standardize-sites-drupal-scaffolding",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "Nick Dickinson-Wilde (NickDickinsonWilde)"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T19:00:00Z",
+      "endTime": "2023-06-05T19:50:00Z",
+      "duration": "P50M",
+      "title": "Beyond Inclusion: Building a Culture of True Equity",
+      "location": "Location Room 317-318",
+      "link": "https://events.drupal.org//pittsburgh2023/session/beyond-inclusion-building-culture-true-equity",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "Monica \"Nikki\" Flores (monicadear)",
+        "elliefanning"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T19:00:00Z",
+      "endTime": "2023-06-05T19:50:00Z",
+      "duration": "P50M",
+      "title": "ARIA-Winning, Son? How to Achieve Accessibility Wins on Your Next Project",
+      "location": "Location Room 319-321",
+      "link": "https://events.drupal.org//pittsburgh2023/session/aria-winning-son-how-achieve-accessibility-wins-your-next-project",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "kleighm",
+        "Irene Dobbs (irene_dobbs)"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T19:00:00Z",
+      "endTime": "2023-06-05T19:50:00Z",
+      "duration": "P50M",
+      "title": "Do I Actually Need a Redesign Right Now?",
+      "location": "Location Room 324",
+      "link": "https://events.drupal.org//pittsburgh2023/session/do-i-actually-need-redesign-right-now",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-05T19:00:00Z",
+      "endTime": "2023-06-05T19:50:00Z",
+      "duration": "P50M",
+      "title": "Core Web Vitals: Google & Tag1 Improving Drupal’s Performance, User Experience, and Your Bottom Line",
+      "location": "Location Room 325",
+      "link": "https://events.drupal.org//pittsburgh2023/session/core-web-vitals-google-tag1-improving-drupals-performance-user-experience",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "Janez Urevc (slashrsm)",
+        "brendanmcn"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T19:00:00Z",
+      "endTime": "2023-06-05T19:50:00Z",
+      "duration": "P50M",
+      "title": "Drupal.org Update: Accelerating contribution",
+      "location": "Location Spirit of Pittsburgh Ballroom",
+      "link": "https://events.drupal.org//pittsburgh2023/session/drupalorg-update-accelerating-contribution",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "Tim Lehnen (hestenet)",
+        "drumm",
+        "fjgarlin",
+        "Brendan Blaine",
+        "alexmoreno"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T19:50:00Z",
+      "endTime": "2023-06-05T20:10:00Z",
+      "duration": "P20M",
+      "title": "Expo Hall Break",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/expo-hall-break-8",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-05T19:50:00Z",
+      "endTime": "2023-06-05T20:05:00Z",
+      "duration": "P15M",
+      "title": "Sponsored Lightning Talk: How I Learned to Stop Worrying and to Love Composable",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/sponsored-lightning-talk-how-i-learned-stop-worrying-and-love-composable",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "cgreaten"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T20:10:00Z",
+      "endTime": "2023-06-05T21:00:00Z",
+      "duration": "P50M",
+      "title": "How to make big things happen in Drupal",
+      "location": "Location Room 301-302",
+      "link": "https://events.drupal.org//pittsburgh2023/session/how-make-big-things-happen-drupal",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "Gábor Hojtsy",
+        "Mike Herchel (mherchel)",
+        "Tiffany Farriss (farriss)",
+        "Kristen Pol (Kristen Pol)"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T20:10:00Z",
+      "endTime": "2023-06-05T21:00:00Z",
+      "duration": "P50M",
+      "title": "How Discover Drupal Changed my Life",
+      "location": "Location Room 306-307",
+      "link": "https://events.drupal.org//pittsburgh2023/session/how-discover-drupal-changed-my-life",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "Devon_4224"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T20:10:00Z",
+      "endTime": "2023-06-05T21:00:00Z",
+      "duration": "P50M",
+      "title": "Get Going with Google Analytics 4",
+      "location": "Location Room 310-311",
+      "link": "https://events.drupal.org//pittsburgh2023/session/get-going-google-analytics-4",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "Heather Wozniak (heatherwoz)"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T20:10:00Z",
+      "endTime": "2023-06-05T21:00:00Z",
+      "duration": "P50M",
+      "title": "Content Governance Models: A Story of Three Websites",
+      "location": "Location Room 315-316",
+      "link": "https://events.drupal.org//pittsburgh2023/session/content-governance-models-story-three-websites",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "Suzanne Dergacheva (pixelite)"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T20:10:00Z",
+      "endTime": "2023-06-05T21:00:00Z",
+      "duration": "P50M",
+      "title": "Rewiring Lullabot: a retrospective on the why & how of becoming employee owned",
+      "location": "Location Room 317-318",
+      "link": "https://events.drupal.org//pittsburgh2023/session/rewiring-lullabot-retrospective-why-how-becoming-employee-owned",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "bskowron",
+        "KarenS",
+        "sethlbrown",
+        "kkonrady"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T20:10:00Z",
+      "endTime": "2023-06-05T21:00:00Z",
+      "duration": "P50M",
+      "title": "Chopped! — Design Systems Edition",
+      "location": "Location Room 319-321",
+      "link": "https://events.drupal.org//pittsburgh2023/session/chopped-design-systems-edition",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "amandakonopko",
+        "matthewdichter"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T20:10:00Z",
+      "endTime": "2023-06-05T21:00:00Z",
+      "duration": "P50M",
+      "title": "Security Team Panel - D7 End of Life Q&A",
+      "location": "Location Room 323",
+      "link": "https://events.drupal.org//pittsburgh2023/session/security-team-panel-d7-end-life-qa",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "Tim Lehnen (hestenet)",
+        "mlhess"
+      ]
+    },
+    {
+      "startTime": "2023-06-05T21:00:00Z",
+      "endTime": "2023-06-05T22:00:00Z",
+      "duration": "P60M",
+      "title": "Welcome Reception",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/welcome-reception-0",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-06T12:00:00Z",
+      "endTime": "2023-06-06T13:50:00Z",
+      "duration": "P110M",
+      "title": "Recruitment Fair",
+      "location": "Location Main Concourse",
+      "link": "https://events.drupal.org//pittsburgh2023/session/recruitment-fair-0",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-06T12:00:00Z",
+      "endTime": "2023-06-06T21:00:00Z",
+      "duration": "P540M",
+      "title": "Birds of a Feather Sessions",
+      "location": "Location Room 326-330",
+      "link": "https://events.drupal.org//pittsburgh2023/session/birds-feather-sessions-0",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-06T12:00:00Z",
+      "endTime": "2023-06-06T21:00:00Z",
+      "duration": "P540M",
+      "title": "General Contribution",
+      "location": "Location Room 408-410",
+      "link": "https://events.drupal.org//pittsburgh2023/session/general-contribution-4",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-06T12:30:00Z",
+      "endTime": "2023-06-06T21:00:00Z",
+      "duration": "P510M",
+      "title": "Registration",
+      "location": "Location Main Concourse",
+      "link": "https://events.drupal.org//pittsburgh2023/session/registration-0",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-06T13:00:00Z",
+      "endTime": "2023-06-06T13:50:00Z",
+      "duration": "P50M",
+      "title": "Pantheon Roundtable: Open Source, Open Web, and Our Values",
+      "location": "Location Room 323",
+      "link": "https://events.drupal.org//pittsburgh2023/session/pantheon-roundtable-open-source-open-web-and-our-values",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "david-strauss",
+        "joshk"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T14:00:00Z",
+      "endTime": "2023-06-06T15:00:00Z",
+      "duration": "P60M",
+      "title": "Keynote - Algorithms of Oppression: How Search Engines Reinforce Racism",
+      "location": "Location Spirit of Pittsburgh Ballroom",
+      "link": "https://events.drupal.org//pittsburgh2023/session/keynote-algorithms-oppression-how-search-engines-reinforce-racism",
+      "track": [],
+      "speakers": [
+        "Dr. Safiya Noble"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T15:00:00Z",
+      "endTime": "2023-06-06T15:30:00Z",
+      "duration": "P30M",
+      "title": "Expo Hall Break",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/expo-hall-break-9",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-06T15:15:00Z",
+      "endTime": "2023-06-06T15:30:00Z",
+      "duration": "P15M",
+      "title": "Sponsored Lightning Talk: DevOps is dead. Let's learn about Platform Engineering!",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/sponsored-lightning-talk-devops-dead-lets-learn-about-platform-engineering",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "Schnitzel"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T15:30:00Z",
+      "endTime": "2023-06-06T16:20:00Z",
+      "duration": "P50M",
+      "title": "Project update bot: The road to Drupal 11",
+      "location": "Location Room 301-302",
+      "link": "https://events.drupal.org//pittsburgh2023/session/project-update-bot-road-drupal-11",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "bbrala"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T15:30:00Z",
+      "endTime": "2023-06-06T16:20:00Z",
+      "duration": "P50M",
+      "title": "Advanced Render Cache Debugging",
+      "location": "Location Room 303-305",
+      "link": "https://events.drupal.org//pittsburgh2023/session/advanced-render-cache-debugging",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "Jody Hamilton (Jody Lynn)",
+        "Janez Urevc (slashrsm)"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T15:30:00Z",
+      "endTime": "2023-06-06T16:20:00Z",
+      "duration": "P50M",
+      "title": "Using the Robo Task Runner to Improve Developer Workflows",
+      "location": "Location Room 306-307",
+      "link": "https://events.drupal.org//pittsburgh2023/session/using-robo-task-runner-improve-developer-workflows",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "markdorison"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T15:30:00Z",
+      "endTime": "2023-06-06T16:20:00Z",
+      "duration": "P50M",
+      "title": "Schema.org Blueprints for Drupal",
+      "location": "Location Room 310-311",
+      "link": "https://events.drupal.org//pittsburgh2023/session/schemaorg-blueprints-drupal",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "Jacob Rockowitz (jrockowitz)"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T15:30:00Z",
+      "endTime": "2023-06-06T16:20:00Z",
+      "duration": "P50M",
+      "title": "How Drupal powers the global UN Refugee Agency fundraising platform",
+      "location": "Location Room 315-316",
+      "link": "https://events.drupal.org//pittsburgh2023/session/how-drupal-powers-global-un-refugee-agency-fundraising-platform",
+      "track": [
+        "drupal showcase"
+      ],
+      "speakers": [
+        "Mohammed Razem (mohammed-j-razem)"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T15:30:00Z",
+      "endTime": "2023-06-06T16:20:00Z",
+      "duration": "P50M",
+      "title": "Aspirations vs. Realities: Nonprofits Share Their Roadmaps",
+      "location": "Location Room 317-318",
+      "link": "https://events.drupal.org//pittsburgh2023/session/aspirations-vs-realities-nonprofits-share-their-roadmaps",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "jacksteadman",
+        "Sam Zimmerman"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T15:30:00Z",
+      "endTime": "2023-06-06T16:20:00Z",
+      "duration": "P50M",
+      "title": "Designing Content Authoring Experiences",
+      "location": "Location Room 319-321",
+      "link": "https://events.drupal.org//pittsburgh2023/session/designing-content-authoring-experiences",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "gdd"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T15:30:00Z",
+      "endTime": "2023-06-06T16:20:00Z",
+      "duration": "P50M",
+      "title": "Drupal isn't the Question; Drupal is the Answer",
+      "location": "Location Room 324",
+      "link": "https://events.drupal.org//pittsburgh2023/session/drupal-isnt-question-drupal-answer",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-06T15:30:00Z",
+      "endTime": "2023-06-06T16:20:00Z",
+      "duration": "P50M",
+      "title": "Hot Takes! Javascript and the Future of Drupal",
+      "location": "Location Room 325",
+      "link": "https://events.drupal.org//pittsburgh2023/session/hot-takes-javascript-and-future-drupal",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "joshk"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T15:30:00Z",
+      "endTime": "2023-06-06T16:20:00Z",
+      "duration": "P50M",
+      "title": "Drupal Association Public Board Meeting",
+      "location": "Location Spirit of Pittsburgh Ballroom",
+      "link": "https://events.drupal.org//pittsburgh2023/session/drupal-association-public-board-meeting",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "Baddý Sonja Breidert (baddysonja)",
+        "Tim D.",
+        "dries"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T16:20:00Z",
+      "endTime": "2023-06-06T17:50:00Z",
+      "duration": "P90M",
+      "title": "Lunch & Expo Hall Break",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/lunch-expo-hall-break-0",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-06T16:20:00Z",
+      "endTime": "2023-06-06T17:20:00Z",
+      "duration": "P60M",
+      "title": "Women in Drupal Luncheon",
+      "location": "Location Room 403-405",
+      "link": "https://events.drupal.org//pittsburgh2023/session/women-drupal-luncheon-0",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-06T16:30:00Z",
+      "endTime": "2023-06-06T17:00:00Z",
+      "duration": "P30M",
+      "title": "Keynote: Women in Tech and Tech Leadership Today",
+      "location": "Location Room 403-405",
+      "link": "https://events.drupal.org//pittsburgh2023/session/keynote-women-tech-and-tech-leadership-today",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "jessmromeo"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T17:00:00Z",
+      "endTime": "2023-06-06T17:15:00Z",
+      "duration": "P15M",
+      "title": "Sponsored Lightning Talk: Drupal, Not Just For The Web",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/sponsored-lightning-talk-drupal-not-just-web",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "grshane"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T17:30:00Z",
+      "endTime": "2023-06-06T17:45:00Z",
+      "duration": "P15M",
+      "title": "Sponsored Lightning Talk - Blending Design and Code using Design Tokens",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/sponsored-lightning-talk-blending-design-and-code-using-design-tokens",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "Randy Oest (amazingrando)"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T17:50:00Z",
+      "endTime": "2023-06-06T18:40:00Z",
+      "duration": "P50M",
+      "title": "Drupal Distributions & Recipes Initiative Update",
+      "location": "Location Room 301-302",
+      "link": "https://events.drupal.org//pittsburgh2023/session/drupal-distributions-recipes-initiative-update",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "thejimbirch"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T17:50:00Z",
+      "endTime": "2023-06-06T18:40:00Z",
+      "duration": "P50M",
+      "title": "Progressive Decoupling: Best of Both Worlds?",
+      "location": "Location Room 303-305",
+      "link": "https://events.drupal.org//pittsburgh2023/session/progressive-decoupling-best-both-worlds",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "Amani.Mansour92",
+        "Ashraf Abed (ashrafabed)"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T17:50:00Z",
+      "endTime": "2023-06-06T18:40:00Z",
+      "duration": "P50M",
+      "title": "The evolution of deployments; choosing the right workflow for your team",
+      "location": "Location Room 306-307",
+      "link": "https://events.drupal.org//pittsburgh2023/session/evolution-deployments-choosing-right-workflow-your-team",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "jrastaban"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T17:50:00Z",
+      "endTime": "2023-06-06T18:40:00Z",
+      "duration": "P50M",
+      "title": "Drupal Certified Partners + Supporting Partners Roundtable",
+      "location": "Location Room 310-311",
+      "link": "https://events.drupal.org//pittsburgh2023/session/drupal-certified-partners-supporting-partners-roundtable",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "kelly_delaney",
+        "Jitka Pilar (jitka_pilar)"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T17:50:00Z",
+      "endTime": "2023-06-06T18:40:00Z",
+      "duration": "P50M",
+      "title": "Demystifying Privacy Consent for Marketers and Website Owners",
+      "location": "Location Room 315-316",
+      "link": "https://events.drupal.org//pittsburgh2023/session/demystifying-privacy-consent-marketers-and-website-owners",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "_doyle_"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T17:50:00Z",
+      "endTime": "2023-06-06T18:40:00Z",
+      "duration": "P50M",
+      "title": "Authenticity is Contagious - Being real and showing emotion builds long lasting client relationships",
+      "location": "Location Room 317-318",
+      "link": "https://events.drupal.org//pittsburgh2023/session/authenticity-contagious-being-real-and-showing-emotion-builds-long-lasting",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "Britany Acre"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T17:50:00Z",
+      "endTime": "2023-06-06T18:40:00Z",
+      "duration": "P50M",
+      "title": "10 Design Principles for Better UX and Accessibility",
+      "location": "Location Room 319-321",
+      "link": "https://events.drupal.org//pittsburgh2023/session/10-design-principles-better-ux-and-accessibility",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "ameshes"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T17:50:00Z",
+      "endTime": "2023-06-06T18:40:00Z",
+      "duration": "P50M",
+      "title": "What you need to know about frontends to decouple",
+      "location": "Location Room 324",
+      "link": "https://events.drupal.org//pittsburgh2023/session/what-you-need-know-about-frontends-decouple",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "chad.carlson"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T17:50:00Z",
+      "endTime": "2023-06-06T18:40:00Z",
+      "duration": "P50M",
+      "title": "The Art of Discovery: Designing and Solutioning for Higher Ed",
+      "location": "Location Room 325",
+      "link": "https://events.drupal.org//pittsburgh2023/session/art-discovery-designing-and-solutioning-higher-ed",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "Jesse Dyck (jessedyck)"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T18:40:00Z",
+      "endTime": "2023-06-06T19:00:00Z",
+      "duration": "P20M",
+      "title": "Expo Hall Break",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/expo-hall-break-10",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-06T18:40:00Z",
+      "endTime": "2023-06-06T18:55:00Z",
+      "duration": "P15M",
+      "title": "Sponsored Lightning Talk - Drupal Serving Veterans",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/sponsored-lightning-talk-drupal-serving-veterans",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "Em Wilson",
+        "davidmpickett"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T19:00:00Z",
+      "endTime": "2023-06-06T19:50:00Z",
+      "duration": "P50M",
+      "title": "Habits of an Effective Drupal Contributor",
+      "location": "Location Room 301-302",
+      "link": "https://events.drupal.org//pittsburgh2023/session/habits-effective-drupal-contributor",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "owenbush",
+        "Matthew Tift (mtift)"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T19:00:00Z",
+      "endTime": "2023-06-06T19:50:00Z",
+      "duration": "P50M",
+      "title": "Using Feeds to integrate complex business data into Drupal",
+      "location": "Location Room 303-305",
+      "link": "https://events.drupal.org//pittsburgh2023/session/using-feeds-integrate-complex-business-data-drupal",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "robert-ngo",
+        "franz"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T19:00:00Z",
+      "endTime": "2023-06-06T19:50:00Z",
+      "duration": "P50M",
+      "title": "Protecting your work-life balance on a global 24/7 team",
+      "location": "Location Room 306-307",
+      "link": "https://events.drupal.org//pittsburgh2023/session/protecting-your-work-life-balance-global-247-team",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "Alanna Burke (aburke626)"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T19:00:00Z",
+      "endTime": "2023-06-06T19:50:00Z",
+      "duration": "P50M",
+      "title": "Selling file downloads and certificates through Drupal Commerce",
+      "location": "Location Room 310-311",
+      "link": "https://events.drupal.org//pittsburgh2023/session/selling-file-downloads-and-certificates-through-drupal-commerce",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "rszrama"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T19:00:00Z",
+      "endTime": "2023-06-06T19:50:00Z",
+      "duration": "P50M",
+      "title": "Knowing and using new capabilities of CKEditor 5 with Drupal 10",
+      "location": "Location Room 315-316",
+      "link": "https://events.drupal.org//pittsburgh2023/session/knowing-and-using-new-capabilities-ckeditor-5-drupal-10",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "Renato Goncalves (RenatoG)"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T19:00:00Z",
+      "endTime": "2023-06-06T19:50:00Z",
+      "duration": "P50M",
+      "title": "Building a reimagined e-commerce platform for independent booksellers using Drupal",
+      "location": "Location Room 317-318",
+      "link": "https://events.drupal.org//pittsburgh2023/session/building-reimagined-e-commerce-platform-independent-booksellers-using-drupal",
+      "track": [
+        "drupal showcase"
+      ],
+      "speakers": [
+        "Albert Hughes (ahughes3)",
+        "Geetha Nathan"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T19:00:00Z",
+      "endTime": "2023-06-06T19:50:00Z",
+      "duration": "P50M",
+      "title": "Death to Personas: A Mindset-Focused Approach to Designing Inclusive Web Experiences",
+      "location": "Location Room 319-321",
+      "link": "https://events.drupal.org//pittsburgh2023/session/death-personas-mindset-focused-approach-designing-inclusive-web-experiences",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "elliott.mower"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T19:00:00Z",
+      "endTime": "2023-06-06T19:50:00Z",
+      "duration": "P50M",
+      "title": "Building with Design Systems and Layout Builder",
+      "location": "Location Room 323",
+      "link": "https://events.drupal.org//pittsburgh2023/session/building-design-systems-and-layout-builder",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "DyanneNova"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T19:00:00Z",
+      "endTime": "2023-06-06T19:50:00Z",
+      "duration": "P50M",
+      "title": "A Drupal core maintainer shares peer code review best practices",
+      "location": "Location Room 324",
+      "link": "https://events.drupal.org//pittsburgh2023/session/drupal-core-maintainer-shares-peer-code-review-best-practices",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "xjm"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T19:00:00Z",
+      "endTime": "2023-06-06T19:50:00Z",
+      "duration": "P50M",
+      "title": "How higher ed brands are able to scale and reduce resource costs with multi-site platform management",
+      "location": "Location Room 325",
+      "link": "https://events.drupal.org//pittsburgh2023/session/how-higher-ed-brands-are-able-scale-and-reduce-resource-costs-multi-site",
+      "track": [
+        "drupal showcase"
+      ],
+      "speakers": [
+        "mandee_englert",
+        "jmoraca"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T19:50:00Z",
+      "endTime": "2023-06-06T20:10:00Z",
+      "duration": "P20M",
+      "title": "Expo Hall Break",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/expo-hall-break-11",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-06T20:10:00Z",
+      "endTime": "2023-06-06T21:00:00Z",
+      "duration": "P50M",
+      "title": "Panel: Empowering the community to more rapidly execute Drupal’s strategic goals",
+      "location": "Location Room 301-302",
+      "link": "https://events.drupal.org//pittsburgh2023/session/panel-empowering-community-more-rapidly-execute-drupals-strategic-goals",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "Anoop John (anoopjohn)",
+        "Rachel Lawson (Rachel_norfolk)",
+        "nerdstein",
+        "Tim Lehnen (hestenet)"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T20:10:00Z",
+      "endTime": "2023-06-06T21:00:00Z",
+      "duration": "P50M",
+      "title": "Technical Writing Workshop",
+      "location": "Location Room 303-305",
+      "link": "https://events.drupal.org//pittsburgh2023/session/technical-writing-workshop",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "AmyJune Hineline (volkswagenchick)",
+        "Marjorie Freeman"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T20:10:00Z",
+      "endTime": "2023-06-06T21:00:00Z",
+      "duration": "P50M",
+      "title": "Diversity and Inclusion: Transforming Lives Through Drupal",
+      "location": "Location Room 306-307",
+      "link": "https://events.drupal.org//pittsburgh2023/session/diversity-and-inclusion-transforming-lives-through-drupal",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "lucienchalom",
+        "luisr",
+        "Renato Goncalves (RenatoG)"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T20:10:00Z",
+      "endTime": "2023-06-06T21:00:00Z",
+      "duration": "P50M",
+      "title": "Introduction to GitOps",
+      "location": "Location Room 310-311",
+      "link": "https://events.drupal.org//pittsburgh2023/session/introduction-gitops",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "gilzow"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T20:10:00Z",
+      "endTime": "2023-06-06T21:00:00Z",
+      "duration": "P50M",
+      "title": "Audience Experience: The “WHY” of Content Management",
+      "location": "Location Room 315-316",
+      "link": "https://events.drupal.org//pittsburgh2023/session/audience-experience-why-content-management",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "Jeffrey McGuire (horncologne)",
+        "Tracy Evans (trayevans)"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T20:10:00Z",
+      "endTime": "2023-06-06T21:00:00Z",
+      "duration": "P50M",
+      "title": "The art of giving and getting feedback",
+      "location": "Location Room 317-318",
+      "link": "https://events.drupal.org//pittsburgh2023/session/art-giving-and-getting-feedback",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "amykhailova"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T20:10:00Z",
+      "endTime": "2023-06-06T21:00:00Z",
+      "duration": "P50M",
+      "title": "Can Drupal be the Backend for a Desktop App?",
+      "location": "Location Room 319-321",
+      "link": "https://events.drupal.org//pittsburgh2023/session/can-drupal-be-backend-desktop-app",
+      "track": [
+        "drupal showcase"
+      ],
+      "speakers": [
+        "Matthew Hood (matt.hood)",
+        "vincent-wasswa"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T20:10:00Z",
+      "endTime": "2023-06-06T21:00:00Z",
+      "duration": "P50M",
+      "title": "Single Directory Components in Core",
+      "location": "Location Room 323",
+      "link": "https://events.drupal.org//pittsburgh2023/session/single-directory-components-core",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "Mike Herchel (mherchel)",
+        "Mateu Aguiló Bosch (e0ipso)"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T20:10:00Z",
+      "endTime": "2023-06-06T21:00:00Z",
+      "duration": "P50M",
+      "title": "In for the Long Haul: supporting and growing living sites in the post Drupal 8 landscape",
+      "location": "Location Room 324",
+      "link": "https://events.drupal.org//pittsburgh2023/session/long-haul-supporting-and-growing-living-sites-post-drupal-8-landscape",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "Cori Neslund (cneslund)",
+        "Joe Meersman (choicelildice)",
+        "Ju young Vanderwater",
+        "Jill Farley"
+      ]
+    },
+    {
+      "startTime": "2023-06-06T20:10:00Z",
+      "endTime": "2023-06-06T21:00:00Z",
+      "duration": "P50M",
+      "title": "Drupal Unit testing has never been easier, with Test Helpers!",
+      "location": "Location Room 325",
+      "link": "https://events.drupal.org//pittsburgh2023/session/drupal-unit-testing-has-never-been-easier-test-helpers",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "Alexey Korepov (Murz)"
+      ]
+    },
+    {
+      "startTime": "2023-06-07T12:00:00Z",
+      "endTime": "2023-06-07T21:00:00Z",
+      "duration": "P540M",
+      "title": "Registration",
+      "location": "Location Main Concourse",
+      "link": "https://events.drupal.org//pittsburgh2023/session/registration-1",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-07T12:00:00Z",
+      "endTime": "2023-06-07T21:00:00Z",
+      "duration": "P540M",
+      "title": "Birds of a Feather Sessions",
+      "location": "Location Room 326-330",
+      "link": "https://events.drupal.org//pittsburgh2023/session/birds-feather-sessions-1",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-07T12:00:00Z",
+      "endTime": "2023-06-07T12:50:00Z",
+      "duration": "P50M",
+      "title": "Membership Breakfast",
+      "location": "Location Room 403-405",
+      "link": "https://events.drupal.org//pittsburgh2023/session/membership-breakfast-0",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-07T12:00:00Z",
+      "endTime": "2023-06-07T21:00:00Z",
+      "duration": "P540M",
+      "title": "Organized Contribution",
+      "location": "Location Room 408-410",
+      "link": "https://events.drupal.org//pittsburgh2023/session/organized-contribution",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-07T13:00:00Z",
+      "endTime": "2023-06-07T14:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal Initiative Leads Keynote",
+      "location": "Location Spirit of Pittsburgh Ballroom",
+      "link": "https://events.drupal.org//pittsburgh2023/session/drupal-initiative-leads-keynote",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "Gábor Hojtsy",
+        "leslieg",
+        "tedbow",
+        "Mateu Aguiló Bosch (e0ipso)",
+        "ckrina",
+        "Amber Himes Matz",
+        "Tim Lehnen (hestenet)"
+      ]
+    },
+    {
+      "startTime": "2023-06-07T14:00:00Z",
+      "endTime": "2023-06-07T14:30:00Z",
+      "duration": "P30M",
+      "title": "Expo Hall Break",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/expo-hall-break-12",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-07T14:30:00Z",
+      "endTime": "2023-06-07T16:00:00Z",
+      "duration": "P90M",
+      "title": "First-time Contributors Workshop",
+      "location": "Location Room 403-405",
+      "link": "https://events.drupal.org//pittsburgh2023/session/first-time-contributors-workshop-1",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-07T14:30:00Z",
+      "endTime": "2023-06-07T16:00:00Z",
+      "duration": "P90M",
+      "title": "Mentored Contribution",
+      "location": "Location Room 411-412",
+      "link": "https://events.drupal.org//pittsburgh2023/session/mentored-contribution-0",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-07T16:00:00Z",
+      "endTime": "2023-06-07T17:00:00Z",
+      "duration": "P60M",
+      "title": "Lunch & Expo Hall Break",
+      "location": "Location Expo Hall",
+      "link": "https://events.drupal.org//pittsburgh2023/session/lunch-expo-hall-break-1",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-07T16:30:00Z",
+      "endTime": "2023-06-07T17:30:00Z",
+      "duration": "P60M",
+      "title": "Black in Drupal Roundtable",
+      "location": "Location Room 326-330",
+      "link": "https://events.drupal.org//pittsburgh2023/session/black-drupal-roundtable",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "Joi Garrett (JoiGarrett)"
+      ]
+    },
+    {
+      "startTime": "2023-06-07T17:00:00Z",
+      "endTime": "2023-06-07T18:30:00Z",
+      "duration": "P90M",
+      "title": "First-time Contributors Workshop",
+      "location": "Location Room 403-405",
+      "link": "https://events.drupal.org//pittsburgh2023/session/first-time-contributors-workshop-2",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-07T17:00:00Z",
+      "endTime": "2023-06-07T18:30:00Z",
+      "duration": "P90M",
+      "title": "Mentored Contribution",
+      "location": "Location Room 411-412",
+      "link": "https://events.drupal.org//pittsburgh2023/session/mentored-contribution-1",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-07T18:30:00Z",
+      "endTime": "2023-06-07T19:00:00Z",
+      "duration": "P30M",
+      "title": "Coffee Break in the Lobby",
+      "location": "Location Main Concourse",
+      "link": "https://events.drupal.org//pittsburgh2023/session/coffee-break-lobby",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-07T18:30:00Z",
+      "endTime": "2023-06-07T20:00:00Z",
+      "duration": "P90M",
+      "title": "Introduction to Neurographica® - The Art of Personal Transformation",
+      "location": "Location Room 306-307",
+      "link": "https://events.drupal.org//pittsburgh2023/session/introduction-neurographicar-art-personal-transformation",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "Anastasiya Kazakova (ctasik)"
+      ]
+    },
+    {
+      "startTime": "2023-06-07T19:00:00Z",
+      "endTime": "2023-06-07T21:00:00Z",
+      "duration": "P120M",
+      "title": "Mentored Contribution",
+      "location": "Location Room 411-412",
+      "link": "https://events.drupal.org//pittsburgh2023/session/mentored-contribution-2",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-08T12:00:00Z",
+      "endTime": "2023-06-08T20:00:00Z",
+      "duration": "P480M",
+      "title": "Registration",
+      "location": "Location Main Concourse",
+      "link": "https://events.drupal.org//pittsburgh2023/session/registration-2",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-08T12:00:00Z",
+      "endTime": "2023-06-08T20:00:00Z",
+      "duration": "P480M",
+      "title": "Birds of a Feather Sessions",
+      "location": "Location Room 326-330",
+      "link": "https://events.drupal.org//pittsburgh2023/session/birds-feather-sessions-2",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-08T12:00:00Z",
+      "endTime": "2023-06-08T20:00:00Z",
+      "duration": "P480M",
+      "title": "General Contribution",
+      "location": "Location Room 408-410",
+      "link": "https://events.drupal.org//pittsburgh2023/session/general-contribution-5",
+      "track": [],
+      "speakers": []
+    },
+    {
+      "startTime": "2023-06-08T13:00:00Z",
+      "endTime": "2023-06-08T20:00:00Z",
+      "duration": "P420M",
+      "title": "Government Industry Summit",
+      "location": "Location Room 301-302",
+      "link": "https://events.drupal.org//pittsburgh2023/session/government-industry-summit",
+      "track": [
+        "summit"
+      ],
+      "speakers": [
+        "Denise Amling (denise.amling)",
+        "johnshortess",
+        "Brooke Aiken",
+        "JasmyneEpps",
+        "mgifford",
+        "Ken Rickard (agentrickard)",
+        "Promet Source",
+        "chad.carlson"
+      ]
+    },
+    {
+      "startTime": "2023-06-08T13:00:00Z",
+      "endTime": "2023-06-08T20:00:00Z",
+      "duration": "P420M",
+      "title": "Higher Education Industry Summit",
+      "location": "Location Room 303-305",
+      "link": "https://events.drupal.org//pittsburgh2023/session/higher-education-industry-summit",
+      "track": [
+        "summit"
+      ],
+      "speakers": [
+        "theotherlondon",
+        "Tammy Stovall (mcnielt)",
+        "boyerj",
+        "kpaxman",
+        "Jim Vomero (nJim)",
+        "justin2pin",
+        "heatherleigh2772",
+        "sethhill"
+      ]
+    },
+    {
+      "startTime": "2023-06-08T13:00:00Z",
+      "endTime": "2023-06-08T20:00:00Z",
+      "duration": "P420M",
+      "title": "Introduction to Drupal Module Development",
+      "location": "Location Room 306-307",
+      "link": "https://events.drupal.org//pittsburgh2023/session/introduction-drupal-module-development",
+      "track": [
+        "training"
+      ],
+      "speakers": [
+        "ultimike"
+      ]
+    },
+    {
+      "startTime": "2023-06-08T13:00:00Z",
+      "endTime": "2023-06-08T20:00:00Z",
+      "duration": "P420M",
+      "title": "Advanced Drupal Front-end Development",
+      "location": "Location Room 315-316",
+      "link": "https://events.drupal.org//pittsburgh2023/session/advanced-drupal-front-end-development",
+      "track": [
+        "training"
+      ],
+      "speakers": [
+        "Andrew Blum (andy-blum)"
+      ]
+    },
+    {
+      "startTime": "2023-06-08T13:00:00Z",
+      "endTime": "2023-06-08T20:00:00Z",
+      "duration": "P420M",
+      "title": "Intro to Drupal: Level 1 Workshop",
+      "location": "Location Room 317-318",
+      "link": "https://events.drupal.org//pittsburgh2023/session/intro-drupal-level-1-workshop",
+      "track": [
+        "training"
+      ],
+      "speakers": [
+        "dharizza",
+        "franz"
+      ]
+    },
+    {
+      "startTime": "2023-06-08T13:00:00Z",
+      "endTime": "2023-06-08T20:00:00Z",
+      "duration": "P420M",
+      "title": "Community Summit",
+      "location": "Location Room 319-321",
+      "link": "https://events.drupal.org//pittsburgh2023/session/community-summit",
+      "track": [
+        "summit"
+      ],
+      "speakers": [
+        "Avi Schwab (froboy)",
+        "leslieg",
+        "Kristen Pol (Kristen Pol)",
+        "seantwalsh",
+        "Suzanne Dergacheva (pixelite)",
+        "George DeMet (gdemet)"
+      ]
+    },
+    {
+      "startTime": "2023-06-08T16:00:00Z",
+      "endTime": "2023-06-08T17:00:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "Location Main Concourse",
+      "link": "https://events.drupal.org//pittsburgh2023/session/lunch-3",
+      "track": [],
+      "speakers": []
+    }
+  ],
+  "result": "success",
+  "url": "https://events.drupal.org/pittsburgh2023/schedule"
+}

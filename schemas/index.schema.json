@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Dataset Index",
+  "description": "Catalog of available conference event data files.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["defaultFile", "files"],
+  "properties": {
+    "defaultFile": {
+      "type": "string",
+      "description": "Filename of the event to load on initial page view."
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["file"],
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "Filename within the data/ directory."
+          },
+          "default": {
+            "type": "boolean",
+            "description": "Marks this file as the default for its event series."
+          }
+        }
+      }
+    }
+  }
+}

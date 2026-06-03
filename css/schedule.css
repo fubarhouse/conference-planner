@@ -1,0 +1,2004 @@
+
+/* ── Dark theme: eventsContainer + slot/event card base ────────────────── */
+        .theme-dark #eventsContainer > div {
+            border-top: 1px dashed rgba(120, 165, 215, 0.22);
+            padding-top: 14px;
+        }
+        .slot-heading {
+            background: var(--surface-1);
+            border: none;
+            border-left: 3px solid var(--accent);
+            border-radius: 0;
+            color: var(--text-2) !important;
+            font-size: 0.74rem !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding-left: 0.85rem;
+            backdrop-filter: none;
+        }
+        .slot-bg-a { background: var(--surface-1); }
+        .slot-bg-b { background: var(--surface-0); }
+        .event-card {
+            border-color: var(--line-0);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+            will-change: transform, box-shadow;
+        }
+        .event-card:focus-within {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+        }
+        .event-card:hover {
+            transform: none;
+            box-shadow: 0 12px 34px rgba(0, 0, 0, 0.25);
+        }
+        .track-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.24rem 0.62rem;
+            border-radius: 0.38rem;
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: 0.01em;
+            background: color-mix(in srgb, var(--color-secondary) 8%, var(--surface-2)) !important;
+            border: 1px solid color-mix(in srgb, var(--color-secondary) 35%, var(--line-0));
+            color: var(--text-1) !important;
+        }
+
+/* ── Header overflow menu button ────────────────────────────────────────── */
+        .header-menu-btn {
+            display: none;
+        }
+        @media (min-width: 1024px) {
+            .header-menu-btn {
+                display: inline-flex;
+                color: #f6fbff;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                transition: background-color 140ms ease;
+            }
+            .header-menu-btn:hover {
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 0.375rem;
+            }
+        }
+
+/* ── Editor menu item (inside header overflow menu) ─────────────────────── */
+        .header-editor-item:disabled,
+        .header-editor-item.is-disabled {
+            color: #9ca3af;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        .header-editor-item:disabled i,
+        .header-editor-item.is-disabled i {
+            color: #d1d5db;
+        }
+
+/* ── Editor access button (on schedule viewer header) ───────────────────── */
+        .editor-access-button {
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: #f6fbff;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease, opacity 140ms ease;
+        }
+        .editor-access-button:hover:not(:disabled),
+        .editor-access-button:focus-visible:not(:disabled) {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(227, 242, 255, 0.6);
+            outline: none;
+        }
+        .editor-access-button:disabled,
+        .editor-access-button.is-disabled {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(224, 235, 245, 0.16);
+            color: rgba(233, 241, 248, 0.48);
+            opacity: 1;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+/* ── design-drupalcon compound overrides ────────────────────────────────── */
+        /* (1,1,0) beats UnoCSS bg utilities (0,1,0) */
+        body.design-drupalcon #eventsContainer {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .design-drupalcon .schedule-day-heading {
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--line-0);
+            border-left: 3px solid var(--accent);
+            border-right: 3px solid var(--color-secondary);
+            background: linear-gradient(95deg, var(--surface-1), var(--surface-0));
+            position: sticky;
+            top: 0;
+            z-index: 15;
+        }
+        .design-drupalcon .timeline-row {
+            display: grid;
+            grid-template-columns: minmax(132px, 160px) minmax(0, 1fr);
+            gap: 12px;
+            align-items: start;
+        }
+        .design-drupalcon .timeline-time {
+            position: sticky;
+            top: 56px;
+            border: none;
+            border-radius: 0;
+            padding: 1rem 2px 2px 0;
+            background: transparent;
+            text-align: right;
+        }
+        .design-drupalcon .timeline-time-hour {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+        .design-drupalcon .timeline-time-date {
+            margin-top: 2px;
+            color: color-mix(in srgb, var(--color-secondary) 70%, var(--text-2));
+            font-size: 0.73rem;
+            line-height: 1.25;
+        }
+        .design-drupalcon .timeline-events {
+            align-items: stretch;
+        }
+        .design-drupalcon .timeline-events .event-card {
+            height: 100%;
+        }
+        .design-drupalcon .timeline-events .event-card > div {
+            height: 100%;
+        }
+        /* (1,1,0) beats UnoCSS in light mode; dark mode handled by neon chrome override below */
+        .design-drupalcon #filtersPanel,
+        .design-drupalcon .mobile-instructions-panel,
+        .design-drupalcon #sessionFiltersPanel {
+            border: 1px solid var(--line-0);
+            background: var(--surface-1);
+            box-shadow: 0 16px 38px rgba(0, 0, 0, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        /* (0,2,0)+(0,3,0) beats UnoCSS single-class utilities */
+        .design-drupalcon .mobile-instructions-panel {
+            padding: 1rem;
+        }
+        .design-drupalcon .mobile-instructions-panel .text-gray-800 {
+            color: var(--text-0);
+        }
+        .design-drupalcon .mobile-instructions-panel .text-gray-600 {
+            color: var(--text-2);
+        }
+        .design-drupalcon .mobile-instructions-panel ul {
+            margin: 0;
+            padding-left: 0.25rem;
+        }
+        .design-drupalcon .mobile-instructions-panel li + li {
+            margin-top: 0.35rem;
+        }
+        /* ID+class (1,1,0) beats UnoCSS utility (0,1,0) */
+        .design-drupalcon #filtersPanel .text-gray-700,
+        .design-drupalcon #sessionFiltersPanel .text-gray-700 {
+            color: var(--text-0);
+            letter-spacing: 0.01em;
+            padding-left: 0rem;
+        }
+        .design-drupalcon #filtersPanel .text-gray-600,
+        .design-drupalcon #sessionFiltersPanel .text-gray-600 {
+            color: var(--text-2);
+        }
+        .design-drupalcon #filtersPanel input,
+        .design-drupalcon #filtersPanel select,
+        .design-drupalcon #sessionFiltersPanel input,
+        .design-drupalcon #sessionFiltersPanel select {
+            background: var(--surface-0);
+            border: 1px solid var(--line-0) !important;
+            color: var(--text-0);
+            border-radius: 0.62rem;
+            padding-left: 0.82rem;
+            padding-right: 0.82rem;
+            transition: border-color 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+        }
+        .design-drupalcon #filtersPanel select,
+        .design-drupalcon #sessionFiltersPanel select {
+            padding-right: 2rem;
+        }
+        .design-drupalcon #filtersPanel input::placeholder,
+        .design-drupalcon #sessionFiltersPanel input::placeholder {
+            color: var(--text-3);
+        }
+        /* (1,1,2) from ID+class+element+pseudo — no !important needed */
+        .design-drupalcon #filtersPanel input:focus,
+        .design-drupalcon #filtersPanel select:focus,
+        .design-drupalcon #sessionFiltersPanel input:focus,
+        .design-drupalcon #sessionFiltersPanel select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 55%, transparent), 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent);
+        }
+        .design-drupalcon #filtersPanel .border-t,
+        .design-drupalcon #sessionFiltersPanel .border-t {
+            border-top-color: var(--line-0);
+        }
+        .design-drupalcon #filtersPanel button,
+        .design-drupalcon #sessionFiltersPanel button {
+            border-radius: 0.62rem;
+            border-color: var(--line-0);
+            background: var(--surface-2);
+            color: var(--text-0);
+        }
+        .design-drupalcon #filtersPanel button:hover,
+        .design-drupalcon #sessionFiltersPanel button:hover {
+            background: var(--surface-1);
+            border-color: var(--accent);
+        }
+        /* (1,2,0) — very specific, no !important needed */
+        .design-drupalcon #filtersPanel #clearKeywords,
+        .design-drupalcon #sessionFiltersPanel #clearKeywords {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            color: var(--text-2);
+            padding: 0;
+        }
+        .design-drupalcon #filtersPanel #clearKeywords:hover,
+        .design-drupalcon #sessionFiltersPanel #clearKeywords:hover {
+            color: var(--text-0);
+        }
+        .design-drupalcon .event-card-dc {
+            border-color: var(--line-0);
+            background: var(--surface-1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+        }
+        .theme-dark .design-drupalcon .event-card-dc {
+            border-color: rgba(149, 191, 233, 1.0);
+            background:
+                linear-gradient(160deg, rgba(15, 27, 43, 0.92), rgba(15, 27, 43, 0.9)),
+                linear-gradient(110deg, var(--event-color-a), var(--event-color-b));
+            background-blend-mode: normal, soft-light;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+        .design-drupalcon .event-card-dc:hover {
+            border-color: var(--accent);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+        }
+        /* (0,2,0) beats base .track-pill-dc (0,1,0) */
+        .design-drupalcon .track-pill-dc {
+            background: color-mix(in srgb, var(--event-color-b) 12%, var(--surface-2));
+            border-color: color-mix(in srgb, var(--event-color-b) 50%, var(--line-0));
+            color: var(--text-0);
+            font-size: 0.7rem;
+        }
+        /* :not() adds specificity — keeps !important only to beat UnoCSS .hidden if needed */
+        .design-drupalcon #eventMediaPromo:not(.hidden) {
+            display: block !important;
+        }
+        /* (1,1,2) with element combinators — no !important needed */
+        .design-drupalcon #eventMediaPromo > div > div {
+            border-color: var(--line-0);
+            background: var(--surface-1);
+        }
+        .sponsors-shell {
+            max-width: 1480px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .sponsors-heading-wrap {
+            margin-bottom: 1.15rem;
+        }
+        .sponsors-heading {
+            margin: 0.22rem 0 0;
+            color: var(--text-0);
+            font-size: 1.45rem;
+            font-weight: 750;
+            line-height: 1.2;
+        }
+        .sponsors-content {
+            display: grid;
+            gap: 1.35rem;
+        }
+        .sponsor-tier-section {
+            display: grid;
+            gap: 0.85rem;
+        }
+        .sponsor-tier-heading {
+            margin: 0;
+            color: var(--text-2);
+            font-size: 0.93rem;
+            font-weight: 800;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            text-align: center;
+        }
+        .sponsor-logo-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 184px));
+            justify-content: center;
+            gap: 0.85rem;
+            align-items: stretch;
+            width: 100%;
+        }
+        .sponsor-card {
+            display: grid;
+            gap: 0.55rem;
+            justify-items: center;
+            width: 100%;
+            max-width: 184px;
+            justify-self: center;
+            align-content: start;
+            text-align: center;
+        }
+        .sponsor-logo-surface {
+            width: 100%;
+            min-height: 104px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.9rem 1rem;
+            border: 1px solid rgba(187, 205, 223, 0.95);
+            border-radius: 0.6rem;
+            background: linear-gradient(180deg, rgba(248, 251, 254, 0.98), rgba(239, 245, 250, 0.98));
+            box-shadow: 0 10px 24px rgba(12, 33, 53, 0.08);
+            text-decoration: none;
+            transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease, background-color 140ms ease;
+        }
+        button.sponsor-logo-surface {
+            appearance: none;
+            cursor: pointer;
+            font: inherit;
+        }
+        .sponsor-logo-surface:hover,
+        .sponsor-logo-surface:focus-visible {
+            transform: translateY(-1px);
+            border-color: rgba(126, 167, 205, 0.95);
+            box-shadow: 0 14px 28px rgba(12, 33, 53, 0.12);
+            outline: none;
+        }
+        .sponsor-logo-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            max-width: 148px;
+            max-height: 68px;
+            object-fit: contain;
+            object-position: center;
+        }
+        .sponsor-card-title {
+            display: flex;
+            width: 100%;
+            align-items: flex-start;
+            justify-content: center;
+            width: 100%;
+            color: var(--text-1);
+            font-size: 0.82rem;
+            font-weight: 650;
+            line-height: 1.35;
+            text-align: center;
+            text-decoration: none;
+        }
+        button.sponsor-card-title {
+            appearance: none;
+            background: transparent;
+            border: 0;
+            padding: 0;
+            cursor: pointer;
+            font: inherit;
+            text-align: center;
+        }
+        .sponsor-card-title:hover,
+        .sponsor-card-title:focus-visible {
+            color: var(--text-0);
+            outline: none;
+        }
+        .sponsor-bg-transparent {
+            background: transparent;
+            border-color: rgba(187, 205, 223, 0.55);
+            box-shadow: none;
+        }
+        .sponsor-bg-light-plate,
+        .sponsor-bg-auto {
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(247, 250, 253, 1));
+            border-color: rgba(173, 194, 215, 0.98);
+            box-shadow:
+                inset 0 0 0 1px rgba(255, 255, 255, 0.96),
+                inset 0 -10px 22px rgba(212, 224, 236, 0.22),
+                0 10px 24px rgba(12, 33, 53, 0.08);
+        }
+        .sponsor-bg-dark-plate {
+            background: linear-gradient(180deg, rgba(35, 54, 76, 0.98), rgba(20, 33, 49, 0.98));
+            border-color: rgba(84, 118, 152, 0.88);
+        }
+        .sponsor-bg-brand-fill {
+            background: linear-gradient(160deg, rgba(13, 120, 204, 0.16), rgba(95, 167, 225, 0.22));
+            border-color: rgba(98, 155, 204, 0.72);
+        }
+        .sponsor-aspect-square {
+            aspect-ratio: 1 / 1;
+        }
+        .sponsor-aspect-landscape,
+        .sponsor-aspect-auto {
+            aspect-ratio: 16 / 10;
+        }
+        .sponsor-aspect-banner {
+            aspect-ratio: 2.6 / 1;
+        }
+        .event-promo-card {
+            display: grid;
+            grid-template-columns: 142px minmax(0, 1fr);
+            gap: 0.75rem;
+            align-items: start;
+            min-height: 106px;
+        }
+        .event-promo-body {
+            min-height: 106px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .event-promo-action {
+            align-self: flex-start;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0.6rem;
+            padding: 0.45rem 0.8rem;
+            border-radius: 999px;
+            border: 1px solid rgba(129, 168, 205, 0.28);
+            background: rgba(255, 255, 255, 0.58);
+            color: #244563;
+            font-size: 0.82rem;
+            font-weight: 700;
+            line-height: 1.2;
+            text-decoration: none;
+            transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+        }
+        .event-promo-action:hover,
+        .event-promo-action:focus-visible {
+            background: rgba(255, 255, 255, 0.78);
+            border-color: rgba(112, 157, 199, 0.42);
+            color: #173550;
+            outline: none;
+        }
+        .event-promo-image-frame {
+            position: relative;
+            width: 142px;
+            height: 106px;
+            min-width: 142px;
+            min-height: 106px;
+            overflow: hidden;
+            border-radius: 0.375rem;
+            border: 1px solid rgba(209, 213, 219, 1);
+            background: rgba(255, 255, 255, 0.86);
+            flex-shrink: 0;
+        }
+        .event-promo-image-frame.is-loading::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(226, 232, 240, 0.65) 0%,
+                rgba(241, 245, 249, 0.92) 50%,
+                rgba(226, 232, 240, 0.65) 100%
+            );
+            background-size: 200% 100%;
+            animation: event-promo-shimmer 1.2s linear infinite;
+        }
+        .event-promo-image {
+            position: relative;
+            z-index: 1;
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 1;
+            transition: opacity 160ms ease;
+        }
+        .event-promo-image-frame.is-loading .event-promo-image {
+            opacity: 0;
+        }
+        .design-drupalcon .event-promo-action {
+            background: var(--surface-2);
+            border-color: var(--line-0);
+            color: var(--text-1);
+        }
+        .design-drupalcon .event-promo-action:hover,
+        .design-drupalcon .event-promo-action:focus-visible {
+            background: var(--surface-1);
+            border-color: var(--accent);
+            color: var(--text-0);
+        }
+        /* (1,1,0) beats UnoCSS utility classes */
+        .design-drupalcon #sponsorsContainer {
+            border-color: var(--line-0);
+            background: var(--surface-1);
+        }
+        .design-drupalcon .sponsors-heading {
+            color: var(--text-0);
+        }
+        .design-drupalcon .sponsor-tier-heading {
+            color: var(--text-2);
+        }
+        .design-drupalcon .sponsor-logo-surface {
+            background: var(--surface-2);
+            border-color: var(--line-0);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+        }
+        .design-drupalcon .sponsor-logo-surface:hover,
+        .design-drupalcon .sponsor-logo-surface:focus-visible {
+            border-color: var(--accent);
+        }
+        .design-drupalcon .sponsor-card-title {
+            color: var(--text-1);
+        }
+        .design-drupalcon .sponsor-card-title:hover,
+        .design-drupalcon .sponsor-card-title:focus-visible {
+            color: var(--text-0);
+        }
+        .design-drupalcon .sponsor-bg-transparent {
+            background: transparent;
+            border-color: rgba(157, 198, 238, 0.2);
+            box-shadow: none;
+        }
+        .design-drupalcon .sponsor-bg-light-plate,
+        .design-drupalcon .sponsor-bg-auto {
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 250, 253, 0.96));
+            border-color: rgba(189, 220, 246, 0.48);
+            box-shadow:
+                inset 0 0 0 1px rgba(255, 255, 255, 0.94),
+                inset 0 -10px 22px rgba(192, 220, 244, 0.18),
+                0 12px 28px rgba(0, 0, 0, 0.24);
+        }
+        .design-drupalcon .sponsor-bg-dark-plate {
+            background: linear-gradient(180deg, rgba(28, 46, 66, 0.98), rgba(15, 27, 43, 0.98));
+        }
+        .design-drupalcon .sponsor-bg-brand-fill {
+            background: linear-gradient(160deg, rgba(13, 120, 204, 0.22), rgba(95, 167, 225, 0.2));
+        }
+        @media (max-width: 639px) {
+            .event-promo-card {
+                grid-template-columns: 142px minmax(0, 1fr);
+                gap: 0.75rem;
+            }
+            /* #id selector wins on specificity without !important */
+            #sponsorsContainer {
+                width: 100vw;
+                margin-left: calc(50% - 50vw);
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+            }
+            .sponsor-logo-row {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                justify-content: stretch;
+                column-gap: 0.7rem;
+                row-gap: 0.85rem;
+            }
+            .sponsor-card {
+                max-width: 100%;
+            }
+        }
+        @media (max-width: 479px) {
+            .event-promo-card {
+                grid-template-columns: 1fr;
+                min-height: 0;
+            }
+            .event-promo-image-frame {
+                width: 100%;
+                height: auto;
+                min-width: 0;
+                min-height: 0;
+                aspect-ratio: 142 / 106;
+            }
+            .event-promo-body {
+                min-height: 0;
+            }
+            .sponsors-heading {
+                font-size: 1.24rem;
+            }
+            .sponsor-logo-row {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                justify-content: stretch;
+                column-gap: 0.65rem;
+                row-gap: 0.85rem;
+            }
+            .sponsor-card {
+                max-width: 100%;
+            }
+            .sponsor-logo-surface {
+                min-height: 92px;
+                padding: 0.8rem;
+            }
+            .sponsor-logo-image {
+                max-width: 120px;
+                max-height: 56px;
+            }
+            .sponsor-card-title {
+                font-size: 0.76rem;
+            }
+        }
+        @keyframes event-promo-shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .event-info-list {
+            display: grid;
+            grid-template-columns: minmax(7.75rem, max-content) minmax(0, 1fr);
+            column-gap: 0.85rem;
+            row-gap: 0.45rem;
+            align-items: start;
+        }
+        .event-info-label {
+            min-width: 0;
+            text-align: left;
+            line-height: 1.35;
+            white-space: nowrap;
+        }
+        .event-info-value {
+            min-width: 0;
+            line-height: 1.35;
+        }
+        /* (0,3,1) from .design-drupalcon .event-info-card dt — beats base */
+        .design-drupalcon .event-info-card dt {
+            color: var(--text-2);
+        }
+        .design-drupalcon .event-info-card dd {
+            color: var(--text-0);
+        }
+        /* #id + class selectors win without !important */
+        .selection-overview,
+        #selectionOverview {
+            background: var(--surface-1);
+            border-top: 2px solid var(--accent);
+            box-shadow: 0 -16px 40px rgba(0, 0, 0, 0.36);
+            backdrop-filter: blur(10px);
+        }
+        .selection-overview-summary,
+        .selection-overview-actions,
+        .selection-overview-details-inner {
+            position: relative;
+        }
+        .selection-overview-toggle,
+        #selectionOverview #toggleDetails {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            min-height: 3.25rem;
+            padding: 1rem 1rem 0.75rem;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            box-shadow: none;
+            color: var(--text-0);
+        }
+        .selection-overview-toggle:hover,
+        #selectionOverview #toggleDetails:hover {
+            color: var(--accent);
+            background: color-mix(in srgb, var(--accent) 5%, transparent);
+        }
+        .selection-overview-toggle:focus-visible,
+        #selectionOverview #toggleDetails:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+        .selection-overview-toggle span,
+        .selection-overview-toggle i,
+        #selectionOverview #toggleDetails span,
+        #selectionOverview #toggleDetails i {
+            color: inherit;
+        }
+        .selection-overview-details,
+        #selectionOverview #stageDetails {
+            scrollbar-color: color-mix(in srgb, var(--accent) 45%, transparent) color-mix(in srgb, var(--accent) 4%, transparent);
+        }
+        .selection-overview-details-inner {
+            border-top-color: var(--line-0);
+        }
+        #selectionOverview #stageStats {
+            color: var(--text-0);
+        }
+        #selectionOverview #stageStats > div {
+            border: 1px solid var(--line-0);
+            border-radius: 0.85rem;
+            background: var(--surface-2);
+            padding: 1rem;
+        }
+        #selectionOverview #stageStats > div > div + div {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--line-0);
+        }
+        #selectionOverview #stageStats h4 {
+            color: var(--text-0);
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        #selectionOverview #stageStats table {
+            width: 100%;
+            border-collapse: collapse;
+            color: var(--text-1);
+        }
+        .selection-stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: transparent;
+        }
+        .selection-stats-cell {
+            background: transparent;
+            color: inherit;
+            vertical-align: top;
+        }
+        .selection-stats-row {
+            background: transparent;
+        }
+        .selection-stats-detail {
+            background: rgba(255, 255, 255, 0.03);
+        }
+        .selection-stats-detail-cell {
+            padding: 0.2rem 0 0.55rem;
+            background: transparent;
+        }
+        .selection-stats-subtable {
+            margin-top: 0.2rem;
+        }
+        .selection-stats-subrow {
+            border-bottom: 1px solid var(--line-0);
+        }
+        .selection-stats-subrow:last-child {
+            border-bottom: 0;
+        }
+        .selection-stats-subcell {
+            color: var(--text-2);
+        }
+        .selection-stats-value {
+            color: var(--text-0);
+            white-space: nowrap;
+        }
+        #selectionOverview #stageStats tr {
+            border-bottom: 1px solid var(--line-0);
+        }
+        #selectionOverview #stageStats tr:last-child {
+            border-bottom: 0;
+        }
+        #selectionOverview #stageStats td {
+            padding-top: 0.55rem;
+            padding-bottom: 0.55rem;
+        }
+        #selectionOverview #stageStats .font-mono {
+            color: var(--accent);
+            font-weight: 700;
+        }
+        #selectionOverview #stageStats tr.cursor-pointer:hover {
+            background: color-mix(in srgb, var(--accent) 8%, transparent);
+        }
+        .selection-overview-actions-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+        .selection-overview-action {
+            width: 100%;
+            min-height: 2.75rem;
+            border-radius: 0.72rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            white-space: nowrap;
+        }
+        @media (min-width: 640px) {
+            .selection-overview-actions-row {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        .selection-overview-action-primary,
+        #selectionOverview #downloadIcs {
+            border: 1px solid color-mix(in srgb, var(--accent) 65%, transparent);
+            box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 18%, transparent);
+        }
+        .selection-overview-action-secondary,
+        #selectionOverview #addGoogleCalendar {
+            border: 1px solid var(--line-0);
+            background: var(--surface-2);
+            color: var(--text-0);
+        }
+        .selection-overview-action-secondary:hover,
+        .selection-overview-action-secondary:focus-visible,
+        #selectionOverview #addGoogleCalendar:hover,
+        #selectionOverview #addGoogleCalendar:focus-visible {
+            background: var(--surface-1);
+            color: var(--accent);
+            border-color: color-mix(in srgb, var(--accent) 55%, var(--line-0));
+        }
+        #selectionOverview #downloadIcs:disabled,
+        #selectionOverview #addGoogleCalendar:disabled {
+            opacity: 0.45;
+        }
+        /* (1,1,0) from #selectionOverview beats base (0,1,0) + (1,0,0) */
+        .design-drupalcon .selection-overview,
+        .design-drupalcon #selectionOverview {
+            background:
+                radial-gradient(circle at 14% -18%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 34%),
+                radial-gradient(circle at 88% 0%, color-mix(in srgb, var(--color-secondary) 16%, transparent), transparent 28%),
+                var(--surface-1);
+        }
+        .design-drupalcon #selectionOverview #stageStats > div {
+            border-color: var(--line-0);
+            background: var(--surface-2);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+        .session-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1200;
+            background: rgba(7, 14, 23, 0.7);
+            backdrop-filter: blur(3px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .session-modal-overlay.hidden {
+            display: none;
+        }
+        .session-modal-card {
+            width: min(880px, 100%);
+            max-height: 90vh;
+            background: var(--surface-0);
+            border: 1px solid var(--line-0);
+            border-radius: 12px;
+            box-shadow: 0 24px 56px rgba(0, 0, 0, 0.35);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+        .session-modal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--color-secondary) 100%);
+            z-index: 1;
+        }
+        .session-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.9rem 1rem;
+            border-bottom: 1px solid var(--line-0);
+            background: var(--surface-1);
+        }
+        .session-modal-back,
+        .session-modal-close {
+            border: 1px solid var(--line-0);
+            background: var(--surface-1);
+            color: var(--text-1);
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            line-height: 1;
+            cursor: pointer;
+        }
+        .session-modal-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            font-weight: 600;
+        }
+        .session-modal-close {
+            width: 2rem;
+            height: 2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .session-modal-body {
+            overflow-y: auto;
+            padding: 1rem 1.1rem 1.2rem;
+        }
+        .session-modal-title {
+            font-size: 1.3rem;
+            line-height: 1.25;
+            color: var(--text-0);
+            margin-bottom: 0.7rem;
+            font-weight: 700;
+        }
+        .session-modal-subtitle {
+            margin: 0.1rem 0 0.55rem;
+            color: var(--text-2);
+            font-size: 0.9rem;
+            font-weight: 450;
+            line-height: 1.35;
+        }
+        .speaker-modal-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 0.7rem;
+            margin-bottom: 0.6rem;
+        }
+        .speaker-modal-head .session-modal-title {
+            margin-bottom: 0;
+            flex: 1 1 100%;
+        }
+        .speaker-modal-head .session-modal-subtitle {
+            margin-bottom: 0;
+            flex: 1 1 100%;
+        }
+        .speaker-modal-head .speaker-modal-count-badge {
+            align-self: flex-start;
+        }
+        .speaker-modal-count-badge {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.22rem 0.52rem;
+            border-radius: 999px;
+            border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line-0));
+            background: color-mix(in srgb, var(--accent) 14%, var(--surface-2));
+            color: var(--text-0);
+            font-size: 0.78rem;
+            font-weight: 700;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+        .session-modal-meta {
+            color: var(--text-2);
+            font-size: 0.95rem;
+            margin-bottom: 0.28rem;
+            display: grid;
+            grid-template-columns: 6.7rem minmax(0, 1fr);
+            align-items: start;
+            column-gap: 0.5rem;
+            line-height: 1.4;
+        }
+        .session-modal-meta-label {
+            font-weight: 700;
+            color: var(--text-1);
+        }
+        .session-modal-meta-value {
+            min-width: 0;
+        }
+        .session-speaker-links {
+            display: inline;
+        }
+        .session-speaker-link {
+            border: 0;
+            background: transparent;
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+            font: inherit;
+            line-height: inherit;
+        }
+        .session-speaker-link:hover {
+            color: var(--accent-strong);
+        }
+        .session-speaker-link:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 0.2rem;
+        }
+        .speaker-session-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+            margin-top: 0.7rem;
+        }
+        .speaker-session-card {
+            border: 1px solid var(--line-0);
+            border-radius: 0.7rem;
+            background: color-mix(in srgb, var(--accent) 8%, var(--surface-2));
+            padding: 0.75rem 0.85rem;
+            display: grid;
+            gap: 0.75rem;
+        }
+        .speaker-session-card-current {
+            border-color: var(--accent);
+            background: color-mix(in srgb, var(--accent) 18%, var(--surface-2));
+            box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent);
+        }
+        .speaker-session-current-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.35rem;
+            padding: 0.17rem 0.48rem;
+            border-radius: 999px;
+            border: 1px solid var(--accent);
+            background: color-mix(in srgb, var(--accent) 18%, var(--surface-2));
+            color: var(--text-0);
+            font-size: 0.72rem;
+            font-weight: 700;
+            line-height: 1.15;
+            white-space: nowrap;
+        }
+        .speaker-session-title {
+            margin: 0 0 0.35rem 0;
+            font-size: 1rem;
+            line-height: 1.35;
+            color: var(--text-0);
+        }
+        .speaker-session-meta {
+            margin: 0 0 0.25rem 0;
+            font-size: 0.86rem;
+            color: var(--text-2);
+        }
+        .speaker-session-summary {
+            margin: 0.45rem 0 0.15rem 0;
+            font-size: 0.91rem;
+            color: var(--text-1);
+            line-height: 1.45;
+        }
+        .sponsor-history-head {
+            display: grid;
+            grid-template-columns: 88px minmax(0, 1fr);
+            gap: 0.8rem;
+            align-items: start;
+        }
+        .sponsor-history-copy {
+            min-width: 0;
+        }
+        .sponsor-history-copy .speaker-session-title {
+            margin-bottom: 0.25rem;
+        }
+        .sponsor-history-actions {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.65rem;
+            align-items: stretch;
+        }
+        .sponsor-history-actions .session-modal-link {
+            width: 100%;
+            min-height: 100%;
+            margin: 0;
+        }
+        .sponsor-history-logo {
+            width: 88px;
+            min-width: 88px;
+            min-height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.55rem 0.6rem;
+            border: 1px solid var(--line-0);
+            border-radius: 0.55rem;
+            overflow: hidden;
+        }
+        .speaker-session-accordion {
+            margin: 0.35rem 0 0.25rem 0;
+        }
+        .speaker-session-accordion-toggle {
+            cursor: pointer;
+            color: var(--accent);
+            font-size: 0.86rem;
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .speaker-session-accordion-toggle:hover {
+            color: var(--accent-strong);
+        }
+        .speaker-session-accordion-toggle:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 0.2rem;
+        }
+        .speaker-session-accordion-body {
+            margin-top: 0.35rem;
+            font-size: 0.9rem;
+            color: var(--text-1);
+            line-height: 1.45;
+        }
+        .speaker-session-accordion-body p {
+            margin: 0 0 0.35rem 0;
+        }
+        .speaker-session-accordion-body p:last-child {
+            margin-bottom: 0;
+        }
+        .speaker-session-accordion-body ul,
+        .speaker-session-accordion-body ol {
+            margin: 0.2rem 0 0.45rem 1.1rem;
+        }
+        .speaker-session-accordion-body ul {
+            list-style: disc;
+        }
+        .speaker-session-accordion-body ol {
+            list-style: decimal;
+        }
+        .speaker-session-accordion-body li {
+            margin: 0 0 0.2rem 0;
+        }
+        .session-modal-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 0.75rem 0;
+        }
+        .session-modal-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.48rem 0.78rem;
+            border-radius: 0.5rem;
+            border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+            background: color-mix(in srgb, var(--accent) 12%, rgba(0,0,0,0.2));
+            color: var(--accent);
+            font-size: 0.92rem;
+            font-weight: 500;
+            line-height: 1.2;
+            text-decoration: none;
+            transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease, box-shadow 120ms ease;
+        }
+        button.session-modal-link {
+            appearance: none;
+            cursor: pointer;
+            font: inherit;
+        }
+        .schedule-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--accent);
+            font-size: 0.875rem;
+            font-weight: 400;
+            line-height: 1.25rem;
+            text-decoration: none;
+        }
+        .schedule-link span {
+            text-decoration: underline;
+            text-decoration-thickness: 1.5px;
+            text-underline-offset: 2.5px;
+        }
+        button.schedule-link {
+            border: 0;
+            background: transparent;
+            padding: 0;
+            cursor: pointer;
+            font: inherit;
+        }
+        .session-modal-link:hover,
+        .schedule-link:hover {
+            background: color-mix(in srgb, var(--accent) 10%, transparent);
+            border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+            color: var(--accent-strong);
+        }
+        .session-modal-link:focus-visible,
+        .schedule-link:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 0.2rem;
+        }
+        .session-modal-description {
+            margin-top: 0.8rem;
+            color: var(--text-1);
+            font-size: 0.95rem;
+            line-height: 1.55;
+        }
+        .session-sponsor-block {
+            margin-top: 1rem;
+            border: 1px solid var(--line-0);
+            border-radius: 0.8rem;
+            background: color-mix(in srgb, var(--accent) 8%, var(--surface-2));
+            padding: 0.9rem;
+        }
+        .session-sponsor-block-head {
+            margin-bottom: 0.7rem;
+        }
+        .session-sponsor-block-title {
+            margin: 0;
+            color: var(--text-0);
+            font-size: 0.98rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        .session-sponsor-grid {
+            display: grid;
+            gap: 0.75rem;
+        }
+        .session-sponsor-card {
+            display: grid;
+            grid-template-columns: 92px minmax(0, 1fr);
+            gap: 0.8rem;
+            align-items: center;
+        }
+        .session-sponsor-logo {
+            width: 92px;
+            min-width: 92px;
+            min-height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.55rem 0.6rem;
+            border: 1px solid var(--line-0);
+            border-radius: 0.55rem;
+            overflow: hidden;
+        }
+        .session-sponsor-copy {
+            min-width: 0;
+        }
+        .session-sponsor-name {
+            margin: 0;
+            color: var(--text-0);
+            font-size: 0.96rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        .session-sponsor-tier {
+            margin: 0.18rem 0 0;
+            color: var(--text-2);
+            font-size: 0.84rem;
+            line-height: 1.35;
+        }
+        .session-sponsor-actions {
+            grid-column: 2;
+            margin-top: 0.15rem;
+        }
+        .sponsor-history-session-list {
+            display: grid;
+            gap: 0.3rem;
+        }
+        .sponsor-history-session-items {
+            margin: 0;
+            padding-left: 1.15rem;
+            color: var(--text-1);
+            font-size: 0.9rem;
+            line-height: 1.45;
+        }
+        .sponsor-history-session-items li + li {
+            margin-top: 0.18rem;
+        }
+        .sponsor-history-session-link {
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .sponsor-history-session-link:hover {
+            color: var(--accent-strong);
+        }
+        .sponsor-history-session-link:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 0.2rem;
+        }
+        .session-modal-description p,
+        .session-description-preview p {
+            margin: 0 0 0.35rem 0;
+        }
+        .session-modal-description h1,
+        .session-modal-description h2,
+        .session-modal-description h3,
+        .session-modal-description h4,
+        .session-modal-description h5,
+        .session-modal-description h6,
+        .session-description-preview h1,
+        .session-description-preview h2,
+        .session-description-preview h3,
+        .session-description-preview h4,
+        .session-description-preview h5,
+        .session-description-preview h6,
+        .speaker-session-accordion-body h1,
+        .speaker-session-accordion-body h2,
+        .speaker-session-accordion-body h3,
+        .speaker-session-accordion-body h4,
+        .speaker-session-accordion-body h5,
+        .speaker-session-accordion-body h6 {
+            margin: 0.7rem 0 0.38rem 0;
+            line-height: 1.3;
+            font-weight: 700;
+            color: var(--text-0);
+        }
+        .session-modal-description h1,
+        .session-description-preview h1,
+        .speaker-session-accordion-body h1 { font-size: 1.25rem; }
+        .session-modal-description h2,
+        .session-description-preview h2,
+        .speaker-session-accordion-body h2 { font-size: 1.14rem; }
+        .session-modal-description h3,
+        .session-description-preview h3,
+        .speaker-session-accordion-body h3 { font-size: 1.04rem; }
+        .session-modal-description h4,
+        .session-description-preview h4,
+        .speaker-session-accordion-body h4 { font-size: 0.98rem; }
+        .session-modal-description h5,
+        .session-description-preview h5,
+        .speaker-session-accordion-body h5 { font-size: 0.93rem; }
+        .session-modal-description h6,
+        .session-description-preview h6,
+        .speaker-session-accordion-body h6 { font-size: 0.89rem; }
+        .session-modal-description h1,
+        .session-modal-description h2,
+        .session-modal-description h3,
+        .session-modal-description h4,
+        .session-modal-description h5,
+        .session-modal-description h6,
+        .session-description-preview h1,
+        .session-description-preview h2,
+        .session-description-preview h3,
+        .session-description-preview h4,
+        .session-description-preview h5,
+        .session-description-preview h6,
+        .speaker-session-accordion-body h1,
+        .speaker-session-accordion-body h2,
+        .speaker-session-accordion-body h3,
+        .speaker-session-accordion-body h4,
+        .speaker-session-accordion-body h5,
+        .speaker-session-accordion-body h6 {
+            border-left: 2px solid var(--line-0);
+            padding-left: 0.5rem;
+        }
+        .session-modal-description a,
+        .session-description-preview a,
+        .speaker-session-accordion-body a {
+            color: var(--accent);
+            text-decoration: underline;
+            text-decoration-thickness: 1.4px;
+            text-underline-offset: 2px;
+            font-weight: 500;
+        }
+        .session-modal-description a:hover,
+        .session-description-preview a:hover,
+        .speaker-session-accordion-body a:hover {
+            color: var(--accent-strong);
+        }
+        .session-modal-description table,
+        .session-description-preview table,
+        .speaker-session-accordion-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.75rem 0 0.95rem 0;
+            border: 1px solid var(--line-0);
+            border-radius: 0.55rem;
+            overflow: hidden;
+            font-size: 0.88rem;
+        }
+        .session-modal-description th,
+        .session-description-preview th,
+        .speaker-session-accordion-body th {
+            text-align: left;
+            background: var(--surface-2);
+            color: var(--text-0);
+            font-weight: 700;
+            padding: 0.45rem 0.55rem;
+            border-bottom: 1px solid var(--line-0);
+        }
+        .session-modal-description td,
+        .session-description-preview td,
+        .speaker-session-accordion-body td {
+            padding: 0.45rem 0.55rem;
+            border-bottom: 1px solid var(--line-0);
+            color: var(--text-1);
+            vertical-align: top;
+        }
+        .session-modal-description tbody tr:last-child td,
+        .session-description-preview tbody tr:last-child td,
+        .speaker-session-accordion-body tbody tr:last-child td {
+            border-bottom: 0;
+        }
+        .session-modal-description p:last-child,
+        .session-description-preview p:last-child {
+            margin-bottom: 0;
+        }
+        .session-modal-description blockquote,
+        .session-description-preview blockquote,
+        .speaker-session-accordion-body blockquote {
+            margin: 0.7rem 0 0.9rem 0;
+            padding: 0.5rem 0.75rem;
+            border-left: 3px solid var(--line-0);
+            background: var(--surface-2);
+            border-radius: 0.45rem;
+            color: var(--text-1);
+        }
+        .session-modal-description blockquote p,
+        .session-description-preview blockquote p,
+        .speaker-session-accordion-body blockquote p {
+            margin: 0;
+        }
+        .session-modal-description ul,
+        .session-modal-description ol,
+        .session-description-preview ul {
+            margin: 0.2rem 0 0.45rem 1.1rem;
+        }
+        .session-modal-description ul,
+        .session-description-preview ul {
+            list-style: disc;
+        }
+        .session-modal-description ol {
+            list-style: decimal;
+        }
+        .session-modal-description li,
+        .session-description-preview li {
+            margin: 0 0 0.2rem 0;
+        }
+        .session-modal-description ul:last-child,
+        .session-modal-description ol:last-child,
+        .session-description-preview ul:last-child {
+            margin-bottom: 0;
+        }
+        .session-modal-description pre,
+        .session-description-preview pre,
+        .speaker-session-accordion-body pre {
+            margin: 0.75rem 0 0.95rem 0;
+            padding: 0.75rem 0.9rem;
+            border-radius: 0.55rem;
+            border: 1px solid var(--line-0);
+            background: var(--surface-2);
+            color: var(--text-0);
+            overflow-x: auto;
+            line-height: 1.45;
+            font-size: 0.84rem;
+        }
+        .session-modal-description pre:last-child,
+        .session-description-preview pre:last-child,
+        .speaker-session-accordion-body pre:last-child {
+            margin-bottom: 0;
+        }
+        .session-modal-description pre code,
+        .session-description-preview pre code,
+        .speaker-session-accordion-body pre code {
+            display: block;
+            white-space: pre;
+            background: transparent;
+            border: 0;
+            padding: 0;
+            color: inherit;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        }
+        .session-modal-description code,
+        .session-description-preview code,
+        .speaker-session-accordion-body code {
+            background: var(--surface-2);
+            border: 1px solid var(--line-0);
+            border-radius: 0.3rem;
+            padding: 0.08rem 0.28rem;
+            color: var(--text-0);
+            font-size: 0.86em;
+        }
+        .session-modal-actions {
+            margin-top: 1rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid var(--line-0);
+        }
+        .session-modal-toggle {
+            border: 1px solid var(--accent);
+            background: var(--accent);
+            color: #ffffff;
+            border-radius: 0.55rem;
+            padding: 0.58rem 0.95rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .session-modal-toggle.is-selected {
+            background: color-mix(in srgb, var(--accent) 18%, var(--surface-2));
+            color: var(--accent);
+            border-color: color-mix(in srgb, var(--accent) 55%, var(--line-0));
+        }
+        .share-modal-copy {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: 2.75rem;
+            margin-top: 0.8rem;
+            border: 1px solid var(--line-0);
+            border-radius: 0.65rem;
+            background: var(--surface-1);
+            color: var(--text-0);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+        }
+        .share-modal-copy:hover,
+        .share-modal-copy:focus-visible {
+            background: var(--surface-2);
+            border-color: color-mix(in srgb, var(--accent) 55%, var(--line-0));
+            outline: none;
+        }
+        .share-modal-copy-primary {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: #ffffff;
+        }
+        .share-modal-copy-primary:hover,
+        .share-modal-copy-primary:focus-visible {
+            background: var(--accent-strong);
+            border-color: var(--accent-strong);
+            color: #ffffff;
+        }
+        .share-modal-option + .share-modal-option {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--line-0);
+        }
+        .share-modal-option-title {
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.35;
+            font-weight: 700;
+            color: var(--text-0);
+        }
+        .share-modal-option-text {
+            margin: 0.4rem 0 0;
+            font-size: 0.93rem;
+            line-height: 1.5;
+            color: var(--text-2);
+        }
+        body.session-modal-open {
+            overflow: hidden;
+        }
+
+/* ── Speaker result cards ───────────────────────────────────────────────── */
+        .speaker-result-card {
+            background:
+                linear-gradient(160deg, rgba(15, 27, 43, 0.92), rgba(15, 27, 43, 0.9)),
+                linear-gradient(110deg, rgba(49, 113, 176, 0.45), rgba(37, 86, 136, 0.4));
+            background-blend-mode: normal, soft-light;
+            border-color: rgba(149, 191, 233, 0.2) !important;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+        }
+        .speaker-result-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.75rem;
+            align-items: center;
+            margin-bottom: 0.6rem;
+        }
+        .speaker-user-summary {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            min-width: 0;
+        }
+        .speaker-user-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 9999px;
+            object-fit: cover;
+            border: 1px solid color-mix(in srgb, var(--accent) 50%, var(--line-0));
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+            flex: 0 0 auto;
+        }
+        .speaker-user-name {
+            color: var(--text-0);
+            font-size: 1.04rem;
+            line-height: 1.15;
+            font-weight: 700;
+        }
+        .speaker-user-handle {
+            margin-top: 0.12rem;
+            color: var(--text-2);
+            font-size: 0.86rem;
+            line-height: 1.15;
+        }
+        .speaker-talk-count {
+            border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line-0));
+            border-radius: 0.5rem;
+            padding: 0.22rem 0.52rem;
+            color: var(--text-0);
+            font-size: 0.77rem;
+            background: color-mix(in srgb, var(--accent) 12%, var(--surface-2));
+            white-space: nowrap;
+        }
+        .speaker-talk-list {
+            display: grid;
+            gap: 0.42rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .speaker-talk-item {
+            border: 1px solid var(--line-0);
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.62rem;
+            background: var(--surface-2);
+        }
+        .speaker-talk-title {
+            color: var(--text-0);
+            font-size: 0.92rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        .speaker-talk-meta {
+            margin-top: 0.22rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem 0.72rem;
+            color: var(--text-2);
+            font-size: 0.79rem;
+        }
+
+/* ── Per-track pill colours + card border accents ───────────────────────── */
+        /* ── Per-track pill colours ─────────────────────────────────── */
+        /* Attribute selectors are (0,2,0) vs .track-pill (0,1,0) — no !important needed */
+        .track-pill[data-track="Keynote"] {
+            background: rgba(245, 158, 11, 0.14);
+            border-color: rgba(245, 158, 11, 0.5);
+            color: #fbbf24;
+        }
+        .track-pill[data-track="Drupal Development"] {
+            background: rgba(16, 185, 129, 0.12);
+            border-color: rgba(16, 185, 129, 0.45);
+            color: #34d399;
+        }
+        .track-pill[data-track="Web Tools & Complementary Technologies"] {
+            background: rgba(14, 165, 233, 0.12);
+            border-color: rgba(14, 165, 233, 0.45);
+            color: #38bdf8;
+        }
+        .track-pill[data-track="User Experience & Content"] {
+            background: rgba(249, 115, 22, 0.12);
+            border-color: rgba(249, 115, 22, 0.45);
+            color: #fb923c;
+        }
+        .track-pill[data-track="People & Culture"] {
+            background: rgba(168, 85, 247, 0.12);
+            border-color: rgba(168, 85, 247, 0.45);
+            color: #c084fc;
+        }
+        .track-pill[data-track="Sponsor"] {
+            background: rgba(99, 102, 241, 0.12);
+            border-color: rgba(99, 102, 241, 0.45);
+            color: #a5b4fc;
+        }
+
+        /* ── Per-track card left-border accents ─────────────────────── */
+        /* [attr]:not() selectors are (0,4,0) — specificity wins cleanly */
+        .event-card[data-primary-track]:not(.drupal-blue-border-light) {
+            border-left-width: 3px;
+        }
+        .event-card[data-primary-track="Keynote"]:not(.drupal-blue-border-light) {
+            border-left-color: rgba(245, 158, 11, 0.75);
+        }
+        .event-card[data-primary-track="Drupal Development"]:not(.drupal-blue-border-light) {
+            border-left-color: rgba(16, 185, 129, 0.7);
+        }
+        .event-card[data-primary-track="Web Tools & Complementary Technologies"]:not(.drupal-blue-border-light) {
+            border-left-color: rgba(14, 165, 233, 0.7);
+        }
+        .event-card[data-primary-track="User Experience & Content"]:not(.drupal-blue-border-light) {
+            border-left-color: rgba(249, 115, 22, 0.7);
+        }
+        .event-card[data-primary-track="People & Culture"]:not(.drupal-blue-border-light) {
+            border-left-color: rgba(168, 85, 247, 0.7);
+        }
+        .event-card[data-primary-track="Sponsor"]:not(.drupal-blue-border-light) {
+            border-left-color: rgba(99, 102, 241, 0.7);
+        }
+        .event-card[data-primary-track="Other"]:not(.drupal-blue-border-light) {
+            border-left-color: rgba(100, 116, 139, 0.5);
+        }
+
+        /* ── Day headings ────────────────────────────────────────────── */
+        /* #id selector is (1,0,0) — wins without !important */
+        #eventsContainer h2 {
+            font-weight: 700;
+            color: var(--text-0);
+            border-bottom: 1px solid var(--line-0);
+            padding-bottom: 0.55rem;
+            margin-bottom: 1.1rem;
+        }
+
+
+/* ── Dark neon glass for modals, cards, animations ──────────────────────── */
+/* ── Index body: neon glass for content, modals, cards ──────────────────── */
+
+/* All rules below use .theme-dark compound selectors (0,2,0+) which beat
+   their base counterparts (0,1,0). Later position in file handles equal cases. */
+
+/* Modal overlay */
+.theme-dark .session-modal-overlay {
+    background: rgba(1, 5, 14, 0.85);
+    backdrop-filter: blur(14px) saturate(140%);
+}
+
+/* Session modal card */
+.theme-dark .session-modal-card {
+    background:
+        radial-gradient(ellipse at 95% 5%, rgba(0, 207, 255, 0.08), transparent 40%),
+        radial-gradient(ellipse at 5% 95%, rgba(124, 58, 237, 0.06), transparent 40%),
+        linear-gradient(160deg, rgba(4, 12, 26, 0.98), rgba(2, 7, 16, 0.99));
+    border: 1px solid rgba(0, 207, 255, 0.28);
+    box-shadow:
+        0 36px 90px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(0, 207, 255, 0.06),
+        0 0 60px rgba(0, 207, 255, 0.08);
+}
+
+/* Modal header */
+.theme-dark .session-modal-header {
+    background: rgba(2, 8, 18, 0.97);
+    border-bottom-color: rgba(0, 207, 255, 0.22);
+    box-shadow: 0 1px 0 rgba(0, 207, 255, 0.06);
+}
+
+/* Modal buttons */
+.theme-dark .session-modal-back,
+.theme-dark .session-modal-close {
+    background: rgba(0, 207, 255, 0.08);
+    border-color: rgba(0, 207, 255, 0.28);
+    color: #b8e8ff;
+}
+
+/* Day headings: (0,3,0) beats (0,2,0) */
+.theme-dark .design-drupalcon .schedule-day-heading {
+    border-color: rgba(0, 207, 255, 0.4);
+    background:
+        radial-gradient(ellipse at 0% 50%, rgba(0, 207, 255, 0.12), transparent 55%),
+        linear-gradient(95deg, rgba(6, 20, 44, 0.92), rgba(3, 11, 26, 0.92));
+    box-shadow: 0 0 24px rgba(0, 207, 255, 0.1);
+}
+
+/* Event cards: (0,3,0) beats (0,2,0) */
+.theme-dark .design-drupalcon .event-card-dc {
+    border-color: rgba(0, 207, 255, 0.2);
+    background:
+        linear-gradient(160deg, rgba(4, 12, 26, 0.95), rgba(2, 8, 18, 0.93)),
+        linear-gradient(110deg, var(--event-color-a), var(--event-color-b));
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+.theme-dark .design-drupalcon .event-card-dc:hover {
+    border-color: var(--event-color-a);
+    box-shadow: 0 0 24px rgba(0, 207, 255, 0.16), 0 12px 36px rgba(0, 0, 0, 0.5);
+}
+
+/* Filter panels: need !important — these panels have bg-white class, so
+   .theme-dark .bg-white { background !important } (0,2,0) would otherwise win.
+   (1,2,0) specificity + !important ensures the neon treatment prevails. */
+.theme-dark .design-drupalcon #filtersPanel,
+.theme-dark .design-drupalcon #sessionFiltersPanel {
+    border-color: rgba(0, 207, 255, 0.28) !important;
+    background:
+        radial-gradient(circle at 92% -20%, rgba(0, 207, 255, 0.12), transparent 40%),
+        linear-gradient(165deg, rgba(4, 14, 30, 0.97), rgba(2, 8, 18, 0.95)) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.48), inset 0 1px 0 rgba(0, 207, 255, 0.06);
+}
+
+/* Sponsor surfaces */
+.theme-dark .sponsor-bg-transparent {
+    background: rgba(0, 207, 255, 0.04);
+    border-color: rgba(0, 207, 255, 0.22);
+}
+
+/* Speaker session cards */
+.theme-dark .speaker-session-card {
+    background: rgba(3, 10, 24, 0.92);
+    border-color: rgba(0, 207, 255, 0.2);
+}
+.theme-dark .speaker-session-card-current {
+    background: rgba(0, 207, 255, 0.1);
+    border-color: rgba(0, 207, 255, 0.52);
+    box-shadow: 0 0 22px rgba(0, 207, 255, 0.16), inset 0 0 0 1px rgba(0, 207, 255, 0.22);
+}
+
+/* Slot headings */
+.theme-dark .slot-heading {
+    border-left-color: rgba(0, 207, 255, 0.72);
+    box-shadow: -2px 0 14px rgba(0, 207, 255, 0.22);
+}
+
+/* ── Neon transitions & animations ──────────────────────────────────────── */
+
+/* Event cards: border + glow glide smoothly on hover */
+.design-drupalcon .event-card-dc {
+    transition: border-color 0.25s ease, box-shadow 0.3s ease;
+}
+
+/* Day headings: slow breathing glow (barely perceptible) */
+@keyframes day-heading-breathe {
+    0%, 100% { box-shadow: 0 0 24px rgba(0, 207, 255, 0.10); }
+    50%       { box-shadow: 0 0 40px rgba(0, 207, 255, 0.22); }
+}
+.theme-dark .design-drupalcon .schedule-day-heading {
+    animation: day-heading-breathe 5s ease-in-out infinite;
+}
+
+/* Session modal card: fade + subtle lift on open */
+@keyframes modal-card-enter {
+    from { opacity: 0; transform: translateY(12px) scale(0.983); }
+    to   { opacity: 1; transform: translateY(0)    scale(1);     }
+}
+.session-modal-overlay:not(.hidden) .session-modal-card {
+    animation: modal-card-enter 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* ── Now indicator ──────────────────────────────────────────────────────── */
+/* ── Now indicator ──────────────────────────────────────────── */
+
+.design-drupalcon .now-indicator {
+    display: grid;
+    grid-template-columns: minmax(132px, 160px) minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+    margin: 4px 0 8px;
+    pointer-events: none;
+}
+
+.design-drupalcon .now-indicator-label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    text-align: right;
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+}
+
+.design-drupalcon .now-indicator-line {
+    position: relative;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 1px;
+    box-shadow: 0 0 8px var(--accent);
+}
+
+.design-drupalcon .now-indicator-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 6px var(--accent);
+}
+
+.now-indicator-dot {
+    font-size: 0.45rem;
+    animation: now-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes now-pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.2; }
+}
+
+/* Jump-to-now button inherits accent colour */
+.now-jump-btn {
+    color: var(--accent, #00cfff);
+    border-color: var(--accent, #00cfff);
+    background: transparent;
+}
+.now-jump-btn:hover {
+    background: color-mix(in srgb, var(--accent, #00cfff) 10%, transparent);
+}
+
+/* Mobile: collapse to single-column (matches timeline-row mobile breakpoint) */
+@media (max-width: 639px) {
+    .design-drupalcon .now-indicator {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        margin: 6px 0 10px;
+    }
+    .design-drupalcon .now-indicator-label {
+        justify-content: flex-start;
+        text-align: left;
+    }
+}
+
+/* ── Responsive breakpoints ──────────────────────────────────────────────── */
+        @media (max-width: 900px) {
+            .design-drupalcon .timeline-row {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .design-drupalcon .timeline-time {
+                position: static;
+                text-align: left;
+                padding: 0;
+                margin-bottom: 2px;
+            }
+            .design-drupalcon .timeline-time-hour {
+                font-size: 0.95rem;
+            }
+            .design-drupalcon .timeline-time-date {
+                font-size: 0.72rem;
+            }
+            .sponsor-history-head {
+                grid-template-columns: 72px minmax(0, 1fr);
+            }
+            .sponsor-history-logo {
+                width: 72px;
+                min-width: 72px;
+                max-width: 72px;
+                min-height: 72px;
+            }
+            .sponsor-history-actions {
+                grid-template-columns: 1fr;
+            }
+            .session-sponsor-card {
+                grid-template-columns: 76px minmax(0, 1fr);
+                align-items: start;
+            }
+            .session-sponsor-logo {
+                width: 76px;
+                min-width: 76px;
+                max-width: 76px;
+            }
+            .session-sponsor-actions {
+                grid-column: 2;
+            }
+        }
+        @media (max-width: 640px) {
+            .event-info-list {
+                grid-template-columns: minmax(6.25rem, max-content) minmax(0, 1fr);
+                column-gap: 0.65rem;
+            }
+            .event-info-label {
+                white-space: normal;
+            }
+            .session-modal-overlay {
+                padding: 0.45rem;
+            }
+            .session-modal-body {
+                padding: 0.85rem 0.85rem 1rem;
+            }
+            .session-modal-title {
+                font-size: 1.1rem;
+            }
+            .session-modal-meta {
+                grid-template-columns: 1fr;
+                row-gap: 0.08rem;
+            }
+        }
+
+/* ── Icon spacing utilities ─────────────────────────────────────────────── */
+        /* Optical left-margin correction for FA icons in icon+label buttons.
+           .fas/.fa-solid glyphs sit tight against the flex edge; this nudges
+           them away from the button border consistently across all themes. */
+        #searchEvents .fas, #searchEvents .fa-solid,
+        #shareSchedule .fas, #shareSchedule .fa-solid,
+        #resetFilters .fas, #resetFilters .fa-solid,
+        #selectAllDisplayed .fas, #selectAllDisplayed .fa-solid,
+        #deselectAllDisplayed .fas, #deselectAllDisplayed .fa-solid {
+            margin-left: 1rem;
+        }
+        .design-drupalcon #filtersPanel button .fas,
+        .design-drupalcon #filtersPanel button .fa-solid,
+        .design-drupalcon #sessionFiltersPanel button:not(#clearKeywords) .fas,
+        .design-drupalcon #sessionFiltersPanel button:not(#clearKeywords) .fa-solid {
+            color: var(--color-secondary);
+        }
+
+/* ── Light theme: schedule-specific surface overrides ───────────────────── */
+        /* Session cards — surface colour + visible border in light mode */
+        .theme-light .design-drupalcon .event-card-dc {
+            background: var(--surface-0);
+            border-color: var(--line-0);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.04);
+            color: var(--text-0);
+        }
+        .theme-light .design-drupalcon .event-card-dc:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12), 0 0 0 1px var(--accent);
+        }
+        /* Slot rows use surface vars */
+        .theme-light .slot-bg-a { background: var(--surface-1) !important; } /* ties UnoCSS */
+        .theme-light .slot-bg-b { background: var(--surface-2) !important; }

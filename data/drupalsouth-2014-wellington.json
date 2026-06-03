@@ -1,0 +1,1040 @@
+{
+  "event": {
+    "designation": "DrupalSouth",
+    "location": "Wellington",
+    "year": "2014",
+    "website": "http://drupalsouth2014.drupal.org.nz/",
+    "region": "New Zealand – Wellington",
+    "venue": "Te Papa Museum",
+    "timezone": "Pacific/Auckland",
+    "startDate": "2014-02-13T20:00:00Z",
+    "endDate": "2014-02-16T05:00:00Z",
+    "sourceCache": "cache/wayback/drupalsouth-2014/raw",
+    "flickr": {
+      "enabled": true,
+      "groupUrl": "https://flic.kr/g/o8BYG",
+      "image": "./img/flickr/drupalsouth/2014-wellington.jpg",
+      "imageAlt": "DrupalSouth logo"
+    },
+    "columns": 3,
+    "enabled": true,
+    "logo": {
+      "image": "./img/logos/drupalsouth/2014-wellington.png",
+      "imageAlt": "DrupalSouth logo",
+      "usePlate": false
+    },
+    "sponsors": [
+      {
+        "id": "sponsor-1",
+        "title": "PreviousNext",
+        "tier": "Platinum",
+        "row": 1,
+        "priority": 10,
+        "image": "./img/sponsors/drupalsouth/2014-wellington/sponsor-1.png",
+        "imageAlt": "PreviousNext logo",
+        "link": "http://previousnext.com.au/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-2",
+        "title": "Catalyst",
+        "tier": "Platinum",
+        "row": 1,
+        "priority": 20,
+        "image": "./img/sponsors/drupalsouth/2014-wellington/sponsor-2.png",
+        "imageAlt": "Catalyst logo",
+        "link": "http://catalyst.net.nz/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-3",
+        "title": "Technocrat",
+        "tier": "Gold",
+        "row": 1,
+        "priority": 30,
+        "image": "./img/sponsors/drupalsouth/2014-wellington/sponsor-3.png",
+        "imageAlt": "Technocrat logo",
+        "link": "http://www.technocrat.com.au/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-4",
+        "title": "HeadFirst",
+        "tier": "Gold",
+        "row": 1,
+        "priority": 40,
+        "image": "./img/sponsors/drupalsouth/2014-wellington/sponsor-4.png",
+        "imageAlt": "HeadFirst logo",
+        "link": "http://www.headfirst.co.nz/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-5",
+        "title": "Get Yourself Online",
+        "tier": "Silver",
+        "row": 1,
+        "priority": 50,
+        "image": "./img/sponsors/drupalsouth/2014-wellington/sponsor-5.png",
+        "imageAlt": "Get Yourself Online logo",
+        "link": "http://www.getyourselfonline.co.nz/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-6",
+        "title": "Acquia",
+        "tier": "Silver",
+        "row": 1,
+        "priority": 60,
+        "image": "./img/sponsors/drupalsouth/2014-wellington/sponsor-6.png",
+        "imageAlt": "Acquia logo",
+        "link": "http://acquia.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-7",
+        "title": "RealityLoop",
+        "tier": "Silver",
+        "row": 1,
+        "priority": 70,
+        "image": "./img/sponsors/drupalsouth/2014-wellington/sponsor-7.png",
+        "imageAlt": "RealityLoop logo",
+        "link": "http://realityloop.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-8",
+        "title": "Webscope",
+        "tier": "",
+        "row": 1,
+        "priority": 80,
+        "image": "./img/sponsors/drupalsouth/2014-wellington/sponsor-8.png",
+        "imageAlt": "Webscope logo",
+        "link": "http://webscope.co.nz/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-9",
+        "title": "Sparks Interactive",
+        "tier": "Jade",
+        "row": 1,
+        "priority": 90,
+        "image": "./img/sponsors/drupalsouth/2014-wellington/sponsor-9.jpg",
+        "imageAlt": "Sparks Interactive logo",
+        "link": "http://www.sparksinteractive.co.nz/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-10",
+        "title": "CrossFunctional",
+        "tier": "Jade",
+        "row": 1,
+        "priority": 100,
+        "image": "./img/sponsors/drupalsouth/2014-wellington/sponsor-10.png",
+        "imageAlt": "CrossFunctional logo",
+        "link": "http://crossfunctional.net/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-11",
+        "title": "Code Drop",
+        "tier": "Jade",
+        "row": 1,
+        "priority": 110,
+        "image": "./img/sponsors/drupalsouth/2014-wellington/sponsor-11.png",
+        "imageAlt": "Code Drop logo",
+        "link": "http://codedrop.com.au/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-12",
+        "title": "I Want My Name",
+        "tier": "Jade",
+        "row": 1,
+        "priority": 120,
+        "image": "./img/sponsors/drupalsouth/2014-wellington/sponsor-12.png",
+        "imageAlt": "I Want My Name logo",
+        "link": "https://iwantmyname.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-13",
+        "title": "Red Hat",
+        "tier": "Jade",
+        "row": 1,
+        "priority": 130,
+        "image": "./img/sponsors/drupalsouth/2014-wellington/sponsor-13.png",
+        "imageAlt": "Red Hat logo",
+        "link": "http://sg.redhat.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "scheduleURLs": [
+      "http://drupalsouth2014.drupal.org.nz/schedule"
+    ]
+  },
+  "items": [
+    {
+      "startTime": "2014-02-13T20:00:00Z",
+      "endTime": "2014-02-13T21:00:00Z",
+      "duration": "P60M",
+      "title": "Business Day",
+      "location": "TBA",
+      "link": "http://drupalsouth2014.drupal.org.nz/business-day",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "The DrupalSouth Business day in a one-day business event which will be held on Friday, the 14th, February at the Te Papa Museum. This event is primarily aimed at business leaders who are evaluating, use or provide Drupal services. Join us for a candid peer discussion and networking with other Drupal executives.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-13T20:00:00Z",
+      "endTime": "2014-02-13T21:00:00Z",
+      "duration": "P60M",
+      "title": "Code sprint",
+      "location": "Icon",
+      "link": "http://drupalsouth2014.drupal.org.nz/code-sprint",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "DrupalSouth opens on Valentine's Day, Friday the 14th of February. Show your love for the Drupal project and come along the code sprint and help make Drupal better. You don't have to be a PHP developer to contribute. There are lots of areas to contribute",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-13T20:00:00Z",
+      "endTime": "2014-02-13T21:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal in a Day Course",
+      "location": "TBA",
+      "link": "http://drupalsouth2014.drupal.org.nz/drupal-day-course",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "Get a solid introduction to Drupal 7 with this globally recognised introductory course that's been taken by thousands of people around the world, presented by PreviousNext.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-13T20:00:00Z",
+      "endTime": "2014-02-13T21:00:00Z",
+      "duration": "P60M",
+      "title": "Front End Development: From PSD to Drupal Theme Course",
+      "location": "TBA",
+      "link": "http://drupalsouth2014.drupal.org.nz/front-end-development-psd-drupal-theme-course",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "You've just been handed a gorgeous, static Photoshop file. By tomorrow it needs to be a responsive, extensible, and compatible Drupal theme for some Web site you've never seen. *gulp* No worries!",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-13T20:00:00Z",
+      "endTime": "2014-02-13T21:00:00Z",
+      "duration": "P60M",
+      "title": "Site Builders Training Course",
+      "location": "TBA",
+      "link": "http://drupalsouth2014.drupal.org.nz/site-builders-training-course",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "At the end of this course you will have created a fully functioning Drupal 7 site that is extendible, secure and contains a reusable suite of components with the flexibility to accommodate future requirements. It will open your imagination as to what is possible with Drupal 7.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-14T19:30:00Z",
+      "endTime": "2014-02-14T20:00:00Z",
+      "duration": "P30M",
+      "title": "Opening-Day Welcome",
+      "location": "PreviousNext Soundings Theatre",
+      "link": "http://drupalsouth2014.drupal.org.nz/opening-day-welcome",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-14T20:00:00Z",
+      "endTime": "2014-02-14T21:00:00Z",
+      "duration": "P60M",
+      "title": "Adapting to the Enterprise",
+      "location": "Headfirst Oceania",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/business-strategy/adapting-enterprise",
+      "track": [
+        "Business & Strategy"
+      ],
+      "speakers": [
+        "zzrwood"
+      ],
+      "full_description": "A little fish in a big pond - the challenges of adopting Drupal in large scale sites and in meeting enterprise requirements for security, deployment, integration, accessibility, and more.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-14T20:00:00Z",
+      "endTime": "2014-02-14T21:00:00Z",
+      "duration": "P60M",
+      "title": "Case Study: University Of Queensland's Drupal Platform",
+      "location": "Catalyst Rangimarie Room 1",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/coding-development/case-study-university-queenslands-drupal-platform",
+      "track": [
+        "Coding & Development"
+      ],
+      "speakers": [
+        "firecannon"
+      ],
+      "full_description": "We recently implemented Drupal at The University of Queensland with a team of 2.5, and achieved some incredible results on a small budget and tight deadlines. Centralised data structures & content with RDF, replacing NFS with Riak, SAML for SSO, and how multi-master MySQL is the best thing ever!\n\nThis session aims to cover some of the interesting and unique pieces of the UQ-Drupal build, including:\n\n- Replacing NFS with the Riak object-store, and integrating with Storage API, WYSIWYG and file/image browsers\n- Replacing the traditional MySQL service with Galera for multi-master writes\n- Building a central rdf triplestore to not only dictate content types and taxonomies, but storage of ALL created Drupal content for shared consumption\n- How to build an infrastructure that scales easily and rapidly\n- Using SimpleSAMLphp as a central IDP for SSO\n- Inception: A drag-and-drop interface that sits on top of Display Suite",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-14T20:00:00Z",
+      "endTime": "2014-02-14T21:00:00Z",
+      "duration": "P60M",
+      "title": "I'm A Site Builder, Not A Nerd",
+      "location": "Technocrat Oceania",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/site-building/im-site-builder-not-nerd",
+      "track": [
+        "Site Building"
+      ],
+      "speakers": [
+        "kaybee57"
+      ],
+      "full_description": "Would you like to build Drupal websites from scratch when you are not a 'nerd', don't understand coding or PHP, you're not overly sure how to install modules and themes easily and it becomes all too hard?\n\nOnce those modules and themes ARE installed - what do you do with them?? How do you make them active? How do you place them where you want etc, etc.\nWhat are Blocks? What do you do with them? How do you place them on a page?\nThis session would be ideal for those people who just want to get over the initial barriers of installing and understanding Drupal and 'make a website work'.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-14T20:00:00Z",
+      "endTime": "2014-02-14T21:00:00Z",
+      "duration": "P60M",
+      "title": "Making Your Front End Workflow Awesome [FEATURED]",
+      "location": "PreviousNext Soundings Theatre",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/frontend/making-your-front-end-workflow-awesome-featured",
+      "track": [
+        "Frontend"
+      ],
+      "speakers": [
+        "kitt"
+      ],
+      "full_description": "There are so many tools out there helping us making websites more quickly. There's yeoman, grunt, livereload, emmet, sass, alfred, bower, vagrant, phantomcss, and wow, yet another new, shiny, fancy tool! With all the differing screen resolutions, browser support, network speeds and other considerations buzzing around, jockeying for highest priority and attention during front end development, how do we have time to see what tools will work for our Drupal theme development processes while still finishing our projects on time? Let's take a look at those various tools. We'll see how they can integrate with our Drupal development processes, address responsive web design, review mobile-first development, discuss media queries organization, streamline our workflows with browser bookmarks and automatic page reloading, and show techniques for specific issues like sprites and using svg images with png fallbacks.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-14T21:00:00Z",
+      "endTime": "2014-02-14T22:00:00Z",
+      "duration": "P60M",
+      "title": "Accessibility Is Not Disability",
+      "location": "Headfirst Oceania",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/frontend/accessibility-not-disability",
+      "track": [
+        "Frontend"
+      ],
+      "speakers": [
+        "garethhallnz"
+      ],
+      "full_description": "The web is about information sharing. Why make it hard for users to access your content. Release your site from bad building practices, make it equal access for all and get SEO benefits for free.\n\nGet through to the disabled community\n\nBy breaking down disability barriers you open up your content to a wider community currently 600,000+ in NZ.\n\nThere are definite dos and don’ts when it comes to building for the disabled. Learn what works for them.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-14T21:00:00Z",
+      "endTime": "2014-02-14T22:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal At The ANU College Of Law",
+      "location": "Technocrat Oceania",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/business-strategy/drupal-anu-college-law",
+      "track": [
+        "Business & Strategy"
+      ],
+      "speakers": [
+        "fionamccaskill",
+        "Ilona Van Galen"
+      ],
+      "full_description": "In 2010, the ANU College of Law migrated from a proprietary software environment to an open source Drupal environment. The project started slowly, encountering staff resistance to change from a known, but unwieldy and out-dated system.\nUnder the old environment, we had no content management system. No-one ‘owned’ our static web pages, which were rarely updated and frequently forgotten. When and if pages were updated, they were edited directly on the server, creating headaches for the IT department: corrupted files; rogue code appearing in the browser hidden behind the locally installed website administration tool; and connectivity issues between the client computers and the server\nUniversity pressure to adopt new corporate branding finally created an unstoppable impetus for change. We had to develop a unique, flexible project management approach to achieve stakeholder buy-in, user training and cultural adoption of Drupal.\nAs we moved our content into the new environment we transformed it into “chunks” of information that each had an owner and much more granular permissions. We changed our content structure almost completely in the new environment. The chunks of information became websites. These websites went through rigorous analysis and testing for approval. Our users were given websites they had to administer, granting them the authority to consider the type, currency, accuracy and adaptability of their content.\nBy working from the least important chunks upwards, we were eventually able to achieve not just a new website, but a new college commitment to marketing through the web. The Associate Dean now chairs a web working group tasked with ensuring that content is fresh and relevant; and our college community has finally begun to recognise the power of Drupal, testing us to extend and develop our own knowledge and skill of the platform.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-14T21:00:00Z",
+      "endTime": "2014-02-14T22:00:00Z",
+      "duration": "P60M",
+      "title": "Everything You Wanted To Know About Drupal 8 But Were Too Afraid To Ask [FEATURED]",
+      "location": "PreviousNext Soundings Theatre",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/coding-development/everything-you-wanted-know-about-drupal-8-were-too-afraid-ask-featured",
+      "track": [
+        "Coding & Development"
+      ],
+      "speakers": [
+        "larowlan",
+        "kim.pepper"
+      ],
+      "full_description": "Who this session is for\n\nThe session will assume a reasonable grasp of module development with Drupal 7 and will focus on solving real use-case situations in Drupal 8. Covered in the session The session will be run as a lab working through a real-world example of porting a module from Drupal 7 to Drupal 8. About the presenters Kim Pepper (kim.pepper):\n\n- has been working with Drupal for over 5 years;\n- is a member of the Drupal Software Working Group;\n- is a top-50 contributor to Drupal 8 core; and\n\nLee Rowlands (larowlan):\n\n- has been working with Drupal for over 5 years;\n- is a member of the Drupal security team;\n- is the core maintainer of comment, forum and custom block modules",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-14T21:00:00Z",
+      "endTime": "2014-02-14T22:00:00Z",
+      "duration": "P60M",
+      "title": "Panopoly: Magical Mystery Tour",
+      "location": "Catalyst Rangimarie Room 1",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/site-building/panopoly-magical-mystery-tour",
+      "track": [
+        "Site Building"
+      ],
+      "speakers": [
+        "kattekrab"
+      ],
+      "full_description": "Panopoly is a Drupal Distribution that gives you a massive head start when building a new Drupal site. This session explores the Panopoly learning curve. We'll explore its key features, quirks and confusions. How much can you do out of the box? What extra modules might help get the job done? Come with me on a Magical Mystery Tour of one of Drupal's most exciting distributions.\n\nGrab the slides here: http://www.slideshare.net/kattekrab/panopoly-magical-mystery-tour",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-14T22:00:00Z",
+      "endTime": "2014-02-14T22:30:00Z",
+      "duration": "P30M",
+      "title": "Morning Tea - Saturday",
+      "location": "TBA",
+      "link": "http://drupalsouth2014.drupal.org.nz/morning-tea-saturday",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-14T22:30:00Z",
+      "endTime": "2014-02-14T23:30:00Z",
+      "duration": "P60M",
+      "title": "Better User Experience Through Personalisation [FEATURED]",
+      "location": "PreviousNext Soundings Theatre",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/business-strategy/better-user-experience-through-personalisation-featured",
+      "track": [
+        "Business & Strategy"
+      ],
+      "speakers": [
+        "davidseth"
+      ],
+      "full_description": "Personalisation means better communication to your site visitors. We all know that one size doesn't fit all and this is very true for content. A message that is important to me might be of no consequence to you. Many competing CMS systems have built-in Personalisation. These are powerful, but often complex beasts; yet many clients want this power. How can this be achieved in Drupal? How can Drupal do it better than the other big, expensive, proprietary systems? I will present the latest techniques in the personalisation space and how they can be deeply integrated into your Drupal website. Topics Covered:\n\n- Explicit Personalisation (logged in users)\n- Implicit Personalisation (anonymous users)\n- Presenting content to users based on:\n- geo-location\n- user device\n- time-of-day\n- time-of-week\n- browsing patterns\n- and more...\n- Keeping Drupal fast",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-14T22:30:00Z",
+      "endTime": "2014-02-14T23:30:00Z",
+      "duration": "P60M",
+      "title": "Foundation vs Bootstrap Death Match: Responsive Frameworks in Drupal",
+      "location": "Catalyst Rangimarie Room 1",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/frontend/foundation-vs-bootstrap-death-match-responsive-frameworks-drupal",
+      "track": [
+        "Frontend"
+      ],
+      "speakers": [
+        "VladimirAus"
+      ],
+      "full_description": "- responsive grids to fit any kind of device using responsive design;\n- CSS styles for major HTML elements: forms, tables, lists, navigation items;\n- Java Script extensions (plugged individually) to allow additional functionality such as responsive images, carousel, sliders, accordions, modal windows;\n\nFoundation, Bootstrap and framework's various extensions are now available as themes and modules for Drupal 7. Although both frameworks are relatively young, they can be both used for creating Drupal web sites and web applications with professional look.\n\nThis presentation will consist of three parts\n- Introduction to Bootstrap & Foundation. Common features & differences.\n- Quick brochure site from scratch with Bootstrap\n- Quick yoga studio site from scratch with Foundation\n\nThat’s two sites in under an hour. If you can find a similar deal at any other presentation at Drupal South, we will give you the list of 12 alternative responsive front end frameworks for free.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-14T22:30:00Z",
+      "endTime": "2014-02-14T23:30:00Z",
+      "duration": "P60M",
+      "title": "Multilingual Site Setup and Management",
+      "location": "Headfirst Oceania",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/site-building/multilingual-site-setup-and-management",
+      "track": [
+        "Site Building"
+      ],
+      "speakers": [
+        "jlabrum",
+        "lvandenberg"
+      ],
+      "full_description": "Multilingual was an afterthought in the design of Drupal 7. Luckily, there has been a significant effort within the community that now makes it possible and even simple. This session will discuss how to get a Drupal 7 site to be multilingual and how to manage it overtime.\n\nTopics:\n\n- Keeping translations current for highly dynamic sites with rapidly changing content\n- Set content-types to have specific translation profiles\n- Post-editing translations\n- How to leverage machine, community, and professional translation based on what is needed\n- Testing new markets using machine translation\n- Enlisting others to assist in the translation process\n- Translation workflow considerations and automation\n- Review of client case studies",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-14T22:30:00Z",
+      "endTime": "2014-02-14T23:30:00Z",
+      "duration": "P60M",
+      "title": "Scaling Drupal with MariaDB Galera Clustering",
+      "location": "Technocrat Oceania",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/coding-development/scaling-drupal-mariadb-galera-clustering",
+      "track": [
+        "Coding & Development"
+      ],
+      "speakers": [
+        "daniel.black"
+      ],
+      "full_description": "The Galera clustering technology in MariaDB deals with all that and more, with Drupal webservers able to just connect to any number of connected MariaDB servers, even across different datacentres. All active.\n\nIf you still have to work Drupal 6, that's also fine - with Galera you can still have read-only slaves, but you don't necessarily. So for an application environment that doesn't handle master/slave logic, Galera can be an excellent solution.\n\nIn this session Daniel describes how, in concept as well as the basic practical terms. Naturally each deployment is slightly different, but this information will get you on the right track!",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-14T23:30:00Z",
+      "endTime": "2014-02-15T00:30:00Z",
+      "duration": "P60M",
+      "title": "Case Study: Māori Television",
+      "location": "Catalyst Rangimarie Room 1",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/coding-development/case-study-m%C4%81ori-television",
+      "track": [
+        "Coding & Development"
+      ],
+      "speakers": [
+        "Sean Hamlin"
+      ],
+      "full_description": "Background\n\nA case study on the Drupal 7 development of http://www.maoritelevision.com/. This was a custom built website that replaced the legacy dot NET build. The new website is a responsive, multi-lingual video streaming site.\n\nWho this session is for\n\nDrupal developers and also business managers looking to see how a large complex and real time site works under the covers. This case study will show how the more tricky parts of the build were developed, and highlight modules that worked, as well as others that did not.\n\nCovered in the session\n\n- Responsive design - what worked, what did not, and lessons learned\n- Multi-lingual - how this was integrated and what modules were used\n- Integration with Brightcove - how we integrated the third party video provider, and how the API is being used\n- TV schedule - why this is now on the third re-write http://www.maoritelevision.com/tv/schedule\n- SEO - what practises were used to tame the markup, and what worked well here\n- Performance - what optimisations were made, what modules were used and thoughts on the difference approaches\n\nAbout the presenter\n\nSean Hamlin (@wiifm):\n\n- has been working with Drupal for over 6 years\n- contributed several modules, and dozens of patches upstream (including core)\n\nUpdate 15 February 2014\n\nSlides are now up online at http://bit.ly/drupalsouthmaoritv (google docs) or https://speakerdeck.com/wiifm/case-study-maori-television (speaker deck)",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-14T23:30:00Z",
+      "endTime": "2014-02-15T00:30:00Z",
+      "duration": "P60M",
+      "title": "Collaboration As Marketing: Making Your Drupal Product A Hit",
+      "location": "Technocrat Oceania",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/business-strategy/collaboration-marketing-making-your-drupal-product-hit",
+      "track": [
+        "Business & Strategy"
+      ],
+      "speakers": [
+        "Owen Lansbury"
+      ],
+      "full_description": "The traditional product release model keeps everything under wraps from potential customers until the eleventh hour, finally revealed with a grand announcement and expensive marketing spend, with a hope it's a hit with the intended audience. This session looks at how collaboration with customers during the product's development can be used in place of traditional marketing, resulting in a more refined product and immediate traction upon public release.\n\nPresented by the Managing Partner of one of Australia's most prominent Drupal firms, the session goes behind the scenes of the development of aGov, an open Drupal platform for Australian Government websites, and provides insight into key aspects of the project, including:\n\n- Initiating a product idea off the back of paid client projects\n- Evaluating the market potential for your product concept\n- The challenges of building a product within a professional services business\n- Including potential customers in the early stages of product planning\n- Letting potential customers road test your product\n- Using Drupal.org as your product distribution and collaboration platform\n- Building partnerships around your product\n- Keeping your product open to facilitate ongoing collaboration from your customers and competitors\n- Generating revenue from an open-source product",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-14T23:30:00Z",
+      "endTime": "2014-02-15T00:30:00Z",
+      "duration": "P60M",
+      "title": "Cross Browser Testing With SauceLabs And Selenium",
+      "location": "Headfirst Oceania",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/frontend/cross-browser-testing-saucelabs-and-selenium",
+      "track": [
+        "Frontend"
+      ],
+      "speakers": [
+        "Scott Whittaker"
+      ],
+      "full_description": "Cross-browser testing has always been a headache, and in todays world of mobile devices and tablets there are more combinations of devices, operating systems, browsers and versions than ever before. Most web developers don't even have access to all these platforms let alone test on them.\n\nIn this session we demonstrate how SauceLabs provides virtual devices to test on, how a test can be recorded with Selenium and played back on other platforms using SauceLabs to automate testing.\n\n- What is SauceLabs\n- Manual testing\n- Selenium\n- Getting a Selenium test into SauceLabs\n- Automated testing\n\n(notes: this could possibly be a candidate for the Business & Strategy track if not Site Building. SauceLabs is a commercial product but is quite affordable for small businesses. We have no affiliation with SauceLabs. Interaction with the Saucelabs website will be pre-recorded to remove need for live internet connection)",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-14T23:30:00Z",
+      "endTime": "2014-02-15T00:30:00Z",
+      "duration": "P60M",
+      "title": "Features 101: A Beginners Guide To Configuration Management [FEATURED]",
+      "location": "PreviousNext Soundings Theatre",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/site-building/features-101-beginners-guide-configuration-management-featured",
+      "track": [
+        "Site Building"
+      ],
+      "speakers": [
+        "Deciphered"
+      ],
+      "full_description": "Chances are, if you’re attending DrupalSouth, you’ve built a Drupal site. Chances are, if you’ve built a Drupal site, you’ve pushed it live for the world to see. Chances are, if you’ve pushed that site live, you might just need to upgrade it in the future. There are many ways to upgrade a live site, to add new features and functionality to that site, there’s no reason why you couldn’t just make those changes live… but why take a chance? You’ve probably heard of “Features”, or maybe even “Configuration Management”, but maybe you haven’t had a chance to to use it yet? Well here’s your chance. In this session you’ll be introduced to just what Features is and how to use it for the Configuration Management of your site. This talk is recommended for any site builder, no site is too small to benefit from Features.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-15T00:30:00Z",
+      "endTime": "2014-02-15T01:30:00Z",
+      "duration": "P60M",
+      "title": "Lunch - Saturday",
+      "location": "TBA",
+      "link": "http://drupalsouth2014.drupal.org.nz/lunch-saturday",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-15T01:30:00Z",
+      "endTime": "2014-02-15T02:30:00Z",
+      "duration": "P60M",
+      "title": "Keynote: Emma Jane Westby",
+      "location": "PreviousNext Soundings Theatre",
+      "link": "http://drupalsouth2014.drupal.org.nz/keynote-emma-jane-westby",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "Emma Jane Westby (née Hogbin) is an internationally renowned open source software advocate, technical author, and teacher. In January 2010 she was recognized by The Google Diversity Programme for her efforts in increasing female participation in software development. She is a frequent speaker at open source conferences in Canada, US and Europe and is an active volunteer with several open source projects, including Drupal. In addition to her engaging conference presentations, Emma has also worked as a technical college instructor, has worked on curriculum development for large organizations, and successfully run her own business, Design to Theme, which provided widely acclaimed Drupal training and digital workbooks. Emma has been teaching internet technology since 2002, and is the author of Front End Drupal and Drupal User's Guide.\n\nEmma encourages non-traditional participation in technology through craft and believes that everyone is capable of mastering the tools that surround them. To help engage new ways of participating in technology, she open sourced one of her knitting patterns so that you can make your very own Drupal Socks (as featured in CRAFTzine).\n\nEmma lives with her husband in Owen Sound, Ontario, Canada, where she has run for office in the Green Party, raises bees, and enjoys sipping on a nice single malt scotch.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-15T02:30:00Z",
+      "endTime": "2014-02-15T03:30:00Z",
+      "duration": "P60M",
+      "title": "Keynote: Larry Garfield",
+      "location": "PreviousNext Soundings Theatre",
+      "link": "http://drupalsouth2014.drupal.org.nz/keynote-larry-garfield",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "Larry is the lead for the Drupal 8 Web Services and Context Core Initiative.\n\nLarry Garfield has been building web sites since he was a sophomore in high school, which is longer ago than he'd like to admit. As a freelancer he worked mostly for Chicago-area politicians before graduating to full time consulting with Palantir.net.\n\nLarry is an active Drupal core contributor, including the principle architect of the Drupal 7 database system and the Drupal 8 Web Services Lead. He is also a member of the Advisory Board of the Drupal Association. Larry holds a Master’s degree in Computer Science from DePaul University.\n\nA regular presenter at DrupalCons and DrupalCamps, Larry frequently talks about software architecture. He is a co-author of \"Drupal 7 Module Development\" from Packt Publishing, and has also been published in Drupal Watchdog. He blogs at both http://www.palantir.net and http://www.garfieldtech.com.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-15T03:30:00Z",
+      "endTime": "2014-02-15T04:30:00Z",
+      "duration": "P60M",
+      "title": "Opening Day Reception",
+      "location": "TBA",
+      "link": "http://drupalsouth2014.drupal.org.nz/opening-day-reception",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-15T20:00:00Z",
+      "endTime": "2014-02-15T21:00:00Z",
+      "duration": "P60M",
+      "title": "Keynote: Jeffrey \"Jam\" McGuire",
+      "location": "PreviousNext Soundings Theatre",
+      "link": "http://drupalsouth2014.drupal.org.nz/keynote-jeffrey-jam-mcguire",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Jeffrey \"Jam\" McGuire"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=EIKc0AOZUzQ",
+      "full_description": "Jeffrey A. \"jam\" McGuire, Open Source Evangelist at Acquia, has a longstanding passion for the Drupal project and its community. This has led to him being active at the intersection between open source software, business, and culture. Increasingly in demand as a speaker, he is regularly featured at events around the world, talking about open source, digital disruption, Drupal and more. This helps satisfy his inner diva, which he also feeds with performances as a storyteller and musician.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-15T21:00:00Z",
+      "endTime": "2014-02-15T21:30:00Z",
+      "duration": "P30M",
+      "title": "Morning Tea - Sunday",
+      "location": "TBA",
+      "link": "http://drupalsouth2014.drupal.org.nz/morning-tea-sunday",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-15T21:30:00Z",
+      "endTime": "2014-02-15T22:30:00Z",
+      "duration": "P60M",
+      "title": "Case Study: Sydney Living Museums",
+      "location": "Technocrat Oceania",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/business-strategy/case-study-sydney-living-museums",
+      "track": [
+        "Business & Strategy"
+      ],
+      "speakers": [
+        "daniel.tome"
+      ],
+      "full_description": "The session will cover:\n- Challenges we came across.\n- Responsive design implantation with Zurb.\n- Modules we utilised and created in order to simplify in-place content editing.\n- Tools we utilised for working in an Agile approach.\n- Optimizing techniques like lazy loading and responsive images.\n- And more…",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-15T21:30:00Z",
+      "endTime": "2014-02-15T22:30:00Z",
+      "duration": "P60M",
+      "title": "For The Love Of The Content Editors [FEATURED]",
+      "location": "PreviousNext Soundings Theatre",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/site-building/love-content-editors-featured",
+      "track": [
+        "Site Building"
+      ],
+      "speakers": [
+        "pameeela"
+      ],
+      "full_description": "The devil is in the details when creating a content management system, but it's the details that often get left out. Client cares about how the site looks; developer cares about how the code looks. But rounded corners and nicely commented code don't help the poor content editors. WHY SHOULD I CARE? Simply, it's in the best interest of the vendor to deliver a product that people don't hate to use. Especially if the client doesn't seem to care, it can be really easy to ignore the issue of usability. But even though they may not care during development, they will be made to care once it's delivered. As a former content editor I can attest to this! Ignored we were, until the day came when we had to use the thing. Day after day, we slogged through it, cursing the evildoers (i.e. 'the vendor' and 'the project lead') who inflicted this torture upon us! WHAT CAN I DO ABOUT THAT? You can help! And it's not even that hard, or expensive! Out of the box, Drupal is... OK for content editors. But oftentimes post-major-development, it's... bad. There are a lot of simple things you can do to make life easier for these users, and it doesn't require major customisation. It can also make training easier, and reduce support requests that come from not understanding the system. A few basic guidelines for your team can produce a hugely better result. So it's easy, it's valuable, and it makes people happy - how could you say no to that? Topics to be covered include:\n\n- Ask the right questions before you build\n- Help text is your greatest weapon\n- Contextual links - check the permissions dummy!\n- Advanced content search was not a requirement because it was assumed to exist\n- So you developed it - have you ever tried to use it?\n\nAnd much more!",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-15T21:30:00Z",
+      "endTime": "2014-02-15T22:30:00Z",
+      "duration": "P60M",
+      "title": "jQuery for Designers & Themers",
+      "location": "Headfirst Oceania",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/frontend/jquery-designers-themers",
+      "track": [
+        "Frontend"
+      ],
+      "speakers": [
+        "Bevan"
+      ],
+      "full_description": "Small non-intrusive animations and interactions can greatly enhance the user experience and impress website visitors and clients. jQuery and jQuery UI make it easy to add these enhancements with very little knowledge of javascript or programming. Learn how!\n\nNo understanding of jQuery, javascript, programming or even Drupal theming is required. It is expected that attendees have an understanding of CSS selectors and how HTML elements are nested within each other to build a \"tree\" (aka \"DOM\"). This should make some sense (perhaps not complete sense) to you:\n\n`#page #content > p a.read_more {}`\n\nSome understanding of very basic programming concepts will be useful for the more advanced parts of the session, but is not expected. I.e.\n\n```\n  // Declare a function called \"calculateCircleArea\",\n  // which accepts a parameter \"radius\".\n  function calculateCircleArea(radius) {\n  \n    // Declare a variable called \"area\".\n    var area;\n  \n    // The area variable is now NULL.\n    // Now assign a value to area.\n    // area becomes 2 times pi times radius.\n    area = 2 * 3.142 * radius;\n  \n    // The area variable is now 2πr (\"two-pi-R\").\n    // Functions usually return something.\n    return area;\n  }\n```\n\nExample code at Drupal.org/Project/jQ4DaT.\nSlides at TinyURL.com/jQuery-Designers (Google Docs).",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-15T21:30:00Z",
+      "endTime": "2014-02-15T22:30:00Z",
+      "duration": "P60M",
+      "title": "Migrate in core",
+      "location": "Catalyst Rangimarie Room 1",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/coding-development/migrate-core",
+      "track": [
+        "Coding & Development"
+      ],
+      "speakers": [
+        "chx"
+      ],
+      "full_description": "The Migrate contrib project is great, many have used it before and it has brought some huge sites over to the Drupal side :) There was a lot of talk about replacing the upgrade path with it during the years but the project only kicked off at DrupalCon Prague at 2013 September. Since then a team has formed, migrate has been rewritten with the new Drupal 8 APIs. It's more extensible than ever and yet it kept all the battle tested edge case handling. This talk will show you how to write a migration in Drupal 8.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-15T22:30:00Z",
+      "endTime": "2014-02-15T23:30:00Z",
+      "duration": "P60M",
+      "title": "Building Amazing Searches with Search API",
+      "location": "Technocrat Oceania",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/site-building/building-amazing-searches-search-api",
+      "track": [
+        "Site Building"
+      ],
+      "speakers": [
+        "drunken monkey"
+      ],
+      "full_description": "Having an efficient and helpful search is one of the backbones of nearly all web sites, ensuring that visitors will quickly find what they are looking for without leaving the site. For over three years now, the Search API module has helped site builders to achieve that goal, and an increasing number of extension modules provides help for solving both common and more specific problems, from facetting to location filters. Furthermore, its feature-rich Views integration provides site builders with a powerful mechanism to completely customize their search pages, using a tool they already know.\n\nIn this session I will introduce you to that module and its potential. You will learn how to create amazing search solutions fitting for your site with only a few clicks, will be introduced to several extension modules which can help you further customize your site's search experience and will understand the basic model and concepts by which the Search API operates.\nIn addition, this session will highlight some of the user-facing changes in the upcoming Drupal 8 version of the module and explain where users can expect improvements, thus also providing important information for everyone trying to get a head-start in Drupal 8.\n\nI've already presented similar sessions in Europe ([DrupalCon Munich](http://munich2012.drupal.org/program/sessions/building-amazing-searches-search-api-and-facet-api.html), [DrupalCon Prague](https://prague2013.drupal.org/session/building-amazing-searches-search-api), [DrupalCamp Vienna](http://2013.drupalcamp.at/session/building-amazing-searches-search-api)) and am excited to demonstrate this now to an all-new audience!\n\n## Previous knowledge required\n\nThis session only requires basic Drupal site building skills, no knowledge of the Search API or related modules (except maybe Views) is necessary.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-15T22:30:00Z",
+      "endTime": "2014-02-15T23:30:00Z",
+      "duration": "P60M",
+      "title": "Can I TWIG It? Yes, You Can!",
+      "location": "Catalyst Rangimarie Room 1",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/frontend/can-i-twig-it-yes-you-can",
+      "track": [
+        "Frontend"
+      ],
+      "speakers": [
+        "mortendk"
+      ],
+      "full_description": "The Themers of Drupal have for years been whining & moaning over the bad markup, confusing theme functionality, Drupals lack of separation from the frontend to the backend and generally WTF when you work in the frontend.\n\nNow in Drupal8 The Dark ages of Drupal Theming is gone (foreva!) phptemplate is put on the bench and is replaced by \"a modern tempting system\": TWIG\n\nThis session will show in both practical examples & on a broader base why TWIG will rock the themers world in Drupal.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-15T22:30:00Z",
+      "endTime": "2014-02-15T23:30:00Z",
+      "duration": "P60M",
+      "title": "How To Not Fail On Launch",
+      "location": "Headfirst Oceania",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/business-strategy/how-not-fail-launch",
+      "track": [
+        "Business & Strategy"
+      ],
+      "speakers": [
+        "typhonius"
+      ],
+      "full_description": "Launch day can be a stressful time for the stakeholders of an organisation. From the developers and themers who created the site, editors who created the content, CIOs/CTOs in charge of the whole process and potentially financiers and investors in the business, the onus is on everyone to have a successful launch.\n\nWith the recent HealthCare.gov debacle highlighting the importance of the need to pro-actively plan throughout the course of development for launch. This session focuses on the ways a site can be prepared for the wild in a strategic and planned fashion rather than as an afterthought 8 hours before DNS cutover.\n\nHaving overseen and in some cases having had to jump in and actively work to keep an ailing site up whilst working for Acquia, I've become well accustomed to what makes a launch successful... or not.\n\nIn this talk I'll be discussing:\n\n- Some of the low hanging fruit that are easily achievable as site savers\n- How load testing is an essential part of a successful launch\n- How agile development methodologies can assist with ensuring rapid turn-around post launch\n- Common mistakes made that can have major impacts\n\nThis session is appropriate for:\n- Companies on the brink of launch\n- Key decision makers looking to ensure their team is aware of pitfalls that exist\n- Self hosted individuals investigating the benefits of hosting in a managed environment",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-15T22:30:00Z",
+      "endTime": "2014-02-15T23:30:00Z",
+      "duration": "P60M",
+      "title": "Wax On, Wax Off: The Tao Of Polishing Your Modules [FEATURED]",
+      "location": "PreviousNext Soundings Theatre",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/coding-development/wax-wax-tao-polishing-your-modules-featured",
+      "track": [
+        "Coding & Development"
+      ],
+      "speakers": [
+        "RdeBoer"
+      ],
+      "full_description": "You know that module you've been working on? The one that works, but which you feel embarrassed to admit you wrote? Procrastinating because you think it will take a lot of work to make your module something you can be proud of? This session will cover easy steps that you can take that will greatly enhance the quality of your project that don't require a lot of effort. You'll be surprised how some of these tips are only partly about the code itself and more about the people. This presentation is relevant not only to module developers but also to site-builders. Topics we'll look at: * Low hanging fruit that will make everyone happier to use your module * Tools that can pinpoint areas that need investigating * Best practices for good maintenance with minimal effort.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-15T23:30:00Z",
+      "endTime": "2014-02-16T00:30:00Z",
+      "duration": "P60M",
+      "title": "Lunch - Sunday",
+      "location": "TBA",
+      "link": "http://drupalsouth2014.drupal.org.nz/lunch-sunday",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-16T00:30:00Z",
+      "endTime": "2014-02-16T01:30:00Z",
+      "duration": "P60M",
+      "title": "A Tour Of The Tour Module",
+      "location": "Headfirst Oceania",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/coding-development/tour-tour-module",
+      "track": [
+        "Coding & Development"
+      ],
+      "speakers": [
+        "nick_schuch"
+      ],
+      "full_description": "Topics for this talk will be:\n\n- How tour.module came to be.\n- The current state of tour.module in Drupal 8 core.\n- Demonstration of tour.module in action (single and multipage tours).\n- How to write tours.\n- How to extend tour tip types and create your own (eg. Youtube video tip type).\n- How to write tests for tips (if we get enough time).\n\n## About the author\n\nNick is a Drupal Developer / Systems administrator at Australia’s leading Drupal agency PreviousNext. He is actively working on Drupal 8 core and is the maintainer of Tour module (also in Drupal 8 core).",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-16T00:30:00Z",
+      "endTime": "2014-02-16T01:30:00Z",
+      "duration": "P60M",
+      "title": "Getting Inside Client's Heads - Mindreading 101",
+      "location": "Technocrat Oceania",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/business-strategy/getting-inside-clients-heads-mindreading-101",
+      "track": [
+        "Business & Strategy"
+      ],
+      "speakers": [
+        "RumpledElf"
+      ],
+      "full_description": "The first thing you need to do is figure out what they actually want, before you even mention Drupal. This session talks about some of the ways you can do that.\n\nAnd sometimes the answer to their needs isn't Drupal.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-16T00:30:00Z",
+      "endTime": "2014-02-16T01:30:00Z",
+      "duration": "P60M",
+      "title": "Hiring Bigfoot: Identifying Talent & Evaluating Drupal Skills",
+      "location": "Catalyst Rangimarie Room 1",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/business-strategy/hiring-bigfoot-identifying-talent-evaluating-drupal-skills",
+      "track": [
+        "Business & Strategy"
+      ],
+      "speakers": [
+        "rcross"
+      ],
+      "full_description": "The highly sought after Drupal expert can be an elusive and mysterious creature. Unlike the mythical yeti or drop bear, they do exist.\n\nThis presentation will step through the process of sourcing the right resources to build a great drupal project. This will include tools and techniques for engaging:\n- Freelancers/Contractors\n- Employees\n- Drupal Shops\n\nAfterwards, attendees should better understand:\n- What are the common myths about getting good Dupalers\n- How to avoid common mistakes in hiring Drupalers\n- The 5 factors to identify what kind of resource is needed\n- Questions and techniques for evaluating\n- The roles and skills for a great team",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-16T00:30:00Z",
+      "endTime": "2014-02-16T01:30:00Z",
+      "duration": "P60M",
+      "title": "Managing Complex Projects with Design Components [FEATURED]",
+      "location": "PreviousNext Soundings Theatre",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/frontend/managing-complex-projects-design-components-featured",
+      "track": [
+        "Frontend"
+      ],
+      "speakers": [
+        "JohnAlbin"
+      ],
+      "full_description": "Our CSS sucks. We've been building sites for over a decade using crappy, ornamentation techniques and shoddy selectors. Our styles unintentional bleed across the site. Our stylesheets are fragile and unmaintainable and full of specificity landmines. Pandas wander alone in the wilderness.\n\nBut there's no need to drown ourselves in beer. New technologies like Web Components and new techniques like OOCSS, SMACSS and BEM show us that planning before building can make our projects maintainable, easier to debug, and smaller with reduced CSS file sizes.\n\nThis session will introduce the basic techniques for CSS layering and using design components, the heart of any front-end CSS project. We will also discuss Sass organization and tips to more easily implement these ideas.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-16T01:30:00Z",
+      "endTime": "2014-02-16T02:30:00Z",
+      "duration": "P60M",
+      "title": "Drupal in the Public Sector Down Under [FEATURED]",
+      "location": "PreviousNext Soundings Theatre",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/business-strategy/drupal-public-sector-down-under-featured",
+      "track": [
+        "Business & Strategy"
+      ],
+      "speakers": [
+        "dman"
+      ],
+      "full_description": "We know that Drupal is already a major player in Government and related websites and services in New Zealand and Australia.\n\nWe know that many of the requirements that these public sector clients have (Security, Archiving, Privacy, Functionality) are very similar, and many of us are tired of the lengthy RFP process for IT acquisition that comes with these contracts.\n\nWe know that the Drupal development community can get together and provide a consistent, re-usable solution to this challenge. We have the tools, we have the skills, we have the market niche!\n\nThere are a few interesting install profiles already out there to experiment with -\nWe can look at aGov from PreviousNext, OpenPublic from Phase2, DKAN which is a rebuild of the data.gov.uk engine, and things like that.\nWe can then extend it with some localized extras (eg NZs RealMe single sign-on, or Maori language support).\n\nInterested parties can come together and present a united \"Drupal Solution\" that already meets the requirements that we have solved for individual government agencies.\n\nAlthough I'm a dev, and can talk to the tools and techniques I've experimented with to deliver this dream - this is mainly a strategy talk, and should be of interest to anyone looking at the current web development landscape in this region.\n\n> dman has been building Government websites in Drupal since Version 4.x, and has been helping people in the forums daily since then. With several thousand d.o issues touched (not counting the spam deleted as a d.o moderator and documentation manage), 1.5 thousand commits on maintained or contrib modules (plus a little core) dman was the highest-ranking Kiwi Drupalista according to CertifiedToRock ... until Bevan came back to the country anyway :-)\n>\n>He devotes a stupid amount of his spare time working on Web Standards and adoption of tools for Open Source and Open Data - sometimes surreptitiously - on the NZ government websites he consults on and leads development in.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-16T01:30:00Z",
+      "endTime": "2014-02-16T02:30:00Z",
+      "duration": "P60M",
+      "title": "Geospatial Drupal: Mapping Without Coding",
+      "location": "Technocrat Oceania",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/site-building/geospatial-drupal-mapping-without-coding",
+      "track": [
+        "Site Building"
+      ],
+      "speakers": [
+        "acbramley"
+      ],
+      "full_description": "This session uses my experience with the Openlayers & Leaflet modules in Drupal 7 to show you how easy it is to build content rich, dynamic, searchable, and filterable maps with little to no coding.\n\nThis session will take you from a Vanilla Drupal 7 instance, through the enabling of various modules and configuring them. It will show you how to build powerful maps without writing a single line of code, including how to use Apache Solr as a back-end to make your map content facetable and keyword searchable.\n\nAs an extra-for-experts, I'll explain how I used this in a large end-to-end business process. This includes abstracting the content into custom Entities using Entity API allowing me to bypass all of the overhead that nodes have in a large corporate website, while maintaining the power of Views, Apache Solr, and Openlayers/Leaflet.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-16T01:30:00Z",
+      "endTime": "2014-02-16T02:30:00Z",
+      "duration": "P60M",
+      "title": "Try Before You Buy: User Provisioned Sites Targeting Multiple Hosting Providers",
+      "location": "Catalyst Rangimarie Room 1",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/coding-development/try-you-buy-user-provisioned-sites-targeting-multiple-hosting-providers",
+      "track": [
+        "Coding & Development"
+      ],
+      "speakers": [
+        "marji",
+        "murrayw"
+      ],
+      "full_description": "This presentation will introduce the Cyclone contrib module along with Cyclone Jenkins which contains scripts to automate the site building process. The system is completely pluggable allowing for the addition of new hosting providers and methods of building sites.\n\nThe Drupal hosting market has matured significantly in recent years. There are a wide variety of hosting solutions (Aberdeen, Acquia, Aegir, Pantheon and others) which provide the ability to easily clone sites from a master template site. This has been a big win for Drupal shops as it is now easy to spin up sites from within the management consoles of the hosting providers. However, this is considered an \"admin\" function, not suitable for end users.\n\nWe will present a new Drupal module, Cyclone, which presents a Drupal based front end for provisioning sites, making it possible for end users to spin sites as they desire. We will show how it is possible to extend standard nodes or Commerce products to drive the provisioning process. The end result is a one click provisioning process which will have the user editing their own site in a couple of minutes.\n\nThis presentation will cover:\n- the various hosting options and their APIs\n- the Drupal contrib module which drives the system\n- the Jenkins and Fabric backend used to build the sites\n- a demonstration of the system in action.\n\nThe talk will be of interest to:\n- Dev ops: a mix of APIs and systems coordinated by Jenkins.\n- Site builders: an extensible architecture using ctools plugins.\n- Distro owners: a way to make your site available to potential customers.\n- Trainers: a way to build test sites for your students.\n\nThe talk will be of an intermediate to advanced level as APIs, coding techniques and architecture will be discussed. However, the talk should still be of interest to those who would like to see a one click provisioning process in action. More information is available at the [Cyclone](http://morpht.com/projects/cyclone) project.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-16T01:30:00Z",
+      "endTime": "2014-02-16T02:30:00Z",
+      "duration": "P60M",
+      "title": "UX Spaces: A New Approach To Website Design And Development",
+      "location": "Headfirst Oceania",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/frontend/ux-spaces-new-approach-website-design-and-development",
+      "track": [
+        "Frontend"
+      ],
+      "speakers": [
+        "xtfer"
+      ],
+      "full_description": "Drupal gives us a range of powerful tools for structuring and presenting content, but relying on these can produce bland, list-driven websites. How do you structure a site to get the benefits of Drupal's content-first tools, while still producing a first-class user experience?\n\nThis session introduces an approach to planning Drupal site build's called User Experience (UX) Spaces. This methodology is based on techniques from user-centred design, marketing and consumer research, and content-first development principles. While not a Drupal-specific methodology, this approach has been evolved over eight years of Drupal projects, and can be followed by anyone with a basic knowledge of Drupal.\n\nThis session was standing-room only at DrupalCon's Sydney & Portland, and has been adapted and extended for a new audience.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-16T02:30:00Z",
+      "endTime": "2014-02-16T03:00:00Z",
+      "duration": "P30M",
+      "title": "Afternoon Tea - Sunday",
+      "location": "TBA",
+      "link": "http://drupalsouth2014.drupal.org.nz/afternoon-tea-sunday",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-16T03:00:00Z",
+      "endTime": "2014-02-16T04:00:00Z",
+      "duration": "P60M",
+      "title": "Form Enhances Function: How Design Can Improve User Experience",
+      "location": "Headfirst Oceania",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/frontend/form-enhances-function-how-design-can-improve-user-experience",
+      "track": [
+        "Frontend"
+      ],
+      "speakers": [
+        "keyhitman"
+      ],
+      "full_description": "Meet another Drupal person and one of the first things you will be asked is ‘backend or frontend?’ There is a well known distinction made between these two roles, and not just in Drupal but in the general web design and development field.\n\nEven the terms design and development are seen as separate areas of the web, and there is some truth to that. But we cannot assume and accept that there exists a line of demarcation. Aimed at site-builders, developers and project managers, this session aims to posit the following:\n\n> that rather than seeing design and development as separate and independent processes, we should view these as complementing each other. But more importantly, we need to understand that they enhance each other. They should not be viewed as a tension between art and science for there is a bit of both in each of them. In short, while form follows function, form also enhances function.\n\nWhat will be covered in this session? Things such as:\n\n- the principles of visual design\n- how to use typography to enhance functionality\n- what governs the look and feel of your website\n\nWhy is this important? Once we understand better this beautiful relationship between design & development:\n\n- our websites will look and function better\n- our processes will be smoother\n- our team will work well together ( for they will understand each other’s roles better)\n\nAnd you will get to exercise both your so-called left and right brains.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-16T03:00:00Z",
+      "endTime": "2014-02-16T04:00:00Z",
+      "duration": "P60M",
+      "title": "The Evolution of Media Creators on Drupal",
+      "location": "Catalyst Rangimarie Room 1",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/business-strategy/evolution-media-creators-drupal",
+      "track": [
+        "Business & Strategy"
+      ],
+      "speakers": [
+        "emmadavidson"
+      ],
+      "full_description": "Moving from a print-focused media environment to the online, interactive media landscape can be a big change for content creators and consumers. Doing it in Drupal can make the transition easier, provided it's managed well.\n\nI'll be talking about some lessons learned while going through the process at the Australian Medical Association, including:\n\nFocus on the user - what do they want, how do they want it?\nWorking with the strengths of your content creators\nBaby steps - small, incremental changes are easier to accept than a big bang, and also easier to step back from if they're not working\nPotential roadblocks and how to get around, over, or through them\nNo node left behind - designing to avoid the ugly data migration monster",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-16T03:00:00Z",
+      "endTime": "2014-02-16T04:00:00Z",
+      "duration": "P60M",
+      "title": "The GLAM Question: How Drupal Can Answer The Big Data Problem",
+      "location": "Technocrat Oceania",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/site-building/glam-question-how-drupal-can-answer-big-data-problem",
+      "track": [
+        "Site Building"
+      ],
+      "speakers": [
+        "queenvictoria"
+      ],
+      "full_description": "Drupal is a great editor's tool and datastore. It is a powerful integration tool. With the addition of existing modules you can expose culturally significant archives to (and from) your Drupal site.\n\nThis session looks at the value universities, galleries, libraries, archives and museums (the GLAM sector) can get out of creating or interoperating with archives in Drupal. We've done a bunch of work with the University of New South Wales, the Australian Government and University Newcastle in building archives that have two main purposes:\n\n* To collate disparate research and make it available to the community for research, ingestion and mashing.\n* To capitalise on the value of audiovisual research – in particular to identify significance and provide academic citations in audiovisual based research outcomes.\n\nThis session is an overview and assessment of the overarching concepts in metadata harvesting and the available standards and tools. It looks at some practical examples and use cases.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-16T03:00:00Z",
+      "endTime": "2014-02-16T04:00:00Z",
+      "duration": "P60M",
+      "title": "Web Stacks For Local Development",
+      "location": "PreviousNext Soundings Theatre",
+      "link": "http://drupalsouth2014.drupal.org.nz/sessions/coding-development/web-stacks-local-development",
+      "track": [
+        "Coding & Development"
+      ],
+      "speakers": [
+        "realityloop"
+      ],
+      "full_description": "One of the main groups of tools we use every day is the web stack, it can have a significant yet often not calculated cost on our productivity.\n\nIn this presentation I will compare local development web stack options and provide you with with an unbiased comparison listing the pro’s and cons of each of the compared setups:\n\n- MAMP/WAMP/XAMPP\n- Acquia Dev Desktop\n- Aegir\n- Vagrant\n\nWhere possible comparisons will cover all of Windows, OS X, and Linux.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2014-02-16T04:00:00Z",
+      "endTime": "2014-02-16T05:00:00Z",
+      "duration": "P60M",
+      "title": "Closing Session",
+      "location": "PreviousNext Soundings Theatre",
+      "link": "http://drupalsouth2014.drupal.org.nz/closing-session",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    }
+  ]
+}

@@ -1,0 +1,1335 @@
+{
+  "event": {
+    "designation": "DrupalSouth",
+    "location": "Brisbane",
+    "year": "2022",
+    "website": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule",
+    "region": "Australia – Brisbane",
+    "endDate": "2022-10-21T05:00:00Z",
+    "startDate": "2022-10-18T22:15:00Z",
+    "venue": "The Westin, Brisbane",
+    "timezone": "Australia/Brisbane",
+    "enabled": true,
+    "sourceCache": "cache/remote/2026-04-25T11-46-36Z/drupalsouth-brisbane-2022-json-brisbane-2022",
+    "flickr": {
+      "enabled": true,
+      "groupUrl": "https://flic.kr/g/3gAP4W",
+      "image": "./img/flickr/drupalsouth/2022-brisbane.jpg",
+      "imageAlt": "DrupalSouth logo"
+    },
+    "logo": {
+      "image": "./img/logos/drupalsouth-logo.png",
+      "imageAlt": "DrupalSouth logo",
+      "usePlate": false
+    },
+    "sponsors": [
+      {
+        "id": "sponsor-1",
+        "title": "amazee.io",
+        "tier": "Diamond",
+        "row": 1,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-1.png",
+        "imageAlt": "amazee.io logo",
+        "link": "https://drupalsouth.org/sponsors/amazeeio",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-2",
+        "title": "Morpht",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-2.png",
+        "imageAlt": "Morpht logo",
+        "link": "https://drupalsouth.org/sponsors/morpht",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-3",
+        "title": "GovCMS",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 2,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-3.jpg",
+        "imageAlt": "GovCMS logo",
+        "link": "https://drupalsouth.org/sponsors/govcms",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-4",
+        "title": "platform.sh",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 3,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-4.png",
+        "imageAlt": "platform.sh logo",
+        "link": "https://drupalsouth.org/sponsors/platformsh",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-5",
+        "title": "Pantheon",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-5.png",
+        "imageAlt": "Pantheon logo",
+        "link": "https://drupalsouth.org/sponsors/pantheon",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-6",
+        "title": "Technocrat",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 2,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-6.png",
+        "imageAlt": "Technocrat logo",
+        "link": "https://drupalsouth.org/sponsors/technocrat",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-7",
+        "title": "Icon Agency",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 3,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-7.png",
+        "imageAlt": "Icon Agency logo",
+        "link": "https://drupalsouth.org/sponsors/icon-agency",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-8",
+        "title": "Salsa Digital",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 4,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-8.png",
+        "imageAlt": "Salsa Digital logo",
+        "link": "https://drupalsouth.org/sponsors/salsa-digital",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-9",
+        "title": "Oxide Interactive",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 5,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-9.png",
+        "imageAlt": "Oxide Interactive logo",
+        "link": "https://drupalsouth.org/sponsors/oxide-interactive",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-10",
+        "title": "Just After Midnight",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-10.jpg",
+        "imageAlt": "Just After Midnight logo",
+        "link": "https://drupalsouth.org/sponsors/just-after-midnight",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-11",
+        "title": "Catalyst",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 2,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-11.png",
+        "imageAlt": "Catalyst logo",
+        "link": "https://drupalsouth.org/sponsors/catalyst",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-12",
+        "title": "District CMS",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 3,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-12.jpg",
+        "imageAlt": "District CMS logo",
+        "link": "https://drupalsouth.org/sponsors/district-cms",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-13",
+        "title": "Skpr",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 4,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-13.png",
+        "imageAlt": "Skpr logo",
+        "link": "https://drupalsouth.org/sponsors/skpr",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-14",
+        "title": "Tomato Elephant Studio",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 5,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-14.png",
+        "imageAlt": "Tomato Elephant Studio logo",
+        "link": "https://drupalsouth.org/sponsors/tomato-elephant-studio",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-15",
+        "title": "Acquia",
+        "tier": "Networking Function",
+        "row": 5,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-15.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://drupalsouth.org/sponsors/acquia",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-16",
+        "title": "Srijan",
+        "tier": "Breakfast",
+        "row": 6,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-16.png",
+        "imageAlt": "Srijan logo",
+        "link": "https://drupalsouth.org/sponsors/srijan",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-17",
+        "title": "Sparks Interactive",
+        "tier": "T-Shirt",
+        "row": 7,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-17.png",
+        "imageAlt": "Sparks Interactive logo",
+        "link": "https://drupalsouth.org/sponsors/sparks-interactive",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-18",
+        "title": "Ironstar",
+        "tier": "Coffee Cart",
+        "row": 8,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-18.png",
+        "imageAlt": "Ironstar logo",
+        "link": "https://drupalsouth.org/sponsors/ironstar",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-19",
+        "title": "PreviousNext",
+        "tier": "Sprint",
+        "row": 9,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2022-brisbane/sponsor-19.png",
+        "imageAlt": "PreviousNext logo",
+        "link": "https://drupalsouth.org/sponsors/previousnext",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "columns": 3,
+    "scheduleURLs": [
+      "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule"
+    ]
+  },
+  "items": [
+    {
+      "startTime": "2022-10-18T22:15:00Z",
+      "endTime": "2022-10-18T22:55:00Z",
+      "duration": "P40M",
+      "title": "Registration / Tea & Coffee",
+      "location": "Foyer",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-18T22:55:00Z",
+      "endTime": "2022-10-18T23:05:00Z",
+      "duration": "P10M",
+      "title": "Opening remarks / Introduction",
+      "location": "Ballroom 1",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-18T23:05:00Z",
+      "endTime": "2022-10-18T23:45:00Z",
+      "duration": "P40M",
+      "title": "Hackathons and Open-Source: The Ideal Combination for Driving Innovation",
+      "location": "Ballroom 1",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1986",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Zaidul Alam"
+      ],
+      "full_description": "Zaidul presentation will discuss the use of open source technologies: past, current and plans for the future. He'll also dive into an insightful segment on what's currently missing in open source technologies. Zaidul will of course also share plenty of knowledge surrounding GovHack: statistics, facts, and the incredible works of past winners of their hackathons, including how these competitions have helped to drive innovation in the Drupal Space and beyond!",
+      "video_url": "https://youtu.be/bmo1VmgWWeI",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-18T23:45:00Z",
+      "endTime": "2022-10-18T23:55:00Z",
+      "duration": "P10M",
+      "title": "Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-18T23:55:00Z",
+      "endTime": "2022-10-19T00:30:00Z",
+      "duration": "P35M",
+      "title": "Managing a managed service: An exercise in automating the D8 to D9 upgrade for over 170 websites",
+      "location": "Ballroom 1",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1626",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Alistair O'Neill",
+        "Yvonne Norris"
+      ],
+      "full_description": "GovCMS is a hosting platform available for government agencies and entities across different levels of government. GovCMS offers two hosting options, a Software as a Service (SaaS) and Platform as a Service (PaaS) offering. GovCMS currently host over 330 websites for over 100 agencies.\n\nA majority of the GovCMS customer base leverage the SaaS option for convenience, surety and managed services, such as site patching and updates. While this offering benefits a SaaS customer base, there’s many cogs moving behind the scenes to manage and maintain GovCMS.\n\nIn 2021, GovCMS underwent an activity to upgrade its 170+ D8 SaaS customers to Drupal 9. This presentation covers D8-D9: the initial planning and intent, the challenges faced from a technical standpoint, considerations with security needs, communications activities leading into and throughout, the balancing act of resources for GovCMS and partners. It also touches on engagement with customers and expectations of stakeholders to deliver and maintain site uptime coupled with a pandemic and the unexpected that can creep into the world of GovCMS.\n\nLessons learned and new activities to the GovCMS program enable continuous improvements to our processes and to our customers. GovCMS is set-up for future updates and has a lens looking towards a Drupal 9 to Drupal 10 upgrade activity for over 280 SaaS sites.",
+      "video_url": "https://youtu.be/XYb3swgMHy0",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-18T23:55:00Z",
+      "endTime": "2022-10-19T00:30:00Z",
+      "duration": "P35M",
+      "title": "So many websites, so little time: A consistent and efficient approach to many unique sites",
+      "location": "Ballroom 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1481",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Mel Stubbings"
+      ],
+      "full_description": "What do you do when you have a collection of Drupal (and not Drupal) websites, each with a unique theme, configuration, and an inability to spend time returning and enhancing with improvements?\nOur recent project tackled this very problem! We came on to help upgrade an extensive collection of Drupal 7 websites to Drupal 9 for a large Government Agency. While we could have done these updates by providing a like-for-like of the functionality of each site, no matter how outdated it was, we knew we had to give this team more.\nEach new project made improvements from the previous, but the team could not find the time to go back and make these improvements, so each site for the content authors and developers was different and unique. It was hard to train new staff, and it was hard to bring in new developers to a standard technical stack.\nWe came to a solution that provided the content authors with a consistent editing experience, a way for Developers, old and new, to quickly push enhancements to all their Drupal sites. We even reduced the build times for their new builds by half!\nFor us, this was the CAMERON (Collection of Assistive Mechanisms Engaging Recent Online Networks) project, and it consists of three pieces.\nA custom-built Drupal profile can automatically give each site a consistent collection of modules and configuration and use its collection of unique modules if needed.\nA Drupal base theme to provide a WCAG 2.1 AA accessible theme layer and reusable JavaScript classes for things like accordions and sub-menu hover with keyboard accessible options.\nThe final piece is a Scaffold repository that gives developers the best starting point. This provides the essential Child theme files with the SASS base style files and NPM packages to convert to CSS and give browser sync the ability to rapidly create the unique website theme and all the limiting standards for developers.\nThis presentation will dive deeper into these three pieces and what can come next.",
+      "video_url": "https://youtu.be/Le9CepckTvw",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-18T23:55:00Z",
+      "endTime": "2022-10-19T00:30:00Z",
+      "duration": "P35M",
+      "title": "Building Cloudwatch Dashboards with Custom Drupal Metrics",
+      "location": "Elevate",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1525",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Karl Hepworth"
+      ],
+      "full_description": "Extracting and understanding key metrics in your application can provide powerful insight for product owners and developers.\n\nDiscover how you extend Drupal to create CloudWatch dashboards based on metrics from Drupal and see what insights they can provide.",
+      "video_url": "https://youtu.be/dd3AkR2DN28",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T00:30:00Z",
+      "endTime": "2022-10-19T01:00:00Z",
+      "duration": "P30M",
+      "title": "Morning Tea",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T01:00:00Z",
+      "endTime": "2022-10-19T01:35:00Z",
+      "duration": "P35M",
+      "title": "The challenges of designing a HCD component-based design system and Drupal 9 theme",
+      "location": "Ballroom 1",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1672",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Akhil Bhandari",
+        "Phillipa Martin"
+      ],
+      "full_description": "The retirement of the Australian Government Design System (AGDS) left a void for a high quality Drupal design system that government agencies and other organisations could quickly adopt for Drupal website projects.\n\nThe lack of a high quality design system to provide a robust backbone and functional framework for building and managing Drupal websites left projects facing the problem of high development costs and long project timelines, especially when building sites based on bespoke visual designs.\nA great design system would be able to solve many of these problems as well as deliver a consistent user experience for site visitors, as well as the web publishers and administrators responsible for content creation and management.\n\nSalsa ventured forth to build the next generation design system for the Australian Government and a companion Drupal 9 theme. Naturally, it was easier said than done.\nThere were many challenges, most of which were not technical - that was the easy part! - but non-technical decisions that would shape the ultimate product.\n\nIn this presentation, we’ll take the audience through the development process, including:\n-User testing\n-The role of the Australian Design System\n-Creating an accessible design system\n-The component-based nature of CivicTheme\n-Product-led development\n-Lessons learnt so far\n\nCivicTheme is a new, open source component-based design system and Drupal 9 theme. It provides a quick, easy and cost-efficient solution to build new websites. Web publishers and administrators can create and manage pages and layout designs without any coding.\n\nIt was developed with a strong user experience focus coupled with project-led development (government clients helped shape and test CivicTheme as it was built).",
+      "video_url": "https://youtu.be/hamMm4Une0U",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T01:00:00Z",
+      "endTime": "2022-10-19T01:20:00Z",
+      "duration": "P20M",
+      "title": "Optimise Your Page Loads with Lazy Loading JS",
+      "location": "Ballroom 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1617",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Rikki Bochow"
+      ],
+      "full_description": "Short presentation. Optimise your progressively decoupled Drupal frontend with the new Intersection Observer API to delay loading of each App's javascript and data, until it's container is scrolled into the Viewport.",
+      "video_url": "https://youtu.be/F_rL2jxwxpw",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T01:00:00Z",
+      "endTime": "2022-10-19T01:35:00Z",
+      "duration": "P35M",
+      "title": "Theming with Bundle Classes, Layout builder and Twig",
+      "location": "Elevate",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1547",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Daniel Veza"
+      ],
+      "full_description": "Bundle classes and Layout Builder are a powerful combination for building modern Drupal sites. This presentation aims to demonstrate how you can use these along with twig to build and theme testable and clean sites with tried and true practises used on many production sites.",
+      "video_url": "https://youtu.be/mhI9FDtR4wM",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T01:20:00Z",
+      "endTime": "2022-10-19T01:35:00Z",
+      "duration": "P15M",
+      "title": "Taking a community initiative from idea to success, a Bug Smash case study",
+      "location": "Ballroom 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1508",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Griffyn Heels"
+      ],
+      "full_description": "Created in October 2020, Bugsmash is a community-run Drupal initiative with the goal to tackle the growing backlog of bugs in Drupal Core.\n\nWorking asynchronously (though based in Australian-friendly timezones) Drupal community members from around the globe work together to smash (triage, update and close) Drupal bugs.\n\nWith 450+ members, this is the largest active Drupal community initiative that is making a substantial contribution to Drupal core and helping to train new community members.\n\nThis case study will cover an overview of the initiative, how and why it was started, how it is run and how it continues to grow by one of its founding members - Griffyn Heels.",
+      "video_url": "https://youtu.be/mgyIBgdAKAg",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T01:35:00Z",
+      "endTime": "2022-10-19T01:45:00Z",
+      "duration": "P10M",
+      "title": "Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T01:45:00Z",
+      "endTime": "2022-10-19T02:20:00Z",
+      "duration": "P35M",
+      "title": "Decoupled OpenSearch: A Case Study",
+      "location": "Ballroom 1",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1572",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Adam Bramley"
+      ],
+      "full_description": "Learn how we leveraged a highly available AWS OpenSearch service fronted by React to build lightning fast, dynamic search interfaces backed by Drupal using Search API.\n\nThis talk will cover:\n- Our architecture, why it was chosen, and how you can set it up for yourself\n- An overview of the Search API Opensearch module\n- A deep dive into the frontend technologies and methodologies we used to make building decoupled search apps a breeze.",
+      "video_url": "https://youtu.be/lvbsz6V8KP8",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T01:45:00Z",
+      "endTime": "2022-10-19T02:20:00Z",
+      "duration": "P35M",
+      "title": "Test Automation for GovCMS using Cypress",
+      "location": "Ballroom 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1622",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Joseph Zhao",
+        "Tara Wijayagunawardana"
+      ],
+      "full_description": "Here at GovCMS we manage 350+ government websites. Come and hear how GovCMS handles test automation using Cypress as part of our continuous improvement and deployment for SaaS sites on the platform, the benefits it provides for front end testing and our goal for more automated testing.",
+      "video_url": "https://youtu.be/4tf02XqBBAE",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T01:45:00Z",
+      "endTime": "2022-10-19T02:20:00Z",
+      "duration": "P35M",
+      "title": "DrupalSouth Steering Committee - Panel & Open Discussion",
+      "location": "Elevate",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1657",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "DrupalSouth committee members"
+      ],
+      "full_description": "The DrupalSouth steering committee oversees the conference organisation and assists with a range of Drupal community initiatives in Australia and New Zealand. This session will comprise an update from the panel members on recent activities, announce new panel members and discuss options for future events. Discussion will be opened to attendees to ask questions and contribute ideas.",
+      "video_url": "https://youtu.be/p9egKm6XA5s",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T02:20:00Z",
+      "endTime": "2022-10-19T03:20:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T03:20:00Z",
+      "endTime": "2022-10-19T03:55:00Z",
+      "duration": "P35M",
+      "title": "Scaling Drupal Through a Pandemic",
+      "location": "Ballroom 1",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1580",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Kim Pepper"
+      ],
+      "full_description": "The COVID-19 pandemic saw a ten-fold increase in web traffic to government websites that were providing critical information and services to the population.\n\nIn this session, I will take a look at some of the key challenges we faced and how scalable hosting infrastructure and performant Drupal architecture was able to rise to the occasion.\n\nThis session is for developers and ops teams who are interested in how Cloud infrastructure can be used to support scalable Drupal deployments.",
+      "video_url": "https://youtu.be/yXEil10HLyM",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T03:20:00Z",
+      "endTime": "2022-10-19T03:55:00Z",
+      "duration": "P35M",
+      "title": "A whole new level in Drupal PDF generation - Rebuilding eContracts for MBA NSW",
+      "location": "Ballroom 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1413",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Nigel Cunningham"
+      ],
+      "full_description": "MBA New South Wales's eContracts functionality was from 2010, shoehorned into Drupal 8, and it looked like it. A change to a contract required a deployment, there was no provision for electronic signing and many more ways in which things could be improved. In this talk, we'll show how Webforms, PDF API and a bunch of other contributed and custom modules were combined together to build a whole new and very cool experience for MBA members and their customers. You could do it too!",
+      "video_url": "https://youtu.be/-r5NkoiQq9U",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T03:20:00Z",
+      "endTime": "2022-10-19T03:55:00Z",
+      "duration": "P35M",
+      "title": "Understanding React Hooks as a backend developer",
+      "location": "Elevate",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1595",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Eric Goodwin"
+      ],
+      "full_description": "As of version 16.8 React has added hooks which let your functional components use things like state without rewriting a class. Whilst it's not recommended to immediately convert all of your existing components, if you are starting a new react project, it's recommended to use Hooks.\n\nAs a primarily backend developer, I found writing react components with classes very logical and in many way similar to backend OO code. However, I was in for a shock when I started working with React Hooks and trying to create more complex components.\n\nIn this talk I aim to cover:\n- What are react hooks?\n- Mapping react hooks to something more familiar to backend developers\n- Similarities between event subscribers and hooks like useEffect\n- Understanding useState() and some nuances about working with lots of state variables\n- Passing state to child components\n- Breaking down a few examples including some more complex components",
+      "video_url": "https://youtu.be/JsfwdVOHQEM",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T03:55:00Z",
+      "endTime": "2022-10-19T04:05:00Z",
+      "duration": "P10M",
+      "title": "Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T04:05:00Z",
+      "endTime": "2022-10-19T04:40:00Z",
+      "duration": "P35M",
+      "title": "Drupal 9, Migrations, Decoupled APIs and Online Collections",
+      "location": "Ballroom 1",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1661",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Morgan Strong"
+      ],
+      "full_description": "At QAGOMA we needed to modernise our Online Collection (https://collection.qagoma.qld.gov.au/) amongst a complex web of dependent projects delivering at very different dates. This talk will explain how Drupal 8/9 was leveraged to initially Beta test, and then to deliver our Online Collection, and how this is now used as a digital publishing base and API source for other projects and services.",
+      "video_url": "https://youtu.be/DGia2z2qACo",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T04:05:00Z",
+      "endTime": "2022-10-19T04:40:00Z",
+      "duration": "P35M",
+      "title": "Mobile accessibility: building accessible mobile sites and native apps for accessibility",
+      "location": "Ballroom 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1420",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Gian Wild"
+      ],
+      "full_description": "Unfortunately, when developing WCAG2, the Working Group did not envision the current world where mobile is almost ubiquitous. For example, on a mobile device there is no continual access to a keyboard (unless someone is using it as an add-on to the device – or using a Blackberry Classic). WCAG2 requires that all content be accessible to the keyboard interface, but it does not require that all content be accessible to a mouse or to a touchscreen user – which is essential on a mobile device. WCAG2.1 does include some mobile accessibility requirements, but doesn’t go far enough. Gian Wild chaired the Mobile Site Sub-Committee to develop a set of Mobile Site Testing Guidelines that are available under Creative Commons. These guidelines are meant to be used in conjunction with WCAG2 (and WCAG2.1) to ensure that sites are accessible to people with disabilities using mobile and tablet devices.\nAccessibility is important to all – not everyone using your mobile app, device or wearable will be fully functioning: either because they have a disability or they are simply engaged elsewhere. Gian Wild talks about the things that are essential to avoid when designing mobile apps, devices and wearables to ensure that everyone can use them. She talks about specific mobile accessibility features: pinch zoom, native screen readers, haptic keyboard etc, and system accessibility settings: font size, screen rotation, high contrast etc",
+      "video_url": "https://youtu.be/ZzeIB1aEnlI",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T04:05:00Z",
+      "endTime": "2022-10-19T04:40:00Z",
+      "duration": "P35M",
+      "title": "Purge the gap – Automating Content Delivery Network purging with govCMS",
+      "location": "Elevate",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1630",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Doug Courtney"
+      ],
+      "full_description": "Hear about the GovCMS purge service and the journey that was undertaken to deliver a product that would provide GovCMS customers the ability to purge cached content from the GovCMS Content Delivery Network. This talk will look at the final solution that was delivered, including supporting service analytics and what benefits were realised.\n\n# AI Powered Drupal: A new era for content creation and management\n\nThe world is changing rapidly. The developments in machine learning and artificial intelligence over the past decade have been significant with powerful models being developed and made readily available via APIs. The last few years in particular have seen stunning breakthroughs with the release of classification models for text and images, large language models such as GPT3 and image generation services such as DALL E 2. It really feels like we are living in the future.\n\nHow does this apply to Drupal? Many of the new AI powered services are focussed on content, either augmenting it or creating it. They are therefore a natural ally to CMSs such as Drupal. This presentation will review these developments and will point to a number of pathways for integration into Drupal to improve the content creation process.\n\nThe following conceptual areas will be covered\n- How Drupal can be used as a data source for model training\n- How data can be integrated back into Drupal for tagging, summarisation and content authoring.\n\nA new Drupal contrib module will be announced which provides a general purpose solution for the integration of AI systems into Drupal for content augmentation.\n- Content summarisation\n- Content classification\n- Image classification\n\nThe presentation will be of interest:\n- Anyone interested in the future of content\n- Content strategists\n- Developers",
+      "video_url": "https://youtu.be/ZG5AjolEi6c",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T04:40:00Z",
+      "endTime": "2022-10-19T04:50:00Z",
+      "duration": "P10M",
+      "title": "Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T04:50:00Z",
+      "endTime": "2022-10-19T05:30:00Z",
+      "duration": "P40M",
+      "title": "AI Powered Drupal: A new era for content creation and management",
+      "location": "Ballroom 1",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1647",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Murray Woodman"
+      ],
+      "full_description": "",
+      "video_url": "https://youtu.be/iwxD7rMmnCQ",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T04:50:00Z",
+      "endTime": "2022-10-19T05:30:00Z",
+      "duration": "P40M",
+      "title": "5 Simple Tips To Level Up Your Legacy Code - You Won't Believe What Happens Next!",
+      "location": "Ballroom 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1606",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Michael Strelan"
+      ],
+      "full_description": "Have you ever reviewed an unfamiliar code base only to nope right out after seeing the 2000 line .module file? Or perhaps past you wrote that .module file and present you knows better? Let me guess, there are no tests in sight. Everyone is nervous to make any sweeping changes, so they've been piling on series upon series of very specific if statements.\n\nIn this session we'll explore how you can pay off that technical debt and get the codebase in to shape. We'll discuss why this needs to start with automated testing and get comfortable writing tests quickly and easily. Then we'll dive in to what other tools and techniques can be used to have a codebase you can be proud of. This includes enforcing code quality through static analysis as well as replacing those nested-if-statement-hooks-of-hell with clean, readable plugins and bundle classes. Finally we'll discuss how to keep the code in good health with automated checks in CI/CD.",
+      "video_url": "https://youtu.be/rgELc1UmCow",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T04:50:00Z",
+      "endTime": "2022-10-19T05:30:00Z",
+      "duration": "P40M",
+      "title": "Better user and editor experience - exploring open data on GovCMS",
+      "location": "Elevate",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1635",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Julia Topliss",
+        "Matthew Pirani"
+      ],
+      "full_description": "IPEA is a government authority tasked with the management and reporting of parliamentarian expenditure. In this case study we will show how the Migrate and Solr modules were used to solve scalability and performance challenges by providing a user and editor friendly solution. The end result is that citizens and parliamentarians can access data expenditure more efficiently.\n\nMatt & Julia will discuss how to work on GovCMS SaaS to deliver improved experiences.\n\nThis presentation covers:\n1. Improving user experience with better performance on rendering complex datasets containing many rows of data using view modes and Solr.\n2. Improving website management experience by providing internal tools to add/update/publish reports which contain thousands of rows of data. Considering scalability in the implementation with the requirement to factor in future reporting periods.\n3. Providing stability and scalability with a solution that is delivered onto the GovCMS SaaS platform and the restrictions & challenges that come with working on a proscriptive platform.\n\nThis presentation will be of interest to:\nGovCMS agencies who want to get the most from GovCMS SaaS\nDevelopers looking for tips on how to build performance and scalable solutions.\nOpen data advocates interested in citizen access to government data.",
+      "video_url": "https://youtu.be/_jN5mvglet4",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T05:30:00Z",
+      "endTime": "2022-10-19T07:00:00Z",
+      "duration": "P90M",
+      "title": "Networking",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "sponsor-15"
+    },
+    {
+      "startTime": "2022-10-19T22:25:00Z",
+      "endTime": "2022-10-19T22:55:00Z",
+      "duration": "P30M",
+      "title": "Breakfast",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "sponsor-16"
+    },
+    {
+      "startTime": "2022-10-19T22:55:00Z",
+      "endTime": "2022-10-19T23:00:00Z",
+      "duration": "P5M",
+      "title": "Opening remarks / Introduction",
+      "location": "Ballroom 1",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T23:00:00Z",
+      "endTime": "2022-10-19T23:35:00Z",
+      "duration": "P35M",
+      "title": "How to Lead Talented Technical Teams",
+      "location": "Ballroom 1",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1996",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Sarah-Jane Peterschlingmann"
+      ],
+      "full_description": "This session will explore the twelve key questions you need to answer to retain and motivate your top technical talent. We will also explore practical tools and techniques for creating an engaging and inclusive environment that empowers your entire team to deliver results.",
+      "video_url": "https://youtu.be/TJ2MP2sLtHU",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T23:35:00Z",
+      "endTime": "2022-10-19T23:40:00Z",
+      "duration": "P5M",
+      "title": "Sponsor address by SRIJAN",
+      "location": "Ballroom 1",
+      "link": "",
+      "track": [
+        "Sponsor"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "sponsor-16"
+    },
+    {
+      "startTime": "2022-10-19T23:40:00Z",
+      "endTime": "2022-10-19T23:55:00Z",
+      "duration": "P15M",
+      "title": "Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T23:55:00Z",
+      "endTime": "2022-10-20T00:30:00Z",
+      "duration": "P35M",
+      "title": "Beyond plain language: techniques for communicating complex concepts and processes",
+      "location": "Ballroom 1",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1638",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Diana Campbell"
+      ],
+      "full_description": "Do you set out to create beautiful, usable content every day but find that it’s, well, kind of impossible given the terminology you have to use, and the elaborate processes you have to guide users through? Do you need to persuade users to do things that are complicated, time consuming, or difficult, or that there’s little precedent for? Do people bounce off your website, or call or email because they just. don’t. get. it?\n\nIn this presentation, Diana Campbell, Content Lead at Oxide Interactive, will share practical techniques she uses to prune, sort, untangle, package and clarify content about complex concepts and processes, reducing bounce rates and enquiries, and increasing engagement. She’ll also cover strategies for convincing stakeholders to let you give impenetrable content the makeover it needs.",
+      "video_url": "https://youtu.be/kFf_AWNGm90",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T23:55:00Z",
+      "endTime": "2022-10-20T00:30:00Z",
+      "duration": "P35M",
+      "title": "Wriggling out from the weight of Covid to take GovCMS on its next adventure",
+      "location": "Ballroom 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1660",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Sharyn Clarkson"
+      ],
+      "full_description": "The last few years have been busy for GovCMS. We delivered large amounts of Covid content to Australians; feeling the weight of responsibility to not make any mistakes and watched over enormous spikes in traffic that did not fall away as the pandemic ebbed and flowed. The reality of that workload and pressure meant we had to delay most of our optional work.\n\nA few months ago we wriggled out from under the load and set about designing and executing the first steps in our next big adventure. It’s a packed program of business and technical improvements over the next 2 years. This session will focus on what’s coming next in GovCMS.",
+      "video_url": "https://youtu.be/oDyt8uCE_EA",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-19T23:55:00Z",
+      "endTime": "2022-10-20T00:30:00Z",
+      "duration": "P35M",
+      "title": "Building a Drupal hosting platform for all the users",
+      "location": "Elevate",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/2068",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Toby Bellwood"
+      ],
+      "full_description": "At amazee.io we've been building Lagoon, our open-source Drupal (and more!) hosting platform for over 5 years. Whilst we've always had a laser-like focus on developers and their needs, we've done a lot of work recently to ensure that all the non-developer users can also access the information and tools they need to be able to perform their roles independently.\n\nIn this talk, find out how we give product owners and project managers at-a-glance data about their complete site holdings, and how Site Reliability Engineers can have access to the metrics they need to be able to ensure uptime. We'll also cover how we collect and present essential information for your security team, and how your content editing teams can get ready access to perform everyday tasks. And if you're a smaller team, we can run through all the goodies you'll get to use yourself!\n\nWe'll cover our experiences working with a number of our partners, and how we've extended and adapted our Lagoon platform to meet their needs, and how some surprising use cases have sprung up, helping us get a clearer idea of how people use our tools day-to-day.",
+      "video_url": "https://youtu.be/uCoheOHl-jU",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T00:30:00Z",
+      "endTime": "2022-10-20T01:00:00Z",
+      "duration": "P30M",
+      "title": "Morning Tea",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T01:00:00Z",
+      "endTime": "2022-10-20T01:35:00Z",
+      "duration": "P35M",
+      "title": "Using Drupal as a content store for Service NSW apps",
+      "location": "Ballroom 1",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1634",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Michael Caddy"
+      ],
+      "full_description": "This presentation will share how different teams at Service NSW are using Drupal to host content.\n\nIt will touch on the various benefits such as:\n\n- Allowing product teams to embed managed content into non-Drupal apps reducing the need for deployments for simple changes. (Error messages, notifications, terms and conditions etc.)\n- Accelerating the replacement of legacy monolith applications with decoupled solutions.\n\nIt will venture into how we do this using:\n\n- The Microcontent module for content modelling and separation of concerns\n- Content assigned to editorial sections with Workbench access\n- External editor roles with restricted permissions\n- Access to content with JSON:API.",
+      "video_url": "https://youtu.be/8njA8UBIl38",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T01:00:00Z",
+      "endTime": "2022-10-20T01:35:00Z",
+      "duration": "P35M",
+      "title": "Intro into Layout Builder and Drupal.offCanvas with extra tricks (and no extra Drupal modules)",
+      "location": "Ballroom 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1636",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Joshua Graham"
+      ],
+      "full_description": "- Present an overview of what Drupal core Layout Builder module is (psst! It is better that Display Suite!).\n- Show/explain some custom Layout Builder PHP/YML code that allows extra html classes, custom plugin classes and extra form fields, all in the theme layer! (no extra modules, can even work in GovCMS!)\n- Show that via block contexts, layout builder can show a Drupal view of a Drupal node in draft state (or any revision). Traditionally, Drupal views will only work with the current published version.\n- Present an overview of what Drupal core Drupal.offCanvas() is, how it works, how to style etc.\n- Show/explain how to add extra classes to specific instances via JavaScript.\n- Finally, show a live website example of Layout Builder andDrupal.offCanvas() (Lead Developed by yours truly) and mention how these can work together. (https://soe.dcceew.gov.au/overview/key-findings => Click \"cite this page\" on the right)",
+      "video_url": "https://youtu.be/jGujjxBvYJ0",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T01:00:00Z",
+      "endTime": "2022-10-20T01:35:00Z",
+      "duration": "P35M",
+      "title": "A personalisation UX playbook",
+      "location": "Elevate",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1648",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Andre Kakos"
+      ],
+      "full_description": "A user centric approach to website design and architecture generally involves user research, discovery of user goals and the definition of user pathways and journeys through the site. Content needs to be designed to support the user to complete their tasks and move them onto the next stage. The personalisation and customisation of content adds another dimension for the designer to consider and opens the way for an enhanced user experience to be designed and delivered.\n\nThis presentation will present a playbook which can be used by UX and content designers to deliver better user experiences. The playbook will cover concepts such as:\n- taxonomy to better categorise content along a number of dimensions.\n- microcontent for delivering personalised experiences\n- integration of personalisation into traditional approaches\n- the future role of content in a personalised world.\n\nFinally the presentation will review the Drupal contrib space and identify modules which can help with delivering personalised experiences.\n\nThe presentation will be of interest to:\n- UX designers\n- Content designers\n- Marketers\n- Site owners",
+      "video_url": "https://youtu.be/AkcGw1lIogo",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T01:35:00Z",
+      "endTime": "2022-10-20T01:45:00Z",
+      "duration": "P10M",
+      "title": "Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T01:45:00Z",
+      "endTime": "2022-10-20T02:20:00Z",
+      "duration": "P35M",
+      "title": "The state of Headless and the emergence of MACH",
+      "location": "Ballroom 1",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1426",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Josh Waihi"
+      ],
+      "full_description": "5 years ago I spoke at DrupalSouth Hobart and made the case (in the frontend track of all places) that decoupled solutions were more expensive, more complex and excessively resource intensive compared with coupled solutions in Drupal. Five years on, have things improved? Is it cheaper? simple? economical? Does it matter?\n\nIn this session we'll reflect on the increasing adoption of headless CMS delivery, how thats impacting Drupal and you, the community.",
+      "video_url": "https://youtu.be/jGOXWunr-4A",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T01:45:00Z",
+      "endTime": "2022-10-20T02:20:00Z",
+      "duration": "P35M",
+      "title": "Replatforming Victoria's Department of Health onto Single Digital Presence",
+      "location": "Ballroom 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1673",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Suchi Garg",
+        "Phillipa Martin"
+      ],
+      "full_description": "Salsa migrated the large health.vic.gov.au from SiteCore to Victoria’s Single Digital Presence (SDP) to access the benefits of open source and the whole-of-government platform. The project represents a very large site with over 110 different features identified for rebuilding on SDP, and over 80,000 content objects (pages, documents and components) for migration.\n\nWe used Merlin (a tool Salsa created and open sourced) to migrate the website to Victoria’s SDP. Merlin significantly reduces costs compared to traditional migration methods. We also rebuilt the site using the Ripple component library and standard patterns, to accelerate delivery and reduce cost.\nThe project represents a very successful migration/website build, but like most projects it had some curveballs along the way. During our presentation we’ll cover:\n- How the frontend was mapped to SDP’s frontend presentation layer, Ripple\n- How features and stories were reviewed and descoped\n- Building of a new feature, content collections to meet client requirements\n- The complex migration process, covering migration scripts and final migration to SDP\n- Challenges across the project lifecycle\n- The transition from site build to support\n\nBackground\nSingle Digital Presence is Victoria’s whole-of-government platform. It’s made up for three components:\n1. Bay (an open-source platform based on Lagoon)\n2. Tide (a Drupal CMS distribution)\n3. Ripple coupled with Nuxt (the frontend presentation layer)",
+      "video_url": "https://youtu.be/i_wgWgu5eQw",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T01:45:00Z",
+      "endTime": "2022-10-20T02:20:00Z",
+      "duration": "P35M",
+      "title": "Drupal Architecture Anti Patterns",
+      "location": "Elevate",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1650",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Joseph Chin"
+      ],
+      "full_description": "There are many ways to build a Drupal website but that doesn't mean the results are always equal. In this session, I'll talk about some common but bad architecture design choices I have seen that led to poor site performance, exposed vulnerabilities and lot's of technical debt. Basically, a \"what not to do\" guide, followed up with best practices for any Drupalist looking to build better websites.",
+      "video_url": "https://youtu.be/uCoheOHl-jU",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T02:20:00Z",
+      "endTime": "2022-10-20T03:20:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T03:20:00Z",
+      "endTime": "2022-10-20T03:55:00Z",
+      "duration": "P35M",
+      "title": "Building QA Dashboards in Drupal",
+      "location": "Ballroom 1",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1684",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Arijit Dutta"
+      ],
+      "full_description": "About 18 months ago, a few of our team members started an experimental project in Drupal to store all the reports produced by running automation tests, load tests, security scans etc. As more teams started using the portal, many feature requests requests started coming in. This incremental exercise has resulted in a tool which has centralised most of the testing efforts - initiating the tests, comparing reports, analysing trends across a time period and gauging overall project health.\nAll of this has been built in Drupal mostly utilising contributed modules and a bespoke framework for integration with testing softwares like Jmeter, Gatling, Selenium, NightwatchJS et al and has increased productivity of the quality teams drastically.\nWould love to showcase the tool and share how Drupal solved an internal use case at Srijan",
+      "video_url": "https://youtu.be/pp6Mu65uRhc",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T03:20:00Z",
+      "endTime": "2022-10-20T03:55:00Z",
+      "duration": "P35M",
+      "title": "CMS as a service: Decoupled Drupal on a modern tech stack",
+      "location": "Ballroom 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1631",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Andrew West",
+        "Johanna Aranguren"
+      ],
+      "full_description": "This presentation will focus on how and why Flight Centre migrated a large D7 multisite to a single, decoupled, global site using translation, jsonapi, NextJS and serverless technologies.\n\nDuring the session we will be talking about some of the key challenges and solutions involved in building a website for a large enterprise trading in 6+ different regions around the globe with additional requirements to consume and consolidate data from various internal and external services.\n\nFurther detail will be given on our solution for mapping React components on our frontend application (NextJS) to Drupal. We will be talking about how we serve the structured data from Drupal Layout Builder via jsonapi and consume the data within NextJS to maintain the page layout and component placement from Layout Builder.",
+      "video_url": "https://youtu.be/ZXMYVr7K_y0",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T03:20:00Z",
+      "endTime": "2022-10-20T03:55:00Z",
+      "duration": "P35M",
+      "title": "Improving core web vitals with Drupal: A step by step approach",
+      "location": "Elevate",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1574",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Lee Rowlands"
+      ],
+      "full_description": "Core Web Vitals (CWV) is not just another three letter ancronym (TLA) you need to have an understanding of if you work in the web space. It's actually a series of TLAs you need to be familiar with 😜\n\nComprising Largest Contentful Paint (LCP), First Input Delay (FID) and Cumulative Layout Shift (CLS) you'd be forgiven for feeling Overwhelming Acronym Overload (OAO).\n\nGetting the best score you can for Core Web Vitals (CWV) is a vital element of making sure your site is performing at its best and giving your users the best experience. Numerous studies have shown that improving your CWV leads to improved business outcomes.\nIn addition, Google now use these scores to influence search result ranking on mobile devices, penalizing sites that don't offer a good experience.\n\nBut improving your scores can be a difficult process, particularly with Drupal's out of the box setup.\n\nIn this session we'll look at:\n* A brief introduction to Core Web Vitals and what each of the acronyms is for.\n* How to digest the output from Lighthouse\n* Low hanging fruit for easy wins with Drupal\n* Diving deep and swapping out Drupal CSS renderer for further gains\n* Diving deeper still and generating critical CSS to render inline for even more gains\n* Adding monitoring to your build process to ensure you catch and regressions before they happen",
+      "video_url": "https://youtu.be/aCx_Z5gMyPQ",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T03:55:00Z",
+      "endTime": "2022-10-20T04:05:00Z",
+      "duration": "P10M",
+      "title": "Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T04:05:00Z",
+      "endTime": "2022-10-20T04:40:00Z",
+      "duration": "P35M",
+      "title": "A case study about location based search on nsw.gov.au website",
+      "location": "Ballroom 1",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1653",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Jibran Ijaz"
+      ],
+      "full_description": "The NSW Government Digital Channels team at the Department of Customer Service NSW is working on the OneCX program.\nThe OneCX program is transforming the customer’s digital experience of the NSW Government. It’s making it easier for customers to access the information they need, without having to understand or navigate the structure of government.\nWith over 750 websites across 10 NSW government clusters, the OneCX program is working with agencies to build nsw.gov.au as the single location for customers to source information.\nIt is very important to give the end user the ability to search the content based on their location for a site of this magnitude. Based on the type of content a location can consist of a few different things e.g. regions, suburbs, postcodes, street addresses, and, etc.\nA location-based search on suburbs, postcodes, and addresses are relatively straightforward. The problem arises when the location-based search is built on top of regions. The region names, sizes, and boundaries are different for different agencies e.g. the Department of Premier and Cabinet NSW regions are different than the Transport for NSW regions.\nThere are 5+ different region types in NSW:\n- Local health district\n- Local government area\n- Department of Premier and Cabinet regions\n- Department of Communities and Justice regions\n- Transport for NSW regions\n- More…\nThis session is about the case study of building a solution for location-based content search:\n- How can the content have different types of regions, suburbs, postcodes and street addresses attach to it?\n- How to evolve the content data model based on all the location information?\n- How can the content with different types of regions be searched based on postcodes and suburbs?\n- How can the Drupal search API module help with the indexing of all the location data?\n- How can the partially decoupled solution utlise all the location information to provide the proximity search?",
+      "video_url": "https://youtu.be/8MszcSYmhQs",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T04:05:00Z",
+      "endTime": "2022-10-20T04:40:00Z",
+      "duration": "P35M",
+      "title": "The Pragmatic Guide to Defending Drupal",
+      "location": "Ballroom 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1609",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Nick Schuch"
+      ],
+      "full_description": "Defending Drupal from malicious actors is difficult since it requires a deep knowledge of the application, hosting platform, and development cycle, all of which are rapidly evolving with the Cloud Native landscape.\n\nThis talk will provide attendees with a better understanding of Cloud Native Security and the next steps on how they can secure their applications.",
+      "video_url": "https://youtu.be/jFoESjk6gvE",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T04:05:00Z",
+      "endTime": "2022-10-20T04:40:00Z",
+      "duration": "P35M",
+      "title": "How to write for the online medium",
+      "location": "Elevate",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1669",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Phillipa Martin"
+      ],
+      "full_description": "In this presentation, I’ll cover the latest in website writing best practices, drawing on research from Nielsen Norman Group. The presentation will cover:\n- The different ways people read online (eye-tracking evidence)\n- How to write for scanning readers\n- Writing in plain English and readability tools\n- The inverted pyramid structure\n- How to write accessible content\n- How to use the Australian Government Style Manual\n\nThis presentation will help writers (professional writers and occasional writers) maximise their copy for the unique online medium.",
+      "video_url": "https://youtu.be/vhp6sAdSnLk",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T04:40:00Z",
+      "endTime": "2022-10-20T05:10:00Z",
+      "duration": "P30M",
+      "title": "Afternoon Tea",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T05:10:00Z",
+      "endTime": "2022-10-20T05:45:00Z",
+      "duration": "P35M",
+      "title": "Natural language processing - The what, why and how",
+      "location": "Ballroom 1",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1659",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Govind Kumar Malu"
+      ],
+      "full_description": "Natural language processing (NLP) is a field of computer science that is concerned with the interpretation of human language by computers. NLP has a multitude of different applications in the fields of computer science, artificial intelligence, and linguistics.\n\nAdvantages of NLP include:\nPersonalised content and marketing\nAutomatic image tagging\nContent classification\nSentiment analysis\nEntity analysis\nTopic segmentation\nLanguage identification\n\nOne use case that we will discuss during this presentation is using the Google Natural Language Processing APIs on Drupal sites. We can use it to analyze our own site content and even autotag based on a common taxonomy.\n\nAvailable modules:\nGoogle NL API\nGoogle NL Autotag\n\nThis basically provides context to the editor team about how they can create content and use AI-based methods to classify content and write quality content on the site.",
+      "video_url": "https://youtu.be/RfciTrgFP2I",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T05:10:00Z",
+      "endTime": "2022-10-20T05:45:00Z",
+      "duration": "P35M",
+      "title": "Building a secure, authenticated federal agency Drupal platform",
+      "location": "Ballroom 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1624",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Juliane Erben",
+        "Alex Skrypnyk"
+      ],
+      "full_description": "The federal agency (who would like to be unidentified) was on an old version of MS SharePoint, which was used by authenticated users. The portal had a high cost of ownership, many functional gaps, was slow to respond, and was visually unappealing to the user. It was no longer fit for purpose. The federal agency engaged Salsa to:\n\n1 - Replace the old portal and migrate all of the existing data\n2 - Ingest reports from another portal\n3 - Integrate with an internal publishing system\n4 - Create analytical reports.\n\nThe portal’s purpose is to publish and distribute information to other government agencies. As of June 2022 the new, Salsa-built Drupal portal has replaced the old MS SharePoint solution. In this short presentation, we would like to address:\n\n- Ways of working together that ensured we could react to changes in scope.\n\n- Using the Salsa-built CivicTheme design system as the foundation for the build.\n\n- The outcomes for the content editors: a publishing workflow easily followed via a customised workbench, an editing experience that meets their expectations, and custom tools that allow them to import data from other sources and create compilations for their users in minutes.\n\n- Email alerts and subscription: Salsa custom built a subscription and alert functionality for the federal agency as out-of-the-box solutions (like Mailchimp) were not in question for security reasons.\n\n- The approach to migrating 1.2TB of data and dealing with a rapidly growing amount of data.\n\n- Searching through vast quantities of data using Solr and Elastic Search.\n\nDrupal is very capable of providing functionality far beyond a classic brochure website. This federal agency project showcases what can be achieved, even with a large range of security restrictions.\nJuliane Erben\nI was born and bred in Germany, however I have spent many years living overseas in various countries before settling in Australia in 2012. I have been working in the IT industry initially in sales and then in project management for 15 years and have managed Drupal projects for the past 5 years. I enjoy business analysis; I love how a project can feel like a puzzle and with every client discovery, every design, every JIRA ticket groomed, the puzzle evolves and finally the build will bring it all to life. My work satisfaction comes from delivering what the client needs, feeling like I have really done all I can to maximise the business benefit and ultimately seeing the outcomes for the end user. And I love the collaborative aspect of my role; bringing teams together to work towards a common goal.\nAdditional speakersThe second speaker is Alex Skrypnyk.\n\nBased in Melbourne, Alex works with Salsa and Salsa’s clients to design and build Drupal solutions, providing high level technology strategy and oversight.\n\nAs a solution architect, Alex oversees the technical direction at a strategic level. His continuous integration expertise ensures all projects merge development code into the pipeline early and often. This helps to reduce costs and risks in projects.\n\nAlex also works on Salsa projects as a technical lead, working closely with developers, business analysts and clients to provide a technical direction that meets our clients’ business needs.",
+      "video_url": "https://youtu.be/A4QQIukLHEQ",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T05:10:00Z",
+      "endTime": "2022-10-20T05:45:00Z",
+      "duration": "P35M",
+      "title": "From NGINX + php-fpm to NGINX Unit",
+      "location": "Elevate",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1621",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Luhur Abdi Rizal"
+      ],
+      "full_description": "NGINX + php-fpm has been the de facto standard for a long time. In the current era of cloud-native, NGINX Unit offers a more simple configuration, easier to containerize, more performant, and various new features, while still bringing all the goods from the NGINX web server.\n\nIn this talk, we'll discuss how can we use NGINX Unit for a drupal site.",
+      "video_url": "https://youtu.be/gWZ3_dsHaHs",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T05:45:00Z",
+      "endTime": "2022-10-20T05:55:00Z",
+      "duration": "P10M",
+      "title": "Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T05:55:00Z",
+      "endTime": "2022-10-20T06:30:00Z",
+      "duration": "P35M",
+      "title": "Drupal - The next 20 years (and beyond)",
+      "location": "Ballroom 1",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1493",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Owen Lansbury"
+      ],
+      "full_description": "In 2022, Drupal celebrated its 21st birthday. In that time, Drupal has transformed from the personal project of a Belgian university student, to a platform preferred by software hobbyists and is now a clear option for major enterprises around the world. But what does the next 20 years and beyond look like? Is Drupal sustainable as an open source project in the face of competition from software giants and well funded SAAS startups? What are the pathways to Drupal's future success in the face of mounting challenges, and how can you help shape that future? While Owen has many of these discussions in his role on the Drupal Association's global board, this talk will represent his own views on the subject.",
+      "video_url": "https://youtu.be/g86cXxEIjDs",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T05:55:00Z",
+      "endTime": "2022-10-20T06:30:00Z",
+      "duration": "P35M",
+      "title": "Scanning the Australian Government ecosystem. How popular is Drupal down under?",
+      "location": "Ballroom 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1662",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Sean Hamlin"
+      ],
+      "full_description": "Have you ever wondered how popular Drupal is in your local state and at the Federal Government level? This talk will answer that question, using open source tooling. The hope is that you gain some insight to the relative popularity of Drupal and appreciate more the impact you and Drupal have in Australia.\n\nThis session will include:\n\n* How to get a list of every government web site in Australia\n* How to determine what CMS they are using\n* How to measure site impact\n* Trends we are seeing at the federal level, and by state\n* Taking this tool further\n* How to contribute",
+      "video_url": "https://youtu.be/1jy9-e6uaEc",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T05:55:00Z",
+      "endTime": "2022-10-20T06:30:00Z",
+      "duration": "P35M",
+      "title": "Modernizing Drupal in the enterprise: A charter for a modern CMS platform",
+      "location": "Elevate",
+      "link": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule/1432",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Arijit Dutta",
+        "Mohammed Azharuddin Khan"
+      ],
+      "full_description": "Headless CMSes such as Contentful or Strapi are making the rounds in VC circles as the next big thing in Enterprise CMS. In this wake, Drupal is an equally powerful and mature contender towards an evolution down this path.\nIn more recent times, as content increasingly occupies center stage with respect to commerce & data strategies and there is a renewed interest in exploring Drupal internals, development & deployment patterns with mental models that have been commonplace in recent times. As distributed content management such as content meshes emerge, it is inevitable that Drupal as a stack comes under closer technology strategy & architecture scrutiny with integration & composability as key considerations.\n\nConsidering this next wave of Drupal deployments will be predominantly modern. What this means is that most of the Drupal deployments of the future will be API first and many of them would be headless. In many way, the headless CMS converges into the realm of CMS as a Platform, albeit with a potentially pluggable content repository provider (under the abstraction of APIs);\nThe business case for these patterns is very sound. While these drivers exist, the road to modernizing Drupal isn’t exactly the smoothest one. Some of the constraints around Drupal in an enterprise scenarios are:-\n1. Difficult to scale modules & subsystems independently of each other\n2. Difficult to implement high velocity, high throughput and low latency concerns.\n3. Lack of well defined integration architecture\n4. In this session we will provide perspective about the modern software architecture view around Drupal which addresses concerns mentioned above and provide prescriptive advice to overcome these issues via three main things. The key takeaways for audience would be:\n5. Externalize API concerns: How to externalize API concerns like security, traffic management, analytics etc to an API Gateway\n6. Offload Drupal events into an external event\n7. Evolve a platform",
+      "video_url": "https://youtu.be/i4XPU5fbMBw",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T06:30:00Z",
+      "endTime": "2022-10-20T06:40:00Z",
+      "duration": "P10M",
+      "title": "Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T06:40:00Z",
+      "endTime": "2022-10-20T07:00:00Z",
+      "duration": "P20M",
+      "title": "Closing remarks",
+      "location": "Ballroom 1",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-10-20T23:00:00Z",
+      "endTime": "2022-10-21T05:00:00Z",
+      "duration": "P360M",
+      "title": "Code Contribution Sprint",
+      "location": "Elevate",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "sponsor-19"
+    }
+  ],
+  "result": "✅",
+  "url": "https://drupalsouth.org/events/drupalsouth-brisbane-2022/schedule"
+}

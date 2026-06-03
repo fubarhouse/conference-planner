@@ -1,0 +1,2406 @@
+{
+  "event": {
+    "designation": "DrupalCon",
+    "location": "Portland",
+    "year": "2022",
+    "website": "https://events.drupal.org/portland2022",
+    "region": "America",
+    "venue": "Oregon Convention Center",
+    "timezone": "America/Los_Angeles",
+    "startDate": "2022-04-25T14:30:00Z",
+    "endDate": "2022-04-29T03:00:00Z",
+    "sourceCache": "cache/wayback/portland2022/raw",
+    "columns": 3,
+    "enabled": false,
+    "logo": {
+      "image": "./img/logos/drupalcon-logo.svg",
+      "imageAlt": "DrupalCon logo"
+    },
+    "scheduleURLs": [
+      "https://events.drupal.org/portland2022/schedule"
+    ],
+    "flickr": null
+  },
+  "items": [
+    {
+      "startTime": "2022-04-25T14:30:00Z",
+      "endTime": "2022-04-26T01:00:00Z",
+      "duration": "P630M",
+      "title": "Registration & Check-in",
+      "location": "Lobby",
+      "link": "https://events.drupal.org/portland2022/sessions/registration-check",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ]
+    },
+    {
+      "startTime": "2022-04-25T14:35:00Z",
+      "endTime": "2022-04-26T00:35:00Z",
+      "duration": "P600M",
+      "title": "Core Solution Space",
+      "location": "C128",
+      "link": "https://events.drupal.org/portland2022/sessions/core-solution-space",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ]
+    },
+    {
+      "startTime": "2022-04-25T15:00:00Z",
+      "endTime": "2022-04-25T19:00:00Z",
+      "duration": "P240M",
+      "title": "Birds of a Feather Sessions",
+      "location": "C123",
+      "link": "https://events.drupal.org/portland2022/sessions/birds-feather-sessions",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Drupal Association"
+      ],
+      "full_description": "Informal, small-group discussions where you’ll collaborate to solve problems, exchange information, share best practices, and build your network. Check out the white board on-site for your time slot if you submitted a topic ahead of the event! Ad hoc sessions are encouraged."
+    },
+    {
+      "startTime": "2022-04-25T15:00:00Z",
+      "endTime": "2022-04-25T23:35:00Z",
+      "duration": "P515M",
+      "title": "General Contribution",
+      "location": "Oregon Ballroom 204",
+      "link": "https://events.drupal.org/portland2022/sessions/general-contribution",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Drupal Association"
+      ],
+      "full_description": "Come to the General Contribution if you have a bit of experience working with the Drupal issue queue. You can join one of the many groups including documentation, migrate, media, front-end, layout, API-first, workflow, and lots more."
+    },
+    {
+      "startTime": "2022-04-25T15:30:00Z",
+      "endTime": "2022-04-25T19:00:00Z",
+      "duration": "P210M",
+      "title": "Government Industry Summit",
+      "location": "B117-118-119",
+      "link": "https://events.drupal.org/portland2022/sessions/government-industry-summit",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Drupal Association"
+      ],
+      "full_description": "A Summit is a topic intensive meeting where people who share an industry or interest can come together to collaborate, share pain points and solutions, and meet like-minded individuals in a structured, safe environment. Summits are scheduled on Monday and Tuesday during DrupalCon. Industry Summits require a \"Summit\" ticket type at registration and is an additional cost."
+    },
+    {
+      "startTime": "2022-04-25T15:30:00Z",
+      "endTime": "2022-04-25T19:00:00Z",
+      "duration": "P210M",
+      "title": "Healthcare Industry Summit",
+      "location": "A106",
+      "link": "https://events.drupal.org/portland2022/sessions/healthcare-industry-summit",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Drupal Association"
+      ],
+      "full_description": "A Summit is a topic intensive meeting where people who share an industry or interest can come together to collaborate, share pain points and solutions, and meet like-minded individuals in a structured, safe environment. Summits are scheduled on Monday and Tuesday during DrupalCon. Industry Summits require a \"Summit\" ticket type at registration and is an additional cost."
+    },
+    {
+      "startTime": "2022-04-25T15:30:00Z",
+      "endTime": "2022-04-25T19:00:00Z",
+      "duration": "P210M",
+      "title": "Higher Education Industry Summit",
+      "location": "B110-111-112",
+      "link": "https://events.drupal.org/portland2022/sessions/higher-education-industry-summit",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Drupal Association"
+      ],
+      "full_description": "The Higher Ed Summit at DrupalCon Portland 2022 is your chance to connect with other Drupal users from universities and colleges, including web developers, content creators, designers, strategists and managers."
+    },
+    {
+      "startTime": "2022-04-25T15:30:00Z",
+      "endTime": "2022-04-25T19:00:00Z",
+      "duration": "P210M",
+      "title": "Non-Profit Industry Summit",
+      "location": "A107-108-109",
+      "link": "https://events.drupal.org/portland2022/sessions/non-profit-industry-summit",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Drupal Association"
+      ],
+      "full_description": "A Summit is a topic intensive meeting where people who share an industry or interest can come together to collaborate, share pain points and solutions, and meet like-minded individuals in a structured, safe environment. Summits are scheduled on Monday and Tuesday during DrupalCon. Industry Summits require a \"Summit\" ticket type at registration and is an additional cost."
+    },
+    {
+      "startTime": "2022-04-25T15:30:00Z",
+      "endTime": "2022-04-25T19:00:00Z",
+      "duration": "P210M",
+      "title": "Training: Component-Based Development with Drupal",
+      "location": "A105",
+      "link": "https://events.drupal.org/portland2022/sessions/training-component-based-development-drupal",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "galactus86"
+      ],
+      "full_description": "What you can expect from this course Best practices and standards are at the core of this course. This means you will be exposed to the latest trends, processes, and tools used on today's web development to build responsive, accessible, and component-driven Drupal websites. Syllabus"
+    },
+    {
+      "startTime": "2022-04-25T15:30:00Z",
+      "endTime": "2022-04-25T19:00:00Z",
+      "duration": "P210M",
+      "title": "Training: Drupal 7 to Drupal 9 Migration",
+      "location": "B113",
+      "link": "https://events.drupal.org/portland2022/sessions/training-drupal-7-drupal-9-migration",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "dharizza",
+        "pixelite"
+      ],
+      "full_description": "With Drupal 7 set to reach its end of life in November 2022, now is the perfect time to start planning your migrations. Join this hands-on training to learn:"
+    },
+    {
+      "startTime": "2022-04-25T15:30:00Z",
+      "endTime": "2022-04-25T19:00:00Z",
+      "duration": "P210M",
+      "title": "Training: Introduction to Drupal 9 Module Development",
+      "location": "B116",
+      "link": "https://events.drupal.org/portland2022/sessions/training-introduction-drupal-9-module-development",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "ultimike"
+      ],
+      "full_description": "Module development for Drupal is more powerful than ever with Drupal 9. Object-orientation, the maturity of Drupal's various APIs, Drupal 9's underlying Symfony (and other) components, and the maturity of Drush means that developing for Drupal 9 requires some new knowledge for existing Drupal 7 and PHP developers."
+    },
+    {
+      "startTime": "2022-04-25T15:30:00Z",
+      "endTime": "2022-04-25T19:00:00Z",
+      "duration": "P210M",
+      "title": "Training: Theming - Drupalize.me",
+      "location": "B114-115",
+      "link": "https://events.drupal.org/portland2022/sessions/training-theming-drupalizeme",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "eojthebrave",
+        "blakehall"
+      ],
+      "full_description": "Themes combine HTML, CSS, JavaScript, and Drupal in order to make beautiful websites. Creating truly unique themes requires knowing how to use the Twig template language to manipulate HTML, how to add CSS and JavaScript assets in a way that's compatible with Drupal's caching, all while maintaining the flexibility that Drupal is known for."
+    },
+    {
+      "startTime": "2022-04-25T19:00:00Z",
+      "endTime": "2022-04-25T20:00:00Z",
+      "duration": "P60M",
+      "title": "Expo Hall Opens",
+      "location": "Expo Hall",
+      "link": "https://events.drupal.org/portland2022/sessions/expo-hall-opens",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ]
+    },
+    {
+      "startTime": "2022-04-25T19:00:00Z",
+      "endTime": "2022-04-25T20:00:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "All Conference",
+      "link": "https://events.drupal.org/portland2022/sessions/lunch",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ]
+    },
+    {
+      "startTime": "2022-04-25T21:00:00Z",
+      "endTime": "2022-04-25T21:30:00Z",
+      "duration": "P30M",
+      "title": "Group Photo",
+      "location": "Lobby",
+      "link": "https://events.drupal.org/portland2022/sessions/group-photo",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ]
+    },
+    {
+      "startTime": "2022-04-25T21:30:00Z",
+      "endTime": "2022-04-25T22:00:00Z",
+      "duration": "P30M",
+      "title": "Expo Hall Break",
+      "location": "Expo Hall",
+      "link": "https://events.drupal.org/portland2022/sessions/expo-hall-break",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ]
+    },
+    {
+      "startTime": "2022-04-25T22:00:00Z",
+      "endTime": "2022-04-25T22:50:00Z",
+      "duration": "P50M",
+      "title": "Build highly visual, long-form content with Layout Paragraphs",
+      "location": "A105",
+      "link": "https://events.drupal.org/portland2022/sessions/build-highly-visual-long-form-content-layout-paragraphs",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "justin2pin"
+      ],
+      "full_description": "Layout Paragraphs is a contributed Drupal module that combines drag-and-drop editing, Drupal core's layout API, and the Paragraphs module to provide an accessible, easy-to-use authoring experience. Designed to empower marketing and editorial teams everywhere, Layout Paragraphs offers a WYSIWYG interface for publishing highly visual, long-form content."
+    },
+    {
+      "startTime": "2022-04-25T22:00:00Z",
+      "endTime": "2022-04-25T22:50:00Z",
+      "duration": "P50M",
+      "title": "Drupal drives digital transformation of the Japanese Government as the unified government website",
+      "location": "B116",
+      "link": "https://events.drupal.org/portland2022/sessions/drupal-drives-digital-transformation-japanese-government-unified-government",
+      "track": [
+        "drupal showcase"
+      ],
+      "speakers": [
+        "dokumori",
+        "Satoshi Kino"
+      ],
+      "full_description": "On 1 September 2021, the Digital Agency of the Japanese Government was launched to drive the government’s digital transformation. One of the Agency's many goals is to unify government websites. As is the case in many other governments, the Government of Japan has a large number of websites, creating various problems for both visitors and editors/administrators."
+    },
+    {
+      "startTime": "2022-04-25T22:00:00Z",
+      "endTime": "2022-04-25T22:50:00Z",
+      "duration": "P50M",
+      "title": "Serverless Drupal",
+      "location": "Oregon Ballrooms 201-203",
+      "link": "https://events.drupal.org/portland2022/sessions/serverless-drupal",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "salimlakhani"
+      ],
+      "full_description": "\"No server is easier to manage than no server !\" It's actually possible to run serverless Drupal now. Serverless Drupal scales continuously and is also optimized for cost and performance. So why are we still managing Drupal on servers? We'll look at a few different ways of going \"serverless\" with Drupal and pros and cons of each approach."
+    },
+    {
+      "startTime": "2022-04-25T22:00:00Z",
+      "endTime": "2022-04-25T22:50:00Z",
+      "duration": "P50M",
+      "title": "You Are Not a Fraud!",
+      "location": "A106",
+      "link": "https://events.drupal.org/portland2022/sessions/you-are-not-fraud",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "dmkelner"
+      ],
+      "full_description": "According to a 2018 report by Blind, 58% of tech employees experience imposter syndrome. Despite your achievements, you may experience self-doubt about your capabilities and feel undeserving of your accomplishments. You are constantly doubting your competency."
+    },
+    {
+      "startTime": "2022-04-25T22:50:00Z",
+      "endTime": "2022-04-25T23:30:00Z",
+      "duration": "P40M",
+      "title": "Expo Hall Break",
+      "location": "Expo Hall",
+      "link": "https://events.drupal.org/portland2022/sessions/expo-hall-break-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ]
+    },
+    {
+      "startTime": "2022-04-25T23:30:00Z",
+      "endTime": "2022-04-26T00:20:00Z",
+      "duration": "P50M",
+      "title": "Appsolutely Necessary: Native and Mobile apps with Drupal",
+      "location": "Oregon Ballrooms 201-203",
+      "link": "https://events.drupal.org/portland2022/sessions/appsolutely-necessary-native-and-mobile-apps-drupal",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "grshane",
+        "Amy Novikau"
+      ],
+      "full_description": "Native and mobile apps allow you to reach your customers where they already are via app stores. Users are spending more time on mobile devices than on desktops. Mobile versions of websites are no longer enough to satisfy today’s customers. Each device platform has its own unique user experience that users are used to and deviating from these known patterns can create a jarring experience."
+    },
+    {
+      "startTime": "2022-04-25T23:30:00Z",
+      "endTime": "2022-04-26T00:20:00Z",
+      "duration": "P50M",
+      "title": "Crayons Down! Accessibility for UX is More than Contrast",
+      "location": "A105",
+      "link": "https://events.drupal.org/portland2022/sessions/crayons-down-accessibility-ux-more-contrast",
+      "track": [
+        "user experience, accessibility, & design"
+      ],
+      "speakers": [
+        "Donna Bungard"
+      ],
+      "full_description": "More and more teams are discussing how their work impacts the overall accessibility of a project. Time and again UX teams focus a lot of their energy on colors - which is important but only a fraction of the UX journey. Dear UXers - there is SO MUCH MORE you can do!"
+    },
+    {
+      "startTime": "2022-04-25T23:30:00Z",
+      "endTime": "2022-04-26T00:20:00Z",
+      "duration": "P50M",
+      "title": "Dig In! How IMBA Built Their Own Peer-to-Peer Fundraising Platform in Drupal 9",
+      "location": "B116",
+      "link": "https://events.drupal.org/portland2022/sessions/dig-how-imba-built-their-own-peer-peer-fundraising-platform-drupal-9",
+      "track": [
+        "drupal showcase"
+      ],
+      "speakers": [
+        "genadellett",
+        "Lea Wehrle-Garsh"
+      ],
+      "full_description": "Thanks to financial support from corporate partners, the International Mountain Bicycling Association (IMBA) is able to help grassroots mountain bike organizations across the country create, protect, and enhance more trails close to home. Local Partners apply to be considered a “Dig In” project and if selected receive matching funds based on dollars raised."
+    },
+    {
+      "startTime": "2022-04-25T23:30:00Z",
+      "endTime": "2022-04-26T00:20:00Z",
+      "duration": "P50M",
+      "title": "Drupal Security Team Update: Drupal 7, Drupal Steward, & more",
+      "location": "A107-108-109",
+      "link": "https://events.drupal.org/portland2022/sessions/drupal-security-team-update-drupal-7-drupal-steward-more",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "Michael Hess"
+      ],
+      "full_description": "Much of Drupal's reputation for security is thanks to the tireless efforts of the Drupal Security team. If you'd like to learn more about what the Drupal Security team is, how it works, and how you can join to help keep Drupal Secure, this session is a great place to start."
+    },
+    {
+      "startTime": "2022-04-25T23:30:00Z",
+      "endTime": "2022-04-26T00:20:00Z",
+      "duration": "P50M",
+      "title": "From disabled veteran to Full-Stack Drupal developer",
+      "location": "A106",
+      "link": "https://events.drupal.org/portland2022/sessions/disabled-veteran-full-stack-drupal-developer",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "edmund.dunn"
+      ],
+      "full_description": "As of August 2020, there are over 4.7 million disabled veterans in the United States. They are all dealing with a variety of disabilities connected to their time in the service. To say this is an under-represented group is an understatement. With the right help, these veterans can transition into the tech industry which is chronically short of developers of all stripes."
+    },
+    {
+      "startTime": "2022-04-25T23:30:00Z",
+      "endTime": "2022-04-26T00:20:00Z",
+      "duration": "P50M",
+      "title": "How to Audit PDFs for 508 at Scale",
+      "location": "B110-111-112",
+      "link": "https://events.drupal.org/portland2022/sessions/how-audit-pdfs-508-scale",
+      "track": [
+        "user experience, accessibility, & design"
+      ],
+      "speakers": [
+        "Lauren Maffeo"
+      ],
+      "full_description": "You've read the Statement of Work for your next client project: A full content audit of their website to prepare for the client's first migration to Drupal. This client has over 50k PDFs on their website, and few (if any) are 508-compliant. Your job is to audit all PDFs for 508 compliance to support a new, accessible Drupal website."
+    },
+    {
+      "startTime": "2022-04-25T23:45:00Z",
+      "endTime": "2022-04-26T00:15:00Z",
+      "duration": "P30M",
+      "title": "Chair Yoga with Insightful Culture",
+      "location": "Oregon Ballroom 204",
+      "link": "https://events.drupal.org/portland2022/sessions/chair-yoga-insightful-culture",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ]
+    },
+    {
+      "startTime": "2022-04-26T00:20:00Z",
+      "endTime": "2022-04-26T01:30:00Z",
+      "duration": "P70M",
+      "title": "Welcoming Reception",
+      "location": "All Conference",
+      "link": "https://events.drupal.org/portland2022/sessions/welcoming-reception",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ]
+    },
+    {
+      "startTime": "2022-04-26T14:30:00Z",
+      "endTime": "2022-04-27T00:30:00Z",
+      "duration": "P600M",
+      "title": "Registration & Check-in",
+      "location": "Lobby",
+      "link": "https://events.drupal.org/portland2022/sessions/registration-check-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "Registration and check-in is located in the Holladay Lobby, inside the Holladay Street entrance of the Oregon Convention Center. All DrupalCon participants need to enter via the Holladay entrance. See the Oregon Convention Center maps here: www.oregoncc.org/en/attend/maps"
+    },
+    {
+      "startTime": "2022-04-26T14:35:00Z",
+      "endTime": "2022-04-27T00:30:00Z",
+      "duration": "P595M",
+      "title": "Non-Denominational Prayer Space",
+      "location": "C127",
+      "link": "https://events.drupal.org/portland2022/sessions/non-denominational-prayer-space-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "This room is reserved for those who wish to practice their faith in a quiet and respectful environment. Spiritual texts and prayer rugs are provided. We ask that participants use hushed voices when necessary, but practice silence as much as possible to respect other attendees who may be using the space."
+    },
+    {
+      "startTime": "2022-04-26T14:35:00Z",
+      "endTime": "2022-04-27T00:30:00Z",
+      "duration": "P595M",
+      "title": "Quiet Room",
+      "location": "C126",
+      "link": "https://events.drupal.org/portland2022/sessions/quiet-room-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "This room is reserved for those who need space free from interaction with other participants in an environment where they feel free and safe to do so. The quiet rooms are free of conversation and interaction of any kind. They can be used for meditation, journaling, reading, or just silence away from the buzz of the Con."
+    },
+    {
+      "startTime": "2022-04-26T14:35:00Z",
+      "endTime": "2022-04-27T00:30:00Z",
+      "duration": "P595M",
+      "title": "Strategic Initiative Meeting Room",
+      "location": "C128",
+      "link": "https://events.drupal.org/portland2022/sessions/strategic-initiative-meeting-room-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "This is a space reserved for core maintainers to have conversations about solving key problems."
+    },
+    {
+      "startTime": "2022-04-26T15:00:00Z",
+      "endTime": "2022-04-26T15:30:00Z",
+      "duration": "P30M",
+      "title": "Chair Yoga with Insightful Culture",
+      "location": "G129-G130",
+      "link": "https://events.drupal.org/portland2022/sessions/chair-yoga-insightful-culture-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "Decompress from the hustle and bustle of the conference with chair yoga! Hosted by Dori Kelner from Insightful Culture."
+    },
+    {
+      "startTime": "2022-04-26T15:00:00Z",
+      "endTime": "2022-04-27T00:30:00Z",
+      "duration": "P570M",
+      "title": "General Contribution",
+      "location": "Oregon Ballroom 204",
+      "link": "https://events.drupal.org/portland2022/sessions/general-contribution-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Drupal Association"
+      ],
+      "full_description": "Come to the General Contribution if you have a bit of experience working with the Drupal issue queue. You can join one of the many groups including documentation, migrate, media, front-end, layout, API-first, workflow, and lots more."
+    },
+    {
+      "startTime": "2022-04-26T15:30:00Z",
+      "endTime": "2022-04-26T16:20:00Z",
+      "duration": "P50M",
+      "title": "Automate Behavior-Driven Development in Drupal 9",
+      "location": "A106",
+      "link": "https://events.drupal.org/portland2022/sessions/automate-behavior-driven-development-drupal-9",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "yas"
+      ],
+      "full_description": "We are successful to establish our development process for Drupal 9 custom module incl. automated testing for PHPUnit by our own GitLab CI/CD pipeline (like d.o's automated testing)."
+    },
+    {
+      "startTime": "2022-04-26T15:30:00Z",
+      "endTime": "2022-04-26T16:20:00Z",
+      "duration": "P50M",
+      "title": "Drupal.org: Updating the tools we use for collaboration",
+      "location": "Oregon Ballrooms 201-203",
+      "link": "https://events.drupal.org/portland2022/sessions/drupalorg-updating-tools-we-use-collaboration",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "hestenet",
+        "irinaz",
+        "Neil Drumm"
+      ],
+      "full_description": "The Drupal Association Engineering team is excited to give our bi-annual update on features and improvements we've been making to the home of the community. At each DrupalCon we review recent changes and look ahead to upcoming improvements. At DrupalCon Portland, we'll have quite a lot to talk about:"
+    },
+    {
+      "startTime": "2022-04-26T15:30:00Z",
+      "endTime": "2022-04-26T16:20:00Z",
+      "duration": "P50M",
+      "title": "Elevating Search Results with Solr 7",
+      "location": "A107-108-109",
+      "link": "https://events.drupal.org/portland2022/sessions/elevating-search-results-solr-7",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "bruce.yuen"
+      ],
+      "full_description": "This session will present on how Drupal 9 developers can elevate pieces of content in the search results of their search views with just the Solr 7 backend. A lecture presentation will go over at a high level how it is done, and will give a link to supporting documents, in case the audience wants to grab the code itself, so that they may play around with it for themselves."
+    },
+    {
+      "startTime": "2022-04-26T15:30:00Z",
+      "endTime": "2022-04-26T16:20:00Z",
+      "duration": "P50M",
+      "title": "Future of content management: using Drupal as a content strategy platform",
+      "location": "B114-115",
+      "link": "https://events.drupal.org/portland2022/sessions/future-content-management-using-drupal-content-strategy-platform",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "pixelite"
+      ],
+      "full_description": "Drupal has long been known as a top-notch content management system. It’s well-know for its flexibility, meaning that you can customize it to fit your content model, and also build custom features around that content."
+    },
+    {
+      "startTime": "2022-04-26T15:30:00Z",
+      "endTime": "2022-04-26T16:20:00Z",
+      "duration": "P50M",
+      "title": "Integrating integrations: A tale of two vendors",
+      "location": "B116",
+      "link": "https://events.drupal.org/portland2022/sessions/integrating-integrations-tale-two-vendors",
+      "track": [
+        "drupal showcase"
+      ],
+      "speakers": [
+        "antiorario"
+      ],
+      "full_description": "A complex data structure, a very active marketing team, and not one but two translation vendors: if this doesn't sound daunting enough, imagine if those two vendors weren't able to talk to each other out of the box. That was the status quo at Pega until 2020. On the one hand we had Lingotek, well known for its seamless Drupal integration."
+    },
+    {
+      "startTime": "2022-04-26T15:30:00Z",
+      "endTime": "2022-04-26T16:20:00Z",
+      "duration": "P50M",
+      "title": "Painless Designer to Developer Handoffs",
+      "location": "B110-111-112",
+      "link": "https://events.drupal.org/portland2022/sessions/painless-designer-developer-handoffs",
+      "track": [
+        "user experience, accessibility, & design"
+      ],
+      "speakers": [
+        "jwitkowski79",
+        "mherchel"
+      ],
+      "full_description": "Are you looking to improve the handoff between your design and development teams? In this session, we’ll share our approach at Lullabot for how the design team works with the front-end team throughout the entire design process to help improve the design handoff. We’ll discuss:"
+    },
+    {
+      "startTime": "2022-04-26T15:30:00Z",
+      "endTime": "2022-04-26T16:20:00Z",
+      "duration": "P50M",
+      "title": "Start Small to Win Big: New Offerings for Your Agency",
+      "location": "A105",
+      "link": "https://events.drupal.org/portland2022/sessions/start-small-win-big-new-offerings-your-agency",
+      "track": [
+        "leadership, management, & business"
+      ],
+      "speakers": [
+        "sarahfruy",
+        "dgorton"
+      ],
+      "full_description": "For many agencies, a central tenet of project success is essentially, “You Must Follow The Process”. These agencies have an often rigorous process refined by insights formed over many client engagements. The pattern often looks like this: as each engagement finishes, the team gathers to reflect on what went well, what could be improved, and the process is refined."
+    },
+    {
+      "startTime": "2022-04-26T15:30:00Z",
+      "endTime": "2022-04-26T16:20:00Z",
+      "duration": "P50M",
+      "title": "Structured Content & Flexible Layouts: A Georgia.gov Case Study",
+      "location": "B117-118-119",
+      "link": "https://events.drupal.org/portland2022/sessions/structured-content-flexible-layouts-georgiagov-case-study",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "gdd",
+        "marsepstein",
+        "rachelh_design"
+      ],
+      "full_description": "Editors say they want flexibility when creating content and landing pages, but this leads to a lack of consistency. Content is difficult to re-use. Your target audiences may be confused or ignored. But what if you could have flexible layouts and structured content?"
+    },
+    {
+      "startTime": "2022-04-26T16:20:00Z",
+      "endTime": "2022-04-26T16:45:00Z",
+      "duration": "P25M",
+      "title": "Transition Break",
+      "location": "All Conference",
+      "link": "https://events.drupal.org/portland2022/sessions/transition-break",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ]
+    },
+    {
+      "startTime": "2022-04-26T16:45:00Z",
+      "endTime": "2022-04-26T17:45:00Z",
+      "duration": "P60M",
+      "title": "Keynote: How to combat global systems of oppression in the tech industry",
+      "location": "Oregon Ballrooms 201-203",
+      "link": "https://events.drupal.org/portland2022/sessions/keynote-how-combat-global-systems-oppression-tech-industry",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "vonreyes",
+        "Mala Kumar, Daelynn Moyer, Marcus Carter II"
+      ],
+      "full_description": "The 2019 Driesnote talks a bit about the diversity, equity, and inclusion challenge in open source (starting around 31 minutes). We know based on participation at events, our programs, and high-level data collection around the Project that Drupal follows the same data trends around marginalized people."
+    },
+    {
+      "startTime": "2022-04-26T17:45:00Z",
+      "endTime": "2022-04-26T18:00:00Z",
+      "duration": "P15M",
+      "title": "Transition Break",
+      "location": "All Conference",
+      "link": "https://events.drupal.org/portland2022/sessions/transition-break-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ]
+    },
+    {
+      "startTime": "2022-04-26T18:00:00Z",
+      "endTime": "2022-04-26T18:50:00Z",
+      "duration": "P50M",
+      "title": "Before decoupling, understand JS. JavaScript for Drupalers: Let's learn this",
+      "location": "B114-115",
+      "link": "https://events.drupal.org/portland2022/sessions/decoupling-understand-js-javascript-drupalers-lets-learn",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "ashrafabed"
+      ],
+      "full_description": "When it comes to building modern websites, JavaScript frameworks are clear frontrunners. Where does this leave seasoned Drupal developers? Should we abandon our favored languages in favor of JS? Not necessarily; Drupal is a stellar CMS which is more than capable of standing on its own."
+    },
+    {
+      "startTime": "2022-04-26T18:00:00Z",
+      "endTime": "2022-04-26T18:50:00Z",
+      "duration": "P50M",
+      "title": "Decoupled Design Systems with Web Components",
+      "location": "A106",
+      "link": "https://events.drupal.org/portland2022/sessions/decoupled-design-systems-web-components",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "himerus"
+      ],
+      "full_description": "At Phase2, we have revolutionized how we develop every web project by starting with the foundation—a robust, platform agnostic design system built with Web Components."
+    },
+    {
+      "startTime": "2022-04-26T18:00:00Z",
+      "endTime": "2022-04-26T18:50:00Z",
+      "duration": "P50M",
+      "title": "Drupal Association Community Chat",
+      "location": "Oregon Ballrooms 201-203",
+      "link": "https://events.drupal.org/portland2022/sessions/drupal-association-community-chat",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "hestenet",
+        "Angie Sabin, Ashlee Noland"
+      ],
+      "full_description": "Join the board and staff of the Drupal Association, and learn more about the non-profit that fosters the Drupal Community. Bring questions!"
+    },
+    {
+      "startTime": "2022-04-26T18:00:00Z",
+      "endTime": "2022-04-26T18:50:00Z",
+      "duration": "P50M",
+      "title": "Duke University's Code+ co-curricular program — promoting undergraduate DEI",
+      "location": "A107-108-109",
+      "link": "https://events.drupal.org/portland2022/sessions/duke-universitys-code-co-curricular-program-%E2%80%94-promoting-undergraduate-dei",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "Screenack"
+      ],
+      "full_description": "Through Duke University's Code+ co-curricular program, Duke is committed to increasing equity, inclusion, and diversity in the technology talent pipeline, and is interested in attracting students from underrepresented communities, including first-generation college students."
+    },
+    {
+      "startTime": "2022-04-26T18:00:00Z",
+      "endTime": "2022-04-26T18:50:00Z",
+      "duration": "P50M",
+      "title": "How Penn State News Pivoted to Decoupled Drupal with Gatsby",
+      "location": "B117-118-119",
+      "link": "https://events.drupal.org/portland2022/sessions/how-penn-state-news-pivoted-decoupled-drupal-gatsby",
+      "track": [
+        "drupal showcase"
+      ],
+      "speakers": [
+        "shrop",
+        "jnourse"
+      ],
+      "full_description": "Penn State News is more than just a news site. As one of the university’s most visible communications platforms, the site builds togetherness for the university campus, is an informational go-to during campus emergencies, and drives strategic communications. With so many stories to share, Penn State needed a platform that scaled and was highly performant."
+    },
+    {
+      "startTime": "2022-04-26T18:00:00Z",
+      "endTime": "2022-04-26T18:50:00Z",
+      "duration": "P50M",
+      "title": "How to write a killer marketing case study for a Drupal project",
+      "location": "B110-111-112",
+      "link": "https://events.drupal.org/portland2022/sessions/how-write-killer-marketing-case-study-drupal-project",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "Vaish Vijay",
+        "Shash",
+        "Suhita Ghatak"
+      ],
+      "full_description": "Writing case studies is one of the most effective methods to generate potential leads. It is a herculean task to transform visitors into prospects, without case studies that ooze inspiration through thought-provoking content."
+    },
+    {
+      "startTime": "2022-04-26T18:00:00Z",
+      "endTime": "2022-04-26T18:50:00Z",
+      "duration": "P50M",
+      "title": "Let's Do It Live: Setting up all the Development / Devops Tools for a New Drupal Project",
+      "location": "B116",
+      "link": "https://events.drupal.org/portland2022/sessions/lets-do-it-live-setting-all-development-devops-tools-new-drupal-project",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "Mike Madison"
+      ],
+      "full_description": "You know all the buzzwords... Dependency Management, Version Control, Continuous Integration, Virtual Environments. But do you know how to work with all of them? This session will setup all of the necessary technologies for a new Drupal 9 project."
+    },
+    {
+      "startTime": "2022-04-26T18:00:00Z",
+      "endTime": "2022-04-26T18:50:00Z",
+      "duration": "P50M",
+      "title": "Unlock the power of Drupal Webform for your CRM data",
+      "location": "A105",
+      "link": "https://events.drupal.org/portland2022/sessions/unlock-power-drupal-webform-your-crm-data",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "KarinG"
+      ],
+      "full_description": "The Drupal Webform module allows you to build any type of form to collect any type of data. It is one of the most popular and amazing modules within the Drupal ecosystem. Whether you need a simple contact form or a multi-page form containing multiple input types with conditional logic, it is all possible!"
+    },
+    {
+      "startTime": "2022-04-26T18:50:00Z",
+      "endTime": "2022-04-26T20:00:00Z",
+      "duration": "P70M",
+      "title": "Expo Hall",
+      "location": "Expo Hall",
+      "link": "https://events.drupal.org/portland2022/sessions/expo-hall",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ]
+    },
+    {
+      "startTime": "2022-04-26T18:50:00Z",
+      "endTime": "2022-04-26T20:00:00Z",
+      "duration": "P70M",
+      "title": "Lunch",
+      "location": "All Conference",
+      "link": "https://events.drupal.org/portland2022/sessions/lunch-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ]
+    },
+    {
+      "startTime": "2022-04-26T18:50:00Z",
+      "endTime": "2022-04-26T19:40:00Z",
+      "duration": "P50M",
+      "title": "Trade Show Theater Tuesday – 11:50 AM – 1:00 PM",
+      "location": "Expo Hall",
+      "link": "https://events.drupal.org/portland2022/sessions/trade-show-theater-tuesday-%E2%80%93-1150-am-%E2%80%93-100-pm",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "gdemet",
+        "Kevin Quillen"
+      ],
+      "full_description": "• 11:55 AM – 12:05 PM | Lighting Talk, Palantir.net: How to have an argument"
+    },
+    {
+      "startTime": "2022-04-26T20:00:00Z",
+      "endTime": "2022-04-26T20:50:00Z",
+      "duration": "P50M",
+      "title": "A deep dive of the possibilities of layout builder for the site-builder & content editor",
+      "location": "B114-115",
+      "link": "https://events.drupal.org/portland2022/sessions/deep-dive-possibilities-layout-builder-site-builder-content-editor",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "wouters_f",
+        "Wesley De Vrient"
+      ],
+      "full_description": "We'll show how we've built the content editing experience which is available in the Open Source Drupal 9 Rocketship Distribution. See the pictures at https://www.drupal.org/project/dropsolid_rocketship."
+    },
+    {
+      "startTime": "2022-04-26T20:00:00Z",
+      "endTime": "2022-04-26T20:50:00Z",
+      "duration": "P50M",
+      "title": "Building Olivero’s hyper-accessible (and beautiful) navigation from the ground up",
+      "location": "B110-111-112",
+      "link": "https://events.drupal.org/portland2022/sessions/building-olivero%E2%80%99s-hyper-accessible-and-beautiful-navigation-ground",
+      "track": [
+        "user experience, accessibility, & design"
+      ],
+      "speakers": [
+        "mherchel"
+      ],
+      "full_description": "Olivero is the brand new look and feel for the Drupal CMS. Developing this theme carried with it lofty requirements, knowing that it will be used with millions of people and devices during its lifetime."
+    },
+    {
+      "startTime": "2022-04-26T20:00:00Z",
+      "endTime": "2022-04-26T20:50:00Z",
+      "duration": "P50M",
+      "title": "Grow your digital business responsibly and limit carbon emissions",
+      "location": "B116",
+      "link": "https://events.drupal.org/portland2022/sessions/grow-your-digital-business-responsibly-and-limit-carbon-emissions",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "Fabien Potencier, Ori Pekelman"
+      ],
+      "full_description": "In this session, we will discuss the carbon footprint of digital activities with a focus on the cloud and cover the various ways these emissions can be limited. And good news, there are ways to limit our impact on the environment. We will provide an analysis that uncovers:"
+    },
+    {
+      "startTime": "2022-04-26T20:00:00Z",
+      "endTime": "2022-04-26T20:50:00Z",
+      "duration": "P50M",
+      "title": "Movin’ On Up (the stack)",
+      "location": "B117-118-119",
+      "link": "https://events.drupal.org/portland2022/sessions/movin%E2%80%99-stack",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "joshk",
+        "David Strauss"
+      ],
+      "full_description": "Join long-time Drupal community members and Pantheon co-founders David Strauss and Josh Koenig for a behind the scenes look at how Pantheon is building some of their next generation product capabilities leveraging Google Cloud Platform, Fastly Compute@Edge, and more."
+    },
+    {
+      "startTime": "2022-04-26T20:00:00Z",
+      "endTime": "2022-04-26T20:50:00Z",
+      "duration": "P50M",
+      "title": "Optimizing the haystack: Improving findability in content-heavy websites",
+      "location": "A107-108-109",
+      "link": "https://events.drupal.org/portland2022/sessions/optimizing-haystack-improving-findability-content-heavy-websites",
+      "track": [
+        "drupal showcase"
+      ],
+      "speakers": [
+        "Sam Zimmerman",
+        "micheleannj"
+      ],
+      "full_description": "With an ever-growing amount of content on the web and our perpetually shrinking attention spans, website planning and design must increasingly focus on findability. Site visitors want to find the information they need quickly and easily. Low findability is not only frustrating for users, but can also undermine performance goals and the perception of the credibility of a site."
+    },
+    {
+      "startTime": "2022-04-26T20:00:00Z",
+      "endTime": "2022-04-26T20:50:00Z",
+      "duration": "P50M",
+      "title": "Simple secrets to great client relationships",
+      "location": "A106",
+      "link": "https://events.drupal.org/portland2022/sessions/simple-secrets-great-client-relationships",
+      "track": [
+        "leadership, management, & business"
+      ],
+      "speakers": [
+        "LilyBerman"
+      ],
+      "full_description": "If you work with clients on Drupal projects, you’ve likely encountered challenges. Our work is often technical and complex, so it’s difficult to discuss with non-technical clients. Our work is often agile and unpredictable, so we may need to deliver difficult news or deviate from our initial plan. And, great client relationships don’t just magically appear."
+    },
+    {
+      "startTime": "2022-04-26T20:00:00Z",
+      "endTime": "2022-04-26T20:50:00Z",
+      "duration": "P50M",
+      "title": "SimplyTest.me: The Future Built From The Past",
+      "location": "A105",
+      "link": "https://events.drupal.org/portland2022/sessions/simplytestme-future-built-past",
+      "track": [
+        "drupal and open source 101"
+      ],
+      "speakers": [
+        "nerdstein",
+        "volkswagenchick",
+        "mglaman"
+      ],
+      "full_description": "Simplytest.me has now launched a complete rewrite. During this presentation, we will share the history of simplytest.me and the steps taken to revitalize the project. We will highlight how this vision and execution of work has aligned to our values and helps us better achieve our mission. We will review the new architecture of the site and some key improvements made to improve the service."
+    },
+    {
+      "startTime": "2022-04-26T20:50:00Z",
+      "endTime": "2022-04-26T21:30:00Z",
+      "duration": "P40M",
+      "title": "Expo Hall Break",
+      "location": "Expo Hall",
+      "link": "https://events.drupal.org/portland2022/sessions/expo-hall-break-1",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ]
+    },
+    {
+      "startTime": "2022-04-26T20:50:00Z",
+      "endTime": "2022-04-26T21:40:00Z",
+      "duration": "P50M",
+      "title": "Trade Show Theater Tuesday – 1:50 PM – 2:30 PM",
+      "location": "Expo Hall",
+      "link": "https://events.drupal.org/portland2022/sessions/trade-show-theater-tuesday-%E2%80%93-150-pm-%E2%80%93-230-pm",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "codekarate"
+      ],
+      "full_description": "• 1:55 PM – 2:05 PM | Expo Hall Activity - DrupalCon Portland: Mini-Trivia • 2:10 PM – 2:20 PM | Lightning Talk, Gatsby: Gatsby + Drupal Demo o In this lightning talk, you will learn how to build the fastest decoupled Frontend for your Drupal website using Gatsby. This demo will show examples of:  Sourcing your content from your Drupal site"
+    },
+    {
+      "startTime": "2022-04-26T21:30:00Z",
+      "endTime": "2022-04-27T00:30:00Z",
+      "duration": "P180M",
+      "title": "Community Summit",
+      "location": "C123",
+      "link": "https://events.drupal.org/portland2022/sessions/community-summit",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "volkswagenchick",
+        "leslieg",
+        "weekbeforenext",
+        "Drupal Association"
+      ],
+      "full_description": "Join us on Tuesday, April 26 at DrupalCon Portland for a half-day unconference dedicated to exploring the issues that matter most to the Drupal community. What’s an unconference, you ask? It is a loosely structured conference that emphasizes sharing information instead of following a conventionally structured schedule."
+    },
+    {
+      "startTime": "2022-04-26T21:30:00Z",
+      "endTime": "2022-04-27T00:30:00Z",
+      "duration": "P180M",
+      "title": "Government Industry Summit",
+      "location": "B117-118-119",
+      "link": "https://events.drupal.org/portland2022/sessions/government-industry-summit-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "charlesj",
+        "appmangler",
+        "rachelh_design",
+        "akucharski",
+        "DSquaredB",
+        "Drupal Association"
+      ],
+      "full_description": "Are you a federal, state, or local government employee? A private sector employee supporting government? This summit is for you! What will you get by attending?"
+    },
+    {
+      "startTime": "2022-04-26T21:30:00Z",
+      "endTime": "2022-04-27T00:30:00Z",
+      "duration": "P180M",
+      "title": "Healthcare Industry Summit",
+      "location": "A106",
+      "link": "https://events.drupal.org/portland2022/sessions/healthcare-industry-summit-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "timaholt",
+        "philip_stier",
+        "Drupal Association, Kathleen Veneziano"
+      ],
+      "full_description": "The Healthcare Industry Summit at DrupalCon Portland 2022 is your chance to connect with other Drupal users from Pharmaceutical Companies, Hospital Systems, and more, including web developers, content creators, designers, strategists and managers."
+    },
+    {
+      "startTime": "2022-04-26T21:30:00Z",
+      "endTime": "2022-04-27T00:30:00Z",
+      "duration": "P180M",
+      "title": "Higher Education Industry Summit",
+      "location": "B110-111-112",
+      "link": "https://events.drupal.org/portland2022/sessions/higher-education-industry-summit-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "galactus86",
+        "jkealy",
+        "alisonjo315",
+        "karrot",
+        "Drupal Association, Bjorn Thomson, Nate Lamkin"
+      ],
+      "full_description": "The Higher Ed Summit at DrupalCon Portland 2022 is your chance to connect with other Drupal users from universities and colleges, including web developers, content creators, designers, strategists and managers."
+    },
+    {
+      "startTime": "2022-04-26T21:30:00Z",
+      "endTime": "2022-04-27T00:30:00Z",
+      "duration": "P180M",
+      "title": "Non-Profit Industry Summit",
+      "location": "A107-108-109",
+      "link": "https://events.drupal.org/portland2022/sessions/non-profit-industry-summit-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Drupal Association"
+      ],
+      "full_description": "The Non-profit Industry Summit at DrupalCon Portland 2022 is your chance to connect with other Drupal users from the not-for-profit, citizen sector space, including web developers, content creators, designers, strategists, and managers."
+    },
+    {
+      "startTime": "2022-04-26T21:30:00Z",
+      "endTime": "2022-04-27T00:30:00Z",
+      "duration": "P180M",
+      "title": "Training: Component-Based Development with Drupal",
+      "location": "A105",
+      "link": "https://events.drupal.org/portland2022/sessions/training-component-based-development-drupal-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "galactus86",
+        "matt.hood",
+        "zipymonkey",
+        "tekNorah"
+      ],
+      "full_description": "What you can expect from this course Best practices and standards are at the core of this course. This means you will be exposed to the latest trends, processes, and tools used on today's web development to build responsive, accessible, and component-driven Drupal websites."
+    },
+    {
+      "startTime": "2022-04-26T21:30:00Z",
+      "endTime": "2022-04-27T00:30:00Z",
+      "duration": "P180M",
+      "title": "Training: Drupal 7 to Drupal 9 Migration",
+      "location": "B113",
+      "link": "https://events.drupal.org/portland2022/sessions/training-drupal-7-drupal-9-migration-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "dharizza",
+        "franz"
+      ],
+      "full_description": "With Drupal 7 set to reach its end of life in November 2022, now is the perfect time to start planning your migrations. Join this hands-on training to learn:"
+    },
+    {
+      "startTime": "2022-04-26T21:30:00Z",
+      "endTime": "2022-04-27T00:30:00Z",
+      "duration": "P180M",
+      "title": "Training: Introduction to Drupal 9 Module Development",
+      "location": "B116",
+      "link": "https://events.drupal.org/portland2022/sessions/training-introduction-drupal-9-module-development-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "ultimike"
+      ],
+      "full_description": "Module development for Drupal is more powerful than ever with Drupal 9. Object-orientation, the maturity of Drupal's various APIs, Drupal 9's underlying Symfony (and other) components, and the maturity of Drush means that developing for Drupal 9 requires some new knowledge for existing Drupal 7 and PHP developers."
+    },
+    {
+      "startTime": "2022-04-26T21:30:00Z",
+      "endTime": "2022-04-27T00:30:00Z",
+      "duration": "P180M",
+      "title": "Training: Theming - Drupalize.me",
+      "location": "B114-115",
+      "link": "https://events.drupal.org/portland2022/sessions/training-theming-drupalizeme-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "eojthebrave",
+        "blakehall"
+      ],
+      "full_description": "Themes combine HTML, CSS, JavaScript, and Drupal in order to make beautiful websites. Creating truly unique themes requires knowing how to use the Twig template language to manipulate HTML, how to add CSS and JavaScript assets in a way that's compatible with Drupal's caching, all while maintaining the flexibility that Drupal is known for."
+    },
+    {
+      "startTime": "2022-04-27T14:30:00Z",
+      "endTime": "2022-04-28T00:30:00Z",
+      "duration": "P600M",
+      "title": "Registration & Check-in",
+      "location": "Lobby",
+      "link": "https://events.drupal.org/portland2022/sessions/registration-check-1",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "Registration and check-in is located in the Holladay Lobby, inside the Holladay Street entrance of the Oregon Convention Center. All DrupalCon participants need to enter via the Holladay entrance. See the Oregon Convention Center maps here: www.oregoncc.org/en/attend/maps"
+    },
+    {
+      "startTime": "2022-04-27T14:35:00Z",
+      "endTime": "2022-04-28T00:30:00Z",
+      "duration": "P595M",
+      "title": "Non-Denominational Prayer Space",
+      "location": "C127",
+      "link": "https://events.drupal.org/portland2022/sessions/non-denominational-prayer-space-1",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "This room is reserved for those who wish to practice their faith in a quiet and respectful environment. Spiritual texts and prayer rugs are provided. We ask that participants use hushed voices when necessary, but practice silence as much as possible to respect other attendees who may be using the space."
+    },
+    {
+      "startTime": "2022-04-27T14:35:00Z",
+      "endTime": "2022-04-28T00:30:00Z",
+      "duration": "P595M",
+      "title": "Quiet Room",
+      "location": "C126",
+      "link": "https://events.drupal.org/portland2022/sessions/quiet-room-1",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "This room is reserved for those who need space free from interaction with other participants in an environment where they feel free and safe to do so. The quiet rooms are free of conversation and interaction of any kind. They can be used for meditation, journaling, reading, or just silence away from the buzz of the Con."
+    },
+    {
+      "startTime": "2022-04-27T14:35:00Z",
+      "endTime": "2022-04-28T00:30:00Z",
+      "duration": "P595M",
+      "title": "Strategic Initiative Meeting Room",
+      "location": "C128",
+      "link": "https://events.drupal.org/portland2022/sessions/strategic-initiative-meeting-room-1",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "This is a space reserved for core maintainers to have conversations about solving key problems."
+    },
+    {
+      "startTime": "2022-04-27T15:00:00Z",
+      "endTime": "2022-04-28T00:30:00Z",
+      "duration": "P570M",
+      "title": "General Contribution",
+      "location": "Oregon Ballroom 204",
+      "link": "https://events.drupal.org/portland2022/sessions/general-contribution-1",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Drupal Association"
+      ],
+      "full_description": "Come to the General Contribution if you have a bit of experience working with the Drupal issue queue. You can join one of the many groups including documentation, migrate, media, front-end, layout, API-first, workflow, and lots more."
+    },
+    {
+      "startTime": "2022-04-27T15:30:00Z",
+      "endTime": "2022-04-27T16:20:00Z",
+      "duration": "P50M",
+      "title": "Building a GraphQL API - Beyond the basics",
+      "location": "B110-111-112",
+      "link": "https://events.drupal.org/portland2022/sessions/building-graphql-api-beyond-basics",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "Kingdutch"
+      ],
+      "full_description": "Creating a GraphQL API is about more than just exposing your data. To build an API that’s delightful to use for your API consumers you must consider the use cases. Version 4 of the GraphQL module enables you do to so, with the downside that you have to design your entire schema."
+    },
+    {
+      "startTime": "2022-04-27T15:30:00Z",
+      "endTime": "2022-04-27T16:20:00Z",
+      "duration": "P50M",
+      "title": "Building Secure, Compliant Hosting Environments",
+      "location": "A107-108-109",
+      "link": "https://events.drupal.org/portland2022/sessions/building-secure-compliant-hosting-environments",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "rvtraveller"
+      ],
+      "full_description": "Every day, news reports come out of companies falling victim to ransomware or other cyber attacks. In addition, as Drupal continues to grow, Drupal Site Owners are requiring more and more compliance certifications in order to ensure Drupal is being hosted securely."
+    },
+    {
+      "startTime": "2022-04-27T15:30:00Z",
+      "endTime": "2022-04-27T16:20:00Z",
+      "duration": "P50M",
+      "title": "Building your own DXP - Getting started with Drupal and Mautic",
+      "location": "A106",
+      "link": "https://events.drupal.org/portland2022/sessions/building-your-own-dxp-getting-started-drupal-and-mautic",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "RCheesley",
+        "Nick Veenhof"
+      ],
+      "full_description": "Digital Experience Platform - shortened to DXP - is the latest buzz word in the web industry. Gartner defines it as “an integrated set of core technologies that support the composition, management, delivery and optimization of contextualized digital experiences.”"
+    },
+    {
+      "startTime": "2022-04-27T15:30:00Z",
+      "endTime": "2022-04-27T16:20:00Z",
+      "duration": "P50M",
+      "title": "Drupal Certified Partners + Supporting Partners Roundtable",
+      "location": "Oregon Ballrooms 201-203",
+      "link": "https://events.drupal.org/portland2022/sessions/drupal-certified-partners-supporting-partners-roundtable",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Ashlee Noland"
+      ],
+      "full_description": "Engage with the DA team and learn more about our most recent piloted program; the Drupal Certified Partner Program. This is an elevated level of involvement and support of the Drupal Association and the Drupal Project spun from our current Supporting Partner program."
+    },
+    {
+      "startTime": "2022-04-27T15:30:00Z",
+      "endTime": "2022-04-27T16:20:00Z",
+      "duration": "P50M",
+      "title": "Getting ready for Drupal 10",
+      "location": "B116",
+      "link": "https://events.drupal.org/portland2022/sessions/getting-ready-drupal-10",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "mglaman",
+        "Gábor Hojtsy"
+      ],
+      "full_description": "Drupal 10 is planned to be released later this year. (At the time of submission of this session it could be as early as June 2022). In this talk, Gábor will walk you through the state of Drupal 10, the key new components and changes. Then Matt will dive into the tools to use to move from Drupal 9 to 10, including discovering changes required for PHP 8 compatibility."
+    },
+    {
+      "startTime": "2022-04-27T15:30:00Z",
+      "endTime": "2022-04-27T16:20:00Z",
+      "duration": "P50M",
+      "title": "How Math, Science, and Star Trek Explain the Value of Team Diversity",
+      "location": "A105",
+      "link": "https://events.drupal.org/portland2022/sessions/how-math-science-and-star-trek-explain-value-team-diversity",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "fmitchell"
+      ],
+      "full_description": "The greatest asset of open source software is the ability to fork and improve. When it comes to tech culture, are we accepting all pull requests? Can we be better? If so, how? To the science! This session explores the mathematical algorithms and scientific studies describing the advantage of diverse teams."
+    },
+    {
+      "startTime": "2022-04-27T15:30:00Z",
+      "endTime": "2022-04-27T16:20:00Z",
+      "duration": "P50M",
+      "title": "State of JSON:API",
+      "location": "B117-118-119",
+      "link": "https://events.drupal.org/portland2022/sessions/state-jsonapi",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "bbrala"
+      ],
+      "full_description": "2 years ago JSON:API was released in Core, this was a huge milestone for Drupal. The focus on JSON:API is what is enabling Drupal to become a project beyond PHP, and is enabling more JavaScript components and Decoupled Drupal sites."
+    },
+    {
+      "startTime": "2022-04-27T15:30:00Z",
+      "endTime": "2022-04-27T16:20:00Z",
+      "duration": "P50M",
+      "title": "The rise of self-service and the digital front door",
+      "location": "B114-115",
+      "link": "https://events.drupal.org/portland2022/sessions/rise-self-service-and-digital-front-door",
+      "track": [
+        "leadership, management, & business"
+      ],
+      "speakers": [
+        "Stacey Febbraro",
+        "Carolina Anthony, Daphne Tam"
+      ],
+      "full_description": "Drupal is used by hundreds of healthcare systems, including many of the most prominent and visible brands. Self-service is now crucial to empower patients as we navigate an ongoing pandemic and can save your organization time and effort."
+    },
+    {
+      "startTime": "2022-04-27T16:20:00Z",
+      "endTime": "2022-04-27T16:45:00Z",
+      "duration": "P25M",
+      "title": "Transition Break",
+      "location": "All Conference",
+      "link": "https://events.drupal.org/portland2022/sessions/transition-break-1",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ]
+    },
+    {
+      "startTime": "2022-04-27T16:45:00Z",
+      "endTime": "2022-04-27T17:45:00Z",
+      "duration": "P60M",
+      "title": "Driesnote",
+      "location": "Oregon Ballrooms 201-203",
+      "link": "https://events.drupal.org/portland2022/sessions/driesnote",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Dries"
+      ],
+      "full_description": "During his keynote - a.k.a. Driesnote - Dries will give one of his engaging keynotes about the state of the Drupal project. Belgium-born Drupal founder Dries Buytaert is a pioneer in the open source web publishing and digital experience platform space."
+    },
+    {
+      "startTime": "2022-04-27T17:45:00Z",
+      "endTime": "2022-04-27T18:00:00Z",
+      "duration": "P15M",
+      "title": "Transition Break",
+      "location": "All Conference",
+      "link": "https://events.drupal.org/portland2022/sessions/transition-break-2",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ]
+    },
+    {
+      "startTime": "2022-04-27T18:00:00Z",
+      "endTime": "2022-04-27T18:50:00Z",
+      "duration": "P50M",
+      "title": "Cross-platform apps and PWAs powered by Drupal, for everyone.",
+      "location": "B116",
+      "link": "https://events.drupal.org/portland2022/sessions/cross-platform-apps-and-pwas-powered-drupal-everyone",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "AlexBorsody",
+        "wil2091"
+      ],
+      "full_description": "Every organization, every budget, and every timeline can be a perfect case for an app powered by Drupal. Published on the app store and indistinguishable with as good or better customer experience as 100%, and best of all on time and on budget."
+    },
+    {
+      "startTime": "2022-04-27T18:00:00Z",
+      "endTime": "2022-04-27T18:50:00Z",
+      "duration": "P50M",
+      "title": "Driesnote Q & A",
+      "location": "Oregon Ballrooms 201-203",
+      "link": "https://events.drupal.org/portland2022/sessions/driesnote-q",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Dries",
+        "hestenet",
+        "Angie Sabin"
+      ],
+      "full_description": "Continue the Driesnote conversation with questions for Drupal Project Founder, Dries Buytaert, and Drupal Association Executive Director, Heather Rocker."
+    },
+    {
+      "startTime": "2022-04-27T18:00:00Z",
+      "endTime": "2022-04-27T18:50:00Z",
+      "duration": "P50M",
+      "title": "Drupal Community Events: How we've weathered the storm and what's on the other side?",
+      "location": "A107-108-109",
+      "link": "https://events.drupal.org/portland2022/sessions/drupal-community-events-how-weve-weathered-storm-and-whats-other-side",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "froboy",
+        "MatthewS",
+        "leslieg",
+        "weekbeforenext"
+      ],
+      "full_description": "Gathering our friends, colleagues, and community members together for collaborative learning experiences has been one of the primary ways of growing the Drupal Community throughout our 20 years. The pandemic took a toll on these volunteer-led events, but we've learned and grown through it all."
+    },
+    {
+      "startTime": "2022-04-27T18:00:00Z",
+      "endTime": "2022-04-27T18:50:00Z",
+      "duration": "P50M",
+      "title": "Drupal for Designers: Speaking each other's language",
+      "location": "B114-115",
+      "link": "https://events.drupal.org/portland2022/sessions/drupal-designers-speaking-each-others-language",
+      "track": [
+        "drupal and open source 101"
+      ],
+      "speakers": [
+        "Mayeda Khan"
+      ],
+      "full_description": "As a developer, have you ever received designs for a Drupal site that make no sense or need to be hard coded due to the lack of a contributed module? As a designer, have you ever gotten lost in the jargon of it all? Do both teams ever felt the need for better site planning before embarking on a Drupal-based project?"
+    },
+    {
+      "startTime": "2022-04-27T18:00:00Z",
+      "endTime": "2022-04-27T18:50:00Z",
+      "duration": "P50M",
+      "title": "Getting Ready for Automatic Updates in Drupal core",
+      "location": "A106",
+      "link": "https://events.drupal.org/portland2022/sessions/getting-ready-automatic-updates-drupal-core",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "tedbow"
+      ],
+      "full_description": "Too many Drupal sites are not being kept up to date and running versions of Drupal core that have known security issues. Do you know if all your Drupal sites are on secure versions of Drupal core?"
+    },
+    {
+      "startTime": "2022-04-27T18:00:00Z",
+      "endTime": "2022-04-27T18:50:00Z",
+      "duration": "P50M",
+      "title": "Personalize your path to conversion",
+      "location": "A105",
+      "link": "https://events.drupal.org/portland2022/sessions/personalize-your-path-conversion",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "Mindy League",
+        "gantal",
+        "G Antal"
+      ],
+      "full_description": "Your site’s visitors have different needs and will ultimately take different journeys. Using Drupal personalization to keep the user’s journey relevant to their inquiry helps drive more conversions while having distinct advantages. Providing a personalized experience within Drupal can result in more conversions for your organization and a more satisfying user experience."
+    },
+    {
+      "startTime": "2022-04-27T18:00:00Z",
+      "endTime": "2022-04-27T18:50:00Z",
+      "duration": "P50M",
+      "title": "Understanding Drupal's Form API",
+      "location": "B117-118-119",
+      "link": "https://events.drupal.org/portland2022/sessions/understanding-drupals-form-api",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "jrockowitz"
+      ],
+      "full_description": "Building a form is one of the easiest first things to learn as a new Drupal developer but one of the most challenging things to master as a Drupal expert."
+    },
+    {
+      "startTime": "2022-04-27T18:50:00Z",
+      "endTime": "2022-04-27T20:00:00Z",
+      "duration": "P70M",
+      "title": "Expo Hall",
+      "location": "Expo Hall",
+      "link": "https://events.drupal.org/portland2022/sessions/expo-hall-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ]
+    },
+    {
+      "startTime": "2022-04-27T18:50:00Z",
+      "endTime": "2022-04-27T20:00:00Z",
+      "duration": "P70M",
+      "title": "Lunch",
+      "location": "All Conference",
+      "link": "https://events.drupal.org/portland2022/sessions/lunch-1",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ]
+    },
+    {
+      "startTime": "2022-04-27T18:50:00Z",
+      "endTime": "2022-04-27T19:40:00Z",
+      "duration": "P50M",
+      "title": "Trade Show Theater Wednesday – 11:50 AM – 1:00 PM",
+      "location": "Expo Hall",
+      "link": "https://events.drupal.org/portland2022/sessions/trade-show-theater-wednesday-%E2%80%93-1150-am-%E2%80%93-100-pm",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "jemond",
+        "pixelite"
+      ],
+      "full_description": "• 11:55 AM – 12:05 PM | Lightning Talk, Evolving Web: The live usability testing challenge"
+    },
+    {
+      "startTime": "2022-04-27T19:00:00Z",
+      "endTime": "2022-04-27T20:00:00Z",
+      "duration": "P60M",
+      "title": "Women in Drupal Luncheon",
+      "location": "C120-121-122",
+      "link": "https://events.drupal.org/portland2022/sessions/women-drupal-luncheon",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "Jackie Wirz"
+      ],
+      "full_description": "Women—particularly women who have been further marginalized due to racism, homophobia, transphobia, ableism, classism, and other forms of discrimination—are underrepresented and often unheard in tech. A strong network and support system can be key to our professional success as well as our mental health."
+    },
+    {
+      "startTime": "2022-04-27T20:00:00Z",
+      "endTime": "2022-04-27T20:50:00Z",
+      "duration": "P50M",
+      "title": "Building for the Big Game",
+      "location": "Oregon Ballrooms 201-203",
+      "link": "https://events.drupal.org/portland2022/sessions/building-big-game",
+      "track": [
+        "drupal showcase"
+      ],
+      "speakers": [
+        "ekbecker",
+        "Chaney Kourouniotis, Jenifer Snow"
+      ],
+      "full_description": "Could your web platform handle a surge of engagement stemming from one of the world’s most watched TV programs?"
+    },
+    {
+      "startTime": "2022-04-27T20:00:00Z",
+      "endTime": "2022-04-27T20:50:00Z",
+      "duration": "P50M",
+      "title": "CKEditor 5 in Drupal 10: what is there to be excited about?",
+      "location": "A106",
+      "link": "https://events.drupal.org/portland2022/sessions/ckeditor-5-drupal-10-what-there-be-excited-about",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "dawidurbanski"
+      ],
+      "full_description": "There's _so_ much that's new and to be excited about in https://ckeditor.com/ckeditor-5/! It doesn't just look better, it *works* better: way smoother UX, collaborative editing, browser-specific bugs are a thing of the past thanks to the new architecture, it works great on narrow viewports (aka mobile devices), and so much more."
+    },
+    {
+      "startTime": "2022-04-27T20:00:00Z",
+      "endTime": "2022-04-27T20:50:00Z",
+      "duration": "P50M",
+      "title": "Introducing the surprising drupalsearch.org",
+      "location": "B117-118-119",
+      "link": "https://events.drupal.org/portland2022/sessions/introducing-surprising-drupalsearchorg",
+      "track": [
+        "drupal showcase"
+      ],
+      "speakers": [
+        "maggon"
+      ],
+      "full_description": "In this session, Sameer Maggon will introduce a surprising site: drupalsearch.org that SearchStax is presenting to the Drupal community. Surprising because of the quality of the search results, but also surprising because of how modest the effort was to build this site."
+    },
+    {
+      "startTime": "2022-04-27T20:00:00Z",
+      "endTime": "2022-04-27T20:50:00Z",
+      "duration": "P50M",
+      "title": "Living the UX: When a Web Developer develops a disability",
+      "location": "A105",
+      "link": "https://events.drupal.org/portland2022/sessions/living-ux-when-web-developer-develops-disability",
+      "track": [
+        "user experience, accessibility, & design"
+      ],
+      "speakers": [
+        "alyssapanetta"
+      ],
+      "full_description": "I had been designing and developing websites for over twenty years when I learned that I had been developing a slow-growing brain tumor most of my life. After my surgery, radiation, and chemotherapy, I slowly got back to the computer, learning to use assistive technology. I quickly realized there is no better way to get to know a user experience than living it."
+    },
+    {
+      "startTime": "2022-04-27T20:00:00Z",
+      "endTime": "2022-04-27T20:50:00Z",
+      "duration": "P50M",
+      "title": "Neurodivergence and Tech - My Metamorphosis",
+      "location": "A107-108-109",
+      "link": "https://events.drupal.org/portland2022/sessions/neurodivergence-and-tech-my-metamorphosis",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "MatthewS"
+      ],
+      "full_description": "In Amsterdam 2019, I shared my life's journey as a Neurodivergent Tech Professional along with nascent insights I had that were forming at the time. As I've continued my exploration and have embraced this identity, I have had an increasing understanding of the impact these differences have had on how I view the world, how I work, and how I approach relationships."
+    },
+    {
+      "startTime": "2022-04-27T20:00:00Z",
+      "endTime": "2022-04-27T20:50:00Z",
+      "duration": "P50M",
+      "title": "Non-Code Contribution: Using your passion and skills to power open source.",
+      "location": "B110-111-112",
+      "link": "https://events.drupal.org/portland2022/sessions/non-code-contribution-using-your-passion-and-skills-power-open-source",
+      "track": [
+        "drupal and open source 101"
+      ],
+      "speakers": [
+        "johnpicozzi"
+      ],
+      "full_description": "Open-source contribution comes in many shapes and sizes. While code is the most obvious contribution, there are many ways to help an open-source project and its community. Non-Code contribution may be your avenue to make a difference. Share your passions and skills with the community to help your favorite projects succeed."
+    },
+    {
+      "startTime": "2022-04-27T20:00:00Z",
+      "endTime": "2022-04-27T20:50:00Z",
+      "duration": "P50M",
+      "title": "Rapid Drupal Development: Building at Scale with Design Systems",
+      "location": "B116",
+      "link": "https://events.drupal.org/portland2022/sessions/rapid-drupal-development-building-scale-design-systems",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "drupalninja99"
+      ],
+      "full_description": "Kicking off a new website project is exciting, but the many steps involved to get to the final product might make you pause. Incorporating design systems into the overall process creates more efficient workflows and presents many advantages for both developers and marketers."
+    },
+    {
+      "startTime": "2022-04-27T20:00:00Z",
+      "endTime": "2022-04-27T20:50:00Z",
+      "duration": "P50M",
+      "title": "UNICEF: Lessons learned from our digital transformation six years in",
+      "location": "B114-115",
+      "link": "https://events.drupal.org/portland2022/sessions/unicef-lessons-learned-our-digital-transformation-six-years",
+      "track": [
+        "drupal showcase"
+      ],
+      "speakers": [
+        "Sam Zimmerman",
+        "dennisyuen"
+      ],
+      "full_description": "UNICEF works in the world’s toughest places to reach the most disadvantaged children and to protect the rights of every child, everywhere. UNICEF works in more than 190 countries and territories; however, our federated structure is decentralized, with capabilities and resources varying widely across countries."
+    },
+    {
+      "startTime": "2022-04-27T20:50:00Z",
+      "endTime": "2022-04-27T21:30:00Z",
+      "duration": "P40M",
+      "title": "Expo Hall Break",
+      "location": "Expo Hall",
+      "link": "https://events.drupal.org/portland2022/sessions/expo-hall-break-2",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ]
+    },
+    {
+      "startTime": "2022-04-27T20:50:00Z",
+      "endTime": "2022-04-27T21:40:00Z",
+      "duration": "P50M",
+      "title": "Trade Show Theater Wednesday - 1:50 PM - 2:30 PM",
+      "location": "Expo Hall",
+      "link": "https://events.drupal.org/portland2022/sessions/trade-show-theater-wednesday-150-pm-230-pm",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "No Speaker Yet"
+      ],
+      "full_description": "• 1:55 PM – 2:05 PM | Expo Hall Activity – In Kahoot quiz with trivia about Portland and Drupal • 2:10 PM – 2:20 PM | Expo Hall Activity – Drupal Academy of Magic: Card Tricks with Bounteous Triple Certified Drupal Expert"
+    },
+    {
+      "startTime": "2022-04-27T21:30:00Z",
+      "endTime": "2022-04-28T00:30:00Z",
+      "duration": "P180M",
+      "title": "Birds of a Feather Sessions",
+      "location": "C123",
+      "link": "https://events.drupal.org/portland2022/sessions/birds-feather-sessions-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Drupal Association"
+      ],
+      "full_description": "Informal, small-group discussions where you’ll collaborate to solve problems, exchange information, share best practices, and build your network. Check out the white board on-site for your time slot if you submitted a topic ahead of the event! Ad hoc sessions are encouraged."
+    },
+    {
+      "startTime": "2022-04-27T21:30:00Z",
+      "endTime": "2022-04-27T23:00:00Z",
+      "duration": "P90M",
+      "title": "First Time Contributor Workshop",
+      "location": "C124",
+      "link": "https://events.drupal.org/portland2022/sessions/first-time-contributor-workshop",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Drupal Association"
+      ],
+      "full_description": "Get up to speed with community tools: Drupal.org, issue queues, communication channels, and if needed, installing Drupal 9 locally. Our mentors are excited to get you ready to tackle real issues!"
+    },
+    {
+      "startTime": "2022-04-27T21:30:00Z",
+      "endTime": "2022-04-28T00:30:00Z",
+      "duration": "P180M",
+      "title": "Mentored Contribution",
+      "location": "C120-121-122",
+      "link": "https://events.drupal.org/portland2022/sessions/mentored-contribution",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Drupal Association"
+      ],
+      "full_description": "Why come: If you're like most Drupal users, you've been telling yourself for months that you should start contributing to Drupal core. This event is your chance to get started with in-person training and mentoring from friendly, experienced core contributors."
+    },
+    {
+      "startTime": "2022-04-27T21:30:00Z",
+      "endTime": "2022-04-28T00:30:00Z",
+      "duration": "P180M",
+      "title": "Migration Assistant",
+      "location": "B114-115",
+      "link": "https://events.drupal.org/portland2022/sessions/migration-assistant",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Drupal Association"
+      ],
+      "full_description": "This is a dedicated space for anyone in the Drupal community who needs assistance in all things migration. With more than one version of Drupal reaching their end-of-life, the Migration Assistant space is here to help you make the transition. There will be a strong group of Migration Mentors to help you troubleshoot, create action plans, and answer your specific migration questions."
+    },
+    {
+      "startTime": "2022-04-28T00:00:00Z",
+      "endTime": "2022-04-28T00:30:00Z",
+      "duration": "P30M",
+      "title": "Mindful Meditation with Insightful Culture",
+      "location": "G129-G130",
+      "link": "https://events.drupal.org/portland2022/sessions/mindful-meditation-insightful-culture",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "Decompress from the hustle and bustle of the conference with mindful meditation! Hosted by Dori Kelner from Insightful Culture."
+    },
+    {
+      "startTime": "2022-04-28T14:30:00Z",
+      "endTime": "2022-04-29T00:30:00Z",
+      "duration": "P600M",
+      "title": "Registration & Check-in",
+      "location": "Lobby",
+      "link": "https://events.drupal.org/portland2022/sessions/registration-check-2",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "Registration and check-in is located in the Holladay Lobby, inside the Holladay Street entrance of the Oregon Convention Center. All DrupalCon participants need to enter via the Holladay entrance. See the Oregon Convention Center maps here: www.oregoncc.org/en/attend/maps"
+    },
+    {
+      "startTime": "2022-04-28T14:35:00Z",
+      "endTime": "2022-04-29T00:30:00Z",
+      "duration": "P595M",
+      "title": "Non-Denominational Prayer Space",
+      "location": "C127",
+      "link": "https://events.drupal.org/portland2022/sessions/non-denominational-prayer-space-2",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "This room is reserved for those who wish to practice their faith in a quiet and respectful environment. Spiritual texts and prayer rugs are provided. We ask that participants use hushed voices when necessary, but practice silence as much as possible to respect other attendees who may be using the space."
+    },
+    {
+      "startTime": "2022-04-28T14:35:00Z",
+      "endTime": "2022-04-29T00:30:00Z",
+      "duration": "P595M",
+      "title": "Quiet Room",
+      "location": "C126",
+      "link": "https://events.drupal.org/portland2022/sessions/quiet-room-2",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "This room is reserved for those who need space free from interaction with other participants in an environment where they feel free and safe to do so. The quiet rooms are free of conversation and interaction of any kind. They can be used for meditation, journaling, reading, or just silence away from the buzz of the Con."
+    },
+    {
+      "startTime": "2022-04-28T14:35:00Z",
+      "endTime": "2022-04-29T00:30:00Z",
+      "duration": "P595M",
+      "title": "Strategic Initiative Meeting Room",
+      "location": "C128",
+      "link": "https://events.drupal.org/portland2022/sessions/strategic-initiative-meeting-room-2",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "This is a space reserved for core maintainers to have conversations about solving key problems."
+    },
+    {
+      "startTime": "2022-04-28T15:00:00Z",
+      "endTime": "2022-04-29T00:30:00Z",
+      "duration": "P570M",
+      "title": "General Contribution",
+      "location": "Oregon Ballroom 204",
+      "link": "https://events.drupal.org/portland2022/sessions/general-contribution-2",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Drupal Association"
+      ],
+      "full_description": "Come to the General Contribution if you have a bit of experience working with the Drupal issue queue. You can join one of the many groups including documentation, migrate, media, front-end, layout, API-first, workflow, and lots more."
+    },
+    {
+      "startTime": "2022-04-28T15:00:00Z",
+      "endTime": "2022-04-28T15:30:00Z",
+      "duration": "P30M",
+      "title": "Mindful Meditation with Insightful Culture",
+      "location": "G129-G130",
+      "link": "https://events.drupal.org/portland2022/sessions/mindful-meditation-insightful-culture-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "Decompress from the hustle and bustle of the conference with mindful meditation! Hosted by Dori Kelner from Insightful Culture."
+    },
+    {
+      "startTime": "2022-04-28T15:30:00Z",
+      "endTime": "2022-04-28T16:20:00Z",
+      "duration": "P50M",
+      "title": "Designing Drupal Experiences with Figma",
+      "location": "B110-111-112",
+      "link": "https://events.drupal.org/portland2022/sessions/designing-drupal-experiences-figma",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "mattjcurtin"
+      ],
+      "full_description": "Figma, a web-based design prototyping tool, is growing in popularity across the design and Drupal community. Featuring interactive components, dynamic asset libraries, and powerful collaboration tools, Figma is becoming the design tool of choice for designers establishing design systems and holistic digital experiences for the Drupal platform."
+    },
+    {
+      "startTime": "2022-04-28T15:30:00Z",
+      "endTime": "2022-04-28T16:20:00Z",
+      "duration": "P50M",
+      "title": "Drupal State and the Need for a JavaScript SDK",
+      "location": "B114-115",
+      "link": "https://events.drupal.org/portland2022/sessions/drupal-state-and-need-javascript-sdk",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "brianperry"
+      ],
+      "full_description": "With JSON:API, Drupal offers an extremely low friction approach to make content from Drupal available to any consuming application. However, Drupal doesn't currently offer any tools to make consuming this data in a JavaScript front end just as frictionless."
+    },
+    {
+      "startTime": "2022-04-28T15:30:00Z",
+      "endTime": "2022-04-28T16:20:00Z",
+      "duration": "P50M",
+      "title": "Inequity and isolation: inclusive practices for remote teams",
+      "location": "A106",
+      "link": "https://events.drupal.org/portland2022/sessions/inequity-and-isolation-inclusive-practices-remote-teams",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "NineLivesBlackCat"
+      ],
+      "full_description": "While many dream of working from home, shifting to a fully-remote team has been harder on some groups of the global population than it has been for others. Some jobs are returning to the office, but others are staying out of the office altogether. This can have a profound impact on the lives of underrepresented people in the workplace."
+    },
+    {
+      "startTime": "2022-04-28T15:30:00Z",
+      "endTime": "2022-04-28T16:20:00Z",
+      "duration": "P50M",
+      "title": "Open Personalization with Apache Unomi & Mautic workshop",
+      "location": "Oregon Ballrooms 201-203",
+      "link": "https://events.drupal.org/portland2022/sessions/open-personalization-apache-unomi-mautic-workshop",
+      "track": [
+        "user experience, accessibility, & design"
+      ],
+      "speakers": [
+        "wouters_f",
+        "Wesley De Vrient"
+      ],
+      "full_description": "Personalization is a hot topic, but in the era of consent, privacy and GDPR it may seem it is no longer acceptable to do any form of personalization. Personalization doesn't necessarily have to be this evil non-transparent tracker without any advantage to you as an end-user."
+    },
+    {
+      "startTime": "2022-04-28T15:30:00Z",
+      "endTime": "2022-04-28T16:20:00Z",
+      "duration": "P50M",
+      "title": "Plugins to the rescue! Decouple your code without losing sleep",
+      "location": "A105",
+      "link": "https://events.drupal.org/portland2022/sessions/plugins-rescue-decouple-your-code-without-losing-sleep",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "antiorario",
+        "hlopez"
+      ],
+      "full_description": "Have you ever wondered how to contribute to Drupal, but your logic is quite tied to your actual site? Are you a maintainer of a contrib module and you are looking to provide extension points to site devs or other contrib devs? Welcome to the world of plugins."
+    },
+    {
+      "startTime": "2022-04-28T15:30:00Z",
+      "endTime": "2022-04-28T16:20:00Z",
+      "duration": "P50M",
+      "title": "Unlocking Personalization with Drupal",
+      "location": "B116",
+      "link": "https://events.drupal.org/portland2022/sessions/unlocking-personalization-drupal",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "Mindy League",
+        "Katherine Boller"
+      ],
+      "full_description": "Elevated Third and Comcast will be presenting on how to build your strategy and technology to support personalization with your Drupal website."
+    },
+    {
+      "startTime": "2022-04-28T15:30:00Z",
+      "endTime": "2022-04-28T16:20:00Z",
+      "duration": "P50M",
+      "title": "What is technical strategy and why do you need it?",
+      "location": "A107-108-109",
+      "link": "https://events.drupal.org/portland2022/sessions/what-technical-strategy-and-why-do-you-need-it",
+      "track": [
+        "leadership, management, & business"
+      ],
+      "speakers": [
+        "dalin",
+        "heatherwoz"
+      ],
+      "full_description": "There are two significant changes in the past decade that should prompt us to think differently about tech leadership in web projects: * Websites can now live forever (enabled by Drupal 8, proven by Drupal 9) * We now do a lot more upfront strategy when building a website (organizational strategy, content strategy, UX strategy, etc.)"
+    },
+    {
+      "startTime": "2022-04-28T16:20:00Z",
+      "endTime": "2022-04-28T16:45:00Z",
+      "duration": "P25M",
+      "title": "Transition Break",
+      "location": "All Conference",
+      "link": "https://events.drupal.org/portland2022/sessions/transition-break-3",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ]
+    },
+    {
+      "startTime": "2022-04-28T16:45:00Z",
+      "endTime": "2022-04-28T17:45:00Z",
+      "duration": "P60M",
+      "title": "Keynote Fireside Chat: Let’s Open Source Diversity, Equity and Inclusion",
+      "location": "Oregon Ballrooms 201-203",
+      "link": "https://events.drupal.org/portland2022/sessions/keynote-fireside-chat-let%E2%80%99s-open-source-diversity-equity-and-inclusion",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "Demetris Cheatham, Lauren Maffeo"
+      ],
+      "full_description": "To truly advance diversity, equity and inclusion (DEI), stakeholders from across the entire open source ecosystem must come together transparently and collaboratively as a community. In 2021 we launched All In,an open source community whose mission is to advance DEI through access, community, equity and data."
+    },
+    {
+      "startTime": "2022-04-28T17:45:00Z",
+      "endTime": "2022-04-28T18:00:00Z",
+      "duration": "P15M",
+      "title": "Transition Break",
+      "location": "All Conference",
+      "link": "https://events.drupal.org/portland2022/sessions/transition-break-4",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ]
+    },
+    {
+      "startTime": "2022-04-28T18:00:00Z",
+      "endTime": "2022-04-28T18:50:00Z",
+      "duration": "P50M",
+      "title": "“Request for Partnership” - Redefining the RFP process",
+      "location": "B116",
+      "link": "https://events.drupal.org/portland2022/sessions/%E2%80%9Crequest-partnership%E2%80%9D-redefining-rfp-process",
+      "track": [
+        "drupal and open source 101"
+      ],
+      "speakers": [
+        "John Tran, Bjorn Thomson"
+      ],
+      "full_description": "Preparing an RFP can be a complex, sometimes painful process that can take months and in some cases, years, of meticulous planning. And after all that careful preparation, it is all too common that the resulting bids include a bewildering range of sometimes-conflicting solutions and prices. Too often, the first RFP is retracted and the process begins again."
+    },
+    {
+      "startTime": "2022-04-28T18:00:00Z",
+      "endTime": "2022-04-28T18:50:00Z",
+      "duration": "P50M",
+      "title": "Continuous optimization by continuous consensus building at MSF USA (Doctors Without Borders)",
+      "location": "A107-108-109",
+      "link": "https://events.drupal.org/portland2022/sessions/continuous-optimization-continuous-consensus-building-msf-usa-doctors-without",
+      "track": [
+        "drupal showcase"
+      ],
+      "speakers": [
+        "Taylor-Darnall",
+        "katiejamison"
+      ],
+      "full_description": "Successful nonprofits aren't built in a vacuum. And neither are their websites. For large organizations with deep journalistic roots like MSF USA (Doctors Without Borders), the website is a communication tool owned by many. Consensus and collaborative problem solving among stakeholders, therefore, is a necessity."
+    },
+    {
+      "startTime": "2022-04-28T18:00:00Z",
+      "endTime": "2022-04-28T18:50:00Z",
+      "duration": "P50M",
+      "title": "Deploying from the year 2053 - The Future of the Web",
+      "location": "A105",
+      "link": "https://events.drupal.org/portland2022/sessions/deploying-year-2053-future-web",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "sugaroverflow",
+        "stevector",
+        "JRastaban"
+      ],
+      "full_description": "--> Incoming Transmission utc_timestamp: 2629456148"
+    },
+    {
+      "startTime": "2022-04-28T18:00:00Z",
+      "endTime": "2022-04-28T18:50:00Z",
+      "duration": "P50M",
+      "title": "How to do a kickass portfolio discovery remotely",
+      "location": "A106",
+      "link": "https://events.drupal.org/portland2022/sessions/how-do-kickass-portfolio-discovery-remotely",
+      "track": [
+        "leadership, management, & business"
+      ],
+      "speakers": [
+        "rupamistry27",
+        "Anubhav Gupta"
+      ],
+      "full_description": "According to Microsoft work trend index, 66% of employers are redesigning their workplace to accommodate hybrid work arrangement. Tech giants like Adobe, Twitter, Spotify have already made the switch. Although there are methods to foster good team relations and create an environment for remote product discovery, product management can be very tricky in a remote-work setting."
+    },
+    {
+      "startTime": "2022-04-28T18:00:00Z",
+      "endTime": "2022-04-28T18:50:00Z",
+      "duration": "P50M",
+      "title": "Marketing Meets Privacy: What You Need to Know",
+      "location": "B114-115",
+      "link": "https://events.drupal.org/portland2022/sessions/marketing-meets-privacy-what-you-need-know",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "_doyle_"
+      ],
+      "full_description": "Privacy legislation is rapidly being signed throughout the United States and keeping up with the new laws, regulations, and policies can be a challenge for web and marketing teams. To make it more confusing, these laws are being passed at the state level, with rules and regulations that vary by state."
+    },
+    {
+      "startTime": "2022-04-28T18:00:00Z",
+      "endTime": "2022-04-28T18:50:00Z",
+      "duration": "P50M",
+      "title": "Progressive Enhancements with VueJS widgets",
+      "location": "B110-111-112",
+      "link": "https://events.drupal.org/portland2022/sessions/progressive-enhancements-vuejs-widgets",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "freelock"
+      ],
+      "full_description": "It's no longer a battle between Drupal and WordPress. Today, it's React vs Vue vs Svelte vs Angular vs (insert your other favorite front-end framework here). The back end CMS is becoming an afterthought. Or is it?"
+    },
+    {
+      "startTime": "2022-04-28T18:00:00Z",
+      "endTime": "2022-04-28T18:50:00Z",
+      "duration": "P50M",
+      "title": "The good, the bad, the documentation: how to craft effective documentation",
+      "location": "Oregon Ballrooms 201-203",
+      "link": "https://events.drupal.org/portland2022/sessions/good-bad-documentation-how-craft-effective-documentation",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "jldust"
+      ],
+      "full_description": "How many times have you picked up a project and not been able to understand what is going on or why something was set a specific way; for me it's been more times than I care to count. Documentation can seem like an overwhelming task when working on a project, either there isn’t enough time allocated to accurately write some or what is there doesn’t actually make sense."
+    },
+    {
+      "startTime": "2022-04-28T18:50:00Z",
+      "endTime": "2022-04-28T20:00:00Z",
+      "duration": "P70M",
+      "title": "Expo Hall",
+      "location": "Expo Hall",
+      "link": "https://events.drupal.org/portland2022/sessions/expo-hall-1",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ]
+    },
+    {
+      "startTime": "2022-04-28T18:50:00Z",
+      "endTime": "2022-04-28T20:00:00Z",
+      "duration": "P70M",
+      "title": "Lunch",
+      "location": "All Conference",
+      "link": "https://events.drupal.org/portland2022/sessions/lunch-2",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ]
+    },
+    {
+      "startTime": "2022-04-28T18:50:00Z",
+      "endTime": "2022-04-28T19:40:00Z",
+      "duration": "P50M",
+      "title": "Trade Show Theater Thursday - 11:50 PM - 1:00 PM",
+      "location": "Expo Hall",
+      "link": "https://events.drupal.org/portland2022/sessions/trade-show-theater-thursday-1150-pm-100-pm",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Andrew Gordon"
+      ],
+      "full_description": "• 11:55 AM – 12:05 PM | Expo Hall Activity – Take a break from the conference and pump yourself up with some affirmations! • 12:10 PM – 12:20 PM Expo Hall Activity – Get to know your fellow attendees before the end of DrupalCon by sharing bucket list items with the group"
+    },
+    {
+      "startTime": "2022-04-28T20:00:00Z",
+      "endTime": "2022-04-28T20:50:00Z",
+      "duration": "P50M",
+      "title": "Accelerating Drupal Commerce Adoption through a new Commerce Kickstart",
+      "location": "B114-115",
+      "link": "https://events.drupal.org/portland2022/sessions/accelerating-drupal-commerce-adoption-through-new-commerce-kickstart",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "rszrama"
+      ],
+      "full_description": "Commerce Kickstart 2.x was the most popular Drupal distribution ever created, achieving an install base of over 10,000 sites during the Drupal 7 lifecycle. It gave evaluators a complete, out of the box demo store to explore, and it also served as the foundation for countless stores - some of which grew to sell millions of orders!"
+    },
+    {
+      "startTime": "2022-04-28T20:00:00Z",
+      "endTime": "2022-04-28T20:50:00Z",
+      "duration": "P50M",
+      "title": "Design Systems and Layout Builder: Building consistency and collaboration between designers, develop",
+      "location": "A105",
+      "link": "https://events.drupal.org/portland2022/sessions/design-systems-and-layout-builder-building-consistency-and-collaboration",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "jlockhart",
+        "elly"
+      ],
+      "full_description": "Originally it was just content on a page, then it was in blocks, then it was inside paragraphs inside a page, and now it’s back to blocks inside of layouts inside of sections inside of a page. Confused yet? Great!"
+    },
+    {
+      "startTime": "2022-04-28T20:00:00Z",
+      "endTime": "2022-04-28T20:50:00Z",
+      "duration": "P50M",
+      "title": "Documentation as a deliverable: the business case for documentation",
+      "location": "A106",
+      "link": "https://events.drupal.org/portland2022/sessions/documentation-deliverable-business-case-documentation",
+      "track": [
+        "leadership, management, & business"
+      ],
+      "speakers": [
+        "aburke626"
+      ],
+      "full_description": "It’s no secret that documentation is often ignored, overlooked, or simply incomplete when it comes to many projects. Despite how essential it is, those working on the project often aren’t given the bandwidth to complete the documentation, as it isn’t regarded as being as critical as the code."
+    },
+    {
+      "startTime": "2022-04-28T20:00:00Z",
+      "endTime": "2022-04-28T20:50:00Z",
+      "duration": "P50M",
+      "title": "Lifting the Veil on AAA Compliant Builds: The Realities of Conformance and How to Navigate Them",
+      "location": "Oregon Ballrooms 201-203",
+      "link": "https://events.drupal.org/portland2022/sessions/lifting-veil-aaa-compliant-builds-realities-conformance-and-how-navigate-them",
+      "track": [
+        "user experience, accessibility, & design"
+      ],
+      "speakers": [
+        "ScottyInSpector"
+      ],
+      "full_description": "AAA compliance - you might have heard of the standard, talked about it, or even seen an example of a fully AAA compliant Drupal build out in the wild. But what you probably haven't done is try and build a massively complex but also truly dynamic and wonderfully beautiful website in Drupal that is also AAA compliant before."
+    },
+    {
+      "startTime": "2022-04-28T20:00:00Z",
+      "endTime": "2022-04-28T20:50:00Z",
+      "duration": "P50M",
+      "title": "Managing releases using Git tags and semantic versioning",
+      "location": "A107-108-109",
+      "link": "https://events.drupal.org/portland2022/sessions/managing-releases-using-git-tags-and-semantic-versioning",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "mikemiles86"
+      ],
+      "full_description": "From module development to site building releasing code into a production environment is a process teams want to make sure is repeatable, easy to execute and even easier to track."
+    },
+    {
+      "startTime": "2022-04-28T20:00:00Z",
+      "endTime": "2022-04-28T20:50:00Z",
+      "duration": "P50M",
+      "title": "Peace, Love, and Understanding: Empathy as a Personal and Professional Tool",
+      "location": "B110-111-112",
+      "link": "https://events.drupal.org/portland2022/sessions/peace-love-and-understanding-empathy-personal-and-professional-tool",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "Valerie Genzano"
+      ],
+      "full_description": "The world today, now more than ever, can be cold, distant, and harsh. With the massive changes we've endured and experienced over the past few years, sometimes it's hard to get to a level of understanding with people you work with, work for, or lead."
+    },
+    {
+      "startTime": "2022-04-28T20:50:00Z",
+      "endTime": "2022-04-28T21:30:00Z",
+      "duration": "P40M",
+      "title": "Expo Hall Break",
+      "location": "Expo Hall",
+      "link": "https://events.drupal.org/portland2022/sessions/expo-hall-break-3",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ]
+    },
+    {
+      "startTime": "2022-04-28T20:50:00Z",
+      "endTime": "2022-04-28T21:40:00Z",
+      "duration": "P50M",
+      "title": "Trade Show Theater Thursday - 1:50 PM - 2:30 PM",
+      "location": "Expo Hall",
+      "link": "https://events.drupal.org/portland2022/sessions/trade-show-theater-thursday-150-pm-230-pm",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "lerhone"
+      ],
+      "full_description": "• 1:55 PM – 2:05 PM | Lightning Talk, Bounteous: 3 ways to make sure your D7 to D9 migration goes poorly"
+    },
+    {
+      "startTime": "2022-04-28T21:30:00Z",
+      "endTime": "2022-04-29T00:30:00Z",
+      "duration": "P180M",
+      "title": "Birds of a Feather Sessions",
+      "location": "C123",
+      "link": "https://events.drupal.org/portland2022/sessions/birds-feather-sessions-1",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Drupal Association"
+      ],
+      "full_description": "Informal, small-group discussions where you’ll collaborate to solve problems, exchange information, share best practices, and build your network. Check out the white board on-site for your time slot if you submitted a topic ahead of the event! Ad hoc sessions are encouraged."
+    },
+    {
+      "startTime": "2022-04-28T21:30:00Z",
+      "endTime": "2022-04-28T23:00:00Z",
+      "duration": "P90M",
+      "title": "First Time Contributor Workshop",
+      "location": "C124",
+      "link": "https://events.drupal.org/portland2022/sessions/first-time-contributor-workshop-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Drupal Association"
+      ],
+      "full_description": "Get up to speed with community tools: Drupal.org, issue queues, communication channels, and if needed, installing Drupal 9 locally. Our mentors are excited to get you ready to tackle real issues!"
+    },
+    {
+      "startTime": "2022-04-28T21:30:00Z",
+      "endTime": "2022-04-29T00:30:00Z",
+      "duration": "P180M",
+      "title": "Mentored Contribution",
+      "location": "C120-121-122",
+      "link": "https://events.drupal.org/portland2022/sessions/mentored-contribution-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Drupal Association"
+      ],
+      "full_description": "Why come: If you're like most Drupal users, you've been telling yourself for months that you should start contributing to Drupal core. This event is your chance to get started with in-person training and mentoring from friendly, experienced core contributors."
+    },
+    {
+      "startTime": "2022-04-28T21:30:00Z",
+      "endTime": "2022-04-29T00:30:00Z",
+      "duration": "P180M",
+      "title": "Migration Assistant",
+      "location": "B114-115",
+      "link": "https://events.drupal.org/portland2022/sessions/migration-assistant-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Drupal Association"
+      ],
+      "full_description": "This is a dedicated space for anyone in the Drupal community who needs assistance in all things migration. With more than one version of Drupal reaching their end-of-life, the Migration Assistant space is here to help you make the transition. There will be a strong group of Migration Mentors to help you troubleshoot, create action plans, and answer your specific migration questions."
+    },
+    {
+      "startTime": "2022-04-29T01:00:00Z",
+      "endTime": "2022-04-29T03:00:00Z",
+      "duration": "P120M",
+      "title": "Trivia Night!",
+      "location": "Oregon Ballroom 204",
+      "link": "https://events.drupal.org/portland2022/sessions/trivia-night",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "full_description": "Help us close out another successful DrupalCon with a fun night of Drupal trivia, drinks, and good eats. Competitors and casual players alike are welcome! Please note, this event is closed for registered DrupalCon attendees, so please wear your badge. Doors open at 5:45p, where you'll be able to build your team, compete for prizes, and showcase your Drupal knowledge!"
+    }
+  ]
+}

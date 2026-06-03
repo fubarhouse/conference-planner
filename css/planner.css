@@ -1,0 +1,185 @@
+/* ── Planner: editor-tab-button contrast fixes ───────────────────────────
+   Hardcoded colour overrides for editor-tab-button since its colour
+   is not var-based and must be set explicitly per context.
+   Loads after forms.css so cascade order ensures these win without
+   needing increased specificity.
+─────────────────────────────────────────────────────────────────────── */
+
+/* Toolbar mode toggle + summary toggle: dark readable text in light theme only.
+   Dark theme tabs use the forms.css defaults (light text, cyan hover). */
+.theme-light .editor-tab-button { color: #4b5563 }
+.theme-light .editor-tab-button:hover { background: rgba(0,0,0,0.06); color: #111827 }
+.theme-light .editor-tab-row { border-color: rgba(0,0,0,0.12); background: rgba(0,0,0,0.04) }
+
+/* Dark accordion header tab bar: restore light text */
+.editor-meta-accordion > div > .editor-tab-row .editor-tab-button { color: #c8d6e8 }
+.editor-meta-accordion > div > .editor-tab-row .editor-tab-button:hover {
+  background: rgba(255,255,255,0.08); color: #eef6ff;
+}
+.editor-meta-accordion > div > .editor-tab-row {
+  border-color: rgba(135,186,233,0.22); background: rgba(255,255,255,0.04);
+}
+
+/* Summary toggle inside accordion → bg-white card: keep dark text */
+.editor-meta-accordion .bg-white .editor-tab-button { color: #4b5563 }
+.editor-meta-accordion .bg-white .editor-tab-button:hover {
+  background: rgba(0,0,0,0.06); color: #111827;
+}
+.editor-meta-accordion .bg-white .editor-tab-row {
+  border-color: rgba(0,0,0,0.12); background: rgba(0,0,0,0.04);
+}
+/* In dark theme that white card also darkens — restore light tab text */
+.theme-dark .editor-meta-accordion .bg-white .editor-tab-button { color: #c8d6e8 }
+.theme-dark .editor-meta-accordion .bg-white .editor-tab-button:hover {
+  background: rgba(255,255,255,0.08); color: #eef6ff;
+}
+.theme-dark .editor-meta-accordion .bg-white .editor-tab-row {
+  border-color: rgba(135,186,233,0.22); background: rgba(255,255,255,0.04);
+}
+
+/* ── Planner row action buttons ───────────────────────────────────────────
+   Outlined edit/action buttons: subtle cyan accent border + text.
+   Icon-only remove/delete buttons: muted until hover, then warm red.
+─────────────────────────────────────────────────────────────────────── */
+
+.theme-dark .personal-leg-edit-btn,
+.theme-dark .personal-accom-edit-btn,
+.theme-dark .leg-attach-btn,
+.theme-dark .edit-assignment-btn,
+.theme-dark .edit-accommodation-btn,
+.theme-dark .edit-team-member-btn,
+.theme-dark .edit-budget-item-btn,
+.theme-dark .edit-swag-btn,
+.theme-dark .edit-tracked-session-btn,
+.theme-dark .assoc-switch-btn,
+.theme-dark #personalLegAttachBtn,
+.theme-dark #personalLegCreateReceiptBtn,
+.theme-dark #personalLegViewReceiptBtn {
+    border-color: rgba(0, 207, 255, 0.22) !important;
+    color: rgba(0, 207, 255, 0.65) !important;
+}
+.theme-dark .personal-leg-edit-btn:hover,
+.theme-dark .personal-accom-edit-btn:hover,
+.theme-dark .leg-attach-btn:hover,
+.theme-dark .edit-assignment-btn:hover,
+.theme-dark .edit-accommodation-btn:hover,
+.theme-dark .edit-team-member-btn:hover,
+.theme-dark .edit-budget-item-btn:hover,
+.theme-dark .edit-swag-btn:hover,
+.theme-dark .edit-tracked-session-btn:hover,
+.theme-dark .assoc-switch-btn:hover,
+.theme-dark #personalLegAttachBtn:hover,
+.theme-dark #personalLegCreateReceiptBtn:hover,
+.theme-dark #personalLegViewReceiptBtn:hover {
+    background: rgba(0, 207, 255, 0.1) !important;
+    border-color: rgba(0, 207, 255, 0.48) !important;
+    color: #7dd8ff !important;
+}
+
+.theme-dark .personal-leg-remove-btn,
+.theme-dark .personal-accom-remove-btn,
+.theme-dark .remove-assignment-btn,
+.theme-dark .delete-accommodation-btn,
+.theme-dark .delete-contact-btn,
+.theme-dark .delete-task-btn,
+.theme-dark .delete-receipt-btn,
+.theme-dark .delete-doc-btn,
+.theme-dark .itinerary-delete-btn,
+.theme-dark .remove-leg-btn,
+.theme-dark .delete-deliverables-btn,
+.theme-dark #personalLegUnlinkReceiptBtn {
+    color: var(--text-3) !important;
+}
+.theme-dark .personal-leg-remove-btn:hover,
+.theme-dark .personal-accom-remove-btn:hover,
+.theme-dark .remove-assignment-btn:hover,
+.theme-dark .delete-accommodation-btn:hover,
+.theme-dark .delete-contact-btn:hover,
+.theme-dark .delete-task-btn:hover,
+.theme-dark .delete-receipt-btn:hover,
+.theme-dark .delete-doc-btn:hover,
+.theme-dark .itinerary-delete-btn:hover,
+.theme-dark .remove-leg-btn:hover,
+.theme-dark .delete-deliverables-btn:hover,
+.theme-dark #personalLegUnlinkReceiptBtn:hover {
+    color: #f87171 !important;
+    background: rgba(239, 68, 68, 0.1) !important;
+}
+
+/* ── Dark-theme button aesthetic ─────────────────────────────────────────
+   Gives planner buttons the same glass/neon-accent language used throughout
+   the rest of the dark design: cyan border, subtle glow, electric hover.
+─────────────────────────────────────────────────────────────────────── */
+
+/* Toolbar action buttons (Manage event, New planner, Export, Import) */
+.theme-dark #manageEventBtn,
+.theme-dark #newPlannerBtn,
+.theme-dark #plannerSaveFileBtn,
+.theme-dark #plannerExportBtn,
+.theme-dark #plannerImportBtn {
+    background: rgba(0, 5, 14, 0.65) !important;
+    border-color: rgba(0, 207, 255, 0.28) !important;
+    color: rgba(176, 224, 255, 0.88) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+    backdrop-filter: none !important;
+}
+.theme-dark #manageEventBtn:hover,
+.theme-dark #newPlannerBtn:hover,
+.theme-dark #plannerSaveFileBtn:hover,
+.theme-dark #plannerExportBtn:hover,
+.theme-dark #plannerImportBtn:hover {
+    background: rgba(0, 207, 255, 0.1) !important;
+    border-color: rgba(0, 207, 255, 0.5) !important;
+    color: #e8f8ff !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 0 18px rgba(0, 207, 255, 0.1) !important;
+}
+
+/* Action buttons inside the planner accordion (Add contact, Add task, etc.)
+   Specificity (0,3,1) beats forms.css .theme-dark button.bg-white (0,2,1). */
+.theme-dark .editor-meta-accordion button.bg-white,
+.theme-dark .editor-meta-accordion a.bg-white {
+    background: rgba(0, 207, 255, 0.06) !important;
+    border-color: rgba(0, 207, 255, 0.26) !important;
+    color: rgba(0, 207, 255, 0.82) !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+}
+.theme-dark .editor-meta-accordion button.bg-white:hover,
+.theme-dark .editor-meta-accordion a.bg-white:hover {
+    background: rgba(0, 207, 255, 0.14) !important;
+    border-color: rgba(0, 207, 255, 0.5) !important;
+    color: #7dd8ff !important;
+}
+
+/* ── Planner itinerary timeline header/cell classes ──────────────────── */
+.tl-head-today  { background: color-mix(in srgb, #f59e0b 22%, var(--surface-1, #f9fafb)) !important; color: #92400e !important; font-weight: 600 }
+.tl-head-event  { background: color-mix(in srgb, var(--accent, #0678be) 14%, var(--surface-1, #f9fafb)) !important; color: var(--accent, #0369a1) !important; font-weight: 600 }
+.tl-head-normal { color: var(--text-2, #6b7280) }
+.tl-cell-today  { background: color-mix(in srgb, #f59e0b 10%, var(--surface-0, #fff)) !important }
+.tl-cell-event  { background: color-mix(in srgb, var(--accent, #0678be) 8%, var(--surface-0, #fff)) !important }
+.theme-dark .tl-head-today { color: #fbbf24 !important }
+.theme-dark .tl-head-event { color: color-mix(in srgb, var(--accent) 80%, #fff) !important }
+
+/* ── Save toast ──────────────────────────────────────────────────────────────
+   Base styles must live here because editor.css is not linked in planner.html.
+   Colour overrides are in forms.css and cascade on top. */
+.save-toast {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(0.5rem);
+    padding: 0.55rem 1.2rem;
+    border-radius: 2rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 9999;
+}
+.save-toast.is-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}

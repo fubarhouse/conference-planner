@@ -1,0 +1,419 @@
+{
+  "event": {
+    "designation": "DrupalSouth Community Day",
+    "location": "Canberra",
+    "year": "2024",
+    "website": "https://drupalsouth.org/events/drupalsouth-community-day-2024",
+    "region": "Australia",
+    "startDate": "2024-11-13T21:00:00Z",
+    "endDate": "2024-11-14T05:00:00Z",
+    "venue": "Canberra Southern Cross Club, Woden, ACT",
+    "timezone": "Australia/Sydney",
+    "enabled": true,
+    "sourceCache": "cache/remote/2026-04-25T12-06-45Z/drupalsouth-community-day-2024-json-community-day-2024",
+    "flickr": {
+      "enabled": true,
+      "groupUrl": "https://www.flickr.com/groups/14868937@N24/",
+      "image": "./img/flickr/drupalsouth-community-day/2024-canberra.jpg",
+      "imageAlt": "DrupalSouth logo"
+    },
+    "logo": {
+      "image": "./img/logos/drupalsouth-logo.png",
+      "imageAlt": "DrupalSouth logo",
+      "usePlate": false
+    },
+    "sponsors": [
+      {
+        "id": "sponsor-1",
+        "title": "Annex",
+        "tier": "Networking",
+        "row": 1,
+        "priority": 10,
+        "image": "./img/sponsors/drupalsouth-community-day/2024-canberra/sponsor-1.png",
+        "imageAlt": "Annex logo",
+        "link": "https://drupalsouth.org/sponsors/annex",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-2",
+        "title": "PreviousNext",
+        "tier": "Venue",
+        "row": 2,
+        "priority": 20,
+        "image": "./img/sponsors/drupalsouth-community-day/2024-canberra/sponsor-2.png",
+        "imageAlt": "Venue logo",
+        "link": "https://drupalsouth.org/sponsors/previousnext",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-3",
+        "title": "Acquia",
+        "tier": "Community Day",
+        "row": 3,
+        "priority": 30,
+        "image": "./img/sponsors/drupalsouth-community-day/2024-canberra/sponsor-3.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://drupalsouth.org/sponsors/acquia",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-4",
+        "title": "GovCMS",
+        "tier": "Community Day",
+        "row": 3,
+        "priority": 40,
+        "image": "./img/sponsors/drupalsouth-community-day/2024-canberra/sponsor-4.jpg",
+        "imageAlt": "GovCMS logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-5",
+        "title": "Hide and Seek",
+        "tier": "Community Day",
+        "row": 3,
+        "priority": 50,
+        "image": "./img/sponsors/drupalsouth-community-day/2024-canberra/sponsor-5.png",
+        "imageAlt": "Hide and Seek logo",
+        "link": "https://drupalsouth.org/sponsors/hide-and-seek",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-6",
+        "title": "Ironstar",
+        "tier": "Community Day",
+        "row": 3,
+        "priority": 60,
+        "image": "./img/sponsors/drupalsouth-community-day/2024-canberra/sponsor-6.png",
+        "imageAlt": "https://drupalsouth.org/sponsors/ironstar logo",
+        "link": "https://drupalsouth.org/sponsors/ironstar",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-7",
+        "title": "Morpht",
+        "tier": "Community Day",
+        "row": 3,
+        "priority": 70,
+        "image": "./img/sponsors/drupalsouth-community-day/2024-canberra/sponsor-7.png",
+        "imageAlt": "Morpht logo",
+        "link": "https://drupalsouth.org/sponsors/morpht",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-8",
+        "title": "Pragma Partners",
+        "tier": "Community Day",
+        "row": 3,
+        "priority": 80,
+        "image": "./img/sponsors/drupalsouth-community-day/2024-canberra/sponsor-8.png",
+        "imageAlt": "Pragma Partners logo",
+        "link": "https://drupalsouth.org/sponsors/pragma",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-9",
+        "title": "Salsa Digital",
+        "tier": "Community Day",
+        "row": 3,
+        "priority": 90,
+        "image": "./img/sponsors/drupalsouth-community-day/2024-canberra/sponsor-9.png",
+        "imageAlt": "Salsa Digital logo",
+        "link": "https://drupalsouth.org/sponsors/salsa-digital",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "columns": 3,
+    "scheduleURLs": [
+      "https://drupalsouth.org/community-day-2024-schedule"
+    ]
+  },
+  "items": [
+    {
+      "startTime": "2024-11-13T21:00:00Z",
+      "endTime": "2024-11-13T22:00:00Z",
+      "duration": "P60M",
+      "title": "Registration",
+      "location": "Foyer",
+      "link": "",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-11-13T22:00:00Z",
+      "endTime": "2024-11-13T22:10:00Z",
+      "duration": "P10M",
+      "title": "Opening Remarks",
+      "location": "Top of the Cross",
+      "link": "",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Marge"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-11-13T22:10:00Z",
+      "endTime": "2024-11-13T22:35:00Z",
+      "duration": "P25M",
+      "title": "Venue Sponsor Remarks - PreviousNext",
+      "location": "Top of the Cross",
+      "link": "",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-11-13T22:35:00Z",
+      "endTime": "2024-11-13T23:20:00Z",
+      "duration": "P45M",
+      "title": "Content Creators and Drupal: Bridging the Gap Between Developers and Publishers",
+      "location": "Top of the Cross",
+      "link": "https://drupalsouth.org/drupalsouth-community-day-2024-session-information",
+      "track": [
+        "Non-technical"
+      ],
+      "speakers": [
+        "Mel Stubbings",
+        "Chris Knowles",
+        "Geeta Sharma",
+        "Taylor Spaven",
+        "Shaun Whiter"
+      ],
+      "full_description": "Content development Project management/delivery management\nMel Stubbings, Chris Knowles, Geeta Sharma, Taylor Spaven, Shaun Whiter\nContent publishers are at the heart of any successful Drupal project, yet their everyday challenges are often overlooked. This panel brings together developers, content designers, and publishers to explore the realities of using Drupal from the content side. What pain points do publishers face? Why do they often turn to external tools before even touching Drupal? And how can developers better support content teams to make the platform work for them?\nJoin our diverse panel as we dive into the key issues content publishers encounter when working with Drupal. We’ll discuss everything from integrating external tools to simplifying complex features within Drupal, and why it’s crucial that content publishers are part of the conversation when decisions are made.\nExpect practical, real-world examples of where Drupal succeeds—and where it doesn’t—when it comes to meeting the needs of content teams. This panel will provide actionable insights into how developers and publishers can collaborate more effectively, ultimately creating smoother, more efficient content workflows in Drupal.\nWith an open Q&A session, the audience will have the chance to ask questions and share their own experiences, ensuring the discussion remains relevant to the challenges faced in real-world projects.\nNote: Bring a phone to submit a question\nTechnical Non-technical\nStandard Drupal Headless Drupal Drupal in Education or Government GovCMS SaaS GovCMS PaaS",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-11-13T22:35:00Z",
+      "endTime": "2024-11-13T23:35:00Z",
+      "duration": "P60M",
+      "title": "Common (but tricky) GovCMS requirements",
+      "location": "Orion",
+      "link": "https://drupalsouth.org/drupalsouth-community-day-2024-session-information",
+      "track": [
+        "Technical"
+      ],
+      "speakers": [
+        "David Flores-Condezo"
+      ],
+      "full_description": "GovCMS specific\nDavid Flores-Condezo\nGovCMS SaaS comes with a lot of cool features (security, stability, support, procurement) but as we know, it does come with a set of limitations based off the modules which are available on the platform.\nIn many cases “there’s a module for that” doesn’t apply.\nThe question then becomes, how can the requirements be met with the tools we have at hand?\nIn this presentation, we have reviewed a wide range of GovCMS sites and gathered feedback and recommendations from a range of government agencies on how they have approached certain problems.\nWe present some of the common (but tricky) requirements which regularly beset GovCMS projects.\nThe presentation will cover areas such as Embargoed content, Migration, Content workflows, Search, Maps, Embedded BI Charts and Notifications.\nTechnical Non-technical\nGovCMS SaaS",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-11-13T22:35:00Z",
+      "endTime": "2024-11-13T23:20:00Z",
+      "duration": "P45M",
+      "title": "CivicTheme and Starshot: World-class site builder experience delivering world-class digital experiences",
+      "location": "Private Dining",
+      "link": "https://drupalsouth.org/drupalsouth-community-day-2024-session-information",
+      "track": [
+        "Technical"
+      ],
+      "speakers": [
+        "Thomas Peterson"
+      ],
+      "full_description": "Development (intermediate/advanced) GovCMS specific Government Collaboration Security Starshot\nThomas Peterson\nSession Overview\nSee what we're doing with CivicTheme — CivicTheme (www.civictheme.io) offers a secure, open-source, accessible and user-friendly framework specifically designed for GovCMS users and government agencies. This session will highlight CivicTheme’s latest developments, its commitment to open governance, robust security measures and how it's working with the new Drupal Starshot initiative.\nWhat You’ll Learn\nCivicTheme Roadmap Update: Explore upcoming features and enhancements driven by community feedback and technological advancements.\nOpen Governance: Understand how transparency and collaboration with government stakeholders and the open-source community foster innovation and trust.\nSecurity and Transparency: Learn about our evidence-based security frameworks, regular audits, and compliance with national standards.\nStarshot & Civictheme: Discover how the synergy between Starshot and CivicTheme will accelerate digital transformation for government websites.\nLive Demo: Experience CivicTheme in action with a demonstration on Experience Builder (the Drupal framework for Starshot), showcasing intuitive design, responsive layouts, and accessible components.\nWho Should Attend?\nGovCMS Users: Enhance your website’s design, security, and accessibility.\nGovernment Agencies: Streamline digital services and ensure compliance with national standards.\nDrupal Developers and Designers: Expand your skills and learn about a new government open-source project.\nDigital Strategists and IT Professionals: Discover innovative solutions for government digital transformation for citizens.\nTechnical Non-technical\nStandard Drupal Headless Drupal Drupal in Education or Government GovCMS SaaS GovCMS PaaS",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-11-13T23:40:00Z",
+      "endTime": "2024-11-14T00:00:00Z",
+      "duration": "P20M",
+      "title": "Morning Tea",
+      "location": "Foyer",
+      "link": "",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-11-14T00:00:00Z",
+      "endTime": "2024-11-14T00:30:00Z",
+      "duration": "P30M",
+      "title": "How to unlock enhanced search visibility & provide a richer user experience using Schema.org",
+      "location": "Top of the Cross",
+      "link": "https://drupalsouth.org/drupalsouth-community-day-2024-session-information",
+      "track": [
+        "Non-technical"
+      ],
+      "speakers": [
+        "Julia Topliss"
+      ],
+      "full_description": "Case Study\nJulia Topliss\nThis presentation will explore the power of Schema.org in enhancing web content, including how it can improve the discoverability of content organically in major search engines.\nA key focus of the session will be the integration of Schema.org with Drupal CMS using the Drupal Schema.org Metatag project. This module allows Drupal users to easily implement structured data and extend the functionality of Schema.org on their websites.\nAttendees will gain insights into:\nSchema.org fundamentals and its role in improving search visibility and web experiences.\nHow Schema helps achieve rich search results\nReal-world case study of a website leveraging schema markup to improve discoverability through search engines and increase user engagement.\nAn introduction to the Drupal Schema.org Metatag project, showcasing the types of markup.\nTools for testing structured data\nEmerging trends - what’s next\nBy the end of this presentation, attendees will have a clear understanding of how Schema.org and the Drupal Schema.org Metatag project can work together to automate structured data generation, enhance search engine visibility, and deliver more meaningful search experiences.\nAudience Takeaways:\nUnderstanding the value of Schema.org for SEO and rich search results.\nIntroduction to the Drupal Schema.org Metatag project and the different data types it works with.\nInsights into emerging trends - what's next.\nThis session is ideal for web developers, SEO professionals, Drupal site builders, and content managers looking to improve their site’s content discoverability and search performance by integrating Schema.org markup efficiently within Drupal.\nTechnical Non-technical\nStandard Drupal Headless Drupal Drupal in Education or Government",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-11-14T00:00:00Z",
+      "endTime": "2024-11-14T00:30:00Z",
+      "duration": "P30M",
+      "title": "PDF or not to PDF!",
+      "location": "Orion",
+      "link": "https://drupalsouth.org/drupalsouth-community-day-2024-session-information",
+      "track": [
+        "Non-technical"
+      ],
+      "speakers": [
+        "Andre Kakos"
+      ],
+      "full_description": "Content development\nAndre Kakos\nGovernment site content managers struggle with the decision about what format they should publish their content. Their concern is that content should be published in an open and accessible form.\nSo do they convert all legacy PDF content into HTML?\nCan they still publish new content in PDF?\nWhat are some the considerations for publishing content either way?\nStandard Drupal\nStar",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-11-14T00:00:00Z",
+      "endTime": "2024-11-14T01:00:00Z",
+      "duration": "P60M",
+      "title": "GovFlix: A behind the scenes look of a content recommendation system",
+      "location": "Private Dining",
+      "link": "https://drupalsouth.org/drupalsouth-community-day-2024-session-information",
+      "track": [
+        "Technical"
+      ],
+      "speakers": [
+        "Murray Woodman"
+      ],
+      "full_description": "New features\nMurray Woodman\nWhat does a CMS do? Deliver information? Deliver experiences? Inform? Persuade? Engage? Entertain? All of the above? The future of the CMS is based on how effectively content can be delivered to the end user. Effectiveness is based not just on the quality of the content but also its relevancy and timeliness. Recommendation systems allow websites to become smarter, ensuring the quality content can find the right audience at the right time.\nGovFlix is a website which showcases video content for government and web development. The navigation system for the site is built on top of a content recommendation system where content is recommended to the user based on their browsing history and interests. The site makes use of several AI algorithms to recommend the best content based on popularity, recency, affinity, similarity and browsing history.\nThe presentation will provide attendees with a behind the scenes view of what the system does and how it works. The main aim is to explain how a recommender system can be built and deployed to a Drupal website. The presentation will be largely demonstration based and will be broken into the following sections:\nWalkthrough of functionality\nThe recommender backend - the schema and index\nThe recommender scenarios - crafting responses for users\nData injestation\nTracking\nRetrieval and display\nFuture possibilities\nThe presentation will be suitable for developers, UX specialists and content designers and site owners of any experience level. it is of relevance to a general and GovCMS audience.\nBy the end of the presentation the audience will have a solid understanding of how a recommender system can be deployed to a Drupal site as well as a few ideas as to how websites of any flavour can be made smarter to deliver more relevant experiences to users.\nTechnical Non-technical\nStandard Drupal Headless Drupal GovCMS SaaS GovCMS PaaS",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-11-14T00:35:00Z",
+      "endTime": "2024-11-14T01:05:00Z",
+      "duration": "P30M",
+      "title": "Accessibility Mistakes: A Developer's Guide",
+      "location": "Orion",
+      "link": "https://drupalsouth.org/drupalsouth-community-day-2024-session-information",
+      "track": [
+        "Technical"
+      ],
+      "speakers": [
+        "Jeannie Panting"
+      ],
+      "full_description": "Accessibility Development\nJeannie Panting\nThis session has been inspired by a recent project that was undertaken to uplift a site to WCAG 2.2 compliance, but resulted in more issues than the original site had.\nThis session will involve a live demonstration with audience participation to identify accessibility issues on a site, and apply the proper techniques to ensure inclusive web development.\nThe purpose is to bring a human centred approach to building web components and demonstrate the difference an accessible website can make for users who require assistive technology.\nNote: Bringing a laptop would be beneficial.\nTechnical Non-technical\nStandard Drupal Headless Drupal Drupal in Education or Government GovCMS SaaS GovCMS PaaS\nC",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-11-14T01:10:00Z",
+      "endTime": "2024-11-14T02:00:00Z",
+      "duration": "P50M",
+      "title": "Lunch",
+      "location": "Foyer",
+      "link": "",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-11-14T02:00:00Z",
+      "endTime": "2024-11-14T03:00:00Z",
+      "duration": "P60M",
+      "title": "Exploring Single Directory Components",
+      "location": "Top of the Cross",
+      "link": "https://drupalsouth.org/drupalsouth-community-day-2024-session-information",
+      "track": [
+        "Technical"
+      ],
+      "speakers": [
+        "Brynn Briedis"
+      ],
+      "full_description": "Development (intermediate/advanced)\nBrynn Briedis\nDive into the new Single Directory Components (SDC) system introduced in Drupal 10. This innovative feature allows developers to streamline their theme development process.\nWe’ll explore how SDCs simplify the management and reusability of UI elements, promote better organisation, and enhance the overall development experience.\nWhether you’re a seasoned Drupal developer or just getting started, this talk will provide you with the insights and practical examples needed to leverage SDCs in your next project.\nStandard Drupal GovCMS SaaS GovCMS PaaS",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-11-14T02:00:00Z",
+      "endTime": "2024-11-14T02:30:00Z",
+      "duration": "P30M",
+      "title": "Starshot show & tell (& tell me what you think)",
+      "location": "Private Dining",
+      "link": "https://drupalsouth.org/drupalsouth-community-day-2024-session-information",
+      "track": [
+        "Non-technical"
+      ],
+      "speakers": [
+        "Pamela Barone"
+      ],
+      "full_description": "Starshot\nPamela Barone\nThings are moving quickly as we prepare for the first release of Drupal CMS on January 15, 2025 (Drupal's birthday).\nAs the product owner for Starshot, I'll provide an update on the project, including what's likely to be in scope, what the main challenges have been, and how you can contribute.\nI would also love to get feedback from the community about the product itself and the process so far, so hope to have an open discussion as well.\nTechnical Non-technical\nStandard Drupal",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-11-14T02:30:00Z",
+      "endTime": "2024-11-14T03:00:00Z",
+      "duration": "P30M",
+      "title": "What has the Drupal Association ever done for us?",
+      "location": "Orion",
+      "link": "https://drupalsouth.org/drupalsouth-community-day-2024-session-information",
+      "track": [
+        "Non-technical"
+      ],
+      "speakers": [
+        "Owen Lansbury"
+      ],
+      "full_description": "Drupal community contribution\nOwen Lansbury\nThe Australian Drupal community is a world leader in bootstrapping its own events through DrupalSouth by maintaining a largely inward looking perspective on how Drupal is used locally.\nBut what happens when you engage with the global Drupal Association and how can it benefit you as both an individual or organisation?\nIn his role as Chair of the Drupal Association Board, Owen has spent the past several years helping reimagine the role the DA needs to play globally to sustain the Drupal community and ensure the Drupal project remains innovative and competitive in the long term.\nFrom the Drupal Certified Partner program to Starshot, this talk will look at the recent strategic shifts the DA has undertaken and the exciting initiatives that you can align with to take your Drupal expertise to the next level.\nTechnical Non-technical\nStandard Drupal Headless Drupal",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-11-14T03:00:00Z",
+      "endTime": "2024-11-14T03:10:00Z",
+      "duration": "P10M",
+      "title": "Closing Remarks & Networking Sponsor Remarks (Annex)",
+      "location": "Top of the Cross",
+      "link": "",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Marge"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-11-14T03:10:00Z",
+      "endTime": "2024-11-14T05:00:00Z",
+      "duration": "P110M",
+      "title": "Networking Event (sponsored by Annex)",
+      "location": "Venue",
+      "link": "",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "sponsorIds": ""
+    }
+  ],
+  "result": "success",
+  "url": "https://drupalsouth.org/community-day-2024-schedule"
+}

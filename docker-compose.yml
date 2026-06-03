@@ -1,0 +1,10 @@
+services:
+  editor:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+      - ./img:/app/img
+    environment:
+      PORT: "8080"

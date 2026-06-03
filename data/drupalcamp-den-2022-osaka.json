@@ -1,0 +1,527 @@
+{
+  "event": {
+    "designation": "DrupalCamp DEN",
+    "location": "Osaka",
+    "year": "2022",
+    "website": "https://drupal-camp2022.den-japan.org",
+    "region": "Japan",
+    "startDate": "2022-01-29T04:00:00Z",
+    "endDate": "2022-01-29T08:30:00Z",
+    "scheduleURL": "https://drupal-camp2022.den-japan.org/sessions/",
+    "venue": "Online (YouTube)",
+    "timezone": "Asia/Tokyo",
+    "enabled": true,
+    "columns": 2,
+    "logo": {
+      "image": "./img/logos/drupalcamp-den-logo.png",
+      "imageAlt": "DrupalCamp DEN logo",
+      "usePlate": false
+    },
+    "sponsors": [
+      {
+        "id": "sponsor-1",
+        "title": "IBM",
+        "tier": "",
+        "row": 1,
+        "priority": 1,
+        "image": "./img/sponsors/drupalcamp/2022-osaka/sponsor-1.svg",
+        "imageAlt": "IBM logo",
+        "link": "https://www.ibm.com/jp-ja",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-2",
+        "title": "Issei",
+        "tier": "",
+        "row": 1,
+        "priority": 2,
+        "image": "./img/sponsors/drupalcamp/2022-osaka/sponsor-2.svg",
+        "imageAlt": "Issei logo",
+        "link": "https://issei.cc/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-3",
+        "title": "Acquia",
+        "tier": "",
+        "row": 1,
+        "priority": 3,
+        "image": "./img/sponsors/drupalcamp/2022-osaka/sponsor-3.svg",
+        "imageAlt": "Acquia logo",
+        "link": "https://www.acquia.com/jp",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-4",
+        "title": "Wandmu",
+        "tier": "",
+        "row": 1,
+        "priority": 4,
+        "image": "./img/sponsors/drupalcamp/2022-osaka/sponsor-4.svg",
+        "imageAlt": "Wandmu logo",
+        "link": "https://www.facebook.com/kazuhiro.kodama1",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-5",
+        "title": "AR2",
+        "tier": "",
+        "row": 1,
+        "priority": 5,
+        "image": "./img/sponsors/drupalcamp/2022-osaka/sponsor-5.svg",
+        "imageAlt": "AR2 logo",
+        "link": "http://www.ar2.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-6",
+        "title": "Studio Umi",
+        "tier": "",
+        "row": 2,
+        "priority": 6,
+        "image": "./img/sponsors/drupalcamp/2022-osaka/sponsor-6.svg",
+        "imageAlt": "Studio Umi logo",
+        "link": "https://www.studio-umi.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-7",
+        "title": "Optage",
+        "tier": "",
+        "row": 2,
+        "priority": 7,
+        "image": "./img/sponsors/drupalcamp/2022-osaka/sponsor-7.svg",
+        "imageAlt": "Optage logo",
+        "link": "https://optage.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-8",
+        "title": "Meta Info",
+        "tier": "",
+        "row": 2,
+        "priority": 8,
+        "image": "./img/sponsors/drupalcamp/2022-osaka/sponsor-8.svg",
+        "imageAlt": "Meta Info logo",
+        "link": "https://www.meta-info.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-9",
+        "title": "Ooi",
+        "tier": "",
+        "row": 2,
+        "priority": 9,
+        "image": "./img/sponsors/drupalcamp/2022-osaka/sponsor-9.svg",
+        "imageAlt": "Ooi logo",
+        "link": "https://www.ooi.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-10",
+        "title": "Alleyoop",
+        "tier": "",
+        "row": 2,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcamp/2022-osaka/sponsor-10.svg",
+        "imageAlt": "Alleyoop logo",
+        "link": "https://alleyoop.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-11",
+        "title": "exa Corporation",
+        "tier": "",
+        "row": 3,
+        "priority": 11,
+        "image": "./img/sponsors/drupalcamp/2022-osaka/sponsor-11.svg",
+        "imageAlt": "exa Corporation logo",
+        "link": "https://www.exa-corp.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-12",
+        "title": "Synergy Quest",
+        "tier": "",
+        "row": 3,
+        "priority": 12,
+        "image": "./img/sponsors/drupalcamp/2022-osaka/sponsor-12.svg",
+        "imageAlt": "Synergy Quest logo",
+        "link": "https://synergyquest.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-13",
+        "title": "Ciandt",
+        "tier": "",
+        "row": 3,
+        "priority": 13,
+        "image": "./img/sponsors/drupalcamp/2022-osaka/sponsor-13.svg",
+        "imageAlt": "Ciandt logo",
+        "link": "https://ciandt.com/jp/ja",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-14",
+        "title": "Dentsu Digital",
+        "tier": "",
+        "row": 3,
+        "priority": 14,
+        "image": "./img/sponsors/drupalcamp/2022-osaka/sponsor-14.svg",
+        "imageAlt": "Dentsu Digital logo",
+        "link": "https://www.dentsudigital.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-15",
+        "title": "ANNAI",
+        "tier": "",
+        "row": 3,
+        "priority": 15,
+        "image": "./img/sponsors/drupalcamp/2022-osaka/sponsor-15.svg",
+        "imageAlt": "ANNAI logo",
+        "link": "https://annai.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-16",
+        "title": "Genero",
+        "tier": "",
+        "row": 4,
+        "priority": 16,
+        "image": "./img/sponsors/drupalcamp/2022-osaka/sponsor-16.png",
+        "imageAlt": "Generolo logo",
+        "link": "https://genero.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "flickr": {
+      "enabled": true,
+      "groupUrl": "",
+      "image": "",
+      "imageAlt": ""
+    }
+  },
+  "items": [
+    {
+      "startTime": "2022-01-29T04:00:00Z",
+      "endTime": "2022-01-29T04:15:00Z",
+      "duration": "P15M",
+      "title": "Opening Remarks",
+      "location": "",
+      "link": "https://drupal-camp2022.den-japan.org/",
+      "track": [],
+      "speakers": [
+        "Kunio Nishimoto"
+      ],
+      "video_url": "",
+      "full_description": "Opening address by Kunio Nishimoto, Representative Director of Arts Co., Ltd., welcoming attendees to DrupalCamp DEN 2022 OSAKA ONLINE — the third Drupal Camp organised by DEN (Drupal Experience Network / 田), the community group working to spread Drupal as the digital infrastructure of Japan.\n\nDEN was established in 2017 and operates regional meetup groups including Drupal Meetup Haneda, Drupal Meetup Umeda, Drupal Meetup Toyota, and Drupal Meetup Tokyo.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-01-29T04:15:00Z",
+      "endTime": "2022-01-29T04:20:00Z",
+      "duration": "P5M",
+      "title": "History & Future",
+      "location": "",
+      "link": "https://www.youtube.com/watch?v=GmjQaO2UTYc",
+      "track": [],
+      "speakers": [
+        "Dries Buytaert"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=GmjQaO2UTYc",
+      "full_description": "A video message from Dries Buytaert, Founder and Project Lead of Drupal and Co-Founder and CTO of Acquia, reflecting on Drupal's history and sharing his vision for its future direction.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-01-29T04:20:00Z",
+      "endTime": "2022-01-29T04:55:00Z",
+      "duration": "P35M",
+      "title": "官×民：副業・兼業によるトライセクターでの新しい働き方の開拓",
+      "location": "",
+      "link": "https://drupal-camp2022.den-japan.org/sessions/",
+      "track": [],
+      "speakers": [
+        "Takeshi Kato",
+        "Kyoko Otagaki"
+      ],
+      "video_url": "",
+      "full_description": "\"Official × Private: Pioneering New Work Styles in the Tri-Sector Through Side Business and Blended Employment\"\n\nExplores how professionals can bridge government and private sector careers through dual employment roles, particularly in digital communications and marketing.\n\nMain Speaker: Takeshi Kato\n- Former Ministry of Education, Culture, Sports, Science and Technology Advisor\n- Executive Director, Japan GR Association\n- Background in web marketing, digital consulting, and communications specialist roles for the Tokyo Metropolitan Government and national government\n\nModerator: Kyoko Otagaki, ANNAI Co., Ltd.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-01-29T05:00:00Z",
+      "endTime": "2022-01-29T05:20:00Z",
+      "duration": "P20M",
+      "title": "ITビギナーがDrupalでコミュニティサイトを構築してわかったこと",
+      "location": "Track A",
+      "link": "https://drupal-camp2022.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "Takako Nishizaki"
+      ],
+      "video_url": "",
+      "full_description": "\"What IT Beginners Learned from Building a Community Site with Drupal\"\n\nTakako Nishizaki, Branch Manager at Meta Info Co., Ltd., documents the firsthand difficulties encountered when introducing Drupal site development with minimal technical background. Having previously worked in finance, trade, and agriculture before joining the company in September 2021 and discovering Drupal in July 2021, she shares practical insights on Drupal 9 administration and site management from a beginner's perspective.\n\nLevel: Beginner\nDrupal version: 9\nCategories: Site administration, marketing, case studies",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-01-29T05:00:00Z",
+      "endTime": "2022-01-29T05:20:00Z",
+      "duration": "P20M",
+      "title": "DrupalとWordPressの違いを解説します",
+      "location": "Track B",
+      "link": "https://drupal-camp2022.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "Yasushi Kozono",
+        "Takeshi Takahashi"
+      ],
+      "video_url": "",
+      "full_description": "\"Key Differences Between Drupal and WordPress Explained\"\n\nA comparative analysis examining specific distinctions between Drupal and WordPress from experienced practitioners' perspectives, addressing practical implementation considerations.\n\nSpeakers:\n- Yasushi Kozono, Cloud Engineer, IBM Japan (Client Engineering Team, supporting customer digital transformation)\n- Takeshi Takahashi, UX Designer, IBM Japan (specializations in UX/UI, web, graphic design, and front-end development; CMS experience with WordPress, EC CUBE, and enterprise custom solutions)\n\nDrupal versions covered: 7, 9, 10\nLevel: Beginner to intermediate\nCategories: Project management, marketing, skill development",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-01-29T05:30:00Z",
+      "endTime": "2022-01-29T05:50:00Z",
+      "duration": "P20M",
+      "title": "LandoでDrupal開発環境を構築する",
+      "location": "Track A",
+      "link": "https://drupal-camp2022.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": null,
+      "video_url": "",
+      "full_description": "\"Setting Up a Drupal Development Environment with Lando\"\n\nA practical workshop demonstrating streamlined Drupal 9 development environment configuration using Lando, including hands-on implementation approaches for setting up consistent local development environments.\n\nLevel: Beginner to intermediate\nDrupal version: 9\nFormat: Hands-on workshop\nCategory: Developer tools, development methodology",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-01-29T05:30:00Z",
+      "endTime": "2022-01-29T05:50:00Z",
+      "duration": "P20M",
+      "title": "Drupalの歴史",
+      "location": "Track B",
+      "link": "https://drupal-camp2022.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "Kensuke Naoe"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=X6x5FGkSypk",
+      "full_description": "\"History of Drupal\"\n\nKensuke Naoe from Issei Corporation traces Drupal's development from its origins in 2000 through to 2022, highlighting major version releases and community milestones. The session covers the end-of-life of Drupal 8 (November 2, 2021) and looks ahead to the upcoming Drupal 10 release.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-01-29T06:00:00Z",
+      "endTime": "2022-01-29T06:20:00Z",
+      "duration": "P20M",
+      "title": "Acquia認定資格チャレンジ",
+      "location": "Track A",
+      "link": "https://drupal-camp2022.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "Hikaru Maruyama"
+      ],
+      "video_url": "",
+      "full_description": "\"The Acquia Certification Challenge\"\n\nHikaru Maruyama from Acquia Japan provides an overview of Acquia's certification programs, covering the 24 available credential types and the more than 7,000 certifications awarded worldwide. The session encourages attendees to pursue Acquia certifications as a way to validate and advance their Drupal skills.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-01-29T06:00:00Z",
+      "endTime": "2022-01-29T06:20:00Z",
+      "duration": "P20M",
+      "title": "DMS（Data Management System）としての「Drupal」",
+      "location": "Track B",
+      "link": "https://drupal-camp2022.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "Kyoko Otagaki"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=pUYiWfhqT8A",
+      "full_description": "\"Drupal as a Data Management System (DMS)\"\n\nKyoko Otagaki, Vice President Executive Officer at ANNNAI Corporation, presents on using Drupal not only as a content management system but as a comprehensive Data Management System (DMS). The session explores how Drupal's flexible architecture enables complex data management scenarios beyond traditional web publishing.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-01-29T06:30:00Z",
+      "endTime": "2022-01-29T06:50:00Z",
+      "duration": "P20M",
+      "title": "京都大学ウェブサイトリニューアルにおけるDrupal活用事例",
+      "location": "Track A",
+      "link": "https://drupal-camp2022.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "Hideri Ono"
+      ],
+      "video_url": "",
+      "full_description": "\"Drupal Case Study: Kyoto University Website Renewal\"\n\nA case study on implementing Drupal for the renewal of Kyoto University's website. The project involved the migration of approximately 1.6 million pages using Python-based conversion tools. The session covers the technical and project management challenges involved in one of Japan's largest Drupal website implementations.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-01-29T06:30:00Z",
+      "endTime": "2022-01-29T06:50:00Z",
+      "duration": "P20M",
+      "title": "MAとSFAそしてCMSとの連携について",
+      "location": "Track B",
+      "link": "https://drupal-camp2022.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": null,
+      "video_url": "https://www.youtube.com/watch?v=IsqXx-3gzVM",
+      "full_description": "\"About Marketing Automation, Sales Force Automation, and CMS Integration\"\n\nAn exploration of integrating Marketing Automation (MA) and Sales Force Automation (SFA) systems with Drupal as a content management system, covering strategies for maximising digital marketing effectiveness and customer experience through connected platforms.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-01-29T07:00:00Z",
+      "endTime": "2022-01-29T07:20:00Z",
+      "duration": "P20M",
+      "title": "テンプル大学ジャパンキャンパスにおけるDrupalプロジェクト",
+      "location": "Track A",
+      "link": "https://drupal-camp2022.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "Yasuko Tsuji"
+      ],
+      "video_url": "",
+      "full_description": "\"Drupal Project at Temple University Japan Campus\"\n\nYasuko Tsuji discusses the constraints and approaches involved in implementing Drupal at Temple University Japan Campus, where the CMS operates as a customised version of the parent institution's global Drupal platform, balancing local Japanese requirements with global platform standards.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-01-29T07:00:00Z",
+      "endTime": "2022-01-29T07:20:00Z",
+      "duration": "P20M",
+      "title": "医療・ヘルスケア業界のデジタルトランスフォーメーション",
+      "location": "Track B",
+      "link": "https://drupal-camp2022.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": null,
+      "video_url": "",
+      "full_description": "\"Digital Transformation in the Healthcare Industry\"\n\nA customer-focused perspective on digital transformation in the healthcare and medical sector, exploring how Drupal can support CX (Customer Experience) improvements and digital service delivery in healthcare organisations.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-01-29T07:30:00Z",
+      "endTime": "2022-01-29T07:50:00Z",
+      "duration": "P20M",
+      "title": "ヘッドレスCMSとしてのDrupal開発",
+      "location": "Track A",
+      "link": "https://drupal-camp2022.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": null,
+      "video_url": "",
+      "full_description": "\"Headless CMS Development with Drupal\"\n\nAn exploration of headless CMS architecture approaches using Drupal, covering decoupled and headless implementations, API-first development patterns, and best practices for separating content management from frontend delivery.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-01-29T07:30:00Z",
+      "endTime": "2022-01-29T07:50:00Z",
+      "duration": "P20M",
+      "title": "Drupalを活用したeラーニングプラットフォームの実装",
+      "location": "Track B",
+      "link": "https://drupal-camp2022.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": null,
+      "video_url": "",
+      "full_description": "\"E-learning Platform Implementation with Drupal\"\n\nA session covering the implementation of an e-learning platform built on Drupal, discussing the features, modules, and architecture decisions involved in creating an effective online learning management system.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-01-29T08:00:00Z",
+      "endTime": "2022-01-29T08:20:00Z",
+      "duration": "P20M",
+      "title": "リーン・アジャイル開発とDrupal",
+      "location": "Track A",
+      "link": "https://drupal-camp2022.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": null,
+      "video_url": "",
+      "full_description": "\"Lean-Agile Development and Drupal\"\n\nA session on applying Lean and Agile methodologies to Drupal development projects, covering iterative development approaches, sprint planning, and how agile principles can improve Drupal project delivery and team productivity.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-01-29T08:00:00Z",
+      "endTime": "2022-01-29T08:20:00Z",
+      "duration": "P20M",
+      "title": "Drupal Meetup Tokyo活動報告",
+      "location": "Track B",
+      "link": "https://drupal-camp2022.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": null,
+      "video_url": "",
+      "full_description": "\"Drupal Meetup Tokyo Activity Report\"\n\nA report on the activities and experiences of the Drupal Meetup Tokyo community group, sharing community-building insights and plans for growing the Drupal user community in the Tokyo area.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2022-01-29T08:20:00Z",
+      "endTime": "2022-01-29T08:30:00Z",
+      "duration": "P10M",
+      "title": "Closing",
+      "location": "",
+      "link": "https://drupal-camp2022.den-japan.org/",
+      "track": [],
+      "speakers": [
+        "Kunio Nishimoto"
+      ],
+      "video_url": "",
+      "full_description": "",
+      "sponsorIds": ""
+    }
+  ],
+  "result": "success",
+  "url": "https://drupal-camp2022.den-japan.org/sessions/"
+}

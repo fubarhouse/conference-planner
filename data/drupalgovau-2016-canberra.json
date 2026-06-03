@@ -1,0 +1,624 @@
+{
+  "event": {
+    "designation": "DrupalGov",
+    "location": "Canberra",
+    "year": "2016",
+    "website": "https://drupalgov.org/events/drupalgov-canberra-2016",
+    "region": "Australia",
+    "venue": "National Museum of Australia",
+    "timezone": "Australia/Sydney",
+    "enabled": true,
+    "startDate": "2016-02-07T22:00:00Z",
+    "endDate": "2016-02-08T06:00:00Z",
+    "sourceCache": "cache/wayback/drupalgovau-2016/raw",
+    "flickr": {
+      "enabled": true,
+      "groupUrl": "",
+      "image": "",
+      "imageAlt": ""
+    },
+    "columns": 3,
+    "logo": {
+      "image": "./img/logos/drupalgov-logo.png",
+      "imageAlt": "DrupalGov logo",
+      "usePlate": false
+    },
+    "sponsors": [
+      {
+        "id": "sponsor-1",
+        "title": "Acquia",
+        "tier": "Diamond",
+        "row": 1,
+        "priority": 10,
+        "image": "./img/sponsors/drupalgov/2016-canberra/sponsor-1.png",
+        "imageAlt": "Acquia logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-2",
+        "title": "Salsa Digital",
+        "tier": "Diamond",
+        "row": 1,
+        "priority": 20,
+        "image": "./img/sponsors/drupalgov/2016-canberra/sponsor-2.png",
+        "imageAlt": "Salsa Digital logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-3",
+        "title": "Agileware",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 30,
+        "image": "./img/sponsors/drupalgov/2016-canberra/sponsor-3.png",
+        "imageAlt": "Agileware logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-4",
+        "title": "DogHouse",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 40,
+        "image": "./img/sponsors/drupalgov/2016-canberra/sponsor-4.jpg",
+        "imageAlt": "DogHouse logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-5",
+        "title": "GovCMS",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 50,
+        "image": "./img/sponsors/drupalgov/2016-canberra/sponsor-5.png",
+        "imageAlt": "GovCMS logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-6",
+        "title": "Oxide Interactive",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 60,
+        "image": "./img/sponsors/drupalgov/2016-canberra/sponsor-6.jpg",
+        "imageAlt": "Oxide Interactive logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-7",
+        "title": "aGov",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 70,
+        "image": "./img/sponsors/drupalgov/2016-canberra/sponsor-7.png",
+        "imageAlt": "aGov logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-8",
+        "title": "Komosion",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 80,
+        "image": "./img/sponsors/drupalgov/2016-canberra/sponsor-8.png",
+        "imageAlt": "Komosion logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-9",
+        "title": "PreviousNext",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 90,
+        "image": "./img/sponsors/drupalgov/2016-canberra/sponsor-9.png",
+        "imageAlt": "PreviousNext logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-10",
+        "title": "Morpht",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 100,
+        "image": "./img/sponsors/drupalgov/2016-canberra/sponsor-10.png",
+        "imageAlt": "Morpht logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "scheduleURLs": [
+      "https://drupalgov.org/events/drupalgov-canberra-2016/program"
+    ]
+  },
+  "items": [
+    {
+      "startTime": "2016-02-07T22:00:00Z",
+      "endTime": "2016-02-07T22:15:00Z",
+      "duration": "P15M",
+      "title": "Opening plenary",
+      "location": "Visions Theatre",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxhx/",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-07T22:15:00Z",
+      "endTime": "2016-02-07T23:05:00Z",
+      "duration": "P50M",
+      "title": "Keynote - Tom Burton",
+      "location": "Visions Theatre",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxhy/",
+      "track": [],
+      "speakers": [
+        "Tom Burton"
+      ],
+      "full_description": "Tom is the publisher of The Mandarin, Australia’s digital venue for public sector leaders. Tom is a Walkley award winning journalist and leading digital communicator . He recently lead the digital transformation program at the Australian Communication and Media Authority, where he oversaw the rollout of a social media practice and the launch of a new enterprise website. The program is now considered the model for modern government engagement. He has just completed a project advising Malcolm Turnbull’s department on the roll out of their digital communications. During the late 2000’s Tom worked in Washington DC as online communication director at the Center for American Progress, as well as at series of B2B digital products covering government, telcos and streaming media. He is a former Executive Editor of the Sydney Morning Herald and Chief Political Correspondent for the Australian Financial Review. Tom specialises in economics, technology and communications and won a Walkley award for a series about the powerbrokers of Canberra. Tom sensed the opportunity of the internet early and under his leadership smh.com.au became the most popular news website in Australia. He won a Walkley award for the site the Herald launched during the Sydney Olympics. More recently he founded, developed and published a series of web 2.0 social media and B2B web start ups. He is a regular media commentator and conference speaker on politics, communications, digital engagement and economics.",
+      "video_url": "https://www.youtube.com/watch?v=XZnjYgzH1nU",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-07T23:05:00Z",
+      "endTime": "2016-02-07T23:45:00Z",
+      "duration": "P40M",
+      "title": "Data, data and microdata!",
+      "location": "Room 1",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxkb/",
+      "track": [],
+      "speakers": [
+        "Josh Waihi"
+      ],
+      "full_description": "As government data grows, so too does its desire to be open, compatible and used by systems outside of the owners control. This session looks at the value in standardised data structure and how it can provide a foundation for innovation and digital transformation in Government.",
+      "video_url": "https://www.youtube.com/watch?v=19Fyq7jxc0k",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-07T23:05:00Z",
+      "endTime": "2016-02-07T23:45:00Z",
+      "duration": "P40M",
+      "title": "DRY: Do not repeat yourself! Power of reusability",
+      "location": "Room 2",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxkc/",
+      "track": [],
+      "speakers": [
+        "Vladimir Roudakov"
+      ],
+      "full_description": "\"Do not reinvent the wheel: never start your Drupal website from scratch. Make sure that building blocks and elements from previous projects are not wasted. In addition, bring consistency to your future projects, speed up the development and turn your Drupal instances into solution by leveraging available tools and extensions. This session will demonstrate practical examples and will focus on importance of creating or reusing existing Drupal resources such as - themes - installation profiles - features (Drupal 7) or configuration (Drupal 8)\"",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-07T23:05:00Z",
+      "endTime": "2016-02-07T23:45:00Z",
+      "duration": "P40M",
+      "title": "govCMS and the future of government websites",
+      "location": "Visions Theatre",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxhz/",
+      "track": [],
+      "speakers": [
+        "Sharyn Clarkson"
+      ],
+      "full_description": "How the Department of Finance took the lead in creating the govCMS service to enable an easier path for agencies to jump on board the open source revolution. A big picture govCMS presentation about the hows and whys it benefits government agencies, and also take a look into the future of what's around the corner for govCMS.",
+      "video_url": "https://www.youtube.com/watch?v=XMW-7yVUuCs",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-07T23:45:00Z",
+      "endTime": "2016-02-08T00:00:00Z",
+      "duration": "P15M",
+      "title": "Morning tea",
+      "location": "",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxkd/",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T00:00:00Z",
+      "endTime": "2016-02-08T00:40:00Z",
+      "duration": "P40M",
+      "title": "Dissecting govCMS",
+      "location": "Room 1",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxkg/",
+      "track": [],
+      "speakers": [
+        "Kurt Foster"
+      ],
+      "full_description": "Fresh from the trenches on several govCMS projects, we’ll be taking a look under-the-hood of govCMS and providing insights on backend configuration and front-end UI/theming.",
+      "video_url": "https://www.youtube.com/watch?v=BKsw5eqftzA",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T00:00:00Z",
+      "endTime": "2016-02-08T00:40:00Z",
+      "duration": "P40M",
+      "title": "Migrating your site to Drupal 8",
+      "location": "Room 2",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxkh/",
+      "track": [],
+      "speakers": [
+        "Ben Dougherty"
+      ],
+      "full_description": "The Migrate API is one of the most successful contributed modules in the Drupal ecosystem but not without its pitfalls. In Drupal 8 we realised the importance of Migrate and the Migrate API initiative successfully brought Migrate into Drupal 8 Core. This talk will explore the Migrate API from a high level, we'll run through upgrading from previous versions of Drupal, providing upgrade paths for install profiles like aGov and finally an overview of the extended Migrate modules such as Migrate UI, Migrate Tools, Migrate Plus and more!",
+      "video_url": "https://www.youtube.com/watch?v=HHp-MgB8eXM",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T00:00:00Z",
+      "endTime": "2016-02-08T00:40:00Z",
+      "duration": "P40M",
+      "title": "Site Preview and dealing with embargo content",
+      "location": "Visions Theatre",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxkf/",
+      "track": [],
+      "speakers": [
+        "Paul Kilpatrick"
+      ],
+      "full_description": "An overview of how we overcame the shortfalls with Drupal when it comes to Site Preview and dealing with embargoed content, and how we did this on australia.gov.au (and at the same time made it more secure). This session will cover how we implemented a full site preview system with drush, cron and a small custom module to push from a content editor's environment to a live production environment with no outages. Will also go over how this can be beneficial for those agencies dealing with embargo content but still want a presence in the public cloud.",
+      "video_url": "https://www.youtube.com/watch?v=zFH-__2HTMo",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T00:40:00Z",
+      "endTime": "2016-02-08T01:20:00Z",
+      "duration": "P40M",
+      "title": "Can content be code? A D8 case study @ Department of Justice & Regulation, Victoria",
+      "location": "Visions Theatre",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxkk/",
+      "track": [],
+      "speakers": [
+        "Si Hobbs",
+        "Samantha Presser"
+      ],
+      "full_description": "The Department of Justice and Regulation in Victoria began working with Drupal 8, prior to its first release, with the initial goal of leveraging improvements in configuration management. We're incorporating the latest (and evolving) best practice around config-as-code, composer, designing for continuous integration and asking the ultimate question: do we need a canonical database?",
+      "video_url": "https://www.youtube.com/watch?v=_wo5CLAlrIo",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T00:40:00Z",
+      "endTime": "2016-02-08T01:20:00Z",
+      "duration": "P40M",
+      "title": "Git it Going",
+      "location": "Room 1",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxkm/",
+      "track": [],
+      "speakers": [
+        "Vaibhav Sagar"
+      ],
+      "full_description": "An introduction to Git.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T00:40:00Z",
+      "endTime": "2016-02-08T01:20:00Z",
+      "duration": "P40M",
+      "title": "Transitioning to govCMS",
+      "location": "Room 2",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxkq/",
+      "track": [],
+      "speakers": [
+        "Glenn Martin"
+      ],
+      "full_description": "govCMS Product Owner Glenn Martin will talk through the various paths a government agency has when considering a move to govCMS. Using real case studies of existing sites Glenn will cover just some of the 50 sites already in the govCMS environment and how an agency can self-serve their transition, right through to a fully outsourced development. Glenn also shows how govCMS sites can indeed be unique and beautiful snowflakes while at the same time embracing a culture of Agile and iterative development to continuously improve upon a website in line with the Digital Transformation Office.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T01:20:00Z",
+      "endTime": "2016-02-08T02:00:00Z",
+      "duration": "P40M",
+      "title": "Lunch",
+      "location": "",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxkr/",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T02:00:00Z",
+      "endTime": "2016-02-08T02:30:00Z",
+      "duration": "P30M",
+      "title": "Keynote - Senator Scott Ludlam",
+      "location": "",
+      "link": "http://lanyrd.com/2016/drupalgov/sdyfky/",
+      "track": [],
+      "speakers": [],
+      "full_description": "Elected in November 2007, Scott Ludlam is one of ten Australian Greens in the current Parliament and is the spokesperson for Foreign Affairs, Broadband, Communications & Digital Economy, Housing & Sustainable Cities and Nuclear issues. Scott has been a leading voice against the Federal Government's attempt to censor the internet and establish a mandatory data retention scheme. He strengthened protections for public ownership of the National Broadband Network and has campaigned for the fair treatment for Julian Assange and the WikiLeaks publishing organisation. In 2011, Scott successfully advocated to restore $264 million to the National Rental Affordability Scheme which provided for the construction of thousands of affordable rental homes. He secured an additional $158m for the SBS multicultural broadcaster in the 2012 federal budget and his five-year campaign for light rail in Perth was successful with $4 million federal funding allocated to plan the project. As part of the economic stimulus package, he helped secure $60 million for heritage conservation and $40 million for cycling infrastructure. As Greens spokesperson on nuclear issues, Scott has led opposition in Canberra against attempts to impose a radioactive waste dump on an unwilling community near Tennant Creek in the NT. He has spent a decade working to phase out uranium mining, work given greater urgency following a visit to areas impacted by the Fukushima nuclear disaster in Japan. Scott improved legislation to establish a more transparent Independent Reviewer of terrorism Laws and also introduced legislation to require parliamentary approval for sending Australian troops to war. As a convenor of the Australian Parliamentarians for Democracy in Burma, he has campaigned for the release of Burmese political prisoners including Aung San Suu Kyi. In 2012, he visited Burma and returned with renewed energy to support the Burmese democracy movement.. A prolific and effective participant in the Parliamentary Committee process, Scott initiated Australia’s first national inquiry into public transport, and inquiries into structural asymmetries in the justice system, and protections for privacy protections online. A former film maker, artist and graphic designer by trade, Scott has employed innovative communications tools to help with campaigns. He created the Bike Blackspot App, a smart phone application that enabled bicyclists to lobby for better bike funding. In 2007, he created a compelling 30-minute documentary on why nuclear energy is not the solution to climate change, titled 'Climate of Hope'. Some examples of short-form video work are here. He blogs at www.fieldnotes.org.au and can be found on twitter as @senatorludlam.",
+      "video_url": "https://www.youtube.com/watch?v=r1hjdHTRJ6Y",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T02:20:00Z",
+      "endTime": "2016-02-08T02:40:00Z",
+      "duration": "P20M",
+      "title": "Better Quality Assurance for the whole team",
+      "location": "Room 2",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxkx/",
+      "track": [],
+      "speakers": [
+        "Tim Siers"
+      ],
+      "full_description": "Quality assurance and the role it has in projects can vary greatly depending who you ask. In some cases, the process becomes the rude aunty that no one wants to be around and just seems to bring everyone else down. I want to dispel some of the myths around QA such as: \"Developers can’t test their own work\". \"Everything should be automated\" \"QA can’t happen until everything is complete\" Let me introduce you to a QA model that will involve your whole team, both managers, testers and developers. QA can become part of the culture of your entire team and seen as a valuable and fun challenge. We won’t be getting technical or writing code, instead I want you to leave with some practical ways to facilitate and inspire a better QA process and become more efficient.",
+      "video_url": "https://www.youtube.com/watch?v=uEoV_vOZjgw",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T02:20:00Z",
+      "endTime": "2016-02-08T02:40:00Z",
+      "duration": "P20M",
+      "title": "Revolutionising Museum displays: Large scale interactives at the War Memorial",
+      "location": "Visions Theatre",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxkt/",
+      "track": [],
+      "speakers": [
+        "Snow"
+      ],
+      "full_description": "One of the most frequently asked questions we receive at Holly Sydney is about our major interactive ANZAC From Above at the Australian War Memorial. This work has created buzz from museum and developer communities. It defines what future tech and coding should look like: inspiring and interactive putting the user experience first and generates deep user engagement. Using Drupal 7 as the backend, the Holly designed and built a multilingual system that delivers content to digital signs and interactives throughout the First World War galleries at the Australian War Memorial. Drupal also delivers application updates to the android devices over the air. Who should attend? * Project managers * Digital content team members * Interactive designers and developers What will you learn? * Challenges and constraints of the project * Why Drupal was a good fit * What we will do differently in future",
+      "video_url": "https://www.youtube.com/watch?v=0HeM6JpdFJk",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T02:20:00Z",
+      "endTime": "2016-02-08T02:40:00Z",
+      "duration": "P20M",
+      "title": "Single sign-on using Active Directory",
+      "location": "Room 1",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxkw/",
+      "track": [],
+      "speakers": [
+        "Francis Whittle"
+      ],
+      "full_description": "How to use single sign-on via Active Directory in your Drupal website",
+      "video_url": "https://www.youtube.com/watch?v=NNDLOapOiZw",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T02:40:00Z",
+      "endTime": "2016-02-08T03:00:00Z",
+      "duration": "P20M",
+      "title": "How to eat an agile sandwich",
+      "location": "Visions Theatre",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxky/",
+      "track": [],
+      "speakers": [
+        "Kate McAlister"
+      ],
+      "full_description": "The word 'agile' is thrown around a lot in gov circles these, it's even a favourite of our current PM. But what does that mean for project managers building Drupal sites in government settings? Here we address some of the challenges and advantages.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T02:40:00Z",
+      "endTime": "2016-02-08T03:00:00Z",
+      "duration": "P20M",
+      "title": "Turning stories into websites",
+      "location": "Room 1",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxkz/",
+      "track": [],
+      "speakers": [
+        "Donna Benjamin"
+      ],
+      "full_description": "The world of agile project management is filled with \"\"User stories\"\". But what are they? and how do they relate to building websites with Drupal? This session will outline a range of different approaches to understanding the requirements of a project, and working with a team to bring those stories to life in a browser.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T03:00:00Z",
+      "endTime": "2016-02-08T03:20:00Z",
+      "duration": "P20M",
+      "title": "Building aGov: a progress report and how to contribute",
+      "location": "Room 1",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxmc/",
+      "track": [],
+      "speakers": [
+        "Sam Becker"
+      ],
+      "full_description": "Development of aGov on Drupal 8 is well underway. With an alpha already tagged, this session will focus on what's left to do for a stable release of aGov and how developers and non-developers alike can contribute to the open platform. At the end of this session you will understand: The current state of the aGov platform. The architecture aGov 8.x. How to setup a development environment for contributing to aGov. The aGov issue tracking and pull request workflow. How to test, evaluate and provide feedback for aGov.",
+      "video_url": "https://www.youtube.com/watch?v=edoxHHGq4Lg",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T03:00:00Z",
+      "endTime": "2016-02-08T03:20:00Z",
+      "duration": "P20M",
+      "title": "Building better content creation with WYSIWYG fields and custom formatters",
+      "location": "Room 2",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxmd/",
+      "track": [],
+      "speakers": [
+        "Stuart Clark"
+      ],
+      "full_description": "In a community of developers, content creation can often get overlooked. Developers love to tout \"structured data\" and add an abundance of fields to a content type, but it doesn't make for a good user experience. Simple tasks like inline image management are never as easy as they could or should be. They either feel unnatural, making you jump through too many hoops, or worse yet, they fail to leverage the full power of Drupal. In this session I will be walking through how to build a better content creation experience with the simple yet powerful Wysiwyg Fields module. In addition, I will cover over some tips and tricks to get the most out of the companion Custom Formatters module.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T03:00:00Z",
+      "endTime": "2016-02-08T03:20:00Z",
+      "duration": "P20M",
+      "title": "More than just search - when Drupal meets big data",
+      "location": "Visions Theatre",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxmb/",
+      "track": [],
+      "speakers": [
+        "Joshua Li",
+        "Josh Rich"
+      ],
+      "full_description": "Drupal is not designed for handling with big data. When we have the requirement to manipulate with millions of data records, we are likely to be dealing with the website performance issue and the data discovery issue. In this session, I will have Mr Josh Rich from Elastic to co-present with me on a recent project we are working on. We will be talking about: 1. Comparing Solr and elasticsearch 2. Solutions for performance issue on big data 3. Introduction to Elastic ELK stack 4. Learning and discovering the data 5. The future of Drupal and big data",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T03:40:00Z",
+      "endTime": "2016-02-08T04:00:00Z",
+      "duration": "P20M",
+      "title": "Drupal and legal deposit: Drupal's role in the digital library",
+      "location": "Room 1",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxmg/",
+      "track": [],
+      "speakers": [
+        "Brendon McKinley"
+      ],
+      "full_description": "On 17 August 2015, new legislation was passed to extend legal deposit to include Australia's online landscape. Legal deposit will now cover all published literary, dramatic, musical or artistic works, or an edition of such a work that is a website, web page, web file, book, periodical, newspaper, pamphlet, sheet of music, map, plan, chart or table. The National Library of Australia has developed an eDeposit service as a part of its broader Digital Library Infrastructure Replacement project. The public eDeposit interface for the collection of legal deposit material has been developed in Drupal 7. This presentation will introduce the eDeposit service and will look at the development of the Drupal components and their integration with other Digital Library collection and management systems.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T03:40:00Z",
+      "endTime": "2016-02-08T04:00:00Z",
+      "duration": "P20M",
+      "title": "govCMS Content Migration and Creation",
+      "location": "Visions Theatre",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxmf/",
+      "track": [],
+      "speakers": [
+        "Ian McCrabb"
+      ],
+      "full_description": "Methods and skills deployed in managing the mapping and migration of content in the transition of large scale public sector websites to govCMS.",
+      "video_url": "https://www.youtube.com/watch?v=eRzYKpBVH5U",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T03:40:00Z",
+      "endTime": "2016-02-08T04:00:00Z",
+      "duration": "P20M",
+      "title": "Open Data, Insights and Government. Drupal and CKAN together",
+      "location": "Room 2",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxmk/",
+      "track": [],
+      "speakers": [
+        "Steven De Costa"
+      ],
+      "full_description": "CKAN is used by many jurisdictions for hosting open data catalogues and data management systems. But, CKAN isn't the web experience it needs to be for everyone. Drupal has become the default web experience management system for Governments worldwide. So, how do these two projects come together, dance and enchant those seeking both raw open data and an insightful web experience? This session will show you just how well Drupal and CKAN can work together. Learn from those who have been working with both CKAN and Drupal over the last three years to build and support portals for data.gov.au, data.vic.gov.au, data.nsw.gov.au, data.sa.gov.au and data.wa.gov.au.",
+      "video_url": "https://www.youtube.com/watch?v=j-jofZONJuQ",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T04:00:00Z",
+      "endTime": "2016-02-08T04:20:00Z",
+      "duration": "P20M",
+      "title": "Afternoon tea",
+      "location": "",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxmm/",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T04:20:00Z",
+      "endTime": "2016-02-08T04:40:00Z",
+      "duration": "P20M",
+      "title": "Drupal for Learning Management in Government",
+      "location": "Room 2",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxmr/",
+      "track": [],
+      "speakers": [
+        "Andrew Barnes"
+      ],
+      "full_description": "Many departments, agencies and government projects need to consider how they can provide training for staff or deliver education programmes for volunteers or the general public. Drupal provides a suite of tools that make it easy to deliver and track training competencies, both for online learning and offline courses. This session introduces how we use Drupal as the backbone of multiple Australian government learning management systems. To provide context and examples I will cover a number of government training portals powered by Drupal that we have delivered. An outline on some of the items to be covered includes: Best practice for online learning Creating learning pathways aligned to roles and positions Creating courses in Drupal Embedding courses from third party providers Reporting on competencies and training needs analysis Integrating your Drupal LMS with other systems Supporting offline learning Supporting learning on mobiles and tablets",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T04:20:00Z",
+      "endTime": "2016-02-08T04:40:00Z",
+      "duration": "P20M",
+      "title": "Mapping the unmappable: content geographies in Drupal",
+      "location": "Room 1",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxmq/",
+      "track": [],
+      "speakers": [
+        "Angus Gordon"
+      ],
+      "full_description": "A \"content geography\" is the high-level structure of a website ‚Äî how one piece of content is understood to relate to another. Some CMSs have a strong built-in content geography: a piece of content is always \"\"placed\"\" in relation to another (for example as a subpage). Drupal isn't like that! Famously, the Drupal way is to create a \"big bucket o' content\". There are then any number of ways of defining relationships between one piece of content and another. This gives us great flexibility, but it also makes it easy to build a site with messy, vague or conflicting content geographies that leave users disoriented. In this talk, I'll propose some best practices for planning and building Drupal sites that don't make our users feel seasick.",
+      "video_url": "https://www.youtube.com/watch?v=zeNKyD60zjM",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T04:40:00Z",
+      "endTime": "2016-02-08T05:00:00Z",
+      "duration": "P20M",
+      "title": "Accessibility in Drupal 8",
+      "location": "Room 2",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxmt/",
+      "track": [],
+      "speakers": [
+        "Jack Taranto"
+      ],
+      "full_description": "Australian government websites need to be WCAG 2.0, Level AA compliant. This is why it is more important than ever for government agencies to choose a CMS that is accessible. Drupal 7 can be made accessible by using lots of extra contributed modules, workarounds, and custom code. Fortunately, Drupal 8 is far more accessible than Drupal 7, straight out of the box. In this presentation, I will cover and demonstrate many of the accessibility features that are available in Drupal 8. This session is for anyone who is interested to find out how Drupal 8 can make it easier to create and maintain accessible websites.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T04:40:00Z",
+      "endTime": "2016-02-08T05:00:00Z",
+      "duration": "P20M",
+      "title": "How building Drupal with Agile changed my life (the good, bad and ugly)",
+      "location": "Visions Theatre",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxmp/",
+      "track": [],
+      "speakers": [
+        "Adam Leayr"
+      ],
+      "full_description": "govCMS Technical Product Manager, Adam Leayr, will unpack his journey from traditional waterfall-based development approaches, to adopting Agile methodologies in delivering Drupal-based govCMS initiatives. He will compare and contrast the advantages and gotchas encountered so far, dispel Agile myths and examine ways we can become more responsive to our customers and stakeholders throughout the site building process.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T05:00:00Z",
+      "endTime": "2016-02-08T05:40:00Z",
+      "duration": "P40M",
+      "title": "Project Management Panel",
+      "location": "Visions Theatre",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxmw/",
+      "track": [],
+      "speakers": [
+        "Emma Davidson",
+        "Sharyn Clarkson",
+        "Gavin Tapp",
+        "Kurt Foster",
+        "Geoff Dibley"
+      ],
+      "full_description": "",
+      "video_url": "https://www.youtube.com/watch?v=v2Wynf9IB2E",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2016-02-08T05:40:00Z",
+      "endTime": "2016-02-08T06:00:00Z",
+      "duration": "P20M",
+      "title": "Closing address",
+      "location": "Visions Theatre",
+      "link": "http://lanyrd.com/2016/drupalgov/sdxxmx/",
+      "track": [],
+      "speakers": [
+        "Christopher Skene"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    }
+  ]
+}

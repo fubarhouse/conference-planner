@@ -1,0 +1,643 @@
+{
+  "event": {
+    "designation": "DrupalCamp",
+    "location": "Nagoya",
+    "year": "2019",
+    "website": "https://drupal-camp2019.den-japan.org/",
+    "region": "Japan",
+    "startDate": "2019-12-07T01:00:00Z",
+    "endDate": "2019-12-07T08:30:00Z",
+    "scheduleURL": "https://drupal-camp2019.den-japan.org/sessions/",
+    "venue": "なごのキャンパス (Nagono Campus)",
+    "venueAddress": "〒451-0042 愛知県名古屋市西区那古野２丁目１４−１",
+    "venueURL": "https://nagono-campus.jp/",
+    "timezone": "Asia/Tokyo",
+    "columns": 3,
+    "enabled": true,
+    "sponsors": [
+      {
+        "id": "sponsor-1",
+        "title": "IBM",
+        "tier": "",
+        "row": 1,
+        "priority": 1,
+        "image": "./img/sponsors/drupalcamp/2019-nagoya/sponsor-1.jpg",
+        "imageAlt": "IBM logo",
+        "link": "https://www.ibm.com/jp-ja",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-2",
+        "title": "Acquia",
+        "tier": "",
+        "row": 1,
+        "priority": 2,
+        "image": "./img/sponsors/drupalcamp/2019-nagoya/sponsor-2.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://www.acquia.com/jp",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-3",
+        "title": "Meta Info",
+        "tier": "",
+        "row": 1,
+        "priority": 3,
+        "image": "./img/sponsors/drupalcamp/2019-nagoya/sponsor-3.png",
+        "imageAlt": "Meta Info logo",
+        "link": "https://www.meta-info.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-4",
+        "title": "Solidcom",
+        "tier": "",
+        "row": 1,
+        "priority": 4,
+        "image": "./img/sponsors/drupalcamp/2019-nagoya/sponsor-4.png",
+        "imageAlt": "Solidcom logo",
+        "link": "http://www.solidcom.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-5",
+        "title": "Wandmu",
+        "tier": "",
+        "row": 1,
+        "priority": 5,
+        "image": "./img/sponsors/drupalcamp/2019-nagoya/sponsor-5.png",
+        "imageAlt": "Wandmu logo",
+        "link": "http://www.wandmu.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-6",
+        "title": "Issei",
+        "tier": "",
+        "row": 1,
+        "priority": 6,
+        "image": "./img/sponsors/drupalcamp/2019-nagoya/sponsor-6.png",
+        "imageAlt": "Issei logo",
+        "link": "https://issei.cc/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-7",
+        "title": "ULS Lab",
+        "tier": "",
+        "row": 1,
+        "priority": 7,
+        "image": "./img/sponsors/drupalcamp/2019-nagoya/sponsor-7.png",
+        "imageAlt": "ULS Lab logo",
+        "link": "https://www.ulslab.com/ja/service/drupal",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-8",
+        "title": "Ooi",
+        "tier": "",
+        "row": 2,
+        "priority": 1,
+        "image": "./img/sponsors/drupalcamp/2019-nagoya/sponsor-8.png",
+        "imageAlt": "Ooi logo",
+        "link": "https://www.ooi.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-9",
+        "title": "Studio Umi",
+        "tier": "",
+        "row": 2,
+        "priority": 2,
+        "image": "./img/sponsors/drupalcamp/2019-nagoya/sponsor-9.png",
+        "imageAlt": "Studio Umi logo",
+        "link": "https://www.studio-umi.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-10",
+        "title": "AR2",
+        "tier": "",
+        "row": 2,
+        "priority": 3,
+        "image": "",
+        "imageAlt": "AR2 logo",
+        "link": "http://www.ar2.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-11",
+        "title": "Dentsu Isobar",
+        "tier": "",
+        "row": 2,
+        "priority": 4,
+        "image": "./img/sponsors/drupalcamp/2019-nagoya/sponsor-11.png",
+        "imageAlt": "Dentsu Isobar logo",
+        "link": "https://www.dentsuisobar.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-12",
+        "title": "Hi-fn",
+        "tier": "",
+        "row": 2,
+        "priority": 5,
+        "image": "./img/sponsors/drupalcamp/2019-nagoya/sponsor-12.png",
+        "imageAlt": "Hi-fn logo",
+        "link": "http://hi-fn.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-13",
+        "title": "ANNAI",
+        "tier": "",
+        "row": 2,
+        "priority": 6,
+        "image": "./img/sponsors/drupalcamp/2019-nagoya/sponsor-13.png",
+        "imageAlt": "ANNAI logo",
+        "link": "https://annai.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-14",
+        "title": "Enecom",
+        "tier": "",
+        "row": 2,
+        "priority": 7,
+        "image": "./img/sponsors/drupalcamp/2019-nagoya/sponsor-14.png",
+        "imageAlt": "Enecom logo",
+        "link": "https://www.enecom.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-15",
+        "title": "Optage",
+        "tier": "",
+        "row": 3,
+        "priority": 1,
+        "image": "./img/sponsors/drupalcamp/2019-nagoya/sponsor-15.png",
+        "imageAlt": "Optage logo",
+        "link": "https://optage.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-16",
+        "title": "OS Technology",
+        "tier": "",
+        "row": 3,
+        "priority": 2,
+        "image": "./img/sponsors/drupalcamp/2019-nagoya/sponsor-16.png",
+        "imageAlt": "OS Technology logo",
+        "link": "https://www.ostechnology.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-17",
+        "title": "Genero",
+        "tier": "",
+        "row": 3,
+        "priority": 3,
+        "image": "./img/sponsors/drupalcamp/2019-nagoya/sponsor-17.png",
+        "imageAlt": "Generolo logo",
+        "link": "https://genero.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "flickr": {
+      "enabled": true,
+      "groupUrl": "",
+      "image": "",
+      "imageAlt": ""
+    },
+    "logo": {
+      "image": "./img/logos/drupalcamp/2019-nagoya.png",
+      "imageAlt": "DrupalCamp logo",
+      "usePlate": true
+    }
+  },
+  "items": [
+    {
+      "startTime": "2019-12-07T01:00:00Z",
+      "endTime": "2019-12-07T01:05:00Z",
+      "duration": "P5M",
+      "title": "開会のご挨拶",
+      "location": "コワーキング",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Introduction"
+      ],
+      "speakers": [
+        "小薗井 康志"
+      ],
+      "full_description": "開会のご挨拶\n\nOrganizing Committee Chair 小薗井 康志 による開会のご挨拶。",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T01:05:00Z",
+      "endTime": "2019-12-07T01:10:00Z",
+      "duration": "P5M",
+      "title": "「Driesからのメッセージ」動画の発表",
+      "location": "コワーキング",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Introduction"
+      ],
+      "speakers": [
+        "西尾 正博"
+      ],
+      "full_description": "「Driesからのメッセージ」動画の発表\n\nDrupal創設者 Dries Buytaert からのビデオメッセージ上映。",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T01:10:00Z",
+      "endTime": "2019-12-07T02:00:00Z",
+      "duration": "P50M",
+      "title": "The new CMS paradox: Coming conflicts in content management",
+      "location": "コワーキング",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Preston So"
+      ],
+      "full_description": "Keynote Speech: The new CMS paradox: Coming conflicts in content management\n\nPresented by Preston So, Principal Product Manager at GATSBY (New York), author of \"Decoupled Drupal in Practice.\"\n\nThis keynote covers the emerging paradox in content management systems, including the rise of decoupled and headless CMS architectures, distributed CMS, and the conflicts arising between traditional monolithic CMS approaches and the new generation of API-first, decoupled content management solutions.\n\nSession materials: https://den-japan.org/sites/default/files/den2019presentation/The%20new%20CMS%20paradox_%20Coming%20conflicts%20in%20content%20management%20%28DEN%20Camp%20Nagoya%202019%20keynote%29.pdf",
+      "video_url": "https://www.youtube.com/watch?v=tDvlTuXrbAE",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T02:10:00Z",
+      "endTime": "2019-12-07T02:50:00Z",
+      "duration": "P40M",
+      "title": "【API、デカップルドをテーマ】にしてのグループトーク　米国・インド・日本 ３か国先端エンジニアによる最新開発手法についてディスカッション",
+      "location": "コワーキング",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Panel Discussion"
+      ],
+      "speakers": [
+        "Preston So",
+        "Gautam Das",
+        "岸 俊兵",
+        "萩原 高行"
+      ],
+      "full_description": "【API、デカップルドをテーマ】にしてのグループトーク　米国・インド・日本 ３か国先端エンジニアによる最新開発手法についてディスカッション\n\nAPIおよびデカップルドアーキテクチャをテーマに、アメリカ、インド、日本の3か国の先端エンジニアが集まり、最新開発手法についてディスカッション。\n\nパネリスト:\n- Preston So（米国, GATSBY Principal Product Manager）\n- Gautam Das（インド, Generolo）\n- 岸 俊兵（日本, Acquia Japan）\n\nコーディネーター: 萩原 高行",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T03:00:00Z",
+      "endTime": "2019-12-07T04:00:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": null,
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T04:00:00Z",
+      "endTime": "2019-12-07T04:20:00Z",
+      "duration": "P20M",
+      "title": "Drupal認定試験にチャレンジしよう！アクイア認定プログラムのご紹介",
+      "location": "Track A – A会議室",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "丸山 ひかる"
+      ],
+      "full_description": "Drupal認定試験にチャレンジしよう！アクイア認定プログラムのご紹介\n\n発表者: 丸山 ひかる（Acquia Japan）\n\nAcquiaによるDrupal認定プログラムの概要紹介。DrupalCamp DEN 2019 Nagoya では、アクイア認定サイトビルダー – Drupal 8 試験を会場にて無料で受験することができます。\n\nSession materials: https://den-japan.org/sites/default/files/den2019presentation/20191207-drupalcamp.pdf",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T04:00:00Z",
+      "endTime": "2019-12-07T04:20:00Z",
+      "duration": "P20M",
+      "title": "プログラミングなしで会員制サイトをどこまで構築できそうか追求してみた",
+      "location": "Track B – A会議室",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "萩原 高行"
+      ],
+      "full_description": "プログラミングなしで会員制サイトをどこまで構築できそうか追求してみた\n\n発表者: 萩原 高行（Ubiquitous Lifestyle Laboratory）\n\nプログラミングを使わずにDrupalで会員制サイトをどこまで構築できるかを検証。Business Rulesモジュール等を活用したノーコード開発の可能性を探る。\n\nSession materials: https://den-japan.org/sites/default/files/den2019presentation/BusinessRules%20at%20DrupalCamp%20DEN.pdf",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T04:00:00Z",
+      "endTime": "2019-12-07T05:15:00Z",
+      "duration": "P75M",
+      "title": "アクイア認定サイトビルダー – Drupal 8（第1回）",
+      "location": "試験会場 – B会議室・C会議室",
+      "link": "https://www.acquia.com/jp/certification/events/drupalcamp-dec7",
+      "track": [
+        "Certification Exam"
+      ],
+      "speakers": [
+        "Acquia Japan"
+      ],
+      "full_description": "アクイア認定サイトビルダー – Drupal 8\n\nAcquia認定試験（第1回）。DrupalCamp DEN 2019 Nagoya の会場にて無料で受験可能。\n試験時間: 13:00–14:15（JST）",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T04:30:00Z",
+      "endTime": "2019-12-07T04:50:00Z",
+      "duration": "P20M",
+      "title": "Drupal ニュース 2019～20 のまとめ - A Summary of Drupal News 2019-20",
+      "location": "Track A – A会議室",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "西尾 正博"
+      ],
+      "full_description": "Drupal ニュース 2019～20 のまとめ - A Summary of Drupal News 2019-20\n\n発表者: 西尾 正博（Outsourcing Technology）\n\nDrupal 2019年から2020年にかけての主要なニュース、アップデート、コミュニティ動向のまとめ。\n\nSession materials: https://den-japan.org/sites/default/files/den2019presentation/drupalcamp_den2019_nishio.pdf",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T04:30:00Z",
+      "endTime": "2019-12-07T04:50:00Z",
+      "duration": "P20M",
+      "title": "プロトタイプツールデザインワークフローと課題",
+      "location": "Track B – A会議室",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "神明 篤志"
+      ],
+      "full_description": "プロトタイプツールデザインワークフローと課題\n\n発表者: 神明 篤志（Hyphen）\n\nプロトタイプツールを使ったデザインワークフローと、その課題についての発表。\n\nSession materials: https://den-japan.org/sites/default/files/den2019presentation/Den2019.pdf",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T05:00:00Z",
+      "endTime": "2019-12-07T05:20:00Z",
+      "duration": "P20M",
+      "title": "Kubernetes/OpenShiftを使ってDrupalの世界を広げよう！",
+      "location": "Track A – A会議室",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "小薗井 康志"
+      ],
+      "full_description": "Kubernetes/OpenShiftを使ってDrupalの世界を広げよう！\n\n発表者: 小薗井 康志（IBM Japan）\n\nKubernetesおよびRed Hat OpenShiftを活用してDrupalの展開・運用の可能性を広げる方法についての発表。IBMクラウド上でのDrupalデプロイ戦略を紹介。\n\nSession materials: https://den-japan.org/sites/default/files/den2019presentation/Drupal_on_IBM_20191207.pptx",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T05:00:00Z",
+      "endTime": "2019-12-07T05:20:00Z",
+      "duration": "P20M",
+      "title": "Drupalアップデート奮闘記",
+      "location": "Track B – A会議室",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "片井 隆元"
+      ],
+      "full_description": "Drupalアップデート奮闘記\n\n発表者: 片井 隆元（SCSK）\n\nDrupalのバージョンアップ作業における苦労話と実践的なアップデート手法の紹介。\n\nSession materials: https://den-japan.org/sites/default/files/den2019presentation/drupal_update_20191205.pdf",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T05:30:00Z",
+      "endTime": "2019-12-07T06:45:00Z",
+      "duration": "P75M",
+      "title": "アクイア認定サイトビルダー – Drupal 8（第2回）",
+      "location": "試験会場 – B会議室・C会議室",
+      "link": "https://www.acquia.com/jp/certification/events/drupalcamp-dec7",
+      "track": [
+        "Certification Exam"
+      ],
+      "speakers": [
+        "Acquia Japan"
+      ],
+      "full_description": "アクイア認定サイトビルダー – Drupal 8\n\nAcquia認定試験（第2回）。DrupalCamp DEN 2019 Nagoya の会場にて無料で受験可能。\n試験時間: 14:30–15:45（JST）",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T05:30:00Z",
+      "endTime": "2019-12-07T05:50:00Z",
+      "duration": "P20M",
+      "title": "Drupal最速開発ツール、Acquia Developer Studioの紹介",
+      "location": "Track A – A会議室",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "岸 俊兵"
+      ],
+      "full_description": "Drupal最速開発ツール、Acquia Developer Studioの紹介\n\n発表者: 岸 俊兵（Acquia Japan）\n\nAcquia Developer Studio（現Acquia CMS）は、Drupal開発を加速させるための統合開発環境・ツールセット。本セッションでは、その機能と活用方法を紹介。\n\nSession materials: https://den-japan.org/sites/default/files/den2019presentation/Acquia%20Developer%20Studio%20JP%2020191207.pdf",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T05:30:00Z",
+      "endTime": "2019-12-07T05:50:00Z",
+      "duration": "P20M",
+      "title": "DrupalCon Amsterdam 2019とOpen Social Summit参加報告",
+      "location": "Track B – A会議室",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "直江 健介"
+      ],
+      "full_description": "DrupalCon Amsterdam 2019とOpen Social Summit参加報告\n\n発表者: 直江 健介（Issei株式会社）\n\n写真と共にコミュニティ活動を考える。2019年に開催されたDrupalCon Amsterdam 2019とOpen Social Summitへの参加報告。コミュニティ活動の意義や学びを写真とともに振り返る。\n\nSession materials: https://den-japan.org/sites/default/files/den2019presentation/Drupal%20Camp%20DEN%202019%20Nagoya.pdf",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T06:00:00Z",
+      "endTime": "2019-12-07T06:20:00Z",
+      "duration": "P20M",
+      "title": "CMSではなく、DMS（データ・マネジメント・システム）としてのDrupal",
+      "location": "Track A – A会議室",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "太田垣 恭子"
+      ],
+      "full_description": "CMSではなく、DMS（データ・マネジメント・システム）としてのDrupal\n\n発表者: 太田垣 恭子（ANNAI）\n\nDrupalを単なるCMS（コンテンツ管理システム）ではなく、DMS（データ・マネジメント・システム）として活用する視点からの発表。エンタープライズにおけるデータ管理基盤としてのDrupalの可能性を探る。\n\nSession materials: https://den-japan.org/sites/default/files/den2019presentation/191207_DrupalCampDEN-Nagoya.pdf",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T06:00:00Z",
+      "endTime": "2019-12-07T06:20:00Z",
+      "duration": "P20M",
+      "title": "Drupal Q and A",
+      "location": "Track B – A会議室",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "Matthew Messmer"
+      ],
+      "full_description": "Drupal Q and A\n\n発表者: Matthew Messmer（Generolo）\n\nDrupalに関するオープンなQ&Aセッション。参加者からの質問に答える形式で行われる。",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T06:30:00Z",
+      "endTime": "2019-12-07T06:50:00Z",
+      "duration": "P20M",
+      "title": "デジタルエージェンシーが見たAcquia Engage",
+      "location": "Track A – A会議室",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "門別 諭",
+        "菊池 源吾"
+      ],
+      "full_description": "デジタルエージェンシーが見たAcquia Engage\n\n発表者: 門別 諭、菊池 源吾（Dentsu Isobar Japan）\n\n大手デジタルエージェンシーの視点から見たAcquia Engageカンファレンスの報告。Acquiaのエコシステムとデジタルエクスペリエンスプラットフォームに関する最新動向を紹介。\n\nSession materials: https://den-japan.org/sites/default/files/den2019presentation/acquia_engage_20191207.pdf",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T06:30:00Z",
+      "endTime": "2019-12-07T06:50:00Z",
+      "duration": "P20M",
+      "title": "動画共有サイトを事例としたアクセス制御について",
+      "location": "Track B – A会議室",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "宍戸 祐太郎"
+      ],
+      "full_description": "動画共有サイトを事例としたアクセス制御について\n\n発表者: 宍戸 祐太郎（Energia Communications）\n\nDrupalを使った動画共有サイトの構築事例を基に、アクセス制御の設計と実装方法について解説。ユーザー権限管理とコンテンツアクセス制御の実践的なアプローチを紹介。\n\nSession materials: https://den-japan.org/sites/default/files/den2019presentation/shishido.pdf",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T07:00:00Z",
+      "endTime": "2019-12-07T07:20:00Z",
+      "duration": "P20M",
+      "title": "Drupalの日本語検索",
+      "location": "Track A – A会議室",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "新田 幸子"
+      ],
+      "full_description": "Drupalの日本語検索\n\n発表者: 新田 幸子（Studio Umi）\n\nDrupalにおける日本語全文検索の実装方法について解説。形態素解析（MeCab等）とN-gramアプローチの比較、`hook_search_preprocess`を使った検索前処理の最適化、コアSearchモジュールでのN-gram文字インデックス設定のベストプラクティスを紹介。\n\nSession materials: https://den-japan.org/sites/default/files/den2019presentation/studioumi.pdf",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T07:00:00Z",
+      "endTime": "2019-12-07T07:20:00Z",
+      "duration": "P20M",
+      "title": "Decoupling Drupal and the integration with Gatsby",
+      "location": "Track B – A会議室",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "Gautam Das"
+      ],
+      "full_description": "Decoupling Drupal and the integration with Gatsby\n\n発表者: Gautam Das（Generolo）\n\nDrupalとGatsbyを組み合わせたデカップルドアーキテクチャについての実践的な解説。Drupal JSON:API / GraphQLをデータソースとして活用し、Gatsby静的サイトジェネレーターとの統合方法を紹介。\n\nSession materials: https://den-japan.org/sites/default/files/den2019presentation/DrupalGatsby.pdf",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T07:30:00Z",
+      "endTime": "2019-12-07T08:20:00Z",
+      "duration": "P50M",
+      "title": "クロージングセッション / 交流会",
+      "location": "コワーキング",
+      "link": "https://drupal-camp2019.den-japan.org/sessions/",
+      "track": [
+        "Other"
+      ],
+      "speakers": null,
+      "full_description": "クロージングセッション / 交流会\n\n閉会セッションおよびネットワーキング交流会。",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-12-07T08:30:00Z",
+      "endTime": "2019-12-07T10:30:00Z",
+      "duration": "P120M",
+      "title": "懇親会（有料）",
+      "location": "別会場",
+      "link": "https://drupal-meetup-den.connpass.com/event/151297/",
+      "track": [
+        "Other"
+      ],
+      "speakers": null,
+      "full_description": "懇親会（有料）\n\n別会場にてアフターパーティー（懇親会）を開催。参加費: ¥3,000。定員50名（申込時に選択）。\n\n時間: 17:30–19:30（JST）",
+      "video_url": "",
+      "sponsorIds": ""
+    }
+  ]
+}

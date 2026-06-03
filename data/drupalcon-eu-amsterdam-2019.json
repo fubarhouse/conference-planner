@@ -1,0 +1,2424 @@
+{
+  "event": {
+    "designation": "DrupalCon",
+    "location": "Amsterdam",
+    "year": "2019",
+    "website": "https://events.drupal.org/amsterdam2019/",
+    "region": "Europe",
+    "startDate": "2019-10-28T09:00:00Z",
+    "endDate": "2019-10-31T17:00:00Z",
+    "venue": "Beurs van Berlage",
+    "timezone": "Europe/Amsterdam",
+    "columns": 3,
+    "enabled": false,
+    "logo": {
+      "image": "./img/logos/drupalcon-logo.svg",
+      "imageAlt": "DrupalCon logo"
+    },
+    "scheduleURLs": [
+      "https://events.drupal.org/amsterdam2019/schedule"
+    ],
+    "flickr": null
+  },
+  "items": [
+    {
+      "startTime": "2019-10-28T09:00:00Z",
+      "endTime": "2019-10-28T17:00:00Z",
+      "duration": "P480M",
+      "title": "Training - Advanced ReactJS development for Drupal 8",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/525",
+      "track": [
+        "Trainings"
+      ],
+      "speakers": [
+        "Ashraf Abed"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T09:00:00Z",
+      "endTime": "2019-10-28T17:00:00Z",
+      "duration": "P480M",
+      "title": "Training - Component Based Development in Drupal 8 with Pattern Lab",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/526",
+      "track": [
+        "Trainings"
+      ],
+      "speakers": [
+        "Mark Casias",
+        "Eric Huffman"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T09:00:00Z",
+      "endTime": "2019-10-28T17:00:00Z",
+      "duration": "P480M",
+      "title": "Training - Drupal 8 Migration as a process",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/527",
+      "track": [
+        "Trainings"
+      ],
+      "speakers": [
+        "Antonio De Marco",
+        "Andrea Pescetti",
+        "Daniel Sipos"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T09:00:00Z",
+      "endTime": "2019-10-28T17:00:00Z",
+      "duration": "P480M",
+      "title": "Training - PHP Code performance profiling and optimization",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/529",
+      "track": [
+        "Trainings"
+      ],
+      "speakers": [
+        "Dmytro Olaresko",
+        "Oleksandr Senenko",
+        "Marc Weistroff"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T09:00:00Z",
+      "endTime": "2019-10-28T17:00:00Z",
+      "duration": "P480M",
+      "title": "Training - Drupal + Gatsby",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/530",
+      "track": [
+        "Trainings"
+      ],
+      "speakers": [
+        "Suzanne Dergacheva"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T09:00:00Z",
+      "endTime": "2019-10-28T17:00:00Z",
+      "duration": "P480M",
+      "title": "General Contribution (day 1)",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1012",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-28T13:30:00Z",
+      "endTime": "2019-10-28T14:45:00Z",
+      "duration": "P75M",
+      "title": "Drupal initiative leads keynote",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1001",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Greg Anderson",
+        "Fabian Bircher",
+        "Sean Blommaert",
+        "Ted Bowman",
+        "Cristina Chumillas",
+        "Suzanne Dergacheva",
+        "Tara King",
+        "Wim Leers",
+        "Elli Ludwigson",
+        "Dick Olsson"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T15:00:00Z",
+      "endTime": "2019-10-28T15:40:00Z",
+      "duration": "P40M",
+      "title": "[Machine Learning] Creating more relevant search results with \"Learn to Rank\"",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/28",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Mattias Michaux",
+        "Nick Veenhof"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T15:00:00Z",
+      "endTime": "2019-10-28T15:40:00Z",
+      "duration": "P40M",
+      "title": "Houdini - New Era of CSS",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/169",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Vidit Anjaria",
+        "Saket Kumar"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T15:00:00Z",
+      "endTime": "2019-10-28T15:20:00Z",
+      "duration": "P20M",
+      "title": "[PANEL] The Proposed Drupal Privacy Initiative: What Is It and Why Now?",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/206",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Chris Teitzel"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T15:00:00Z",
+      "endTime": "2019-10-28T15:20:00Z",
+      "duration": "P20M",
+      "title": "A Journey of Building a Media Publishing Platform for a \"GIANT Enterprise\"!!",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/297",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Kapil Kataria",
+        "Rupa Mistry"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T15:00:00Z",
+      "endTime": "2019-10-28T15:20:00Z",
+      "duration": "P20M",
+      "title": "Choosing tech for the enterprise, like you work on The Enterprise",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/418",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Jordan Harrison"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T15:00:00Z",
+      "endTime": "2019-10-28T23:00:00Z",
+      "duration": "P480M",
+      "title": "Mentor Orientation 1",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1019",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-28T15:00:00Z",
+      "endTime": "2019-10-28T15:45:00Z",
+      "duration": "P45M",
+      "title": "BoF 01 - Solutions for content deployment",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1024",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Florent Torregrosa"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T15:25:00Z",
+      "endTime": "2019-10-28T15:45:00Z",
+      "duration": "P20M",
+      "title": "How to start contributing to Drupal without Code",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/95",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Paul Johnson"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T15:25:00Z",
+      "endTime": "2019-10-28T15:45:00Z",
+      "duration": "P20M",
+      "title": "Communication strategy to build digital experiences that connect.",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/444",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Tracy Evans",
+        "Jeffrey McGuire"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T15:25:00Z",
+      "endTime": "2019-10-28T15:45:00Z",
+      "duration": "P20M",
+      "title": "Forget YouTube! We take Drupal to the next level with a state-of-the-art enterprise video on demand platform!",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/472",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Nikolay Borisov",
+        "Christian Kretzschmar",
+        "Kay Werner"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T16:25:00Z",
+      "endTime": "2019-10-28T17:05:00Z",
+      "duration": "P40M",
+      "title": "Linux Server Deep Dives",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/67",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Amin Astaneh"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T16:25:00Z",
+      "endTime": "2019-10-28T16:45:00Z",
+      "duration": "P20M",
+      "title": "The Art of Mentorship",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/214",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Todor Nikolov",
+        "Maria Totova"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T16:25:00Z",
+      "endTime": "2019-10-28T16:45:00Z",
+      "duration": "P20M",
+      "title": "Let’s take the best route - Exploring Drupal 8 Routing System",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/471",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Surbhi Sriwal"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T16:25:00Z",
+      "endTime": "2019-10-28T17:05:00Z",
+      "duration": "P40M",
+      "title": "[PANEL] Tips for a successful and amazing conference, camp or meetup",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/513",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Michael Anello",
+        "Cristina Chumillas",
+        "Doug Cone",
+        "Jordana Fung"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T16:25:00Z",
+      "endTime": "2019-10-28T17:10:00Z",
+      "duration": "P45M",
+      "title": "BoF 02 - Drupal Commerce Ecosystem",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1025",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Eirik Morland"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T16:50:00Z",
+      "endTime": "2019-10-28T17:10:00Z",
+      "duration": "P20M",
+      "title": "Dive deep into Drupal 8 Render API",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/184",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Surbhi Sriwal"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T16:50:00Z",
+      "endTime": "2019-10-28T17:10:00Z",
+      "duration": "P20M",
+      "title": "Autosave and Concurrent editing (conflict resolution) in Drupal 8",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/257",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Hristo Chonov"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T17:15:00Z",
+      "endTime": "2019-10-28T17:55:00Z",
+      "duration": "P40M",
+      "title": "Fast UX Feedback for Your Drupal Project",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/45",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Suzanne Dergacheva"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T17:15:00Z",
+      "endTime": "2019-10-28T17:35:00Z",
+      "duration": "P20M",
+      "title": "Splash Awards initiative update",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/261",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Imre Gmelig Meijling"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T17:15:00Z",
+      "endTime": "2019-10-28T17:55:00Z",
+      "duration": "P40M",
+      "title": "Configuration Management Initiative 2.0 updates",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/308",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Fabian Bircher"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T17:15:00Z",
+      "endTime": "2019-10-28T17:35:00Z",
+      "duration": "P20M",
+      "title": "The Good, The Bad, and The Data: Marketing Strategies for Open Source Companies",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/407",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Felix Morgan"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T17:15:00Z",
+      "endTime": "2019-10-28T17:35:00Z",
+      "duration": "P20M",
+      "title": "Drupal for Social Impact: The ILO Employment Counselling System for Syrian Refugees in Jordan",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/511",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Paco Gracia",
+        "Olga Leon"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T17:15:00Z",
+      "endTime": "2019-10-28T18:00:00Z",
+      "duration": "P45M",
+      "title": "BoF 04 - But, hey, where do I start in Drupal Community?",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1014",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Shadab Ashraf"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T17:15:00Z",
+      "endTime": "2019-10-29T01:15:00Z",
+      "duration": "P480M",
+      "title": "Issue Triage",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1018",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-28T17:40:00Z",
+      "endTime": "2019-10-28T18:00:00Z",
+      "duration": "P20M",
+      "title": "Digital Transformation of Customer Selfcare in a Developing Country",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/119",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Sheikh Faiyaz Moorsalin"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T17:40:00Z",
+      "endTime": "2019-10-28T18:00:00Z",
+      "duration": "P20M",
+      "title": "Content Marketing for Drupal Agencies: Our Simple Strategy for 1100% growth in 8 months",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/309",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Arora Devanshu",
+        "Vidhatanand V"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T17:40:00Z",
+      "endTime": "2019-10-28T18:00:00Z",
+      "duration": "P20M",
+      "title": "Pivot Points - Recognizing Opportunity, Turning Challenges to Strengths.",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/346",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Matthew Saunders"
+      ]
+    },
+    {
+      "startTime": "2019-10-28T18:00:00Z",
+      "endTime": "2019-10-29T02:00:00Z",
+      "duration": "P480M",
+      "title": "Opening Reception",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1023",
+      "track": [
+        "Social Events"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-28T19:00:00Z",
+      "endTime": "2019-10-29T03:00:00Z",
+      "duration": "P480M",
+      "title": "Splash Awards",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1017",
+      "track": [
+        "Awards"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-29T08:45:00Z",
+      "endTime": "2019-10-29T10:00:00Z",
+      "duration": "P75M",
+      "title": "Driesnote",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1002",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Dries Buytaert",
+        "Heather Rocker"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T09:00:00Z",
+      "endTime": "2019-10-29T17:00:00Z",
+      "duration": "P480M",
+      "title": "General Contribution (day 2)",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1013",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-29T10:00:00Z",
+      "endTime": "2019-10-29T18:00:00Z",
+      "duration": "P480M",
+      "title": "Group Photo",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1022",
+      "track": [
+        "Social Events"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T11:25:00Z",
+      "duration": "P40M",
+      "title": "Components everywhere! - Bridging the gap between backend and frontend: A vision for Drupal Core and the Real-time Web",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/84",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Fabian Franz"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T11:25:00Z",
+      "duration": "P40M",
+      "title": "Why Open Source Matters by Making People and Companies Better through Virtual Barnraising",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/111",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Janne Kalliola"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T11:25:00Z",
+      "duration": "P40M",
+      "title": "Security, Drupal 9, and Navigating the Changing Web Landscape",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/212",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Jess (xjm)"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T11:05:00Z",
+      "duration": "P20M",
+      "title": "Dream Migrations and Imports : Feeds UI + Migrate Engine",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/311",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Youri Van Koppen",
+        "Irina Zaks"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T11:25:00Z",
+      "duration": "P40M",
+      "title": "Drupal’s place in an evolving landscape - Modernising your Commerce architecture",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/423",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Richard Jones"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T11:05:00Z",
+      "duration": "P20M",
+      "title": "Adoptable Goats Near Me: What I Googled the Year I Became a Developer",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/495",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Qymana Botts"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T11:25:00Z",
+      "duration": "P40M",
+      "title": "Planning Enterprises Path for Your Drupal 9 Journey",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/522",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Dinesh Waghmare"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T11:30:00Z",
+      "duration": "P45M",
+      "title": "BoF 05 - Holacracy, agile, S3 ... - discussion and sharing learnings about responsive organisations",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1007",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Roy Voggenberger"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T18:45:00Z",
+      "duration": "P480M",
+      "title": "First-Time Contributor Workshop 1",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1011",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T11:30:00Z",
+      "duration": "P45M",
+      "title": "Drupal Ladder",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1048",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Ashish Jain"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T11:10:00Z",
+      "endTime": "2019-10-29T11:30:00Z",
+      "duration": "P20M",
+      "title": "Mindless multitasking: a dummy’s guide to productivity",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/115",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Sarah Wall"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T11:10:00Z",
+      "endTime": "2019-10-29T11:30:00Z",
+      "duration": "P20M",
+      "title": "Config management: 1 to 100 sites",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/155",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Ashley Hazle"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T11:30:00Z",
+      "endTime": "2019-10-29T12:15:00Z",
+      "duration": "P45M",
+      "title": "BoF 09 - Open Source E-commerce solutions : Stop to compare, start to analyze",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1028",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Fabien Clément",
+        "Mathieu Le Cain"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T11:45:00Z",
+      "endTime": "2019-10-29T12:05:00Z",
+      "duration": "P20M",
+      "title": "Mastering the CDN: Present & Future",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/213",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Matthew Cheney"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T11:45:00Z",
+      "endTime": "2019-10-29T12:25:00Z",
+      "duration": "P40M",
+      "title": "What's Next for the Layout Initiative",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/319",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Tim Plunkett"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T11:45:00Z",
+      "endTime": "2019-10-29T12:05:00Z",
+      "duration": "P20M",
+      "title": "Using Drupal as a Content Hub to create an interactive,  visual product exploration application. Of course, decoupled with vueJS ;-)",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/339",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Jan Pilarzeck"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T11:45:00Z",
+      "endTime": "2019-10-29T12:05:00Z",
+      "duration": "P20M",
+      "title": "CERN’s D8 Digital Portfolio",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/484",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Diego Catalan Garcia",
+        "Montaña Franco"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T11:45:00Z",
+      "endTime": "2019-10-29T12:25:00Z",
+      "duration": "P40M",
+      "title": "Open Source Contribution Panel",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/488",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Josef Dabernig",
+        "Julia Pradel",
+        "Michael Schmid",
+        "Sally Young",
+        "Bojan Zivanovic"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T11:45:00Z",
+      "endTime": "2019-10-29T12:25:00Z",
+      "duration": "P40M",
+      "title": "LIVE DEMO: Using GatsbyJS to build a decoupled (Drupal) website",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/498",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Mark Conroy"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T11:45:00Z",
+      "endTime": "2019-10-29T12:05:00Z",
+      "duration": "P20M",
+      "title": "Telling the Full Story - Use Cases and User Stories",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/510",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Lauren Kelly"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T11:45:00Z",
+      "endTime": "2019-10-29T19:45:00Z",
+      "duration": "P480M",
+      "title": "First-Time Contributor Workshop 1bis",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1015",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-29T11:45:00Z",
+      "endTime": "2019-10-29T12:30:00Z",
+      "duration": "P45M",
+      "title": "BoF 10 - Privacy Initivtive Proposal (GDPR /CCPA)",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1054",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-29T12:10:00Z",
+      "endTime": "2019-10-29T12:30:00Z",
+      "duration": "P20M",
+      "title": "How to lower the costs of your Drupal Site's resources and plan Capacity in advance",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/69",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Ricardo Amaro"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T12:10:00Z",
+      "endTime": "2019-10-29T12:30:00Z",
+      "duration": "P20M",
+      "title": "Team London - Connecting Volunteers with Causes in London",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/103",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Will Huggins",
+        "Kinda Youssef Allamaa"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T12:10:00Z",
+      "endTime": "2019-10-29T12:30:00Z",
+      "duration": "P20M",
+      "title": "Stop buying Drupal websites, buy open digital experiences to increase customer life time value",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/180",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Dominique De Cooman"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T12:10:00Z",
+      "endTime": "2019-10-29T12:30:00Z",
+      "duration": "P20M",
+      "title": "#Startuplife. Lessons from 3 years Open Social moving from services to a product company.",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/272",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Taco Potze"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T12:55:00Z",
+      "endTime": "2019-10-29T20:55:00Z",
+      "duration": "P480M",
+      "title": "Creating a healthy technology ecosystem for Drupal",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1032",
+      "track": [
+        "Open Stage"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-29T13:30:00Z",
+      "endTime": "2019-10-29T14:45:00Z",
+      "duration": "P75M",
+      "title": "Humanity in tech",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1003",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Boris Veldhuijzen Van Zanten"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:40:00Z",
+      "duration": "P40M",
+      "title": "Drupal 8 Commerce: Under the hood",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/35",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Robin Ingelbrecht"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:40:00Z",
+      "duration": "P40M",
+      "title": "OWASP Top 10: What are them and how to prevent them",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/76",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Ayesh Karunaratne"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:40:00Z",
+      "duration": "P40M",
+      "title": "Lessons from a first time Drupal Camp organizer",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/130",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Camilo Bravo"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:40:00Z",
+      "duration": "P40M",
+      "title": "Don't trust, verify",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/142",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Nikola Krstic"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:40:00Z",
+      "duration": "P40M",
+      "title": "Massive Multisite and Multilingual - Localisation in the Large!",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/270",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Bansi Kotecha",
+        "Justin Woodington"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:20:00Z",
+      "duration": "P20M",
+      "title": "Making Drupal as easy to use as Squarespace: A programmer gone marketer approach to building web applications",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/442",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Philippe Von Bergen"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:20:00Z",
+      "duration": "P20M",
+      "title": "Next steps on modernizing the Drupal theme system (Drupal 9 and beyond)",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/517",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Lauri Eskola"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:45:00Z",
+      "duration": "P45M",
+      "title": "BoF 11 - Introduction to entity_staging module",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1030",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Fabien Clément"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:45:00Z",
+      "duration": "P45M",
+      "title": "BoF 12 - About API-First Decoupled Drupal Camp Tokyo 2019",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1036",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Kazu Hodota"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:45:00Z",
+      "duration": "P45M",
+      "title": "BoF 13 - Taking control of your infrastructure / hosting",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1040",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Andre Baumeier"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T15:25:00Z",
+      "endTime": "2019-10-29T15:45:00Z",
+      "duration": "P20M",
+      "title": "The transformation from Print paper to Digital News & Media with Drupal",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/226",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Pratik Mehta"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T15:25:00Z",
+      "endTime": "2019-10-29T15:45:00Z",
+      "duration": "P20M",
+      "title": "Frontend Security is a Thing",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/421",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Madalina Cotumbeanu"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T15:55:00Z",
+      "endTime": "2019-10-29T23:55:00Z",
+      "duration": "P480M",
+      "title": "Matsmart eliminates food waste with headless Drupal Commerce",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1034",
+      "track": [
+        "Open Stage"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-29T16:15:00Z",
+      "endTime": "2019-10-29T16:55:00Z",
+      "duration": "P40M",
+      "title": "Drupal Association Town Hall",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/109",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Adam Goodman",
+        "Timothy Lehnen",
+        "Heather Rocker"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T16:15:00Z",
+      "endTime": "2019-10-29T16:55:00Z",
+      "duration": "P40M",
+      "title": "QUIC and HTTP/3: Too Big to Fail?!",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/113",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Robin Marx"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T16:15:00Z",
+      "endTime": "2019-10-29T16:55:00Z",
+      "duration": "P40M",
+      "title": "[PANEL] Drupal Diversity & Inclusion: Volunteer-led strategies for helping the Drupal community",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/228",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Alanna Burke",
+        "Tara King",
+        "Elli Ludwigson"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T16:15:00Z",
+      "endTime": "2019-10-29T16:55:00Z",
+      "duration": "P40M",
+      "title": "React as a decoupled theme engine for Drupal",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/277",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Nikolay Dobromirov",
+        "Petyo Stoyanov"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T16:15:00Z",
+      "endTime": "2019-10-29T16:35:00Z",
+      "duration": "P20M",
+      "title": "Before decoupling, understand JS. JavaScript for Drupalers: Let's learn this",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/361",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Ashraf Abed"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T16:15:00Z",
+      "endTime": "2019-10-29T16:55:00Z",
+      "duration": "P40M",
+      "title": "Drupal Gutenberg and Unicef: A Case Study",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/382",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Marco Fernandes",
+        "Thor Andre Gretland"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T16:15:00Z",
+      "endTime": "2019-10-29T16:35:00Z",
+      "duration": "P20M",
+      "title": "Alexa skills design patterns and principles",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/441",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Raffaele Chiocca",
+        "Alessandra Petromilli"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T16:15:00Z",
+      "endTime": "2019-10-29T17:00:00Z",
+      "duration": "P45M",
+      "title": "BoF 15 - Promote Drupal Pitch Deck",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1029",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Paul Johnson"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T16:15:00Z",
+      "endTime": "2019-10-29T17:00:00Z",
+      "duration": "P45M",
+      "title": "BoF 18 - Native Drupal CRM + Integrations",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1045",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-29T16:40:00Z",
+      "endTime": "2019-10-29T17:00:00Z",
+      "duration": "P20M",
+      "title": "Storybook and Drupal: Seamless frontend integration for decoupled sites.",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/247",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Jamie Hollern",
+        "Mattia Simonato"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T16:40:00Z",
+      "endTime": "2019-10-29T17:00:00Z",
+      "duration": "P20M",
+      "title": "Drop your Excel Sheets: Drupal native editorial planning",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/296",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Lukas Fischer"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T17:15:00Z",
+      "endTime": "2019-10-29T17:35:00Z",
+      "duration": "P20M",
+      "title": "Fostering Community Health and demystifying the CWG",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/89",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Michael Anello",
+        "Jordana Fung"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T17:15:00Z",
+      "endTime": "2019-10-29T17:55:00Z",
+      "duration": "P40M",
+      "title": "Winning and retaining long term clients",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/126",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Owen Lansbury"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T17:15:00Z",
+      "endTime": "2019-10-29T17:55:00Z",
+      "duration": "P40M",
+      "title": "External Design Systems in Practice",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/195",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Brian Perry"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T17:15:00Z",
+      "endTime": "2019-10-29T17:35:00Z",
+      "duration": "P20M",
+      "title": "Hardships faced while theming e-commerce site in Drupal 8",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/332",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Meenakshi Gupta",
+        "Lakshay Kumar Mutreja"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T17:15:00Z",
+      "endTime": "2019-10-29T17:35:00Z",
+      "duration": "P20M",
+      "title": "Pre-Rendering Media Sites with Nuxt.js & Netlify",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/344",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Wolfgang Ziegler"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T17:15:00Z",
+      "endTime": "2019-10-29T17:55:00Z",
+      "duration": "P40M",
+      "title": "Building Your Legos: A Practitioner’s Guide to Building Reusable Components",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/360",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Chris Greatens"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T17:15:00Z",
+      "endTime": "2019-10-29T17:55:00Z",
+      "duration": "P40M",
+      "title": "Memory of Nations - how Drupal helps to preserve memories of humankind",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/386",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Miro Michalicka"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T17:40:00Z",
+      "endTime": "2019-10-29T18:00:00Z",
+      "duration": "P20M",
+      "title": "Extreme Makeover: Drupal.org Profile Edition",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/25",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Amanda Marshall",
+        "Gregg Marshall"
+      ]
+    },
+    {
+      "startTime": "2019-10-29T17:40:00Z",
+      "endTime": "2019-10-29T18:00:00Z",
+      "duration": "P20M",
+      "title": "IT news portal migrated from a highly customized Wordpress to Drupal 8",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/512",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Peter Ponya",
+        "Dominika Péterová"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T09:00:00Z",
+      "endTime": "2019-10-30T09:40:00Z",
+      "duration": "P40M",
+      "title": "Do you know what your Drupal is doing? Observe it!",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/38",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Luca Lusso"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T09:00:00Z",
+      "endTime": "2019-10-30T09:40:00Z",
+      "duration": "P40M",
+      "title": "Content Management as Critical Success Factor for Personalized Medicine",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/56",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Markus Kalkbrenner",
+        "Rudolf Koopmann"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T09:00:00Z",
+      "endTime": "2019-10-30T09:20:00Z",
+      "duration": "P20M",
+      "title": "How to utilize Open Source tools to create CI/CD & DevOps workflows without the vendor lock-in",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/149",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Aleksandr Tolstikov"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T09:00:00Z",
+      "endTime": "2019-10-30T09:40:00Z",
+      "duration": "P40M",
+      "title": "Women in Tech: How to get (and keep) women in your leadership roles",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/185",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Lindsey Catlett",
+        "Ruth Cheesley"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T09:00:00Z",
+      "endTime": "2019-10-30T09:40:00Z",
+      "duration": "P40M",
+      "title": "Scaling up and accelerating Drupal 8 with NoSQL",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/249",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Frédéric Marand"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T09:00:00Z",
+      "endTime": "2019-10-30T09:40:00Z",
+      "duration": "P40M",
+      "title": "Designing the future of the Drupal Admin UI",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/341",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Archita Arora",
+        "Cristina Chumillas",
+        "Sascha Eggenberger"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T09:00:00Z",
+      "endTime": "2019-10-30T09:40:00Z",
+      "duration": "P40M",
+      "title": "Judging a book by its cover - how inclusive is your community?",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/458",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Alanna Burke"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T09:00:00Z",
+      "endTime": "2019-10-30T09:40:00Z",
+      "duration": "P40M",
+      "title": "Making support the backbone of your business",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/486",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Anthony Lindsay",
+        "Stella Power"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T09:25:00Z",
+      "endTime": "2019-10-30T09:45:00Z",
+      "duration": "P20M",
+      "title": "Drupal HA:  a story from the trenches",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/387",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Bram Vogelaar"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T10:15:00Z",
+      "endTime": "2019-10-30T10:55:00Z",
+      "duration": "P40M",
+      "title": "Accelerating International Education via Drupal: A Georgia Tech Case Study",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/96",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Jimmy Kriigel"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T10:15:00Z",
+      "endTime": "2019-10-30T10:55:00Z",
+      "duration": "P40M",
+      "title": "Dries Q&A",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/165",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Dries Buytaert",
+        "Rachel Lawson"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T10:15:00Z",
+      "endTime": "2019-10-30T10:55:00Z",
+      "duration": "P40M",
+      "title": "[PANEL] How companies are currently using Kubernetes with Drupal",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/324",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Kevin Bridges",
+        "Florian Loretan",
+        "Michael Schmid",
+        "Thom Toogood"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T10:15:00Z",
+      "endTime": "2019-10-30T10:55:00Z",
+      "duration": "P40M",
+      "title": "Advanced migration techniques",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/334",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Daniel Sipos"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T10:15:00Z",
+      "endTime": "2019-10-30T10:55:00Z",
+      "duration": "P40M",
+      "title": "Taking Drupal Commerce to Market: 2019 Roadmap",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/398",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Ryan Szrama"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T10:15:00Z",
+      "endTime": "2019-10-30T10:55:00Z",
+      "duration": "P40M",
+      "title": "Composer and Drupal: Past, Present and Future",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/445",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Greg Anderson",
+        "Ryan Aslett"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T10:15:00Z",
+      "endTime": "2019-10-30T10:55:00Z",
+      "duration": "P40M",
+      "title": "Fixing the mistakes we -all- make as developers, leaders and teams",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/499",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Jordana Fung",
+        "Jacqui Tenderwolf"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T10:15:00Z",
+      "endTime": "2019-10-30T18:15:00Z",
+      "duration": "P480M",
+      "title": "Mentor Orientation 2",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1020",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:10:00Z",
+      "duration": "P40M",
+      "title": "Find security vulnerabilities through code review",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/91",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Klaus Purer"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:10:00Z",
+      "duration": "P40M",
+      "title": "Drupal Association Public Board Meeting",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/108",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Heather Rocker"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:10:00Z",
+      "duration": "P40M",
+      "title": "Progressive decoupling in action: using Vue.js to add rich application-like functionality to the course pages of a UK Higher Education institution's Drupal 8 site",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/187",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Phil Wolstenholme"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:10:00Z",
+      "duration": "P40M",
+      "title": "I Think It’s a Kitten Wearing a Bowtie? Drupal Media Image Caption Suggestions Using AI",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/201",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Laura Johnson",
+        "Boban Stanojevic"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:10:00Z",
+      "duration": "P40M",
+      "title": "Expanding Drupal Universe : Exploring how new technologies help finding new customers",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/304",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Ashish Goyal",
+        "Shashank Merothiya"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:10:00Z",
+      "duration": "P40M",
+      "title": "Building a platform for sustainability",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/314",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Jari Nousiainen",
+        "Eveliina Vikström"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:10:00Z",
+      "duration": "P40M",
+      "title": "[PANEL] The \"battle\" of the local development tools",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/321",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Ricardo Amaro",
+        "Mark Casias",
+        "Randy Fay",
+        "Mattias Michaux",
+        "Alejandro Moreno-Lopez",
+        "Michael Schmid",
+        "Engin Yilmaz"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:10:00Z",
+      "duration": "P40M",
+      "title": "How to build up resilience and keep burnout at bay",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/463",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Jochen Lillich"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:15:00Z",
+      "duration": "P45M",
+      "title": "BoF 29 - The state of the Drupal Community in Poland",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1021",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Adam Szałapski"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:15:00Z",
+      "duration": "P45M",
+      "title": "BoF 30 - Discuss about DSP2 and Commerce Stripe Payment Intent",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1031",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Fabien Clément"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T12:15:00Z",
+      "endTime": "2019-10-30T20:15:00Z",
+      "duration": "P480M",
+      "title": "Women in Drupal Luncheon",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1027",
+      "track": [
+        "Social Events"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-30T13:15:00Z",
+      "endTime": "2019-10-30T21:15:00Z",
+      "duration": "P480M",
+      "title": "Amazecapades",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1035",
+      "track": [
+        "Open Stage"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-30T13:30:00Z",
+      "endTime": "2019-10-30T14:45:00Z",
+      "duration": "P75M",
+      "title": "If I can do it, so can you",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1004",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Sue Black"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T15:00:00Z",
+      "endTime": "2019-10-30T15:40:00Z",
+      "duration": "P40M",
+      "title": "Quick wins for an accessible website",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/141",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Marloes Bosch"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T15:00:00Z",
+      "endTime": "2019-10-30T15:40:00Z",
+      "duration": "P40M",
+      "title": "4 Keys to a Successful Globalization Strategy and CMS Platform Architecture",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/177",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Tina Williams"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T15:00:00Z",
+      "endTime": "2019-10-30T15:20:00Z",
+      "duration": "P20M",
+      "title": "Create and theme amazing PDFs using Drupal 8",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/196",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Taher Jodhpurwala"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T15:00:00Z",
+      "endTime": "2019-10-30T15:40:00Z",
+      "duration": "P40M",
+      "title": "The Pains And Gains Of Bringing Agile ABM Marketing To A Global Drupal Development Agency",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/220",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Nathan Roach"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T15:00:00Z",
+      "endTime": "2019-10-30T15:20:00Z",
+      "duration": "P20M",
+      "title": "Combining DevOps and Emotional Intelligence",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/343",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Kevin Bridges",
+        "Elli Ludwigson"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T15:00:00Z",
+      "endTime": "2019-10-30T15:40:00Z",
+      "duration": "P40M",
+      "title": "Caching in Drupal 8 has evolved: Tips on how to improve your code",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/461",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Kristiaan Van den Eynde"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T15:00:00Z",
+      "endTime": "2019-10-30T15:40:00Z",
+      "duration": "P40M",
+      "title": "Building amazing searches with Search API",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/466",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Thomas Seidl"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T15:00:00Z",
+      "endTime": "2019-10-30T15:20:00Z",
+      "duration": "P20M",
+      "title": "Green Tech Thinking",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/480",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Janne Koponen"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T15:00:00Z",
+      "endTime": "2019-10-30T15:45:00Z",
+      "duration": "P45M",
+      "title": "BoF 33 - How to develop site & don't mind of security, backups, PHP configuration, etc",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1053",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": null
+    },
+    {
+      "startTime": "2019-10-30T15:25:00Z",
+      "endTime": "2019-10-30T15:45:00Z",
+      "duration": "P20M",
+      "title": "Deploying PHP applications with Ansible, Ansible Vault and Ansistrano",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/64",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Oliver Davies"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T15:25:00Z",
+      "endTime": "2019-10-30T15:45:00Z",
+      "duration": "P20M",
+      "title": "In Their Own Words: Stories of Web Accessibility",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/99",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Helena McCabe"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T15:25:00Z",
+      "endTime": "2019-10-30T15:45:00Z",
+      "duration": "P20M",
+      "title": "What digital marketeers and Drupal can learn from the Brexit campaign",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/413",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Michel Van Velde"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T16:15:00Z",
+      "endTime": "2019-10-30T16:55:00Z",
+      "duration": "P40M",
+      "title": "7 cultural models to adapt to a world of increased complexity",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/80",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Kristof Van Tomme"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T16:15:00Z",
+      "endTime": "2019-10-30T16:55:00Z",
+      "duration": "P40M",
+      "title": "Multilingualism makes better programmers - a look beyond PHP and JavaScript",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/83",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Alexander Varwijk"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T16:15:00Z",
+      "endTime": "2019-10-30T16:55:00Z",
+      "duration": "P40M",
+      "title": "Your First Drupal 8(or 9!) Module",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/138",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Ted Bowman"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T16:15:00Z",
+      "endTime": "2019-10-30T16:55:00Z",
+      "duration": "P40M",
+      "title": "SVGs in Drupal Frontends - Creating configurable blazing effects",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/175",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Melinda Kovacs - Sztankovits",
+        "Francisco Jose Seva Mora"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T16:15:00Z",
+      "endTime": "2019-10-30T16:55:00Z",
+      "duration": "P40M",
+      "title": "How to be a good boss, tech lead, or project maintainer: Inclusive Leadership Edition",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/215",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Tara King"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T16:15:00Z",
+      "endTime": "2019-10-30T16:35:00Z",
+      "duration": "P20M",
+      "title": "Drupal marketing headstart for local associations",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/260",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Jeroen van den Berg"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T16:15:00Z",
+      "endTime": "2019-10-30T16:35:00Z",
+      "duration": "P20M",
+      "title": "Layout builder ecosystem",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/402",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Boyan Borisov"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T16:15:00Z",
+      "endTime": "2019-10-30T16:55:00Z",
+      "duration": "P40M",
+      "title": "How we implemented a Drupal Commerce marketplace for safety equipment",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/438",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Kai Hartung",
+        "Mario Thiele"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T16:40:00Z",
+      "endTime": "2019-10-30T17:00:00Z",
+      "duration": "P20M",
+      "title": "Drupal SEO Pitfalls and How To Avoid Them",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/186",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Wouter De Bruycker",
+        "Brent Gees"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T16:40:00Z",
+      "endTime": "2019-10-30T17:00:00Z",
+      "duration": "P20M",
+      "title": "Design your workplace embracing \"Diversity and Inclusion\" and walk on air all the time",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/342",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Rakhi Mandhania"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T17:55:00Z",
+      "duration": "P40M",
+      "title": "Content driven eCommerce with Drupal Commerce",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/29",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Eirik Morland"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T17:55:00Z",
+      "duration": "P40M",
+      "title": "Drupal.org Infrastructure Update",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/107",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Ryan Aslett",
+        "Neil Drumm",
+        "Timothy Lehnen"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T17:55:00Z",
+      "duration": "P40M",
+      "title": "Connecting Drupal to Print: A seamless, smart, and bidirectional integration into an Adobe InDesign based publishing workflow",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/259",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Christian Kreutzer"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T17:35:00Z",
+      "duration": "P20M",
+      "title": "Drupal Docker and Debugging",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/262",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Rahul Kumar"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T17:35:00Z",
+      "duration": "P20M",
+      "title": "Drupal 8 BOGOFs: A Hitchhiker's Guide to Less Popular Symfony Components",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/278",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Deji Akala"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T17:55:00Z",
+      "duration": "P40M",
+      "title": "Live preview with Gatsby and decoupled Drupal",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/368",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Matt Davis",
+        "Preston So"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T17:35:00Z",
+      "duration": "P20M",
+      "title": "Mentoring Metamorphosis",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/393",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Elli Ludwigson"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T17:55:00Z",
+      "duration": "P40M",
+      "title": "Core initiatives and corporate roadmaps — Lessons learnt from 5 years of running an initiative",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/474",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Dick Olsson"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T18:00:00Z",
+      "duration": "P45M",
+      "title": "BoF 40 – Kuoni Congress - Give us your feedback about DrupalCon 2019",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1033",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T18:00:00Z",
+      "duration": "P45M",
+      "title": "BoF 38 - Kubernetes, Drupal, and other CMSs",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1038",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Kevin Bridges"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T17:40:00Z",
+      "endTime": "2019-10-30T18:00:00Z",
+      "duration": "P20M",
+      "title": "Death Star Security: A Realtime Look At How A Site Is Hacked",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/198",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Chris Teitzel"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T17:40:00Z",
+      "endTime": "2019-10-30T18:00:00Z",
+      "duration": "P20M",
+      "title": "Deep dive into Content Security Policy",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/284",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Priya Sundharam"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T17:40:00Z",
+      "endTime": "2019-10-30T18:00:00Z",
+      "duration": "P20M",
+      "title": "Beating imposter syndrome and burnout - how I rebuilt myself as a developer and learned to love Drupal again",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/453",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "David Thorne"
+      ]
+    },
+    {
+      "startTime": "2019-10-30T20:30:00Z",
+      "endTime": "2019-10-31T04:30:00Z",
+      "duration": "P480M",
+      "title": "Trivia Night",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1026",
+      "track": [
+        "Social Events"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-31T09:00:00Z",
+      "endTime": "2019-10-31T17:00:00Z",
+      "duration": "P480M",
+      "title": "First-Time Contributor Workshop",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1008",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-31T09:00:00Z",
+      "endTime": "2019-10-31T17:00:00Z",
+      "duration": "P480M",
+      "title": "General Contribution",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1009",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": []
+    },
+    {
+      "startTime": "2019-10-31T09:00:00Z",
+      "endTime": "2019-10-31T17:00:00Z",
+      "duration": "P480M",
+      "title": "Mentored Contribution",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1010",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": []
+    }
+  ],
+  "result": "success",
+  "url": "https://events.drupal.org/amsterdam2019/schedule"
+}

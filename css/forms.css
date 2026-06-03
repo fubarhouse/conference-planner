@@ -1,0 +1,399 @@
+/* ── Editor form fields ─────────────────────────────────────────────────── */
+        .editor-form-field {
+            display: flex;
+            flex-direction: column;
+        }
+        .editor-form-field > input:not([type="checkbox"]),
+        .editor-form-field > select,
+        .editor-form-field > textarea,
+        .editor-form-field > span[class*="inline-flex"] {
+            margin-top: auto;
+        }
+        .editor-field-label {
+            display: block;
+            margin-bottom: 0.1rem;
+            color: var(--text-1);
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            line-height: 1.2;
+        }
+        .editor-field-description {
+            display: block;
+            margin-bottom: 0.35rem;
+            color: var(--text-2);
+            font-size: 0.74rem;
+            line-height: 1.35;
+        }
+        .editor-form-field input:not([type="checkbox"]),
+        .editor-form-field select,
+        .editor-form-field textarea {
+            border: 1px solid rgba(100, 140, 180, 0.5);
+            border-radius: 0.45rem;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        .editor-form-field input:not([type="checkbox"]):hover,
+        .editor-form-field select:hover,
+        .editor-form-field textarea:hover {
+            border-color: rgba(100, 160, 220, 0.75);
+        }
+        .editor-field-description code {
+            color: var(--text-0);
+            background: var(--surface-2);
+            border: 1px solid var(--line-0);
+            border-radius: 0.25rem;
+            padding: 0.05rem 0.25rem;
+        }
+
+/* ── Editor flickr block, accordion, tabs, quick-edit ──────────────────── */
+        .editor-toggle-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.85rem 0.95rem;
+            border: 1px solid rgba(132, 180, 226, 0.32);
+            border-radius: 0.5rem;
+            background: rgba(9, 20, 34, 0.34);
+        }
+        .editor-toggle-row .editor-field-description {
+            margin-bottom: 0;
+        }
+        .editor-flickr-block {
+            display: block;
+            margin-top: 0.65rem;
+            padding: 1rem;
+            border: 1px solid rgba(110, 185, 246, 0.62);
+            border-radius: 0.65rem;
+            background:
+                radial-gradient(circle at 100% 0%, rgba(84, 169, 240, 0.24), transparent 34%),
+                linear-gradient(160deg, rgba(16, 38, 62, 0.95), rgba(11, 25, 42, 0.95));
+            box-shadow:
+                0 16px 34px rgba(0, 0, 0, 0.28),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+        .editor-flickr-block legend {
+            width: 100%;
+            padding: 0 0 0.75rem 0;
+        }
+        .editor-flickr-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #f3f9ff;
+            font-size: 1rem;
+            font-weight: 750;
+            line-height: 1.25;
+        }
+        .editor-flickr-summary {
+            display: block;
+            margin-top: 0.2rem;
+            color: #b8d3ed;
+            font-size: 0.82rem;
+            line-height: 1.35;
+        }
+        .editor-flickr-defaults {
+            padding: 0.85rem 0.95rem;
+            border: 1px solid rgba(132, 180, 226, 0.32);
+            border-radius: 0.5rem;
+            background: rgba(9, 20, 34, 0.34);
+        }
+        .editor-flickr-defaults-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.65rem;
+        }
+        .editor-flickr-defaults-label {
+            display: block;
+            color: #b8d3ed;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.12rem;
+        }
+        .editor-flickr-defaults-value {
+            display: block;
+            color: #eef6ff;
+            font-size: 0.9rem;
+            line-height: 1.35;
+        }
+        .editor-meta-accordion {
+            border: 1px solid rgba(113, 167, 219, 0.26);
+            background:
+                radial-gradient(circle at 100% 0%, rgba(96, 176, 241, 0.16), transparent 30%),
+                linear-gradient(165deg, rgba(16, 36, 58, 0.96), rgba(10, 23, 39, 0.98));
+            box-shadow:
+                0 16px 34px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+        .editor-meta-toggle {
+            min-height: 2.75rem;
+            padding: 0.65rem 0.85rem;
+            border: 1px solid rgba(135, 186, 233, 0.22);
+            border-radius: 0.6rem;
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            transition: background-color 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+        }
+        .editor-meta-toggle:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(156, 202, 244, 0.34);
+        }
+        .editor-meta-toggle:focus-visible {
+            outline: none;
+            border-color: rgba(156, 202, 244, 0.5);
+            box-shadow:
+                0 0 0 3px rgba(103, 176, 235, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+        .editor-quick-edit-toggle {
+            transition:
+                background-color 140ms ease,
+                border-color 140ms ease,
+                color 140ms ease,
+                box-shadow 140ms ease,
+                transform 140ms ease;
+        }
+        .editor-tab-row {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.3rem;
+            border: 1px solid rgba(135, 186, 233, 0.22);
+            border-radius: 0.7rem;
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .editor-tab-button {
+            min-height: 2.35rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.55rem 0.9rem;
+            border: 1px solid transparent;
+            border-radius: 0.55rem;
+            background: transparent;
+            color: #c8d6e8;
+            font-size: 0.85rem;
+            font-weight: 700;
+            line-height: 1.2;
+            cursor: pointer;
+            transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease, box-shadow 140ms ease;
+        }
+        .editor-tab-button:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #eef6ff;
+        }
+        .editor-tab-button:focus-visible {
+            outline: none;
+            border-color: rgba(156, 202, 244, 0.44);
+            box-shadow: 0 0 0 3px rgba(96, 179, 238, 0.18);
+        }
+        .editor-tab-button.is-active {
+            border-color: rgba(110, 192, 255, 0.75);
+            background: linear-gradient(180deg, rgba(22, 140, 222, 0.98), rgba(13, 108, 182, 0.98));
+            color: #ffffff;
+            box-shadow:
+                0 10px 26px rgba(13, 120, 204, 0.32),
+                inset 0 1px 0 rgba(255, 255, 255, 0.22),
+                0 0 0 1px rgba(46, 163, 255, 0.18);
+        }
+        .editor-tab-button.hidden {
+            display: none !important;
+        }
+        /* Combine rest + hover into one rule so active state always wins
+           without needing !important to beat the hover pseudo-class */
+        .editor-quick-edit-toggle-active,
+        .editor-quick-edit-toggle-active:hover,
+        .editor-quick-edit-toggle-active:focus-visible {
+            border-color: rgba(110, 192, 255, 0.75);
+            background: linear-gradient(180deg, rgba(22, 140, 222, 0.98), rgba(13, 108, 182, 0.98));
+            color: #ffffff;
+            box-shadow:
+                0 10px 26px rgba(13, 120, 204, 0.32),
+                inset 0 1px 0 rgba(255, 255, 255, 0.22),
+                0 0 0 1px rgba(46, 163, 255, 0.18);
+        }
+        .editor-quick-edit-toggle-active:focus-visible {
+            outline: none;
+            box-shadow:
+                0 0 0 3px rgba(96, 179, 238, 0.24),
+                0 10px 22px rgba(13, 120, 204, 0.24),
+                inset 0 1px 0 rgba(255, 255, 255, 0.16);
+        }
+        .editor-session-workspace-expanded {
+            grid-template-columns: minmax(0, 1fr) !important;
+        }
+        .editor-sponsor-workspace {
+            border: 1px solid rgba(113, 167, 219, 0.22);
+        }
+        .session-row-expanded {
+            user-select: none;
+        }
+        .session-row-expanded-grid {
+            display: grid;
+            grid-template-columns: 20px minmax(0, 1.5fr) minmax(170px, 1fr) minmax(170px, 1fr) auto;
+            gap: 0.85rem;
+            align-items: end;
+        }
+        .session-row-handle {
+            align-self: center;
+            justify-self: center;
+            font-size: 0.95rem;
+        }
+        .sponsor-row-grid {
+            display: grid;
+            grid-template-columns: 20px minmax(0, 2fr) minmax(120px, 0.9fr) minmax(120px, 0.9fr) minmax(120px, 0.7fr) auto;
+            gap: 0.85rem;
+            align-items: end;
+        }
+        .editor-inline-open {
+            align-self: center;
+        }
+        .editor-quick-open-state {
+            min-height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .editor-quick-open-card {
+            width: min(100%, 520px);
+            border: 1px solid rgba(113, 167, 219, 0.22);
+            border-radius: 0.65rem;
+            background: rgba(14, 26, 40, 0.72);
+            padding: 1.25rem;
+        }
+        .session-inline-field {
+            display: block;
+        }
+        .session-inline-label {
+            display: block;
+            margin-bottom: 0.34rem;
+            color: #c8d6e8;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        @media (max-width: 1023px) {
+            .session-row-expanded-grid {
+                grid-template-columns: 20px minmax(0, 1fr);
+            }
+            .sponsor-row-grid {
+                grid-template-columns: 20px minmax(0, 1fr);
+            }
+            .editor-inline-open {
+                grid-column: 1 / -1;
+                justify-self: end;
+            }
+        }
+
+/* ── Editor chrome: neon/electric dark aesthetic (tabs/accordion override) */
+/* ── Editor chrome: neon/electric dark aesthetic ─────────────────────────── */
+
+/* Toolbar: near-black glass, neon border */
+.theme-dark #editorToolbar.bg-white,
+.theme-dark #editorToolbar {
+    background: rgba(2, 7, 16, 0.97) !important; /* needs !important — .bg-white tie */
+    border-color: rgba(0, 207, 255, 0.24);
+    box-shadow:
+        0 24px 64px rgba(0, 0, 0, 0.58),
+        inset 0 1px 0 rgba(0, 207, 255, 0.07),
+        inset 0 -1px 0 rgba(0, 207, 255, 0.04);
+}
+
+/* Editor sections panel: aurora corner glows — overrides earlier .editor-meta-accordion */
+.editor-meta-accordion {
+    background:
+        radial-gradient(circle at 98% 2%,  rgba(0, 207, 255, 0.18), transparent 32%),
+        radial-gradient(circle at 2%  98%, rgba(124, 58, 237, 0.12), transparent 30%),
+        linear-gradient(165deg, rgba(5, 14, 30, 0.99), rgba(2, 8, 18, 1));
+    border: 1px solid rgba(0, 207, 255, 0.22);
+    box-shadow:
+        0 20px 55px rgba(0, 0, 0, 0.48),
+        inset 0 1px 0 rgba(0, 207, 255, 0.06);
+}
+
+/* Tab row: dark glass with neon rim — overrides earlier .editor-tab-row */
+.editor-tab-row {
+    border-color: rgba(0, 207, 255, 0.26);
+    background: rgba(0, 5, 14, 0.65);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        0 0 14px rgba(0, 207, 255, 0.07);
+}
+
+/* Tab hover: electric cyan — overrides earlier :hover definition */
+.editor-tab-button:hover {
+    background: rgba(0, 207, 255, 0.13);
+    color: #e8f8ff;
+    border-color: rgba(0, 207, 255, 0.32);
+}
+
+/* Active tab: vivid neon glow — overrides earlier .is-active definition */
+.editor-tab-button.is-active,
+.editor-quick-edit-toggle-active {
+    background: linear-gradient(180deg, #0ea5e9, #0369a1);
+    border-color: rgba(0, 207, 255, 0.92);
+    color: #ffffff;
+    box-shadow:
+        0 4px 22px rgba(14, 165, 233, 0.55),
+        0 0 0 1px rgba(0, 207, 255, 0.32),
+        0 0 32px rgba(0, 207, 255, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Button hover: electric cyan tint (needs !important — hover pseudo ties UnoCSS) */
+.theme-dark .hover\:bg-gray-50:hover {
+    background-color: rgba(0, 207, 255, 0.1) !important;
+    border-color: rgba(0, 207, 255, 0.4) !important;
+}
+
+/* Dirty save button: amber neon glow — (1,1,0) beats base, later in file */
+#saveDataset.is-dirty,
+#timelineSaveBtn.is-dirty {
+    box-shadow:
+        0 0 26px rgba(245, 158, 11, 0.6),
+        0 0 55px rgba(245, 158, 11, 0.22),
+        0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* Dirty state badge: attribute selector (1,1,0) > base (1,0,0), later in file */
+#dirtyState[data-dirty="true"] {
+    border-color: rgba(245, 158, 11, 0.82);
+    background: rgba(245, 158, 11, 0.13);
+    box-shadow: 0 0 18px rgba(245, 158, 11, 0.25);
+    color: #fbbf24;
+}
+
+/* Session/sponsor list hover: (1,1,1) specificity, later in file */
+.theme-dark #sessionList li:hover,
+.theme-dark #sponsorList li:hover {
+    border-color: rgba(0, 207, 255, 0.4);
+    box-shadow: 0 0 14px rgba(0, 207, 255, 0.1);
+}
+
+/* Save toast: overrides earlier .save-toast by cascade order */
+.save-toast {
+    background: linear-gradient(135deg, #050e20, #02080e);
+    border: 1px solid rgba(0, 207, 255, 0.5);
+    color: #b8e8ff;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.48),
+        0 0 28px rgba(0, 207, 255, 0.22);
+}
+
+/* Input focus: no competing rule — only definition for this state */
+.editor-form-field input:not([type="checkbox"]):focus,
+.editor-form-field select:focus,
+.editor-form-field textarea:focus {
+    border-color: rgba(0, 207, 255, 0.72);
+    box-shadow:
+        0 0 0 3px rgba(0, 207, 255, 0.18),
+        0 0 16px rgba(0, 207, 255, 0.12);
+    outline: none;
+}
+
+/* Brand gradients: overrides base by cascade order */
+.brand-drupalsouth { background: linear-gradient(135deg, rgba(88, 178, 248, 0.97), rgba(18, 78, 158, 0.99)); }
+.brand-community   { background: linear-gradient(135deg, rgba(72, 202, 190, 0.97), rgba(20, 98, 116, 0.99)); }
+.brand-drupalcon   { background: linear-gradient(135deg, rgba(148, 162, 200, 0.90), rgba(66, 84, 124, 0.98)); }

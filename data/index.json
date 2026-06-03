@@ -1,0 +1,168 @@
+{
+  "defaultFile": "drupalsouth-2026-wellington.json",
+  "files": [
+    {
+      "file": "ddd-2026-athens.json"
+    },
+    {
+      "file": "drupalcamp-den-2019-nagoya.json"
+    },
+    {
+      "file": "drupalcamp-den-2022-osaka.json"
+    },
+    {
+      "file": "drupalcamp-den-2023-iwakuni.json"
+    },
+    {
+      "file": "drupalcamp-pune-2025.json"
+    },
+    {
+      "file": "drupalcon-asia-mumbai-2016.json"
+    },
+    {
+      "file": "drupalcon-asia-nara-2025.json"
+    },
+    {
+      "file": "drupalcon-asia-singapore-2024.json"
+    },
+    {
+      "file": "drupalcon-au-sydney-2013.json"
+    },
+    {
+      "file": "drupalcon-eu-amsterdam-2019.json"
+    },
+    {
+      "file": "drupalcon-eu-barcelona-2024.json"
+    },
+    {
+      "file": "drupalcon-eu-lille-2023.json"
+    },
+    {
+      "file": "drupalcon-eu-paris-2019.json"
+    },
+    {
+      "file": "drupalcon-eu-prague-2022.json"
+    },
+    {
+      "file": "drupalcon-eu-rotterdam-2026.json"
+    },
+    {
+      "file": "drupalcon-eu-vienna-2025.json"
+    },
+    {
+      "file": "drupalcon-la-bogota-2015.json"
+    },
+    {
+      "file": "drupalcon-us-atlanta-2025.json"
+    },
+    {
+      "file": "drupalcon-us-austin-2014.json"
+    },
+    {
+      "file": "drupalcon-us-chicago-2011.json"
+    },
+    {
+      "file": "drupalcon-us-chicago-2026.json"
+    },
+    {
+      "file": "drupalcon-us-denver-2012.json"
+    },
+    {
+      "file": "drupalcon-us-los-angeles-2015.json"
+    },
+    {
+      "file": "drupalcon-us-pittsburgh-2023.json"
+    },
+    {
+      "file": "drupalcon-us-portland-2013.json"
+    },
+    {
+      "file": "drupalcon-us-portland-2022.json"
+    },
+    {
+      "file": "drupalcon-us-portland-2024.json"
+    },
+    {
+      "file": "drupalgovau-2013-canberra.json"
+    },
+    {
+      "file": "drupalgovau-2014-canberra.json"
+    },
+    {
+      "file": "drupalgovau-2016-canberra.json"
+    },
+    {
+      "file": "drupalgovau-2017-canberra.json"
+    },
+    {
+      "file": "drupalgovau-2020-online.json"
+    },
+    {
+      "file": "drupalsouth-2008-christchurch.json"
+    },
+    {
+      "file": "drupalsouth-2008-drupalcamp-sydney.json"
+    },
+    {
+      "file": "drupalsouth-2010-wellington.json"
+    },
+    {
+      "file": "drupalsouth-2011-brisbane.json"
+    },
+    {
+      "file": "drupalsouth-2012-melbourne.json"
+    },
+    {
+      "file": "drupalsouth-2014-wellington.json"
+    },
+    {
+      "file": "drupalsouth-2015-melbourne.json"
+    },
+    {
+      "file": "drupalsouth-2016-gold-coast.json"
+    },
+    {
+      "file": "drupalsouth-2017-auckland.json"
+    },
+    {
+      "file": "drupalsouth-2018-canberra.json"
+    },
+    {
+      "file": "drupalsouth-2019-hobart.json"
+    },
+    {
+      "file": "drupalsouth-2021-online.json"
+    },
+    {
+      "file": "drupalsouth-2022-brisbane.json"
+    },
+    {
+      "file": "drupalsouth-2023-wellington.json"
+    },
+    {
+      "file": "drupalsouth-2024-sydney.json"
+    },
+    {
+      "file": "drupalsouth-2025-melbourne.json"
+    },
+    {
+      "file": "drupalsouth-2026-wellington.json",
+      "default": true
+    },
+    {
+      "file": "drupalsouth-community-day-2023-canberra.json"
+    },
+    {
+      "file": "drupalsouth-community-day-2024-canberra.json"
+    },
+    {
+      "file": "drupalsouth-community-day-2025-canberra.json"
+    },
+    {
+      "file": "sponsors.json"
+    },
+    {
+      "file": "themes.json"
+    }
+  ]
+}

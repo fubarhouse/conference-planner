@@ -1,0 +1,14 @@
+{
+  "name": "conference-calendar-planner",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Conference calendar data editor with local API server",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}

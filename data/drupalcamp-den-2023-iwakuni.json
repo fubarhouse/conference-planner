@@ -1,0 +1,721 @@
+{
+  "event": {
+    "designation": "DrupalCamp",
+    "name": "DrupalCamp DEN 2023 Iwakuni",
+    "location": "Iwakuni",
+    "year": "2023",
+    "website": "https://drupal-camp2023.den-japan.org",
+    "region": "Japan",
+    "startDate": "2023-01-21T01:00:00Z",
+    "endDate": "2023-01-21T07:55:00Z",
+    "venue": "岩国市民文化会館 (Iwakuni Citizens' Cultural Hall)",
+    "timezone": "Asia/Tokyo",
+    "columns": 3,
+    "enabled": true,
+    "logo": {
+      "image": "./img/logos/drupalcamp-den-logo.svg",
+      "imageAlt": "DrupalCamp DEN logo",
+      "usePlate": false
+    },
+    "sponsors": [
+      {
+        "id": "sponsor-1",
+        "title": "InfraRed",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-1.png",
+        "imageAlt": "InfraRed logo",
+        "link": "https://infr.red/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-2",
+        "title": "Drupal Tokyo",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-2.png",
+        "imageAlt": "Drupal Tokyo logo",
+        "link": "https://drupal-tokyo.github.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-3",
+        "title": "Studio Umi",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-3.png",
+        "imageAlt": "Studio Umi logo",
+        "link": "https://www.studio-umi.jp",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-4",
+        "title": "Acquia",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-4.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://www.acquia.com/jp",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-5",
+        "title": "MetaInfo",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-5.png",
+        "imageAlt": "MetaInfo logo",
+        "link": "https://www.meta-info.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-6",
+        "title": "Digital Circus",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-6.png",
+        "imageAlt": "Digital Circus logo",
+        "link": "https://www.dgcircus.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-7",
+        "title": "ULS Lab",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 70,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-7.png",
+        "imageAlt": "ULS Lab logo",
+        "link": "https://www.ulslab.com/ja",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-8",
+        "title": "10X Vision",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 80,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-8.png",
+        "imageAlt": "10X Vision logo",
+        "link": "https://10x-vision.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-9",
+        "title": "Ooi Electric",
+        "tier": "Sponsor",
+        "row": 2,
+        "priority": 90,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-9.png",
+        "imageAlt": "Ooi Electric logo",
+        "link": "https://www.ooi.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-10",
+        "title": "NDK",
+        "tier": "Sponsor",
+        "row": 2,
+        "priority": 100,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-10.png",
+        "imageAlt": "NDK logo",
+        "link": "https://ndk.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-11",
+        "title": "Havas",
+        "tier": "Sponsor",
+        "row": 2,
+        "priority": 110,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-11.png",
+        "imageAlt": "Havas logo",
+        "link": "https://www.havas.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-12",
+        "title": "Faith",
+        "tier": "Sponsor",
+        "row": 2,
+        "priority": 120,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-12.png",
+        "imageAlt": "Faith logo",
+        "link": "https://www.faith-sol-tech.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-13",
+        "title": "ANNAI",
+        "tier": "Sponsor",
+        "row": 2,
+        "priority": 130,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-13.png",
+        "imageAlt": "ANNAI logo",
+        "link": "https://annai.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-14",
+        "title": "Genero",
+        "tier": "Sponsor",
+        "row": 2,
+        "priority": 140,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-14.png",
+        "imageAlt": "Genero logo",
+        "link": "https://genero.jp",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-15",
+        "title": "Synergy Quest",
+        "tier": "Sponsor",
+        "row": 2,
+        "priority": 150,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-15.png",
+        "imageAlt": "Synergy Quest logo",
+        "link": "https://synergyquest.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-16",
+        "title": "Wand Mu",
+        "tier": "Sponsor",
+        "row": 2,
+        "priority": 160,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-16.png",
+        "imageAlt": "Wand Mu logo",
+        "link": "https://www.wandmu.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-17",
+        "title": "Hi-Fn",
+        "tier": "Sponsor",
+        "row": 3,
+        "priority": 170,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-17.png",
+        "imageAlt": "Hi-Fn logo",
+        "link": "http://hi-fn.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-18",
+        "title": "Issei",
+        "tier": "Sponsor",
+        "row": 3,
+        "priority": 180,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-18.png",
+        "imageAlt": "Issei logo",
+        "link": "https://issei.cc/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-19",
+        "title": "Sazae",
+        "tier": "Sponsor",
+        "row": 3,
+        "priority": 190,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-19.png",
+        "imageAlt": "Sazae logo",
+        "link": "https://sazae.com.au/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-20",
+        "title": "Dentsu Digital",
+        "tier": "Sponsor",
+        "row": 3,
+        "priority": 200,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-20.png",
+        "imageAlt": "Dentsu Digital logo",
+        "link": "https://www.dentsudigital.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-21",
+        "title": "Exa Corporation",
+        "tier": "Sponsor",
+        "row": 3,
+        "priority": 210,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-21.png",
+        "imageAlt": "Exa Corporation logo",
+        "link": "https://www.exa-corp.co.jp",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-22",
+        "title": "Fastly",
+        "tier": "Sponsor",
+        "row": 3,
+        "priority": 220,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-22.png",
+        "imageAlt": "Fastly logo",
+        "link": "https://www.fastly.com/jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-23",
+        "title": "Data Mochiya",
+        "tier": "Sponsor",
+        "row": 3,
+        "priority": 230,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-23.png",
+        "imageAlt": "Data Mochiya logo",
+        "link": "https://mochiya.ad.jp",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-24",
+        "title": "Optage",
+        "tier": "Sponsor",
+        "row": 3,
+        "priority": 240,
+        "image": "./img/sponsors/drupalcamp/2023-iwakuni/sponsor-24.png",
+        "imageAlt": "Optage logo",
+        "link": "https://optage.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "flickr": {
+      "enabled": true,
+      "provider": "",
+      "groupUrl": "",
+      "image": "",
+      "imageAlt": ""
+    },
+    "scheduleURLs": [
+      "https://drupal-camp2023.den-japan.org/session_list"
+    ]
+  },
+  "items": [
+    {
+      "startTime": "2023-01-21T01:00:00Z",
+      "endTime": "2023-01-21T03:00:00Z",
+      "duration": "P120M",
+      "title": "ワークショップ (Workshop)",
+      "location": "Location Workshop Room",
+      "link": "https://drupal-camp2023.den-japan.org/workshop",
+      "track": [],
+      "speakers": null,
+      "video_url": "",
+      "full_description": "Hands-on workshop introducing Drupal to beginners. Participants registered tourism content about Iwakuni City and experienced creating website pages through content registration and no-code solutions. Target audience: people unfamiliar with Drupal, those wanting to create websites, those interested in no-code/low-code approaches. Programming knowledge not required. Own laptop required (tablets acceptable; smartphones not supported).",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T04:00:00Z",
+      "endTime": "2023-01-21T04:10:00Z",
+      "duration": "P10M",
+      "title": "開会の挨拶 (Opening Remarks)",
+      "location": "Location Main Hall",
+      "link": "https://drupal-camp2023.den-japan.org/session/1",
+      "track": [],
+      "speakers": [
+        "福田良彦 (Yoshihiko Fukuda)"
+      ],
+      "video_url": "",
+      "full_description": "Opening address by Yoshihiko Fukuda, Mayor of Iwakuni City, Yamaguchi Prefecture.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T04:10:00Z",
+      "endTime": "2023-01-21T04:20:00Z",
+      "duration": "P10M",
+      "title": "Driesからのビデオメッセージ (Video Message from Dries)",
+      "location": "Location Main Hall",
+      "link": "https://drupal-camp2023.den-japan.org/node/34",
+      "track": [],
+      "speakers": [
+        "Dries Buytaert"
+      ],
+      "video_url": "",
+      "full_description": "Video message from Dries Buytaert, Drupal Founder & Acquia CTO.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T04:20:00Z",
+      "endTime": "2023-01-21T04:50:00Z",
+      "duration": "P30M",
+      "title": "Rebirth of OIST 10 years old website with Drupal 9",
+      "location": "Location Main Hall",
+      "link": "https://drupal-camp2023.den-japan.org/session/s01",
+      "track": [
+        "special"
+      ],
+      "speakers": [
+        "Chris Wu"
+      ],
+      "video_url": "",
+      "full_description": "OIST is a pioneering graduate university conducting interdisciplinary research. The website was relaunched at the end of 2022, having been built on Drupal 7 more than 10 years ago. The talk covers project management approach and bilingual implementation challenges during the redesign.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T05:00:00Z",
+      "endTime": "2023-01-21T05:20:00Z",
+      "duration": "P20M",
+      "title": "国際農研Webサイトの構築と運用",
+      "location": "Location Track A",
+      "link": "https://drupal-camp2023.den-japan.org/session/a01",
+      "track": [
+        "track a"
+      ],
+      "speakers": [
+        "林 賢紀 (Takanori Hayashi)"
+      ],
+      "video_url": "",
+      "full_description": "Introduces the implementation and subsequent management of Drupal as a CMS on the official JIRCAS website (https://www.jircas.go.jp/), covering objectives, background, and operational experience since its 2016 adoption.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T05:00:00Z",
+      "endTime": "2023-01-21T05:20:00Z",
+      "duration": "P20M",
+      "title": "より速いデプロイを求めてチームで取り組む開発者体験の向上",
+      "location": "Location Track B",
+      "link": "https://drupal-camp2023.den-japan.org/session/b01",
+      "track": [
+        "track b"
+      ],
+      "speakers": [
+        "小松 高廣 (Takahiro Komatsu)"
+      ],
+      "video_url": "",
+      "full_description": "Explains that reducing deployment costs is necessary for more frequent Drupal application updates and robust app development. Covers using Acquia's Cloud IDE and Code Studio to enhance developer experience and pursue faster team deployment approaches.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T05:00:00Z",
+      "endTime": "2023-01-21T05:20:00Z",
+      "duration": "P20M",
+      "title": "Drupalで進化させる社内ポータルの作り方と事例",
+      "location": "Location Track C (Online)",
+      "link": "https://drupal-camp2023.den-japan.org/session/c01",
+      "track": [
+        "track c",
+        "online"
+      ],
+      "speakers": [
+        "岸 俊兵 (Kishi Toshuhei)"
+      ],
+      "video_url": "",
+      "full_description": "Presents success stories from consolidating multiple internal portal sites using Drupal, highlighting necessary features and advantages of adopting Drupal for corporate intranet environments.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T05:30:00Z",
+      "endTime": "2023-01-21T05:50:00Z",
+      "duration": "P20M",
+      "title": "国際学会サイトの事例紹介",
+      "location": "Location Track A",
+      "link": "https://drupal-camp2023.den-japan.org/session/a02",
+      "track": [
+        "track a"
+      ],
+      "speakers": [
+        "萩原 高行 (Takayuki Hagihara)"
+      ],
+      "video_url": "",
+      "full_description": "Construction case study of a Drupal site for The 19th International Conference on Retinal Proteins (held November 2022). The system enabled all participants and stakeholders to obtain accounts and independently manage conference registration, payments, and presentation abstracts through self-service. The site was built using only no-code site builders and subsequently converted to static HTML for handoff to Canadian administrators.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T05:30:00Z",
+      "endTime": "2023-01-21T05:50:00Z",
+      "duration": "P20M",
+      "title": "DrupalとFastly！～究極の柔軟性と高速性を手に入れよう～",
+      "location": "Location Track B",
+      "link": "https://drupal-camp2023.den-japan.org/session/b02",
+      "track": [
+        "track b"
+      ],
+      "speakers": [
+        "加藤 晋平 (Shimpei Kato)"
+      ],
+      "video_url": "",
+      "full_description": "Introduces Fastly's capabilities and demonstrates practical applications when combined with Drupal. Covers what effects are achievable and explains the concepts of flexibility and speed. Also presents other complementary services offered by InfraRed LLC that integrate well with Drupal.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T05:30:00Z",
+      "endTime": "2023-01-21T05:50:00Z",
+      "duration": "P20M",
+      "title": "MAとSFAそしてCMSとの連携について",
+      "location": "Location Track C (Online)",
+      "link": "https://drupal-camp2023.den-japan.org/session/c02",
+      "track": [
+        "track c",
+        "online"
+      ],
+      "speakers": [
+        "秋山 真咲 (Akiyama Masaki)"
+      ],
+      "video_url": "",
+      "full_description": "Explains how CMS, SFA, and MA systems often operate independently, creating challenges for digital marketing. Rather than undertaking complex custom development, demonstrates how modules and plugins can enable system integration with minimal programming. Provides specific guidance on which modules and plugins to utilize.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T06:00:00Z",
+      "endTime": "2023-01-21T06:20:00Z",
+      "duration": "P20M",
+      "title": "Drupalを始めるあなたへ、豊田支部発刊書籍の紹介",
+      "location": "Location Track A",
+      "link": "https://drupal-camp2023.den-japan.org/session/a03",
+      "track": [
+        "track a"
+      ],
+      "speakers": [
+        "小薗井 康志 (Yasushi Osonoi)"
+      ],
+      "video_url": "",
+      "full_description": "Covers 7 books (effectively 4 unique titles) published by Drupal Meetup Toyota chapter, beginning with \"Drupal9 Web開発をはじめる薄い本\" (A Slim Book to Start Drupal 9 Web Development) released December 23, 2020. The speaker outlines chapter overviews targeting those beginning with Drupal or seeking skill advancement.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T06:00:00Z",
+      "endTime": "2023-01-21T06:20:00Z",
+      "duration": "P20M",
+      "title": "W3CSSテーマを利用したシンプルなディストリビューション SQbase",
+      "location": "Location Track B",
+      "link": "https://drupal-camp2023.den-japan.org/session/b03",
+      "track": [
+        "track b"
+      ],
+      "speakers": [
+        "白根 健司 (Kenji Shirane)"
+      ],
+      "video_url": "",
+      "full_description": "SQbase is a Drupal distribution featuring simple site configuration and Japanese sample content, offering responsive site construction examples using the W3.CSS framework. The project aims at improving site construction efficiency and serving as training material. Includes installation demonstration and educational resources.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T06:00:00Z",
+      "endTime": "2023-01-21T06:20:00Z",
+      "duration": "P20M",
+      "title": "Drupalにおける検索エンジンSolrの活用",
+      "location": "Location Track C (Online)",
+      "link": "https://drupal-camp2023.den-japan.org/session/c03",
+      "track": [
+        "track c",
+        "online"
+      ],
+      "speakers": [
+        "真喜屋 篤 (Atsushi Makiya)"
+      ],
+      "video_url": "",
+      "full_description": "Explores how search engines effectively handle large content volumes. Using a corporate product information site as a reference, demonstrates a sample site combining Drupal with Solr, explaining the integration mechanism between Solr and Drupal and the benefits.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T06:35:00Z",
+      "endTime": "2023-01-21T06:55:00Z",
+      "duration": "P20M",
+      "title": "日本企業でも取り組める、新しいDrupalコミュニティへの貢献のカタチ 〜Group, Subgroupモジュール開発におけるANNAIの取り組み〜",
+      "location": "Location Track A",
+      "link": "https://drupal-camp2023.den-japan.org/session/a04",
+      "track": [
+        "track a"
+      ],
+      "speakers": [
+        "太田垣 恭子 (Kyoko Otagaki)"
+      ],
+      "video_url": "",
+      "full_description": "Discusses how Japanese companies can contribute to the Drupal community through module development sponsorships. ANNAI shares their experience sponsoring development since 2020, including work by German company Factorial on the Group module and creation of the Subgroup module. Explains the process for sponsoring module development and considerations when commissioning work from companies in different countries.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T06:35:00Z",
+      "endTime": "2023-01-21T06:55:00Z",
+      "duration": "P20M",
+      "title": "エンジニア向けノードのアクセス制限方法まとめ",
+      "location": "Location Track B",
+      "link": "https://drupal-camp2023.den-japan.org/session/b04",
+      "track": [
+        "track b"
+      ],
+      "speakers": [
+        "新田 幸子 (Sachiko Nitta)"
+      ],
+      "video_url": "",
+      "full_description": "Introduces methods usable for implementing granular access restrictions on nodes (ノードに対するきめ細かいアクセス制限を行うために使える方法を紹介します).",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T06:35:00Z",
+      "endTime": "2023-01-21T06:55:00Z",
+      "duration": "P20M",
+      "title": "オーストラリアのDrupal事情",
+      "location": "Location Track C (Online)",
+      "link": "https://drupal-camp2023.den-japan.org/session/c04",
+      "track": [
+        "track c",
+        "online"
+      ],
+      "speakers": [
+        "Ayumi Mizoshiri"
+      ],
+      "video_url": "",
+      "full_description": "Discusses how Drupal is used in Australia and shares case examples.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T07:05:00Z",
+      "endTime": "2023-01-21T07:25:00Z",
+      "duration": "P20M",
+      "title": "千葉日報のDrupal活用事例",
+      "location": "Location Track A",
+      "link": "https://drupal-camp2023.den-japan.org/session/a05",
+      "track": [
+        "track a"
+      ],
+      "speakers": [
+        "岩嵜 晃 (Akira Iwasaki)"
+      ],
+      "video_url": "",
+      "full_description": "Covers Chiba Nippo's 12-year Drupal implementation history starting with Drupal 6. Details web service content management through Drupal, content distribution destinations, system architecture diagrams, and ongoing migration validation from Drupal 7 to 9, including structural architecture considerations.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T07:05:00Z",
+      "endTime": "2023-01-21T07:25:00Z",
+      "duration": "P20M",
+      "title": "Drupal × Tailwind CSS",
+      "location": "Location Track B",
+      "link": "https://drupal-camp2023.den-japan.org/session/b05",
+      "track": [
+        "track b"
+      ],
+      "speakers": [
+        "中井 俊貴 (Toshiki Nakai)"
+      ],
+      "video_url": "",
+      "full_description": "The speaker updated a company's Drupal site and redesigned it simultaneously. Having only worked with SMACS and BEM frameworks previously, they adopted Tailwind CSS to expand knowledge. Covers foundational Tailwind CSS concepts and shares insights gained from implementing it.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T07:05:00Z",
+      "endTime": "2023-01-21T07:25:00Z",
+      "duration": "P20M",
+      "title": "Introducing Augmentor module",
+      "location": "Location Track C (Online)",
+      "link": "https://drupal-camp2023.den-japan.org/session/c05",
+      "track": [
+        "track c",
+        "online"
+      ],
+      "speakers": [
+        "Eleo Basili"
+      ],
+      "video_url": "",
+      "full_description": "Covers the Augmentor module for Drupal (https://www.drupal.org/project/augmentor), which enables AI service integration. Demonstrations include: OpenAI GPT3 for content summarisation, OpenAI GPT3 for content classification, Google Cloud for image labeling, Google Cloud for audio transcription, and Google Cloud for text-to-speech conversion.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T07:35:00Z",
+      "endTime": "2023-01-21T07:55:00Z",
+      "duration": "P20M",
+      "title": "Drupalモジュール紹介 100本ノック",
+      "location": "Location Track A",
+      "link": "https://drupal-camp2023.den-japan.org/session/a06",
+      "track": [
+        "track a"
+      ],
+      "speakers": [
+        "村田 和子 (Murata Kazuko)"
+      ],
+      "video_url": "",
+      "full_description": "Introduces approximately 100 essential core and contributed Drupal modules for customization. Aims to help beginners discover useful modules and challenges experienced practitioners to identify all 100 modules presented.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T07:35:00Z",
+      "endTime": "2023-01-21T07:55:00Z",
+      "duration": "P20M",
+      "title": "Drupal Initiativesから読み取る Drupal 10以降の未来",
+      "location": "Location Track B",
+      "link": "https://drupal-camp2023.den-japan.org/session/b06",
+      "track": [
+        "track b"
+      ],
+      "speakers": [
+        "直江 健介 (Kensuke Naoe)"
+      ],
+      "video_url": "",
+      "full_description": "Examines how Drupal Initiatives shape the framework's direction. Notes Drupal 10.0.0 was released in December 2022, then analyzes past and present initiatives to understand where Drupal is headed. Considers how initiatives correlate with features adopted in subsequent major versions.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-01-21T07:35:00Z",
+      "endTime": "2023-01-21T07:55:00Z",
+      "duration": "P20M",
+      "title": "No-code API integrations with ECA and HTTP Client Manager",
+      "location": "Location Track C (Online)",
+      "link": "https://drupal-camp2023.den-japan.org/session/c06",
+      "track": [
+        "track c",
+        "online"
+      ],
+      "speakers": [
+        "Brandon Williams"
+      ],
+      "video_url": "",
+      "full_description": "Covers integrating Drupal with external services without custom module development. Using the HTTP Client Manager and ECA (Event - Condition - Action) modules together, site builders can create API integrations without coding. Demonstrates module configuration and practical examples.",
+      "sponsorIds": ""
+    }
+  ],
+  "result": "success",
+  "url": "https://drupal-camp2023.den-japan.org/session_list"
+}

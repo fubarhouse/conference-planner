@@ -1,0 +1,1334 @@
+{
+  "event": {
+    "designation": "DrupalSouth",
+    "location": "Melbourne",
+    "year": "2015",
+    "website": "http://melbourne2015.drupal.org.au/",
+    "region": "Australia – Melbourne",
+    "venue": "Melbourne Convention and Exhibition Centre",
+    "timezone": "Australia/Melbourne",
+    "enabled": true,
+    "startDate": "2015-03-04T21:00:00Z",
+    "endDate": "2015-03-07T06:00:00Z",
+    "sourceCache": "cache/wayback/drupalsouth-2015/raw",
+    "videoPlaylist": "https://www.youtube.com/playlist?list=PL31TzQhFjH2IcfNJT6ur9EVVw1ayWcdy-",
+    "videoPlaylistCache": "cache/remote/youtube/drupalsouth-2015/playlist.xml",
+    "logo": {
+      "image": "./img/logos/drupalsouth/2015-melbourne.png",
+      "imageAlt": "DrupalSouth logo",
+      "usePlate": false
+    },
+    "flickr": {
+      "enabled": true,
+      "groupUrl": "https://flic.kr/go/pqAZK",
+      "image": "./img/flickr/drupalsouth/2015-melbourne.jpg",
+      "imageAlt": "DrupalSouth Flickr image"
+    },
+    "sponsors": [
+      {
+        "id": "sponsor-1",
+        "title": "Technocrat",
+        "tier": "Diamond",
+        "row": 1,
+        "priority": 10,
+        "image": "./img/sponsors/drupalsouth/2015-melbourne/sponsor-1.png",
+        "imageAlt": "Technocrat logo",
+        "link": "http://melbourne2015.drupal.org.au/sponsor/technocrat",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-2",
+        "title": "PreviousNext",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 20,
+        "image": "./img/sponsors/drupalsouth/2015-melbourne/sponsor-2.png",
+        "imageAlt": "PreviousNext logo",
+        "link": "http://melbourne2015.drupal.org.au/sponsor/previousnext",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-4",
+        "title": "Komosion",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 40,
+        "image": "./img/sponsors/drupalsouth/2015-melbourne/sponsor-4.png",
+        "imageAlt": "Komosion logo",
+        "link": "https://melbourne2015.drupal.org.au/sponsor/komosion",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-5",
+        "title": "DogHouse",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 50,
+        "image": "./img/sponsors/drupalsouth/2015-melbourne/sponsor-5.jpg",
+        "imageAlt": "DogHouse logo",
+        "link": "https://melbourne2015.drupal.org.au/sponsor/doghouse-digital-agency",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-6",
+        "title": "Microsoft",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 60,
+        "image": "./img/sponsors/drupalsouth/2015-melbourne/sponsor-6.png",
+        "imageAlt": "Microsoft logo",
+        "link": "https://melbourne2015.drupal.org.au/sponsor/microsoft-australia",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-7",
+        "title": "RealityLoop",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 70,
+        "image": "./img/sponsors/drupalsouth/2015-melbourne/sponsor-7.png",
+        "imageAlt": "RealityLoop logo",
+        "link": "https://melbourne2015.drupal.org.au/sponsor/realityloop",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-8",
+        "title": "Australian Government Department of Finance",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 80,
+        "image": "./img/sponsors/drupalsouth/2015-melbourne/sponsor-8.jpg",
+        "imageAlt": "Australian Government Department of Finance logo",
+        "link": "https://melbourne2015.drupal.org.au/sponsor/department-finance",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-9",
+        "title": "Web Prophets",
+        "tier": "Bronze",
+        "row": 5,
+        "priority": 90,
+        "image": "./img/sponsors/drupalsouth/2015-melbourne/sponsor-9.png",
+        "imageAlt": "Web Prophets logo",
+        "link": "https://melbourne2015.drupal.org.au/sponsor/web-prophets",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-10",
+        "title": "Code Drop",
+        "tier": "Bronze",
+        "row": 5,
+        "priority": 100,
+        "image": "./img/sponsors/drupalsouth/2015-melbourne/sponsor-10.png",
+        "imageAlt": "Code Drop logo",
+        "link": "https://melbourne2015.drupal.org.au/sponsor/code-drop",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-3",
+        "title": "Xyzware Technologies",
+        "tier": "Bronze",
+        "row": 5,
+        "priority": 110,
+        "image": "./img/sponsors/drupalsouth/2015-melbourne/sponsor-3.png",
+        "imageAlt": "Xyzware Technologies logo",
+        "link": "http://melbourne2015.drupal.org.au/sponsor/xyxware-technologies",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-11",
+        "title": "Braintree",
+        "tier": "Bronze",
+        "row": 5,
+        "priority": 120,
+        "image": "./img/sponsors/drupalsouth/2015-melbourne/sponsor-11.png",
+        "imageAlt": "Braintree logo",
+        "link": "https://melbourne2015.drupal.org.au/sponsor/braintree",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-12",
+        "title": "Connecting Up",
+        "tier": "Bronze",
+        "row": 5,
+        "priority": 130,
+        "image": "./img/sponsors/drupalsouth/2015-melbourne/sponsor-12.png",
+        "imageAlt": "Connecting Up logo",
+        "link": "https://melbourne2015.drupal.org.au/sponsor/connecting-up",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-13",
+        "title": "10Collective",
+        "tier": "Bronze",
+        "row": 5,
+        "priority": 140,
+        "image": "./img/sponsors/drupalsouth/2015-melbourne/sponsor-13.png",
+        "imageAlt": "10Collective logo",
+        "link": "https://melbourne2015.drupal.org.au/sponsor/10collective",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-14",
+        "title": "Sparks Interactive",
+        "tier": "Supporting",
+        "row": 6,
+        "priority": 140,
+        "image": "./img/sponsors/drupalsouth/2015-melbourne/sponsor-14.jpg",
+        "imageAlt": "Sparks Interactive logo",
+        "link": "https://melbourne2015.drupal.org.au/sponsor/sparks-interactive",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-15",
+        "title": "Morpht",
+        "tier": "Supporting",
+        "row": 7,
+        "priority": 150,
+        "image": "./img/sponsors/drupalsouth/2015-melbourne/sponsor-15.png",
+        "imageAlt": "Morpht logo",
+        "link": "https://melbourne2015.drupal.org.au/sponsor/morpht",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-16",
+        "title": "Weave",
+        "tier": "Supporting",
+        "row": 6,
+        "priority": 160,
+        "image": "./img/sponsors/drupalsouth/2015-melbourne/sponsor-16.png",
+        "imageAlt": "Weave logo",
+        "link": "https://melbourne2015.drupal.org.au/sponsor/weave",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-17",
+        "title": "Acquia",
+        "tier": "Supporting",
+        "row": 6,
+        "priority": 170,
+        "image": "./img/sponsors/drupalsouth/2015-melbourne/sponsor-17.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://melbourne2015.drupal.org.au/sponsor/acquia",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "columns": 3,
+    "scheduleURLs": [
+      "http://melbourne2015.drupal.org.au/program/schedule"
+    ]
+  },
+  "items": [
+    {
+      "startTime": "2015-03-04T21:00:00Z",
+      "endTime": "2015-03-04T22:00:00Z",
+      "duration": "P60M",
+      "title": "Registration",
+      "location": "Foyer",
+      "link": "http://melbourne2015.drupal.org.au/registration",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-04T22:00:00Z",
+      "endTime": "2015-03-04T23:15:00Z",
+      "duration": "P75M",
+      "title": "Drupal 8: What you need to know",
+      "location": "Technocrat Auditorium",
+      "link": "http://melbourne2015.drupal.org.au/session/drupal-8-what-you-need-know",
+      "track": [
+        "Drupal Futures"
+      ],
+      "speakers": [
+        "Angela Byron"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=sEOvYaBFj64",
+      "full_description": "Since March 2011, the community has been hard at work on Drupal 8, which is currently undergoing active development. This revolutionary new release sports tons of improvements, and Angela Byron, Drupal core committer and long-time core developer, will lead you through the most important ones and how they'll impact your future site building endeavors.\n\nGet answers to your frequently asked questions, learn about the changes coming down the pipe for clients, site builders, designers, and developers. You'll also find out more about the core development process, some tips and tricks on how the community works and how to contribute. Best of all, you'll take away some action steps on how you too can help make Drupal 8 the most awesome release of Drupal yet!",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-04T23:15:00Z",
+      "endTime": "2015-03-04T23:45:00Z",
+      "duration": "P30M",
+      "title": "Morning tea",
+      "location": "Foyer",
+      "link": "http://melbourne2015.drupal.org.au/morning-tea",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-04T23:45:00Z",
+      "endTime": "2015-03-05T00:30:00Z",
+      "duration": "P45M",
+      "title": "Better Remote Work",
+      "location": "Microsoft - Room C",
+      "link": "http://melbourne2015.drupal.org.au/session/better-remote-work",
+      "track": [
+        "Building with Drupal",
+        "Planning for Drupal",
+        "Business and strategy"
+      ],
+      "speakers": [
+        "jOksanen"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=x6hzU9j9LHU",
+      "full_description": "Find out what you can to do improve your remote/distributed team, and how to get more out of your everyday remote work.\n\nIf you're not yet working remotely, I'll give you a good idea on what it will feel like, and cover most of the early issues that you'll face.\n\nRemote work has come by storm to the world of IT in the last few years. In Drupal, it's starting to be so that almost everyone has a possibility to work remotely. Working remote has a great number of benefits, but almost just as many issues.\n\nThese issues, and their solutions are the main thing this session is about.\n\nA quick glance:\n\n1. What's the situation at the moment\n2. Benefits of working remote\n3. Building a working remote team\n4. Solutions to usual issues\n5. Security issues\n6. Improving your own work\n7. Using remote contractors\n8. More information\n\nThe content will be best suited for developers, managers and everyone associated with remote work.\n\nCome and enjoy.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-04T23:45:00Z",
+      "endTime": "2015-03-05T00:30:00Z",
+      "duration": "P45M",
+      "title": "Contributing to Core without losing your mind",
+      "location": "Technocrat Auditorium",
+      "link": "http://melbourne2015.drupal.org.au/session/contributing-core-without-losing-your-mind",
+      "track": [
+        "Building with Drupal",
+        "Drupal Futures"
+      ],
+      "speakers": [
+        "larowlan"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=leE5tH1wCQg",
+      "full_description": "Contributing to Drupal core can be satisfying, educational, overwhelming, frustrating and many more emotions, all in the one issue.\n\nIn this session I'll share some things I've learned from contributing to Drupal 7 and Drupal 8 core.\n\nTopics covered\n\n- Negotiating issue queues\n- Finding your niche\n- Git and patch workflows\n- Dealing with politics and personalities\n- Not sweating details\n- Development approaches\n- Learning through reviews\n- Building networks and friendships\n- Automating your processes with phing\n- Automated tests\n- About the speaker\n\n@larowlan:\n\n- Has been working with Drupal for over 6 years\n- Is a member of the Drupal security team\n- Is the core maintainer of comment, forum, contact and block content modules\n- Is a top 20 contributor to Drupal 8\n\nSession preview\n\nA shorter preview version of this session was given as a lightning talk for colleagues - video is here https://www.youtube.com/watch?v=eVrPYSvL9dc\n\nSlides for that session are here: http://larowlan.github.io/ds.core-til",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-04T23:45:00Z",
+      "endTime": "2015-03-05T00:30:00Z",
+      "duration": "P45M",
+      "title": "Drupal and the future of the internet",
+      "location": "PreviousNext - Room E",
+      "link": "http://melbourne2015.drupal.org.au/session/drupal-and-future-internet",
+      "track": [
+        "Drupal Futures",
+        "Digital visions"
+      ],
+      "speakers": [
+        "Tim Siers"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=QwO22HYa__E",
+      "full_description": "Drupal has cemented its place within the era of digital information through its ability to manage and structure large volumes of content.\n\nHowever we’re now living in the “age of the customer”, a time when users expect more and want to wait less. The power has shifted away from content holders and into the hands of consumers who demand exceptional experiences and engaging interactions.\n\nAs we steam ahead into the future the internet will connect people and knowledge on an even greater scale, and our participation online will only increase as it becomes ubiquitous, and beyond the browser.\n\nThis inevitably calls for us to redefine the tools we use online and the way we manage information. What will be the role of a content management system like Drupal?\n\nLet’s dream together as we talk about where the Internet is heading and what role Drupal will play in building engaging experiences.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-04T23:45:00Z",
+      "endTime": "2015-03-05T00:30:00Z",
+      "duration": "P45M",
+      "title": "Drupal as an Integration Hub",
+      "location": "Doghouse - Room D",
+      "link": "http://melbourne2015.drupal.org.au/session/drupal-integration-hub",
+      "track": [
+        "Building with Drupal",
+        "Coding and development",
+        "The technical edge"
+      ],
+      "speakers": [
+        "James Purser"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=wkEbVx2vI08",
+      "full_description": "We have had quite a few projects where we have used Drupal as the core of an integration star diagram. Drupal has typically owned user data and some related entities.\n\nAs the canonical source of user information, Drupal has to be able to integrate with a range of different systems - all living on different technical stacks and using a range of protocals to communicate.\n\nThankfully, Drupal's open source heritage and PHP implementation means that the libraries required to speak the right technical language are generally already mature and extendable.\n\nIn one of our larger LMS projects, we integrated Drupal with Moodle LMS, SimpleSAMLphp (authentication), Two different payment gateways, Salesforce and a Student Management system.\n\nWe learnt a lot in glueing these systems together via Drupal and have some experiences to share in some of the approaches and architectures that we applied.\n\nThis talk will explore:\n\n- asynchronous vs synchronous integration\n- pluses and web services in Enterprise solutions\n- what we learnt using of queuing/messaging layer\n- test harnesses for web services\n- architecting for failure\n- integration point monitoring\n\nYou can now find the slides for this presentation here:\n\nhttp://www.slideshare.net/purserj/drupal-as-integration-hubodp",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T00:45:00Z",
+      "endTime": "2015-03-05T01:30:00Z",
+      "duration": "P45M",
+      "title": "Compete to Collaborate - Exploring wider collaboration mechanisms in the Drupal space",
+      "location": "PreviousNext - Room E",
+      "link": "http://melbourne2015.drupal.org.au/session/compete-collaborate-exploring-wider-collaboration-mechanisms-drupal-space",
+      "track": [
+        "Business and strategy"
+      ],
+      "speakers": [
+        "Anoop John"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=BclWR33vcrk",
+      "full_description": "Drupal is a powerful platform but most Drupal firms are less than 50 people strong and there are very few in the 50 - 500 range. One of the biggest limitations (and also the biggest strengths) of Drupal is its powerful API which creates a steep learning curve for anybody new in Drupal and consequently an entry barrier for new players to enter also also a limitation for existing players to scale.\n\nWe are competing in a space where gigantic players in the industry like Accenture, IBM, Infosys, CTS etc manage projects worth hundreds of millions of dollars with teams that are hundreds or even thousands strong. If Drupal companies have to compete with such players then we will also have to re-invent ourselves to be able to offer an alternative to proprietary platforms not just in terms of technology but also in terms of a scale of solutions and engagements.\n\nThis session is about exploring how Drupal companies can compete to collaborate with each other to effectively take on such large players and also allow the whole Drupal ecosystem to grow. This session is about how Drupal companies could explore a much wider range of collaboration among Drupal companies who look at Drupal not just as a commercial tool but as a powerful community that can transform application development on the web and who look at Free Software as a philosophy of life and not something to take a free ride on. Such collaborations would not only address the commercial needs of companies but also the contribution needs of the community.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T00:45:00Z",
+      "endTime": "2015-03-05T01:30:00Z",
+      "duration": "P45M",
+      "title": "Drupal and IoT",
+      "location": "Doghouse - Room D",
+      "link": "http://melbourne2015.drupal.org.au/session/drupal-and-iot",
+      "track": [
+        "Building with Drupal",
+        "Coding and development",
+        "Site building",
+        "Drupal Futures",
+        "Digital visions",
+        "Drupal futures",
+        "The technical edge",
+        "Business and strategy",
+        "User experience"
+      ],
+      "speakers": [
+        "Steven Cooper"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=iIFgF7YzoY8",
+      "full_description": "In this session we will look at the IoT world and how it can be integrated with Drupal to create new and awesome ways for users to interface the digital world like never before and ways that developers can monitise new IoT opportunities.\n\nWe look at how you can take an Arduino Yun and a Thermal printer to create a new way for customers to order via a drupal ecom website and for a reciept to automatically print out in a resturant to ways that robotics can be integrated with a drupal site allowing users to create new ways to interact (only if theres time in the session for the robotic topic)",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T00:45:00Z",
+      "endTime": "2015-03-05T01:30:00Z",
+      "duration": "P45M",
+      "title": "No CMS is an Island, Entire of Itself; What open source communities can teach each other",
+      "location": "Technocrat Auditorium",
+      "link": "http://melbourne2015.drupal.org.au/session/no-cms-island-entire-itself-what-open-source-communities-can-teach-each-other",
+      "track": [
+        "Drupal Futures",
+        "Drupal futures"
+      ],
+      "speakers": [
+        "The Web Princess"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=qcEpR35lfOo",
+      "full_description": "No CMS is an Island, Entire of Itself;\nWhat open source communities can teach each other\n\nby Dee Teal\n\n\"Drupal Futures\"\nDrupalSouth Conference\nMarch 5th - March 7th 2015\n\nEvery CMS is a piece of the continent, a part of the main; if Drupal be washed away by the sea, WordPress is the less, as well as if Joomla were... (With the humblest of apologies to John Donne...)\n\nAs much as we'd love to think we're platform agnostic, I’ve observed that a lot of us web developers appear to find a favourite CMS to build with and stick with it. As a consequence we may find ourselves downgrading, criticising and denying the value in other platforms, just because we know and love ours the best.\n\nOne of the disappointing outworkings of this is the rivalry between platforms and platform developers. Under the guise of gentle teasing, one platform's proponents claim their competitor’s product is insecure, whilst the other may retort that their alternate is bloated and unfriendly to users.\n\nWith a view to proposing closer relationships between open source CMS communities locally (and beyond) for the future benefit of not only Drupal, but all Open Source communities, this talk will present an assessment of the strengths of predominant communities in this space and a outline some positive steps to help all of us move forward with a better understanding and appreciation of each other.\n\nThis is not a technical talk. You won’t hear a series of reasons that one particular set of code is superior to another. The dominant themes will be related to the strengths of the community around our products rather than the tools themselves and the ways we can draw from each other to work more closely together.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T00:45:00Z",
+      "endTime": "2015-03-05T01:30:00Z",
+      "duration": "P45M",
+      "title": "Why Drupal 8? Why now? PS - Drupal 7 is still awesome",
+      "location": "Microsoft - Room C",
+      "link": "http://melbourne2015.drupal.org.au/session/why-drupal-8-why-now-ps-drupal-7-still-awesome",
+      "track": [
+        "Drupal Futures",
+        "Drupal futures"
+      ],
+      "speakers": [
+        "horncologne"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=DQP_qrTP2gI",
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T01:30:00Z",
+      "endTime": "2015-03-05T02:30:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "Foyer",
+      "link": "http://melbourne2015.drupal.org.au/lunch",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T02:30:00Z",
+      "endTime": "2015-03-05T03:15:00Z",
+      "duration": "P45M",
+      "title": "2.9 million words in two months (and then what?)",
+      "location": "Microsoft - Room C",
+      "link": "http://melbourne2015.drupal.org.au/session/29-million-words-two-months-and-then-what",
+      "track": [
+        "Business and strategy",
+        "User experience"
+      ],
+      "speakers": [
+        "Peter Henderson"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=xGsSaAQMAOI",
+      "full_description": "Most web teams face one inescapable truth - content will be late.\n\nThis session is about how the Australian Pesticides and Veterinary Medicines Authority got on the front foot and reworked 2.9 million words in just two months.\n\nReview, rewrite, edit, approve and publish; without cutting any corners; and with only one person to coordinate.\n\nLearn how Drupal was used to efficiently solve this problem, and why email is the wrong tool for content development.\n\nEpilogue\n\nIt turns out there’s a second inescapable truth - content owners are quick to forget their content is theirs.\n\nFind out about the carrot and stick required to help content owners keep those 2.9 million words up to date.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T02:30:00Z",
+      "endTime": "2015-03-05T03:15:00Z",
+      "duration": "P45M",
+      "title": "Carrying the Can: Scaling Humans for Complex Drupal",
+      "location": "Doghouse - Room D",
+      "link": "http://melbourne2015.drupal.org.au/session/carrying-can-scaling-humans-complex-drupal",
+      "track": [
+        "Business and strategy"
+      ],
+      "speakers": [
+        "ChrisO"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=sR2xTC6DIkw",
+      "full_description": "For all its frustrations, Drupal is renowned for scaling into marvellously complex and unique configurations, and for integrating with other best of breed technologies. This allows organisations to deliver unique and creative applications that align closely with what the business wants.\n\nSo much for the technology though. How do you make sure your organisation can cope with the monster you've architected? What happens when your Drupal-powered corporate blog evolves and consumes one legacy site or system after another? How do you design a team for the problems you anticipate, much less the ones you can't?\n\nFrom the perspective of someone who has watched enterprises of different scales all over the world grapple with these concerns, this talk will cover a few key ideas and examples that might help you make wise decisions when planning human resourcing around Drupal.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T02:30:00Z",
+      "endTime": "2015-03-05T03:15:00Z",
+      "duration": "P45M",
+      "title": "Panel: Project manager war stories",
+      "location": "Technocrat Auditorium",
+      "link": "http://melbourne2015.drupal.org.au/session/panel-project-manager-war-stories",
+      "track": [
+        "Planning for Drupal"
+      ],
+      "speakers": [
+        "Murray"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=_8p6Qj8dAm4",
+      "full_description": "Project managers are a crucial element in the success of a project. They are the glue between the client and the developers, between the vision and the reality. This is not an easy job. What are the secrets to keeping a project on track when the odds seemed stacked against you? Do you have a few stories to tell from the trenches?\n\nThis \"panel\" presentation will be a series of rapid fire 5 minute presentations from a variety of project managers. We would love to hear about what worked and what didn’t, the successes and failures, tips and tricks, etc. If it works it will be funny and educational at the same time.\n\nWe are looking for seasoned PMs who have stories to tell and can tell them fast, the funnier the better. If you are up for imparting your pearls of wisdom, in 5 minutes, please get in touch with murray.woodman at gmail com and we'll get you on the bill.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T02:30:00Z",
+      "endTime": "2015-03-05T03:15:00Z",
+      "duration": "P45M",
+      "title": "The DrupalCI initiative",
+      "location": "PreviousNext - Room E",
+      "link": "http://melbourne2015.drupal.org.au/session/drupalci-initiative",
+      "track": [
+        "Coding and development",
+        "Drupal Futures",
+        "Drupal futures"
+      ],
+      "speakers": [
+        "nick_schuch"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=aRuCzW23QRc",
+      "full_description": "This session is all about an adhoc initiative with the goal of improving the testing situation on Drupal.org.\n\nThis talk will outline:\n\n- Drupal.org pain points.\n- The components of DrupalCI (API, dispatcher, results, Drupal.org module and monitoring). Each of these components will be separate open source projects that you can leverage as well!\n- How you can help.\n\nYou could say this talk is going to cover all the latest hotness in continuous integration.\n\nSLIDES CAN BE FOUND HERE: http://ds2015.nickschuch.com",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T03:30:00Z",
+      "endTime": "2015-03-05T04:15:00Z",
+      "duration": "P45M",
+      "title": "Design pitfalls in responsive builds",
+      "location": "Microsoft - Room C",
+      "link": "http://melbourne2015.drupal.org.au/session/design-pitfalls-responsive-builds",
+      "track": [
+        "Building with Drupal",
+        "Coding and development",
+        "Front-end",
+        "Business and strategy"
+      ],
+      "speakers": [
+        "meeli"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=BR9FXPcFAfg",
+      "full_description": "Mobile sites are one thing but responsive is a whole other beast - a beast that designers are often happy to perform with in the circus ring of artwork, but not to so happy to lie down with every night in the cage of front-end development.\n\nSick of overwrought metaphors? You’re probably also sick of all the pitfalls designers fall into when not aware of the limitations of responsive builds. This session is useful for designers looking to cause less headaches, front-end devs wanting tools to educate their designers, and project managers who want to get better at spotting disasters before they happen.\n\nThis talk won’t be exhaustive, but hopefully will get you thinking about some patterns we see over and over again that just can’t (for various reasons) be built in to a responsive site easily.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T03:30:00Z",
+      "endTime": "2015-03-05T04:15:00Z",
+      "duration": "P45M",
+      "title": "Government as a Service: Architecting govCMS",
+      "location": "PreviousNext - Room E",
+      "link": "http://melbourne2015.drupal.org.au/session/government-service-architecting-govcms",
+      "track": [
+        "Planning for Drupal"
+      ],
+      "speakers": [
+        "typhonius"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=oMD0q0kPnqM",
+      "full_description": "Architecting any solution can be tricky to get right. With different requirements, sometimes unknown but important functionality and often several stakeholders to satisfy.\n\nHow then, is a successful Whole-of-Government solution engineered? One that is able to take the needs of the many, and place it into one codebase.\n\nThis session discusses the process taken by Acquia in conjunction with the Department of Finance to make govCMS a success. We'll be explaining:\n\n- How broad solutions can be engineered;\n- The decisions needed to keep govCMS from bloating;\n- The benefits this entire project brings to the Drupal community and to Australia;\n- How you can contribute",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T03:30:00Z",
+      "endTime": "2015-03-05T04:15:00Z",
+      "duration": "P45M",
+      "title": "Services in Drupal 8: using Drupal as data storage for mobile apps, web apps and websites",
+      "location": "Doghouse - Room D",
+      "link": "http://melbourne2015.drupal.org.au/session/services-drupal-8-using-drupal-data-storage-mobile-apps-web-apps-and-websites",
+      "track": [
+        "Drupal Futures"
+      ],
+      "speakers": [
+        "VladimirAus",
+        "jayturn"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=5XA-n9BCpts",
+      "full_description": "Web services is one of the official Drupal 8 initiatives. Known as \"headless Drupal\", web services allow us to use Drupal as a data storage for applications and websites using various frameworks and technologies.\n\nThis session will address:\n\n1. Introduction to web services. Origins and types of web services, crucial components and basics to get us going. We will look into the difference between Drupal 7 and Drupal 8 service setup and why it was crucial to get services into the core.\n2. Examples. Practical use of web services with various frameworks.\n3. Drupal 8 services configuration. Hands on configuring of Drupal 8 to setup and interact with services.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T03:30:00Z",
+      "endTime": "2015-03-05T04:15:00Z",
+      "duration": "P45M",
+      "title": "Style-guide-driven development",
+      "location": "Technocrat Auditorium",
+      "link": "http://melbourne2015.drupal.org.au/session/style-guide-driven-development",
+      "track": [
+        "Building with Drupal",
+        "Front-end",
+        "Drupal Futures",
+        "Digital visions"
+      ],
+      "speakers": [
+        "JohnAlbin"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=uHWlUhvBwr0",
+      "full_description": "We suck at what we do. We know the websites we build need excellent front-end performance, full accessibility, compelling designs, and reusable parts. We learn. We plan. We build. We make a mad scramble to finish on time and deliver a product that falls short of what we know we could have achieved. Every. Single. Time.\n\nBut things are starting to change. Web development is undergoing a monumental shift in methodology as it begins to integrate agile development, a proven way to successfully build software. And it turns out integrating agile development with web development is actually very simple. It's called style-guide-driven development.\n\nIn this session, we will discuss why front-end development has started to be turned inside out these past few years. And how to make sense of the eleventy-million new tools that have been released. Most importantly, we'll discuss the two requirements for Style Guide Driven Development: component-based design and automated style guides.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T04:15:00Z",
+      "endTime": "2015-03-05T04:45:00Z",
+      "duration": "P30M",
+      "title": "Afternoon tea",
+      "location": "Foyer",
+      "link": "http://melbourne2015.drupal.org.au/afternoon-tea",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T04:45:00Z",
+      "endTime": "2015-03-05T05:30:00Z",
+      "duration": "P45M",
+      "title": "Digital Local Government – why Drupal and how to make it work",
+      "location": "Microsoft - Room C",
+      "link": "http://melbourne2015.drupal.org.au/session/digital-local-government-%E2%80%93-why-drupal-and-how-make-it-work",
+      "track": [
+        "Planning for Drupal",
+        "Business and strategy",
+        "Drupal public"
+      ],
+      "speakers": [
+        "Fergal Coleman"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=XJwgHSm181A",
+      "full_description": "In this session Fergal Coleman (and Phillip Dooley) will discuss the current digital environment in the local government sector. We will explain why Drupal is the ideal digital platform for overcoming the challenges and issues in the sector and delivering real digital change.\n\nThis talk will utilise current Drupal projects in local government and provide hands-on examples that show how Drupal:\n- Allows local government to deliver a more seamless experience to stakeholders\n- Drives internal process efficiencies\n- Reduces licensing and training costs\n- Provides staff with a single view of customers through web services integration ( Drupal/ internal systems / social media.)\n\nWe will also discuss the nuances of managing and driving change in local government, how to bring staff on the digital journey and how to manage local government perceptions of Open Source.\n\nWith over 30 years of experience delivering strategic consulting services and technology platforms to the local government and corporate sectors, our consultants understand the needs of local government and how they must adopt customer centric digital models.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T04:45:00Z",
+      "endTime": "2015-03-05T05:30:00Z",
+      "duration": "P45M",
+      "title": "How Everything is Connected - Drupal 8 and Schema.org",
+      "location": "PreviousNext - Room E",
+      "link": "http://melbourne2015.drupal.org.au/session/how-everything-connected-drupal-8-and-schemaorg",
+      "track": [
+        "Building with Drupal",
+        "Site building"
+      ],
+      "speakers": [
+        "davidseth"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=5pv2aL5lsbw",
+      "full_description": "The world is complex and is full of connections and relationships amongst \"real things\". The web is complex and full of links between text, video and images.\n\nHow do we bridge this divide between the real world and the online web? The Graph. The knowledge graph defines what is important to us and how it relates to the things we care about.\n\nWhen you publish a Drupal site is built with rich Content Types and fields, relationships link things together in a way that provides unique value to your end users. Then this wonderful data is hidden away as soon you you save the page and HTML is generated. Schema.org integration within Drupal 8 uncovers these hidden \"things\" and relationships and describes them as rich data within your HTML.\n\nSo, that sounds great, right? But why would you want to do this? Schema.org was created by the largest search engines in the world Google, Bing, Yahoo and Yandex. They are consuming this data to provide end users with a much richer and more relevant search experience. Google has stated that 15% of all websites it has indexed use schema.org. That adds up to ... A LOT :)\n\nSEO is no longer a dark art. SEO is about encoding the rich relationships and entities from your website and sharing them to the wider world.\n\nCome to this session and hear about this wonderful new and interconnected world -- the Knowledge Graph.\n\nTopics Covered\n\n- What is the Semantic Web\n- What is schema.org\n- Modelling your Content Types\n- Marking up your Content Types and Fields with Schema.org terms\n- Rich Snippets, Testing & viewing how your content will appear in Google search results\n- Learn why data-driven design is the new SEO\n- Learn how to increase your visitors through better search results\n\nThis talk will be targeted at the beginner/intermediate, but I will also delve into \"some\" advanced topics -- like the meaning of \"Semantic\" :) I will give an intro and overview of everything covered and then will jump into how to put these things into place in your own Drupal site.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T04:45:00Z",
+      "endTime": "2015-03-05T05:30:00Z",
+      "duration": "P45M",
+      "title": "Panel: Selling agile",
+      "location": "Technocrat Auditorium",
+      "link": "http://melbourne2015.drupal.org.au/session/panel-selling-agile",
+      "track": [
+        "Planning for Drupal",
+        "Business and strategy"
+      ],
+      "speakers": [
+        "pameeela"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=M2nNT50iiks",
+      "full_description": "We've all heard by now that agile development is the solution to all of our problems. It sounds great in theory - but how do you convince others, whether clients or colleagues or supervisors, to take the plunge?\n\nWe're proposing panel discussion where two to four agile practitioners discuss how they sell agile projects to clients, how they then structure the contract and discovery phases. Along the way we would hope to find out about the advantages of agile methodologies for building software, as well as the practical tips for getting the client on board.\n\nWe are looking for: business owners or business development people who are having success selling agile. If you are interested in participating in this panel, please contact Pamela Barone at pnbarone@gmail.com.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T04:45:00Z",
+      "endTime": "2015-03-05T05:30:00Z",
+      "duration": "P45M",
+      "title": "Who said developers can't design!",
+      "location": "Doghouse - Room D",
+      "link": "http://melbourne2015.drupal.org.au/session/who-said-developers-cant-design",
+      "track": [
+        "Building with Drupal",
+        "Front-end"
+      ],
+      "speakers": [
+        "rikki_iki"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=2iAWBcS8Raw",
+      "full_description": "Web design isn’t just for designers. A basic understanding of the principles of design can help any developer deliver a better product. Better because there is less back and forth between you and the designer, because you can create a decent looking mockup of something, because you can start to understand their language (and can tell if they’re making up excuses).\n\nAnd if your designer colleagues don’t have basic HTML/CSS skills you’ll be better equipped to teach them code.\n\nExplained by a web designer turned Drupal developer, this session will cover;\n\n- Typography & how to choose webfonts\n- Vertical rhythm and whitespace\n- Proximity of elements\n- Contrast & basic accessibility\n- Designing for touch screens\n\nAs well as giving you some handy tools and references so you don’t have to start from scratch every time.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T05:45:00Z",
+      "endTime": "2015-03-05T06:30:00Z",
+      "duration": "P45M",
+      "title": "Connecting with Accessibility: compliance or confidence",
+      "location": "Doghouse - Room D",
+      "link": "http://melbourne2015.drupal.org.au/session/connecting-accessibility-compliance-or-confidence",
+      "track": [
+        "Digital visions",
+        "Business and strategy",
+        "Drupal public"
+      ],
+      "speakers": [
+        "Michelle Stevens",
+        "Tim Noonan"
+      ],
+      "full_description": "A large shift to online services from government and enterprise is resulting in an increase in both independence for people with disabilities, but also in many cases with an increase in frustration, wasted effort and lock-out due to the lack of adequate thought and care around inclusive online services.\n\nGovernment and, increasingly, major retailers are tasked with ensuring their services do not discriminate against large sections of the population.\n\nHow do we, as designers and developers of these services, really connect with the underlying principles of accessibility? How can we change our outlook and thinking to ensure that we are creating inclusive services with elegance and confidence?\n\nThe aims of this session\n\nTo discuss approaches and  strategies to resolve issues that arise throughout the lifecycle of a project development to include accessibility consistently\n\nTo provide UX practitioners and developers with the knowledge to understand and identify with often overlooked users - the one in five Australians who have some kind of disability.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T05:45:00Z",
+      "endTime": "2015-03-05T06:30:00Z",
+      "duration": "P45M",
+      "title": "Enterprise Glue: Configuring and extending Shibboleth to integrate Drupal CMS, Python and Java web applications",
+      "location": "PreviousNext - Room E",
+      "link": "http://melbourne2015.drupal.org.au/session/enterprise-glue-configuring-and-extending-shibboleth-integrate-drupal-cms-python-and-java",
+      "track": [
+        "Building with Drupal",
+        "Coding and development"
+      ],
+      "speakers": [
+        "Gavin Jackson"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=SmT8X5iEX5Q",
+      "full_description": "This presentation looks at the architecture, configuration and extension of the Open Source Single Sign On product Shibboleth. I will discuss how we share authentication and user role/attribute details between our drupal CMS and internal Java and Python web applications, configuration of the Shibboleth IDP and SP (apache mod_shib), configuration of the drupal shib_auth module (including how to map shibboleth attributes to drupal roles). I'll also discuss extending the IDP to provide custom authentication and attribute resolution.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T05:45:00Z",
+      "endTime": "2015-03-05T06:30:00Z",
+      "duration": "P45M",
+      "title": "HTML5 Rocks: The best of the modern web",
+      "location": "Technocrat Auditorium",
+      "link": "http://melbourne2015.drupal.org.au/session/html5-rocks-best-modern-web",
+      "track": [
+        "Drupal Futures"
+      ],
+      "speakers": [
+        "Sam Thorogood"
+      ],
+      "full_description": "An average Google search to complete a task inside the web platform, like form validation, turns up a multitude of results using a wide variety of add-on technologies to the Web. These include pure JavaScript, jQuery plugins, PHP libraries, and include catchy phrases: the 'best', 'ultimate', to name a few.\n\nHowever, the web moves fast! HTML5 has added a variety of useful, evolving standards (including form validation). Today, developers targeting modern browsers - or via polyfills for older browsers - can short-circuit many traditional boilerplate tasks: being more productive with incredibly useful and standardised building blocks.\n\nThis talk will showcase the absolute best of HTML on desktop and mobile. These are the technologies that don't always come up first in search results (much to the frustration of the Chrome DPE team). We'll talk about the features that should be in every modern developer's toolbox: Web Animations, modern CSS, interactive HTML elements, not to mention Web Components, and more.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T05:45:00Z",
+      "endTime": "2015-03-05T06:30:00Z",
+      "duration": "P45M",
+      "title": "The Dark Art of making a Non-Profit (beyond contact management)",
+      "location": "Microsoft - Room C",
+      "link": "http://melbourne2015.drupal.org.au/session/dark-art-making-non-profit-beyond-contact-management",
+      "track": [
+        "Drupal public"
+      ],
+      "speakers": [
+        "peter.davis"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=BGINkwGiisA",
+      "full_description": "Non Profits come in many shapes and sizes. Some need 'case management' tools, for others their 'core business' is campaigning. Online shops, membership systems, task tracking, grant management, event management and managing volunteers are also common requirements. And underpinning all of the above is the need for comprehensive contact management and communication package.\n\nCiviCRM is a bit like the contact management 'twin' to Drupal's content management system. It bolts in to Drupal (and other floss CMSs) providing a dedicated CRM whose capabilities can be further extended through key Drupal features such as Views, Rules, Entities, Webform, Commerce and Ubercart.\n\nExtension developed by the CiviCRM community provide further capabilities such as integration with online accounting software Xero, or human resource management tools.\n\nDrupal+CiviCRM provides a richly featured integrated system that can deliver non-profits a wider range of tools to help them in their work.\n\nThis workshop will run through many of the features described above with a special emphasis on the Drupal-side of working with CiviCRM.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T06:45:00Z",
+      "endTime": "2015-03-05T07:45:00Z",
+      "duration": "P60M",
+      "title": "Technocrat drinks & nibbles",
+      "location": "Foyer",
+      "link": "http://melbourne2015.drupal.org.au/technocrat-drinks-nibbles",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "Join us for drinks and nibbles provided by our DIAMOND sponsor Technocrat.\n\n# Friday",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T21:30:00Z",
+      "endTime": "2015-03-05T22:00:00Z",
+      "duration": "P30M",
+      "title": "Registration",
+      "location": "Registration desk",
+      "link": "http://melbourne2015.drupal.org.au/registration-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T22:00:00Z",
+      "endTime": "2015-03-05T23:15:00Z",
+      "duration": "P75M",
+      "title": "Keynote: True, real and ideal… designing for purpose, delivering with impact",
+      "location": "Technocrat Auditorium",
+      "link": "http://melbourne2015.drupal.org.au/session/keynote-true-real-and-ideal",
+      "track": [
+        "Planning for Drupal",
+        "User experience"
+      ],
+      "speakers": [
+        "Harriet Wakelam"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=dvie58zXUuQ",
+      "full_description": "This session will examine the system of design... It will look at how we design for actions, consequences and relationships and how this makes it easier to design products and services that wow.  I am going to tell you some hard earned stories of the way I've learnt to tread the line between true and real and ideal.  How even having these conversations will change the work you are trusted to do... and what might happen if we do things properly.\n\nThis is a human story of design.  It will not give you funky tools, it will help you have conversations with purpose, and design things that matter... it is for you if you believe in industrialised curiosity and the ability to do work that matters, and that creates difference.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T23:15:00Z",
+      "endTime": "2015-03-05T23:45:00Z",
+      "duration": "P30M",
+      "title": "Morning tea",
+      "location": "Foyer",
+      "link": "http://melbourne2015.drupal.org.au/morning-tea-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T23:45:00Z",
+      "endTime": "2015-03-06T00:30:00Z",
+      "duration": "P45M",
+      "title": "How to create a custom theme in Drupal 8",
+      "location": "PreviousNext - Room E",
+      "link": "http://melbourne2015.drupal.org.au/session/how-create-custom-theme-drupal-8",
+      "track": [
+        "Front-end"
+      ],
+      "speakers": [
+        "Magda Kostrzewa"
+      ],
+      "full_description": "In this session we will look at some of the new features that are in Drupal 8 theming as well as demonstrate how to create and configure a Drupal 8 sub-theme from Classy, the new core theme in Drupal 8.\n\nThis session is for current Drupal themers who want a glimpse into how to get started creating your own sub-theme in Drupal 8 as well as those new to Drupal who want an introduction to Drupal 8 theming.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T23:45:00Z",
+      "endTime": "2015-03-06T00:30:00Z",
+      "duration": "P45M",
+      "title": "Intro to GIT",
+      "location": "Microsoft - Room C",
+      "link": "http://melbourne2015.drupal.org.au/session/intro-git",
+      "track": [
+        "Building with Drupal",
+        "Coding and development",
+        "Site building"
+      ],
+      "speakers": [
+        "garethhallnz"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=6INO8r8Ds6I",
+      "full_description": "I strongly consider this best practice when building a site, and thought it would be a good opportunity to go over its importance and how you can make it work for you.\n\nGit offers several advantages:\n- It's super fast\n- It's easy.\n- And no you don't need to be familiar with Command Line code (there are several great GUI's out there).\n\nGIT Version Control works by keeping track of all successive changes you make to a site.\nThe biggest advantage of this is easily undoing any mistakes you might make along the way.\nIt's a great feeling to know Version Control has your back that you can roll back if something goes catastrophically wrong.\nIt's also a big bonus in collaborative development.\nAs soon as more than one person works on a project things get a lot more complicated.\nWhat happens when 2 edits effect the same file? How do you know what's new, what's old and what's changed?\nNo worries, simply merge the variations and let GIT deal with the rest.\n\nGIT is not just for the developers of this world but can be a life saver for themers, site maintainers and the like.\n\nMost people will admit they should use it, but either don't know how or believe it's hard to integrate.\nThe reality is that it's actually pretty simple and once you start integrating GIT into your workflow you'll ask yourself \"Why the hell did I keep using ftp\" - I know I did.\n\nFTP is so yesterday, its slow, it's cumbersome to use and it's a very manual method.\nSwitch to GIT, start using GIT, and never look back.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T23:45:00Z",
+      "endTime": "2015-03-06T00:30:00Z",
+      "duration": "P45M",
+      "title": "Open Source Enterprise Continuous Delivery for Drupal",
+      "location": "Doghouse - Room D",
+      "link": "http://melbourne2015.drupal.org.au/session/open-source-enterprise-continuous-delivery-drupal",
+      "track": [
+        "Coding and development",
+        "The technical edge"
+      ],
+      "speakers": [
+        "August1914"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=XNir7eAWJmg",
+      "full_description": "Step up to enterprise Continuous Delivery (CD) practices to Drupal with this comprehensive walk through of the totally awesome, recently open-sourced CD platform called \"Go\":   Download Go Open Source.       The “Go” project started as “Cruise Control” in 2001, rooted in the first principle of the Agile Manifesto: “Our highest priority is to satisfy the customer through early and continuous delivery of valuable software”. Here's some backstory: Jez Humble on \"Go\" Open Source We'll start with an outline of the principles of CD practice, and then move right into implementation. The focus of this session is to show just how easy it is to get a Drupal build up and running in “Go”, and along the way illustrate the very nice benefits of delivering in a pipeline. We'll look at why “Go” can be a game changer in bringing stability to agency practice and for selling Drupal into big projects.\n\nWe'll cover:\n\nCore concepts of building a Go pipeline\n\n- Setting up a delivery pipeline\n- Configuring Build Materials\n- Configuring Build Stages\n- Configuring Build Artifacts\n- Configuring Jobs\n- Configuring Tasks\n- Drill down to familiar Drush commands\n\nImplementing basic principles of CD practice\n\n- Test and preview on production before cutting over a release\n- Zero downtime releases\n- Safe and easy rollback options\n- Making the release a business decision rather than technical decision.\n\nTake away objectives\n\n- How Go's Trusted Artifacts can take the ambiguity out of the build\n- How to get your money's worth out of test automation, with an emphasis on BDD\n- Outstanding support for managing dependencies between different projects.\n\nWho this session is for: Continuous Delivery practice breaks down the dev and ops technical silo, by bringing the less technical side of the team into the delivery process. We will show the devs and admins how to implement CD, and we'll help Business Analysts, QA's, Project Managers and Stake Holders to understand how their roles map to tasks in the delivery game. CD is a full team sport. We'll keep our enthusiasm for the tool in balance with the importance of engaging the whole team in the delivery process.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-05T23:45:00Z",
+      "endTime": "2015-03-06T00:30:00Z",
+      "duration": "P45M",
+      "title": "The Open Source Paradigm Shift",
+      "location": "Technocrat Auditorium",
+      "link": "http://melbourne2015.drupal.org.au/session/open-source-paradigm-shift",
+      "track": [
+        "Planning for Drupal",
+        "Business and strategy",
+        "Drupal public"
+      ],
+      "speakers": [
+        "Kim Pepper"
+      ],
+      "full_description": "Open Source is becoming mainstream, especially in government.\n\nRecently the Federal Government announced a CMS Platform-as-a-Service called govCMS, based on aGov and Acquia Site Factory.\n\nThere are hundreds of sites currently running Drupal in Australian government agencies already. With the advent of govCMS, this number is expected to accelerate.\n\nHow do organisations maximise the effectiveness of working with open source software like Drupal?\n\nIn this session I will discuss:\n\n- What are the key differences between working with proprietary versus open source software\n- How to build a team of open source developers\n- How to plan and execute a successful Drupal project",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T00:45:00Z",
+      "endTime": "2015-03-06T01:30:00Z",
+      "duration": "P45M",
+      "title": "Best practices for configuration management in Drupal 8",
+      "location": "PreviousNext - Room E",
+      "link": "http://melbourne2015.drupal.org.au/session/best-practices-configuration-management-drupal-8",
+      "track": [
+        "Building with Drupal",
+        "Coding and development",
+        "Site building"
+      ],
+      "speakers": [
+        "beejeebus"
+      ],
+      "full_description": "Drupal 8 ships with a new Configuration Management System (CMI) that vastly improves on Drupal 7. A Drupal site's configuration can be expressed as a set of yaml files, and stored and managed just like source code.\n\nIn this talk I'll explore the powerful new CMI features, and present best practice workflows for managing configuration across Drupal 8 projects.\n\nTrying to figure out how Drupal 8's new CMI features will work with your development team? Come to this presentation and we'll try to work it out.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T00:45:00Z",
+      "endTime": "2015-03-06T01:30:00Z",
+      "duration": "P45M",
+      "title": "Maps to the max: take your maps further with region-awareness and aggregations",
+      "location": "Doghouse - Room D",
+      "link": "http://melbourne2015.drupal.org.au/session/maps-max-take-your-maps-further-region-awareness-and-aggregations",
+      "track": [
+        "Building with Drupal",
+        "Site building"
+      ],
+      "speakers": [
+        "RdeBoer"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=M7bgrJIAEWc",
+      "full_description": "A brief tour inside and outside of Drupal, of snazzy maps and map applications, and how you can take your maps to the next level by unearthing relationships in your data that you didn't know were there.\n\nPlenty of eye-candy but more importantly practical examples in Drupal of how you can create beautiful, information-packed maps that combine region-awareness with spreadsheet-like functionality to draw your visitors to the right areas.\n\nFully interactive, fully attractive.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T00:45:00Z",
+      "endTime": "2015-03-06T01:30:00Z",
+      "duration": "P45M",
+      "title": "Panel: Content strategy",
+      "location": "Technocrat Auditorium",
+      "link": "http://melbourne2015.drupal.org.au/session/panel-content-strategy",
+      "track": [
+        "Planning for Drupal",
+        "Business and strategy",
+        "Drupal public",
+        "User experience"
+      ],
+      "speakers": [
+        "pameeela",
+        "angusg",
+        "Susan",
+        "Michelle Stevens"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=2t6bzAmQdSs",
+      "full_description": "Drupal is a content management system - so why do so many of us ignore content during the planning and building process?\n\nWhether you're a client or vendor, chances are you could use some help in the content strategy area.\n\nThis is a panel discussion where the panelists can give a brief intro into the benefits of this often overlooked component of a Drupal project. Discussion can then move on to strategy and practical techniques for managing content strategy.\n\nWe are looking for: anyone who promotes their business as offering content strategy services. If you are interested in participating in this panel, please contact Pamela Barone at pnbarone@gmail.com.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T00:45:00Z",
+      "endTime": "2015-03-06T01:30:00Z",
+      "duration": "P45M",
+      "title": "Scald media management - A New Hope",
+      "location": "Microsoft - Room C",
+      "link": "http://melbourne2015.drupal.org.au/session/scald-media-management-new-hope",
+      "track": [
+        "Building with Drupal",
+        "Coding and development"
+      ],
+      "speakers": [
+        "James Gollan"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=x4I9TmBt1C8",
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T01:30:00Z",
+      "endTime": "2015-03-06T02:30:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "Foyer",
+      "link": "http://melbourne2015.drupal.org.au/lunch-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T02:30:00Z",
+      "endTime": "2015-03-06T03:15:00Z",
+      "duration": "P45M",
+      "title": "On a clear day you can View forever",
+      "location": "Microsoft - Room C",
+      "link": "http://melbourne2015.drupal.org.au/session/clear-day-you-can-view-forever",
+      "track": [
+        "Building with Drupal",
+        "Coding and development",
+        "Front-end",
+        "Site building"
+      ],
+      "speakers": [
+        "Anton Baggerman"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=RTmedFLfcX0",
+      "full_description": "This session takes an in-depth look at the veritable Drupal workhorse for displaying your data: Views. We'll explore the various ways that Views allows us to retrieve data from Drupal (or other sources), massage and transform our data, and then display it just the way we want it.\n\nWe'll look at the various options in Views, we'll discuss when and how to use various Views hooks and templates, and then briefly look at some of the more popular modules that integrate with Views.\n\nThis is an allround exploration sprinkled with real-life examples that promises to have something of interest for everyone.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T02:30:00Z",
+      "endTime": "2015-03-06T03:15:00Z",
+      "duration": "P45M",
+      "title": "The present and future of intranets",
+      "location": "Technocrat Auditorium",
+      "link": "http://melbourne2015.drupal.org.au/session/present-and-future-intranets",
+      "track": [
+        "Digital visions",
+        "Business and strategy",
+        "User experience"
+      ],
+      "speakers": [
+        "rebeccar"
+      ],
+      "full_description": "As Drupal makes its mark on public-facing websites, there is matching interest in reshaping staff-facing intranets.\n\nThis talk, by Rebecca Rodgers a Principal Consultant with Step Two Designs, the leader in intranets, will provide a pragmatic view of the current state of intranets, and the future possibilties.\n\nPacked with screenshots from real-world intranets, this session will inspire you to deliver a great intranet, as well as providing a framework for developing an intranet strategy.\n\nTechnology agnostic, the session will cover the five purposes of intranets: content, communication, collaboration, culture and activity. Building on the fundamentals, many examples will explore how modern web technologies can transform the way people work.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T02:30:00Z",
+      "endTime": "2015-03-06T03:15:00Z",
+      "duration": "P45M",
+      "title": "There is a PHP library for that",
+      "location": "Doghouse - Room D",
+      "link": "http://melbourne2015.drupal.org.au/session/there-php-library",
+      "track": [
+        "Drupal Futures",
+        "The technical edge"
+      ],
+      "speakers": [
+        "Josh Taylor"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=xCWqKd80MVk",
+      "full_description": "\"There is a module for that\"\n\nA very common expression amongst Drupal developers (and maybe Apple users with their app too) due to the great ecosystem of modules that Drupal has.\n\nYou can find a number of great modules that Drupal has that makes Drupal special, and is used for hundreds of thousands of websites out there.\n\nThe problem with this is that it is impossible to reuse code outside of the Drupal community, with many wheels that have been solved already solved.\n\nDrupal 8 solves this problem by allowing you, the developer, to utilise a myriad of outside libraries within your module. If you can create a PHP library around your code, then integrate it into your module, you should do so.\n\nCommerce 2.x has started doing this by splitting many of the hard parts of commerce into multiple libraries, such as:\n\n- Intl - a A PHP internationalization library, powered by CLDR data(https://github.com/commerceguys/intl)\n- addressing, powered by Google's dataset (https://github.com/commerceguys/addressing) that allows all addresses in every country to be supported and formatted\n- pricing - A library for working with prices and formatting prices for various currencies\n- tax - A tax management library allowing taxes in different currencies.\n\nThis session will go over the different libraries that will go towards building a better Drupal ecosystem, and why having libraries anyone can use is good for both Drupal and the PHP community.\n\nslides: http://phplib.joshtaylor.id.au",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T02:30:00Z",
+      "endTime": "2015-03-06T03:15:00Z",
+      "duration": "P45M",
+      "title": "UX Is More than a Buzzword",
+      "location": "PreviousNext - Room E",
+      "link": "http://melbourne2015.drupal.org.au/session/ux-more-buzzword",
+      "track": [
+        "Planning for Drupal",
+        "User experience"
+      ],
+      "speakers": [
+        "sleepyscene"
+      ],
+      "full_description": "User Experience or UX is more than a buzzword; it defines the very success of your website. The concept itself can be vague and is often pigeonholed. In this session we will learn exactly what UX is and more importantly what it isn't.\n\nCool story... who are you?\n\nMy name is Callum and I'm a unicorn designer / developer. I'm also the User Experience and Interface Designer over at doghouse.agency *woof*.\n\nSession Overview\n\nUser Experience\n- What it is and isn't.\n- Why it's important.\n- Why we can't design a “User Experience”.\n- Criticisms.\n\nProcess\n- Gathering content and forming information architecture.\n- Simplifying complex systems.\n- User journeys and flows.\n- Wireframing, fidelity levels, and prototyping tools.\n- Design patterns.\n- Style guides and Drupal smart elements.\n\nAssessment\n- A/B testing.\n- Measuring results.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T03:30:00Z",
+      "endTime": "2015-03-06T04:15:00Z",
+      "duration": "P45M",
+      "title": "Power to the Editors: Introducing the Paragraphs module",
+      "location": "PreviousNext - Room E",
+      "link": "http://melbourne2015.drupal.org.au/session/power-editors-introducing-paragraphs-module",
+      "track": [
+        "Building with Drupal",
+        "Site building"
+      ],
+      "speakers": [
+        "Ivan Zugec",
+        "Murray"
+      ],
+      "full_description": "Oftentimes there is a tension between what editors want and what site builders are willing or capable of delivering. Site builders love it when Drupal is a machine, acting on clean, well defined data structures. Editors often just want to put great looking content on a page wherever they want. Sometimes this works out well but other times things can get tricky. This presentation will demonstrate how the Paragraphs module can be used to overcome these difficulties and provide editors with a friendly editing interface into the bargain.\n\nSite builders have a familiar toolkit which includes nodes, fields, view modes and templates. Nodes have a defined structure and this is transposed into a template. Module such as Panelizer gives site builders the ability to customize layouts on a per node basis - very handy for handling one off tweaks. However, the Panelizer interface is complex and powerful. As such, it is not suitable for Editors who want a simple way to manage only content. How can this be brought into the node edit screen?\n\nIntroducing the Paragraphs module. It provides a way for editors to add the content they wish, in the order they wish to the regions they wish.... all on the node edit page. This is a big win for editors and for site builders too. Site builders retain control over the data model and editors get the flexibility they wish.\n\nThe presentation will cover the following areas:\n\n- A hilarious ;) role playing exercise between a besieged site builder and an optimistic editor. We've all been there, right.\n- An introduction to the Paragraphs module and how it can be used.\n- Some advanced tips on how to get some hot looking layouts for edge to edge and page based designs.\n- A demo of a \"filtering\" paragraph type which exposes the power of views to the editor.\n\nA similar presentation was given by the presenters at DrupalCamp Sydney. It generated a fair amount of discussion around layout techniques in general.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T03:30:00Z",
+      "endTime": "2015-03-06T04:15:00Z",
+      "duration": "P45M",
+      "title": "The accidental content strategist: Content modelling in Drupal",
+      "location": "Doghouse - Room D",
+      "link": "http://melbourne2015.drupal.org.au/session/accidental-content-strategist-content-modelling-drupal",
+      "track": [
+        "Planning for Drupal",
+        "User experience"
+      ],
+      "speakers": [
+        "angusg"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=ENXEk8nx3s0",
+      "full_description": "\"Content modelling\" is a central part of content strategy. It's the process of structuring content logically so that websites become intelligent, flexible content systems, rather than dumping grounds for static pages.\n\nSound familiar? It should, because Drupal is tailor-made for structured content. Everyone who builds Drupal sites has been through the process of creating content types and taxonomy vocabularies, adding fields to them, and creating relationships between them. Drupal site builders are content strategists by default, and every Drupal site has an implicit content model.\n\nBut that's not to say every Drupal site has a useful content model! Often, decisions about content (or other entity) types and fields are arbitrary, or made on the fly. Even with the impressive structured content capabilities of Drupal, many sites fall back on the easy option of sticking everything in one big body field.\n\nComing from a content strategist who has worked extensively on Drupal projects, this session will help Drupal site builders apply a consistent set of principles to structured content. I'll also look at some of the curly problems that tend to come up when the rubber hits the road.\n\nThe session will also be of interest to content strategists, information architects, UXers, and others who work with content and want to know more about Drupal. I'll assume no prior knowledge of Drupal terminology (entities, bundles, fields, etc.). So you'll come away an overview of how content \"works\" in Drupal, and an insight into how Drupal can help you bring a content model to life.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T03:30:00Z",
+      "endTime": "2015-03-06T04:15:00Z",
+      "duration": "P45M",
+      "title": "The future of Speed",
+      "location": "Microsoft - Room C",
+      "link": "http://melbourne2015.drupal.org.au/session/future-speed",
+      "track": [
+        "Coding and development",
+        "Drupal Futures",
+        "The technical edge"
+      ],
+      "speakers": [
+        "Peter"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=215BnOoCkd0",
+      "full_description": "Your customers want speed. They might be happy with pretty when they first visit but when they return to buy a birthday present or 10 outfits for the ski season or 500 items for the office, they want speed. Nothing beats fast code and there are four contenders for the fastest code. First there was compiled PHP then Hip Hop then HHVM. Now there are real speed demons, Phalcon and Zephir, with PHP 7 fast approaching. Based on 20 years experience with Perl then PHP 3, 4, 5, Phalcon 1, Phalcon 2, and other languages from hand written machine code up, I will step through the why, when, and how of code speed. Along the way I will revamp your ideas on databases, user interaction, and other areas where better design will magnify the speed gains. Plus, as a free bonus extra, a six pack of Drupal 8 speed improvements.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T03:30:00Z",
+      "endTime": "2015-03-06T04:15:00Z",
+      "duration": "P45M",
+      "title": "There and Back Again: An Unexpected Journey in Agile Documentation",
+      "location": "Technocrat Auditorium",
+      "link": "http://melbourne2015.drupal.org.au/session/there-and-back-again-unexpected-journey-agile-documentation",
+      "track": [
+        "Site building"
+      ],
+      "speakers": [
+        "loquacity"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=5rntgE-3xrY",
+      "full_description": "While many developers are now using Agile development methodologies to produce software, most documentation is still produced using traditional waterfall-style methods. This just wasn't cutting it for me, though, so I developed an entirely new way of planning and writing documentation based on Agile development methods. The days of an author spending months in a draughty garret to produce dry technical documentation are over, the future of documentation is here.\n\nThis is a hands-on talk, where I take the audience through a series of development sprints as a documentation team, creating a living, shared document on the big screen. We document a lego creation by a small team of 'developers' (volunteers from the audience). This has been run with much success for smaller audiences, comprising both developers and experienced technical writers. A rudimentary level of agile development knowledge is assumed, knowledge of technical writing or documentation in an agile environment is not.\n\nTechnical requirements: ideally, this is presented in a space with dual projection capabilities, one showing a live feed of the lego 'development', and one showing the collaborative document. However, the talk can be tailored to the room quite easily, and as long as I can get details of the technical capabilities of the room ahead of time, I can work within most constraints.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T04:15:00Z",
+      "endTime": "2015-03-06T04:45:00Z",
+      "duration": "P30M",
+      "title": "Afternoon tea",
+      "location": "Foyer",
+      "link": "http://melbourne2015.drupal.org.au/afternoon-tea-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T04:45:00Z",
+      "endTime": "2015-03-06T05:30:00Z",
+      "duration": "P45M",
+      "title": "Create your own bespoke Views Style Plugins for Drupal 8",
+      "location": "Technocrat Auditorium",
+      "link": "http://melbourne2015.drupal.org.au/session/create-your-own-bespoke-views-style-plugins-drupal-8",
+      "track": [
+        "Building with Drupal",
+        "Coding and development",
+        "Site building"
+      ],
+      "speakers": [
+        "Jibran Ijaz"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=XjXyFnA-wzM",
+      "full_description": "Views in Drupal Core was the first initiative to reach feature completion in Drupal 8. Like all other core systems Views has embraced PSR , Plugin Systems, Annotations and ConfigEntities.\n\nThis session is about how Drupal 8 makes it easy and painless to create a ViewsStyle Plugin.\n\nWe'll learn:\n- How to add a custom theme to a plugin.\n- How to add a display option to a plugin.\n- How to use configuration options to customise the HTML output.\n\nWe'll also take a look into some contributed views style plugin modules.\n\nAbout the speaker @jibran\n- Has been working with Drupal for more then 4 years.\n- Has more then 150 commit mentions in Drupal 8.\n- Has reviewed a lot Drupal 8 patches.\n- Has worked on a lot Views patches in Drupal 8.\n- Is the maintainer of Views field view, Views fieldset style plugin, Views details style plugin, Views vertical tabs style plugin and Views collapsible group.\n\nhttp://jibran.github.io/d8_views_style_plugins/",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T04:45:00Z",
+      "endTime": "2015-03-06T05:30:00Z",
+      "duration": "P45M",
+      "title": "Performance: Not an Afterthought",
+      "location": "Doghouse - Room D",
+      "link": "http://melbourne2015.drupal.org.au/session/performance-not-afterthought",
+      "track": [
+        "Building with Drupal",
+        "Coding and development",
+        "Site building"
+      ],
+      "speakers": [
+        "Nick Santamaria"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=12idsSDDMDU",
+      "full_description": "As Drupal continues to experience huge growth with government and enterprise clients, the scale and complexity of Drupal implementations also grows. A common issue affecting these bigger projects is poor website performance. Problems of this nature have huge and costly impacts on the customer; lost sales and advertising revenue, loss of consumer confidence and brand legitimacy, SEO penalties, increased hosting infrastructure costs - the list goes on. Not to mention the developers tasked with fixing the problem! The stakes are high, the pressure is on, and the technical challenges are real - not a position many of us would choose to be in.\n\nThis aims of this session\n- To provide developers with the knowledge to identify and mitigate potential performance risks before they manifest.\n- To provide strategies to identify and resolve crippling performance issues that arise throughout the lifecycle of a Drupal application.\n\nWho should attend this session\n- Developers who are building complex Drupal instances, but currently do not intentionally architect the site to perform.\n- Developers wanting to improve the performance of their end product.\n- Technical roles involved in the architecture of systems containing Drupal.\n\nAbout me\n\nMy name is Nick Santamaria. I'm a Senior Developer at Technocrat, with over 8 years experience working with Drupal. I have an extensive background in Drupal performance optimisation, including involvement in a number of high-profile project rescues. You can find me online here:\n- drupal.org\n- github\n- twitter\n- linkedin\n\nSlides on Slideshare\nhttp://www.slideshare.net/NickSantamaria/drupalsouth-2015-performance-not-an-afterthought",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T04:45:00Z",
+      "endTime": "2015-03-06T05:30:00Z",
+      "duration": "P45M",
+      "title": "Prototyping in User Centered Design in Drupal",
+      "location": "PreviousNext - Room E",
+      "link": "http://melbourne2015.drupal.org.au/session/prototyping-user-centered-design-drupal",
+      "track": [
+        "Planning for Drupal",
+        "User experience"
+      ],
+      "speakers": [
+        "chloe"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=5Awjd5OIz_k",
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T04:45:00Z",
+      "endTime": "2015-03-06T05:30:00Z",
+      "duration": "P45M",
+      "title": "Site preview, the holy grail of Drupal",
+      "location": "Microsoft - Room C",
+      "link": "http://melbourne2015.drupal.org.au/session/site-preview-holy-grail-drupal",
+      "track": [
+        "Building with Drupal",
+        "Site building",
+        "Drupal Futures",
+        "Drupal futures"
+      ],
+      "speakers": [
+        "wiifm"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=FBVKPOhlnco",
+      "full_description": "Background\nHistorically this has been challenging for Drupal. In this session I aim to show you the existing methods this can be done, a comparison between them, and introduce an entirely different approach (Preview Sync) we have just created for a client.\n\nWho this session is for\nDrupal developers and also business managers looking to see how this can be done in Drupal, the pros and cons, and which method may suit them the best.\n\nCovered in the session\n- Drupal 7 - what is in Drupal core, and why this probably is not what you are after\n- Site Preview System (SPS) - https://www.drupal.org/project/sps\n- Content Publishing System (CPS) by @merlinofchaos https://www.drupal.org/project/cps\n- Preview Sync - the custom implementation we wrote that syncs production to another cluster, and publishes content, for a true site wide preview (including views, Solr). I will also aim to have this open sourced by the presentation. Has minimal requirements on the production site, and is extensible and flexible.\n- Looking forward to Drupal 8, and what changes in core can help us\n\nAbout the presenter\nSean Hamlin (@wiifm):\n- has been working with Drupal for over 6 years\n- contributed several modules, and dozens of patches upstream (including core)\n- works as a Technical Account Manager for Acquia in New Zealand\n\nSlides\nhttp://bit.ly/drupalsouthsitepreview",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T05:45:00Z",
+      "endTime": "2015-03-06T06:30:00Z",
+      "duration": "P45M",
+      "title": "Failing with Style - A practical guide to Continuous Integration",
+      "location": "PreviousNext - Room E",
+      "link": "http://melbourne2015.drupal.org.au/session/failing-style-practical-guide-continuous-integration",
+      "track": [
+        "Building with Drupal",
+        "Coding and development"
+      ],
+      "speakers": [
+        "leex"
+      ],
+      "full_description": "Presentation: http://slides.com/webscope/deck-9\n\nCodeception test examples - https://github.com/Webscope/ci_demo_tests\n\nAnsible local setup - https://github.com/Webscope/vagrant-ansible-drupal7\n\nBuild server setup - https://github.com/Webscope/acme-ci-build-server\n\nSite build setup - https://github.com/Webscope/acme-ci-site-build\n\nAt Webscope, we’ve been refining our development workflow over the past three years. I will cover our current (and best!) development workflow - from our local development environment using Vagrant and Ansible, to our Continuous Integration and automated test suite using Jenkins, Codeception and PhantomJS, through to hosting on Pantheon.\n\nThe main focus will be on Continuous Integration and automated tests since this is hugely beneficial for many reasons, including:\n- The site gets tested multiple times before each release, hugely reducing manual testing and improving code stability.\n- Day to day it speeds up development, as developers can focus on writing code for new features without having to spend time familiarizing themselves with how the whole system works.\n- Most bugs are caught straight away and don’t get buried only to be found weeks later.\n- The end result of this is that the development team can be much more efficient, keeping costs down, speeding up delivery, removing time consuming and error prone manual testing, and increasing the lifespan of the software.\n\nThe attendees should leave with an understanding of how to implement this into their own workflow.\n\n# Saturday",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T05:45:00Z",
+      "endTime": "2015-03-06T06:30:00Z",
+      "duration": "P45M",
+      "title": "Idealism embodied: Philosophy, Code, Empowerment",
+      "location": "Technocrat Auditorium",
+      "link": "http://melbourne2015.drupal.org.au/session/idealism-embodied-philosophy-code-empowerment",
+      "track": [
+        "Drupal Futures"
+      ],
+      "speakers": [
+        "horncologne"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=HbRZZZygdJw",
+      "full_description": "As part of the LAMP stack, PHP is a dominant web technology and it is getting more powerful all the time: Convergence through things like Composer and the PSR standards is bringing once disparate communities together. Multiple “meta projects” like Drupal are adopting code from around the PHP and FOSS spheres. Contribution to one has become contribution to whole ecosystems. Many of us are idealists. Powering 80% of the web, we have the chance – and perhaps the responsibility – to make a difference through PHP. Paraphrasing Angie “Webchick” Byron, Drupal core committer, “We make really abstract complicated programming concepts accessible to non-developers, available to them by clicking a few buttons, without having to understand all the code that comes underneath it. What I get really excited about is the idea that we create really easily accessible things to help those people who are on the front lines trying to make the world a better place. We can build technology to enable that.” I will talk about how the thinking of Richard Stallman and other pioneers became code and how that code is empowering people and organisations. I want to draw a few lines from the very definition of free and open source software, through its practical application and native advantages, to how it helps people do better business, better government … and I’m hoping … make a better world.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T05:45:00Z",
+      "endTime": "2015-03-06T06:30:00Z",
+      "duration": "P45M",
+      "title": "Using Drupal in education: strategies, standalone vs collaboration",
+      "location": "Doghouse - Room D",
+      "link": "http://melbourne2015.drupal.org.au/session/using-drupal-education-strategies-standalone-vs-collaboration",
+      "track": [
+        "Drupal Futures",
+        "Digital visions",
+        "Planning for Drupal",
+        "Drupal public"
+      ],
+      "speakers": [
+        "VladimirAus",
+        "Josh Martin",
+        "Michelle Stevens"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=J8rzCmnqrPo",
+      "full_description": "There is no simple solution to cover all the challenges that education is currently facing. The number of software applications that are currently on the market are addressing only fraction of requested features. After extensive research and the number of specialized and customized projects for universities, we set the goal to create LMS that education sector is craving for.\n\nThis session will address:\n- history of education software including current education software leaders (open source and others)\n- education software approaches: collaborative (using LMS with Drupal) versus standalone (can Drupal be an LMS?)\n- LMS for Drupal 8",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T06:30:00Z",
+      "endTime": "2015-03-06T07:00:00Z",
+      "duration": "P30M",
+      "title": "Conference close",
+      "location": "Technocrat Auditorium",
+      "link": "http://melbourne2015.drupal.org.au/conference-close",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2015-03-06T22:30:00Z",
+      "endTime": "2015-03-07T06:00:00Z",
+      "duration": "P450M",
+      "title": "Contribution sprints",
+      "location": "Realityloop Sprints - Room A",
+      "link": "http://melbourne2015.drupal.org.au/contribution-sprints",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "Come collaborate on Drupal in person with hundreds of other Drupal community members from 9am-5pm on Saturday, March 7 at the Melbourne Convention and Exhibition Center.\n\nWhat is a sprint?\nA sprint is a get-together for focused work on a project. Sprints are an important part of Drupal's growth, and are also a great opportunity to get involved, because others are on hand to help you contribute. Come and collaborate in person with dozens of other Drupal community members.\n\nAnd, people curious about mentoring while at Drupal South or organizing their own local sprint should review this video from DrupalCon Prague: Patch reviews & Turning regular people into mentors (http://www.youtube.com/watch?v=k3CJL75tgB4)",
+      "sponsorIds": ""
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+[
+  {
+    "id": "dark",
+    "label": "Dark",
+    "dark": true,
+    "colors": {
+      "bg": "#010810",
+      "bgAlt": "#040d1c",
+      "primary": "#00cfff",
+      "secondary": "#4a90d9",
+      "tertiary": "#7c3aed",
+      "surface": "rgba(3,10,22,0.93)",
+      "surfaceAlt": "rgba(7,18,36,0.96)",
+      "surfaceDeep": "rgba(12,28,52,0.84)",
+      "text": "#eaf2fc",
+      "textAlt": "#cdd9ee",
+      "textMuted": "#8eaacc",
+      "textFaint": "#6a8cb0",
+      "border": "#162c4c"
+    }
+  },
+  {
+    "id": "light",
+    "label": "Light",
+    "dark": false,
+    "colors": {
+      "bg": "#f0f4f8",
+      "bgAlt": "#ffffff",
+      "primary": "#006aa9",
+      "secondary": "#4a8ec2",
+      "tertiary": "#1a5ebb",
+      "surface": "rgba(255,255,255,0.97)",
+      "surfaceAlt": "rgba(248,250,252,0.99)",
+      "surfaceDeep": "rgba(241,245,249,0.95)",
+      "text": "#0f172a",
+      "textAlt": "#1e293b",
+      "textMuted": "#475569",
+      "textFaint": "#64748b",
+      "border": "#cbd5e1"
+    }
+  },
+  {
+    "id": "drupalcamp",
+    "label": "DrupalCamp",
+    "dark": true,
+    "colors": {
+      "bg": "#01100e",
+      "bgAlt": "#041c19",
+      "primary": "#48cabe",
+      "secondary": "#14626a",
+      "tertiary": "#0a7c72",
+      "surface": "rgba(3,22,18,0.93)",
+      "surfaceAlt": "rgba(7,36,28,0.96)",
+      "surfaceDeep": "rgba(12,52,40,0.84)",
+      "text": "#eaf2fc",
+      "textAlt": "#cdd9ee",
+      "textMuted": "#8eaacc",
+      "textFaint": "#6a8cb0",
+      "border": "#0e3530"
+    }
+  },
+  {
+    "id": "drupalcon",
+    "label": "DrupalCon",
+    "dark": true,
+    "colors": {
+      "bg": "#0a0e1a",
+      "bgAlt": "#131929",
+      "primary": "#7b92bd",
+      "secondary": "#4a5e84",
+      "tertiary": "#424c7c",
+      "surface": "rgba(10,14,26,0.93)",
+      "surfaceAlt": "rgba(16,23,42,0.96)",
+      "surfaceDeep": "rgba(20,30,55,0.84)",
+      "text": "#eaf2fc",
+      "textAlt": "#cdd9ee",
+      "textMuted": "#8eaacc",
+      "textFaint": "#6a8cb0",
+      "border": "#1e2d4a"
+    }
+  },
+  {
+    "id": "drupalsouth",
+    "label": "DrupalSouth",
+    "dark": true,
+    "colors": {
+      "bg": "#010912",
+      "bgAlt": "#04112b",
+      "primary": "#58b2f8",
+      "secondary": "#1a5ebb",
+      "tertiary": "#124a9e",
+      "surface": "rgba(3,12,22,0.93)",
+      "surfaceAlt": "rgba(7,20,42,0.96)",
+      "surfaceDeep": "rgba(12,32,60,0.84)",
+      "text": "#eaf2fc",
+      "textAlt": "#cdd9ee",
+      "textMuted": "#8eaacc",
+      "textFaint": "#6a8cb0",
+      "border": "#132454"
+    }
+  }
+]

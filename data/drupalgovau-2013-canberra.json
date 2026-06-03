@@ -1,0 +1,531 @@
+{
+  "event": {
+    "designation": "DrupalGov",
+    "location": "Canberra",
+    "year": "2013",
+    "website": "http://lanyrd.com/2013/drupalgov/",
+    "region": "Australia",
+    "venue": "University House, Cnr Balmain Crescent & Liversidge St, Acton, ACT 2601, Australia",
+    "timezone": "Australia/Sydney",
+    "enabled": true,
+    "startDate": "2013-08-22T23:00:00Z",
+    "endDate": "2013-08-23T07:00:00Z",
+    "sourceCache": "cache/wayback/drupalgovau-2013/raw",
+    "logo": {
+      "image": "./img/logos/drupalgov-logo.png",
+      "imageAlt": "DrupalGov logo",
+      "usePlate": false
+    },
+    "flickr": {
+      "enabled": true,
+      "groupUrl": "",
+      "image": "",
+      "imageAlt": ""
+    },
+    "sponsors": [
+      {
+        "id": "sponsor-1",
+        "title": "Datacom",
+        "tier": "Principal",
+        "row": 1,
+        "priority": 10,
+        "image": "./img/sponsors/drupalgov/2013-canberra/sponsor-1.jpg",
+        "imageAlt": "Datacom logo",
+        "link": "http://www.datacom.com.au/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-3",
+        "title": "Agileware",
+        "tier": "Principal",
+        "row": 1,
+        "priority": 30,
+        "image": "./img/sponsors/drupalgov/2013-canberra/sponsor-3.png",
+        "imageAlt": "Agileware logo",
+        "link": "http://agileware.com.au/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-4",
+        "title": "PreviousNext",
+        "tier": "Principal",
+        "row": 1,
+        "priority": 40,
+        "image": "./img/sponsors/drupalgov/2013-canberra/sponsor-4.png",
+        "imageAlt": "PreviousNext logo",
+        "link": "http://previousnext.com.au/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-5",
+        "title": "OPC IT",
+        "tier": "Principal",
+        "row": 1,
+        "priority": 50,
+        "image": "./img/sponsors/drupalgov/2013-canberra/sponsor-5.png",
+        "imageAlt": "OPC IT logo",
+        "link": "http://www.opc.com.au/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-7",
+        "title": "Oxide Interactive",
+        "tier": "Principal",
+        "row": 1,
+        "priority": 70,
+        "image": "./img/sponsors/drupalgov/2013-canberra/sponsor-7.png",
+        "imageAlt": "Oxide Interactive logo",
+        "link": "http://www.oxideinteractive.com.au/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-6",
+        "title": "Portable Studios",
+        "tier": "Supporter",
+        "row": 2,
+        "priority": 60,
+        "image": "./img/sponsors/drupalgov/2013-canberra/sponsor-6.jpg",
+        "imageAlt": "Portable Studios logo",
+        "link": "http://www.portablestudios.com.au/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-8",
+        "title": "Boab Interactive",
+        "tier": "Supporter",
+        "row": 2,
+        "priority": 80,
+        "image": "./img/sponsors/drupalgov/2013-canberra/sponsor-8.png",
+        "imageAlt": "Boab Interactive logo",
+        "link": "http://www.boabinteractive.com.au/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-9",
+        "title": "Acquia",
+        "tier": "Principal",
+        "row": 1,
+        "priority": 90,
+        "image": "./img/sponsors/drupalgov/2013-canberra/sponsor-9.png",
+        "imageAlt": "Acquia logo",
+        "link": "http://acquia.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-2",
+        "title": "Datacom",
+        "tier": "Sprint",
+        "row": 3,
+        "priority": 20,
+        "image": "./img/sponsors/drupalgov/2013-canberra/sponsor-2.jpg",
+        "imageAlt": "Datacom logo",
+        "link": "http://www.datacom.com.au/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "columns": 3,
+    "scheduleURLs": [
+      "http://lanyrd.com/2013/drupalgov/schedule/"
+    ]
+  },
+  "items": [
+    {
+      "startTime": "2013-08-22T22:30:00Z",
+      "endTime": "2013-08-22T23:00:00Z",
+      "duration": "P30M",
+      "title": "Registration",
+      "location": "Foyer, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgyx/",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-22T23:00:00Z",
+      "endTime": "2013-08-22T23:10:00Z",
+      "duration": "P10M",
+      "title": "Opening address",
+      "location": "Great Hall, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgxd/",
+      "track": [],
+      "speakers": [
+        "Christopher Skene"
+      ],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-22T23:10:00Z",
+      "endTime": "2013-08-22T23:30:00Z",
+      "duration": "P20M",
+      "title": "Keynote",
+      "location": "Great Hall, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgwz/",
+      "track": [],
+      "speakers": [
+        "John Sheridan"
+      ],
+      "full_description": "John Sheridan joined the APS Senior Executive Service in 2002, after 22 years in the Australian Army and three in the Defence Science and Technology Organisation. In Defence, he was the lead IT architect and, later, responsible for the design and development of IT systems.\n\n In the Australian Government Information Management Office, John negotiated the Microsoft Volume Sourcing Agreement, managed major ICT budget reductions, and led whole of government matters such as australia.gov.au, data centre strategy, coordinated procurement, industry engagement, and telecommunications services.\n\n In February 2013, John became the first Australian Government Chief Technology Officer. In addition to his responsibilities for ICT, coordinated and general procurement policy and operations, John assists the business community as the Australian Government Procurement Coordinator.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-22T23:30:00Z",
+      "endTime": "2013-08-23T00:15:00Z",
+      "duration": "P45M",
+      "title": "Drupal content workflows",
+      "location": "Drawing Room, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgxz/",
+      "track": [],
+      "speakers": [
+        "Martin Ollman"
+      ],
+      "full_description": "Exploring the many unique ways drupal can control your digital content publishing needs. Across channels and devices.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-22T23:30:00Z",
+      "endTime": "2013-08-23T00:15:00Z",
+      "duration": "P45M",
+      "title": "Introducing Drupal 8",
+      "location": "Common Room, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgxq/",
+      "track": [],
+      "speakers": [
+        "David Peterson"
+      ],
+      "full_description": "Drupal 8 is the upcoming release of the massively popular Open Source CMS. It has a completely new backend engine incorporating symfony2 and is RESTful at its core. Mobile applications will become a first class citizen along with built-in responsive design.\n\n Things you will get from this session: \n\n* Get an overview of the key features \n\n* Learn how you can leverage this flexibility to rapidly create web applications and minimise time to market \n\n* When should you start thinking about building Drupal 8 sites \n\n* What about Drupal 6? Drupal 7?",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-22T23:30:00Z",
+      "endTime": "2013-08-23T00:15:00Z",
+      "duration": "P45M",
+      "title": "Rethink your requirements",
+      "location": "Great Hall, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgxc/",
+      "track": [],
+      "speakers": [
+        "Pamela Barone"
+      ],
+      "full_description": "Requirements often come with technical implications, without regard for the platform that will be used - or even for the system's users and what they might want. Meeting strictly written requirements can lead to an over-engineered and over-priced solution.\n\n Don't let requirements undermine Drupal's strengths by being too prescriptive about the approach. You can re-frame the requirements to leverage what Drupal does well, instead of trying to work around its weaknesses to build a custom, complex product. Beyond improving the technical outcome, writing Drupal-y requirements can help avoid misunderstandings. The intent of a requirement is to establish business value - not to tell you how to build something.\n\n This session targets those on the delivery end of Drupal and will look at how to achieve useful requirements to establish a mutually understood goal. Then you can build it - the Drupal way!",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T00:15:00Z",
+      "endTime": "2013-08-23T00:45:00Z",
+      "duration": "P30M",
+      "title": "Morning Tea",
+      "location": "Foyer, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgyy/",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T00:45:00Z",
+      "endTime": "2013-08-23T01:30:00Z",
+      "duration": "P45M",
+      "title": "Building responsive websites with Drupal",
+      "location": "Common Room, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgxr/",
+      "track": [],
+      "speakers": [
+        "Daniel Tome"
+      ],
+      "full_description": "In the 45 minutes of the session these will be the topics that will be covered: \n\n10 minutes – Overview of responsive design and why it is important \n\n20 minutes – Methods of implementing it with Drupal. Explaining modules, themes and challenges \n\n10 minutes – Keeping it accessible in the government sector \n\n5 minutes – What things can be optimised and the future or RWD with Drupal 8",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T00:45:00Z",
+      "endTime": "2013-08-23T01:30:00Z",
+      "duration": "P45M",
+      "title": "How to Archive and Influence People, or, Research Archiving for Ninjas",
+      "location": "Drawing Room, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgxy/",
+      "track": [],
+      "speakers": [
+        "Mr. Snow"
+      ],
+      "full_description": "This session looks at the value universities can get out of creating archives in Drupal. We've done a bunch of work with the University of New South Wales, and Newcastle in building archives that have two purposes:\n\n \n To collate disparate research and make it available to the community for research and ingestion.\n\n To capitalise on the value of audiovisual research – in particular to reference significance in audiovisual based research outcomes.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T00:45:00Z",
+      "endTime": "2013-08-23T01:30:00Z",
+      "duration": "P45M",
+      "title": "Panel: The Challenge of Drupal for Government",
+      "location": "Great Hall, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scpbdb/",
+      "track": [],
+      "speakers": [
+        "Owen Lansbury",
+        "Geoff Dibley"
+      ],
+      "full_description": "Join experienced Drupal implementers, and chair Owen Lansbury (PreviousNext), as they discuss the challenges of implementing Drupal in the public sector.\n\n This is your opportunity to hear how these departments have managed and overcome some of the issues Drupal can throw up in Government departments, as well as putting your own questions to the panel.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T01:30:00Z",
+      "endTime": "2013-08-23T02:15:00Z",
+      "duration": "P45M",
+      "title": "ADFA and aGov: Cadets driving change",
+      "location": "Common Room, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgyw/",
+      "track": [],
+      "speakers": [],
+      "full_description": "A recent initiative from Australian Defence Force Academy Midshipmen and Officer Cadets has seen the implementation of PreviousNext's aGov distribution to serve as a cadet intranet for the Academy. This session presents a case study on its implementation from both the business and technical perspective, and shares the experience of those who made it happen.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T01:30:00Z",
+      "endTime": "2013-08-23T02:15:00Z",
+      "duration": "P45M",
+      "title": "IBIS (International Biosecurity Intelligence System) - Intelligence Gathering and Analysis with Drupal 7",
+      "location": "Great Hall, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgxt/",
+      "track": [],
+      "speakers": [
+        "Shaun Moss"
+      ],
+      "full_description": "For the past few years, the Biosecurity sections of DAFF (the Department of Agriculture, Fisheries and Forestry), working with ACERA (the Australian Centre of Excellence in Risk Analysis) have been developing intelligence gathering and analysis tools using Drupal. Three prototype sites were developed in Drupal 6 (2010-2012), and these are now being redeveloped as a Drupal 7 multisite, soon to be deployed.\n\n The site constantly searches the web looking for news reports of relevance to biosecurity, i.e. plant and animal disease outbreaks, automatically tags and geotags collected reports, then informs the community and engages their input. This software provides real-time awareness of, and rapid response to, biosecurity threats around the world; connects and engages the global biosecurity community; and drives the formation of national policy. Future directions for the software include crowd-sourcing of predictive analysis and foresighting tools.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T01:30:00Z",
+      "endTime": "2013-08-23T02:15:00Z",
+      "duration": "P45M",
+      "title": "We the People: forming a more perfect union with Drupal",
+      "location": "Drawing Room, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgyb/",
+      "track": [],
+      "speakers": [
+        "Robert Caracaus"
+      ],
+      "full_description": "WhiteHouse.gov's WeThePeople Platform is a living example of how Drupal is changing the culture of government. Embracing this change will give you a better .GOV website.\n\n \n \n A look into the WeThePeople API and how it is being used to enrich petition data and promote engagement. How the new \"write API\" will make .GOV websites facilitators of change.\n\n \n \n President Obama specifically stated in a UN speech that he wanted \"other governments\" to use his code. Take a shallow dive into how you might use WeThePeople's Drupal.org \"petitions\" distribution to recreate \"We the People\" for your own country.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T02:15:00Z",
+      "endTime": "2013-08-23T02:30:00Z",
+      "duration": "P15M",
+      "title": "Group Photo",
+      "location": "Foyer, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scpbdc/",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T02:30:00Z",
+      "endTime": "2013-08-23T03:30:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "Foyer, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgyz/",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T02:45:00Z",
+      "endTime": "2013-08-23T03:30:00Z",
+      "duration": "P45M",
+      "title": "Lightning Talks",
+      "location": "Common Room, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scpbdd/",
+      "track": [],
+      "speakers": [],
+      "full_description": "Got something you want to share? 6 minute lightning talks start at 12:45 in the Common Room. Come along and see what pops up!",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T03:30:00Z",
+      "endTime": "2013-08-23T04:15:00Z",
+      "duration": "P45M",
+      "title": "A roundtable on CRMs and Drupal for Gov and NGOs",
+      "location": "Great Hall, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgyc/",
+      "track": [],
+      "speakers": [
+        "Chris Ward",
+        "Martin Schwall"
+      ],
+      "full_description": "CRMs are a valuable tool in helping track your constituents or contacts and your interactions with them. Whether those interactions are memberships or donations, demographics or hot issues, surveying members or a variety of other potential interactions, recording them accurately to know who is most engaged with your organisation is an important task.\n\n Through this roundtable we'll discuss the various CRM options available and how well the integrate with Drupal, including case studies of Australian organisations using CiviCRM, Salesforce and many other solutions.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T03:30:00Z",
+      "endTime": "2013-08-23T04:15:00Z",
+      "duration": "P45M",
+      "title": "Safely stepping in to the clouds",
+      "location": "Drawing Room, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgyg/",
+      "track": [],
+      "speakers": [
+        "Phil Ingram"
+      ],
+      "full_description": "The cloud is an external resource that is run by a third party. What used to be kept internal is now in the care of someone else. The need to adhere to standards such as the ISM or FISMA to ensure that yours and public data is secure is very doable, but there are some things that you should know first.\n\n This talk is aimed at helping individuals, departments and organisations take those first steps into cloud computing and doing so in a safe and secure way. Acquia run over five thousand servers for many varied high profile customers. Ensuring that their sites meet SLA yet remain performant and secure is a goal we have reached, but constantly strive to improve.\n\n We have learned many lessons along our journey from a start up of just four people that has enabled us to scale out to over three hundred employees and an ever increasing customer base in just over five years.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T03:30:00Z",
+      "endTime": "2013-08-23T04:15:00Z",
+      "duration": "P45M",
+      "title": "Working with aGov",
+      "location": "Common Room, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgyd/",
+      "track": [],
+      "speakers": [
+        "Kim Pepper"
+      ],
+      "full_description": "aGov is a free open source Drupal 7 distribution developed specifically for Australian government organisations. Easy to install and configure, this pre-packaged Drupal CMS platform complies with all Australian government standards and provides a full suite of essential website management features.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T04:15:00Z",
+      "endTime": "2013-08-23T05:00:00Z",
+      "duration": "P45M",
+      "title": "CiviCRM: Connected Community",
+      "location": "Great Hall, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgyh/",
+      "track": [],
+      "speakers": [
+        "Justin Freeman"
+      ],
+      "full_description": "Presenting the opportunity for NGOs, Non-profits and Government to better connect, gain insights from and manage their community using a world-class CRM system.\n\n Will cover key CiviCRM features, integration with Drupal, multisite installation, Case Studies. Includes discussion of:\n\n \n Contacts\n\n Targeted mailing lists\n\n Groups and categorisation\n\n Memberships\n\n Contributions\n\n Event management\n\n Recording of actions\n\n Recurring donations",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T04:15:00Z",
+      "endTime": "2013-08-23T05:00:00Z",
+      "duration": "P45M",
+      "title": "Drupalising your Intranet",
+      "location": "Common Room, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgyk/",
+      "track": [],
+      "speakers": [
+        "Geoff Dibley"
+      ],
+      "full_description": "After developing a number of external websites since 2009 on the Drupal platform, including pm.gov.au, a multi-branch team within the Department of the Prime Minister and Cabinet embarked on a project in 2012 to redevelop the PM&C intranet using Drupal.\n\n This case study will look at the redevelopment approach, as well as some of the benefits and challenges in deploying Drupal to meet the complex business needs of a government intranet.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T04:15:00Z",
+      "endTime": "2013-08-23T05:00:00Z",
+      "duration": "P45M",
+      "title": "Rapid Prototyping the Drupal way",
+      "location": "Drawing Room, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgym/",
+      "track": [],
+      "speakers": [
+        "Toby Wild"
+      ],
+      "full_description": "This session investigates Drupal's ability to rapidly prototype ideas without having the massive code releases normally associated with other applications.\n\n Among other things, this session will look at the ability to create and alter forms in pretty much realtime, as well as the ability to easily upload geolocated data and have it display on a map in under 20 minutes.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T05:00:00Z",
+      "endTime": "2013-08-23T05:30:00Z",
+      "duration": "P30M",
+      "title": "Afternoon tea",
+      "location": "Foyer, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgzb/",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T05:30:00Z",
+      "endTime": "2013-08-23T06:15:00Z",
+      "duration": "P45M",
+      "title": "Accessibility: Not boring or difficult",
+      "location": "Great Hall, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgyp/",
+      "track": [],
+      "speakers": [
+        "Christian Biggins"
+      ],
+      "full_description": "Accessibility has two very strong stigma's associated with it.\n\n 1. You can't have a good looking site while ensuring it is accessible.\n\n2. Its too difficult to maintain accessibility.\n\n I plan to try and pry these two, unjustified, opinions from people by presenting some easy win accessibility fixes as well as a showcase of beautiful, and accessible, sites.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T05:30:00Z",
+      "endTime": "2013-08-23T06:15:00Z",
+      "duration": "P45M",
+      "title": "Best practices, workflow and how not to break your site",
+      "location": "Drawing Room, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgyr/",
+      "track": [],
+      "speakers": [
+        "Adam Malone"
+      ],
+      "full_description": "It’s often tempting to skip over best practices when time to deadlines is short or simply because what may be seen as a complex development workflow takes time to set up. This is made only more inviting if you’re in a large department with multiple developers engaged in a range of projects and have a list of issues longer than fit on a screen in your backlog. Whilst doing so is the path of least resistance, quite often the time investment taken pays off quickly by creating an environment that exists to mitigate catastrophe. By implementing good workflow and following best practices (both in terms of Drupal and continuous integration) and utilising tools we already have, development can fly.\n\n Aimed at both individual developers and large teams, this talk can benefit anyone looking to start working in a best practices environment.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T05:30:00Z",
+      "endTime": "2013-08-23T06:15:00Z",
+      "duration": "P45M",
+      "title": "Security compliance with Drupal",
+      "location": "Common Room, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgyq/",
+      "track": [],
+      "speakers": [
+        "Tim Siers"
+      ],
+      "full_description": "In recent years there have been a number of public attacks on high profile sites and leaks of sensitive data. As a decision maker you've no doubt been asked many times questions about security. Perhaps you yourself are wondering how an open source project could survive the scrutiny of your rigorous department's security requirements.\n\n This presentation aims to demonstrate that a large annual license fee and closed source won't necessarily equal a secure product. The Defence Signals Directorate (DSD) produces the Australian Government Information Security Manual (ISM). The manual is the standard which governs the security of government ICT systems. We'll be talking at a high level on how Drupal stands up against these standards, and others from the Open Web Application Security Project (OWASP). In doing so you should gain a better understanding of what Drupal is doing about security, and what you should be doing about security. This will give you some strategies for minimising your risks and offering Drupal as a viable solution for mission critical or sensitive information.\n\n Only a basic knowledge of Drupal is required as we won't be writing code or configuring modules, but I do hope to give you tips for your development team and some knowledge for future conversations with supervisors, clients, or the IT department.",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T06:15:00Z",
+      "endTime": "2013-08-23T07:00:00Z",
+      "duration": "P45M",
+      "title": "DrupalInGov – Lessons learned from years of doing Drupal in the public sector",
+      "location": "Common Room, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmhct/",
+      "track": [],
+      "speakers": [
+        "Joshua Li"
+      ],
+      "full_description": "\"This presentation covers lessons learned by Datacom’s Drupal consultants based on their experience working in public sector and public sector like organisations. If you are about to embark on a Drupal project or planning to engage an external Drupal consultant the topics covered are intended to assist you to get the best out of your project.\n\n Topics include:\n\n1. Requirements development \n\n2. Agile \n\n3. Politics \n\n4. On-site or off-site? \n\n5. Let developers develop \n\n6. Knowledge transfer \n\n7. Test, test, test \n\n8. Infrastructure \n\n9. Plan for organisational change \n\n10. Module shopping \n\n11. Documentation",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2013-08-23T06:15:00Z",
+      "endTime": "2013-08-23T07:00:00Z",
+      "duration": "P45M",
+      "title": "Implement an accessible video player with Drupal",
+      "location": "Great Hall, University House",
+      "link": "http://lanyrd.com/2013/drupalgov/scmgyt/",
+      "track": [],
+      "speakers": [
+        "Stephen Ollman"
+      ],
+      "full_description": "Learn how to implement JW Player Controls to enable your team to add truly accessible video content to your Drupal website. This presentation will demonstrate what modules to use and how to create a video caption file.",
+      "sponsorIds": ""
+    }
+  ]
+}

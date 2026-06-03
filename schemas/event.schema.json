@@ -1,0 +1,343 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Conference Event",
+  "description": "A conference event dataset containing metadata, sponsors, and session schedule.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["event", "items"],
+  "properties": {
+    "result": {
+      "type": "string",
+      "description": "How the dataset was sourced (e.g. \"manual\", \"cached\")."
+    },
+    "url": {
+      "type": "string",
+      "description": "The source URL this dataset was fetched or derived from."
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "designation",
+        "location",
+        "year",
+        "website",
+        "region",
+        "timezone",
+        "enabled",
+        "columns",
+        "scheduleURLs",
+        "logo",
+        "flickr",
+        "sponsors"
+      ],
+      "properties": {
+        "designation": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Event series name (e.g. \"DrupalSouth\", \"DrupalCon\")."
+        },
+        "location": {
+          "type": "string",
+          "minLength": 1,
+          "description": "City or region where the event is held."
+        },
+        "year": {
+          "type": "string",
+          "pattern": "^[0-9]{4}$",
+          "description": "Four-digit year of the event."
+        },
+        "website": {
+          "type": "string",
+          "description": "Official event website URL."
+        },
+        "region": {
+          "type": "string",
+          "description": "Human-readable geographic region (e.g. \"New Zealand – Wellington\")."
+        },
+        "timezone": {
+          "type": "string",
+          "description": "IANA timezone identifier for the event location."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether this event is visible in the UI."
+        },
+        "hidden": {
+          "type": "boolean",
+          "description": "Explicitly hides the event from all listings."
+        },
+        "eventVisibility": {
+          "type": "string",
+          "enum": ["hidden", "private", "off", "disabled"],
+          "description": "Fine-grained visibility override."
+        },
+        "columns": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of columns used in the schedule grid view."
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 UTC start date/time of the event."
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 UTC end date/time of the event."
+        },
+        "scheduleURLs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Source schedule URLs used when this dataset was created or last checked."
+        },
+        "venue": {
+          "type": "string",
+          "description": "Physical venue name."
+        },
+        "sourceCache": {
+          "type": "string",
+          "description": "Path to the locally cached copy of the source schedule data."
+        },
+        "videoPlaylist": {
+          "type": "string",
+          "description": "URL to a YouTube or other video playlist for this event."
+        },
+        "videoPlaylistCache": {
+          "type": "string",
+          "description": "Path to a locally cached copy of the video playlist."
+        },
+        "id": {
+          "type": "string",
+          "description": "Internal identifier for this event dataset."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name for this event dataset."
+        },
+        "theme": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Per-event theme overrides. All fields optional.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Theme ID to use for this event (overrides the global default)."
+            },
+            "primaryColor": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$",
+              "description": "Custom primary accent color (e.g. \"#00cfff\")."
+            },
+            "secondaryColor": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$",
+              "description": "Custom secondary accent color (e.g. \"#4a90d9\")."
+            },
+            "tertiaryColor": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$",
+              "description": "Custom tertiary accent color used for background glows (e.g. \"#7c3aed\")."
+            }
+          }
+        },
+        "logo": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["image", "imageAlt", "usePlate"],
+          "properties": {
+            "image": {
+              "type": "string",
+              "description": "Path to the event logo image."
+            },
+            "imageAlt": {
+              "type": "string",
+              "description": "Accessible alt text for the logo."
+            },
+            "usePlate": {
+              "type": "boolean",
+              "description": "Whether to render a background plate behind the logo."
+            }
+          }
+        },
+        "flickr": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["enabled", "groupUrl", "image", "imageAlt"],
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether the Flickr photo promo card is shown."
+            },
+            "provider": {
+              "type": "string",
+              "description": "Name of the photo platform shown in the callout (e.g. Flickr, Google Photos, SmugMug)."
+            },
+            "groupUrl": {
+              "type": "string",
+              "description": "URL to the Flickr group or photo collection."
+            },
+            "image": {
+              "type": "string",
+              "description": "Path to the promo image displayed with the Flickr card."
+            },
+            "imageAlt": {
+              "type": "string",
+              "description": "Accessible alt text for the promo image."
+            }
+          }
+        },
+        "sponsors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "title",
+              "tier",
+              "row",
+              "priority",
+              "image",
+              "imageAlt",
+              "link",
+              "bgStyle",
+              "aspect",
+              "enabled"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique sponsor identifier within this event (e.g. \"sponsor-1\")."
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Canonical sponsor name."
+              },
+              "subtitle": {
+                "type": "string",
+                "description": "Optional secondary label shown beneath the sponsor name."
+              },
+              "tier": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Sponsorship tier (e.g. \"Platinum\", \"Gold\", \"Silver\")."
+              },
+              "row": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Display row within the sponsor grid."
+              },
+              "priority": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Sort order within the row (lower = earlier)."
+              },
+              "image": {
+                "type": "string",
+                "description": "Path to the sponsor logo image."
+              },
+              "imageAlt": {
+                "type": "string",
+                "description": "Accessible alt text for the logo."
+              },
+              "link": {
+                "type": "string",
+                "description": "Sponsor website URL."
+              },
+              "bgStyle": {
+                "type": "string",
+                "enum": ["auto", "light-plate", "dark-plate", "brand-fill", "transparent"],
+                "description": "Background style applied behind the sponsor logo."
+              },
+              "aspect": {
+                "type": "string",
+                "enum": ["auto", "square", "landscape", "banner"],
+                "description": "Aspect ratio treatment for the logo image."
+              },
+              "enabled": {
+                "type": "boolean",
+                "description": "Whether this sponsor entry is visible."
+              }
+            }
+          }
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "description": "Ordered list of sessions and schedule entries.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "startTime",
+          "endTime",
+          "duration",
+          "title",
+          "location",
+          "track",
+          "speakers",
+          "full_description",
+          "video_url",
+          "link",
+          "sponsorIds"
+        ],
+        "properties": {
+          "startTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 UTC start time of the session."
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO 8601 UTC end time of the session."
+          },
+          "duration": {
+            "type": "string",
+            "pattern": "^P\\d+M$",
+            "description": "ISO 8601 duration in minutes (e.g. \"P60M\")."
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Public session title."
+          },
+          "location": {
+            "type": "string",
+            "description": "Room, stage, or venue location for this session."
+          },
+          "track": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Topic tracks this session belongs to."
+          },
+          "speakers": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Display names of the session speakers."
+          },
+          "full_description": {
+            "type": "string",
+            "description": "Full session description. Supports Markdown."
+          },
+          "video_url": {
+            "type": "string",
+            "description": "URL to a recording of this session, if available."
+          },
+          "link": {
+            "type": "string",
+            "description": "Canonical URL for this session on the official event website."
+          },
+          "sponsorIds": {
+            "type": "string",
+            "description": "Space-separated IDs of sponsors associated with this session."
+          }
+        }
+      }
+    }
+  }
+}

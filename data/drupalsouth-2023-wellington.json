@@ -1,0 +1,1332 @@
+{
+  "event": {
+    "designation": "DrupalSouth",
+    "location": "Wellington",
+    "year": "2023",
+    "website": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule",
+    "region": "New Zealand – Wellington",
+    "endDate": "2023-05-19T03:00:00Z",
+    "startDate": "2023-05-16T20:00:00Z",
+    "venue": "The Embassy Theatre",
+    "timezone": "Pacific/Auckland",
+    "enabled": true,
+    "sourceCache": "cache/remote/2026-04-25T11-45-45Z/drupalsouth-wellington-2023-json-wellington-2023",
+    "flickr": {
+      "enabled": true,
+      "groupUrl": "https://flic.kr/g/3gRYuT",
+      "image": "./img/flickr/drupalsouth/2023-wellington.jpg",
+      "imageAlt": "DrupalSouth logo"
+    },
+    "logo": {
+      "image": "./img/logos/drupalsouth-logo.png",
+      "imageAlt": "DrupalSouth logo",
+      "usePlate": false
+    },
+    "sponsors": [
+      {
+        "id": "sponsor-1",
+        "title": "amazee.io",
+        "tier": "Diamond",
+        "row": 1,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2023-wellington/sponsor-1.png",
+        "imageAlt": "amazee.io logo",
+        "link": "https://drupalsouth.org/sponsors/amazeeio",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-2",
+        "title": "GovCMS",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2023-wellington/sponsor-2.jpg",
+        "imageAlt": "GovCMS logo",
+        "link": "https://drupalsouth.org/sponsors/govcms",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-3",
+        "title": "Morpht",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2023-wellington/sponsor-3.png",
+        "imageAlt": "Morpht logo",
+        "link": "https://drupalsouth.org/sponsors/morpht",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-4",
+        "title": "Salsa Digital",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 2,
+        "image": "./img/sponsors/drupalsouth/2023-wellington/sponsor-4.png",
+        "imageAlt": "Salsa Digital logo",
+        "link": "https://drupalsouth.org/sponsors/salsa-digital",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-5",
+        "title": "Acquia",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 3,
+        "image": "./img/sponsors/drupalsouth/2023-wellington/sponsor-5.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://drupalsouth.org/sponsors/acquia",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-6",
+        "title": "platform.sh",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 4,
+        "image": "./img/sponsors/drupalsouth/2023-wellington/sponsor-6.png",
+        "imageAlt": "platform.sh logo",
+        "link": "https://drupalsouth.org/sponsors/platformsh",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-7",
+        "title": "Catalyst",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 5,
+        "image": "./img/sponsors/drupalsouth/2023-wellington/sponsor-7.png",
+        "imageAlt": "Catalyst logo",
+        "link": "https://drupalsouth.org/sponsors/catalyst",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-8",
+        "title": "Skpr",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2023-wellington/sponsor-8.png",
+        "imageAlt": "Skpr logo",
+        "link": "https://drupalsouth.org/sponsors/skpr",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-9",
+        "title": "Oxide Interactive",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 2,
+        "image": "./img/sponsors/drupalsouth/2023-wellington/sponsor-9.png",
+        "imageAlt": "Oxide Interactive logo",
+        "link": "https://drupalsouth.org/sponsors/oxide-interactive",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-10",
+        "title": "Icon Agency",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 3,
+        "image": "./img/sponsors/drupalsouth/2023-wellington/sponsor-10.png",
+        "imageAlt": "Icon Agency logo",
+        "link": "https://drupalsouth.org/sponsors/icon-agency",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-11",
+        "title": "Ackama",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 4,
+        "image": "./img/sponsors/drupalsouth/2023-wellington/sponsor-11.png",
+        "imageAlt": "Ackama logo",
+        "link": "https://drupalsouth.org/sponsors/ackama",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-12",
+        "title": "XEquals",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 5,
+        "image": "./img/sponsors/drupalsouth/2023-wellington/sponsor-12.png",
+        "imageAlt": "XEquals logo",
+        "link": "https://drupalsouth.org/sponsors/xequals",
+        "bgStyle": "transparent",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-13",
+        "title": "Sparks Interactive",
+        "tier": "Merchandise",
+        "row": 5,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2023-wellington/sponsor-13.png",
+        "imageAlt": "Sparks Interactive logo",
+        "link": "https://drupalsouth.org/sponsors/sparks-interactive",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-14",
+        "title": "PreviousNext",
+        "tier": "Sprint",
+        "row": 6,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2023-wellington/sponsor-14.png",
+        "imageAlt": "PreviousNext logo",
+        "link": "https://drupalsouth.org/sponsors/previousnext",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-15",
+        "title": "Technocrat",
+        "tier": "Splash Awards",
+        "row": 7,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2023-wellington/sponsor-15.png",
+        "imageAlt": "Technocrat logo",
+        "link": "https://drupalsouth.org/sponsors/technocrat",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-16",
+        "title": "Ironstar",
+        "tier": "Coffee Cart",
+        "row": 8,
+        "priority": 160,
+        "image": "./img/sponsors/drupalsouth/2023-wellington/sponsor-16.png",
+        "imageAlt": "Ironstar logo",
+        "link": "https://drupalsouth.org/sponsors/ironstar",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-17",
+        "title": "The Drop Times",
+        "tier": "Media",
+        "row": 9,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2023-wellington/sponsor-17.png",
+        "imageAlt": "The Drop Times logo",
+        "link": "https://drupalsouth.org/sponsors/thedroptimes",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "columns": 3,
+    "scheduleURLs": [
+      "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule"
+    ]
+  },
+  "items": [
+    {
+      "startTime": "2023-05-16T20:00:00Z",
+      "endTime": "2023-05-16T21:00:00Z",
+      "duration": "P60M",
+      "title": "Registration / Tea & Coffee",
+      "location": "Foyer",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-16T21:00:00Z",
+      "endTime": "2023-05-16T21:15:00Z",
+      "duration": "P15M",
+      "title": "Opening remarks / Introduction",
+      "location": "Main Theatre",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-16T21:15:00Z",
+      "endTime": "2023-05-16T22:00:00Z",
+      "duration": "P45M",
+      "title": "Securing the software that will change the world",
+      "location": "Main Theatre",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2846",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Laura Bell Main"
+      ],
+      "full_description": "There has never been a more exciting time for us to be building software. From fashion to e-commerce, gaming to energy generation - we are building incredible systems no matter where you look. Many of these technologies will improve the world, and as a software developer, I couldn’t be more excited.\n\nHowever, I find myself conflicted as a cyber security person; it’s not like we have an excellent track record in securing this space so far.\n\nI have concluded that to secure the future; we need to embrace it and understand it. (how hard could it be?). So I started collecting stories and interviewing 1000 engineers worldwide. The stories of the systems we dream of building and the nightmare that cyber security could pose if we don’t get it right, and how we could address that issue.\n\nIn this talk, we will look at these amazing technologies, their stories, and, most importantly, what we need to change if we are going to protect the software that will change the world.",
+      "video_url": "https://youtu.be/OXKMONOxcrA",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-16T22:00:00Z",
+      "endTime": "2023-05-16T22:15:00Z",
+      "duration": "P15M",
+      "title": "Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-16T22:15:00Z",
+      "endTime": "2023-05-16T22:45:00Z",
+      "duration": "P30M",
+      "title": "From 'them' to 'us': Demystifying Drupal contribution",
+      "location": "Main Theatre",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2716",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Pamela Barone",
+        "Lee Rowlands"
+      ],
+      "full_description": "Millions of people use Drupal, but a small fraction of those contribute in a given year. That's enough to make Drupal one of the biggest open-source projects in the world, but it still leaves a high proportion of takers to makers.\n\nContributing to a project the size of Drupal can be overwhelming, and some who want to contribute struggle to find a way. But we need new contributors in order to ship new versions and releases on time.\n\nIn this session we'll examine the contribution ecosystem, from the perspective of two/three members of the core committer team: pameeela, quietone and larowlan.\n\nThey will share:\n\n* some of their background and various skillsets\n\n* how they came to become part of the committer team\n\n* insights into how Drupal is actually built\n\nThe session will cover topics such as the issue queue, community channels, roles and processes that keep the project moving towards it goals.\n\nInstead of asking, \"Why haven't they fixed that bug yet?\" or \"Why haven't they added that feature yet?\" this session aims to get you thinking, \"How can I help fix that bug?\" and \"How can I progress that feature?\"\n\nIn other words, go from taker to maker!\n\nIf you're new to Drupal, this session might help you find your niche and be your impetus for getting more involved in this amazing community. If you've been around a long time, you might find answers to questions you've always wanted to ask but never did.\n\nThe session will be delivered in two parts, the first part with the two/three presenters sharing their insights, and the second part open the floor to the audience to ask their questions.",
+      "video_url": "https://youtu.be/cHk01kLTLT4",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-16T22:15:00Z",
+      "endTime": "2023-05-16T22:45:00Z",
+      "duration": "P30M",
+      "title": "Build Your Own Mailchimp in Amazon SES",
+      "location": "Room 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2703",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Dieuwe de Boer"
+      ],
+      "full_description": "Have you ever wanted to implement your own subscription and email templating system using Amazon Web Service's Simple Email Service? Me neither, but here we are. In this talk I'll go through the requirements that Land Information NZ (LINZ) gave us and how we shifted their custom Drupal 7 + Mailchimp mailing solution into Drupal 9 + Amazon SES.\n\nI'll cover how to integrate Amazon SES into Drupal with webforms, build a queue system to handle high-volume mailing lists, the challenges we faced, hard limitations the AWS API has, and being able to contribute back to Drupal's open source community.\n\n[The session is a mix of Drupal Development, Web Tools & Technologies, and Showcases, but the focus will be on developer-y technical things.]",
+      "video_url": "https://youtu.be/VqPeAhZSzcQ",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-16T22:15:00Z",
+      "endTime": "2023-05-16T22:45:00Z",
+      "duration": "P30M",
+      "title": "Open Source, Seriously",
+      "location": "Room 3",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2712",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Mathias Bolt Lesniak"
+      ],
+      "full_description": "When done right, open source projects can have a positive impact also on society at large. When choosing an open-source CMS platform, you’re not just choosing a software product, but also a community-driven, collaborative approach to software development that is very different from that of closed-source vendors.\n\nThis talk is about the fundamentals of open source, but also about how these fundamentals affect more than our day-to-day work. We’ll look at how open-source projects depend on each other and how open source can contribute to a stronger civil society and democracy-building — and a new way to do development aid.\n\nOpen source practice can teach us a lot about how to live in a peaceful, free, and democratic society. And just like the benefits of civil liberties, the benefits of open source freedom can be easy to take for granted — until you lose them.",
+      "video_url": "https://youtu.be/0X3PXw2gHhY",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-16T22:45:00Z",
+      "endTime": "2023-05-16T23:15:00Z",
+      "duration": "P30M",
+      "title": "Morning Tea",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-16T23:15:00Z",
+      "endTime": "2023-05-16T23:45:00Z",
+      "duration": "P30M",
+      "title": "Understanding the Fields System in Drupal",
+      "location": "Main Theatre",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2728",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Ivan Zugec"
+      ],
+      "full_description": "One of Drupal’s best features is the entity and field system. The ability to create content types and attach custom fields makes Drupal a flexible CMS.\n\nIn this session, you’ll learn about the field and entity system. We’ll also perform a live demo and show you how to create a content type and attach fields to it.\n\nYou’ll learn the following:\n\n- How to create a content type\n\n- Attach fields\n\n- Discuss all the different fields\n\n- Reuse fields\n\n- Understanding the “number of values”\n\n- And we’ll look at some modules that offer useful field types\n\nBy the end you’ll have a better understanding of how fields in Drupal work and have practical examples on how to use them in your next project.",
+      "video_url": "https://youtu.be/IT31WOEdj4c",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-16T23:15:00Z",
+      "endTime": "2023-05-16T23:45:00Z",
+      "duration": "P30M",
+      "title": "Six weeks on the dark side",
+      "location": "Room 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2700",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Margery Tongway"
+      ],
+      "full_description": "A case study about a GovCMS SaaS project with a dark theme - from kick off to forklift in 6 weeks (aka 3 sprints).\n\nThe presentation will provide insights into the project team structure, development set up, theming, content types, design iterations, and accessibility testing.\n\nThere will be low level technical information, and is aimed towards anyone who wants to know about our lessons learned on a short GovCMS SaaS forklifted project.",
+      "video_url": "https://youtu.be/7G1JyyvPQPk",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-16T23:15:00Z",
+      "endTime": "2023-05-16T23:45:00Z",
+      "duration": "P30M",
+      "title": "CKEditor 5: One Small Step for Content Editor, One Giant Leap for Drupal",
+      "location": "Room 3",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2732",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Vladimir Roudakov"
+      ],
+      "full_description": "Introduction of CKEditor 5 to Drupal core has improved the content creation experience for website editors. The new version of rich text editor offers a more intuitive and modern interface than its predecessor. The complete rewrite of core features have made it easier to produce high-quality content with less effort.\n\nDrupal configuration process has undergone some changes, and it is essential to understand how to configure the editor when building new and upgrading existing websites. We will kick off by configuring CKEditor 5 for Drupal 10 highlighting practical tips and gotchas.\n\nSome functionality provided by contrib modules might not be available, so we will list top Drupal modules that are currently updated to support CKEditor 5 and how site builders can utilise them to improve the content creation. If a specific functionality is not available, site builders can contribute back by identifying the gaps and sharing the findings with the community.\n\nThe best for the last, demo of the editor's premium features enhancing functionality relevant to teams such as real-time collaboration, revision history, and comments.\n\nOverall, the presentation will showcase the improvements brought to Drupal by CKEditor 5, the changes to configuration process, and the Drupal modules and premium features available to improve the editor's functionality and collaboration.",
+      "video_url": "https://youtu.be/hTdVMJgf8dI",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-16T23:45:00Z",
+      "endTime": "2023-05-17T00:00:00Z",
+      "duration": "P15M",
+      "title": "Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T00:00:00Z",
+      "endTime": "2023-05-17T00:30:00Z",
+      "duration": "P30M",
+      "title": "Creating the optimal editorial experience with Layout Builder",
+      "location": "Main Theatre",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2729",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Daniel Veza"
+      ],
+      "full_description": "Layout builder can be intimidating, and handing over the control of the presentation layer of a website can be a reason why people think twice before using Layout Builder. But the good news is that it doesn't have to be that way. Layout Builder has come a long way and in 2023, it doesn't need to be avoided.\n\nThis talk will cover modules that can be used to enhance and control the Layout Builder experience, and approaches we have taken to empower the content editorial experience for our editors while keeping the front end consistant.",
+      "video_url": "https://youtu.be/X_-PGPxfShM",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T00:00:00Z",
+      "endTime": "2023-05-17T00:30:00Z",
+      "duration": "P30M",
+      "title": "Getting the most from your CI/CD experience",
+      "location": "Room 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2744",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Karl Hepworth"
+      ],
+      "full_description": "In this talk, Karl will dive into a CI/CD maturity model which can evaluate how far you are into the DevOps experience.\n\nWe will dive into a complete end-to-end user story familiar to us all, from the start of adoption until being fully mature, and explore all the avenues of opportunity along the way.\n\nAttendees will be able to evaluate their own CI/CD maturity and discover what might be in store for their journey next and into the future, and learn about some opportunities between where they are now, and where they can expect to arrive in the future.",
+      "video_url": "https://youtu.be/2GROJxRc4-w",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T00:00:00Z",
+      "endTime": "2023-05-17T00:30:00Z",
+      "duration": "P30M",
+      "title": "Scanning the New Zealand Government ecosystem. How popular is Drupal in the land of the long white cloud?",
+      "location": "Room 3",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2724",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Sean Hamlin"
+      ],
+      "full_description": "Have you ever wondered how popular Drupal is in your local region and at the National Government level? This talk will answer that question, using open source tooling. The hope is that you gain some insight to the relative popularity of Drupal and appreciate more the impact you and Drupal have in New Zealand.\n\nThis session will include:\n\n* How to get a list of every government web site in New Zealand\n\n* How to determine what CMS they are using\n\n* How to measure site impact\n\n* Trends we are seeing at the national level, and by region\n\n* Comparison to Australia\n\n* Taking this tool further\n\n* How to contribute",
+      "video_url": "https://youtu.be/E6IgRYA7ca4",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T00:30:00Z",
+      "endTime": "2023-05-17T01:30:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T01:30:00Z",
+      "endTime": "2023-05-17T02:00:00Z",
+      "duration": "P30M",
+      "title": "Drupal Hosting Security Panel",
+      "location": "Main Theatre",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2742",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Kim Pepper"
+      ],
+      "full_description": "Join us as we discuss the current state of Drupal security with some of Australia’s Drupal Hosting experts.\n\nJoining us on the panel will be:\n\nMike Richardson\n\nManaging Director - Ironstar\n\nMike has helped government and enterprise clients secure their sites and comply with industry frameworks such as the Australian Cyber Security Standard’s Information Security Manual, the Hosting Certification Framework, and the Payment Card Industry Data Security Standard.\n\nNick Schuch\n\nPlatform Lead - Skpr\n\nNick leads the platform architecture of Skpr which hosts some of Australia’s largest Drupal sites. Driven and passionate about technology, Nick Schuch is a highly experienced systems administrator who has been involved with the Drupal community for over a decade.\n\nScott Leggett\n\nApplication Security Engineer - Amazee IO\n\nScott started his career writing Unix systems software over a decade ago and has spent several years working with Kubernetes and cloud-native technology. He is still a Unix nerd, but now carries a Yubikey instead of a serial cable. Scott is passionate about integrating Information Security best practices into Software Engineering and is a huge shift-left security advocate.\n\nBring along your toughest questions on Drupal security in the cloud and join the discussion!",
+      "video_url": "https://youtu.be/zUtaqFRV6-w",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T01:30:00Z",
+      "endTime": "2023-05-17T02:00:00Z",
+      "duration": "P30M",
+      "title": "Introduction to decoupled Drupal with a Gatsby frontend",
+      "location": "Room 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2709",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Stewart West"
+      ],
+      "full_description": "Decoupled Drupal has been quite abuzz, from centrally managed content, to multiple, swappable, fast and secure frontends. There are now several ways to decouple Drupal and we'll look at using the Gatsby ecosystem for the frontend.\n\nWe will step through the basic setup process using the https://www.drupal.org/project/gatsby module with the gatsby-source-drupal plugin and then I'll demo Drupal serving content and have Gatsby preview the frontend locally. (If the internet connection is working well, we'll try to build on Gatsby Cloud too).\n\nThis talk will best be suited to people who have never done this before, rather than for those who are already using this setup in production.\n\nI have created a demo repo https://github.com/stewest/GatsbyDrupalSectorDemo with a local DDEV (Docker) option with both front and backend ready to install.",
+      "video_url": "https://youtu.be/9YH4hFKxrVY",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T01:30:00Z",
+      "endTime": "2023-05-17T01:45:00Z",
+      "duration": "P15M",
+      "title": "How much does a polar bear weigh?",
+      "location": "Room 3",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2741",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Fonda Duffy"
+      ],
+      "full_description": "If you don’t know how that joke ends, I may be able to help if you come along to hear me talk about icebreakers. Something so simple can play a significant role in building and maintaining team connection. Whether you're working with a new team or an established one, in person or remotely, icebreakers can help alleviate any initial awkwardness. Of course, there are some dos and don'ts to consider, but having a better understanding of icebreakers and how to use them effectively is an essential tool for any facilitator.",
+      "video_url": "https://youtu.be/is0ltTDDdkg",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T01:45:00Z",
+      "endTime": "2023-05-17T02:00:00Z",
+      "duration": "P15M",
+      "title": "The Recipe for Enduring and Meaningful Workplace Relationships",
+      "location": "Room 3",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2772",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Julia Topliss"
+      ],
+      "full_description": "According to a recent survey, only 38 percent of respondents feel that leaders in their organisation take proactive steps to create a positive workplace culture. In fact, a toxic work culture is one of the main reasons people leave their jobs, ranking even higher than seeking better pay.\n\nWhile some of us can talk about a positive work environment they have experienced, many more of us have found ourselves on teams where we feel undermined and unappreciated. As employees, managers, or even clients, what can we do to create and maintain better places to work?\n\nIn this presentation I will provide the ingredients and recipe for building a strong workplace culture and how this impacts client relationships. We will delve into what turns a workplace sour and how to tell when it’s happening. We will also discuss how to counteract an office culture headed in the wrong direction and provide a set of ingredients to build a better team environment.\n\nWe will also describe in detail how to deftly handle the most challenging parts of a job: setting boundaries, saying no, and giving and accepting criticism.",
+      "video_url": "https://youtu.be/Z9_EFmj7I9s",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T02:00:00Z",
+      "endTime": "2023-05-17T02:15:00Z",
+      "duration": "P15M",
+      "title": "Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T02:15:00Z",
+      "endTime": "2023-05-17T02:45:00Z",
+      "duration": "P30M",
+      "title": "Securing your Drupal projects with Essential 8: Scanning Tools & Compliance Strategies",
+      "location": "Main Theatre",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2770",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Daynis Olman"
+      ],
+      "full_description": "This talk highlights the crucial importance of complying with the Australian Cyber Security Centre Essential 8. As developers, attendees are not only responsible for ensuring the security and reliability of their Drupal projects but also for adhering to government regulations to protect against cyber threats.\n\nDrawing on the presenter's experience with a Federal Government Client - Fair Work Commission, the talk will provide valuable insights into the challenges involved in achieving compliance with Essential 8. Attendees will gain a deeper understanding of the tools and strategies that can be leveraged to maintain project security and compliance, including the approach deemed acceptable by the client.\n\nCompliance with Essential 8 is a necessary step towards safeguarding against cyber threats, and developers have a responsibility to ensure that their projects are secure and compliant. Attending the talk will provide attendees with valuable insights into the world of cybersecurity compliance, enabling them to better protect their Drupal projects and contribute to creating a safer online environment.",
+      "video_url": "https://youtu.be/X8xUUe8j1IM",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T02:15:00Z",
+      "endTime": "2023-05-17T02:45:00Z",
+      "duration": "P30M",
+      "title": "Vue JS for React JS developers and vice versa",
+      "location": "Room 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2702",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Lee Rowlands"
+      ],
+      "full_description": "Developers can be a bit tribal at times, and when it comes to JavaScript frameworks, things can really get ugly.\n\nBut with the release of Vue 3, the differences between Vue and React might not be as big as you think.\n\nIn this session a React developer will share their experience building components with Vue 3's composition API and show the equivalent concepts from both frameworks in a way that should be familiar to developers familiar with either.\n\nThis session is for developers experienced in either React or Vue JS but curious about the grass on the other side of the fence.",
+      "video_url": "https://youtu.be/Gxh0RpJVRgQ",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T02:15:00Z",
+      "endTime": "2023-05-17T02:45:00Z",
+      "duration": "P30M",
+      "title": "How (anyone!) can get constructive user feedback.",
+      "location": "Room 3",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2710",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Zinzi Bianca Sullivan"
+      ],
+      "full_description": "This session goes through the basics of how to get constructive user feedback from your product users, even if you’ve never facilitated any research or user testing before. It goes through key aspects of the feedback session covering what to include, avoid and common mistakes. Below is a guide of the presentation structure.\n\n.\n\n1. Make it clear what's going to happen\n\n- What’s the plan and what will happen with their feedback – create an information sheet.\n\n- Get their consent.\n\n- Introduce the session, the people, the format.\n\n.\n\n2. Building rapport\n\n- Clear your mind and be present. Participants can tell when you are distracted and not listening fully and they won’t share as deeply.\n\n- Help the participant to feel comfortable.\n\n.\n\n3. What questions to ask and to avoid\n\n- Person first, product second.\n\n- Understand their goal for using this product.\n\n- What to avoid\n\n-- Validation vs insight.\n\n-- Closed question including examples.\n\n-- Leading questions including examples.\n\n.\n\n4. How to respond\n\n- Reflective & Curious listening, what are these and how to use these to get more insight.\n\n- What to do when they ask you a question.\n\n.\n\n5. Wrapping up a session\n\n- Genuine thank you and express how helpful they have been.\n\n- Next steps what will happen from here with what they’ve shared.\n\n.\n\n6. Observers – who to invite and how to prep them.\n\n- Don’t get too excited yet – things to be mindful of when inviting observers.\n\n- Get 1-2 of your clients to join.\n\n- Creating the space for an effective session – how to prepare observers for joining a session.\n\n.\n\n7. Note taking / recording\n\n- Buddy-up – Take notes as you go (if you can!)\n\n- Write some main dot-points or summary directly after the session.\n\n- Capture the findings in a spreadsheet with headings and filters.\n\n.\n\n8. Practice where you can\n\n- Start with people you know.",
+      "video_url": "https://youtu.be/jLwb1ycpxwQ",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T02:45:00Z",
+      "endTime": "2023-05-17T03:00:00Z",
+      "duration": "P15M",
+      "title": "Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T03:00:00Z",
+      "endTime": "2023-05-17T03:30:00Z",
+      "duration": "P30M",
+      "title": "Secure by Design: Integrating Security into Development",
+      "location": "Main Theatre",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2733",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Janna Malikova"
+      ],
+      "full_description": "Cyber security (or lack of) has been covered extensively in the news. Hacker attacks range from bored school kids toying around to state-sponsored ransom-driven targeted strikes. As software engineers it’s our responsibility to incorporate cyber security best practices into the development cycle. In this presentation, I’ll provide a list of resources, best practices, tools and Drupal modules for designing and implementing a more secure Drupal web application and to prepare for penetration testing.\n\nRepository: https://gitlab.com/testudio/security-by-design-starter-kit",
+      "video_url": "https://youtu.be/F5fh0aW_EUg",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T03:00:00Z",
+      "endTime": "2023-05-17T03:30:00Z",
+      "duration": "P30M",
+      "title": "Building an API with GraphQL 4",
+      "location": "Room 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2694",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Adam Bramley"
+      ],
+      "full_description": "The GraphQL Drupal module provides a powerful out-of-the-box toolkit for writing GraphQL APIs backed by Drupal. There are also some great docs on how to get started and how to write some basic schemas and data producers.\n\nHowever, with such a powerful toolkit, it can be hard to get your head around the concepts and how the puzzle pieces fit together, especially once you start getting into more complex content modeling.\n\nIn this session we'll cover:\n\n- How to kickstart your GraphQL API\n\n- The fundamentals of the module's architecture and how to write your own maintainable data producers.\n\n- How to write secure Mutations to Create, Update, and Delete content on your site.\n\n- A sneak peek into how to integrate all of this into a decoupled React app",
+      "video_url": "https://youtu.be/79iExftNqrk",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T03:00:00Z",
+      "endTime": "2023-05-17T03:30:00Z",
+      "duration": "P30M",
+      "title": "LINZ & Charts Showcase: From Discovery and Designs, to Development and Delivery",
+      "location": "Room 3",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2715",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Jack Kilborn"
+      ],
+      "full_description": "In the middle of 2021, Sparks were tasked with rebuilding https://www.linz.govt.nz/ in Drupal 9, looking to replace the previous Drupal 7 website.\n\nWe'll cover the main build - matching like-for-like from Drupal 7 to Sector (https://www.sector.nz/) for Drupal 9, whilst working in an agile way: setting tasks to complete in fortnightly sprints, chopping and changing ideas and methodology to match updated thinking and opportunities.\n\nThen thrown into the mix: another requirement, to rebuild a tool from scratch that previously existed within the LINZ website - https://charts.linz.govt.nz/. With a different audience and requirements, it was clear that a second website would be needed.\n\nWe'll showcase how we did it, from discovery and designs, to development and delivery.",
+      "video_url": "https://youtu.be/sFlW2V5H87Q",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T03:30:00Z",
+      "endTime": "2023-05-17T04:00:00Z",
+      "duration": "P30M",
+      "title": "Afternoon Tea",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T04:00:00Z",
+      "endTime": "2023-05-17T04:30:00Z",
+      "duration": "P30M",
+      "title": "Why Drupal? Why Now? - Panel Discussion",
+      "location": "Main Theatre",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2850",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Dave Sparks"
+      ],
+      "full_description": "With more than 10% of the top 10,000 websites worldwide using Drupal, and over 20 years as a leading open source project, the popularity and success of Drupal as a CMS and development framework is legendary.\n\nWhere to from here? The release of Drupal 10 in December 2022, with a modernised UI, support for newer Javascript frameworks and an eye on decoupled as standard, opens up a new discussion around the best uses for Drupal and where it fits into the market.\n\nIf you're interested in learning why Drupal works so well for people in this part of the world, keen to leverage the latest developments for your web presence, or comparing CMS and Digital Experience Platforms for your next project - this panel discussion is for you!",
+      "video_url": "https://youtu.be/7DmFQIiqeK4",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T04:00:00Z",
+      "endTime": "2023-05-17T04:30:00Z",
+      "duration": "P30M",
+      "title": "The Best of Both Worlds: Combining Drupal Headless and Next.js",
+      "location": "Room 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2767",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Jimmy Cann"
+      ],
+      "full_description": "Drupal Headless and Next.js are two powerful technologies that can be used together to create modern, high performance web applications. In this talk, we'll explore the benefits of using Next.js with Drupal Headless and how to set up a new project. We'll discuss best practices for working with these technologies, including building components and integrating data. We'll also showcase real-world examples of using Next.js with Drupal Headless and the benefits experienced. By the end of the talk, you'll have an understanding of how to use these technologies together and be equipped to create your own Next.js and Drupal Headless project.",
+      "video_url": "https://youtu.be/K0g2sEjLlPo",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T04:00:00Z",
+      "endTime": "2023-05-17T04:30:00Z",
+      "duration": "P30M",
+      "title": "Creating a Culture of Documentation",
+      "location": "Room 3",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2723",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Alanna C Burke"
+      ],
+      "full_description": "Picture this: you’ve found a new project on GitHub. It does exactly what you’re looking for, and it’s open-source. Amazing! So you roll up your sleeves and get to it. But then, you run into an error. You Google it. You find similar queries, but never the answer. You pour over the code. You search for anything documenting this project, but keep coming up empty. This project would be perfect, but no one ever documented it.\n\nFar too often, the information we need is never found. It stays locked in the minds of the engineers who wrote the code. But what good is code that no one knows how to use? Documentation is every bit as important as making sure the project works.\n\nThat buy-in can be hard. Stakeholders don’t want to pay for the time. Project managers don’t prioritize the work. Engineers don’t want to do it.\n\nThe only way to solve this problem is to create a culture around documentation. In this session, we’ll talk about how to elevate the status of the humble documentation to its rightful place alongside your code. We’ll cover how to integrate the documentation process into your existing processes so that your engineers are on board, and how to show stakeholders and others who push back that documentation is not only worthwhile, but essential to the success of your project.",
+      "video_url": "https://youtu.be/8SRf6n-xaw8",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T04:30:00Z",
+      "endTime": "2023-05-17T04:45:00Z",
+      "duration": "P15M",
+      "title": "Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T04:45:00Z",
+      "endTime": "2023-05-17T05:45:00Z",
+      "duration": "P60M",
+      "title": "Splash Awards",
+      "location": "Main Theatre",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "sponsor-15"
+    },
+    {
+      "startTime": "2023-05-17T05:45:00Z",
+      "endTime": "2023-05-17T05:45:00Z",
+      "duration": "P60M",
+      "title": "Networking Drinks and Canapés",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T20:30:00Z",
+      "endTime": "2023-05-17T20:55:00Z",
+      "duration": "P25M",
+      "title": "Tea & Coffee",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T20:55:00Z",
+      "endTime": "2023-05-17T21:15:00Z",
+      "duration": "P20M",
+      "title": "Opening remarks / Introduction",
+      "location": "Main Theatre",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T21:15:00Z",
+      "endTime": "2023-05-17T21:45:00Z",
+      "duration": "P30M",
+      "title": "Open Source is Dead, Long Live Open Source",
+      "location": "Main Theatre",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2860",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Donald Christie"
+      ],
+      "full_description": "Kia whakatōmuri te haere whakamua.\n\nI walk backwards into the future with my eyes fixed on my past.”\n\nThe world of open source software (OSS) has come a long way since its inception, and it's worth taking a look back at what has been achieved. However, as we delve into the past, we also need to be aware of the mistakes we have made along the way. In this keynote presentation, Donald Christie, the founder and the Managing Director at Catalyst IT, will explore the evolution of OSS and examine the challenges that threaten its future.",
+      "video_url": "https://youtu.be/5WzpUNBHwhA",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T21:45:00Z",
+      "endTime": "2023-05-17T22:00:00Z",
+      "duration": "P15M",
+      "title": "Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T22:00:00Z",
+      "endTime": "2023-05-17T22:30:00Z",
+      "duration": "P30M",
+      "title": "The road to zero friction testing - getting the most out of Drupal Testing Traits",
+      "location": "Main Theatre",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2717",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Michael Strelan"
+      ],
+      "full_description": "Every project of medium complexity should have at least some automated tests to ensure new features can be shipped without regressions. However for those new to testing or testing with Drupal, it can be overwhelming knowing where and how to start.\n\nIn this session we'll look at some real world approaches from large client projects that make writing new tests a breeze. With some basic foundations in place adding new tests can become smooth like butter.\n\nCovered in the session:\n\n* Getting setup with Drupal Testing traits\n\n* Writing your first test\n\n* Building a library of project specific traits\n\n* Maximising test-suite performance and reliability\n\n* The benefits of fostering a test-focused culture within your development team",
+      "video_url": "https://youtu.be/zuXtFSF6Av0",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T22:00:00Z",
+      "endTime": "2023-05-17T22:30:00Z",
+      "duration": "P30M",
+      "title": "Announcing the 2023 Drupal Local Development Survey Results",
+      "location": "Room 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2698",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Michael Richardson"
+      ],
+      "full_description": "The Drupal Local Development Survey asks Drupal devs all over the world about the tools and processes they use when building amazing Drupal sites. It provides a fascinating insight into how Drupal sites get built and the people that build them. It's also really useful for web hosts and tool developers to build better solutions.\n\nThe survey used to be run by Jeff Geerling and Chris Urban in 2018 to 2020, but has been on a bit of a break. In 2023, it's back and has had a really amazing response.\n\nThe survey is open now and closing on April 17. We're hoping to share the results of this survey at Wellington for the first time. We'll answer questions like:\n\n- How many people are working on headless Drupal sites?\n\n- What's the most popular local environment manager?\n\n- Do people still think they'll be working with Drupal a year from now?\n\n- Which regions are still supporting Drupal 6 and 7 sites?\n\n- What other PHP frameworks do Drupal devs use?\n\n- How are Drupal devs testing the security of their sites?\n\nAnd much, much more!",
+      "video_url": "https://youtu.be/_LNXMKWK0Bw",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T22:00:00Z",
+      "endTime": "2023-05-17T22:30:00Z",
+      "duration": "P30M",
+      "title": "The Fast and the Functional: Pragma's Strategy for a Successful Website Rebuild",
+      "location": "Room 3",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2751",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Emily Mills"
+      ],
+      "full_description": "This session is a must-see for professionals seeking to deliver high-impact and meaningful outcomes for their clients across both the public and private sectors.\n\nSince 2020, Pragma has been engaged by a high-profile Australian government client to manage the maintenance and improvement of its public-facing GovCMS website.\n\nMore recently, when preparing to implement a new information architecture system and redesigned page layouts, Pragma saw an opportunity to completely overhaul the website and build it from scratch.\n\nThis came after Pragma’s evaluation of back-end functionality, user testing, and content review identified significant opportunities to reduce site complexity, align with best-practice standards, and significantly improve the user experience.\n\nBut before Pragma could start, there was a challenge: how to convince the client to rebuild their whole website.\n\nPragma had to develop a strong, evidence-based pitch to get the client on board. It had to show the client that not only would a rebuild improve the end-user experience, it would have significant business benefits. It would enhance the back-end user experience and publishing processes, and reduce technical debt and site issues.\n\nAfter successfully gaining support from the client and additional project funding, Pragma had only three months to build a new GovCMS website from the ground up, incorporating a whole new design system, redesigned information architecture and multiple interactive features.\n\nIn this session Pragma share insights into:\n\n- How the team was able to pitch the website rebuild, get client buy-in, and secure extra project funding to stand up an additional agile team\n\n- How the uplift was conducted, from project kick-off through to go-live\n\n- The team’s biggest challenges and wins across management, development, design and content streams.\n\nUsing real-life examples, Pragma will share practical ways to effectively advocate for change with clients.",
+      "video_url": "https://youtu.be/th5zgtOTU7I",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T22:30:00Z",
+      "endTime": "2023-05-17T23:00:00Z",
+      "duration": "P30M",
+      "title": "Morning Tea",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T23:00:00Z",
+      "endTime": "2023-05-17T23:30:00Z",
+      "duration": "P30M",
+      "title": "I thought you'd said you'd written the tests!?",
+      "location": "Main Theatre",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2720",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Kent Shelley"
+      ],
+      "full_description": "Drupal tests for all those developers who thought about or were told to write tests, but never got around to it. Drupal testing with phpunit now includes browser testing, and if you are brave, also javascript tests. This presentation covers all the steps involved in setting up tests for your development environment for a website with reasonably complex access rules and then running those tests as a foundation to building on github using circleci.\n\n1. creating phpunit.xml\n\n2. writing and debugging tests involving multiple modules and a site build\n\n3. creating schema.yml\n\n4. writing browser tests and using chromedriver\n\n5. viewing browser_output and debugging tests\n\n6. setting up browser tests in circleci\n\nThis presentation showcases an actual project",
+      "video_url": "https://youtu.be/HOl1SJis5q8",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T23:00:00Z",
+      "endTime": "2023-05-17T23:30:00Z",
+      "duration": "P30M",
+      "title": "Design in Figma, launch on Drupal in days, not weeks",
+      "location": "Room 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2771",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Akhil Bhandari"
+      ],
+      "full_description": "You have the perfect final design, ready to be built. You’ve spent months and an eye-watering budget creating, researching, validating and testing your visual website designs. The designs look exquisite and next…a simple build in Drupal.\n\nThe first thing your development team does is start asking how the interactions look for this component or how the behaviours work for that design.\n\nSo they do their best Google Translate impression and begin interpreting the designs and inevitably your visual design artwork is a thing of the past and the Drupal build is fantastic, but not quite like the designs and it cost another small fortune to build (say bye-bye Christmas party)...\n\nThe cost, time and pain in translating design to build is often very high. Designs get missed, misinterpreted and take a long time to translate into code. Many bugs arise, which take time to resolve that end up breaking the bank.\n\nCompare that to an experience when designers can arrange key page layouts and assign interactions in Figma design files and web publishers and administrators in Drupal can create and manage the identical pages and flexible layout designs without any coding.\n\nCivicTheme is a true atomic, component-based design system in Figma that is 100% in sync with its Drupal 10 build. This significantly reduces the time it takes to build your website while ensuring a consistent, compliant and visually stunning experience.\n\nLearn more about the Figma-to-Drupal process with CivicTheme and how you can design fast, build fast and deploy fast. This gives a head start to all content, development and research teams, reducing your Drupal design-build-test-deploy project lifecycle.\n\nFinally find out how you can deliver exactly the designs your executives signed off on.",
+      "video_url": "https://youtu.be/4Y9R1taGM1k",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T23:00:00Z",
+      "endTime": "2023-05-17T23:30:00Z",
+      "duration": "P30M",
+      "title": "GovCMS Deep Dive into content sharing at scale",
+      "location": "Room 3",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2760",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Sharyn Clarkson"
+      ],
+      "full_description": "Last year at DrupalSouth I spoke about GovCMS emerging from Covid and kickstarting a wave of new initiatives to make Digital Experience Platform (DXP) tools available to agencies who wanted to personalise and develop a stronger user experience on their Drupal sites. That work is now in its final stages with tenders currently being evaluated.\n\nToday’s session is a more focused deep dive on specific aspects of DXP and content that are most compelling to a whole of government implementation on GovCMS. We will discuss the business, security and technical challenges that we will be seeking to solve, iterate and roll out over the next 12 months and how the Drupal community can participate and contribute.",
+      "video_url": "https://youtu.be/a7_YWQKBEUg",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T23:30:00Z",
+      "endTime": "2023-05-17T23:45:00Z",
+      "duration": "P15M",
+      "title": "Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T23:45:00Z",
+      "endTime": "2023-05-18T00:15:00Z",
+      "duration": "P30M",
+      "title": "Uplifting content with AI: ChatGPT and NLP Cloud",
+      "location": "Main Theatre",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2745",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Murray Woodman"
+      ],
+      "full_description": "The development and interest in AI technologies has exploded in recent months. AI is now mainstream and is being introduced to workflows at a rapid pace. ChatGPT has captured the public’s imagination and the recent release as a public API has made it easily integrated into tech such as Drupal. OpenAI isn’t the only game in town with many other services such as NLP Cloud offering compelling AI services which can also be integrated into Drupal.\n\nThis presentation will review the recent advancements in generative AI and demonstrate how they can be used in the context of Drupal to provide assistance to editors and creators in Drupal as they carry out their editorial tasks. ChatGPT offers new and improved capabilities over GPT3 for summarising and generating content. NLP Cloud offers a suite of services which can analyse and process text in a variety of ways. Together they form a formidable team capable of uplifting content.\n\nThe session will provide practical steps for implementing AI into Drupal. The following open source modules will be demonstrated in this presentation:\n\n- Augmentor: AI ecosystem for Drupal\n\n- ChatGPT Augmentor\n\n- NLP Cloud Augmentor\n\nBy the end of the presentation, the audience should have a grasp of the following:\n\n- Site owners: How AI can be safely integrated into a site.\n\n- Editors: A stack of ideas for how their workflow can be improved.\n\n- Site builders: Modules to install and how to wire together an AI implementation using open source code and SaaS integrations..\n\nThis presentation is suitable for anyone who wants to find out more about what this AI thing is all about. The main audiencewould be for site owners and editors to show some of the possibilities with AI. The future is now here.",
+      "video_url": "https://youtu.be/4L5gRnetnIY",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T23:45:00Z",
+      "endTime": "2023-05-18T00:15:00Z",
+      "duration": "P30M",
+      "title": "SEO + Web core vitals + Drupal: a 360o view on the metrics that matter",
+      "location": "Room 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2757",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Shivan Jaikaran"
+      ],
+      "full_description": "SEO and web core vitals (WCV) go hand in hand and are usually an afterthought with most projects. Improvements in these areas early on in your project can have a significant impact on your bottom line, especially if you have an e-commerce type website or a website that relies heavily on organic traffic.\n\nI’ll outline some easy tips and tools on how to improve your WCV and SEO.\n\nI’ll cover:\n\nEarly decisions with devastating impacts\n\nTools/Libraries you can use for testing\n\nImportant metrics to analyse\n\nImplementation strategies",
+      "video_url": "https://youtu.be/bESOzUyHAZM",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-17T23:45:00Z",
+      "endTime": "2023-05-18T00:15:00Z",
+      "duration": "P30M",
+      "title": "Automate your tests so you can spend more time drinking coffee",
+      "location": "Room 3",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2762",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Mel Stubbings"
+      ],
+      "full_description": "Deployments can be a nightmare, especially when you're the only developer available to test multiple websites. It's not uncommon to miss critical issues when you're under pressure, and human error can be costly. But with Cypress, you can eliminate these risks and make testing a breeze. In this talk, we'll explore how Cypress can help you test the front-end and back-end of your Drupal site, saving you valuable time and effort. Say goodbye to manual testing and hello to more coffee breaks and problem-solving time!",
+      "video_url": "https://youtu.be/iJzGEJZ2r44",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-18T00:15:00Z",
+      "endTime": "2023-05-18T01:00:00Z",
+      "duration": "P45M",
+      "title": "Lunch",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-18T01:00:00Z",
+      "endTime": "2023-05-18T01:30:00Z",
+      "duration": "P30M",
+      "title": "Next level Search API",
+      "location": "Main Theatre",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2719",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Saul Willers"
+      ],
+      "full_description": "Large organisations can have complex search requirements. Many great SaaS search solutions exist, but sometimes the flexibility of implementing your own Search API based search can solve the exact problems you face.\n\nIn this session we'll explore some of the lesser known or \"enterprise\" features that can extend Search API. These include things like:\n\n* Fast and fuzzy client-side search with Lunr.js.\n\n* Hands off managed search with AWS OpenSearch.\n\n* Allowing multiple Drupal sites, and in multiple Drupal versions, to be searched seamlessly from one search interface.\n\n* Search result faceting over the same field multiple times with different filters, in a single query!",
+      "video_url": "https://youtu.be/RM8-mG7fcQ8",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-18T01:00:00Z",
+      "endTime": "2023-05-18T01:30:00Z",
+      "duration": "P30M",
+      "title": "A Case Study On Building A Cloud Native Platform",
+      "location": "Room 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2718",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Nick Schuch"
+      ],
+      "full_description": "Skpr is a hosting platform built on top of cloud-native technology and managed cloud services.\n\nOver the past 7 years, the Skpr platform has gone through many iterations to make it the platform it is today.\n\nWhether it be keeping up with the latest Kubernetes releases, cloud-native ecosystem technologies, or AWS announcements. It’s safe to say we have some stories to tell.\n\nThis talk is a dive deep into those stories and the lessons we learned along the way.\n\nAttendees can expect to learn about cloud-native platform concepts, how they differ from traditional hosting and the difficulties of building on top of a rapidly developing technology.",
+      "video_url": "https://youtu.be/okX6Zt9otYU",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-18T01:00:00Z",
+      "endTime": "2023-05-18T01:30:00Z",
+      "duration": "P30M",
+      "title": "Tips and tricks for working with GovCMS SaaS",
+      "location": "Room 3",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2749",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Marji Cermak"
+      ],
+      "full_description": "GovCMS SaaS provides an easy entry for government agencies to quickly benefit from the awesome power of Drupal. The regular maintenance of the site’s code is very convenient and GovCMS support also helps build trust and expertise in the tools.\n\nBut that’s not to say it’s the easiest onboarding for a developer new to Drupal or to the GovCMS SaaS framework. From a developer’s point of view, any site has its “ghosts in the machine,” and the complexity of the GovCMS SaaS platform also can make getting started a challenge.\n\nThis session contains some of the most important lessons learned on my journey to efficiency on GovCMS. Come to the session to learn from my previous mistakes and hopefully your GovCMS development will become more joyful and productive. Feel free to bring your own lessons learned, so we all benefit!\n\nGovCMS-specific topics and examples will include:\n\n* Best practices in using config management.\n\n* Enabling and using XDEBUG\n\n* Using watchdog logs, even in OpenSearch\n\nThis will also include how to solve head-scratching issues:\n\n* Has your gitlab pipeline finished but your site is still running the old code?\n\n* Does your database import take too long?\n\n* Are you sure you are running the same GovCMS release locally as the same one in production?\n\nIf any of the above questions sounds familiar, let’s tackle these together!\n\nThis presentation is suitable for any developer working with GovCMS SaaS sites, from beginners to experienced.",
+      "video_url": "https://youtu.be/8AsOReRMMks",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-18T01:30:00Z",
+      "endTime": "2023-05-18T01:45:00Z",
+      "duration": "P15M",
+      "title": "Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-18T01:45:00Z",
+      "endTime": "2023-05-18T02:15:00Z",
+      "duration": "P30M",
+      "title": "Unlocking the Power of GraphQL in Drupal for Frontend Developers",
+      "location": "Main Theatre",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2707",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Al Munnings"
+      ],
+      "full_description": "Frontend and backend teams need to work together seamlessly to deliver effective digital experiences. However, often these teams have different tools and ways of working that can create friction and inefficiencies.\n\nThis is where GraphQL comes in, providing a flexible and intuitive query language that allows frontend developers to access the exact data they need from the backend.\n\nIn this talk, we'll explore how Drupal and GraphQL can work together to empower frontend developers with a sensible API using `graphql` 4.x and `graphql_compose`, how you can create simple and targeted schemas for your frontend developers.",
+      "video_url": "https://youtu.be/sMwPyqtJjtQ",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-18T01:45:00Z",
+      "endTime": "2023-05-18T02:15:00Z",
+      "duration": "P30M",
+      "title": "Enhance User Experience with Partially Decoupled Drupal Webforms",
+      "location": "Room 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2721",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Brynn Briedis"
+      ],
+      "full_description": "Webforms are an essential part of many Drupal websites, and they play a critical role in facilitating user interactions. However, standard Drupal webforms can be limited in terms of flexibility and customization, which can impact the user experience. Partial decoupling is a technique that can help enhance the user experience by allowing more customization of webforms.\n\nIn this presentation, we will explore how partially decoupled Drupal webforms can improve user experience. We will start by discussing the basics of webforms and decoupling. Then, we will dive into the benefits of partial decoupling and how it can be used to enhance user experience. We will explore several examples of how partial decoupling can be used to create custom webform elements and improve the look and feel of webforms.\n\nWe will also cover some of the technical aspects of partial decoupling, including the use of Drupal's REST API and JavaScript frameworks like React and Vue.js. Finally, we will discuss some best practices for implementing partially decoupled Drupal webforms and potential pitfalls to avoid.\n\nBy the end of this presentation, you will have a clear understanding of how partial decoupling can enhance the user experience of Drupal webforms and be equipped with the knowledge to start implementing it in your own projects.",
+      "video_url": "https://youtu.be/4v_YXnrSgYA",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-18T01:45:00Z",
+      "endTime": "2023-05-18T02:15:00Z",
+      "duration": "P30M",
+      "title": "Drupal for Changemakers - past, present, future",
+      "location": "Room 3",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2777",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Jaime Schmidt"
+      ],
+      "full_description": "We attend events like this one to learn from one another and to be an active part of the Drupal community. Collaborating on projects together using Drupal is a great way to to achieve goals for ourselves and our employers. We know how having a team allows us to have different perspectives; enhanced problem solving; increased productivity; improved communication, the ability to learn from one another and it generally improves the chances of success and longevity of a project.\n\nHow about the non technical goals in our lives?\n\nHow can we build a community around what is important to us so we can work with many other people that have the same values?\n\nHow can use Drupal and other Open Technologies to achieve bigger things?\n\nAs technologists we hold the power and have the responsibility to make change by using what we are good at, Drupal, to join together with those that have the many other skills that we need.\n\nThis talk will be a case study of how we can make a big impact by taking small actions and do that by using Drupal with Open Social, We'll explore the way to create engaging social experiences\n\nOpenSocial is a powerful framework for building social applications and widgets that can be integrated with various social networking platforms. It enables developers to create applications that are portable across multiple social networks, making it easier to reach a larger audience and build a thriving community.",
+      "video_url": "https://youtu.be/9GJoZduDI4M",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-18T02:15:00Z",
+      "endTime": "2023-05-18T02:45:00Z",
+      "duration": "P30M",
+      "title": "Afternoon Tea",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-18T02:45:00Z",
+      "endTime": "2023-05-18T03:15:00Z",
+      "duration": "P30M",
+      "title": "Engineering data pipelines, but not code",
+      "location": "Main Theatre",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2753",
+      "track": [
+        "Drupal Development"
+      ],
+      "speakers": [
+        "Nathan ter Bogt"
+      ],
+      "full_description": "The NSW Government is undergoing a large project to consolidate many *.nsw.gov.au websites into www.nsw.gov.au. We have a team of 10+ developers at any one time and this brings with it unique challenges.\n\nThis means we have problems like many developers solving similar problems in different ways. This adds time to the development lifecycle, makes it difficult for others to pick up the implementation (and the code) and reduces reuse across teams and developers.\n\nOne of these is that we pull data from a tonne of different sources (json files / http, csv files / http, APIs, push/pull, etc) and from a bunch of different providers. Given the scale of our site, using the data directly from the source wasn’t an option. We always imported the data into our site and wrapped it in a controller or imported into a custom entity.\n\nA review was undertaken about the issues with the current solution and how to solve them. Data Pipelines (https://www.drupal.org/project/data_pipelines) is the result of that review.\n\nThis solved the problem by:\n\n- Identifying that we could store most of the data in non structured noSQL storage.\n\n- Removing the need to create a bunch of custom entities, saving time and database performance.\n\n- Removing the custom controllers implementing custom API.\n\n- Removing requests to our application server altogether by allowing access to the data by Elasticsearch.\n\n- Removing a security issue of ‘trusting’ the data from the remote source.\n\n- Mitigating our risk of invalid data causing flow on issues.\n\n- Making the backend and the frontend problem the same for all developers.\n\n- Making sure we don’t inadvertently take down our data providers with too many requests.\n\n- Frontend react application reuse.\n\nI'm not actually sure if 'Drupal Development' is the correct category for this. If you have some insight, I'd be happy to discuss it.",
+      "video_url": "https://youtu.be/_u9B63Godfg",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-18T02:45:00Z",
+      "endTime": "2023-05-18T03:15:00Z",
+      "duration": "P30M",
+      "title": "Understanding Users Better at Scale with Google Looker Studio",
+      "location": "Room 2",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2748",
+      "track": [
+        "Web Tools & Technologies"
+      ],
+      "speakers": [
+        "Scott Massey"
+      ],
+      "full_description": "In the last decade, simple metrics around page views or new users have been replaced by much more granular and comprehensive journey mapping. Using every available metric is important for websites to gauge whether the website is an effective tool or not. But the risk is that so much data leads to analysis paralysis.\n\nGoogle Analytics and Google Looker Studio work together to provide data and visualisation that help website owners understand whether their website is working or not. Whether the goal is awareness, engagement or conversions, using these tools will give you a much clearer picture of the user’s experience and give you better direction on how to make improvements at scale.\n\nIn this session, we will share our experience with building the analytics reporting to measure the user engagement before and after implementing various personalisation features.\n\nThe session will include:\n\nOverview of the Google Looker Studio and Analytics\n\nHow reports and dashboards are built and shared\n\nDashboard and report examples\n\nQ&A\n\nBy the end of the presentation, the audience would have the understanding of the benefits of this analytics reporting methodology.",
+      "video_url": "https://youtu.be/9tdKl13_XUc",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-18T02:45:00Z",
+      "endTime": "2023-05-18T03:15:00Z",
+      "duration": "P30M",
+      "title": "Using Drupal for Rules as Code projects in NZ and Australia",
+      "location": "Room 3",
+      "link": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule/2750",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Phillipa Martin"
+      ],
+      "full_description": "Phillipa and Suchi worked on two projects in 2022 that combined Drupal and Rules as Code (RaC).\n\nThis presentation will provide a quick overview of both projects, before moving into the technical solution. Salsa built an OpenFisca Drupal module to integrate OpenFisca with a Drupal webform. This was built for a GovCMS (Australia) proof of concept that focused on some of the rules around COVID-19 vaccination. Users were taken through a series of questions to find out if they were up-to-date with their COVID vaccinations and if they needed to be vaccinated to work in their industry. The GovCMS proof of concept was completed in September 2022.\n\nThis module was then customised for BenefitMe, which is an RaC project focused on codifying New Zealand’s Social Security Act.\n\nThe webform allows users to enter information that’s then sent to OpenFisca. The webform also includes conditional logic, so new questions are displayed depending on the user’s previous responses. We also built custom blocks to display the eligibility results and calculation logic (how much someone was eligible to) after the form is submitted. The alpha version of benefitme.nz was launched in mid December 2022.\n\nOur presentation will cover:\n\nA brief intro on RaC and the two projects above\n\nA quick overview of the process of turning legislation into RaC\n\nA more detailed look at how Drupal has been used in both projects and the Drupal module\n\nCreating a frontend experience for the GovCMS PoC and BenefitMe",
+      "video_url": "https://youtu.be/iBcOrrBCEgA",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-18T03:15:00Z",
+      "endTime": "2023-05-18T03:30:00Z",
+      "duration": "P15M",
+      "title": "Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-18T03:30:00Z",
+      "endTime": "2023-05-18T04:00:00Z",
+      "duration": "P30M",
+      "title": "Closing remarks",
+      "location": "Main Theatre",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-18T04:00:00Z",
+      "endTime": "2023-05-18T06:00:00Z",
+      "duration": "P120M",
+      "title": "Networking Drinks @ Panhead Tory Street",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2023-05-18T21:00:00Z",
+      "endTime": "2023-05-19T03:00:00Z",
+      "duration": "P360M",
+      "title": "Code Contribution Sprint",
+      "location": "Xequals Wellington, 93 Cuba Street, Te Aro, Wellington 6011",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "sponsor-14"
+    }
+  ],
+  "result": "✅",
+  "url": "https://drupalsouth.org/events/drupalsouth-wellington-2023/schedule"
+}
