@@ -1,0 +1,1303 @@
+{
+  "event": {
+    "designation": "DrupalSouth",
+    "location": "Melbourne",
+    "year": "2012",
+    "website": "http://2012.drupaldownunder.org/",
+    "region": "Australia – Melbourne",
+    "venue": "Melbourne",
+    "timezone": "Australia/Melbourne",
+    "enabled": true,
+    "startDate": "2012-01-12T22:00:00Z",
+    "endDate": "2012-01-15T06:00:00Z",
+    "sourceCache": "cache/wayback/drupalsouth-2012/raw",
+    "flickr": {
+      "enabled": true,
+      "groupUrl": "https://flic.kr/g/fLUHK",
+      "image": "./img/flickr/drupalsouth/2012-melbourne.jpg",
+      "imageAlt": "DrupalCon logo"
+    },
+    "columns": 4,
+    "logo": {
+      "image": "./img/logos/drupalsouth/2012-melbourne.png",
+      "imageAlt": "DrupalSouth logo",
+      "usePlate": false
+    },
+    "sponsors": [
+      {
+        "id": "sponsor-1",
+        "title": "PreviousNext",
+        "tier": "Platinum",
+        "row": 1,
+        "priority": 10,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-1.png",
+        "imageAlt": "PreviousNext logo",
+        "link": "http://www.previousnext.com.au/",
+        "bgStyle": "dark-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-2",
+        "title": "Powerful CMS",
+        "tier": "Gold",
+        "row": 2,
+        "priority": 20,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-2.png",
+        "imageAlt": "Powerful CMS logo",
+        "link": "http://www.powerfulcms.com.au/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-3",
+        "title": "CrossFunctional",
+        "tier": "Gold",
+        "row": 2,
+        "priority": 30,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-3.png",
+        "imageAlt": "CrossFunctional logo",
+        "link": "http://crossfunctional.net/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-4",
+        "title": "State Government Victoria",
+        "tier": "Silver",
+        "row": 3,
+        "priority": 40,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-4.png",
+        "imageAlt": "State Government Victoria logo",
+        "link": "http://www.mmv.vic.gov.au/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-5",
+        "title": "Connecting Up",
+        "tier": "Silver",
+        "row": 3,
+        "priority": 50,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-5.png",
+        "imageAlt": "Connecting Up logo",
+        "link": "http://www.connectingup.org/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-6",
+        "title": "Google",
+        "tier": "Silver",
+        "row": 3,
+        "priority": 60,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-6.png",
+        "imageAlt": "Google logo",
+        "link": "http://google.com.au/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-14",
+        "title": "Catalyst",
+        "tier": "Silver",
+        "row": 3,
+        "priority": 140,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-14.png",
+        "imageAlt": "Catalyst logo",
+        "link": "http://www.catalyst-au.net/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-8",
+        "title": "Boab Interactive",
+        "tier": "Silver",
+        "row": 3,
+        "priority": 80,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-8.png",
+        "imageAlt": "Boab Interactive logo",
+        "link": "http://www.boab.info/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-9",
+        "title": "10Collective",
+        "tier": "Silver",
+        "row": 3,
+        "priority": 90,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-9.png",
+        "imageAlt": "10Collective logo",
+        "link": "http://10collective.com.au/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-10",
+        "title": "DejanSEO",
+        "tier": "Bronze",
+        "row": 4,
+        "priority": 100,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-10.gif",
+        "imageAlt": "DejanSEO logo",
+        "link": "http://drupaldownunder.org/dejanseo",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-11",
+        "title": "Acquia",
+        "tier": "Bronze",
+        "row": 4,
+        "priority": 110,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-11.png",
+        "imageAlt": "Acquia logo",
+        "link": "http://acquia.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-12",
+        "title": "mig5",
+        "tier": "Bronze",
+        "row": 4,
+        "priority": 120,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-12.png",
+        "imageAlt": "mig5 logo",
+        "link": "http://mig5.net/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-13",
+        "title": "ninefold",
+        "tier": "Bronze",
+        "row": 4,
+        "priority": 130,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-13.png",
+        "imageAlt": "ninefold logo",
+        "link": "http://ninefold.com/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-15",
+        "title": "Pagebuild",
+        "tier": "Supporter",
+        "row": 5,
+        "priority": 150,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-15.png",
+        "imageAlt": "Pagebuild logo",
+        "link": "http://www.pagebuild.net/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-16",
+        "title": "Pantheon",
+        "tier": "Supporter",
+        "row": 5,
+        "priority": 160,
+        "image": "",
+        "imageAlt": "",
+        "link": "https://getpantheon.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-16",
+        "title": "Pearson",
+        "tier": "Supporter",
+        "row": 5,
+        "priority": 160,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-16.png",
+        "imageAlt": "Pearson logo",
+        "link": "http://informit.com/title/9780137041299",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-17",
+        "title": "Packt Publishing",
+        "tier": "Supporter",
+        "row": 5,
+        "priority": 170,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-17.png",
+        "imageAlt": "Packt Publishing logo",
+        "link": "http://packtlib.packtpub.com/drupal-library/subscription",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-18",
+        "title": "Drupalize Me",
+        "tier": "Supporter",
+        "row": 5,
+        "priority": 180,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-18.png",
+        "imageAlt": "Drupalize Me logo",
+        "link": "http://drupalize.me/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-19",
+        "title": "Linux Australia",
+        "tier": "Supporter",
+        "row": 5,
+        "priority": 190,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-19.png",
+        "imageAlt": "Linux Australia logo",
+        "link": "http://linux.org.au/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-20",
+        "title": "Internode",
+        "tier": "Supporter",
+        "row": 5,
+        "priority": 200,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-20.png",
+        "imageAlt": "Internode logo",
+        "link": "http://internode.on.net/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-21",
+        "title": "Xirrus",
+        "tier": "Supporter",
+        "row": 5,
+        "priority": 210,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-21.png",
+        "imageAlt": "Xirrus logo",
+        "link": "http://www.xirrus.com/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-22",
+        "title": "GitHub",
+        "tier": "Supporter",
+        "row": 5,
+        "priority": 220,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-22.png",
+        "imageAlt": "GitHub logo",
+        "link": "http://github.com/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-23",
+        "title": "Next Day Video",
+        "tier": "Supporter",
+        "row": 5,
+        "priority": 230,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-23.png",
+        "imageAlt": "Next Day Video logo",
+        "link": "http://www.nextdayvideo.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-24",
+        "title": "Design to Theme",
+        "tier": "Supporter",
+        "row": 5,
+        "priority": 240,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-24.png",
+        "imageAlt": "Design to Theme logo",
+        "link": "http://www.designtotheme.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-25",
+        "title": "Microsoft",
+        "tier": "Supporter",
+        "row": 5,
+        "priority": 250,
+        "image": "./img/sponsors/drupalsouth/2012-melbourne/sponsor-25.png",
+        "imageAlt": "Microsoft logo",
+        "link": "http://www.microsoft.com/web/webmatrix/?WT.mc_id=soc-c-au-loc--drupal",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "scheduleURLs": [
+      "http://drupaldownunder.org/program/session-schedule/all"
+    ],
+    "other_urls": []
+  },
+  "items": [
+    {
+      "startTime": "2012-01-12T22:00:00Z",
+      "endTime": "2012-01-13T01:30:00Z",
+      "duration": "P210M",
+      "title": "Drupal 7 in a Day",
+      "location": "Coders Lounge",
+      "link": "http://drupaldownunder.org/drupal-7-day",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "Get a solid introduction to Drupal 7 and learn about the most essential features and concepts of Drupal through hands-on activities. By the end of the day you will be familiar with Drupal terminology and be able to identify how many Drupal sites are constructed.\n\nDrupal 7 in a Day is not included in your conference registration and costs $395.00. You can [register for this course](http://drupaldownunder.org/ticket/drupal-7-day) on our [training page](http://drupaldownunder.org/training-drupal-downunder).\n\nStick around afterwards to socialise with speakers and other delegates and enjoy our complimentary drinks and snacks.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-12T22:00:00Z",
+      "endTime": "2012-01-13T01:30:00Z",
+      "duration": "P210M",
+      "title": "MySQL - Query Design",
+      "location": "BOF Room 5",
+      "link": "http://drupaldownunder.org/mysql-query-design",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "Understanding how (and why) components work the way they do (MySQL in particular) can help you make the most of the environment you work in, rather than battling with it.\n\nOptimal schema and query design with indexing basics tossed in, useful for module developers as well as people creating Views\n\nThis course is not included in your conference registration and costs $220.00. You can [register for this course](http://drupaldownunder.org/ticket/mysql-query-design) on our [training page](http://drupaldownunder.org/training-drupal-downunder).\n\nThis course is also available in combination with [MySQL - Server Tuning](http://drupaldownunder.org/ticket/mysql-server-tuning) as part of a [discounted full-day package](http://drupaldownunder.org/mysql-training-pack).\n\nStick around afterwards to socialise with speakers and other delegates and enjoy our complimentary drinks and snacks.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-12T22:00:00Z",
+      "endTime": "2012-01-13T01:30:00Z",
+      "duration": "P210M",
+      "title": "Object-Oriented Programming in PHP",
+      "location": "BOF Room 6",
+      "link": "http://drupaldownunder.org/object-oriented-programming-php",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "This workshop is for PHP programmers who wish to learn object-oriented programming using PHP 5. It assumes knowledge of PHP, but not of OOP.\n\nThis is a work session during which you'll create about 7 inter-related classes and write various scripts to test them. You don't need to be a PHP wiz for this course.\n\nObject-Oriented Programming in PHP is not included in your conference registration and costs $395.00. You can [register for this course](http://drupaldownunder.org/ticket/ticket/object-oriented-programming-php) on our [training page](http://drupaldownunder.org/training-drupal-downunder).\n\nStick around afterwards to socialise with speakers and other delegates and enjoy our complimentary drinks and snacks.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-13T01:30:00Z",
+      "endTime": "2012-01-13T02:30:00Z",
+      "duration": "P60M",
+      "title": "Lunch break",
+      "location": "",
+      "link": "http://drupaldownunder.org/lunch-break",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "sponsorIds": "",
+      "full_description": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-13T02:30:00Z",
+      "endTime": "2012-01-13T06:00:00Z",
+      "duration": "P210M",
+      "title": "Drupal 7 in a Day",
+      "location": "Coders Lounge",
+      "link": "http://drupaldownunder.org/drupal-7-day-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "Get a solid introduction to Drupal 7 and learn about the most essential features and concepts of Drupal through hands-on activities. By the end of the day you will be familiar with Drupal terminology and be able to identify how many Drupal sites are constructed.\n\nDrupal 7 in a Day is not included in your conference registration and costs $395.00. You can [register for this course](http://drupaldownunder.org/ticket/drupal-7-day) on our [training page](http://drupaldownunder.org/training-drupal-downunder).\n\nStick around afterwards to socialise with speakers and other delegates and enjoy our complimentary drinks and snacks.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-13T02:30:00Z",
+      "endTime": "2012-01-13T06:00:00Z",
+      "duration": "P210M",
+      "title": "MySQL - Server Tuning",
+      "location": "BOF Room 5",
+      "link": "http://drupaldownunder.org/mysql-server-tuning",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "Server tuning, making things run as well as possible considering a pre-existing reality of set of modules and views.\n\nThis course is useful for DBAs who have practical basic familiarity with MySQL, but the day also has high value for DBAs who already have experience with other databases, as this topic is highly MySQL specific.\n\nThis course is not included in your conference registration and costs $220.00. You can [register for this course](http://drupaldownunder.org/ticket/mysql-server-tuning) on our [training page](http://drupaldownunder.org/training-drupal-downunder).\n\nThis course is also available in combination with [MySQL - Query Design](http://drupaldownunder.org/ticket/mysql-query-design) as part of a [discounted full-day package](http://drupaldownunder.org/mysql-training-pack).\n\nStick around afterwards to socialise with speakers and other delegates and enjoy our complimentary drinks and snacks.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-13T02:30:00Z",
+      "endTime": "2012-01-13T06:00:00Z",
+      "duration": "P210M",
+      "title": "Object-Oriented Programming in PHP",
+      "location": "BOF Room 6",
+      "link": "http://drupaldownunder.org/object-oriented-programming-php-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "This workshop is for PHP programmers who wish to learn object-oriented programming using PHP 5. It assumes knowledge of PHP, but not of OOP.\n\nThis is a work session during which you'll create about 7 inter-related classes and write various scripts to test them. You don't need to be a PHP wiz for this course.\n\nObject-Oriented Programming in PHP is not included in your conference registration and costs $395.00. You can [register for this course](http://drupaldownunder.org/ticket/ticket/object-oriented-programming-php) on our [training page](http://drupaldownunder.org/training-drupal-downunder).\n\nStick around afterwards to socialise with speakers and other delegates and enjoy our complimentary drinks and snacks.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-13T04:30:00Z",
+      "endTime": "2012-01-13T06:00:00Z",
+      "duration": "P90M",
+      "title": "Hello Drupal!",
+      "location": "PreviousNext Keynote",
+      "link": "http://drupaldownunder.org/hello-drupal",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "This free session will provide a high level introduction to Drupal as a platform and community. Perfect for anyone looking to switch to Drupal, but doesn't want to get their feet too wet. Held in the late afternoon, just before we head off to opening night drinks.\n\nThis course is included in your conference registration is free to attend. However, places are limited, so you must register. You can [register for this course](http://drupaldownunder.org/ticket/hello-drupal) on our [training page](http://drupaldownunder.org/training-drupal-downunder).\n\nStick around afterwards to socialise with speakers and other delegates and enjoy our complimentary drinks and snacks.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-13T06:00:00Z",
+      "endTime": "2012-01-13T08:00:00Z",
+      "duration": "P120M",
+      "title": "Pre-Conference Drinks",
+      "location": "PreviousNext Keynote",
+      "link": "http://drupaldownunder.org/pre-conference-drinks",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "Come socialise before the conference starts. We'll provide snacks and drinks whilst you mingle with the other attendees. You're in the heart of Melbourne, so dinner will be easy to find afterward.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-13T06:00:00Z",
+      "endTime": "2012-01-13T08:00:00Z",
+      "duration": "P120M",
+      "title": "Pre-Conference Drinks",
+      "location": "BOF Room 5, BOF Room 6, Coders Lounge",
+      "link": "http://drupaldownunder.org/pre-conference-drinks",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "Come socialise before the conference starts. We'll provide snacks and drinks whilst you mingle with the other attendees. You're in the heart of Melbourne, so dinner will be easy to find afterward.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-13T22:00:00Z",
+      "endTime": "2012-01-13T23:15:00Z",
+      "duration": "P75M",
+      "title": "Keynote - Dmitri Gaskin",
+      "location": "PreviousNext Keynote",
+      "link": "http://drupaldownunder.org/session/keynote-dmitri-gaskin",
+      "track": [
+        "Keynote Presentation"
+      ],
+      "speakers": [
+        "Dmitri Gaskin"
+      ],
+      "full_description": "Keynote topic description coming soon",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-13T23:15:00Z",
+      "endTime": "2012-01-13T23:45:00Z",
+      "duration": "P30M",
+      "title": "Morning tea",
+      "location": "PreviousNext Keynote, CrossFunctional Room, Powerful CMS Room, Gold room",
+      "link": "http://drupaldownunder.org/saturday-morning-tea",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "sponsorIds": "",
+      "full_description": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-13T23:45:00Z",
+      "endTime": "2012-01-14T00:30:00Z",
+      "duration": "P45M",
+      "title": "Omega - how to implement & use this Responsive theme",
+      "location": "PreviousNext Keynote",
+      "link": "http://drupaldownunder.org/session/omega-how-implement-use-responsive-theme",
+      "track": [
+        "Theming and Design"
+      ],
+      "speakers": [
+        "Colin Watson",
+        "Christian Biggins"
+      ],
+      "full_description": "OK, so you've heard about Responsive Design and perhaps even implemented it. Is there a Drupal theme which can help you put together a Responsive Design and also give you the option of implementing HTML5?\n\nYes, there is. It's the Omega theme: it's grid-based, responsive and gives you the choice of HTML5 or XHTML.\n\nCome and drink the Kool-Aid with us and become a believer in Jake Strawn's Omega theme! We will show you how to download, implement and use it. You will impress your friends, frustrate your enemies and enamour your stalkers.",
+      "video_url": "https://www.youtube.com/watch?v=YzeHXt43-Wk",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-13T23:45:00Z",
+      "endTime": "2012-01-14T00:30:00Z",
+      "duration": "P45M",
+      "title": "A Moodle Integration tour.",
+      "location": "CrossFunctional Room",
+      "link": "http://drupaldownunder.org/session/moodle-integration-tour",
+      "track": [
+        "Building Sites and Systems"
+      ],
+      "speakers": [
+        "Alex Lawn"
+      ],
+      "full_description": "Sharing user accounts between Moodle and Drupal is possible, so is Single sign on. You can take then take this further by displaying Moodle course listings in Drupal, integrate this with your favorite Commerce module and finally feed the newly purchased course enrollments back to Moodle.",
+      "video_url": "https://www.youtube.com/watch?v=q9WUr1okX9I",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-13T23:45:00Z",
+      "endTime": "2012-01-14T00:30:00Z",
+      "duration": "P45M",
+      "title": "Views API Exposed",
+      "location": "Powerful CMS Room",
+      "link": "http://drupaldownunder.org/session/views-api-exposed",
+      "track": [
+        "Code, Core and Contrib"
+      ],
+      "speakers": [
+        "Michael Strelan",
+        "Mark Matuschka"
+      ],
+      "full_description": "Views is used by site builders and developers on 68% of Drupal websites, but on many of these sites only the basic functions of Views are in use. This presentation digs beneath the surface to discover the largely undocumented Views API and will demonstrate examples of how and when these hooks can be implemented.\n\nThe following topics will be discussed:\n• Finding your way around the Views API\n• Dynamically modifying the configuration of a view\n• Dynamically modifying a view’s query\n• Creating a views plugin\n• Using a view as a bulk data entry form",
+      "video_url": "https://www.youtube.com/watch?v=OBCSIUaacak",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-13T23:45:00Z",
+      "endTime": "2012-01-14T00:30:00Z",
+      "duration": "P45M",
+      "title": "The truth about job hunting...",
+      "location": "Gold room",
+      "link": "http://drupaldownunder.org/session/truth-about-job-hunting",
+      "track": [
+        "The Business of Drupal"
+      ],
+      "speakers": [
+        "Georgie Carpenter",
+        "Julien Viard"
+      ],
+      "full_description": "10collective knows what it's like to be a real person that is looking\nfor a real job in a real company. It's hard, can be awfully draining\nand frankly, who can understand all the little nuances and bits of\netiquette that employers, sometimes unfairly, heap on you?!\n\nWell, this session is about assisting anyone who has struggled during\nthe employment process in the Web and Digital space.\n\nWe know you have a specialist skill set in the Drupal space. We know\nthat you're not a generic automaton designed to simply spurt out code.\nWe know you don't wear a suit. So let us tell you what we think about\nhow to go and get the job you actually want in this industry.\n\nThrow out everything you learned at uni!",
+      "video_url": "https://www.youtube.com/watch?v=LlzIgU5WmWc",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T00:45:00Z",
+      "endTime": "2012-01-14T01:30:00Z",
+      "duration": "P45M",
+      "title": "jQuery for Designers & Themers",
+      "location": "PreviousNext Keynote",
+      "link": "http://drupaldownunder.org/session/jquery-designers-themers",
+      "track": [
+        "Theming and Design"
+      ],
+      "speakers": [
+        "Bevan Rudge"
+      ],
+      "full_description": "Small non-intrusive animations and interactions can greatly enhance the user experience and impress website visitors and clients. [jQuery](http://jquery.com/) and [jQuery UI](http://jqueryui.com/) make it easy to add these enhancements with very little knowledge of javascript or programming. Learn how!\n\nNo understanding of jQuery, javascript, programming or even Drupal theming is required. It is expected that attendees have an understanding of CSS selectors and how HTML elements are nested within each other to build a \"tree\" (aka \"DOM\"). This should make some sense (perhaps not complete sense) to you:\n\n`#page #content > p a.read_more {}`\n\nSome understanding of very basic programming concepts will be useful for the more advanced parts of the session, but is not expected. I.e.\n\n```\n  // Declare a function called \"calculateCircleArea\",\n  // which accepts a parameter \"radius\".\n  function calculateCircleArea(radius) {\n  \n    // Declare a variable called \"area\".\n    var area;\n  \n    // The area variable is now NULL.\n    // Now assign a value to area.\n    // area becomes 2 times pi times radius.\n    area = 2 * 3.142 * radius;\n  \n    // The area variable is now 2πr (\"two-pi-R\").\n    // Functions usually return something.\n    return area;\n  }\n```\n\nThis session is based on the [jQuery for Designers and Themers theme](http://drupal.org/project/jq4dat), which was created and upgraded for previous Drupal events where I gave this session or variations of it. Based on audience feedback from those sessions, I have refined the session content and adapted it.\n\n**Links**:\n- [Sample code is at Drupal.org/Project/jQ4DaT](http://drupal.org/project/jq4dat).\n- [Slides are at TinyURL.com/jQuery-Designers (Google Docs)](http://docs.google.com/present/view?id=drmcbw4_1816qv2fkc7). They will be updated and refined.\n- [Audio from DrupalCon SF](http://sf2010.drupal.org/conference/sessions/jquery-designers-and-themers). Audio is high quality, but video contains slides only. Sorry I forgot to repeat the questions into the microphone.\n- [Video from DrupalCon Paris](http://www.archive.org/details/jQueryfordesignersandthemers). It is a very poor quality recording.",
+      "video_url": "https://www.youtube.com/watch?v=u2IeDn_FcCA",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T00:45:00Z",
+      "endTime": "2012-01-14T01:30:00Z",
+      "duration": "P45M",
+      "title": "0-6 Drupal websites in 6 months: a federal government experience",
+      "location": "CrossFunctional Room",
+      "link": "http://drupaldownunder.org/session/0-6-drupal-websites-6-months-federal-government-experience",
+      "track": [
+        "Government, Education and NFP's"
+      ],
+      "speakers": [
+        "Daniel Nitsche"
+      ],
+      "full_description": "The Department of Education, Employment and Workplace Relations shares their experiences in going from knowing nothing about Drupal, to building 6 websites in 6 months. Topics will include:\n\n- Open source in Government\n- Developing websites in Drupal: how we do it, and what modules you'll need\n- Learning about Drupal: how we did it, and continue to do it\n- Accessibility in Government, the National Transition Strategy and Drupal, or: DON'T PANIC\n- Drupal and HTML5, responsive design: how we do it, and some demos",
+      "video_url": "https://www.youtube.com/watch?v=zvOgEc3SDzQ",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T00:45:00Z",
+      "endTime": "2012-01-14T01:30:00Z",
+      "duration": "P45M",
+      "title": "Field, Widgets and Formatters - oh my!",
+      "location": "Powerful CMS Room",
+      "link": "http://drupaldownunder.org/session/field-widgets-and-formatters-oh-my",
+      "track": [
+        "Code, Core and Contrib"
+      ],
+      "speakers": [
+        "Lee Rowlands"
+      ],
+      "full_description": "Drupal 7 saw the introduction of fields in core and a strong api to allow you to define your own fields and widgets giving you the flexibility to integrate your own business logic and functionality into the familiar administrative interface exposed by Drupal.\n\nThis session will discuss when you need to roll your own fields, widgets and formatters and why you'd want to do so.\n\nIt will then take you through defining a field, widgets and associated formatters for a real world example.\n\nThen we'll all sit around and talk about how awesome Drupal is and how the fields api is awesome and generally just pat each other on the back about how awesome we are...",
+      "video_url": "https://www.youtube.com/watch?v=MPUmsuXww94",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T00:45:00Z",
+      "endTime": "2012-01-14T01:30:00Z",
+      "duration": "P45M",
+      "title": "Drupal: A framework to accelerate business success",
+      "location": "Gold room",
+      "link": "http://drupaldownunder.org/session/drupal-framework-accelerate-business-success",
+      "track": [
+        "The Business of Drupal"
+      ],
+      "speakers": [
+        "Russ Porteous"
+      ],
+      "full_description": "Drupal is a versatile platform for capturing and presenting information in a variety of formats. This presentation seeks to demonstrate how Drupal can be used to accelerate business success.\n\nTopics covered will include;\n\n1. The economics of business decision making;\n2. From concept to sale, selling business solutions;\n3. Product vs. Service - Leverage; developing your own business;\n4. Effective business communication;\n5. Low hanging fruit;\n6. 6 Modules that accelerate application development.\n\nWith the extensive availability of enterprise API's Drupal is being used as a platform for a wide variety of business applications.",
+      "video_url": "https://www.youtube.com/watch?v=5hnhfgtuCg4",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T01:30:00Z",
+      "endTime": "2012-01-14T02:30:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "PreviousNext Keynote, CrossFunctional Room, Powerful CMS Room, Gold room",
+      "link": "http://drupaldownunder.org/saturday-lunch",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "sponsorIds": "",
+      "full_description": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-14T02:30:00Z",
+      "endTime": "2012-01-14T03:15:00Z",
+      "duration": "P45M",
+      "title": "Aegir - Skynet for Drupal",
+      "location": "PreviousNext Keynote",
+      "link": "http://drupaldownunder.org/session/aegir-skynet-drupal",
+      "track": [
+        "Building Sites and Systems"
+      ],
+      "speakers": [
+        "Miguel Jacq"
+      ],
+      "full_description": "You've probably 'heard of' Aegir - it's a hosting system for managing rapid, automated provisioning and ongoing maintenance (upgrades, cloning, destroying) of Drupal sites.\n\nAegir itself is made of Drupal - it consists of a Drupal frontend 'control panel' and a 'backend' which makes extensive use of Drush.\n\nThis will be an ambitious and largely demonstrative talk (yes that's right, it's a tradition that we always do live Aegir demos) that will cover stuff for newbies as well as those that have seen many-an-Aegir presentation before already:\n\n1) The basics of using Aegir (for those new to the project / with simple needs for managing a small to large set of basic sites)\n\n2) How to upgrade your site(s) to a new version of core / apply changes from a dev site to live\n\n3) How to go berserk with step 2 using automated tools such as Jenkins, Git and Fabric, and see the Matrix\n\n4) How to extend Aegir itself with basic add-ons / an overview of the current Aegir contrib space\n\n5) A quick roadmap overview of where Aegir is and where it's going\n\n[mig5](http://mig5.net/) will be presenting this talk and is the Aussie component of the core Aegir development team.",
+      "video_url": "https://www.youtube.com/watch?v=rylQMjh2dA0",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T02:30:00Z",
+      "endTime": "2012-01-14T03:15:00Z",
+      "duration": "P45M",
+      "title": "The Dark Arts of Business Analysis: Requirements Gathering with Mind Maps for a Drupal Project",
+      "location": "CrossFunctional Room",
+      "link": "http://drupaldownunder.org/session/dark-arts-business-analysis-requirements-gathering-mind-maps-drupal-project",
+      "track": [
+        "The Business of Drupal"
+      ],
+      "speakers": [
+        "Jason Brooks"
+      ],
+      "full_description": "Although the actual scale of the issue is arguable, it's well established in the Project Management community that a very significant proportion of failed projects are due to poor requirements gathering in the early stages of defining project.\n\nThere are many approaches, and no magic solutions - but I'll outline one approach that we take, utilising a Mindmap to reduce the technobabble, and assisting the site builder and client to come to terms on a shared set of expectations.\n\n- Capturing Requirements (you want it to make you coffee too?)\n- Iterative Analysis (cleaning up the mess)\n- Scoping\n- Selecting Contrib Modules.\n\nWe'll walk through using a small business website scenario to illustrate the process.",
+      "video_url": "https://www.youtube.com/watch?v=JI58gv0li9w",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T02:30:00Z",
+      "endTime": "2012-01-14T03:15:00Z",
+      "duration": "P45M",
+      "title": "Drupal7 theming and template Inheritance",
+      "location": "Powerful CMS Room",
+      "link": "http://drupaldownunder.org/session/drupal7-theming-and-template-inheritance",
+      "track": [
+        "Theming and Design"
+      ],
+      "speakers": [
+        "Aimee Maree Forsstrom"
+      ],
+      "full_description": "Where is that .class and .tpl coming from? and how has templating changed in Drupal7?\n\nThis talk provides a look at Drupal7 theme inheritance;\nDiscussion on why and how theme inheritance occurs within Drupal, the Drupal way of over-riding theme elements. Has a look into some key things which have changed in Drupal 7 templates.\n\nWhen theming Drupal sites alot of time is spent trying to figure out where a style is coming from and how can you add that class/template file into your own theme. Provides a look into Drupal 7's new naming conventions for templates within your theme and how overwrites occur within this new structure.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-14T02:30:00Z",
+      "endTime": "2012-01-14T03:15:00Z",
+      "duration": "P45M",
+      "title": "The FUSE Projects - Nine Drupal sites for the education sector",
+      "location": "Gold room",
+      "link": "http://drupaldownunder.org/session/fuse-projects-nine-drupal-sites-education-sector",
+      "track": [
+        "Stories and Case Studies"
+      ],
+      "speakers": [
+        "Heath Graham"
+      ],
+      "full_description": "In 2010, the Victorian Department of Education and Early Childhood\nDevelopment provided funding to a range of Strategic Partners to produce original Web 2.0 content for Victorian schools to be hosted on the FUSE educational portal.\n\nThe projects were designed to encourage engagement, collaboration, and authentic work in a range of ways across the curriculum. Nine of them were developed using Drupal.\n\nThis session showcases these Drupal sites and the people and organisations behind their creation.",
+      "video_url": "https://www.youtube.com/watch?v=wpDb7LErf8k",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T03:30:00Z",
+      "endTime": "2012-01-14T04:15:00Z",
+      "duration": "P45M",
+      "title": "Node.js and Drupal",
+      "location": "PreviousNext Keynote",
+      "link": "http://drupaldownunder.org/session/nodejs-and-drupal",
+      "track": [
+        "Code, Core and Contrib"
+      ],
+      "speakers": [
+        "Justin Randell"
+      ],
+      "full_description": "Drupal is a powerful, flexible platform for building applications, but not something that handles realtime notifications easily.\n[Node.js](http://nodejs.org/) is a breath of fresh air in the Open Source web server landscape. It makes writing applications that handle thousands of open connections at the same time easy.\nThe [Nodejs](http://drupal.org/project/nodejs) module integrates Drupal with Node.js, allowing for the best of both worlds.\nThis presentation will address:\n\n- Why realtime\n- Why Node.js\n- How the Nodejs module integrates Drupal and Node.js\n- Current features of the Nodejs module\n- Where the Nodejs module is going\n",
+      "video_url": "https://www.youtube.com/watch?v=zQreu722RE8",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T03:30:00Z",
+      "endTime": "2012-01-14T04:15:00Z",
+      "duration": "P45M",
+      "title": "Drupal Commerce Group Buy: A Case Study Disaster",
+      "location": "CrossFunctional Room",
+      "link": "http://drupaldownunder.org/session/drupal-commerce-group-buy-case-study-disaster",
+      "track": [
+        "Stories and Case Studies"
+      ],
+      "speakers": [
+        "John Kennedy"
+      ],
+      "full_description": "Earlier this year we developed a group buy site for a customer using Drupal Commerce...",
+      "video_url": "https://www.youtube.com/watch?v=AuNipk6N4cQ",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T03:30:00Z",
+      "endTime": "2012-01-14T04:15:00Z",
+      "duration": "P45M",
+      "title": "Simple and powerful site deployment with capistrano",
+      "location": "Powerful CMS Room",
+      "link": "http://drupaldownunder.org/session/simple-and-powerful-site-deployment-capistrano",
+      "track": [
+        "Building Sites and Systems"
+      ],
+      "speakers": [
+        "Kim Pepper"
+      ],
+      "full_description": "Are you still using FTP to deploy changes to your sites?\n\nThis session outlines a deployment process and use of the capistrano deployment tool.\n\nWhen you run the one-line deploy command you get:\n* Automatic database backup\n* Pull in changes from a git repository\n* Automatic 'update db' call\n* Automatic cache flush\n* Ability to roll back releases\n* Support for mulitple servers, including separate varnish, app and db servers\n\nFind out how to effectively manage deployment, and take control of your releases.",
+      "video_url": "https://www.youtube.com/watch?v=ulK-lhv8eI0",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T03:30:00Z",
+      "endTime": "2012-01-14T04:15:00Z",
+      "duration": "P45M",
+      "title": "Love and Devotion",
+      "location": "Gold room",
+      "link": "http://drupaldownunder.org/session/love-and-devotion",
+      "track": [
+        "Government, Education and NFP's"
+      ],
+      "speakers": [
+        "Richard Hayward"
+      ],
+      "full_description": "The State Library of Victoria is a cultural agency of the State Government of Victoria. After implementing its first Drupal project in June 2010, further projects achieved the implementation of several additional Drupal 6 sites using a combination of internal and external resources. The Love and Devotion project combined internal Drupal expertise with the introduction of Realityloop Pty Ltd to the development mix for the first time. The project focuses on creating a new platform to accompany the State Library's significant cultural exhibition program. In February 2012, the Love and Devotion website featuring the manuscripts of medieval Persia will be released. This project introduced Drupal 7 to the State Library's Drupal team for the first time.",
+      "video_url": "https://www.youtube.com/watch?v=qldsOV4p1Lg",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T04:15:00Z",
+      "endTime": "2012-01-14T04:45:00Z",
+      "duration": "P30M",
+      "title": "Afternoon tea",
+      "location": "PreviousNext Keynote, CrossFunctional Room, Powerful CMS Room, Gold room",
+      "link": "http://drupaldownunder.org/saturday-afternoon-tea",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "sponsorIds": "",
+      "full_description": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-14T04:45:00Z",
+      "endTime": "2012-01-14T05:30:00Z",
+      "duration": "P45M",
+      "title": "Responsive Design",
+      "location": "PreviousNext Keynote",
+      "link": "http://drupaldownunder.org/session/responsive-design",
+      "track": [
+        "Theming and Design"
+      ],
+      "speakers": [
+        "Geoffrey Roberts"
+      ],
+      "full_description": "Responsive Design is a web design philosophy that describes ways of making web pages respond to the device they're viewed on. The techniques that underpin it enables designers to style websites to have an appropriate look and feel for a range of devices, without sacrificing functionality, depth of content, or beauty. It means that you need not waste time developing different versions of your site for different platforms, and as a bonus, ensures your site is ready to work on future platforms or devices.\n\nThis session will concentrate as much on the what and why of responsive design as possible, whilst occasionally dipping into the how. It requires understanding on what CSS and JavaScript can do, but will try to skip most of the technical details in favour of a general overview. Other resources will be referred to that explore this technique in greater depth.\n\nResponsive Design is not exclusive to Drupal, and most of the session will be spent discussing it as a general technique. There are tools and themes currently available that will help you use Responsive Design on Drupal sites, and some will be covered.\n\nThis session will cover:\n\n* More on what Responsive Design is\n* Why you should use it, and what problems you might face\n* A review of the ideas that underpin Responsive Design\n* How to work with it in Drupal\n* A quick example of making a Drupal layout responsive",
+      "video_url": "https://www.youtube.com/watch?v=7uxkghne2pU",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T04:45:00Z",
+      "endTime": "2012-01-14T05:30:00Z",
+      "duration": "P45M",
+      "title": "Scaling out your Drupal and Database Infrastructure, Affordably",
+      "location": "CrossFunctional Room",
+      "link": "http://drupaldownunder.org/session/scaling-out-your-drupal-and-database-infrastructure-affordably",
+      "track": [
+        "Building Sites and Systems"
+      ],
+      "speakers": [
+        "Arjen Lentz"
+      ],
+      "full_description": "It's common for 'simple' Drupal systems to have a combined server for both the web server and the database. That's an easy way to start, but it can become nasty to maintain.\n\nObviously, any maintenance or upgrade work (OS security updates, for instance) requires scheduled outages. While for some sites that's ok, for many it's not. And what about backups, and the possibility of (parts of) the system failing?\n\nYou want to keep things simple, as low budget as possible, and preferably forget about it for most of the time - without it coming back and biting you later.\n\nWe regularly help clients move from single systems to more resilient and scalable infrastructures, step by step. We'll show you how it's done (and why), so you can do it too!",
+      "video_url": "https://www.youtube.com/watch?v=Cz4LlvcHmnE",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T04:45:00Z",
+      "endTime": "2012-01-14T05:30:00Z",
+      "duration": "P45M",
+      "title": "Drupal and CiviCRM",
+      "location": "Powerful CMS Room",
+      "link": "http://drupaldownunder.org/session/drupal-and-civicrm",
+      "track": [
+        "Government, Education and NFP's"
+      ],
+      "speakers": [
+        "Chris Ward"
+      ],
+      "full_description": "CiviCRM is a BIG module with a growing user base and a massive amount of potential for any clients (or indeed internal community or company organisation) requiring CRM type services such as mailing lists, event registrations, memberships, reporting and much more…\n\nWhilst it offers as many features and functions as it's commercial counterparts, it's sometimes hard to know where to start with CiviCRM and where it can take you.\n\nThis session will take a brief tour through installation and setup, what it can do, how it integrates with Drupal, common pitfalls, the CiviCRM community and a short foray into expanding and developing for CiviCRM.",
+      "video_url": "https://www.youtube.com/watch?v=fBv3fpU3PyQ",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T04:45:00Z",
+      "endTime": "2012-01-14T05:30:00Z",
+      "duration": "P45M",
+      "title": "The rough edges of the Drupal dream.",
+      "location": "Gold room",
+      "link": "http://drupaldownunder.org/session/rough-edges-drupal-dream",
+      "track": [
+        "Building Sites and Systems"
+      ],
+      "speakers": [
+        "Pascal Hakim"
+      ],
+      "full_description": "In 2007 my team and I decided to move our main web sites to Drupal. Things were great - at first. A few years later, things were not going so well any more, and we eventually moved to a different system.\n\nFind out what mistakes we made, what we did right, and where we went wrong with migrating data in, views, multi-site setups, caching, giving our users the functionality they wanted and running multiple systems at the same time.",
+      "video_url": "https://www.youtube.com/watch?v=jm-B-mhEmNA",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T05:45:00Z",
+      "endTime": "2012-01-14T06:45:00Z",
+      "duration": "P60M",
+      "title": "Keynote - The differences between WCAG1 and WCAG2",
+      "location": "PreviousNext Keynote",
+      "link": "http://drupaldownunder.org/session/keynote-differences-between-wcag1-and-wcag2",
+      "track": [
+        "Keynote Presentation"
+      ],
+      "speakers": [
+        "Gian Wild"
+      ],
+      "full_description": "The differences between WCAG1 and WCAG2\n\nNow that WCAG2 has been endorsed by federal, state and local Government, the time has come to learn all about the new guidelines- and how they differ from WCAG1. Gian Wild will talk about WCAG2 and the main differences between this new set of guidelines and WCAG1, such as CAPTCHA, captions, ALT attributes, skip links, validation, keyboard operability and audio control.",
+      "video_url": "https://www.youtube.com/watch?v=mGbefqDDspM",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T22:00:00Z",
+      "endTime": "2012-01-14T23:15:00Z",
+      "duration": "P75M",
+      "title": "Keynote - Dries Buytaert",
+      "location": "PreviousNext Keynote",
+      "link": "http://drupaldownunder.org/session/keynote-dries-buytaert",
+      "track": [
+        "Keynote Presentation"
+      ],
+      "speakers": [
+        "Dries Buytaert"
+      ],
+      "full_description": "Keynote topic description coming soon",
+      "video_url": "https://www.youtube.com/watch?v=Utza0BCFYws",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T23:15:00Z",
+      "endTime": "2012-01-14T23:45:00Z",
+      "duration": "P30M",
+      "title": "Morning tea",
+      "location": "PreviousNext Keynote, CrossFunctional Room, Powerful CMS Room, Gold room",
+      "link": "http://drupaldownunder.org/sunday-morning-tea",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "sponsorIds": "",
+      "full_description": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-14T23:45:00Z",
+      "endTime": "2012-01-15T00:30:00Z",
+      "duration": "P45M",
+      "title": "Poppin' forms that clients love.",
+      "location": "PreviousNext Keynote",
+      "link": "http://drupaldownunder.org/session/poppin-forms-clients-love",
+      "track": [
+        "Code, Core and Contrib"
+      ],
+      "speakers": [
+        "Simon Hobbs"
+      ],
+      "full_description": "Let's get jiggy with Ajax and Forms API. If you came to my talk in Brisbane, we're talking Chaos tool suite (ctools) again, plus some of the similar features that got into Drupal 7. Find out about all the bits that you can use to turn an ordinary form into and extraordinary form. You know you want to!",
+      "video_url": "https://www.youtube.com/watch?v=ds9P2fI7E_g",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T23:45:00Z",
+      "endTime": "2012-01-15T00:30:00Z",
+      "duration": "P45M",
+      "title": "Livethemer: theme builder for Drupal!",
+      "location": "CrossFunctional Room",
+      "link": "http://drupaldownunder.org/session/livethemer-theme-builder-drupal",
+      "track": [
+        "Theming and Design"
+      ],
+      "speakers": [
+        "Jeff Hanbury",
+        "Tony Aslett"
+      ],
+      "full_description": "Wish you could quickly and easily create a custom, professional theme for your Drupal site yourself without having to write code or CSS? Or perhaps you're a Drupal developer who would rather write PHP than fight random CSS layout bugs?\n\nFind out what you will be able to do with Livethemer, the D7 module Marmaladesoul & friends have been beavering away at all year...\n\n— create whole new themes by pulling together modular, customisable sets of theme components\n\n— enhance specific parts of an existing theme",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-14T23:45:00Z",
+      "endTime": "2012-01-15T00:30:00Z",
+      "duration": "P45M",
+      "title": "Small is beautiful",
+      "location": "Powerful CMS Room",
+      "link": "http://drupaldownunder.org/session/small-beautiful",
+      "track": [
+        "The Business of Drupal"
+      ],
+      "speakers": [
+        "Campbell Angus"
+      ],
+      "full_description": "We host hundreds of small-to-medium Drupal sites, half 'regular' 'ol websites, and the other half online stores.\n\nWe jumped in deep end with Drupal when we started the company 2.5 years ago, and have learnt a lot along with way as we deliver online solutions to the huge small business segment.\n\nOur talk will cover:\n\n- doing business with Drupal\n- managing hundreds of small websites - think Aegir\n- doing more with less\n- streamlining the delivery life-cycle to cater for very simple requirements through to more complex sites\n- the cost of making exceptions for clients\n- to outsource or not to outsource\n- preparing for 100,000 site visits in a one-hour window without impacting our other client's site",
+      "video_url": "https://www.youtube.com/watch?v=sYOE0R3RKlE",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-14T23:45:00Z",
+      "endTime": "2012-01-15T00:30:00Z",
+      "duration": "P45M",
+      "title": "HTML5 video specifications",
+      "location": "Gold room",
+      "link": "http://drupaldownunder.org/session/html5-video-specifications",
+      "track": [
+        "Building Sites and Systems"
+      ],
+      "speakers": [
+        "Silvia Pfeiffer"
+      ],
+      "full_description": "You would think that publishing video on the Web - YouTube-style - is all that is required to make video a core part of the Web. Far from it: work on accessibility features and synchronization of several audio and video resources has been ongoing since video was introduced into HTML5. And now we are looking at how to make real-time video work on the Web: how can we enable Web developers to make video conferencing possible in the browser using no more than a dozen or so lines of code.\n\nSilvia will give us an update on HTML5 video and the latest developments at the WHATWG and W3C.",
+      "video_url": "https://www.youtube.com/watch?v=-1hWHQBm4cE",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-15T00:45:00Z",
+      "endTime": "2012-01-15T01:30:00Z",
+      "duration": "P45M",
+      "title": "Ezy-bake Drupal: Cooking sites with Distributions",
+      "location": "PreviousNext Keynote",
+      "link": "http://drupaldownunder.org/session/ezy-bake-drupal-cooking-sites-distributions",
+      "track": [
+        "Building Sites and Systems"
+      ],
+      "speakers": [
+        "Stuart Clark",
+        "Brian Gilbert"
+      ],
+      "full_description": "Hi, I'm a Drupal developer and I build websites.\n\nI like this module, that module, and those modules.\nI click this checkbox, tweak that setting, and set those variable.\nI make websites.\n\nWhen does this stop being fun, aren't you sick of repeating these same arduous tasks for every site you build?\n\nMeet Distributions, not a new concept at all but one that will save you time and let you get on with the better things in Drupal.\n\nRecipe:\n1 x Install profile\n1-2 x Drush make file(s)\nAdd features to taste and stir\n\nA new site ready to go in a matter of minutes.",
+      "video_url": "https://www.youtube.com/watch?v=AmEUUg7C2mk",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-15T00:45:00Z",
+      "endTime": "2012-01-15T01:30:00Z",
+      "duration": "P45M",
+      "title": "Finding Your Voice: Compelling Content For Your Site",
+      "location": "CrossFunctional Room",
+      "link": "http://drupaldownunder.org/session/finding-your-voice-compelling-content-your-site",
+      "track": [
+        "The Business of Drupal"
+      ],
+      "speakers": [
+        "Raena Jackson-Armitage"
+      ],
+      "full_description": "You've got a great idea for a new site, and the technical chops to pull it together - all that's missing now is the killer content that's going to keep your visitors coming back for more. We'll talk about some easy techniques you can use to make your website copy great -- and avoid sounding like a marketing robot!",
+      "video_url": "https://www.youtube.com/watch?v=u0hHJoky3RQ",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-15T00:45:00Z",
+      "endTime": "2012-01-15T01:30:00Z",
+      "duration": "P45M",
+      "title": "Media savvy",
+      "location": "Powerful CMS Room",
+      "link": "http://drupaldownunder.org/session/media-savvy",
+      "track": [
+        "Code, Core and Contrib"
+      ],
+      "speakers": [
+        "James Gollan"
+      ],
+      "full_description": "Media and Drupal hasn't always been easy. Hey, Drupal 7 is the first release to have images in core! But the good news is that things have really improved.\n\nThe media module is described as 'a file browser for the web'. In this session we will take a look at the media module, and along the way touch upon:\n\n- the underlying changes in file handling in Drupal 7,\n- embedding external media (e.g. Youtube),\n- reusing uploaded assets,\n- and integrating with a WYSIWYG editor.\n",
+      "video_url": "https://www.youtube.com/watch?v=8pHoGZBv47c",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-15T00:45:00Z",
+      "endTime": "2012-01-15T01:30:00Z",
+      "duration": "P45M",
+      "title": "eGility: Drupal ERP based Shopping Cart",
+      "location": "Gold room",
+      "link": "http://drupaldownunder.org/session/egility-drupal-erp-based-shopping-cart",
+      "track": [
+        "Building Sites and Systems"
+      ],
+      "speakers": [
+        "Martin Fuggle"
+      ],
+      "full_description": "There are a few scenarios where Ubercart or Drupal commerce cannot meet the needs of a business, especially when the business is engaged in multiple channels of product distribution - multiple Point of Sale (POS) systems, multiple online stores, multiple warehouses, etc. A full blown ERP is usually sought in such situations, however this brings in a massive complexity with synchronisation of user, product, pricing and inventory to be presented online.\n\nLeveraging a fully open source ERP offering called Adempiere, with Drupal allows businesses to run multiple online stores, multiple POS systems, multiple warehouses and get all the benefits like:\n\n- real time promotions, pricing across systems\n- holistic view of a customer across channels\n- integrated financials\n- multi warehouse support\n- support for MRP, planning, financials and more\n\nThis presentation will look at how large enterprises can benefit with a full blown ERP with one or more integrated web stores.\n\nPresentation by Martin Fuggle and/or Joe Matthew",
+      "video_url": "https://www.youtube.com/watch?v=ct_-qIcV-gw",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-15T01:30:00Z",
+      "endTime": "2012-01-15T02:30:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "PreviousNext Keynote, CrossFunctional Room, Powerful CMS Room, Gold room",
+      "link": "http://drupaldownunder.org/sunday-lunch",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "sponsorIds": "",
+      "full_description": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-15T02:30:00Z",
+      "endTime": "2012-01-15T03:15:00Z",
+      "duration": "P45M",
+      "title": "Drupal, Web Typography, and You",
+      "location": "PreviousNext Keynote",
+      "link": "http://drupaldownunder.org/session/drupal-web-typography-and-you",
+      "track": [
+        "Theming and Design"
+      ],
+      "speakers": [
+        "Simon Pascal Klein"
+      ],
+      "full_description": "Web Typography has seen a strong resurgence in the past few years, and rightly so, with most of content online still very text-based.\n\nWe'll look at various methods of setting type on the web, both from technical and aesthetic perspectives, and explore a few tips to get the best effects and see what options there are for improving typography within Drupal.\n\nThe talk is suited to anyone who publishes on the web, with relevance to designers and devel­opers.",
+      "video_url": "https://www.youtube.com/watch?v=0NJwkMyiAQ8",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-15T02:30:00Z",
+      "endTime": "2012-01-15T03:15:00Z",
+      "duration": "P45M",
+      "title": "Using Drupal for rapid prototyping and as application framework",
+      "location": "CrossFunctional Room",
+      "link": "http://drupaldownunder.org/session/using-drupal-rapid-prototyping-and-application-framework",
+      "track": [
+        "Building Sites and Systems"
+      ],
+      "speakers": [
+        "Sven Berg Ryen"
+      ],
+      "full_description": "I'd like to share some experience from using Drupal to build custom applications, going beyond the normal CMS usage of Drupal.\n\n- How quickly can you put together a prototype in Drupal? What are the benefits? How does Drupal match up against other frameworks in PHP and other languages?\n\n- Examples of Drupal being used for web apps. What's already being built in Drupal and why are they using Drupal?\n\n- The most common pitfalls to avoid.\n\n- Improving speed for logged in users.\n\n- Challenges with web apps in Drupal. What are the current issues and can something be done to address them in future Drupal builds?\n\nAbout the presenter:\nI'm a Drupal developer at Maxus Media & Software Pte Ltd in Singapore, and enjoy travelling around to meet other Drupal people in Asia and elsewhere. I organize Drupal Meetups in Singapore and I'm originally from Norway.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-15T02:30:00Z",
+      "endTime": "2012-01-15T03:15:00Z",
+      "duration": "P45M",
+      "title": "Features galore! But which ones do we choose for our UI?",
+      "location": "Powerful CMS Room",
+      "link": "http://drupaldownunder.org/session/features-galore-which-ones-do-we-choose-our-ui",
+      "track": [
+        "Building Sites and Systems"
+      ],
+      "speakers": [
+        "William Donovan"
+      ],
+      "full_description": "Surely custom coding EVERYTHING, or adding any old module is not the way to go, right? Technology is an amazing facilitator of ideas, however it can also create user disasters.\n\nThis is Guerilla UX.\nAll too often, watching a user struggle through your website teaches you more about what you didn’t think through. It makes you wish you'd checked and tested earlier.\n\nWilliam will share some simple tools and easy principles that can help prevent feature creep and stop the project scope getting out of control. Good ideas to help you hit the ground with a beta product that can be tested early.\n\nWilliam is a human centred innovator. His favourite part of the day is helping users match the business outcome they're trying to achieve with the right technologies to make it happen.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-15T02:30:00Z",
+      "endTime": "2012-01-15T03:15:00Z",
+      "duration": "P45M",
+      "title": "Crowdsourcing Historical Research",
+      "location": "Gold room",
+      "link": "http://drupaldownunder.org/session/crowdsourcing-historical-research",
+      "track": [
+        "Stories and Case Studies"
+      ],
+      "speakers": [
+        "Claudine Chionh"
+      ],
+      "full_description": "Founders and Survivors is an Australian Research Council-funded research project to build biographies of the approx. 70,000 convicts transported to Tasmania, and their descendants. The project is a collaboration between historians, public health scientists, and a growing number of volunteer genealogists and amateur historians. Our tools include a massive and complex XML database, and social and collaboration tools built with Drupal and Google Docs.\n\nThis presentation will describe the goals and challenges of the project, the motivations behind the adoption of these tools, and their implementation.\n\n[http://foundersandsurvivors.org/](http://foundersandsurvivors.org/)",
+      "video_url": "https://www.youtube.com/watch?v=T0JHYwUqFU4",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-15T03:30:00Z",
+      "endTime": "2012-01-15T04:15:00Z",
+      "duration": "P45M",
+      "title": "Building an awesome e-commerce site in 25 minutes (without losing your soul)",
+      "location": "PreviousNext Keynote",
+      "link": "http://drupaldownunder.org/session/building-awesome-e-commerce-site-25-minutes-without-losing-your-soul",
+      "track": [
+        "Building Sites and Systems"
+      ],
+      "speakers": [
+        "Andrew Yager"
+      ],
+      "full_description": "There are so many e-commerce frameworks and systems out there, and lets face it - Drupal has been pretty light on when it has come to anything of any quality. Drupal Commerce changes everything - and gives Drupal a truly enterprise set of building blocks for commerce stores.\n\nCome along to this session to get a basic overview of Drupal Commerce, learn how entities relate to products relate to views relate to your mind being blown, and build an Australian Commerce site in 25 minutes!",
+      "video_url": "https://www.youtube.com/watch?v=ViS2xFvnZwc",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-15T03:30:00Z",
+      "endTime": "2012-01-15T04:15:00Z",
+      "duration": "P45M",
+      "title": "All node, no code",
+      "location": "CrossFunctional Room",
+      "link": "http://drupaldownunder.org/session/all-node-no-code",
+      "track": [
+        "Building Sites and Systems"
+      ],
+      "speakers": [
+        "Erica Bramham"
+      ],
+      "full_description": "Drupal is a great tool for building dynamic websites, but the learning curve can be huge particularly for people coming from a non-coding background.\n\nPresented by a non-coding developer who jumped from static HTML into Drupal with much hair pulling and frustrated documentation trawling, this session is designed for Drupal beginners, particularly those wanting to move from static HTML or other tools like Wordpress to building a dynamic website with Drupal. And best of all, it shows you how to do it with no custom code.\n\nThe following topics will be covered:\n\n- An introduction to Drupal and the community\n- How to install Drupal and contributed modules and themes\n- The Drupal file structure (aka, Why is index.php so small?)\n- Where to find the Drupal settings\n- Where to put your CSS\n- Essential modules every site needs\n- Simple no-code recpies to create a news feature, image gallery and blog\n- And finally, where to get help when you need it",
+      "video_url": "https://www.youtube.com/watch?v=znbFv5EyI8Q",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-15T03:30:00Z",
+      "endTime": "2012-01-15T04:15:00Z",
+      "duration": "P45M",
+      "title": "CDNs made simple, fast & cheap",
+      "location": "Powerful CMS Room",
+      "link": "http://drupaldownunder.org/session/cdns-made-simple-fast-cheap",
+      "track": [
+        "Building Sites and Systems"
+      ],
+      "speakers": [
+        "Murray Woodman"
+      ],
+      "full_description": "Do you want the snappiest page load times for all users, wherever they are in the world? Do you have a lot of multi media content which needs to be served? Is your web server suffering from too many connections or not enough RAM? Can you afford $5 per month and a little of your time up front? You should think about setting up a CDN for your sites.\n\nOut of the box it is possible to configure Drupal to perform quite well when it comes to client side performance. There are a variety approaches including page caching, CSS and JS aggregation, file compression, expires headers, etags and image sprites. Once these have been configured, conducting a test using a tool such as YSlow gives Drupal a reasonable score. One area where things can be improved is with the addition of a Content Delivery Network (CDN).\n\nA CDN brings your static content closer to users by storing copies of files in servers around the globe. When a user makes a request content con be served from a location near them, resulting in much faster download times. Adding a CDN is the last step in the process of getting content to your users.\n\nThis talk will walk you through:\n- the basic mechanisms of CDNs\n- how to set up Drupal to use a CDN\n- the best performing networks for use in Australia\n- the cheapest networks in Australia\n- configuration of your DNS.",
+      "video_url": "https://www.youtube.com/watch?v=NuWDMsrMmvE",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-15T03:30:00Z",
+      "endTime": "2012-01-15T04:15:00Z",
+      "duration": "P45M",
+      "title": "Telling Stories with Linked Data - Australian War Memorial",
+      "location": "Gold room",
+      "link": "http://drupaldownunder.org/session/telling-stories-linked-data-australian-war-memorial",
+      "track": [
+        "Building Sites and Systems"
+      ],
+      "speakers": [
+        "David Peterson"
+      ],
+      "full_description": "The Australian War Memorial is connecting and enriching online archives and collections toward building a platform for telling history. Through Drupal 7 and Linked Data, the Memorial is developing tools that designers, researchers and historians can use to help find new ways of building historical narratives.\n\nDuring this session I will also demonstrate some real-world Drupal modules built to leverage Linked Data along with early prototypes and examples of how we are using Drupal 7 as a practical publishing tool for the Semantic Web.\n\nCome listen & see how this work is unfolding inside one of Australia’s major collecting institutions.",
+      "video_url": "https://www.youtube.com/watch?v=5q_FaLgJqO0",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2012-01-15T04:15:00Z",
+      "endTime": "2012-01-15T04:45:00Z",
+      "duration": "P30M",
+      "title": "Afternoon tea",
+      "location": "PreviousNext Keynote, CrossFunctional Room, Powerful CMS Room, Gold room",
+      "link": "http://drupaldownunder.org/sunday-afternoon-lunch",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "sponsorIds": "",
+      "full_description": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2012-01-15T04:45:00Z",
+      "endTime": "2012-01-15T06:00:00Z",
+      "duration": "P75M",
+      "title": "Lightning Talks",
+      "location": "PreviousNext Keynote",
+      "link": "http://drupaldownunder.org/lightning-talks",
+      "track": [
+        "Keynote Presentation"
+      ],
+      "speakers": [
+        "TBA"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=3nSrK6mSrnc",
+      "sponsorIds": "",
+      "full_description": ""
+    }
+  ]
+}

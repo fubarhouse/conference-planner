@@ -5,7 +5,15 @@
   "description": "Conference calendar data editor with local API server",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "validate": "node scripts/validate-data.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^6.12.6",
+    "playwright": "^1.60.0",
+    "vitest": "^2.0.0"
   },
   "dependencies": {
     "express": "^4.21.2",

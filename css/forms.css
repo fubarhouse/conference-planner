@@ -200,6 +200,40 @@
         .editor-tab-button.hidden {
             display: none !important;
         }
+        .editor-sub-tab-row {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.2rem;
+            margin-bottom: 0.75rem;
+            border: 1px solid rgba(135, 186, 233, 0.15);
+            border-radius: 0.55rem;
+            background: rgba(255, 255, 255, 0.03);
+        }
+        .editor-sub-tab-button {
+            min-height: 1.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.3rem 0.75rem;
+            border: 1px solid transparent;
+            border-radius: 0.4rem;
+            background: transparent;
+            color: #a8bdd4;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+        }
+        .editor-sub-tab-button:hover {
+            background: rgba(255, 255, 255, 0.07);
+            color: #d8eaf8;
+        }
+        .editor-sub-tab-button.is-active {
+            border-color: rgba(110, 192, 255, 0.5);
+            background: rgba(22, 140, 222, 0.25);
+            color: #a8d4f8;
+        }
         /* Combine rest + hover into one rule so active state always wins
            without needing !important to beat the hover pseudo-class */
         .editor-quick-edit-toggle-active,

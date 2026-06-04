@@ -30,10 +30,18 @@
             </h1>
           </div>
         </div>
-        <a href="./index.html" class="h-11 inline-flex items-center justify-center pl-5 pr-4 border border-gray-300 rounded-md text-sm font-medium text-gray-100 bg-transparent hover:bg-gray-50 transition-colors whitespace-nowrap">
-          <i class="fas fa-calendar-alt mr-2"></i>Back to schedule
-        </a>
       </div>
+      <nav class="site-nav" aria-label="Site navigation">
+        <a href="./index.html" class="site-nav-link">
+          <i class="fas fa-calendar-alt" aria-hidden="true"></i><span>Schedule</span>
+        </a>
+        <a href="./planner.html" class="site-nav-link">
+          <i class="fas fa-clipboard-list" aria-hidden="true"></i><span>My Planner</span>
+        </a>
+        <a href="./editor.html" class="site-nav-link is-active" aria-current="page">
+          <i class="fas fa-pen-ruler" aria-hidden="true"></i><span>Editor</span>
+        </a>
+      </nav>
     </div>
   </header>
 
@@ -149,9 +157,6 @@
             <button id="showSitemapTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="sitemapWorkspacePanel">
               <i class="fas fa-link mr-2 text-[0.72rem]"></i>Sources
             </button>
-            <button id="showTimelineTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="timelineWorkspacePanel">
-              <i class="fas fa-calendar-week mr-2 text-[0.72rem]"></i>Timeline
-            </button>
             <button id="showAppearanceTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="appearanceWorkspacePanel">
               <i class="fas fa-palette mr-2 text-[0.72rem]"></i>Appearance
             </button>
@@ -171,6 +176,15 @@
       </div>
 
       <div id="sessionWorkspacePanel">
+        <div class="editor-sub-tab-row" role="tablist" aria-label="Sessions sections">
+          <button id="showSessionDetailsSubTab" type="button" class="editor-sub-tab-button is-active" role="tab" aria-selected="true">
+            <i class="fas fa-list mr-1.5 text-[0.72rem]"></i>Details
+          </button>
+          <button id="showSessionTimelineSubTab" type="button" class="editor-sub-tab-button" role="tab" aria-selected="false">
+            <i class="fas fa-calendar-week mr-1.5 text-[0.72rem]"></i>Timeline
+          </button>
+        </div>
+        <div id="sessionDetailsPanel">
       <section id="sessionWorkspace" class="editor-session-workspace grid grid-cols-1 xl:grid-cols-[360px_1fr] gap-4">
         <div id="sessionSidebarPanel" class="bg-white rounded-lg shadow-md p-4 h-[70vh] max-h-[820px] min-h-[420px] flex flex-col">
           <div class="flex flex-col gap-2 mb-3">
@@ -215,7 +229,17 @@
           <div id="sessionForm" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
         </div>
       </section>
-      </div>
+        </div><!-- /sessionDetailsPanel -->
+        <div id="timelineWorkspacePanel" class="hidden">
+          <section class="editor-meta-accordion rounded-lg shadow-md p-4">
+            <div class="mb-3">
+              <h2 class="text-lg font-semibold text-gray-100">Timeline Editor</h2>
+              <p class="text-sm text-gray-400">Drag sessions to reschedule. Click an empty slot to add. Drag the bottom handle to resize.</p>
+            </div>
+            <div id="timelineCanvas"></div>
+          </section>
+        </div><!-- /timelineWorkspacePanel -->
+      </div><!-- /sessionWorkspacePanel -->
 
       <div id="logoWorkspacePanel" class="hidden">
       <section class="bg-white rounded-lg shadow-md p-4">
@@ -288,24 +312,21 @@
       </div>
 
       <div id="sitemapWorkspacePanel" class="hidden">
+      <section class="editor-meta-accordion rounded-lg shadow-md p-4 mb-4">
+        <div class="mb-3">
+          <h2 class="text-lg font-semibold text-gray-100">Reference URLs</h2>
+          <p class="text-sm text-gray-400">Additional reference URLs for this event — documentation, archived pages, or related resources.</p>
+        </div>
+        <div id="otherUrlsEditorContent"></div>
+      </section>
       <section class="bg-white rounded-lg shadow-md p-4">
         <div class="flex items-center justify-between mb-4">
           <div>
-            <h2 class="text-lg font-semibold text-gray-100">Sources</h2>
+            <h2 class="text-lg font-semibold text-gray-100">URL map</h2>
             <p class="text-sm text-gray-400">Known URLs for this event's domain, derived from the dataset.</p>
           </div>
         </div>
         <div id="sitemapContent"></div>
-      </section>
-      </div>
-
-      <div id="timelineWorkspacePanel" class="hidden">
-      <section class="editor-meta-accordion rounded-lg shadow-md p-4">
-        <div class="mb-3">
-          <h2 class="text-lg font-semibold text-gray-100">Timeline Editor</h2>
-          <p class="text-sm text-gray-400">Drag sessions to reschedule. Click an empty slot to add. Drag the bottom handle to resize.</p>
-        </div>
-        <div id="timelineCanvas"></div>
       </section>
       </div>
 

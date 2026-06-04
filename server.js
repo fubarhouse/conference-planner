@@ -28,11 +28,26 @@ app.use((req, res, next) => {
   next();
 });
 
+// Strip trailing slashes so relative asset paths resolve correctly from clean URLs
+app.use((req, res, next) => {
+  if (req.path !== '/' && req.path.endsWith('/')) {
+    const qs = req.url.slice(req.path.length);
+    return res.redirect(301, req.path.slice(0, -1) + qs);
+  }
+  next();
+});
+
+// Clean URL aliases
+const HTML_ROUTES = { '/': 'index.html', '/schedule': 'index.html', '/planner': 'planner.html', '/editor': 'editor.html' };
+for (const [route, file] of Object.entries(HTML_ROUTES)) {
+  app.get(route, (_, res) => res.sendFile(join(ROOT, file)));
+}
+
 // Serve static files (the editor app itself)
 app.use(express.static(ROOT));
 
 // Health check for connection testing
-app.get('/api/health', (_, res) => res.json({ ok: true }));
+app.get('/api/health', (_, res) => res.json({ ok: true, app: 'conference-planner-api', version: 1 }));
 
 // Metadata summary — returns event metadata for all dataset files (no items arrays)
 app.get('/api/meta', async (_, res) => {
@@ -71,9 +86,9 @@ app.get('/api/meta', async (_, res) => {
   }
 });
 
-// Read a data file
-app.get('/api/data/:file', async (req, res) => {
-  const target = guardPath(DATA_DIR, req.params.file);
+// Read a data file (supports subdirectory paths like events/drupalcon/us/2025-atlanta.json)
+app.get('/api/data/*', async (req, res) => {
+  const target = guardPath(DATA_DIR, req.params[0]);
   if (!target) return res.status(400).json({ error: 'Invalid path' });
   try {
     const raw = await readFile(target, 'utf8');
@@ -84,12 +99,13 @@ app.get('/api/data/:file', async (req, res) => {
 });
 
 // Write a data file — receives raw JSON text to preserve formatting
-app.put('/api/data/:file', express.text({ type: 'application/json', limit: '10mb' }), async (req, res) => {
-  if (!req.params.file.endsWith('.json')) return res.status(400).json({ error: 'JSON files only' });
-  const target = guardPath(DATA_DIR, req.params.file);
+app.put('/api/data/*', express.text({ type: 'application/json', limit: '10mb' }), async (req, res) => {
+  if (!req.params[0].endsWith('.json')) return res.status(400).json({ error: 'JSON files only' });
+  const target = guardPath(DATA_DIR, req.params[0]);
   if (!target) return res.status(400).json({ error: 'Invalid path' });
   try {
     JSON.parse(req.body); // validate before writing
+    await mkdir(dirname(target), { recursive: true });
     await writeFile(target, req.body, 'utf8');
     res.json({ ok: true });
   } catch (e) {
@@ -226,6 +242,7 @@ app.get('/api/rates', async (req, res) => {
 const PORT = parseInt(process.env.PORT || '8080', 10);
 app.listen(PORT, () => {
   console.log(`Conference schedule editor & planner server → http://localhost:${PORT}`);
-  console.log(`  editor.html → http://localhost:${PORT}/editor.html`);
-  console.log(`  planner.html → http://localhost:${PORT}/editor.html`);
+  console.log(`  schedule → http://localhost:${PORT}/schedule`);
+  console.log(`  planner → http://localhost:${PORT}/planner`);
+  console.log(`  editor  → http://localhost:${PORT}/editor`);
 });

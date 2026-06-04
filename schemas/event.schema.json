@@ -92,6 +92,11 @@
           "items": { "type": "string" },
           "description": "Source schedule URLs used when this dataset was created or last checked."
         },
+        "other_urls": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Additional reference URLs for this event (documentation, archives, related resources)."
+        },
         "venue": {
           "type": "string",
           "description": "Physical venue name."

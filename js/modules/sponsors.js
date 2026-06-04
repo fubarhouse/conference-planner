@@ -1,6 +1,6 @@
 import state from './state.js';
 import { loadEventCatalog } from './eventCatalog.js';
-import { escapeHtml, parseSponsorIds, getFocusableElements, deriveOfficialWebsite, once } from './utils.js';
+import { escapeHtml, parseSponsorIds, getFocusableElements, deriveOfficialWebsite, once, slugify } from './utils.js';
 
 const SPONSOR_MODAL_ID = 'sponsorHistoryModal';
 let lastFocusedElementBeforeSponsorModal = null;
@@ -146,6 +146,7 @@ const loadAllSponsorHistory = once(async () => {
         const items = Array.isArray(payload?.items) ? payload.items : [];
         const eventLabel = [meta.designation, meta.year, meta.location].filter(Boolean).join(' ').trim() || file;
         const eventWebsite = deriveOfficialWebsite(meta);
+        const eventId = slugify(eventLabel) || slugify(file.replace(/\.json$/i, ''));
         const eventYear = Number.parseInt(String(meta.year || '').trim(), 10);
         const eventEndTime = Date.parse(String(meta.endDate || '').trim());
         const eventStartTime = Date.parse(String(meta.startDate || '').trim());
@@ -166,6 +167,7 @@ const loadAllSponsorHistory = once(async () => {
           entries.push({
             file,
             eventLabel,
+            eventId,
             eventWebsite,
             eventYear: Number.isFinite(eventYear) ? eventYear : null,
             eventEndTime: Number.isFinite(eventEndTime) ? eventEndTime : null,
@@ -235,13 +237,20 @@ function renderSponsorHistoryModalContent(currentSponsor, entries) {
           </div>
         `
         : '';
+      if (!isCurrentEvent && entry.eventId) {
+        actions.push(
+          `<a class="session-modal-link" href="${escapeHtml(`./index.html?id=${entry.eventId}`)}" target="_blank" rel="noopener noreferrer"><i class="fas fa-calendar-days"></i><span>View schedule</span></a>`
+        );
+      }
       return `
         <article class="speaker-session-card${isCurrentEvent ? ' speaker-session-card-current' : ''}">
-          ${isCurrentEvent ? '<div class="speaker-session-current-badge">Current event</div>' : ''}
           <div class="sponsor-history-head">
             ${logoSurface}
             <div class="sponsor-history-copy">
-              <h3 class="speaker-session-title">${escapeHtml(entry.eventLabel)}</h3>
+              <div class="sponsor-history-title-row">
+                <h3 class="speaker-session-title">${escapeHtml(entry.eventLabel)}</h3>
+                ${isCurrentEvent ? '<span class="speaker-session-current-badge"><i class="fas fa-eye" aria-hidden="true"></i> Viewing now</span>' : ''}
+              </div>
               ${entry.sponsorSubtitle ? `<p class="speaker-session-meta">${escapeHtml(entry.sponsorSubtitle)}</p>` : ''}
               <p class="speaker-session-meta"><strong>Tier:</strong> ${escapeHtml(entry.eventTier)}</p>
             </div>

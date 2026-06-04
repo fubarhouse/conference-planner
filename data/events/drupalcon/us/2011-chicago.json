@@ -1,0 +1,1760 @@
+{
+  "event": {
+    "designation": "DrupalCon",
+    "location": "Chicago",
+    "year": "2011",
+    "website": "https://chicago2011.drupal.org/",
+    "region": "America",
+    "venue": "Sheraton Hotel & Towers",
+    "timezone": "America/Chicago",
+    "startDate": "2011-03-08T14:30:00Z",
+    "endDate": "2011-03-10T23:30:00Z",
+    "columns": 3,
+    "enabled": false,
+    "logo": {
+      "image": "./img/logos/drupalcon-logo.svg",
+      "imageAlt": "DrupalCon logo",
+      "usePlate": false
+    },
+    "scheduleURLs": [
+      "https://chicago2011.drupal.org/schedule"
+    ],
+    "flickr": {
+      "enabled": false,
+      "groupUrl": "",
+      "image": "",
+      "imageAlt": ""
+    },
+    "sponsors": [],
+    "other_urls": []
+  },
+  "items": [
+    {
+      "startTime": "2011-03-08T14:30:00Z",
+      "endTime": "2011-03-08T15:15:00Z",
+      "duration": "P45M",
+      "title": "Welcome to Drupal(Con)",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/sessions/welcome-drupal-con",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "Jeffrey A. \"jam\" McGuire",
+        "Robert Douglass"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T15:30:00Z",
+      "endTime": "2011-03-08T17:00:00Z",
+      "duration": "P90M",
+      "title": "Keynote - Dries Buytaert",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/keynote-dries-buytaert",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T17:00:00Z",
+      "endTime": "2011-03-08T18:30:00Z",
+      "duration": "P90M",
+      "title": "Lunch",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/lunch-0",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T18:30:00Z",
+      "endTime": "2011-03-08T19:30:00Z",
+      "duration": "P60M",
+      "title": "Introduction to Module Development",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/sessions/introduction-module-development",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Ezra Barnett Gildesgame"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T18:30:00Z",
+      "endTime": "2011-03-08T19:30:00Z",
+      "duration": "P60M",
+      "title": "Media",
+      "location": "Chicago 6 & 7",
+      "link": "https://chicago2011.drupal.org/sessions/media",
+      "track": [
+        "Implementation and Config"
+      ],
+      "speakers": [
+        "Aaron Winborn",
+        "Jacob Singh"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T18:30:00Z",
+      "endTime": "2011-03-08T19:30:00Z",
+      "duration": "P60M",
+      "title": "Community Health: Some Doctor's Advice",
+      "location": "Chicago 8 & 9",
+      "link": "https://chicago2011.drupal.org/sessions/community-health-some-doctor-s-advice",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "Addison Berry"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T18:30:00Z",
+      "endTime": "2011-03-08T19:30:00Z",
+      "duration": "P60M",
+      "title": "Competing with Giants - How to Win with Drupal vs Proprietary Alternatives",
+      "location": "Sheraton 1",
+      "link": "https://chicago2011.drupal.org/sessions/competing-giants-how-win-drupal-vs-proprietary-alternatives",
+      "track": [
+        "Business and Strategy"
+      ],
+      "speakers": [
+        "Bryan House"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T18:30:00Z",
+      "endTime": "2011-03-08T19:30:00Z",
+      "duration": "P60M",
+      "title": "Forensic Theming: Key Techniques to Building Effective Drupal Themes",
+      "location": "Sheraton 2 & 3",
+      "link": "https://chicago2011.drupal.org/sessions/forensic-theming-key-techniques-building-effective-drupal-themes",
+      "track": [
+        "Theming"
+      ],
+      "speakers": [
+        "Emma Jane Hogbin"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T18:30:00Z",
+      "endTime": "2011-03-08T19:30:00Z",
+      "duration": "P60M",
+      "title": "Free and Open Source Tools for Integrating Web Accessibility into the Design Process",
+      "location": "Chicago 10",
+      "link": "https://chicago2011.drupal.org/sessions/free-and-open-source-tools-integrating-web-accessibility-design-process",
+      "track": [
+        "Design and UX"
+      ],
+      "speakers": [
+        "Jon Gunderson"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T19:45:00Z",
+      "endTime": "2011-03-08T20:45:00Z",
+      "duration": "P60M",
+      "title": "Drupal Security for Coders",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/sessions/drupal-security-coders",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Greg Knaddison"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T19:45:00Z",
+      "endTime": "2011-03-08T20:45:00Z",
+      "duration": "P60M",
+      "title": "Lessons from Drupal 3",
+      "location": "Chicago 8 & 9",
+      "link": "https://chicago2011.drupal.org/sessions/lessons-drupal-3",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "Ken Rickard"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T19:45:00Z",
+      "endTime": "2011-03-08T20:45:00Z",
+      "duration": "P60M",
+      "title": "Getting Early Estimates Right",
+      "location": "Sheraton 1",
+      "link": "https://chicago2011.drupal.org/sessions/getting-early-estimates-right",
+      "track": [
+        "Business and Strategy"
+      ],
+      "speakers": [
+        "Jakob Persson"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T19:45:00Z",
+      "endTime": "2011-03-08T20:45:00Z",
+      "duration": "P60M",
+      "title": "Rockin’ HTML5 with Drupal",
+      "location": "Sheraton 2 & 3",
+      "link": "https://chicago2011.drupal.org/sessions/rockin-html5-drupal",
+      "track": [
+        "Theming"
+      ],
+      "speakers": [
+        "Jen Simmons"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T19:45:00Z",
+      "endTime": "2011-03-08T20:45:00Z",
+      "duration": "P60M",
+      "title": "The Right Way to Wireframe",
+      "location": "Chicago 10",
+      "link": "https://chicago2011.drupal.org/sessions/right-way-wireframe",
+      "track": [
+        "Design and UX"
+      ],
+      "speakers": [
+        "Russ Unger"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T20:45:00Z",
+      "endTime": "2011-03-08T21:15:00Z",
+      "duration": "P30M",
+      "title": "Break",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/break",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T21:15:00Z",
+      "endTime": "2011-03-08T22:15:00Z",
+      "duration": "P60M",
+      "title": "Aphorisms of API design",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/sessions/aphorisms-api-design",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Larry Garfield"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T21:15:00Z",
+      "endTime": "2011-03-08T22:15:00Z",
+      "duration": "P60M",
+      "title": "Webform 3: The Survey Tool for Drupal",
+      "location": "Chicago 6 & 7",
+      "link": "https://chicago2011.drupal.org/sessions/webform-3-survey-tool-drupal",
+      "track": [
+        "Implementation and Config"
+      ],
+      "speakers": [
+        "Nathan Haug"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T21:15:00Z",
+      "endTime": "2011-03-08T22:15:00Z",
+      "duration": "P60M",
+      "title": "The \"tools of the trade\"",
+      "location": "Chicago 8 & 9",
+      "link": "https://chicago2011.drupal.org/sessions/tools-trade",
+      "track": [
+        "Business and Strategy"
+      ],
+      "speakers": [
+        "Lior Kesos",
+        "Alex Urevick-Ackelsberg",
+        "Aaron Pava",
+        "Eric Gundersen"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T21:15:00Z",
+      "endTime": "2011-03-08T22:15:00Z",
+      "duration": "P60M",
+      "title": "Drupal Summit - A New Drupal Conference Paradigm",
+      "location": "Sheraton 1",
+      "link": "https://chicago2011.drupal.org/sessions/drupal-summit-new-drupal-conference-paradigm",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "Jared Stoneberg"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T21:15:00Z",
+      "endTime": "2011-03-08T22:15:00Z",
+      "duration": "P60M",
+      "title": "Crafting App Interfaces with jQuery",
+      "location": "Sheraton 2 & 3",
+      "link": "https://chicago2011.drupal.org/sessions/crafting-app-interfaces-jquery",
+      "track": [
+        "Theming"
+      ],
+      "speakers": [
+        "Nathan Smith"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T21:15:00Z",
+      "endTime": "2011-03-08T22:15:00Z",
+      "duration": "P60M",
+      "title": "From Usability to UX Strategy",
+      "location": "Chicago 10",
+      "link": "https://chicago2011.drupal.org/sessions/usability-ux-strategy",
+      "track": [
+        "Design and UX"
+      ],
+      "speakers": [
+        "Leisa Reichelt"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T22:30:00Z",
+      "endTime": "2011-03-08T23:30:00Z",
+      "duration": "P60M",
+      "title": "Views for hackers",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/sessions/views-hackers",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Karim Ratib"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T22:30:00Z",
+      "endTime": "2011-03-08T23:30:00Z",
+      "duration": "P60M",
+      "title": "\"Drupal as a Framework\" vs. \"Drupal as a Platform\"",
+      "location": "Chicago 6 & 7",
+      "link": "https://chicago2011.drupal.org/sessions/drupal-framework-vs-drupal-platform",
+      "track": [
+        "Implementation and Config"
+      ],
+      "speakers": [
+        "Moshe Weitzman",
+        "Jeff Eaton",
+        "Irakli Nadareishvili"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T22:30:00Z",
+      "endTime": "2011-03-08T23:30:00Z",
+      "duration": "P60M",
+      "title": "Strategies for Client Management",
+      "location": "Chicago 8 & 9",
+      "link": "https://chicago2011.drupal.org/sessions/strategies-client-management",
+      "track": [
+        "Business and Strategy"
+      ],
+      "speakers": [
+        "Chris Strahl",
+        "Vanessa Turke",
+        "Amye Scavarda",
+        "Seth Brown",
+        "Rachel Scott"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T22:30:00Z",
+      "endTime": "2011-03-08T23:30:00Z",
+      "duration": "P60M",
+      "title": "Paying for the Plumbing",
+      "location": "Sheraton 1",
+      "link": "https://chicago2011.drupal.org/sessions/paying-plumbing",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "Allie Micka",
+        "Grace Francisco",
+        "Carol Smith",
+        "Robert Douglass"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T22:30:00Z",
+      "endTime": "2011-03-08T23:30:00Z",
+      "duration": "P60M",
+      "title": "Advanced Accessibility in Drupal",
+      "location": "Sheraton 2 & 3",
+      "link": "https://chicago2011.drupal.org/sessions/advanced-accessibility-drupal",
+      "track": [
+        "Theming"
+      ],
+      "speakers": [
+        "Katherine Lynch"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-08T22:30:00Z",
+      "endTime": "2011-03-08T23:30:00Z",
+      "duration": "P60M",
+      "title": "Designing for Mobile",
+      "location": "Chicago 10",
+      "link": "https://chicago2011.drupal.org/sessions/designing-mobile",
+      "track": [
+        "Design and UX"
+      ],
+      "speakers": [
+        "Steve Fisher"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T01:00:00Z",
+      "endTime": "2011-03-09T04:00:00Z",
+      "duration": "P180M",
+      "title": "Field Museum Party",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/field-museum-party",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T15:00:00Z",
+      "endTime": "2011-03-09T16:00:00Z",
+      "duration": "P60M",
+      "title": "Keynote - Clay Shirky",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/keynote-clay-shirky",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T16:00:00Z",
+      "endTime": "2011-03-09T17:00:00Z",
+      "duration": "P60M",
+      "title": "Break",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/break-0",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T17:00:00Z",
+      "endTime": "2011-03-09T18:00:00Z",
+      "duration": "P60M",
+      "title": "Views Demystified",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/sessions/views-demystified",
+      "track": [
+        "Implementation and Config"
+      ],
+      "speakers": [
+        "Rain Breaw"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T17:00:00Z",
+      "endTime": "2011-03-09T18:00:00Z",
+      "duration": "P60M",
+      "title": "Git on Drupal.org: It's Easier Than You Think!",
+      "location": "Chicago 6 & 7",
+      "link": "https://chicago2011.drupal.org/sessions/git-drupal-org-it-s-easier-you-think",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Randy Fay",
+        "Alan Burke"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T17:00:00Z",
+      "endTime": "2011-03-09T18:00:00Z",
+      "duration": "P60M",
+      "title": "Teaching Drupal: Creating Effective Drupal Training Materials for Clients, Employees, and the Public",
+      "location": "Chicago 8 & 9",
+      "link": "https://chicago2011.drupal.org/sessions/teaching-drupal-creating-effective-drupal-training-materials-clients-employees-and-public",
+      "track": [
+        "Business and Strategy"
+      ],
+      "speakers": [
+        "Chris Shattuck",
+        "Tom Geller",
+        "Matt Petrowsky"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T17:00:00Z",
+      "endTime": "2011-03-09T18:00:00Z",
+      "duration": "P60M",
+      "title": "New Directions for Drupal Documentation",
+      "location": "Sheraton 1",
+      "link": "https://chicago2011.drupal.org/sessions/new-directions-drupal-documentation",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "Jennifer Hodgdon",
+        "Ariane Khachatourians"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T17:00:00Z",
+      "endTime": "2011-03-09T18:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal on the go with jQuery Mobile",
+      "location": "Sheraton 2 & 3",
+      "link": "https://chicago2011.drupal.org/sessions/drupal-go-jquery-mobile",
+      "track": [
+        "Theming"
+      ],
+      "speakers": [
+        "Tim Cosgrove",
+        "Brian McMurray"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T17:00:00Z",
+      "endTime": "2011-03-09T18:00:00Z",
+      "duration": "P60M",
+      "title": "Avoiding a Frankenstein Website Design: Collaborating with Clients",
+      "location": "Chicago 10",
+      "link": "https://chicago2011.drupal.org/sessions/avoiding-frankenstein-website-design-collaborating-clients",
+      "track": [
+        "Design and UX"
+      ],
+      "speakers": [
+        "Samantha Warren"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T17:00:00Z",
+      "endTime": "2011-03-09T18:00:00Z",
+      "duration": "P60M",
+      "title": "Creating an Online Community the Open Source Way",
+      "location": "Superior A/B",
+      "link": "https://chicago2011.drupal.org/sessions/creating-online-community-open-source-way",
+      "track": [
+        "Business and Strategy"
+      ],
+      "speakers": [
+        "Jason Hibbets"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T18:00:00Z",
+      "endTime": "2011-03-09T19:00:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/lunch",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T19:00:00Z",
+      "endTime": "2011-03-09T20:00:00Z",
+      "duration": "P60M",
+      "title": "Developing Apps for iPhone/iPad/Android using drupal as Base System",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/sessions/developing-apps-iphone-ipad-android-using-drupal-base-system",
+      "track": [
+        "Implementation and Config"
+      ],
+      "speakers": [
+        "Sumit Kataria"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T19:00:00Z",
+      "endTime": "2011-03-09T20:00:00Z",
+      "duration": "P60M",
+      "title": "Automated Testing and Drupal",
+      "location": "Chicago 6 & 7",
+      "link": "https://chicago2011.drupal.org/sessions/automated-testing-and-drupal",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Steven W. Merrill"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T19:00:00Z",
+      "endTime": "2011-03-09T20:00:00Z",
+      "duration": "P60M",
+      "title": "Project Management As an Art Form",
+      "location": "Chicago 8 & 9",
+      "link": "https://chicago2011.drupal.org/sessions/project-management-art-form",
+      "track": [
+        "Business and Strategy"
+      ],
+      "speakers": [
+        "Nicole Lind",
+        "Joel Sackett",
+        "Amy O'Malley",
+        "George DeMet"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T19:00:00Z",
+      "endTime": "2011-03-09T20:00:00Z",
+      "duration": "P60M",
+      "title": "Bad Judgement, Eldorado Superfly, Khaaaaaaan: Joke modules and what they tell us about Drupal",
+      "location": "Sheraton 1",
+      "link": "https://chicago2011.drupal.org/sessions/bad-judgement-eldorado-superfly-khaaaaaaan-joke-modules-and-what-they-tell-us-about-drupal",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "Matt Butcher"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T19:00:00Z",
+      "endTime": "2011-03-09T20:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal 7 : Interface patterns",
+      "location": "Sheraton 2 & 3",
+      "link": "https://chicago2011.drupal.org/sessions/drupal-7-interface-patterns",
+      "track": [
+        "Design and UX"
+      ],
+      "speakers": [
+        "Roy Scholten",
+        "Bojhan"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T19:00:00Z",
+      "endTime": "2011-03-09T20:00:00Z",
+      "duration": "P60M",
+      "title": "Making Beautiful Maps",
+      "location": "Chicago 10",
+      "link": "https://chicago2011.drupal.org/sessions/making-beautiful-maps",
+      "track": [
+        "Theming"
+      ],
+      "speakers": [
+        "Alan Palazzolo",
+        "Thomas Turnbull"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T19:00:00Z",
+      "endTime": "2011-03-09T20:00:00Z",
+      "duration": "P60M",
+      "title": "Building Conference & Event Websites in Drupal with COD",
+      "location": "Superior A/B",
+      "link": "https://chicago2011.drupal.org/sessions/building-conference-event-websites-drupal-cod",
+      "track": [
+        "Business and Strategy"
+      ],
+      "speakers": [
+        "Ezra Barnett Gildesgame",
+        "Ben Jeavons",
+        "Lisa Rex"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T20:15:00Z",
+      "endTime": "2011-03-09T21:15:00Z",
+      "duration": "P60M",
+      "title": "Failure to Launch: Drupal Performance Tuning",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/sessions/failure-launch-drupal-performance-tuning",
+      "track": [
+        "Implementation and Config"
+      ],
+      "speakers": [
+        "Kenny Silanskas"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T20:15:00Z",
+      "endTime": "2011-03-09T21:15:00Z",
+      "duration": "P60M",
+      "title": "Design Thinking",
+      "location": "Chicago 6 & 7",
+      "link": "https://chicago2011.drupal.org/sessions/design-thinking",
+      "track": [
+        "Design and UX"
+      ],
+      "speakers": [
+        "Steve Fisher",
+        "Jared Ponchot",
+        "Samantha Warren"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T20:15:00Z",
+      "endTime": "2011-03-09T21:15:00Z",
+      "duration": "P60M",
+      "title": "Attain Apache Solr Coding Chops",
+      "location": "Chicago 8 & 9",
+      "link": "https://chicago2011.drupal.org/sessions/attain-apache-solr-coding-chops",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Peter Wolanin",
+        "Chris Pliakas"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T20:15:00Z",
+      "endTime": "2011-03-09T21:15:00Z",
+      "duration": "P60M",
+      "title": "Certifications and Drupal: Three strategies",
+      "location": "Sheraton 1",
+      "link": "https://chicago2011.drupal.org/sessions/certifications-and-drupal-three-strategies",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "Greg Knaddison",
+        "Aaron Winborn",
+        "Jeff Robbins"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T20:15:00Z",
+      "endTime": "2011-03-09T21:15:00Z",
+      "duration": "P60M",
+      "title": "Don't design websites. Design web SYSTEMS!",
+      "location": "Sheraton 2 & 3",
+      "link": "https://chicago2011.drupal.org/sessions/don-t-design-websites-design-web-systems",
+      "track": [
+        "Design and UX"
+      ],
+      "speakers": [
+        "Todd Ross Nienkerk",
+        "Adam Snetman"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T20:15:00Z",
+      "endTime": "2011-03-09T21:15:00Z",
+      "duration": "P60M",
+      "title": "Themeing Haiku with Haml, Sass and Peroxide",
+      "location": "Chicago 10",
+      "link": "https://chicago2011.drupal.org/sessions/themeing-haiku-haml-sass-and-peroxide",
+      "track": [
+        "Theming"
+      ],
+      "speakers": [
+        "Kyle Cunningham"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T20:15:00Z",
+      "endTime": "2011-03-09T21:15:00Z",
+      "duration": "P60M",
+      "title": "&%$@ My Internet Marketing Company Says",
+      "location": "Superior A/B",
+      "link": "https://chicago2011.drupal.org/sessions/my-internet-marketing-company-says",
+      "track": [
+        "Business and Strategy"
+      ],
+      "speakers": [
+        "Erik Wagner",
+        "Tom McCracken"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T21:15:00Z",
+      "endTime": "2011-03-09T21:45:00Z",
+      "duration": "P30M",
+      "title": "Break",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/break-4",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T21:45:00Z",
+      "endTime": "2011-03-09T22:45:00Z",
+      "duration": "P60M",
+      "title": "From Zero to Distribution using Features, Profiler, and Drush Make",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/sessions/zero-distribution-using-features-profiler-and-drush-make",
+      "track": [
+        "Implementation and Config"
+      ],
+      "speakers": [
+        "dmitrig01"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T21:45:00Z",
+      "endTime": "2011-03-09T22:45:00Z",
+      "duration": "P60M",
+      "title": "Baby Got Backend: Content Administrators are Users Too",
+      "location": "Chicago 6 & 7",
+      "link": "https://chicago2011.drupal.org/sessions/baby-got-backend-content-administrators-are-users-too",
+      "track": [
+        "Design and UX"
+      ],
+      "speakers": [
+        "Karen McGrane",
+        "Jeff Eaton"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T21:45:00Z",
+      "endTime": "2011-03-09T22:45:00Z",
+      "duration": "P60M",
+      "title": "Coder Module: Easily Port Modules to Drupal 7",
+      "location": "Chicago 8 & 9",
+      "link": "https://chicago2011.drupal.org/sessions/coder-module-easily-port-modules-drupal-7",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Stella Power"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T21:45:00Z",
+      "endTime": "2011-03-09T22:45:00Z",
+      "duration": "P60M",
+      "title": "Community-Based Drupal Training",
+      "location": "Sheraton 1",
+      "link": "https://chicago2011.drupal.org/sessions/community-based-drupal-training",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "Jennifer Hodgdon",
+        "Douglas Vann",
+        "Andy Laken",
+        "Barry Madore"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T21:45:00Z",
+      "endTime": "2011-03-09T22:45:00Z",
+      "duration": "P60M",
+      "title": "Show Me The Money!",
+      "location": "Sheraton 2 & 3",
+      "link": "https://chicago2011.drupal.org/sessions/show-me-money",
+      "track": [
+        "Business and Strategy"
+      ],
+      "speakers": [
+        "Liza Kindred",
+        "Eric Gundersen",
+        "James Walker",
+        "Matt Westgate"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T21:45:00Z",
+      "endTime": "2011-03-09T22:45:00Z",
+      "duration": "P60M",
+      "title": "Intro to Accessible Site-Building in Drupal",
+      "location": "Chicago 10",
+      "link": "https://chicago2011.drupal.org/sessions/intro-accessible-site-building-drupal",
+      "track": [
+        "Theming"
+      ],
+      "speakers": [
+        "Brandon Bowersox-Johnson",
+        "Hadi Rangin"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T21:45:00Z",
+      "endTime": "2011-03-09T22:45:00Z",
+      "duration": "P60M",
+      "title": "Introducing OpenPublic: the Government Drupal Distribution!",
+      "location": "Superior A/B",
+      "link": "https://chicago2011.drupal.org/sessions/introducing-openpublic-government-drupal-distribution",
+      "track": [
+        "Business and Strategy"
+      ],
+      "speakers": [
+        "Jeff Walpole",
+        "Andrew Hoppin"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T23:00:00Z",
+      "endTime": "2011-03-10T00:00:00Z",
+      "duration": "P60M",
+      "title": "Distribution Deli",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/sessions/distribution-deli",
+      "track": [
+        "Implementation and Config"
+      ],
+      "speakers": [
+        "Ferdinand Alimadhi",
+        "Dick Olsson",
+        "Bryan Hirsch",
+        "Wilbur Ince",
+        "Jay Batson"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T23:00:00Z",
+      "endTime": "2011-03-10T00:00:00Z",
+      "duration": "P60M",
+      "title": "Advanced Drush",
+      "location": "Chicago 6 & 7",
+      "link": "https://chicago2011.drupal.org/sessions/advanced-drush",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Moshe Weitzman",
+        "Owen Barton",
+        "Mark Sonnabaum"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T23:00:00Z",
+      "endTime": "2011-03-10T00:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal 7 JavaScript for Developers",
+      "location": "Chicago 8 & 9",
+      "link": "https://chicago2011.drupal.org/sessions/drupal-7-javascript-developers",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Katherine Bailey",
+        "Randy Fay"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T23:00:00Z",
+      "endTime": "2011-03-10T00:00:00Z",
+      "duration": "P60M",
+      "title": "Community benefits of the Drupal.org redesign",
+      "location": "Sheraton 1",
+      "link": "https://chicago2011.drupal.org/sessions/community-benefits-drupal-org-redesign",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "Kieran Lal",
+        "Lisa Rex",
+        "Neil Drumm",
+        "Chris Strahl"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T23:00:00Z",
+      "endTime": "2011-03-10T00:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal As a Mature Software Industry",
+      "location": "Sheraton 2 & 3",
+      "link": "https://chicago2011.drupal.org/sessions/drupal-mature-software-industry",
+      "track": [
+        "Business and Strategy"
+      ],
+      "speakers": [
+        "Robert Douglass",
+        "Jeff Walpole"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T23:00:00Z",
+      "endTime": "2011-03-10T00:00:00Z",
+      "duration": "P60M",
+      "title": "Best practices for cross-browser compatibility of Drupal website",
+      "location": "Chicago 10",
+      "link": "https://chicago2011.drupal.org/sessions/best-practices-cross-browser-compatibility-drupal-website",
+      "track": [
+        "Theming"
+      ],
+      "speakers": [
+        "Vadim Mirgorod"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-09T23:00:00Z",
+      "endTime": "2011-03-10T00:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal in the Enterprise, IBM and Norwegian Cruise Line",
+      "location": "Superior A/B",
+      "link": "https://chicago2011.drupal.org/sessions/drupal-enterprise-ibm-and-norwegian-cruise-line",
+      "track": [
+        "Business and Strategy"
+      ],
+      "speakers": [
+        "Rob Shea"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T15:00:00Z",
+      "endTime": "2011-03-10T16:00:00Z",
+      "duration": "P60M",
+      "title": "Keynote - Jared Spool",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/keynote-jared-spool",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T16:00:00Z",
+      "endTime": "2011-03-10T17:00:00Z",
+      "duration": "P60M",
+      "title": "Break",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/break-2",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T17:00:00Z",
+      "endTime": "2011-03-10T18:00:00Z",
+      "duration": "P60M",
+      "title": "Scaling the Drupal Community",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/sessions/scaling-drupal-community",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "Angie Byron",
+        "Greg Dunlap"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T17:00:00Z",
+      "endTime": "2011-03-10T18:00:00Z",
+      "duration": "P60M",
+      "title": "How to Make Awesomesauce",
+      "location": "Chicago 6 & 7",
+      "link": "https://chicago2011.drupal.org/sessions/how-make-awesomesauce",
+      "track": [
+        "Theming"
+      ],
+      "speakers": [
+        "mortendk"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T17:00:00Z",
+      "endTime": "2011-03-10T18:00:00Z",
+      "duration": "P60M",
+      "title": "The Render API in Drupal 7",
+      "location": "Chicago 8 & 9",
+      "link": "https://chicago2011.drupal.org/sessions/render-api-drupal-7",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Franz Heinzmann"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T17:00:00Z",
+      "endTime": "2011-03-10T18:00:00Z",
+      "duration": "P60M",
+      "title": "Workbench:  Managing Content Management",
+      "location": "Sheraton 1",
+      "link": "https://chicago2011.drupal.org/sessions/workbench-managing-content-management",
+      "track": [
+        "Implementation and Config"
+      ],
+      "speakers": [
+        "Robin Barre",
+        "Colleen Carroll",
+        "Ken Rickard"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T17:00:00Z",
+      "endTime": "2011-03-10T18:00:00Z",
+      "duration": "P60M",
+      "title": "Practical MongoDB and Drupal",
+      "location": "Sheraton 2 & 3",
+      "link": "https://chicago2011.drupal.org/sessions/practical-mongodb-and-drupal",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Doug Green",
+        "Károly Négyesi"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T17:00:00Z",
+      "endTime": "2011-03-10T18:00:00Z",
+      "duration": "P60M",
+      "title": "Advanced Features Usage",
+      "location": "Chicago 10",
+      "link": "https://chicago2011.drupal.org/sessions/advanced-features-usage",
+      "track": [
+        "Implementation and Config"
+      ],
+      "speakers": [
+        "Neil Hastings"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T17:00:00Z",
+      "endTime": "2011-03-10T18:00:00Z",
+      "duration": "P60M",
+      "title": "Understanding the Semantic Web and Drupal",
+      "location": "Superior A/B",
+      "link": "https://chicago2011.drupal.org/sessions/understanding-semantic-web-and-drupal",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Stéphane Corlosquet",
+        "Lin Clark"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T18:00:00Z",
+      "endTime": "2011-03-10T19:00:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/lunch-1",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T19:00:00Z",
+      "endTime": "2011-03-10T20:00:00Z",
+      "duration": "P60M",
+      "title": "The Platypus Problem",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/sessions/platypus-problem",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "Jeff Eaton"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T19:00:00Z",
+      "endTime": "2011-03-10T20:00:00Z",
+      "duration": "P60M",
+      "title": "Faster Front End Performance",
+      "location": "Chicago 6 & 7",
+      "link": "https://chicago2011.drupal.org/sessions/faster-front-end-performance",
+      "track": [
+        "Theming"
+      ],
+      "speakers": [
+        "Matt Farina",
+        "Dan Mouyard"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T19:00:00Z",
+      "endTime": "2011-03-10T20:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal Commerce: Setting up Shop on Drupal 7",
+      "location": "Chicago 8 & 9",
+      "link": "https://chicago2011.drupal.org/sessions/drupal-commerce-setting-shop-drupal-7",
+      "track": [
+        "Implementation and Config"
+      ],
+      "speakers": [
+        "Ryan Szrama"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T19:00:00Z",
+      "endTime": "2011-03-10T20:00:00Z",
+      "duration": "P60M",
+      "title": "Videola: Anatomy of a Drupal distribution",
+      "location": "Sheraton 1",
+      "link": "https://chicago2011.drupal.org/sessions/videola-anatomy-drupal-distribution",
+      "track": [
+        "Implementation and Config"
+      ],
+      "speakers": [
+        "Jeff Robbins"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T19:00:00Z",
+      "endTime": "2011-03-10T20:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal Usability for Developers: How to Get Real People to Love Your Work",
+      "location": "Sheraton 2 & 3",
+      "link": "https://chicago2011.drupal.org/sessions/drupal-usability-developers-how-get-real-people-love-your-work",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "David Rothstein",
+        "Gábor Hojtsy"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T19:00:00Z",
+      "endTime": "2011-03-10T20:00:00Z",
+      "duration": "P60M",
+      "title": "Design in the Browser: Use CSS to Stop Lying to Ourselves and Our Clients",
+      "location": "Chicago 10",
+      "link": "https://chicago2011.drupal.org/sessions/design-browser-use-css-stop-lying-ourselves-and-our-clients",
+      "track": [
+        "Design and UX"
+      ],
+      "speakers": [
+        "Mason Wendell"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T19:00:00Z",
+      "endTime": "2011-03-10T20:00:00Z",
+      "duration": "P60M",
+      "title": "Visual Hierarchy 1, 2, 3: This MUST Be Important!",
+      "location": "Superior A/B",
+      "link": "https://chicago2011.drupal.org/sessions/visual-hierarchy-1-2-3-must-be-important",
+      "track": [
+        "Design and UX"
+      ],
+      "speakers": [
+        "Jared Ponchot"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T20:15:00Z",
+      "endTime": "2011-03-10T21:15:00Z",
+      "duration": "P60M",
+      "title": "This is horribly broken, how can we fix it?",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/sessions/horribly-broken-how-can-we-fix-it",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "Gábor Hojtsy"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T20:15:00Z",
+      "endTime": "2011-03-10T21:15:00Z",
+      "duration": "P60M",
+      "title": "Drupal 7 Theming Basics",
+      "location": "Chicago 6 & 7",
+      "link": "https://chicago2011.drupal.org/sessions/drupal-7-theming-basics",
+      "track": [
+        "Theming"
+      ],
+      "speakers": [
+        "David Needham",
+        "Jennifer Lea Lampton",
+        "Carl Wiedemann",
+        "Joe Shindelar"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T20:15:00Z",
+      "endTime": "2011-03-10T21:15:00Z",
+      "duration": "P60M",
+      "title": "Building Drupal Platforms",
+      "location": "Chicago 8 & 9",
+      "link": "https://chicago2011.drupal.org/sessions/building-drupal-platforms",
+      "track": [
+        "Implementation and Config"
+      ],
+      "speakers": [
+        "Frank Febbraro"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T20:15:00Z",
+      "endTime": "2011-03-10T21:15:00Z",
+      "duration": "P60M",
+      "title": "Become an IA superstar: building essential navigation in Drupal",
+      "location": "Sheraton 1",
+      "link": "https://chicago2011.drupal.org/sessions/become-ia-superstar-building-essential-navigation-drupal",
+      "track": [
+        "Implementation and Config"
+      ],
+      "speakers": [
+        "John Albin Wilkins"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T20:15:00Z",
+      "endTime": "2011-03-10T21:15:00Z",
+      "duration": "P60M",
+      "title": "Drupal Module Coding: Leaner Techniques for Faster Websites.",
+      "location": "Sheraton 2 & 3",
+      "link": "https://chicago2011.drupal.org/sessions/drupal-module-coding-leaner-techniques-faster-websites",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Irakli Nadareishvili",
+        "Erik Summerfield"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T20:15:00Z",
+      "endTime": "2011-03-10T21:15:00Z",
+      "duration": "P60M",
+      "title": "Resourcing for Drupal – Insight into Building a Stellar Team",
+      "location": "Chicago 10",
+      "link": "https://chicago2011.drupal.org/sessions/resourcing-drupal-insight-building-stellar-team",
+      "track": [
+        "Business and Strategy"
+      ],
+      "speakers": [
+        "Glenn Hilton",
+        "Dave Terry"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T20:15:00Z",
+      "endTime": "2011-03-10T21:15:00Z",
+      "duration": "P60M",
+      "title": "Interface Therapy: Emotional design and Drupal’s user experience",
+      "location": "Superior A/B",
+      "link": "https://chicago2011.drupal.org/sessions/interface-therapy-emotional-design-and-drupal-s-user-experience",
+      "track": [
+        "Design and UX"
+      ],
+      "speakers": [
+        "James Elliott"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T21:15:00Z",
+      "endTime": "2011-03-10T21:45:00Z",
+      "duration": "P30M",
+      "title": "Break",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/break-3",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T21:45:00Z",
+      "endTime": "2011-03-10T22:45:00Z",
+      "duration": "P60M",
+      "title": "Git Phase Next: The Promised Land",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/sessions/git-phase-next-promised-land",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "Derek Wright",
+        "Angie Byron",
+        "Sam Boyer"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T21:45:00Z",
+      "endTime": "2011-03-10T22:45:00Z",
+      "duration": "P60M",
+      "title": "Building awesome user interfaces with Drupal 7's Form, AJAX, and Theme systems",
+      "location": "Chicago 6 & 7",
+      "link": "https://chicago2011.drupal.org/sessions/building-awesome-user-interfaces-drupal-7-s-form-ajax-and-theme-systems",
+      "track": [
+        "Theming"
+      ],
+      "speakers": [
+        "Alex Bronstein"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T21:45:00Z",
+      "endTime": "2011-03-10T22:45:00Z",
+      "duration": "P60M",
+      "title": "Drupal in the Cloud",
+      "location": "Chicago 8 & 9",
+      "link": "https://chicago2011.drupal.org/sessions/drupal-cloud",
+      "track": [
+        "Implementation and Config"
+      ],
+      "speakers": [
+        "Jim Salem",
+        "Josh Koenig",
+        "Robert Collazo",
+        "Pierre Couzy"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T21:45:00Z",
+      "endTime": "2011-03-10T22:45:00Z",
+      "duration": "P60M",
+      "title": "Building Successful Local Communities: Insights and Best Practices",
+      "location": "Sheraton 1",
+      "link": "https://chicago2011.drupal.org/sessions/building-successful-local-communities-insights-and-best-practices",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "Ivo Radulovski",
+        "João Ventura",
+        "Christefano",
+        "Jeffrey A. \"jam\" McGuire"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T21:45:00Z",
+      "endTime": "2011-03-10T22:45:00Z",
+      "duration": "P60M",
+      "title": "Test, Tune, Tweak, Hack, Repeat: Industrial-strength Performance and Scalability",
+      "location": "Sheraton 2 & 3",
+      "link": "https://chicago2011.drupal.org/sessions/test-tune-tweak-hack-repeat-industrial-strength-performance-and-scalability",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Matt Butcher",
+        "Theresa Summa"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T21:45:00Z",
+      "endTime": "2011-03-10T22:45:00Z",
+      "duration": "P60M",
+      "title": "Lessons Learned from the Agile Process Applied",
+      "location": "Chicago 10",
+      "link": "https://chicago2011.drupal.org/sessions/lessons-learned-agile-process-applied",
+      "track": [
+        "Business and Strategy"
+      ],
+      "speakers": [
+        "Jenn Sramek",
+        "Elizabeth Raley",
+        "Justine Hirsch"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T21:45:00Z",
+      "endTime": "2011-03-10T22:45:00Z",
+      "duration": "P60M",
+      "title": "The type revolutionary’s cookbook",
+      "location": "Superior A/B",
+      "link": "https://chicago2011.drupal.org/sessions/type-revolutionary-s-cookbook",
+      "track": [
+        "Design and UX"
+      ],
+      "speakers": [
+        "Terrence Kevin O'Leary",
+        "Aaron Stanush"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2011-03-10T23:00:00Z",
+      "endTime": "2011-03-10T23:30:00Z",
+      "duration": "P30M",
+      "title": "Closing Plenary",
+      "location": "Sheraton 4 & 5",
+      "link": "https://chicago2011.drupal.org/closing-plenary",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    }
+  ],
+  "result": "success",
+  "url": "https://chicago2011.drupal.org/schedule"
+}

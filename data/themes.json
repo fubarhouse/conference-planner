@@ -57,6 +57,11 @@
       "textMuted": "#8eaacc",
       "textFaint": "#6a8cb0",
       "border": "#0e3530"
+    },
+    "branding": {
+      "kicker": "DrupalCamp Schedule",
+      "iconClass": "fas fa-calendar-alt",
+      "brandClass": "brand-drupalcon"
     }
   },
   {
@@ -77,6 +82,11 @@
       "textMuted": "#8eaacc",
       "textFaint": "#6a8cb0",
       "border": "#1e2d4a"
+    },
+    "branding": {
+      "kicker": "DrupalCon Schedule",
+      "iconClass": "fas fa-globe",
+      "brandClass": "brand-drupalcon"
     }
   },
   {
@@ -97,6 +107,11 @@
       "textMuted": "#8eaacc",
       "textFaint": "#6a8cb0",
       "border": "#132454"
+    },
+    "branding": {
+      "kicker": "DrupalSouth Schedule",
+      "iconClass": "fas fa-water",
+      "brandClass": "brand-drupalsouth"
     }
   }
 ]
