@@ -690,6 +690,17 @@
     cursor: not-allowed;
     background: #34526f;
 }
+/* Restore solid background in dark mode — .theme-dark button resets it to transparent */
+.theme-dark .editor-welcome-cta {
+    background: #34526f;
+}
+.theme-dark .editor-welcome-cta:hover {
+    background: #2a4259;
+}
+.theme-dark .editor-welcome-cta:disabled,
+.theme-dark .editor-welcome-cta:disabled:hover {
+    background: #34526f;
+}
 
 /* ── Preview mode banner ─────────────────────────────────────────────────── */
 .preview-banner {
@@ -982,15 +993,16 @@ body.has-preview-banner { padding-top: 2.25rem; }
 }
 #saveDataset.is-dirty,
 #timelineSaveBtn.is-dirty {
-    background: #f59e0b;
+    background: #f59e0b !important;
     border-color: #d97706;
-    color: #1a1200;
+    color: #1a1200 !important;
     font-weight: 600;
 }
 #saveDataset.is-dirty:hover,
 #timelineSaveBtn.is-dirty:hover {
-    background: #d97706;
+    background: #d97706 !important;
     border-color: #b45309;
+    color: #1a1200 !important;
 }
 
 /* ── Save toast ─────────────────────────────────────────────────────────── */
@@ -1062,6 +1074,11 @@ body.has-preview-banner { padding-top: 2.25rem; }
     border-color: #b45309;
 }
 .recovery-bar-btn--primary:hover { background: #b45309; }
+.theme-dark .recovery-bar-btn--primary {
+    background: #d97706;
+    color: #fff;
+}
+.theme-dark .recovery-bar-btn--primary:hover { background: #b45309; }
 
 /* ── Sponsor / logo / Flickr editor sidebars ────────────────────────────── */
 /* ── Sponsor editor sidebar ────────────────────────────────── */
@@ -1665,6 +1682,12 @@ body.has-preview-banner { padding-top: 2.25rem; }
 .appearance-btn-primary:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+.theme-dark .appearance-btn-primary {
+    background: var(--accent);
+}
+.theme-dark .appearance-btn-primary:hover {
+    opacity: 0.88;
 }
 .appearance-btn-secondary {
     height: 2.2rem;

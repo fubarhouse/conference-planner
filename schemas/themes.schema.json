@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UI Themes",
+  "description": "Available colour themes for the conference planner UI.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "label", "dark", "colors"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Unique theme identifier referenced by event datasets."
+      },
+      "label": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Human-readable theme name shown in the UI."
+      },
+      "dark": {
+        "type": "boolean",
+        "description": "Whether this is a dark-mode theme."
+      },
+      "colors": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "bg", "bgAlt",
+          "primary", "secondary", "tertiary",
+          "surface", "surfaceAlt", "surfaceDeep",
+          "text", "textAlt", "textMuted", "textFaint",
+          "border"
+        ],
+        "properties": {
+          "bg":           { "$ref": "#/definitions/color" },
+          "bgAlt":        { "$ref": "#/definitions/color" },
+          "primary":      { "$ref": "#/definitions/color" },
+          "secondary":    { "$ref": "#/definitions/color" },
+          "tertiary":     { "$ref": "#/definitions/color" },
+          "surface":      { "$ref": "#/definitions/color" },
+          "surfaceAlt":   { "$ref": "#/definitions/color" },
+          "surfaceDeep":  { "$ref": "#/definitions/color" },
+          "text":         { "$ref": "#/definitions/color" },
+          "textAlt":      { "$ref": "#/definitions/color" },
+          "textMuted":    { "$ref": "#/definitions/color" },
+          "textFaint":    { "$ref": "#/definitions/color" },
+          "border":       { "$ref": "#/definitions/color" }
+        }
+      },
+      "branding": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kicker", "iconClass", "brandClass"],
+        "properties": {
+          "kicker": {
+            "type": "string",
+            "description": "Short tagline shown in the branded header."
+          },
+          "iconClass": {
+            "type": "string",
+            "description": "Font Awesome class for the header icon."
+          },
+          "brandClass": {
+            "type": "string",
+            "description": "CSS class applied to the branded header element."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "color": {
+      "type": "string",
+      "pattern": "^(#[0-9a-fA-F]{6}|rgba?\\([^)]+\\))$",
+      "description": "A CSS colour value — hex (#rrggbb) or rgb/rgba function."
+    }
+  }
+}

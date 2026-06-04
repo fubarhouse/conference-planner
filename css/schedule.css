@@ -156,6 +156,9 @@
         .design-drupalcon .timeline-events .event-card > div {
             height: 100%;
         }
+        .design-drupalcon .timeline-events .event-card > div.absolute {
+            height: auto;
+        }
         /* (1,1,0) beats UnoCSS in light mode; dark mode handled by neon chrome override below */
         .design-drupalcon #filtersPanel,
         .design-drupalcon .mobile-instructions-panel,
@@ -1017,20 +1020,26 @@
             background: color-mix(in srgb, var(--accent) 18%, var(--surface-2));
             box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent);
         }
+        .sponsor-history-title-row {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
         .speaker-session-current-badge {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            margin-bottom: 0.35rem;
-            padding: 0.17rem 0.48rem;
+            gap: 0.3em;
+            flex-shrink: 0;
+            padding: 0.15rem 0.5rem;
             border-radius: 999px;
-            border: 1px solid var(--accent);
-            background: color-mix(in srgb, var(--accent) 18%, var(--surface-2));
-            color: var(--text-0);
-            font-size: 0.72rem;
+            background: var(--accent);
+            color: #000;
+            font-size: 0.68rem;
             font-weight: 700;
-            line-height: 1.15;
+            line-height: 1.3;
             white-space: nowrap;
+            letter-spacing: 0.01em;
         }
         .speaker-session-title {
             margin: 0 0 0.35rem 0;
@@ -1063,14 +1072,24 @@
         }
         .sponsor-history-actions {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 0.65rem;
+            grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+            gap: 0.5rem;
             align-items: stretch;
         }
         .sponsor-history-actions .session-modal-link {
             width: 100%;
             min-height: 100%;
             margin: 0;
+            font-size: 0.8rem;
+            padding: 0.35rem 0.6rem;
+            background: transparent;
+            border-color: color-mix(in srgb, var(--line-0) 60%, transparent);
+            color: var(--text-2);
+        }
+        .sponsor-history-actions .session-modal-link:hover {
+            background: color-mix(in srgb, var(--accent) 8%, transparent);
+            border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+            color: var(--accent);
         }
         .sponsor-history-logo {
             width: 88px;

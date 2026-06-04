@@ -1,0 +1,1541 @@
+{
+  "event": {
+    "designation": "DrupalSouth",
+    "location": "Hobart",
+    "year": "2019",
+    "website": "https://drupalsouth.org/events/hobart-2019/schedule",
+    "region": "Australia – Hobart",
+    "endDate": "2019-11-29T09:30:00Z",
+    "startDate": "2019-11-26T23:00:00Z",
+    "venue": "Hotel Grand Chancellor",
+    "timezone": "Australia/Hobart",
+    "columns": 5,
+    "enabled": true,
+    "sourceCache": "cache/remote/2026-04-25T11-59-37Z/drupalsouth-hobart-2019-json-hobart-2019",
+    "videoPlaylist": "https://www.youtube.com/playlist?list=PL31TzQhFjH2LV3MAnr4AIOctKIpl7PqaU",
+    "videoPlaylistCache": "cache/remote/youtube/drupalsouth-2019/playlist.xml",
+    "flickr": {
+      "enabled": true,
+      "groupUrl": "https://flic.kr/g/3gphwa",
+      "image": "./img/flickr/drupalsouth/2019-hobart.jpg",
+      "imageAlt": "DrupalSouth logo"
+    },
+    "logo": {
+      "image": "./img/logos/drupalsouth-logo.png",
+      "imageAlt": "DrupalSouth logo",
+      "usePlate": false
+    },
+    "sponsors": [
+      {
+        "id": "sponsor-1",
+        "title": "platform.sh",
+        "tier": "Gold",
+        "row": 1,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2019-hobart/sponsor-1.png",
+        "imageAlt": "platform.sh logo",
+        "link": "https://drupalsouth.org/sponsors/platformsh",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-2",
+        "title": "Acquia",
+        "tier": "Gold",
+        "row": 1,
+        "priority": 2,
+        "image": "./img/sponsors/drupalsouth/2019-hobart/sponsor-2.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://drupalsouth.org/sponsors/acquia",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-3",
+        "title": "DogHouse",
+        "tier": "Gold",
+        "row": 1,
+        "priority": 3,
+        "image": "./img/sponsors/drupalsouth/2019-hobart/sponsor-3.jpg",
+        "imageAlt": "DogHouse logo",
+        "link": "https://drupalsouth.org/sponsors/doghouse",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-4",
+        "title": "Annex",
+        "tier": "Gold",
+        "row": 1,
+        "priority": 4,
+        "image": "./img/sponsors/drupalsouth/2019-hobart/sponsor-4.png",
+        "imageAlt": "Annex logo",
+        "link": "https://drupalsouth.org/sponsors/annex",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-5",
+        "title": "Salsa Digital",
+        "tier": "Gold",
+        "row": 1,
+        "priority": 5,
+        "image": "./img/sponsors/drupalsouth/2019-hobart/sponsor-5.png",
+        "imageAlt": "Salsa Digital logo",
+        "link": "https://drupalsouth.org/sponsors/salsa-digital",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-6",
+        "title": "Morpht",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2019-hobart/sponsor-6.png",
+        "imageAlt": "Morpht logo",
+        "link": "https://drupalsouth.org/sponsors/morpht",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-7",
+        "title": "Ironstar",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 2,
+        "image": "./img/sponsors/drupalsouth/2019-hobart/sponsor-7.png",
+        "imageAlt": "Ironstar logo",
+        "link": "https://drupalsouth.org/sponsors/ironstar",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-8",
+        "title": "WeKnow",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 3,
+        "image": "./img/sponsors/drupalsouth/2019-hobart/sponsor-8.png",
+        "imageAlt": "WeKnow logo",
+        "link": "https://drupalsouth.org/sponsors/weknow",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-9",
+        "title": "amazee.io",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 4,
+        "image": "./img/sponsors/drupalsouth/2019-hobart/sponsor-9.png",
+        "imageAlt": "amazee.io logo",
+        "link": "https://drupalsouth.org/sponsors/amazeeio",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-10",
+        "title": "Sparks Interactive",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 5,
+        "image": "./img/sponsors/drupalsouth/2019-hobart/sponsor-10.png",
+        "imageAlt": "Sparks Interactive logo",
+        "link": "https://drupalsouth.org/sponsors/amazeeio",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-11",
+        "title": "EightyOptions",
+        "tier": "Other",
+        "row": 3,
+        "priority": 1,
+        "image": "./img/sponsors/drupalsouth/2019-hobart/sponsor-11.png",
+        "imageAlt": "EightyOptions logo",
+        "link": "https://drupalsouth.org/sponsors/eightyoptions",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-12",
+        "title": "PreviousNext",
+        "tier": "Other",
+        "row": 3,
+        "priority": 2,
+        "image": "./img/sponsors/drupalsouth/2019-hobart/sponsor-12.png",
+        "imageAlt": "PreviousNext logo",
+        "link": "https://drupalsouth.org/sponsors/previousnext",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-13",
+        "title": "Technocrat",
+        "tier": "Other",
+        "row": 3,
+        "priority": 3,
+        "image": "./img/sponsors/drupalsouth/2019-hobart/sponsor-13.png",
+        "imageAlt": "Technocrat logo",
+        "link": "https://drupalsouth.org/sponsors/technocrat",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-14",
+        "title": "EY Digital Pty Ltd",
+        "tier": "Other",
+        "row": 3,
+        "priority": 4,
+        "image": "./img/sponsors/drupalsouth/2019-hobart/sponsor-14.png",
+        "imageAlt": "EY Digital Pty Ltd logo",
+        "link": "https://drupalsouth.org/sponsors/ey-digital-pty-ltd",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-15",
+        "title": "Skpr",
+        "tier": "Other",
+        "row": 3,
+        "priority": 5,
+        "image": "./img/sponsors/drupalsouth/2019-hobart/sponsor-15.png",
+        "imageAlt": "Skpr logo",
+        "link": "https://drupalsouth.org/sponsors/skpr",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-16",
+        "title": "ICE Media",
+        "tier": "Other",
+        "row": 3,
+        "priority": 6,
+        "image": "./img/sponsors/drupalsouth/2019-hobart/sponsor-16.png",
+        "imageAlt": "ICE Media logo",
+        "link": "https://drupalsouth.org/sponsors/icemedia",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-17",
+        "title": "Pantheon",
+        "tier": "Other",
+        "row": 3,
+        "priority": 7,
+        "image": "./img/sponsors/drupalsouth/2019-hobart/sponsor-17.png",
+        "imageAlt": "Pantheon logo",
+        "link": "https://drupalsouth.org/sponsors/pantheon",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "scheduleURLs": [
+      "https://drupalsouth.org/events/hobart-2019/schedule"
+    ],
+    "other_urls": []
+  },
+  "items": [
+    {
+      "startTime": "2019-11-26T23:00:00Z",
+      "endTime": "2019-11-27T01:00:00Z",
+      "duration": "P120M",
+      "title": "Code sprint",
+      "location": "Huon",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/code-sprint",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "The 2019 Drupal South sprint is shaping up to be the biggest contribution event in the Australia-Pacific region since Drupalcon Sydney 2013.\n\nThis year, core-contributors with over 3000 commit credits between them will be in attendance, including 3 members of the core committers team, 3 members of the Drupal security team, 7 core module/subsystem maintainers as well as maintainers of major contrib modules and command-line tools.\n\nWith Drupal 9 just around the corner, this will be a great chance to help the community get popular modules ready for Drupal 9, meet some great people and help shape the future of Drupal.\n\nThe PreviousNext team are sponsoring and helping to run the sprint day on Wednesday, November 27th 2019, and there are a few things you can do now to hit the ground running on the day.\n\nOriginally published on PreviousNext website",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-26T23:00:00Z",
+      "endTime": "2019-11-27T01:00:00Z",
+      "duration": "P120M",
+      "title": "Introduction to CI/CD with Gitlab and Drupal 8",
+      "location": "Oak",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/introduction-cicd-gitlab-and-drupal-8",
+      "track": [
+        "Other"
+      ],
+      "speakers": [
+        "Vladimir Roudakov"
+      ],
+      "full_description": "Setup information\n\nMake sure your machine has git installed\n\nAll registered participants received link to the setup instructions via email on Sunday, 24 November.\n\nRegistration\n\nWorkshop capacity is limited to 30 people each and will be running during other events such as the code sprint and sessions. Make sure you are registered for the workshops that you can attend or let us know in advanced if you have changed your mind so others can attend the workshop. Registration for the workshops can be found at https://drupalsouth.org/events/hobart-2019/workshops.\n\nAll attendees will need to bring their own laptop or tablet. On arrival, you will be provided with your own Drupal website to work on.\n\nOther workshops\n\nWed 27 November 2019: Introduction to CI/CD with Gitlab and Drupal 8 (4 hours)\n\nThu 28 November 2019: Drupal 8 webforms: event registration (2 hours)\n\nThu 28 November 2019: Python for Drupal Devs (2 hours)\n\nFri 29 November 2019: Practical theming in Drupal 8 (2 hours)\n\nAbout presenter\n\nVladimir is a Drupal architect and software developer in Tomato Elephant Studio (Brisbane, Australia). He teaches Drupal privately and publicly (quarterly as part of Drupal global training day). Vladimir has presented sessions and has run workshops on migration, continuous integration, automated testing, content management systems & frontend frameworks at the camps and conferences around the world.",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-27T01:00:00Z",
+      "endTime": "2019-11-27T02:00:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-27T02:00:00Z",
+      "endTime": "2019-11-27T04:00:00Z",
+      "duration": "P120M",
+      "title": "Code sprint",
+      "location": "Huon",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/code-sprint",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "The 2019 Drupal South sprint is shaping up to be the biggest contribution event in the Australia-Pacific region since Drupalcon Sydney 2013.\n\nThis year, core-contributors with over 3000 commit credits between them will be in attendance, including 3 members of the core committers team, 3 members of the Drupal security team, 7 core module/subsystem maintainers as well as maintainers of major contrib modules and command-line tools.\n\nWith Drupal 9 just around the corner, this will be a great chance to help the community get popular modules ready for Drupal 9, meet some great people and help shape the future of Drupal.\n\nThe PreviousNext team are sponsoring and helping to run the sprint day on Wednesday, November 27th 2019, and there are a few things you can do now to hit the ground running on the day.\n\nOriginally published on PreviousNext website",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-27T02:00:00Z",
+      "endTime": "2019-11-27T04:00:00Z",
+      "duration": "P120M",
+      "title": "Introduction to CI/CD with Gitlab and Drupal 8",
+      "location": "Oak",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/introduction-cicd-gitlab-and-drupal-8",
+      "track": [
+        "Other"
+      ],
+      "speakers": [
+        "Vladimir Roudakov"
+      ],
+      "full_description": "Setup information\n\nMake sure your machine has git installed\n\nAll registered participants received link to the setup instructions via email on Sunday, 24 November.\n\nRegistration\n\nWorkshop capacity is limited to 30 people each and will be running during other events such as the code sprint and sessions. Make sure you are registered for the workshops that you can attend or let us know in advanced if you have changed your mind so others can attend the workshop. Registration for the workshops can be found at https://drupalsouth.org/events/hobart-2019/workshops.\n\nAll attendees will need to bring their own laptop or tablet. On arrival, you will be provided with your own Drupal website to work on.\n\nOther workshops\n\nWed 27 November 2019: Introduction to CI/CD with Gitlab and Drupal 8 (4 hours)\n\nThu 28 November 2019: Drupal 8 webforms: event registration (2 hours)\n\nThu 28 November 2019: Python for Drupal Devs (2 hours)\n\nFri 29 November 2019: Practical theming in Drupal 8 (2 hours)\n\nAbout presenter\n\nVladimir is a Drupal architect and software developer in Tomato Elephant Studio (Brisbane, Australia). He teaches Drupal privately and publicly (quarterly as part of Drupal global training day). Vladimir has presented sessions and has run workshops on migration, continuous integration, automated testing, content management systems & frontend frameworks at the camps and conferences around the world.",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-27T04:00:00Z",
+      "endTime": "2019-11-27T04:00:00Z",
+      "duration": "P60M",
+      "title": "Closing remarks",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-27T20:00:00Z",
+      "endTime": "2019-11-27T21:45:00Z",
+      "duration": "P105M",
+      "title": "Hike / Walk",
+      "location": "Hotel Grand Chancellor",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-27T21:45:00Z",
+      "endTime": "2019-11-27T22:00:00Z",
+      "duration": "P15M",
+      "title": "Opening remarks",
+      "location": "Sassafras",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-27T22:00:00Z",
+      "endTime": "2019-11-27T22:45:00Z",
+      "duration": "P45M",
+      "title": "Consolidation: a GovCMS SaaS story",
+      "location": "Sassafras",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/consolidation-govcms-saas-story",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Margery Tongway"
+      ],
+      "full_description": "A case study looking back over 2 years of blood, sweat and beers to consolidate 14 government websites into 1, and migrate 2 more at the Department of Industry, Innovation and Science.\n\nOn time, on budget, using GovCMS SaaS",
+      "video_url": "https://www.youtube.com/watch?v=jFQ5eFM0ihk",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-27T22:00:00Z",
+      "endTime": "2019-11-27T22:45:00Z",
+      "duration": "P45M",
+      "title": "The pursuit of automatic Drupal updates",
+      "location": "Huon",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/pursuit-automatic-drupal-updates",
+      "track": [
+        "DevOps and Security"
+      ],
+      "speakers": [
+        "Blaize Kaye",
+        "Thom Toogood"
+      ],
+      "full_description": "Set your alarm a little later on patch Thursday! Automatic updates of Drupal sites has had a challenging history but improvements in the last few years allow you to automate the job.\n\nIn this talk we’ll discuss how we are able to scale to support upgrading hundreds of sites with confidence.\n\nSome of the topics we’ll be covering include:\n\n* A survey of the automated dependency management landscape\n\n* A discussion and demonstration of the tools we’ve integrated into our workflow at Amazee.\n\n* The importance of automated testing/CI to give confidence of no regressions.\n\n* Continuous delivery, testing deployments, be ready to deploy at any stage of the development workflow.\n\n* Centralised management of updates via docker base images.\n\nGet more time in the issue queues and let the bots do the work!",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-27T22:00:00Z",
+      "endTime": "2019-11-27T22:45:00Z",
+      "duration": "P45M",
+      "title": "Why you need QA people, and why you need them NOW!",
+      "location": "Myrtle",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/why-you-need-qa-people-and-why-you-need-them-now",
+      "track": [
+        "Project Management"
+      ],
+      "speakers": [
+        "Daniel Carvalhinho"
+      ],
+      "full_description": "Stop for a moment and ask yourself:\n\n* How many times have you get tired of the back-and-forth on bug reporting and fixing after months of development?\n\n* How many times have a project go over budget because developers didn't get all necessary scenarios covered in their tests?\n\n* How many unsatisfied emails did you get from angry clients that just wanted their projects delivered on-time with the expected quality?\n\nIf you've answered _several_ for any of these questions, it is probably time to review your QA (Quality Assurance) strategy!\n\nIn this session, we're going to discuss how dedicated QA people could partner with the PM and the Tech Lead/Architect to ensure better coverage of the use cases/test scenarios on multiple projects and how it would help in controlling the quality of the software delivered by your developers.\n\nThroughout this session, we'll see how to take better advantage of several well-known tools, but also talk about simple scripts, internal tools, and sets of rules for pre-screening and managing projects' deployments.\n\nBesides that, we'll also cover the need to teach our customers the importance of QA.",
+      "video_url": "https://www.youtube.com/watch?v=cv3FSzkL4",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-27T22:00:00Z",
+      "endTime": "2019-11-27T22:20:00Z",
+      "duration": "P20M",
+      "title": "Highly processed migrations",
+      "location": "Blackwood",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/highly-processed-migrations",
+      "track": [
+        "Back-End Development"
+      ],
+      "speakers": [
+        "Eric Goodwin"
+      ],
+      "full_description": "With many sites moving to Drupal 8 over the last few years, I'm sure many of you have had to write some serious migrations to move content from the existing site to the new site. Migrations tend to get tricky when the old data isn't clean, doesn't have a consistent format or is the wrong style to match up to your new data model. That's where process plugins come in, out of the box and with a few handy modules from contrib, there are a range of powerful process plugins available to help you process your old data into a clean and consistent format ready to be imported into your new website.\n\nThis talk will go over some of the available process plugins in core migrate and from some common migrate contrib modules as well at looking at ways you can use them and combine them for powerful results.",
+      "video_url": "https://www.youtube.com/watch?v=5ehEPiI_KBc",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-27T22:25:00Z",
+      "endTime": "2019-11-27T22:45:00Z",
+      "duration": "P20M",
+      "title": "5239 pages, 357 authors and counting: quality, consistency and flexibility at scale",
+      "location": "Blackwood",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/5239-pages-357-authors-and-counting-quality-consistency-and",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Emma Cameron"
+      ],
+      "full_description": "Moving an entire government department onto a new content management system and a new user-focused framework with no expensive consultancy to hold your hand. It's a huge, scary job. Then our director got another department excited about the platform too.\n\nFind out how we:\n\n- won over the doubters\n\n- provided brand flexibility alongside consistency\n\n- work with content owners at scale.",
+      "video_url": "https://www.youtube.com/watch?v=TlTiymxLkYA",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-27T22:45:00Z",
+      "endTime": "2019-11-27T23:15:00Z",
+      "duration": "P30M",
+      "title": "Morning Tea",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-27T23:15:00Z",
+      "endTime": "2019-11-28T00:00:00Z",
+      "duration": "P45M",
+      "title": "Content modeling with Drupal",
+      "location": "Sassafras",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/content-modeling-drupal",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Si Hobbs"
+      ],
+      "full_description": "Drupal is truly the greatest CMS and with great power comes great responsibility. This presentation looks at a range of content modeling techniques in Drupal, new techniques and old faithfuls. It is suitable for non-technical users who want to start site building, but can be overwhelmed by the flexibility and jargon. Topics will include:\n\n* tips for naming fields (machine names)\n\n* techniques to plan your content model\n\n* how content modeling can interacts with layout and styling\n\n* balance between structure and traditional HTML\n\n* an overview of general tips and further reading",
+      "video_url": "https://www.youtube.com/watch?v=580nU9Wgr1g",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-27T23:15:00Z",
+      "endTime": "2019-11-27T23:40:00Z",
+      "duration": "P25M",
+      "title": "The Art of Parenting Applied to Challenging Clients",
+      "location": "Huon",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/art-parenting-applied-challenging-clients",
+      "track": [
+        "Project Management"
+      ],
+      "speakers": [
+        "Shelley L'Green"
+      ],
+      "full_description": "A deep dive into the workings of a toddlers brain during an epic meltdown and the similarities seen in our stressed clients. Knowledge of how the brain reacts to stress can help us approach our clients with a little more empathy and compassion during tough times in a project.",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-27T23:15:00Z",
+      "endTime": "2019-11-28T00:00:00Z",
+      "duration": "P45M",
+      "title": "The New Zealand Govt Design System and Sector Drupal 8",
+      "location": "Myrtle",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/new-zealand-govt-design-system-and-sector-drupal-8",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Heike Theis",
+        "Daniel Veza"
+      ],
+      "full_description": "The public alpha for the design system for New Zealand public sector websites is up and running - design-system-alpha.digital.govt.nz. Now’s the time to look into options to provide the components in a Drupal-compatible format - which isn't part of the alpha yet - and to look into how Sector can help bridge the gap.\n\nThis talk is in three parts. In Part 1, we'll go over what a design system is, why it needs to be about more than design and code, and why you might need one. In Part 2, we'll have a look at public sector design systems and introduce the New Zealand Design System Alpha. And in Part 3, we'll talk about our Drupal approach and a roadmap for Sector with the design system components included in the Starter Kit or as a Sector add-on. We'll look at themes, Twig, text filters, WYSIWYG templates, style drop-downs, and more - and we hope to hear your ideas as well!",
+      "video_url": "https://www.youtube.com/watch?v=dU7TJtsTG5U",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-27T23:15:00Z",
+      "endTime": "2019-11-28T00:00:00Z",
+      "duration": "P45M",
+      "title": "Deploying Drupal on Kubernetes",
+      "location": "Blackwood",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/deploying-drupal-kubernetes",
+      "track": [
+        "DevOps and Security"
+      ],
+      "speakers": [
+        "Nick Schuch"
+      ],
+      "full_description": "Kubernetes has taken the world by storm and brought forth a new paradigm for application development.\n\nWhat everyone leaves out is how many new APIs and concepts you will need to learn to deploy an application. In this talk we will be demystifying all the APIs required to deploy Drupal.\n\nCome for the buzzwords, stay for the demo, let's deploy Drupal onto Kubernetes!",
+      "video_url": "https://www.youtube.com/watch?v=BSDr7-QwSFU",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-27T23:15:00Z",
+      "endTime": "2019-11-28T00:00:00Z",
+      "duration": "P45M",
+      "title": "Drupal 8 webforms: building Event registration",
+      "location": "Oak",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/drupal-8-webforms-event-registration",
+      "track": [
+        "Other"
+      ],
+      "speakers": [
+        "Vladimir Roudakov"
+      ],
+      "full_description": "Setup information\n\nAll registered participants will receive link to the environment via email on Wednesday, 27 November.\n\nMore information will be available on Friday, 22 November 2019.\n\nRegistration\n\nWorkshop capacity is limited to 30 people each and will be running during other events such as the code sprint and sessions. Make sure you are registered for the workshops that you can attend or let us know in advanced if you have changed your mind so others can attend the workshop. Registration for the workshops can be found at https://drupalsouth.org/events/hobart-2019/workshops.\n\nAll attendees will need to bring their own laptop or tablet. On arrival, you will be provided with your own Drupal website to work on.\n\nOther workshops\n\nWed 27 November 2019: Introduction to CI/CD with Gitlab and Drupal 8 (4 hours)\n\nThu 28 November 2019: Drupal 8 webforms: event registration (2 hours)\n\nThu 28 November 2019: Python for Drupal Devs (2 hours)\n\nFri 29 November 2019: Practical theming in Drupal 8 (2 hours)\n\nAbout presenter\n\nVladimir is a Drupal architect and software developer in Tomato Elephant Studio (Brisbane, Australia). He teaches Drupal privately and publicly (quarterly as part of Drupal global training day). Vladimir has presented sessions and has run workshops on migration, continuous integration, automated testing, content management systems & frontend frameworks at the camps and conferences around the world.",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-27T23:40:00Z",
+      "endTime": "2019-11-28T00:00:00Z",
+      "duration": "P20M",
+      "title": "It takes two to tango: a true partnership approach",
+      "location": "Huon",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/it-takes-two-tango-true-partnership-approach",
+      "track": [
+        "Project Management"
+      ],
+      "speakers": [
+        "Juliane Erben",
+        "Nathan Wall"
+      ],
+      "full_description": "Business relationships are increasingly about being partners rather than the traditional vendor/client relationship. But what does a good partnership entail? In many cases, it’s not that different to what makes a successful personal relationship -- importantly, it takes two.\n\nIn this session, Salsa Digital’s Julie Erben and Department of Finance’s Nathan Wall (Head of GovCMS) discuss the importance of a true partnership for delivering digital projects. They’ll cover what it takes to be a good partner from both sides -- as the vendor/supplier and as the client.\n\nFind out what you can do to bring a partnership approach into your business relationships.",
+      "video_url": "https://www.youtube.com/watch?v=ATapg5mE_iE",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T00:15:00Z",
+      "endTime": "2019-11-28T00:40:00Z",
+      "duration": "P25M",
+      "title": "WCAG 2.1, Web Accessibility and Drupal 8",
+      "location": "Sassafras",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/wcag-21-web-accessibility-and-drupal-8",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Morgan Strong"
+      ],
+      "full_description": "This talk will take the audience through the WCAG v2.0 guidelines, how the (newish) WCAG v2.1 guidelines add some implementation considerations for the modern web, and what Accessibility features are offered through some common Drupal themes based on common frontend frameworks (Bootstrap and Foundation) and important modules (like Webform and Layout Builder). This talk will inform the audience about Accessibility guidelines, embedding an \"accessible mindset\" into project development, as well as offering practical considerations for your next Drupal project.",
+      "video_url": "https://www.youtube.com/watch?v=38bjHphuBCo",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T00:15:00Z",
+      "endTime": "2019-11-28T00:40:00Z",
+      "duration": "P25M",
+      "title": "Cordelta: The Delivery Game",
+      "location": "Huon",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/cordelta-sponsor-slot",
+      "track": [
+        "Project Management"
+      ],
+      "speakers": [
+        "Damian Tunney"
+      ],
+      "full_description": "Learn how to win at the game of delivery and set your project up for success.\n\nTo win at the game of delivery you first need to understand the game. So what is it and where do you start?\n\nIn this session, Damian Tunney (Head of Engagement and Delivery at Cordelta Digital) will share his insights on the core ingredients to designing complex engagements. With a focus of the people side of projects, Damian will draw from his experience across the private and public sectors delivering global campaigns, product launches and his most recent digital transformation projects.",
+      "video_url": "https://www.youtube.com/watch?v=AvvCjEoYY80",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T00:15:00Z",
+      "endTime": "2019-11-28T01:00:00Z",
+      "duration": "P45M",
+      "title": "Building your design system",
+      "location": "Myrtle",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/building-your-design-system",
+      "track": [
+        "Front-end Development"
+      ],
+      "speakers": [
+        "Jack Taranto"
+      ],
+      "full_description": "A design system is an invaluable asset for any organisation so let's take a look at the strategies, technologies and methodologies behind creating something successful. In this session I'll be covering: ideal design patterns; technology options for implementation with plenty of technical front end development examples; common pitfalls and persuasion points as to why every organisation should build one as a fully fledged product.",
+      "video_url": "https://www.youtube.com/watch?v=nHYGa3kIy9U",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T00:15:00Z",
+      "endTime": "2019-11-28T01:00:00Z",
+      "duration": "P45M",
+      "title": "Modular distributions and the Sector add-on ecosystem",
+      "location": "Blackwood",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/modular-distributions-and-sector-add-ecosystem",
+      "track": [
+        "Back-End Development"
+      ],
+      "speakers": [
+        "Daniel Veza"
+      ],
+      "full_description": "Building Drupal distributions is fun … but that doesn’t mean it’s trivial. A distribution defines a way to approach and build Drupal sites, and not everybody will agree on how to do this. Moving Sector from Drupal 7 to Drupal 8 allowed us to rethink and revisit the idea of building a truly modular, plug-and-play distribution - with the Sector Starter Kit in the centre and the Sector add-ons growing around it.\n\nThis talk is about how we approached Sector D8 from two perspectives - providing usable and useful modular tools to our clients, and working the magic behind the scenes to make it happen, the Drupal 8 way.",
+      "video_url": "https://www.youtube.com/watch?v=wjHDYxWAr-Q",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T01:00:00Z",
+      "endTime": "2019-11-28T02:00:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T02:00:00Z",
+      "endTime": "2019-11-28T02:45:00Z",
+      "duration": "P45M",
+      "title": "DevOps and Collaboration. How Devs and non-Devs can work together",
+      "location": "Sassafras",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/keynote-michelle-mannering",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Michelle Mannering"
+      ],
+      "full_description": "Michelle Mannering (MishManners), Developer Community Manager at GitHub.\n\nMish is a highly motivated, curious and compassionate leader with a keen interest in driving entrepreneurial culture and pioneering Melbourne’s esports industry. She's founded several tech companies and, as a result, sits at the forefront of this city’s science, tech, esports and startup scenes.\n\nEveryday we see Mish creating awesome experiences and engaging with the vibrant GitHub developer community. She's run many hackathons - over 70, and is an accomplished MC, speaker, and facilitator. You'll often catch Mish at an event or speaking on stage!\n\nIn her 'spare' time she's a streamer, journalist, and always working on something exciting. Right now, her latest epic venture is Raine Scooters. The team has designed and created an electric scooter to put the fun in your daily commute ⚡🛴\n\nMichelle will be talking about DevOps and Collaboration: How Devs and non-Devs can work better together.",
+      "video_url": "https://www.youtube.com/watch?v=XbwdhgBiCGQ",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T02:45:00Z",
+      "endTime": "2019-11-28T03:00:00Z",
+      "duration": "P15M",
+      "title": "Group photo",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T03:00:00Z",
+      "endTime": "2019-11-28T03:45:00Z",
+      "duration": "P45M",
+      "title": "Streamlining Drupal Delivery and Support: Our Journey at Deloitte Digital",
+      "location": "Sassafras",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/deloitte-sponsor-slot",
+      "track": [
+        "Project Management"
+      ],
+      "speakers": [
+        "Aaron Nichol",
+        "Christopher Hopper"
+      ],
+      "full_description": "Join us as we take you on our journey: How we streamlined our delivery for clients with a sneak-peak into where we think the greatest impact will be moving forward.\n\nCompanies want to create customer experiences that rival the best of what they experience in their own lives, but technology moves fast and digital transformation takes time. There is a need to move faster without sacrificing quality, and this requires a more systematic and scalable approach to Drupal development and support.\n\nWe’ll share our story, as we’ve refined our approach, delivering the best of what Drupal has to offer for our Clients and ourselves.",
+      "video_url": "https://www.youtube.com/watch?v=jmz6aE9iP1A",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T03:00:00Z",
+      "endTime": "2019-11-28T03:25:00Z",
+      "duration": "P25M",
+      "title": "Decoupled: Why we're reinventing a worse wheel",
+      "location": "Huon",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/decoupled-why-were-reinventing-worse-wheel",
+      "track": [
+        "Front-end Development"
+      ],
+      "speakers": [
+        "Josh Waihi"
+      ],
+      "full_description": "Decoupled, headless, micro-services; Whatever you want to call it, its here to stay and often for good and great reasons. But are you using it for a good and great reason?\n\nIn the past 2 years we're seen a growing emergence of decoupled builds that questionably didn't need to me.\n\n* Were they faster?\n\n* Were they more engaging?\n\n* Were they cheaper?\n\nWe'll look at some the innovations that have been emerging from the frontend world and understand if this world is better or worse then the coupled delivery environment Drupal 8 is delivering.",
+      "video_url": "https://www.youtube.com/watch?v=6GwTClYxFmo",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T03:00:00Z",
+      "endTime": "2019-11-28T03:45:00Z",
+      "duration": "P45M",
+      "title": "Drupal, Cacheability, and all that",
+      "location": "Myrtle",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/drupal-cacheability-and-all",
+      "track": [
+        "Back-End Development"
+      ],
+      "speakers": [
+        "Jibran Ijaz"
+      ],
+      "full_description": "Drupal has a very complex rendering system. The Drupal rendering process has the ability to cache rendered output at any level. In this session we'll talk about:\n\n* Render arrays\n\n* Caching of render arrays\n\n* Cache bins\n\n* Dynamic Page Cache\n\n* Reverse proxies\n\n* Troubleshooting Cache issues\n\n* Some interesting caching related problem-solving",
+      "video_url": "https://www.youtube.com/watch?v=MjQUXXWtGAI",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T03:00:00Z",
+      "endTime": "2019-11-28T03:45:00Z",
+      "duration": "P45M",
+      "title": "Design Systems for Agencies: The benefits of creating a shared language",
+      "location": "Blackwood",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/design-systems-agencies-benefits-creating-shared-language",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Richard Sison"
+      ],
+      "full_description": "Design systems have been a very popular topic over the past few years and for good reason. The benefits of aligning the broader team around shared principles and ways of working really are compelling.\n\nFor the design and development process in particular, Design Systems provide efficiencies to the team's workflow; a shared way of working enables diverse teams to approach problems in the same way (without adding as much design and technical debt).\n\nAnd while this is a natural fit for larger product teams, what I've found as a designer within an agency, is that we share a lot of the same problems.\n\nIn this presentation I'll be speaking about Design Systems from an agency's perspective. The presentation aims to demonstrate the benefits of establishing your own design system framework and getting teams to speak the same language.\n\nI'll be sharing my experience around the big problems we're solving with our system (along with some practical tips along the way).\n\nThis is a topic I'm particularly passionate about as I've always been agency-side have always advocated for streamlining the processes between designers and developers.",
+      "video_url": "https://www.youtube.com/watch?v=Pik27KxaaDw",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T03:00:00Z",
+      "endTime": "2019-11-28T03:45:00Z",
+      "duration": "P45M",
+      "title": "Python for Drupal Devs",
+      "location": "Oak",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/python-drupal-devs",
+      "track": [
+        "Other"
+      ],
+      "speakers": [
+        "Dave Hall"
+      ],
+      "full_description": "Setup information\n\nWill be available before 17 November 2019.\n\nRegistration\n\nWorkshop capacity is limited to 30 people each and will be running during other events such as the code sprint and sessions. Make sure you are registered for the workshops that you can attend or let us know in advanced if you have changed your mind so others can attend the workshop. Registration for the workshops can be found at https://drupalsouth.org/events/hobart-2019/workshops.\n\nAll attendees will need to bring their own laptop or tablet. On arrival, you will be provided with your own Drupal website to work on.\n\nOther workshops\n\nWed 27 November 2019: Introduction to CI/CD with Gitlab and Drupal 8 (4 hours)\n\nThu 28 November 2019: Drupal 8 webforms: event registration (2 hours)\n\nThu 28 November 2019: Python for Drupal Devs (2 hours)\n\nFri 29 November 2019: Practical theming in Drupal 8 (2 hours)\n\nAbout presenter\n\nDave Hall has trained teams for almost 2 decades. He has taught people with all abilities, from school children through to seniors. Today, Dave works with large companies to develop efficient processes and tooling for getting projects in front of customers faster. Dave is the Managing Director at Dave Hall Consulting and is the Founder of Getting It Live Training.",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T03:25:00Z",
+      "endTime": "2019-11-28T03:45:00Z",
+      "duration": "P20M",
+      "title": "Drupal meets the 3D World: On Closer Inspection",
+      "location": "Huon",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/drupal-meets-3d-world-closer-inspection",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Melissa Stubbings",
+        "Joshua Graham"
+      ],
+      "full_description": "The Australian War Memorial is in the process of turning 5 of our large objects into a 360 experience. Currently two have been made live.\n\nThis presentation would be how the development team used Drupal as a back-end to a React 360 experience front end and the challenges that we came across along the way.\n\nThis presentation displays how far we can take Drupal as more than a website content management system and empower content creators.\n\nWe also plan to open source this project for others to use in the future.",
+      "video_url": "https://www.youtube.com/watch?v=Q3MBwo9xRAM",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T04:00:00Z",
+      "endTime": "2019-11-28T04:45:00Z",
+      "duration": "P45M",
+      "title": "How To (Not) Get Hacked",
+      "location": "Sassafras",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/how-not-get-hacked",
+      "track": [
+        "DevOps and Security"
+      ],
+      "speakers": [
+        "Michael Richardson"
+      ],
+      "full_description": "Drupal vulnerabilities come and go, swiftly being patched and neutralised on up-to-date sites. But what about the undisclosed vulnerabilities, or the patches that lead researches to other weaknesses?\n\nSimply patching your site isn't enough, we need to look at how our hosting environments are built and configured to provide defense-in-depth protection against automated attacks and targeted efforts by very bad people.\n\nThis talk for system admins and backend developers will explore some common and not-so-common approaches for building secure web servers and containers running Drupal, to help keep your awesome Drupal site safe.",
+      "video_url": "https://www.youtube.com/watch?v=RSDZXUk7_k8",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T04:00:00Z",
+      "endTime": "2019-11-28T04:25:00Z",
+      "duration": "P25M",
+      "title": "Not all maps lead to treasure - but a good process map can lead to a successful project!",
+      "location": "Huon",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/not-all-maps-lead-treasure-good-process-map-can-lead",
+      "track": [
+        "Project Management"
+      ],
+      "speakers": [
+        "Akhil Bhandari"
+      ],
+      "full_description": "You’re ready to go, you have a team to deliver your website and you know how and what to do, but does everyone else? Ensuring everyone on the project team knows what part they’ll be playing and most importantly the processes they need to follow is key to a smooth(er) project delivery.\n\nThis session presented by Salsa Digital’s Akhil Bhandari will reflect the insights of process mapping key project activities, challenges faced, and key light-bulb moments discovered by the Department of Finance Migration Project team tasked to migrate 25 Australian Government websites on to GovCMS in six months.\n\nFind out how process mapping can help ensure everyone is on the same journey.",
+      "video_url": "https://www.youtube.com/watch?v=UDoXdCQxY9I",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T04:00:00Z",
+      "endTime": "2019-11-28T04:45:00Z",
+      "duration": "P45M",
+      "title": "Learn and Contribute to Open Source by Writing Blog Posts",
+      "location": "Myrtle",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/learn-and-contribute-open-source-writing-blog-posts",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Ivan Zugec"
+      ],
+      "full_description": "Link to video: https://www.youtube.com/watch?v=K2qTR1FNkgM\n\nLink to slides: https://www.slideshare.net/zugec/learn-and-contribute-to-open-source-by-writing-blog-posts/\n\nIn this session, we'll discuss the benefits of having a blog and why you should produce content (text or video).\n\nWe'll discuss the following:\n\n- Why you should write content\n\n- The benefits of maintaining a blog\n\n- How to publish content (discuss platforms)\n\n- How to re-purpose content\n\nI'll also talk about my experience in running a web dev/Drupal blog called WebWash (webwash.net). Over the years, I've written over 160 tutorials and produced 100 videos.\n\nBy the end of the session, I hope to get you excited about setting up a blog and writing content which will help others.",
+      "video_url": "https://www.youtube.com/watch?v=K2qTR1FNkgM",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T04:00:00Z",
+      "endTime": "2019-11-28T04:25:00Z",
+      "duration": "P25M",
+      "title": "Dissecting a security audit: common issues and how to fix them",
+      "location": "Blackwood",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/dissecting-security-audit-common-issues-and-how-fix-them",
+      "track": [
+        "Back-End Development"
+      ],
+      "speakers": [
+        "Sam Becker"
+      ],
+      "full_description": "For various institutions, security audits are an essential step in launching a new Drupal website. This session will highlight the most common issues reported by external auditors and how to resolve them. By the end of this session you'll have a few practical strategies for passing a security audit and hardening your Drupal applications.",
+      "video_url": "https://www.youtube.com/watch?v=7Z4sI9e6s7U",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T04:25:00Z",
+      "endTime": "2019-11-28T04:45:00Z",
+      "duration": "P20M",
+      "title": "Let's keep this G rated - redevelopment of classification.gov.au on GovCMS",
+      "location": "Huon",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/lets-keep-g-rated-redevelopment-classificationgovau-govcms",
+      "track": [
+        "Project Management"
+      ],
+      "speakers": [
+        "Paul Morriss"
+      ],
+      "full_description": "Most people are familiar with classification ratings for movies such as G, PG, MA etc., classifications that also apply to publications and games. Classification.gov.au is a resource for the public and industry to understand the classification process and search for classification ratings. Salsa Digital and the Department of Communications and the Arts (DoCA) re-developed classification.gov.au on GovCMS SaaS. The project adopted the DTA design system and also the DTA service design and delivery process, in particular, user research and testing prior to build.\n\nIn this session, Salsa Digital’s Paul Morriss and DoCA's Catherine Driessen will discuss the methodology used to deliver the project, the application of the DTA design system, the alignment to the DTA delivery process and lessons learnt. The boundaries of GovCMS SaaS were pushed when the project integrated with the National Classification Database via an API - this challenge, and the project’s solution, will also be presented. So while the session is on the Project Management track, it should also interest user experience and technical audiences.",
+      "video_url": "https://www.youtube.com/watch?v=snjngtSstaQ",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T04:25:00Z",
+      "endTime": "2019-11-28T04:45:00Z",
+      "duration": "P20M",
+      "title": "Ultimate guide to Layout Builder",
+      "location": "Blackwood",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/ultimate-guide-layout-builder",
+      "track": [
+        "Back-End Development"
+      ],
+      "speakers": [
+        "Saul Willers"
+      ],
+      "full_description": "Layout Builder provides a new \"core approved\" way for managing layouts. If you've wondered what it is, or are already using it and looking for tips and pointers this session should help you. We'll cover best practice, gotchas, UX issues and improvements, performance issues, and more.\n\nSlides: https://fenstrat.github.io/layout-builder-ds-hobart/",
+      "video_url": "https://www.youtube.com/watch?v=BnH4d2zFvX0",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T04:45:00Z",
+      "endTime": "2019-11-28T05:15:00Z",
+      "duration": "P30M",
+      "title": "Afternoon Tea",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T05:15:00Z",
+      "endTime": "2019-11-28T05:40:00Z",
+      "duration": "P25M",
+      "title": "Personalisation with Recombee",
+      "location": "Sassafras",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/personalisation-recombee",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Murray Woodman"
+      ],
+      "full_description": "Watch video\n\nDrupal provides a solid foundation for managing content. That is a solved problem. The next phase in content management is around personalising the user experience and ensuring that the experience is consistent across platforms. This presentation will provide a practical demonstration of how user behaviour and content data (from federated sites) can be used to personalise the content recommended to users.\n\nThe personalisation of content, customised to the user, is a powerful way to improve the user experience. Personalised content can deliver more relevant information to your users, keeping them engaged. It is especially useful on commerce sites where similar products can be recommended, or on content-driven sites where relevant information can be uncovered. In practical terms, it is able to increase the time users spend on a site and improve the chances of conversion.\n\nRecombee is a leading SaaS-based recommendation engine which is able to combine user behaviour and content properties to provide real-time user and item recommendations. It exposes an API which provides tracking and recommendation functionality which can be accessed from the Drupal frontend. It offers an affordable and simple pathway to web personalisation.\n\nThe developers at Morpht have implemented a SearchAPI backend implementation for Recombee, allowing content to be synced across into the Recombee engine, augmenting the data collected through user interactions. Recommendation quality is improved, especially when relatively little data has been collected on the current user. The presentation will demonstrate the module publicly for the first time.\n\nThis presentation will cover the following areas:\n\n- content modelling techniques for improving personalisation\n\n- tracking user behaviour to drive recommendations\n\n- a decoupled approach for presenting the recommendations,\n\n- the advantages of using an external system such as GTM for orchestrating personalisation.\n\nThe session should be of interest to the following people:\n\n- marketers who wish to find out more about practical personalisation,\n\n- commerce and site owners who want to get more from their site,\n\n- content modellers who are interested in modelling the enterprise,\n\n- backend developers who are interested in SearchAPI plugins,\n\n- front-enders who may be interested in a pragmatic implementation of snippets with handlebars templates.\n\nThe presentation is suitable for beginners and intermediates as it will mostly be conceptual in nature. There should be a practical demo for the audience to participate in as well.\n\nAuthor details\n\nhttps://www.linkedin.com/in/murraywoodman/\n\nhttps://www.drupal.org/u/murrayw\n\nhttps://twitter.com/murrayw\n\nhttps://www.morpht.com/about/murray-woodman",
+      "video_url": "https://www.youtube.com/watch?v=A6WXQuFbWY8",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T05:15:00Z",
+      "endTime": "2019-11-28T05:40:00Z",
+      "duration": "P25M",
+      "title": "The 45 minute site audit",
+      "location": "Huon",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/45-minute-site-audit",
+      "track": [
+        "Project Management"
+      ],
+      "speakers": [
+        "Scott Anderson"
+      ],
+      "full_description": "You've taken over a Drupal website and pretty soon you'll be expected to fix bugs, address production emergencies and develop new features. But... is it a pristine solution, crafted by the finest of Drupal artisans or does its slick carousel and parallax background hide terrible secrets, shocking security holes and spaghetti code.\n\nWhile there are clearly limits to how thoroughly you can review a site in 45 minutes, let me show you how far you can get in covering many important health checks and identifying potential concerns and action points.",
+      "video_url": "https://www.youtube.com/watch?v=59nvaO4Iy1s",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T05:15:00Z",
+      "endTime": "2019-11-28T05:40:00Z",
+      "duration": "P25M",
+      "title": "Jumping into conversational AI - Alexa",
+      "location": "Myrtle",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/jumping-conversational-ai-alexa",
+      "track": [
+        "Back-End Development"
+      ],
+      "speakers": [
+        "Suchi Garg"
+      ],
+      "full_description": "Voice user interfaces are becoming more and more common in our daya to day lives. Whether it is in the office, at home or even in the car, we can see the usage of VUI increasing. The techniques of graphical user interfaces are not so relevant to VUI. Alexa (Amazon echo) uses one such VUI.\n\nIn this session, we will talk about:\n\n* Concepts and terminology\n\n* Design challenges of VUI\n\nWe will also do a quick demo of:\n\n* A Drupal recipes site, integrated with Alexa",
+      "video_url": "https://www.youtube.com/watch?v=1yAgCJ0T4uM",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T05:15:00Z",
+      "endTime": "2019-11-28T05:40:00Z",
+      "duration": "P25M",
+      "title": "Frontend Re-United: The energy of the people",
+      "location": "Blackwood",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/frontend-re-united-energy-people",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Mathieu Spillebeen"
+      ],
+      "full_description": "We have hosted 15 conferences simultaneously around the world.\n\nHow did we facilitate for flexibility?\n\nWhat impact do we have across the globe?\n\nHow does the passion of a single global community look like?\n\nWhat divides and what unites us?\n\nThis session is how organizing a global conference made me a better person and how it can change you too. Using a conference as a tool to learn from different cultures.\n\nhttps://www.frontendunited.org/",
+      "video_url": "https://www.youtube.com/watch?v=4inIPgiE4ko",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T06:00:00Z",
+      "endTime": "2019-11-28T08:00:00Z",
+      "duration": "P120M",
+      "title": "Eighty Options Cocktail party at the HGC",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T20:00:00Z",
+      "endTime": "2019-11-28T21:45:00Z",
+      "duration": "P105M",
+      "title": "Women in Drupal coffee",
+      "location": "",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/women-drupal",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "DrupalSouth conference in Australia and New Zealand. DrupalSouth Melbourne 2025: 11-13 March 2025.",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T21:45:00Z",
+      "endTime": "2019-11-28T22:00:00Z",
+      "duration": "P15M",
+      "title": "Opening remarks",
+      "location": "Sassafras",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T22:00:00Z",
+      "endTime": "2019-11-28T22:25:00Z",
+      "duration": "P25M",
+      "title": "The Scientific Wild-Ass Guess",
+      "location": "Sassafras",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/scientific-wild-ass-guess",
+      "track": [
+        "Project Management"
+      ],
+      "speakers": [
+        "Adam Malone"
+      ],
+      "full_description": "Project estimation is hard, especially when you've got a basic set of requirements in an RFP with little to no knowledge of the business drivers, potential risks, or deeper integration requirements for a solution. Enter the SWAG, or Scientific Wild-Ass Guess.\n\nWith little information to go on, how do we estimate successfully projects which may take months to actually deliver upon. The SWAG uses an approach not dissimilar to Fermi estimations, where intuition and subject matter knowledge can be combined to provide a good idea of the level of effort required to build entire projects.\n\nThis talk will take us through the steps of creating a SWAG, breaking requirements down into features, applying difficulty, risk, and uncertainty loadings alongside a healthy dose of Excel to provide a low-risk level of effort when estimating large projects across a number of streams.",
+      "video_url": "https://www.youtube.com/watch?v=c37KxcBI880",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T22:00:00Z",
+      "endTime": "2019-11-28T22:45:00Z",
+      "duration": "P45M",
+      "title": "GovCMS: It's not just about Drupal, it's an ecosystem of tools",
+      "location": "Huon",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/govcms-its-not-just-about-drupal-its-ecosystem-tools",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Toby Bellwood"
+      ],
+      "full_description": "GovCMS has evolved in the last year, with the migration to amazee.io's Lagoon platform. With this, a wide range of opportunities to develop additional tooling and take advantage of new technology has also emerged. Whilst Drupal is the CMS that GovCMS is based on, the platform that supports it is comprised of a large amount of open source technology (with the occasional proprietary tool thrown in).\n\nIn this talk, Toby will talk through some of the tools, platforms and processes developed for use with GovCMS, and will provide some insight from the front-line on how they could also be used in your own Drupal infrastructure. Covering all stages of the development process, he'll cover CI tools (CircleCI, GitLab), the incorporation of Testing (tugboat.qa, CircleCI ), Logging (EFLK stack) and Monitoring (Grafana), Automation (Ansible and AWX), Containers and security (Docker, quay.io), a range of other tools (both familiar and unfamiliar) and some of the other goodies developed over the last year or so.\n\nThe last year in GovCMS has been a journey, and a great example in iterative development, building new tools and developing processes to address the ever-evolving needs of a growing platform and meeting the expectations of a user base building a new set of skills.",
+      "video_url": "https://www.youtube.com/watch?v=O_44JVcMmM4",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T22:00:00Z",
+      "endTime": "2019-11-28T22:45:00Z",
+      "duration": "P45M",
+      "title": "Single Sign On across Drupal 8",
+      "location": "Myrtle",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/single-sign-across-drupal-8",
+      "track": [
+        "Back-End Development"
+      ],
+      "speakers": [
+        "Iwantha Lekamge"
+      ],
+      "full_description": "Today, in the digitally-driven world, connecting their systems is a must for any organization.\n\nAs these could be different systems, websites and many more, having a single authentication mechanism across all is highly beneficial.\n\nWhat is SSO?\n\nSingle Sign-On (SSO) is a user authentication service that permits a user to use one set of login credentials (e.g., name and password) to access multiple systems.\n\nWhat will be discussed?\n\n- Advantages of having a single authenticated system to an organization\n\n- How to set up SSO for multiple systems using Simple SAML\n\n- SSO in a production environment and the use of Open Source Identity Provider for authenticating\n\n- Generic discussion on few Open Source SSO libraries/platforms along with a demonstration (configure with WSO2 Identity Server)",
+      "video_url": "https://www.youtube.com/watch?v=wp9PK4wlQ3E",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T22:00:00Z",
+      "endTime": "2019-11-28T22:45:00Z",
+      "duration": "P45M",
+      "title": "The future of Drupal theming?",
+      "location": "Blackwood",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/future-drupal-theming",
+      "track": [
+        "Front-end Development"
+      ],
+      "speakers": [
+        "Mathieu Spillebeen"
+      ],
+      "full_description": "Session outline:\n\nWhat if you don't need to decouple, to have some fun?\n\nWhat if you could make your CSS and JS over 90% more lean, with just a slice of opinion?\n\nWhat if the theming layer, is actually in your way?\n\nWhat if someone is going to tell you about a cutting-edge native Drupal frontend alternative?\n\nWould you come?\n\nThis talk is around the potential of splitting up the theming layer of Drupal",
+      "video_url": "https://www.youtube.com/watch?v=XMkIjhxt0Jg",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T22:25:00Z",
+      "endTime": "2019-11-28T22:45:00Z",
+      "duration": "P20M",
+      "title": "Preparing for a high traffic event, simple steps to success",
+      "location": "Sassafras",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/preparing-high-traffic-event-simple-steps-success",
+      "track": [
+        "Project Management"
+      ],
+      "speakers": [
+        "Sean Hamlin"
+      ],
+      "full_description": "This session is all about the steps that any new launch or high traffic event should go through in order to have the best chance of success. Topics covered:\n\nLoad testing\n\nEnsuring (auto) scaling is configured\n\nCache tuning and minimising origin requests\n\nLetting your hosting provider know\n\nWhat success looks like",
+      "video_url": "https://www.youtube.com/watch?v=zujP5cGJUFw",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T22:45:00Z",
+      "endTime": "2019-11-28T23:15:00Z",
+      "duration": "P30M",
+      "title": "Morning Tea",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T23:15:00Z",
+      "endTime": "2019-11-29T00:00:00Z",
+      "duration": "P45M",
+      "title": "Complexity of a Multi-language infrastructure - the CCAMLR story",
+      "location": "Sassafras",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/complexity-multi-language-infrastructure-ccamlr-story",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Dane Cavanagh"
+      ],
+      "full_description": "A presentation of the CCAMLR websites and how we work with Multiple Languages within a Drupal environment using an in house translation team in a large group of sites....",
+      "video_url": "https://www.youtube.com/watch?v=fbr92rBDF9Q",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T23:15:00Z",
+      "endTime": "2019-11-28T23:40:00Z",
+      "duration": "P25M",
+      "title": "Cloud Native Drupal Panel",
+      "location": "Huon",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/cloud-native-drupal-panel",
+      "track": [
+        "DevOps and Security"
+      ],
+      "speakers": [
+        "Nick Santamaria",
+        "Nick Schuch",
+        "Michael Richardson",
+        "Scott Leggett"
+      ],
+      "full_description": "We have spent the last few years in the midst of a complete revolution in how web applications are built and deployed. The unprecedented speed of these changes has made it challenging to keep up with current best practices, and it often feels like these “improvements” are just trading one set of problems for another.\n\nTo help you sort through the FUD we are bringing together a panel of experts who have spent years deep in the trenches building cloud-native platforms to deploy fast and resilient Drupal applications.\n\nPanelists:\n\n- Mike Richardson - Co-Founder @ Ironstar\n\n- Nick Schuch - Technical Lead @ PreviousNext\n\n- Scott Leggett- Systems Engineer @ Amazee.io\n\nHosted by Nick Santamaria - SysOps Engineer @ PreviousNext\n\nThis discussion will cover a range of topics from:\n\n- Making Drupal cloud-native friendly\n\n- Best practices for building container images\n\n- Getting started with Kubernetes\n\n- Tip and gotchas when building and operating Kubernetes clusters\n\n- Options for deploying and managing Drupal apps on Kubernetes",
+      "video_url": "https://www.youtube.com/watch?v=MW16OOmaDb4",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T23:15:00Z",
+      "endTime": "2019-11-29T00:00:00Z",
+      "duration": "P45M",
+      "title": "Winning and retaining long term clients",
+      "location": "Myrtle",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/winning-and-retaining-long-term-clients",
+      "track": [
+        "Project Management"
+      ],
+      "speakers": [
+        "Owen Lansbury"
+      ],
+      "full_description": "Every successful Drupal agency has a roster of long term clients who probably account for 80% of their ongoing revenue. It's these type of clients that we all aspire to winning and retaining, but how can you do this year after year through constant change of personnel, strategies and budgets?\n\nThis talk will go into detail about how to first identify and secure the types of clients that you can form multi-year relationships with. Once you've delivered that first successful project, how do you put the processes and relationship management in place to ensure you can replicate this success time and again?\n\nAimed at agency leaders and project managers we'll be using real world examples of what happens when you get it right and, of course, sometimes terribly wrong!",
+      "video_url": "https://www.youtube.com/watch?v=dKumvxuV15g",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T23:15:00Z",
+      "endTime": "2019-11-29T00:00:00Z",
+      "duration": "P45M",
+      "title": "Site search - A relevant case study",
+      "location": "Blackwood",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/site-search-relevant-case-study",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Dominic Milburn"
+      ],
+      "full_description": "On site search serves a critical function for visitors. Search results relevance and optimisation often gets overlooked in the push to go live and there is little appetite to revisit search because of its black box nature.\n\nBusiness users want their site visitors to have a google search experience but don't understand efforts and cost that that go into creating that experience. This talk examines site search implementation through a case study and provides some strategies and tactics that will allow business users to implement effective site search to provide a google experience without the huge price tag.",
+      "video_url": "https://www.youtube.com/watch?v=7DANkcW2_oQ",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T23:15:00Z",
+      "endTime": "2019-11-29T00:00:00Z",
+      "duration": "P45M",
+      "title": "Practical theming in Drupal 8",
+      "location": "Oak",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/practical-theming-drupal-8",
+      "track": [
+        "Other"
+      ],
+      "speakers": [
+        "Vladimir Roudakov"
+      ],
+      "full_description": "Setup information\n\nAll registered participants will receive link to the environment via email on Thursday, 28 November.\n\nMore information will be available on Friday, 22 November 2019.\n\nRegistration\n\nWorkshop capacity is limited to 30 people each and will be running during other events such as the code sprint and sessions. Make sure you are registered for the workshops that you can attend or let us know in advanced if you have changed your mind so others can attend the workshop. Registration for the workshops can be found at https://drupalsouth.org/events/hobart-2019/workshops.\n\nAll attendees will need to bring their own laptop or tablet. On arrival, you will be provided with your own Drupal website to work on.\n\nOther workshops\n\nWed 27 November 2019: Introduction to CI/CD with Gitlab and Drupal 8 (4 hours)\n\nThu 28 November 2019: Drupal 8 webforms: event registration (2 hours)\n\nThu 28 November 2019: Python for Drupal Devs (2 hours)\n\nFri 29 November 2019: Practical theming in Drupal 8 (2 hours)\n\nAbout presenter\n\nVladimir is a Drupal architect and software developer in Tomato Elephant Studio (Brisbane, Australia). He teaches Drupal privately and publicly (quarterly as part of Drupal global training day). Vladimir has presented sessions and has run workshops on migration, continuous integration, automated testing, content management systems & frontend frameworks at the camps and conferences around the world.",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-28T23:40:00Z",
+      "endTime": "2019-11-29T00:00:00Z",
+      "duration": "P20M",
+      "title": "End to end testing decoupled Drupal sites",
+      "location": "Huon",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/end-end-testing-decoupled-drupal-sites",
+      "track": [
+        "Front-end Development"
+      ],
+      "speakers": [
+        "Dylan Kelly"
+      ],
+      "full_description": "Ensuring websites are bug free and stay bug free is a time consuming process, which only gets harder as sites grow in size and complexity. Testing websites based upon a decoupled architecture using a Drupal JSON API backend presents additional challenges. Learn about the approach the Single Digital Presence project takes to end to end testing using Cypress.io to run tests across front and back end.",
+      "video_url": "https://www.youtube.com/watch?v=5S8tp5eCHcI",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-29T00:15:00Z",
+      "endTime": "2019-11-29T01:00:00Z",
+      "duration": "P45M",
+      "title": "Debunking the Myths of Digital Governance",
+      "location": "Sassafras",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/debunking-myths-digital-governance",
+      "track": [
+        "Project Management"
+      ],
+      "speakers": [
+        "Morgan Ritchings"
+      ],
+      "full_description": "Does Digital Governance give you mystical powers? Will it finally make everybody do what you ask them? Probably not - but what is Digital Governance and how can it help small digital teams maintain and launch hundreds of sites? Can its success be attributed to products and technology, or is it a result of process and organisational best practices? How do some companies go from taking months to launch a site to weeks?\n\nAttendees will find out how organisations, big and small, organise themselves and their technologies to gain maximum efficiency - and what can go wrong without any Digital Governance in place. We will discuss best practices, lessons learned from working with a large network of experienced platform owners, and tactical things you can do immediately to ensure that your site production systems and teams are running like a well-oiled machine.",
+      "video_url": "https://www.youtube.com/watch?v=JHd2R_OJ-HI",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-29T00:15:00Z",
+      "endTime": "2019-11-29T01:00:00Z",
+      "duration": "P45M",
+      "title": "Drupal confessions",
+      "location": "Huon",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/drupal-confessions",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Bevan Wishart",
+        "Lee Rowlands",
+        "Adam Bramley",
+        "Pamela Barone",
+        "Ling Yu"
+      ],
+      "full_description": "Proposed session type: panel/open mic\n\nSessions at Drupal South tend towards the positive and the evangelistic.\n\nI'll be working with Si Hobbs @sime to bring this together.\n\nAnd there are others in the Aus/NZ community that have expressed interest in such a session.\n\nNewbies can come away from a conference with a sense that drupal is somehow magical, and certain features and modules can be enabled and configured with the click of a button.\n\nExperienced Drupal users know that there are common gotchas. They've made their own mistakes.\n\nThere would be great value in a casual session, with an emphasis on casual, where people have the opportunity to express their honest experiences, let their guard down, a great chance for everyone to learn from other people's mistakes, and to give new developers (and even experienced ones) a chance to see that even the most experienced developers make mistakes. And often these are common mistakes.\n\nI'm envisioning this as being suitable as one of the last sessions for the conference, where everyone is ready to start winding down, and relax with a bit of fun, a completion and culmination of the previous events of the conference, prior to the final keynote. A chance for people to chill, enjoy themselves, and feedback some of their successes and their failures too.\n\nI'll bring together some experienced volunteers for the panel chairs, so they can share their stories, and encourage the audience to come up with some examples of their own, and also ask questions that will inevitably come to mind.\n\nA few quotes from slack to highlight this are:\n\n> \"\"probably one of mine\" #drupalconfessions\"\n\n> I feel like I owe a “sorry” gift basket to every client I’ve given paragraphs to for building a landing page lol\n\n> I’ve learnt the hard way (or my clients have) but recently i feel like i’m\n\n> doing the right amount of stuff with it in the right amount of reuse\n\n> ... drupal is awesome ...\n\n> But.. well at least in my experience.. I can come out of a talk, or reading a blog about new features being elated.\n\n> and then when I go to use it reality sets back in..\n\n> i love this idea! it could be an open mic\n\n> also trying to figure out what is 'the shittiest thing' i've ever done...... ahh memories\n\n> you've probably prevented me from doing a lot of the potential 'worst thing'\n\n> it took me several years to accept that some people build sites without HTML filtering\n\n> there are some things in Drupal you only learn the hard way, or from someone else who learnt the hard way\n\n> the first Drupal site I built had a custom theme and module with the same machine name\n\n> I had module hooks in the theme and had no idea that the fact it worked was a miracle\n\n> What about 'why is drush hanging there'.. oh damn, xdebug.",
+      "video_url": "https://www.youtube.com/watch?v=YmJOQG8hCww",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-29T00:15:00Z",
+      "endTime": "2019-11-29T01:00:00Z",
+      "duration": "P45M",
+      "title": "Better content workflow, moderation and audits in Drupal 8",
+      "location": "Myrtle",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/better-content-workflow-moderation-and-audits-drupal-8",
+      "track": [
+        "User Experience & Content"
+      ],
+      "speakers": [
+        "Heike Theis"
+      ],
+      "full_description": "Workflow in Drupal 8 is part of core - so far, so good. However, after hours of head shaking and box ticking, the user experience for content editors using the core modules out-of-the-box is anything but easy to understand or use. We can and we need to do better. Developers might build Drupal sites, but the editorial teams have to use them day to day over many years.\n\nThis talk is about our approach to content workflow, moderation and audits in Drupal 8 - it is about throwing out-of-the-box out of the window to find the answers you (really) need, the tools that can support you, and the resilience to survive.",
+      "video_url": "https://www.youtube.com/watch?v=gbnCyE4VtlM",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-29T00:15:00Z",
+      "endTime": "2019-11-29T01:00:00Z",
+      "duration": "P45M",
+      "title": "Comprehensive local-ci-production workflow setup with DrupalDevops.io",
+      "location": "Blackwood",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/comprehensive-local-ci-production-workflow-setup",
+      "track": [
+        "DevOps and Security"
+      ],
+      "speakers": [
+        "Alex Skrypnyk"
+      ],
+      "full_description": "When working on Drupal projects, the typical workflow to deliver a new feature may look like this:\n\nStart local dev environment -> Make changes -> Add unit tests -> Add Behat tests -> Lint code -> Push to remote -> Wait for CI to finish -> Open PR -> Deploy to Preview environment -> Merge PR -> Deploy to Production\n\nSetting up such workflow requires significant DevOps and Drupal knowledge and time.\n\nDrevOps is a free open-source Drupal project template with development-testing-deployment workflow provided out of the box. It has all necessary configurations (tested) to support such workflow and covers the following areas:\n\n- Composer-based Drupal (8, 7)\n\n- Local development environment (Docker, Ahoy)\n\n- Code linting (PHP, JS, SASS)\n\n- Testing (PHPUnit, Behat, Simpletest)\n\n- Automated builds (CircleCI)\n\n- Deployment (Acquia, Amazee Lagoon)\n\n- Documentation\n\n- Integrations (Diffy, dependencies.io)\n\nDuring this session I will demonstrate how DrevOps helps digital agencies and individual developers to use enterprise-level DevOps systems with Drupal projects.\n\nThis session may be interested to Digital Agencies that want to significantly decrease project setup and maintenance costs, while increasing quality and client satisfaction.",
+      "video_url": "https://www.youtube.com/watch?v=zOsjoWzMvmc",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-29T01:00:00Z",
+      "endTime": "2019-11-29T02:00:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-29T02:00:00Z",
+      "endTime": "2019-11-29T02:45:00Z",
+      "duration": "P45M",
+      "title": "How Drupal.org is built",
+      "location": "Sassafras",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/keynote-neil-drumm",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Neil Drumm"
+      ],
+      "full_description": "Neil Drumm (drumm) is a Drupal.org Architect and helps build Drupal.org as part of the Drupal Association's Engineering team. Drumm has been a member of Drupal.org for 16 years and has been credited for fixes on 184 issues in the past year.\n\nHe has been a regular at Drupal conferences since 2005, however, this will be his first time attending and presenting at DrupalSouth!\n\nNeil will be presenting a keynote on how Drupal.org is built.",
+      "video_url": "https://www.youtube.com/watch?v=XYVQbtjbq4I",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-29T02:45:00Z",
+      "endTime": "2019-11-29T03:00:00Z",
+      "duration": "P15M",
+      "title": "Group photo",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-29T03:00:00Z",
+      "endTime": "2019-11-29T03:45:00Z",
+      "duration": "P45M",
+      "title": "The new DrupalSouth Steering Committee - Goals and progress",
+      "location": "Sassafras",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/new-drupalsouth-steering-committee-goals-and-progress",
+      "track": [
+        "Project Management"
+      ],
+      "speakers": [],
+      "full_description": "In mid 2019, the DrupalSouth Steering Committee was formed to provide continuity for the main conference and a means to initiate and fund other activities that support and grow the regional Drupal community and CMS adoption. This panel will introduce the Steering Committee members and provide an update on the goals and initiatives they're focusing on and how you can get involved to help drive things forward.",
+      "video_url": "https://www.youtube.com/watch?v=cucyq1m1yPM",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-29T03:00:00Z",
+      "endTime": "2019-11-29T03:25:00Z",
+      "duration": "P25M",
+      "title": "A case study about Service NSW website",
+      "location": "Huon",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/case-study-about-service-nsw-website",
+      "track": [
+        "Showcases & Project Management"
+      ],
+      "speakers": [
+        "Jibran Ijaz",
+        "Tessa Penny",
+        "Christine Roque"
+      ],
+      "full_description": "Service NSW was created to provide a unified approach to customer service. It gives people and businesses easy access to government services online, over the phone or in-person at service centres. With 118 million visits since 2013, the Service NSW website is the most visited government digital touchpoint in NSW and one of the largest Drupal sites in Australia.\n\nIn June 2019, Service NSW launched a new and improved website that features a new design, improved content and functionality, as well as an upgraded content management system (CMS).\n\nIn this session, we'll discuss how we delivered a better and more innovative digital experience through:\n\nUX research and user-centred design processes that meets the needs of our customers,\n\nagile ways of working that allow us to respond quickly to usability improvements,\n\nfrontend and CMS functionality that enhances the user and publishing experience,\n\nan upgraded platform that increases reliability and performance, and\n\nour contributions back to the Drupal community.",
+      "video_url": "https://www.youtube.com/watch?v=TaIU2gzbp8U",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-29T03:00:00Z",
+      "endTime": "2019-11-29T03:25:00Z",
+      "duration": "P25M",
+      "title": "Easy Migration with Commerce",
+      "location": "Myrtle",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/easy-migration-commerce",
+      "track": [
+        "Back-End Development"
+      ],
+      "speakers": [
+        "Tiffany Tjan"
+      ],
+      "full_description": "What happens when you want to display products from an external source on your website, and when marketing teams need to augment those products with extra information?\n\nOne option here is to migrate the products you are selling into your Drupal 8 website. Drupal Commerce is one of the most popular ways to build e-commerce websites and to use a CMS as ‘the glass’.\n\nWith the rise of demand on online shopping, we can easily and automatically migrate products, variations, and attributes into Drupal from, amongst other sources, a CSV/XML file or JSON API. This approach cuts down time, increases accuracy, and allows marketers to provide additional content.\n\nThis talk will take us through a real-world example of integrating the Drupal migrate framework with Commerce and teach you how to pull accurate product information and attributes, while also ensuring it doesn’t become stale.",
+      "video_url": "https://www.youtube.com/watch?v=FV8W6JW0wrI",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-29T03:00:00Z",
+      "endTime": "2019-11-29T03:25:00Z",
+      "duration": "P25M",
+      "title": "Open source your work",
+      "location": "Blackwood",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/open-source-your-work",
+      "track": [
+        "DevOps and Security"
+      ],
+      "speakers": [
+        "Ben Jackson"
+      ],
+      "full_description": "Everyone talks about containers and wants to the technology in production. Amazee.io provides hosting of websites for several years to its customers and we’re currently working on the fourth iteration of our hosting stack called Lagoon. About 2 years ago we made a huge step and open-sourced all the code that runs our production environment for everyone to see and contribute.\n\nI’ll talk about why we open-sourced our daily work, why we think it’s the right step to do, and why open-source should be hosted by open source",
+      "video_url": "https://www.youtube.com/watch?v=ExCF-oPG3B4",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-29T03:25:00Z",
+      "endTime": "2019-11-29T03:45:00Z",
+      "duration": "P20M",
+      "title": "Content processing for site migration",
+      "location": "Myrtle",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/content-processing-site-migration",
+      "track": [
+        "Back-End Development"
+      ],
+      "speakers": [
+        "Kelvin Wong"
+      ],
+      "full_description": "Migration is an Extract, transform, load (ETL) process. During site migration, the data source we are getting could be in any kind of structure that does not always fit into the Drupal paradigm. Thankfully the Migrate API provides a number of plugins that allow raw data to be moulded and shaped into the right form.\n\nIn my section, I will be going through a number of handy Migrate process plugins. How we can make use of these plugins, to ensure content is imported in the correct format to minimise the cleanup process afterwards? What callback functions can be used to process and clean up data, so you can utilise functions from contrib modules without reinventing the wheel? I will be sharing my experience in site migration especially in dealing with contents from non-Drupal sites.",
+      "video_url": "https://www.youtube.com/watch?v=k1nSpNNuLII",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-29T03:25:00Z",
+      "endTime": "2019-11-29T03:45:00Z",
+      "duration": "P20M",
+      "title": "Automated auditing",
+      "location": "Blackwood",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/auditing-glance",
+      "track": [
+        "DevOps and Security"
+      ],
+      "speakers": [
+        "Karl Hepworth"
+      ],
+      "full_description": "GovCMS has evolved into a popular choice for government agencies choosing to take advantage of Drupal and modern technologies. Have a look at how GovCMS handles auditing and monitoring of Drupal applications on the Lagoon platform, and where it's heading with the increased security classification around the corner.",
+      "video_url": "https://www.youtube.com/watch?v=Vs1fTddNk",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-29T03:45:00Z",
+      "endTime": "2019-11-29T04:15:00Z",
+      "duration": "P30M",
+      "title": "Afternoon Tea",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-29T04:15:00Z",
+      "endTime": "2019-11-29T05:00:00Z",
+      "duration": "P45M",
+      "title": "Core release manager and a member of the Drupal Security Team Security, Drupal 9, and Navigating the Changing Web Landscape",
+      "location": "Sassafras",
+      "link": "https://drupalsouth.org/events/drupalsouth-hobart-2019/sessions/keynote-jess-xjm",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "xjm"
+      ],
+      "full_description": "Security, Drupal 9, and Navigating the Changing Web Landscape\n\nThis Keynote explores how Drupal 8 core has made its way \"off the island\" by leveraging industry standards like semantic versioning, package management, third-party libraries, and other external tools, and how these changes will affect Drupal 9 and 10. This shift brings a lot of benefits, but has also impacted how we manage release schedules, backwards compatibility, and security.\n\nWorking in Acquia's Drupal Acceleration Team, xjm is one of two Drupal core release managers and among Drupal 8's top patch contributors. She is also a member of the Drupal Security Team and has helped coordinate most core security releases since Drupal 8's release in 2015.\n\nPreviously, xjm founded the core contribution mentoring program in 2011, and worked as a member of the Views in Core initiative team in 2012.",
+      "video_url": "https://www.youtube.com/watch?v=yxVJggeMAPs",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-29T05:15:00Z",
+      "endTime": "2019-11-29T05:45:00Z",
+      "duration": "P30M",
+      "title": "Lightning talks",
+      "location": "Sassafras",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "https://www.youtube.com/watch?v=8NpHO5OkeHk",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-29T05:45:00Z",
+      "endTime": "2019-11-29T06:00:00Z",
+      "duration": "P15M",
+      "title": "Closing remarks",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-11-29T07:00:00Z",
+      "endTime": "2019-11-29T09:30:00Z",
+      "duration": "P150M",
+      "title": "Pantheon After Party at Shambles Brewery",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "sponsor-17"
+    }
+  ],
+  "result": "✅",
+  "url": "https://drupalsouth.org/events/hobart-2019/schedule"
+}

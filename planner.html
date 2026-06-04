@@ -32,10 +32,18 @@
             </h1>
           </div>
         </div>
-        <a href="./index.html" class="h-11 inline-flex items-center justify-center pl-5 pr-4 border border-gray-300 rounded-md text-sm font-medium text-gray-100 bg-transparent hover:bg-gray-50 transition-colors whitespace-nowrap">
-          <i class="fas fa-calendar-alt mr-2"></i>Back to schedule
-        </a>
       </div>
+      <nav class="site-nav" aria-label="Site navigation">
+        <a href="./index.html" class="site-nav-link">
+          <i class="fas fa-calendar-alt" aria-hidden="true"></i><span>Schedule</span>
+        </a>
+        <a href="./planner.html" class="site-nav-link is-active" aria-current="page">
+          <i class="fas fa-clipboard-list" aria-hidden="true"></i><span>My Planner</span>
+        </a>
+        <a id="editorNavLink" href="./editor.html" class="site-nav-link hidden">
+          <i class="fas fa-pen-ruler" aria-hidden="true"></i><span>Editor</span>
+        </a>
+      </nav>
     </div>
   </header>
 
@@ -82,19 +90,32 @@
               <i class="fas fa-book mr-2 text-xs"></i>Manage planner
             </button>
           </div>
-          <div class="flex gap-2 flex-wrap">
+          <div class="flex gap-2 flex-wrap items-center">
+            <label class="h-11 inline-flex items-center gap-2 pl-3 pr-2 border border-gray-300 rounded-md text-sm text-gray-600 bg-white whitespace-nowrap" title="Default currency for new items">
+              <i class="fas fa-coins text-xs text-gray-400"></i>
+              <select id="defaultCurrencySelect" class="h-full bg-transparent text-sm text-gray-700 border-0 focus:ring-0 pr-1 cursor-pointer"></select>
+            </label>
             <button id="plannerSaveFileBtn" type="button" class="hidden h-11 inline-flex items-center justify-center pl-5 pr-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
               <i class="fas fa-server mr-2"></i>Save to file
             </button>
-            <button id="plannerExportBtn" type="button" class="h-11 inline-flex items-center justify-center pl-5 pr-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
-              <i class="fas fa-file-export mr-2"></i>Export
+            <button id="plannerExportBtn" type="button" class="h-11 inline-flex items-center justify-center pl-5 pr-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap" title="Download a backup copy of this planner">
+              <i class="fas fa-download mr-2"></i>Back up
             </button>
-            <button id="plannerImportBtn" type="button" class="h-11 inline-flex items-center justify-center pl-5 pr-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
-              <i class="fas fa-file-import mr-2"></i>Import
+            <button id="plannerImportBtn" type="button" class="h-11 inline-flex items-center justify-center pl-5 pr-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap" title="Restore planner from a backup file">
+              <i class="fas fa-upload mr-2"></i>Restore
             </button>
           </div>
         </div>
       </section>
+
+      <!-- localStorage notice -->
+      <div id="storageNotice" class="hidden flex items-start gap-3 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+        <i class="fas fa-circle-info mt-0.5 shrink-0 text-amber-500"></i>
+        <span>Your planner is saved in this browser only. Use <strong>Back up</strong> to keep a copy you can restore later or use on another device.</span>
+        <button id="storageNoticeDismiss" type="button" class="ml-auto shrink-0 text-amber-500 hover:text-amber-700" aria-label="Dismiss">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
 
       <!-- Tab container -->
       <section class="editor-meta-accordion rounded-lg shadow-md p-4 space-y-4">
@@ -1361,15 +1382,20 @@
         </button>
       </div>
       <div class="px-6 py-5 space-y-3">
+        <label class="editor-form-field">
+          <span class="editor-field-label">Name</span>
+          <input type="text" id="swagModalName" placeholder="T-shirt, sticker, tote bag…"
+            class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+        </label>
         <div class="grid grid-cols-2 gap-3">
-          <label class="editor-form-field col-span-2 sm:col-span-1">
-            <span class="editor-field-label">Name</span>
-            <input type="text" id="swagModalName" placeholder="T-shirt, sticker, tote bag…"
+          <label class="editor-form-field">
+            <span class="editor-field-label">Quantity sent</span>
+            <input type="number" min="1" step="1" id="swagModalQuantity" placeholder="1"
               class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
           </label>
-          <label class="editor-form-field col-span-2 sm:col-span-1">
-            <span class="editor-field-label">Quantity</span>
-            <input type="number" min="1" step="1" id="swagModalQuantity" placeholder="1"
+          <label class="editor-form-field">
+            <span class="editor-field-label">Returned</span>
+            <input type="number" min="0" step="1" id="swagModalReturned" placeholder="0"
               class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
           </label>
         </div>

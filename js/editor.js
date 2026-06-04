@@ -278,10 +278,12 @@ const els = {
   showLogoTab: document.getElementById('showLogoTab'),
   showFlickrTab: document.getElementById('showFlickrTab'),
   showSessionsTab: document.getElementById('showSessionsTab'),
+  showSessionDetailsSubTab: document.getElementById('showSessionDetailsSubTab'),
+  showSessionTimelineSubTab: document.getElementById('showSessionTimelineSubTab'),
+  sessionDetailsPanel: document.getElementById('sessionDetailsPanel'),
   showSponsorsTab: document.getElementById('showSponsorsTab'),
   showSitemapTab: document.getElementById('showSitemapTab'),
   sitemapWorkspacePanel: document.getElementById('sitemapWorkspacePanel'),
-  showTimelineTab: document.getElementById('showTimelineTab'),
   timelineWorkspacePanel: document.getElementById('timelineWorkspacePanel'),
   timelineCanvas: document.getElementById('timelineCanvas'),
   showAppearanceTab: document.getElementById('showAppearanceTab'),
@@ -545,7 +547,7 @@ function setEditorButtonsEnabled(enabled) {
   if (els.saveDatasetToggle) els.saveDatasetToggle.disabled = !enabled;
   if (els.previewDataset) els.previewDataset.disabled = !enabled;
   if (els.previewDatasetToggle) els.previewDatasetToggle.disabled = !enabled;
-  if (els.revertDataset) els.revertDataset.disabled = true;
+  if (els.revertDataset) els.revertDataset.disabled = !enabled || !state.dirty || !state.persistedSnapshot;
   if (els.saveSession) els.saveSession.disabled = !enabled || state.selectedIndex < 0;
   els.addSession.disabled = !enabled;
   els.deleteSession.disabled = !enabled || state.selectedIndex < 0;
@@ -824,7 +826,9 @@ async function performUndo() {
   state.quickEditSessionChanges = new Set();
   state.quickEditSponsorChanges = new Set();
   normalizeDatasetShape();
-  markDirty(true);
+  const matchesSaved = state.persistedSnapshot &&
+    JSON.stringify(state.dataset) === JSON.stringify(state.persistedSnapshot.dataset);
+  markDirty(!matchesSaved);
   markSessionDirty(false);
   markSponsorDirty(false);
   updateUndoButton();
@@ -1485,23 +1489,28 @@ async function listDatasetFilesFromConnectedFolder() {
   const dataDir = await getDataDirectoryHandle(false);
   if (!dataDir) return [];
   const files = [];
-  // eslint-disable-next-line no-restricted-syntax
-  for await (const [name, handle] of dataDir.entries()) {
-    if (handle.kind !== 'file') continue;
-    if (!isEditorDatasetFile(name)) continue;
-    files.push(name);
+  async function scanDir(dirHandle, prefix) {
+    // eslint-disable-next-line no-restricted-syntax
+    for await (const [name, handle] of dirHandle.entries()) {
+      const rel = prefix ? `${prefix}/${name}` : name;
+      if (handle.kind === 'directory') {
+        await scanDir(handle, rel);
+      } else if (isEditorDatasetFile(name)) {
+        files.push(rel);
+      }
+    }
   }
+  await scanDir(dataDir, '');
   return files.sort((a, b) => a.localeCompare(b));
 }
 
 async function loadDatasetMetaForGrouping(files) {
-  const dataDir = await getDataDirectoryHandle(false);
-  if (!dataDir) return [];
+  if (!state.projectDirHandle) return [];
 
   const records = await Promise.all(
     files.map(async (file) => {
       try {
-        const handle = await dataDir.getFileHandle(file);
+        const handle = await resolveFileHandleFromProjectDir(`data/${file}`);
         const blob = await handle.getFile();
         const text = await blob.text();
         const parsed = JSON.parse(text);
@@ -1536,7 +1545,7 @@ async function loadDatasetMetaForGroupingViaFetch(files) {
   const records = await Promise.all(
     files.map(async (file) => {
       try {
-        const url = isApiMode() ? `${state.apiEndpoint}/api/data/${encodeURIComponent(file)}` : `./data/${file}`;
+        const url = isApiMode() ? `${state.apiEndpoint}/api/data/${file.split('/').map(encodeURIComponent).join('/')}` : `./data/${file}`;
         const res = await fetch(url);
         if (!res.ok) throw new Error();
         const parsed = await res.json();
@@ -1684,7 +1693,7 @@ async function loadDataset(file) {
   let handle = null;
   let parsed;
   if (isApiMode()) {
-    const res = await fetch(`${state.apiEndpoint}/api/data/${encodeURIComponent(file)}`);
+    const res = await fetch(`${state.apiEndpoint}/api/data/${file.split('/').map(encodeURIComponent).join('/')}`);
     if (!res.ok) throw new Error(`Failed to load ${file}: HTTP ${res.status}`);
     parsed = await res.json();
   } else {
@@ -1734,7 +1743,7 @@ async function loadDataset(file) {
   renderSessionForm();
   renderSponsorList();
   renderSponsorForm();
-  if (state.activeEditorTab === 'sitemap') renderSitemap();
+  if (state.activeEditorTab === 'sitemap') { renderOtherUrlsEditor(); renderSitemap(); }
   if (state.activeEditorTab === 'timeline' && els.timelineCanvas) {
     renderTimeline(els.timelineCanvas, state.dataset, {
       markDirty: () => markDirty(true),
@@ -1797,7 +1806,7 @@ function createDatasetScaffold(pathValue) {
   renderSessionForm();
   renderSponsorList();
   renderSponsorForm();
-  if (state.activeEditorTab === 'sitemap') renderSitemap();
+  if (state.activeEditorTab === 'sitemap') { renderOtherUrlsEditor(); renderSitemap(); }
   setEditorButtonsEnabled(true);
 }
 
@@ -3216,92 +3225,74 @@ function setSponsorWorkspaceExpanded(expanded) {
 }
 
 function setActiveEditorTab(tab) {
-  const nextTab = ['event', 'logo', 'flickr', 'sessions', 'sponsors', 'sitemap', 'timeline', 'appearance'].includes(tab) ? tab : 'event';
+  const nextTab = ['event', 'logo', 'flickr', 'sessions', 'timeline', 'sponsors', 'sitemap', 'appearance'].includes(tab) ? tab : 'event';
   state.activeEditorTab = nextTab;
 
-  if (els.eventWorkspacePanel) {
-    els.eventWorkspacePanel.classList.toggle('hidden', nextTab !== 'event');
+  const inSessionsArea = nextTab === 'sessions' || nextTab === 'timeline';
+
+  // Main panel visibility
+  els.eventWorkspacePanel?.classList.toggle('hidden', nextTab !== 'event');
+  els.logoWorkspacePanel?.classList.toggle('hidden', nextTab !== 'logo');
+  els.flickrWorkspacePanel?.classList.toggle('hidden', nextTab !== 'flickr');
+  els.sessionWorkspacePanel?.classList.toggle('hidden', !inSessionsArea);
+  els.sponsorWorkspacePanel?.classList.toggle('hidden', nextTab !== 'sponsors');
+  els.sitemapWorkspacePanel?.classList.toggle('hidden', nextTab !== 'sitemap');
+  els.appearanceWorkspacePanel?.classList.toggle('hidden', nextTab !== 'appearance');
+
+  // Sessions sub-panels
+  els.sessionDetailsPanel?.classList.toggle('hidden', nextTab !== 'sessions');
+  els.timelineWorkspacePanel?.classList.toggle('hidden', nextTab !== 'timeline');
+
+  // Main tab buttons
+  const tabButtonMap = {
+    event: els.showEventTab,
+    logo: els.showLogoTab,
+    flickr: els.showFlickrTab,
+    sponsors: els.showSponsorsTab,
+    sitemap: els.showSitemapTab,
+    appearance: els.showAppearanceTab,
+  };
+  for (const [key, btn] of Object.entries(tabButtonMap)) {
+    if (!btn) continue;
+    const active = nextTab === key;
+    btn.classList.toggle('is-active', active);
+    btn.setAttribute('aria-selected', active ? 'true' : 'false');
   }
-  if (els.logoWorkspacePanel) {
-    els.logoWorkspacePanel.classList.toggle('hidden', nextTab !== 'logo');
-  }
-  if (els.flickrWorkspacePanel) {
-    els.flickrWorkspacePanel.classList.toggle('hidden', nextTab !== 'flickr');
-  }
-  if (els.sessionWorkspacePanel) {
-    els.sessionWorkspacePanel.classList.toggle('hidden', nextTab !== 'sessions');
-  }
-  if (els.sponsorWorkspacePanel) {
-    els.sponsorWorkspacePanel.classList.toggle('hidden', nextTab !== 'sponsors');
-  }
-  if (els.sitemapWorkspacePanel) {
-    els.sitemapWorkspacePanel.classList.toggle('hidden', nextTab !== 'sitemap');
-  }
-  if (els.showEventTab) {
-    const active = nextTab === 'event';
-    els.showEventTab.classList.toggle('is-active', active);
-    els.showEventTab.setAttribute('aria-selected', active ? 'true' : 'false');
-  }
-  if (els.showLogoTab) {
-    const active = nextTab === 'logo';
-    els.showLogoTab.classList.toggle('is-active', active);
-    els.showLogoTab.setAttribute('aria-selected', active ? 'true' : 'false');
-  }
-  if (els.showFlickrTab) {
-    const active = nextTab === 'flickr';
-    els.showFlickrTab.classList.toggle('is-active', active);
-    els.showFlickrTab.setAttribute('aria-selected', active ? 'true' : 'false');
-  }
+  // Sessions tab is active for both sessions and timeline sub-tabs
   if (els.showSessionsTab) {
+    els.showSessionsTab.classList.toggle('is-active', inSessionsArea);
+    els.showSessionsTab.setAttribute('aria-selected', inSessionsArea ? 'true' : 'false');
+  }
+
+  // Sessions sub-tab buttons
+  if (els.showSessionDetailsSubTab) {
     const active = nextTab === 'sessions';
-    els.showSessionsTab.classList.toggle('is-active', active);
-    els.showSessionsTab.setAttribute('aria-selected', active ? 'true' : 'false');
+    els.showSessionDetailsSubTab.classList.toggle('is-active', active);
+    els.showSessionDetailsSubTab.setAttribute('aria-selected', active ? 'true' : 'false');
   }
-  if (els.showSponsorsTab) {
-    const active = nextTab === 'sponsors';
-    els.showSponsorsTab.classList.toggle('is-active', active);
-    els.showSponsorsTab.setAttribute('aria-selected', active ? 'true' : 'false');
-  }
-  if (els.showSitemapTab) {
-    const active = nextTab === 'sitemap';
-    els.showSitemapTab.classList.toggle('is-active', active);
-    els.showSitemapTab.setAttribute('aria-selected', active ? 'true' : 'false');
-    if (active) renderSitemap();
-  }
-  if (els.sitemapWorkspacePanel) {
-    els.sitemapWorkspacePanel.classList.toggle('hidden', nextTab !== 'sitemap');
-  }
-  if (els.timelineWorkspacePanel) {
-    els.timelineWorkspacePanel.classList.toggle('hidden', nextTab !== 'timeline');
-  }
-  if (els.showTimelineTab) {
+  if (els.showSessionTimelineSubTab) {
     const active = nextTab === 'timeline';
-    els.showTimelineTab.classList.toggle('is-active', active);
-    els.showTimelineTab.setAttribute('aria-selected', active ? 'true' : 'false');
-    if (active && state.dataset && els.timelineCanvas) {
-      renderTimeline(els.timelineCanvas, state.dataset, {
-        markDirty: () => markDirty(true),
-        trackQuickSessionChange,
-        undoPush,
-        utcIsoToLocalInput,
-        localInputToUtcIso,
-        getEventTimezone,
-      });
-    }
+    els.showSessionTimelineSubTab.classList.toggle('is-active', active);
+    els.showSessionTimelineSubTab.setAttribute('aria-selected', active ? 'true' : 'false');
   }
-  if (els.appearanceWorkspacePanel) {
-    els.appearanceWorkspacePanel.classList.toggle('hidden', nextTab !== 'appearance');
-  }
-  if (els.showAppearanceTab) {
-    const active = nextTab === 'appearance';
-    els.showAppearanceTab.classList.toggle('is-active', active);
-    els.showAppearanceTab.setAttribute('aria-selected', active ? 'true' : 'false');
-    if (active) renderAppearanceForm();
+
+  // Side-effects on activation
+  if (nextTab === 'sitemap') { renderOtherUrlsEditor(); renderSitemap(); }
+  if (nextTab === 'appearance') renderAppearanceForm();
+  if (nextTab === 'timeline' && state.dataset && els.timelineCanvas) {
+    renderTimeline(els.timelineCanvas, state.dataset, {
+      markDirty: () => markDirty(true),
+      trackQuickSessionChange,
+      undoPush,
+      utcIsoToLocalInput,
+      localInputToUtcIso,
+      getEventTimezone,
+    });
   }
 }
 
 function switchEditorTab(tab) {
-  const nextTab = ['event', 'logo', 'flickr', 'sessions', 'sponsors', 'sitemap', 'timeline', 'appearance'].includes(tab) ? tab : 'event';
+  const nextTab = ['event', 'logo', 'flickr', 'sessions', 'timeline', 'sponsors', 'sitemap', 'appearance'].includes(tab) ? tab : 'event';
   if (nextTab === state.activeEditorTab) return;
   setActiveEditorTab(nextTab);
 }
@@ -4881,7 +4872,7 @@ async function buildSponsorEventCounts() {
     .filter((f) => f && f.endsWith('.json') && f !== 'sponsors.json');
   const results = await Promise.allSettled(
     files.map((f) => {
-      const url = isApiMode() ? `${state.apiEndpoint}/api/data/${encodeURIComponent(f)}` : `./data/${f}`;
+      const url = isApiMode() ? `${state.apiEndpoint}/api/data/${f.split('/').map(encodeURIComponent).join('/')}` : `./data/${f}`;
       return fetch(url).then((r) => r.json());
     })
   );
@@ -4935,9 +4926,12 @@ function isApiMode() {
 }
 
 async function saveViaApi() {
-  const filename = outputBasename(state.outputPath) || state.file;
-  if (!filename) throw new Error('No output filename configured.');
-  const res = await fetch(`${state.apiEndpoint}/api/data/${encodeURIComponent(filename)}`, {
+  const relativePath = state.outputPath
+    ? state.outputPath.replace(/^data\//, '')
+    : (outputBasename(state.outputPath) || state.file);
+  if (!relativePath) throw new Error('No output filename configured.');
+  const apiPath = relativePath.split('/').map(encodeURIComponent).join('/');
+  const res = await fetch(`${state.apiEndpoint}/api/data/${apiPath}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: datasetJsonText(),
@@ -5085,6 +5079,66 @@ function renderSitemap() {
   });
 }
 
+function renderOtherUrlsEditor() {
+  const container = document.getElementById('otherUrlsEditorContent');
+  if (!container) return;
+
+  const urls = normalizeUrlArray(state.dataset?.event?.other_urls);
+
+  const rows = urls.map((url, i) => `
+    <div class="url-multifield-row">
+      <input type="text"
+        class="url-multifield-input"
+        data-other-url-index="${i}"
+        value="${escapeAttr(url)}"
+        placeholder="https://">
+      <button type="button"
+        class="url-multifield-remove"
+        data-other-url-remove="${i}"
+        aria-label="Remove URL">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  `).join('');
+
+  container.innerHTML = `
+    <div class="url-multifield-list">
+      ${rows || '<p class="url-multifield-empty">No reference URLs added yet.</p>'}
+    </div>
+    <button type="button" class="url-multifield-add" id="addOtherUrl">
+      <i class="fas fa-plus"></i> Add URL
+    </button>
+  `;
+
+  container.querySelectorAll('[data-other-url-index]').forEach((input) => {
+    input.addEventListener('input', () => {
+      const index = Number(input.dataset.otherUrlIndex);
+      if (!Array.isArray(state.dataset.event.other_urls)) state.dataset.event.other_urls = [];
+      state.dataset.event.other_urls[index] = input.value;
+      markDirty(true);
+      renderSitemap();
+    });
+  });
+
+  container.querySelectorAll('[data-other-url-remove]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const index = Number(btn.dataset.otherUrlRemove);
+      if (!Array.isArray(state.dataset.event.other_urls)) return;
+      state.dataset.event.other_urls.splice(index, 1);
+      markDirty(true);
+      renderOtherUrlsEditor();
+      renderSitemap();
+    });
+  });
+
+  document.getElementById('addOtherUrl')?.addEventListener('click', () => {
+    if (!Array.isArray(state.dataset.event.other_urls)) state.dataset.event.other_urls = [];
+    state.dataset.event.other_urls.push('');
+    markDirty(true);
+    renderOtherUrlsEditor();
+  });
+}
+
 function doPreview(mode = 'tab') {
   if (!state.dataset) return;
   try {
@@ -5221,6 +5275,33 @@ function bindEvents() {
     if (closeApiSettingsBtn) closeApiSettingsBtn.addEventListener('click', closeApiModal);
     apiSettingsModal.addEventListener('click', (e) => { if (e.target === apiSettingsModal) closeApiModal(); });
 
+    async function checkApiCompatibility(endpoint, resultEl) {
+      resultEl.classList.remove('hidden');
+      resultEl.textContent = 'Testing…';
+      resultEl.className = 'text-sm text-gray-500';
+      try {
+        const res = await fetch(`${endpoint}/api/health`);
+        if (res.ok) {
+          const data = await res.json().catch(() => null);
+          if (data?.app === 'conference-planner-api') {
+            resultEl.textContent = 'Connected — compatible API detected.';
+            resultEl.className = 'text-sm text-green-600';
+            return true;
+          }
+          resultEl.textContent = 'Server responded but does not appear to be a compatible API. Check the endpoint URL.';
+          resultEl.className = 'text-sm text-yellow-600';
+          return false;
+        }
+        resultEl.textContent = `Server responded with HTTP ${res.status}.`;
+        resultEl.className = 'text-sm text-red-600';
+        return false;
+      } catch (e) {
+        resultEl.textContent = `Could not connect: ${e.message}`;
+        resultEl.className = 'text-sm text-red-600';
+        return false;
+      }
+    }
+
     if (apiTestBtn && apiEndpointInput && apiTestResult) {
       apiTestBtn.addEventListener('click', async () => {
         const endpoint = apiEndpointInput.value.trim().replace(/\/$/, '');
@@ -5230,21 +5311,7 @@ function bindEvents() {
           return;
         }
         apiTestBtn.disabled = true;
-        apiTestResult.textContent = 'Testing…';
-        apiTestResult.className = 'text-sm text-gray-500';
-        try {
-          const res = await fetch(`${endpoint}/api/health`);
-          if (res.ok) {
-            apiTestResult.textContent = 'Connected successfully.';
-            apiTestResult.className = 'text-sm text-green-600';
-          } else {
-            apiTestResult.textContent = `Server responded with HTTP ${res.status}.`;
-            apiTestResult.className = 'text-sm text-red-600';
-          }
-        } catch (e) {
-          apiTestResult.textContent = `Could not connect: ${e.message}`;
-          apiTestResult.className = 'text-sm text-red-600';
-        }
+        await checkApiCompatibility(endpoint, apiTestResult);
         apiTestBtn.disabled = false;
       });
     }
@@ -5252,6 +5319,12 @@ function bindEvents() {
     if (apiSaveBtn && apiEndpointInput) {
       apiSaveBtn.addEventListener('click', async () => {
         const endpoint = apiEndpointInput.value.trim().replace(/\/$/, '');
+        if (endpoint) {
+          apiSaveBtn.disabled = true;
+          const ok = await checkApiCompatibility(endpoint, apiTestResult);
+          apiSaveBtn.disabled = false;
+          if (!ok) return;
+        }
         state.apiEndpoint = endpoint;
         if (endpoint) {
           localStorage.setItem('editorApiEndpoint', endpoint);
@@ -5493,10 +5566,12 @@ function bindEvents() {
     });
   }
 
-  if (els.showTimelineTab) {
-    els.showTimelineTab.addEventListener('click', async () => {
-      switchEditorTab('timeline');
-    });
+  if (els.showSessionDetailsSubTab) {
+    els.showSessionDetailsSubTab.addEventListener('click', () => switchEditorTab('sessions'));
+  }
+
+  if (els.showSessionTimelineSubTab) {
+    els.showSessionTimelineSubTab.addEventListener('click', () => switchEditorTab('timeline'));
   }
 
   if (els.showAppearanceTab) {
@@ -5737,13 +5812,6 @@ function revealPage() {
 async function init() {
   await loadThemes();
   applyThemeClass(getCurrentThemeId());
-
-  if (!isLocalhost()) {
-    els.blocked.classList.remove('hidden');
-    els.app.classList.add('hidden');
-    revealPage();
-    return;
-  }
 
   eventCatalog = await loadEventCatalog().catch(() => []);
   buildTimezoneList();

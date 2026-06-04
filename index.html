@@ -40,38 +40,18 @@
                         </h1>
                     </div>
                 </div>
-                <div class="relative">
-                  <button
-                    id="headerMenuBtn"
-                    type="button"
-                    aria-label="More options"
-                    aria-haspopup="menu"
-                    aria-expanded="false"
-                    class="header-menu-btn h-10 w-10 items-center justify-center rounded-md text-gray-100 transition-colors"
-                  >
-                    <i class="fas fa-ellipsis-vertical" aria-hidden="true"></i>
-                  </button>
-                  <div id="headerMenu" role="menu" class="hidden absolute right-0 top-full mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black/10 z-50">
-                    <a href="./planner.html" role="menuitem"
-                       class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 rounded-md">
-                      <i class="fas fa-clipboard-list text-gray-400 text-xs" aria-hidden="true"></i>
-                      Trip planner
-                    </a>
-                    <div class="border-t border-gray-100 mx-2"></div>
-                    <button
-                      id="editorAccessButton"
-                      type="button"
-                      role="menuitem"
-                      aria-label="Open schedule editor"
-                      title="Editor available when running locally"
-                      class="header-editor-item w-full flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 rounded-md"
-                    >
-                      <i class="fas fa-cog text-gray-400 text-xs" aria-hidden="true"></i>
-                      Schedule editor
-                    </button>
-                  </div>
-                </div>
             </div>
+            <nav class="site-nav" aria-label="Site navigation">
+                <a href="./index.html" class="site-nav-link is-active" aria-current="page">
+                    <i class="fas fa-calendar-alt" aria-hidden="true"></i><span>Schedule</span>
+                </a>
+                <a href="./planner.html" class="site-nav-link">
+                    <i class="fas fa-clipboard-list" aria-hidden="true"></i><span>My Planner</span>
+                </a>
+                <a id="editorNavLink" href="./editor.html" class="site-nav-link hidden">
+                    <i class="fas fa-pen-ruler" aria-hidden="true"></i><span>Editor</span>
+                </a>
+            </nav>
         </div>
     </header>
 
@@ -200,7 +180,7 @@
                 <div class="selection-overview-actions p-4 border-t border-gray-700">
                     <div class="selection-overview-actions-row">
                         <button id="downloadIcs" class="selection-overview-action selection-overview-action-primary drupal-blue text-white px-4 py-2 rounded-md drupal-blue-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-                            <i class="fas fa-download mr-2"></i>Download ICS
+                            <i class="fas fa-calendar-plus mr-2"></i>Add to Calendar
                         </button>
                         <button id="addGoogleCalendar" class="selection-overview-action selection-overview-action-secondary px-4 py-2 rounded-md border border-gray-300 text-sm font-medium text-gray-100 bg-transparent hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
                             <i class="fab fa-google mr-2"></i>Add to Google Calendar

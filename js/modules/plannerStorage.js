@@ -1,6 +1,6 @@
 export const STORAGE_PREFIX = 'drupalconPlanner_';
 export const GLOBAL_KEY     = 'drupalconPlanner_global';
-export const PLANNER_VERSION = 2;
+export const PLANNER_VERSION = 3;
 
 export function getPlannerKey(eventFile) {
   return `${STORAGE_PREFIX}${eventFile}`;
@@ -13,7 +13,7 @@ export function makeItemId(prefix = 'item') {
 // ── Global (cross-event) store ────────────────────────────────────────────────
 
 export function makeEmptyGlobal() {
-  return { teamMembers: [] };
+  return { teamMembers: [], defaultCurrency: '' };
 }
 
 export function loadGlobal() {
@@ -60,8 +60,8 @@ export function makeEmptyPlanner(plannerKey, eventFile = '') {
       documents: [],
       budgetItems: [],
       itinerary: [],
+      memberItinerary: [],
     },
-    itinerary: [],
     receipts: [],
     personal: {
       outboundLegs:   [],
@@ -86,7 +86,7 @@ export function loadPlanner(plannerKey, defaultEventFile = '') {
     const parsed = JSON.parse(raw);
     const empty  = makeEmptyPlanner(plannerKey, parsed._eventFile || defaultEventFile);
     // Strip legacy top-level keys before spreading
-    const { trip: _trip, individual: _individual, ...cleanParsed } = parsed;
+    const { trip: _trip, individual: _individual, itinerary: _legacyItinerary, ...cleanParsed } = parsed;
     return {
       ...empty,
       ...cleanParsed,
@@ -99,9 +99,10 @@ export function loadPlanner(plannerKey, defaultEventFile = '') {
           item.name !== undefined ? item
             : { ...item, name: item.label || '', quantity: 1, budget: '', actual: '', currency: 'AUD', notes: '' }
         );
-        return { ...empty.org, ...po, swag };
+        // Migrate v2 top-level itinerary (team-member items) into org.memberItinerary
+        const memberItinerary = po.memberItinerary || _legacyItinerary || [];
+        return { ...empty.org, ...po, swag, memberItinerary };
       })(),
-      itinerary: cleanParsed.itinerary || [],
       receipts:  cleanParsed.receipts  || [],
       personal: (() => {
         const pi = cleanParsed.personal || _individual || {};

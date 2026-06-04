@@ -1,0 +1,2213 @@
+{
+  "event": {
+    "designation": "DrupalCon",
+    "location": "Portland",
+    "year": "2024",
+    "website": "https://events.drupal.org/portland2024",
+    "region": "America",
+    "startDate": "2024-05-06T15:00:00Z",
+    "endDate": "2024-05-10T04:05:00Z",
+    "venue": "Oregon Convention Center",
+    "timezone": "America/Los_Angeles",
+    "columns": 3,
+    "enabled": false,
+    "logo": {
+      "image": "./img/logos/drupalcon-logo.svg",
+      "imageAlt": "DrupalCon logo",
+      "usePlate": false
+    },
+    "scheduleURLs": [
+      "https://events.drupal.org/portland2024/schedule"
+    ],
+    "flickr": {
+      "enabled": false,
+      "groupUrl": "",
+      "image": "",
+      "imageAlt": ""
+    },
+    "sponsors": [],
+    "other_urls": []
+  },
+  "items": [
+    {
+      "startTime": "2024-05-06T15:00:00Z",
+      "endTime": "2024-05-06T15:50:00Z",
+      "duration": "P50M",
+      "title": "Scholarship Breakfast",
+      "location": "Location 204 Oregon Ballroom",
+      "link": "https://events.drupal.org//portland2024/session/scholarship-breakfast",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T15:00:00Z",
+      "endTime": "2024-05-07T00:00:00Z",
+      "duration": "P540M",
+      "title": "General Contribution",
+      "location": "Location B115-116",
+      "link": "https://events.drupal.org//portland2024/session/general-contribution",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T15:00:00Z",
+      "endTime": "2024-05-07T00:00:00Z",
+      "duration": "P540M",
+      "title": "Prayer Room",
+      "location": "Location C127",
+      "link": "https://events.drupal.org//portland2024/session/prayer-room",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T15:00:00Z",
+      "endTime": "2024-05-07T00:00:00Z",
+      "duration": "P540M",
+      "title": "Quiet Room",
+      "location": "Location C128",
+      "link": "https://events.drupal.org//portland2024/session/quiet-room",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T15:00:00Z",
+      "endTime": "2024-05-07T00:00:00Z",
+      "duration": "P540M",
+      "title": "Birds of a Feather",
+      "location": "Location G129, G130, G131, G132",
+      "link": "https://events.drupal.org//portland2024/session/birds-feather",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T15:00:00Z",
+      "endTime": "2024-05-07T01:00:00Z",
+      "duration": "P600M",
+      "title": "Registration Opens",
+      "location": "Location Lobby C",
+      "link": "https://events.drupal.org//portland2024/session/registration-opens",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T16:00:00Z",
+      "endTime": "2024-05-06T16:50:00Z",
+      "duration": "P50M",
+      "title": "Mastering Consistency: Expanding content across multiple sites and touch points",
+      "location": "Location A105",
+      "link": "https://events.drupal.org//portland2024/session/mastering-consistency-expanding-content-across-multiple-sites-and-touch-points",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "mandee_englert",
+        "Amanda Konopko"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T16:00:00Z",
+      "endTime": "2024-05-06T16:50:00Z",
+      "duration": "P50M",
+      "title": "Save time upgrading from Drupal 7 to Drupal 10 using Retrofit",
+      "location": "Location A106",
+      "link": "https://events.drupal.org//portland2024/session/save-time-upgrading-drupal-7-drupal-10-using-retrofit",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "mglaman"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T16:00:00Z",
+      "endTime": "2024-05-06T16:50:00Z",
+      "duration": "P50M",
+      "title": "Ethical Implications of Artificial Intelligence",
+      "location": "Location A107-109",
+      "link": "https://events.drupal.org//portland2024/session/ethical-implications-artificial-intelligence",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "jmcwherter"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T16:00:00Z",
+      "endTime": "2024-05-06T16:50:00Z",
+      "duration": "P50M",
+      "title": "Key to Collaboration: How to Build Psychological Safety with Individuals and Teams",
+      "location": "Location B117-119",
+      "link": "https://events.drupal.org//portland2024/session/key-collaboration-how-build-psychological-safety-individuals-and-teams",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "cneslund",
+        "Britany Acre"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T16:00:00Z",
+      "endTime": "2024-05-06T16:50:00Z",
+      "duration": "P50M",
+      "title": "Transforming Drupal into a MarTech LeadGen Machine",
+      "location": "Location C120-122",
+      "link": "https://events.drupal.org//portland2024/session/transforming-drupal-martech-leadgen-machine",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "nedrahutton"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T16:00:00Z",
+      "endTime": "2024-05-06T16:50:00Z",
+      "duration": "P50M",
+      "title": "Accessibility audits: The many shapes and sizes. What’s the right fit for you?",
+      "location": "Location C123-124",
+      "link": "https://events.drupal.org//portland2024/session/accessibility-audits-many-shapes-and-sizes-whats-right-fit-you",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "Julieelman",
+        "kbeck303"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T16:50:00Z",
+      "endTime": "2024-05-06T17:30:00Z",
+      "duration": "P40M",
+      "title": "Expo Hall Break",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/expo-hall-break",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T16:55:00Z",
+      "endTime": "2024-05-06T17:05:00Z",
+      "duration": "P10M",
+      "title": "Lightning Talk: Trivia with a twist: Stretching mind and body",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/lightning-talk-trivia-twist-stretching-mind-and-body",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "Haylee Millar"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T17:30:00Z",
+      "endTime": "2024-05-06T17:45:00Z",
+      "duration": "P15M",
+      "title": "Welcome Remarks and Aaron Winborn Award (Community Working Group Presenting this Award)",
+      "location": "Location 201-203 Oregon Ballroom",
+      "link": "https://events.drupal.org//portland2024/session/welcome-remarks-and-aaron-winborn-award-community-working-group-presenting",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T17:45:00Z",
+      "endTime": "2024-05-06T18:45:00Z",
+      "duration": "P60M",
+      "title": "Driesnote",
+      "location": "Location 201-203 Oregon Ballroom",
+      "link": "https://events.drupal.org//portland2024/session/driesnote",
+      "track": [],
+      "speakers": [
+        "Dries Buytaert"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T18:45:00Z",
+      "endTime": "2024-05-06T19:00:00Z",
+      "duration": "P15M",
+      "title": "GROUP PHOTO",
+      "location": "Location Lobby C",
+      "link": "https://events.drupal.org//portland2024/session/group-photo",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T19:00:00Z",
+      "endTime": "2024-05-06T20:00:00Z",
+      "duration": "P60M",
+      "title": "Lunch & Expo Hall",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/lunch-expo-hall",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T19:20:00Z",
+      "endTime": "2024-05-06T20:20:00Z",
+      "duration": "P60M",
+      "title": "Black in Drupal Lunch",
+      "location": "Location 204 Oregon Ballroom",
+      "link": "https://events.drupal.org//portland2024/session/black-drupal-lunch",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T20:00:00Z",
+      "endTime": "2024-05-06T20:30:00Z",
+      "duration": "P30M",
+      "title": "Expo Hall Break",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/expo-hall-break-0",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T20:05:00Z",
+      "endTime": "2024-05-06T20:15:00Z",
+      "duration": "P10M",
+      "title": "Lightning Talk: 5 new free things you get from CKEditor 5 Plugin Pack",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/lightning-talk-5-new-free-things-you-get-ckeditor-5-plugin-pack",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "Dan Wilson"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T20:30:00Z",
+      "endTime": "2024-05-06T21:20:00Z",
+      "duration": "P50M",
+      "title": "Drupal Security",
+      "location": "Location 201-203 Oregon Ballroom",
+      "link": "https://events.drupal.org//portland2024/session/drupal-security",
+      "track": [],
+      "speakers": [
+        "mlhess",
+        "hestenet"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T20:30:00Z",
+      "endTime": "2024-05-06T21:20:00Z",
+      "duration": "P50M",
+      "title": "Modernizing Oregon Metro's Digital Landscape: A Drupal Journey of Integration, Inclusivity, & Impact",
+      "location": "Location A105",
+      "link": "https://events.drupal.org//portland2024/session/modernizing-oregon-metros-digital-landscape-drupal-journey-integration",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "blgraves",
+        "Ben Crawford",
+        "kmonahan",
+        "gbeezus",
+        "John Johnson"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T20:30:00Z",
+      "endTime": "2024-05-06T21:20:00Z",
+      "duration": "P50M",
+      "title": "From Many to One: Migrating 70+ Disparate Local Government Websites onto a Cohesive Drupal Platform",
+      "location": "Location A106",
+      "link": "https://events.drupal.org//portland2024/session/many-one-migrating-70-disparate-local-government-websites-cohesive-drupal",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "johnlutz",
+        "Amy Groenhof"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T20:30:00Z",
+      "endTime": "2024-05-06T21:20:00Z",
+      "duration": "P50M",
+      "title": "Successful Migrations: A Strategic Framework for Planning and Estimating Drupal Migrations",
+      "location": "Location A107-109",
+      "link": "https://events.drupal.org//portland2024/session/successful-migrations-strategic-framework-planning-and-estimating-drupal",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "michaelemeyers",
+        "dinarcon"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T20:30:00Z",
+      "endTime": "2024-05-06T21:20:00Z",
+      "duration": "P50M",
+      "title": "The 30-Minute Content Strategist: From Concept to Plan",
+      "location": "Location B110-112",
+      "link": "https://events.drupal.org//portland2024/session/30-minute-content-strategist-concept-plan",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "amazingrando"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T20:30:00Z",
+      "endTime": "2024-05-06T21:20:00Z",
+      "duration": "P50M",
+      "title": "So I logged in, now what? The Dashboard initiative welcomes you",
+      "location": "Location B113-114",
+      "link": "https://events.drupal.org//portland2024/session/so-i-logged-now-what-dashboard-initiative-welcomes-you",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "penyaskito",
+        "plopesc"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T20:30:00Z",
+      "endTime": "2024-05-06T21:20:00Z",
+      "duration": "P50M",
+      "title": "Certified Partner Roundtable",
+      "location": "Location B117-119",
+      "link": "https://events.drupal.org//portland2024/session/certified-partner-roundtable",
+      "track": [],
+      "speakers": [
+        "jitka_pilar",
+        "Kelly Delaney"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T20:30:00Z",
+      "endTime": "2024-05-06T21:20:00Z",
+      "duration": "P50M",
+      "title": "Higher Ed Rebrand or Revamp: Pushing the Envelope Within Your Design System",
+      "location": "Location C120-122",
+      "link": "https://events.drupal.org//portland2024/session/higher-ed-rebrand-or-revamp-pushing-envelope-within-your-design-system",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "pixelite"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T20:30:00Z",
+      "endTime": "2024-05-06T21:20:00Z",
+      "duration": "P50M",
+      "title": "Drupal and FOSS CMS Collaboration in a Competitive Market",
+      "location": "Location C123-124",
+      "link": "https://events.drupal.org//portland2024/session/drupal-and-foss-cms-collaboration-competitive-market",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "mabolek"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T21:20:00Z",
+      "endTime": "2024-05-06T22:00:00Z",
+      "duration": "P40M",
+      "title": "Expo Hall Break",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/expo-hall-break-1",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T22:00:00Z",
+      "endTime": "2024-05-06T22:50:00Z",
+      "duration": "P50M",
+      "title": "Drupal.org Update",
+      "location": "Location 201-203 Oregon Ballroom",
+      "link": "https://events.drupal.org//portland2024/session/drupalorg-update",
+      "track": [],
+      "speakers": [
+        "drumm",
+        "alexmoreno",
+        "hestenet",
+        "B_man",
+        "fjgarlin"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T22:00:00Z",
+      "endTime": "2024-05-06T22:50:00Z",
+      "duration": "P50M",
+      "title": "Collaborative Editing in Drupal Core",
+      "location": "Location A106",
+      "link": "https://events.drupal.org//portland2024/session/collaborative-editing-drupal-core",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "agentrickard",
+        "farriss"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T22:00:00Z",
+      "endTime": "2024-05-06T22:50:00Z",
+      "duration": "P50M",
+      "title": "KineticGPT: Creating an AI assistant for the Kinetic Drupal theme",
+      "location": "Location A107-109",
+      "link": "https://events.drupal.org//portland2024/session/kineticgpt-creating-ai-assistant-kinetic-drupal-theme",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "michaellander"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T22:00:00Z",
+      "endTime": "2024-05-06T22:50:00Z",
+      "duration": "P50M",
+      "title": "AI + Atomic Content: Managing Personalized, Omni-channel Content at Scale",
+      "location": "Location B110-112",
+      "link": "https://events.drupal.org//portland2024/session/ai-atomic-content-managing-personalized-omni-channel-content-scale",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "okljjohnson",
+        "jerdavis"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T22:00:00Z",
+      "endTime": "2024-05-06T22:50:00Z",
+      "duration": "P50M",
+      "title": "Navigation changes in Drupal’s Admin UI",
+      "location": "Location B113-114",
+      "link": "https://events.drupal.org//portland2024/session/navigation-changes-drupals-admin-ui",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "ckrina"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T22:00:00Z",
+      "endTime": "2024-05-06T22:50:00Z",
+      "duration": "P50M",
+      "title": "Designing AI Prompts for Content Creation: Balancing User Needs with UX",
+      "location": "Location B117-119",
+      "link": "https://events.drupal.org//portland2024/session/designing-ai-prompts-content-creation-balancing-user-needs-ux",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "Mrina Sugosh"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T22:00:00Z",
+      "endTime": "2024-05-06T22:50:00Z",
+      "duration": "P50M",
+      "title": "Discoveries for Scale: Preparing for Your Brand & Platform Makeover",
+      "location": "Location C120-122",
+      "link": "https://events.drupal.org//portland2024/session/discoveries-scale-preparing-your-brand-platform-makeover",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "matthewdichter"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T22:00:00Z",
+      "endTime": "2024-05-06T22:50:00Z",
+      "duration": "P50M",
+      "title": "Drupal's next leap: configuration validation — it's here!",
+      "location": "Location C123-124",
+      "link": "https://events.drupal.org//portland2024/session/drupals-next-leap-configuration-validation-its-here",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "Wim Leers"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T22:50:00Z",
+      "endTime": "2024-05-06T23:10:00Z",
+      "duration": "P20M",
+      "title": "Expo Hall Break",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/expo-hall-break-2",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T23:10:00Z",
+      "endTime": "2024-05-07T00:00:00Z",
+      "duration": "P50M",
+      "title": "DrupalCon's Next Top Content Model",
+      "location": "Location A105",
+      "link": "https://events.drupal.org//portland2024/session/drupalcons-next-top-content-model",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "matthewdichter"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T23:10:00Z",
+      "endTime": "2024-05-07T00:00:00Z",
+      "duration": "P50M",
+      "title": "Intermediate Drupal Front End Development (Render Arrays, Debugging Caching, Modern Theming & more!)",
+      "location": "Location A106",
+      "link": "https://events.drupal.org//portland2024/session/intermediate-drupal-front-end-development-render-arrays-debugging-caching",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "ashrafabed",
+        "nagatahmed"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T23:10:00Z",
+      "endTime": "2024-05-07T00:00:00Z",
+      "duration": "P50M",
+      "title": "Navigating Tomorrow: The Future of Websites in the Age of AI and Content Proliferation",
+      "location": "Location B110-112",
+      "link": "https://events.drupal.org//portland2024/session/navigating-tomorrow-future-websites-age-ai-and-content-proliferation",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "_doyle_"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T23:10:00Z",
+      "endTime": "2024-05-07T00:00:00Z",
+      "duration": "P50M",
+      "title": "Project Browser: On the road to Core",
+      "location": "Location B113-114",
+      "link": "https://events.drupal.org//portland2024/session/project-browser-road-core",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "leslieg",
+        "chrisfromredfin"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T23:10:00Z",
+      "endTime": "2024-05-07T00:00:00Z",
+      "duration": "P50M",
+      "title": "Composable: Discovering Drupal’s next-gen way to structure content",
+      "location": "Location B117-119",
+      "link": "https://events.drupal.org//portland2024/session/composable-discovering-drupals-next-gen-way-structure-content",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "https://www.drupal.org/u/jmolivas",
+        "roaguicr"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T23:10:00Z",
+      "endTime": "2024-05-07T00:00:00Z",
+      "duration": "P50M",
+      "title": "Beyond Inclusion: Doing the Right Thing, Drupal-Style",
+      "location": "Location C120-122",
+      "link": "https://events.drupal.org//portland2024/session/beyond-inclusion-doing-right-thing-drupal-style",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "monicadear",
+        "feilauren"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-06T23:10:00Z",
+      "endTime": "2024-05-07T00:00:00Z",
+      "duration": "P50M",
+      "title": "Debugging Yourself: How to Move Forward When the Blocker is You",
+      "location": "Location C123-124",
+      "link": "https://events.drupal.org//portland2024/session/debugging-yourself-how-move-forward-when-blocker-you",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "nicholemaureen"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T00:00:00Z",
+      "endTime": "2024-05-07T02:00:00Z",
+      "duration": "P120M",
+      "title": "Welcome Party & Expo Opening",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/welcome-party-expo-opening",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T15:00:00Z",
+      "endTime": "2024-05-08T00:00:00Z",
+      "duration": "P540M",
+      "title": "General Contribution",
+      "location": "Location B115-116",
+      "link": "https://events.drupal.org//portland2024/session/general-contribution-0",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T15:00:00Z",
+      "endTime": "2024-05-08T00:00:00Z",
+      "duration": "P540M",
+      "title": "Prayer Room",
+      "location": "Location C127",
+      "link": "https://events.drupal.org//portland2024/session/prayer-room-0",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T15:00:00Z",
+      "endTime": "2024-05-08T00:00:00Z",
+      "duration": "P540M",
+      "title": "Quiet Room",
+      "location": "Location C128",
+      "link": "https://events.drupal.org//portland2024/session/quiet-room-0",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T15:00:00Z",
+      "endTime": "2024-05-08T00:00:00Z",
+      "duration": "P540M",
+      "title": "Birds of a Feather",
+      "location": "Location G129, G130, G131, G132",
+      "link": "https://events.drupal.org//portland2024/session/birds-feather-0",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T15:00:00Z",
+      "endTime": "2024-05-07T16:50:00Z",
+      "duration": "P110M",
+      "title": "Recruitment Fair",
+      "location": "Location Hall B",
+      "link": "https://events.drupal.org//portland2024/session/recruitment-fair",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T15:00:00Z",
+      "endTime": "2024-05-08T00:00:00Z",
+      "duration": "P540M",
+      "title": "Registration Opens",
+      "location": "Location Lobby C",
+      "link": "https://events.drupal.org//portland2024/session/registration-opens-0",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T17:00:00Z",
+      "endTime": "2024-05-07T18:00:00Z",
+      "duration": "P60M",
+      "title": "Keynote: Open Source AI Now: Why Open Must Win the AI War",
+      "location": "Location 201-203 Oregon Ballroom",
+      "link": "https://events.drupal.org//portland2024/session/keynote-open-source-ai-now-why-open-must-win-ai-war",
+      "track": [],
+      "speakers": [
+        "Alex Salkever"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T18:00:00Z",
+      "endTime": "2024-05-07T18:30:00Z",
+      "duration": "P30M",
+      "title": "Expo Hall Break",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/expo-hall-break-3",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T18:05:00Z",
+      "endTime": "2024-05-07T18:15:00Z",
+      "duration": "P10M",
+      "title": "Lightning Talk: Drupal and Mautic brought together on the Dropsolid DXP",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/lightning-talk-drupal-and-mautic-brought-together-dropsolid-dxp",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "domidc"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T18:30:00Z",
+      "endTime": "2024-05-07T19:20:00Z",
+      "duration": "P50M",
+      "title": "Drupal Association Public Board Meeting",
+      "location": "Location 201-203 Oregon Ballroom",
+      "link": "https://events.drupal.org//portland2024/session/drupal-association-public-board-meeting",
+      "track": [],
+      "speakers": [
+        "Owenlansbury",
+        "Tim Doyle",
+        "farriss"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T18:30:00Z",
+      "endTime": "2024-05-07T19:20:00Z",
+      "duration": "P50M",
+      "title": "Elevate Your Approval Processes: Mastering Complex Workflows",
+      "location": "Location A106",
+      "link": "https://events.drupal.org//portland2024/session/elevate-your-approval-processes-mastering-complex-workflows",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "ultrabob",
+        "hktang"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T18:30:00Z",
+      "endTime": "2024-05-07T19:20:00Z",
+      "duration": "P50M",
+      "title": "Case Study: Lenovo's Journey with Drupal and Creating 100+ Language-Specific Sites",
+      "location": "Location B110-112",
+      "link": "https://events.drupal.org//portland2024/session/case-study-lenovos-journey-drupal-and-creating-100-language-specific-sites",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "johnlutz",
+        "akucharski"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T18:30:00Z",
+      "endTime": "2024-05-07T19:20:00Z",
+      "duration": "P50M",
+      "title": "Drupal 11 deep dive: what's new, how to prepare",
+      "location": "Location B113-114",
+      "link": "https://events.drupal.org//portland2024/session/drupal-11-deep-dive-whats-new-how-prepare",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "Gábor Hojtsy"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T18:30:00Z",
+      "endTime": "2024-05-07T19:20:00Z",
+      "duration": "P50M",
+      "title": "Sustainable by Design: The revolutionary shift to sustainable web practices",
+      "location": "Location B117-119",
+      "link": "https://events.drupal.org//portland2024/session/sustainable-design-revolutionary-shift-sustainable-web-practices",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "cloos"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T18:30:00Z",
+      "endTime": "2024-05-07T19:20:00Z",
+      "duration": "P50M",
+      "title": "Getting started using Personalization",
+      "location": "Location C120-122",
+      "link": "https://events.drupal.org//portland2024/session/getting-started-using-personalization",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "Jim Banrthouse"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T18:30:00Z",
+      "endTime": "2024-05-07T19:20:00Z",
+      "duration": "P50M",
+      "title": "Community Working Group Roundtable",
+      "location": "Location C123-124",
+      "link": "https://events.drupal.org//portland2024/session/community-working-group-roundtable",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "markie",
+        "weekbeforenext",
+        "mtift"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T19:20:00Z",
+      "endTime": "2024-05-07T20:20:00Z",
+      "duration": "P60M",
+      "title": "Women in Drupal Luncheon | The Lonely Only: Women in tech and navigating a male-dominated landscape",
+      "location": "Location 204 Oregon Ballroom",
+      "link": "https://events.drupal.org//portland2024/session/women-drupal-luncheon-lonely-only-women-tech-and-navigating-male-dominated",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "jennaharrismosley",
+        "shaortiz728",
+        "ltrainjohnson",
+        "sebastianna"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T19:20:00Z",
+      "endTime": "2024-05-07T20:20:00Z",
+      "duration": "P60M",
+      "title": "Lunch & Expo Hall",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/lunch-expo-hall-0",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T19:45:00Z",
+      "endTime": "2024-05-07T19:55:00Z",
+      "duration": "P10M",
+      "title": "Lightning Talk: Is the Redesign Dead?",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/lightning-talk-redesign-dead",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "elliott.mower",
+        "kbasarab"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T20:05:00Z",
+      "endTime": "2024-05-07T20:15:00Z",
+      "duration": "P10M",
+      "title": "Lightning Talk: Domain-specific LLMs the next best step towards Personalization in Beauty Industry",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/lightning-talk-domain-specific-llms-next-best-step-towards-personalization",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "shash"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T20:20:00Z",
+      "endTime": "2024-05-07T20:50:00Z",
+      "duration": "P30M",
+      "title": "Expo Hall Break",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/expo-hall-break-4",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T20:25:00Z",
+      "endTime": "2024-05-07T20:35:00Z",
+      "duration": "P10M",
+      "title": "Lightning Talk: Mario Kart Showdown With Third and Grove",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/lightning-talk-mario-kart-showdown-third-and-grove",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "bstumbo"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T20:50:00Z",
+      "endTime": "2024-05-07T21:40:00Z",
+      "duration": "P50M",
+      "title": "Automate, Integrate, Innovate: AI-powered GitLab CI for Drupal module development",
+      "location": "Location A105",
+      "link": "https://events.drupal.org//portland2024/session/automate-integrate-innovate-ai-powered-gitlab-ci-drupal-module-development",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "yas"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T20:50:00Z",
+      "endTime": "2024-05-07T21:40:00Z",
+      "duration": "P50M",
+      "title": "Innovation and Contributions Challenges",
+      "location": "Location A106",
+      "link": "https://events.drupal.org//portland2024/session/innovation-and-contributions-challenges",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "alexmoreno",
+        "irinaz"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T20:50:00Z",
+      "endTime": "2024-05-07T21:40:00Z",
+      "duration": "P50M",
+      "title": "Bringing Personalization Within Reach: Insights From Industry Leaders",
+      "location": "Location A107-109",
+      "link": "https://events.drupal.org//portland2024/session/bringing-personalization-within-reach-insights-industry-leaders",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "joshk"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T20:50:00Z",
+      "endTime": "2024-05-07T21:40:00Z",
+      "duration": "P50M",
+      "title": "Promoting accessible content throughout the publishing lifecycle",
+      "location": "Location B110-112",
+      "link": "https://events.drupal.org//portland2024/session/promoting-accessible-content-throughout-publishing-lifecycle",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "pixelite",
+        "jessedyck"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T20:50:00Z",
+      "endTime": "2024-05-07T21:40:00Z",
+      "duration": "P50M",
+      "title": "Drupal Distributions & Recipes Initiative Update",
+      "location": "Location B113-114",
+      "link": "https://events.drupal.org//portland2024/session/drupal-distributions-recipes-initiative-update",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "ltrainjohnson",
+        "robert-arias"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T20:50:00Z",
+      "endTime": "2024-05-07T21:40:00Z",
+      "duration": "P50M",
+      "title": "Elevating Front-End Excellence: A Fortune 500 Company's Journey with Figma and Storybook",
+      "location": "Location B117-119",
+      "link": "https://events.drupal.org//portland2024/session/elevating-front-end-excellence-fortune-500-companys-journey-figma-and",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "sarahjean",
+        "rodneyEspinoza84"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T20:50:00Z",
+      "endTime": "2024-05-07T21:40:00Z",
+      "duration": "P50M",
+      "title": "How to use automated tools to upgrade your site from Drupal 7 to Drupal 10.x",
+      "location": "Location C120-122",
+      "link": "https://events.drupal.org//portland2024/session/how-use-automated-tools-upgrade-your-site-drupal-7-drupal-10x",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "mikemadison"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T20:50:00Z",
+      "endTime": "2024-05-07T21:40:00Z",
+      "duration": "P50M",
+      "title": "Unleashing the power of ECA: No-code coding for ambitious site builders",
+      "location": "Location C123-124",
+      "link": "https://events.drupal.org//portland2024/session/unleashing-power-eca-no-code-coding-ambitious-site-builders",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "freelock"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T21:00:00Z",
+      "endTime": "2024-05-07T22:00:00Z",
+      "duration": "P60M",
+      "title": "First-time Contributor Workshop",
+      "location": "Location 204 Oregon Ballroom",
+      "link": "https://events.drupal.org//portland2024/session/first-time-contributor-workshop-0",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T21:40:00Z",
+      "endTime": "2024-05-07T22:00:00Z",
+      "duration": "P20M",
+      "title": "Expo Hall Break",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/expo-hall-break-5",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T21:45:00Z",
+      "endTime": "2024-05-07T21:55:00Z",
+      "duration": "P10M",
+      "title": "Lightning Talk: PetOps - Keeping Your Pets Safe with Technology",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/lightning-talk-petops-keeping-your-pets-safe-technology",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "aburke626"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T22:00:00Z",
+      "endTime": "2024-05-07T22:50:00Z",
+      "duration": "P50M",
+      "title": "Secure, Performant, Scalable and Green: The big wins of a static Drupal website",
+      "location": "Location A105",
+      "link": "https://events.drupal.org//portland2024/session/secure-performant-scalable-and-green-big-wins-static-drupal-website",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "Kristen Pol"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T22:00:00Z",
+      "endTime": "2024-05-07T22:50:00Z",
+      "duration": "P50M",
+      "title": "Revolutionizing Conversations: AI Chat Integration on YaleSites",
+      "location": "Location A106",
+      "link": "https://events.drupal.org//portland2024/session/revolutionizing-conversations-ai-chat-integration-yalesites",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "April Tiddei",
+        "amazingrando",
+        "franzhartl"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T22:00:00Z",
+      "endTime": "2024-05-07T22:50:00Z",
+      "duration": "P50M",
+      "title": "From proposal to partnership; redefining the RFP process.",
+      "location": "Location A107-109",
+      "link": "https://events.drupal.org//portland2024/session/proposal-partnership-redefining-rfp-process",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "Bjorn Thomson",
+        "Ashley Stagg"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T22:00:00Z",
+      "endTime": "2024-05-07T22:50:00Z",
+      "duration": "P50M",
+      "title": "DAM Straight! Why AI is a Clarion Call for Centralized Digital Asset & Content Management",
+      "location": "Location B110-112",
+      "link": "https://events.drupal.org//portland2024/session/dam-straight-why-ai-clarion-call-centralized-digital-asset-content-management",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "okljjohnson"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T22:00:00Z",
+      "endTime": "2024-05-07T22:50:00Z",
+      "duration": "P50M",
+      "title": "Protecting your site with Automatic Updates",
+      "location": "Location B113-114",
+      "link": "https://events.drupal.org//portland2024/session/protecting-your-site-automatic-updates",
+      "track": [
+        "drupal core"
+      ],
+      "speakers": [
+        "tedbow"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T22:00:00Z",
+      "endTime": "2024-05-07T22:50:00Z",
+      "duration": "P50M",
+      "title": "A Migration Is a Terrible Thing to Waste – A roadmap for your next big content migration",
+      "location": "Location B117-119",
+      "link": "https://events.drupal.org//portland2024/session/migration-terrible-thing-waste-roadmap-your-next-big-content-migration",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "markdorison"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T22:00:00Z",
+      "endTime": "2024-05-07T22:50:00Z",
+      "duration": "P50M",
+      "title": "Edit Together: Collaborative Editing for Everyone",
+      "location": "Location C120-122",
+      "link": "https://events.drupal.org//portland2024/session/edit-together-collaborative-editing-everyone",
+      "track": [
+        "drupal showcase"
+      ],
+      "speakers": [
+        "gdemet",
+        "Alex Jones",
+        "tnascimento"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T22:00:00Z",
+      "endTime": "2024-05-07T22:50:00Z",
+      "duration": "P50M",
+      "title": "Using Layout Builder: Practical Advice from the Field",
+      "location": "Location C123-124",
+      "link": "https://events.drupal.org//portland2024/session/using-layout-builder-practical-advice-field",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "heatherwoz",
+        "monicadear",
+        "rlhawk",
+        "mortona2k"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T22:50:00Z",
+      "endTime": "2024-05-07T23:10:00Z",
+      "duration": "P20M",
+      "title": "Expo Hall Break",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/expo-hall-break-6",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T22:55:00Z",
+      "endTime": "2024-05-07T23:05:00Z",
+      "duration": "P10M",
+      "title": "Lightning Talk: Decoupled Drupal Do's and Don'ts",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/lightning-talk-decoupled-drupal-dos-and-donts",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "mikeegoulding"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T23:10:00Z",
+      "endTime": "2024-05-08T00:00:00Z",
+      "duration": "P50M",
+      "title": "How McGill University manages, tests and deploys 1,000 Drupal websites with Ansible and Gitlab CI",
+      "location": "Location A105",
+      "link": "https://events.drupal.org//portland2024/session/how-mcgill-university-manages-tests-and-deploys-1000-drupal-websites-ansible",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "fengtan"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T23:10:00Z",
+      "endTime": "2024-05-08T00:00:00Z",
+      "duration": "P50M",
+      "title": "The Price of Silence: The Hidden Costs of Withholding Feedback in Teams!",
+      "location": "Location A106",
+      "link": "https://events.drupal.org//portland2024/session/price-silence-hidden-costs-withholding-feedback-teams",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "mukulgarg7",
+        "jaspreetsingh31"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T23:10:00Z",
+      "endTime": "2024-05-08T00:00:00Z",
+      "duration": "P50M",
+      "title": "Migrations for Mortals: Content Migrations for the non-technical folks",
+      "location": "Location B110-112",
+      "link": "https://events.drupal.org//portland2024/session/migrations-mortals-content-migrations-non-technical-folks",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "jessedyck",
+        "mregnault"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T23:10:00Z",
+      "endTime": "2024-05-08T00:00:00Z",
+      "duration": "P50M",
+      "title": "AI readiness: How Drupal can become a leader in the Open Interface Web",
+      "location": "Location B113-114",
+      "link": "https://events.drupal.org//portland2024/session/ai-readiness-how-drupal-can-become-leader-open-interface-web",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "kvantomme"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T23:10:00Z",
+      "endTime": "2024-05-08T00:00:00Z",
+      "duration": "P50M",
+      "title": "Revolutionizing Drupal with Automated Performance Testing: Deep Dive into Gander, the New Framework",
+      "location": "Location B117-119",
+      "link": "https://events.drupal.org//portland2024/session/revolutionizing-drupal-automated-performance-testing-deep-dive-gander-new",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "slashrsm"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-07T23:10:00Z",
+      "endTime": "2024-05-08T00:00:00Z",
+      "duration": "P50M",
+      "title": "Access Control Strategies for Enterprise Drupal Websites",
+      "location": "Location C123-124",
+      "link": "https://events.drupal.org//portland2024/session/access-control-strategies-enterprise-drupal-websites",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "joshuami"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-08T15:00:00Z",
+      "endTime": "2024-05-08T15:50:00Z",
+      "duration": "P50M",
+      "title": "Membership Breakfast",
+      "location": "Location 204 Oregon Ballroom",
+      "link": "https://events.drupal.org//portland2024/session/membership-breakfast",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-08T15:00:00Z",
+      "endTime": "2024-05-09T00:00:00Z",
+      "duration": "P540M",
+      "title": "General Contribution",
+      "location": "Location B115-116",
+      "link": "https://events.drupal.org//portland2024/session/general-contribution-1",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-08T15:00:00Z",
+      "endTime": "2024-05-09T00:00:00Z",
+      "duration": "P540M",
+      "title": "Prayer Room",
+      "location": "Location C127",
+      "link": "https://events.drupal.org//portland2024/session/prayer-room-1",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-08T15:00:00Z",
+      "endTime": "2024-05-09T00:00:00Z",
+      "duration": "P540M",
+      "title": "Quiet Room",
+      "location": "Location C128",
+      "link": "https://events.drupal.org//portland2024/session/quiet-room-1",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-08T15:00:00Z",
+      "endTime": "2024-05-09T00:00:00Z",
+      "duration": "P540M",
+      "title": "Birds of a Feather",
+      "location": "Location G129, G130, G131, G132",
+      "link": "https://events.drupal.org//portland2024/session/birds-feather-1",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-08T15:00:00Z",
+      "endTime": "2024-05-09T00:00:00Z",
+      "duration": "P540M",
+      "title": "Registration Opens",
+      "location": "Location Lobby C",
+      "link": "https://events.drupal.org//portland2024/session/registration-opens-1",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-08T16:00:00Z",
+      "endTime": "2024-05-08T17:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal Project Initiatives Keynote",
+      "location": "Location 201-203 Oregon Ballroom",
+      "link": "https://events.drupal.org//portland2024/session/drupal-project-initiatives-keynote",
+      "track": [],
+      "speakers": [
+        "jurgenhaas",
+        "Amber Himes Matz",
+        "Gábor Hojtsy",
+        "hestenet",
+        "ckrina",
+        "e0ipso",
+        "tedbow",
+        "fjgarlin",
+        "slashrsm"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-08T17:00:00Z",
+      "endTime": "2024-05-08T17:30:00Z",
+      "duration": "P30M",
+      "title": "Expo Hall Break",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/expo-hall-break-7",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-08T17:05:00Z",
+      "endTime": "2024-05-08T17:15:00Z",
+      "duration": "P10M",
+      "title": "Lightning Talk: How we used ECA and why you should consider it too",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/lightning-talk-how-we-used-eca-and-why-you-should-consider-it-too",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "tonytosta"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-08T17:30:00Z",
+      "endTime": "2024-05-08T19:00:00Z",
+      "duration": "P90M",
+      "title": "Drupal Branding Panel",
+      "location": "Location 201-203 Oregon Ballroom",
+      "link": "https://events.drupal.org//portland2024/session/drupal-branding-panel",
+      "track": [],
+      "speakers": [
+        "Shawn Perritt",
+        "nikofthehill",
+        "pixelite"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-08T17:30:00Z",
+      "endTime": "2024-05-08T19:00:00Z",
+      "duration": "P90M",
+      "title": "First-time contributor workshop",
+      "location": "Location 204 Oregon Ballroom",
+      "link": "https://events.drupal.org//portland2024/session/first-time-contributor-workshop",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-08T17:30:00Z",
+      "endTime": "2024-05-09T00:00:00Z",
+      "duration": "P390M",
+      "title": "Mentored Contribution",
+      "location": "Location B113-114",
+      "link": "https://events.drupal.org//portland2024/session/mentored-contribution",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-08T19:00:00Z",
+      "endTime": "2024-05-08T20:00:00Z",
+      "duration": "P60M",
+      "title": "Lunch & Expo Hall",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/lunch-expo-hall-1",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-08T20:00:00Z",
+      "endTime": "2024-05-09T00:00:00Z",
+      "duration": "P240M",
+      "title": "Marketing Contribution",
+      "location": "Location B117-119",
+      "link": "https://events.drupal.org//portland2024/session/marketing-contribution",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-08T21:30:00Z",
+      "endTime": "2024-05-08T22:00:00Z",
+      "duration": "P30M",
+      "title": "Coffee Break",
+      "location": "Location 204 Oregon Ballroom",
+      "link": "https://events.drupal.org//portland2024/session/coffee-break",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T15:00:00Z",
+      "endTime": "2024-05-10T00:00:00Z",
+      "duration": "P540M",
+      "title": "General Contribution",
+      "location": "Location B115-116",
+      "link": "https://events.drupal.org//portland2024/session/general-contribution-2",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T15:00:00Z",
+      "endTime": "2024-05-10T00:00:00Z",
+      "duration": "P540M",
+      "title": "Prayer Room",
+      "location": "Location C127",
+      "link": "https://events.drupal.org//portland2024/session/prayer-room-2",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T15:00:00Z",
+      "endTime": "2024-05-10T00:00:00Z",
+      "duration": "P540M",
+      "title": "Quiet Room",
+      "location": "Location C128",
+      "link": "https://events.drupal.org//portland2024/session/quiet-room-2",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T15:00:00Z",
+      "endTime": "2024-05-10T00:00:00Z",
+      "duration": "P540M",
+      "title": "Birds of a Feather",
+      "location": "Location G129, G130, G131, G132",
+      "link": "https://events.drupal.org//portland2024/session/birds-feather-2",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T15:00:00Z",
+      "endTime": "2024-05-09T20:00:00Z",
+      "duration": "P300M",
+      "title": "Expo Hall Opens",
+      "location": "Location Hall C",
+      "link": "https://events.drupal.org//portland2024/session/expo-hall-opens",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T15:00:00Z",
+      "endTime": "2024-05-10T00:00:00Z",
+      "duration": "P540M",
+      "title": "Registration Opens",
+      "location": "Location Lobby C",
+      "link": "https://events.drupal.org//portland2024/session/registration-opens-2",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T16:00:00Z",
+      "endTime": "2024-05-09T23:00:00Z",
+      "duration": "P420M",
+      "title": "TRAINING | Debug Academy",
+      "location": "Location A105",
+      "link": "https://events.drupal.org//portland2024/session/training-debug-academy",
+      "track": [],
+      "speakers": [
+        "ashrafabed"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T16:00:00Z",
+      "endTime": "2024-05-09T23:00:00Z",
+      "duration": "P420M",
+      "title": "TRAINING | Evolving Web",
+      "location": "Location A106",
+      "link": "https://events.drupal.org//portland2024/session/training-evolving-web",
+      "track": [],
+      "speakers": [
+        "mregnault",
+        "dharizza"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T16:00:00Z",
+      "endTime": "2024-05-09T23:00:00Z",
+      "duration": "P420M",
+      "title": "TRAINING | DrupalEasy",
+      "location": "Location A107-109",
+      "link": "https://events.drupal.org//portland2024/session/training-drupaleasy",
+      "track": [],
+      "speakers": [
+        "ultimike"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T16:00:00Z",
+      "endTime": "2024-05-09T23:00:00Z",
+      "duration": "P420M",
+      "title": "Government Summit",
+      "location": "Location B110-112",
+      "link": "https://events.drupal.org//portland2024/session/government-summit",
+      "track": [],
+      "speakers": [
+        "jennaharrismosley"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T16:00:00Z",
+      "endTime": "2024-05-09T23:00:00Z",
+      "duration": "P420M",
+      "title": "Nonprofit Summit",
+      "location": "Location B113-114",
+      "link": "https://events.drupal.org//portland2024/session/nonprofit-summit",
+      "track": [],
+      "speakers": [
+        "Julia Kranzthor",
+        "hanpersand",
+        "hestenet",
+        "Jess Snyder",
+        "fjgarlin"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T16:00:00Z",
+      "endTime": "2024-05-09T23:00:00Z",
+      "duration": "P420M",
+      "title": "Healthcare Summit",
+      "location": "Location B117-119",
+      "link": "https://events.drupal.org//portland2024/session/healthcare-summit",
+      "track": [],
+      "speakers": [
+        "andywaldrop",
+        "Georgiana Masgras",
+        "Jesse Meece",
+        "Jonathan Stewart",
+        "Maile Conwi",
+        "Morgan Guegan"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T16:00:00Z",
+      "endTime": "2024-05-09T23:00:00Z",
+      "duration": "P420M",
+      "title": "Community Summit",
+      "location": "Location C120-122",
+      "link": "https://events.drupal.org//portland2024/session/community-summit",
+      "track": [],
+      "speakers": [
+        "Kathryn Carruthers",
+        "Nneka",
+        "froboy",
+        "johnpicozzi",
+        "rgladden",
+        "pixelite",
+        "mtift",
+        "volkswagenchick"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T16:00:00Z",
+      "endTime": "2024-05-09T23:00:00Z",
+      "duration": "P420M",
+      "title": "Higher Ed Summit",
+      "location": "Location C123-124",
+      "link": "https://events.drupal.org//portland2024/session/higher-ed-summit",
+      "track": [],
+      "speakers": [
+        "sujathavaradharajan",
+        "Donald Mcleod",
+        "mikeegoulding",
+        "crugen",
+        "mandee_englert",
+        "Sam Pettinati",
+        "jkriigel",
+        "Adrienne Smith",
+        "d70rr3s",
+        "kbasarab",
+        "elliott.mower"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T16:15:00Z",
+      "endTime": "2024-05-09T16:40:00Z",
+      "duration": "P25M",
+      "title": "HIGHER ED SUMMIT | Case Study: University of East London, a tale of a successful digital partnership",
+      "location": "Location C123-124",
+      "link": "https://events.drupal.org//portland2024/session/higher-ed-summit-case-study-university-east-london-tale-successful-digital",
+      "track": [
+        "summit"
+      ],
+      "speakers": [
+        "sujathavaradharajan",
+        "Donald McLeod"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T17:20:00Z",
+      "endTime": "2024-05-09T17:35:00Z",
+      "duration": "P15M",
+      "title": "HIGHER ED SUMMIT | Empower Content Editors: Effective End-User Training and Documentation Strategy",
+      "location": "Location C123-124",
+      "link": "https://events.drupal.org//portland2024/session/higher-ed-summit-empower-content-editors-effective-end-user-training-and",
+      "track": [
+        "training"
+      ],
+      "speakers": [
+        "mandee_englert"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T18:00:00Z",
+      "endTime": "2024-05-09T18:25:00Z",
+      "duration": "P25M",
+      "title": "HIGHER ED SUMMIT | How Acquia and Drupal Power Robust, Modern, and Secure Digital Experiences",
+      "location": "Location C123-124",
+      "link": "https://events.drupal.org//portland2024/session/higher-ed-summit-how-acquia-and-drupal-power-robust-modern-and-secure-digital",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "Sam Pettinati"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T18:15:00Z",
+      "endTime": "2024-05-09T19:00:00Z",
+      "duration": "P45M",
+      "title": "HEALTHCARE SUMMIT | Building healthcare content SaaS products with Drupal",
+      "location": "Location B117-119",
+      "link": "https://events.drupal.org//portland2024/session/healthcare-summit-building-healthcare-content-saas-products-drupal",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "andywaldrop"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T18:30:00Z",
+      "endTime": "2024-05-09T18:45:00Z",
+      "duration": "P15M",
+      "title": "GOVERNMENT SUMMIT | Creating next gen government websites that your customers crave",
+      "location": "Location B110-112",
+      "link": "https://events.drupal.org//portland2024/session/government-summit-creating-next-gen-government-websites-your-customers-crave",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "joshnorthcott",
+        "Bryan Stifle"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T18:30:00Z",
+      "endTime": "2024-05-09T18:45:00Z",
+      "duration": "P15M",
+      "title": "HIGHER ED SUMMIT | How Drupal Rescued Georgia Tech’s International Students During and Post-Pandemic",
+      "location": "Location C123-124",
+      "link": "https://events.drupal.org//portland2024/session/higher-ed-summit-how-drupal-rescued-georgia-techs-international-students",
+      "track": [
+        "drupal showcase"
+      ],
+      "speakers": [
+        "jkriigel"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T19:00:00Z",
+      "endTime": "2024-05-09T20:00:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "Location Hall B",
+      "link": "https://events.drupal.org//portland2024/session/lunch",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T20:00:00Z",
+      "endTime": "2024-05-09T20:15:00Z",
+      "duration": "P15M",
+      "title": "HIGHER ED SUMMIT | How to Design Under the Constraints and Bureaucracy of Higher Education",
+      "location": "Location C123-124",
+      "link": "https://events.drupal.org//portland2024/session/higher-ed-summit-how-design-under-constraints-and-bureaucracy-higher-education",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "Adrienne Smith"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-09T21:20:00Z",
+      "endTime": "2024-05-09T21:45:00Z",
+      "duration": "P25M",
+      "title": "HIGHER ED SUMMIT | Harvard College: Don't Call it a Redesign",
+      "location": "Location C123-124",
+      "link": "https://events.drupal.org//portland2024/session/higher-ed-summit-harvard-college-dont-call-it-redesign",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "elliott.mower",
+        "kbasarab"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2024-05-10T01:30:00Z",
+      "endTime": "2024-05-10T04:05:00Z",
+      "duration": "P155M",
+      "title": "Trivia Night",
+      "location": "Location Drupal Activity",
+      "link": "https://events.drupal.org//portland2024/session/trivia-night",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    }
+  ],
+  "result": "success",
+  "url": "https://events.drupal.org/portland2024/schedule"
+}

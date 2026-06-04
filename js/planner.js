@@ -22,7 +22,7 @@ import {
   STORAGE_PREFIX,
 } from './modules/plannerStorage.js';
 
-import { escapeHtml, parseSponsorIds } from './modules/utils.js';
+import { escapeHtml, parseSponsorIds, isLocalhost } from './modules/utils.js';
 import { configureEventSearch, openEventSearchModal } from './modules/eventSearch.js';
 import { loadEventCatalog } from './modules/eventCatalog.js';
 
@@ -420,8 +420,13 @@ const DOC_CATEGORIES = [
   { value: 'other',         label: 'Other' },
 ]
 
-function currencyOptions(selected = 'AUD') {
-  return CURRENCIES.map((c) => `<option value="${c}"${c === selected ? ' selected' : ''}>${c}</option>`).join('')
+function getDefaultCurrency() {
+  return state.global?.defaultCurrency || 'AUD';
+}
+
+function currencyOptions(selected) {
+  const active = selected || getDefaultCurrency();
+  return CURRENCIES.map((c) => `<option value="${c}"${c === active ? ' selected' : ''}>${c}</option>`).join('')
 }
 
 function tzDatalist() {
@@ -1371,16 +1376,24 @@ function swagCardHtml(item) {
   const budget = fmt(item.budget);
   const actual = fmt(item.actual);
   const cur    = item.currency ? `${item.currency} ` : '';
-  const qty    = parseInt(item.quantity, 10);
+  const qty      = parseInt(item.quantity, 10);
+  const returned = item.returned != null ? parseInt(item.returned, 10) : NaN;
   const hasBudget = budget || actual;
   const subtitle  = [budget ? `Budget: ${cur}${budget}` : '', actual ? `Actual: ${cur}${actual}` : ''].filter(Boolean).join(' · ');
+  const distributed = !isNaN(qty) && !isNaN(returned) ? qty - returned : NaN;
+  const qtyBadge = !isNaN(qty) && qty > 0
+    ? `<span class="text-[0.65rem] font-semibold bg-gray-100 text-gray-500 rounded-full px-2 py-0.5 flex-shrink-0">×${qty}</span>`
+    : '';
+  const retBadge = !isNaN(returned)
+    ? `<span class="text-[0.65rem] font-semibold bg-amber-50 text-amber-600 rounded-full px-2 py-0.5 flex-shrink-0" title="${!isNaN(distributed) ? `${distributed} distributed` : ''}">↩ ${returned}</span>`
+    : '';
   return `<div class="flex items-center gap-2.5 py-2.5 px-3 rounded-lg border border-gray-200 bg-white" data-swag-id="${esc(item.id)}">
     <input type="checkbox" class="h-4 w-4 rounded flex-shrink-0 swag-done-check" data-swag-id="${esc(item.id)}" ${item.done ? 'checked' : ''} aria-label="Mark ${esc(item.name || 'swag item')} as completed">
     <div class="flex-1 min-w-0">
       <p class="text-sm font-medium ${item.done ? 'line-through text-gray-400' : 'text-gray-800'} truncate">${esc(item.name || 'Untitled swag item')}</p>
       ${hasBudget ? `<p class="text-xs text-gray-400 truncate mt-0.5">${esc(subtitle)}</p>` : ''}
     </div>
-    ${!isNaN(qty) && qty > 0 ? `<span class="text-[0.65rem] font-semibold bg-gray-100 text-gray-500 rounded-full px-2 py-0.5 flex-shrink-0">×${qty}</span>` : ''}
+    ${qtyBadge}${retBadge}
     <button type="button" class="edit-swag-btn flex-shrink-0 h-7 w-7 inline-flex items-center justify-center border border-gray-200 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-50 transition-colors" data-swag-id="${esc(item.id)}" aria-label="Edit ${esc(item.name || 'swag item')}">
       <i class="fas fa-pen-to-square text-[0.65rem]" aria-hidden="true"></i>
     </button>
@@ -1403,7 +1416,7 @@ function renderItineraryTab() {
   if (!container) return
 
   const { teamAssignments = [], timeline = {} } = state.planner.org
-  const itinerary = state.planner.itinerary || []
+  const itinerary = state.planner.org.memberItinerary || []
 
   if (!teamAssignments.length) {
     container.innerHTML = '<p class="text-xs text-gray-400 py-2">Assign team members in the <strong>Org</strong> tab to see the itinerary grid.</p>'
@@ -1493,7 +1506,7 @@ function renderItineraryDayItems(memberId, date) {
   if (!container) return
   const modal   = document.getElementById('itineraryDayModal')
   const isPersonal = modal?.dataset.ctx === 'personal'
-  const pool    = isPersonal ? (state.planner.personal?.itinerary || []) : (state.planner.itinerary || [])
+  const pool    = isPersonal ? (state.planner.personal?.itinerary || []) : (state.planner.org.memberItinerary || [])
   const items   = pool
     .filter((i) => isPersonal ? i.date === date : i.memberId === memberId && i.date === date)
     .sort((a, b) => (a.time || '').localeCompare(b.time || ''))
@@ -1781,7 +1794,7 @@ function wireItineraryPanel() {
       ? (state.planner.personal.itinerary ??= [])
       : isOrg
       ? (state.planner.org.itinerary ??= [])
-      : (state.planner.itinerary ??= [])
+      : (state.planner.org.memberItinerary ??= [])
 
     const editId = document.getElementById('itineraryFormEditId')?.value || ''
     if (editId) {
@@ -1820,7 +1833,7 @@ function wireItineraryPanel() {
     if (e.target.classList.contains('itinerary-done-check')) {
       const id      = e.target.dataset.itemId
       const isPersonal = modal.dataset.ctx === 'personal'
-      const pool    = isPersonal ? (state.planner.personal?.itinerary || []) : (state.planner.itinerary || [])
+      const pool    = isPersonal ? (state.planner.personal?.itinerary || []) : (state.planner.org.memberItinerary || [])
       const item    = pool.find((i) => i.id === id)
       if (item) { item.done = e.target.checked; renderItineraryDayItems(isPersonal ? '' : modal.dataset.memberId, modal.dataset.date); scheduleAutoSave() }
     }
@@ -1833,7 +1846,7 @@ function wireItineraryPanel() {
     if (editBtn) {
       const id      = editBtn.dataset.itemId
       const isPersonal = modal.dataset.ctx === 'personal'
-      const pool    = isPersonal ? (state.planner.personal?.itinerary || []) : (state.planner.itinerary || [])
+      const pool    = isPersonal ? (state.planner.personal?.itinerary || []) : (state.planner.org.memberItinerary || [])
       const item    = pool.find((i) => i.id === id)
       if (!item) return
       const form = document.getElementById('itineraryAddForm')
@@ -1858,7 +1871,7 @@ function wireItineraryPanel() {
       if (isPersonal) {
         state.planner.personal.itinerary = (state.planner.personal.itinerary || []).filter((i) => i.id !== id)
       } else {
-        state.planner.itinerary = (state.planner.itinerary || []).filter((i) => i.id !== id)
+        state.planner.org.memberItinerary = (state.planner.org.memberItinerary || []).filter((i) => i.id !== id)
       }
       renderItineraryDayItems(isPersonal ? '' : modal.dataset.memberId, modal.dataset.date)
       scheduleAutoSave()
@@ -1938,7 +1951,7 @@ function receiptCardHtml(receipt) {
             <span class="editor-field-label">Currency</span>
             <select data-receipt-id="${esc(receipt.id)}" data-receipt-field="currency"
               class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
-              ${currencyOptions(receipt.currency || 'AUD')}
+              ${currencyOptions(receipt.currency || getDefaultCurrency())}
             </select>
           </label>
           <label class="editor-form-field sm:col-span-2">
@@ -2450,7 +2463,7 @@ function renderSummaryThisEvent() {
       const n = Math.round((new Date(a.checkOut) - new Date(a.checkIn)) / 86400000)
       return s2 + (n > 0 ? n : 0)
     }, 0), 0)
-  const itinerary = state.planner.itinerary || []
+  const itinerary = state.planner.org.memberItinerary || []
   const itinDone  = itinerary.filter((i) => i.done).length
   const itinOpen  = itinerary.filter((i) => !i.done).length
 
@@ -4479,6 +4492,8 @@ function saveSwag() {
   if (!item) return;
   item.name     = document.getElementById('swagModalName')?.value     || '';
   item.quantity = parseInt(document.getElementById('swagModalQuantity')?.value, 10) || 1;
+  const retVal  = document.getElementById('swagModalReturned')?.value;
+  item.returned = retVal !== '' && retVal != null ? parseInt(retVal, 10) : null;
   item.budget   = document.getElementById('swagModalBudget')?.value   || '';
   item.actual   = document.getElementById('swagModalActual')?.value   || '';
   item.notes    = document.getElementById('swagModalNotes')?.value    || '';
@@ -4506,6 +4521,7 @@ function openSwagModal(id) {
   _swagId = item.id;
   document.getElementById('swagModalName').value        = item.name     || '';
   document.getElementById('swagModalQuantity').value    = item.quantity ?? 1;
+  document.getElementById('swagModalReturned').value    = item.returned != null ? item.returned : '';
   document.getElementById('swagModalBudget').value      = item.budget   || '';
   document.getElementById('swagModalActual').value      = item.actual   || '';
   document.getElementById('swagModalNotes').value       = item.notes    || '';
@@ -4633,7 +4649,7 @@ function wirePersonalPanel() {
   function ensurePersonal() {
     if (!state.planner.personal) state.planner.personal = {
       outboundLegs: [], returnLegs: [], accommodations: [],
-      budget: '', budgetActual: '', currency: 'AUD', notes: ''
+      budget: '', budgetActual: '', currency: getDefaultCurrency(), notes: ''
     }
     return state.planner.personal
   }
@@ -5005,7 +5021,7 @@ function wireOrgPanel() {
       if (!already) {
         state.planner.org.teamAssignments = [
           ...(state.planner.org.teamAssignments || []),
-          { memberId, outboundLegs: [], returnLegs: [], budget: '', budgetActual: '', currency: state.planner?.org?.sponsorCurrency || 'AUD', notes: '' },
+          { memberId, outboundLegs: [], returnLegs: [], budget: '', budgetActual: '', currency: state.planner?.org?.sponsorCurrency || getDefaultCurrency(), notes: '' },
         ];
         renderOrgTab();
         scheduleAutoSave();
@@ -5918,7 +5934,7 @@ async function loadSchedule(eventFile) {
 
 async function init() {
   // Load themes and event catalog in parallel
-  const [, catalog] = await Promise.all([loadThemes(), loadEventCatalog()]);
+  const [, catalog] = await Promise.all([loadThemes(), loadEventCatalog().catch(() => [])]);
   _eventCatalog = catalog;
   applyThemeClass(getCurrentThemeId());
 
@@ -5969,6 +5985,28 @@ async function init() {
   }
 
   state.global  = loadGlobal();
+
+  if (isLocalhost()) document.getElementById('editorNavLink')?.classList.remove('hidden');
+
+  const storageNotice = document.getElementById('storageNotice');
+  if (storageNotice && !localStorage.getItem('plannerStorageNoticeDismissed')) {
+    storageNotice.classList.remove('hidden');
+    document.getElementById('storageNoticeDismiss')?.addEventListener('click', () => {
+      storageNotice.classList.add('hidden');
+      localStorage.setItem('plannerStorageNoticeDismissed', '1');
+    });
+  }
+
+  const defaultCurrencyEl = document.getElementById('defaultCurrencySelect');
+  if (defaultCurrencyEl) {
+    defaultCurrencyEl.innerHTML = CURRENCIES.map((c) =>
+      `<option value="${c}"${c === getDefaultCurrency() ? ' selected' : ''}>${c}</option>`
+    ).join('');
+    defaultCurrencyEl.addEventListener('change', () => {
+      state.global.defaultCurrency = defaultCurrencyEl.value;
+      saveGlobal(state.global);
+    });
+  }
 
   // Sync the URL so refresh stays on this planner and the address is shareable
   pushPlannerUrl(state.plannerKey);
@@ -6041,4 +6079,4 @@ async function init() {
   revealPage();
 }
 
-document.addEventListener('DOMContentLoaded', init);
+void init();

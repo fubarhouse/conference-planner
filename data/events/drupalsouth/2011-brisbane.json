@@ -1,0 +1,846 @@
+{
+  "event": {
+    "designation": "DrupalSouth",
+    "location": "Brisbane, Australia",
+    "year": "2011",
+    "website": "http://2011.drupaldownunder.org/",
+    "region": "Australia",
+    "venue": "Bardon Conference Centre, 390 Simpsons Rd, Bardon Queensland 4065, Australia",
+    "timezone": "Australia/Sydney",
+    "enabled": true,
+    "startDate": "2011-01-21T21:00:00Z",
+    "endDate": "2011-01-23T06:30:00Z",
+    "sourceCache": "cache/wayback/drupalsouth-2011/raw",
+    "flickr": {
+      "enabled": true,
+      "groupUrl": "https://flic.kr/go/fsUsw",
+      "image": "./img/flickr/drupalsouth/2011-brisbane-australia.jpg",
+      "imageAlt": "DrupalCon logo"
+    },
+    "columns": 3,
+    "logo": {
+      "image": "./img/logos/drupalsouth/2011-brisbane-australia.png",
+      "imageAlt": "DrupalSouth logo",
+      "usePlate": false
+    },
+    "sponsors": [
+      {
+        "id": "sponsor-1",
+        "title": "Glo Digital",
+        "tier": "Platinum",
+        "row": 1,
+        "priority": 10,
+        "image": "./img/sponsors/drupalsouth/2011-brisbane-australia/sponsor-1.png",
+        "imageAlt": "Glo Digital logo",
+        "link": "http://glodigital.com.au/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-2",
+        "title": "PreviousNext",
+        "tier": "Platinum",
+        "row": 1,
+        "priority": 20,
+        "image": "./img/sponsors/drupalsouth/2011-brisbane-australia/sponsor-2.png",
+        "imageAlt": "PreviousNext logo",
+        "link": "http://www.previousnext.com.au/",
+        "bgStyle": "dark-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-3",
+        "title": "Trellon",
+        "tier": "Gold",
+        "row": 2,
+        "priority": 30,
+        "image": "./img/sponsors/drupalsouth/2011-brisbane-australia/sponsor-3.png",
+        "imageAlt": "Trellon logo",
+        "link": "http://www.trellon.com/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-4",
+        "title": "CrossFunctional",
+        "tier": "Gold",
+        "row": 2,
+        "priority": 40,
+        "image": "./img/sponsors/drupalsouth/2011-brisbane-australia/sponsor-4.png",
+        "imageAlt": "CrossFunctional logo",
+        "link": "http://crossfunctional.net/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-5",
+        "title": "Itomic",
+        "tier": "Gold",
+        "row": 2,
+        "priority": 50,
+        "image": "./img/sponsors/drupalsouth/2011-brisbane-australia/sponsor-5.png",
+        "imageAlt": "Itomic logo",
+        "link": "http://www.itomic.com.au/",
+        "bgStyle": "dark-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-6",
+        "title": "Boab Interactive",
+        "tier": "Silver",
+        "row": 3,
+        "priority": 60,
+        "image": "./img/sponsors/drupalsouth/2011-brisbane-australia/sponsor-6.png",
+        "imageAlt": "Boab Interactive logo",
+        "link": "http://2011.drupaldownunder.org/sponsor/boab-interactive",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-7",
+        "title": "Publicity Works",
+        "tier": "Silver",
+        "row": 3,
+        "priority": 70,
+        "image": "./img/sponsors/drupalsouth/2011-brisbane-australia/sponsor-7.png",
+        "imageAlt": "Publicity Works logo",
+        "link": "http://2011.drupaldownunder.org/sponsor/publicity-works",
+        "bgStyle": "dark-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-8",
+        "title": "NetEngine",
+        "tier": "Silver",
+        "row": 3,
+        "priority": 80,
+        "image": "./img/sponsors/drupalsouth/2011-brisbane-australia/sponsor-8.png",
+        "imageAlt": "NetEngine logo",
+        "link": "http://2011.drupaldownunder.org/sponsor/netengine",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-9",
+        "title": "Microsoft",
+        "tier": "Silver",
+        "row": 3,
+        "priority": 90,
+        "image": "./img/sponsors/drupalsouth/2011-brisbane-australia/sponsor-9.png",
+        "imageAlt": "Microsoft logo",
+        "link": "http://2011.drupaldownunder.org/sponsor/microsoft",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-10",
+        "title": "RealityLoop",
+        "tier": "Silver",
+        "row": 3,
+        "priority": 100,
+        "image": "./img/sponsors/drupalsouth/2011-brisbane-australia/sponsor-10.png",
+        "imageAlt": "RealityLoop logo",
+        "link": "http://2011.drupaldownunder.org/sponsor/realityloop",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-11",
+        "title": "Connecting Up",
+        "tier": "Silver",
+        "row": 3,
+        "priority": 110,
+        "image": "./img/sponsors/drupalsouth/2011-brisbane-australia/sponsor-11.png",
+        "imageAlt": "Connecting Up logo",
+        "link": "http://2011.drupaldownunder.org/sponsor/connecting-australia",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-13",
+        "title": "Creative Contingencies",
+        "tier": "Bronze",
+        "row": 4,
+        "priority": 130,
+        "image": "./img/sponsors/drupalsouth/2011-brisbane-australia/sponsor-13.png",
+        "imageAlt": "Creative Contingencies logo",
+        "link": "http://2011.drupaldownunder.org/sponsor/creative-contingencies",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-12",
+        "title": "Catalyst",
+        "tier": "Bronze",
+        "row": 4,
+        "priority": 120,
+        "image": "./img/sponsors/drupalsouth/2011-brisbane-australia/sponsor-12.png",
+        "imageAlt": "Catalyst logo",
+        "link": "http://2011.drupaldownunder.org/sponsor/catalyst",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "scheduleURLs": [
+      "http://2011.drupaldownunder.org/schedule"
+    ],
+    "other_urls": []
+  },
+  "items": [
+    {
+      "startTime": "2011-01-21T21:00:00Z",
+      "endTime": "2011-01-21T21:30:00Z",
+      "duration": "P30M",
+      "title": "Registration",
+      "location": "Glo Digital Room, PreviousNext Room 1, PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/content/registration",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "sponsorIds": "",
+      "full_description": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-21T22:00:00Z",
+      "endTime": "2011-01-21T22:45:00Z",
+      "duration": "P45M",
+      "title": "Exportables",
+      "location": "Glo Digital Room",
+      "link": "http://2011.drupaldownunder.org/session/exportables",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "sime"
+      ],
+      "full_description": "From their early origins in Views, their standardization in Chaos Tools, through to the mind-blowing achievements of Features, exportables have made a big impact on easing the pain that comes with UI configuration.\n\nExportables provide a way to put database configuration into code. This code can then be used directly in a module, or imported into a site. Exportables enable an iterative cycle of database overrides and configuration export back to code.\n\nViews, Panels, Context, Custom Formatters, Features, Strongarm and plenty more modules leverage the power of exportables, and this is set to grow in Drupal 7.\n\nIn the context of Drupal 7, this talk looks at:\n\n- the basic landscape of exportables,\n- which existing modules are compatible,\n- the hooks that are exposed, and\n- how to make your own module's data exportable.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-21T22:00:00Z",
+      "endTime": "2011-01-21T22:45:00Z",
+      "duration": "P45M",
+      "title": "jQuery for Designers and Themers",
+      "location": "PreviousNext Room 1",
+      "link": "http://2011.drupaldownunder.org/session/jquery-designers-and-themers",
+      "track": [
+        "Theming"
+      ],
+      "speakers": [
+        "bevan"
+      ],
+      "full_description": "Small non-intrusive animations and interactions can greatly enhance the user experience and impress website visitors and clients. [jQuery](http://jquery.com/) and [jQuery UI](http://jqueryui.com/) make it easy to add these enhancements with very little knowledge of javascript or programming. Learn how!\n\nNo understanding of jQuery, javascript, programming or even Drupal theming is required. It is expected that attendees have an understanding of CSS selectors and how HTML elements are nested within each other to build a \"tree\" (aka \"DOM\"). This should make some sense (perhaps not complete sense) to you:\n`#page #content > p a.read_more {}`\n\nSome understanding of very basic programming concepts will be useful for the more advanced parts of the session, but is not expected. I.e.\n\n```\n  // Declare a function called \"calculateCircleArea\", which accepts a parameter \"radius\".\n  function calculateCircleArea(radius) {\n    // Declare a variable called \"area\".\n    var area;\n    // The area variable is now NULL.\n\n    // Now assign a value to area.\n    // area becomes 2 times pi times radius.\n    area = 2 * 3.142 * radius;\n    // The area variable is now 2πr (\"two-pi-R\").\n\n    // Functions usually return something.\n    return area;\n  }\n```\n\nThis session is based on the [jQuery for Designers and Themers theme](http://drupal.org/project/jq4dat), which was created and upgraded for previous Drupal events where I gave this session or variations of it. Based on audience feedback from those sessions, I have refined the session content and adapted it.\n\n- [DrupalCon Paris](http://paris2009.drupalcon.org/session/jquery-designers-and-themers), September 2009\n- [DrupalCon San Francisco](http://sf2010.drupal.org/conference/sessions/jquery-designers-and-themers), April 2010\n- [DrupalSouth Wellington](http://wellington2010.drupalsouth.net.nz/session/jquery-basics-plus-plus), January 2010\n- [Chicago DrupalCamp](https://www.chicagodrupalcamp.org/sessions/jquery-designers-and-themers), June 2010\n- [DrupalCon Chicago](http://chicago2011.drupal.org/sessions/jquery-designers-and-themers), March 2011\n\n**Links**:\n\n- [Sample code is at Drupal.org/Project/jQ4DaT](http://drupal.org/project/jq4dat).\n- [Slides are at TinyURL.com/jQuery-Designers (Google Docs)](http://docs.google.com/present/view?id=drmcbw4_1816qv2fkc7). They will be updated and refined for Chicago 2011.\n- [Audio from DrupalCon SF](http://sf2010.drupal.org/conference/sessions/jquery-designers-and-themers). Audio is high quality, but video contains slides only. Sorry I forgot to repeat the questions into the microphone.\n- [Video from DrupalCon Paris](http://www.archive.org/details/jQueryfordesignersandthemers). It is a very poor quality recording.\n",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-21T22:00:00Z",
+      "endTime": "2011-01-21T22:45:00Z",
+      "duration": "P45M",
+      "title": "From zero to rockstar (contributing to Drupal)",
+      "location": "PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/session/zero-rockstar-contributing-drupal",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "realityloop"
+      ],
+      "full_description": "You've made the decision to use Drupal and you know the power of Drupal is the community behind it, but you not a coder... So how can you contribute?\n\nThere are a lot of ways you can help and I aim to show you some of the ways, and also show you where to get started if you want to help with coding as well.\n\nSlides are available at: [http://realityloop.com/blog/2011/01/22/presentation-zero-rockstar-contri...](http://realityloop.com/blog/2011/01/22/presentation-zero-rockstar-contributing-drupal)",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-21T23:00:00Z",
+      "endTime": "2011-01-21T23:45:00Z",
+      "duration": "P45M",
+      "title": "Keynote: Now you're in business: making a living with Drupal",
+      "location": "Glo Digital Room, PreviousNext Room 1, PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/session/making-a-living-with-drupal",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "Allie"
+      ],
+      "full_description": "Drupal powers hundreds of thousands of sites, and provides thousands of developers with rewarding and productive jobs. Drupal does things differently, and a solid Drupal career stems from careful planning and a clear understanding of how to use those differences as a strength before they become a hinderance. This means setting clear goals working together to stay on track.\n\nEvery Drupal developer owes her career to its contributors, and every Drupal user has the potential to become the next contributor. It's a great way to grow together! Learn how others are growing from Drupal consumers to Drupal producers by http://blip.tv/file/4724362 growing their business in ways that give back.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-21T23:45:00Z",
+      "endTime": "2011-01-22T00:15:00Z",
+      "duration": "P30M",
+      "title": "Morning Tea",
+      "location": "Glo Digital Room, PreviousNext Room 1, PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/content/morning-tea",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "sponsorIds": "",
+      "full_description": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T00:15:00Z",
+      "endTime": "2011-01-22T01:00:00Z",
+      "duration": "P45M",
+      "title": "Pantheon: Best Practice Development, Testing and High-Performance Deployment",
+      "location": "Glo Digital Room",
+      "link": "http://2011.drupaldownunder.org/session/session-josh-koenig",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Josh Koenig"
+      ],
+      "full_description": "How can Drupal fulfill its destiny of running a double-digit percentage of the internet? How can the community continue to grow in breadth and depth of talent? How can we continue to win converts from traditional (proprietary) CMSs and keep pace with our Open Source rivals? By empowering our users and putting the human at the top of the stack.\n\nPantheon does this by standardizing and opening up the \"magic\" of advanced enterprise hosting, bundling the benefit of years of hard-won development experience and making this all ubiquitously and inexpensively available via the Cloud.\n\nWhoa mate, that's a lot of buzzwords.\n\nIn this session we'll blow past the hype and explain each component in the Pantheon stack: what it is, why it matters, and how it can help you take Drupal to the next level. You will learn how we utilize:\n• Git\n• Pressflow\n• Cutting edge server-side tools (e.g. Varnish, Memcached, Apache Solr, Cassandra, Mongo)\n• Hudson\n• BCFG2\n• Cloud Computing (Rackspace, Rimuhosting, others)\n\nTo create what we believe is the first completely mapped-out end-to-end Drupal production process.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T00:15:00Z",
+      "endTime": "2011-01-22T01:00:00Z",
+      "duration": "P45M",
+      "title": "Building Distributions with Drupal 7",
+      "location": "PreviousNext Room 1",
+      "link": "http://2011.drupaldownunder.org/session/building-distributions-drupal-7",
+      "track": [
+        "Implementation & Config"
+      ],
+      "speakers": [
+        "skwashd"
+      ],
+      "full_description": "Things have come a long way over the last few years in terms of making it easy to build distributions with Drupal. Just a couple of short years ago the accepted way of building a distro was to run mysqldump, remove any sensitive data, tar up the root directory and release it. This wasn't very sustainable.\n\nDrupal 7 treats installation profiles as first class projects, just like modules and themes. There have been a lot of changes in Drupal 7 which make it a lot easier to build and maintain Drupal based distributions.\n\nDuring this session Dave will walk attendees through the process of building a Drupal distro. All code will be made available via a git repository.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T00:15:00Z",
+      "endTime": "2011-01-22T01:00:00Z",
+      "duration": "P45M",
+      "title": "Inkscape: mockup that site",
+      "location": "PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/session/inkscape-mockup-site",
+      "track": [
+        "Design & UX"
+      ],
+      "speakers": [
+        "kattekrab"
+      ],
+      "full_description": "Inkscape is an open source vector graphic editor. It is fantastic for creating mockups, and web images.\n\nBring the freedom you love in Drupal to your desktop graphic tool set and give Inkscape a go.\n\nThis session will introduce Inkscape and its key features, and then demo some of my strategies for creating mockups - for the client, and for the dev team. From low-fidelity sketches, to the complete design... Inkscape should be in your toolbox.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T01:00:00Z",
+      "endTime": "2011-01-22T02:00:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "Glo Digital Room, PreviousNext Room 1, PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/content/lunch",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "sponsorIds": "",
+      "full_description": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T02:00:00Z",
+      "endTime": "2011-01-22T02:20:00Z",
+      "duration": "P20M",
+      "title": "Group Session plus Photo",
+      "location": "Glo Digital Room, PreviousNext Room 1, PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/content/group-session-plus-photo-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T02:20:00Z",
+      "endTime": "2011-01-22T03:05:00Z",
+      "duration": "P45M",
+      "title": "Keynote: Goodbye Centralization, Hello Distribution: An Introduction to Git",
+      "location": "Glo Digital Room, PreviousNext Room 1, PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/session/keynote-goodbye-centralization-hello-distribution-introduction-git",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Josh Waihi"
+      ],
+      "full_description": "Git is a powerful distributed version control system that the Drupal community is moving towards, so what a perfect time to get acquainted with the newest tech to integrate with Drupal. I'll cover how Git differs from centralized version controls systems like CVS as well as a \"how to\" to utilise some of Git's key advantages.\n\n**Intended audience**:\nNon-Git users, new Git users and people who'd like to understand better how Git differs from traditional VCS.\n\nQuestions answered by this session\n\n1. Question 1: How does Version Control traditionally work?\n2. Question 2: What is Git?\n3. Question 3: What is the difference between centralized and distributed version control?\n4. Question 4: I'm use to CVS or SVN, how do use Git to achieve the same results?\n5. Question 5: What other cool things can I do with Git?\n",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T03:15:00Z",
+      "endTime": "2011-01-22T04:00:00Z",
+      "duration": "P45M",
+      "title": "Paid Membership Sites",
+      "location": "Glo Digital Room",
+      "link": "http://2011.drupaldownunder.org/session/paid-membership-sites",
+      "track": [
+        "Implementation & Config"
+      ],
+      "speakers": [
+        "univate"
+      ],
+      "full_description": "This session will show off the capabilities of [ubercarts recurring payments and subscription module](http://drupal.org/project/uc_recurring) which features include the ability to build and manage a paid membership site complete with recurring billing.\n\nLullubot has recent launched their new drupal video/training site using this module to manage their subscribers:\n[http://drupalize.me/](http://drupalize.me/)\n\nWill also cover some of the general issues that you need to consider when running any e-commerce site and specifically what options are available to store and process credit card details.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T03:15:00Z",
+      "endTime": "2011-01-22T04:00:00Z",
+      "duration": "P45M",
+      "title": "MySQL server tuning, not an optional extra",
+      "location": "PreviousNext Room 1",
+      "link": "http://2011.drupaldownunder.org/session/mysql-server-tuning-not-optional-extra",
+      "track": [
+        "Implementation & Config"
+      ],
+      "speakers": [
+        "arjen"
+      ],
+      "full_description": "MySQL's default settings are intended for minimal resource (RAM/disk) use, not performance and safety in production. Some of the commonly known sample configs (\"my-huge.cnf\") are hideously outdated: incomplete and in some cases even incorrect! Using these can actually cause more trouble.\n\nThere are a number of settings that you really need to know about when deploying MySQL or MariaDB. We'll discuss those in this session.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T03:15:00Z",
+      "endTime": "2011-01-22T04:00:00Z",
+      "duration": "P45M",
+      "title": "Better practices for writing CSS",
+      "location": "PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/session/better-practices-writing-css",
+      "track": [
+        "Theming"
+      ],
+      "speakers": [
+        "rimian"
+      ],
+      "full_description": "Learn how to improve quality and productivity by applying pragmatic principles to your CSS layer.\n\nBy using an interface like xCSS or Sass, you can remove duplication, eliminate unwanted relationships and build a CSS framework to enforce your requirements.\n\nBy writing code that writes the code, you'll output more for less. By removing duplication, you'll spend less time maintaining legacy code and improve quality. By defining a set of rules or framework, you'll promote extensibility and readability. By applying all these principles, you'll wonder why you wrote CSS the old way.\n\nSlides:\n[http://www.rimian.com.au/best-practice-css.pdf](http://www.rimian.com.au/best-practice-css.pdf)\nCode:\n[https://github.com/rimian/css-framework](https://github.com/rimian/css-framework)\n\nAlso See:\n[http://xcss.antpaw.org/](http://xcss.antpaw.org/)\n[http://sass-lang.com/](http://sass-lang.com/)\n[http://lesscss.org/](http://lesscss.org/)\n[http://lessframework.com/](http://lessframework.com/)\n[http://drupal.org/project/xcss](http://drupal.org/project/xcss)\n[http://drupal.org/project/less](http://drupal.org/project/less)\n[http://twitter.com/rimian](http://twitter.com/rimian)",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T04:00:00Z",
+      "endTime": "2011-01-22T04:30:00Z",
+      "duration": "P30M",
+      "title": "Afternoon Tea",
+      "location": "Glo Digital Room, PreviousNext Room 1, PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/content/afternoon-tea",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "sponsorIds": "",
+      "full_description": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T04:30:00Z",
+      "endTime": "2011-01-22T05:15:00Z",
+      "duration": "P45M",
+      "title": "Fields in Core: How to create a custom field",
+      "location": "Glo Digital Room",
+      "link": "http://2011.drupaldownunder.org/session/fields-core-how-create-custom-field",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "zugec"
+      ],
+      "full_description": "In Drupal 7 a lot of CCK's power has been brought into core. Now it's very easy to create a custom field for those edge cases where a standard text/number field just doesn't cut it.\n\nIn my presentation I'll discuss the following topics:\n\n- Intro to fields\n- Walk through the creation of a custom field module\n- Explain all field hooks\n- Explain where to find documentation\n- Talk about other contrib field based modules\n\n## UPDATE:\nPresentation: [http://www.slideshare.net/zugec/fields-in-core-how-to-create-a-custom-field](http://www.slideshare.net/zugec/fields-in-core-how-to-create-a-custom-field)\nExample code: [https://github.com/zugec/presentation-fields-in-core-ddu2011](https://github.com/zugec/presentation-fields-in-core-ddu2011)\n",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T04:30:00Z",
+      "endTime": "2011-01-22T05:15:00Z",
+      "duration": "P45M",
+      "title": "Selling Drupal into Large Enterprise & Government",
+      "location": "PreviousNext Room 1",
+      "link": "http://2011.drupaldownunder.org/session/selling-drupal-large-enterprise-government",
+      "track": [
+        "Business & Strategy"
+      ],
+      "speakers": [
+        "owenlansbury"
+      ],
+      "full_description": "Drupal is now in the consideration set for many large enterprises and government departments when they're tendering new web projects. This often pits Drupal against other open-source and proprietary Content Management Systems.\n\nThis session will go into detail about what these organisations are looking for in a Content Management System, what factors need to be considered and how to win the arguments and allay concerns about using Drupal. The topics covered will be of a broad nature, so suitable for developers, project managers and business managers alike.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T04:30:00Z",
+      "endTime": "2011-01-22T05:15:00Z",
+      "duration": "P45M",
+      "title": "Migrating to a Drupal Web Environment",
+      "location": "PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/session/migrating-drupal-web-environment",
+      "track": [
+        "Implementation & Config"
+      ],
+      "speakers": [
+        "fionabush"
+      ],
+      "full_description": "Are you considering moving to Drupal from another environment? Learn about some of the issues we faced and how we got around them when we decided to migrate from a paid Microsoft environment to an Open Source Drupal environment at the ANU College of Law.\n\nThe session will cover details about the technology and environment we migrated from and to.\nWhat drupal modules we used and how we tailored them in our Drupal environment to meet our needs.\nWe tried to accommodate the transition based on the skill level of our users.\nWe will discuss the methods we used to get our users trained and using the new Drupal environment and technology.\n\nIf your interested in this session [Chris Skene has a presentation on building and managing a shared drupal distribution for the University](http://drupaldownunder.org/session/building-and-managing-enterprise-drupal-distribution) as a whole.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T05:30:00Z",
+      "endTime": "2011-01-22T07:00:00Z",
+      "duration": "P90M",
+      "title": "Drupal: history, coummunity, future",
+      "location": "Glo Digital Room, PreviousNext Room 1, PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/session/dries-keynote",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "Dries"
+      ],
+      "full_description": "Dries' Keynote — session details to come!",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T22:00:00Z",
+      "endTime": "2011-01-22T22:45:00Z",
+      "duration": "P45M",
+      "title": "Drush: from Beginner to Advanced",
+      "location": "Glo Digital Room",
+      "link": "http://2011.drupaldownunder.org/session/drush-intro-installation-and-basics",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "matthew.lechleider"
+      ],
+      "full_description": "## Drush: Intro, Installation and Basics\n\nDrush is a command line shell and scripting interface for Drupal, a veritable Swiss Army knife designed to make life easier for those of us who spend some of our working hours hacking away at the command prompt.\n\nDrush will download and update modules, clear the cache, index your search results, and perform useful database operations. You can also extend it by installing commands that have been contributed or by writing your own.\n\nAttend this session and learn that Drush is your new best friend. Be one of the cool kids who say \"Oh, you wait for the entire module page to load in a web browser?? I just use Drush\".\n\nKey Points:\n\n- What is Drush?\n- Introduction to Command Line Interface\n- Installation of Drush\n- Useful Drush commands to get started\n- Drush to backup\n- Drush to download/update Drupal core\n- Drush to download/update modules/themes\n- +more\n\nIf time allows, I can demo a sneak preview of \"Drush IRC\".\n\n## Advanced Drush\n\nAs a Drupal developer you find yourself building up a collection of shell scripts, aliases and other tools to automate your regular tasks. This includes things like installing a local development copy, working with remote development, staging and production instances, deploying and testing updates and managing the configuration differences between different environments and sites.\n\nThe DRUpal SHell (Drush) can do more than download packages from d.o and clear the cache when you're working on a theme. Its real power comes when you automate it to power your own scripts. It allows you to write smart, robust and reusable tools and is a great platform on which to standardise your workflows.\n\nThis session will explore the features of drush beyond the basics and show examples of how it can be used to improve your custom scripts.\n\nTechnology - latest drush, shell scripting, drupal 6 and 7\n\nTopics:\n\n- automated site installation\n- remote site management\n- database management\n- development environments\n- deployment\n- drupal object manipulation (users, nodes, variables)\n- testing\n- custom commands",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T22:00:00Z",
+      "endTime": "2011-01-22T22:45:00Z",
+      "duration": "P45M",
+      "title": "New Drupal Technology: Theming without coding!",
+      "location": "PreviousNext Room 1",
+      "link": "http://2011.drupaldownunder.org/session/theming-without-coding-impossible-you-say",
+      "track": [
+        "Theming"
+      ],
+      "speakers": [
+        "Jeff"
+      ],
+      "full_description": "Find out how to create your own unique professional-looking theme without writing any code! Be the first to see some exciting new Drupal technology straight from the top-secret labs at Marmaladesoul.\n\nAlthough the session is primarily aimed at non-coders, others may be interested to see how we have used advanced jQuery with JSON interacting with the depths of Drupal's theme layer and forms API.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T22:00:00Z",
+      "endTime": "2011-01-22T22:45:00Z",
+      "duration": "P45M",
+      "title": "Building a document management system in drupal",
+      "location": "PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/session/building-document-management-system-drupal",
+      "track": [
+        "Implementation & Config"
+      ],
+      "speakers": [
+        "jzornig"
+      ],
+      "full_description": "I recently completed the development of a corporate document management system in drupal. This system replaces a largely manual and ad hoc set of business processes and a static website for corporate policy documents. The new system is fully dynamic with documents able to be edited and reviewed online according to a strict workflow while maintaining revisions and audit trails. One feature of the system is a flexible role assignment system where each document in the system may have different users assigned to roles within the workflow. The system is implemented in Drupal 6 using over 60 community modules and a minimum of bespoke code. It provides a great example of the flexibility and suitability of the drupal platform for custom application design.\n\nThe talk would cover:\n1. Introduction to the requirements spec and the reasoning behind the choice of drupal.\n2. The document content types and editing solution (cck, ckeditor)\n3. Site navigation and document display (advanced book blocks, views etc.)\n4. Workflow (revisioning, rules)\n5. The access control (module grants, content access, nodeaccess user reference)",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T23:00:00Z",
+      "endTime": "2011-01-22T23:45:00Z",
+      "duration": "P45M",
+      "title": "Archimedes - Application Monitoring",
+      "location": "Glo Digital Room",
+      "link": "http://2011.drupaldownunder.org/session/archimedes-application-monitoring",
+      "track": [
+        "Implementation & Config"
+      ],
+      "speakers": [
+        "Josh Waihi"
+      ],
+      "full_description": "Archimedes will be an application monitoring tool built on Drupal that can monitor all kinds of web based applications including:\n\n- Drupal\n- Moodle - Learning Management System\n- Mahara - ePortfolios system\n- Koha - Online library management system\n\nArchimedes utilizes information from each application to provide feature set functionality such as security or general updates info to applications, version control references, indicative financial upkeep costings and performance metrics.\nThis talk will cover an overview of the what, why and how of the Archimedes project, yet to be open sourced.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T23:00:00Z",
+      "endTime": "2011-01-22T23:45:00Z",
+      "duration": "P45M",
+      "title": "Turbo charge your Drupal site",
+      "location": "PreviousNext Room 1",
+      "link": "http://2011.drupaldownunder.org/session/turbo-charge-your-drupal-site",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "kim.pepper"
+      ],
+      "full_description": "There are 3 golden rules for web site optimisation:\n\n1. Caching\n2. Caching\n3. Caching \n\nThis session will take you from the browser to the database showing how to optimise your site to handle large volumes of traffic.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T23:00:00Z",
+      "endTime": "2011-01-22T23:45:00Z",
+      "duration": "P45M",
+      "title": "Fancy Pants WYSIWYG Editing",
+      "location": "PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/session/fancy-pants-wysiwyg-editing",
+      "track": [
+        "Implementation & Config"
+      ],
+      "speakers": [
+        "boztek"
+      ],
+      "full_description": "A common complaint heard from migrants of other web systems that ship with an out of the box WYSIWYG editor is the lack of one when installing Drupal. When they discover the dizzying array of options available and the configuration required to get one working they often wonder why Drupal doesn't just tidy up TinyMCE and be done with it like WordPress.\n\nThis session will show some of the reasons why a one size fits all WYSIWYG editor isn't always enough. We will demo some more advanced WYSIWYG setups that include linking, image handling, custom styles and demo a commissioned module that allows insertion of rich custom content types with a fancy modal interface based on the nodepicker module.\n\nTechnology - Drupal 6, WYSIWYG API, javascript, some custom module code, CKEditor, TinyMCE\n\nTopics:\n\n- An overview of WYSIWYG in Drupal\n- Image handling and insertion options\n- Pathologic module\n- LinkIt module\n- NodePicker module\n- WYSIWYG API\n- Styles\n- A fork of the Nodepicker module for WYSIWYG insertion of rich custom content types\n- Managing configuration when deploying",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-22T23:45:00Z",
+      "endTime": "2011-01-23T00:15:00Z",
+      "duration": "P30M",
+      "title": "Morning Tea",
+      "location": "Glo Digital Room, PreviousNext Room 1, PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/content/morning-tea-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "sponsorIds": "",
+      "full_description": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-23T00:15:00Z",
+      "endTime": "2011-01-23T01:45:00Z",
+      "duration": "P90M",
+      "title": "Q&A Panel",
+      "location": "Glo Digital Room, PreviousNext Room 1, PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/session/session-dries",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [
+        "Dries"
+      ],
+      "full_description": "Dries Buytaert, Josh Koenig, Allie Micka & Josh Waihi answer question from attendees at DrupalDownunder",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-23T01:45:00Z",
+      "endTime": "2011-01-23T02:45:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "Glo Digital Room, PreviousNext Room 1, PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/content/lunch-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "sponsorIds": "",
+      "full_description": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-23T02:45:00Z",
+      "endTime": "2011-01-23T03:30:00Z",
+      "duration": "P45M",
+      "title": "Accepting payments online: A building block approach",
+      "location": "Glo Digital Room",
+      "link": "http://2011.drupaldownunder.org/session/accepting-payments-online",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Allie"
+      ],
+      "full_description": "There are lots of reasons to ask for money online, but the basic mechanism for exchanging money remains the same. This session introduces a payment framework that can be used by a developer to accept payments on just about any Drupal form page. This is a lightweight alternative to an entire shopping cart system, and demonstrates the power of using multiple modules together as part of an overall framework.\n\nThis session is good for developers who want to learn now to build payment systems, users who want to use the donation and webform solutions already available, or anyone who is interested in seeing an example of a framework module in practice.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-23T02:45:00Z",
+      "endTime": "2011-01-23T03:30:00Z",
+      "duration": "P45M",
+      "title": "Horizontally Scaling Drupal",
+      "location": "PreviousNext Room 1",
+      "link": "http://2011.drupaldownunder.org/session/horizontally-scaling-drupal",
+      "track": [
+        "Implementation & Config"
+      ],
+      "speakers": [
+        "skwashd"
+      ],
+      "full_description": "Managing large numbers of Drupal sites is not only frustrating, it is time consuming. In 2009 Dave deployed 2086 production Drupal 6 sites in around 50 hours. Since this time he has been working with clients to streamline their development, deployment and maintenance workflows.\n\nDuring this session Dave will provide an overview of the Aegir platform and tools which assist with Druapl site development such as Drush, Drush Make, Context, Strong Arm and Features.\n\nThe session will be a walk through, with code samples being made available for download.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-23T02:45:00Z",
+      "endTime": "2011-01-23T03:30:00Z",
+      "duration": "P45M",
+      "title": "Adding live data sources to your content",
+      "location": "PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/session/adding-live-data-sources-your-content",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "jaime"
+      ],
+      "full_description": "To add interest to your web pages you may want to incorporate data from external services like Twitter, Flickr or Wikipedia.\n\nI would like to show you how I've gone about joining custom content types with external data sources.\n\nThis session will be suitable for people wanting to learn about custom content types (using CCK) and Views. We will also delve into writing some custom code at the theme layer.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-23T03:45:00Z",
+      "endTime": "2011-01-23T04:30:00Z",
+      "duration": "P45M",
+      "title": "Case-Study: ABC Dig Music",
+      "location": "Glo Digital Room",
+      "link": "http://2011.drupaldownunder.org/session/case-studies-nswgov-and-abc",
+      "track": [
+        "Implementation & Config"
+      ],
+      "speakers": [
+        "davidseth"
+      ],
+      "full_description": "To coincide with the launch of Australian digital radio in July of 2009, the ABC launched three websites: ABC Dig Music, ABC Jazz and ABC Country. The DIG project was one of the earliest pioneering ABC projects to involve external content aggregation (including MusicBrainz, YouTube, Last .fm and Wikipedia). This content aggregation was key to give the real-time snapshot of the musical artists that populate the world of the DIG Music's various audiences. To make sure that all this wonderful (and sometimes messy) data was indeed useful, Semantic Web technology was enlisted in unique ways (again another first for the ABC).\n\nDavid Peterson will give a case study discussing the architecture choices, custom modules built, module selections and performance tweaks used along with Drupal 6. He will cover the technology that made the mashup possible: Semantic Web, linked data, Wikipedia, MusicBrainz, Last .FM, Discogs and Apache Solr Search. The good, the bad and the ugly will be revealed along with the secret ingredients that made it all work. If time allows David will also cover how he would do things differently in a Drupal 7 world.\n\nSlides: \n[http://www.slideshare.net/davidseth/drupal-case-study-abc-dig-music](http://www.slideshare.net/davidseth/drupal-case-study-abc-dig-music)",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-23T03:45:00Z",
+      "endTime": "2011-01-23T04:30:00Z",
+      "duration": "P45M",
+      "title": "An overview of Fusion Theme",
+      "location": "PreviousNext Room 1",
+      "link": "http://2011.drupaldownunder.org/session/overview-fusion-theme",
+      "track": [
+        "Theming"
+      ],
+      "speakers": [
+        "bernie.cram"
+      ],
+      "full_description": "As with everything in Drupal, there is more than one way to arrive at your destination. This talk will present an overview of subtheming with Fusion and adding Skinr functionality into your theme. Aimed at beginner and intermediate themers as well as developers looking to streamline theming on sites when they are not working with a specialist themer.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-23T03:45:00Z",
+      "endTime": "2011-01-23T04:30:00Z",
+      "duration": "P45M",
+      "title": "Code Sprint",
+      "location": "PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/session/code-sprint",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "full_description": "We will be holding a code sprint!",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-23T04:30:00Z",
+      "endTime": "2011-01-23T05:00:00Z",
+      "duration": "P30M",
+      "title": "Afternoon Tea",
+      "location": "Glo Digital Room, PreviousNext Room 1, PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/content/afternoon-tea-0",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "Event Team"
+      ],
+      "sponsorIds": "",
+      "full_description": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-23T05:00:00Z",
+      "endTime": "2011-01-23T05:45:00Z",
+      "duration": "P45M",
+      "title": "Keynote: Drupal as the future Web Platform",
+      "location": "Glo Digital Room, PreviousNext Room 1, PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/session/josh-koenigs-keynote",
+      "track": [
+        "Coder"
+      ],
+      "speakers": [
+        "Josh Koenig"
+      ],
+      "full_description": "Contrary to what buzz-hungry pundits may say, the web is far from dead. Indeed, the growth of web domains and websites is accelerating as more and more people worldwide gain access to fast, reliable net access and begin making the transition from information consumer to information-sharer.\n\nHowever, the problem of content management remains unsolved for most users, be they individuals looking to express themselves, businesses looking to engage customers, or international NGOs seeking to fulfill their mission more effectively. A disorganized (and dizzying) array of narrow point-solutions, custom builds, and open source tools crowd the field.\n\nIn this context, Drupal is uniquely positioned to break through as the first all-around platform for the web. Major challenges remain, but many are already being addressed by Drupal core, and/or by various elements within the wider community. This presentation makes the case for Drupal as a leading platform for the future web, reviewing the opportunities at hand and laying out some of the work to be done to realize the full potential.\n\nSlides: \n[http://www.slideshare.net/joshkoenig/drupal-as-a-winning-web-platform](http://www.slideshare.net/joshkoenig/drupal-as-a-winning-web-platform)",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2011-01-23T05:45:00Z",
+      "endTime": "2011-01-23T06:30:00Z",
+      "duration": "P45M",
+      "title": "Lightning Talks",
+      "location": "Glo Digital Room, PreviousNext Room 1, PreviousNext Room 2",
+      "link": "http://2011.drupaldownunder.org/session/lightning-talks",
+      "track": [
+        "Drupal Community"
+      ],
+      "speakers": [],
+      "full_description": "Do you have a 5min talk on any topic that would be of interest to the Drupal Community?\n\nThere will be board in the foyer of the venue on the weekend where you can submit a talk for this session.",
+      "sponsorIds": "",
+      "video_url": ""
+    }
+  ]
+}

@@ -22,6 +22,7 @@ import {
 import { configureEventSearch, openEventSearchModal } from './eventSearch.js';
 import {
   loadThemes,
+  getThemeById,
   THEME_STORAGE_KEY,
   normalizeThemeId,
   setCurrentThemeId,
@@ -79,25 +80,8 @@ function bindViewportScheduleLockUi() {
 
 
 function setupEditorAccessButton() {
-  const button = document.getElementById('editorAccessButton');
-  if (!button) return;
-
-  const isLocalhostResult = isLocalhost();
-  if (!isLocalhostResult) {
-    button.disabled = true;
-    button.setAttribute('aria-disabled', 'true');
-    button.title = 'Editor is available only when running locally';
-    button.classList.add('is-disabled');
-    return;
-  }
-
-  button.disabled = false;
-  button.removeAttribute('aria-disabled');
-  button.title = 'Open editor';
-  button.classList.remove('is-disabled');
-  button.addEventListener('click', () => {
-    window.location.assign('./editor.html');
-  });
+  if (!isLocalhost()) return;
+  document.getElementById('editorNavLink')?.classList.remove('hidden');
 }
 
 export function wireStatsHandlers(selectionOverviewFn, stageStatsFn) {
@@ -259,78 +243,25 @@ function renderCategoryOptions(categories) {
     .join('');
 }
 
-export function getHeaderBranding(category, eventMeta = null) {
-  const categoryName = String(category || '').toLowerCase();
-  const designationName = String(eventMeta?.designation || '').toLowerCase();
-  const combinedLabel = `${categoryName} ${designationName}`;
-  const isDrupalGov =
-    /drupalgov/.test(combinedLabel) ||
-    (state.currentEventFile || '').startsWith('drupalgov-') ||
-    (state.currentEventFile || '').startsWith('drupalgovau-');
-  const isDrupalSouth = /drupalsouth/.test(combinedLabel);
-  const isCommunityDay = /community day/.test(combinedLabel);
-  const isDrupalCon = /drupalcon/.test(combinedLabel);
-  const isDrupalConSingapore = (state.currentEventFile || '') === 'drupalcon-asia-singapore-2024.json';
-  if (isCommunityDay) {
-    return {
-      kicker: 'DrupalSouth Community Day',
-      iconClass: 'fas fa-users',
-      brandClass: 'brand-community',
-      logoUrl: String(eventMeta?.logo?.image || '').trim(),
-      logoAlt: String(eventMeta?.logo?.imageAlt || '').trim()
-    };
-  }
-  if (isDrupalSouth) {
-    if (isDrupalGov) {
-      return {
-        kicker: 'DrupalGov Schedule',
-        iconClass: 'fas fa-landmark',
-        brandClass: 'brand-drupalsouth',
-        logoUrl: String(eventMeta?.logo?.image || '').trim(),
-        logoAlt: String(eventMeta?.logo?.imageAlt || '').trim()
-      };
-    }
-    return {
-      kicker: 'DrupalSouth Schedule',
-      iconClass: 'fas fa-water',
-      brandClass: 'brand-drupalsouth',
-      logoUrl: String(eventMeta?.logo?.image || '').trim(),
-      logoAlt: String(eventMeta?.logo?.imageAlt || '').trim()
-    };
-  }
-  if (isDrupalGov) {
-    return {
-      kicker: 'DrupalGovAU Schedule',
-      iconClass: 'fas fa-landmark',
-      brandClass: 'brand-drupalsouth',
-      logoUrl: String(eventMeta?.logo?.image || '').trim(),
-      logoAlt: String(eventMeta?.logo?.imageAlt || '').trim()
-    };
-  }
-  if (!isDrupalCon) {
-    return {
-      kicker: `${category || 'Conference'} Schedule`,
-      iconClass: 'fas fa-calendar-alt',
-      brandClass: 'brand-drupalcon',
-      logoUrl: String(eventMeta?.logo?.image || '').trim(),
-      logoAlt: String(eventMeta?.logo?.imageAlt || '').trim()
-    };
-  }
+export function getHeaderBranding(eventMeta = null) {
+  const themeVal = eventMeta?.theme;
+  const themeId  = typeof themeVal === 'object' ? themeVal?.id : themeVal;
+  const b = (themeId ? getThemeById(themeId) : null)?.branding || {};
   return {
-    kicker: 'DrupalCon Schedule',
-    iconClass: 'fas fa-globe',
-    brandClass: 'brand-drupalcon',
-    logoUrl: String(eventMeta?.logo?.image || '').trim(),
-    logoAlt: String(eventMeta?.logo?.imageAlt || '').trim()
+    kicker:     b.kicker     || `${eventMeta?.designation || 'Conference'} Schedule`,
+    iconClass:  b.iconClass  || 'fas fa-calendar-alt',
+    brandClass: b.brandClass || 'brand-drupalcon',
+    logoUrl:    String(eventMeta?.logo?.image    || '').trim(),
+    logoAlt:    String(eventMeta?.logo?.imageAlt || '').trim(),
   };
 }
 
-export function updateHeaderBranding(category) {
+export function updateHeaderBranding() {
   const logo = document.getElementById('headerLogo');
   const logoImage = document.getElementById('headerLogoImage');
   const logoIcon = document.getElementById('headerLogoIcon');
   const kicker = document.getElementById('headerKicker');
-  const branding = getHeaderBranding(category, state.eventMeta);
+  const branding = getHeaderBranding(state.eventMeta);
   const useLogoPlate =
     state.eventMeta?.logo?.usePlate === true ||
     String(state.eventMeta?.logo?.usePlate || '').toLowerCase() === 'true';
@@ -606,7 +537,7 @@ export function setActiveTab(category) {
   if (select) {
     select.value = category;
   }
-  updateHeaderBranding(category);
+  updateHeaderBranding();
 }
 
 export function populateEventSelector(category, preferredFile) {
@@ -954,7 +885,7 @@ export async function loadEvent(filename) {
   const events = await fetchEvents(filename);
   updateHeaderFlag(manifestItem || inferFlagFromMeta(state.eventMeta || {}));
   if (state.currentEventCategory) {
-    updateHeaderBranding(state.currentEventCategory);
+    updateHeaderBranding();
   }
   const meta = state.eventMeta || {};
   const themeVal = meta.theme;
