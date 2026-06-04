@@ -4,6 +4,7 @@ cache/*
 .idea/*
 documents/*
 scripts/*
+!scripts/validate-data.mjs
 planner/*
 receipts/*
 package.json
