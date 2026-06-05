@@ -9,8 +9,8 @@
     "endDate": "2026-03-27T02:00:00Z",
     "venue": "Hilton Chicago",
     "timezone": "America/Chicago",
-    "columns": 3,
-    "enabled": false,
+    "columns": 5,
+    "enabled": true,
     "logo": {
       "image": "./img/logos/drupalcon-logo.svg",
       "imageAlt": "DrupalCon logo",
@@ -20,13 +20,757 @@
       "https://events.drupal.org/chicago2026/schedule"
     ],
     "flickr": {
-      "enabled": false,
-      "groupUrl": "",
-      "image": "",
-      "imageAlt": ""
+      "enabled": true,
+      "provider": "",
+      "groupUrl": "https://flic.kr/g/3gBx6W",
+      "image": "./img/flickr/drupalcon/2026-chicago.jpg",
+      "imageAlt": "DrupalCon  Chicago 2026 Group Photo Flickr image"
     },
-    "sponsors": [],
-    "other_urls": []
+    "sponsors": [
+      {
+        "id": "acquia",
+        "title": "Acquia",
+        "tier": "Presenting",
+        "row": 1,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon/2026-chicago/acquia.jpg",
+        "imageAlt": "Acquia logo",
+        "link": "https://www.acquia.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "pantheon",
+        "title": "Pantheon",
+        "tier": "Presenting",
+        "row": 1,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon/2026-chicago/pantheon.png",
+        "imageAlt": "Pantheon logo",
+        "link": "https://pantheon.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "imagex",
+        "title": "ImageX",
+        "tier": "Champion",
+        "row": 2,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon/2026-chicago/imagex.png",
+        "imageAlt": "ImageX logo",
+        "link": "https://imagexmedia.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "tag1",
+        "title": "Tag1",
+        "tier": "Champion",
+        "row": 2,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon/2026-chicago/tag1.png",
+        "imageAlt": "Tag1 logo",
+        "link": "https://www.tag1.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "automattic",
+        "title": "Automattic",
+        "tier": "Champion",
+        "row": 2,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon/2026-chicago/automattic.png",
+        "imageAlt": "Automattic logo",
+        "link": "https://automattic.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "evolving-web",
+        "title": "Evolving Web",
+        "tier": "Champion",
+        "row": 2,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon/2026-chicago/evolving-web.png",
+        "imageAlt": "Evolving Web logo",
+        "link": "https://evolvingweb.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "amazeeio",
+        "title": "amazee.io",
+        "tier": "Advocate",
+        "row": 3,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon/2026-chicago/amazeeio.svg",
+        "imageAlt": "amazee.io logo",
+        "link": "https://www.amazee.io/solutions/enterprise-drupal-hosting",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "centarro",
+        "title": "Centarro",
+        "tier": "Advocate",
+        "row": 3,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon/2026-chicago/centarro.png",
+        "imageAlt": "Centarro logo",
+        "link": "https://www.centarro.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "cksource",
+        "title": "CKSource",
+        "tier": "Advocate",
+        "row": 3,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon/2026-chicago/cksource.png",
+        "imageAlt": "CKSource logo",
+        "link": "https://cksource.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "four-kitchens",
+        "title": "Four Kitchens",
+        "tier": "Advocate",
+        "row": 3,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon/2026-chicago/four-kitchens.png",
+        "imageAlt": "Four Kitchens logo",
+        "link": "https://www.fourkitchens.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "material",
+        "title": "Material+",
+        "tier": "Advocate",
+        "row": 3,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon/2026-chicago/material.jpg",
+        "imageAlt": "Material+ logo",
+        "link": "https://www.materialplus.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "aten",
+        "title": "Aten Design Group",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon/2026-chicago/aten.png",
+        "imageAlt": "Aten Design Group logo",
+        "link": "https://atendesigngroup.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "binaryworks",
+        "title": "BinaryWorks",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon/2026-chicago/binaryworks.png",
+        "imageAlt": "BinaryWorks logo",
+        "link": "https://www.thebinaryworks.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "civicactions",
+        "title": "Civic Actions",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon/2026-chicago/civicactions.png",
+        "imageAlt": "Civic Actions logo",
+        "link": "https://civicactions.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "debug-academy",
+        "title": "Debug Academy",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon/2026-chicago/debug-academy.png",
+        "imageAlt": "Debug Academy logo",
+        "link": "https://debugacademy.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "deepl",
+        "title": "DeepL",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon/2026-chicago/deepl.jpg",
+        "imageAlt": "DeepL logo",
+        "link": "https://www.deepl.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "digital-collegium",
+        "title": "Digital Collegium",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcon/2026-chicago/digital-collegium.png",
+        "imageAlt": "Digital Collegium logo",
+        "link": "https://digicol.org/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "dropsolid",
+        "title": "Dropsolid",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 70,
+        "image": "./img/sponsors/drupalcon/2026-chicago/dropsolid.jpg",
+        "imageAlt": "Dropsolid logo",
+        "link": "https://dropsolid.com/en/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "drupalfit",
+        "title": "DrupalFit",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 80,
+        "image": "./img/sponsors/drupalcon/2026-chicago/drupalfit.png",
+        "imageAlt": "DrupalFit logo",
+        "link": "https://drupalfit.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "dubbot",
+        "title": "Dubbot",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 90,
+        "image": "./img/sponsors/drupalcon/2026-chicago/dubbot.png",
+        "imageAlt": "Dubbot logo",
+        "link": "https://dubbot.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "electric-citizen",
+        "title": "Electric Citizen",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 100,
+        "image": "./img/sponsors/drupalcon/2026-chicago/electric-citizen.png",
+        "imageAlt": "Electric Citizen logo",
+        "link": "https://www.electriccitizen.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "elevated-third",
+        "title": "Elevated Third",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 110,
+        "image": "./img/sponsors/drupalcon/2026-chicago/elevated-third.png",
+        "imageAlt": "Elevated Third logo",
+        "link": "https://www.elevatedthird.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "epam",
+        "title": "EPAM",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 120,
+        "image": "./img/sponsors/drupalcon/2026-chicago/epam.png",
+        "imageAlt": "EPAM logo",
+        "link": "https://www.epam.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "hounder",
+        "title": "Hounder",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 130,
+        "image": "./img/sponsors/drupalcon/2026-chicago/hounder.png",
+        "imageAlt": "Hounder logo",
+        "link": "https://hounder.co/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "jakala",
+        "title": "Jakala",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 140,
+        "image": "./img/sponsors/drupalcon/2026-chicago/jakala.png",
+        "imageAlt": "Jakala logo",
+        "link": "https://www.jakala.com/en-gb/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "kadabra",
+        "title": "Kadabra",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 150,
+        "image": "./img/sponsors/drupalcon/2026-chicago/kadabra.png",
+        "imageAlt": "Kadabra logo",
+        "link": "https://kadabrait.net/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "lullabot",
+        "title": "Lullabot",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 160,
+        "image": "./img/sponsors/drupalcon/2026-chicago/lullabot.png",
+        "imageAlt": "Lullabot logo",
+        "link": "https://www.lullabot.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "palantir",
+        "title": "Palantir.net",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 170,
+        "image": "./img/sponsors/drupalcon/2026-chicago/palantir.png",
+        "imageAlt": "Palantir.net logo",
+        "link": "https://www.palantir.net/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "promet-source",
+        "title": "Promet Source",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 180,
+        "image": "./img/sponsors/drupalcon/2026-chicago/promet-source.png",
+        "imageAlt": "Promet Source logo",
+        "link": "https://www.prometsource.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sandstorm",
+        "title": "Sandstorm",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 190,
+        "image": "./img/sponsors/drupalcon/2026-chicago/sandstorm.jpg",
+        "imageAlt": "Sandstorm logo",
+        "link": "https://www.sandstormdesign.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sevaa",
+        "title": "Sevaa",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 200,
+        "image": "./img/sponsors/drupalcon/2026-chicago/sevaa.png",
+        "imageAlt": "Sevaa logo",
+        "link": "https://sevaa.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "specbee",
+        "title": "Specbee",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 210,
+        "image": "./img/sponsors/drupalcon/2026-chicago/specbee.png",
+        "imageAlt": "Specbee logo",
+        "link": "https://www.specbee.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "symfony",
+        "title": "Symfony",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 220,
+        "image": "./img/sponsors/drupalcon/2026-chicago/symfony.png",
+        "imageAlt": "Symfony logo",
+        "link": "https://symfony.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "tugboat",
+        "title": "Tugboat",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 230,
+        "image": "./img/sponsors/drupalcon/2026-chicago/tugboat.png",
+        "imageAlt": "Tugboat logo",
+        "link": "https://www.tugboatqa.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "upsun",
+        "title": "Upsun",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 240,
+        "image": "./img/sponsors/drupalcon/2026-chicago/upsun.jpg",
+        "imageAlt": "Upsun logo",
+        "link": "https://upsun.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "urban-insight",
+        "title": "Urban Insight",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 250,
+        "image": "./img/sponsors/drupalcon/2026-chicago/urban-insight.png",
+        "imageAlt": "Urban Insight logo",
+        "link": "https://www.urbaninsight.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "zoocha",
+        "title": "Zoocha",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 260,
+        "image": "./img/sponsors/drupalcon/2026-chicago/zoocha.png",
+        "imageAlt": "Zoocha logo",
+        "link": "https://www.zoocha.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "acquia-module",
+        "title": "Acquia",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon/2026-chicago/acquia-module.jpg",
+        "imageAlt": "Acquia logo",
+        "link": "https://www.acquia.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "bluefly",
+        "title": "Bluefly.io",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon/2026-chicago/bluefly.png",
+        "imageAlt": "Bluefly.io logo",
+        "link": "https://bluefly.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "cksource-module",
+        "title": "CKSource",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon/2026-chicago/cksource-module.png",
+        "imageAlt": "CKSource logo",
+        "link": "https://cksource.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "clarity-partners",
+        "title": "Clarity Partners",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon/2026-chicago/clarity-partners.png",
+        "imageAlt": "Clarity Partners logo",
+        "link": "https://www.claritypartners.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "current",
+        "title": "Current",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon/2026-chicago/current.png",
+        "imageAlt": "Current logo",
+        "link": "https://www.stay-current.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "drupalfit-module",
+        "title": "DrupalFit",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcon/2026-chicago/drupalfit-module.png",
+        "imageAlt": "DrupalFit logo",
+        "link": "https://drupalfit.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "electric-citizen-module",
+        "title": "Electric Citizen",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 70,
+        "image": "./img/sponsors/drupalcon/2026-chicago/electric-citizen-module.png",
+        "imageAlt": "Electric Citizen logo",
+        "link": "https://www.electriccitizen.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "evolving-web-module",
+        "title": "Evolving Web",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 80,
+        "image": "./img/sponsors/drupalcon/2026-chicago/evolving-web-module.png",
+        "imageAlt": "Evolving Web logo",
+        "link": "https://evolvingweb.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "four-kitchens-module",
+        "title": "Four Kitchens",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 90,
+        "image": "./img/sponsors/drupalcon/2026-chicago/four-kitchens-module.png",
+        "imageAlt": "Four Kitchens logo",
+        "link": "https://www.fourkitchens.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "hounder-module",
+        "title": "Hounder",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 100,
+        "image": "./img/sponsors/drupalcon/2026-chicago/hounder-module.png",
+        "imageAlt": "Hounder logo",
+        "link": "https://hounder.co/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "imagex-module",
+        "title": "ImageX",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 110,
+        "image": "./img/sponsors/drupalcon/2026-chicago/imagex-module.png",
+        "imageAlt": "ImageX logo",
+        "link": "https://imagexmedia.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "midcamp",
+        "title": "Midcamp",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 120,
+        "image": "./img/sponsors/drupalcon/2026-chicago/midcamp.png",
+        "imageAlt": "Midcamp logo",
+        "link": "https://www.midcamp.org/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "pantheon-module",
+        "title": "Pantheon",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 130,
+        "image": "./img/sponsors/drupalcon/2026-chicago/pantheon-module.png",
+        "imageAlt": "Pantheon logo",
+        "link": "https://pantheon.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "symetris",
+        "title": "Symetris",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 140,
+        "image": "./img/sponsors/drupalcon/2026-chicago/symetris.png",
+        "imageAlt": "Symetris logo",
+        "link": "https://symetris.com/en/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "tag1-module",
+        "title": "Tag1",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 150,
+        "image": "./img/sponsors/drupalcon/2026-chicago/tag1-module.png",
+        "imageAlt": "Tag1 logo",
+        "link": "https://www.tag1.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "nationwide-it",
+        "title": "Nationwide IT Services",
+        "tier": "Drupal Village",
+        "row": 6,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon/2026-chicago/nationwide-it.png",
+        "imageAlt": "Nationwide IT Services logo",
+        "link": "https://www.nw-its.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "turbojet",
+        "title": "Turbojet",
+        "tier": "Drupal Village",
+        "row": 6,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon/2026-chicago/turbojet.png",
+        "imageAlt": "Turbojet logo",
+        "link": "https://www.turbojettech.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "devitjobs",
+        "title": "DevITJobs",
+        "tier": "Media Sponsors",
+        "row": 7,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon/2026-chicago/devitjobs.png",
+        "imageAlt": "DevITJobs logo",
+        "link": "https://devitjobs.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "linux-magazine",
+        "title": "Linux Magazine",
+        "tier": "Media Sponsors",
+        "row": 7,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon/2026-chicago/linux-magazine.png",
+        "imageAlt": "Linux Magazine logo",
+        "link": "https://www.linux-magazine.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "opensource-jobhub",
+        "title": "Open Source Job Hub",
+        "tier": "Media Sponsors",
+        "row": 7,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon/2026-chicago/opensource-jobhub.png",
+        "imageAlt": "Open Source Job Hub logo",
+        "link": "https://opensourcejobhub.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "other_urls": [],
+    "sourceCache": "cache/remote/2026-06-05T02-49-43Z/drupalcon-us-chicago-2026-descriptions"
   },
   "items": [
     {
@@ -69,7 +813,7 @@
         "johnpicozzi",
         "MayaLena"
       ],
-      "full_description": "",
+      "full_description": "The Drupal Community Summit at DrupalCon is a collaborative, discussion-focused gathering where people from across the Drupal ecosystem — from newcomers to long-time contributors — come together to connect, share experiences, and explore ways to get involved with and strengthen the community. It emphasizes networking, inclusive conversation, and community-driven initiatives, using a variety of presentation formats that create a welcoming space to learn, contribute, and help shape the future of Drupal beyond just code.\n\nThe full Schedule can be viewed here - [https://docs.google.com/document/d/1I4KSraDFY9zrWethyYyw1FyHyJ3QdoJ0gLp…](https://docs.google.com/document/d/1I4KSraDFY9zrWethyYyw1FyHyJ3QdoJ0gLpz1Ak57qs/edit?usp=sharing)\n\n8:30am – 9:00am\n\nCoffee & Registration\n\n9:00am – 10:20am\n\nMorning Session 1\n\n- Welcome + Ice Breaker (20 min)\n\n- Lightning Talks (60 Min)\n\n-Drupal At Other Events - Ryan Witcombe (ryan_witcombe)\n\n-Getting Off the Island - Bernardo Martinez (bernardm28)\n\n-Attracting New Folks - Alex Dergachev (dergachev) / Maya Schaeffer (mayalena)\n\n10:20am – 10:40am\n\nCoffee Break\n\n10:40am – 12:00pm\n\nMorning Session 2\n\n- AMA - Event Organizers (35 min)\n\n-Mark Casias (markie) - CWG\n\n-Megan McDermott (megan_m) - EOWG\n\n-Melissa Miller (mel-miller) - BADCamp\n\n-Ronald Aguilar (roaguicr) - DrupalCamp Costa Rica\n\n- Fireside Chat - Drupal Contribution (35 min)\n\n-Tim Hestenes Lehnen (hestenet)\n\n12:00pm– 1:00pm\n\nLunch\n\n1:00pm – 2:20pm\n\n- Afternoon Session 1\n\n-Session: Economic Resilience: Practical Project Strategies to Get More From Drupal in Any Market (35min) - Ashraf Abed (ashrafabed)\n\n-Fireside Chat - The Drupal Federation (35 min) - Baddý Sonja Breidert (baddysonja)\n\n2:20pm – 2:40pm\n\nCoffee Break\n\n2:40pm – 4:00pm\n\n- Afternoon Session 2\n\n-Session: IXP Program: How we delivered 1500 credits in year one (35 min) - Ana Laura Coto (anicoto)\n\n-Fireside Chat - The Drupal Association (35 min) - Tim Doyle (tim d.)",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -102,7 +846,7 @@
         "mherchel",
         "andy-blum"
       ],
-      "full_description": "",
+      "full_description": "NOTE: Trainings require an add-on ticket.\n\nGuests can pre-register for this training during the DrupalCon Chicago registration process. If you’re already registered and would like to add this training, simply use the “Modify” button in your confirmation email to update your registration.\n\nLevel: Intermediate / Advanced\n\nDrupal theming is evolving quickly, and this training prepares you for the future. Through practical exercises, you’ll explore Single Directory Components, Drupal Canvas, and modern CSS/JS techniques that shape the next era of Drupal theming. Learn to build reusable components, integrate Storybook for workflow efficiency, and create themes that are fast, accessible, and easy to maintain. You’ll also gain strategies for avoiding common pitfalls with page builders while ensuring flexible, future-ready designs.\n\nKey Takeaways:\n\n- Build reusable, component-based Drupal themes\n\n- Streamline workflows with tools like Storybook\n\n- Apply modern CSS/JS best practices\n\n- Deliver accessible, maintainable, and durable designs",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -138,7 +882,7 @@
         "minneapolisdan",
         "pixelite"
       ],
-      "full_description": "",
+      "full_description": "NOTE: Summits require an add-on ticket.\n\nGuests can pre-register for this summit during the DrupalCon Chicago registration process. If you’re already registered and would like to add this summit, simply use the “Modify” button in your confirmation email to update your registration.\n\nGovernment Summit Agenda\n\n8:30am – 9:00am - Coffee & Registration\n\n9:00am – 9:20am - Welcome & Introduction\n\n9:20 am – 10:05am - John Cloys, Princeton University\n\nFive types of landing pages that every government website needs\n\nEveryone knows that flexible page-building tools are a must. And Drupal Canvas will bring exciting new options for designers and content editors, but flexibility alone doesn’t make for a strong content strategy.\n\nWe’ll look at five types of landing pages and the role that each one plays in contributing to your content strategy. Along the way, we’ll highlight real-world examples and talk about how what you build in Drupal can support content editors.\n\n10:05am – 10:40am - Coffee Break & Mini BoF’s\n\n10:40am – 11:10am - Josh Mitchell, M6L\n\n10 Translation Best Practices for Government Website\n\nBest practices and tips to make your website, government or not, more equitable and accessible to a range of languages. Learn how to properly translate content meant for organizations with diverse community members with a focus on equity, accessibility, usability, and search optimization.\n\n11:10am – 11:30am - Dan Moriarty & Tim Broeker, Electric Citizen\n\nAI Powered Search\n\nToday, users' search expectations are shifting from traditional keyword search to a more conversational search, where they can use plain questions to get rich, context-aware results from AI. Learn more about implementing AI Powered search functionality into your websites.\n\n11:30am – 11:45am - Josh Northcott & Austin Amento, Hounder\n\nMulti-Site Done Right\n\nLearn battle-tested strategies for implementing multi-website setups the right way for Gov: clean architecture, shared efficiencies, strong governance, and pitfalls to avoid for scalable, maintainable results.\n\n11:45am – 12:00pm - Martin Anderson Clutz, Acquia\n\nThe Citizen Gateway: AI Search, Accessibility, and Trust in Government in Today’s Answer Economy\n\n12:00pm– 1:00pm - Lunch Sponsor - Pantheon\n\n1:00pm – 2:20pm Dan Moriarty, Electric Citizen\n\nToo Many PDFs? Build Accessible, Findable Content in Drupal\n\nPDFs pile up fast—and they quietly drag your digital experience down. This session cuts through the clutter, showing how overreliance on PDFs hurts accessibility, search, mobile usability, and long‑term governance. Walk away with a clear plan to clean up your content ecosystem and deliver a smoother, more user‑friendly experience.\n\n2:20pm – 2:40pm - Coffee Break & Mini BoFs\n\n2:40pm – 4:00pm - Will Kirchheimer\n\n2026 WCAG Accessibility Audits\n\nIn 2026, new ADA digital accessibility rules will take effect — and more than 90% of websites today would fail a WCAG 2.1 AA audit. This session will share how to combine manual audits, automated scans, and continuous monitoring to stay compliant, avoid costly fines, and build accessible digital experiences that serve everyone",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -157,7 +901,7 @@
         "heatherwoz",
         "jannafiester"
       ],
-      "full_description": "",
+      "full_description": "NOTE: Summits require an add-on ticket.\n\nGuests can pre-register for this summit during the DrupalCon Chicago registration process. If you’re already registered and would like to add this summit, simply use the “Modify” button in your confirmation email to update your registration.\n\nHealthcare Summit Agenda\n\n8:30am – 9:00am\n\nCoffee & Registration\n\n9:00am – 9:15am\n\nWelcome & Introduction\n\n9:15am – 10:05am\n\nAccessible by Design: Building Healthcare Experiences That Work for Everyone (and AI)\n\n10:05am – 10:20am\n\nSponsor presentation\n\n10:20am – 10:30am\n\nBreak\n\n10:30am – 11:20am\n\nMulti-Language Done Right: Translation Management Essentials for Product Owners\n\n11:20am– 12:00pm\n\nTable Talk\n\n12:00pm– 1:00pm\n\nLunch\n\n1:00pm – 1:10pm\n\nReturn and intros at table\n\n1:10pm – 2:00pm\n\nPanel on Solutions for Handling Microsites\n\n2:00pm – 2:15pm\n\nSponsor presentation\n\n2:15pm – 2:25pm\n\nBreak\n\n2:25pm – 3:15pm\n\nChatGPT and Health Data\n\n3:15pm – 3:55pm\n\nTable Talk\n\n3:55pm – 4:00pm\n\nWrap up and Close",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -170,7 +914,7 @@
       "link": "https://events.drupal.org//chicago2026/session/summit-higher-education-guests-must-pre-register",
       "track": [],
       "speakers": [],
-      "full_description": "",
+      "full_description": "NOTE: Summits require an add-on ticket.\n\nGuests can pre-register for this summit during the DrupalCon Chicago registration process. If you’re already registered and would like to add this summit, simply use the “Modify” button in your confirmation email to update your registration.\n\n8:30am – 9:00am\n\nCoffee & Registration\n\n9:00am – 9:15am\n\nWelcome & Introduction\n\n9:15am – 10:05am\n\n50 minutes, including Q&A\n\n- 25-minute Group discussion\n\n- 25-minute Panel discussion \"Navigating challenges in Higher Education\" moderated by Joyce Peralta\n\n10:05am – 10:40am\n\nCoffee Break\n\n10:40am – 12:00pm\n\nMorning Session 2 – 80 minutes of content\n\n- 15-minute Sponsor Case Study\n\n- 45-minute Presentation \"Bringing Semantic Search to Life with Drupal AI\" by John Tran & Aaron Christian\n\n- 20-minute Group Discussion\n\n12:00pm– 1:00pm\n\nLunch\n\n1:00pm – 2:20pm\n\nAfternoon Session 1 – 80 minutes of content\n\n- 15-minute Sponsor Case Study\n\n- 45-minute Presentation \"From Gut Feel to Tested Truth: Creating Content Experiences that Click with Audiences\" by Maggie Blaisdell & Brynne Schweigel-Skeers\n\n- 20-minute Group Discussion\n\n2:20pm – 2:40pm\n\nCoffee Break\n\n2:40pm – 4:00pm\n\nAfternoon Session 2 – 80 minutes of content\n\n- 15-minute Sponsor Case Study\n\n- 45-minute Presentation \"Beyond the Site: Your Design System's Next Chapter\" by Melissa Miller\n\n- 20-minute Group Discussion",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -185,7 +929,7 @@
       "speakers": [
         "hestenet"
       ],
-      "full_description": "",
+      "full_description": "NOTE: Summits require an add-on ticket.\n\nGuests can pre-register for this summit during the DrupalCon Chicago registration process. If you’re already registered and would like to add this summit, simply use the “Modify” button in your confirmation email to update your registration.\n\nNonprofit Summit Agenda\n\n8:30am – 9:00am\n\nCoffee & Registration\n\n9:00am – 9:20am\n\nWelcome and Ice Breakers\n\n(no trust falls, we promise)\n\n9:20am – 10:20am\n\nFireside Chat: Should You Use AI to Serve Your Nonprofit’s Mission? Getting Past the Hype\n\nLearn to be AI-literate when evaluating when and where to use (or not use) it in your organization.\n\nTim Lehnen (hestenet) and Josh Miller, Urban Institute\n\n10:20am – 10:40am\n\nCoffee Break\n\n10:40am – 10:55pm\n\nSponsor Presentation - Open Sense Labs\n\n10:55am – 12:00pm\n\nBreakout Discussions:\n\n1. Josh Miller, Urban Institute - Agentic Interface and Nonprofits: Survival Tips\n\n2. Margaret Chalinda, Arizona State University - Drupal Resilience for Small and Mid-size Organizations in a Time of High Turnover\n\n3. Devan Martin, Guttmacher Institute - What Do We Need from Drupal? (AI, governance, lower cost of ownership)\n\n4. Christina Sohn, Facing History - Project Communication and Stewardship Best Practices\n\n12:00pm– 1:00pm\n\nLunch\n\n1:00pm – 2:20pm\n\nBreakout Discussions:\n\n1. Paige Eaton - Drupal Careers in These Times\n\n2. Daniel Cotran, JSI - Using Drupal to Enhance Resilience\n\n3. Hamad Khan, UNICEF / Digital Dynamite - Using Drupal to Create Accessible, Secure, Inclusive Online Spaces Around Sensitive Topics\n\n4. JD Leonard - Zilker Neighborhood Association / Modern Biz Consulting - Simple, Small-Site Features That Can Be Built in Drupal on a Dime\n\n2:20pm – 2:40pm\n\nCoffee Break\n\n2:40pm – 3:30pm\n\nThe Importance of Digital Sovereignty & Resilience: How Drupal Can Help\n\nHow Drupal can help protect an organization in uncertain times\n\nTim Lehnen (hestenet)\n\n3:30pm – 4:00pm\n\nWrapping Up and Optional Networking",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -198,7 +942,7 @@
       "link": "https://events.drupal.org//chicago2026/session/summit-ai-guests-must-pre-register",
       "track": [],
       "speakers": [],
-      "full_description": "",
+      "full_description": "NOTE: Summits require an add-on ticket.\n\nGuests can pre-register for this summit during the DrupalCon Chicago registration process. If you’re already registered and would like to add this summit, simply use the “Modify” button in your confirmation email to update your registration.\n\n8:30 am – 9:00 am - Coffee & Registration\n\n9:00 am – 9:15 am - Welcome & Introduction\n\n9:15 am – 9:30 am - Sponsor Case Study (Acquia)\n\n9:30 am – 10:20 am - AI Strategic Initiative Panel and Q/A\n\nJamie Abrahams, Matthew Saunders, Glenn Hilton, Paul Johnson\n\n10:20 – 10:40 am - Coffee Break\n\n10:40 am – 10:55 - Sponsor Case Study (Four Kitchens)\n\n10:55 am – 11:35 am - Michael Schmid\n\nWhy Private AI Matters: Data Sovereignty as the Foundation for Trustworthy AI on the Open Web\n\n11:35 am – 12:00 pm - Moderated Group Discussion on Ethics and Governance with Breakouts\n\n12:00 pm– 1:00 pm - Lunch\n\n1:00 pm – 1:40 pm Laura Garling and Bec White\n\nInnovation from Within: Drupal, AI, and Internal Expertise to Create Powerful Products\n\n1:40 pm – 2:20 pm Richard Nosek\n\nThe Human Edge in AI Content: Crafting Connection Amid Algorithms\n\n2:20pm – 2:40pm - Coffee Break\n\n2:40 pm - 2:55 pm - Sponsor Case Study (CKSource)\n\n2:55 - 3:40 pm - Scott Falconer\n\nA Practical Framework for AI Success in Drupal\n\n3:40 pm – 4:00 pm - Wrap up and Closing",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -211,7 +955,7 @@
       "link": "https://events.drupal.org//chicago2026/session/summit-drupal-partner-guests-must-pre-register",
       "track": [],
       "speakers": [],
-      "full_description": "",
+      "full_description": "NOTE: Summits require an add-on ticket.\n\nGuests can pre-register for this summit during the DrupalCon Chicago registration process. If you’re already registered and would like to add this summit, simply use the “Modify” button in your confirmation email to update your registration.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -280,7 +1024,7 @@
       "speakers": [
         "afem"
       ],
-      "full_description": "",
+      "full_description": "Most custom features in Drupal need settings, but too often, those settings are hidden behind broad admin permissions, hardcoded into modules or themes, or require custom forms just to expose them. In this session, we will explore the Config Pages module, a clean and maintainable solution to manage structured settings through site building tools and the Field API. We will cover use cases like managing site-wide alerts, global contact information, and quick links, demonstrating examples built with U.S. Web Design System (USWDS). You’ll learn how Config Pages improves the editorial experience through tightly scoped permissions that show editors only what they need and giving developers full control over how and where settings appear in Twig templates or as configurable blocks.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -298,7 +1042,7 @@
         "mherchel",
         "mglaman"
       ],
-      "full_description": "",
+      "full_description": "Behind every great Drupal feature is a stubborn person (not necessarily a developer) who refused to let it stay broken. Want to be that person? We’ll show you how.\n\nIn this wildly entertaining session from two seasoned Drupal core maintainers and bug fixers, you’ll be walked through the murky steps of getting your feature or bugfix into Drupal core, Drupal CMS, or prominent contrib project.\n\nWe'll cover:\n\n- Identifying issues or features that can be fixed\n\n- Pitching the idea to relevant stakeholders\n\n- Assembling your team\n\n- Doing the actual work (including what makes a MR review-worthy)\n\n- Handling the complexities of communication (spoiler: this is often the hardest part)\n\n- Getting it across the finish line (aka committed!)\n\nWe’ll also break down real-world case studies of contributions to Drupal core, following them from first idea to final commit, and covering the wins, the failures, and the desperate Slack messages in between.\n\nAt the end of this session, you’ll walk away with the motivation, ability, and confidence to land your very own EPIC contribution.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -313,7 +1057,7 @@
         "leadership, management & business"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "True innovation requires the grappling of ideas—where differing viewpoints, experiences, and expertise collide to create something greater than the sum of their parts. Conflict catalyzes this process by breaking through groupthink, challenging outdated practices, and pushing teams to find better solutions. Without conflict, organizations risk settling for mediocrity, as unchallenged ideas rarely lead to transformative breakthroughs. This session will explore how leaders can harness conflict to create a culture of innovation, where team members feel empowered to challenge each other respectfully and collaboratively.\n\nConflict is not just an obstacle to overcome—it is the lifeblood of innovation. Without conflict, ideas remain unchallenged, teams become complacent, and organizations stagnate. This session is designed to help current and aspiring leaders reframe their understanding of conflict as a critical driver of progress and creativity. Leadership is not about avoiding friction but embracing it as an opportunity to push ideas from good to great. In every industry, innovation thrives in environments where people are encouraged to grapple with diverse perspectives, question assumptions, and engage in constructive debates.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -330,7 +1074,7 @@
       "speakers": [
         "moshe weitzman"
       ],
-      "full_description": "",
+      "full_description": "Learn about Drupal Test Traits (DTT), an open source project started by the Commonwealth of Massachusetts. Dive into real tests from our open source project, and learn how DTT works under the hood.\n\nmass.gov is large, content-centric site. Most of our tests click around and assert that content is laid out properly, the right icons are showing, etc. In order to test this stuff, we need the mass.gov database - testing on an empty site won't do. The traditional tool for testing a site using an existing database is Behat. So we used Behat for over a year and found it getting more and more awkward. We've replaced Behat with DTT!\n\nDTT reuses the awesome Drupal core testing system, so it works with your site's content, as opposed to an empty site. It supports testing client side interactions in addition to traditional browsing.\n\nAt the end of this session, you will have another tool to test your content-centric sites.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -343,7 +1087,7 @@
       "link": "https://events.drupal.org//chicago2026/session/first-time-contributor-workshop-1",
       "track": [],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Do you want to contribute but are not sure how? Check out the First Time Contributor Pathway for a list of recommended sessions at DrupalCon Chicago to help you figure out how to use your particular skills to contribute to the Drupal project!\n\nThose who are new to the process and tools of contributing to Drupal, you are invited to attend one of the “First Time Contributor Workshops”. Many people will be new to contributing and different opportunities arise based on experience level.\n\nGet up to speed with community tools: Drupal.org, issue queues, communication channels, and if needed, installing Drupal 11 locally. Our mentors are excited to get you ready to tackle real issues.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -360,7 +1104,7 @@
       "speakers": [
         "emma horrell"
       ],
-      "full_description": "",
+      "full_description": "What if Drupal's biggest innovation opportunity comes from studying users, not systems? As Drupal CMS UX Research Lead, my Drupal journey is unconventional. As a content writer and UX professional I am obsessed with watching people use interfaces to spark transformative ideas. I’m committed to aligning Drupal's strengths with user goals, from mindful word choices to strategic AI implementation, so I’m perfectly placed to lead Drupal's UX evolution!\n\nUX thinking bridges the gap between Drupal's power and non-technical users' needs. This session reveals how a comprehensive UX research programme is driving a product that's fundamentally changing the narrative about Drupal, turning feelings into features and accelerating innovation across our entire community.\n\nJoin my session and you’ll get consolidated research findings and the full picture of what we’ve learned from AI testing, surveys, interviews, concept studies, and usability research. I'll reveal what telemetry data exposed about users’ first encounters with Drupal CMS, and share eye-opening results from our community quiz about Drupal terminology. You'll understand how we use all this data to make product decisions and maintain our continuous learning approach. I’ll include interactive discussion time for your feedback and feature requests, and I'll teach you practical UX techniques you can immediately apply to make your Drupal work more user-focused.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -378,7 +1122,7 @@
         "pameeela",
         "ckrina"
       ],
-      "full_description": "",
+      "full_description": "Drupal CMS 2.0 has launched, complete with Drupal Canvas and site templates!\n\nWhat does this mean for building Drupal sites? And what's next?\n\nSome topics we may cover:\n\n* How we're using Canvas and what it offers\n\n* Features and areas we're working on now\n\n* Plans for future versions ongoing\n\n* What we're looking for from contributors\n\n* How we defined the strategy and scope\n\n* Using the strategy to define the roadmap and what it looks like now\n\n* Highlights from the development of Drupal CMS 2.0 and what we learned",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -395,7 +1139,7 @@
       "speakers": [
         "cjpagtakhan"
       ],
-      "full_description": "",
+      "full_description": "Higher education is facing a critical challenge: shifting demographics, increasing competition, and evolving student expectations are making enrolment growth harder than ever.\n\nIn this session, we’ll explore how Drupal can be a powerful driver of enrolment success by enabling personalization, accessibility, streamlined user journeys, and data-driven decision-making. Drawing on insights from more than 500 digital projects with colleges and universities across North America, we’ll showcase proven strategies, real-world examples, and actionable takeaways that your institution can apply immediately.\n\nWhether you’re focused on attracting first-generation students, improving graduate program visibility, or re-engaging adult learners, this session will highlight how Drupal’s flexibility and scalability can help you meet the moment and deliver measurable enrolment results.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -425,7 +1169,7 @@
       "speakers": [
         "daniel-oconnor"
       ],
-      "full_description": "",
+      "full_description": "It’s a scenario we’ve all lived through: your deadline is fast approaching. UI bugs are cropping up left, right and center. Spacing is so inconsistent it looks jarring, and your client is stressed that every image they upload in Drupal comes out with people’s faces cropped in half. Can you resist the temptation to add another hack, another field, another confusing instruction? What if instead we took a peek at the design logic behind these elements and found something better?\n\nJoin me as we resurrect the lost art of design interrogation: a front-end skill for finding lasting solutions that are more robust, more intuitive and simpler to maintain by developing through the eyes of a designer.\n\nIn this presentation we’ll look at common technical issues in front-end development, and consider why band-aid solutions come up short. We'll then go on a treasure hunt for design logic that allows us to create confident systems that govern spacing, images, and all the rest. Finally, we'll hone our new skill of design interrogation to root out where design logic is missing, and use it as an opportunity to create our own.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -443,7 +1187,7 @@
         "ahughes3",
         "dalin"
       ],
-      "full_description": "",
+      "full_description": "When 500 editors across 130 sites log into our Drupal platform, the first thing they see is a dashboard designed to support their work. But what should that dashboard actually do? Over the last year, we’ve been figuring out how to answer that question. The result is a dashboard that surfaces what matters most to our editors: announcements about new features, their recent edits, broken links, accessibility issues, duplicate profiles, permissions, design settings, and more.\n\nThis session isn’t a technical deep-dive into code; it’s the story of the decisions behind the dashboard. We’ll share how we prioritized features, balanced editor needs with technical realities, and decided what belonged on the dashboard—and what didn’t. Attendees will walk away with lessons they can apply to their own platforms, whether they manage one site or one hundred.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -461,7 +1205,7 @@
         "q0rban",
         "jasmyneepps"
       ],
-      "full_description": "",
+      "full_description": "How the State of Georgia streamlined their QA and UAT process to ship code faster and catch bugs earlier.\n\nJasmyne Epps (Unit Director, Digital Services Georgia) and James Sansbury (Owner, Tugboat) reveal how Georgia transformed their software delivery lifecycle for GovHub, their Drupal CMS powering 80+ state agency websites.\n\nTraditional staging-server bottlenecks created end-of-sprint QA crunches, delayed releases, team burnout, and expensive rework. Migrating 80+ websites with the existing workflow was infeasible.\n\nImplementing \"shift left\" moved testing, QA, and stakeholder signoff to pull request time. This distributed QA throughout sprints and caught issues earlier, benefiting developers, QA testers, product managers, and stakeholders.\n\nKey Topics:\n\n• Identifying and eliminating SDLC bottlenecks\n\n• Implementing \"shift left\" testing in government environments\n\n• Leveraging Docker, CircleCI, and Tugboat for testing infrastructure\n\n• Managing complex migration workflows with parallel testing\n\n• Visual regression testing and automated QA integration\n\n• Secure data handling strategies for realistic test environments",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -500,7 +1244,7 @@
       "link": "https://events.drupal.org//chicago2026/session/black-drupal-luncheon-guests-must-pre-register",
       "track": [],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Guests can pre-register for the luncheon during the DrupalCon Chicago registration process. If you’re already registered and would like to add the luncheon, simply use the “Modify” button in your confirmation email to update your registration.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -530,7 +1274,7 @@
       "speakers": [
         "akucharski"
       ],
-      "full_description": "",
+      "full_description": "Government agencies on both sides of the Atlantic are embracing Drupal to meet the demand for cost-effective, standards-compliant digital services. In the UK, LocalGov Drupal has grown into a shared open-source platform supported by dozens of councils, with a strong collaborative governance model. In the US, ProvusGov builds on the U.S. Web Design System (USWDS) to provide a reusable Drupal distribution tailored to state and local government needs, emphasizing accessibility, compliance, and low-cost deployment.\n\nThis session compares the two approaches—community-driven vs. standards-driven—and explores what each ecosystem can learn from the other. We’ll highlight practical lessons in governance, procurement, design systems, and distribution strategy, offering attendees actionable ways to replicate proven models in their own government digital projects.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -548,7 +1292,7 @@
         "MattDanger",
         "bburg"
       ],
-      "full_description": "",
+      "full_description": "Over the past year, a new kind of bot has shown up in our server logs: AI-powered crawlers scraping public government websites to feed large language models. These bots aren’t malicious, but they hit fast, often ignore robots.txt, and can overwhelm infrastructure not built to handle that level of traffic.\n\nIn this talk, we’ll look at what’s really happening behind the scenes: how LLM crawlers are targeting sites, what patterns to watch for, and what happens when your site can’t keep up. We’ll cover practical steps you can take to detect, throttle, or block these crawlers using tools like CDNs, WAFs, and server-level protections. That includes how to configure your Drupal site to manage caching, permissions, and crawl behavior to reduce exposure and load.\n\nWe’ll also talk about the policy side, when blocking is appropriate, what public content should be exposed, and how to talk to stakeholders about the risks.\n\nWhether you're a developer, architect, or program manager, you’ll leave with a clear understanding of the problem and a checklist of actions to protect your site without compromising on transparency.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -578,7 +1322,7 @@
       "speakers": [
         "pfrilling"
       ],
-      "full_description": "",
+      "full_description": "I want...\n\n- Drupal CMS\n\n- Configuration management\n\n- Automatic updates\n\n- Git workflows\n\n- Modern infrastructure\n\n- Continuous delivery\n\n- Project Browser for content editors\n\nIn the words of Queen, \"I want it all... and I want it now!\"\n\nDrupal's configuration management has evolved from strictly living in the database to becoming entities that can be exported, imported and validated. The strict management of configuration in code has me longing for the days where we just let the database handle it all.\n\nWith the rise of Drupal CMS, configuration management becomes even more challenging. How do we allow content editors and site administrators the ability to configure their site without having a deployment pipeline config:import and blow away those changes?\n\nCan we have our configuration management and our modern workflows?",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -595,7 +1339,7 @@
       "speakers": [
         "mhespanhol"
       ],
-      "full_description": "",
+      "full_description": "In this session, we will showcase a custom module designed to assist editors with conducting a content audit, including a ROT analysis (Redundant, Outdated, and Trivial) and translation reviews on their website. Periodically performing these analyses is essential for ensuring the relevance of website content, and it is a crucial step during content migration.\n\nOur module also leverages AI to evaluate the accuracy of translations for each piece of content, providing a score to help editors maintain consistency across multiple languages. This reduces the risk of discrepancies when one language is updated, ensuring all content remains up-to-date.\n\nBased on these reports, editors can choose which content to migrate and which to exclude if it's not relevant to the new site. These selections are integrated into the migration process, ensuring that only the content approved by the client is transferred to the new website.\n\nAgenda:\n\n- Introductions\n\n- Common Challenges\n\n- ROT Analysis Report\n\n- AI-Powered Translation Review\n\n- Content Migration Review\n\n- Module Roadmap\n\n- Q&A",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -612,7 +1356,7 @@
       "speakers": [
         "yautja_cetanu"
       ],
-      "full_description": "",
+      "full_description": "At Vienna, we showcased how Canvas AI can transform page-building in Drupal. Now, we’re excited to show you the next step.\n\nThe Drupal AI Initiative is driving the strategic evolution of Drupal through our dual-track approach: bi-weekly Immediate Impact releases and twice-yearly Strategic Evolution leaps. Our latest leap is the development of truly orchestrated Flows.\n\nOur rigorous focus on UX for tools like ECA, Tools API and MCP, means even ambitious site builders can create complex orchestrations without code, from content moderation to full site migrations. Our visual workflows give you precise control over AI agents, allowing you to combine intelligent non-deterministic AI agents with reliable and predictable standard deterministic actions.\n\nThese innovations are the heart of what we do, and have the potential to turbocharge and future-proof how we engage with new Drupal builds. Our core tools can accomplish more without needing to develop new modules for each new iteration. This allows us to focus on a speedy time-to-market for releases whilst ensuring everything is working securely, reliably and on point.\n\nCome for a deeper dive into the AI features you saw in the DriesNote. Whether you're a developer, site builder, or decision-maker, you'll leave with practical knowledge of current AI capabilities in Drupal and insight into shaping its future.\n\nIt's never been a better time to Do It With Drupal!",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -628,7 +1372,7 @@
         "hestenet",
         "greggles"
       ],
-      "full_description": "",
+      "full_description": "The security team will present topics from their work promoting a more secure Drupal project. The team will also talk about how they recruit new members, refinements to their procedures, and what you can do to support Drupal security.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -645,7 +1389,7 @@
       "speakers": [
         "MatthewS"
       ],
-      "full_description": "",
+      "full_description": "If recognizing the value of neurodiversity is the first step, the next is changing systems, environments, and behaviours to actually support neurodivergent people. Neuroinclusive spaces use the ethos of Universal Design.\n\nUniversal design (UD) is a concept that involves designing products and environments to be usable by as many people as possible, regardless of age, size, ability, or disability. The goal is to maximize usability without the need for specialized design or adaptation. UD can be applied to many things, including buildings, services, tools, learning strategies, and physical spaces. It focuses on equity in design.\n\nThis session will move beyond why neurodiversity matters and focus on how to operationalize inclusion at every level of an organization, from hiring, to team culture, to leadership practices.\n\nNeuroinclusion isn’t about fixing people, it’s about fixing systems.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -662,7 +1406,7 @@
       "speakers": [
         "farriss"
       ],
-      "full_description": "",
+      "full_description": "Need a little joy right now? This story has it all: success metrics exceeded, meaningful digital transformation, and a team that genuinely enjoyed the journey. As one usability test participant put it: “I can’t wait until this is live!”\n\nIn this session, we’ll take you behind the scenes of the Wisconsin Department of Health Services’ two-year effort to digitize and centralize over 9,000 resources from its Aging and Disability Resource Centers (ADRC)—making vital support more accessible to people across Wisconsin. The result? A transformation that was as measurable as it was meaningful, and as technologically innovative as it was fun.\n\nCross-functional teams from WDHS and Palantir.net collaborated through a highly iterative, human-centered process that prioritized accessibility, measurable outcomes, and joy. We experimented, co-created, and celebrated small wins that added up to big impacts.\n\nWe’ll share how:\n\n- Agile practices and co-creation fostered trust, creativity, and momentum\n\n- Continuous feedback loops kept stakeholders engaged and energized\n\n- Behavior-driven development (using example mapping) aligned engineers and subject matter experts\n\n- A shared sense of purpose helped us navigate complex challenges\n\n- KPIs told the story: 664% more resource engagement and 25% longer user engagement times\n\nIf you’re looking for a roadmap to results—and a reminder that impactful government work can be deeply rewarding—this session is for you.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -679,7 +1423,7 @@
       "speakers": [
         "froboy"
       ],
-      "full_description": "",
+      "full_description": "The YMCA’s mission is rooted in community impact—and in today’s world, that includes a strong, unified digital presence. Enter Open Y, an open-source, Drupal-based platform built specifically for YMCAs to streamline content management, marketing, and integrations.\n\nIn this session, we’ll dive into how Open Y empowers local YMCAs to deliver scalable, accessible, and user-friendly websites while reducing development overhead through shared community resources. Whether you're a developer, site builder, digital marketer, or decision-maker, you'll come away with:\n\n- An overview of the Open Y distribution and how it builds on Drupal 11\n\n- A look at how the YMCA network collaborates to enhance the platform\n\n- Real-world examples of YMCAs using Open Y to increase engagement and reduce tech debt\n\n- A roadmap for getting started with Open Y (whether you're upgrading or launching a new site)\n\nWe’ll also cover key modules and architecture choices in Open Y, and show how you can contribute or customize it to fit your organization’s unique needs.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -709,7 +1453,7 @@
       "speakers": [
         "erykmynn"
       ],
-      "full_description": "",
+      "full_description": "For so many of our projects, the key to success lies in mastering the art of listening and interpreting feedback—skills that any seasoned game master knows well. Just as a game master guides players through an evolving story, product teams must navigate the complex dynamics of customer and stakeholder relationships. This session will explore how techniques from tabletop role-playing games like Dungeons and Dragons can be applied to stakeholder management and all forms of facilitation.\n\nWe’ll delve into the importance of letting stakeholders talk, understanding their underlying needs, and translating feedback into actionable strategies—much like interpreting the motivations and actions of players in a campaign. We’ll also look at models for setting expectations and boundaries in kickoff meetings, then structuring and preparing for the work ahead. You’ll learn how to balance different personalities, keep the “party” moving forward toward a shared goal while avoiding common pitfalls like railroading, scope creep, or disengaged participants.\n\nWhether you’re dealing with demanding clients, internal teams, or external partners, this session will equip you with the tools to become a “game master” in your professional projects.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -726,7 +1470,7 @@
       "speakers": [
         "Amani.Mansour92"
       ],
-      "full_description": "",
+      "full_description": "Drupal’s Views module is a powerful tool for building custom content listings, filtered displays, and dynamic, auto-updating pages — all without writing any code.\n\nAs DrupalCMS continues to simplify the site-building experience with a user-friendly interface and built-in tools like Experience Builder, many newer users are discovering Drupal for the first time. Views provides a natural next step for those users: a way to go beyond simple content creation and start building more dynamic, tailored experiences.\n\nIn this session, we’ll walk through how Views works, including:\n\nCreating lists of content, users, media, or taxonomy terms\n\nUsing filters, sorting, and contextual logic to tailor displays\n\nDisplaying Views as blocks or pages\n\nConnecting Views with Layout Builder or Experience Builder\n\nThis session will demonstrate how Views can help you build smarter, more flexible sites — without needing to write custom code.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -745,7 +1489,7 @@
         "monicadear",
         "javi-er"
       ],
-      "full_description": "",
+      "full_description": "Kat Shaw and M. Nikki Flores are CPACC-certified and work with Javier Reartes at Lullabot to integrate accessibility as a mindset and framework into government platforms, such as for the states of Iowa, Maryland, and Georgia, and higher education, such as UMass Amherst and NYU.\n\nThis session explores how governments and higher education institutions can move beyond basic compliance to truly implement accessibility across their digital platforms.\n\nWe delve into strategies for integrating accessibility throughout the project lifecycle, from initial planning and design to development, QA testing, and content entry.\n\nDrawing on real-world case studies, including Iowa.gov’s digital transformation project and the State of Maryland platform, we discuss how to leverage Drupal's features and contributed modules to create accessible experiences.\n\nThe session covers key aspects including:\n\na) design system reviews,\n\nb) automated and manual testing,\n\nc) content entry training for meaningful alt text and logical heading order, and\n\nd) benefits of cross-collaboration.\n\nAttendees gain insights into fostering a \"shift-left\" methodology, preventing issues, increasing cross-collaboration, and ultimately delivering higher quality, more inclusive digital services.\n\nWe also touch upon the importance of understanding the \"why\" behind accessibility, considering the experiences of users with disabilities, and the long-term benefits of an accessibility-forward approach.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -775,7 +1519,7 @@
       "speakers": [
         "murz"
       ],
-      "full_description": "",
+      "full_description": "Oh, that Drupal Forms... Too much code just to create a simple form with a couple of fields!\n\nWhat if I tell you that those times are in the past?\n\nNow, just describing the form data in the YAML declarative format is enough! The rest will be done automatically, without any line of code: the form fields design, validation, submission, saving to the database, and all other boring stuff - everything works out of the box!\n\nUsing this declarative approach, you can create any type of form automatically:\n\n- End-user forms, like a feedback form or a comment form.\n\n- Custom settings pages with automatic saving to the configuration.\n\n- Entity Forms with all base fields editable in the form.\n\nAnd if you want to customize some fields or the submission flow, you're still able to do this by code. But just with a couple of code lines, without tons of boilerplate.\n\nCome to learn how to make forms without pain, and forget those times of writing a lot of code lines.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -792,7 +1536,7 @@
       "speakers": [
         "eojthebrave"
       ],
-      "full_description": "",
+      "full_description": "Large Language Models like ChatGPT and Claude are increasingly used for search, support, dev tools, and content creation. Out of the box, they can read but not interact with your Drupal sites content and features. Model Context Protocol (MCP) solves this by defining a standard way for LLMs to interact with external data sources and tools. Teaching the LLM to interact with Drupal and perform searches, flag nodes, and more.\n\nBy the end of this session, you will be able to:\n\n* Understand what MCP is and the problems it solves.\n\n* Use MCP with Drupal’s entity system, and the evolving suite of MCP related modules to support retrieval-augmented generation (RAG) and action execution.\n\n* Allow an LLM to authenticate and access member-only content and features.\n\n* Explore methods for implementing an MCP server to broker requests between an LLM and Drupal.\n\n* Build practical use cases, such as retrieving upcoming events, drafting blog posts from recent content, or generating Drupal modules and code explanations.\n\nI’ll illustrate by exposing Drupal docs and Drupalize.Me tutorials to an LLM for more context when generating Drupal code. The focus is on learning how to configure your Drupal site—and its unique data and features—so an LLM can understand and interact with it.\n\nThis technical session is for developers interested in AI \\+ Drupal integration, focusing on building custom MCP servers. This is a rapidly evolving space -- we'll focus on the current options, and the future.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -810,7 +1554,7 @@
         "Kristen Pol",
         "afoster"
       ],
-      "full_description": "",
+      "full_description": "AI can generate landing pages, service pages, and blog posts in seconds - but without the right context, the results feel generic, off-brand, or just plain wrong. Context is what takes you from AI-slop to content that is authentic and resonates with your audience.\n\nIn this session, we'll show you how to configure Drupal's Content Control Center and Canvas AI to produce content that actually sounds like your organization. You'll see how simple markdown files defining brand voice, tone, and content structure can dramatically improve AI outputs.\n\nThrough demos, we'll walk you through creating a landing page, service page, and blog post to demonstrate how different context rules and guidelines can be applied in various applications.\n\nYou'll leave with a practical starter framework for building your own context files, plus clear guidance on how to apply it to your Drupal site.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -827,7 +1571,7 @@
       "speakers": [
         "lauriii"
       ],
-      "full_description": "",
+      "full_description": "For years, the Drupal community has talked about a component-driven future. The Drupal Canvas is where that future finally becomes a reality. This is more than just an evolution of Layout Builder; it's a fundamental paradigm shift in how we think about building with Drupal.\n\nJoin us for a visionary, forward-looking session that goes beyond a simple roadmap. We'll explore the core concepts behind Drupal Canvas and demonstrate how upcoming features will unlock new possibilities.\n\nYou will leave this session empowered to shape the future of digital experiences with Drupal Canvas.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -845,7 +1589,7 @@
         "richard-nosek",
         "cjpagtakhan"
       ],
-      "full_description": "",
+      "full_description": "Organizations often struggle with fragmented content, inconsistent messaging, and editorial bottlenecks—especially as websites grow and multiple teams contribute to the same platform. In this session, we’ll explore how to design and implement a sustainable content governance model in Drupal that keeps your content organized, high-quality, and future-proof.\n\nAttendees will learn practical workflows for content authors, editors, and administrators, including strategies for approval processes, content audits, and lifecycle management. The session also covers frameworks for defining roles, responsibilities, and standards that scale across teams and departments. Real-world examples from Drupal sites of varying sizes will illustrate how structured governance not only improves content quality but also enhances collaboration, reduces technical debt, and supports long-term digital strategy goals.\n\nBy the end of the session, you’ll have actionable insights to create a governance model that transforms chaotic content operations into a streamlined, sustainable system.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -862,7 +1606,7 @@
       "speakers": [
         "jurgenhaas"
       ],
-      "full_description": "",
+      "full_description": "ECA (the Event, Condition, Action module) for modern Drupal has established itself as the go-to tool for automating Drupal workflows with a no-code/low-code approach. After several years in production and with the benefit of experience and feedback from hundreds of power users, the time has come to plan and execute the future of ECA and make an even bigger difference for Drupal and all its users.\n\nECA's future vision is to accomplish the following goals:\n\n1. Currently, ECA is used by only 1% of Drupal users; the next generation of ECA will be suitable for all Drupal users, including those with little or no experience of the platform.\n\n2. Getting started with ECA currently requires users to have a basic understanding of Drupal and its workflow. The next-generation ECA will be intuitive for all users, enabling them to achieve success with ECA in minutes.\n\n3. The next-generation ECA will guide users, helping them to elevate their skills and achieve more as they progress.\n\n4. Personas: currently, ECA caters for developers, site builders and project managers. This will be extended to enable all users to build their own workflows and automations.\n\nThis session will outline how the maintainers and the Drupal community are planning to achieve these goals and how much progress has been made so far.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -892,7 +1636,7 @@
       "speakers": [
         "Zoocha Will"
       ],
-      "full_description": "",
+      "full_description": "Following on from the DrupalCon Vienna session \"It’s OK to NOT be OK! Establishing support frameworks in community teams\", this session will advance the proposal to create a 'Code of Care' to enshrine in policy how we care for each other in the Drupal community.\n\nThe session will explore in more depth the key themes of:\n\nThe impact of external factors: Sometimes health, family, work or other personal reasons compromise our ability to follow through on the community obligations we have committed to. This can lead to guilt and shame, adding more pressure at precisely the time you need the most compassion and support.\n\nDealing with over-commitment: There can be many reasons for ‘biting off more than we can chew’. A common one is because we are passionate about specific initiatives or subjects and really want to get involved… pushing ourselves beyond our own capacity.\n\nSpotting the warning signs: If a team member is struggling to cope, it is likely they put on a brave face and suffer in silence. A Code of Care would equip us all with tools and resources to help us spot warning signs and create ‘safe spaces’ for team members to seek help.\n\nThe session will conclude with a detailed proposal for the 'Code of Care' and how it might be implemented.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -909,7 +1653,7 @@
       "speakers": [
         "breidert"
       ],
-      "full_description": "",
+      "full_description": "Transform your Drupal sites with practical AI integration in this hands-on workshop. Starting with the Drupal AI module installation, you'll progressively build AI-powered features including automated content generation, intelligent image alt text, CKEditor AI enhancements, and SEO optimization tools. Advanced topics cover AI automators for PDF processing, URL content import, and retrieval-augmented generation (RAG) for intelligent search. Each concept includes hands-on building with step-by-step guidance. You'll leave with working code, configured AI workflows, and the foundation to build sophisticated AI applications. Bring your laptop for the complete hands-on experience - no AI background required, just curiosity and basic Drupal familiarity.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -924,7 +1668,7 @@
         "leadership, management & business"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "We know that Drupal is a predominant Content Management System amongst the top 100 universities globally. What about the other 5,000+ institutions? Who’s choosing proprietary CMS’s, when, and why? How can we ensure Drupal agencies are positioned competitively when competing against proprietary partners for website redesigns?\n\nIn this session, we’ll walk through data-driven insights for agency leaders competing in the higher education market. We’ll focus on:\n\n- Proprietary CMS’s products, features, pricing, differentiators, and more\n\n- Guiding a CMS recommendation or a CMS evaluation process\n\n- Addressing common misconceptions around Drupal\n\nBy the end of the presentation, you’ll be better-equipped to win Drupal work at the critical junction of the CMS + agency choice.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -941,7 +1685,7 @@
       "speakers": [
         "nord102"
       ],
-      "full_description": "",
+      "full_description": "Running multiple sites from a single Drupal codebase is powerful—and tricky—when it comes to configuration. One site needs a feature, another must not have that feature; environment overrides creep in; and “just export and import” stops being simple. This session presents a clear, repeatable approach built around distinct Config Split types and shows how to templatize and automate them so adding a new site is a 5‑minute task, not a much longer ordeal.\n\nWhat we’ll be covering:\n\n- Site-level splits (per-domain overrides), feature-level splits (toggleable features any site can opt into), and environment-level splits (dev/stage/prod tooling).\n\n- Setting split precedence using Config Split\n\n- Opinionated directory structure and naming conventions that prevent overlap and drift.\n\n- Reusable site-level split templates\n\n- A lightweight automation command that scaffolds a new site-level split from the template and runs a quick validation so you know it’s sound.\n\nWe’ll walk through creating a feature split, generating a new site split from a template, opting the site into the feature, and importing config across two sites locally. You’ll leave with an understanding of patterns, templates, and a simple automation you can adopt immediately.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -959,7 +1703,7 @@
         "adiaz",
         "mariannuar"
       ],
-      "full_description": "",
+      "full_description": "Modern web experiences don’t always require decoupled architectures, complex frameworks, or external libraries like React. In this session we’ll show, using real world examples, how vanilla JavaScript can bring rich and interactive storytelling to Drupal without sacrificing performance or editorial workflow.\n\nThe tools and techniques we’ll cover can be used to build feature-rich interfaces like:\n\n- Parallax slideshows for immersive storytelling\n\n- Interactive grids that open content in overlays\n\n- Scroll-driven animations for storytelling\n\n- Sticky / Scroll-Follow Elements like headers, menus, or sidebars that stick while scrolling.\n\n- Transitions and animations to provide an app-like experience in a regular web site\n\n- Other interactive and responsive interfaces fully integrated into Drupal\n\nWe’ll share not only our approach and lessons learned, but also practical ideas for other uses of vanilla Javascript to enhance user experience while keeping sites maintainable, performant, and fully within the Drupal ecosystem.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -976,7 +1720,7 @@
       "speakers": [
         "hestenet"
       ],
-      "full_description": "",
+      "full_description": "The potential of Site Templates is clear: by combining recipes, demo content, and a Canvas-compatible theme, they make Drupal’s power, flexibility, and openness more accessible—giving users a head start with DrupalCMS. That innovation becomes transformative once these templates are easy to find and use via a Marketplace on Drupal.org.\n\nAt DrupalCon Vienna, we announced a pilot program to launch the very first site templates, together with some early Template Makers drawn from the Drupal Certified Partners.\n\nWe'll talk about what we've learned from the Marketplace pilot, how this will impact the roadmap for Drupal CMS, Drupal Canvas, and Drupal Site Templates in general, and what the roadmap looks like for scaling up to many more site templates.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -993,7 +1737,7 @@
       "speakers": [
         "balintbrews"
       ],
-      "full_description": "",
+      "full_description": "Drupal Canvas introduced Code Components last year at DrupalCon Atlanta, opening a new avenue for Drupal frontend engineering by shipping a zero-setup, in-browser code editor, and out-of-the-box support for React and Tailwind CSS. A lot has happened since then. As the technical lead for Code Components, I've watched the possibilities steadily grow as Drupal Canvas has matured and become stable.\n\nNew features have been introduced to support data fetching and Next.js-style image optimization. Experiments are underway to support server-side rendering and third-party imports. Editing Code Components is no longer bound to the browser: A CLI tool makes it possible to work with them in any development environment. This opens up interesting opportunities, such as building decoupled frontends.\n\nThis session will discuss different approaches and techniques for working with Code Components in Drupal Canvas, as well as the current state of all features, experiments, and plans for the future.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1010,7 +1754,7 @@
       "speakers": [
         "q0rban"
       ],
-      "full_description": "",
+      "full_description": "Whether you're an AI optimist, a pessimist, or somewhere in-between, there's no getting around it: if you aren't shipping AI-generated code yet, you will be. Are you and your team prepared for it?\n\nThe traditional code review process wasn't designed for machine-generated code. When AI can produce hundreds of lines in seconds, human reviewers become the bottleneck—and more critically, they miss things. AI generates seemingly perfect code that can harbor subtle business logic errors, security vulnerabilities, or integration issues that only surface under real conditions. No amount of peer review is sufficient for AI-generated code.\n\nThe solution? Test everything before it merges.\n\nWhen AI can generate features in minutes, your testing strategy needs to match that pace—or risk becoming the new bottleneck. In this session, we'll explore how to build testing pipelines that scale with AI, and why your deployment strategy might determine whether AI becomes your superpower or your liability.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1027,7 +1771,7 @@
       "speakers": [
         "antiorario"
       ],
-      "full_description": "",
+      "full_description": "Our talk will present the most salient aspects of what we call the HMS Flagship Refresh project, born out of multiple needs: integrating the MD Program’s content into the site, before OpenScholar’s decommissioning in November 2025; enhancing the role of the site as an editorial product, after the 2023 launch of the standalone Harvard Medicine magazine; and the structural and visual modernization of the site, which in 2024 was the oldest flagship among Harvard schools.\n\nOur main constraints were, predictably, time and budget, and the idea that finding a way to keep working on the existing site would be more economical and sustainable than embarking in a multi-year, full-on redesign-and-rebuild project. In addition to that, not fully outsourcing the project would allow us to take advantage of our small but experienced web-development team.\n\nWe’ll explore the main aspects of our approach:\n\n1. We hired vendors for key project milestones: content strategy to integrate the new content while preserving the site’s integrity, and design and front-end development for new and refreshed components\n\n2. We established a multi-office collaboration process with strong project management and internal communication to make the process transparent and inclusive of all stakeholders, including school leadership and site owners\n\n3. We have been progressively rebuilding the site using modern, flexible, and sustainable techniques, from layout patterns to coding standards and Drupal-related technologies",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1070,7 +1814,7 @@
       "speakers": [
         "mikemccaffrey"
       ],
-      "full_description": "",
+      "full_description": "For websites to be accessible, content needs to be thoughtfully arranged into sections and navigable by headings, so users can easily scan a page and find the information they are seeking. Ensuring that proper structure can be one of the biggest accessibility challenges for a Drupal site, with many pages ending up with improperly nested heading levels, sections without explicit headings, or regular text that is styled like headings, but missing the proper semantic markup needed by screen readers.\n\nAt Kalamuna, we are passionate about building Drupal sites that empower and encourage editors to properly structure their content and provide the headings needed for easy navigation (and passing accessibility scans). Whether content on your site is managed using Field Groups, Twig templates, Paragraphs, Layout Builder, Canvas, or just one big WYSIWYG field, we have tips for how to set things up in a way will result in far more accessible content and much happier users.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1088,7 +1832,7 @@
         "dharizza",
         "garphy"
       ],
-      "full_description": "",
+      "full_description": "Shipping updates for Drupal sites doesn’t have to be stressful or error-prone. In this session, we’ll dive deep into automated testing as the backbone of a reliable CI/CD workflow, showing how developers can confidently move code from development to production while preventing regressions and maintaining site quality.\n\nUsing real-world examples, we’ll explore how to integrate automated testing at multiple stages of your workflow, including:\n\n- Unit and functional testing to verify individual modules and site functionality.\n\n- Visual regression testing with tools like Diffy to catch unintended layout or design changes before deployment.\n\n- Multi-stage testing pipelines that run tests at local, staging, and pre-production environments to ensure safe, repeatable deployments.\n\nAttendees will leave with a practical understanding of how to implement a full test-driven deployment strategy for Drupal, reduce errors, and improve confidence in their releases.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1106,7 +1850,7 @@
         "hannaholeary",
         "hannah mcdermott"
       ],
-      "full_description": "",
+      "full_description": "All too frequently the relationship between sales and delivery is a constant balancing act. Sales teams are driven by ambitious targets, while delivery teams are focused on accurate scoping, sustainable recovery rates, and the practical realities of open-source implementation. The result? Friction, misaligned expectations, and, in the worst cases, even a hit to client satisfaction.\n\nIn this session, we’ll share how Zoocha’s Business Development and Delivery leadership joined forces to turn this tension into a genuine partnership. By introducing transparent handover processes, joint scoping, and shared KPIs, we built a framework where both teams can genuinely succeed together. We’ll discuss improved forecasting accuracy, how open communication channels reduced “us vs them” dynamics, and how collaboration had a direct impact on quality Drupal delivery and client happiness.\n\nAttendees will walk away with practical strategies to replicate in their own organizations: tools for building cross-team empathy, opportunities for aligning metrics, and methods for creating a culture of transparency. Whether you lead sales, manage projects, or oversee delivery teams, this session will give you a fresh perspective on how to bridge one of the most common frictions in agency life.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1123,7 +1867,7 @@
       "speakers": [
         "pdureau"
       ],
-      "full_description": "",
+      "full_description": "HTMX has been added to Drupal 11.2 as a light javascript dependency to modernize and unify many legacy Drupal APIs: AJAX, AJAX for Views, Form States, Big Pipe…\n\nThis addition is also opening new easy ways of building modern, performant, highly interactive, user interfaces for both the admin and front UI, without the need of javascript frameworks.\n\nOne of those UI is the new Display Builder contrib module, which is leveraging HTMX, alongside many recent additions to Drupal Core, to provide a display building experience both unified (page layouts, entity displays, content and more) and powerful (design system native, live previews, iterative updates, realtime collaboration, adaptive profiles…).\n\nFrom this example, we will explore together how we can modernize the UI of other Drupal modules, providing a reactive, world-class, user experience while keeping the implementation lean and maintainable.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1140,7 +1884,7 @@
       "speakers": [
         "jldust"
       ],
-      "full_description": "",
+      "full_description": "Drupal's Single Directory Components (SDC) represent a significant shift in how we approach component-based theming by grouping templates, CSS, and JavaScript into a single directory. This architecture simplifies both the organization and the management of theme components, making it easier for developers to maintain and scale Drupal projects. SDC ensures that all assets related to a component are located in one place, streamlining the development process and reducing complexity for front-end and back-end teams alike.\n\nThe SDC Display module adds flexibility by allowing developers and site builders to link components directly through Drupal’s admin interface. It breaks down theming barriers by making components reusable and accessible, enabling site builders and themers to map and manage components without relying solely on custom code. As a result, it makes it easier to adapt and reuse components across different sections of a site without manual intervention. In this session, we’ll showcase a practical demo of SDC and SDC Display in action, illustrating how to efficiently build and connect SDC components for a faster and more maintainable development workflow. We’ll also discuss strategies to improve collaboration between designers, front-end developers (FEDs) and back-end developers (BEDs), enabling each to work more efficiently within their areas of expertise.\n\nSlides for this presentation: https://bit.ly/breaking-the-theme-barrier",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1157,7 +1901,7 @@
       "speakers": [
         "tedbow"
       ],
-      "full_description": "",
+      "full_description": "Enabling ambitious site builders has always been a superpower of Drupal and the introduction of Drupal Canvas has taken this to another level. This session will explore advanced site-building techniques utilizing the new Drupal Canvas module. Attendees will learn how to combine the power of Canvas with existing core modules like Views and popular contrib modules, all without writing any code!\n\nWe will demonstrate how to build a demo site that leverages Drupal's robust information architecture capabilities alongside the streamlined user experience offered by Drupal Canvas.\n\nAttendees will learn how to:\n\nCreate dynamic landing pages\n\nUse Canvas content templates to format structured content\n\nLink field data inside templates to SDC and Code Component properties\n\nCreate template slots, enabling content editors to further customize content using Canvas templates.\n\nManage permissions to tailor the user experience of Canvas for different user groups\n\nBuild Views to showcase related content and author details inside Canvas templates.\n\nUse Views to display lists of content formatted by Canvas templates\n\nAs Drupal Canvas is rapidly evolving, we will cover the latest site building related Canvas features at the time of DrupalCon. We will also demonstrate some of the most useful contrib modules to extend Drupal Canvas.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1175,7 +1919,7 @@
         "Fabianx",
         "Phoyes"
       ],
-      "full_description": "",
+      "full_description": "To be a true enterprise content management system, Drupal must support comprehensive, site-wide content staging. That means content editors, publishers and site builders need to be able to preview entire sets of changes from an end-user's perspective before publishing them easily with a single click.\n\nWhile content moderation promises a lot, in practice it is only for single content items. Until now. Because now workspaces is able to power content moderation. And that is a game changer! Because when you are ready you can just switch and use the full power of workspaces immediately.\n\nDiscover how to leverage the Workspaces module to implement enterprise-ready publishing workflows, and take advantage of contributed modules in the Workspace ecosystem: Site-wide moderation, archiving, external previews, scheduling, and rollbacks are only some of the things that add to a fully-featured content staging system.\n\nExtend this even further with advanced capabilities like translation, access management, configuration management, and A/B testing. Workspaces is a game changer for content staging.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1225,7 +1969,7 @@
         "jannafiester",
         "joannajackson"
       ],
-      "full_description": "",
+      "full_description": "Great non-profit websites do more than deliver content, they create connection. They guide users, inspire engagement and donations, and make complex organizations feel human. In this session, we’ll break down real-world examples of top non-profit websites and show how their UX strategies translate into Drupal builds and performant experiences. From navigation patterns to content architecture to design choices, you’ll leave with an actionable playbook of practical ideas ready to apply to your next Drupal project.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1238,7 +1982,7 @@
       "link": "https://events.drupal.org//chicago2026/session/keynote-alexandra-bell-security-implications-ai",
       "track": [],
       "speakers": [],
-      "full_description": "",
+      "full_description": "AI technologies are evolving faster than our ability to understand them, much less control them. While these technologies have the potential to improve our quality of life across multiple sectors, it is essential to global security that governments and civil society weigh the both the costs and benefits of AI expansion. From nuclear proliferation to the environment to public health to the global economy, AI can bring hope or wreak havoc. Bell will outline both the threats at hand, as well as how to manage or mitigate those threats.\n\nA noted policy expert and former diplomat, she oversees the Bulletin‘s publishing programs, management of the Doomsday Clock, and a growing set of activities around nuclear risk, climate change, and disruptive technologies.\n\nBefore joining the Bulletin, Alexandra Bell served as the Deputy Assistant Secretary for Nuclear Affairs in the Bureau of Arms Control, Deterrence, and Stability (ADS) at the U.S. Department of State. There she managed the Offices of Strategic Stability and Deterrence and Multilateral and Nuclear Affairs. From 2017 to 2021, Bell was the Senior Policy Director at the Center for Arms Control and Non-Proliferation and the Council for a Livable World. Previously, Bell served as a Senior Advisor in the Office of the Under Secretary of State for Arms Control and International Security and as an Advisor in ADS, then named the Bureau of Arms Control, Verification and Compliance. Before joining the Department of State in 2010, she worked on nuclear policy issues at the Ploughshares Fund and the Center for American Progress.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1251,7 +1995,7 @@
       "link": "https://events.drupal.org//chicago2026/session/women-drupal-luncheon-guests-must-pre-register",
       "track": [],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Guests can pre-register for the luncheon during the DrupalCon Chicago registration process. If you’re already registered and would like to add the luncheon, simply use the “Modify” button in your confirmation email to update your registration.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1281,7 +2025,7 @@
       "speakers": [
         "MayaLena"
       ],
-      "full_description": "",
+      "full_description": "Drupal has always thrived because of its passionate developer community. But the future of Drupal depends on something bigger: the ecosystem around it. Designers, communicators, strategists, web managers, and decision-makers all influence whether Drupal gets adopted and sustained.\n\nOver the past three years, Maya Schaeffer and Alex Dergachev have experimented with ways to bring these broader audiences into the Drupal ecosystem through the EvolveDrupal (now EvolveDigital) summit series. When the first events launched, about 60% of attendees were technical, and many non-technical roles were hesitant to attend something branded as a “Drupal event.”\n\nThrough intentional outreach, personal invitations, ecosystem partnerships, and programming focused on real digital challenges, the audience gradually shifted to roughly 30% technical and 70% broader digital roles across higher education, government, agencies, nonprofits, and tech vendors.\n\nIn this session, we’ll share what we learned from organizing 11 summits designed to get “off the Drupal island.” We’ll explore how outreach, branding, programming, and collaboration can bring new voices into the ecosystem—and how agencies, community organizers, and contributors can act as force multipliers for Drupal’s future.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1299,7 +2043,7 @@
         "andyg5000",
         "phenaproxima"
       ],
-      "full_description": "",
+      "full_description": "Site templates are a big deal. They have the potential to open Drupal up to more people than ever by delivering functional and beautiful starter sites. But it's up to the Drupal community to create them. And, as with anything in the Drupal world, there are a few ways to go about it.\n\nIn this session, we'll cover two main ways to build site templates:\n\n* The quick way, which empowers site builders to build on top of Drupal CMS and deliver awesome site templates with minimal coding.\n\n* The detailed way, for developers who want to keep their recipes well-organized, cleanly architected, thoroughly tested, and reliable.\n\nThrough real-world examples and a live demo of our recipe stack, you’ll leave with practical knowledge and the confidence to structure site templates that meet your organization’s needs today while remaining adaptable for the future.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1316,7 +2060,7 @@
       "speakers": [
         "mrconnerton"
       ],
-      "full_description": "",
+      "full_description": "Slides: [https://drive.google.com/file/d/1cwnuN5UooC_dnwGhzFqt8rTGBVV4YAD9/view?…](https://drive.google.com/file/d/1cwnuN5UooC_dnwGhzFqt8rTGBVV4YAD9/view?usp=sharing)\n\nSecurity and privacy compliance certifications—like SOC 2 (a leading audit standard for security, availability, and confidentiality) and HITRUST (a healthcare-focused security framework)—are quickly becoming standard requirements for healthcare, finance, and other regulated industries building on Drupal. The challenge isn’t just writing policies—it’s proving through code, infrastructure, and process that your systems are secure and well-governed.\n\nThis session shares engineering lessons from Encore Healthcare’s journey to SOC 2 and HITRUST readiness on a Drupal-based SaaS platform. Instead of focusing on checklists, we’ll explore how to design Drupal architecture, CI/CD, and infrastructure so compliance readiness is continuous, not seasonal. You’ll see how access control, logging, configuration management, and deployment pipelines can produce auditable evidence automatically.\n\nWe’ll cover aligning Drupal’s configuration management, custom modules, and hosting environments with security controls for change management, encryption, and least privilege. You’ll learn how observability practices can turn audit requirements into real-time visibility and ongoing assurance.\n\nYou’ll leave with a blueprint for building compliance-aware Drupal applications where your infrastructure, code, and processes work together to make audits almost boring.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1334,7 +2078,7 @@
         "salimlakhani",
         "darren oh"
       ],
-      "full_description": "",
+      "full_description": "How do you learn to cook? Try the dish first, watch someone make it, deconstruct the recipe, then make it yourself. Same with fixing cars, playing music, or any skill. But learning AI in Drupal is hard - where are the working examples to try?\n\nThis session provides 13+ working AI templates using proven learning methods that work for any new skill. We'll explore templates that solve real problems you face every day:\n\nAI Templates to Explore:\n\n• Content generation pipelines that create blog posts from just a title\n\n• Smart compliance checkers for WCAG, Section 508, and accessibility\n\n• Intelligent chatbots that know your site content and update automatically\n\n• Document processors that extract content from PDFs and images\n\n• Web scrapers that turn Wikipedia articles into formatted blog posts\n\n• SEO auditors that generate detailed optimization reports\n\n• Image generators for custom visual content\n\n• Translation workflows for multi-language sites\n\n• Code assistants integrated into your development environment\n\nVote on which templates interest you most - we'll demonstrate them live and show you exactly how they work.\n\nYou'll Leave With:\n\n- Access to all demonstrated templates (ready-to-use, 5-second deployment)\n\n- Proven methodology for mastering AI through hands-on practice\n\n- Clear roadmap from AI beginner to expert\n\nPerfect for developers who want to learn AI by doing, not theory.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1351,7 +2095,7 @@
       "speakers": [
         "fmazeikis"
       ],
-      "full_description": "",
+      "full_description": "This technical session covers the high-level architecture and inner workings of Drupal Canvas. The session focuses on the back-end aspects that Drupal developers need to know when developing with future Canvas adoption in mind.\n\nLearn the basics of the Canvas data model, the rationale behind its architecture, and which APIs are intended for module developers. I'll cover:\n\n- how to make SDCs and Block Plugins compatible with Canvas\n\n- how metadata and schema validation enables the Canvas UI to create relevant form fields on the fly\n\n- creating new Component Source Plugins, using Paragraphs and Layout Builder as examples\n\n- how Canvas' Component and Code Component config entity types' plumbing powers much of what you see in the UI\n\nWe'll finish with an overview of existing debugging tools, available documentation, and configuration management strategies.\n\nThe goal: you'll walk away with a sense of accomplishment that you *get* how it works and can expand it!\n\n--- FYI for reviewers:\n\nAs DrupalCon Chicago approaches, the session content will likely change to adapt to the state of Canvas at that time.\n\nThe slides will contain code extracts, diagrams, and pre-recorded demonstrations, but they won't include deep dives into the actual code.\n\nI will leave time for a Q&A session at the end of the presentation.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1368,7 +2112,7 @@
       "speakers": [
         "boyan.borisov"
       ],
-      "full_description": "",
+      "full_description": "Explore practical strategies for adopting Drupal's Drupal Canvas in existing platforms, ensuring a smooth transition without compromising current investments.\n\nDrupal's Drupal Canvas introduces a new approach to content management with an intuitive, drag-and-drop interface for creating and styling pages directly within the browser.​\n\nFor organizations with established Drupal sites utilizing tools like Layout Builder or Paragraphs, transitioning to Drupal Canvas presents both opportunities and challenges. This session will explore practical strategies for adopting Drupal Canvas in existing platforms, ensuring a smooth evolution without compromising current investments.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1385,7 +2129,7 @@
       "speakers": [
         "megakeegman"
       ],
-      "full_description": "",
+      "full_description": "Drupal excels at the Create Once, Publish Everywhere (COPE) model—using structured content to enable the same individual piece of content to flow into a variety of contexts.\n\nPublish (on your) Own Site, Syndicate Elsewhere (POSSE) is a relevant Indieweb principle, which is more specific to publishing content on your own site, and then to the places where it will actually reach your audience. Drupal has great potential in making it easy for content editors to govern content across multiple platforms.\n\n3 years ago, it was difficult to make good recommendations on how to approach this potentially complex feature-set. Today, however, such solutions are increasingly flexible and easy to configure. Between the technical and cultural implications following the fragmentation of our social media networks, and the continued innovation by the Drupal community, our ability to practice POSSE in Drupal is looking better than ever.\n\nIn addition to briefing on why now is such an opportune moment, I will demonstrate easy ways to syndicate content from your Drupal site, and provide guidance on which methods are suitable for various use cases. Expect to leave with a good understanding of how to write your content once and send it everywhere, with no extra services required.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1398,7 +2142,7 @@
       "link": "https://events.drupal.org//chicago2026/session/first-time-contributor-workshop-0",
       "track": [],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Do you want to contribute but are not sure how? Check out the First Time Contributor Pathway for a list of recommended sessions at DrupalCon Chicago to help you figure out how to use your particular skills to contribute to the Drupal project!\n\nThose who are new to the process and tools of contributing to Drupal, you are invited to attend one of the “First Time Contributor Workshops”. Many people will be new to contributing and different opportunities arise based on experience level.\n\nGet up to speed with community tools: Drupal.org, issue queues, communication channels, and if needed, installing Drupal 11 locally. Our mentors are excited to get you ready to tackle real issues.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1415,7 +2159,7 @@
       "speakers": [
         "alentino"
       ],
-      "full_description": "",
+      "full_description": "When your Drupal site spans thousands of pages, good content structure isn’t just helpful, it’s essential. This 30-minute session will share practical strategies for managing large-scale Drupal sites through user-centered information architecture (IA) and smart use of Drupal’s tools.\n\nYou’ll see how user research informed taxonomy design and content prioritization, how to build navigation patterns that help users explore deep content archives, and which Drupal features enable scalable, flexible, and future-friendly IA structures. Whether you’re redesigning a large site or maintaining a complex one, this session will give you actionable approaches to architect smarter, faster, and more intuitive Drupal experiences.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1445,7 +2189,7 @@
       "speakers": [
         "thejimbirch"
       ],
-      "full_description": "",
+      "full_description": "Drupal's Recipes Initiative is redefining how we build and share functionality, moving beyond distributions toward lightweight, composable recipes and site templates.\n\nWe are continuing to refine the recipes and default content APIs and config actions and expanded capabilities, but the real story is how the community can now find, author, and contribute recipes that make site building faster and more approachable.\n\nIn this session, we’ll explore the progress to date, showcase examples of community-built recipes, and demonstrate practical authoring workflows.\n\nAttendees will leave with a clear understanding of where recipes fit into Drupal’s future, how to discover and apply them effectively, and how to create their own contributions to the growing recipe ecosystem.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1462,7 +2206,7 @@
       "speakers": [
         "schnitzel"
       ],
-      "full_description": "",
+      "full_description": "In this session, we will let you all see behind the curtain of amazee.ai. This will not be a sales pitch in any way, but rather an in depth overview how AI infrastructure is ran today on a global scale. While AI developers might only see an API endpoint, behind the scenes a lot more is happening. A short overview of the things that we will cover:\n\n- API Gateways\n\n- How LLMs are actually executed\n\n- How VectorDBs work\n\n- Monitoring, Alerting and Metrics tools we use\n\n- How we can ensure privacy and data compliance\n\n- Actual demos, Dashboards and much more!",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1479,7 +2223,7 @@
       "speakers": [
         "jaspreetsingh31"
       ],
-      "full_description": "",
+      "full_description": "As a project manager, I remember how overwhelming it was to handle that big Drupal multi-site rollout. There were so many tickets to track, and the client’s priorities kept shifting. With different teams depending on each other, I often felt like I was just putting out fires instead of steering the project.\n\nI started looking into AI tools, not to replace me, but to act as an assistant — something to help me see things clearly and make decisions faster. I used the OODA Loop (Observe, Orient, Decide, Act) to give structure to how I worked with AI.\n\na) Observe: I had AI scan Jira boards, Slack chats, and long client emails to pull key points and risks into short summaries.\n\nb) Orient: It helped me analyze workflows, spot stuck tickets, and highlight dependencies.\n\nc) Decide: With that context, I could prioritize better, unblock the team, and shift focus where it mattered most.\n\nd) Act: I laid out the next steps simply, kept the team aligned, and updated the client so everyone stayed on the same page.\n\nThis gave me structure, reduced chaos, and helped me feel in control. AI is everywhere now, but without a framework, it can add clutter. The OODA Loop bridges that gap — not replacing PMs but helping us make quicker, clearer decisions. Using this, we caught problems earlier, sprints felt more manageable, meetings ran shorter, and clients noticed steady progress with fewer surprises. For me, it meant less time lost in my inbox and more time moving the project forward.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1496,7 +2240,7 @@
       "speakers": [
         "gábor hojtsy"
       ],
-      "full_description": "",
+      "full_description": "Dive deeper into the latest developments of Drupal CMS and the AI Initiative in a series of lightning talks. The speakers are not only experts in their field, but they are the ones leading each area of development or research.\n\nBy engaging directly with the experts spearheading these efforts, you’ll have the unique opportunity to join the groundbreaking efforts currently redefining the open-source landscape and play a direct role in building the next generation of the web.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1514,7 +2258,7 @@
         "shrop",
         "mwilbur"
       ],
-      "full_description": "",
+      "full_description": "Organizations rush to implement AI but see minimal ROI by treating it as a feature rather than a fundamental shift in how teams work. This gap costs companies millions in wasted licenses and missed opportunities.\n\nThis session cuts through the hype to show our proven approach for developing AI-powered solutions that integrate seamlessly with existing enterprise systems. We'll demonstrate real tools built for clients, including Tessera—our AI solution that transforms project management by intelligently generating comprehensive Jira epics, issues, and tasks from high-level requirements.\n\nYou'll see how we leverage Elvex for integration orchestration, n8n for workflow automation, and modern AI technologies to create maintainable, scalable systems. This is battle-tested methodology from enterprise development trenches, covering architecture decisions, integration patterns, and practical considerations separating successful implementations from expensive experiments.\n\nLive demonstrations show these tools connecting with Drupal APIs and content management systems, but principles apply to any enterprise platform. You'll learn to evaluate AI use cases, design robust architectures, create intuitive interfaces, and maintain systems in real-world environments using approaches you can implement immediately.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1531,7 +2275,7 @@
       "speakers": [
         "joevagyok"
       ],
-      "full_description": "",
+      "full_description": "Today the European Commission runs one of the largest Drupal platforms in the world. In the beginning it was adoption without contribution. Each institution tried to implement similar solutions. This talk is about what changed when we stopped trying to justify giving back to the community and started building in a way where contribution is what comes out the other end. Shared modules, common governance, and a platform designed so that doing the work well and doing open source are the same thing. If your organization uses open source but hasn't figured out how to give back, this one's for you.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1549,7 +2293,7 @@
         "emoleee",
         "Ameshes"
       ],
-      "full_description": "",
+      "full_description": "Chat bubbles are everywhere, but are they actually working for users? Sandstorm® conducted usability studies with actual users to uncover what people really want when interacting with AI-driven tools. We tested transactional bots, generative AI, hybrid models, and domain-specific chat experiences to see where they succeed, where they fall short, and how they compare to traditional search.\n\nIn this session, we will share 5 key findings from our research, including where users instinctively go for support, how they react when AI is in play, and what kinds of experiences foster trust instead of frustration. Attendees will walk away with a practical decision framework for when to use search, chat, or both to create more intuitive and effective Drupal experiences.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1579,7 +2323,7 @@
       "speakers": [
         "cneslund"
       ],
-      "full_description": "",
+      "full_description": "Team's aren't getting stuck because they lack ideas -- they get stuck because they can’t agree on what to try next. Whether it’s due to navigating internal politics, a fear of failure, or decision fatigue, progress becomes a never-ending churn when a path forward struggles to be defined.\n\nIterative experimentation doesn't just solve problems or reduce risk, it creates a sense of shared confidence in a team's abilities and demonstrates their capacity in tackling bigger, cooler, more impactful issues.\n\nIn this session, we'll explore how the practice of designing safe-to-try experiments gives teams a way to unblock themselves consistently. Come learn how to design and implement experiments, build buy-in, and translate results into forward momentum.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1596,7 +2340,7 @@
       "speakers": [
         "uptil4music"
       ],
-      "full_description": "",
+      "full_description": "A major contributing factor to the Digital Divide - the unequal access to and effective use of digital technology - lies squarely with those of us who build and maintain websites. We often compel users to download enormous images to use our sites, without considering the burden this places on infrastructure, devices, data costs, and personal patience. The sheer magnitude of image-based web content, estimated at about 35% by volume, exacerbates the problem.\n\nIt's time for us to responsibly use the excellent tools Drupal places at our disposal. We must architect our sites to balance our desire for visual impact with our duty to be good digital citizens, by empowering the browser to choose the most optimal image for every situation. It's time to rethink responsive images, relinquish centralized control, and let the browser decide.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1616,7 +2360,7 @@
         "breidert",
         "yautja_cetanu"
       ],
-      "full_description": "",
+      "full_description": "With the launch of the Drupal AI Initiative approaching its one-year anniversary, now is the perfect time for a critical look back and an exciting preview of what's next.\n\nBuilding on the significant announcements around AI revealed in the DriesNote, this session offers a comprehensive exploration of the Drupal AI Initiative. Attendees will gain an in-depth understanding of the progress achieved so far, including recent developments in AI integration within Drupal, as well as the roadmap for upcoming features and improvements.\n\nThe session will include:\n\n* A detailed overview of the current capabilities enabled by the Drupal AI Initiative.\n\n* A forward-looking discussion of upcoming developments, including opportunities for community contribution and experimentation.\n\n* An open “Ask Me Anything” segment, providing participants the chance to engage directly with the initiative’s technical leads, clarify technical questions, and explore integration possibilities.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1633,7 +2377,7 @@
       "speakers": [
         "vincenzo gambino"
       ],
-      "full_description": "",
+      "full_description": "Everyone’s talking about RAG (Retrieval-Augmented Generation), but let’s be honest: the standard demo usually goes something like this: split your content into chunks, toss them into a vector database, cross your fingers, and hope the LLM comes back with something vaguely useful. That’s fine for a project with straightforward content, but in the case of a hundred thousand Drupal nodes, you need a different RAG setup and strategy.\n\nIn this session, we’ll look at how to make RAG actually reliable. We’ll cover:\n\nIntroduction to RAG and embeddings: a tour through the basics of combining large language models with external knowledge.\n\nHybrid retrieval: mixing semantic embeddings with old-school keyword search (BM25) so you don’t miss the obvious.\n\nSmarter chunking: using headings, paragraphs, and semantic cues instead of arbitrary splits.\n\nRe-ranking: allowing smaller models to refine the retrieval process before the LLM takes over.\n\nContext injection: using user profiles, session data, and relationships between nodes to give the model the “bigger picture.”\n\nYou’ll leave with a clear sense of how to move from basic “embeddings in a box” to a proper AI assistant that respects your content structure, scales with Drupal, and maybe, just maybe, makes your users think you’ve built magic.\n\nBring your curiosity, and perhaps a cup of tea. We’ll be doing more than chunking this time.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1650,7 +2394,7 @@
       "speakers": [
         "fathershawn"
       ],
-      "full_description": "",
+      "full_description": "HTMX has steadily risen among JavaScript projects since its release in recent years, gaining more new stars on GitHub in 2024 than React. Now HTMX is integrated into Drupal core and forms the basis of a subsystem that will replace our jQuery based Ajax API.\n\nHTMX is both simple and powerful. It enables any HTML element to become a hypermedia control, enhancing interaction with the site. HTMX uses HTML as its data structure enabling replacement or addition of new markup anywhere on the page.\n\nDrupal 11.3 shipped with a new subsystem that allows straightforward integration of HTMX into Drupal. This session will introduce this subsystem and the theory and practice of hypermedia web applications built with HTMX. We will walk through examples of how you can start using HTMX in your own projects and also look at the current status of the community initiative to replace the Ajax API.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1667,7 +2411,7 @@
       "speakers": [
         "marcus_johansson"
       ],
-      "full_description": "",
+      "full_description": "What if you could open up the world of Agents, so that people with communication and language skills could focus on the prompt writing and the actual way the Agents interact with Drupal or its content is just an abstraction that you get access to with a click of a button.\n\nThe new Agents framework allows you to build your own business specific Agents without having to code a single line of code.\n\nThis talk will showcase what an Agent is, the background on how we built the framework, what they can be used for and how they interact with the MCP framework.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1706,7 +2450,7 @@
       "link": "https://events.drupal.org//chicago2026/session/mentored-contribution",
       "track": [],
       "speakers": [],
-      "full_description": "",
+      "full_description": "If you are already familiar with the tools the Drupal community uses (such as the issue queue and/or a local development environment), but could still use help choosing issues and navigating the process, Mentored Contribution is for you.\n\nLearn while helping to improve Drupal! Plenty of mentors will be available to help you get started. If you are new to contribution, this is a great place for you after you have completed the First-Time Contributor Workshop.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1732,7 +2476,7 @@
       "link": "https://events.drupal.org//chicago2026/session/first-time-contributor-workshop",
       "track": [],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Do you want to contribute but are not sure how? Check out the First Time Contributor Pathway for a list of recommended sessions at DrupalCon Chicago to help you figure out how to use your particular skills to contribute to the Drupal project!\n\nThose who are new to the process and tools of contributing to Drupal, you are invited to attend one of the “First Time Contributor Workshops”. Many people will be new to contributing and different opportunities arise based on experience level.\n\nGet up to speed with community tools: Drupal.org, issue queues, communication channels, and if needed, installing Drupal 11 locally. Our mentors are excited to get you ready to tackle real issues.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1747,7 +2491,7 @@
       "speakers": [
         "froboy"
       ],
-      "full_description": "",
+      "full_description": "DrupalCon Chicago Trivia Night will be held on Thursday, March 26 from 5:30-8:30PM at the Weather Mark Tavern (1503 S Michigan Ave, Chicago, IL 60605).\n\nWe’ll have light snacks and drink tickets available. The venue also has a full food menu and you’re welcome to order food during the event. Teams should be up to 5 people. We will start questions at 6PM and go for around 2 hours, with lots of time for breaks and socializing. Thanks to our generous sponsors, we’ll have awesome prizes for the winners!\n\nThe Weather Mark is wheelchair accessible and has accessible restrooms. It’s accessible via multiple CTA busses or is about a 17 minute walk (0.7 miles) from the Hilton. Get directions to the Weather Mark.",
       "video_url": "",
       "sponsorIds": ""
     }
