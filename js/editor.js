@@ -78,7 +78,8 @@ const EVENT_META_FIELDS = [
   'flickr',
   'timezone',
   'columns',
-  'enabled'
+  'enabled',
+  'scheduleComplete'
 ];
 const EVENT_META_FIELD_CONFIG = {
   designation: {
@@ -136,6 +137,10 @@ const EVENT_META_FIELD_CONFIG = {
   enabled: {
     label: 'Show this event',
     description: 'Controls whether this dataset is available in the public planner.'
+  },
+  scheduleComplete: {
+    label: 'Schedule complete',
+    description: 'Mark when the event has passed and its schedule is final — no further session changes are expected.'
   }
 };
 const FLICKR_FIELD_CONFIG = {
@@ -172,6 +177,14 @@ const LOGO_FIELD_CONFIG = {
   usePlate: {
     label: 'Use background plate',
     description: 'Enable a soft white plate behind the logo for images without transparency.'
+  },
+  logoDisabled: {
+    label: 'Disable logo image',
+    description: 'When checked, the logo image is hidden on the schedule and a Font Awesome icon is shown instead.'
+  },
+  faIcon: {
+    label: 'Replacement icon',
+    description: 'Font Awesome icon classes shown when the logo is disabled (e.g. "fa-solid fa-calendar-days"). Defaults to fa-solid fa-calendar-days.'
   }
 };
 const SPONSOR_FIELDS = [
@@ -1177,7 +1190,9 @@ function normalizeLogoObject(raw = null) {
   return {
     image: String(input.image || '').trim(),
     imageAlt: String(input.imageAlt || '').trim(),
-    usePlate: input.usePlate === true || String(input.usePlate || '').toLowerCase() === 'true'
+    usePlate: input.usePlate === true || String(input.usePlate || '').toLowerCase() === 'true',
+    logoDisabled: input.logoDisabled === true || String(input.logoDisabled || '').toLowerCase() === 'true',
+    faIcon: String(input.faIcon || '').trim()
   };
 }
 
@@ -2214,9 +2229,13 @@ function renderFlickrBlock(flickr) {
   `;
 }
 
+const LOGO_FA_DEFAULT = 'fa-solid fa-calendar-days';
+
 function renderLogoBlock(logo) {
   const imageSrc = (logo.image || '').trim();
   const plateClass = logo.usePlate ? ' header-logo-use-plate' : '';
+  const faIcon = (logo.faIcon || '').trim() || LOGO_FA_DEFAULT;
+  const showFaIcon = logo.logoDisabled;
   return `
     <div class="col-span-full flex gap-5 items-start">
       <div class="flex-1 min-w-0 grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -2238,6 +2257,10 @@ function renderLogoBlock(logo) {
               <input data-logo-field="usePlate" type="checkbox" class="h-4 w-4" ${logo.usePlate ? 'checked' : ''}${fieldDescriptionAttr('logo', 'usePlate', LOGO_FIELD_CONFIG.usePlate)}>
               <span class="text-sm text-gray-700">Background plate</span>
             </label>
+            <label class="h-9 inline-flex items-center gap-2.5 rounded-md border border-gray-300 px-3 bg-white cursor-pointer select-none">
+              <input data-logo-field="logoDisabled" type="checkbox" class="h-4 w-4" ${logo.logoDisabled ? 'checked' : ''}${fieldDescriptionAttr('logo', 'logoDisabled', LOGO_FIELD_CONFIG.logoDisabled)}>
+              <span class="text-sm text-gray-700">Disable image</span>
+            </label>
             <button id="logoImageUpload" type="button" class="h-9 inline-flex items-center justify-center px-3 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
               <i class="fas fa-upload mr-1.5 text-[0.72rem]"></i>Upload logo
             </button>
@@ -2246,13 +2269,17 @@ function renderLogoBlock(logo) {
             </button>
           </div>
         </div>
+        <label class="editor-form-field md:col-span-2">
+          ${renderFieldIntro('logo', 'faIcon', LOGO_FIELD_CONFIG.faIcon)}
+          <input data-logo-field="faIcon" type="text" value="${escapeAttr(logo.faIcon)}" class="w-full h-11 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3" placeholder="${escapeAttr(LOGO_FA_DEFAULT)}"${fieldDescriptionAttr('logo', 'faIcon', LOGO_FIELD_CONFIG.faIcon)}>
+        </label>
       </div>
 
       <aside class="logo-editor-sidebar">
         <div class="logo-preview-stage">
           <div id="logoPreviewContainer" class="header-logo${escapeAttr(plateClass)}">
-            <i class="fas fa-image${imageSrc ? ' hidden' : ''}"></i>
-            <img id="logoImagePreview" class="header-logo-image${imageSrc ? '' : ' hidden'}"
+            <i id="logoIconPreview" class="${escapeAttr(showFaIcon ? faIcon : 'fas fa-image')}${(!showFaIcon && imageSrc) ? ' hidden' : ''}"></i>
+            <img id="logoImagePreview" class="header-logo-image${(imageSrc && !showFaIcon) ? '' : ' hidden'}"
               src="${escapeAttr(bustSrc(imageSrc))}" alt="${escapeAttr(logo.imageAlt || '')}">
           </div>
         </div>
@@ -2346,26 +2373,39 @@ function bindLogoFormEvents(container) {
     const key = input.dataset.logoField;
     const updateLogoField = () => {
       const eventLogo = normalizeLogoObject(state.dataset.event.logo);
-      eventLogo[key] = key === 'usePlate' ? Boolean(input.checked) : input.value;
+      if (key === 'usePlate' || key === 'logoDisabled') {
+        eventLogo[key] = Boolean(input.checked);
+      } else {
+        eventLogo[key] = input.value;
+      }
       state.dataset.event.logo = normalizeLogoObject(eventLogo);
       markDirty(true);
 
+      const img = container.querySelector('#logoImagePreview');
+      const iconEl = container.querySelector('#logoIconPreview');
+      const clearBtn = container.querySelector('#logoImageClear');
+      const currentLogo = state.dataset.event.logo;
+      const hasSrc = Boolean((currentLogo.image || '').trim());
+      const disabled = currentLogo.logoDisabled;
+      const resolvedIcon = (currentLogo.faIcon || '').trim() || LOGO_FA_DEFAULT;
+
       if (key === 'image') {
         const newSrc = input.value.trim();
-        const img = container.querySelector('#logoImagePreview');
-        const icon = container.querySelector('#logoPreviewContainer > i');
-        const clearBtn = container.querySelector('#logoImageClear');
-        if (img) { img.src = newSrc; img.classList.toggle('hidden', !newSrc); }
-        if (icon) icon.classList.toggle('hidden', Boolean(newSrc));
+        if (img) { img.src = newSrc; img.classList.toggle('hidden', !newSrc || disabled); }
         if (clearBtn) clearBtn.disabled = !newSrc;
       }
       if (key === 'imageAlt') {
-        const img = container.querySelector('#logoImagePreview');
         if (img) img.alt = input.value;
       }
       if (key === 'usePlate') {
         const preview = container.querySelector('#logoPreviewContainer');
         if (preview) preview.classList.toggle('header-logo-use-plate', input.checked);
+      }
+      if (key === 'logoDisabled' || key === 'faIcon') {
+        if (iconEl) {
+          iconEl.className = disabled ? resolvedIcon : (hasSrc ? 'fas fa-image hidden' : 'fas fa-image');
+        }
+        if (img) img.classList.toggle('hidden', disabled || !hasSrc);
       }
     };
     input.addEventListener('input', updateLogoField);
@@ -3030,6 +3070,23 @@ function renderEventMetaForm() {
       `;
     }
 
+    if (field === 'scheduleComplete') {
+      const checked = event.scheduleComplete === true || String(event.scheduleComplete).toLowerCase() === 'true';
+      return `
+        <label class="editor-form-field ${spanClass}">
+          ${renderFieldIntro('event', field, config)}
+          <span class="h-11 inline-flex items-center gap-3 rounded-md border border-gray-300 px-3 bg-white">
+            <input data-event-field="${field}" type="checkbox" class="h-4 w-4" ${checked ? 'checked' : ''}${fieldDescriptionAttr(
+              'event',
+              field,
+              config
+            )}>
+            <span class="text-sm text-gray-200">Event has passed, schedule is final</span>
+          </span>
+        </label>
+      `;
+    }
+
     if (field === 'startDate' || field === 'endDate') {
       const raw = toStringValue(event[field]);
       const dateValue = raw ? raw.split('T')[0] : '';
@@ -3086,7 +3143,7 @@ function renderEventMetaForm() {
         renderSessionList();
         renderSessionForm();
         renderFlickrForm();
-      } else if (field === 'enabled') {
+      } else if (field === 'enabled' || field === 'scheduleComplete') {
         state.dataset.event[field] = Boolean(input.checked);
       } else {
         state.dataset.event[field] = input.value;

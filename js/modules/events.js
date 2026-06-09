@@ -272,7 +272,17 @@ export function updateHeaderBranding() {
   logoIcon.className = branding.iconClass;
   kicker.textContent = branding.kicker;
 
-  if (branding.logoUrl) {
+  const logoDisabled =
+    state.eventMeta?.logo?.logoDisabled === true ||
+    String(state.eventMeta?.logo?.logoDisabled || '').toLowerCase() === 'true';
+  const faIcon = String(state.eventMeta?.logo?.faIcon || '').trim() || 'fa-solid fa-calendar-days';
+
+  if (logoDisabled) {
+    logoImage.onerror = null;
+    logoImage.classList.add('hidden');
+    logoIcon.className = faIcon;
+    logoIcon.classList.remove('hidden');
+  } else if (branding.logoUrl) {
     logoImage.onerror = () => {
       logoImage.classList.add('hidden');
       logoIcon.classList.remove('hidden');
@@ -285,6 +295,7 @@ export function updateHeaderBranding() {
   } else {
     logoImage.onerror = null;
     logoImage.classList.add('hidden');
+    logoIcon.className = branding.iconClass;
     logoIcon.classList.remove('hidden');
   }
 }

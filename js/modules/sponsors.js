@@ -168,6 +168,7 @@ const loadAllSponsorHistory = once(async () => {
             file,
             eventLabel,
             eventId,
+            eventEnabled: meta.enabled !== false,
             eventWebsite,
             eventYear: Number.isFinite(eventYear) ? eventYear : null,
             eventEndTime: Number.isFinite(eventEndTime) ? eventEndTime : null,
@@ -193,7 +194,44 @@ const loadAllSponsorHistory = once(async () => {
     })
   );
 
-  return entries;
+  // Deduplicate: when a sponsor appears in multiple tiers/rows within the same
+  // event, merge those into one history entry so the modal shows one card per
+  // event and the count badge reflects distinct events, not distinct entries.
+  const deduped = new Map();
+  for (const entry of entries) {
+    const key = `${entry.file}\0${entry.sponsorTitleKey}`;
+    if (!deduped.has(key)) {
+      deduped.set(key, { ...entry, _tiers: [entry.eventTier], _subtitles: entry.sponsorSubtitle ? [entry.sponsorSubtitle] : [] });
+    } else {
+      const ex = deduped.get(key);
+      // Promote display properties to the highest-tier (lowest row) appearance.
+      if (entry.sponsorRow < ex.sponsorRow || (entry.sponsorRow === ex.sponsorRow && entry.sponsorPriority < ex.sponsorPriority)) {
+        Object.assign(ex, {
+          eventTier: entry.eventTier,
+          sponsorImage: entry.sponsorImage,
+          sponsorImageAlt: entry.sponsorImageAlt,
+          sponsorBgStyle: entry.sponsorBgStyle,
+          sponsorAspect: entry.sponsorAspect,
+          sponsorLink: entry.sponsorLink,
+          sponsorRow: entry.sponsorRow,
+          sponsorPriority: entry.sponsorPriority,
+        });
+      }
+      if (!ex._tiers.includes(entry.eventTier)) ex._tiers.push(entry.eventTier);
+      if (entry.sponsorSubtitle && !ex._subtitles.includes(entry.sponsorSubtitle)) ex._subtitles.push(entry.sponsorSubtitle);
+      // Merge sponsored sessions without duplicates.
+      const seen = new Set(ex.sponsoredSessions.map((s) => s.title));
+      for (const session of entry.sponsoredSessions) {
+        if (!seen.has(session.title)) { ex.sponsoredSessions.push(session); seen.add(session.title); }
+      }
+    }
+  }
+
+  return [...deduped.values()].map(({ _tiers, _subtitles, ...entry }) => ({
+    ...entry,
+    eventTier: _tiers.join(', '),
+    sponsorSubtitle: _subtitles.length ? _subtitles.join('; ') : undefined,
+  }));
 });
 
 function renderSponsorHistoryModalContent(currentSponsor, entries) {
@@ -237,7 +275,7 @@ function renderSponsorHistoryModalContent(currentSponsor, entries) {
           </div>
         `
         : '';
-      if (!isCurrentEvent && entry.eventId) {
+      if (!isCurrentEvent && entry.eventId && entry.eventEnabled) {
         actions.push(
           `<a class="session-modal-link" href="${escapeHtml(`./index.html?id=${entry.eventId}`)}" target="_blank" rel="noopener noreferrer"><i class="fas fa-calendar-days"></i><span>View schedule</span></a>`
         );
