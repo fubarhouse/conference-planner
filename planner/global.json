@@ -1,0 +1,48 @@
+{
+  "defaultMode": "personal",
+  "defaultCurrency": "AUD",
+  "budgetCategories": [
+    { "id": "travel",        "name": "Travel" },
+    { "id": "accommodation", "name": "Accommodation" },
+    { "id": "food",          "name": "Food & Drink" },
+    { "id": "customer",      "name": "Customer" },
+    { "id": "team",          "name": "Team" },
+    { "id": "tickets",       "name": "Tickets" },
+    { "id": "swag",          "name": "Swag" },
+    { "id": "sponsor",       "name": "Sponsor" },
+    { "id": "marketing",     "name": "Marketing" },
+    { "id": "misc",          "name": "Misc" }
+  ],
+  "teamMembers": [
+    {
+      "id": "tmb_alice123",
+      "name": "Alice Johnson",
+      "role": "Partnerships Lead",
+      "company": "Acme Digital",
+      "department": "Sales & Partnerships",
+      "phone": "+61 2 8765 4321",
+      "notes": "Primary sponsor rep. Handles all key account conversations at events.",
+      "enabled": true
+    },
+    {
+      "id": "tmb_bob456",
+      "name": "Bob Chen",
+      "role": "Senior Developer",
+      "company": "Acme Digital",
+      "department": "Engineering",
+      "phone": "+61 3 9876 5432",
+      "notes": "Runs the live demo station. Always bring two laptops.",
+      "enabled": true
+    },
+    {
+      "id": "tmb_carol789",
+      "name": "Carol Davis",
+      "role": "Marketing Manager",
+      "company": "Acme Digital",
+      "department": "Marketing",
+      "phone": "+61 7 3456 7890",
+      "notes": "Manages swag logistics and social media coverage during the event.",
+      "enabled": true
+    }
+  ]
+}
