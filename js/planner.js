@@ -238,6 +238,24 @@ function scheduleAutoSave() {
   }, 600);
 }
 
+// ── Modal visibility helpers ─────────────────────────────────────────────────
+
+function showModal(id, focusId) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+  const sw = window.innerWidth - document.documentElement.clientWidth;
+  document.body.style.overflow = 'hidden';
+  if (sw) document.body.style.paddingRight = `${sw}px`;
+  modal.classList.remove('hidden');
+  if (focusId) document.getElementById(focusId)?.focus();
+}
+
+function hideModal(id) {
+  document.getElementById(id)?.classList.add('hidden');
+  document.body.style.overflow = '';
+  document.body.style.paddingRight = '';
+}
+
 // ── Disk recovery ────────────────────────────────────────────────────────────
 
 // Seeds localStorage from the API disk copy when the local entry is missing or has a corrupted
@@ -260,20 +278,53 @@ async function seedFromDiskIfMissing(plannerKey) {
     const data = await res.json();
     if (!data || typeof data !== 'object') return;
     if (!data._eventFile && !data._plannerKey && !data._displayName) return;
+    delete data._globalTeamMembers; // strip before saving; global.json handles team member seeding
     localStorage.setItem(`${STORAGE_PREFIX}${plannerKey}`, JSON.stringify(data));
   } catch { /* server not running or file not found — silent */ }
 }
 
-// Seeds global (shared team member list) from disk if localStorage has no entry yet.
-// Only runs once — never overwrites existing global data.
+// Seeds global state from disk on every startup, merging non-destructively by key.
+// Team members + budget categories: merged by ID — new entries are appended, existing ones are never overwritten.
+// defaultMode: seeded only when the local value is empty/missing.
 async function seedGlobalFromDiskIfMissing() {
-  if (localStorage.getItem(GLOBAL_KEY)) return;
   try {
     const res = await fetch('./api/planner/global.json');
     if (!res.ok) return;
     const data = await res.json();
-    if (!data || typeof data !== 'object' || !Array.isArray(data.teamMembers)) return;
-    localStorage.setItem(GLOBAL_KEY, JSON.stringify(data));
+    if (!data || typeof data !== 'object') return;
+    const existing = (() => {
+      try { return JSON.parse(localStorage.getItem(GLOBAL_KEY) || 'null') || {}; } catch { return {}; }
+    })();
+    let changed = false;
+
+    // Merge team members by ID
+    if (Array.isArray(data.teamMembers)) {
+      const existingIds = new Set((existing.teamMembers || []).map((m) => m.id));
+      const toAdd = data.teamMembers.filter((m) => m?.id && !existingIds.has(m.id));
+      if (toAdd.length) { existing.teamMembers = [...(existing.teamMembers || []), ...toAdd]; changed = true; }
+    }
+
+    // Merge budget categories by ID — adds any from global.json not yet in localStorage
+    if (Array.isArray(data.budgetCategories) && data.budgetCategories.length) {
+      const existingIds = new Set((existing.budgetCategories || []).map((c) => c.id));
+      const toAdd = data.budgetCategories.filter((c) => c?.id && !existingIds.has(c.id));
+      if (toAdd.length) {
+        existing.budgetCategories = [...(existing.budgetCategories || []), ...toAdd];
+        changed = true;
+      }
+    }
+
+    // Seed default mode and currency if local has none
+    if (data.defaultMode && !existing.defaultMode) {
+      existing.defaultMode = data.defaultMode;
+      changed = true;
+    }
+    if (data.defaultCurrency && !existing.defaultCurrency) {
+      existing.defaultCurrency = data.defaultCurrency;
+      changed = true;
+    }
+
+    if (changed) localStorage.setItem(GLOBAL_KEY, JSON.stringify(existing));
   } catch { /* server not running or file not found — silent */ }
 }
 
@@ -379,46 +430,46 @@ function applyTheme() {
 
 const CURRENCIES = ['AUD', 'USD', 'EUR', 'GBP', 'NZD', 'CHF', 'CAD', 'INR', 'JPY', 'SGD']
 
-const BUDGET_ITEM_CATS_PERSONAL = [
-  { value: 'travel',        label: 'Travel / Transport' },
-  { value: 'accommodation', label: 'Accommodation' },
-  { value: 'food',          label: 'Food & Drink' },
-  { value: 'customer',      label: 'Customer' },
-  { value: 'team',          label: 'Team' },
-  { value: 'misc',          label: 'Misc' },
+// Budget categories — loaded from data/budget.json at init, then overridden per-event
+let _defaultBudgetCategories = [
+  { id: 'travel',        name: 'Travel' },
+  { id: 'accommodation', name: 'Accommodation' },
+  { id: 'food',          name: 'Food & Drink' },
+  { id: 'customer',      name: 'Customer' },
+  { id: 'team',          name: 'Team' },
+  { id: 'tickets',       name: 'Tickets' },
+  { id: 'swag',          name: 'Swag' },
+  { id: 'sponsor',       name: 'Sponsor' },
+  { id: 'marketing',     name: 'Marketing' },
+  { id: 'misc',          name: 'Misc' },
 ]
 
-const BUDGET_ITEM_CATS_SPONSOR = [
-  { value: 'travel',        label: 'Travel' },
-  { value: 'accommodation', label: 'Accommodation' },
-  { value: 'food',          label: 'Food & Drink' },
-  { value: 'customer',      label: 'Customer' },
-  { value: 'team',          label: 'Team' },
-  { value: 'misc',          label: 'Misc' },
-  { value: 'sponsor',       label: 'Sponsor' },
-  { value: 'swag',          label: 'Swag' },
-]
+function getEventBudgetCategories(mode) {
+  const stored = mode === 'personal'
+    ? (state.planner?.personal?.budgetCategories || [])
+    : (state.planner?.org?.budgetCategories || [])
+  return stored.length ? stored : _defaultBudgetCategories
+}
 
-const RECEIPT_CATEGORIES = [
-  { value: 'food',          label: 'Food & Drink' },
-  { value: 'travel',        label: 'Travel / Transport' },
-  { value: 'accommodation', label: 'Accommodation' },
-  { value: 'customer',      label: 'Customer' },
-  { value: 'team',          label: 'Team' },
-  { value: 'misc',          label: 'Misc' },
-]
+function budgetCatList(mode) {
+  return getEventBudgetCategories(mode).map((c) => ({ value: c.id, label: c.name }))
+}
 
-const DOC_CATEGORIES = [
-  { value: '',              label: 'No category' },
-  { value: 'general',       label: 'General' },
-  { value: 'travel',        label: 'Travel' },
-  { value: 'accommodation', label: 'Accommodation' },
-  { value: 'financial',     label: 'Financial' },
-  { value: 'contract',      label: 'Contract' },
-  { value: 'visa',          label: 'Visa / Passport' },
-  { value: 'insurance',     label: 'Insurance' },
-  { value: 'other',         label: 'Other' },
-]
+function BUDGET_ITEM_CATS_PERSONAL() { return budgetCatList('personal') }
+function BUDGET_ITEM_CATS_SPONSOR()  { return budgetCatList('org') }
+
+// Returns budget categories for the active mode as { value, label } pairs.
+// Used by receipts, documents, and any other place that should stay in sync
+// with the event's configured budget categories.
+function getActiveBudgetCategoryOptions() {
+  const mode = state.planner?.mode || 'personal'
+  return getEventBudgetCategories(mode === 'sponsor' ? 'org' : 'personal')
+    .map((c) => ({ value: c.id, label: c.name }))
+}
+
+function getDocCategoryOptions() {
+  return [{ value: '', label: 'No category' }, ...getActiveBudgetCategoryOptions()]
+}
 
 function getDefaultCurrency() {
   return state.global?.defaultCurrency || 'AUD';
@@ -427,6 +478,18 @@ function getDefaultCurrency() {
 function currencyOptions(selected) {
   const active = selected || getDefaultCurrency();
   return CURRENCIES.map((c) => `<option value="${c}"${c === active ? ' selected' : ''}>${c}</option>`).join('')
+}
+
+function buildSelectOptions(options, selected = '') {
+  return options.map((c) => `<option value="${esc(c.value)}"${c.value === selected ? ' selected' : ''}>${esc(c.label)}</option>`).join('');
+}
+
+function renderListPanel(listId, emptyId, items, cardFn) {
+  const list  = document.getElementById(listId);
+  const empty = document.getElementById(emptyId);
+  if (!list) return;
+  empty?.classList.toggle('hidden', items.length > 0);
+  list.innerHTML = items.map(cardFn).join('');
 }
 
 function tzDatalist() {
@@ -488,7 +551,22 @@ function plannerDisplayName(planner, plannerKey) {
 
 // ── Tab system ───────────────────────────────────────────────────────────────
 
-const TABS = ['sponsor', 'team', 'documents', 'tasks', 'contacts', 'personal', 'notes', 'receipts', 'summary'];
+const TABS = ['sponsor', 'team', 'documents', 'tasks', 'contacts', 'personal', 'notes', 'receipts', 'tickets', 'budget', 'summary', 'settings'];
+
+const TAB_ICONS = {
+  sponsor:   'fas fa-handshake',
+  team:      'fas fa-users',
+  personal:  'fas fa-person',
+  tasks:     'fas fa-list-check',
+  contacts:  'fas fa-address-book',
+  notes:     'fas fa-file-lines',
+  receipts:  'fas fa-receipt',
+  tickets:   'fas fa-ticket',
+  budget:    'fas fa-wallet',
+  documents: 'fas fa-folder-open',
+  summary:   'fas fa-chart-bar',
+  settings:  'fas fa-gear',
+};
 
 const PANEL_IDS = {
   contacts:  'plannerContactsPanel',
@@ -499,7 +577,10 @@ const PANEL_IDS = {
   team:      'plannerTeamPanel',
   documents: 'plannerDocumentsPanel',
   receipts:  'plannerReceiptsPanel',
+  tickets:   'plannerTicketsPanel',
+  budget:    'plannerBudgetPanel',
   summary:   'plannerSummaryPanel',
+  settings:  'plannerSettingsPanel',
 };
 
 const TAB_BTN_IDS = {
@@ -511,22 +592,25 @@ const TAB_BTN_IDS = {
   team:      'showTeamTab',
   documents: 'showDocumentsTab',
   receipts:  'showReceiptsTab',
+  tickets:   'showTicketsTab',
+  budget:    'showBudgetTab',
   summary:   'showSummaryTab',
+  settings:  'showSettingsTab',
 };
 
 function setActiveTab(tab) {
   const next = TABS.includes(tab) ? tab : TABS[0];
   state.activeTab = next;
   TABS.forEach((t) => {
-    const panel = document.getElementById(PANEL_IDS[t]);
-    const btn   = document.getElementById(TAB_BTN_IDS[t]);
-    const active = t === next;
-    panel?.classList.toggle('hidden', !active);
-    if (btn) {
-      btn.classList.toggle('is-active', active);
-      btn.setAttribute('aria-selected', active ? 'true' : 'false');
-    }
+    document.getElementById(PANEL_IDS[t])?.classList.toggle('hidden', t !== next);
   });
+  // Update all tab buttons (main bar + Settings + overflow dropdown) via data-tab
+  document.querySelectorAll('[data-tab]').forEach((btn) => {
+    const active = btn.dataset.tab === next;
+    btn.classList.toggle('is-active', active);
+    btn.setAttribute('aria-selected', active ? 'true' : 'false');
+  });
+  try { history.replaceState(null, '', `${location.pathname}${location.search}#${next}`); } catch {}
 }
 
 // ── Session Notes tab ────────────────────────────────────────────────────────
@@ -546,19 +630,19 @@ function noteCardHtml(session, note) {
 
   return `
     <details class="planner-note-card rounded-md border border-gray-200 overflow-hidden" data-session-id="${esc(sid)}" ${hasNote ? 'open' : ''}>
-      <summary class="flex items-center gap-3 px-4 py-3 cursor-pointer select-none hover:bg-gray-50 transition-colors list-none">
+      <summary class="flex items-center gap-2.5 px-3 py-2 cursor-pointer select-none hover:bg-gray-50 transition-colors list-none">
         <i class="fas fa-chevron-right note-card-chevron text-gray-400 text-xs flex-shrink-0 transition-transform"></i>
         <div class="flex-1 min-w-0">
           <p class="text-sm font-medium text-gray-800 truncate">${esc(session.title)}</p>
-          <p class="text-xs text-gray-500">${esc(time)}${session.location ? ` · ${esc(session.location)}` : ''}${track ? ` · ${esc(track)}` : ''}</p>
+          <p class="text-xs text-gray-400">${esc(time)}${session.location ? ` · ${esc(session.location)}` : ''}${track ? ` · ${esc(track)}` : ''}</p>
         </div>
         <div class="flex items-center gap-2 flex-shrink-0">
-          ${note.attended ? '<span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-medium">Attended</span>' : ''}
+          ${note.attended ? '<span class="text-[0.6rem] px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-semibold uppercase tracking-wide">Attended</span>' : ''}
           ${note.rating ? `<span class="text-xs text-yellow-500">${'★'.repeat(note.rating)}</span>` : ''}
           ${note.notes ? '<i class="fas fa-file-lines text-gray-400 text-xs"></i>' : ''}
         </div>
       </summary>
-      <div class="px-4 pb-4 pt-2 border-t border-gray-100 space-y-3 bg-white">
+      <div class="px-3 pb-3 pt-2 border-t border-gray-100 space-y-2.5 bg-white">
         <div class="flex items-center gap-6 flex-wrap">
           <label class="inline-flex items-center gap-2 cursor-pointer text-sm text-gray-700">
             <input type="checkbox" class="h-4 w-4 rounded" data-note-field="attended" data-note-id="${esc(sid)}" ${note.attended ? 'checked' : ''}>
@@ -641,55 +725,35 @@ function handleNoteChange(sessionId, field, value) {
 
 // ── Contacts tab ─────────────────────────────────────────────────────────────
 
-function contactCardHtml(contact, open = false) {
+const CONTACT_TYPES = {
+  organiser: { label: 'Organiser', color: 'bg-violet-100 text-violet-700', border: 'border-l-violet-300' },
+  media:     { label: 'Media',     color: 'bg-teal-100 text-teal-700',     border: 'border-l-teal-300'   },
+  partner:   { label: 'Partner',   color: 'bg-amber-100 text-amber-700',   border: 'border-l-amber-300'  },
+  vip:       { label: 'VIP',       color: 'bg-rose-100 text-rose-700',     border: 'border-l-rose-300'   },
+};
+
+function contactCardHtml(contact) {
   const headerText = [contact.name, contact.org].filter(Boolean).join(' · ') || 'New contact';
+  const meta       = [contact.email, contact.whereMet].filter(Boolean).join(' · ');
+  const typeInfo   = contact.type ? CONTACT_TYPES[contact.type] : null;
+  const borderCls  = typeInfo ? `border-l-2 ${typeInfo.border}` : '';
+  const typeBadge  = typeInfo
+    ? `<span class="text-[0.6rem] px-1.5 py-0.5 rounded-full ${typeInfo.color} font-semibold uppercase tracking-wide flex-shrink-0">${esc(typeInfo.label)}</span>`
+    : '';
+  const followUpBadge = contact.followUp
+    ? '<span class="text-[0.6rem] px-1.5 py-0.5 rounded-full bg-blue-100 text-blue-700 font-semibold uppercase tracking-wide flex-shrink-0">Follow up</span>'
+    : '';
   return `
-    <details class="rounded-md border border-gray-200 overflow-hidden" data-contact-id="${esc(contact.id)}" ${open ? 'open' : ''}>
-      <summary class="flex items-center gap-3 px-4 py-3 cursor-pointer select-none hover:bg-gray-50 transition-colors list-none">
-        <i class="fas fa-chevron-right text-gray-400 text-xs flex-shrink-0 transition-transform contact-chevron"></i>
-        <div class="flex-1 min-w-0">
-          <p class="text-sm font-medium text-gray-800 truncate">${esc(headerText)}</p>
-          ${contact.email ? `<p class="text-xs text-gray-500 truncate">${esc(contact.email)}</p>` : ''}
-        </div>
-        ${contact.followUp ? '<span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-medium flex-shrink-0">Follow up</span>' : ''}
-        <button type="button" class="delete-contact-btn flex-shrink-0 text-gray-400 hover:text-red-500 transition-colors px-1" data-contact-id="${esc(contact.id)}" title="Delete contact" aria-label="Delete contact">
-          <i class="fas fa-trash text-xs"></i>
-        </button>
-      </summary>
-      <div class="px-4 pb-4 pt-3 border-t border-gray-100 bg-white">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <label class="editor-form-field">
-            <span class="editor-field-label">Name</span>
-            <input type="text" data-contact-id="${esc(contact.id)}" data-contact-field="name" value="${esc(contact.name)}" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3" placeholder="Full name">
-          </label>
-          <label class="editor-form-field">
-            <span class="editor-field-label">Organisation</span>
-            <input type="text" data-contact-id="${esc(contact.id)}" data-contact-field="org" value="${esc(contact.org)}" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3" placeholder="Company / team">
-          </label>
-          <label class="editor-form-field">
-            <span class="editor-field-label">Email</span>
-            <input type="email" data-contact-id="${esc(contact.id)}" data-contact-field="email" value="${esc(contact.email)}" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
-          </label>
-          <label class="editor-form-field">
-            <span class="editor-field-label">LinkedIn URL</span>
-            <input type="url" data-contact-id="${esc(contact.id)}" data-contact-field="linkedin" value="${esc(contact.linkedin)}" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
-          </label>
-          <label class="editor-form-field sm:col-span-2">
-            <span class="editor-field-label">Where / how you met</span>
-            <input type="text" data-contact-id="${esc(contact.id)}" data-contact-field="whereMet" value="${esc(contact.whereMet)}" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3" placeholder="e.g. Session on Drupal CMS, hallway track…">
-          </label>
-          <label class="editor-form-field sm:col-span-2">
-            <span class="editor-field-label">Notes</span>
-            <textarea data-contact-id="${esc(contact.id)}" data-contact-field="notes" rows="2"
-              class="w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white p-2 resize-y">${esc(contact.notes)}</textarea>
-          </label>
-          <label class="inline-flex items-center gap-2 cursor-pointer text-sm text-gray-700 sm:col-span-2">
-            <input type="checkbox" class="h-4 w-4 rounded" data-contact-id="${esc(contact.id)}" data-contact-field="followUp" ${contact.followUp ? 'checked' : ''}>
-            Follow-up needed
-          </label>
-        </div>
+    <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-gray-200 bg-white ${borderCls}" data-contact-id="${esc(contact.id)}">
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-medium text-gray-800 truncate">${esc(headerText)}</p>
+        ${meta ? `<p class="text-xs text-gray-400 truncate mt-0.5">${esc(meta)}</p>` : ''}
       </div>
-    </details>`;
+      ${typeBadge}${followUpBadge}
+      <button type="button" class="edit-contact-btn h-7 px-2.5 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0" data-contact-id="${esc(contact.id)}" aria-label="Edit ${esc(contact.name || 'contact')}">
+        <i class="fas fa-pen-to-square mr-1 text-[0.65rem]"></i>Edit
+      </button>
+    </div>`;
 }
 
 function renderContactsTab() {
@@ -698,42 +762,80 @@ function renderContactsTab() {
   if (!list) return;
   const contacts = state.planner.contacts;
   empty?.classList.toggle('hidden', contacts.length > 0);
-  list.innerHTML = contacts.map((c, i) => contactCardHtml(c, i === 0)).join('');
+
+  const key     = contacts.filter((c) => c.type && CONTACT_TYPES[c.type]);
+  const general = contacts.filter((c) => !c.type || !CONTACT_TYPES[c.type]);
+
+  if (!key.length) {
+    list.className = 'space-y-2';
+    list.innerHTML = general.map(contactCardHtml).join('');
+    return;
+  }
+
+  list.className = 'grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-2';
+  const colHtml = (title, items) => `
+    <div>
+      <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">${esc(title)}</p>
+      <div class="space-y-1.5">
+        ${items.length
+          ? items.map(contactCardHtml).join('')
+          : '<p class="text-xs text-gray-400 italic py-2 px-1">None yet</p>'}
+      </div>
+    </div>`;
+  list.innerHTML = colHtml('Key contacts', key) + colHtml('General', general);
 }
 
-function addContact() {
-  const contact = {
-    id: makeItemId('c'), name: '', org: '', email: '',
-    linkedin: '', whereMet: '', followUp: false, notes: '',
+let _contactModalId = null;
+
+function openContactModal(id) {
+  _contactModalId = id;
+  const contact = id ? state.planner.contacts.find((c) => c.id === id) : null;
+  document.getElementById('contactModalTitle').textContent = id ? 'Edit Contact' : 'Add Contact';
+  document.getElementById('contactName').value       = contact?.name     || '';
+  document.getElementById('contactOrg').value        = contact?.org      || '';
+  document.getElementById('contactEmail').value      = contact?.email    || '';
+  document.getElementById('contactLinkedin').value   = contact?.linkedin || '';
+  document.getElementById('contactType').value       = contact?.type     || '';
+  document.getElementById('contactWhereMet').value   = contact?.whereMet || '';
+  document.getElementById('contactNotes').value      = contact?.notes    || '';
+  document.getElementById('contactFollowUp').checked = contact?.followUp || false;
+  document.getElementById('contactModalDelete')?.classList.toggle('hidden', !id);
+  showModal('contactModal', 'contactName');
+}
+
+function saveContactModal() {
+  const isNew = !_contactModalId;
+  const id = _contactModalId || makeItemId('c');
+  const data = {
+    id,
+    name:     document.getElementById('contactName').value.trim(),
+    org:      document.getElementById('contactOrg').value.trim(),
+    email:    document.getElementById('contactEmail').value.trim(),
+    linkedin: document.getElementById('contactLinkedin').value.trim(),
+    type:     document.getElementById('contactType').value,
+    whereMet: document.getElementById('contactWhereMet').value.trim(),
+    notes:    document.getElementById('contactNotes').value.trim(),
+    followUp: document.getElementById('contactFollowUp').checked,
   };
-  state.planner.contacts.unshift(contact);
+  if (isNew) {
+    state.planner.contacts.unshift(data);
+  } else {
+    const idx = state.planner.contacts.findIndex((c) => c.id === id);
+    if (idx !== -1) state.planner.contacts[idx] = data;
+  }
+  closeContactModal();
   renderContactsTab();
   scheduleAutoSave();
-  // Open the first details element after render
-  document.querySelector('#contactsList details')?.setAttribute('open', '');
+}
+
+function closeContactModal() {
+  hideModal('contactModal');
+  _contactModalId = null;
 }
 
 function deleteContact(id) {
   state.planner.contacts = state.planner.contacts.filter((c) => c.id !== id);
   renderContactsTab();
-  scheduleAutoSave();
-}
-
-function handleContactChange(id, field, value) {
-  const contact = state.planner.contacts.find((c) => c.id === id);
-  if (!contact) return;
-  contact[field] = value;
-  // Refresh the summary text without re-rendering the whole list
-  const details = document.querySelector(`[data-contact-id="${id}"]`)?.closest('details');
-  if (details && (field === 'name' || field === 'org' || field === 'email')) {
-    const summary = details.querySelector('summary p.text-sm');
-    const emailEl = details.querySelector('summary p.text-xs');
-    if (summary) {
-      const headerText = [contact.name, contact.org].filter(Boolean).join(' · ') || 'New contact';
-      summary.textContent = headerText;
-    }
-    if (emailEl) emailEl.textContent = contact.email || '';
-  }
   scheduleAutoSave();
 }
 
@@ -750,54 +852,73 @@ function buildSessionOptions(selectedId) {
 }
 
 function taskRowHtml(task) {
+  const session = task.sessionId ? state.allSessions.find((s) => s.id === task.sessionId) : null;
+  const sessionBadge = session
+    ? `<span class="text-[0.6rem] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500 truncate max-w-[140px]" title="${esc(session.title)}">${esc(fmtTime(session.startTime))} ${esc(session.title.slice(0, 30))}${session.title.length > 30 ? '…' : ''}</span>`
+    : '';
   return `
-    <div class="flex items-start gap-3 p-3 rounded-md border border-gray-200 bg-white group" data-task-id="${esc(task.id)}">
-      <input type="checkbox" class="mt-0.5 h-4 w-4 rounded flex-shrink-0" data-task-id="${esc(task.id)}" data-task-field="done" ${task.done ? 'checked' : ''} aria-label="Mark task done">
-      <div class="flex-1 min-w-0 space-y-2">
-        <input type="text" data-task-id="${esc(task.id)}" data-task-field="text"
-          value="${esc(task.text)}"
-          placeholder="What needs to be done…"
-          class="w-full text-sm ${task.done ? 'line-through text-gray-400' : 'text-gray-800'} border-0 border-b border-transparent hover:border-gray-200 focus:border-gray-300 focus:ring-0 bg-transparent p-0 pb-0.5 transition-colors">
-        <select data-task-id="${esc(task.id)}" data-task-field="sessionId"
-          class="w-full text-xs rounded border-gray-200 text-gray-500 bg-transparent py-0.5 pr-6">
-          ${buildSessionOptions(task.sessionId)}
-        </select>
+    <div class="flex items-center gap-2.5 px-3 py-2 rounded-lg border border-gray-200 bg-white group" data-task-id="${esc(task.id)}">
+      <input type="checkbox" class="h-4 w-4 rounded flex-shrink-0" data-task-id="${esc(task.id)}" data-task-field="done" ${task.done ? 'checked' : ''} aria-label="Mark task done">
+      <div class="flex-1 min-w-0 flex items-center gap-2 flex-wrap">
+        <span class="text-sm ${task.done ? 'line-through text-gray-400' : 'text-gray-800'} truncate">${esc(task.text || 'Untitled task')}</span>
+        ${sessionBadge}
       </div>
-      <button type="button" class="delete-task-btn flex-shrink-0 text-gray-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100 mt-0.5" data-task-id="${esc(task.id)}" title="Delete task" aria-label="Delete task">
-        <i class="fas fa-trash text-xs"></i>
+      <button type="button" class="edit-task-btn h-6 w-6 flex items-center justify-center rounded border border-gray-200 text-gray-400 hover:text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0 opacity-0 group-hover:opacity-100" data-task-id="${esc(task.id)}" aria-label="Edit task">
+        <i class="fas fa-pen-to-square text-[0.6rem]"></i>
+      </button>
+      <button type="button" class="delete-task-btn h-6 w-6 flex items-center justify-center flex-shrink-0 text-gray-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100" data-task-id="${esc(task.id)}" aria-label="Delete task">
+        <i class="fas fa-times text-xs"></i>
       </button>
     </div>`;
 }
 
 function renderTasksTab() {
-  const list  = document.getElementById('tasksList');
-  const empty = document.getElementById('tasksEmptyState');
-  if (!list) return;
-
-  const filter = state.tasksFilter;
+  const filter   = state.tasksFilter;
   const filtered = state.planner.tasks.filter((t) => {
     if (filter === 'open') return !t.done;
     if (filter === 'done') return t.done;
     return true;
   });
-  // Open tasks first, then done
-  const sorted = [
-    ...filtered.filter((t) => !t.done),
-    ...filtered.filter((t) => t.done),
-  ];
+  const sorted = [...filtered.filter((t) => !t.done), ...filtered.filter((t) => t.done)];
+  renderListPanel('tasksList', 'tasksEmptyState', sorted, taskRowHtml);
+}
 
-  empty?.classList.toggle('hidden', sorted.length > 0);
-  list.innerHTML = sorted.map(taskRowHtml).join('');
+let _taskModalId = null;
+
+function openTaskModal(id) {
+  _taskModalId = id;
+  const task = id ? state.planner.tasks.find((t) => t.id === id) : null;
+  document.getElementById('taskModalTitle').textContent = id ? 'Edit Task' : 'Add Task';
+  document.getElementById('taskModalText').value = task?.text || '';
+  const sessionEl = document.getElementById('taskModalSession');
+  if (sessionEl) sessionEl.innerHTML = buildSessionOptions(task?.sessionId || '');
+  document.getElementById('taskModalDelete')?.classList.toggle('hidden', !id);
+  showModal('taskModal', 'taskModalText');
+}
+
+function saveTaskModal() {
+  const isNew = !_taskModalId;
+  const id = _taskModalId || makeItemId('t');
+  const text = document.getElementById('taskModalText').value.trim();
+  const sessionId = document.getElementById('taskModalSession').value || null;
+  if (isNew) {
+    state.planner.tasks.unshift({ id, text, done: false, sessionId });
+  } else {
+    const task = state.planner.tasks.find((t) => t.id === id);
+    if (task) { task.text = text; task.sessionId = sessionId; }
+  }
+  closeTaskModal();
+  renderTasksTab();
+  scheduleAutoSave();
+}
+
+function closeTaskModal() {
+  hideModal('taskModal');
+  _taskModalId = null;
 }
 
 function addTask() {
-  state.planner.tasks.unshift({
-    id: makeItemId('t'), text: '', done: false, sessionId: null,
-  });
-  renderTasksTab();
-  scheduleAutoSave();
-  list?.querySelector('input[type="text"]')?.focus();
-  document.querySelector('#tasksList input[type="text"]')?.focus();
+  openTaskModal(null);
 }
 
 function deleteTask(id) {
@@ -810,9 +931,7 @@ function handleTaskChange(id, field, value) {
   const task = state.planner.tasks.find((t) => t.id === id);
   if (!task) return;
   task[field] = field === 'done' ? Boolean(value) : (value || null);
-  if (field === 'done') {
-    renderTasksTab(); // re-sort on done toggle
-  }
+  if (field === 'done') renderTasksTab();
   scheduleAutoSave();
 }
 
@@ -829,6 +948,31 @@ const TRAVEL_MODES = {
   other:     { label: '↔ Other',    icon: 'fas fa-route' },
 };
 
+const TRAVEL_STATUSES = [
+  { value: '',              label: '— No status —' },
+  { value: 'needs-booking', label: 'Needs Booking' },
+  { value: 'shortlisted',   label: 'Shortlisted' },
+  { value: 'booked',        label: 'Booked' },
+  { value: 'confirmed',     label: 'Confirmed' },
+  { value: 'cancelled',     label: 'Cancelled' },
+];
+
+const TRAVEL_STATUS_CLASSES = {
+  'needs-booking': 'bg-red-100 text-red-700',
+  'shortlisted':   'bg-yellow-100 text-yellow-700',
+  'booked':        'bg-blue-100 text-blue-700',
+  'confirmed':     'bg-emerald-100 text-emerald-700',
+  'cancelled':     'bg-gray-100 text-gray-400',
+};
+
+function travelStatusBadge(status) {
+  if (!status) return '';
+  const entry = TRAVEL_STATUSES.find((s) => s.value === status);
+  if (!entry || !entry.value) return '';
+  const cls = TRAVEL_STATUS_CLASSES[status] || 'bg-gray-100 text-gray-500';
+  return `<span class="text-[0.6rem] px-1.5 py-px rounded-full font-medium flex-shrink-0 ${cls}">${esc(entry.label)}</span>`;
+}
+
 function travelIcon(mode, isReturn) {
   const m = TRAVEL_MODES[mode] || TRAVEL_MODES.other;
   return isReturn && m.returnIcon ? m.returnIcon : m.icon;
@@ -843,13 +987,14 @@ function sortLegs(legs) {
 }
 
 function makeLeg() {
-  return { id: makeItemId('leg'), mode: 'flight', date: '', ref: '', from: '', to: '', departTime: '', arriveTime: '', departTz: '', arriveTz: '', confirmation: '', notes: '', filePath: '', fileLabel: '', receiptId: '' };
+  return { id: makeItemId('leg'), mode: 'flight', status: '', date: '', ref: '', from: '', to: '', departTime: '', arriveTime: '', departTz: '', arriveTz: '', confirmation: '', notes: '', filePath: '', fileLabel: '', receiptId: '' };
 }
 
 function legCardHtml(leg, direction) {
   const modeOptions = Object.entries(TRAVEL_MODES)
     .map(([val, { label }]) => `<option value="${val}"${leg.mode === val ? ' selected' : ''}>${label}</option>`)
     .join('');
+  const statusOptions = buildSelectOptions(TRAVEL_STATUSES, leg.status || '');
   const d = direction;
   const li = esc(leg.id);
   const f = (field, type = 'text', placeholder = '') =>
@@ -860,6 +1005,10 @@ function legCardHtml(leg, direction) {
         <select data-leg-id="${li}" data-direction="${d}" data-leg-field="mode"
           class="h-8 rounded border-gray-300 text-xs bg-white px-2 drupal-blue-focus flex-shrink-0">
           ${modeOptions}
+        </select>
+        <select data-leg-id="${li}" data-direction="${d}" data-leg-field="status"
+          class="h-8 rounded border-gray-300 text-xs bg-white px-2 drupal-blue-focus flex-shrink-0">
+          ${statusOptions}
         </select>
         <div class="flex-1 min-w-0 grid grid-cols-[1fr_auto_1fr] items-center gap-1">
           ${f('from', 'text', 'From')}
@@ -918,6 +1067,7 @@ function personalLegRowHtml(leg, direction) {
     <div class="flex items-center gap-2 p-2.5 rounded-lg border border-gray-200 bg-white" data-personal-leg-id="${li}" data-personal-leg-dir="${direction}">
       <i class="${icon} text-gray-400 flex-shrink-0 w-4 text-center text-xs"></i>
       <span class="flex-1 min-w-0 text-xs text-gray-700 truncate">${summary || 'New leg — click Edit to add details'}</span>
+      ${travelStatusBadge(leg.status)}
       <button type="button" class="personal-leg-edit-btn h-7 px-2.5 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0"
         data-personal-leg-id="${li}" data-personal-leg-dir="${direction}" aria-label="Edit ${direction} leg${from || to ? ': ' + from + (from && to ? ' to ' + to : '') : ''}">
         <i class="fas fa-pen-to-square mr-1 text-[0.65rem]" aria-hidden="true"></i>Edit
@@ -1268,8 +1418,7 @@ function openAssignmentModal(memberId) {
   const currencyEl = document.getElementById('assignmentCurrency');
   if (currencyEl) currencyEl.innerHTML = currencyOptions(assignment.currency || state.planner?.org?.sponsorCurrency || 'AUD');
 
-  modal.classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
+  showModal('assignmentModal');
   modal.querySelector('input, select')?.focus();
 }
 
@@ -1350,8 +1499,7 @@ function openAccommodationModal(id) {
   renderAccomDocStatus(acc, 'accomDocStatus', 'accomAttachDocBtn');
   renderAccomMembersSection(acc);
 
-  modal.classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
+  showModal('accommodationModal');
   modal.querySelector('input')?.focus();
 }
 
@@ -1582,18 +1730,15 @@ function openItineraryDayModal(memberId, date) {
   }
 
   _resetItineraryForm()
-  modal.classList.remove('hidden')
-  document.body.style.overflow = 'hidden'
-  if (isStandalone) document.getElementById('itineraryFormTitle')?.focus()
+  showModal('itineraryDayModal', isStandalone ? 'itineraryFormTitle' : '')
 }
 
 function closeItineraryDayModal() {
   const modal   = document.getElementById('itineraryDayModal')
   if (!modal) return
   const ctx = modal.dataset.ctx
-  modal.classList.add('hidden')
+  hideModal('itineraryDayModal')
   modal.dataset.ctx = ''
-  document.body.style.overflow = ''
   if (ctx === 'personal') renderPersonalItinerary()
   else if (ctx === 'org') renderOrgItinerary()
   else renderItineraryTab()
@@ -1622,8 +1767,7 @@ function openPersonalDayModal(date) {
   _resetItineraryForm()
 
   renderItineraryDayItems('', date)
-  modal.classList.remove('hidden')
-  document.body.style.overflow = 'hidden'
+  showModal('itineraryDayModal')
 }
 
 function _resetItineraryForm() {
@@ -1681,9 +1825,7 @@ function openOrgEventModal(id = null) {
     }
   }
 
-  modal.classList.remove('hidden')
-  document.body.style.overflow = 'hidden'
-  document.getElementById('itineraryFormTitle')?.focus()
+  showModal('itineraryDayModal', 'itineraryFormTitle')
 }
 
 function renderOrgItinerary() {
@@ -1909,183 +2051,163 @@ function budgetItemDropdownOptions(selectedId) {
 }
 
 function receiptCardHtml(receipt) {
-  const catLabel = RECEIPT_CATEGORIES.find((c) => c.value === receipt.category)?.label || 'Misc'
+  const catLabel = getActiveBudgetCategoryOptions().find((c) => c.value === receipt.category)?.label || receipt.category || ''
+  const meta = [
+    receipt.date,
+    receipt.amount ? `${receipt.amount}${receipt.currency ? ' ' + receipt.currency : ''}` : '',
+    catLabel,
+  ].filter(Boolean).join(' · ')
   return `
-    <details class="rounded-md border border-gray-200 overflow-hidden" data-receipt-id="${esc(receipt.id)}">
-      <summary class="flex items-center gap-3 px-4 py-3 cursor-pointer select-none hover:bg-gray-50 transition-colors list-none">
-        <i class="fas fa-chevron-right text-gray-400 text-xs flex-shrink-0 transition-transform receipt-chevron"></i>
-        <div class="flex-1 min-w-0">
-          <p class="text-sm font-medium text-gray-800">${esc(receipt.name || 'New Receipt')}</p>
-          <p class="text-xs text-gray-500">${receipt.date ? esc(receipt.date) : ''}${receipt.amount ? ` · ${esc(receipt.amount)} ${esc(receipt.currency || '')}` : ''} · <span class="text-gray-400">${esc(catLabel)}</span></p>
-        </div>
-        ${receipt.filePath ? '<span class="text-xs text-blue-500 flex-shrink-0"><i class="fas fa-paperclip text-[0.65rem]"></i></span>' : ''}
-        <button type="button" class="delete-receipt-btn flex-shrink-0 text-gray-400 hover:text-red-500 transition-colors px-1" data-receipt-id="${esc(receipt.id)}" aria-label="Delete receipt: ${esc(receipt.name || 'receipt')}">
-          <i class="fas fa-trash text-xs" aria-hidden="true"></i>
-        </button>
-      </summary>
-      <div class="px-4 pb-4 pt-3 border-t border-gray-100 bg-white">
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          <label class="editor-form-field sm:col-span-2">
-            <span class="editor-field-label">Description</span>
-            <input type="text" data-receipt-id="${esc(receipt.id)}" data-receipt-field="name" value="${esc(receipt.name)}"
-              class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3" placeholder="What was this for?">
-          </label>
-          <label class="editor-form-field">
-            <span class="editor-field-label">Date</span>
-            <input type="date" data-receipt-id="${esc(receipt.id)}" data-receipt-field="date" value="${esc(receipt.date)}"
-              class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
-          </label>
-          <label class="editor-form-field">
-            <span class="editor-field-label">Amount</span>
-            <input type="text" data-receipt-id="${esc(receipt.id)}" data-receipt-field="amount" value="${esc(receipt.amount)}"
-              class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3" placeholder="0.00">
-          </label>
-          <label class="editor-form-field">
-            <span class="editor-field-label">Category</span>
-            <select data-receipt-id="${esc(receipt.id)}" data-receipt-field="category"
-              class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
-              ${RECEIPT_CATEGORIES.map((c) => `<option value="${c.value}"${receipt.category === c.value ? ' selected' : ''}>${esc(c.label)}</option>`).join('')}
-            </select>
-          </label>
-          <label class="editor-form-field">
-            <span class="editor-field-label">Currency</span>
-            <select data-receipt-id="${esc(receipt.id)}" data-receipt-field="currency"
-              class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
-              ${currencyOptions(receipt.currency || getDefaultCurrency())}
-            </select>
-          </label>
-          <label class="editor-form-field sm:col-span-2">
-            <span class="editor-field-label">Budget item</span>
-            <select data-receipt-id="${esc(receipt.id)}" data-receipt-field="budgetItemId"
-              class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
-              ${budgetItemDropdownOptions(receipt.budgetItemId || '')}
-            </select>
-          </label>
-          <label class="editor-form-field">
-            <span class="editor-field-label">File attachment</span>
-            <div class="flex items-center gap-2">
-              ${receipt.filePath ? `<a href="${esc(receipt.filePath)}" target="_blank" class="text-xs drupal-blue-text truncate flex-1">${esc(fileDisplayName(receipt.filePath, receipt.fileLabel))}</a>` : '<span class="text-xs text-gray-400 flex-1">No file attached</span>'}
-              <button type="button" class="receipt-attach-btn h-8 px-2 border border-gray-300 rounded text-xs text-gray-600 hover:bg-gray-50 flex-shrink-0" data-receipt-id="${esc(receipt.id)}">
-                <i class="fas fa-paperclip text-[0.65rem]"></i>
-              </button>
-            </div>
-          </label>
-          <label class="editor-form-field sm:col-span-3">
-            <span class="editor-field-label">Notes</span>
-            <textarea data-receipt-id="${esc(receipt.id)}" data-receipt-field="notes" rows="2"
-              class="w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white p-2 resize-y" placeholder="Any extra details…">${esc(receipt.notes)}</textarea>
-          </label>
-        </div>
+    <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-gray-200 bg-white" data-receipt-id="${esc(receipt.id)}">
+      <i class="${receipt.filePath ? 'fas fa-paperclip text-blue-400' : 'fas fa-receipt text-gray-300'} text-xs flex-shrink-0" aria-hidden="true"></i>
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-medium text-gray-800 truncate">${esc(receipt.name || 'New receipt')}</p>
+        ${meta ? `<p class="text-xs text-gray-400 truncate mt-0.5">${esc(meta)}</p>` : ''}
       </div>
-    </details>`
+      <button type="button" class="edit-receipt-btn h-7 px-2.5 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0" data-receipt-id="${esc(receipt.id)}" aria-label="Edit receipt">
+        <i class="fas fa-pen-to-square mr-1 text-[0.65rem]"></i>Edit
+      </button>
+    </div>`
+}
+
+let _receiptModalId   = null
+let _receiptModalFilePath  = ''
+let _receiptModalFileLabel = ''
+
+function openReceiptModal(id) {
+  _receiptModalId = id
+  const receipt = id ? (state.planner.receipts || []).find((r) => r.id === id) : null
+  document.getElementById('receiptModalTitle').textContent = id ? 'Edit Receipt' : 'Add Receipt'
+  document.getElementById('receiptModalName').value     = receipt?.name     || ''
+  document.getElementById('receiptModalDate').value     = receipt?.date     || ''
+  document.getElementById('receiptModalAmount').value   = receipt?.amount   || ''
+  document.getElementById('receiptModalNotes').value    = receipt?.notes    || ''
+  document.getElementById('receiptModalCurrency').innerHTML = currencyOptions(receipt?.currency || getDefaultCurrency())
+  document.getElementById('receiptModalCategory').innerHTML = buildSelectOptions(getActiveBudgetCategoryOptions(), receipt?.category || '')
+  document.getElementById('receiptModalBudgetItem').innerHTML = budgetItemDropdownOptions(receipt?.budgetItemId || '')
+  _receiptModalFilePath  = receipt?.filePath  || ''
+  _receiptModalFileLabel = receipt?.fileLabel || ''
+  _syncModalFile(_receiptModalFilePath, _receiptModalFileLabel, 'receiptModalFileLabel', 'receiptModalRemoveFileBtn')
+  document.getElementById('receiptModalDelete')?.classList.toggle('hidden', !id)
+  showModal('receiptModal', 'receiptModalName')
+}
+
+function _syncModalFile(filePath, fileLabel, labelElId, removeBtnId) {
+  const labelEl   = document.getElementById(labelElId)
+  const removeBtn = document.getElementById(removeBtnId)
+  if (labelEl) {
+    if (filePath) {
+      labelEl.innerHTML = `<a href="${esc(filePath)}" target="_blank" class="drupal-blue-text hover:underline truncate">${esc(fileLabel || fileDisplayName(filePath, ''))}</a>`
+    } else {
+      labelEl.textContent = 'No file attached'
+    }
+  }
+  removeBtn?.classList.toggle('hidden', !filePath)
+}
+
+function saveReceiptModal() {
+  const isNew = !_receiptModalId
+  const id = _receiptModalId || makeItemId('rc')
+  const data = {
+    id,
+    name:         document.getElementById('receiptModalName').value.trim(),
+    date:         document.getElementById('receiptModalDate').value,
+    amount:       document.getElementById('receiptModalAmount').value.trim(),
+    currency:     document.getElementById('receiptModalCurrency').value,
+    category:     document.getElementById('receiptModalCategory').value,
+    budgetItemId: document.getElementById('receiptModalBudgetItem').value,
+    notes:        document.getElementById('receiptModalNotes').value.trim(),
+    filePath:     _receiptModalFilePath,
+    fileLabel:    _receiptModalFileLabel,
+  }
+  if (isNew) {
+    state.planner.receipts = [...(state.planner.receipts || []), data]
+  } else {
+    const idx = (state.planner.receipts || []).findIndex((r) => r.id === id)
+    if (idx !== -1) state.planner.receipts[idx] = data
+  }
+  closeReceiptModal()
+  renderReceiptsTab()
+  renderPersonalBudgetBreakdown(); renderSponsorBudgetBreakdown()
+  renderBudgetItems('personal'); renderBudgetItems('sponsor')
+  scheduleAutoSave()
+}
+
+function closeReceiptModal() {
+  hideModal('receiptModal')
+  _receiptModalId = null
+  _receiptModalFilePath = ''
+  _receiptModalFileLabel = ''
 }
 
 function renderReceiptsTab() {
-  const list  = document.getElementById('receiptsList')
-  const empty = document.getElementById('receiptsEmptyState')
-  if (!list) return
-  const receipts = state.planner.receipts || []
-  empty?.classList.toggle('hidden', receipts.length > 0)
-  list.innerHTML = receipts.map(receiptCardHtml).join('')
+  renderListPanel('receiptsList', 'receiptsEmptyState', state.planner.receipts || [], receiptCardHtml)
 }
 
 function wireReceiptsPanel() {
-  const panel = document.getElementById('plannerReceiptsPanel')
-  if (!panel) return
+  document.getElementById('addReceiptBtn')?.addEventListener('click', () => openReceiptModal(null))
 
-  document.getElementById('addReceiptBtn')?.addEventListener('click', () => {
-    const r = makeReceipt()
-    state.planner.receipts = [...(state.planner.receipts || []), r]
-    renderReceiptsTab()
-    scheduleAutoSave()
-    renderPersonalBudgetBreakdown(); renderSponsorBudgetBreakdown()
-    // Open the new card
-    setTimeout(() => {
-      const el = document.querySelector(`[data-receipt-id="${r.id}"]`)
-      el?.setAttribute('open', '')
-      el?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-    }, 20)
+  document.getElementById('plannerReceiptsPanel')?.addEventListener('click', (e) => {
+    const editBtn = e.target.closest('.edit-receipt-btn')
+    if (editBtn) { openReceiptModal(editBtn.dataset.receiptId); return }
   })
 
-  panel.addEventListener('input', (e) => {
-    const id    = e.target.dataset.receiptId
-    const field = e.target.dataset.receiptField
-    if (!id || !field) return
-    const receipt = (state.planner.receipts || []).find((r) => r.id === id)
-    if (!receipt) return
-    receipt[field] = e.target.value
-    // Update summary line in the details summary without full re-render
-    const details = e.target.closest('details[data-receipt-id]')
-    if (details && (field === 'name' || field === 'amount' || field === 'date')) {
-      const nameEl   = details.querySelector('summary p.text-sm')
-      const detailEl = details.querySelector('summary p.text-xs')
-      if (nameEl)   nameEl.textContent   = receipt.name || 'New Receipt'
-      if (detailEl) detailEl.textContent = `${receipt.date || ''}${receipt.amount ? ` · ${receipt.amount} ${receipt.currency || ''}` : ''}`
-    }
-    if (field === 'amount') { renderPersonalBudgetBreakdown(); renderSponsorBudgetBreakdown(); }
-    scheduleAutoSave()
+  // Receipt modal controls
+  document.getElementById('receiptModalClose')?.addEventListener('click', closeReceiptModal)
+  document.getElementById('receiptModalDone')?.addEventListener('click', saveReceiptModal)
+  document.getElementById('receiptModal')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeReceiptModal()
   })
 
-  panel.addEventListener('change', (e) => {
-    const id    = e.target.dataset.receiptId
-    const field = e.target.dataset.receiptField
-    if (!id || !field) return
-    const receipt = (state.planner.receipts || []).find((r) => r.id === id)
-    if (!receipt) return
-    receipt[field] = e.target.value
-    if (field === 'category' || field === 'amount' || field === 'currency') { renderPersonalBudgetBreakdown(); renderSponsorBudgetBreakdown(); }
-    if (field === 'budgetItemId') { renderBudgetItems('personal'); renderBudgetItems('sponsor'); }
-    scheduleAutoSave()
-  })
-
-  panel.addEventListener('click', (e) => {
-    // Delete receipt
-    const deleteBtn = e.target.closest('.delete-receipt-btn')
-    if (deleteBtn) {
-      e.preventDefault(); e.stopPropagation()
-      if (window.confirm('Delete this receipt?')) {
-        state.planner.receipts = (state.planner.receipts || []).filter((r) => r.id !== deleteBtn.dataset.receiptId)
-        renderReceiptsTab()
-        scheduleAutoSave()
-        renderPersonalBudgetBreakdown(); renderSponsorBudgetBreakdown()
-      }
-      return
-    }
-
-    // Attach file
-    const attachBtn = e.target.closest('.receipt-attach-btn')
-    if (attachBtn) {
-      const rid = attachBtn.dataset.receiptId
-      const fileInput = document.getElementById('receiptFileInput')
-      if (!fileInput) return
-      fileInput.dataset.receiptId = rid
-      fileInput.click()
-      return
+  document.getElementById('receiptModalDelete')?.addEventListener('click', () => {
+    if (!_receiptModalId) return
+    if (window.confirm('Delete this receipt?')) {
+      state.planner.receipts = (state.planner.receipts || []).filter((r) => r.id !== _receiptModalId)
+      closeReceiptModal()
+      renderReceiptsTab()
+      renderPersonalBudgetBreakdown(); renderSponsorBudgetBreakdown()
+      scheduleAutoSave()
     }
   })
 
-  // Chevron rotation
-  panel.addEventListener('toggle', (e) => {
-    const chevron = e.target.querySelector('.receipt-chevron')
-    if (chevron) chevron.classList.toggle('rotate-90', e.target.open)
-  }, true)
+  document.getElementById('receiptModalAttachBtn')?.addEventListener('click', () => {
+    const fi = document.getElementById('receiptFileInput')
+    if (fi) { fi.dataset.target = 'receiptModal'; fi.click() }
+  })
+
+  document.getElementById('receiptModalRemoveFileBtn')?.addEventListener('click', () => {
+    _receiptModalFilePath = ''
+    _receiptModalFileLabel = ''
+    _syncModalFile(_receiptModalFilePath, _receiptModalFileLabel, 'receiptModalFileLabel', 'receiptModalRemoveFileBtn')
+  })
 
   document.getElementById('receiptFileInput')?.addEventListener('change', async (e) => {
     const file = e.target.files?.[0]
     if (!file) return
-    const rid     = e.target.dataset.receiptId
-    const receipt = (state.planner.receipts || []).find((r) => r.id === rid)
-    if (!receipt) { e.target.value = ''; return }
+    const target = e.target.dataset.target
 
-    try {
-      const { path, label } = await uploadOrReadFile(file)
-      receipt.filePath  = path
-      receipt.fileLabel = label
-    } catch (err) { window.alert(err.message); e.target.value = ''; return }
-
-    renderReceiptsTab()
-    renderDocumentsTab()
-    scheduleAutoSave()
+    if (target === 'receiptModal') {
+      try {
+        const { path, label } = await uploadOrReadFile(file)
+        _receiptModalFilePath  = path
+        _receiptModalFileLabel = label
+        _syncModalFile(_receiptModalFilePath, _receiptModalFileLabel, 'receiptModalFileLabel', 'receiptModalRemoveFileBtn')
+      } catch (err) { window.alert(err.message) }
+    } else {
+      // Legacy path: file attach from outside modal (e.g. personal leg receipt creation)
+      const rid     = e.target.dataset.receiptId
+      const receipt = (state.planner.receipts || []).find((r) => r.id === rid)
+      if (receipt) {
+        try {
+          const { path, label } = await uploadOrReadFile(file)
+          receipt.filePath  = path
+          receipt.fileLabel = label
+          renderReceiptsTab()
+          renderDocumentsTab()
+          scheduleAutoSave()
+        } catch (err) { window.alert(err.message) }
+      }
+    }
     e.target.value = ''
   })
 }
@@ -2100,30 +2222,24 @@ function destroyCharts(...keys) {
 
 function buildEventBudgetData(planner, filterMemberId = null, conv = null) {
   const cvt = conv ?? ((n) => n)
-  const cats = {
-    travel:        { label: 'Travel',        budget: 0, actual: 0, items: [], receipts: [] },
-    accommodation: { label: 'Accommodation', budget: 0, actual: 0, items: [], receipts: [] },
-    food:          { label: 'Food & Drink',  budget: 0, actual: 0, items: [], receipts: [] },
-    customer:      { label: 'Customer',      budget: 0, actual: 0, items: [], receipts: [] },
-    team:          { label: 'Team',          budget: 0, actual: 0, items: [], receipts: [] },
-    misc:          { label: 'Misc',          budget: 0, actual: 0, items: [], receipts: [] },
-    sponsor:       { label: 'Sponsor',       budget: 0, actual: 0, items: [], receipts: [] },
-    swag:          { label: 'Swag',          budget: 0, actual: 0, items: [], receipts: [] },
-  }
+  const activeCats = getEventBudgetCategories('org')
+  const cats = Object.fromEntries(activeCats.map((c) => [c.id, { label: c.name, budget: 0, actual: 0, items: [], receipts: [] }]))
+  if (!cats.misc) cats.misc = { label: 'Misc', budget: 0, actual: 0, items: [], receipts: [] }
   const org = planner.org || {}
 
-  // Team assignments → travel
+  // Team assignments → travel (actual only; budget comes from categoryBudgets)
   ;(org.teamAssignments || []).forEach((a) => {
     if (filterMemberId && a.memberId !== filterMemberId) return
     const m = state.global?.teamMembers.find((tm) => tm.id === a.memberId)
     const aCurr = a.currency || 'AUD'
     const b = cvt(parseBudget(a.budget), aCurr)
     const ac = cvt(parseBudget(a.budgetActual), aCurr)
-    cats.travel.budget += b; cats.travel.actual += ac
-    if (b || ac) cats.travel.items.push({ label: m?.name || 'Unnamed', budget: b, actual: ac })
+    const tCat = cats.travel || cats.misc
+    tCat.actual += ac
+    if (b || ac) tCat.items.push({ label: m?.name || 'Unnamed', budget: b, actual: ac })
   })
 
-  // Accommodation stays → accommodation
+  // Accommodation stays → accommodation (actual only)
   ;(org.accommodations || []).forEach((acc) => {
     ;(acc.assignments || []).forEach((stay) => {
       if (filterMemberId && stay.memberId !== filterMemberId) return
@@ -2131,37 +2247,34 @@ function buildEventBudgetData(planner, filterMemberId = null, conv = null) {
       const sCurr = stay.currency || 'AUD'
       const b = cvt(parseBudget(stay.budget), sCurr)
       const ac = cvt(parseBudget(stay.budgetActual), sCurr)
-      cats.accommodation.budget += b; cats.accommodation.actual += ac
-      if (b || ac) cats.accommodation.items.push({ label: `${m?.name || 'Unnamed'} @ ${acc.name || 'Accommodation'}`, budget: b, actual: ac })
+      const aCat = cats.accommodation || cats.misc
+      aCat.actual += ac
+      if (b || ac) aCat.items.push({ label: `${m?.name || 'Unnamed'} @ ${acc.name || 'Accommodation'}`, budget: b, actual: ac })
     })
   })
 
-  // Org-level itinerary events (team dinners, activities, etc.)
+  // Org-level itinerary events (actual only)
   if (!filterMemberId) {
     ;(org.itinerary || []).forEach((item) => {
       if (!item.budget && !item.actual) return
       const iCurr = item.currency || 'AUD'
       const b  = cvt(parseBudget(item.budget), iCurr)
       const ac = cvt(parseBudget(item.actual), iCurr)
-      cats.team.budget += b; cats.team.actual += ac
-      if (b || ac) cats.team.items.push({ label: item.title || 'Team event', budget: b, actual: ac, isManual: true })
+      const tmCat = cats.team || cats.misc
+      tmCat.actual += ac
+      if (b || ac) tmCat.items.push({ label: item.title || 'Team event', budget: b, actual: ac, isManual: true })
     })
   }
 
-  // The following fields are org-wide, not member-specific — skip when filtering by member
+  // The following are org-wide, not member-specific
   if (!filterMemberId) {
-    const spCurr = org.sponsorCurrency || 'AUD'
-    const sb = cvt(parseBudget(org.sponsorBudget), spCurr)
-    const sa = cvt(parseBudget(org.sponsorActual), spCurr)
-    cats.sponsor.budget += sb; cats.sponsor.actual += sa
-    if (sb || sa) cats.sponsor.items.push({ label: 'Company / Sponsor', budget: sb, actual: sa })
-
     ;(org.swag || []).forEach((item) => {
       const iCurr = item.currency || 'AUD'
       const b = cvt(parseBudget(item.budget), iCurr)
       const ac = cvt(parseBudget(item.actual), iCurr)
-      cats.swag.budget += b; cats.swag.actual += ac
-      if (b || ac) cats.swag.items.push({ label: item.name || 'Swag item', budget: b, actual: ac })
+      const swCat = cats.swag || cats.misc
+      swCat.actual += ac
+      if (b || ac) swCat.items.push({ label: item.name || 'Swag item', budget: b, actual: ac })
     })
 
     ;(org.budgetItems || []).forEach((item) => {
@@ -2172,10 +2285,35 @@ function buildEventBudgetData(planner, filterMemberId = null, conv = null) {
       const ac = linked.length
         ? linked.reduce((s, r) => s + cvt(parseBudget(r.amount), r.currency || iCurr), 0)
         : cvt(parseBudget(item.actual), iCurr)
-      if (cats[cat]) {
-        cats[cat].budget += b; cats[cat].actual += ac
-        if (b || ac) cats[cat].items.push({ label: item.name || 'Budget item', budget: b, actual: ac, isManual: true })
-      }
+      const target = cats[cat] || cats.misc
+      target.actual += ac
+      if (b || ac) target.items.push({ label: item.name || 'Budget item', budget: b, actual: ac, isManual: true })
+    })
+
+    // Apply category-level budget targets (set in Budget tab, keyed by category ID)
+    const catBudgets = org.categoryBudgets || {}
+    const orgCurr = org.sponsorCurrency || 'AUD'
+    Object.entries(catBudgets).forEach(([catId, amt]) => {
+      const target = cats[catId] || cats.misc
+      target.budget = cvt(parseBudget(String(amt)), orgCurr)
+    })
+  }
+
+  // Tickets associated to member (assigned or purchased by)
+  if (filterMemberId) {
+    const memberTickets = [
+      ...(org.tickets               || []),
+      ...(planner.personal?.tickets || []),
+    ].filter((t) => t.assignedTo === filterMemberId || t.purchasedBy === filterMemberId)
+    memberTickets.forEach((t) => {
+      const tCurr = t.currency || 'AUD'
+      const qty = parseBudget(t.quantity) || 1
+      const unit = parseBudget(t.unitPrice)
+      const cost = cvt(unit * qty, tCurr)
+      if (!cost) return
+      const tkCat = cats.tickets || cats.misc
+      tkCat.actual += cost
+      tkCat.items.push({ label: t.name || 'Ticket', budget: 0, actual: cost })
     })
   }
 
@@ -2184,9 +2322,8 @@ function buildEventBudgetData(planner, filterMemberId = null, conv = null) {
     if (r.budgetItemId) return
     const cat = r.category || 'misc'
     const amt = parseBudget(r.amount)
-    if (amt && cats[cat]) {
-      cats[cat].receipts.push({ label: r.name || 'Receipt', amount: amt, currency: r.currency || '', date: r.date || '' })
-    }
+    const target = cats[cat] || cats.misc
+    if (amt) target.receipts.push({ label: r.name || 'Receipt', amount: amt, currency: r.currency || '', date: r.date || '' })
   })
 
   return cats
@@ -2194,28 +2331,25 @@ function buildEventBudgetData(planner, filterMemberId = null, conv = null) {
 
 function buildPersonalBudgetData(planner, conv = null) {
   const cvt = conv ?? ((n) => n)
-  const cats = {
-    travel:        { label: 'Travel',        budget: 0, actual: 0, items: [], receipts: [] },
-    accommodation: { label: 'Accommodation', budget: 0, actual: 0, items: [], receipts: [] },
-    food:          { label: 'Food & Drink',  budget: 0, actual: 0, items: [], receipts: [] },
-    customer:      { label: 'Customer',      budget: 0, actual: 0, items: [], receipts: [] },
-    team:          { label: 'Team',          budget: 0, actual: 0, items: [], receipts: [] },
-    misc:          { label: 'Misc',          budget: 0, actual: 0, items: [], receipts: [] },
-  }
+  const activeCats = getEventBudgetCategories('personal')
+  const cats = Object.fromEntries(activeCats.map((c) => [c.id, { label: c.name, budget: 0, actual: 0, items: [], receipts: [] }]))
+  if (!cats.misc) cats.misc = { label: 'Misc', budget: 0, actual: 0, items: [], receipts: [] }
   const personal = planner.personal || {}
   const pCurr = personal.currency || 'AUD'
 
   const tb = cvt(parseBudget(personal.budget), pCurr)
   const ta = cvt(parseBudget(personal.budgetActual), pCurr)
-  cats.travel.budget += tb; cats.travel.actual += ta
-  if (tb || ta) cats.travel.items.push({ label: 'My travel', budget: tb, actual: ta })
+  const tCat = cats.travel || cats.misc
+  tCat.budget += tb; tCat.actual += ta
+  if (tb || ta) tCat.items.push({ label: 'My travel', budget: tb, actual: ta })
 
   ;(personal.accommodations || []).forEach((acc) => {
     const aCurr = acc.currency || 'AUD'
     const ab = cvt(parseBudget(acc.budget), aCurr)
     const aa = cvt(parseBudget(acc.budgetActual), aCurr)
-    cats.accommodation.budget += ab; cats.accommodation.actual += aa
-    if (ab || aa) cats.accommodation.items.push({ label: acc.name || 'Accommodation', budget: ab, actual: aa })
+    const aCat = cats.accommodation || cats.misc
+    aCat.budget += ab; aCat.actual += aa
+    if (ab || aa) aCat.items.push({ label: acc.name || 'Accommodation', budget: ab, actual: aa })
   })
 
   // Personal itinerary items with budget
@@ -2237,10 +2371,9 @@ function buildPersonalBudgetData(planner, conv = null) {
     const ac = linked.length
       ? linked.reduce((s, r) => s + cvt(parseBudget(r.amount), r.currency || iCurr), 0)
       : cvt(parseBudget(item.actual), iCurr)
-    if (cats[cat]) {
-      cats[cat].budget += b; cats[cat].actual += ac
-      if (b || ac) cats[cat].items.push({ label: item.name || 'Budget item', budget: b, actual: ac, isManual: true })
-    }
+    const target = cats[cat] || cats.misc
+    target.budget += b; target.actual += ac
+    if (b || ac) target.items.push({ label: item.name || 'Budget item', budget: b, actual: ac, isManual: true })
   })
 
   // Unlinked receipts go to category drilldown only; linked ones already count via their budget item.
@@ -2248,9 +2381,8 @@ function buildPersonalBudgetData(planner, conv = null) {
     if (r.budgetItemId) return
     const cat = r.category || 'misc'
     const amt = parseBudget(r.amount)
-    if (amt && cats[cat]) {
-      cats[cat].receipts.push({ label: r.name || 'Receipt', amount: amt, currency: r.currency || '', date: r.date || '' })
-    }
+    const target = cats[cat] || cats.misc
+    if (amt) target.receipts.push({ label: r.name || 'Receipt', amount: amt, currency: r.currency || '', date: r.date || '' })
   })
 
   return cats
@@ -2272,13 +2404,6 @@ function renderBudgetHealth(cats, totalBudget, totalActual, primaryCurr = '') {
   const activeCats = Object.entries(cats).filter(([, c]) => c.budget !== 0 || c.actual !== 0)
   if (!activeCats.length) { el.innerHTML = ''; return }
 
-  const netBudget  = totalBudget
-  const netActual  = totalActual
-  const pct        = netBudget > 0 ? Math.min((netActual / netBudget) * 100, 100) : 0
-  const overBudget = netActual > netBudget && netBudget > 0
-  const remaining  = netBudget - netActual
-  const barColor   = overBudget ? '#ef4444' : pct >= 70 ? '#f59e0b' : '#10b981'
-
   const _convBH = _buildConvFn(_currentRenderDate)
   const fmt = (n) => {
     const s = n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
@@ -2286,45 +2411,79 @@ function renderBudgetHealth(cats, totalBudget, totalActual, primaryCurr = '') {
     return primaryCurr ? `${primaryCurr} ${s}` : s
   }
 
-  const catRows = activeCats.map(([, c]) => {
-    const catPct   = c.budget > 0 ? Math.min((c.actual / c.budget) * 100, 100) : 0
-    const catOver  = c.actual > c.budget && c.budget > 0
-    const catColor = catOver ? '#ef4444' : catPct >= 70 ? '#f59e0b' : '#10b981'
-    const isCredit = c.budget < 0 || c.actual < 0
-    const catBadge = catOver
-      ? `<span class="text-[0.6rem] px-1 py-px rounded bg-red-100 text-red-500 ml-1 whitespace-nowrap">over</span>`
-      : isCredit
-      ? `<span class="text-[0.6rem] px-1 py-px rounded bg-emerald-50 text-emerald-600 ml-1 whitespace-nowrap">credit</span>`
+  // Sort worst-first so the most critical categories appear at the top
+  const sorted = activeCats.slice().sort(([, a], [, b]) => {
+    const pA = a.budget > 0 ? a.actual / a.budget : (a.actual !== 0 ? Infinity : 0)
+    const pB = b.budget > 0 ? b.actual / b.budget : (b.actual !== 0 ? Infinity : 0)
+    return pB - pA
+  })
+
+  let nOver = 0, nAtRisk = 0, nOk = 0
+  const catRows = sorted.map(([, c]) => {
+    const rawPct       = c.budget > 0 ? (c.actual / c.budget) * 100 : 0
+    const barPct       = Math.min(rawPct, 100)
+    const catOver      = c.actual > c.budget && c.budget > 0
+    const isUnbudgeted = c.budget === 0 && c.actual !== 0
+    const catColor     = catOver || isUnbudgeted ? '#ef4444' : rawPct >= 70 ? '#f59e0b' : '#10b981'
+
+    if (catOver || isUnbudgeted) nOver++
+    else if (rawPct >= 70) nAtRisk++
+    else nOk++
+
+    const remaining = c.budget - c.actual
+    const remainLabel = catOver
+      ? `<span style="color:#ef4444" class="font-medium">${fmt(Math.abs(remaining))} over</span>`
+      : isUnbudgeted
+      ? `<span style="color:#f59e0b" class="font-medium">unbudgeted</span>`
+      : `<span class="text-gray-400">${fmt(remaining)} left</span>`
+    const pctBadge = c.budget > 0
+      ? `<span class="text-[0.6rem] px-1 py-px rounded font-semibold tabular-nums flex-shrink-0" style="background:${catColor}22;color:${catColor}">${rawPct.toFixed(0)}%</span>`
       : ''
+
     return `
       <div class="flex items-center gap-2 text-xs">
-        <span class="w-28 text-gray-500 truncate flex-shrink-0">${esc(c.label)}</span>
+        <span class="w-24 text-gray-500 truncate flex-shrink-0">${esc(c.label)}</span>
         <div class="flex-1 bg-gray-100 rounded-full h-1.5 overflow-hidden">
-          ${c.budget > 0 ? `<div style="width:${catPct.toFixed(1)}%;background:${catColor}" class="h-full rounded-full transition-all"></div>` : ''}
+          ${c.budget > 0 ? `<div style="width:${barPct.toFixed(1)}%;background:${catColor}" class="h-full rounded-full transition-all"></div>` : ''}
         </div>
-        <span class="w-24 text-right text-gray-500 flex-shrink-0 tabular-nums">${fmt(c.actual)} / ${fmt(c.budget)}${catBadge}</span>
+        ${pctBadge}
+        <span class="w-28 text-right flex-shrink-0 tabular-nums">${remainLabel}</span>
       </div>`
   }).join('')
 
-  const totalLine = netBudget !== 0
-    ? `Spent <span class="font-medium text-gray-700">${fmt(netActual)}</span>
-       of <span class="font-medium text-gray-700">${fmt(netBudget)}</span>
+  const overBudget = totalActual > totalBudget && totalBudget > 0
+  const remaining  = totalBudget - totalActual
+  const pct        = totalBudget > 0 ? Math.min((totalActual / totalBudget) * 100, 100) : 0
+  const barColor   = overBudget ? '#ef4444' : pct >= 70 ? '#f59e0b' : '#10b981'
+
+  const totalLine = totalBudget !== 0
+    ? `Spent <span class="font-medium text-gray-700">${fmt(totalActual)}</span>
+       of <span class="font-medium text-gray-700">${fmt(totalBudget)}</span>
        ${overBudget
-         ? `<span class="text-red-500 font-medium ml-1">(${fmt(Math.abs(remaining))} over)</span>`
+         ? `<span class="font-medium ml-1" style="color:#ef4444">(${fmt(Math.abs(remaining))} over)</span>`
          : `<span class="text-gray-500 ml-1">(${fmt(remaining)} remaining)</span>`}`
-    : `Net: <span class="font-medium text-gray-700">${fmt(netActual)}</span>`
+    : `Net: <span class="font-medium text-gray-700">${fmt(totalActual)}</span>`
+
+  const dot = (color, label) =>
+    `<span class="inline-flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:${color}"></span><span>${label}</span></span>`
+  const statusDots = [
+    nOver   ? dot('#ef4444', `${nOver} over`)      : '',
+    nAtRisk ? dot('#f59e0b', `${nAtRisk} at risk`) : '',
+    nOk     ? dot('#10b981', `${nOk} on track`)    : '',
+  ].filter(Boolean).join('<span class="text-gray-200 mx-1">·</span>')
 
   el.innerHTML = `
     <div class="rounded-lg border border-gray-200 bg-white p-3 space-y-2">
-      <div class="flex items-center justify-between flex-wrap gap-1">
+      <div class="flex items-center justify-between gap-3 flex-wrap">
         <span class="text-xs font-semibold text-gray-500 uppercase tracking-widest">Budget Health</span>
-        <span class="text-xs text-gray-400">${totalLine}</span>
+        <span class="text-[0.65rem] text-gray-400 flex items-center gap-1 flex-wrap">${statusDots}</span>
       </div>
-      ${netBudget > 0 ? `
+      <span class="text-xs text-gray-400 block">${totalLine}</span>
+      ${totalBudget > 0 ? `
       <div class="bg-gray-100 rounded-full h-2 overflow-hidden">
         <div style="width:${pct.toFixed(1)}%;background:${barColor}" class="h-full rounded-full transition-all"></div>
       </div>` : ''}
-      ${activeCats.length ? `<div class="space-y-1.5 pt-1">${catRows}</div>` : ''}
+      ${sorted.length ? `<div class="space-y-1.5 pt-2 border-t border-gray-100">${catRows}</div>` : ''}
     </div>`
 }
 
@@ -2365,41 +2524,65 @@ function renderSummaryThisEvent() {
     const catCanvas = document.getElementById('budgetCategoryChart')
     const activeCats = Object.entries(cats).filter(([, c]) => c.budget > 0 || c.actual > 0)
     if (catCanvas && activeCats.length) {
-      const displayCurr = conv && _summaryCurrency ? `≈${_summaryCurrency}` : _primaryDisplayCurrency || 'as entered'
-      const chartCurrLabel = ` (${displayCurr})`
       const fmtChartVal = (v) => {
         const s = v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
         return conv && _summaryCurrency ? `≈${s} ${_summaryCurrency}` : _primaryDisplayCurrency ? `${_primaryDisplayCurrency} ${s}` : s
+      }
+      const utilData  = activeCats.map(([, c]) => c.budget > 0 ? parseFloat(((c.actual / c.budget) * 100).toFixed(1)) : null)
+      const bgColors  = activeCats.map(([, c]) => { const p = c.budget > 0 ? c.actual / c.budget * 100 : 0; return p >= 100 ? 'rgba(239,68,68,0.65)' : p >= 70 ? 'rgba(245,158,11,0.65)' : 'rgba(16,185,129,0.65)' })
+      const bdrColors = activeCats.map(([, c]) => { const p = c.budget > 0 ? c.actual / c.budget * 100 : 0; return p >= 100 ? '#ef4444' : p >= 70 ? '#f59e0b' : '#10b981' })
+      const refLine = {
+        id: 'budgetLine',
+        afterDraw(chart) {
+          const { ctx, chartArea, scales } = chart
+          if (!scales.x) return
+          const x = scales.x.getPixelForValue(100)
+          if (x < chartArea.left || x > chartArea.right) return
+          ctx.save()
+          ctx.strokeStyle = 'rgba(107,114,128,0.45)'
+          ctx.lineWidth = 1.5
+          ctx.setLineDash([5, 4])
+          ctx.beginPath(); ctx.moveTo(x, chartArea.top); ctx.lineTo(x, chartArea.bottom); ctx.stroke()
+          ctx.restore()
+        },
       }
       _charts.category = new Chart(catCanvas, {
         type: 'bar',
         data: {
           labels: activeCats.map(([, c]) => c.label),
-          datasets: [
-            { label: `Budget${chartCurrLabel}`, data: activeCats.map(([, c]) => c.budget), backgroundColor: 'rgba(59,130,246,0.55)', borderColor: '#3b82f6', borderWidth: 1 },
-            { label: `Actual${chartCurrLabel}`, data: activeCats.map(([, c]) => c.actual), backgroundColor: 'rgba(16,185,129,0.55)', borderColor: '#10b981', borderWidth: 1 },
-          ],
+          datasets: [{ label: '% of budget used', data: utilData, backgroundColor: bgColors, borderColor: bdrColors, borderWidth: 1 }],
         },
         options: {
           indexAxis: 'y',
           responsive: true,
           plugins: {
-            legend: { position: 'top' },
+            legend: { display: false },
             tooltip: {
               callbacks: {
-                label: (ctx) => ` ${ctx.dataset.label?.split(' (')[0] ?? ''}: ${fmtChartVal(ctx.parsed.x)}`,
-                footer: () => 'Click to drill down',
+                title: (items) => activeCats[items[0].dataIndex][1].label,
+                label: (ctx) => {
+                  const [, c] = activeCats[ctx.dataIndex]
+                  const lines = [`  Actual: ${fmtChartVal(c.actual)}`]
+                  if (c.budget > 0) {
+                    lines.push(`  Budget: ${fmtChartVal(c.budget)}`)
+                    const rem = c.budget - c.actual
+                    lines.push(rem >= 0 ? `  Left:   ${fmtChartVal(rem)}` : `  Over:   ${fmtChartVal(Math.abs(rem))}`)
+                  }
+                  lines.push('  Click to drill down')
+                  return lines
+                },
               },
             },
           },
-          aspectRatio: 3,
-          scales: { x: { beginAtZero: true, ticks: { callback: (v) => fmtChartVal(v) } } },
+          aspectRatio: activeCats.length > 5 ? 1.8 : 2.5,
+          scales: { x: { min: 0, suggestedMax: 115, ticks: { callback: (v) => `${v}%` } } },
           onClick(_, elements) {
             if (!elements.length) return
             const [key] = activeCats[elements[0].index]
             openDrilldown(key, cats[key])
           },
         },
+        plugins: [refLine],
       })
     } else if (catCanvas) {
       catCanvas.getContext('2d').clearRect(0, 0, catCanvas.width, catCanvas.height)
@@ -2408,7 +2591,9 @@ function renderSummaryThisEvent() {
 
   if (isPersonal) {
     const personal = state.planner.personal || {}
-    const totalLegs = (personal.outboundLegs?.length || 0) + (personal.returnLegs?.length || 0)
+    const allLegs = [...(personal.outboundLegs || []), ...(personal.returnLegs || [])]
+    const totalLegs = allLegs.length
+    const unconfirmedLegs = allLegs.filter((l) => l.status !== 'confirmed' && l.status !== 'cancelled').length
     let accomNights = 0
     ;(personal.accommodations || []).forEach((acc) => {
       if (acc.checkIn && acc.checkOut) {
@@ -2419,6 +2604,8 @@ function renderSummaryThisEvent() {
     const personalItinerary = personal.itinerary || []
     const itinDone = personalItinerary.filter((i) => i.done).length
     const itinOpen = personalItinerary.filter((i) => !i.done).length
+    const tickets = personal.tickets || []
+    const ticketsPending = tickets.filter((t) => t.status !== 'cancelled' && t.status !== 'assigned').length
 
     const conv = _buildConvFn(_currentRenderDate)
     const cats = buildPersonalBudgetData(state.planner, conv)
@@ -2433,8 +2620,9 @@ function renderSummaryThisEvent() {
     _showRateNotice(false, _summaryCurrency ? `${_summaryCurrency}:${_currentRenderDate || 'current'}` : '')
 
     statsGrid.innerHTML = [
-      statCard('fas fa-plane',        'Travel legs',    totalLegs),
+      statCard('fas fa-plane',        'Travel legs',    totalLegs, unconfirmedLegs ? `${unconfirmedLegs} unconfirmed` : 'all confirmed'),
       statCard('fas fa-bed',          'Nights',         accomNights),
+      statCard('fas fa-ticket',       'Tickets',        tickets.length, ticketsPending ? `${ticketsPending} pending` : tickets.length ? 'all done' : ''),
       statCard('fas fa-list-check',   'Tasks',          tasksDone + ' / ' + (tasksDone + tasksOpen), `${tasksOpen} open`),
       statCard('fas fa-map-pin',      'Itinerary',      itinDone + ' / ' + (itinDone + itinOpen),    `${itinOpen} open`),
       statCard('fas fa-address-book', 'Contacts',       contactCount),
@@ -2456,7 +2644,9 @@ function renderSummaryThisEvent() {
   const accommodations = org.accommodations || []
 
   const memberCount  = assignments.length
-  const totalLegs    = assignments.reduce((s, a) => s + (a.outboundLegs?.length || 0) + (a.returnLegs?.length || 0), 0)
+  const allOrgLegs   = assignments.flatMap((a) => [...(a.outboundLegs || []), ...(a.returnLegs || [])])
+  const totalLegs    = allOrgLegs.length
+  const unconfirmedLegs = allOrgLegs.filter((l) => l.status !== 'confirmed' && l.status !== 'cancelled').length
   const totalNights  = accommodations.reduce((sum, acc) =>
     sum + (acc.assignments || []).reduce((s2, a) => {
       if (!a.checkIn || !a.checkOut) return s2
@@ -2466,6 +2656,8 @@ function renderSummaryThisEvent() {
   const itinerary = state.planner.org.memberItinerary || []
   const itinDone  = itinerary.filter((i) => i.done).length
   const itinOpen  = itinerary.filter((i) => !i.done).length
+  const orgTickets = org.tickets || []
+  const orgTicketsPending = orgTickets.filter((t) => t.status !== 'cancelled' && t.status !== 'assigned').length
 
   const conv = _buildConvFn(_currentRenderDate)
   const cats = buildEventBudgetData(state.planner, null, conv)
@@ -2481,8 +2673,9 @@ function renderSummaryThisEvent() {
 
   statsGrid.innerHTML = [
     statCard('fas fa-users',        'Members',        memberCount),
-    statCard('fas fa-plane',        'Travel legs',    totalLegs),
+    statCard('fas fa-plane',        'Travel legs',    totalLegs, unconfirmedLegs ? `${unconfirmedLegs} unconfirmed` : totalLegs ? 'all confirmed' : ''),
     statCard('fas fa-bed',          'Nights',         totalNights),
+    statCard('fas fa-ticket',       'Tickets',        orgTickets.length, orgTicketsPending ? `${orgTicketsPending} pending` : orgTickets.length ? 'all done' : ''),
     statCard('fas fa-list-check',   'Tasks',          tasksDone + ' / ' + (tasksDone + tasksOpen), `${tasksOpen} open`),
     statCard('fas fa-map-pin',      'Itinerary',      itinDone + ' / ' + (itinDone + itinOpen),    `${itinOpen} open`),
     statCard('fas fa-address-book', 'Contacts',       contactCount),
@@ -2516,40 +2709,65 @@ function renderSummaryThisEvent() {
   }).filter((d) => d.budget || d.actual)
 
   if (memberCanvas && memberData.length) {
-    const memberCurrLabel = conv && _summaryCurrency ? ` (≈${_summaryCurrency})` : ` (${primaryCurr})`
     const fmtMemberVal = (v) => {
       const s = v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
       return conv && _summaryCurrency ? `≈${s} ${_summaryCurrency}` : `${primaryCurr} ${s}`
+    }
+    const mUtilData  = memberData.map((d) => d.budget > 0 ? parseFloat(((d.actual / d.budget) * 100).toFixed(1)) : null)
+    const mBgColors  = memberData.map((d) => { const p = d.budget > 0 ? d.actual / d.budget * 100 : 0; return p >= 100 ? 'rgba(239,68,68,0.65)' : p >= 70 ? 'rgba(245,158,11,0.65)' : 'rgba(99,102,241,0.65)' })
+    const mBdrColors = memberData.map((d) => { const p = d.budget > 0 ? d.actual / d.budget * 100 : 0; return p >= 100 ? '#ef4444' : p >= 70 ? '#f59e0b' : '#6366f1' })
+    const memberRefLine = {
+      id: 'memberBudgetLine',
+      afterDraw(chart) {
+        const { ctx, chartArea, scales } = chart
+        if (!scales.x) return
+        const x = scales.x.getPixelForValue(100)
+        if (x < chartArea.left || x > chartArea.right) return
+        ctx.save()
+        ctx.strokeStyle = 'rgba(107,114,128,0.45)'
+        ctx.lineWidth = 1.5
+        ctx.setLineDash([5, 4])
+        ctx.beginPath(); ctx.moveTo(x, chartArea.top); ctx.lineTo(x, chartArea.bottom); ctx.stroke()
+        ctx.restore()
+      },
     }
     _charts.member = new Chart(memberCanvas, {
       type: 'bar',
       data: {
         labels: memberData.map((d) => d.name),
-        datasets: [
-          { label: `Budget${memberCurrLabel}`, data: memberData.map((d) => d.budget), backgroundColor: 'rgba(99,102,241,0.55)', borderColor: '#6366f1', borderWidth: 1 },
-          { label: `Actual${memberCurrLabel}`, data: memberData.map((d) => d.actual), backgroundColor: 'rgba(245,158,11,0.55)', borderColor: '#f59e0b', borderWidth: 1 },
-        ],
+        datasets: [{ label: '% of budget used', data: mUtilData, backgroundColor: mBgColors, borderColor: mBdrColors, borderWidth: 1 }],
       },
       options: {
         indexAxis: 'y',
         responsive: true,
         plugins: {
-          legend: { position: 'top' },
+          legend: { display: false },
           tooltip: {
             callbacks: {
-              label: (ctx) => ` ${ctx.dataset.label?.split(' (')[0] ?? ''}: ${fmtMemberVal(ctx.parsed.x)}`,
-              footer: () => 'Click to drill down',
+              title: (items) => memberData[items[0].dataIndex].name,
+              label: (ctx) => {
+                const d = memberData[ctx.dataIndex]
+                const lines = [`  Actual: ${fmtMemberVal(d.actual)}`]
+                if (d.budget > 0) {
+                  lines.push(`  Budget: ${fmtMemberVal(d.budget)}`)
+                  const rem = d.budget - d.actual
+                  lines.push(rem >= 0 ? `  Left:   ${fmtMemberVal(rem)}` : `  Over:   ${fmtMemberVal(Math.abs(rem))}`)
+                }
+                lines.push('  Click to drill down')
+                return lines
+              },
             },
           },
         },
-        aspectRatio: 3,
-        scales: { x: { beginAtZero: true, ticks: { callback: (v) => fmtMemberVal(v) } } },
+        aspectRatio: memberData.length > 5 ? 1.8 : 2.5,
+        scales: { x: { min: 0, suggestedMax: 115, ticks: { callback: (v) => `${v}%` } } },
         onClick(_, elements) {
           if (!elements.length) return
           const d = memberData[elements[0].index]
           openMemberDrilldown(d, state.planner)
         },
       },
+      plugins: [memberRefLine],
     })
   } else if (memberCanvas) {
     memberCanvas.getContext('2d').clearRect(0, 0, memberCanvas.width, memberCanvas.height)
@@ -3029,8 +3247,7 @@ function openDrilldown(catKey, catData) {
   if (!html) html = '<p class="text-sm text-gray-400 italic">No data recorded for this category.</p>'
 
   content.innerHTML = html
-  modal.classList.remove('hidden')
-  document.body.style.overflow = 'hidden'
+  showModal('summaryDrilldownModal')
 }
 
 function openMemberDrilldown(memberData, planner) {
@@ -3092,8 +3309,7 @@ function openMemberDrilldown(memberData, planner) {
   if (!rows.length) html = '<p class="text-sm text-gray-400 italic">No budget data for this member.</p>'
 
   content.innerHTML = html
-  modal.classList.remove('hidden')
-  document.body.style.overflow = 'hidden'
+  showModal('summaryDrilldownModal')
 }
 
 // ── Create Planner modal ──────────────────────────────────────────────────────
@@ -3109,14 +3325,11 @@ function wireCreatePlannerModal() {
   openCreatePlannerModal = function() {
     if (!modal) return;
     if (nameInput) nameInput.value = '';
-    document.body.style.overflow = 'hidden';
-    modal.classList.remove('hidden');
-    nameInput?.focus();
+    showModal('createPlannerModal', 'createPlannerName');
   };
 
   function closeCreateModal() {
-    modal?.classList.add('hidden');
-    document.body.style.overflow = '';
+    hideModal('createPlannerModal');
   }
 
   document.getElementById('newPlannerBtnNoEvent')?.addEventListener('click', openCreatePlannerModal);
@@ -3134,6 +3347,7 @@ function wireCreatePlannerModal() {
     // Persist display name and save empty planner to localStorage so it shows up
     const newPlanner = loadPlanner(slug);
     newPlanner._displayName = name;
+    newPlanner.mode = state.global?.defaultMode || 'personal';
     savePlanner(slug, newPlanner);
     closeCreateModal();
     location.href = `planner.html?id=${encodeURIComponent(slug)}`;
@@ -3310,12 +3524,10 @@ function wireEventAssocModal() {
 
   function openModal() {
     if (!modal) return;
-    document.body.style.overflow = 'hidden';
-    modal.classList.remove('hidden');
     if (searchInput) searchInput.value = '';
     const list = document.getElementById('assocModalResults');
     if (list) list.innerHTML = '<p class="text-sm text-gray-400 px-4 py-6 text-center"><i class="fas fa-spinner fa-spin mr-2"></i>Loading…</p>';
-    searchInput?.focus();
+    showModal('eventAssocModal', 'assocSearchInput');
     gatherAssocSources().then((items) => {
       _assocModalResults = items;
       renderAssocResults(items, '');
@@ -3323,8 +3535,7 @@ function wireEventAssocModal() {
   }
 
   function closeModal() {
-    modal?.classList.add('hidden');
-    document.body.style.overflow = '';
+    hideModal('eventAssocModal');
   }
 
   document.getElementById('manageEventBtn')?.addEventListener('click', openModal);
@@ -3489,8 +3700,7 @@ function wireSummaryPanel() {
 }
 
 function closeDrilldown() {
-  document.getElementById('summaryDrilldownModal')?.classList.add('hidden')
-  document.body.style.overflow = ''
+  hideModal('summaryDrilldownModal')
 }
 
 // ── Export / Import ──────────────────────────────────────────────────────────
@@ -3499,11 +3709,25 @@ function handleExport() {
   exportPlannerJson(state.plannerKey, state.planner);
 }
 
+function mergeGlobalTeamMembers(plannerObj) {
+  if (!Array.isArray(plannerObj._globalTeamMembers) || !plannerObj._globalTeamMembers.length) return;
+  const existingIds = new Set((state.global.teamMembers || []).map((m) => m.id));
+  plannerObj._globalTeamMembers.forEach((m) => {
+    if (m?.id && !existingIds.has(m.id)) {
+      (state.global.teamMembers ??= []).push(m);
+      existingIds.add(m.id);
+    }
+  });
+  saveGlobal(state.global);
+  delete plannerObj._globalTeamMembers;
+}
+
 function handleImport(file) {
   const reader = new FileReader();
   reader.onload = (e) => {
     try {
       const parsed = parsePlannerImport(e.target.result);
+      mergeGlobalTeamMembers(parsed);
       state.planner = parsed;
       // Preserve current plannerKey — imported data is merged into current slot
       renderAll();
@@ -3658,8 +3882,7 @@ function openTrackedSessionModal(ctx, tsId, sessionOverride) {
   const delBtn = document.getElementById('trackedSessionDeleteBtn');
   if (delBtn) delBtn.classList.toggle('invisible', !existing);
 
-  modal.classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
+  showModal('trackedSessionModal');
 }
 
 function closeTrackedSessionModal() { _trackedModal.close(); }
@@ -3946,12 +4169,7 @@ function personalAccomCardHtml(accom) {
 }
 
 function renderPersonalAccomList() {
-  const list  = document.getElementById('personalAccomList');
-  const empty = document.getElementById('personalAccomEmpty');
-  if (!list) return;
-  const accoms = state.planner?.personal?.accommodations || [];
-  list.innerHTML = accoms.map(personalAccomCardHtml).join('');
-  empty?.classList.toggle('hidden', accoms.length > 0);
+  renderListPanel('personalAccomList', 'personalAccomEmpty', state.planner?.personal?.accommodations || [], personalAccomCardHtml);
 }
 
 function renderBudgetBreakdownInto(containerId, cats, currency) {
@@ -4112,6 +4330,7 @@ function savePersonalLeg() {
   const leg  = legs.find((l) => l.id === id);
   if (!leg) return;
   leg.mode         = document.getElementById('personalLegModalMode')?.value         || 'flight';
+  leg.status       = document.getElementById('personalLegModalStatus')?.value       || '';
   leg.date         = document.getElementById('personalLegModalDate')?.value         || '';
   leg.ref          = document.getElementById('personalLegModalRef')?.value          || '';
   leg.from         = document.getElementById('personalLegModalFrom')?.value         || '';
@@ -4154,6 +4373,10 @@ function openPersonalLegModal(direction, legId) {
     modeSelect.innerHTML = Object.entries(TRAVEL_MODES)
       .map(([val, { label }]) => `<option value="${val}"${leg.mode === val ? ' selected' : ''}>${label}</option>`)
       .join('');
+  }
+  const statusSelect = document.getElementById('personalLegModalStatus');
+  if (statusSelect) {
+    statusSelect.innerHTML = buildSelectOptions(TRAVEL_STATUSES, leg.status || '');
   }
   document.getElementById('personalLegModalDate').value         = leg.date         || '';
   document.getElementById('personalLegModalRef').value          = leg.ref          || '';
@@ -4327,7 +4550,7 @@ function renderBudgetItems(ctx) {
   if (!container) return
 
   const items = getBudgetItemList(ctx)
-  const cats  = ctx === 'personal' ? BUDGET_ITEM_CATS_PERSONAL : BUDGET_ITEM_CATS_SPONSOR
+  const cats  = ctx === 'personal' ? BUDGET_ITEM_CATS_PERSONAL() : BUDGET_ITEM_CATS_SPONSOR()
   const fmt   = (n) => parseBudget(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
   if (!items.length) {
@@ -4371,11 +4594,10 @@ function openBudgetItemModal(ctx, id = null) {
   _budgetItemCtx = ctx
   _budgetItemId  = id
 
-  const cats      = ctx === 'personal' ? BUDGET_ITEM_CATS_PERSONAL : BUDGET_ITEM_CATS_SPONSOR
+  const cats      = ctx === 'personal' ? BUDGET_ITEM_CATS_PERSONAL() : BUDGET_ITEM_CATS_SPONSOR()
   const catSelect = document.getElementById('budgetItemCategory')
-  if (catSelect) catSelect.innerHTML = cats.map((c) => `<option value="${c.value}">${esc(c.label)}</option>`).join('')
-
   const item = id ? getBudgetItemList(ctx).find((i) => i.id === id) : null
+  if (catSelect) catSelect.innerHTML = buildSelectOptions(cats, item?.category || '')
 
   const currencyEl = document.getElementById('budgetItemCurrency')
   if (currencyEl) {
@@ -4390,7 +4612,6 @@ function openBudgetItemModal(ctx, id = null) {
   document.getElementById('budgetItemBudget').value = item?.budget || ''
   document.getElementById('budgetItemActual').value = item?.actual || ''
   document.getElementById('budgetItemNotes').value  = item?.notes  || ''
-  if (catSelect && item?.category) catSelect.value  = item.category
 
   document.getElementById('budgetItemBudget')?.classList.remove('!border-red-400')
   document.getElementById('budgetItemActual')?.classList.remove('!border-red-400')
@@ -4756,6 +4977,664 @@ function wirePersonalPanel() {
 
 // ── Render all tabs ──────────────────────────────────────────────────────────
 
+// ── Tickets tab ──────────────────────────────────────────────────────────────
+
+const TICKET_STATUSES = [
+  { value: 'planned',          label: 'Planned' },
+  { value: 'pending-purchase', label: 'Pending Purchase' },
+  { value: 'purchased',        label: 'Purchased' },
+  { value: 'assigned',         label: 'Assigned' },
+  { value: 'cancelled',        label: 'Cancelled' },
+]
+
+const TICKET_STATUS_CLASSES = {
+  'planned':          'bg-gray-100 text-gray-500',
+  'pending-purchase': 'bg-yellow-100 text-yellow-700',
+  'purchased':        'bg-blue-100 text-blue-700',
+  'assigned':         'bg-emerald-100 text-emerald-700',
+  'cancelled':        'bg-red-100 text-red-400',
+}
+
+let _ticketCtx = null
+let _ticketId  = null
+
+function getTicketList(ctx) {
+  if (ctx === 'personal') return (state.planner.personal.tickets ??= [])
+  return (state.planner.org.tickets ??= [])
+}
+
+function ticketStatusBadge(status) {
+  if (!status) return ''
+  const entry = TICKET_STATUSES.find((s) => s.value === status)
+  if (!entry) return ''
+  const cls = TICKET_STATUS_CLASSES[status] || 'bg-gray-100 text-gray-500'
+  return `<span class="text-[0.6rem] px-1.5 py-px rounded-full font-medium flex-shrink-0 ${cls}">${esc(entry.label)}</span>`
+}
+
+function renderTicketsTab() {
+  const mode = state.planner?.mode || 'personal'
+  const ctx  = mode === 'sponsor' ? 'org' : 'personal'
+  const container = document.getElementById('ticketsList')
+  const empty     = document.getElementById('ticketsEmptyState')
+  const addBtn    = document.getElementById('addTicketBtn')
+  if (!container) return
+
+  const members = state.global?.teamMembers || []
+  const tickets = getTicketList(ctx)
+
+  if (addBtn) {
+    addBtn.dataset.ticketCtx = ctx
+  }
+
+  if (!tickets.length) {
+    container.innerHTML = ''
+    empty?.classList.remove('hidden')
+    return
+  }
+  empty?.classList.add('hidden')
+
+  const fmt = (n) => parseBudget(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+
+  container.innerHTML = tickets.map((t) => {
+    const assignedMember = members.find((m) => m.id === t.assignedTo)
+    const purchasedMember = members.find((m) => m.id === t.purchasedBy)
+    const cur   = t.currency || 'AUD'
+    const unit  = parseBudget(t.unitPrice)
+    const qty   = t.quantity || 1
+    const total = unit * qty
+
+    return `<div class="flex items-start gap-3 py-2 px-3 rounded-lg border border-gray-200 bg-white" data-ticket-id="${esc(t.id)}">
+      <div class="flex-1 min-w-0 space-y-0.5">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-sm font-medium text-gray-800">${esc(t.name || 'Unnamed ticket')}</span>
+          ${ticketStatusBadge(t.status || 'planned')}
+        </div>
+        <div class="flex gap-3 text-xs text-gray-500 flex-wrap">
+          ${qty > 1 ? `<span>${qty}× ${cur} ${fmt(unit)} = ${cur} ${fmt(total)}</span>` : `<span>${cur} ${fmt(unit)}</span>`}
+          ${assignedMember  ? `<span><i class="fas fa-user text-[0.55rem] mr-0.5"></i>${esc(assignedMember.name)}</span>` : ''}
+          ${purchasedMember ? `<span><i class="fas fa-credit-card text-[0.55rem] mr-0.5"></i>${esc(purchasedMember.name)}</span>` : ''}
+          ${t.notes ? `<span class="truncate max-w-[200px]">${esc(t.notes)}</span>` : ''}
+        </div>
+      </div>
+      <button type="button" class="edit-ticket-btn h-7 w-7 flex items-center justify-center rounded-md border border-gray-200 text-gray-400 hover:text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0"
+        data-ticket-id="${esc(t.id)}" data-ticket-ctx="${esc(ctx)}" aria-label="Edit ticket">
+        <i class="fas fa-pen-to-square text-[0.65rem]" aria-hidden="true"></i>
+      </button>
+    </div>`
+  }).join('')
+}
+
+function openTicketModal(ctx, id = null) {
+  _ticketCtx = ctx
+  _ticketId  = id
+  const ticket = id ? getTicketList(ctx).find((t) => t.id === id) : null
+  const members = state.global?.teamMembers || []
+  const memberOptions = `<option value="">—</option>` + members.map((m) => `<option value="${esc(m.id)}">${esc(m.name || 'Unnamed')}</option>`).join('')
+
+  document.getElementById('ticketModalTitle').textContent = id ? 'Edit Ticket' : 'Add Ticket'
+  document.getElementById('ticketName').value             = ticket?.name      || ''
+  document.getElementById('ticketQuantity').value         = ticket?.quantity  ?? 1
+  document.getElementById('ticketUnitPrice').value        = ticket?.unitPrice || ''
+  document.getElementById('ticketNotes').value            = ticket?.notes     || ''
+
+  const currEl = document.getElementById('ticketCurrency')
+  if (currEl) {
+    const defaultCurr = ctx === 'personal'
+      ? (state.planner.personal?.currency || 'AUD')
+      : (state.planner.org?.sponsorCurrency || 'AUD')
+    currEl.innerHTML = currencyOptions(ticket?.currency || defaultCurr)
+  }
+
+  const statusEl = document.getElementById('ticketStatus')
+  if (statusEl) {
+    statusEl.innerHTML = buildSelectOptions(TICKET_STATUSES, ticket?.status || 'planned')
+  }
+
+  const assignedEl = document.getElementById('ticketAssignedTo')
+  if (assignedEl) {
+    assignedEl.innerHTML = memberOptions
+    if (ticket?.assignedTo) assignedEl.value = ticket.assignedTo
+  }
+
+  const purchasedEl = document.getElementById('ticketPurchasedBy')
+  if (purchasedEl) {
+    purchasedEl.innerHTML = memberOptions
+    if (ticket?.purchasedBy) purchasedEl.value = ticket.purchasedBy
+  }
+
+  document.getElementById('ticketModalDelete')?.classList.toggle('hidden', !id)
+  showModal('ticketModal', 'ticketName')
+}
+
+function saveTicket() {
+  if (!_ticketCtx) return
+  const list     = getTicketList(_ticketCtx)
+  const name      = document.getElementById('ticketName')?.value.trim()     || ''
+  const quantity  = parseInt(document.getElementById('ticketQuantity')?.value, 10) || 1
+  const unitPrice = document.getElementById('ticketUnitPrice')?.value        || ''
+  const currency  = document.getElementById('ticketCurrency')?.value         || 'AUD'
+  const status    = document.getElementById('ticketStatus')?.value           || 'planned'
+  const assignedTo   = document.getElementById('ticketAssignedTo')?.value   || ''
+  const purchasedBy  = document.getElementById('ticketPurchasedBy')?.value  || ''
+  const notes     = document.getElementById('ticketNotes')?.value.trim()     || ''
+
+  if (_ticketId) {
+    const t = list.find((x) => x.id === _ticketId)
+    if (t) Object.assign(t, { name, quantity, unitPrice, currency, status, assignedTo, purchasedBy, notes })
+  } else {
+    const newTicket = { id: makeItemId('tk'), name, quantity, unitPrice, currency, status, assignedTo, purchasedBy, notes }
+    list.push(newTicket)
+    _ticketId = newTicket.id
+  }
+  scheduleAutoSave()
+}
+
+function closeTicketModal() {
+  const ctx = _ticketCtx
+  _ticketCtx = null
+  _ticketId  = null
+  hideModal('ticketModal')
+  if (ctx) renderTicketsTab()
+  if (state.activeTab === 'summary') renderSummaryTab()
+}
+
+function wireTicketsPanel() {
+  const panel = document.getElementById('plannerTicketsPanel')
+  if (!panel) return
+
+  document.getElementById('addTicketBtn')?.addEventListener('click', (e) => {
+    const ctx = e.currentTarget.dataset.ticketCtx || (state.planner?.mode === 'sponsor' ? 'org' : 'personal')
+    openTicketModal(ctx)
+  })
+
+  panel.addEventListener('click', (e) => {
+    const editBtn = e.target.closest('.edit-ticket-btn')
+    if (editBtn) { openTicketModal(editBtn.dataset.ticketCtx, editBtn.dataset.ticketId); return }
+  })
+
+  const modal = document.getElementById('ticketModal')
+  if (!modal) return
+
+  document.getElementById('ticketModalClose')?.addEventListener('click', closeTicketModal)
+  document.getElementById('ticketModalDone')?.addEventListener('click', () => { saveTicket(); closeTicketModal() })
+  document.getElementById('ticketModalDelete')?.addEventListener('click', () => {
+    if (!_ticketCtx || !_ticketId) return
+    const list = getTicketList(_ticketCtx)
+    const idx  = list.findIndex((t) => t.id === _ticketId)
+    if (idx !== -1) list.splice(idx, 1)
+    scheduleAutoSave()
+    closeTicketModal()
+  })
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeTicketModal() })
+}
+
+// ── Budget category management ────────────────────────────────────────────────
+
+function renderBudgetCategoryManager(mode) {
+  const containerId = mode === 'personal' ? 'personalBudgetCategoryList' : 'sponsorBudgetCategoryList'
+  const container   = document.getElementById(containerId)
+  if (!container) return
+  const cats = getEventBudgetCategories(mode)
+  container.innerHTML = cats.map((c) => `
+    <div class="flex items-center gap-2 py-1 px-2 rounded border border-gray-200 bg-white" data-cat-id="${esc(c.id)}" data-cat-mode="${mode}">
+      <span class="flex-1 text-xs text-gray-700">${esc(c.name)}</span>
+      <button type="button" class="remove-budget-cat-btn text-gray-300 hover:text-red-500 transition-colors" data-cat-id="${esc(c.id)}" data-cat-mode="${mode}" aria-label="Remove category">
+        <i class="fas fa-times text-[0.6rem]"></i>
+      </button>
+    </div>`).join('')
+}
+
+function addBudgetCategory(mode, name) {
+  if (!name.trim()) return
+  const id = name.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-')
+  const cats = getEventBudgetCategories(mode)
+  if (cats.find((c) => c.id === id)) return
+  const stored = mode === 'personal'
+    ? (state.planner.personal.budgetCategories ??= [])
+    : (state.planner.org.budgetCategories ??= [])
+  // If using defaults, copy them in first, then append
+  if (!stored.length) stored.push(..._defaultBudgetCategories.map((c) => ({ ...c })))
+  stored.push({ id, name: name.trim() })
+  scheduleAutoSave()
+  renderBudgetCategoryManager(mode)
+}
+
+function removeBudgetCategory(mode, catId) {
+  const stored = mode === 'personal'
+    ? (state.planner.personal.budgetCategories ??= [])
+    : (state.planner.org.budgetCategories ??= [])
+  if (!stored.length) stored.push(..._defaultBudgetCategories.map((c) => ({ ...c })))
+  const idx = stored.findIndex((c) => c.id === catId)
+  if (idx !== -1) stored.splice(idx, 1)
+  scheduleAutoSave()
+  renderBudgetCategoryManager(mode)
+}
+
+// ── Settings tab ─────────────────────────────────────────────────────────────
+
+// ── Budget tab (sponsor mode) ─────────────────────────────────────────────────
+
+function renderBudgetTab() {
+  const org      = state.planner.org
+  const currency = org.sponsorCurrency || 'AUD'
+
+  // Overall budget header fields
+  const budgetEl   = document.getElementById('orgSponsorBudget')
+  const actualEl   = document.getElementById('orgSponsorActual')
+  const currencyEl = document.getElementById('orgSponsorCurrency')
+  if (budgetEl)   budgetEl.value      = org.sponsorBudget   || ''
+  if (actualEl)   actualEl.value      = org.sponsorActual   || ''
+  if (currencyEl) currencyEl.innerHTML = currencyOptions(currency)
+
+  // Per-category budget rows
+  const catsEl = document.getElementById('budgetCategoryRows')
+  if (catsEl) {
+    const activeCats  = getEventBudgetCategories('org')
+    const catBudgets  = org.categoryBudgets || {}
+    const catActuals  = buildEventBudgetData(state.planner) // actual-only (budgets come from categoryBudgets)
+    const fmt = (n) => n ? n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '—'
+    catsEl.innerHTML = activeCats.map((c) => {
+      const budgetVal = catBudgets[c.id] || ''
+      const actual    = catActuals[c.id]?.actual || 0
+      const budgetNum = parseBudget(budgetVal)
+      const over      = budgetNum > 0 && actual > budgetNum
+      const remain    = budgetNum > 0 ? budgetNum - actual : null
+      return `<div class="grid grid-cols-[1fr_1fr_auto] items-center gap-3 py-2.5 border-b border-gray-100 last:border-0">
+        <span class="text-sm text-gray-700 font-medium">${esc(c.name)}</span>
+        <label class="flex items-center gap-1.5 min-w-0">
+          <span class="text-xs text-gray-400 flex-shrink-0">${esc(currency)}</span>
+          <input type="number" min="0" step="0.01" placeholder="0.00"
+            class="budget-cat-input h-8 w-full rounded border-gray-300 text-sm bg-white px-2 drupal-blue-focus"
+            data-cat-id="${esc(c.id)}" value="${esc(budgetVal)}">
+        </label>
+        <div class="text-right min-w-[6rem]" data-cat-indicator="${esc(c.id)}">
+          <span class="text-sm tabular-nums ${over ? 'text-red-500 font-medium' : 'text-gray-600'}">${fmt(actual)}</span>
+          ${remain !== null ? `<span class="ml-2 text-xs tabular-nums ${over ? 'text-red-400' : 'text-emerald-600'}">${over ? '↑' : '↓'} ${fmt(Math.abs(remain))}</span>` : ''}
+        </div>
+      </div>`
+    }).join('')
+  }
+
+  // Budget line items
+  renderBudgetItems('sponsor')
+  renderSponsorBudgetBreakdown()
+}
+
+function _updateCatBudgetIndicator(catId, budgetVal) {
+  const el = document.querySelector(`[data-cat-indicator="${catId}"]`)
+  if (!el) return
+  const currency = state.planner.org?.sponsorCurrency || 'AUD'
+  const actual   = buildEventBudgetData(state.planner)[catId]?.actual || 0
+  const budgetNum = parseBudget(budgetVal)
+  const over    = budgetNum > 0 && actual > budgetNum
+  const remain  = budgetNum > 0 ? budgetNum - actual : null
+  const fmt = (n) => n ? n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '—'
+  el.innerHTML = `
+    <span class="text-sm tabular-nums ${over ? 'text-red-500 font-medium' : 'text-gray-600'}">${fmt(actual)}</span>
+    ${remain !== null ? `<span class="ml-2 text-xs tabular-nums ${over ? 'text-red-400' : 'text-emerald-600'}">${over ? '↑' : '↓'} ${fmt(Math.abs(remain))}</span>` : ''}`
+}
+
+function wireBudgetPanel() {
+  const panel = document.getElementById('plannerBudgetPanel')
+  if (!panel) return
+
+  // Overall budget fields
+  panel.addEventListener('input', (e) => {
+    if (e.target.id === 'orgSponsorBudget') { state.planner.org.sponsorBudget = e.target.value; scheduleAutoSave(); return }
+    if (e.target.id === 'orgSponsorActual') { state.planner.org.sponsorActual = e.target.value; scheduleAutoSave(); return }
+
+    // Category budget inputs
+    const catInput = e.target.closest('.budget-cat-input')
+    if (catInput) {
+      const catId = catInput.dataset.catId
+      ;(state.planner.org.categoryBudgets ??= {})[catId] = catInput.value
+      scheduleAutoSave()
+      _updateCatBudgetIndicator(catId, catInput.value)
+      if (state.activeTab === 'summary') renderSummaryTab()
+      return
+    }
+  })
+
+  panel.addEventListener('change', (e) => {
+    if (e.target.id === 'orgSponsorCurrency') {
+      state.planner.org.sponsorCurrency = e.target.value
+      scheduleAutoSave()
+      renderBudgetTab()
+      renderSponsorBudgetBreakdown()
+      if (state.activeTab === 'summary') renderSummaryTab()
+      return
+    }
+  })
+
+}
+
+function renderSettingsTeamSection() {
+  const el = document.getElementById('settingsTeamList')
+  if (!el) return
+  const members     = state.global?.teamMembers || []
+  const assignedIds = new Set((state.planner.org?.teamAssignments || []).map((a) => a.memberId))
+
+  if (!members.length) {
+    el.innerHTML = '<p class="text-sm text-gray-400 italic">No team members yet. Add one below.</p>'
+    return
+  }
+
+  el.innerHTML = members.map((m) => {
+    const assigned = assignedIds.has(m.id)
+    const disabled = m.enabled === false
+    const meta = [m.role, m.department, m.company].filter(Boolean).join(' · ')
+    return `<div class="flex items-center gap-3 py-2 px-3 rounded-lg border border-gray-200 bg-white ${disabled ? 'opacity-50' : ''}">
+      <label class="flex items-center gap-2 flex-shrink-0 cursor-pointer" title="${assigned ? 'Remove from this event' : 'Assign to this event'}">
+        <input type="checkbox" class="settings-team-assign h-4 w-4 rounded border-gray-300 text-blue-600 drupal-blue-focus"
+          data-member-id="${esc(m.id)}" ${assigned ? 'checked' : ''}>
+      </label>
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-medium text-gray-800 truncate">${esc(m.name || 'Unnamed')}${disabled ? ' <span class="text-[0.6rem] font-semibold uppercase tracking-wider px-1 py-0.5 rounded bg-gray-100 text-gray-400 ml-1">Inactive</span>' : ''}</p>
+        ${meta ? `<p class="text-xs text-gray-400 truncate">${esc(meta)}</p>` : ''}
+      </div>
+      <button type="button" class="view-team-member-btn flex-shrink-0 h-7 px-2 border border-gray-200 rounded text-xs text-gray-500 hover:bg-gray-50 transition-colors" data-member-id="${esc(m.id)}">
+        <i class="fas fa-eye text-[0.6rem]"></i>
+      </button>
+      <button type="button" class="edit-team-member-btn flex-shrink-0 h-7 px-2 border border-gray-200 rounded text-xs text-gray-500 hover:bg-gray-50 transition-colors" data-member-id="${esc(m.id)}">
+        <i class="fas fa-pen-to-square text-[0.6rem]"></i>
+      </button>
+    </div>`
+  }).join('')
+}
+
+function renderSettingsTab() {
+  const mode = state.planner.mode || 'personal'
+  const isSponsor = mode === 'sponsor'
+  const base = isSponsor ? SPONSOR_TABS_BASE : PERSONAL_TABS_BASE
+  const disabled = new Set(
+    isSponsor
+      ? (state.planner?.org?.disabledTabs     || [])
+      : (state.planner?.personal?.disabledTabs || [])
+  )
+
+  // Mode radio buttons
+  const modePersonalRadio = document.getElementById('settingsModePersonal')
+  const modeSponsorRadio  = document.getElementById('settingsModeSponsor')
+  if (modePersonalRadio) modePersonalRadio.checked = !isSponsor
+  if (modeSponsorRadio)  modeSponsorRadio.checked  = isSponsor
+
+  // Tab order + visibility list (all tabs in stored order, including disabled)
+  const tabsEl = document.getElementById('settingsTabList')
+  if (tabsEl) {
+    const stored = isSponsor
+      ? (state.planner?.org?.tabOrder     || [])
+      : (state.planner?.personal?.tabOrder || [])
+    const allOrdered = stored.filter((t) => base.has(t))
+    base.forEach((t) => { if (!allOrdered.includes(t)) allOrdered.push(t) })
+    tabsEl.innerHTML = allOrdered.map((tab) => {
+      const label   = TAB_LABELS[tab] || tab
+      const icon    = TAB_ICONS[tab]  || 'fas fa-circle'
+      const checked = !disabled.has(tab)
+      return `<div class="settings-tab-row flex items-center gap-2.5 px-2.5 py-2 rounded-lg border border-gray-200 bg-white select-none"
+          draggable="true" data-tab="${esc(tab)}">
+        <span class="drag-handle cursor-grab active:cursor-grabbing text-gray-300 hover:text-gray-500 transition-colors flex-shrink-0 px-0.5" title="Drag to reorder">
+          <i class="fas fa-grip-vertical text-xs" aria-hidden="true"></i>
+        </span>
+        <input type="checkbox" class="settings-tab-toggle h-4 w-4 rounded border-gray-300 text-blue-600 drupal-blue-focus flex-shrink-0 cursor-pointer"
+          data-tab="${esc(tab)}" ${checked ? 'checked' : ''}>
+        <i class="${esc(icon)} text-gray-400 text-xs flex-shrink-0 w-4 text-center" aria-hidden="true"></i>
+        <span class="text-sm text-gray-700 flex-1 pointer-events-none">${esc(label)}</span>
+      </div>`
+    }).join('')
+  }
+
+  // Sponsor-only sections
+  document.getElementById('settingsSponsorSection')?.classList.toggle('hidden', !isSponsor)
+  if (isSponsor) {
+    renderSponsorLinked()
+    renderSettingsTeamSection()
+  }
+
+  // Show only the relevant budget category section
+  document.getElementById('settingsBudgetSponsor')?.classList.toggle('hidden', !isSponsor)
+  document.getElementById('settingsBudgetPersonal')?.classList.toggle('hidden', isSponsor)
+  renderBudgetCategoryManager(isSponsor ? 'org' : 'personal')
+
+  // Global defaults section
+  const defaultCurrencyEl = document.getElementById('settingsDefaultCurrency')
+  if (defaultCurrencyEl) {
+    defaultCurrencyEl.innerHTML = CURRENCIES.map((c) =>
+      `<option value="${c}"${c === getDefaultCurrency() ? ' selected' : ''}>${c}</option>`
+    ).join('')
+  }
+  const defaultModeEl = document.getElementById('settingsDefaultMode')
+  if (defaultModeEl) defaultModeEl.value = state.global?.defaultMode || 'personal'
+}
+
+function wireSettingsTabOrder() {
+  const list = document.getElementById('settingsTabList')
+  if (!list) return
+  let _dragged = null
+
+  list.addEventListener('dragstart', (e) => {
+    const row = e.target.closest('.settings-tab-row')
+    if (!row) return
+    _dragged = row.dataset.tab
+    row.classList.add('tab-drag-source')
+    e.dataTransfer.effectAllowed = 'move'
+  }, { passive: true })
+
+  list.addEventListener('dragend', () => {
+    _dragged = null
+    list.querySelectorAll('.tab-drag-source, .settings-drop-before, .settings-drop-after')
+      .forEach((el) => el.classList.remove('tab-drag-source', 'settings-drop-before', 'settings-drop-after'))
+  }, { passive: true })
+
+  list.addEventListener('dragover', (e) => {
+    if (!_dragged) return
+    e.preventDefault()
+    e.dataTransfer.dropEffect = 'move'
+    const target = e.target.closest('.settings-tab-row')
+    list.querySelectorAll('.settings-drop-before, .settings-drop-after')
+      .forEach((el) => el.classList.remove('settings-drop-before', 'settings-drop-after'))
+    if (target && target.dataset.tab !== _dragged) {
+      const rect   = target.getBoundingClientRect()
+      const before = e.clientY < rect.top + rect.height / 2
+      target.classList.add(before ? 'settings-drop-before' : 'settings-drop-after')
+    }
+  })
+
+  list.addEventListener('drop', (e) => {
+    e.preventDefault()
+    if (!_dragged) return
+    const target = e.target.closest('.settings-tab-row')
+    if (!target || target.dataset.tab === _dragged) return
+
+    const mode     = state.planner.mode || 'personal'
+    const isSponsor = mode === 'sponsor'
+    const base     = isSponsor ? SPONSOR_TABS_BASE : PERSONAL_TABS_BASE
+    const stored   = isSponsor
+      ? (state.planner?.org?.tabOrder     || [])
+      : (state.planner?.personal?.tabOrder || [])
+    const allOrdered = stored.filter((t) => base.has(t))
+    base.forEach((t) => { if (!allOrdered.includes(t)) allOrdered.push(t) })
+
+    const rect   = target.getBoundingClientRect()
+    const before = e.clientY < rect.top + rect.height / 2
+    const from   = allOrdered.indexOf(_dragged)
+    const to     = allOrdered.indexOf(target.dataset.tab)
+    if (from === -1 || to === -1) return
+
+    const newOrder = [...allOrdered]
+    newOrder.splice(from, 1)
+    const insertAt = before ? to - (from < to ? 1 : 0) : to + (from > to ? 1 : 0)
+    newOrder.splice(Math.max(0, insertAt), 0, _dragged)
+
+    if (isSponsor) state.planner.org.tabOrder = newOrder
+    else state.planner.personal.tabOrder = newOrder
+    scheduleAutoSave()
+    renderTabBar()
+    renderSettingsTab()
+  })
+}
+
+function wireSettingsPanel() {
+  const panel = document.getElementById('plannerSettingsPanel')
+  if (!panel) return
+
+  panel.addEventListener('change', (e) => {
+    const mode = state.planner.mode || 'personal'
+
+    // Planner mode radio
+    if (e.target.name === 'settingsMode') {
+      applyMode(e.target.value)
+      renderSettingsTab()
+      return
+    }
+
+    // Global default currency select
+    if (e.target.id === 'settingsDefaultCurrency') {
+      state.global.defaultCurrency = e.target.value
+      saveGlobal(state.global)
+      return
+    }
+
+    // Global default mode select
+    if (e.target.id === 'settingsDefaultMode') {
+      state.global.defaultMode = e.target.value
+      saveGlobal(state.global)
+      return
+    }
+
+    // Tab visibility toggle
+    const tabCb = e.target.closest('.settings-tab-toggle')
+    if (tabCb) {
+      const tab = tabCb.dataset.tab
+      const isSponsor = mode === 'sponsor'
+      const arr = isSponsor
+        ? (state.planner.org.disabledTabs     ??= [])
+        : (state.planner.personal.disabledTabs ??= [])
+      if (tabCb.checked) {
+        const idx = arr.indexOf(tab)
+        if (idx !== -1) arr.splice(idx, 1)
+      } else {
+        if (!arr.includes(tab)) arr.push(tab)
+      }
+      scheduleAutoSave()
+      applyMode(mode)
+      return
+    }
+
+    // Team event-assignment toggle
+    const assignCb = e.target.closest('.settings-team-assign')
+    if (assignCb) {
+      const memberId = assignCb.dataset.memberId
+      const assignments = (state.planner.org.teamAssignments ??= [])
+      if (assignCb.checked) {
+        if (!assignments.find((a) => a.memberId === memberId)) {
+          assignments.push({ memberId, budget: '', budgetActual: '', currency: state.planner.org.sponsorCurrency || 'AUD', notes: '', outboundLegs: [], returnLegs: [] })
+          refreshAssignMemberSelect()
+          renderOrgTab()
+        }
+      } else {
+        const idx = assignments.findIndex((a) => a.memberId === memberId)
+        if (idx !== -1) {
+          const a = assignments[idx]
+          const hasData = a.budget || a.budgetActual || a.notes || a.outboundLegs?.length || a.returnLegs?.length
+          if (hasData) {
+            assignCb.checked = true // revert
+            alert('This member has travel or budget data on this event. Remove them from the Team tab instead.')
+            return
+          }
+          assignments.splice(idx, 1)
+          refreshAssignMemberSelect()
+          renderOrgTab()
+        }
+      }
+      scheduleAutoSave()
+      return
+    }
+  })
+
+  // Clicks: view/edit team member buttons, add-member, reset tab order
+  panel.addEventListener('click', (e) => {
+    const viewBtn = e.target.closest('.view-team-member-btn')
+    if (viewBtn) { openTeamMemberDetailModal(viewBtn.dataset.memberId); return }
+    const editBtn = e.target.closest('.edit-team-member-btn')
+    if (editBtn) { openTeamMemberModal(editBtn.dataset.memberId); return }
+    if (e.target.closest('#settingsAddTeamMemberBtn')) { openTeamMemberModal(null); return }
+    if (e.target.closest('#settingsResetTabOrderBtn')) {
+      const m = state.planner.mode || 'personal'
+      if (m === 'sponsor') state.planner.org.tabOrder = []
+      else state.planner.personal.tabOrder = []
+      scheduleAutoSave()
+      renderTabBar()
+      renderSettingsTab()
+      return
+    }
+  })
+
+  wireSettingsTabOrder()
+
+  // Sponsor search
+  document.getElementById('sponsorSearchInput')?.addEventListener('input', (e) => {
+    const query   = e.target.value.trim().toLowerCase()
+    const results = document.getElementById('sponsorSearchResults')
+    if (!results) return
+    if (!query) { results.classList.add('hidden'); results.innerHTML = ''; return }
+    const sponsors = state.eventMeta?.sponsors || []
+    const matches  = sponsors.filter((s) => s.title?.toLowerCase().includes(query))
+    if (!matches.length) {
+      results.innerHTML = '<li class="px-4 py-2 text-xs text-gray-400 italic">No sponsors found</li>'
+    } else {
+      results.innerHTML = matches.map((s) =>
+        `<li class="px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer flex items-center justify-between gap-2 sponsor-result-item" data-sponsor-id="${esc(s.id)}">
+          <span>${esc(s.title || '')}</span>
+          <span class="text-xs text-gray-400 flex-shrink-0">${esc(s.tier || '')}</span>
+        </li>`
+      ).join('')
+    }
+    results.classList.remove('hidden')
+  })
+
+  document.getElementById('sponsorSearchResults')?.addEventListener('click', (e) => {
+    const item = e.target.closest('.sponsor-result-item')
+    if (!item) return
+    state.planner.org.sponsorId = item.dataset.sponsorId
+    document.getElementById('sponsorSearchInput').value = ''
+    document.getElementById('sponsorSearchResults').classList.add('hidden')
+    renderSponsorLinked()
+    syncSponsoredSessions()
+    scheduleAutoSave()
+  })
+
+  document.getElementById('unlinkSponsorBtn')?.addEventListener('click', () => {
+    state.planner.org.sponsorId = ''
+    renderSponsorLinked()
+    scheduleAutoSave()
+  })
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#sponsorSearchRow') && !e.target.closest('#sponsorSearchResults')) {
+      document.getElementById('sponsorSearchResults')?.classList.add('hidden')
+    }
+  }, { capture: false })
+}
+
+function wireBudgetCategoryManager() {
+  ['personal', 'org'].forEach((mode) => {
+    const addInput  = document.getElementById(mode === 'personal' ? 'personalBudgetCategoryInput' : 'sponsorBudgetCategoryInput')
+    const addBtn    = document.getElementById(mode === 'personal' ? 'addPersonalBudgetCategoryBtn' : 'addSponsorBudgetCategoryBtn')
+    const container = document.getElementById(mode === 'personal' ? 'personalBudgetCategoryList' : 'sponsorBudgetCategoryList')
+
+    addBtn?.addEventListener('click', () => {
+      if (addInput?.value) { addBudgetCategory(mode, addInput.value); addInput.value = '' }
+    })
+    addInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { addBudgetCategory(mode, addInput.value); addInput.value = ''; e.preventDefault() }
+    })
+    container?.addEventListener('click', (e) => {
+      const btn = e.target.closest('.remove-budget-cat-btn')
+      if (btn) removeBudgetCategory(btn.dataset.catMode, btn.dataset.catId)
+    })
+  })
+}
+
 function renderAll() {
   applyScheduleGating();
   renderContactsTab();
@@ -4765,7 +5644,10 @@ function renderAll() {
   renderTeamTab();
   renderDocumentsTab();
   renderReceiptsTab();
+  renderTicketsTab();
+  renderBudgetTab();
   renderSummaryTab();
+  renderSettingsTab();
 }
 
 // ── Event delegation ─────────────────────────────────────────────────────────
@@ -4920,56 +5802,45 @@ function wireContactsPanel() {
   const panel = document.getElementById('plannerContactsPanel');
   if (!panel) return;
 
-  panel.addEventListener('input', (e) => {
-    const id    = e.target.dataset.contactId;
-    const field = e.target.dataset.contactField;
-    if (id && field && e.target.type !== 'checkbox') handleContactChange(id, field, e.target.value);
-  });
-
-  panel.addEventListener('change', (e) => {
-    const id    = e.target.dataset.contactId;
-    const field = e.target.dataset.contactField;
-    if (id && field && e.target.type === 'checkbox') handleContactChange(id, field, e.target.checked);
-  });
-
   panel.addEventListener('click', (e) => {
-    const deleteBtn = e.target.closest('.delete-contact-btn');
-    if (deleteBtn) {
-      e.preventDefault(); // prevent details toggle
-      e.stopPropagation();
-      if (window.confirm('Delete this contact?')) deleteContact(deleteBtn.dataset.contactId);
+    const editBtn = e.target.closest('.edit-contact-btn');
+    if (editBtn) { openContactModal(editBtn.dataset.contactId); return; }
+  });
+
+  document.getElementById('addContactBtn')?.addEventListener('click', () => openContactModal(null));
+
+  // Contact modal wiring
+  document.getElementById('contactModalClose')?.addEventListener('click', closeContactModal);
+  document.getElementById('contactModalDone')?.addEventListener('click', saveContactModal);
+  document.getElementById('contactModalDelete')?.addEventListener('click', () => {
+    if (_contactModalId && window.confirm('Delete this contact?')) {
+      deleteContact(_contactModalId);
+      closeContactModal();
     }
   });
-
-  panel.addEventListener('toggle', (e) => {
-    const chevron = e.target.querySelector('.contact-chevron');
-    if (chevron) chevron.classList.toggle('rotate-90', e.target.open);
-  }, true);
-
-  document.getElementById('addContactBtn')?.addEventListener('click', addContact);
+  document.getElementById('contactModal')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeContactModal();
+  });
+  document.getElementById('contactModal')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeContactModal();
+  });
 }
 
 function wireTasksPanel() {
   const panel = document.getElementById('plannerTasksPanel');
   if (!panel) return;
 
-  panel.addEventListener('input', (e) => {
-    const id    = e.target.dataset.taskId;
-    const field = e.target.dataset.taskField;
-    if (id && field && field === 'text') handleTaskChange(id, 'text', e.target.value);
-  });
-
   panel.addEventListener('change', (e) => {
     const id    = e.target.dataset.taskId;
     const field = e.target.dataset.taskField;
-    if (!id || !field) return;
-    if (field === 'done')      handleTaskChange(id, 'done', e.target.checked);
-    if (field === 'sessionId') handleTaskChange(id, 'sessionId', e.target.value || null);
+    if (id && field === 'done') handleTaskChange(id, 'done', e.target.checked);
   });
 
   panel.addEventListener('click', (e) => {
+    const editBtn = e.target.closest('.edit-task-btn');
+    if (editBtn) { openTaskModal(editBtn.dataset.taskId); return; }
     const deleteBtn = e.target.closest('.delete-task-btn');
-    if (deleteBtn) deleteTask(deleteBtn.dataset.taskId);
+    if (deleteBtn) { deleteTask(deleteBtn.dataset.taskId); return; }
   });
 
   document.getElementById('addTaskBtn')?.addEventListener('click', addTask);
@@ -4978,8 +5849,51 @@ function wireTasksPanel() {
     state.tasksFilter = e.target.value;
     renderTasksTab();
   });
+
+  // Task modal wiring
+  document.getElementById('taskModalClose')?.addEventListener('click', closeTaskModal);
+  document.getElementById('taskModalDone')?.addEventListener('click', saveTaskModal);
+  document.getElementById('taskModalDelete')?.addEventListener('click', () => {
+    if (_taskModalId) { deleteTask(_taskModalId); closeTaskModal(); }
+  });
+  document.getElementById('taskModal')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeTaskModal();
+  });
+  document.getElementById('taskModal')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeTaskModal();
+  });
 }
 
+
+function renderSponsorLinked() {
+  const sponsorId  = state.planner.org.sponsorId || ''
+  const sponsors   = state.eventMeta?.sponsors   || []
+  const linked     = sponsors.find((s) => s.id === sponsorId)
+  const searchRow  = document.getElementById('sponsorSearchRow')
+  const resultsEl  = document.getElementById('sponsorSearchResults')
+  const linkedCard = document.getElementById('sponsorLinkedCard')
+  const unlinkBtn  = document.getElementById('unlinkSponsorBtn')
+
+  if (linked) {
+    searchRow?.classList.add('hidden')
+    resultsEl?.classList.add('hidden')
+    linkedCard?.classList.remove('hidden')
+    unlinkBtn?.classList.remove('hidden')
+    const nameEl = document.getElementById('sponsorLinkedName')
+    const tierEl = document.getElementById('sponsorLinkedTier')
+    const urlEl  = document.getElementById('sponsorLinkedUrl')
+    if (nameEl) nameEl.textContent = linked.title || ''
+    if (tierEl) tierEl.textContent = linked.tier  || ''
+    if (urlEl) {
+      if (linked.link) { urlEl.href = linked.link; urlEl.classList.remove('hidden') }
+      else             { urlEl.classList.add('hidden') }
+    }
+  } else {
+    searchRow?.classList.remove('hidden')
+    linkedCard?.classList.add('hidden')
+    unlinkBtn?.classList.add('hidden')
+  }
+}
 
 function wireOrgPanel() {
   const panel = document.getElementById('plannerSponsorPanel');
@@ -4987,10 +5901,8 @@ function wireOrgPanel() {
 
   // ── Booth fields ────────────────────────────────────────────────────────────
   panel.addEventListener('input', (e) => {
-    if (e.target.id === 'orgBoothInfo')       { state.planner.org.boothInfo       = e.target.value; scheduleAutoSave(); return; }
-    if (e.target.id === 'orgBoothNotes')      { state.planner.org.boothNotes      = e.target.value; scheduleAutoSave(); return; }
-    if (e.target.id === 'orgSponsorBudget')   { state.planner.org.sponsorBudget   = e.target.value; scheduleAutoSave(); renderSponsorBudgetBreakdown(); return; }
-    if (e.target.id === 'orgSponsorActual')   { state.planner.org.sponsorActual   = e.target.value; scheduleAutoSave(); renderSponsorBudgetBreakdown(); return; }
+    if (e.target.id === 'orgBoothInfo')  { state.planner.org.boothInfo  = e.target.value; scheduleAutoSave(); return; }
+    if (e.target.id === 'orgBoothNotes') { state.planner.org.boothNotes = e.target.value; scheduleAutoSave(); return; }
 
     const delivId    = e.target.dataset.deliverablesId;
     const delivField = e.target.dataset.deliverablesField;
@@ -5001,8 +5913,6 @@ function wireOrgPanel() {
   });
 
   panel.addEventListener('change', (e) => {
-    if (e.target.id === 'orgSponsorCurrency') { state.planner.org.sponsorCurrency = e.target.value; scheduleAutoSave(); renderSponsorBudgetBreakdown(); return; }
-
     // Timeline date range
     if (e.target.id === 'timelineStartDate') {
       state.planner.org.timeline = { ...state.planner.org.timeline, startDate: e.target.value };
@@ -5330,111 +6240,37 @@ function wireOrgPanel() {
     });
   }
 
-  // ── Sponsor search ────────────────────────────────────────────────────────
-  function renderSponsorLinked() {
-    const sponsorId    = state.planner.org.sponsorId || ''
-    const sponsors     = state.eventMeta?.sponsors   || []
-    const linked       = sponsors.find((s) => s.id === sponsorId)
-    const searchRow    = document.getElementById('sponsorSearchRow')
-    const resultsEl    = document.getElementById('sponsorSearchResults')
-    const linkedCard   = document.getElementById('sponsorLinkedCard')
-    const unlinkBtn    = document.getElementById('unlinkSponsorBtn')
-
-    if (linked) {
-      searchRow?.classList.add('hidden')
-      resultsEl?.classList.add('hidden')
-      linkedCard?.classList.remove('hidden')
-      unlinkBtn?.classList.remove('hidden')
-      const nameEl = document.getElementById('sponsorLinkedName')
-      const tierEl = document.getElementById('sponsorLinkedTier')
-      const urlEl  = document.getElementById('sponsorLinkedUrl')
-      if (nameEl) nameEl.textContent = linked.title || ''
-      if (tierEl) tierEl.textContent = linked.tier  || ''
-      if (urlEl) {
-        if (linked.link) { urlEl.href = linked.link; urlEl.classList.remove('hidden') }
-        else             { urlEl.classList.add('hidden') }
-      }
-    } else {
-      searchRow?.classList.remove('hidden')
-      linkedCard?.classList.add('hidden')
-      unlinkBtn?.classList.add('hidden')
-    }
-  }
-
-  renderSponsorLinked()
-
-  document.getElementById('sponsorSearchInput')?.addEventListener('input', (e) => {
-    const query   = e.target.value.trim().toLowerCase()
-    const results = document.getElementById('sponsorSearchResults')
-    if (!results) return
-    if (!query) { results.classList.add('hidden'); results.innerHTML = ''; return }
-    const sponsors = state.eventMeta?.sponsors || []
-    const matches  = sponsors.filter((s) => s.title?.toLowerCase().includes(query))
-    if (!matches.length) {
-      results.innerHTML = '<li class="px-4 py-2 text-xs text-gray-400 italic">No sponsors found</li>'
-    } else {
-      results.innerHTML = matches.map((s) =>
-        `<li class="px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer flex items-center justify-between gap-2 sponsor-result-item" data-sponsor-id="${esc(s.id)}">
-          <span>${esc(s.title || '')}</span>
-          <span class="text-xs text-gray-400 flex-shrink-0">${esc(s.tier || '')}</span>
-        </li>`
-      ).join('')
-    }
-    results.classList.remove('hidden')
-  })
-
-  document.getElementById('sponsorSearchResults')?.addEventListener('click', (e) => {
-    const item = e.target.closest('.sponsor-result-item')
-    if (!item) return
-    state.planner.org.sponsorId = item.dataset.sponsorId
-    document.getElementById('sponsorSearchInput').value = ''
-    document.getElementById('sponsorSearchResults').classList.add('hidden')
-    renderSponsorLinked()
-    syncSponsoredSessions()
-    scheduleAutoSave()
-  })
-
-  document.getElementById('unlinkSponsorBtn')?.addEventListener('click', () => {
-    state.planner.org.sponsorId = ''
-    renderSponsorLinked()
-    scheduleAutoSave()
-  })
-
-  // Close results on outside click
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('#sponsorSearchRow') && !e.target.closest('#sponsorSearchResults')) {
-      document.getElementById('sponsorSearchResults')?.classList.add('hidden')
-    }
-  }, { capture: false })
-
   wireTrackedSessionSearch('sponsor')
 }
 
 // ── Team tab (global team members) ───────────────────────────────────────────
 
 function teamMemberCardHtml(member) {
+  const disabled = member.enabled === false;
+  const meta = [member.department, member.company].filter(Boolean).join(' · ');
   return `
-    <div class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 bg-white" data-member-id="${esc(member.id)}">
+    <div class="flex items-center gap-3 p-3 rounded-lg border ${disabled ? 'border-gray-100 bg-gray-50 opacity-60' : 'border-gray-200 bg-white'}" data-member-id="${esc(member.id)}">
       <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-800">${esc(member.name || 'Unnamed')}</p>
-        <div class="flex items-center gap-3 mt-0.5">
+        <div class="flex items-center gap-2">
+          <p class="text-sm font-medium text-gray-800">${esc(member.name || 'Unnamed')}</p>
+          ${disabled ? '<span class="text-[0.6rem] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-gray-100 text-gray-400">Inactive</span>' : ''}
+        </div>
+        <div class="flex items-center gap-3 mt-0.5 flex-wrap">
           ${member.role  ? `<span class="text-xs text-gray-400">${esc(member.role)}</span>` : ''}
+          ${meta         ? `<span class="text-xs text-gray-400">${esc(meta)}</span>` : ''}
           ${member.phone ? `<span class="text-xs text-gray-400"><i class="fas fa-phone text-[0.6rem] mr-1"></i>${esc(member.phone)}</span>` : ''}
         </div>
       </div>
-      <button type="button" class="edit-team-member-btn h-8 px-3 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0" data-member-id="${esc(member.id)}">
-        <i class="fas fa-pen-to-square mr-1.5 text-[0.65rem]"></i>Edit
+      <button type="button" class="view-team-member-btn h-8 px-3 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0" data-member-id="${esc(member.id)}">
+        <i class="fas fa-eye mr-1.5 text-[0.65rem]"></i>View
       </button>
     </div>`;
 }
 
 function renderTeamTab() {
-  const list  = document.getElementById('teamMembersList');
-  const empty = document.getElementById('teamMembersEmpty');
-  if (!list) return;
-  const members = state.global?.teamMembers || [];
-  list.innerHTML = members.map(teamMemberCardHtml).join('');
-  empty?.classList.toggle('hidden', members.length > 0);
+  const assignedIds = new Set((state.planner?.org?.teamAssignments || []).map((a) => a.memberId));
+  const members = (state.global?.teamMembers || []).filter((m) => assignedIds.has(m.id));
+  renderListPanel('teamMembersList', 'teamMembersEmpty', members, teamMemberCardHtml);
 }
 
 function openTeamMemberModal(id) {
@@ -5442,37 +6278,156 @@ function openTeamMemberModal(id) {
   if (!modal) return;
   const member = id ? (state.global?.teamMembers || []).find((m) => m.id === id) : null;
   modal.dataset.memberId = id || '';
-  document.getElementById('tmName').value  = member?.name  || '';
-  document.getElementById('tmRole').value  = member?.role  || '';
-  document.getElementById('tmPhone').value = member?.phone || '';
-  document.getElementById('tmNotes').value = member?.notes || '';
+  document.getElementById('tmName').value       = member?.name       || '';
+  document.getElementById('tmRole').value       = member?.role       || '';
+  document.getElementById('tmCompany').value    = member?.company    || '';
+  document.getElementById('tmDepartment').value = member?.department || '';
+  document.getElementById('tmPhone').value      = member?.phone      || '';
+  document.getElementById('tmNotes').value      = member?.notes      || '';
+  document.getElementById('tmEnabled').checked  = member ? (member.enabled !== false) : true;
   document.getElementById('teamMemberModalDelete').classList.toggle('hidden', !id);
-  modal.classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
-  document.getElementById('tmName').focus();
+  showModal('teamMemberModal', 'tmName');
 }
 
+
+function openTeamMemberDetailModal(memberId) {
+  const modal  = document.getElementById('teamMemberDetailModal');
+  if (!modal) return;
+  const member = (state.global?.teamMembers || []).find((m) => m.id === memberId);
+  if (!member) return;
+
+  const disabled = member.enabled === false;
+  document.getElementById('tmDetailName').textContent = member.name || 'Unnamed';
+  document.getElementById('tmDetailDisabledBadge')?.classList.toggle('hidden', !disabled);
+
+  const roleEl = document.getElementById('tmDetailRole');
+  roleEl.textContent = member.role || '';
+  roleEl.classList.toggle('hidden', !member.role);
+
+  const meta = [member.department, member.company].filter(Boolean).join(' · ');
+  const metaEl = document.getElementById('tmDetailMeta');
+  if (metaEl) { metaEl.textContent = meta; metaEl.classList.toggle('hidden', !meta); }
+
+  document.getElementById('tmDetailPhone').textContent = member.phone || '';
+  document.getElementById('tmDetailPhone').closest('.tm-detail-phone-row')?.classList.toggle('hidden', !member.phone);
+  document.getElementById('tmDetailNotes').textContent = member.notes || '';
+  document.getElementById('tmDetailNotes').closest('.tm-detail-notes-row')?.classList.toggle('hidden', !member.notes);
+
+  const travelEl = document.getElementById('tmDetailTravel');
+  if (travelEl) {
+    const assignments = (state.planner.org?.teamAssignments || []).filter((a) => a.memberId === memberId);
+    if (assignments.length) {
+      const legs = assignments.flatMap((a) => [
+        ...(a.outboundLegs || []).map((l) => ({ ...l, dir: 'outbound' })),
+        ...(a.returnLegs   || []).map((l) => ({ ...l, dir: 'return'   })),
+      ]);
+      travelEl.innerHTML = legs.length
+        ? legs.map((l) => {
+            const route = [l.from, l.to].filter(Boolean).join(' → ');
+            const date  = l.date ? new Date(l.date + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : '';
+            const icon  = travelIcon(l.mode, l.dir === 'return');
+            return `<div class="flex items-center gap-2 text-xs text-gray-600">
+              <i class="${icon} text-gray-400 w-4 text-center flex-shrink-0"></i>
+              <span>${route || 'No route'}</span>
+              ${date ? `<span class="text-gray-400">${date}</span>` : ''}
+              ${travelStatusBadge(l.status)}
+            </div>`
+          }).join('')
+        : '<p class="text-xs text-gray-400 italic">No travel legs recorded.</p>';
+    } else {
+      travelEl.innerHTML = '<p class="text-xs text-gray-400 italic">Not assigned to this event.</p>';
+    }
+  }
+
+  const ticketsEl = document.getElementById('tmDetailTickets');
+  if (ticketsEl) {
+    const allTickets = [
+      ...(state.planner.org?.tickets     || []),
+      ...(state.planner.personal?.tickets || []),
+    ].filter((t) => t.assignedTo === memberId || t.purchasedBy === memberId);
+    ticketsEl.innerHTML = allTickets.length
+      ? allTickets.map((t) => `<div class="flex items-center gap-2 text-xs text-gray-600">
+          ${ticketStatusBadge(t.status || 'planned')}
+          <span>${esc(t.name || 'Unnamed ticket')}</span>
+          ${t.assignedTo === memberId ? '<span class="text-gray-400">(assigned)</span>' : '<span class="text-gray-400">(purchased by)</span>'}
+        </div>`).join('')
+      : '<p class="text-xs text-gray-400 italic">No tickets associated.</p>';
+  }
+
+  const budgetEl = document.getElementById('tmDetailBudget');
+  if (budgetEl) {
+    const cats = buildEventBudgetData(state.planner, memberId)
+    const activeCats = Object.entries(cats).filter(([, c]) => c.budget !== 0 || c.actual !== 0 || c.items.length)
+    if (activeCats.length) {
+      const currency = state.planner?.org?.sponsorCurrency || 'AUD'
+      const fmt = (n) => n !== 0 ? n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '—'
+      const allItems = activeCats.flatMap(([, c]) => (c.items || []).map((item) => ({ ...item, catLabel: c.label })))
+      const totalB = activeCats.reduce((s, [, c]) => s + c.budget, 0)
+      const totalA = activeCats.reduce((s, [, c]) => s + c.actual, 0)
+      budgetEl.innerHTML = `
+        <div class="grid grid-cols-[1fr_auto_auto] gap-x-4 gap-y-1">
+          <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-gray-300 pb-0.5">Item</span>
+          <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-gray-300 text-right pb-0.5">Budget</span>
+          <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-gray-300 text-right pb-0.5">Actual</span>
+          ${allItems.map((item) => `
+            <span class="text-gray-500 truncate">${esc(item.label)} <span class="text-gray-400">(${esc(item.catLabel)})</span></span>
+            <span class="text-gray-400 tabular-nums text-right">${fmt(item.budget)}</span>
+            <span class="tabular-nums text-right ${item.actual > item.budget && item.budget > 0 ? 'text-red-500' : 'text-gray-600'}">${fmt(item.actual)}</span>
+          `).join('')}
+          ${allItems.length > 1 ? `
+            <div class="col-span-3 h-px bg-gray-200 my-0.5"></div>
+            <span class="text-gray-700 font-medium">Total</span>
+            <span class="text-gray-500 font-medium tabular-nums text-right">${fmt(totalB)}</span>
+            <span class="text-gray-700 font-medium tabular-nums text-right">${fmt(totalA)}</span>
+          ` : ''}
+        </div>
+        ${totalB !== 0 ? `<div class="flex items-center justify-between mt-2 pt-1.5 border-t border-gray-200 font-medium ${totalA > totalB ? 'text-red-500' : 'text-emerald-600'}">
+          <span>${totalA > totalB ? 'Over budget' : 'Remaining'}</span>
+          <span class="tabular-nums">${currency} ${fmt(Math.abs(totalB - totalA))}</span>
+        </div>` : ''}
+      `
+      budgetEl.closest('.tm-detail-budget-row')?.classList.remove('hidden')
+    } else {
+      budgetEl.innerHTML = '<p class="text-xs text-gray-400 italic">No budget data for this member.</p>'
+    }
+  }
+
+  showModal('teamMemberDetailModal');
+}
 
 function wireTeamPanel() {
   const panel = document.getElementById('plannerTeamPanel');
   if (!panel) return;
 
   panel.addEventListener('click', (e) => {
+    const viewBtn = e.target.closest('.view-team-member-btn');
+    if (viewBtn) { openTeamMemberDetailModal(viewBtn.dataset.memberId); return; }
     const editBtn = e.target.closest('.edit-team-member-btn');
     if (editBtn) { openTeamMemberModal(editBtn.dataset.memberId); return; }
   });
 
   document.getElementById('addTeamMemberBtn')?.addEventListener('click', () => openTeamMemberModal(null));
 
+  const detailModal = document.getElementById('teamMemberDetailModal');
+  if (detailModal) {
+    const closeDetail = () => hideModal('teamMemberDetailModal');
+    document.getElementById('tmDetailClose')?.addEventListener('click', closeDetail);
+    document.getElementById('tmDetailClose2')?.addEventListener('click', closeDetail);
+    detailModal.addEventListener('click', (e) => { if (e.target === detailModal) closeDetail(); });
+  }
+
   const modal = document.getElementById('teamMemberModal');
   if (!modal) return;
 
   function readModalFields() {
     return {
-      name:  document.getElementById('tmName').value.trim(),
-      role:  document.getElementById('tmRole').value.trim(),
-      phone: document.getElementById('tmPhone').value.trim(),
-      notes: document.getElementById('tmNotes').value.trim(),
+      name:       document.getElementById('tmName').value.trim(),
+      role:       document.getElementById('tmRole').value.trim(),
+      company:    document.getElementById('tmCompany').value.trim(),
+      department: document.getElementById('tmDepartment').value.trim(),
+      phone:      document.getElementById('tmPhone').value.trim(),
+      notes:      document.getElementById('tmNotes').value.trim(),
+      enabled:    document.getElementById('tmEnabled').checked,
     };
   }
 
@@ -5502,27 +6457,217 @@ function wireTeamPanel() {
       state.global.teamMembers = (state.global?.teamMembers || []).filter((m) => m.id !== id);
       saveGlobal(state.global);
     },
-    onClose: () => { renderTeamTab(); refreshAssignMemberSelect(); },
+    onClose: () => { renderTeamTab(); refreshAssignMemberSelect(); renderSettingsTeamSection(); },
   }).wire();
 }
 
 // ── Mode toggle (sponsor / personal) ─────────────────────────────────────────
 
-// Tabs visible in each mode
-const SPONSOR_TABS  = new Set(['contacts', 'tasks', 'sponsor', 'team', 'notes', 'documents', 'summary']);
-const PERSONAL_TABS = new Set(['personal', 'notes', 'contacts', 'tasks', 'receipts', 'documents', 'summary']);
+// Base tabs per mode (before per-event disable overrides). Settings always added below.
+const SPONSOR_TABS_BASE  = new Set(['contacts', 'tasks', 'sponsor', 'team', 'notes', 'documents', 'tickets', 'budget', 'summary']);
+const PERSONAL_TABS_BASE = new Set(['personal', 'notes', 'contacts', 'tasks', 'receipts', 'documents', 'tickets', 'summary']);
+
+// Human-readable labels used by the settings UI
+const TAB_LABELS = {
+  sponsor:   'Sponsor',
+  team:      'Team',
+  documents: 'Documents',
+  tasks:     'Tasks',
+  contacts:  'Contacts',
+  personal:  'Personal',
+  notes:     'Notes',
+  receipts:  'Receipts',
+  tickets:   'Tickets',
+  budget:    'Budget',
+  summary:   'Summary',
+};
+
+// Returns an ordered array of visible tab keys (excluding 'settings') for the tab bar.
+function getVisibleTabsOrdered(mode) {
+  const base     = mode === 'sponsor' ? SPONSOR_TABS_BASE : PERSONAL_TABS_BASE;
+  const stored   = mode === 'sponsor'
+    ? (state.planner?.org?.tabOrder     || [])
+    : (state.planner?.personal?.tabOrder || []);
+  const disabled = new Set(
+    mode === 'sponsor'
+      ? (state.planner?.org?.disabledTabs     || [])
+      : (state.planner?.personal?.disabledTabs || [])
+  );
+  // Stored order first (filtered to base & enabled), then any tabs not yet in stored order
+  const ordered = stored.filter((t) => base.has(t) && !disabled.has(t));
+  base.forEach((t) => { if (!ordered.includes(t) && !disabled.has(t)) ordered.push(t); });
+  return ordered;
+}
+
+// Returns a Set of all visible tabs including 'settings' (used for routing / settings panel).
+function getVisibleTabs(mode) {
+  return new Set([...getVisibleTabsOrdered(mode), 'settings']);
+}
+
+let _draggedTab = null;
+let _tabMoreOpen = false;
+
+function renderTabBar() {
+  const mode    = state.planner?.mode || 'personal';
+  const ordered = getVisibleTabsOrdered(mode);
+  const mainEl  = document.getElementById('tabBarMain');
+  if (!mainEl) return;
+
+  mainEl.innerHTML = '';
+  ordered.forEach((tab) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.id   = TAB_BTN_IDS[tab];
+    btn.dataset.tab = tab;
+    btn.draggable = true;
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-controls', PANEL_IDS[tab]);
+    btn.setAttribute('aria-selected', state.activeTab === tab ? 'true' : 'false');
+    btn.className = `editor-tab-button whitespace-nowrap flex-shrink-0${state.activeTab === tab ? ' is-active' : ''}`;
+    btn.innerHTML = `<i class="${TAB_ICONS[tab] || 'fas fa-circle'} mr-2 text-[0.72rem]" aria-hidden="true"></i>${TAB_LABELS[tab] || tab}`;
+    mainEl.appendChild(btn);
+  });
+
+  wireDragDrop(mainEl, mode);
+  requestAnimationFrame(updateTabOverflow);
+}
+
+function updateTabOverflow() {
+  const mainEl   = document.getElementById('tabBarMain');
+  const moreWrap = document.getElementById('tabBarMoreWrap');
+  const moreBtnEl = document.getElementById('tabMoreBtn');
+  const dropdown = document.getElementById('tabMoreDropdown');
+  if (!mainEl || !moreWrap || !dropdown) return;
+
+  const allBtns = [...mainEl.querySelectorAll('[data-tab]')];
+  if (!allBtns.length) { moreWrap.classList.add('hidden'); return; }
+
+  // Reset state for measurement
+  allBtns.forEach((b) => { b.style.display = ''; });
+  moreWrap.classList.add('hidden');
+
+  const containerWidth = mainEl.getBoundingClientRect().width;
+  const gap = 4;
+
+  // Sum all button widths
+  const widths = allBtns.map((b) => b.getBoundingClientRect().width + gap);
+  const total  = widths.reduce((s, w) => s + w, 0) - gap;
+
+  if (total <= containerWidth + 1) {
+    // Everything fits, no More button needed
+    dropdown.innerHTML = '';
+    _tabMoreOpen = false;
+    return;
+  }
+
+  // Measure More button width
+  moreWrap.classList.remove('hidden');
+  const moreWidth = moreWrap.getBoundingClientRect().width + gap;
+  moreWrap.classList.add('hidden');
+
+  const usable = containerWidth - moreWidth;
+  let accumulated = 0;
+  let overflowIdx = 0;
+  for (let i = 0; i < allBtns.length; i++) {
+    if (accumulated + widths[i] <= usable + 1) {
+      accumulated += widths[i];
+      overflowIdx = i + 1;
+    } else {
+      break;
+    }
+  }
+
+  moreWrap.classList.remove('hidden');
+  moreBtnEl?.setAttribute('aria-expanded', String(_tabMoreOpen));
+  dropdown.innerHTML = '';
+
+  allBtns.forEach((btn, i) => {
+    if (i >= overflowIdx) {
+      btn.style.display = 'none';
+      const item = document.createElement('button');
+      item.type = 'button';
+      item.dataset.tab = btn.dataset.tab;
+      const isActive = state.activeTab === btn.dataset.tab;
+      item.className = isActive ? 'is-active' : '';
+      item.innerHTML = btn.innerHTML;
+      dropdown.appendChild(item);
+    }
+  });
+
+  if (!_tabMoreOpen) dropdown.classList.add('hidden');
+}
+
+function wireDragDrop(mainEl, mode) {
+  mainEl.addEventListener('dragstart', (e) => {
+    const btn = e.target.closest('[data-tab]');
+    if (!btn) return;
+    _draggedTab = btn.dataset.tab;
+    btn.classList.add('tab-drag-source');
+    e.dataTransfer.effectAllowed = 'move';
+  }, { passive: true });
+
+  mainEl.addEventListener('dragend', () => {
+    _draggedTab = null;
+    mainEl.querySelectorAll('.tab-drag-source, .tab-drop-before, .tab-drop-after')
+      .forEach((el) => el.classList.remove('tab-drag-source', 'tab-drop-before', 'tab-drop-after'));
+  }, { passive: true });
+
+  mainEl.addEventListener('dragover', (e) => {
+    if (!_draggedTab) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    const target = e.target.closest('[data-tab]');
+    mainEl.querySelectorAll('.tab-drop-before, .tab-drop-after')
+      .forEach((el) => el.classList.remove('tab-drop-before', 'tab-drop-after'));
+    if (target && target.dataset.tab !== _draggedTab) {
+      const rect = target.getBoundingClientRect();
+      const before = e.clientX < rect.left + rect.width / 2;
+      target.classList.add(before ? 'tab-drop-before' : 'tab-drop-after');
+    }
+  });
+
+  mainEl.addEventListener('drop', (e) => {
+    e.preventDefault();
+    if (!_draggedTab) return;
+    const target = e.target.closest('[data-tab]');
+    if (!target || target.dataset.tab === _draggedTab) return;
+
+    const rect   = target.getBoundingClientRect();
+    const before = e.clientX < rect.left + target.getBoundingClientRect().width / 2;
+    const ordered = getVisibleTabsOrdered(mode);
+    const from  = ordered.indexOf(_draggedTab);
+    const to    = ordered.indexOf(target.dataset.tab);
+    if (from === -1 || to === -1) return;
+
+    const newOrder = [...ordered];
+    newOrder.splice(from, 1);
+    const insertAt = before ? to - (from < to ? 1 : 0) : to + (from > to ? 1 : 0);
+    newOrder.splice(Math.max(0, insertAt), 0, _draggedTab);
+
+    // Persist full tab list order (including disabled tabs) so disabled→re-enabled tabs keep position
+    const fullBase = mode === 'sponsor' ? SPONSOR_TABS_BASE : PERSONAL_TABS_BASE;
+    const disabled = new Set(
+      mode === 'sponsor'
+        ? (state.planner?.org?.disabledTabs || [])
+        : (state.planner?.personal?.disabledTabs || [])
+    );
+    const finalOrder = [...newOrder, ...[...fullBase].filter((t) => disabled.has(t) && !newOrder.includes(t))];
+
+    if (mode === 'sponsor') state.planner.org.tabOrder = finalOrder;
+    else state.planner.personal.tabOrder = finalOrder;
+    scheduleAutoSave();
+    renderTabBar();
+  });
+}
 
 function applyMode(mode) {
   state.planner.mode = mode;
   savePlanner(state.plannerKey, state.planner);
 
-  const isSponsor  = mode === 'sponsor';
-  const visibleTabs = isSponsor ? SPONSOR_TABS : PERSONAL_TABS;
+  const isSponsor   = mode === 'sponsor';
+  const visibleTabs = getVisibleTabs(mode);
 
-  // Show/hide tab buttons based on the active mode
-  TABS.forEach((tab) => {
-    document.getElementById(TAB_BTN_IDS[tab])?.classList.toggle('hidden', !visibleTabs.has(tab));
-  });
+  renderTabBar();
 
   // Update header mode label and subtitle
   const suffix = document.getElementById('plannerHeaderSuffix');
@@ -5530,11 +6675,11 @@ function applyMode(mode) {
   const subtitle = document.getElementById('plannerModeSubtitle');
   if (subtitle) subtitle.textContent = isSponsor ? 'Your sponsor notebook for this event.' : 'Your personal notebook for this event.';
 
-  // Mark the active mode button
-  document.getElementById('modeToggleSponsor')?.classList.toggle('is-active', isSponsor);
-  document.getElementById('modeToggleSponsor')?.setAttribute('aria-pressed', String(isSponsor));
-  document.getElementById('modeTogglePersonal')?.classList.toggle('is-active', !isSponsor);
-  document.getElementById('modeTogglePersonal')?.setAttribute('aria-pressed', String(!isSponsor));
+  // Sync the settings panel mode radio buttons
+  const modePersonalRadio = document.getElementById('settingsModePersonal');
+  const modeSponsorRadio  = document.getElementById('settingsModeSponsor');
+  if (modePersonalRadio) modePersonalRadio.checked = !isSponsor;
+  if (modeSponsorRadio)  modeSponsorRadio.checked  = isSponsor;
 
   // Navigate away from the current tab if it isn't available in this mode
   const cur = state.activeTab;
@@ -5544,6 +6689,7 @@ function applyMode(mode) {
 
   // Re-render summary if it's visible (stats differ by mode)
   if (state.activeTab === 'summary') renderSummaryTab();
+  if (state.activeTab === 'settings') renderSettingsTab();
 }
 
 // ── Documents tab ─────────────────────────────────────────────────────────────
@@ -5666,51 +6812,33 @@ function collectDocuments() {
 }
 
 function documentCardHtml(doc) {
-  const date = doc.updatedAt
-    ? new Date(doc.updatedAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
-    : '';
-
   if (doc.isDirect) {
-    const catOptions = DOC_CATEGORIES.map((c) =>
-      `<option value="${c.value}"${doc.category === c.value ? ' selected' : ''}>${esc(c.label)}</option>`
-    ).join('');
+    const catLabel = getDocCategoryOptions().find((c) => c.value === doc.category)?.label || '';
+    const meta = [doc.description, catLabel].filter(Boolean).join(' · ');
     return `
-      <div class="rounded-lg border border-gray-200 bg-white group" data-doc-id="${esc(doc.id)}">
-        <div class="flex items-center gap-3 px-3 py-2.5">
-          <i class="fas fa-file-alt text-gray-400 flex-shrink-0 text-sm" aria-hidden="true"></i>
-          <div class="flex-1 min-w-0">
-            <input type="text" class="doc-name-input w-full border-0 border-b border-transparent hover:border-gray-200 focus:border-gray-300 focus:ring-0 bg-transparent text-sm text-gray-800 px-0 py-0.5 transition-colors"
-              data-doc-id="${esc(doc.id)}" value="${esc(doc.name)}" placeholder="Document name"
-              aria-label="Document name for ${esc(doc.name || 'this file')}">
-            ${date ? `<p class="text-[0.7rem] text-gray-400 mt-0.5">Updated ${esc(date)}</p>` : ''}
-          </div>
-          ${doc.filePath
-            ? `<a href="${esc(doc.filePath)}" target="_blank"
-                 class="flex-shrink-0 h-8 px-3 border border-gray-300 rounded-md text-xs text-blue-600 hover:bg-blue-50 transition-colors inline-flex items-center"
-                 aria-label="View ${esc(doc.name || 'document')}">
-                 <i class="fas fa-external-link-alt mr-1 text-[0.65rem]" aria-hidden="true"></i>View
-               </a>`
-            : '<span class="text-xs text-gray-400 flex-shrink-0 italic">No file</span>'
-          }
-          <button type="button" class="delete-doc-btn flex-shrink-0 text-gray-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
-            data-doc-id="${esc(doc.id)}" aria-label="Delete ${esc(doc.name || 'document')}">
-            <i class="fas fa-times text-xs" aria-hidden="true"></i>
-          </button>
+      <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-gray-200 bg-white" data-doc-id="${esc(doc.id)}">
+        <i class="fas fa-file-alt text-gray-400 flex-shrink-0 text-sm" aria-hidden="true"></i>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-medium text-gray-800 truncate">${esc(doc.name || 'Unnamed document')}</p>
+          ${meta ? `<p class="text-[0.7rem] text-gray-400 mt-0.5 truncate">${esc(meta)}</p>` : ''}
         </div>
-        <div class="flex gap-2 px-3 pb-2.5 border-t border-gray-100 pt-2">
-          <input type="text" class="doc-desc-input flex-1 h-7 rounded border border-gray-200 text-xs text-gray-600 px-2 focus:outline-none focus:border-gray-300 bg-white"
-            data-doc-id="${esc(doc.id)}" value="${esc(doc.description || '')}" placeholder="Description (optional)"
-            aria-label="Description for ${esc(doc.name || 'this file')}">
-          <select class="doc-cat-select h-7 rounded border border-gray-200 text-xs text-gray-600 px-1.5 bg-white focus:outline-none focus:border-gray-300"
-            data-doc-id="${esc(doc.id)}" aria-label="Category for ${esc(doc.name || 'this file')}">
-            ${catOptions}
-          </select>
-        </div>
+        ${doc.filePath
+          ? `<a href="${esc(doc.filePath)}" target="_blank"
+               class="flex-shrink-0 h-7 px-2.5 border border-gray-300 rounded-md text-xs text-blue-600 hover:bg-blue-50 transition-colors inline-flex items-center"
+               aria-label="View ${esc(doc.name || 'document')}">
+               <i class="fas fa-external-link-alt mr-1 text-[0.65rem]" aria-hidden="true"></i>View
+             </a>`
+          : ''
+        }
+        <button type="button" class="edit-doc-btn h-7 px-2.5 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0"
+          data-doc-id="${esc(doc.id)}" aria-label="Edit ${esc(doc.name || 'document')}">
+          <i class="fas fa-pen-to-square mr-1 text-[0.65rem]" aria-hidden="true"></i>Edit
+        </button>
       </div>`;
   }
 
   const receiptCatLabel = doc.docType === 'receipt' && doc.category
-    ? RECEIPT_CATEGORIES.find((c) => c.value === doc.category)?.label || ''
+    ? getActiveBudgetCategoryOptions().find((c) => c.value === doc.category)?.label || ''
     : '';
   const receiptMeta = [doc.date, receiptCatLabel].filter(Boolean).join(' · ');
 
@@ -5732,100 +6860,188 @@ function documentCardHtml(doc) {
     </div>`;
 }
 
+let _documentModalId       = null
+let _documentModalFilePath  = ''
+let _documentModalFileLabel = ''
+
+function openDocumentModal(id) {
+  _documentModalId = id
+  const mode = state.planner.mode || 'personal'
+  const arr  = mode === 'sponsor' ? (state.planner.org?.documents || []) : (state.planner.personal?.documents || [])
+  const doc  = id ? arr.find((d) => d.id === id) : null
+  document.getElementById('documentModalTitle').textContent = id ? 'Edit Document' : 'Add Document'
+  document.getElementById('documentModalName').value        = doc?.name        || ''
+  document.getElementById('documentModalDescription').value = doc?.description || ''
+  document.getElementById('documentModalCategory').innerHTML = buildSelectOptions(getDocCategoryOptions(), doc?.category || '')
+  _documentModalFilePath  = doc?.filePath  || ''
+  _documentModalFileLabel = doc?.fileLabel || ''
+  _syncModalFile(_documentModalFilePath, _documentModalFileLabel, 'documentModalFileLabel', 'documentModalRemoveFileBtn')
+  document.getElementById('documentModalDelete')?.classList.toggle('hidden', !id)
+  showModal('documentModal', 'documentModalName')
+}
+
+
+function saveDocumentModal() {
+  const isNew = !_documentModalId
+  const id    = _documentModalId || makeItemId('doc')
+  const data  = {
+    id,
+    name:        document.getElementById('documentModalName').value.trim(),
+    description: document.getElementById('documentModalDescription').value.trim(),
+    category:    document.getElementById('documentModalCategory').value,
+    filePath:    _documentModalFilePath,
+    fileLabel:   _documentModalFileLabel,
+    updatedAt:   new Date().toISOString(),
+  }
+  const mode = state.planner.mode || 'personal'
+  if (mode === 'sponsor') {
+    const arr = (state.planner.org.documents ??= [])
+    if (isNew) arr.push(data)
+    else { const i = arr.findIndex((d) => d.id === id); if (i !== -1) arr[i] = data }
+  } else {
+    if (!state.planner.personal) state.planner.personal = {}
+    const arr = (state.planner.personal.documents ??= [])
+    if (isNew) arr.push(data)
+    else { const i = arr.findIndex((d) => d.id === id); if (i !== -1) arr[i] = data }
+  }
+  closeDocumentModal()
+  renderDocumentsTab()
+  scheduleAutoSave()
+}
+
+function closeDocumentModal() {
+  hideModal('documentModal')
+  _documentModalId = null
+  _documentModalFilePath = ''
+  _documentModalFileLabel = ''
+}
+
 function renderDocumentsTab() {
-  const list  = document.getElementById('documentsList');
-  const empty = document.getElementById('documentsEmptyState');
-  if (!list) return;
-  const docs = collectDocuments();
-  empty?.classList.toggle('hidden', docs.length > 0);
-  list.innerHTML = docs.map(documentCardHtml).join('');
+  renderListPanel('documentsList', 'documentsEmptyState', collectDocuments(), documentCardHtml);
 }
 
 function wireDocumentsPanel() {
-  const panel = document.getElementById('plannerDocumentsPanel');
-  if (!panel) return;
-
+  // Upload button: pick file first, then open modal with file pre-filled
   document.getElementById('uploadDocBtn')?.addEventListener('click', () => {
-    document.getElementById('docFileInput')?.click();
-  });
+    const fi = document.getElementById('docFileInput')
+    if (fi) { fi.dataset.target = 'documentModal'; fi.click() }
+  })
 
   document.getElementById('docFileInput')?.addEventListener('change', async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    try {
-      const { path, label } = await uploadOrReadFile(file, 'documents');
-      const doc = {
-        id: makeItemId('doc'),
-        name: label,
-        description: '',
-        category: '',
-        filePath: path,
-        fileLabel: label,
-        updatedAt: new Date().toISOString(),
-      };
-      const mode = state.planner.mode || 'personal';
-      if (mode === 'sponsor') {
-        state.planner.org.documents = [...(state.planner.org.documents || []), doc];
-      } else {
-        if (!state.planner.personal) state.planner.personal = {};
-        state.planner.personal.documents = [...(state.planner.personal.documents || []), doc];
-      }
-      scheduleAutoSave();
-      renderDocumentsTab();
-    } catch (err) { window.alert(err.message); }
-    e.target.value = '';
-  });
+    const file   = e.target.files?.[0]
+    const target = e.target.dataset.target
+    e.target.value = ''
+    if (!file) return
 
-  panel.addEventListener('input', (e) => {
-    const nameInput = e.target.closest('.doc-name-input');
-    const descInput = e.target.closest('.doc-desc-input');
-    const catSelect = e.target.closest('.doc-cat-select');
-    const el = nameInput || descInput || catSelect;
-    if (!el) return;
-    const id   = el.dataset.docId;
-    const mode = state.planner.mode || 'personal';
-    const arr  = mode === 'sponsor' ? (state.planner.org.documents || []) : (state.planner.personal.documents || []);
-    const doc  = arr.find((d) => d.id === id);
-    if (!doc) return;
-    if (nameInput) doc.name = nameInput.value;
-    if (descInput) doc.description = descInput.value;
-    if (catSelect) doc.category = catSelect.value;
-    doc.updatedAt = new Date().toISOString();
-    scheduleAutoSave();
-  });
-
-  panel.addEventListener('click', (e) => {
-    const deleteBtn = e.target.closest('.delete-doc-btn');
-    if (!deleteBtn) return;
-    const id = deleteBtn.dataset.docId;
-    if (window.confirm('Delete this document?')) {
-      const mode = state.planner.mode || 'personal';
-      if (mode === 'sponsor') {
-        state.planner.org.documents = (state.planner.org.documents || []).filter((d) => d.id !== id);
-      } else {
-        state.planner.personal.documents = (state.planner.personal.documents || []).filter((d) => d.id !== id);
-      }
-      scheduleAutoSave();
-      renderDocumentsTab();
+    if (target === 'documentModal') {
+      // Upload → open new-document modal with file pre-populated
+      try {
+        const { path, label } = await uploadOrReadFile(file, 'documents')
+        _documentModalFilePath  = path
+        _documentModalFileLabel = label
+        _documentModalId = null
+        document.getElementById('documentModalTitle').textContent = 'Add Document'
+        document.getElementById('documentModalName').value        = label
+        document.getElementById('documentModalDescription').value = ''
+        document.getElementById('documentModalCategory').innerHTML = buildSelectOptions(getDocCategoryOptions())
+        _syncModalFile(_documentModalFilePath, _documentModalFileLabel, 'documentModalFileLabel', 'documentModalRemoveFileBtn')
+        document.getElementById('documentModalDelete')?.classList.add('hidden')
+        showModal('documentModal', 'documentModalName')
+      } catch (err) { window.alert(err.message) }
+    } else if (target === 'documentModalAttach') {
+      // Attach file while modal already open
+      try {
+        const { path, label } = await uploadOrReadFile(file, 'documents')
+        _documentModalFilePath  = path
+        _documentModalFileLabel = label
+        _syncModalFile(_documentModalFilePath, _documentModalFileLabel, 'documentModalFileLabel', 'documentModalRemoveFileBtn')
+      } catch (err) { window.alert(err.message) }
     }
-  });
+  })
+
+  document.getElementById('plannerDocumentsPanel')?.addEventListener('click', (e) => {
+    const editBtn = e.target.closest('.edit-doc-btn')
+    if (editBtn) { openDocumentModal(editBtn.dataset.docId); return }
+  })
+
+  // Document modal controls
+  document.getElementById('documentModalClose')?.addEventListener('click', closeDocumentModal)
+  document.getElementById('documentModalDone')?.addEventListener('click', saveDocumentModal)
+  document.getElementById('documentModal')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeDocumentModal()
+  })
+
+  document.getElementById('documentModalDelete')?.addEventListener('click', () => {
+    if (!_documentModalId) return
+    if (window.confirm('Delete this document?')) {
+      const id   = _documentModalId
+      const mode = state.planner.mode || 'personal'
+      if (mode === 'sponsor') {
+        state.planner.org.documents = (state.planner.org.documents || []).filter((d) => d.id !== id)
+      } else {
+        state.planner.personal.documents = (state.planner.personal.documents || []).filter((d) => d.id !== id)
+      }
+      closeDocumentModal()
+      renderDocumentsTab()
+      scheduleAutoSave()
+    }
+  })
+
+  document.getElementById('documentModalAttachBtn')?.addEventListener('click', () => {
+    const fi = document.getElementById('docFileInput')
+    if (fi) { fi.dataset.target = 'documentModalAttach'; fi.click() }
+  })
+
+  document.getElementById('documentModalRemoveFileBtn')?.addEventListener('click', () => {
+    _documentModalFilePath = ''
+    _documentModalFileLabel = ''
+    _syncModalFile(_documentModalFilePath, _documentModalFileLabel, 'documentModalFileLabel', 'documentModalRemoveFileBtn')
+  })
 }
 
 function wireToolbar() {
-  // Tab buttons
-  document.getElementById('showContactsTab')?.addEventListener('click', () => setActiveTab('contacts'));
-  document.getElementById('showTasksTab')?.addEventListener('click', () => setActiveTab('tasks'));
-  document.getElementById('showSponsorTab')?.addEventListener('click', () => { setActiveTab('sponsor'); renderSponsorBudgetBreakdown(); });
-  document.getElementById('showPersonalTab')?.addEventListener('click', () => { setActiveTab('personal'); renderPersonalBudgetBreakdown(); });
-  document.getElementById('showTeamTab')?.addEventListener('click', () => setActiveTab('team'));
-  document.getElementById('showNotesTab')?.addEventListener('click', () => { setActiveTab('notes'); renderNotesTab(); });
-  document.getElementById('showDocumentsTab')?.addEventListener('click', () => setActiveTab('documents'));
-  document.getElementById('showReceiptsTab')?.addEventListener('click', () => setActiveTab('receipts'));
-  document.getElementById('showSummaryTab')?.addEventListener('click', () => { setActiveTab('summary'); renderSummaryTab(); });
+  // Tab bar: delegated click handler covers main bar, Settings pin, and overflow dropdown
+  const TAB_EXTRA_RENDERS = {
+    sponsor:  () => renderSponsorBudgetBreakdown(),
+    personal: () => renderPersonalBudgetBreakdown(),
+    notes:    () => renderNotesTab(),
+    tickets:  () => renderTicketsTab(),
+    budget:   () => renderBudgetTab(),
+    summary:  () => renderSummaryTab(),
+    settings: () => renderSettingsTab(),
+  };
+  document.getElementById('plannerTabBar')?.addEventListener('click', (e) => {
+    // More button toggle
+    if (e.target.closest('#tabMoreBtn')) {
+      _tabMoreOpen = !_tabMoreOpen;
+      const dropdown = document.getElementById('tabMoreDropdown');
+      document.getElementById('tabMoreBtn')?.setAttribute('aria-expanded', String(_tabMoreOpen));
+      dropdown?.classList.toggle('hidden', !_tabMoreOpen);
+      document.getElementById('tabMoreChevron')?.classList.toggle('rotate-180', _tabMoreOpen);
+      return;
+    }
+    const btn = e.target.closest('[data-tab]');
+    if (!btn || btn.id === 'tabMoreBtn') return;
+    const tab = btn.dataset.tab;
+    setActiveTab(tab);
+    TAB_EXTRA_RENDERS[tab]?.();
+    // Close More dropdown after selection
+    _tabMoreOpen = false;
+    document.getElementById('tabMoreDropdown')?.classList.add('hidden');
+    document.getElementById('tabMoreChevron')?.classList.remove('rotate-180');
+  });
+  // Close More dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (_tabMoreOpen && !e.target.closest('#tabBarMoreWrap')) {
+      _tabMoreOpen = false;
+      document.getElementById('tabMoreDropdown')?.classList.add('hidden');
+      document.getElementById('tabMoreChevron')?.classList.remove('rotate-180');
+      document.getElementById('tabMoreBtn')?.setAttribute('aria-expanded', 'false');
+    }
+  });
 
   // Mode toggle
-  document.getElementById('modeToggleSponsor')?.addEventListener('click', () => applyMode('sponsor'));
-  document.getElementById('modeTogglePersonal')?.addEventListener('click', () => applyMode('personal'));
+  // Mode is now changed via the Settings tab radio buttons
 
   // Export / import / save-to-file
   document.getElementById('plannerExportBtn')?.addEventListener('click', handleExport);
@@ -5840,6 +7056,12 @@ function wireToolbar() {
 
   document.getElementById('plannerSaveFileBtn')?.addEventListener('click', handleSaveToFile);
   // New planner / manage event wiring is in wireCreatePlannerModal / wireEventAssocModal
+
+  // Recalculate tab overflow whenever the tab bar container is resized
+  const tabBarMain = document.getElementById('tabBarMain');
+  if (tabBarMain && typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(() => updateTabOverflow()).observe(tabBarMain);
+  }
 }
 
 // ── Init ─────────────────────────────────────────────────────────────────────
@@ -5934,7 +7156,10 @@ async function loadSchedule(eventFile) {
 
 async function init() {
   // Load themes and event catalog in parallel
-  const [, catalog] = await Promise.all([loadThemes(), loadEventCatalog().catch(() => [])]);
+  const [, catalog] = await Promise.all([
+    loadThemes(),
+    loadEventCatalog().catch(() => []),
+  ]);
   _eventCatalog = catalog;
   applyThemeClass(getCurrentThemeId());
 
@@ -5985,6 +7210,14 @@ async function init() {
   }
 
   state.global  = loadGlobal();
+  // Use global budget categories as the default (sourced from planner/global.json via seed).
+  if (state.global.budgetCategories?.length) _defaultBudgetCategories = state.global.budgetCategories;
+  // Merge any team members bundled in a seeded-from-disk planner file, then
+  // re-save so the _globalTeamMembers field doesn't persist in localStorage.
+  if (state.planner._globalTeamMembers) {
+    mergeGlobalTeamMembers(state.planner);
+    savePlanner(state.plannerKey, state.planner);
+  }
 
   if (isLocalhost()) document.getElementById('editorNavLink')?.classList.remove('hidden');
 
@@ -5997,17 +7230,6 @@ async function init() {
     });
   }
 
-  const defaultCurrencyEl = document.getElementById('defaultCurrencySelect');
-  if (defaultCurrencyEl) {
-    defaultCurrencyEl.innerHTML = CURRENCIES.map((c) =>
-      `<option value="${c}"${c === getDefaultCurrency() ? ' selected' : ''}>${c}</option>`
-    ).join('');
-    defaultCurrencyEl.addEventListener('change', () => {
-      state.global.defaultCurrency = defaultCurrencyEl.value;
-      saveGlobal(state.global);
-    });
-  }
-
   // Sync the URL so refresh stays on this planner and the address is shareable
   pushPlannerUrl(state.plannerKey);
 
@@ -6016,6 +7238,17 @@ async function init() {
   updateHeader();
   renderAll();
   applyMode(state.planner.mode || 'personal');
+
+  // Restore tab from URL hash (after applyMode so visibility is correct)
+  const hashTab = location.hash.replace('#', '');
+  if (hashTab && TABS.includes(hashTab)) {
+    const mode = state.planner.mode || 'personal';
+    if (getVisibleTabs(mode).has(hashTab)) {
+      setActiveTab(hashTab);
+      if (hashTab === 'summary') renderSummaryTab();
+      if (hashTab === 'settings') renderSettingsTab();
+    }
+  }
 
   // Configure the shared event-search modal used by "Find event" / "Manage event"
   _searchCatalog = await searchCatalogPromise;
@@ -6067,6 +7300,10 @@ async function init() {
   wireDocumentsPanel();
   wireReceiptsPanel();
   wireSummaryPanel();
+  wireTicketsPanel();
+  wireBudgetPanel();
+  wireBudgetCategoryManager();
+  wireSettingsPanel();
 
   // Inject timezone datalist once
   if (!document.getElementById('tzList')) {

@@ -37,6 +37,57 @@
   border-color: rgba(135,186,233,0.22); background: rgba(255,255,255,0.04);
 }
 
+/* ── Planner tab bar: full-width with overflow dropdown ──────────────────*/
+#plannerTabBar.editor-tab-row {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+#tabBarMain {
+    overflow: hidden;
+}
+
+/* Drag-drop visual feedback */
+.tab-drag-source { opacity: 0.35; }
+/* Tab bar: horizontal drop lines */
+.tab-drop-before { box-shadow: -2px 0 0 0 rgba(110,192,255,0.9) !important; }
+.tab-drop-after  { box-shadow:  2px 0 0 0 rgba(110,192,255,0.9) !important; }
+/* Settings list: vertical drop lines */
+.settings-drop-before { box-shadow: 0 -2px 0 0 rgba(110,192,255,0.9) !important; }
+.settings-drop-after  { box-shadow: 0  2px 0 0 rgba(110,192,255,0.9) !important; }
+
+/* More dropdown: inherits accordion dark theme colours */
+.tab-more-dropdown {
+    background: #1a2535;
+    border-color: rgba(135,186,233,0.22);
+}
+.editor-meta-accordion .tab-more-dropdown button {
+    color: #c8d6e8;
+    background: transparent;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.45rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    text-align: left;
+    transition: background 120ms;
+    border: none;
+}
+.editor-meta-accordion .tab-more-dropdown button:hover { background: rgba(255,255,255,0.08); color: #eef6ff; }
+.editor-meta-accordion .tab-more-dropdown button.is-active { color: #fff; background: rgba(19,131,210,0.5); }
+.theme-light .tab-more-dropdown {
+    background: #fff;
+    border-color: rgba(0,0,0,0.12);
+}
+.theme-light .editor-meta-accordion .tab-more-dropdown button { color: #374151; }
+.theme-light .editor-meta-accordion .tab-more-dropdown button:hover { background: rgba(0,0,0,0.05); color: #111827; }
+.theme-light .editor-meta-accordion .tab-more-dropdown button.is-active { color: #1d4ed8; background: rgba(59,130,246,0.08); }
+
 /* ── Planner row action buttons ───────────────────────────────────────────
    Outlined edit/action buttons: subtle cyan accent border + text.
    Icon-only remove/delete buttons: muted until hover, then warm red.

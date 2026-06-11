@@ -13,7 +13,7 @@ export function makeItemId(prefix = 'item') {
 // ── Global (cross-event) store ────────────────────────────────────────────────
 
 export function makeEmptyGlobal() {
-  return { teamMembers: [], defaultCurrency: '' };
+  return { teamMembers: [], defaultCurrency: '', budgetCategories: [], defaultMode: '' };
 }
 
 export function loadGlobal() {
@@ -59,6 +59,11 @@ export function makeEmptyPlanner(plannerKey, eventFile = '') {
       autoAddedSponsoredSessions: [],
       documents: [],
       budgetItems: [],
+      budgetCategories: [],
+      categoryBudgets: {},
+      tickets: [],
+      disabledTabs: [],
+      tabOrder: [],
       itinerary: [],
       memberItinerary: [],
     },
@@ -75,6 +80,10 @@ export function makeEmptyPlanner(plannerKey, eventFile = '') {
       itinerary:      [],
       documents:      [],
       budgetItems:    [],
+      budgetCategories: [],
+      tickets:        [],
+      disabledTabs:   [],
+      tabOrder:       [],
     },
   };
 }

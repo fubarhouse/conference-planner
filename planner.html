@@ -66,15 +66,6 @@
       <section class="bg-white rounded-lg shadow-md p-4">
         <div class="flex flex-wrap gap-2 items-center justify-between">
           <div class="flex gap-2 flex-wrap items-center">
-            <!-- Mode toggle -->
-            <div class="editor-tab-row" role="group" aria-label="Planner mode">
-              <button id="modeToggleSponsor" type="button" class="editor-tab-button" aria-pressed="false">
-                <i class="fas fa-handshake mr-2 text-[0.72rem]"></i>Sponsor
-              </button>
-              <button id="modeTogglePersonal" type="button" class="editor-tab-button is-active" aria-pressed="true">
-                <i class="fas fa-person mr-2 text-[0.72rem]"></i>Personal
-              </button>
-            </div>
             <div class="h-11 inline-flex items-center px-4 rounded-md border border-gray-300 text-sm text-gray-500 gap-2">
               <i class="fas fa-calendar-alt text-xs"></i>
               <span id="plannerEventName">Loading…</span>
@@ -91,10 +82,6 @@
             </button>
           </div>
           <div class="flex gap-2 flex-wrap items-center">
-            <label class="h-11 inline-flex items-center gap-2 pl-3 pr-2 border border-gray-300 rounded-md text-sm text-gray-600 bg-white whitespace-nowrap" title="Default currency for new items">
-              <i class="fas fa-coins text-xs text-gray-400"></i>
-              <select id="defaultCurrencySelect" class="h-full bg-transparent text-sm text-gray-700 border-0 focus:ring-0 pr-1 cursor-pointer"></select>
-            </label>
             <button id="plannerSaveFileBtn" type="button" class="hidden h-11 inline-flex items-center justify-center pl-5 pr-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
               <i class="fas fa-server mr-2"></i>Save to file
             </button>
@@ -124,33 +111,16 @@
             <h2 class="text-lg font-semibold text-gray-100">Planner</h2>
             <p id="plannerModeSubtitle" class="text-sm text-gray-400">Your personal notebook for this event.</p>
           </div>
-          <div class="editor-tab-row" role="tablist" aria-label="Planner sections">
-            <button id="showSponsorTab" type="button" class="editor-tab-button hidden" role="tab" aria-selected="false" aria-controls="plannerSponsorPanel">
-              <i class="fas fa-handshake mr-2 text-[0.72rem]"></i>Sponsor
-            </button>
-            <button id="showTeamTab" type="button" class="editor-tab-button hidden" role="tab" aria-selected="false" aria-controls="plannerTeamPanel">
-              <i class="fas fa-users mr-2 text-[0.72rem]"></i>Team
-            </button>
-            <button id="showPersonalTab" type="button" class="editor-tab-button is-active" role="tab" aria-selected="true" aria-controls="plannerPersonalPanel">
-              <i class="fas fa-person mr-2 text-[0.72rem]"></i>Personal
-            </button>
-            <button id="showTasksTab" type="button" class="editor-tab-button hidden" role="tab" aria-selected="false" aria-controls="plannerTasksPanel">
-              <i class="fas fa-list-check mr-2 text-[0.72rem]"></i>Tasks
-            </button>
-            <button id="showContactsTab" type="button" class="editor-tab-button hidden" role="tab" aria-selected="false" aria-controls="plannerContactsPanel">
-              <i class="fas fa-address-book mr-2 text-[0.72rem]"></i>Contacts
-            </button>
-            <button id="showNotesTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="plannerNotesPanel">
-              <i class="fas fa-file-lines mr-2 text-[0.72rem]"></i>Notes
-            </button>
-            <button id="showReceiptsTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="plannerReceiptsPanel">
-              <i class="fas fa-receipt mr-2 text-[0.72rem]"></i>Receipts
-            </button>
-            <button id="showDocumentsTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="plannerDocumentsPanel">
-              <i class="fas fa-folder-open mr-2 text-[0.72rem]"></i>Documents
-            </button>
-            <button id="showSummaryTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="plannerSummaryPanel">
-              <i class="fas fa-chart-bar mr-2 text-[0.72rem]"></i>Summary
+          <div id="plannerTabBar" class="editor-tab-row planner-tab-row" role="tablist" aria-label="Planner sections">
+            <div id="tabBarMain" class="flex items-center gap-0.5 flex-1 min-w-0"></div>
+            <div id="tabBarMoreWrap" class="relative hidden flex-shrink-0">
+              <button id="tabMoreBtn" type="button" class="editor-tab-button whitespace-nowrap" aria-haspopup="listbox" aria-expanded="false">
+                More <i id="tabMoreChevron" class="fas fa-chevron-down text-[0.55rem] ml-1.5"></i>
+              </button>
+              <div id="tabMoreDropdown" class="hidden absolute right-0 top-full mt-1 z-30 rounded-lg shadow-xl border py-1 min-w-[160px] tab-more-dropdown"></div>
+            </div>
+            <button id="showSettingsTab" type="button" class="editor-tab-button flex-shrink-0" role="tab" aria-selected="false" aria-controls="plannerSettingsPanel" data-tab="settings">
+              <i class="fas fa-gear mr-2 text-[0.72rem]"></i>Settings
             </button>
           </div>
         </div>
@@ -198,38 +168,6 @@
 
         <!-- Sponsor panel -->
         <div id="plannerSponsorPanel" class="hidden" role="tabpanel" aria-labelledby="showSponsorTab">
-          <!-- Linked sponsor search -->
-          <section class="bg-white rounded-lg shadow-md p-4 mb-4">
-            <div class="flex items-center justify-between mb-3">
-              <h2 class="text-sm font-semibold text-gray-700">Linked Sponsor</h2>
-              <button type="button" id="unlinkSponsorBtn" class="hidden h-7 px-3 rounded-md border border-red-200 text-xs text-red-500 hover:bg-red-50 transition-colors">
-                <i class="fas fa-times mr-1"></i>Unlink
-              </button>
-            </div>
-            <!-- Search (shown when no sponsor linked) -->
-            <div id="sponsorSearchRow" class="flex items-center gap-2">
-              <div class="relative flex-1">
-                <input type="text" id="sponsorSearchInput" placeholder="Search sponsors by name…"
-                  class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3 pr-8"
-                  autocomplete="off">
-                <i class="fas fa-search absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-300 text-xs pointer-events-none"></i>
-              </div>
-            </div>
-            <ul id="sponsorSearchResults" class="hidden mt-1 rounded-md border border-gray-200 bg-white shadow-sm text-sm overflow-hidden max-h-48 overflow-y-auto"></ul>
-            <!-- Linked sponsor card (shown when linked) -->
-            <div id="sponsorLinkedCard" class="hidden rounded-md border border-gray-200 bg-gray-50 px-4 py-3 flex items-center gap-3">
-              <i class="fas fa-handshake text-gray-400 flex-shrink-0"></i>
-              <div class="flex-1 min-w-0">
-                <p id="sponsorLinkedName" class="text-sm font-semibold text-gray-800 truncate"></p>
-                <p id="sponsorLinkedTier" class="text-xs text-gray-400"></p>
-              </div>
-              <a id="sponsorLinkedUrl" href="#" target="_blank" rel="noopener"
-                class="flex-shrink-0 text-xs drupal-blue-text hover:underline hidden">
-                <i class="fas fa-arrow-up-right-from-square text-[0.6rem] mr-0.5"></i>Visit
-              </a>
-            </div>
-          </section>
-
           <section class="bg-white rounded-lg shadow-md p-4">
             <h2 class="text-lg font-semibold text-gray-800 mb-6">Org / Sponsor</h2>
             <div class="space-y-8">
@@ -248,37 +186,6 @@
                     <span class="editor-field-label">Notes</span>
                     <textarea id="orgBoothNotes" rows="4" class="w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white p-3 mt-1" placeholder="Setup instructions, contacts, requirements…"></textarea>
                   </label>
-                  <div class="pt-3 border-t border-gray-100 space-y-3">
-                    <h4 class="text-xs font-semibold text-gray-400 uppercase tracking-widest">Sponsorship Budget</h4>
-                    <div class="rounded-lg border border-gray-200 bg-gray-50 p-3 space-y-3">
-                      <div class="grid grid-cols-3 gap-3">
-                        <label class="editor-form-field col-span-1">
-                          <span class="editor-field-label">Currency</span>
-                          <select id="orgSponsorCurrency" class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"></select>
-                        </label>
-                        <label class="editor-form-field">
-                          <span class="editor-field-label">Sponsor budget</span>
-                          <input type="number" min="0" step="0.01" id="orgSponsorBudget" placeholder="0.00" class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
-                        </label>
-                        <label class="editor-form-field">
-                          <span class="editor-field-label">Sponsor actual</span>
-                          <input type="number" min="0" step="0.01" id="orgSponsorActual" placeholder="0.00" class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
-                        </label>
-                      </div>
-                      <!-- Manual budget line items (sponsor) -->
-                      <div class="pt-2 border-t border-gray-200 space-y-2">
-                        <div class="flex items-center justify-between">
-                          <span class="text-[0.65rem] font-semibold uppercase tracking-widest text-gray-400">Budget Line Items</span>
-                          <button id="addSponsorBudgetItemBtn" type="button"
-                            class="h-6 px-2.5 rounded border border-gray-300 text-[0.65rem] font-medium text-gray-600 bg-white hover:bg-gray-50 transition-colors">
-                            <i class="fas fa-plus mr-1 text-[0.55rem]"></i>Add item
-                          </button>
-                        </div>
-                        <div id="sponsorBudgetItems" class="space-y-1.5"></div>
-                      </div>
-                      <div id="sponsorBudgetBreakdown" class="hidden pt-2 border-t border-gray-200 text-xs"></div>
-                    </div>
-                  </div>
                 </div>
 
                 <!-- Event Team -->
@@ -589,6 +496,80 @@
           </section>
         </div>
 
+        <!-- Tickets panel -->
+        <div id="plannerTicketsPanel" class="hidden" role="tabpanel" aria-labelledby="showTicketsTab">
+          <section class="bg-white rounded-lg shadow-md p-4">
+            <div class="flex items-center justify-between mb-4 flex-wrap gap-3">
+              <div>
+                <h2 class="text-lg font-semibold text-gray-800">Tickets</h2>
+                <p class="text-sm text-gray-500">Conference passes, workshop seats, and other ticketed items.</p>
+              </div>
+              <button id="addTicketBtn" type="button" class="h-9 inline-flex items-center justify-center px-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+                <i class="fas fa-plus mr-2 text-xs"></i>Add ticket
+              </button>
+            </div>
+            <div id="ticketsList" class="space-y-2"></div>
+            <p id="ticketsEmptyState" class="text-sm text-gray-400 text-center py-8">No tickets yet — add your first one above.</p>
+          </section>
+        </div>
+
+        <!-- Budget panel -->
+        <div id="plannerBudgetPanel" class="hidden" role="tabpanel" aria-labelledby="showBudgetTab">
+          <section class="bg-white rounded-lg shadow-md p-4 space-y-6">
+            <div class="flex items-center justify-between flex-wrap gap-3">
+              <div>
+                <h2 class="text-lg font-semibold text-gray-800">Budget</h2>
+                <p class="text-sm text-gray-500 mt-0.5">Set category-level budget targets and track spend against actuals.</p>
+              </div>
+            </div>
+
+            <!-- Overall event budget -->
+            <div class="space-y-2">
+              <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-widest">Overall event budget</h3>
+              <div class="grid grid-cols-3 gap-3 rounded-lg border border-gray-200 bg-gray-50 p-3">
+                <label class="editor-form-field">
+                  <span class="editor-field-label">Currency</span>
+                  <select id="orgSponsorCurrency" class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"></select>
+                </label>
+                <label class="editor-form-field">
+                  <span class="editor-field-label">Total budget</span>
+                  <input type="number" min="0" step="0.01" id="orgSponsorBudget" placeholder="0.00" class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+                </label>
+                <label class="editor-form-field">
+                  <span class="editor-field-label">Total actual</span>
+                  <input type="number" min="0" step="0.01" id="orgSponsorActual" placeholder="0.00" class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+                </label>
+              </div>
+            </div>
+
+            <!-- Per-category budget targets -->
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-widest">Category budgets</h3>
+                <div class="grid grid-cols-[1fr_1fr_auto] gap-3 text-[0.6rem] font-semibold uppercase tracking-widest text-gray-300 w-1/2 text-right">
+                  <span></span><span>Target</span><span class="min-w-[6rem]">Actual / remaining</span>
+                </div>
+              </div>
+              <div id="budgetCategoryRows" class="rounded-lg border border-gray-200 bg-gray-50 px-3 divide-y divide-gray-100"></div>
+            </div>
+
+            <!-- Budget line items -->
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-widest">Line items</h3>
+                <button id="addSponsorBudgetItemBtn" type="button"
+                  class="h-7 px-3 rounded border border-gray-300 text-[0.65rem] font-medium text-gray-600 bg-white hover:bg-gray-50 transition-colors">
+                  <i class="fas fa-plus mr-1 text-[0.55rem]"></i>Add item
+                </button>
+              </div>
+              <div id="sponsorBudgetItems" class="space-y-1.5"></div>
+            </div>
+
+            <!-- Budget breakdown (item-level drilldown) -->
+            <div id="sponsorBudgetBreakdown" class="hidden pt-2 border-t border-gray-100 text-xs"></div>
+          </section>
+        </div>
+
         <!-- Summary panel -->
         <div id="plannerSummaryPanel" class="hidden" role="tabpanel" aria-labelledby="showSummaryTab">
           <section class="bg-white rounded-lg shadow-md p-4 space-y-6">
@@ -635,11 +616,27 @@
               <div id="summaryBudgetHealth"></div>
               <div class="flex gap-4 min-w-0">
                 <div class="flex-1 min-w-0">
-                  <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Category <span class="normal-case font-normal text-gray-300 ml-1">(click to drill down)</span></h3>
+                  <div class="flex items-center justify-between gap-3 mb-3 pb-2 border-b border-gray-100">
+                    <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-widest flex-shrink-0">Category</h3>
+                    <span class="flex items-center gap-3 text-[0.6rem] text-gray-400 flex-shrink-0">
+                      <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-sm inline-block bg-emerald-400"></span>&lt;70%</span>
+                      <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-sm inline-block bg-amber-400"></span>70–99%</span>
+                      <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-sm inline-block bg-red-400"></span>over</span>
+                      <span class="text-gray-300">· click to drill down</span>
+                    </span>
+                  </div>
                   <canvas id="budgetCategoryChart" height="120"></canvas>
                 </div>
                 <div id="summaryMemberChartSection" class="flex-1 min-w-0">
-                  <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">By Team Member <span class="normal-case font-normal text-gray-300 ml-1">(click to drill down)</span></h3>
+                  <div class="flex items-center justify-between gap-3 mb-3 pb-2 border-b border-gray-100">
+                    <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-widest flex-shrink-0">By Team Member</h3>
+                    <span class="flex items-center gap-3 text-[0.6rem] text-gray-400 flex-shrink-0">
+                      <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-sm inline-block bg-indigo-400"></span>&lt;70%</span>
+                      <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-sm inline-block bg-amber-400"></span>70–99%</span>
+                      <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-sm inline-block bg-red-400"></span>over</span>
+                      <span class="text-gray-300">· click to drill down</span>
+                    </span>
+                  </div>
                   <canvas id="budgetMemberChart" height="120"></canvas>
                 </div>
               </div>
@@ -688,6 +685,164 @@
                 <div id="globalChartEventFilter" style="display:none;flex-wrap:wrap;gap:0.375rem;margin-bottom:0.75rem"></div>
                 <canvas id="globalBudgetChart"></canvas>
               </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Settings panel -->
+        <div id="plannerSettingsPanel" class="hidden" role="tabpanel" aria-labelledby="showSettingsTab">
+          <section class="bg-white rounded-lg shadow-md p-4 space-y-6">
+            <div>
+              <h2 class="text-lg font-semibold text-gray-800">Settings</h2>
+              <p class="text-sm text-gray-500 mt-0.5">Configure this planner's tabs and budget categories.</p>
+            </div>
+
+            <!-- Planner mode -->
+            <div class="space-y-3">
+              <div>
+                <h3 class="text-sm font-semibold text-gray-700">Planner mode</h3>
+                <p class="text-xs text-gray-400 mt-0.5">Choose how this planner is set up. Sponsor mode adds team, budget, and booth tracking; personal mode focuses on your own travel and expenses.</p>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <label class="flex items-start gap-3 p-3 rounded-lg border border-gray-200 bg-white cursor-pointer hover:bg-gray-50 transition-colors has-[:checked]:border-blue-400 has-[:checked]:bg-blue-50">
+                  <input type="radio" id="settingsModePersonal" name="settingsMode" value="personal" class="mt-0.5 h-4 w-4 text-blue-600 border-gray-300 drupal-blue-focus">
+                  <div>
+                    <p class="text-sm font-semibold text-gray-800">Personal</p>
+                    <p class="text-xs text-gray-500 mt-0.5">Travel, receipts, session notes, contacts</p>
+                  </div>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg border border-gray-200 bg-white cursor-pointer hover:bg-gray-50 transition-colors has-[:checked]:border-blue-400 has-[:checked]:bg-blue-50">
+                  <input type="radio" id="settingsModeSponsor" name="settingsMode" value="sponsor" class="mt-0.5 h-4 w-4 text-blue-600 border-gray-300 drupal-blue-focus">
+                  <div>
+                    <p class="text-sm font-semibold text-gray-800">Sponsor</p>
+                    <p class="text-xs text-gray-500 mt-0.5">Team, booth, budget, deliverables</p>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Tab order & visibility -->
+            <div class="space-y-3 pt-4 border-t border-gray-100">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <h3 class="text-sm font-semibold text-gray-700">Tab order &amp; visibility</h3>
+                  <p class="text-xs text-gray-400 mt-0.5">Drag to reorder. Toggle the checkbox to show or hide a tab. Settings cannot be disabled.</p>
+                </div>
+                <button type="button" id="settingsResetTabOrderBtn"
+                  class="flex-shrink-0 h-7 px-2.5 rounded border border-gray-200 text-xs text-gray-500 bg-white hover:bg-gray-50 hover:border-gray-300 transition-colors whitespace-nowrap">
+                  <i class="fas fa-rotate-left mr-1 text-[0.6rem]"></i>Reset order
+                </button>
+              </div>
+              <div id="settingsTabList" class="space-y-1.5"></div>
+            </div>
+
+            <!-- Sponsor-only sections (linked sponsor + team) -->
+            <div id="settingsSponsorSection" class="hidden space-y-6">
+
+              <!-- Linked sponsor -->
+              <div class="space-y-3 pt-4 border-t border-gray-100">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <h3 class="text-sm font-semibold text-gray-700">Linked sponsor</h3>
+                    <p class="text-xs text-gray-400 mt-0.5">Connect this planner to a sponsor entry from the event data to auto-track sponsored sessions.</p>
+                  </div>
+                  <button type="button" id="unlinkSponsorBtn" class="hidden flex-shrink-0 h-7 px-3 rounded-md border border-red-200 text-xs text-red-500 hover:bg-red-50 transition-colors">
+                    <i class="fas fa-times mr-1"></i>Unlink
+                  </button>
+                </div>
+                <div id="sponsorSearchRow" class="flex items-center gap-2">
+                  <div class="relative flex-1">
+                    <input type="text" id="sponsorSearchInput" placeholder="Search sponsors by name…"
+                      class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3 pr-8"
+                      autocomplete="off">
+                    <i class="fas fa-search absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-300 text-xs pointer-events-none"></i>
+                  </div>
+                </div>
+                <ul id="sponsorSearchResults" class="hidden rounded-md border border-gray-200 bg-white shadow-sm text-sm overflow-hidden max-h-48 overflow-y-auto"></ul>
+                <div id="sponsorLinkedCard" class="hidden rounded-md border border-gray-200 bg-gray-50 px-4 py-3 flex items-center gap-3">
+                  <i class="fas fa-handshake text-gray-400 flex-shrink-0"></i>
+                  <div class="flex-1 min-w-0">
+                    <p id="sponsorLinkedName" class="text-sm font-semibold text-gray-800 truncate"></p>
+                    <p id="sponsorLinkedTier" class="text-xs text-gray-400"></p>
+                  </div>
+                  <a id="sponsorLinkedUrl" href="#" target="_blank" rel="noopener"
+                    class="flex-shrink-0 text-xs drupal-blue-text hover:underline hidden">
+                    <i class="fas fa-arrow-up-right-from-square text-[0.6rem] mr-0.5"></i>Visit
+                  </a>
+                </div>
+              </div>
+
+              <!-- Team -->
+              <div class="space-y-3 pt-4 border-t border-gray-100">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <h3 class="text-sm font-semibold text-gray-700">Team</h3>
+                    <p class="text-xs text-gray-400 mt-0.5">Global team members — check the box to assign them to this event.</p>
+                  </div>
+                  <button type="button" id="settingsAddTeamMemberBtn"
+                    class="flex-shrink-0 h-8 inline-flex items-center px-3 rounded-md bg-gray-800 text-xs font-medium text-white hover:bg-gray-700 transition-colors">
+                    <i class="fas fa-plus mr-1.5 text-[0.6rem]"></i>Add member
+                  </button>
+                </div>
+                <div id="settingsTeamList" class="space-y-2"></div>
+              </div>
+
+            </div>
+
+            <!-- Budget categories (sponsor mode) -->
+            <div id="settingsBudgetSponsor" class="hidden space-y-3 pt-4 border-t border-gray-100">
+              <div>
+                <h3 class="text-sm font-semibold text-gray-700">Budget categories</h3>
+                <p class="text-xs text-gray-400 mt-0.5">Customise categories for this event's sponsor budget. Removing a category won't delete existing items — they'll fall back to Misc.</p>
+              </div>
+              <div id="sponsorBudgetCategoryList" class="space-y-1"></div>
+              <div class="flex gap-2">
+                <input type="text" id="sponsorBudgetCategoryInput" placeholder="New category name"
+                  class="flex-1 h-8 rounded border-gray-300 text-sm bg-white px-2 drupal-blue-focus">
+                <button type="button" id="addSponsorBudgetCategoryBtn"
+                  class="h-8 px-3 rounded border border-gray-300 text-xs font-medium text-gray-600 bg-white hover:bg-gray-50 transition-colors flex-shrink-0">
+                  <i class="fas fa-plus text-[0.55rem]"></i> Add
+                </button>
+              </div>
+            </div>
+
+            <!-- Budget categories (personal mode) -->
+            <div id="settingsBudgetPersonal" class="hidden space-y-3 pt-4 border-t border-gray-100">
+              <div>
+                <h3 class="text-sm font-semibold text-gray-700">Budget categories</h3>
+                <p class="text-xs text-gray-400 mt-0.5">Customise categories for this event's personal budget. Removing a category won't delete existing items — they'll fall back to Misc.</p>
+              </div>
+              <div id="personalBudgetCategoryList" class="space-y-1"></div>
+              <div class="flex gap-2">
+                <input type="text" id="personalBudgetCategoryInput" placeholder="New category name"
+                  class="flex-1 h-8 rounded border-gray-300 text-sm bg-white px-2 drupal-blue-focus">
+                <button type="button" id="addPersonalBudgetCategoryBtn"
+                  class="h-8 px-3 rounded border border-gray-300 text-xs font-medium text-gray-600 bg-white hover:bg-gray-50 transition-colors flex-shrink-0">
+                  <i class="fas fa-plus text-[0.55rem]"></i> Add
+                </button>
+              </div>
+            </div>
+
+            <!-- Global defaults -->
+            <div class="space-y-3 pt-4 border-t border-gray-100">
+              <div>
+                <h3 class="text-sm font-semibold text-gray-700">Global defaults</h3>
+                <p class="text-xs text-gray-400 mt-0.5">Applied across all planners and stored globally.</p>
+              </div>
+              <label class="flex items-center justify-between gap-4">
+                <div>
+                  <span class="text-sm text-gray-700">Default currency</span>
+                  <p class="text-xs text-gray-400 mt-0.5">Pre-selected in every new item. Individual fields can still be changed.</p>
+                </div>
+                <select id="settingsDefaultCurrency" class="h-8 rounded-md border-gray-300 text-sm bg-white px-2 drupal-blue-focus"></select>
+              </label>
+              <label class="flex items-center justify-between gap-4">
+                <span class="text-sm text-gray-700">Default mode for new planners</span>
+                <select id="settingsDefaultMode" class="h-8 rounded-md border-gray-300 text-sm bg-white px-2 drupal-blue-focus">
+                  <option value="personal">Personal</option>
+                  <option value="sponsor">Sponsor</option>
+                </select>
+              </label>
             </div>
           </section>
         </div>
@@ -839,12 +994,24 @@
           <input type="text" id="tmRole" placeholder="e.g. Sales Engineer" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
         </label>
         <label class="editor-form-field">
+          <span class="editor-field-label">Company</span>
+          <input type="text" id="tmCompany" placeholder="e.g. Acme Corp" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Department</span>
+          <input type="text" id="tmDepartment" placeholder="e.g. Engineering" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+        </label>
+        <label class="editor-form-field">
           <span class="editor-field-label">Phone</span>
           <input type="tel" id="tmPhone" placeholder="+1 555 000 0000" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
         </label>
         <label class="editor-form-field">
           <span class="editor-field-label">Notes</span>
           <input type="text" id="tmNotes" placeholder="Any quick notes…" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+        </label>
+        <label class="editor-form-field col-span-2 flex items-center gap-3 cursor-pointer">
+          <input type="checkbox" id="tmEnabled" class="h-4 w-4 rounded border-gray-300 text-blue-600 drupal-blue-focus">
+          <span class="editor-field-label !mb-0">Active (enabled)</span>
         </label>
       </div>
       <div class="flex items-center justify-between px-6 py-4 border-t border-gray-200">
@@ -1220,11 +1387,17 @@
         </button>
       </div>
       <div class="px-6 py-5 space-y-4">
-        <div class="grid grid-cols-3 gap-3">
+        <div class="grid grid-cols-2 gap-3">
           <label class="editor-form-field">
             <span class="editor-field-label">Mode</span>
             <select id="personalLegModalMode" class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"></select>
           </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Status</span>
+            <select id="personalLegModalStatus" class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"></select>
+          </label>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
           <label class="editor-form-field">
             <span class="editor-field-label">Date</span>
             <input type="date" id="personalLegModalDate" class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
@@ -1435,6 +1608,347 @@
           class="h-9 inline-flex items-center px-5 rounded-md bg-gray-800 text-xs font-medium text-white hover:bg-gray-700 transition-colors">
           Done
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ticket modal -->
+  <div id="ticketModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" style="background:rgba(0,0,0,0.55)" role="dialog" aria-modal="true" aria-labelledby="ticketModalTitle">
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg flex flex-col my-auto">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <h2 id="ticketModalTitle" class="text-base font-semibold text-gray-800">Add Ticket</h2>
+        <button type="button" id="ticketModalClose" aria-label="Close"
+          class="h-8 w-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="px-6 py-5 space-y-4">
+        <label class="editor-form-field">
+          <span class="editor-field-label">Name / description</span>
+          <input type="text" id="ticketName" placeholder="DrupalCon conference pass"
+            class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+        </label>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="editor-form-field">
+            <span class="editor-field-label">Status</span>
+            <select id="ticketStatus" class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"></select>
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Currency</span>
+            <select id="ticketCurrency" class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"></select>
+          </label>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="editor-form-field">
+            <span class="editor-field-label">Quantity</span>
+            <input type="number" min="1" step="1" id="ticketQuantity" placeholder="1"
+              class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Unit price</span>
+            <input type="number" min="0" step="0.01" id="ticketUnitPrice" placeholder="0.00"
+              class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+          </label>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="editor-form-field">
+            <span class="editor-field-label">Assigned to</span>
+            <select id="ticketAssignedTo" class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"></select>
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Purchased by</span>
+            <select id="ticketPurchasedBy" class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"></select>
+          </label>
+        </div>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Notes</span>
+          <textarea id="ticketNotes" rows="2" placeholder="Early bird, workshop access, etc."
+            class="w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white p-2 resize-y"></textarea>
+        </label>
+      </div>
+      <div class="flex items-center justify-between px-6 py-4 border-t border-gray-200">
+        <button type="button" id="ticketModalDelete"
+          class="hidden h-9 inline-flex items-center px-4 rounded-md border border-red-200 text-xs font-medium text-red-500 hover:bg-red-50 transition-colors">
+          <i class="fas fa-trash-can mr-1.5 text-[0.65rem]"></i>Remove
+        </button>
+        <div class="ml-auto">
+          <button type="button" id="ticketModalDone"
+            class="h-9 inline-flex items-center px-5 rounded-md bg-gray-800 text-xs font-medium text-white hover:bg-gray-700 transition-colors">
+            Done
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Team member detail modal -->
+  <div id="teamMemberDetailModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" style="background:rgba(0,0,0,0.55)" role="dialog" aria-modal="true" aria-labelledby="tmDetailName">
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-xl flex flex-col my-auto">
+      <div class="flex items-start justify-between px-6 py-4 border-b border-gray-200">
+        <div class="min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h2 id="tmDetailName" class="text-base font-semibold text-gray-800"></h2>
+            <span id="tmDetailDisabledBadge" class="hidden text-[0.6rem] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-gray-100 text-gray-400">Inactive</span>
+          </div>
+          <p id="tmDetailRole" class="text-xs text-gray-400 mt-0.5"></p>
+          <p id="tmDetailMeta" class="text-xs text-gray-400 mt-0.5"></p>
+        </div>
+        <button type="button" id="tmDetailClose" aria-label="Close"
+          class="ml-3 flex-shrink-0 h-8 w-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="px-6 py-5 space-y-5">
+        <div class="tm-detail-phone-row space-y-0.5">
+          <p class="text-[0.65rem] font-semibold uppercase tracking-widest text-gray-400">Phone</p>
+          <p id="tmDetailPhone" class="text-sm text-gray-700"></p>
+        </div>
+        <div class="tm-detail-notes-row space-y-0.5">
+          <p class="text-[0.65rem] font-semibold uppercase tracking-widest text-gray-400">Notes</p>
+          <p id="tmDetailNotes" class="text-sm text-gray-700 whitespace-pre-line"></p>
+        </div>
+        <div class="space-y-1.5">
+          <p class="text-[0.65rem] font-semibold uppercase tracking-widest text-gray-400">Travel</p>
+          <div id="tmDetailTravel" class="space-y-1"></div>
+        </div>
+        <div class="space-y-1.5">
+          <p class="text-[0.65rem] font-semibold uppercase tracking-widest text-gray-400">Tickets</p>
+          <div id="tmDetailTickets" class="space-y-1"></div>
+        </div>
+        <div class="tm-detail-budget-row space-y-1.5">
+          <p class="text-[0.65rem] font-semibold uppercase tracking-widest text-gray-400">Budget</p>
+          <div id="tmDetailBudget" class="text-xs space-y-1"></div>
+        </div>
+      </div>
+      <div class="flex justify-end px-6 py-4 border-t border-gray-200">
+        <button type="button" id="tmDetailClose2"
+          class="h-9 inline-flex items-center px-5 rounded-md bg-gray-800 text-xs font-medium text-white hover:bg-gray-700 transition-colors">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact modal -->
+  <div id="contactModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" style="background:rgba(0,0,0,0.55)" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg flex flex-col my-auto">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <h2 id="contactModalTitle" class="text-base font-semibold text-gray-800">Contact</h2>
+        <button type="button" id="contactModalClose" aria-label="Close"
+          class="h-8 w-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="px-6 py-5 grid grid-cols-2 gap-3">
+        <label class="editor-form-field">
+          <span class="editor-field-label">Name</span>
+          <input type="text" id="contactName" placeholder="Full name" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Organisation</span>
+          <input type="text" id="contactOrg" placeholder="Company / team" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Email</span>
+          <input type="email" id="contactEmail" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">LinkedIn URL</span>
+          <input type="url" id="contactLinkedin" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+        </label>
+        <label class="editor-form-field col-span-2">
+          <span class="editor-field-label">Contact type</span>
+          <select id="contactType" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+            <option value="">General</option>
+            <option value="organiser">Organiser</option>
+            <option value="media">Media</option>
+            <option value="partner">Partner</option>
+            <option value="vip">VIP</option>
+          </select>
+        </label>
+        <label class="editor-form-field col-span-2">
+          <span class="editor-field-label">Where / how you met</span>
+          <input type="text" id="contactWhereMet" placeholder="e.g. Session on Drupal CMS, hallway track…" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+        </label>
+        <label class="editor-form-field col-span-2">
+          <span class="editor-field-label">Notes</span>
+          <textarea id="contactNotes" rows="3" class="w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white p-2 resize-y"></textarea>
+        </label>
+        <label class="col-span-2 inline-flex items-center gap-3 cursor-pointer text-sm text-gray-700">
+          <input type="checkbox" id="contactFollowUp" class="h-4 w-4 rounded border-gray-300 text-blue-600 drupal-blue-focus">
+          <span class="editor-field-label !mb-0">Follow-up needed</span>
+        </label>
+      </div>
+      <div class="flex items-center justify-between px-6 py-4 border-t border-gray-200">
+        <button type="button" id="contactModalDelete"
+          class="hidden h-9 inline-flex items-center px-4 rounded-md border border-red-200 text-xs font-medium text-red-500 hover:bg-red-50 transition-colors">
+          <i class="fas fa-trash-can mr-1.5 text-[0.65rem]"></i>Remove
+        </button>
+        <div class="ml-auto">
+          <button type="button" id="contactModalDone"
+            class="h-9 inline-flex items-center px-5 rounded-md bg-gray-800 text-xs font-medium text-white hover:bg-gray-700 transition-colors">
+            Done
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Task modal -->
+  <div id="taskModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" style="background:rgba(0,0,0,0.55)" role="dialog" aria-modal="true" aria-labelledby="taskModalTitle">
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg flex flex-col my-auto">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <h2 id="taskModalTitle" class="text-base font-semibold text-gray-800">Task</h2>
+        <button type="button" id="taskModalClose" aria-label="Close"
+          class="h-8 w-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="px-6 py-5 space-y-4">
+        <label class="editor-form-field">
+          <span class="editor-field-label">Task</span>
+          <textarea id="taskModalText" rows="3" placeholder="What needs to be done…"
+            class="w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white p-2 resize-y"></textarea>
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Linked session (optional)</span>
+          <select id="taskModalSession" class="h-9 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"></select>
+        </label>
+      </div>
+      <div class="flex items-center justify-between px-6 py-4 border-t border-gray-200">
+        <button type="button" id="taskModalDelete"
+          class="hidden h-9 inline-flex items-center px-4 rounded-md border border-red-200 text-xs font-medium text-red-500 hover:bg-red-50 transition-colors">
+          <i class="fas fa-trash-can mr-1.5 text-[0.65rem]"></i>Remove
+        </button>
+        <div class="ml-auto">
+          <button type="button" id="taskModalDone"
+            class="h-9 inline-flex items-center px-5 rounded-md bg-gray-800 text-xs font-medium text-white hover:bg-gray-700 transition-colors">
+            Done
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Receipt modal -->
+  <div id="receiptModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" style="background:rgba(0,0,0,0.55)" role="dialog" aria-modal="true" aria-labelledby="receiptModalTitle">
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg flex flex-col my-auto">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <h2 id="receiptModalTitle" class="text-base font-semibold text-gray-800">Receipt</h2>
+        <button type="button" id="receiptModalClose" aria-label="Close"
+          class="h-8 w-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="px-6 py-5 grid grid-cols-2 gap-3">
+        <label class="editor-form-field col-span-2">
+          <span class="editor-field-label">Description</span>
+          <input type="text" id="receiptModalName" placeholder="What was this for?" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Date</span>
+          <input type="date" id="receiptModalDate" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Amount</span>
+          <input type="text" id="receiptModalAmount" placeholder="0.00" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Currency</span>
+          <select id="receiptModalCurrency" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"></select>
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Category</span>
+          <select id="receiptModalCategory" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"></select>
+        </label>
+        <label class="editor-form-field col-span-2">
+          <span class="editor-field-label">Budget item</span>
+          <select id="receiptModalBudgetItem" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"></select>
+        </label>
+        <div class="editor-form-field col-span-2">
+          <span class="editor-field-label">File attachment</span>
+          <div class="flex items-center gap-2 mt-1">
+            <span id="receiptModalFileLabel" class="text-xs text-gray-400 flex-1 truncate">No file attached</span>
+            <button type="button" id="receiptModalAttachBtn"
+              class="h-8 px-3 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0">
+              <i class="fas fa-paperclip mr-1 text-[0.65rem]"></i>Attach
+            </button>
+            <button type="button" id="receiptModalRemoveFileBtn"
+              class="hidden h-8 px-2 border border-red-200 rounded-md text-xs text-red-400 hover:bg-red-50 transition-colors flex-shrink-0">
+              <i class="fas fa-times text-[0.65rem]"></i>
+            </button>
+          </div>
+        </div>
+        <label class="editor-form-field col-span-2">
+          <span class="editor-field-label">Notes</span>
+          <textarea id="receiptModalNotes" rows="2" placeholder="Any extra details…"
+            class="w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white p-2 resize-y"></textarea>
+        </label>
+      </div>
+      <div class="flex items-center justify-between px-6 py-4 border-t border-gray-200">
+        <button type="button" id="receiptModalDelete"
+          class="hidden h-9 inline-flex items-center px-4 rounded-md border border-red-200 text-xs font-medium text-red-500 hover:bg-red-50 transition-colors">
+          <i class="fas fa-trash-can mr-1.5 text-[0.65rem]"></i>Remove
+        </button>
+        <div class="ml-auto">
+          <button type="button" id="receiptModalDone"
+            class="h-9 inline-flex items-center px-5 rounded-md bg-gray-800 text-xs font-medium text-white hover:bg-gray-700 transition-colors">
+            Done
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Document modal -->
+  <div id="documentModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" style="background:rgba(0,0,0,0.55)" role="dialog" aria-modal="true" aria-labelledby="documentModalTitle">
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-md flex flex-col my-auto">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <h2 id="documentModalTitle" class="text-base font-semibold text-gray-800">Document</h2>
+        <button type="button" id="documentModalClose" aria-label="Close"
+          class="h-8 w-8 flex items-center justify-center rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="px-6 py-5 space-y-3">
+        <label class="editor-form-field">
+          <span class="editor-field-label">Name</span>
+          <input type="text" id="documentModalName" placeholder="Document name" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Description</span>
+          <input type="text" id="documentModalDescription" placeholder="Optional description" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Category</span>
+          <select id="documentModalCategory" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"></select>
+        </label>
+        <div class="editor-form-field">
+          <span class="editor-field-label">File attachment</span>
+          <div class="flex items-center gap-2 mt-1">
+            <span id="documentModalFileLabel" class="text-xs text-gray-400 flex-1 truncate">No file attached</span>
+            <button type="button" id="documentModalAttachBtn"
+              class="h-8 px-3 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0">
+              <i class="fas fa-paperclip mr-1 text-[0.65rem]"></i>Attach
+            </button>
+            <button type="button" id="documentModalRemoveFileBtn"
+              class="hidden h-8 px-2 border border-red-200 rounded-md text-xs text-red-400 hover:bg-red-50 transition-colors flex-shrink-0">
+              <i class="fas fa-times text-[0.65rem]"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center justify-between px-6 py-4 border-t border-gray-200">
+        <button type="button" id="documentModalDelete"
+          class="hidden h-9 inline-flex items-center px-4 rounded-md border border-red-200 text-xs font-medium text-red-500 hover:bg-red-50 transition-colors">
+          <i class="fas fa-trash-can mr-1.5 text-[0.65rem]"></i>Remove
+        </button>
+        <div class="ml-auto">
+          <button type="button" id="documentModalDone"
+            class="h-9 inline-flex items-center px-5 rounded-md bg-gray-800 text-xs font-medium text-white hover:bg-gray-700 transition-colors">
+            Done
+          </button>
+        </div>
       </div>
     </div>
   </div>
