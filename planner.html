@@ -387,6 +387,11 @@
                           <i class="fas fa-plus mr-1 text-[0.55rem]"></i>Add item
                         </button>
                       </div>
+                      <div class="relative">
+                        <i class="fas fa-search absolute left-2 top-1/2 -translate-y-1/2 text-gray-300 text-[0.6rem] pointer-events-none"></i>
+                        <input type="text" id="personalBudgetItemFilter" placeholder="Filter by name or category…"
+                          class="h-6 w-full rounded border-gray-300 text-xs bg-white pl-6 pr-2 drupal-blue-focus text-gray-600 placeholder-gray-300">
+                      </div>
                       <div id="personalBudgetItems" class="space-y-1.5"></div>
                     </div>
                     <div id="personalBudgetBreakdown" class="hidden pt-2 border-t border-gray-200 text-xs"></div>
@@ -561,6 +566,11 @@
                   class="h-7 px-3 rounded border border-gray-300 text-[0.65rem] font-medium text-gray-600 bg-white hover:bg-gray-50 transition-colors">
                   <i class="fas fa-plus mr-1 text-[0.55rem]"></i>Add item
                 </button>
+              </div>
+              <div class="relative">
+                <i class="fas fa-search absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-300 text-[0.6rem] pointer-events-none"></i>
+                <input type="text" id="sponsorBudgetItemFilter" placeholder="Filter by name or category…"
+                  class="h-7 w-full rounded border-gray-300 text-xs bg-white pl-7 pr-2 drupal-blue-focus text-gray-600 placeholder-gray-300">
               </div>
               <div id="sponsorBudgetItems" class="space-y-1.5"></div>
             </div>
@@ -874,6 +884,10 @@
         <label class="editor-form-field">
           <span class="editor-field-label">Category</span>
           <select id="budgetItemCategory" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"></select>
+        </label>
+        <label id="budgetItemAssignedToRow" class="editor-form-field hidden">
+          <span class="editor-field-label">Assigned to</span>
+          <select id="budgetItemAssignedTo" class="h-10 w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"></select>
         </label>
         <div class="grid grid-cols-3 gap-3">
           <label class="editor-form-field">

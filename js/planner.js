@@ -2309,6 +2309,22 @@ function buildEventBudgetData(planner, filterMemberId = null, conv = null) {
     })
   }
 
+  // Budget items assigned to a specific member
+  if (filterMemberId) {
+    ;(org.budgetItems || []).filter((item) => item.memberId === filterMemberId).forEach((item) => {
+      const iCurr = item.currency || 'AUD'
+      const cat   = item.category || 'misc'
+      const b     = cvt(parseBudget(item.budget), iCurr)
+      const linked = (planner.receipts || []).filter((r) => r.budgetItemId === item.id)
+      const ac = linked.length
+        ? linked.reduce((s, r) => s + cvt(parseBudget(r.amount), r.currency || iCurr), 0)
+        : cvt(parseBudget(item.actual), iCurr)
+      const target = cats[cat] || cats.misc
+      target.actual += ac
+      if (b || ac) target.items.push({ label: item.name || 'Budget item', budget: b, actual: ac, isManual: true })
+    })
+  }
+
   // Tickets associated to member (assigned or purchased by)
   if (filterMemberId) {
     const memberTickets = [
@@ -2737,7 +2753,15 @@ function renderSummaryThisEvent() {
       const qty = parseBudget(t.quantity) || 1
       ticketAc += (conv ?? ((n) => n))(parseBudget(t.unitPrice) * qty, tCurr)
     })
-    return { name: m?.name || 'Unnamed', budget: b + accomB, actual: ac + accomAc + ticketAc, memberId: a.memberId, memberBudget: b, memberActual: ac, accomBudget: accomB, accomActual: accomAc, ticketActual: ticketAc }
+    let assignedAc = 0
+    ;(org.budgetItems || []).filter((item) => item.memberId === a.memberId).forEach((item) => {
+      const iCurr  = item.currency || 'AUD'
+      const linked = (state.planner.receipts || []).filter((r) => r.budgetItemId === item.id)
+      assignedAc += linked.length
+        ? linked.reduce((s, r) => s + (conv ?? ((n) => n))(parseBudget(r.amount), r.currency || iCurr), 0)
+        : (conv ?? ((n) => n))(parseBudget(item.actual), iCurr)
+    })
+    return { name: m?.name || 'Unnamed', budget: b + accomB, actual: ac + accomAc + ticketAc + assignedAc, memberId: a.memberId, memberBudget: b, memberActual: ac, accomBudget: accomB, accomActual: accomAc, ticketActual: ticketAc, assignedActual: assignedAc }
   }).filter((d) => d.budget || d.actual)
 
   if (memberCanvas && memberData.length) {
@@ -3323,10 +3347,24 @@ function openMemberDrilldown(memberData, planner) {
     })
     .filter((r) => r.actual)
 
+  const assignedItemRows = (org.budgetItems || [])
+    .filter((item) => item.memberId === memberData.memberId)
+    .map((item) => {
+      const iCurr  = item.currency || 'AUD'
+      const b      = cvt(parseBudget(item.budget), iCurr)
+      const linked = (planner.receipts || []).filter((r) => r.budgetItemId === item.id)
+      const ac     = linked.length
+        ? linked.reduce((s, r) => s + cvt(parseBudget(r.amount), r.currency || iCurr), 0)
+        : cvt(parseBudget(item.actual), iCurr)
+      return { label: item.name || 'Budget item', budget: b, actual: ac }
+    })
+    .filter((r) => r.budget || r.actual)
+
   const rows = [
     { label: 'Travel allocation', budget: memberData.memberBudget, actual: memberData.memberActual },
     ...stays.map((s) => ({ label: `Accommodation: ${s.property}`, budget: s.budget, actual: s.actual })),
     ...memberTicketRows,
+    ...assignedItemRows,
   ].filter((r) => r.budget || r.actual)
 
   let html = `<table class="w-full text-sm">
@@ -4589,20 +4627,42 @@ function getBudgetItemList(ctx) {
 
 function renderBudgetItems(ctx) {
   const containerId = ctx === 'personal' ? 'personalBudgetItems' : 'sponsorBudgetItems'
+  const filterId    = ctx === 'personal' ? 'personalBudgetItemFilter' : 'sponsorBudgetItemFilter'
   const container   = document.getElementById(containerId)
   if (!container) return
 
-  const items = getBudgetItemList(ctx)
-  const cats  = ctx === 'personal' ? BUDGET_ITEM_CATS_PERSONAL() : BUDGET_ITEM_CATS_SPONSOR()
-  const fmt   = (n) => parseBudget(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  const filterQ = (document.getElementById(filterId)?.value || '').trim().toLowerCase()
+  const allItems = getBudgetItemList(ctx)
+  const cats     = ctx === 'personal' ? BUDGET_ITEM_CATS_PERSONAL() : BUDGET_ITEM_CATS_SPONSOR()
+  const fmt      = (n) => parseBudget(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
-  if (!items.length) {
+  const resolveMember = (memberId) => memberId
+    ? (state.global?.teamMembers || []).find((m) => m.id === memberId)?.name || ''
+    : ''
+
+  const items = filterQ
+    ? allItems.filter((item) => {
+        const catLabel    = cats.find((c) => c.value === item.category)?.label || item.category || 'misc'
+        const memberName  = resolveMember(item.memberId)
+        return (item.name || '').toLowerCase().includes(filterQ)
+          || catLabel.toLowerCase().includes(filterQ)
+          || memberName.toLowerCase().includes(filterQ)
+      })
+    : allItems
+
+  if (!allItems.length) {
     container.innerHTML = '<p class="text-xs text-gray-400 italic py-1">No items added yet.</p>'
     return
   }
 
+  if (!items.length) {
+    container.innerHTML = '<p class="text-xs text-gray-400 italic py-1">No items match the filter.</p>'
+    return
+  }
+
   container.innerHTML = items.map((item) => {
-    const catLabel = cats.find((c) => c.value === item.category)?.label || item.category || 'Misc'
+    const catLabel    = cats.find((c) => c.value === item.category)?.label || item.category || 'Misc'
+    const memberName  = resolveMember(item.memberId)
     const b  = parseBudget(item.budget)
     const cur = item.currency || 'AUD'
     const linked = (state.planner.receipts || []).filter((r) => r.budgetItemId === item.id)
@@ -4616,6 +4676,7 @@ function renderBudgetItems(ctx) {
         <div class="flex items-center gap-1.5 flex-wrap">
           <span class="text-sm font-medium text-gray-700 truncate">${esc(item.name || 'Budget item')}</span>
           <span class="text-[0.6rem] px-1.5 py-px rounded bg-gray-100 text-gray-500 flex-shrink-0">${esc(catLabel)}</span>
+          ${memberName ? `<span class="text-[0.6rem] px-1.5 py-px rounded bg-blue-50 text-blue-500 flex-shrink-0"><i class="fas fa-user text-[0.5rem] mr-0.5"></i>${esc(memberName)}</span>` : ''}
         </div>
         <div class="flex gap-3 text-xs mt-0.5 flex-wrap">
           ${bSet ? `<span class="text-gray-400">Budget: <span class="tabular-nums text-gray-600">${esc(cur)} ${fmt(b)}</span></span>` : ''}
@@ -4650,6 +4711,18 @@ function openBudgetItemModal(ctx, id = null) {
     currencyEl.innerHTML = currencyOptions(item?.currency || defaultCurrency)
   }
 
+  // "Assigned to" — sponsor mode only, populated from event team assignments
+  const assignedRow = document.getElementById('budgetItemAssignedToRow')
+  const assignedEl  = document.getElementById('budgetItemAssignedTo')
+  const isSponsor   = ctx === 'sponsor'
+  if (assignedRow) assignedRow.classList.toggle('hidden', !isSponsor)
+  if (isSponsor && assignedEl) {
+    const assignedIds = new Set((state.planner.org?.teamAssignments || []).map((a) => a.memberId))
+    const members = (state.global?.teamMembers || []).filter((m) => m.enabled !== false && assignedIds.has(m.id))
+    assignedEl.innerHTML = `<option value="">— Unassigned —</option>` +
+      members.map((m) => `<option value="${esc(m.id)}"${m.id === (item?.memberId || '') ? ' selected' : ''}>${esc(m.name)}${m.role ? ` (${esc(m.role)})` : ''}</option>`).join('')
+  }
+
   document.getElementById('budgetItemModalTitle').textContent = id ? 'Edit Budget Item' : 'Add Budget Item'
   document.getElementById('budgetItemName').value   = item?.name   || ''
   document.getElementById('budgetItemBudget').value = item?.budget || ''
@@ -4671,12 +4744,15 @@ function saveBudgetItem() {
   const budget   = document.getElementById('budgetItemBudget')?.value        || ''
   const actual   = document.getElementById('budgetItemActual')?.value        || ''
   const notes    = document.getElementById('budgetItemNotes')?.value.trim()  || ''
+  const memberId = _budgetItemCtx === 'sponsor'
+    ? (document.getElementById('budgetItemAssignedTo')?.value || '')
+    : ''
 
   if (_budgetItemId) {
     const item = list.find((i) => i.id === _budgetItemId)
-    if (item) Object.assign(item, { name, category, currency, budget, actual, notes })
+    if (item) Object.assign(item, { name, category, currency, budget, actual, notes, memberId })
   } else {
-    const newItem = { id: makeItemId('bi'), name, category, currency, budget, actual, notes }
+    const newItem = { id: makeItemId('bi'), name, category, currency, budget, actual, notes, memberId }
     list.push(newItem)
     _budgetItemId = newItem.id
   }
@@ -4732,6 +4808,9 @@ function wireBudgetItemsPanel() {
 
   document.getElementById('addPersonalBudgetItemBtn')?.addEventListener('click', () => openBudgetItemModal('personal'))
   document.getElementById('addSponsorBudgetItemBtn')?.addEventListener('click',  () => openBudgetItemModal('sponsor'))
+
+  document.getElementById('personalBudgetItemFilter')?.addEventListener('input', () => renderBudgetItems('personal'))
+  document.getElementById('sponsorBudgetItemFilter')?.addEventListener('input',  () => renderBudgetItems('sponsor'))
 
   // Edit delegation — personal budget items list
   document.getElementById('personalBudgetItems')?.addEventListener('click', (e) => {
