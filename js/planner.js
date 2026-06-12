@@ -2277,6 +2277,16 @@ function buildEventBudgetData(planner, filterMemberId = null, conv = null) {
       if (b || ac) swCat.items.push({ label: item.name || 'Swag item', budget: b, actual: ac })
     })
 
+    ;(org.tickets || []).forEach((t) => {
+      const tCurr = t.currency || 'AUD'
+      const qty  = parseBudget(t.quantity) || 1
+      const cost = cvt(parseBudget(t.unitPrice) * qty, tCurr)
+      if (!cost) return
+      const tkCat = cats.tickets || cats.misc
+      tkCat.actual += cost
+      tkCat.items.push({ label: t.name || 'Ticket', budget: 0, actual: cost })
+    })
+
     ;(org.budgetItems || []).forEach((item) => {
       const iCurr = item.currency || 'AUD'
       const cat = item.category || 'misc'
@@ -2350,6 +2360,16 @@ function buildPersonalBudgetData(planner, conv = null) {
     const aCat = cats.accommodation || cats.misc
     aCat.budget += ab; aCat.actual += aa
     if (ab || aa) aCat.items.push({ label: acc.name || 'Accommodation', budget: ab, actual: aa })
+  })
+
+  ;(personal.tickets || []).forEach((t) => {
+    const tCurr = t.currency || 'AUD'
+    const qty  = parseBudget(t.quantity) || 1
+    const cost = cvt(parseBudget(t.unitPrice) * qty, tCurr)
+    if (!cost) return
+    const tkCat = cats.tickets || cats.misc
+    tkCat.actual += cost
+    tkCat.items.push({ label: t.name || 'Ticket', budget: 0, actual: cost })
   })
 
   // Personal itinerary items with budget
@@ -2528,9 +2548,11 @@ function renderSummaryThisEvent() {
         const s = v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
         return conv && _summaryCurrency ? `≈${s} ${_summaryCurrency}` : _primaryDisplayCurrency ? `${_primaryDisplayCurrency} ${s}` : s
       }
-      const utilData  = activeCats.map(([, c]) => c.budget > 0 ? parseFloat(((c.actual / c.budget) * 100).toFixed(1)) : null)
-      const bgColors  = activeCats.map(([, c]) => { const p = c.budget > 0 ? c.actual / c.budget * 100 : 0; return p >= 100 ? 'rgba(239,68,68,0.65)' : p >= 70 ? 'rgba(245,158,11,0.65)' : 'rgba(16,185,129,0.65)' })
-      const bdrColors = activeCats.map(([, c]) => { const p = c.budget > 0 ? c.actual / c.budget * 100 : 0; return p >= 100 ? '#ef4444' : p >= 70 ? '#f59e0b' : '#10b981' })
+      // Categories with spend but no budget target use a sentinel (110) so the bar renders
+      // just past the 100% reference line in amber, making unbudgeted spend visible.
+      const utilData  = activeCats.map(([, c]) => c.budget > 0 ? parseFloat(((c.actual / c.budget) * 100).toFixed(1)) : c.actual > 0 ? 110 : null)
+      const bgColors  = activeCats.map(([, c]) => { if (c.budget === 0 && c.actual > 0) return 'rgba(245,158,11,0.65)'; const p = c.budget > 0 ? c.actual / c.budget * 100 : 0; return p >= 100 ? 'rgba(239,68,68,0.65)' : p >= 70 ? 'rgba(245,158,11,0.65)' : 'rgba(16,185,129,0.65)' })
+      const bdrColors = activeCats.map(([, c]) => { if (c.budget === 0 && c.actual > 0) return '#f59e0b'; const p = c.budget > 0 ? c.actual / c.budget * 100 : 0; return p >= 100 ? '#ef4444' : p >= 70 ? '#f59e0b' : '#10b981' })
       const refLine = {
         id: 'budgetLine',
         afterDraw(chart) {
@@ -2562,6 +2584,9 @@ function renderSummaryThisEvent() {
                 title: (items) => activeCats[items[0].dataIndex][1].label,
                 label: (ctx) => {
                   const [, c] = activeCats[ctx.dataIndex]
+                  if (c.budget === 0 && c.actual > 0) {
+                    return [`  Actual: ${fmtChartVal(c.actual)}`, `  No budget target set`, `  Click to drill down`]
+                  }
                   const lines = [`  Actual: ${fmtChartVal(c.actual)}`]
                   if (c.budget > 0) {
                     lines.push(`  Budget: ${fmtChartVal(c.budget)}`)
@@ -2705,7 +2730,14 @@ function renderSummaryThisEvent() {
         accomAc += (conv ?? ((n) => n))(parseBudget(stay.budgetActual), sCurr)
       }
     })
-    return { name: m?.name || 'Unnamed', budget: b + accomB, actual: ac + accomAc, memberId: a.memberId, memberBudget: b, memberActual: ac, accomBudget: accomB, accomActual: accomAc }
+    let ticketAc = 0
+    ;(org.tickets || []).forEach((t) => {
+      if (t.assignedTo !== a.memberId && t.purchasedBy !== a.memberId) return
+      const tCurr = t.currency || 'AUD'
+      const qty = parseBudget(t.quantity) || 1
+      ticketAc += (conv ?? ((n) => n))(parseBudget(t.unitPrice) * qty, tCurr)
+    })
+    return { name: m?.name || 'Unnamed', budget: b + accomB, actual: ac + accomAc + ticketAc, memberId: a.memberId, memberBudget: b, memberActual: ac, accomBudget: accomB, accomActual: accomAc, ticketActual: ticketAc }
   }).filter((d) => d.budget || d.actual)
 
   if (memberCanvas && memberData.length) {
@@ -2831,7 +2863,7 @@ async function renderSummaryAllEvents() {
     const yearMatch = (label + ' ' + (data._eventFile || slug)).match(/\b(20\d{2})\b/)
     const eventYear = yearMatch ? parseInt(yearMatch[1], 10) : 0
     return { label, slug, mode: plannerMode, budget, actual, catData, eventFile: data._eventFile || '', eventYear, rawPlanner: data, eventDate }
-  })
+  }).filter((e) => e.budget > 0 || e.actual > 0)
 
   // Update rate notice — show historical note if any event used a dated rate
   if (_summaryCurrency) {
@@ -3281,9 +3313,20 @@ function openMemberDrilldown(memberData, planner) {
     }
   })
 
+  const memberTicketRows = (org.tickets || [])
+    .filter((t) => t.assignedTo === memberData.memberId || t.purchasedBy === memberData.memberId)
+    .map((t) => {
+      const tCurr = t.currency || 'AUD'
+      const qty  = parseBudget(t.quantity) || 1
+      const cost = cvt(parseBudget(t.unitPrice) * qty, tCurr)
+      return { label: `Ticket: ${t.name || 'Ticket'}`, budget: 0, actual: cost }
+    })
+    .filter((r) => r.actual)
+
   const rows = [
     { label: 'Travel allocation', budget: memberData.memberBudget, actual: memberData.memberActual },
     ...stays.map((s) => ({ label: `Accommodation: ${s.property}`, budget: s.budget, actual: s.actual })),
+    ...memberTicketRows,
   ].filter((r) => r.budget || r.actual)
 
   let html = `<table class="w-full text-sm">

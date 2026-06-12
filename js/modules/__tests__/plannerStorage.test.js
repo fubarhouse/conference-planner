@@ -10,14 +10,20 @@ vi.stubGlobal('localStorage', {
 
 import {
   STORAGE_PREFIX,
+  GLOBAL_KEY,
   PLANNER_VERSION,
+  makeEmptyGlobal,
   makeEmptyPlanner,
   makeItemId,
   makeSessionId,
+  loadGlobal,
+  saveGlobal,
   loadPlanner,
   savePlanner,
   parsePlannerImport,
   getPlannerKey,
+  listPlannerFiles,
+  savePlannerViaApi,
 } from '../plannerStorage.js';
 
 beforeEach(() => store.clear());
@@ -181,5 +187,166 @@ describe('parsePlannerImport', () => {
 
   it('throws when identity fields are missing', () => {
     expect(() => parsePlannerImport('{"foo":"bar"}')).toThrow(/identity fields/i);
+  });
+});
+
+// ── makeEmptyGlobal ───────────────────────────────────────────────────────────
+
+describe('makeEmptyGlobal', () => {
+  it('returns an object with the expected keys', () => {
+    const g = makeEmptyGlobal();
+    expect(Array.isArray(g.teamMembers)).toBe(true);
+    expect(Array.isArray(g.budgetCategories)).toBe(true);
+    expect('defaultCurrency' in g).toBe(true);
+    expect('defaultMode' in g).toBe(true);
+  });
+
+  it('returns fresh arrays on each call (not shared references)', () => {
+    const a = makeEmptyGlobal();
+    const b = makeEmptyGlobal();
+    a.teamMembers.push({ id: 'x' });
+    expect(b.teamMembers).toHaveLength(0);
+  });
+});
+
+// ── loadGlobal / saveGlobal ───────────────────────────────────────────────────
+
+describe('loadGlobal / saveGlobal', () => {
+  it('returns default shape when nothing is stored', () => {
+    const g = loadGlobal();
+    expect(Array.isArray(g.teamMembers)).toBe(true);
+  });
+
+  it('roundtrips a saved global object', () => {
+    saveGlobal({ ...makeEmptyGlobal(), defaultCurrency: 'EUR' });
+    expect(loadGlobal().defaultCurrency).toBe('EUR');
+  });
+
+  it('merges saved data with defaults so missing keys are always present', () => {
+    store.set(GLOBAL_KEY, JSON.stringify({ defaultCurrency: 'JPY' }));
+    const g = loadGlobal();
+    expect(g.defaultCurrency).toBe('JPY');
+    expect(Array.isArray(g.teamMembers)).toBe(true);
+  });
+
+  it('handles corrupted JSON gracefully and returns default shape', () => {
+    store.set(GLOBAL_KEY, 'not valid json{{{');
+    const g = loadGlobal();
+    expect(Array.isArray(g.teamMembers)).toBe(true);
+  });
+});
+
+// ── loadPlanner — v2 memberItinerary migration ────────────────────────────────
+
+describe('loadPlanner — v2 memberItinerary migration', () => {
+  it('migrates a top-level itinerary array into org.memberItinerary', () => {
+    // Simulate a v2 planner: top-level itinerary present, org.memberItinerary absent
+    const { memberItinerary: _dropped, ...orgWithoutMemberItinerary } = makeEmptyPlanner('k').org;
+    const raw = JSON.stringify({
+      ...makeEmptyPlanner('k'),
+      itinerary: [{ id: 'it1', memberId: 'tmb_a', date: '2025-07-10', title: 'Setup' }],
+      org: orgWithoutMemberItinerary,
+    });
+    store.set(`${STORAGE_PREFIX}k`, raw);
+    const p = loadPlanner('k');
+    expect(p.org.memberItinerary).toHaveLength(1);
+    expect(p.org.memberItinerary[0].id).toBe('it1');
+  });
+
+  it('prefers org.memberItinerary over legacy top-level itinerary when both are non-empty', () => {
+    const raw = JSON.stringify({
+      ...makeEmptyPlanner('k'),
+      itinerary: [{ id: 'legacy' }],
+      org: { ...makeEmptyPlanner('k').org, memberItinerary: [{ id: 'fresh' }] },
+    });
+    store.set(`${STORAGE_PREFIX}k`, raw);
+    const p = loadPlanner('k');
+    expect(p.org.memberItinerary[0].id).toBe('fresh');
+  });
+
+  it('does not expose a top-level itinerary key after migration', () => {
+    const raw = JSON.stringify({
+      ...makeEmptyPlanner('k'),
+      itinerary: [{ id: 'x' }],
+    });
+    store.set(`${STORAGE_PREFIX}k`, raw);
+    expect(loadPlanner('k').itinerary).toBeUndefined();
+  });
+});
+
+// ── listPlannerFiles ──────────────────────────────────────────────────────────
+
+describe('listPlannerFiles', () => {
+  it('returns the file list on a successful response', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(['a.json', 'b.json']),
+    }));
+    expect(await listPlannerFiles('http://localhost:3000')).toEqual(['a.json', 'b.json']);
+  });
+
+  it('returns an empty array when the response is not ok', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false }));
+    expect(await listPlannerFiles('http://localhost:3000')).toEqual([]);
+  });
+
+  it('strips a trailing slash from the endpoint before building the URL', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: () => Promise.resolve([]) });
+    vi.stubGlobal('fetch', fetchMock);
+    await listPlannerFiles('http://localhost:3000/');
+    const [url] = fetchMock.mock.calls[0];
+    expect(url).not.toContain('//api');
+  });
+});
+
+// ── savePlannerViaApi ─────────────────────────────────────────────────────────
+
+describe('savePlannerViaApi', () => {
+  it('sends a PUT request to the correct URL', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true });
+    vi.stubGlobal('fetch', fetchMock);
+    await savePlannerViaApi('http://localhost:3000', 'event.json', makeEmptyPlanner('event.json'));
+    expect(fetchMock).toHaveBeenCalledWith(
+      'http://localhost:3000/api/planner/event.json',
+      expect.objectContaining({ method: 'PUT' }),
+    );
+  });
+
+  it('appends .json suffix if plannerKey lacks it', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true });
+    vi.stubGlobal('fetch', fetchMock);
+    await savePlannerViaApi('http://localhost:3000', 'myevent', makeEmptyPlanner('myevent'));
+    const [url] = fetchMock.mock.calls[0];
+    expect(url).toContain('myevent.json');
+  });
+
+  it('sends Content-Type: application/json', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true });
+    vi.stubGlobal('fetch', fetchMock);
+    await savePlannerViaApi('http://localhost:3000', 'e.json', makeEmptyPlanner('e.json'));
+    const [, opts] = fetchMock.mock.calls[0];
+    expect(opts.headers['Content-Type']).toBe('application/json');
+  });
+
+  it('throws with the server error message on a non-ok response', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: false,
+      status: 500,
+      json: () => Promise.resolve({ error: 'Internal Server Error' }),
+    }));
+    await expect(
+      savePlannerViaApi('http://localhost:3000', 'event.json', makeEmptyPlanner('event.json')),
+    ).rejects.toThrow(/Internal Server Error/);
+  });
+
+  it('throws with HTTP status when error body has no message', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: false,
+      status: 503,
+      json: () => Promise.resolve({}),
+    }));
+    await expect(
+      savePlannerViaApi('http://localhost:3000', 'event.json', makeEmptyPlanner('event.json')),
+    ).rejects.toThrow(/503/);
   });
 });

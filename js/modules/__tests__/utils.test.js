@@ -1,6 +1,6 @@
 
 
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import state from '../state.js';
 import {
   escapeHtml,
@@ -9,6 +9,12 @@ import {
   buildSummaryFromText,
   deriveSummaryFromEvent,
   formatHoursDuration,
+  normalizeSummaryText,
+  deriveOfficialWebsite,
+  highlightKeywords,
+  formatDuration,
+  debounce,
+  once,
   slugify,
   parseSponsorIds,
   getLocalDate,
@@ -160,5 +166,198 @@ describe('getLocalDate', () => {
     state.eventMeta = { timezone: 'America/New_York' };
     // 2025-07-10T03:00:00Z is July 9 in New York (EDT = UTC-4)
     expect(getLocalDate('2025-07-10T03:00:00Z')).toBe('2025-07-09');
+  });
+});
+
+// ── formatDuration ────────────────────────────────────────────────────────────
+
+describe('formatDuration', () => {
+  it('returns minutes-only for PT30M', () => {
+    expect(formatDuration(null, 'PT30M')).toBe('30m');
+  });
+
+  it('returns hours-only for PT2H', () => {
+    expect(formatDuration(null, 'PT2H')).toBe('2h');
+  });
+
+  it('returns decimal notation for a 30-minute fraction', () => {
+    expect(formatDuration(null, 'PT1H30M')).toBe('1.5h');
+  });
+
+  it('returns combined h+m notation for non-half-hour fractions', () => {
+    expect(formatDuration(null, 'PT1H45M')).toBe('1h45m');
+  });
+
+  it('returns 0m for PT0M', () => {
+    expect(formatDuration(null, 'PT0M')).toBe('0m');
+  });
+
+  it('ignores the event argument entirely', () => {
+    expect(formatDuration({ anything: true }, 'PT1H')).toBe('1h');
+  });
+});
+
+// ── highlightKeywords ─────────────────────────────────────────────────────────
+
+describe('highlightKeywords', () => {
+  it('wraps the matching term in a keyword-highlight span', () => {
+    const result = highlightKeywords('Hello World', 'World');
+    expect(result).toBe('Hello <span class="keyword-highlight">World</span>');
+  });
+
+  it('is case-insensitive', () => {
+    expect(highlightKeywords('Hello World', 'world')).toContain('keyword-highlight');
+  });
+
+  it('returns text unchanged when keyword is empty', () => {
+    expect(highlightKeywords('Hello', '')).toBe('Hello');
+  });
+
+  it('returns text unchanged when keyword is whitespace-only', () => {
+    expect(highlightKeywords('Hello', '   ')).toBe('Hello');
+  });
+
+  it('escapes regex special characters in the keyword', () => {
+    expect(() => highlightKeywords('1+1=2', '1+1')).not.toThrow();
+    expect(highlightKeywords('1+1=2', '1+1')).toContain('keyword-highlight');
+  });
+
+  it('highlights all occurrences', () => {
+    const result = highlightKeywords('foo and foo', 'foo');
+    expect((result.match(/keyword-highlight/g) || []).length).toBe(2);
+  });
+});
+
+// ── debounce ──────────────────────────────────────────────────────────────────
+
+describe('debounce', () => {
+  it('does not invoke the function before the wait period', () => {
+    vi.useFakeTimers();
+    const fn = vi.fn();
+    const debounced = debounce(fn, 100);
+    debounced();
+    expect(fn).not.toHaveBeenCalled();
+    vi.useRealTimers();
+  });
+
+  it('invokes the function after the wait period', () => {
+    vi.useFakeTimers();
+    const fn = vi.fn();
+    const debounced = debounce(fn, 100);
+    debounced();
+    vi.advanceTimersByTime(100);
+    expect(fn).toHaveBeenCalledTimes(1);
+    vi.useRealTimers();
+  });
+
+  it('fires only once for rapid successive calls', () => {
+    vi.useFakeTimers();
+    const fn = vi.fn();
+    const debounced = debounce(fn, 100);
+    debounced(); debounced(); debounced();
+    vi.advanceTimersByTime(100);
+    expect(fn).toHaveBeenCalledTimes(1);
+    vi.useRealTimers();
+  });
+
+  it('passes the most recent arguments to the function', () => {
+    vi.useFakeTimers();
+    const fn = vi.fn();
+    const debounced = debounce(fn, 50);
+    debounced('first'); debounced('second');
+    vi.advanceTimersByTime(50);
+    expect(fn).toHaveBeenCalledWith('second');
+    vi.useRealTimers();
+  });
+});
+
+// ── normalizeSummaryText ──────────────────────────────────────────────────────
+
+describe('normalizeSummaryText', () => {
+  it('returns empty string for empty input', () => {
+    expect(normalizeSummaryText('')).toBe('');
+    expect(normalizeSummaryText(null)).toBe('');
+  });
+
+  it('strips markdown headings', () => {
+    expect(normalizeSummaryText('## Title\nContent here.')).toBe('Content here.');
+  });
+
+  it('strips blockquote lines', () => {
+    expect(normalizeSummaryText('> A quote\nNormal text.')).toBe('Normal text.');
+  });
+
+  it('strips table header and delimiter rows', () => {
+    const table = '| Col A | Col B |\n| --- | --- |\n| a | b |';
+    expect(normalizeSummaryText(table)).toBe('');
+  });
+
+  it('joins remaining lines into a single space-separated string', () => {
+    expect(normalizeSummaryText('Line one.\nLine two.')).toBe('Line one. Line two.');
+  });
+
+  it('collapses multiple spaces', () => {
+    expect(normalizeSummaryText('too   many   spaces')).toBe('too many spaces');
+  });
+
+  it('removes empty lines', () => {
+    expect(normalizeSummaryText('first\n\nsecond')).toBe('first second');
+  });
+});
+
+// ── deriveOfficialWebsite ─────────────────────────────────────────────────────
+
+describe('deriveOfficialWebsite', () => {
+  it('returns empty string for null or empty metadata', () => {
+    expect(deriveOfficialWebsite(null)).toBe('');
+    expect(deriveOfficialWebsite({})).toBe('');
+  });
+
+  it('returns the website URL stripped of hash and query', () => {
+    expect(deriveOfficialWebsite({ website: 'https://example.com/about?utm=1#footer' }))
+      .toBe('https://example.com/about');
+  });
+
+  it('strips a trailing /schedule path segment', () => {
+    expect(deriveOfficialWebsite({ website: 'https://example.com/schedule' }))
+      .toBe('https://example.com');
+  });
+
+  it('strips a trailing /programme path segment', () => {
+    expect(deriveOfficialWebsite({ website: 'https://example.com/programme' }))
+      .toBe('https://example.com');
+  });
+
+  it('falls back to the first scheduleURL when website is absent', () => {
+    const meta = { website: '', scheduleURLs: ['https://example.com/schedule'] };
+    expect(deriveOfficialWebsite(meta)).toBe('https://example.com');
+  });
+
+  it('prefers website over scheduleURL when both are present', () => {
+    const meta = { website: 'https://primary.com', scheduleURLs: ['https://fallback.com'] };
+    expect(deriveOfficialWebsite(meta)).toBe('https://primary.com');
+  });
+});
+
+// ── once ──────────────────────────────────────────────────────────────────────
+
+describe('once', () => {
+  it('calls the wrapped function only once across multiple invocations', () => {
+    const fn = vi.fn().mockResolvedValue('result');
+    const wrapped = once(fn);
+    wrapped(); wrapped(); wrapped();
+    expect(fn).toHaveBeenCalledTimes(1);
+  });
+
+  it('returns the same promise on every call', () => {
+    const fn = vi.fn().mockResolvedValue('x');
+    const wrapped = once(fn);
+    expect(wrapped()).toBe(wrapped());
+  });
+
+  it('resolves to the value returned by the first call', async () => {
+    const wrapped = once(() => Promise.resolve(42));
+    expect(await wrapped()).toBe(42);
+    expect(await wrapped()).toBe(42);
   });
 });
