@@ -13,7 +13,7 @@ export function makeItemId(prefix = 'item') {
 // ── Global (cross-event) store ────────────────────────────────────────────────
 
 export function makeEmptyGlobal() {
-  return { teamMembers: [], defaultCurrency: '', budgetCategories: [], defaultMode: '' };
+  return { teamMembers: [], defaultCurrency: '', budgetCategories: [], defaultMode: '', personalContacts: [] };
 }
 
 export function loadGlobal() {
@@ -40,6 +40,7 @@ export function makeEmptyPlanner(plannerKey, eventFile = '') {
     _displayName: '',
     _lastModified: new Date().toISOString(),
     mode: 'personal',
+    isConference: true,
     sessionNotes: {},
     contacts: [],
     tasks: [],
@@ -81,9 +82,14 @@ export function makeEmptyPlanner(plannerKey, eventFile = '') {
       documents:      [],
       budgetItems:    [],
       budgetCategories: [],
+      categoryBudgets: {},
       tickets:        [],
       disabledTabs:   [],
       tabOrder:       [],
+      tripAssignments: [],
+      localCompanions: [],
+      gpxTrack: null,
+      meContactId: null,
     },
   };
 }

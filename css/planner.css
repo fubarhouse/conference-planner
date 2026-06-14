@@ -136,6 +136,7 @@
 .theme-dark .delete-receipt-btn,
 .theme-dark .delete-doc-btn,
 .theme-dark .itinerary-delete-btn,
+.theme-dark .remove-cruise-leg-btn,
 .theme-dark .remove-leg-btn,
 .theme-dark .delete-deliverables-btn,
 .theme-dark #personalLegUnlinkReceiptBtn {
@@ -150,6 +151,7 @@
 .theme-dark .delete-receipt-btn:hover,
 .theme-dark .delete-doc-btn:hover,
 .theme-dark .itinerary-delete-btn:hover,
+.theme-dark .remove-cruise-leg-btn:hover,
 .theme-dark .remove-leg-btn:hover,
 .theme-dark .delete-deliverables-btn:hover,
 .theme-dark #personalLegUnlinkReceiptBtn:hover {
@@ -212,6 +214,15 @@
 .tl-cell-event  { background: color-mix(in srgb, var(--accent, #0678be) 8%, var(--surface-0, #fff)) !important }
 .theme-dark .tl-head-today { color: #fbbf24 !important }
 .theme-dark .tl-head-event { color: color-mix(in srgb, var(--accent) 80%, #fff) !important }
+
+/* ── Timeline scroll container ──────────────────────────────────────────── */
+.tl-scroll { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--accent, #0678be) 30%, #cbd5e1) transparent }
+.tl-scroll::-webkit-scrollbar         { height: 4px }
+.tl-scroll::-webkit-scrollbar-track   { background: transparent; border-radius: 9999px }
+.tl-scroll::-webkit-scrollbar-thumb   { background: color-mix(in srgb, var(--accent, #0678be) 30%, #cbd5e1); border-radius: 9999px }
+.tl-scroll::-webkit-scrollbar-thumb:hover { background: var(--accent, #0678be) }
+.theme-dark .tl-scroll { scrollbar-color: color-mix(in srgb, var(--accent, #0678be) 45%, #334155) transparent }
+.theme-dark .tl-scroll::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--accent, #0678be) 45%, #334155) }
 
 /* ── Save toast ──────────────────────────────────────────────────────────────
    Base styles must live here because editor.css is not linked in planner.html.

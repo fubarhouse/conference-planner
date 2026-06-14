@@ -172,6 +172,14 @@ function getTimezone() {
   return state.eventMeta?.timezone || undefined;
 }
 
+function autoArriveDate(departDate, departTime, arriveTime) {
+  if (!departDate || !departTime || !arriveTime) return '';
+  if (arriveTime >= departTime) return '';
+  const d = new Date(departDate + 'T12:00:00');
+  d.setDate(d.getDate() + 1);
+  return d.toISOString().slice(0, 10);
+}
+
 function fmtTime(iso) {
   if (!iso) return '';
   return new Date(iso).toLocaleTimeString(undefined, {
@@ -433,6 +441,7 @@ const CURRENCIES = ['AUD', 'USD', 'EUR', 'GBP', 'NZD', 'CHF', 'CAD', 'INR', 'JPY
 // Budget categories — loaded from data/budget.json at init, then overridden per-event
 let _defaultBudgetCategories = [
   { id: 'travel',        name: 'Travel' },
+  { id: 'cruise',        name: 'Cruise' },
   { id: 'accommodation', name: 'Accommodation' },
   { id: 'food',          name: 'Food & Drink' },
   { id: 'customer',      name: 'Customer' },
@@ -549,9 +558,33 @@ function plannerDisplayName(planner, plannerKey) {
   return (plannerKey || '').replace(/^planner-/, '').replace(/-/g, ' ');
 }
 
+function scheduleMetaTitle() {
+  const meta = state.eventMeta || {}
+  return [meta.location || meta.designation, meta.year].filter(Boolean).join(' ')
+}
+
+function syncEventTitleField(inputId, hintId) {
+  const el   = document.getElementById(inputId)
+  const hint = document.getElementById(hintId)
+  if (!el) return
+  const metaTitle = scheduleMetaTitle()
+  // Only treat as associated when the schedule actually loaded meaningful metadata.
+  // state.eventFile can be truthy due to backward-compat even when the file is
+  // a planner (not a schedule), in which case eventMeta is empty.
+  if (state.eventFile && metaTitle) {
+    el.value    = metaTitle
+    el.disabled = true
+    hint?.classList.remove('hidden')
+  } else {
+    el.value    = state.planner?._displayName || plannerDisplayName(state.planner, state.plannerKey) || ''
+    el.disabled = false
+    hint?.classList.add('hidden')
+  }
+}
+
 // ── Tab system ───────────────────────────────────────────────────────────────
 
-const TABS = ['sponsor', 'team', 'documents', 'tasks', 'contacts', 'personal', 'notes', 'receipts', 'tickets', 'budget', 'summary', 'settings'];
+const TABS = ['sponsor', 'team', 'documents', 'tasks', 'contacts', 'personal', 'companions', 'notes', 'receipts', 'tickets', 'budget', 'map', 'summary', 'settings'];
 
 const TAB_ICONS = {
   sponsor:   'fas fa-handshake',
@@ -562,7 +595,9 @@ const TAB_ICONS = {
   notes:     'fas fa-file-lines',
   receipts:  'fas fa-receipt',
   tickets:   'fas fa-ticket',
+  companions:'fas fa-people-group',
   budget:    'fas fa-wallet',
+  map:       'fas fa-map',
   documents: 'fas fa-folder-open',
   summary:   'fas fa-chart-bar',
   settings:  'fas fa-gear',
@@ -578,7 +613,9 @@ const PANEL_IDS = {
   documents: 'plannerDocumentsPanel',
   receipts:  'plannerReceiptsPanel',
   tickets:   'plannerTicketsPanel',
+  companions:'plannerCompanionsPanel',
   budget:    'plannerBudgetPanel',
+  map:       'plannerMapPanel',
   summary:   'plannerSummaryPanel',
   settings:  'plannerSettingsPanel',
 };
@@ -593,7 +630,9 @@ const TAB_BTN_IDS = {
   documents: 'showDocumentsTab',
   receipts:  'showReceiptsTab',
   tickets:   'showTicketsTab',
+  companions:'showCompanionsTab',
   budget:    'showBudgetTab',
+  map:       'showMapTab',
   summary:   'showSummaryTab',
   settings:  'showSettingsTab',
 };
@@ -851,17 +890,46 @@ function buildSessionOptions(selectedId) {
   return none + opts;
 }
 
+const TASK_PRIORITY_ORDER = { urgent: 0, high: 1, normal: 2, low: 3 };
+const TASK_PRIORITY_BADGE = {
+  urgent: 'bg-red-100 text-red-600',
+  high:   'bg-orange-100 text-orange-600',
+  low:    'bg-gray-100 text-gray-400',
+};
+const TASK_STATUS_BADGE = {
+  'in-progress': 'bg-blue-100 text-blue-600',
+  'blocked':     'bg-amber-100 text-amber-600',
+};
+
 function taskRowHtml(task) {
   const session = task.sessionId ? state.allSessions.find((s) => s.id === task.sessionId) : null;
+  const today   = localDateStr(new Date());
+  const overdue = !task.done && task.dueDate && task.dueDate < today;
+  const dueStr  = task.dueDate
+    ? new Date(task.dueDate + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
+    : '';
+
+  const priorityBadge = !task.done && task.priority && task.priority !== 'normal' && TASK_PRIORITY_BADGE[task.priority]
+    ? `<span class="text-[0.6rem] px-1.5 py-0.5 rounded font-medium flex-shrink-0 ${TASK_PRIORITY_BADGE[task.priority]}">${task.priority}</span>`
+    : '';
+  const statusBadge = !task.done && task.status && TASK_STATUS_BADGE[task.status]
+    ? `<span class="text-[0.6rem] px-1.5 py-0.5 rounded font-medium flex-shrink-0 ${TASK_STATUS_BADGE[task.status]}">${task.status}</span>`
+    : '';
+  const dueBadge = dueStr
+    ? `<span class="text-[0.6rem] px-1.5 py-0.5 rounded flex-shrink-0 ${overdue ? 'bg-red-100 text-red-600 font-medium' : 'bg-gray-100 text-gray-500'}"><i class="fas fa-calendar-day mr-0.5 text-[0.5rem]"></i>${dueStr}${overdue ? ' !' : ''}</span>`
+    : '';
   const sessionBadge = session
     ? `<span class="text-[0.6rem] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500 truncate max-w-[140px]" title="${esc(session.title)}">${esc(fmtTime(session.startTime))} ${esc(session.title.slice(0, 30))}${session.title.length > 30 ? '…' : ''}</span>`
     : '';
+
   return `
-    <div class="flex items-center gap-2.5 px-3 py-2 rounded-lg border border-gray-200 bg-white group" data-task-id="${esc(task.id)}">
+    <div class="flex items-center gap-2.5 px-3 py-2 rounded-lg border ${overdue ? 'border-red-200' : 'border-gray-200'} bg-white group" data-task-id="${esc(task.id)}">
       <input type="checkbox" class="h-4 w-4 rounded flex-shrink-0" data-task-id="${esc(task.id)}" data-task-field="done" ${task.done ? 'checked' : ''} aria-label="Mark task done">
-      <div class="flex-1 min-w-0 flex items-center gap-2 flex-wrap">
-        <span class="text-sm ${task.done ? 'line-through text-gray-400' : 'text-gray-800'} truncate">${esc(task.text || 'Untitled task')}</span>
-        ${sessionBadge}
+      <div class="flex-1 min-w-0">
+        <span class="text-sm ${task.done ? 'line-through text-gray-400' : 'text-gray-800'} truncate block">${esc(task.text || 'Untitled task')}</span>
+        ${priorityBadge || statusBadge || dueBadge || sessionBadge
+          ? `<div class="flex items-center gap-1.5 mt-0.5 flex-wrap">${priorityBadge}${statusBadge}${dueBadge}${sessionBadge}</div>`
+          : ''}
       </div>
       <button type="button" class="edit-task-btn h-6 w-6 flex items-center justify-center rounded border border-gray-200 text-gray-400 hover:text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0 opacity-0 group-hover:opacity-100" data-task-id="${esc(task.id)}" aria-label="Edit task">
         <i class="fas fa-pen-to-square text-[0.6rem]"></i>
@@ -879,8 +947,18 @@ function renderTasksTab() {
     if (filter === 'done') return t.done;
     return true;
   });
-  const sorted = [...filtered.filter((t) => !t.done), ...filtered.filter((t) => t.done)];
-  renderListPanel('tasksList', 'tasksEmptyState', sorted, taskRowHtml);
+  const sortOpen = (a, b) => {
+    const pa = TASK_PRIORITY_ORDER[a.priority] ?? 2;
+    const pb = TASK_PRIORITY_ORDER[b.priority] ?? 2;
+    if (pa !== pb) return pa - pb;
+    if (a.dueDate && b.dueDate) return a.dueDate.localeCompare(b.dueDate);
+    if (a.dueDate) return -1;
+    if (b.dueDate) return 1;
+    return 0;
+  };
+  const open = filtered.filter((t) => !t.done).sort(sortOpen);
+  const done = filtered.filter((t) =>  t.done);
+  renderListPanel('tasksList', 'tasksEmptyState', [...open, ...done], taskRowHtml);
 }
 
 let _taskModalId = null;
@@ -888,24 +966,40 @@ let _taskModalId = null;
 function openTaskModal(id) {
   _taskModalId = id;
   const task = id ? state.planner.tasks.find((t) => t.id === id) : null;
+  const isConference = state.planner?.isConference !== false;
+
   document.getElementById('taskModalTitle').textContent = id ? 'Edit Task' : 'Add Task';
-  document.getElementById('taskModalText').value = task?.text || '';
+  document.getElementById('taskModalText').value        = task?.text    || '';
+  document.getElementById('taskModalDueDate').value     = task?.dueDate || '';
+
+  const statusEl = document.getElementById('taskModalStatus');
+  if (statusEl) statusEl.value = task?.status || 'open';
+  const priorityEl = document.getElementById('taskModalPriority');
+  if (priorityEl) priorityEl.value = task?.priority || 'normal';
+
+  const sessionRowEl = document.getElementById('taskModalSessionRow');
+  if (sessionRowEl) sessionRowEl.classList.toggle('hidden', !isConference);
   const sessionEl = document.getElementById('taskModalSession');
-  if (sessionEl) sessionEl.innerHTML = buildSessionOptions(task?.sessionId || '');
+  if (sessionEl) sessionEl.innerHTML = buildSessionOptions(isConference ? (task?.sessionId || '') : '');
+
   document.getElementById('taskModalDelete')?.classList.toggle('hidden', !id);
   showModal('taskModal', 'taskModalText');
 }
 
 function saveTaskModal() {
-  const isNew = !_taskModalId;
-  const id = _taskModalId || makeItemId('t');
-  const text = document.getElementById('taskModalText').value.trim();
-  const sessionId = document.getElementById('taskModalSession').value || null;
+  const isNew      = !_taskModalId;
+  const id         = _taskModalId || makeItemId('t');
+  const text       = document.getElementById('taskModalText').value.trim();
+  const isConference = state.planner?.isConference !== false;
+  const sessionId  = isConference ? (document.getElementById('taskModalSession').value || null) : null;
+  const status     = document.getElementById('taskModalStatus')?.value   || 'open';
+  const priority   = document.getElementById('taskModalPriority')?.value || 'normal';
+  const dueDate    = document.getElementById('taskModalDueDate')?.value  || '';
   if (isNew) {
-    state.planner.tasks.unshift({ id, text, done: false, sessionId });
+    state.planner.tasks.unshift({ id, text, done: false, sessionId, status, priority, dueDate });
   } else {
     const task = state.planner.tasks.find((t) => t.id === id);
-    if (task) { task.text = text; task.sessionId = sessionId; }
+    if (task) { task.text = text; task.sessionId = sessionId; task.status = status; task.priority = priority; task.dueDate = dueDate; }
   }
   closeTaskModal();
   renderTasksTab();
@@ -987,7 +1081,7 @@ function sortLegs(legs) {
 }
 
 function makeLeg() {
-  return { id: makeItemId('leg'), mode: 'flight', status: '', date: '', ref: '', from: '', to: '', departTime: '', arriveTime: '', departTz: '', arriveTz: '', confirmation: '', notes: '', filePath: '', fileLabel: '', receiptId: '' };
+  return { id: makeItemId('leg'), mode: 'flight', status: '', date: '', arriveDate: '', ref: '', from: '', to: '', departTime: '', arriveTime: '', departTz: '', arriveTz: '', confirmation: '', notes: '', filePath: '', fileLabel: '', receiptId: '' };
 }
 
 function legCardHtml(leg, direction) {
@@ -1033,9 +1127,7 @@ function legCardHtml(leg, direction) {
           <span class="absolute left-2 top-1/2 -translate-y-1/2 text-[0.6rem] text-gray-400 pointer-events-none">Arr</span>
           <input type="time" data-leg-id="${li}" data-direction="${d}" data-leg-field="arriveTime" value="${esc(leg.arriveTime || '')}" class="h-8 w-full rounded border-gray-300 text-xs bg-white pl-7 pr-2 drupal-blue-focus">
         </div>
-        <div></div>
-        <input type="text" list="tzList" data-leg-id="${li}" data-direction="${d}" data-leg-field="departTz" value="${esc(leg.departTz || '')}" placeholder="${d === 'return' ? (getTimezone() || 'Departure timezone') : 'Departure timezone'}" class="h-8 w-full rounded border-gray-300 text-xs bg-white px-2 drupal-blue-focus">
-        <input type="text" list="tzList" data-leg-id="${li}" data-direction="${d}" data-leg-field="arriveTz" value="${esc(leg.arriveTz || '')}" placeholder="${d === 'outbound' ? (getTimezone() || 'Arrival timezone') : 'Arrival timezone'}" class="h-8 w-full rounded border-gray-300 text-xs bg-white px-2 drupal-blue-focus">
+        <input type="date" data-leg-id="${li}" data-direction="${d}" data-leg-field="arriveDate" value="${esc(leg.arriveDate || '')}" class="h-8 w-full rounded border-gray-300 text-xs bg-white px-2 drupal-blue-focus" title="Arrival date (auto-filled if arrive time wraps past midnight)">
       </div>
       <div class="flex items-center gap-2 pt-2 border-t border-gray-100">
         <span class="text-[0.7rem] font-medium text-gray-400 uppercase tracking-wide flex-shrink-0">Receipt</span>
@@ -1055,8 +1147,11 @@ function personalLegRowHtml(leg, direction) {
   const icon   = travelIcon(leg.mode || 'flight', direction === 'return');
   const from   = leg.from || '';
   const to     = leg.to   || '';
-  const date   = leg.date
-    ? new Date(leg.date + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
+  const fmtDate = (d) => new Date(d + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+  const date = leg.date
+    ? (leg.arriveDate && leg.arriveDate !== leg.date
+        ? `${fmtDate(leg.date)} → ${fmtDate(leg.arriveDate)}`
+        : fmtDate(leg.date))
     : '';
   const ref    = leg.ref || '';
   const route  = (from || to) ? `${esc(from)} → ${esc(to)}` : '';
@@ -1131,17 +1226,153 @@ function assignmentCardHtml(assignment) {
     </div>`;
 }
 
+function accomTypeIcon(type) {
+  return type === 'cruise' ? 'fas fa-ship' : 'fas fa-bed';
+}
+
+function makeCruiseLeg() {
+  return { id: makeItemId('cl'), location: '', coords: '', date: '', time: '', notes: '' };
+}
+
+function cruiseLegRowHtml(leg) {
+  return `<div class="flex items-start gap-2 p-2 rounded-md border border-gray-200 bg-gray-50 group" draggable="true" data-cruise-leg-id="${esc(leg.id)}">
+    <i class="fas fa-grip-vertical cruise-leg-drag-handle text-gray-300 text-xs flex-shrink-0 cursor-grab active:cursor-grabbing mt-2" title="Drag to reorder"></i>
+    <i class="fas fa-anchor text-gray-300 text-xs flex-shrink-0 pointer-events-none mt-2"></i>
+    <div class="flex-1 min-w-0 space-y-0.5">
+      <input type="text" class="w-full h-8 border-0 border-b border-transparent hover:border-gray-200 focus:border-gray-300 focus:ring-0 bg-transparent text-sm px-1"
+        placeholder="Port / location name" data-cruise-leg-field="location" value="${esc(leg.location || '')}">
+      <div class="flex items-center gap-1 px-1">
+        <i class="fas fa-map-pin text-gray-300 text-[0.55rem] flex-shrink-0"></i>
+        <input type="text" class="flex-1 h-6 border-0 bg-transparent text-[0.7rem] text-gray-400 placeholder-gray-300 focus:outline-none focus:text-gray-600"
+          placeholder="LOCODE (e.g. VUVLI), lat,lon, or search term" data-cruise-leg-field="coords" value="${esc(leg.coords || '')}">
+      </div>
+    </div>
+    <input type="date" class="h-8 rounded border-gray-200 text-xs bg-white px-2 w-32 flex-shrink-0 mt-0.5"
+      data-cruise-leg-field="date" value="${esc(leg.date || '')}">
+    <input type="time" class="h-8 rounded border-gray-200 text-xs bg-white px-2 w-24 flex-shrink-0 mt-0.5"
+      data-cruise-leg-field="time" value="${esc(leg.time || '')}">
+    <div class="flex flex-col gap-0.5 flex-shrink-0 mt-1">
+      <button type="button" class="move-cruise-leg-up-btn w-6 h-4 flex items-center justify-center rounded text-gray-300 hover:text-gray-600 hover:bg-gray-100 transition-colors" data-cruise-leg-id="${esc(leg.id)}" aria-label="Move up">
+        <i class="fas fa-chevron-up text-[0.5rem]"></i>
+      </button>
+      <button type="button" class="move-cruise-leg-down-btn w-6 h-4 flex items-center justify-center rounded text-gray-300 hover:text-gray-600 hover:bg-gray-100 transition-colors" data-cruise-leg-id="${esc(leg.id)}" aria-label="Move down">
+        <i class="fas fa-chevron-down text-[0.5rem]"></i>
+      </button>
+    </div>
+    <button type="button" class="remove-cruise-leg-btn flex-shrink-0 text-gray-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100 mt-1" aria-label="Remove port">
+      <i class="fas fa-times text-xs"></i>
+    </button>
+  </div>`;
+}
+
+function renderCruiseLegs(legs, listId, emptyId) {
+  const list  = document.getElementById(listId);
+  const empty = document.getElementById(emptyId);
+  if (!list) return;
+  list.innerHTML = (legs || []).map(cruiseLegRowHtml).join('');
+  if (empty) empty.classList.toggle('hidden', (legs || []).length > 0);
+}
+
+function toggleCruiseLegSection(isCruise, sectionId) {
+  document.getElementById(sectionId)?.classList.toggle('hidden', !isCruise);
+}
+
+function wireCruiseLegDragDrop(listId, emptyId, getAccFn) {
+  const list = document.getElementById(listId);
+  if (!list) return;
+  let _dragged = null;
+
+  list.addEventListener('dragstart', (e) => {
+    if (!e.target.closest('.cruise-leg-drag-handle')) { e.preventDefault(); return; }
+    const row = e.target.closest('[data-cruise-leg-id]');
+    if (!row) return;
+    _dragged = row.dataset.cruiseLegId;
+    row.classList.add('tab-drag-source');
+    e.dataTransfer.effectAllowed = 'move';
+  });
+
+  list.addEventListener('dragend', () => {
+    _dragged = null;
+    list.querySelectorAll('.tab-drag-source, .settings-drop-before, .settings-drop-after')
+      .forEach((el) => el.classList.remove('tab-drag-source', 'settings-drop-before', 'settings-drop-after'));
+  }, { passive: true });
+
+  list.addEventListener('dragover', (e) => {
+    if (!_dragged) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    const target = e.target.closest('[data-cruise-leg-id]');
+    list.querySelectorAll('.settings-drop-before, .settings-drop-after')
+      .forEach((el) => el.classList.remove('settings-drop-before', 'settings-drop-after'));
+    if (target && target.dataset.cruiseLegId !== _dragged) {
+      const rect   = target.getBoundingClientRect();
+      const before = e.clientY < rect.top + rect.height / 2;
+      target.classList.add(before ? 'settings-drop-before' : 'settings-drop-after');
+    }
+  });
+
+  list.addEventListener('drop', (e) => {
+    e.preventDefault();
+    if (!_dragged) return;
+    const target = e.target.closest('[data-cruise-leg-id]');
+    if (!target || target.dataset.cruiseLegId === _dragged) return;
+    const acc = getAccFn();
+    if (!acc) return;
+    const legs = acc.cruiseLegs || [];
+    const from = legs.findIndex((l) => l.id === _dragged);
+    const to   = legs.findIndex((l) => l.id === target.dataset.cruiseLegId);
+    if (from === -1 || to === -1) return;
+    const rect     = target.getBoundingClientRect();
+    const before   = e.clientY < rect.top + rect.height / 2;
+    const newLegs  = [...legs];
+    const [moved]  = newLegs.splice(from, 1);
+    const insertAt = before ? to - (from < to ? 1 : 0) : to + (from > to ? 1 : 0);
+    newLegs.splice(Math.max(0, insertAt), 0, moved);
+    acc.cruiseLegs = newLegs;
+    renderCruiseLegs(acc.cruiseLegs, listId, emptyId);
+    scheduleAutoSave();
+  });
+
+  list.addEventListener('click', (e) => {
+    const upBtn   = e.target.closest('.move-cruise-leg-up-btn');
+    const downBtn = e.target.closest('.move-cruise-leg-down-btn');
+    if (!upBtn && !downBtn) return;
+    const legId = (upBtn || downBtn).dataset.cruiseLegId;
+    const acc   = getAccFn();
+    if (!acc) return;
+    const legs = acc.cruiseLegs || [];
+    const idx  = legs.findIndex((l) => l.id === legId);
+    if (idx === -1) return;
+    const newLegs = [...legs];
+    if (upBtn && idx > 0) {
+      [newLegs[idx - 1], newLegs[idx]] = [newLegs[idx], newLegs[idx - 1]];
+    } else if (downBtn && idx < newLegs.length - 1) {
+      [newLegs[idx], newLegs[idx + 1]] = [newLegs[idx + 1], newLegs[idx]];
+    } else {
+      return;
+    }
+    acc.cruiseLegs = newLegs;
+    renderCruiseLegs(acc.cruiseLegs, listId, emptyId);
+    scheduleAutoSave();
+  });
+}
+
 function accommodationCardHtml(acc, colorIdx) {
   const col = TIMELINE_COLORS[colorIdx % TIMELINE_COLORS.length];
-  const stayCount = (acc.assignments || []).filter((a) => a.checkIn || a.checkOut).length;
+  const stayNames = (acc.assignments || [])
+    .filter((a) => a.checkIn || a.checkOut)
+    .map((a) => {
+      const m = state.global?.teamMembers.find((tm) => tm.id === a.memberId);
+      return m?.name || null;
+    }).filter(Boolean);
   return `
     <div class="flex items-center gap-3 p-3 rounded-lg border bg-white" style="border-color:${col.border}" data-accom-id="${esc(acc.id)}">
-      <span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:${col.bg};border:2px solid ${col.border}"></span>
+      <i class="${accomTypeIcon(acc.type)} flex-shrink-0 text-sm" style="color:${col.border}"></i>
       <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-800">${esc(acc.name || 'New Accommodation')}</p>
+        <p class="text-sm font-medium text-gray-800">${esc(acc.name || (acc.type === 'cruise' ? 'New Cruise' : 'New Accommodation'))}</p>
         <div class="flex items-center gap-2 mt-0.5">
           ${acc.address ? `<span class="text-xs text-gray-400 truncate">${esc(acc.address)}</span>` : ''}
-          ${stayCount ? `<span class="text-[0.65rem] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500"><i class="fas fa-person text-[0.55rem] mr-1"></i>${stayCount} stay${stayCount !== 1 ? 's' : ''}</span>` : ''}
+          ${stayNames.length ? `<span class="text-[0.65rem] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500"><i class="fas fa-person text-[0.55rem] mr-1"></i>${esc(stayNames.join(', '))}</span>` : ''}
           ${(acc.budget || acc.budgetActual) ? `<span class="text-[0.65rem] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500"><i class="fas fa-wallet text-[0.55rem] mr-0.5"></i>${acc.budget ? esc(acc.budget) : ''}${acc.budgetActual ? ` / ${esc(acc.budgetActual)}` : ''}${acc.currency ? ` ${esc(acc.currency)}` : ''}</span>` : ''}
         </div>
       </div>
@@ -1246,7 +1477,7 @@ function renderTimeline() {
     const isToday = day === todayStr;
     const label   = new Date(day + 'T00:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
     const cls     = isToday ? 'tl-head-today' : isEvent ? 'tl-head-event' : 'tl-head-normal';
-    return `<th style="min-width:54px" class="${cls} text-center text-[0.65rem] px-1 py-2 whitespace-nowrap border-l border-gray-100">${label}${isToday ? '<br><span style="font-size:0.5rem">●</span>' : ''}</th>`;
+    return `<th style="min-width:68px" class="${cls} text-center text-[0.65rem] px-1 py-2 whitespace-nowrap border-l border-gray-100">${label}${isToday ? '<br><span style="font-size:0.5rem">●</span>' : ''}</th>`;
   }).join('');
 
   const rows = teamAssignments.map((assignment) => {
@@ -1254,27 +1485,29 @@ function renderTimeline() {
     if (!member) return '';
     const dam = dayAccomMap(assignment.memberId);
 
-    // Build day→mode maps (first leg per day wins) for both directions
-    const outDayMode = {};
-    const retDayMode = {};
+    // Build day→legs arrays (all legs, sorted chronologically by departure time)
+    const outDayLegs = {};
+    const retDayLegs = {};
     (assignment.outboundLegs || []).filter((l) => l.date).forEach((l) => {
-      if (!outDayMode[l.date]) outDayMode[l.date] = l.mode || 'other';
+      (outDayLegs[l.date] ??= []).push({ mode: l.mode || 'other', time: l.departTime || '' });
     });
     (assignment.returnLegs || []).filter((l) => l.date).forEach((l) => {
-      if (!retDayMode[l.date]) retDayMode[l.date] = l.mode || 'other';
+      (retDayLegs[l.date] ??= []).push({ mode: l.mode || 'other', time: l.departTime || '' });
     });
     // Legacy compat
-    if (assignment.flightOut?.date && !outDayMode[assignment.flightOut.date])
-      outDayMode[assignment.flightOut.date] = 'flight';
-    if (assignment.flightReturn?.date && !retDayMode[assignment.flightReturn.date])
-      retDayMode[assignment.flightReturn.date] = 'flight';
+    if (assignment.flightOut?.date)
+      (outDayLegs[assignment.flightOut.date] ??= []).push({ mode: 'flight', time: '' });
+    if (assignment.flightReturn?.date)
+      (retDayLegs[assignment.flightReturn.date] ??= []).push({ mode: 'flight', time: '' });
+    Object.values(outDayLegs).forEach((legs) => legs.sort((a, b) => a.time.localeCompare(b.time)));
+    Object.values(retDayLegs).forEach((legs) => legs.sort((a, b) => a.time.localeCompare(b.time)));
 
     const cells = days.map((day) => {
       const dayInfo    = dam[day];
       const accom      = dayInfo?.accom      || null;
       const splitAccom = dayInfo?.splitAccom || null;
-      const outMode = outDayMode[day];
-      const retMode = retDayMode[day];
+      const outLegs = outDayLegs[day] || [];
+      const retLegs = retDayLegs[day] || [];
       const isEvent = eventDaySet.has(day);
       const isToday = day === todayStr;
       const cellCls = (accom || splitAccom) ? '' : isToday ? 'tl-cell-today' : isEvent ? 'tl-cell-event' : '';
@@ -1289,14 +1522,15 @@ function renderTimeline() {
       }
 
       let content = '';
-      if (outMode && retMode) {
-        const outIco = travelIcon(outMode, false);
-        const retIco = travelIcon(retMode, true);
-        content = `<i class="${outIco}" style="color:#7c3aed;font-size:0.6rem" title="${esc(member.name)} outbound + return"></i><i class="${retIco}" style="color:#7c3aed;font-size:0.6rem;margin-left:2px"></i>`;
-      } else if (outMode) {
-        content = `<i class="${travelIcon(outMode, false)}" style="color:#2563eb;font-size:0.7rem" title="${esc(member.name)} outbound"></i>`;
-      } else if (retMode) {
-        content = `<i class="${travelIcon(retMode, true)}" style="color:#059669;font-size:0.7rem" title="${esc(member.name)} return"></i>`;
+      if (outLegs.length || retLegs.length) {
+        const hasBoth = outLegs.length && retLegs.length;
+        const color   = hasBoth ? '#7c3aed' : outLegs.length ? '#2563eb' : '#059669';
+        const tip     = hasBoth ? `${esc(member.name)} outbound + return` : outLegs.length ? `${esc(member.name)} outbound` : `${esc(member.name)} return`;
+        const icons   = [
+          ...outLegs.map((l) => `<i class="${travelIcon(l.mode, false)}" style="color:${color};font-size:0.62rem"></i>`),
+          ...retLegs.map((l) => `<i class="${travelIcon(l.mode, true)}"  style="color:${color};font-size:0.62rem"></i>`),
+        ].join('');
+        content = `<span class="inline-flex flex-wrap justify-center gap-1" title="${tip}">${icons}</span>`;
       }
 
       return `<td style="${bgStyle}" class="${cellCls} text-center px-1 py-2 border-l border-gray-100">${content}</td>`;
@@ -1306,11 +1540,11 @@ function renderTimeline() {
 
   const legend = accommodations.map((acc, i) => {
     const c = TIMELINE_COLORS[i % TIMELINE_COLORS.length];
-    return `<span class="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full font-medium" style="background:${c.bg};color:${c.text};border:1px solid ${c.border}"><i class="fas fa-bed text-[0.6rem]"></i>${esc(acc.name || 'Unnamed')}</span>`;
+    return `<span class="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full font-medium" style="background:${c.bg};color:${c.text};border:1px solid ${c.border}"><i class="${accomTypeIcon(acc.type)} text-[0.6rem]"></i>${esc(acc.name || 'Unnamed')}</span>`;
   }).join('');
 
   container.innerHTML = rows
-    ? `<div class="overflow-x-auto rounded-lg border border-gray-200"><table class="w-full text-sm" style="border-collapse:collapse"><thead class="bg-gray-50"><tr><th class="text-left text-xs font-semibold text-gray-500 pr-3 py-2 whitespace-nowrap border-r border-gray-200" style="min-width:90px">Member</th>${headerCells}</tr></thead><tbody>${rows}</tbody></table></div>${legend ? `<div class="flex flex-wrap gap-2 mt-3">${legend}</div>` : ''}`
+    ? `<div class="tl-scroll overflow-x-auto rounded-lg border border-gray-200"><table class="min-w-full text-sm" style="border-collapse:collapse"><thead class="bg-gray-50"><tr><th class="text-left text-xs font-semibold text-gray-500 pr-3 py-2 whitespace-nowrap border-r border-gray-200" style="min-width:90px">Member</th>${headerCells}</tr></thead><tbody>${rows}</tbody></table></div>${legend ? `<div class="flex flex-wrap gap-2 mt-3">${legend}</div>` : ''}`
     : '<p class="text-xs text-gray-400 py-2">No valid team assignments to display.</p>';
 }
 
@@ -1326,6 +1560,8 @@ function refreshAssignMemberSelect() {
 
 function renderOrgTab() {
   const org = state.planner.org;
+
+  syncEventTitleField('plannerSponsorTitle', 'plannerSponsorTitleHint')
 
   const boothInfo  = document.getElementById('orgBoothInfo');
   const boothNotes = document.getElementById('orgBoothNotes');
@@ -1411,6 +1647,7 @@ function openAssignmentModal(memberId) {
     `${member.name || 'Unnamed'}${member.role ? ` · ${member.role}` : ''}`;
 
   renderAssignmentLegsInModal(assignment);
+  _hideAssignmentModalImportButtons();
 
   document.getElementById('assignmentBudget').value = assignment.budget       || '';
   document.getElementById('assignmentActual').value = assignment.budgetActual || '';
@@ -1472,13 +1709,17 @@ function loadMemberStayFields(acc, memberId) {
     else         removeBtn.classList.add('opacity-0', 'pointer-events-none');
   }
 
+  const isCruise = acc.type === 'cruise';
+  document.getElementById('accomMemberCheckInRow')?.classList.toggle('hidden', isCruise);
+  document.getElementById('accomMemberCheckOutRow')?.classList.toggle('hidden', isCruise);
+
   const checkIn  = document.getElementById('accomMemberCheckIn');
   const checkOut = document.getElementById('accomMemberCheckOut');
   const currency = document.getElementById('accomMemberCurrency');
   const budget   = document.getElementById('accomMemberBudget');
   const actual   = document.getElementById('accomMemberActual');
-  if (checkIn)  checkIn.value  = stay.checkIn      || '';
-  if (checkOut) checkOut.value = stay.checkOut     || '';
+  if (checkIn)  checkIn.value  = isCruise ? (acc.checkIn || '') : (stay.checkIn || '');
+  if (checkOut) checkOut.value = isCruise ? (acc.checkOut || '') : (stay.checkOut || '');
   if (currency) currency.innerHTML = currencyOptions(stay.currency || state.planner?.org?.sponsorCurrency || 'AUD');
   if (budget)   budget.value   = stay.budget       || '';
   if (actual)   actual.value   = stay.budgetActual || '';
@@ -1491,10 +1732,17 @@ function openAccommodationModal(id) {
   if (!acc) return;
 
   modal.dataset.accomId = id;
+  const accomType = acc.type || 'accommodation';
+  const typeEl = document.getElementById('accomType');
+  if (typeEl) typeEl.value = accomType;
+  document.getElementById('accommodationModalTitle').textContent = accomType === 'cruise' ? 'Cruise' : 'Accommodation';
   document.getElementById('accomName').value         = acc.name         || '';
   document.getElementById('accomAddress').value      = acc.address      || '';
   document.getElementById('accomConfirmation').value = acc.confirmation || '';
   document.getElementById('accomNotes').value        = acc.notes        || '';
+
+  toggleCruiseLegSection(accomType === 'cruise', 'accomCruiseLegsSection');
+  renderCruiseLegs(acc.cruiseLegs, 'accomCruiseLegsList', 'accomCruiseLegsEmpty');
 
   renderAccomDocStatus(acc, 'accomDocStatus', 'accomAttachDocBtn');
   renderAccomMembersSection(acc);
@@ -2530,13 +2778,16 @@ function renderSummaryThisEvent() {
   // Determine the event date for historical FX rate lookup
   _currentRenderDate = state.eventMeta?.startDate?.slice(0, 10) || ''
 
-  const isPersonal = state.planner?.mode === 'personal'
-  document.getElementById('summaryMemberChartSection')?.classList.toggle('hidden', isPersonal)
+  const mode        = state.planner?.mode || 'personal'
+  const isPersonal  = mode === 'personal'
+  const visibleTabs = getVisibleTabs(mode)
 
-  const tasks    = state.planner.tasks || []
-  const contacts = state.planner.contacts || []
-  const notes    = state.planner.sessionNotes || {}
-  const receipts = state.planner.receipts || []
+  document.getElementById('summaryMemberChartSection')?.classList.toggle('hidden', isPersonal || !visibleTabs.has('team'))
+
+  const tasks    = visibleTabs.has('tasks')    ? (state.planner.tasks         || []) : []
+  const contacts = visibleTabs.has('contacts') ? (state.planner.contacts      || []) : []
+  const notes    = visibleTabs.has('notes')    ? (state.planner.sessionNotes  || {}) : {}
+  const receipts = visibleTabs.has('receipts') ? (state.planner.receipts      || []) : []
 
   const tasksDone    = tasks.filter((t) => t.done).length
   const tasksOpen    = tasks.filter((t) => !t.done).length
@@ -2663,18 +2914,18 @@ function renderSummaryThisEvent() {
     statsGrid.innerHTML = [
       statCard('fas fa-plane',        'Travel legs',    totalLegs, unconfirmedLegs ? `${unconfirmedLegs} unconfirmed` : 'all confirmed'),
       statCard('fas fa-bed',          'Nights',         accomNights),
-      statCard('fas fa-ticket',       'Tickets',        tickets.length, ticketsPending ? `${ticketsPending} pending` : tickets.length ? 'all done' : ''),
-      statCard('fas fa-list-check',   'Tasks',          tasksDone + ' / ' + (tasksDone + tasksOpen), `${tasksOpen} open`),
+      visibleTabs.has('tickets')  ? statCard('fas fa-ticket',       'Tickets',        tickets.length, ticketsPending ? `${ticketsPending} pending` : tickets.length ? 'all done' : '') : '',
+      visibleTabs.has('tasks')    ? statCard('fas fa-list-check',   'Tasks',          tasksDone + ' / ' + (tasksDone + tasksOpen), `${tasksOpen} open`) : '',
       statCard('fas fa-map-pin',      'Itinerary',      itinDone + ' / ' + (itinDone + itinOpen),    `${itinOpen} open`),
-      statCard('fas fa-address-book', 'Contacts',       contactCount),
-      statCard('fas fa-file-lines',   'Sessions noted', notedCount),
-      statCard('fas fa-receipt',      'Receipts',       receiptCount, receiptTotal ? receiptTotal.toLocaleString() : ''),
-      hasBudgetData ? statCard('fas fa-wallet', 'My budget', fmtStat(totalBudget)) : '',
-      hasBudgetData ? statCard('fas fa-coins',  'My actual', fmtStat(totalActual)) : '',
+      visibleTabs.has('contacts') ? statCard('fas fa-address-book', 'Contacts',       contactCount) : '',
+      visibleTabs.has('notes')    ? statCard('fas fa-file-lines',   'Sessions noted', notedCount) : '',
+      visibleTabs.has('receipts') ? statCard('fas fa-receipt',      'Receipts',       receiptCount, receiptTotal ? receiptTotal.toLocaleString() : '') : '',
+      visibleTabs.has('budget') && hasBudgetData ? statCard('fas fa-wallet', 'My budget', fmtStat(totalBudget)) : '',
+      visibleTabs.has('budget') && hasBudgetData ? statCard('fas fa-coins',  'My actual', fmtStat(totalActual)) : '',
     ].filter(Boolean).join('')
 
-    renderBudgetHealth(cats, totalBudget, totalActual, primaryCurr)
-    renderCategoryChart(cats)
+    renderBudgetHealth(visibleTabs.has('budget') ? cats : {}, visibleTabs.has('budget') ? totalBudget : 0, visibleTabs.has('budget') ? totalActual : 0, primaryCurr)
+    renderCategoryChart(visibleTabs.has('budget') ? cats : {})
     destroyCharts('member')
     return
   }
@@ -2713,24 +2964,25 @@ function renderSummaryThisEvent() {
   _showRateNotice(false, _summaryCurrency ? `${_summaryCurrency}:${_currentRenderDate || 'current'}` : '')
 
   statsGrid.innerHTML = [
-    statCard('fas fa-users',        'Members',        memberCount),
+    visibleTabs.has('team')     ? statCard('fas fa-users',        'Members',        memberCount) : '',
     statCard('fas fa-plane',        'Travel legs',    totalLegs, unconfirmedLegs ? `${unconfirmedLegs} unconfirmed` : totalLegs ? 'all confirmed' : ''),
     statCard('fas fa-bed',          'Nights',         totalNights),
-    statCard('fas fa-ticket',       'Tickets',        orgTickets.length, orgTicketsPending ? `${orgTicketsPending} pending` : orgTickets.length ? 'all done' : ''),
-    statCard('fas fa-list-check',   'Tasks',          tasksDone + ' / ' + (tasksDone + tasksOpen), `${tasksOpen} open`),
+    visibleTabs.has('tickets')  ? statCard('fas fa-ticket',       'Tickets',        orgTickets.length, orgTicketsPending ? `${orgTicketsPending} pending` : orgTickets.length ? 'all done' : '') : '',
+    visibleTabs.has('tasks')    ? statCard('fas fa-list-check',   'Tasks',          tasksDone + ' / ' + (tasksDone + tasksOpen), `${tasksOpen} open`) : '',
     statCard('fas fa-map-pin',      'Itinerary',      itinDone + ' / ' + (itinDone + itinOpen),    `${itinOpen} open`),
-    statCard('fas fa-address-book', 'Contacts',       contactCount),
-    statCard('fas fa-file-lines',   'Sessions noted', notedCount),
-    statCard('fas fa-receipt',      'Receipts',       receiptCount, receiptTotal ? receiptTotal.toLocaleString() : ''),
-    hasBudgetData ? statCard('fas fa-wallet', 'Total budget', fmtStat(totalBudget)) : '',
-    hasBudgetData ? statCard('fas fa-coins',  'Total actual', fmtStat(totalActual)) : '',
+    visibleTabs.has('contacts') ? statCard('fas fa-address-book', 'Contacts',       contactCount) : '',
+    visibleTabs.has('notes')    ? statCard('fas fa-file-lines',   'Sessions noted', notedCount) : '',
+    visibleTabs.has('receipts') ? statCard('fas fa-receipt',      'Receipts',       receiptCount, receiptTotal ? receiptTotal.toLocaleString() : '') : '',
+    visibleTabs.has('budget') && hasBudgetData ? statCard('fas fa-wallet', 'Total budget', fmtStat(totalBudget)) : '',
+    visibleTabs.has('budget') && hasBudgetData ? statCard('fas fa-coins',  'Total actual', fmtStat(totalActual)) : '',
   ].filter(Boolean).join('')
 
-  renderBudgetHealth(cats, totalBudget, totalActual, primaryCurr)
-  renderCategoryChart(cats)
+  renderBudgetHealth(visibleTabs.has('budget') ? cats : {}, visibleTabs.has('budget') ? totalBudget : 0, visibleTabs.has('budget') ? totalActual : 0, primaryCurr)
+  renderCategoryChart(visibleTabs.has('budget') ? cats : {})
 
   // ── Per-member chart ─────────────────────────────────────────────────────────
   destroyCharts('member')
+  if (!visibleTabs.has('team')) return
   const memberCanvas = document.getElementById('budgetMemberChart')
   const memberData = assignments.map((a) => {
     const m    = state.global?.teamMembers.find((tm) => tm.id === a.memberId)
@@ -2935,12 +3187,14 @@ async function renderSummaryAllEvents() {
     return true
   })
 
-  // 2. Person filter — '' = everyone, 'me' = personal only, memberId = sponsor costs for that member
+  // 2. Person filter — '' = everyone, 'me' = personal only, 'sponsor' = all sponsor, memberId = sponsor for that member
   let allEvents
   if (!person) {
     allEvents = dateFiltered
   } else if (person === 'me') {
     allEvents = dateFiltered.filter((e) => e.mode === 'personal')
+  } else if (person === 'sponsor') {
+    allEvents = dateFiltered.filter((e) => e.mode === 'sponsor')
   } else {
     allEvents = dateFiltered
       .filter((e) => {
@@ -2966,11 +3220,13 @@ async function renderSummaryAllEvents() {
   if (personSelect) {
     const teamMembers = state.global?.teamMembers || []
     personSelect.innerHTML =
-      `<option value="">Everyone</option>` +
-      `<option value="me"${person === 'me' ? ' selected' : ''}>Me (personal)</option>` +
-      teamMembers.map((m) =>
-        `<option value="${esc(m.id)}"${m.id === person ? ' selected' : ''}>${esc(m.name || 'Unnamed')}${m.role ? ` — ${esc(m.role)}` : ''}</option>`
-      ).join('')
+      `<option value="">All planners</option>` +
+      `<option value="me"${person === 'me' ? ' selected' : ''}>Personal only</option>` +
+      `<option value="sponsor"${person === 'sponsor' ? ' selected' : ''}>Sponsor only</option>` +
+      (teamMembers.length ? `<optgroup label="Sponsor — by person">` +
+        teamMembers.map((m) =>
+          `<option value="${esc(m.id)}"${m.id === person ? ' selected' : ''}>${esc(m.name || 'Unnamed')}${m.role ? ` — ${esc(m.role)}` : ''}</option>`
+        ).join('') + `</optgroup>` : '')
   }
 
   // Render event toggle pills (drawn from date-filtered set so users can un-hide)
@@ -3525,64 +3781,98 @@ function renderAssocResults(items, query) {
   const list = document.getElementById('assocModalResults');
   if (!list) return;
   const q = query.toLowerCase();
-  const filtered = q ? items.filter((r) => r.label.toLowerCase().includes(q) || (r.eventFile || '').toLowerCase().includes(q)) : items;
+  const filtered = q
+    ? items.filter((r) =>
+        r.label.toLowerCase().includes(q) ||
+        (r.eventFile || '').toLowerCase().includes(q) ||
+        (r.plannerData?._displayName || '').toLowerCase().includes(q)
+      )
+    : items;
 
   if (!filtered.length) {
-    list.innerHTML = '<p class="text-sm text-gray-400 px-4 py-6 text-center">No events found.</p>';
+    list.innerHTML = '<p class="text-sm text-gray-400 px-4 py-6 text-center">No results found.</p>';
     return;
   }
 
-  const currentEventFile = state.eventFile;
+  const currentEventFile  = state.eventFile;
   const currentPlannerKey = state.plannerKey;
-  const isSponsor = state.planner?.mode === 'sponsor';
 
-  list.innerHTML = filtered.map((r) => {
+  // Split into planners the user owns vs bare events with no planner yet
+  const myPlanners = filtered.filter((r) => r.plannerData);
+  const bareEvents = filtered.filter((r) => !r.plannerData && r.eventFile);
+
+  function modeBadge(r) {
+    if (r.plannerData?.mode === 'sponsor')  return '<span class="text-[0.6rem] px-1.5 py-px rounded bg-blue-50 text-blue-600">Sponsor</span>';
+    if (r.plannerData?.mode === 'personal') return '<span class="text-[0.6rem] px-1.5 py-px rounded bg-gray-100 text-gray-500">Personal</span>';
+    return '';
+  }
+  function diskBadge(r) {
+    return r.hasDiskFile ? '<span class="text-[0.6rem] px-1.5 py-px rounded bg-green-50 text-green-600"><i class="fas fa-server mr-0.5 text-[0.55rem]"></i>Disk</span>' : '';
+  }
+  function sponsorBadge(r) {
+    return r.sponsorMatch ? `<span class="text-[0.6rem] px-1.5 py-px rounded bg-amber-50 text-amber-600"><i class="fas fa-handshake mr-0.5 text-[0.55rem]"></i>Sponsoring</span>` : '';
+  }
+
+  const sectionHead = (label) =>
+    `<div class="px-4 py-2 bg-gray-50 border-b border-gray-100 sticky top-0">
+       <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-gray-400">${label}</span>
+     </div>`;
+
+  const plannerRows = myPlanners.map((r) => {
+    const isCurrent = r.plannerKey === currentPlannerKey;
     const isCurrentSchedule = r.eventFile && r.eventFile === currentEventFile;
-    const hasPlannerData = !!r.plannerData;
-    const modeBadge = r.plannerData?.mode === 'sponsor'
-      ? '<span class="ml-1 text-[0.6rem] px-1.5 py-px rounded bg-blue-50 text-blue-600">Sponsor</span>'
-      : r.plannerData?.mode === 'personal'
-        ? '<span class="ml-1 text-[0.6rem] px-1.5 py-px rounded bg-gray-100 text-gray-500">Personal</span>'
-        : '';
-    const sponsorBadge = r.sponsorMatch
-      ? `<span class="ml-1 text-[0.6rem] px-1.5 py-px rounded bg-amber-50 text-amber-600"><i class="fas fa-handshake mr-0.5 text-[0.55rem]"></i>Sponsoring</span>`
+    const lastMod = r.plannerData?._lastModified
+      ? new Date(r.plannerData._lastModified).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })
       : '';
-    const diskBadge = r.hasDiskFile
-      ? '<span class="ml-1 text-[0.6rem] px-1.5 py-px rounded bg-green-50 text-green-600"><i class="fas fa-server mr-0.5 text-[0.55rem]"></i>Disk</span>'
-      : '';
-
     const actions = [];
-    if (r.eventFile && !isCurrentSchedule) {
+    if (!isCurrent) {
+      actions.push(`<a href="planner.html?id=${encodeURIComponent(r.plannerKey)}"
+        class="assoc-switch-btn h-7 px-3 rounded-md border border-gray-300 text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0 inline-flex items-center">
+        <i class="fas fa-arrow-right mr-1 text-[0.6rem]"></i>Open
+      </a>`);
+    }
+    if (isCurrent && isCurrentSchedule && currentEventFile) {
+      actions.push(`<button type="button" class="assoc-disassociate-btn h-7 px-3 rounded-md border border-red-200 text-xs text-red-500 hover:bg-red-50 transition-colors flex-shrink-0">
+        <i class="fas fa-unlink mr-1 text-[0.6rem]"></i>Disassociate
+      </button>`);
+    }
+    if (r.eventFile && !isCurrentSchedule && isCurrent) {
       actions.push(`<button type="button" class="assoc-associate-btn h-7 px-3 rounded-md border border-blue-200 text-xs text-blue-600 hover:bg-blue-50 transition-colors flex-shrink-0"
         data-event-file="${esc(r.eventFile)}" data-label="${esc(r.label)}">
         <i class="fas fa-link mr-1 text-[0.6rem]"></i>Associate
       </button>`);
     }
-    if (isCurrentSchedule && currentEventFile) {
-      actions.push(`<button type="button" class="assoc-disassociate-btn h-7 px-3 rounded-md border border-red-200 text-xs text-red-500 hover:bg-red-50 transition-colors flex-shrink-0">
-        <i class="fas fa-unlink mr-1 text-[0.6rem]"></i>Disassociate
-      </button>`);
-    }
-
-    return `<div class="flex items-center gap-2 px-4 py-3 border-b border-gray-100 last:border-0 ${r.sponsorMatch ? 'bg-amber-50/40' : ''}">
+    return `<div class="flex items-center gap-2 px-4 py-3 border-b border-gray-100 last:border-0 ${r.sponsorMatch ? 'bg-amber-50/40' : ''} ${isCurrent ? 'bg-blue-50/30' : ''}">
       <div class="flex-1 min-w-0">
-        <div class="flex items-center flex-wrap gap-0.5">
-          <span class="text-sm font-medium text-gray-800 truncate">${esc(r.label)}</span>
-          ${sponsorBadge}${modeBadge}${diskBadge}
+        <div class="flex items-center flex-wrap gap-1">
+          <span class="text-sm font-medium ${isCurrent ? 'text-blue-700' : 'text-gray-800'} truncate">${esc(r.plannerData._displayName || r.plannerKey || r.label)}</span>
+          ${isCurrent ? '<span class="text-[0.6rem] px-1.5 py-px rounded bg-blue-100 text-blue-600">Current</span>' : ''}
+          ${modeBadge(r)}${sponsorBadge(r)}${diskBadge(r)}
         </div>
-        ${isCurrentSchedule ? '<p class="text-xs text-blue-500 mt-0.5"><i class="fas fa-check-circle mr-1 text-[0.6rem]"></i>Current schedule</p>' : ''}
-        ${hasPlannerData && !isCurrentSchedule ? `<p class="text-xs text-gray-400 mt-0.5">${r.plannerData._displayName || r.plannerKey || ''}</p>` : ''}
-        ${r.eventFile && !hasPlannerData ? '<p class="text-xs text-gray-300 mt-0.5 italic">No planner data yet</p>' : ''}
+        ${r.eventFile ? `<p class="text-xs text-gray-400 mt-0.5 truncate"><i class="fas fa-calendar-alt mr-1 text-[0.55rem]"></i>${esc(r.label)}</p>` : ''}
+        ${lastMod ? `<p class="text-xs text-gray-300 mt-0.5">Edited ${esc(lastMod)}</p>` : ''}
       </div>
       <div class="flex gap-1.5 flex-shrink-0">${actions.join('')}</div>
     </div>`;
   }).join('');
+
+  const eventRows = bareEvents.map((r) => {
+    return `<a href="planner.html?event=${encodeURIComponent(r.eventFile)}"
+      class="flex items-center gap-2 px-4 py-3 border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors">
+      <div class="flex-1 min-w-0">
+        <span class="text-sm font-medium text-gray-800 truncate block">${esc(r.label)}</span>
+        <p class="text-xs text-gray-300 mt-0.5 italic">No planner yet — click to create one</p>
+      </div>
+      <i class="fas fa-chevron-right text-gray-300 text-xs flex-shrink-0"></i>
+    </a>`;
+  }).join('');
+
+  list.innerHTML =
+    (myPlanners.length ? sectionHead('Your planners') + plannerRows : '') +
+    (bareEvents.length  ? sectionHead('Events without a planner') + eventRows  : '');
 }
 
 function wireManageEventBtn() {
-  // "Find event" uses the shared event-search modal, same as editor.html.
-  document.getElementById('plannerFindEventBtn')?.addEventListener('click', openEventSearchModal);
-
   // Disassociate via the × inside the association badge (delegated — badge is re-rendered by updateHeader).
   document.addEventListener('click', (e) => {
     if (!e.target.closest('#plannerDisassocBtn')) return;
@@ -3630,35 +3920,18 @@ function wireEventAssocModal() {
     renderAssocResults(_assocModalResults, e.target.value.trim());
   });
 
-  document.getElementById('assocModalResults')?.addEventListener('click', async (e) => {
-    const assocBtn   = e.target.closest('.assoc-associate-btn');
+  modal?.addEventListener('click', async (e) => {
+    if (e.target === modal) return;
     const disassocBtn = e.target.closest('.assoc-disassociate-btn');
-
-    if (assocBtn) {
-      const ef  = assocBtn.dataset.eventFile;
-      const lbl = assocBtn.dataset.label;
-      state.planner._eventFile = ef;
-      if (!state.planner._displayName) state.planner._displayName = lbl;
-      state.eventFile = ef;
-      savePlanner(state.plannerKey, state.planner);
-      await loadSchedule(ef);
-      syncSponsoredSessions();
-      updateHeader();
-      renderAll();
-      closeModal();
-    }
-
-    if (disassocBtn) {
-      state.planner._eventFile = '';
-      state.eventFile = null;
-      state.eventMeta = {};
-      state.allSessions = [];
-      savePlanner(state.plannerKey, state.planner);
-      updateHeader();
-      renderAll();
-      closeModal();
-    }
-
+    if (!disassocBtn) return;
+    state.planner._eventFile = '';
+    state.eventFile = null;
+    state.eventMeta = {};
+    state.allSessions = [];
+    savePlanner(state.plannerKey, state.planner);
+    updateHeader();
+    renderAll();
+    closeModal();
   });
 
   document.getElementById('managePlannerNewBtn')?.addEventListener('click', () => {
@@ -3706,6 +3979,13 @@ function wireSummaryPanel() {
     document.getElementById('summaryThisEvent')?.classList.add('hidden')
     document.getElementById('summaryToggleAll')?.classList.add('is-active')
     document.getElementById('summaryToggleThis')?.classList.remove('is-active')
+    if (!_globalSummaryFilter.person) {
+      const mode = state.planner?.mode || 'personal'
+      _globalSummaryFilter.person = mode === 'sponsor' ? 'sponsor' : 'me'
+      const p = document.getElementById('globalPersonFilter')
+      if (p) p.value = _globalSummaryFilter.person
+      _updateGlobalFilterClearBtn()
+    }
     renderSummaryAllEvents()
   })
 
@@ -4108,7 +4388,13 @@ function renderPersonalTimeline() {
   if (!startStr || !endStr) {
     const all = [
       ...outLegs.map((l) => l.date), ...retLegs.map((l) => l.date),
-      ...accoms.flatMap((a) => [a.checkIn, a.checkOut]),
+      ...accoms.flatMap((a) => {
+        if (a.type === 'cruise') {
+          const legDates = (a.cruiseLegs || []).map((cl) => cl.date).filter(Boolean)
+          return legDates.length ? legDates : [a.checkIn, a.checkOut]
+        }
+        return [a.checkIn, a.checkOut]
+      }),
       ...state.allSessions.map((s) => s.startTime.slice(0, 10)),
       ...items.map((i) => i.date),
     ].filter(Boolean).sort()
@@ -4141,21 +4427,34 @@ function renderPersonalTimeline() {
   ))
   const todayStr = localDateStr(new Date())
 
-  // Day → travel mode
-  const outDayMode = {}
-  const retDayMode = {}
-  outLegs.filter((l) => l.date).forEach((l) => { if (!outDayMode[l.date]) outDayMode[l.date] = l.mode || 'other' })
-  retLegs.filter((l) => l.date).forEach((l) => { if (!retDayMode[l.date]) retDayMode[l.date] = l.mode || 'other' })
+  // Day → legs arrays sorted chronologically by departure time
+  const outDayLegs = {}
+  const retDayLegs = {}
+  outLegs.filter((l) => l.date).forEach((l) => { (outDayLegs[l.date] ??= []).push({ mode: l.mode || 'other', time: l.departTime || '' }) })
+  retLegs.filter((l) => l.date).forEach((l) => { (retDayLegs[l.date] ??= []).push({ mode: l.mode || 'other', time: l.departTime || '' }) })
+  Object.values(outDayLegs).forEach((legs) => legs.sort((a, b) => a.time.localeCompare(b.time)))
+  Object.values(retDayLegs).forEach((legs) => legs.sort((a, b) => a.time.localeCompare(b.time)))
 
-  // Per-accommodation day maps: primary (checkIn to day before checkOut) and checkout day
-  const accomPrimary  = {}  // day → { acc, color }
-  const accomCheckout = {}  // day → { acc, color }
+  // Per-accommodation day maps for "Me" row: use __me__ stay records, fall back to top-level dates for old data
+  // For cruise: fall back further to first/last leg date when embarkation/disembarkation not set
+  const accomPrimary      = {}  // day → { acc, color }
+  const accomCheckout     = {}  // day → { acc, color }
+  const cruisePortsByAccom = {}  // accId → Set<date> — used for port icons in all rows
   accoms.forEach((acc, i) => {
-    const color = TIMELINE_COLORS[i % TIMELINE_COLORS.length]
-    if (!acc.checkIn || !acc.checkOut) return
-    accomCheckout[acc.checkOut] = { acc, color }
-    let d = new Date(acc.checkIn + 'T00:00:00')
-    const e = new Date(acc.checkOut + 'T00:00:00')
+    const color  = TIMELINE_COLORS[i % TIMELINE_COLORS.length]
+    const meStay = (acc.assignments || []).find((s) => s.memberId === '__me__')
+    let checkIn  = meStay ? (meStay.checkIn  || acc.checkIn)  : acc.checkIn
+    let checkOut = meStay ? (meStay.checkOut || acc.checkOut) : acc.checkOut
+    if (acc.type === 'cruise') {
+      const legDates = (acc.cruiseLegs || []).map((cl) => cl.date).filter(Boolean).sort()
+      if (!checkIn  && legDates.length) checkIn  = legDates[0]
+      if (!checkOut && legDates.length) checkOut = legDates[legDates.length - 1]
+      cruisePortsByAccom[acc.id] = new Set(legDates)
+    }
+    if (!checkIn || !checkOut) return
+    accomCheckout[checkOut] = { acc, color }
+    let d = new Date(checkIn + 'T00:00:00')
+    const e = new Date(checkOut + 'T00:00:00')
     e.setDate(e.getDate() - 1)
     while (d <= e) { accomPrimary[localDateStr(d)] = { acc, color }; d.setDate(d.getDate() + 1) }
   })
@@ -4183,12 +4482,12 @@ function renderPersonalTimeline() {
 
   // Row 1: travel + accommodation
   const travelCells = allDays.map((day) => {
-    const match   = accomForDay(day)
-    const outMode = outDayMode[day]
-    const retMode = retDayMode[day]
-    const isToday = day === todayStr
-    const isEvent = eventDaySet.has(day)
-    const cellCls = match ? '' : isToday ? 'tl-cell-today' : isEvent ? 'tl-cell-event' : ''
+    const match    = accomForDay(day)
+    const outLegs  = outDayLegs[day] || []
+    const retLegs  = retDayLegs[day] || []
+    const isToday  = day === todayStr
+    const isEvent  = eventDaySet.has(day)
+    const cellCls  = match ? '' : isToday ? 'tl-cell-today' : isEvent ? 'tl-cell-event' : ''
     let bgStyle = ''
     if (match?.splitAcc) {
       bgStyle = `background:linear-gradient(to right,${match.splitColor.bg} 50%,${match.color.bg} 50%);border-bottom:2px solid ${match.color.border}`
@@ -4196,12 +4495,20 @@ function renderPersonalTimeline() {
       bgStyle = `background:${match.color.bg};border-bottom:2px solid ${match.color.border}`
     }
     let content = ''
-    if (outMode && retMode) {
-      content = `<i class="${travelIcon(outMode, false)}" style="color:#7c3aed;font-size:0.6rem" title="Outbound + return"></i><i class="${travelIcon(retMode, true)}" style="color:#7c3aed;font-size:0.6rem;margin-left:2px"></i>`
-    } else if (outMode) {
-      content = `<i class="${travelIcon(outMode, false)}" style="color:#2563eb;font-size:0.7rem" title="Outbound"></i>`
-    } else if (retMode) {
-      content = `<i class="${travelIcon(retMode, true)}" style="color:#059669;font-size:0.7rem" title="Return"></i>`
+    if (outLegs.length || retLegs.length) {
+      const hasBoth = outLegs.length && retLegs.length
+      const color   = hasBoth ? '#7c3aed' : outLegs.length ? '#2563eb' : '#059669'
+      const tip     = hasBoth ? 'Outbound + return' : outLegs.length ? 'Outbound' : 'Return'
+      const icons   = [
+        ...outLegs.map((l) => `<i class="${travelIcon(l.mode, false)}" style="color:${color};font-size:0.62rem"></i>`),
+        ...retLegs.map((l) => `<i class="${travelIcon(l.mode, true)}"  style="color:${color};font-size:0.62rem"></i>`),
+      ].join('')
+      content = `<span class="inline-flex flex-wrap justify-center gap-1" title="${tip}">${icons}</span>`
+    }
+    if (match?.acc.type === 'cruise' && cruisePortsByAccom[match.acc.id]?.has(day)) {
+      const portLegs = (match.acc.cruiseLegs || []).filter((cl) => cl.date === day)
+      const tip = portLegs.map((cl) => cl.location || 'Port').join(', ')
+      content += `<i class="fas fa-anchor" style="color:${match.color.border};font-size:0.55rem;opacity:0.85;vertical-align:middle" title="${esc(tip)}"></i>`
     }
     return `<td style="${bgStyle}" class="${cellCls} text-center px-1 py-1.5 border-l border-gray-100">${content}</td>`
   }).join('')
@@ -4221,21 +4528,140 @@ function renderPersonalTimeline() {
   const legend = accoms.length
     ? `<div class="flex flex-wrap gap-2 mt-2">${accoms.map((acc, i) => {
         const c = TIMELINE_COLORS[i % TIMELINE_COLORS.length]
-        return `<span class="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full font-medium" style="background:${c.bg};color:${c.text};border:1px solid ${c.border}"><i class="fas fa-bed text-[0.6rem] mr-0.5"></i>${esc(acc.name || 'Accommodation')}</span>`
+        return `<span class="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full font-medium" style="background:${c.bg};color:${c.text};border:1px solid ${c.border}"><i class="${accomTypeIcon(acc.type)} text-[0.6rem] mr-0.5"></i>${esc(acc.name || (acc.type === 'cruise' ? 'Cruise' : 'Accommodation'))}</span>`
       }).join('')}</div>`
     : ''
 
-  container.innerHTML = `<div class="overflow-x-auto rounded-lg border border-gray-200"><table class="w-full text-sm" style="border-collapse:collapse"><thead class="bg-gray-50"><tr>${headerCells}</tr></thead><tbody><tr class="border-t border-gray-200">${travelCells}</tr><tr class="border-t border-gray-100">${itinCells}</tr></tbody></table></div>${legend}`
+  const meContactId = state.planner.personal?.meContactId || null;
+  const companions  = (state.planner.personal?.tripAssignments || []).filter((a) => a.memberId !== meContactId);
+  const contacts    = state.global?.personalContacts || [];
+
+  if (companions.length === 0) {
+    container.innerHTML = `<div class="tl-scroll overflow-x-auto rounded-lg border border-gray-200"><table class="min-w-full text-sm" style="border-collapse:collapse"><thead class="bg-gray-50"><tr>${headerCells}</tr></thead><tbody><tr class="border-t border-gray-200">${travelCells}</tr><tr class="border-t border-gray-100">${itinCells}</tr></tbody></table></div>${legend}`
+  } else {
+    const nameHeaderCell = `<th class="text-left text-xs font-semibold text-gray-500 pr-3 py-2 whitespace-nowrap border-r border-gray-200 bg-gray-50" style="min-width:90px">Person</th>`
+    const meLabel = `<td class="text-xs font-medium text-gray-700 pr-3 py-2 whitespace-nowrap border-r border-gray-200" style="min-width:90px">${esc(getMeLabel())}</td>`
+
+    const companionRows = companions.map((assignment) => {
+      const contact = contacts.find((c) => c.id === assignment.memberId);
+      if (!contact) return '';
+      const compAccomPrimary  = {};
+      const compAccomCheckout = {};
+      accoms.forEach((acc, i) => {
+        const stay = (acc.assignments || []).find((s) => s.memberId === assignment.memberId);
+        if (!stay) return;
+        let checkIn  = stay.checkIn  || acc.checkIn;
+        let checkOut = stay.checkOut || acc.checkOut;
+        if (acc.type === 'cruise') {
+          const legDates = (acc.cruiseLegs || []).map((cl) => cl.date).filter(Boolean).sort()
+          if (!checkIn  && legDates.length) checkIn  = legDates[0]
+          if (!checkOut && legDates.length) checkOut = legDates[legDates.length - 1]
+        }
+        const color = TIMELINE_COLORS[i % TIMELINE_COLORS.length];
+        if (checkOut) compAccomCheckout[checkOut] = { acc, color };
+        if (checkIn && checkOut) {
+          let d = new Date(checkIn + 'T00:00:00');
+          const e2 = new Date(checkOut + 'T00:00:00'); e2.setDate(e2.getDate() - 1);
+          while (d <= e2) { compAccomPrimary[localDateStr(d)] = { acc, color }; d.setDate(d.getDate() + 1); }
+        }
+      });
+
+      const cOutDayLegs = {};
+      const cRetDayLegs = {};
+      (assignment.outboundLegs || []).filter((l) => l.date).forEach((l) => { (cOutDayLegs[l.date] ??= []).push({ mode: l.mode || 'other', time: l.departTime || '' }); });
+      (assignment.returnLegs   || []).filter((l) => l.date).forEach((l) => { (cRetDayLegs[l.date] ??= []).push({ mode: l.mode || 'other', time: l.departTime || '' }); });
+      Object.values(cOutDayLegs).forEach((legs) => legs.sort((a, b) => a.time.localeCompare(b.time)));
+      Object.values(cRetDayLegs).forEach((legs) => legs.sort((a, b) => a.time.localeCompare(b.time)));
+
+      const cells = allDays.map((day) => {
+        const primary  = compAccomPrimary[day];
+        const checkout = compAccomCheckout[day];
+        const match = (primary && checkout && primary.acc.id !== checkout.acc.id)
+          ? { acc: primary.acc, color: primary.color, splitAcc: checkout.acc, splitColor: checkout.color }
+          : primary || checkout || null;
+        const outLegs = cOutDayLegs[day] || [];
+        const retLegs = cRetDayLegs[day] || [];
+        const isToday = day === todayStr;
+        const isEvent = eventDaySet.has(day);
+        const cellCls = match ? '' : isToday ? 'tl-cell-today' : isEvent ? 'tl-cell-event' : '';
+        let bgStyle = '';
+        if (match?.splitAcc) {
+          bgStyle = `background:linear-gradient(to right,${match.splitColor.bg} 50%,${match.color.bg} 50%);border-bottom:2px solid ${match.color.border}`;
+        } else if (match) {
+          bgStyle = `background:${match.color.bg};border-bottom:2px solid ${match.color.border}`;
+        }
+        let content = '';
+        if (outLegs.length || retLegs.length) {
+          const hasBoth = outLegs.length && retLegs.length;
+          const color   = hasBoth ? '#7c3aed' : outLegs.length ? '#2563eb' : '#059669';
+          const tip     = hasBoth ? `${esc(contact.name)} outbound + return` : outLegs.length ? `${esc(contact.name)} outbound` : `${esc(contact.name)} return`;
+          const icons   = [
+            ...outLegs.map((l) => `<i class="${travelIcon(l.mode, false)}" style="color:${color};font-size:0.62rem"></i>`),
+            ...retLegs.map((l) => `<i class="${travelIcon(l.mode, true)}"  style="color:${color};font-size:0.62rem"></i>`),
+          ].join('');
+          content = `<span class="inline-flex flex-wrap justify-center gap-1" title="${tip}">${icons}</span>`;
+        }
+        if (match?.acc.type === 'cruise' && cruisePortsByAccom[match.acc.id]?.has(day)) {
+          const portLegs = (match.acc.cruiseLegs || []).filter((cl) => cl.date === day);
+          const portTip  = portLegs.map((cl) => cl.location || 'Port').join(', ');
+          content += `<i class="fas fa-anchor" style="color:${match.color.border};font-size:0.55rem;opacity:0.85;vertical-align:middle" title="${esc(portTip)}"></i>`;
+        }
+        return `<td style="${bgStyle}" class="${cellCls} text-center px-1 py-1.5 border-l border-gray-100">${content}</td>`;
+      }).join('');
+      return `<tr class="border-t border-gray-100"><td class="text-xs font-medium text-gray-700 pr-3 py-2 whitespace-nowrap border-r border-gray-200" style="min-width:90px">${esc(contact.name || 'Unnamed')}</td>${cells}</tr>`;
+    }).filter(Boolean).join('');
+
+    // Local companion rows (trip-specific, only shown if they have flights or accommodation)
+    const localCompanions = (state.planner.personal?.localCompanions || []).filter((lc) => lc.id !== meContactId);
+    const localRows = localCompanions.map((lc) => {
+      const lcOutDayLegs = {};
+      const lcRetDayLegs = {};
+      (lc.outboundLegs || []).filter((l) => l.date).forEach((l) => { (lcOutDayLegs[l.date] ??= []).push({ mode: l.mode || 'other', time: l.departTime || '' }); });
+      (lc.returnLegs   || []).filter((l) => l.date).forEach((l) => { (lcRetDayLegs[l.date] ??= []).push({ mode: l.mode || 'other', time: l.departTime || '' }); });
+      if (!Object.keys(lcOutDayLegs).length && !Object.keys(lcRetDayLegs).length) return '';
+      const cells = allDays.map((day) => {
+        const outL = lcOutDayLegs[day] || [];
+        const retL = lcRetDayLegs[day] || [];
+        if (!outL.length && !retL.length) return `<td class="px-1 py-1.5 border-l border-gray-100"></td>`;
+        const hasBoth = outL.length && retL.length;
+        const c = hasBoth ? '#7c3aed' : outL.length ? '#2563eb' : '#059669';
+        const icons = [
+          ...outL.map((l) => `<i class="${travelIcon(l.mode, false)}" style="color:${c};font-size:0.62rem"></i>`),
+          ...retL.map((l) => `<i class="${travelIcon(l.mode, true)}" style="color:${c};font-size:0.62rem"></i>`),
+        ].join('');
+        return `<td class="text-center px-1 py-1.5 border-l border-gray-100"><span class="inline-flex flex-wrap justify-center gap-1">${icons}</span></td>`;
+      }).join('');
+      return `<tr class="border-t border-gray-100"><td class="text-xs font-medium text-gray-700 pr-3 py-2 whitespace-nowrap border-r border-gray-200" style="min-width:90px">${esc(lc.name || 'Unnamed')}<span class="ml-1 text-[0.55rem] text-blue-400">(trip)</span></td>${cells}</tr>`;
+    }).filter(Boolean).join('');
+
+    const itinLabelCell = `<td class="text-xs text-gray-400 pr-3 py-1 whitespace-nowrap border-r border-gray-200 italic" style="min-width:90px">Itinerary</td>`;
+
+    container.innerHTML = `<div class="tl-scroll overflow-x-auto rounded-lg border border-gray-200"><table class="min-w-full text-sm" style="border-collapse:collapse"><thead class="bg-gray-50"><tr>${nameHeaderCell}${headerCells}</tr></thead><tbody><tr class="border-t border-gray-200">${meLabel}${travelCells}</tr>${companionRows}${localRows}<tr class="border-t border-gray-100">${itinLabelCell}${itinCells}</tr></tbody></table></div>${legend}`
+  }
 }
 
 function personalAccomCardHtml(accom) {
   const checkIn  = accom.checkIn  ? new Date(accom.checkIn  + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : '';
   const checkOut = accom.checkOut ? new Date(accom.checkOut + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : '';
   const dates = (checkIn && checkOut) ? `${checkIn} → ${checkOut}` : checkIn || checkOut || '';
-  const meta  = [dates, accom.confirmation ? `#${accom.confirmation}` : ''].filter(Boolean).join(' · ');
+  const stays = accom.assignments || [];
+  const meStaying   = stays.some((s) => s.memberId === '__me__');
+  const meContactId = state.planner.personal?.meContactId || null;
+  const localCompanions = state.planner.personal?.localCompanions || [];
+  const companionNames = [
+    ...(meStaying ? [getMeLabel()] : []),
+    ...(state.planner.personal?.tripAssignments || [])
+      .filter((a) => a.memberId !== meContactId && stays.some((s) => s.memberId === a.memberId && s.memberId !== '__me__'))
+      .map((a) => (state.global?.personalContacts || []).find((c) => c.id === a.memberId)?.name)
+      .filter(Boolean),
+    ...localCompanions
+      .filter((lc) => lc.id !== meContactId && stays.some((s) => s.memberId === lc.id))
+      .map((lc) => lc.name || 'Unnamed'),
+  ];
+  const meta  = [dates, accom.confirmation ? `#${accom.confirmation}` : '', companionNames.length ? companionNames.join(', ') : ''].filter(Boolean).join(' · ');
   const ai    = esc(accom.id);
   return `<div class="flex items-center gap-2 p-2.5 rounded-lg border border-gray-200 bg-white">
-    <i class="fas fa-bed text-gray-400 flex-shrink-0 w-4 text-center text-xs"></i>
+    <i class="${accomTypeIcon(accom.type)} text-gray-400 flex-shrink-0 w-4 text-center text-xs"></i>
     <div class="flex-1 min-w-0">
       <p class="text-sm font-medium text-gray-800 truncate">${esc(accom.name || 'Unnamed accommodation')}</p>
       ${meta ? `<p class="text-xs text-gray-400 mt-0.5 truncate">${esc(meta)}</p>` : ''}
@@ -4299,11 +4725,10 @@ function renderBudgetBreakdownInto(containerId, cats, currency) {
 }
 
 function renderPersonalBudgetBreakdown() {
-  renderBudgetBreakdownInto(
-    'personalBudgetBreakdown',
-    buildPersonalBudgetData(state.planner),
-    state.planner?.personal?.currency || 'AUD'
-  )
+  const data     = buildPersonalBudgetData(state.planner)
+  const currency = state.planner?.personal?.currency || 'AUD'
+  renderBudgetBreakdownInto('personalBudgetBreakdown',    data, currency)
+  renderBudgetBreakdownInto('personalBudgetTabBreakdown', data, currency)
 }
 
 function renderSponsorBudgetBreakdown() {
@@ -4317,6 +4742,8 @@ function renderSponsorBudgetBreakdown() {
 function renderPersonalTab() {
   const personal = state.planner.personal
   if (!personal) return
+
+  syncEventTitleField('plannerPersonalTitle', 'plannerPersonalTitleHint')
 
   // Budget fields
   const budgetEl   = document.getElementById('personalBudget')
@@ -4344,6 +4771,7 @@ function renderPersonalTab() {
 
   renderPersonalTimeline()
   renderPersonalItinerary()
+  renderPersonalCompanionsSection()
   renderTrackedSessions('personal')
   renderPersonalAccomList()
   renderBudgetItems('personal')
@@ -4413,13 +4841,12 @@ function savePersonalLeg() {
   leg.mode         = document.getElementById('personalLegModalMode')?.value         || 'flight';
   leg.status       = document.getElementById('personalLegModalStatus')?.value       || '';
   leg.date         = document.getElementById('personalLegModalDate')?.value         || '';
+  leg.arriveDate   = document.getElementById('personalLegModalArriveDate')?.value     || '';
   leg.ref          = document.getElementById('personalLegModalRef')?.value          || '';
   leg.from         = document.getElementById('personalLegModalFrom')?.value         || '';
   leg.to           = document.getElementById('personalLegModalTo')?.value           || '';
   leg.departTime   = document.getElementById('personalLegModalDepartTime')?.value   || '';
   leg.arriveTime   = document.getElementById('personalLegModalArriveTime')?.value   || '';
-  leg.departTz     = document.getElementById('personalLegModalDepartTz')?.value     || '';
-  leg.arriveTz     = document.getElementById('personalLegModalArriveTz')?.value     || '';
   leg.confirmation = document.getElementById('personalLegModalConfirmation')?.value || '';
   scheduleAutoSave();
 }
@@ -4460,22 +4887,13 @@ function openPersonalLegModal(direction, legId) {
     statusSelect.innerHTML = buildSelectOptions(TRAVEL_STATUSES, leg.status || '');
   }
   document.getElementById('personalLegModalDate').value         = leg.date         || '';
+  const arriveDateEl = document.getElementById('personalLegModalArriveDate');
+  if (arriveDateEl) arriveDateEl.value = leg.arriveDate || '';
   document.getElementById('personalLegModalRef').value          = leg.ref          || '';
   document.getElementById('personalLegModalFrom').value         = leg.from         || '';
   document.getElementById('personalLegModalTo').value           = leg.to           || '';
   document.getElementById('personalLegModalDepartTime').value   = leg.departTime   || '';
   document.getElementById('personalLegModalArriveTime').value   = leg.arriveTime   || '';
-  const departTzEl = document.getElementById('personalLegModalDepartTz');
-  const arriveTzEl = document.getElementById('personalLegModalArriveTz');
-  const eventTz    = state.eventMeta?.timezone || '';
-  if (departTzEl) {
-    departTzEl.value       = leg.departTz || '';
-    departTzEl.placeholder = direction === 'return' ? (eventTz || 'Departure timezone') : 'Departure timezone';
-  }
-  if (arriveTzEl) {
-    arriveTzEl.value       = leg.arriveTz || '';
-    arriveTzEl.placeholder = direction === 'outbound' ? (eventTz || 'Arrival timezone') : 'Arrival timezone';
-  }
   document.getElementById('personalLegModalConfirmation').value = leg.confirmation || '';
   renderPersonalLegReceiptStatus(leg);
   _personalLegModal.open('personalLegModalFrom');
@@ -4588,6 +5006,20 @@ function wirePersonalLegModal() {
     }
   });
 
+  ['personalLegModalDate', 'personalLegModalDepartTime', 'personalLegModalArriveTime'].forEach((id) => {
+    document.getElementById(id)?.addEventListener('change', () => {
+      const departDate  = document.getElementById('personalLegModalDate')?.value        || '';
+      const departTime  = document.getElementById('personalLegModalDepartTime')?.value  || '';
+      const arriveTime  = document.getElementById('personalLegModalArriveTime')?.value  || '';
+      const arriveDateEl = document.getElementById('personalLegModalArriveDate');
+      if (arriveDateEl && !arriveDateEl.value) {
+        const computed = autoArriveDate(departDate, departTime, arriveTime);
+        if (computed) arriveDateEl.value = computed;
+      }
+      savePersonalLeg();
+    });
+  });
+
   document.getElementById('personalLegFileInput')?.addEventListener('change', async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -4626,9 +5058,11 @@ function getBudgetItemList(ctx) {
 }
 
 function renderBudgetItems(ctx) {
-  const containerId = ctx === 'personal' ? 'personalBudgetItems' : 'sponsorBudgetItems'
-  const filterId    = ctx === 'personal' ? 'personalBudgetItemFilter' : 'sponsorBudgetItemFilter'
-  const container   = document.getElementById(containerId)
+  const containerIds = ctx === 'personal'
+    ? ['personalBudgetItems', 'personalBudgetTabItems']
+    : ['sponsorBudgetItems']
+  const filterId  = ctx === 'personal' ? 'personalBudgetItemFilter' : 'sponsorBudgetItemFilter'
+  const container = document.getElementById(containerIds[0])
   if (!container) return
 
   const filterQ = (document.getElementById(filterId)?.value || '').trim().toLowerCase()
@@ -4650,17 +5084,19 @@ function renderBudgetItems(ctx) {
       })
     : allItems
 
+  const setHtml = (html) => containerIds.forEach((id) => { const el = document.getElementById(id); if (el) el.innerHTML = html; });
+
   if (!allItems.length) {
-    container.innerHTML = '<p class="text-xs text-gray-400 italic py-1">No items added yet.</p>'
+    setHtml('<p class="text-xs text-gray-400 italic py-1">No items added yet.</p>')
     return
   }
 
   if (!items.length) {
-    container.innerHTML = '<p class="text-xs text-gray-400 italic py-1">No items match the filter.</p>'
+    setHtml('<p class="text-xs text-gray-400 italic py-1">No items match the filter.</p>')
     return
   }
 
-  container.innerHTML = items.map((item) => {
+  setHtml(items.map((item) => {
     const catLabel    = cats.find((c) => c.value === item.category)?.label || item.category || 'Misc'
     const memberName  = resolveMember(item.memberId)
     const b  = parseBudget(item.budget)
@@ -4691,7 +5127,7 @@ function renderBudgetItems(ctx) {
         <i class="fas fa-pen-to-square text-[0.65rem]" aria-hidden="true"></i>
       </button>
     </div>`
-  }).join('')
+  }).join(''))
 }
 
 function openBudgetItemModal(ctx, id = null) {
@@ -4884,11 +5320,12 @@ function savePersonalAccom() {
   if (!_personalAccomId) return;
   const accom = (state.planner.personal?.accommodations || []).find((a) => a.id === _personalAccomId);
   if (!accom) return;
+  accom.type         = document.getElementById('personalAccomModalType')?.value         || 'accommodation';
   accom.name         = document.getElementById('personalAccomModalName')?.value         || '';
   accom.address      = document.getElementById('personalAccomModalAddress')?.value      || '';
   accom.confirmation = document.getElementById('personalAccomModalConfirmation')?.value || '';
-  accom.checkIn      = document.getElementById('personalAccomModalCheckIn')?.value      || '';
-  accom.checkOut     = document.getElementById('personalAccomModalCheckOut')?.value     || '';
+  accom.checkIn      = accom.type === 'cruise' ? (document.getElementById('personalAccomModalCheckIn')?.value  || '') : '';
+  accom.checkOut     = accom.type === 'cruise' ? (document.getElementById('personalAccomModalCheckOut')?.value || '') : '';
   accom.notes        = document.getElementById('personalAccomModalNotes')?.value        || '';
   accom.budget       = document.getElementById('personalAccomModalBudget')?.value       || '';
   accom.budgetActual = document.getElementById('personalAccomModalActual')?.value       || '';
@@ -4913,10 +5350,27 @@ const _personalAccomModal = createModal('personalAccomModal', {
   },
 });
 
+function _syncPersonalAccomModalType(type) {
+  const iconEl = document.getElementById('personalAccomModalTitleIcon');
+  const textEl = document.getElementById('personalAccomModalTitleText');
+  const isCruise = type === 'cruise';
+  if (iconEl) iconEl.className = `${accomTypeIcon(type)} mr-2 text-gray-400 text-sm`;
+  if (textEl) textEl.textContent = isCruise ? 'Cruise' : 'Accommodation';
+  toggleCruiseLegSection(isCruise, 'personalAccomCruiseLegsSection');
+  document.getElementById('personalAccomModalCheckInRow')?.classList.toggle('hidden', !isCruise);
+  document.getElementById('personalAccomModalCheckOutRow')?.classList.toggle('hidden', !isCruise);
+  document.getElementById('personalAccomCompanionCheckInRow')?.classList.toggle('hidden', isCruise);
+  document.getElementById('personalAccomCompanionCheckOutRow')?.classList.toggle('hidden', isCruise);
+}
+
 function openPersonalAccomModal(id) {
   const accom = (state.planner.personal?.accommodations || []).find((a) => a.id === id);
   if (!accom) return;
   _personalAccomId = id;
+  const pType = document.getElementById('personalAccomModalType');
+  if (pType) pType.value = accom.type || 'accommodation';
+  _syncPersonalAccomModalType(accom.type || 'accommodation');
+  renderCruiseLegs(accom.cruiseLegs, 'personalAccomCruiseLegsList', 'personalAccomCruiseLegsEmpty');
   document.getElementById('personalAccomModalName').value         = accom.name         || '';
   document.getElementById('personalAccomModalAddress').value      = accom.address      || '';
   document.getElementById('personalAccomModalConfirmation').value = accom.confirmation || '';
@@ -4928,6 +5382,7 @@ function openPersonalAccomModal(id) {
   const currEl = document.getElementById('personalAccomModalCurrency');
   if (currEl) { currEl.innerHTML = currencyOptions(); currEl.value = accom.currency || state.planner?.personal?.currency || 'AUD'; }
   renderAccomDocStatus(accom, 'personalAccomDocStatus', 'personalAccomAttachDocBtn');
+  renderPersonalAccomMembersSection(accom);
   _personalAccomModal.open('personalAccomModalName');
 }
 
@@ -4965,6 +5420,75 @@ function wirePersonalAccomModal() {
     if (e.target.closest('#personalAccomAttachDocBtn')) {
       document.getElementById('personalAccomFileInput')?.click();
     }
+    if (e.target.closest('#personalAccomRemoveCompanionBtn')) {
+      const accom = (state.planner.personal?.accommodations || []).find((a) => a.id === _personalAccomId);
+      if (!accom) return;
+      const select    = document.getElementById('personalAccomCompanionSelect');
+      const contactId = select?.value;
+      if (!contactId) return;
+      accom.assignments = (accom.assignments || []).filter((s) => s.memberId !== contactId);
+      const opt = select.querySelector(`option[value="${CSS.escape(contactId)}"]`);
+      if (opt) opt.textContent = opt.textContent.replace(' ✓', '');
+      ['personalAccomCompanionCheckIn','personalAccomCompanionCheckOut','personalAccomCompanionBudget','personalAccomCompanionActual'].forEach((id) => {
+        const el = document.getElementById(id); if (el) el.value = '';
+      });
+      const currEl = document.getElementById('personalAccomCompanionCurrency');
+      if (currEl) currEl.innerHTML = currencyOptions('AUD');
+      const removeBtn = document.getElementById('personalAccomRemoveCompanionBtn');
+      if (removeBtn) removeBtn.classList.add('opacity-0', 'pointer-events-none');
+      scheduleAutoSave();
+    }
+  });
+
+  const COMPANION_FIELD_MAP = {
+    personalAccomCompanionCheckIn:  'checkIn',
+    personalAccomCompanionCheckOut: 'checkOut',
+    personalAccomCompanionCurrency: 'currency',
+    personalAccomCompanionBudget:   'budget',
+    personalAccomCompanionActual:   'budgetActual',
+  };
+
+  modal.addEventListener('change', (e) => {
+    if (e.target.id === 'personalAccomCompanionSelect') {
+      const accom = (state.planner.personal?.accommodations || []).find((a) => a.id === _personalAccomId);
+      if (!accom) return;
+      const contactId = e.target.value;
+      if (contactId) {
+        accom.assignments = accom.assignments || [];
+        if (!accom.assignments.find((s) => s.memberId === contactId)) {
+          accom.assignments.push({ memberId: contactId, checkIn: '', checkOut: '', budget: '', budgetActual: '', currency: state.planner?.personal?.currency || 'AUD' });
+          const opt = modal.querySelector(`#personalAccomCompanionSelect option[value="${CSS.escape(contactId)}"]`);
+          if (opt && !opt.textContent.endsWith(' ✓')) opt.textContent += ' ✓';
+          const removeBtn = document.getElementById('personalAccomRemoveCompanionBtn');
+          if (removeBtn) removeBtn.classList.remove('opacity-0', 'pointer-events-none');
+          scheduleAutoSave();
+        }
+        loadPersonalCompanionStayFields(accom, contactId);
+      } else {
+        document.getElementById('personalAccomCompanionFields')?.classList.add('hidden');
+        const removeBtn = document.getElementById('personalAccomRemoveCompanionBtn');
+        if (removeBtn) removeBtn.classList.add('opacity-0', 'pointer-events-none');
+      }
+      return;
+    }
+    if (COMPANION_FIELD_MAP[e.target.id]) {
+      const accom = (state.planner.personal?.accommodations || []).find((a) => a.id === _personalAccomId);
+      if (!accom) return;
+      const contactId = document.getElementById('personalAccomCompanionSelect')?.value;
+      if (!contactId) return;
+      accom.assignments = accom.assignments || [];
+      let stay = accom.assignments.find((s) => s.memberId === contactId);
+      if (!stay) {
+        stay = { memberId: contactId, checkIn: '', checkOut: '', budget: '', budgetActual: '', currency: state.planner?.personal?.currency || 'AUD' };
+        accom.assignments.push(stay);
+        const opt = modal.querySelector(`#personalAccomCompanionSelect option[value="${CSS.escape(contactId)}"]`);
+        if (opt && !opt.textContent.endsWith(' ✓')) opt.textContent += ' ✓';
+        const removeBtn = document.getElementById('personalAccomRemoveCompanionBtn');
+        if (removeBtn) removeBtn.classList.remove('opacity-0', 'pointer-events-none');
+      }
+      stay[COMPANION_FIELD_MAP[e.target.id]] = e.target.value;
+      scheduleAutoSave();
+    }
   });
 
   document.getElementById('personalAccomFileInput')?.addEventListener('change', async (e) => {
@@ -4983,6 +5507,39 @@ function wirePersonalAccomModal() {
     renderDocumentsTab();
     e.target.value = '';
   });
+
+  document.getElementById('personalAccomAddCruiseLegBtn')?.addEventListener('click', () => {
+    const accom = (state.planner.personal?.accommodations || []).find((a) => a.id === _personalAccomId);
+    if (!accom) return;
+    accom.cruiseLegs = [...(accom.cruiseLegs || []), makeCruiseLeg()];
+    renderCruiseLegs(accom.cruiseLegs, 'personalAccomCruiseLegsList', 'personalAccomCruiseLegsEmpty');
+    scheduleAutoSave();
+  });
+
+  document.getElementById('personalAccomCruiseLegsList')?.addEventListener('input', (e) => {
+    const field = e.target.dataset.cruiseLegField;
+    if (!field) return;
+    const legId = e.target.closest('[data-cruise-leg-id]')?.dataset.cruiseLegId;
+    if (!legId) return;
+    const accom = (state.planner.personal?.accommodations || []).find((a) => a.id === _personalAccomId);
+    if (!accom) return;
+    const leg = (accom.cruiseLegs || []).find((l) => l.id === legId);
+    if (leg) { leg[field] = e.target.value; scheduleAutoSave(); }
+  });
+
+  document.getElementById('personalAccomCruiseLegsList')?.addEventListener('click', (e) => {
+    if (!e.target.closest('.remove-cruise-leg-btn')) return;
+    const legId = e.target.closest('[data-cruise-leg-id]')?.dataset.cruiseLegId;
+    if (!legId) return;
+    const accom = (state.planner.personal?.accommodations || []).find((a) => a.id === _personalAccomId);
+    if (!accom) return;
+    accom.cruiseLegs = (accom.cruiseLegs || []).filter((l) => l.id !== legId);
+    renderCruiseLegs(accom.cruiseLegs, 'personalAccomCruiseLegsList', 'personalAccomCruiseLegsEmpty');
+    scheduleAutoSave();
+  });
+
+  wireCruiseLegDragDrop('personalAccomCruiseLegsList', 'personalAccomCruiseLegsEmpty',
+    () => (state.planner.personal?.accommodations || []).find((a) => a.id === _personalAccomId));
 }
 
 function wirePersonalPanel() {
@@ -5015,6 +5572,12 @@ function wirePersonalPanel() {
     openPersonalLegModal('return', newLeg.id)
   })
 
+  // Personal accom type select — updates modal icon/title live and saves
+  document.getElementById('personalAccomModalType')?.addEventListener('change', (e) => {
+    _syncPersonalAccomModalType(e.target.value);
+    savePersonalAccom();
+  });
+
   // Add accommodation
   document.getElementById('addPersonalAccomBtn')?.addEventListener('click', () => {
     const personal   = ensurePersonal()
@@ -5035,6 +5598,13 @@ function wirePersonalPanel() {
 
   function handlePersonalField(e) {
     const personal = ensurePersonal()
+    // Event title (unassociated planners only)
+    if (e.target.id === 'plannerPersonalTitle') {
+      state.planner._displayName = e.target.value
+      const other = document.getElementById('plannerSponsorTitle')
+      if (other && !other.disabled) other.value = e.target.value
+      scheduleAutoSave(); updateHeader(); return
+    }
     // Budget / notes
     if (e.target.id === 'personalBudget')   { personal.budget       = e.target.value; scheduleAutoSave(); renderPersonalBudgetBreakdown(); return }
     if (e.target.id === 'personalActual')   { personal.budgetActual = e.target.value; scheduleAutoSave(); renderPersonalBudgetBreakdown(); return }
@@ -5048,6 +5618,15 @@ function wirePersonalPanel() {
       const leg  = (legs || []).find((l) => l.id === legId)
       if (leg) {
         leg[legField] = e.target.value
+        if (legField === 'date' || legField === 'departTime' || legField === 'arriveTime') {
+          const computed = autoArriveDate(leg.date, leg.departTime, leg.arriveTime)
+          if (computed && !leg.arriveDate) {
+            leg.arriveDate = computed
+            const arriveDateInput = e.target.closest('[data-leg-id]')?.parentElement
+              ?.querySelector(`[data-leg-field="arriveDate"]`)
+            if (arriveDateInput) arriveDateInput.value = computed
+          }
+        }
         scheduleAutoSave()
         if (legField === 'date' || legField === 'mode') { renderPersonalTimeline(); renderPersonalItinerary() }
       }
@@ -5094,6 +5673,25 @@ function wirePersonalPanel() {
     if (personalCell) { openPersonalDayModal(personalCell.dataset.date); return }
   })
 
+  const personalPanel = document.getElementById('plannerPersonalPanel');
+  if (personalPanel) {
+    personalPanel.addEventListener('click', (e) => {
+      const editBtn   = e.target.closest('.edit-companion-btn');
+      if (editBtn) { openTripAssignmentModal(editBtn.dataset.companionId); return; }
+      const removeBtn = e.target.closest('.remove-companion-btn');
+      if (removeBtn) {
+        const contactId = removeBtn.dataset.companionId;
+        if (!state.planner.personal) return;
+        state.planner.personal.tripAssignments = (state.planner.personal.tripAssignments || []).filter((a) => a.memberId !== contactId);
+        scheduleAutoSave();
+        renderPersonalCompanionsSection();
+        renderPersonalTimeline();
+        renderSettingsPersonalContactsSection();
+        return;
+      }
+    });
+  }
+
   wireTrackedSessionSearch('personal')
 }
 
@@ -5133,6 +5731,42 @@ function ticketStatusBadge(status) {
   return `<span class="text-[0.6rem] px-1.5 py-px rounded-full font-medium flex-shrink-0 ${cls}">${esc(entry.label)}</span>`
 }
 
+function getMeLabel() {
+  const meId = state.planner.personal?.meContactId;
+  if (!meId) return 'Me';
+  const c = (state.global?.personalContacts || []).find((x) => x.id === meId);
+  if (c) return `${c.name || 'Unnamed'} (me)`;
+  const lc = (state.planner.personal?.localCompanions || []).find((x) => x.id === meId);
+  return lc ? `${lc.name || 'Unnamed'} (me)` : 'Me';
+}
+
+function _ticketPeopleForCtx(ctx) {
+  if (ctx === 'personal') {
+    const meContactId = state.planner.personal?.meContactId || null;
+    const contacts  = (state.global?.personalContacts || []).filter((c) => c.id !== meContactId);
+    const locals    = (state.planner.personal?.localCompanions || []).filter((lc) => lc.id !== meContactId);
+    return [
+      { id: '__me__', name: getMeLabel() },
+      ...contacts.map((c) => ({ id: c.id, name: c.name || 'Unnamed' })),
+      ...locals.map((lc) => ({ id: lc.id, name: `${lc.name || 'Unnamed'} (this trip)` })),
+    ];
+  }
+  return (state.global?.teamMembers || []).map((m) => ({ id: m.id, name: m.name || 'Unnamed' }));
+}
+
+function _resolvePerson(id, ctx) {
+  if (!id) return null;
+  if (id === '__me__' && ctx === 'personal') return { name: getMeLabel() };
+  if (ctx === 'personal') {
+    const c = (state.global?.personalContacts || []).find((x) => x.id === id);
+    if (c) return { name: c.name || 'Unnamed' };
+    const lc = (state.planner.personal?.localCompanions || []).find((x) => x.id === id);
+    return lc ? { name: lc.name || 'Unnamed' } : null;
+  }
+  const m = (state.global?.teamMembers || []).find((x) => x.id === id);
+  return m ? { name: m.name || 'Unnamed' } : null;
+}
+
 function renderTicketsTab() {
   const mode = state.planner?.mode || 'personal'
   const ctx  = mode === 'sponsor' ? 'org' : 'personal'
@@ -5141,7 +5775,6 @@ function renderTicketsTab() {
   const addBtn    = document.getElementById('addTicketBtn')
   if (!container) return
 
-  const members = state.global?.teamMembers || []
   const tickets = getTicketList(ctx)
 
   if (addBtn) {
@@ -5158,8 +5791,8 @@ function renderTicketsTab() {
   const fmt = (n) => parseBudget(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
   container.innerHTML = tickets.map((t) => {
-    const assignedMember = members.find((m) => m.id === t.assignedTo)
-    const purchasedMember = members.find((m) => m.id === t.purchasedBy)
+    const assignedMember  = _resolvePerson(t.assignedTo,  ctx)
+    const purchasedMember = _resolvePerson(t.purchasedBy, ctx)
     const cur   = t.currency || 'AUD'
     const unit  = parseBudget(t.unitPrice)
     const qty   = t.quantity || 1
@@ -5190,8 +5823,8 @@ function openTicketModal(ctx, id = null) {
   _ticketCtx = ctx
   _ticketId  = id
   const ticket = id ? getTicketList(ctx).find((t) => t.id === id) : null
-  const members = state.global?.teamMembers || []
-  const memberOptions = `<option value="">—</option>` + members.map((m) => `<option value="${esc(m.id)}">${esc(m.name || 'Unnamed')}</option>`).join('')
+  const people = _ticketPeopleForCtx(ctx)
+  const memberOptions = `<option value="">—</option>` + people.map((p) => `<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('')
 
   document.getElementById('ticketModalTitle').textContent = id ? 'Edit Ticket' : 'Add Ticket'
   document.getElementById('ticketName').value             = ticket?.name      || ''
@@ -5336,7 +5969,55 @@ function removeBudgetCategory(mode, catId) {
 
 // ── Budget tab (sponsor mode) ─────────────────────────────────────────────────
 
+function renderPersonalBudgetTab() {
+  const personal = state.planner.personal
+  const currency = personal.currency || 'AUD'
+
+  const budgetEl   = document.getElementById('personalBudgetTabBudget')
+  const actualEl   = document.getElementById('personalBudgetTabActual')
+  const currencyEl = document.getElementById('personalBudgetTabCurrency')
+  if (budgetEl)   budgetEl.value       = personal.budget       || ''
+  if (actualEl)   actualEl.value       = personal.budgetActual || ''
+  if (currencyEl) currencyEl.innerHTML = currencyOptions(currency)
+
+  const catsEl = document.getElementById('personalBudgetCategoryRows')
+  if (catsEl) {
+    const activeCats = getEventBudgetCategories('personal')
+    const catBudgets = personal.categoryBudgets || {}
+    const catActuals = buildPersonalBudgetData(state.planner)
+    const fmt = (n) => n ? n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '—'
+    catsEl.innerHTML = activeCats.map((c) => {
+      const budgetVal = catBudgets[c.id] || ''
+      const actual    = catActuals[c.id]?.actual || 0
+      const budgetNum = parseBudget(budgetVal)
+      const over      = budgetNum > 0 && actual > budgetNum
+      const remain    = budgetNum > 0 ? budgetNum - actual : null
+      return `<div class="grid grid-cols-[1fr_1fr_auto] items-center gap-3 py-2.5 border-b border-gray-100 last:border-0">
+        <span class="text-sm text-gray-700 font-medium">${esc(c.name)}</span>
+        <label class="flex items-center gap-1.5 min-w-0">
+          <span class="text-xs text-gray-400 flex-shrink-0">${esc(currency)}</span>
+          <input type="number" min="0" step="0.01" placeholder="0.00"
+            class="personal-budget-cat-input h-8 w-full rounded border-gray-300 text-sm bg-white px-2 drupal-blue-focus"
+            data-cat-id="${esc(c.id)}" value="${esc(budgetVal)}">
+        </label>
+        <div class="text-right min-w-[6rem]">
+          <span class="text-sm tabular-nums ${over ? 'text-red-500 font-medium' : 'text-gray-600'}">${fmt(actual)}</span>
+          ${remain !== null ? `<span class="ml-2 text-xs tabular-nums ${over ? 'text-red-400' : 'text-emerald-600'}">${over ? '↑' : '↓'} ${fmt(Math.abs(remain))}</span>` : ''}
+        </div>
+      </div>`
+    }).join('')
+  }
+
+  renderBudgetItems('personal')
+  renderPersonalBudgetBreakdown()
+}
+
 function renderBudgetTab() {
+  const mode = state.planner.mode || 'personal'
+  document.getElementById('budgetSponsorSection')?.classList.toggle('hidden', mode !== 'sponsor')
+  document.getElementById('budgetPersonalSection')?.classList.toggle('hidden', mode !== 'personal')
+  if (mode === 'personal') { renderPersonalBudgetTab(); return }
+
   const org      = state.planner.org
   const currency = org.sponsorCurrency || 'AUD'
 
@@ -5400,12 +6081,12 @@ function wireBudgetPanel() {
   const panel = document.getElementById('plannerBudgetPanel')
   if (!panel) return
 
-  // Overall budget fields
   panel.addEventListener('input', (e) => {
+    // Sponsor overall budget
     if (e.target.id === 'orgSponsorBudget') { state.planner.org.sponsorBudget = e.target.value; scheduleAutoSave(); return }
     if (e.target.id === 'orgSponsorActual') { state.planner.org.sponsorActual = e.target.value; scheduleAutoSave(); return }
 
-    // Category budget inputs
+    // Sponsor category budget inputs
     const catInput = e.target.closest('.budget-cat-input')
     if (catInput) {
       const catId = catInput.dataset.catId
@@ -5415,6 +6096,24 @@ function wireBudgetPanel() {
       if (state.activeTab === 'summary') renderSummaryTab()
       return
     }
+
+    // Personal overall budget
+    if (e.target.id === 'personalBudgetTabBudget') { state.planner.personal.budget = e.target.value; scheduleAutoSave(); renderPersonalTab(); return }
+    if (e.target.id === 'personalBudgetTabActual') { state.planner.personal.budgetActual = e.target.value; scheduleAutoSave(); renderPersonalTab(); return }
+
+    // Personal category budget inputs
+    const pCatInput = e.target.closest('.personal-budget-cat-input')
+    if (pCatInput) {
+      const catId = pCatInput.dataset.catId
+      ;(state.planner.personal.categoryBudgets ??= {})[catId] = pCatInput.value
+      scheduleAutoSave()
+      renderPersonalBudgetBreakdown()
+      if (state.activeTab === 'summary') renderSummaryTab()
+      return
+    }
+
+    // Personal budget item filter (budget tab)
+    if (e.target.id === 'personalBudgetTabFilter') { renderBudgetItems('personal'); return }
   })
 
   panel.addEventListener('change', (e) => {
@@ -5426,8 +6125,22 @@ function wireBudgetPanel() {
       if (state.activeTab === 'summary') renderSummaryTab()
       return
     }
+    if (e.target.id === 'personalBudgetTabCurrency') {
+      state.planner.personal.currency = e.target.value
+      scheduleAutoSave()
+      renderPersonalBudgetTab()
+      renderPersonalTab()
+      if (state.activeTab === 'summary') renderSummaryTab()
+      return
+    }
   })
 
+  // Personal budget tab: Add item button
+  panel.addEventListener('click', (e) => {
+    if (e.target.closest('#addPersonalBudgetTabItemBtn')) { openBudgetItemModal('personal'); return }
+    const editBtn = e.target.closest('.edit-budget-item-btn')
+    if (editBtn && editBtn.dataset.biCtx === 'personal') { openBudgetItemModal('personal', editBtn.dataset.biId); return }
+  })
 }
 
 function renderSettingsTeamSection() {
@@ -5467,6 +6180,7 @@ function renderSettingsTeamSection() {
 function renderSettingsTab() {
   const mode = state.planner.mode || 'personal'
   const isSponsor = mode === 'sponsor'
+  const isConference = state.planner?.isConference !== false
   const base = isSponsor ? SPONSOR_TABS_BASE : PERSONAL_TABS_BASE
   const disabled = new Set(
     isSponsor
@@ -5480,14 +6194,19 @@ function renderSettingsTab() {
   if (modePersonalRadio) modePersonalRadio.checked = !isSponsor
   if (modeSponsorRadio)  modeSponsorRadio.checked  = isSponsor
 
-  // Tab order + visibility list (all tabs in stored order, including disabled)
+  // Conference toggle
+  const conferenceEl = document.getElementById('settingsIsConference')
+  if (conferenceEl) conferenceEl.checked = isConference
+
+  // Tab order + visibility list (all tabs in stored order, including disabled; conference-only tabs hidden when !isConference)
   const tabsEl = document.getElementById('settingsTabList')
   if (tabsEl) {
     const stored = isSponsor
       ? (state.planner?.org?.tabOrder     || [])
       : (state.planner?.personal?.tabOrder || [])
-    const allOrdered = stored.filter((t) => base.has(t))
-    base.forEach((t) => { if (!allOrdered.includes(t)) allOrdered.push(t) })
+    const inBase = (t) => base.has(t) && (isConference || !CONFERENCE_TABS.has(t))
+    const allOrdered = stored.filter(inBase)
+    base.forEach((t) => { if (!allOrdered.includes(t) && inBase(t)) allOrdered.push(t) })
     tabsEl.innerHTML = allOrdered.map((tab) => {
       const label   = TAB_LABELS[tab] || tab
       const icon    = TAB_ICONS[tab]  || 'fas fa-circle'
@@ -5510,6 +6229,12 @@ function renderSettingsTab() {
   if (isSponsor) {
     renderSponsorLinked()
     renderSettingsTeamSection()
+  }
+
+  // Personal-only sections
+  document.getElementById('settingsPersonalSection')?.classList.toggle('hidden', isSponsor)
+  if (!isSponsor) {
+    renderSettingsPersonalContactsSection()
   }
 
   // Show only the relevant budget category section
@@ -5609,6 +6334,27 @@ function wireSettingsPanel() {
       return
     }
 
+    // Conference features toggle
+    if (e.target.id === 'settingsIsConference') {
+      state.planner.isConference = e.target.checked;
+      scheduleAutoSave();
+      applyConferenceMode();
+      renderSettingsTab();
+      return;
+    }
+
+    // "Me" identity select (personal mode)
+    if (e.target.id === 'settingsMeContactId') {
+      if (state.planner.personal) {
+        state.planner.personal.meContactId = e.target.value || null;
+        scheduleAutoSave();
+        renderPersonalTab();
+        renderPersonalTimeline();
+        if (state.activeTab === 'map') renderMapTab();
+      }
+      return;
+    }
+
     // Global default currency select
     if (e.target.id === 'settingsDefaultCurrency') {
       state.global.defaultCurrency = e.target.value
@@ -5671,6 +6417,24 @@ function wireSettingsPanel() {
       scheduleAutoSave()
       return
     }
+
+    const pcAssignCheck = e.target.closest('.settings-personal-contact-assign');
+    if (pcAssignCheck) {
+      const contactId = pcAssignCheck.dataset.contactId;
+      if (!state.planner.personal) return;
+      state.planner.personal.tripAssignments = state.planner.personal.tripAssignments || [];
+      if (pcAssignCheck.checked) {
+        if (!state.planner.personal.tripAssignments.find((a) => a.memberId === contactId)) {
+          state.planner.personal.tripAssignments.push(makeTripAssignment(contactId));
+        }
+      } else {
+        state.planner.personal.tripAssignments = state.planner.personal.tripAssignments.filter((a) => a.memberId !== contactId);
+      }
+      scheduleAutoSave();
+      renderPersonalCompanionsSection();
+      renderPersonalTimeline();
+      return;
+    }
   })
 
   // Clicks: view/edit team member buttons, add-member, reset tab order
@@ -5680,6 +6444,9 @@ function wireSettingsPanel() {
     const editBtn = e.target.closest('.edit-team-member-btn')
     if (editBtn) { openTeamMemberModal(editBtn.dataset.memberId); return }
     if (e.target.closest('#settingsAddTeamMemberBtn')) { openTeamMemberModal(null); return }
+    if (e.target.closest('#settingsAddPersonalContactBtn')) { openPersonalContactModal(null); return; }
+    const editPersonalContact = e.target.closest('.edit-personal-contact-btn');
+    if (editPersonalContact) { openPersonalContactModal(editPersonalContact.dataset.contactId); return; }
     if (e.target.closest('#settingsResetTabOrderBtn')) {
       const m = state.planner.mode || 'personal'
       if (m === 'sponsor') state.planner.org.tabOrder = []
@@ -6017,12 +6784,154 @@ function renderSponsorLinked() {
   }
 }
 
+function wireAssignmentModal() {
+  const assignModal = document.getElementById('assignmentModal');
+  if (!assignModal) return;
+
+  function getAssignment() {
+    const ctx = assignModal.dataset.ctx || 'org';
+    if (ctx === 'localCompanion') {
+      return (state.planner.personal?.localCompanions || []).find((lc) => lc.id === assignModal.dataset.memberId);
+    }
+    const store = ctx === 'personal'
+      ? (state.planner.personal?.tripAssignments || [])
+      : (state.planner.org?.teamAssignments     || []);
+    return store.find((a) => a.memberId === assignModal.dataset.memberId);
+  }
+
+  function handleAssignField(e) {
+    const assignment = getAssignment();
+    if (!assignment) return;
+    if (e.target.id === 'assignmentBudget')   { assignment.budget       = e.target.value; scheduleAutoSave(); return; }
+    if (e.target.id === 'assignmentActual')   { assignment.budgetActual = e.target.value; scheduleAutoSave(); return; }
+    if (e.target.id === 'assignmentCurrency') { assignment.currency     = e.target.value; scheduleAutoSave(); return; }
+    if (e.target.id === 'assignmentNotes')    { assignment.notes        = e.target.value; scheduleAutoSave(); return; }
+    const { legId, direction, legField } = e.target.dataset;
+    if (legId && direction && legField) {
+      const legs = direction === 'outbound' ? assignment.outboundLegs : assignment.returnLegs;
+      const leg  = legs?.find((l) => l.id === legId);
+      if (leg) { leg[legField] = e.target.value; scheduleAutoSave(); }
+    }
+  }
+
+  document.getElementById('addOutboundLegBtn')?.addEventListener('click', () => {
+    const assignment = getAssignment();
+    if (!assignment) return;
+    assignment.outboundLegs.push(makeLeg());
+    renderAssignmentLegsInModal(assignment);
+    scheduleAutoSave();
+  });
+
+  document.getElementById('addReturnLegBtn')?.addEventListener('click', () => {
+    const assignment = getAssignment();
+    if (!assignment) return;
+    assignment.returnLegs.push(makeLeg());
+    renderAssignmentLegsInModal(assignment);
+    scheduleAutoSave();
+  });
+
+  function importLegsFromMe(direction) {
+    const assignment = getAssignment();
+    if (!assignment) return;
+    const personal = state.planner.personal;
+    const srcLegs = direction === 'outbound'
+      ? (personal?.outboundLegs || [])
+      : (personal?.returnLegs   || []);
+    if (!srcLegs.length) return;
+    const destLegs = direction === 'outbound' ? assignment.outboundLegs : assignment.returnLegs;
+    if (destLegs.length > 0) {
+      if (!window.confirm(`Replace existing ${direction} legs with your own legs?`)) return;
+    }
+    const copied = srcLegs.map((l) => ({ ...l, id: makeItemId('leg') }));
+    if (direction === 'outbound') assignment.outboundLegs = copied;
+    else assignment.returnLegs = copied;
+    renderAssignmentLegsInModal(assignment);
+    scheduleAutoSave();
+  }
+
+  document.getElementById('importOutboundFromMeBtn')?.addEventListener('click', () => importLegsFromMe('outbound'));
+  document.getElementById('importReturnFromMeBtn')?.addEventListener('click',   () => importLegsFromMe('return'));
+
+  assignModal.addEventListener('click', (e) => {
+    const removeBtn = e.target.closest('.remove-leg-btn');
+    if (removeBtn) {
+      const { legId, direction } = removeBtn.dataset;
+      const assignment = getAssignment();
+      if (!assignment) return;
+      if (direction === 'outbound') assignment.outboundLegs = assignment.outboundLegs.filter((l) => l.id !== legId);
+      else assignment.returnLegs = assignment.returnLegs.filter((l) => l.id !== legId);
+      renderAssignmentLegsInModal(assignment);
+      scheduleAutoSave();
+      return;
+    }
+    const attachBtn = e.target.closest('.leg-attach-btn');
+    if (attachBtn) {
+      const legFileInput = document.getElementById('legFileInput');
+      if (!legFileInput) return;
+      legFileInput.dataset.legId  = attachBtn.dataset.legId;
+      legFileInput.dataset.legDir = attachBtn.dataset.direction;
+      legFileInput.dataset.legCtx = assignModal.dataset.ctx || 'org';
+      legFileInput.click();
+    }
+  });
+
+  document.getElementById('legFileInput')?.addEventListener('change', async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const legId  = e.target.dataset.legId;
+    const legDir = e.target.dataset.legDir;
+    const legCtx = e.target.dataset.legCtx || 'org';
+    if (!legId) { e.target.value = ''; return; }
+    const assignments = legCtx === 'personal'
+      ? (state.planner.personal?.tripAssignments || [])
+      : (state.planner.org?.teamAssignments     || []);
+    let foundLeg = null;
+    let foundAssignment = null;
+    for (const a of assignments) {
+      const legs = legDir === 'outbound' ? a.outboundLegs : a.returnLegs;
+      const leg  = (legs || []).find((l) => l.id === legId);
+      if (leg) { foundLeg = leg; foundAssignment = a; break; }
+    }
+    if (!foundLeg) { e.target.value = ''; return; }
+    try {
+      const { path, label } = await uploadOrReadFile(file);
+      foundLeg.filePath  = path;
+      foundLeg.fileLabel = label;
+    } catch (err) { window.alert(err.message); e.target.value = ''; return; }
+    scheduleAutoSave();
+    if (foundAssignment) renderAssignmentLegsInModal(foundAssignment);
+    e.target.value = '';
+  });
+
+  createModal('assignmentModal', {
+    onSave: handleAssignField,
+    onClose: () => {
+      const ctx = assignModal.dataset.ctx;
+      if (ctx === 'personal' || ctx === 'localCompanion') {
+        renderPersonalCompanionsSection();
+        renderCompanionsTab();
+        renderPersonalTimeline();
+        renderPersonalAccomList();
+      } else {
+        renderOrgTab();
+      }
+      assignModal.dataset.ctx = '';
+    },
+  }).wire();
+}
+
 function wireOrgPanel() {
   const panel = document.getElementById('plannerSponsorPanel');
   if (!panel) return;
 
   // ── Booth fields ────────────────────────────────────────────────────────────
   panel.addEventListener('input', (e) => {
+    if (e.target.id === 'plannerSponsorTitle') {
+      state.planner._displayName = e.target.value
+      const other = document.getElementById('plannerPersonalTitle')
+      if (other && !other.disabled) other.value = e.target.value
+      scheduleAutoSave(); updateHeader(); return;
+    }
     if (e.target.id === 'orgBoothInfo')  { state.planner.org.boothInfo  = e.target.value; scheduleAutoSave(); return; }
     if (e.target.id === 'orgBoothNotes') { state.planner.org.boothNotes = e.target.value; scheduleAutoSave(); return; }
 
@@ -6158,100 +7067,6 @@ function wireOrgPanel() {
     renderOrgTab(); scheduleAutoSave();
   });
 
-  // ── Assignment modal ────────────────────────────────────────────────────────
-  const assignModal = document.getElementById('assignmentModal');
-  if (assignModal) {
-    function getAssignment() {
-      return (state.planner.org.teamAssignments || []).find((a) => a.memberId === assignModal.dataset.memberId);
-    }
-
-    function handleAssignField(e) {
-      const assignment = getAssignment();
-      if (!assignment) return;
-
-      if (e.target.id === 'assignmentBudget')   { assignment.budget       = e.target.value; scheduleAutoSave(); return; }
-      if (e.target.id === 'assignmentActual')   { assignment.budgetActual = e.target.value; scheduleAutoSave(); return; }
-      if (e.target.id === 'assignmentCurrency') { assignment.currency     = e.target.value; scheduleAutoSave(); return; }
-      if (e.target.id === 'assignmentNotes')    { assignment.notes        = e.target.value; scheduleAutoSave(); return; }
-
-      const { legId, direction, legField } = e.target.dataset;
-      if (legId && direction && legField) {
-        const legs = direction === 'outbound' ? assignment.outboundLegs : assignment.returnLegs;
-        const leg  = legs?.find((l) => l.id === legId);
-        if (leg) { leg[legField] = e.target.value; scheduleAutoSave(); }
-      }
-    }
-
-    document.getElementById('addOutboundLegBtn')?.addEventListener('click', () => {
-      const assignment = getAssignment();
-      if (!assignment) return;
-      assignment.outboundLegs.push(makeLeg());
-      renderAssignmentLegsInModal(assignment);
-      scheduleAutoSave();
-    });
-
-    document.getElementById('addReturnLegBtn')?.addEventListener('click', () => {
-      const assignment = getAssignment();
-      if (!assignment) return;
-      assignment.returnLegs.push(makeLeg());
-      renderAssignmentLegsInModal(assignment);
-      scheduleAutoSave();
-    });
-
-    assignModal.addEventListener('click', (e) => {
-      const removeBtn = e.target.closest('.remove-leg-btn');
-      if (removeBtn) {
-        const { legId, direction } = removeBtn.dataset;
-        const assignment = getAssignment();
-        if (!assignment) return;
-        if (direction === 'outbound') assignment.outboundLegs = assignment.outboundLegs.filter((l) => l.id !== legId);
-        else assignment.returnLegs = assignment.returnLegs.filter((l) => l.id !== legId);
-        renderAssignmentLegsInModal(assignment);
-        scheduleAutoSave();
-        return;
-      }
-
-      const attachBtn = e.target.closest('.leg-attach-btn');
-      if (attachBtn) {
-        const legFileInput = document.getElementById('legFileInput');
-        if (!legFileInput) return;
-        legFileInput.dataset.legId  = attachBtn.dataset.legId;
-        legFileInput.dataset.legDir = attachBtn.dataset.direction;
-        legFileInput.click();
-      }
-    });
-
-    document.getElementById('legFileInput')?.addEventListener('change', async (e) => {
-      const file = e.target.files?.[0];
-      if (!file) return;
-      const legId  = e.target.dataset.legId;
-      const legDir = e.target.dataset.legDir;
-      if (!legId) { e.target.value = ''; return; }
-
-      let foundLeg = null;
-      let foundAssignment = null;
-      for (const a of (state.planner.org?.teamAssignments || [])) {
-        const legs = legDir === 'outbound' ? a.outboundLegs : a.returnLegs;
-        const leg  = (legs || []).find((l) => l.id === legId);
-        if (leg) { foundLeg = leg; foundAssignment = a; break; }
-      }
-      if (!foundLeg) { e.target.value = ''; return; }
-
-      try {
-        const { path, label } = await uploadOrReadFile(file);
-        foundLeg.filePath  = path;
-        foundLeg.fileLabel = label;
-      } catch (err) { window.alert(err.message); e.target.value = ''; return; }
-
-      scheduleAutoSave();
-      if (foundAssignment) renderAssignmentLegsInModal(foundAssignment);
-      renderDocumentsTab();
-      e.target.value = '';
-    });
-
-    createModal('assignmentModal', { onSave: handleAssignField, onClose: () => renderOrgTab() }).wire();
-  }
-
   // ── Accommodation modal ─────────────────────────────────────────────────────
   const accomModal = document.getElementById('accommodationModal');
   if (accomModal) {
@@ -6270,7 +7085,8 @@ function wireOrgPanel() {
     function handleAccomField(e) {
       const acc = getAccom();
       if (!acc) return;
-      if      (e.target.id === 'accomName')         { acc.name         = e.target.value; }
+      if      (e.target.id === 'accomType')         { acc.type = e.target.value; document.getElementById('accommodationModalTitle').textContent = e.target.value === 'cruise' ? 'Cruise' : 'Accommodation'; toggleCruiseLegSection(e.target.value === 'cruise', 'accomCruiseLegsSection'); renderCruiseLegs(acc.cruiseLegs, 'accomCruiseLegsList', 'accomCruiseLegsEmpty'); renderAccomMembersSection(acc); renderTimeline(); }
+      else if (e.target.id === 'accomName')         { acc.name         = e.target.value; }
       else if (e.target.id === 'accomAddress')      { acc.address      = e.target.value; }
       else if (e.target.id === 'accomConfirmation') { acc.confirmation = e.target.value; }
       else if (e.target.id === 'accomNotes')        { acc.notes        = e.target.value; }
@@ -6331,6 +7147,13 @@ function wireOrgPanel() {
       if (!acc) return;
       const memberId = e.target.value;
       if (memberId) {
+        acc.assignments = acc.assignments || [];
+        if (!acc.assignments.find((s) => s.memberId === memberId)) {
+          acc.assignments.push({ memberId, checkIn: '', checkOut: '', budget: '', budgetActual: '', currency: state.planner?.org?.sponsorCurrency || 'AUD' });
+          const opt = accomModal.querySelector(`#accomMemberSelect option[value="${CSS.escape(memberId)}"]`);
+          if (opt && !opt.textContent.endsWith(' ✓')) opt.textContent += ' ✓';
+          scheduleAutoSave();
+        }
         loadMemberStayFields(acc, memberId);
       } else {
         document.getElementById('accomMemberFields')?.classList.add('hidden');
@@ -6360,9 +7183,324 @@ function wireOrgPanel() {
       if (removeBtn) removeBtn.classList.add('opacity-0', 'pointer-events-none');
       scheduleAutoSave();
     });
+
+    document.getElementById('accomAddCruiseLegBtn')?.addEventListener('click', () => {
+      const acc = getAccom();
+      if (!acc) return;
+      acc.cruiseLegs = [...(acc.cruiseLegs || []), makeCruiseLeg()];
+      renderCruiseLegs(acc.cruiseLegs, 'accomCruiseLegsList', 'accomCruiseLegsEmpty');
+      scheduleAutoSave();
+    });
+
+    document.getElementById('accomCruiseLegsList')?.addEventListener('input', (e) => {
+      const field = e.target.dataset.cruiseLegField;
+      if (!field) return;
+      const legId = e.target.closest('[data-cruise-leg-id]')?.dataset.cruiseLegId;
+      if (!legId) return;
+      const acc = getAccom();
+      if (!acc) return;
+      const leg = (acc.cruiseLegs || []).find((l) => l.id === legId);
+      if (leg) { leg[field] = e.target.value; scheduleAutoSave(); }
+    });
+
+    document.getElementById('accomCruiseLegsList')?.addEventListener('click', (e) => {
+      if (!e.target.closest('.remove-cruise-leg-btn')) return;
+      const legId = e.target.closest('[data-cruise-leg-id]')?.dataset.cruiseLegId;
+      if (!legId) return;
+      const acc = getAccom();
+      if (!acc) return;
+      acc.cruiseLegs = (acc.cruiseLegs || []).filter((l) => l.id !== legId);
+      renderCruiseLegs(acc.cruiseLegs, 'accomCruiseLegsList', 'accomCruiseLegsEmpty');
+      scheduleAutoSave();
+    });
+
+    wireCruiseLegDragDrop('accomCruiseLegsList', 'accomCruiseLegsEmpty', getAccom);
   }
 
   wireTrackedSessionSearch('sponsor')
+}
+
+// ── Personal contacts (global) ────────────────────────────────────────────────
+
+function makePersonalContact() {
+  return { id: makeItemId('pc'), name: '', phone: '', notes: '' };
+}
+
+function makeTripAssignment(contactId) {
+  return { id: makeItemId('ta'), memberId: contactId, outboundLegs: [], returnLegs: [],
+           budget: '', budgetActual: '', currency: getDefaultCurrency(), notes: '' };
+}
+
+function renderSettingsPersonalContactsSection() {
+  // Populate "Me" identity select
+  const meSelect = document.getElementById('settingsMeContactId');
+  if (meSelect) {
+    const contacts = state.global?.personalContacts || [];
+    const locals   = state.planner.personal?.localCompanions || [];
+    const currentMe = state.planner.personal?.meContactId || '';
+    meSelect.innerHTML = `<option value="">Me (default)</option>` +
+      contacts.map((c) => `<option value="${esc(c.id)}"${c.id === currentMe ? ' selected' : ''}>${esc(c.name || 'Unnamed')}</option>`).join('') +
+      locals.map((lc) => `<option value="${esc(lc.id)}"${lc.id === currentMe ? ' selected' : ''}>${esc(lc.name || 'Unnamed')} (this trip)</option>`).join('');
+  }
+
+  const el = document.getElementById('settingsPersonalContactsList');
+  if (!el) return;
+  const contacts     = state.global?.personalContacts || [];
+  const assignedIds  = new Set((state.planner.personal?.tripAssignments || []).map((a) => a.memberId));
+
+  if (!contacts.length) {
+    el.innerHTML = '<p class="text-sm text-gray-400 italic">No trip contacts yet. Add one below.</p>';
+    return;
+  }
+
+  el.innerHTML = contacts.map((c) => {
+    const assigned = assignedIds.has(c.id);
+    return `<div class="flex items-center gap-3 py-2 px-3 rounded-lg border border-gray-200 bg-white">
+      <label class="flex items-center gap-2 flex-shrink-0 cursor-pointer" title="${assigned ? 'Remove from this trip' : 'Add to this trip'}">
+        <input type="checkbox" class="settings-personal-contact-assign h-4 w-4 rounded border-gray-300 text-blue-600 drupal-blue-focus"
+          data-contact-id="${esc(c.id)}" ${assigned ? 'checked' : ''}>
+      </label>
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-medium text-gray-800 truncate">${esc(c.name || 'Unnamed')}</p>
+        ${c.notes ? `<p class="text-xs text-gray-400 truncate">${esc(c.notes)}</p>` : ''}
+      </div>
+      <button type="button" class="edit-personal-contact-btn flex-shrink-0 h-7 px-2 border border-gray-200 rounded text-xs text-gray-500 hover:bg-gray-50 transition-colors" data-contact-id="${esc(c.id)}">
+        <i class="fas fa-pen-to-square text-[0.6rem]"></i>
+      </button>
+    </div>`;
+  }).join('');
+}
+
+function openPersonalContactModal(id) {
+  const modal   = document.getElementById('personalContactModal');
+  if (!modal) return;
+  const contact = id ? (state.global?.personalContacts || []).find((c) => c.id === id) : null;
+  modal.dataset.contactId = id || '';
+  document.getElementById('pcName').value  = contact?.name  || '';
+  document.getElementById('pcPhone').value = contact?.phone || '';
+  document.getElementById('pcNotes').value = contact?.notes || '';
+  document.getElementById('personalContactModalDelete').classList.toggle('hidden', !id);
+  showModal('personalContactModal', 'pcName');
+}
+
+function wirePersonalContactModal() {
+  const modal = document.getElementById('personalContactModal');
+  if (!modal) return;
+
+  function readFields() {
+    return {
+      name:  document.getElementById('pcName').value.trim(),
+      phone: document.getElementById('pcPhone').value.trim(),
+      notes: document.getElementById('pcNotes').value.trim(),
+    };
+  }
+
+  createModal('personalContactModal', {
+    onDone: () => {
+      const id     = modal.dataset.contactId;
+      const fields = readFields();
+      state.global.personalContacts = state.global.personalContacts || [];
+      if (!id) {
+        state.global.personalContacts.push({ id: makeItemId('pc'), ...fields });
+      } else {
+        const c = state.global.personalContacts.find((x) => x.id === id);
+        if (c) Object.assign(c, fields);
+      }
+      saveGlobal(state.global);
+    },
+    onDelete: () => {
+      const id = modal.dataset.contactId;
+      if (!id) return;
+      state.global.personalContacts = (state.global.personalContacts || []).filter((c) => c.id !== id);
+      if (state.planner.personal) {
+        state.planner.personal.tripAssignments = (state.planner.personal.tripAssignments || []).filter((a) => a.memberId !== id);
+      }
+      saveGlobal(state.global);
+      scheduleAutoSave();
+    },
+    onClose: () => {
+      renderSettingsPersonalContactsSection();
+      renderPersonalCompanionsSection();
+    },
+  }).wire();
+}
+
+function companionCardHtml(assignment) {
+  const contact = (state.global?.personalContacts || []).find((c) => c.id === assignment.memberId);
+  if (!contact) return '';
+  const accomNames = (state.planner.personal?.accommodations || [])
+    .filter((acc) => (acc.assignments || []).some((a) => a.memberId === assignment.memberId && (a.checkIn || a.checkOut)))
+    .map((acc) => acc.name || 'Unnamed').join(', ');
+  const outLegs = assignment.outboundLegs || [];
+  const retLegs = assignment.returnLegs  || [];
+  const firstOut = outLegs.find((l) => l.date);
+  const firstRet = retLegs.find((l) => l.date);
+  const badges = [
+    firstOut && `<span class="inline-flex items-center text-[0.65rem] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500"><i class="fas fa-plane-departure text-[0.55rem] mr-0.5"></i>${outLegs.length > 1 ? `×${outLegs.length}` : ''}</span>`,
+    firstRet && `<span class="inline-flex items-center text-[0.65rem] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500"><i class="fas fa-plane-arrival text-[0.55rem] mr-0.5"></i>${retLegs.length > 1 ? `×${retLegs.length}` : ''}</span>`,
+    (assignment.budget || assignment.budgetActual) && `<span class="inline-flex items-center text-[0.65rem] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500"><i class="fas fa-wallet text-[0.55rem] mr-0.5"></i>${assignment.budget ? esc(assignment.budget) : ''}${assignment.budgetActual ? ` / ${esc(assignment.budgetActual)}` : ''}${assignment.currency ? ` ${esc(assignment.currency)}` : ''}</span>`,
+    accomNames && `<span class="text-[0.65rem] text-gray-400">${esc(accomNames)}</span>`,
+  ].filter(Boolean).join('');
+  return `
+    <div class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 bg-white" data-companion-id="${esc(assignment.memberId)}">
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-medium text-gray-800">${esc(contact.name || 'Unnamed')}</p>
+        <div class="flex items-center gap-2 mt-0.5 flex-wrap">${badges}</div>
+      </div>
+      <button type="button" class="edit-companion-btn h-8 px-3 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0" data-companion-id="${esc(assignment.memberId)}" aria-label="Edit travel for ${esc(contact.name || 'companion')}">
+        <i class="fas fa-plane mr-1.5 text-[0.65rem]"></i>Travel
+      </button>
+      <button type="button" class="remove-companion-btn flex-shrink-0 text-gray-300 hover:text-red-500 transition-colors" data-companion-id="${esc(assignment.memberId)}" aria-label="Remove ${esc(contact.name || 'companion')}">
+        <i class="fas fa-times text-xs"></i>
+      </button>
+    </div>`;
+}
+
+function renderPersonalCompanionsSection() {
+  const section    = document.getElementById('personalCompanionsSection');
+  const listEl     = document.getElementById('personalCompanionsList');
+  const emptyEl    = document.getElementById('personalCompanionsEmpty');
+  const meContactId = state.planner.personal?.meContactId || null;
+  const assignments = (state.planner.personal?.tripAssignments || []).filter((a) => a.memberId !== meContactId);
+  const locals      = (state.planner.personal?.localCompanions || []).filter((lc) => lc.id !== meContactId);
+  if (!section) return;
+  section.classList.toggle('hidden', assignments.length === 0 && locals.length === 0);
+  if (!listEl) return;
+  listEl.innerHTML = assignments.map(companionCardHtml).filter(Boolean).join('') +
+    locals.map(localCompanionCardHtml).join('');
+  emptyEl?.classList.toggle('hidden', assignments.length > 0 || locals.length > 0);
+  if (state.activeTab === 'companions') renderCompanionsTab();
+}
+
+function _setAssignmentModalImportButtons() {
+  const personal = state.planner.personal;
+  const hasOut = (personal?.outboundLegs || []).length > 0;
+  const hasRet = (personal?.returnLegs   || []).length > 0;
+  document.getElementById('importOutboundFromMeBtn')?.classList.toggle('hidden', !hasOut);
+  document.getElementById('importReturnFromMeBtn')?.classList.toggle('hidden',   !hasRet);
+}
+
+function _hideAssignmentModalImportButtons() {
+  document.getElementById('importOutboundFromMeBtn')?.classList.add('hidden');
+  document.getElementById('importReturnFromMeBtn')?.classList.add('hidden');
+}
+
+function openTripAssignmentModal(contactId) {
+  const assignModal = document.getElementById('assignmentModal');
+  const contact     = (state.global?.personalContacts || []).find((c) => c.id === contactId);
+  if (!assignModal || !contact) return;
+
+  let assignment = (state.planner.personal?.tripAssignments || []).find((a) => a.memberId === contactId);
+  if (!assignment) return;
+
+  assignment.outboundLegs = assignment.outboundLegs || [];
+  assignment.returnLegs   = assignment.returnLegs   || [];
+
+  assignModal.dataset.ctx      = 'personal';
+  assignModal.dataset.memberId = contactId;
+
+  document.getElementById('assignmentModalSubtitle').textContent = contact.name || 'Unnamed';
+  renderAssignmentLegsInModal(assignment);
+  _setAssignmentModalImportButtons();
+
+  document.getElementById('assignmentBudget').value = assignment.budget       || '';
+  document.getElementById('assignmentActual').value = assignment.budgetActual || '';
+  document.getElementById('assignmentNotes').value  = assignment.notes        || '';
+  const currencyEl = document.getElementById('assignmentCurrency');
+  if (currencyEl) currencyEl.innerHTML = currencyOptions(assignment.currency || state.planner?.personal?.currency || 'AUD');
+
+  showModal('assignmentModal');
+  assignModal.querySelector('input, select')?.focus();
+}
+
+function openLocalCompanionAssignmentModal(lcId) {
+  const assignModal = document.getElementById('assignmentModal');
+  const lc = (state.planner.personal?.localCompanions || []).find((x) => x.id === lcId);
+  if (!assignModal || !lc) return;
+  lc.outboundLegs = lc.outboundLegs || [];
+  lc.returnLegs   = lc.returnLegs   || [];
+  assignModal.dataset.ctx      = 'localCompanion';
+  assignModal.dataset.memberId = lcId;
+  document.getElementById('assignmentModalSubtitle').textContent = `${lc.name || 'Unnamed'} (this trip)`;
+  renderAssignmentLegsInModal(lc);
+  _setAssignmentModalImportButtons();
+  document.getElementById('assignmentBudget').value = lc.budget       || '';
+  document.getElementById('assignmentActual').value = lc.budgetActual || '';
+  document.getElementById('assignmentNotes').value  = lc.notes        || '';
+  const currencyEl = document.getElementById('assignmentCurrency');
+  if (currencyEl) currencyEl.innerHTML = currencyOptions(lc.currency || state.planner?.personal?.currency || 'AUD');
+  showModal('assignmentModal');
+  assignModal.querySelector('input, select')?.focus();
+}
+
+function renderPersonalAccomMembersSection(acc) {
+  const tripAssignments = state.planner.personal?.tripAssignments || [];
+  const noCompanionsEl  = document.getElementById('personalAccomNoCompanions');
+  const wrapper         = document.getElementById('personalAccomCompanionStaysWrapper');
+  const select          = document.getElementById('personalAccomCompanionSelect');
+  const section         = document.getElementById('personalAccomCompanionSection');
+
+  if (!section) return;
+  section.classList.remove('hidden');
+  noCompanionsEl?.classList.add('hidden');
+  wrapper?.classList.remove('hidden');
+
+  const prevValue   = select?.value || '';
+  const assignedIds = new Set((acc.assignments || []).map((s) => s.memberId));
+  const contacts    = state.global?.personalContacts || [];
+
+  if (select) {
+    const meCheck = assignedIds.has('__me__') ? ' ✓' : '';
+    const localCompanions = state.planner.personal?.localCompanions || [];
+    const meContactId = state.planner.personal?.meContactId || null;
+    const companionOptions = tripAssignments.filter((a) => a.memberId !== meContactId).map((a) => {
+      const c = contacts.find((x) => x.id === a.memberId);
+      if (!c) return '';
+      return `<option value="${esc(c.id)}"${prevValue === c.id ? ' selected' : ''}>${esc(c.name || 'Unnamed')}${assignedIds.has(c.id) ? ' ✓' : ''}</option>`;
+    }).filter(Boolean).join('');
+    const localOptions = localCompanions.filter((lc) => lc.id !== meContactId).map((lc) =>
+      `<option value="${esc(lc.id)}"${prevValue === lc.id ? ' selected' : ''}>${esc(lc.name || 'Unnamed')} (this trip)${assignedIds.has(lc.id) ? ' ✓' : ''}</option>`
+    ).join('');
+    select.innerHTML = `<option value="">— Select to view or add —</option>` +
+      `<option value="__me__"${prevValue === '__me__' ? ' selected' : ''}>${esc(getMeLabel())}${meCheck}</option>` +
+      companionOptions + localOptions;
+  }
+
+  if (prevValue && select?.value === prevValue) {
+    loadPersonalCompanionStayFields(acc, prevValue);
+  } else {
+    document.getElementById('personalAccomCompanionFields')?.classList.add('hidden');
+    const removeBtn = document.getElementById('personalAccomRemoveCompanionBtn');
+    if (removeBtn) removeBtn.classList.add('opacity-0', 'pointer-events-none');
+  }
+}
+
+function loadPersonalCompanionStayFields(acc, contactId) {
+  const stay      = (acc.assignments || []).find((s) => s.memberId === contactId) || {};
+  const hasStay   = !!(acc.assignments || []).find((s) => s.memberId === contactId);
+  const fields    = document.getElementById('personalAccomCompanionFields');
+  const removeBtn = document.getElementById('personalAccomRemoveCompanionBtn');
+
+  fields?.classList.remove('hidden');
+  if (removeBtn) {
+    if (hasStay) removeBtn.classList.remove('opacity-0', 'pointer-events-none');
+    else         removeBtn.classList.add('opacity-0', 'pointer-events-none');
+  }
+
+  const isCruise = acc.type === 'cruise';
+  document.getElementById('personalAccomCompanionCheckInRow')?.classList.toggle('hidden', isCruise);
+  document.getElementById('personalAccomCompanionCheckOutRow')?.classList.toggle('hidden', isCruise);
+
+  const checkIn  = document.getElementById('personalAccomCompanionCheckIn');
+  const checkOut = document.getElementById('personalAccomCompanionCheckOut');
+  const currency = document.getElementById('personalAccomCompanionCurrency');
+  const budget   = document.getElementById('personalAccomCompanionBudget');
+  const actual   = document.getElementById('personalAccomCompanionActual');
+  if (checkIn)  checkIn.value  = isCruise ? (acc.checkIn || '') : (stay.checkIn || acc.checkIn || '');
+  if (checkOut) checkOut.value = isCruise ? (acc.checkOut || '') : (stay.checkOut || acc.checkOut || '');
+  if (currency) currency.innerHTML = currencyOptions(stay.currency || state.planner?.personal?.currency || 'AUD');
+  if (budget)   budget.value   = stay.budget       || '';
+  if (actual)   actual.value   = stay.budgetActual || '';
 }
 
 // ── Team tab (global team members) ───────────────────────────────────────────
@@ -6405,8 +7543,9 @@ function openTeamMemberModal(id) {
   document.getElementById('tmCompany').value    = member?.company    || '';
   document.getElementById('tmDepartment').value = member?.department || '';
   document.getElementById('tmPhone').value      = member?.phone      || '';
-  document.getElementById('tmNotes').value      = member?.notes      || '';
-  document.getElementById('tmEnabled').checked  = member ? (member.enabled !== false) : true;
+  document.getElementById('tmNotes').value         = member?.notes         || '';
+  document.getElementById('tmEnabled').checked     = member ? (member.enabled !== false) : true;
+  document.getElementById('tmSkipFinances').checked = member?.skipFinances === true;
   document.getElementById('teamMemberModalDelete').classList.toggle('hidden', !id);
   showModal('teamMemberModal', 'tmName');
 }
@@ -6421,6 +7560,7 @@ function openTeamMemberDetailModal(memberId) {
   const disabled = member.enabled === false;
   document.getElementById('tmDetailName').textContent = member.name || 'Unnamed';
   document.getElementById('tmDetailDisabledBadge')?.classList.toggle('hidden', !disabled);
+  document.getElementById('tmDetailSkipFinancesBadge')?.classList.toggle('hidden', !member.skipFinances);
 
   const roleEl = document.getElementById('tmDetailRole');
   roleEl.textContent = member.role || '';
@@ -6478,6 +7618,10 @@ function openTeamMemberDetailModal(memberId) {
 
   const budgetEl = document.getElementById('tmDetailBudget');
   if (budgetEl) {
+    if (member.skipFinances) {
+      budgetEl.innerHTML = '<p class="text-xs text-gray-400 italic">Finance tracking is disabled for this person.</p>';
+      budgetEl.closest('.tm-detail-budget-row')?.classList.remove('hidden');
+    } else {
     const cats = buildEventBudgetData(state.planner, memberId)
     const activeCats = Object.entries(cats).filter(([, c]) => c.budget !== 0 || c.actual !== 0 || c.items.length)
     if (activeCats.length) {
@@ -6512,6 +7656,7 @@ function openTeamMemberDetailModal(memberId) {
     } else {
       budgetEl.innerHTML = '<p class="text-xs text-gray-400 italic">No budget data for this member.</p>'
     }
+    } // end else (skipFinances)
   }
 
   showModal('teamMemberDetailModal');
@@ -6543,13 +7688,14 @@ function wireTeamPanel() {
 
   function readModalFields() {
     return {
-      name:       document.getElementById('tmName').value.trim(),
-      role:       document.getElementById('tmRole').value.trim(),
-      company:    document.getElementById('tmCompany').value.trim(),
-      department: document.getElementById('tmDepartment').value.trim(),
-      phone:      document.getElementById('tmPhone').value.trim(),
-      notes:      document.getElementById('tmNotes').value.trim(),
-      enabled:    document.getElementById('tmEnabled').checked,
+      name:         document.getElementById('tmName').value.trim(),
+      role:         document.getElementById('tmRole').value.trim(),
+      company:      document.getElementById('tmCompany').value.trim(),
+      department:   document.getElementById('tmDepartment').value.trim(),
+      phone:        document.getElementById('tmPhone').value.trim(),
+      notes:        document.getElementById('tmNotes').value.trim(),
+      enabled:      document.getElementById('tmEnabled').checked,
+      skipFinances: document.getElementById('tmSkipFinances').checked,
     };
   }
 
@@ -6586,8 +7732,11 @@ function wireTeamPanel() {
 // ── Mode toggle (sponsor / personal) ─────────────────────────────────────────
 
 // Base tabs per mode (before per-event disable overrides). Settings always added below.
-const SPONSOR_TABS_BASE  = new Set(['contacts', 'tasks', 'sponsor', 'team', 'notes', 'documents', 'tickets', 'budget', 'summary']);
-const PERSONAL_TABS_BASE = new Set(['personal', 'notes', 'contacts', 'tasks', 'receipts', 'documents', 'tickets', 'summary']);
+const SPONSOR_TABS_BASE  = new Set(['contacts', 'tasks', 'sponsor', 'team', 'notes', 'documents', 'tickets', 'budget', 'map', 'summary']);
+const PERSONAL_TABS_BASE = new Set(['personal', 'companions', 'notes', 'contacts', 'tasks', 'receipts', 'documents', 'tickets', 'budget', 'map', 'summary']);
+
+// Tabs that only appear when isConference is true on the planner.
+const CONFERENCE_TABS = new Set(['notes', 'contacts']);
 
 // Human-readable labels used by the settings UI
 const TAB_LABELS = {
@@ -6600,12 +7749,15 @@ const TAB_LABELS = {
   notes:     'Notes',
   receipts:  'Receipts',
   tickets:   'Tickets',
+  companions:'Companions',
   budget:    'Budget',
+  map:       'Map',
   summary:   'Summary',
 };
 
 // Returns an ordered array of visible tab keys (excluding 'settings') for the tab bar.
 function getVisibleTabsOrdered(mode) {
+  const isConference = state.planner?.isConference !== false;
   const base     = mode === 'sponsor' ? SPONSOR_TABS_BASE : PERSONAL_TABS_BASE;
   const stored   = mode === 'sponsor'
     ? (state.planner?.org?.tabOrder     || [])
@@ -6615,9 +7767,10 @@ function getVisibleTabsOrdered(mode) {
       ? (state.planner?.org?.disabledTabs     || [])
       : (state.planner?.personal?.disabledTabs || [])
   );
+  const visible = (t) => base.has(t) && !disabled.has(t) && (isConference || !CONFERENCE_TABS.has(t));
   // Stored order first (filtered to base & enabled), then any tabs not yet in stored order
-  const ordered = stored.filter((t) => base.has(t) && !disabled.has(t));
-  base.forEach((t) => { if (!ordered.includes(t) && !disabled.has(t)) ordered.push(t); });
+  const ordered = stored.filter(visible);
+  base.forEach((t) => { if (!ordered.includes(t) && visible(t)) ordered.push(t); });
   return ordered;
 }
 
@@ -6780,6 +7933,18 @@ function wireDragDrop(mainEl, mode) {
     scheduleAutoSave();
     renderTabBar();
   });
+}
+
+function applyConferenceMode() {
+  const isConference = state.planner?.isConference !== false;
+  ['sponsorTrackedSessionsSection', 'personalTrackedSessionsSection'].forEach((id) => {
+    document.getElementById(id)?.classList.toggle('hidden', !isConference);
+  });
+  renderTabBar();
+  const mode = state.planner?.mode || 'personal';
+  if (!getVisibleTabs(mode).has(state.activeTab)) {
+    setActiveTab(getVisibleTabsOrdered(mode)[0] || 'settings');
+  }
 }
 
 function applyMode(mode) {
@@ -7121,6 +8286,666 @@ function wireDocumentsPanel() {
   })
 }
 
+// ── Companions tab ────────────────────────────────────────────────────────────
+
+function makeLocalCompanion() {
+  return { id: makeItemId('lc'), name: '', phone: '', notes: '',
+           outboundLegs: [], returnLegs: [], budget: '', budgetActual: '', currency: '' };
+}
+
+function localCompanionCardHtml(lc) {
+  const accomNames = (state.planner.personal?.accommodations || [])
+    .filter((acc) => (acc.assignments || []).some((a) => a.memberId === lc.id))
+    .map((acc) => acc.name || 'Unnamed').join(', ');
+  return `
+    <div class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 bg-white" data-local-companion-id="${esc(lc.id)}">
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-2">
+          <p class="text-sm font-medium text-gray-800">${esc(lc.name || 'Unnamed')}</p>
+          <span class="text-[0.6rem] px-1.5 py-0.5 rounded bg-blue-50 text-blue-500 font-medium">This trip</span>
+        </div>
+        <div class="flex items-center gap-2 mt-0.5 flex-wrap">
+          ${lc.phone ? `<span class="text-[0.65rem] text-gray-400"><i class="fas fa-phone text-[0.55rem] mr-0.5"></i>${esc(lc.phone)}</span>` : ''}
+          ${accomNames ? `<span class="text-[0.65rem] text-gray-400">${esc(accomNames)}</span>` : ''}
+        </div>
+      </div>
+      <button type="button" class="local-companion-flights-btn h-8 px-3 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0"
+        data-local-companion-id="${esc(lc.id)}" aria-label="Travel for ${esc(lc.name || 'companion')}">
+        <i class="fas fa-plane mr-1.5 text-[0.65rem]"></i>Travel
+      </button>
+      <button type="button" class="edit-local-companion-btn h-8 px-3 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0"
+        data-local-companion-id="${esc(lc.id)}" aria-label="Edit ${esc(lc.name || 'companion')}">
+        <i class="fas fa-pen-to-square mr-1.5 text-[0.65rem]"></i>Details
+      </button>
+      <button type="button" class="delete-local-companion-btn flex-shrink-0 text-gray-300 hover:text-red-500 transition-colors"
+        data-local-companion-id="${esc(lc.id)}" aria-label="Remove ${esc(lc.name || 'companion')}">
+        <i class="fas fa-times text-xs"></i>
+      </button>
+    </div>`;
+}
+
+function renderCompanionsTab() {
+  const listEl  = document.getElementById('companionsTabList');
+  const emptyEl = document.getElementById('companionsTabEmpty');
+  if (!listEl) return;
+
+  const meContactId     = state.planner.personal?.meContactId || null;
+  const assignments     = (state.planner.personal?.tripAssignments || []).filter((a) => a.memberId !== meContactId);
+  const localCompanions = (state.planner.personal?.localCompanions || []).filter((lc) => lc.id !== meContactId);
+
+  const globalHtml = assignments.map(companionCardHtml).filter(Boolean).join('');
+  const localHtml  = localCompanions.map(localCompanionCardHtml).join('');
+  const allHtml    = globalHtml + localHtml;
+
+  listEl.innerHTML = allHtml;
+  emptyEl?.classList.toggle('hidden', allHtml.length > 0);
+}
+
+let _localCompanionId = null;
+
+function openLocalCompanionModal(id) {
+  _localCompanionId = id;
+  const lc = id ? (state.planner.personal?.localCompanions || []).find((x) => x.id === id) : null;
+  document.getElementById('localCompanionModalTitle').textContent = id ? 'Edit Companion' : 'Add Companion';
+  document.getElementById('localCompanionName').value  = lc?.name  || '';
+  document.getElementById('localCompanionPhone').value = lc?.phone || '';
+  document.getElementById('localCompanionNotes').value = lc?.notes || '';
+  document.getElementById('localCompanionModalDelete')?.classList.toggle('hidden', !id);
+  showModal('localCompanionModal', 'localCompanionName');
+}
+
+function saveLocalCompanion() {
+  const personal = state.planner.personal;
+  if (!personal) return;
+  const name  = document.getElementById('localCompanionName')?.value.trim()  || '';
+  const phone = document.getElementById('localCompanionPhone')?.value.trim() || '';
+  const notes = document.getElementById('localCompanionNotes')?.value.trim() || '';
+  personal.localCompanions = personal.localCompanions || [];
+  if (_localCompanionId) {
+    const lc = personal.localCompanions.find((x) => x.id === _localCompanionId);
+    if (lc) Object.assign(lc, { name, phone, notes });
+  } else {
+    personal.localCompanions.push({ ...makeLocalCompanion(), name, phone, notes });
+  }
+  scheduleAutoSave();
+  hideModal('localCompanionModal');
+  _localCompanionId = null;
+  renderCompanionsTab();
+  renderPersonalAccomList();
+}
+
+function deleteLocalCompanion(id) {
+  const personal = state.planner.personal;
+  if (!personal) return;
+  personal.localCompanions = (personal.localCompanions || []).filter((x) => x.id !== id);
+  // Also remove from accommodation assignments
+  (personal.accommodations || []).forEach((acc) => {
+    acc.assignments = (acc.assignments || []).filter((a) => a.memberId !== id);
+  });
+  scheduleAutoSave();
+  hideModal('localCompanionModal');
+  _localCompanionId = null;
+  renderCompanionsTab();
+  renderPersonalAccomList();
+}
+
+function wireCompanionsPanel() {
+  const panel = document.getElementById('plannerCompanionsPanel');
+  if (!panel) return;
+
+  document.getElementById('addLocalCompanionBtn')?.addEventListener('click', () => openLocalCompanionModal(null));
+
+  panel.addEventListener('click', (e) => {
+    const flightsBtn = e.target.closest('.local-companion-flights-btn');
+    if (flightsBtn) { openLocalCompanionAssignmentModal(flightsBtn.dataset.localCompanionId); return; }
+    const editBtn = e.target.closest('.edit-local-companion-btn');
+    if (editBtn) { openLocalCompanionModal(editBtn.dataset.localCompanionId); return; }
+    const delBtn = e.target.closest('.delete-local-companion-btn');
+    if (delBtn) { deleteLocalCompanion(delBtn.dataset.localCompanionId); return; }
+    // Global companion buttons also live here (reuse existing handlers via delegation)
+    const editComp = e.target.closest('.edit-companion-btn');
+    if (editComp) { openTripAssignmentModal(editComp.dataset.companionId); return; }
+    const removeComp = e.target.closest('.remove-companion-btn');
+    if (removeComp) {
+      const cid = removeComp.dataset.companionId;
+      state.planner.personal.tripAssignments = (state.planner.personal?.tripAssignments || []).filter((a) => a.memberId !== cid);
+      scheduleAutoSave();
+      renderCompanionsTab();
+      renderPersonalCompanionsSection();
+    }
+  });
+
+  // Local companion modal wiring
+  document.getElementById('localCompanionModalClose')?.addEventListener('click', () => { hideModal('localCompanionModal'); _localCompanionId = null; });
+  document.getElementById('localCompanionModalDone')?.addEventListener('click', saveLocalCompanion);
+  document.getElementById('localCompanionModalDelete')?.addEventListener('click', () => { if (_localCompanionId) deleteLocalCompanion(_localCompanionId); });
+  document.getElementById('localCompanionModal')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); saveLocalCompanion(); }
+    if (e.key === 'Escape') { hideModal('localCompanionModal'); _localCompanionId = null; }
+  });
+}
+
+// ── Map tab ───────────────────────────────────────────────────────────────────
+
+// Top ~200 IATA airport codes → [lat, lon]
+const IATA_COORDS = {
+  // Australia / NZ
+  SYD:[-33.9461,151.1772], MEL:[-37.6690,144.8410], BNE:[-27.3842,153.1175],
+  PER:[-31.9403,115.9669], ADL:[-34.9450,138.5301], CBR:[-35.3069,149.1951],
+  HBA:[-42.8361,147.5078], OOL:[-28.1644,153.5044], CNS:[-16.8858,145.7452],
+  DRW:[-12.4147,130.8765], AKL:[-37.0082,174.7850], CHC:[-43.4894,172.5322],
+  WLG:[-41.3272,174.8052],
+  // USA
+  JFK:[40.6413,-73.7781], LAX:[33.9425,-118.4081], ORD:[41.9742,-87.9073],
+  ATL:[33.6407,-84.4277], DFW:[32.8998,-97.0403], DEN:[39.8561,-104.6737],
+  SFO:[37.6213,-122.3790], LAS:[36.0840,-115.1537], MIA:[25.7959,-80.2870],
+  PHX:[33.4373,-112.0078], SEA:[47.4502,-122.3088], IAH:[29.9902,-95.3368],
+  MSP:[44.8848,-93.2223], DTW:[42.2124,-83.3534], BOS:[42.3656,-71.0096],
+  FLL:[26.0726,-80.1527], MCO:[28.4312,-81.3081], EWR:[40.6895,-74.1745],
+  PDX:[45.5898,-122.5951], SLC:[40.7899,-111.9791], DCA:[38.8521,-77.0377],
+  IAD:[38.9531,-77.4565], CLT:[35.2140,-80.9431], PHL:[39.8744,-75.2424],
+  TPA:[27.9755,-82.5332], MDW:[41.7868,-87.7522], LGA:[40.7772,-73.8726],
+  SNA:[33.6757,-117.8676], OAK:[37.7213,-122.2208], BWI:[39.1754,-76.6683],
+  MKE:[42.9472,-87.8966], STL:[38.7487,-90.3700], BNA:[36.1245,-86.6782],
+  AUS:[30.1945,-97.6699], RDU:[35.8776,-78.7875], SMF:[38.6954,-121.5908],
+  SAN:[32.7338,-117.1933], MSY:[29.9934,-90.2580],
+  // Canada
+  YVR:[49.1947,-123.1792], YYZ:[43.6777,-79.6248], YUL:[45.4706,-73.7408],
+  YYC:[51.1215,-114.0132], YEG:[53.3097,-113.5797], YOW:[45.3225,-75.6692],
+  YHZ:[44.8808,-63.5086], YWG:[49.9100,-97.2398],
+  // UK / Ireland
+  LHR:[51.4775,-0.4614], LGW:[51.1537,-0.1821], MAN:[53.3537,-2.2750],
+  EDI:[55.9500,-3.3725], DUB:[53.4213,-6.2700], BHX:[52.4539,-1.7480],
+  GLA:[55.8642,-4.4330], STN:[51.8850,0.2350],
+  // Europe
+  CDG:[49.0097,2.5479], ORY:[48.7233,2.3794], AMS:[52.3086,4.7639],
+  FRA:[50.0379,8.5622], MUC:[48.3537,11.7750], TXL:[52.5597,13.2877],
+  BER:[52.3667,13.5033], ZRH:[47.4647,8.5492], VIE:[48.1103,16.5697],
+  BCN:[41.2971,2.0785], MAD:[40.4936,-3.5668], LIS:[38.7756,-9.1354],
+  FCO:[41.8003,12.2389], MXP:[45.6306,8.7281], ATH:[37.9364,23.9445],
+  CPH:[55.6180,12.6560], OSL:[60.1939,11.1004], ARN:[59.6519,17.9186],
+  HEL:[60.3172,24.9633], BRU:[50.9010,4.4844], DUS:[51.2895,6.7668],
+  HAM:[53.6303,10.0065], WAW:[52.1657,20.9671], PRG:[50.1008,14.2600],
+  BUD:[47.4298,19.2612], OTP:[44.5711,26.0858], SOF:[42.6967,23.4114],
+  HEL:[60.3172,24.9633], RIG:[56.9236,23.9711], TLL:[59.4133,24.8328],
+  VNO:[54.6341,25.2858], KBP:[50.3450,30.8947], SVO:[55.9726,37.4146],
+  DME:[55.4088,37.9063], LED:[59.8003,30.2625],
+  // Middle East
+  DXB:[25.2528,55.3644], DOH:[25.2609,51.6138], AUH:[24.4330,54.6511],
+  AMM:[31.7226,35.9932], BEY:[33.8209,35.4883], KWI:[29.2267,47.9689],
+  BAH:[26.2708,50.6336], MCT:[23.5931,58.2844],
+  // Asia
+  NRT:[35.7647,140.3864], HND:[35.5494,139.7798], KIX:[34.4347,135.2440],
+  NGO:[34.8583,136.8050], FUK:[33.5853,130.4511], CTS:[42.7752,141.6922],
+  ICN:[37.4692,126.4505], GMP:[37.5663,126.7914], PUS:[35.1795,128.9386],
+  PVG:[31.1434,121.8052], PEK:[40.0799,116.6031], PKX:[39.5098,116.4106],
+  CAN:[23.3924,113.2988], SZX:[22.6393,113.8107], SHA:[31.1979,121.3362],
+  CTU:[30.5785,103.9469], HKG:[22.3080,113.9185], MFM:[22.1496,113.5916],
+  TPE:[25.0777,121.2325], BKK:[13.6811,100.7475], DMK:[13.9126,100.6067],
+  SIN:[1.3644,103.9915], KUL:[2.7456,101.7099], CGK:[-6.1256,106.6559],
+  DPS:[-8.7482,115.1672], MNL:[14.5086,121.0195], HAN:[21.2187,105.8047],
+  SGN:[10.8188,106.6520], RGN:[16.9073,96.1332], BOM:[19.0887,72.8679],
+  DEL:[28.5562,77.1000], BLR:[13.1986,77.7066], MAA:[12.9900,80.1693],
+  HYD:[17.2403,78.4294], CCU:[22.6547,88.4467], CMB:[7.1800,79.8841],
+  KTM:[27.6966,85.3591], DAC:[23.8433,90.3979],
+  // Latin America
+  GRU:[-23.4356,-46.4731], GIG:[-22.8100,-43.2506], BSB:[-15.8711,-47.9186],
+  EZE:[-34.8222,-58.5358], AEP:[-34.5592,-58.4156], SCL:[-33.3930,-70.7858],
+  LIM:[-12.0219,-77.1143], BOG:[4.7016,-74.1469], MDE:[6.1645,-75.4231],
+  MEX:[19.4363,-99.0721], CUN:[21.0365,-86.8771], GDL:[20.5218,-103.3106],
+  PTY:[9.0714,-79.3835], SJO:[9.9939,-84.2088],
+  // Africa
+  JNB:[-26.1392,28.2460], CPT:[-33.9648,18.6017], NBO:[-1.3192,36.9275],
+  ADD:[8.9779,38.7993], LOS:[6.5774,3.3214], CAI:[30.1219,31.4056],
+  CMN:[33.3675,-7.5900], ACC:[5.6052,-0.1668], DAR:[-6.8780,39.2026],
+  // Pacific
+  HNL:[21.3187,-157.9224], GUM:[13.4834,144.7960], SYD:[-33.9461,151.1772],
+  NAN:[-17.7554,177.4434], PPT:[-17.5534,-149.6066],
+};
+
+
+const GEOCODE_CACHE_KEY = 'drupalconPlanner_geocache';
+
+function _loadGeocodeCache() {
+  try { return JSON.parse(localStorage.getItem(GEOCODE_CACHE_KEY) || '{}'); } catch { return {}; }
+}
+function _saveGeocodeCache(cache) {
+  try { localStorage.setItem(GEOCODE_CACHE_KEY, JSON.stringify(cache)); } catch {}
+}
+
+// Resolve a location string to [lat, lon] or null.
+// 1. IATA code match  2. localStorage cache  3. Nominatim API (queued, 1.1s apart)
+const _geocodeQueue  = [];
+let   _geocodeTimer  = null;
+
+function _drainGeocodeQueue() {
+  if (!_geocodeQueue.length) { _geocodeTimer = null; return; }
+  const { query, cacheKey, countrycodes, resolve } = _geocodeQueue.shift();
+  const key   = cacheKey || query;
+  const cache = _loadGeocodeCache();
+  if (cache[key]) { resolve(cache[key]); _geocodeTimer = setTimeout(_drainGeocodeQueue, 0); return; }
+  let url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1`;
+  if (countrycodes) url += `&countrycodes=${encodeURIComponent(countrycodes)}`;
+  fetch(url)
+    .then((r) => r.json())
+    .then((data) => {
+      if (data?.[0]) {
+        const pt = [parseFloat(data[0].lat), parseFloat(data[0].lon)];
+        const c = _loadGeocodeCache(); c[key] = pt; _saveGeocodeCache(c);
+        resolve(pt);
+      } else {
+        resolve(null);
+      }
+    })
+    .catch(() => resolve(null))
+    .finally(() => { _geocodeTimer = setTimeout(_drainGeocodeQueue, 1100); });
+}
+
+function geocodeLocation(query) {
+  if (!query) return Promise.resolve(null);
+  const q = query.trim();
+  // Direct lat,lon (e.g. "-17.73,168.32" pasted from Google Maps) — instant, no network
+  const coordMatch = q.match(/^(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)$/);
+  if (coordMatch) return Promise.resolve([parseFloat(coordMatch[1]), parseFloat(coordMatch[2])]);
+  // 3-letter IATA airport code — instant, no network
+  const iata = q.match(/\b([A-Z]{3})\b/)?.[1];
+  if (iata && IATA_COORDS[iata]) return Promise.resolve(IATA_COORDS[iata]);
+  if (IATA_COORDS[q.toUpperCase()]) return Promise.resolve(IATA_COORDS[q.toUpperCase()]);
+  // Check cache before queuing any network request
+  const cache = _loadGeocodeCache();
+  if (cache[q]) return Promise.resolve(cache[q]);
+  // UN/LOCODE (exactly 5 uppercase alphanums, e.g. VUVLI): use embedded country code to
+  // scope the Nominatim query so "VLI" resolves correctly even for obscure locations.
+  // The result is cached under the original LOCODE key, not the derived query string.
+  const locodeMatch = q.match(/^([A-Z]{2})([A-Z0-9]{3})$/);
+  if (locodeMatch) {
+    const [, cc, loc] = locodeMatch;
+    return new Promise((resolve) => {
+      _geocodeQueue.push({ query: loc, cacheKey: q, countrycodes: cc.toLowerCase(), resolve });
+      if (!_geocodeTimer) _geocodeTimer = setTimeout(_drainGeocodeQueue, 0);
+    });
+  }
+  // General free-text — queue Nominatim request
+  return new Promise((resolve) => {
+    _geocodeQueue.push({ query: q, resolve });
+    if (!_geocodeTimer) _geocodeTimer = setTimeout(_drainGeocodeQueue, 0);
+  });
+}
+
+// Parse a GPX file (File object) → { name, points: [[lat,lon],...] } or null
+function parseGpx(file) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const xml   = new DOMParser().parseFromString(e.target.result, 'application/xml');
+        const name  = xml.querySelector('name')?.textContent?.trim() || file.name.replace(/\.gpx$/i, '');
+        // Prefer track points, fall back to route points, then waypoints
+        const tags  = xml.querySelectorAll('trkpt').length
+          ? xml.querySelectorAll('trkpt')
+          : xml.querySelectorAll('rtept').length
+            ? xml.querySelectorAll('rtept')
+            : xml.querySelectorAll('wpt');
+        let pts = Array.from(tags).map((p) => [parseFloat(p.getAttribute('lat')), parseFloat(p.getAttribute('lon'))]).filter(([la, lo]) => !isNaN(la) && !isNaN(lo));
+        // Downsample to ≤ 800 points to keep localStorage lean
+        if (pts.length > 800) {
+          const step = pts.length / 800;
+          pts = pts.filter((_, i) => Math.round(i / step) * step === Math.round(i));
+        }
+        resolve(pts.length ? { name, points: pts } : null);
+      } catch { resolve(null); }
+    };
+    reader.readAsText(file);
+  });
+}
+
+// Leaflet lazy loader
+let _leafletReady = false;
+const _leafletCbs = [];
+function _loadLeaflet(cb) {
+  if (_leafletReady) { cb(); return; }
+  _leafletCbs.push(cb);
+  if (_leafletCbs.length > 1) return;
+  const link = Object.assign(document.createElement('link'), { rel: 'stylesheet', href: 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' });
+  document.head.appendChild(link);
+  const s = Object.assign(document.createElement('script'), { src: 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js' });
+  s.onload = () => { _leafletReady = true; _leafletCbs.splice(0).forEach((f) => f()); };
+  document.head.appendChild(s);
+}
+
+let _map         = null;
+let _mapLayers   = null;  // LayerGroup for route/marker layers
+const _gpxOnlyPersons = new Set();  // person IDs where auto-lines are hidden in favour of GPX track
+
+function _initMap() {
+  const el = document.getElementById('plannerMap');
+  if (!el) return;
+  if (_map) { setTimeout(() => _map.invalidateSize(), 50); return; }
+  _map = window.L.map('plannerMap', { zoomControl: true }).setView([20, 10], 2);
+  window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19,
+  }).addTo(_map);
+  _mapLayers = window.L.layerGroup().addTo(_map);
+}
+
+function _clearMapLayers() { _mapLayers?.clearLayers(); }
+
+// Render polylines and markers for one traveller's data
+async function _drawTraveller({ outboundLegs = [], returnLegs = [], accommodations = [], gpxTrack = null, color = '#2563eb', label = 'Me', hideAutoLines = false }) {
+  const L = window.L;
+  const allPts = [];
+  const skipLines = hideAutoLines && gpxTrack?.points?.length;
+
+  // Helper: resolve an ordered list of location strings to [lat,lon] pairs
+  async function resolveSeq(locs) {
+    const pts = await Promise.all(locs.map(geocodeLocation));
+    return pts.filter(Boolean);
+  }
+
+  // Build ordered waypoint sequences for outbound and return legs
+  const outboundLocs = [];
+  for (const leg of outboundLegs) {
+    if (!outboundLocs.length && leg.from) outboundLocs.push(leg.from);
+    if (leg.to) outboundLocs.push(leg.to);
+  }
+  const returnLocs = [];
+  for (const leg of returnLegs) {
+    if (!returnLocs.length && leg.from) returnLocs.push(leg.from);
+    if (leg.to) returnLocs.push(leg.to);
+  }
+  const [outboundPts, returnPts] = await Promise.all([resolveSeq(outboundLocs), resolveSeq(returnLocs)]);
+
+  if (!skipLines) {
+    // Draw outbound flight polyline + departure marker
+    if (outboundPts.length >= 2) {
+      L.polyline(outboundPts, { color, weight: 2, opacity: 0.75 })
+        .bindTooltip(`${esc(label)}: outbound`, { sticky: true })
+        .addTo(_mapLayers);
+      L.circleMarker(outboundPts[0], { radius: 4, color, fillColor: color, fillOpacity: 0.9, weight: 1.5 })
+        .bindPopup(`<strong>${esc(label)}</strong><br>${esc(outboundLocs[0] || '')}<br><span style="color:#666;font-size:0.8em">Outbound departure</span>`)
+        .addTo(_mapLayers);
+    }
+    // Draw return flight polyline + departure marker
+    if (returnPts.length >= 2) {
+      L.polyline(returnPts, { color, weight: 2, opacity: 0.75, dashArray: '6 5' })
+        .bindTooltip(`${esc(label)}: return`, { sticky: true })
+        .addTo(_mapLayers);
+      L.circleMarker(returnPts[0], { radius: 4, color, fillColor: color, fillOpacity: 0.9, weight: 1.5 })
+        .bindPopup(`<strong>${esc(label)}</strong><br>${esc(returnLocs[0] || '')}<br><span style="color:#666;font-size:0.8em">Return departure</span>`)
+        .addTo(_mapLayers);
+    }
+  }
+  allPts.push(...outboundPts, ...returnPts);
+
+  // Draw accommodation markers; collect resolved points per accommodation for connectors
+  const accomSeqs = [];
+  for (const acc of accommodations) {
+    const entries = acc.type === 'cruise'
+      ? (acc.cruiseLegs || [])
+          .map((cl) => ({ name: cl.location || '', query: cl.coords || cl.location }))
+          .filter((e) => e.query)
+      : [{ name: acc.name || '', query: acc.address || acc.name }].filter((e) => e.query);
+    const resolved = await Promise.all(entries.map((e) => geocodeLocation(e.query)));
+    const validEntries = entries.map((e, i) => ({ ...e, pt: resolved[i] })).filter((e) => e.pt);
+    for (let i = 0; i < validEntries.length; i++) {
+      const { name, pt } = validEntries[i];
+      const icon = acc.type === 'cruise'
+        ? L.divIcon({ html: `<div style="background:${color};color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;border:2px solid #fff">${i + 1}</div>`, className: '', iconAnchor: [10, 10] })
+        : L.divIcon({ html: `<i class="fas fa-bed" style="color:${color};font-size:1rem;text-shadow:0 1px 3px rgba(0,0,0,0.4)"></i>`, className: '', iconAnchor: [8, 16] });
+      L.marker(pt, { icon })
+        .bindPopup(`<strong>${esc(label)}</strong><br>${esc(acc.name || 'Accommodation')}${acc.type === 'cruise' ? `<br><span style="color:#666;font-size:0.8em">Port ${i + 1}: ${esc(name)}</span>` : ''}`)
+        .addTo(_mapLayers);
+    }
+    const pts = validEntries.map((e) => e.pt);
+    if (!skipLines && acc.type === 'cruise' && pts.length >= 2) {
+      L.polyline(pts, { color, weight: 2, opacity: 0.75, dashArray: '4 4' })
+        .bindTooltip(`${esc(label)}: ${esc(acc.name || 'Cruise')}`, { sticky: true })
+        .addTo(_mapLayers);
+    }
+    if (pts.length) accomSeqs.push(pts);
+    allPts.push(...pts);
+  }
+
+  if (!skipLines) {
+    // Draw connector segments bridging flight endpoints to accommodation
+    let bridgePrev = outboundPts.length ? outboundPts[outboundPts.length - 1] : null;
+    for (const pts of accomSeqs) {
+      if (!pts.length) continue;
+      if (bridgePrev) {
+        L.polyline([bridgePrev, pts[0]], { color, weight: 2, opacity: 0.55, dashArray: '5 4' }).addTo(_mapLayers);
+      }
+      bridgePrev = pts[pts.length - 1];
+    }
+    if (bridgePrev && returnPts.length) {
+      L.polyline([bridgePrev, returnPts[0]], { color, weight: 2, opacity: 0.55, dashArray: '5 4' }).addTo(_mapLayers);
+    }
+  }
+
+  // GPX track
+  if (gpxTrack?.points?.length) {
+    L.polyline(gpxTrack.points, { color, weight: 3, opacity: 0.55 })
+      .bindTooltip(`${esc(label)} GPX: ${esc(gpxTrack.name)}`, { sticky: true })
+      .addTo(_mapLayers);
+    allPts.push(...gpxTrack.points);
+  }
+
+  return allPts;
+}
+
+async function _renderMapLayers() {
+  if (!_map || !_mapLayers) return;
+  _clearMapLayers();
+  const mode = state.planner.mode || 'personal';
+  const personal  = state.planner.personal;
+  const org       = state.planner.org;
+  const allPoints = [];
+
+  if (mode === 'personal') {
+    const meColor = '#2563eb';
+    const mePts = await _drawTraveller({
+      outboundLegs:   personal?.outboundLegs   || [],
+      returnLegs:     personal?.returnLegs     || [],
+      accommodations: personal?.accommodations || [],
+      gpxTrack:       personal?.gpxTrack       || null,
+      color: meColor, label: getMeLabel(),
+      hideAutoLines: _gpxOnlyPersons.has('__me__'),
+    });
+    allPoints.push(...mePts);
+
+    const contacts    = state.global?.personalContacts || [];
+    const meContactId = personal?.meContactId || null;
+    const assignments = personal?.tripAssignments || [];
+    for (let i = 0; i < assignments.length; i++) {
+      const a       = assignments[i];
+      if (a.memberId === meContactId) continue;  // already drawn as "Me"
+      const contact = contacts.find((c) => c.id === a.memberId);
+      if (!contact) continue;
+      const color = TIMELINE_COLORS[(i + 1) % TIMELINE_COLORS.length].border;
+      const compAccoms = (personal?.accommodations || []).filter((acc) =>
+        (acc.assignments || []).some((s) => s.memberId === a.memberId));
+      const pts = await _drawTraveller({
+        outboundLegs: a.outboundLegs || [],
+        returnLegs:   a.returnLegs   || [],
+        accommodations: compAccoms,
+        gpxTrack:     a.gpxTrack     || null,
+        color, label: contact.name || 'Unnamed',
+        hideAutoLines: _gpxOnlyPersons.has(a.memberId),
+      });
+      allPoints.push(...pts);
+    }
+    // Local companions with flights
+    const locals = personal?.localCompanions || [];
+    for (let i = 0; i < locals.length; i++) {
+      const lc = locals[i];
+      if (lc.id === meContactId) continue;
+      if (!(lc.outboundLegs?.length || lc.returnLegs?.length)) continue;
+      const color = TIMELINE_COLORS[(assignments.length + i + 1) % TIMELINE_COLORS.length].border;
+      const lcAccoms = (personal?.accommodations || []).filter((acc) =>
+        (acc.assignments || []).some((s) => s.memberId === lc.id));
+      const pts = await _drawTraveller({
+        outboundLegs: lc.outboundLegs || [],
+        returnLegs:   lc.returnLegs   || [],
+        accommodations: lcAccoms,
+        gpxTrack:     lc.gpxTrack     || null,
+        color, label: `${lc.name || 'Unnamed'} (this trip)`,
+        hideAutoLines: _gpxOnlyPersons.has(lc.id),
+      });
+      allPoints.push(...pts);
+    }
+  } else {
+    // Sponsor mode: each team assignment
+    const members = state.global?.teamMembers || [];
+    const assignments = org?.teamAssignments || [];
+    for (let i = 0; i < assignments.length; i++) {
+      const a      = assignments[i];
+      const member = members.find((m) => m.id === a.memberId);
+      if (!member) continue;
+      const color  = TIMELINE_COLORS[i % TIMELINE_COLORS.length].border;
+      const memberAccoms = (org?.accommodations || []).filter((acc) =>
+        (acc.assignments || []).some((s) => s.memberId === a.memberId));
+      const pts = await _drawTraveller({
+        outboundLegs: a.outboundLegs || [],
+        returnLegs:   a.returnLegs   || [],
+        accommodations: memberAccoms,
+        gpxTrack:     a.gpxTrack     || null,
+        color, label: member.name || 'Unnamed',
+        hideAutoLines: _gpxOnlyPersons.has(a.memberId),
+      });
+      allPoints.push(...pts);
+    }
+  }
+
+  if (allPoints.length) {
+    try { _map.fitBounds(window.L.latLngBounds(allPoints), { padding: [40, 40], maxZoom: 14 }); } catch {}
+  }
+}
+
+function _renderGpxList() {
+  const el = document.getElementById('mapGpxList');
+  if (!el) return;
+  const mode     = state.planner.mode || 'personal';
+  const personal = state.planner.personal;
+
+  const rows = [];
+
+  if (mode === 'personal') {
+    const meTrack = personal?.gpxTrack;
+    rows.push({ id: '__me__', label: getMeLabel(), color: '#2563eb', track: meTrack });
+    const contacts    = state.global?.personalContacts || [];
+    const meContactId = personal?.meContactId || null;
+    const assignments = personal?.tripAssignments || [];
+    assignments.forEach((a, i) => {
+      if (a.memberId === meContactId) return;  // already listed as "Me"
+      const c = contacts.find((x) => x.id === a.memberId);
+      if (!c) return;
+      rows.push({ id: a.memberId, label: c.name || 'Unnamed', color: TIMELINE_COLORS[(i + 1) % TIMELINE_COLORS.length].border, track: a.gpxTrack || null });
+    });
+    (personal?.localCompanions || []).forEach((lc, i) => {
+      if (lc.id === meContactId) return;
+      rows.push({ id: lc.id, label: `${lc.name || 'Unnamed'} (this trip)`, color: TIMELINE_COLORS[(assignments.length + i + 1) % TIMELINE_COLORS.length].border, track: lc.gpxTrack || null });
+    });
+  } else {
+    const members     = state.global?.teamMembers || [];
+    const assignments = state.planner.org?.teamAssignments || [];
+    assignments.forEach((a, i) => {
+      const m = members.find((x) => x.id === a.memberId);
+      if (!m) return;
+      rows.push({ id: a.memberId, label: m.name || 'Unnamed', color: TIMELINE_COLORS[i % TIMELINE_COLORS.length].border, track: a.gpxTrack || null });
+    });
+  }
+
+  if (!rows.length) {
+    el.innerHTML = '<p class="text-xs text-gray-400 italic">No travellers found. Add travel legs or team members first.</p>';
+    return;
+  }
+
+  el.innerHTML = rows.map((row) => `
+    <div class="flex items-center gap-3 p-2.5 rounded-lg border border-gray-200 bg-white" data-gpx-person-id="${esc(row.id)}">
+      <span class="flex-shrink-0 w-3 h-3 rounded-full border-2 border-white shadow" style="background:${esc(row.color)}"></span>
+      <span class="flex-1 text-sm font-medium text-gray-700">${esc(row.label)}</span>
+      ${row.track
+        ? (() => {
+            const gpxOnly = _gpxOnlyPersons.has(row.id);
+            return `<span class="text-xs text-gray-400"><i class="fas fa-route mr-1 text-[0.6rem]"></i>${esc(row.track.name)} <span class="text-gray-300">(${row.track.points.length} pts)</span></span>
+           <button type="button" class="map-gpx-only-btn h-6 px-2 rounded border text-[0.65rem] transition-colors flex-shrink-0 ${gpxOnly ? 'border-blue-300 text-blue-600 bg-blue-50' : 'border-gray-300 text-gray-500 hover:bg-gray-50'}" data-gpx-person-id="${esc(row.id)}" title="${gpxOnly ? 'Show auto-lines' : 'Hide auto-lines (GPX only)'}"><i class="fas fa-route mr-1 text-[0.55rem]"></i>${gpxOnly ? 'GPX only' : 'Auto lines'}</button>
+           <button type="button" class="map-gpx-remove-btn h-6 px-2 rounded border border-red-200 text-[0.65rem] text-red-500 hover:bg-red-50 transition-colors flex-shrink-0" data-gpx-person-id="${esc(row.id)}">Remove</button>`;
+          })()
+        : `<button type="button" class="map-gpx-upload-btn h-6 px-2 rounded border border-gray-300 text-[0.65rem] text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0" data-gpx-person-id="${esc(row.id)}"><i class="fas fa-upload mr-1 text-[0.55rem]"></i>Upload GPX</button>`
+      }
+    </div>`).join('');
+}
+
+function renderMapTab() {
+  _loadLeaflet(() => {
+    _initMap();
+    _renderGpxList();
+    _renderMapLayers();
+  });
+}
+
+function wireMapPanel() {
+  const panel = document.getElementById('plannerMapPanel');
+  if (!panel) return;
+  const fileInput = document.getElementById('mapGpxFileInput');
+
+  panel.addEventListener('click', (e) => {
+    const uploadBtn = e.target.closest('.map-gpx-upload-btn');
+    if (uploadBtn && fileInput) {
+      fileInput.dataset.gpxPersonId = uploadBtn.dataset.gpxPersonId;
+      fileInput.value = '';
+      fileInput.click();
+      return;
+    }
+    const gpxOnlyBtn = e.target.closest('.map-gpx-only-btn');
+    if (gpxOnlyBtn) {
+      const personId = gpxOnlyBtn.dataset.gpxPersonId;
+      if (_gpxOnlyPersons.has(personId)) _gpxOnlyPersons.delete(personId);
+      else _gpxOnlyPersons.add(personId);
+      _renderGpxList();
+      _renderMapLayers();
+      return;
+    }
+    const removeBtn = e.target.closest('.map-gpx-remove-btn');
+    if (removeBtn) {
+      const personId = removeBtn.dataset.gpxPersonId;
+      _setGpxTrack(personId, null);
+      _gpxOnlyPersons.delete(personId);
+      _renderGpxList();
+      _renderMapLayers();
+    }
+  });
+
+  fileInput?.addEventListener('change', async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const personId = fileInput.dataset.gpxPersonId;
+    const track    = await parseGpx(file);
+    if (!track) { window.alert('Could not parse GPX file — no track points found.'); return; }
+    _setGpxTrack(personId, track);
+    scheduleAutoSave();
+    _renderGpxList();
+    _renderMapLayers();
+  });
+}
+
+function _setGpxTrack(personId, track) {
+  const mode = state.planner.mode || 'personal';
+  if (mode === 'personal') {
+    if (personId === '__me__') {
+      state.planner.personal.gpxTrack = track;
+    } else {
+      const a = (state.planner.personal?.tripAssignments || []).find((x) => x.memberId === personId);
+      if (a) { a.gpxTrack = track; return; }
+      const lc = (state.planner.personal?.localCompanions || []).find((x) => x.id === personId);
+      if (lc) lc.gpxTrack = track;
+    }
+  } else {
+    const a = (state.planner.org?.teamAssignments || []).find((x) => x.memberId === personId);
+    if (a) a.gpxTrack = track;
+  }
+}
+
 function wireToolbar() {
   // Tab bar: delegated click handler covers main bar, Settings pin, and overflow dropdown
   const TAB_EXTRA_RENDERS = {
@@ -7128,7 +8953,9 @@ function wireToolbar() {
     personal: () => renderPersonalBudgetBreakdown(),
     notes:    () => renderNotesTab(),
     tickets:  () => renderTicketsTab(),
+    companions: () => renderCompanionsTab(),
     budget:   () => renderBudgetTab(),
+    map:      () => renderMapTab(),
     summary:  () => renderSummaryTab(),
     settings: () => renderSettingsTab(),
   };
@@ -7194,13 +9021,17 @@ function revealPage() {
 
 function updateHeader() {
   const meta  = state.eventMeta || {};
-  const hasSchedule = !!state.eventFile;
+  // Only consider the schedule "loaded" if the metadata has meaningful content.
+  // state.eventFile can be set via backward-compat even when the file is a planner
+  // (not a data/schedule file), leaving eventMeta empty after a failed fetch.
+  const metaTitle   = scheduleMetaTitle()
+  const hasSchedule = !!state.eventFile && !!metaTitle;
 
   const kicker = hasSchedule
     ? [meta.designation, meta.location].filter(Boolean).join(' · ')
     : 'Conference Planner';
   const title  = hasSchedule
-    ? (meta.year ? `${meta.location || meta.designation} ${meta.year}` : (meta.location || meta.designation || 'Trip Notebook'))
+    ? metaTitle
     : (state.planner?._displayName || plannerDisplayName(state.planner, state.plannerKey) || 'Trip Notebook');
 
   const kickerEl = document.getElementById('plannerHeaderKicker');
@@ -7213,7 +9044,7 @@ function updateHeader() {
   // Association indicator badge — includes an inline × to disassociate
   const assocBadge = document.getElementById('plannerAssocBadge');
   if (assocBadge) {
-    if (hasSchedule) {
+    if (state.eventFile) {
       assocBadge.innerHTML = `${escapeHtml(state.eventFile.replace('.json', ''))}<button id="plannerDisassocBtn" class="ml-1 opacity-50 hover:opacity-100 transition-opacity leading-none" title="Remove schedule association" aria-label="Remove schedule association"><i class="fas fa-xmark text-[0.5rem]"></i></button>`;
       assocBadge.classList.remove('hidden');
     } else {
@@ -7295,6 +9126,40 @@ async function init() {
   if (!plannerKey) {
     document.getElementById('plannerNoEvent')?.classList.remove('hidden');
     document.getElementById('plannerApp')?.classList.add('hidden');
+    // Populate list of existing planners so the user can open one without knowing its URL
+    const listEl = document.getElementById('noEventPlannerList');
+    if (listEl) {
+      const existing = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (!k?.startsWith(STORAGE_PREFIX) || k === `${STORAGE_PREFIX}global`) continue;
+        try {
+          const d = JSON.parse(localStorage.getItem(k) || '{}');
+          const slug = k.slice(STORAGE_PREFIX.length);
+          const name = d._displayName || (d._eventFile || slug).replace('.json', '')
+          const mode = d.mode === 'sponsor' ? 'Sponsor' : 'Personal'
+          const modeColor = d.mode === 'sponsor' ? 'bg-blue-50 text-blue-600' : 'bg-gray-100 text-gray-500'
+          const lastMod = d._lastModified
+            ? new Date(d._lastModified).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })
+            : ''
+          existing.push({ slug, name, mode, modeColor, lastMod })
+        } catch { /* skip corrupt */ }
+      }
+      if (existing.length) {
+        listEl.classList.remove('hidden')
+        listEl.innerHTML = '<p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">Your planners</p>' +
+          existing.map((p) => `
+            <a href="planner.html?id=${encodeURIComponent(p.slug)}"
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-colors group">
+              <i class="fas fa-clipboard-list text-gray-300 group-hover:text-gray-400 flex-shrink-0"></i>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-gray-700 truncate">${esc(p.name)}</p>
+                ${p.lastMod ? `<p class="text-xs text-gray-400">Last edited ${esc(p.lastMod)}</p>` : ''}
+              </div>
+              <span class="text-[0.6rem] px-1.5 py-px rounded ${esc(p.modeColor)} flex-shrink-0">${esc(p.mode)}</span>
+            </a>`).join('')
+      }
+    }
     revealPage();
     wireCreatePlannerModal();
     return;
@@ -7360,6 +9225,7 @@ async function init() {
   updateHeader();
   renderAll();
   applyMode(state.planner.mode || 'personal');
+  applyConferenceMode();
 
   // Restore tab from URL hash (after applyMode so visibility is correct)
   const hashTab = location.hash.replace('#', '');
@@ -7416,6 +9282,8 @@ async function init() {
   wireSwagModal();
   wirePersonalLegModal();
   wirePersonalAccomModal();
+  wireAssignmentModal();
+  wirePersonalContactModal();
   wireNotesPanel();
   wireTeamPanel();
   wireItineraryPanel();
@@ -7424,6 +9292,8 @@ async function init() {
   wireSummaryPanel();
   wireTicketsPanel();
   wireBudgetPanel();
+  wireMapPanel();
+  wireCompanionsPanel();
   wireBudgetCategoryManager();
   wireSettingsPanel();
 
