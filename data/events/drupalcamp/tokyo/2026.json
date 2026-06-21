@@ -279,7 +279,7 @@
       "startTime": "2026-06-27T01:20:00Z",
       "endTime": "2026-06-27T02:20:00Z",
       "duration": "P60M",
-      "title": "基調講演：James Abrahams — AI Integration with Drupal (Keynote)",
+      "title": "基調講演：James Abrahams — Drupal - The best CMS for your agents to use! (Keynote)",
       "location": "Main Hall",
       "track": [
         "special session"
@@ -376,14 +376,14 @@
       "startTime": "2026-06-27T04:00:00Z",
       "endTime": "2026-06-27T04:50:00Z",
       "duration": "P50M",
-      "title": "TBD (ANNAI Inc.) — セッション情報は後日公開予定",
+      "title": "「作る」から「続ける」へ — OSS CMSをマネージドSaaSに変えるANNAIのプラットフォーム戦略 (From 'Creating' to 'Continuing': ANNAI's Platform Strategy for Converting OSS CMS to Managed SaaS)",
       "location": "Track A",
       "track": [
         "track a",
-        "beginner"
+        "practitioner"
       ],
       "speakers": [],
-      "full_description": "Session details to be announced. Presented by ANNAI Inc.",
+      "full_description": "開発は一度、しかし運用は続く。ANNAIは公共セクター、エンタープライズ大規模Drupal案件で得た知見から、OSS CMSを「SaaS化」しエンドユーザーに安心して採用してもらえるプラットフォームに出来ないかと考えました。\n\nPresents ANNAI's platform strategy for converting open-source CMS into a managed SaaS offering, drawing on experience across public-sector and large-scale enterprise Drupal projects. Covers how auto-updates and template systems can reduce operational burden and lower the barrier for end-user adoption.",
       "video_url": "",
       "link": "https://www.drupal.jp/tokyo2026/session",
       "sponsorIds": ""
@@ -474,7 +474,8 @@
         "practitioner"
       ],
       "speakers": [
-        "岸 俊兵 (Shumpei Kishi)"
+        "岸 俊兵 (Shumpei Kishi)",
+        "ショーン・江戸・モリソン (Sean Morrison)"
       ],
       "full_description": "The first half covers Drupal ecosystem solutions including DAM, web governance, A/B testing, and personalisation. The second half reveals Acquia's 2026 roadmap, featuring a centralised digital experience management system powered by autonomous AI that can orchestrate content, targeting, and delivery with minimal manual intervention.",
       "video_url": "",
@@ -552,14 +553,16 @@
       "startTime": "2026-06-27T06:10:00Z",
       "endTime": "2026-06-27T07:00:00Z",
       "duration": "P50M",
-      "title": "TBD (Trans Cosmos Inc.) — セッション情報は後日公開予定",
+      "title": "国内BtoB向けECの構築&運用事例から考えるDrupalの強み (Drupal's Strengths Through Domestic B2B E-Commerce: A Construction and Operations Case Study)",
       "location": "Track B",
       "track": [
         "track b",
         "practitioner"
       ],
-      "speakers": [],
-      "full_description": "Session details to be announced. Presented by Trans Cosmos Inc.",
+      "speakers": [
+        "今本 優吾 (Yugo Imamoto)"
+      ],
+      "full_description": "Examines Drupal's strengths through a real-world domestic B2B e-commerce case study, covering both the construction and ongoing operation of the platform. Presented by Trans Cosmos Inc.",
       "video_url": "",
       "link": "https://www.drupal.jp/tokyo2026/session",
       "sponsorIds": ""
@@ -711,8 +714,8 @@
     },
     {
       "startTime": "2026-06-27T08:00:00Z",
-      "endTime": "2026-06-27T08:20:00Z",
-      "duration": "P20M",
+      "endTime": "2026-06-27T08:50:00Z",
+      "duration": "P50M",
       "title": "DistributionからSite Templateへ 〜 Kamihaya CMS開発から考えるDrupal再利用アーキテクチャ 〜 (Distribution to Site Template: Drupal Reuse Architecture Evolution via Kamihaya CMS)",
       "location": "Track B",
       "track": [
