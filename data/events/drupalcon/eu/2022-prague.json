@@ -1,32 +1,430 @@
 {
   "event": {
-    "designation": "DrupalCon",
+    "designation": "DrupalCon Europe",
     "location": "Prague",
     "year": "2022",
     "website": "https://events.drupal.org/prague2022/",
     "region": "Europe",
     "startDate": "2022-09-20T07:00:00Z",
-    "endDate": "2022-10-19T16:00:00Z",
-    "venue": "Prague Congress Centre",
+    "endDate": "2022-09-23T16:00:00Z",
+    "venue": "O2 Universum",
     "timezone": "Europe/Prague",
     "columns": 3,
-    "enabled": false,
+    "enabled": true,
+    "scheduleComplete": true,
     "logo": {
       "image": "./img/logos/drupalcon-logo.svg",
       "imageAlt": "DrupalCon logo",
-      "usePlate": false
+      "usePlate": false,
+      "logoDisabled": true,
+      "faIcon": "fa-solid fa-droplet"
     },
     "scheduleURLs": [
       "https://events.drupal.org/prague2022/schedule/all"
     ],
+    "other_urls": [
+      "https://events.drupal.org/prague2022/"
+    ],
+    "videoPlaylist": "https://www.youtube.com/playlist?list=PLpeDXSh4nHjRK_6I7HVLCw8k_ZTopYv5i",
     "flickr": {
-      "enabled": false,
-      "groupUrl": "",
+      "enabled": true,
+      "provider": "Flickr",
+      "groupUrl": "https://www.flickr.com/groups/drupalconprague2022/pool/",
       "image": "",
-      "imageAlt": ""
+      "imageAlt": "DrupalCon Prague 2022 photos on Flickr"
     },
-    "sponsors": [],
-    "other_urls": []
+    "sponsors": [
+      {
+        "id": "acquia",
+        "title": "Acquia",
+        "tier": "Diamond",
+        "row": 1,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/acquia.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://www.acquia.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "dropsolid",
+        "title": "Dropsolid",
+        "tier": "Diamond",
+        "row": 1,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/dropsolid.png",
+        "imageAlt": "Dropsolid logo",
+        "link": "https://dropsolid.com/en/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "pantheon",
+        "title": "Pantheon",
+        "tier": "Diamond",
+        "row": 1,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/pantheon.png",
+        "imageAlt": "Pantheon logo",
+        "link": "https://pantheon.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "platformsh",
+        "title": "Platform.sh",
+        "tier": "Diamond",
+        "row": 1,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/platformsh.png",
+        "imageAlt": "Platform.sh logo",
+        "link": "https://platform.sh/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "1xinternet",
+        "title": "1xINTERNET",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/1xinternet.png",
+        "imageAlt": "1xINTERNET logo",
+        "link": "https://www.1xinternet.de/en",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "amazeeio",
+        "title": "amazee.io",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/amazeeio.png",
+        "imageAlt": "amazee.io logo",
+        "link": "https://www.amazee.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "annertech",
+        "title": "Annertech",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/annertech.png",
+        "imageAlt": "Annertech logo",
+        "link": "https://www.annertech.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "factorial",
+        "title": "Factorial",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/factorial.png",
+        "imageAlt": "Factorial logo",
+        "link": "https://www.factorial.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "ffw",
+        "title": "FFW",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/ffw.png",
+        "imageAlt": "FFW logo",
+        "link": "https://ffwagency.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "website-standards",
+        "title": "Website Standards",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/website-standards.png",
+        "imageAlt": "Website Standards logo",
+        "link": "https://website-standards.io/en",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "ckeditor",
+        "title": "CKEditor",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/ckeditor.png",
+        "imageAlt": "CKEditor logo",
+        "link": "https://ckeditor.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "droptica",
+        "title": "Droptica",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/droptica.png",
+        "imageAlt": "Droptica logo",
+        "link": "https://www.droptica.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "eton-digital",
+        "title": "Eton Digital",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/eton-digital.png",
+        "imageAlt": "Eton Digital logo",
+        "link": "https://www.etondigital.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "lingotek",
+        "title": "Lingotek",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/lingotek.png",
+        "imageAlt": "Lingotek logo",
+        "link": "https://www.lingotek.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "softescu",
+        "title": "Softescu",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/softescu.png",
+        "imageAlt": "Softescu logo",
+        "link": "https://softescu.com/en",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "systemseed",
+        "title": "SystemSeed",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/systemseed.png",
+        "imageAlt": "SystemSeed logo",
+        "link": "https://systemseed.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "tag1",
+        "title": "Tag1 Consulting",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 70,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/tag1.png",
+        "imageAlt": "Tag1 Consulting logo",
+        "link": "https://tag1consulting.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "agiledrop",
+        "title": "Agiledrop",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/agiledrop.png",
+        "imageAlt": "Agiledrop logo",
+        "link": "https://www.agiledrop.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "apmg",
+        "title": "APMG International",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/apmg.png",
+        "imageAlt": "APMG International logo",
+        "link": "https://apmg-international.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "aten",
+        "title": "Aten",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/aten.png",
+        "imageAlt": "Aten logo",
+        "link": "https://aten.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "devoteam",
+        "title": "Devoteam Creative Tech",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/devoteam.png",
+        "imageAlt": "Devoteam Creative Tech logo",
+        "link": "https://creative.devoteam.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "lemberg",
+        "title": "Lemberg Solutions",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/lemberg.png",
+        "imageAlt": "Lemberg Solutions logo",
+        "link": "https://lembergsolutions.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "websolutions",
+        "title": "Websolutions Agency",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/websolutions.png",
+        "imageAlt": "Websolutions Agency logo",
+        "link": "https://ws.agency/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "werk21",
+        "title": "Werk 21",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 70,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/werk21.png",
+        "imageAlt": "Werk 21 logo",
+        "link": "https://www.werk21.de/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "city-prague",
+        "title": "City of Prague",
+        "tier": "Supporting",
+        "row": 5,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/city-prague.png",
+        "imageAlt": "City of Prague logo",
+        "link": "https://www.prague.eu/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "starbucks",
+        "title": "Starbucks",
+        "tier": "Supporting",
+        "row": 5,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/starbucks.png",
+        "imageAlt": "Starbucks logo",
+        "link": "https://www.starbucks.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "admin-magazine",
+        "title": "ADMIN Magazine",
+        "tier": "Media Partner",
+        "row": 6,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/admin-magazine.png",
+        "imageAlt": "ADMIN Magazine logo",
+        "link": "https://www.admin-magazine.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "cesko-digital",
+        "title": "Česko.Digital",
+        "tier": "Media Partner",
+        "row": 6,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/cesko-digital.png",
+        "imageAlt": "Česko.Digital logo",
+        "link": "https://cesko.digital/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "fosslife",
+        "title": "FOSSlife",
+        "tier": "Media Partner",
+        "row": 6,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/fosslife.png",
+        "imageAlt": "FOSSlife logo",
+        "link": "https://fosslife.org/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "linux-magazine",
+        "title": "Linux Magazine",
+        "tier": "Media Partner",
+        "row": 6,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2022-prague/linux-magazine.png",
+        "imageAlt": "Linux Magazine logo",
+        "link": "https://www.linux-magazine.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ]
   },
   "items": [
     {
@@ -40,7 +438,7 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "If you have experience with Drupal issues and maybe already picked a team/topic, General Contribution is for you. You can join one of the many groups including Drupal 9, documentation, migrate, media, frontend and lots more. General Contribution does not have formal mentoring available, but if you have questions, there are many friendly people to help or work with you - collaboration is the idea!",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -55,7 +453,7 @@
         "other"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Let's kick off the first in-person DrupalCon event in Europe since 2019 together! The event features practical information presented by organizing leadership, followed by the first keynote of the conference week.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -69,9 +467,14 @@
       "track": [
         "keynote"
       ],
-      "speakers": [],
-      "full_description": "",
-      "video_url": "",
+      "speakers": [
+        "Marine Gandy",
+        "Neil Drumm",
+        "Alex Pott",
+        "Gábor Hojtsy"
+      ],
+      "full_description": "Drupal's initiatives form powerful teams that make great things happen. Core initiatives work to improve the base system while community initiatives handle event organization, diversity promotion, and marketing collaboration. This fourth installment features community leaders discussing their current work, obstacles, and opportunities for audience participation.",
+      "video_url": "https://www.youtube.com/watch?v=13hyoDAFP9E",
       "sponsorIds": ""
     },
     {
@@ -84,8 +487,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Gábor Hojtsy"
+      ],
+      "full_description": "Join this round of testing to help assess the functionality on hosting providers such as Bluehost, SiteGround, Dreamhost, GoDaddy, etc. We will follow the testing guidelines at https://www.drupal.org/project/automatic_updates/issues/3308319. You can join at any point during the session.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -99,8 +504,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Andrey Lipattsev"
+      ],
+      "full_description": "Chrome's Privacy Sandbox initiative creates technologies that both protect people's privacy online and give companies and developers tools to build thriving digital businesses. This session examines how these privacy-focused technologies affect Drupal, addressing potential disruptions and identifying gaps for community discussion.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -114,8 +521,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Chris Wells"
+      ],
+      "full_description": "An informal opportunity to test the Project Browser prototype. Participants receive a demo, interact with the tool, provide feedback, and may file issues. You will receive a contribution credit for participating!",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -130,9 +539,9 @@
         "sponsored talk"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "At Annertech, our managed services team manages close to 100 sites on behalf of our clients. Learn how they do it!",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "annertech"
     },
     {
       "startTime": "2022-09-20T14:15:00Z",
@@ -144,8 +553,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Gábor Hojtsy"
+      ],
+      "full_description": "Join this round of testing to help assess the functionality on hosting providers such as Bluehost, SiteGround, Dreamhost, GoDaddy, etc. We will follow the testing guidelines at https://www.drupal.org/project/automatic_updates/issues/3308319.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -159,8 +570,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Chris Wells"
+      ],
+      "full_description": "This casual BoF session offers an opportunity to test the Project Browser Initiative prototype. A Project Browser representative will demo the current version, then participants can interact with it directly. We welcome any and all feedback, and the observer may watch you interact and take notes. Attendees can file issues or provide written feedback and receive contribution credit.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -175,7 +588,7 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Those who are new to the process and tools of contributing to Drupal, you are invited to attend one of the 'First-Time Contributor Workshops'. The workshop covers community tools including Drupal.org, issue queues, communication channels, and local Drupal installation assistance for versions 8 and 9.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -205,7 +618,7 @@
         "other"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "This year's Opening Reception promises a great time. You will have the opportunity to live a memorable experience while tasting the community spirit. The event offers an informal setting to connect with community members and leadership.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -219,9 +632,11 @@
       "track": [
         "keynote"
       ],
-      "speakers": [],
-      "full_description": "",
-      "video_url": "",
+      "speakers": [
+        "Dries Buytaert"
+      ],
+      "full_description": "Dries will deliver one of his engaging keynotes about the state of the Drupal project. The speaker is described as a Belgium-born Drupal founder and pioneer in the open source web publishing and digital experience platform space.",
+      "video_url": "https://www.youtube.com/watch?v=Hmit4ET-l3Q",
       "sponsorIds": ""
     },
     {
@@ -235,7 +650,7 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "If you have experience with Drupal issues and maybe already picked a team/topic, General Contribution is for you. You can join one of the many groups including Drupal 9, documentation, migrate, media, frontend and lots more.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -249,10 +664,12 @@
       "track": [
         "sponsored talk"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Tassos Koutlas"
+      ],
+      "full_description": "The speaker explores how companies should adapt to post-pandemic digital demands. He presents a framework based on five key elements: Content, Customer, Commerce, Consolidation and Capabilities. The session addresses the reality that digital transformations frequently failed before COVID-19, yet many organizations rapidly transitioned online during the pandemic.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "ffw"
     },
     {
       "startTime": "2022-09-21T08:30:00Z",
@@ -265,7 +682,7 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Those who are new to the process and tools of contributing to Drupal, you are invited to attend one of the 'First-Time Contributor Workshops'. The session aims to prepare newcomers with community tools including Drupal.org, issue queues, and communication channels, plus optional local Drupal installation assistance.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -279,8 +696,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Randy Fay"
+      ],
+      "full_description": "Interested in your first experience with DDEV? Let's sit down and start up a project and use it. Anyone of any experience level is welcome. DDEV enables developers to run websites locally without configuration requirements, also available via gitpod.io.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -294,8 +713,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Kate Marshalkina"
+      ],
+      "full_description": "E-learning is in high-demand for the modern post-COVID web. This session explores available Drupal solutions for LMS platforms and invites participants to share experiences or ask questions about e-learning development. Facilitators @kalabro and @Spleshka, who have extensive experience building learning platforms with Drupal, will lead the discussion. No technical background is required.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -309,8 +730,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Mathias Bolt Lesniak"
+      ],
+      "full_description": "The session explores what it means to 'think open source' and examines how this philosophy can create broader value beyond professional contexts. It questions whether the world underestimates open source's potential impact on achieving a peaceful, free, and democratic society by applying principles of openness, sharing, good governance, and democratic ideals.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -324,10 +747,12 @@
       "track": [
         "sponsored talk"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Paul Gilzow"
+      ],
+      "full_description": "This presentation explores GitOps principles as an evolution of Infrastructure as Code and DevOps practices. The session discusses using Git as the single source of truth and examines how GitOps workflows can help marketing and communications teams respond faster to requests while improving security and reliability, ultimately enabling organizations to do more with less amid budget constraints.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "platformsh"
     },
     {
       "startTime": "2022-09-21T10:45:00Z",
@@ -339,10 +764,12 @@
       "track": [
         "sponsored talk"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Bastian Widmer"
+      ],
+      "full_description": "The presentation explores how businesses can expand operations through container technology adoption. Widmer discusses customer case studies demonstrating successful scaling, covering amazee.io's offerings including Cloud Hosting and Dedicated Clusters that adapt to organizational growth. The session highlights how multi-region deployment enables data sovereignty compliance and explains how standardized development workflows enhance team productivity and coding efficiency.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "amazeeio"
     },
     {
       "startTime": "2022-09-21T11:00:00Z",
@@ -354,10 +781,12 @@
       "track": [
         "sponsored talk"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Gábor Hojtsy"
+      ],
+      "full_description": "Drupal 10 is scheduled for release on December 14, 2022. In this talk, Gábor will walk you through the state of Drupal 10, the key new components and changes and more importantly the tools to use to move from earlier Drupal versions to 10.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "acquia"
     },
     {
       "startTime": "2022-09-21T11:30:00Z",
@@ -369,8 +798,10 @@
       "track": [
         "keynote"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Taavi Kotka"
+      ],
+      "full_description": "Estonia's first CIO presents an overview of digital development across countries, focusing on where the more advanced ones are going and what to expect. The presentation addresses practical challenges rather than speculative technologies, examining how nations without physical borders might influence these advancements.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -384,8 +815,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Lauri Eskola"
+      ],
+      "full_description": "The session invites developers working on upgrading CKEditor modules to CKEditor 5, or those interested in contributing. Attendees can meet the Drupal core CKEditor 5 module team, who offer support with CKEditor 5 related issues or can help you get started.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -399,8 +832,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Felip Manyer i Ballester"
+      ],
+      "full_description": "The session invites everybody interested in the development of the new version of Drupal localization server to discuss and contribute. Participants can offer input on current capabilities or suggest future enhancements to the translation tools infrastructure.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -415,7 +850,7 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "This BoF session invites mentors to meet other mentors, get your questions answered about what in the world mentors do, and find out how the general contributions will run on the Contribution Platform this week. Participants can join via the #mentoring channel on Drupal Slack.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -429,8 +864,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Chris Wells"
+      ],
+      "full_description": "The Project Browser Initiative Team aims to improve Drupal.org's project page template. They seek community input on the most important information in the best way possible when comparing modules, particularly from site builders and new community members. The initiative recognizes that the data we can display is only as good as the data that exists on Drupal.org.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -444,10 +881,12 @@
       "track": [
         "sponsored talk"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Maggie Schroeder"
+      ],
+      "full_description": "The presentation traces Drupal's evolution toward headless architecture, from its 2012 shift toward RESTful design through 2023. It covers key milestones including the 2015 acknowledgment of decoupled futures, the 2017 recognition of API-first capabilities, and JSON:API's 2019 inclusion in core. The speaker examines how headless commerce catches wind by 2021 and discusses emerging trends. The session concludes by introducing a new 100% open source headless starter kit and Next.js starter kit from Acquia.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "acquia"
     },
     {
       "startTime": "2022-09-21T14:15:00Z",
@@ -474,8 +913,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Randy Fay"
+      ],
+      "full_description": "The session addresses licensing concerns around Docker Desktop by exploring open-source alternatives. It covers how Colima integrates with DDEV on macOS and how open-source docker-ce works with WSL2 on Windows. The speaker discusses licensing issues and the future of docker usage for local development.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -489,10 +930,13 @@
       "track": [
         "sponsored talk"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Andrey Lipattsev",
+        "Michael Meyers"
+      ],
+      "full_description": "An interactive workshop focused on optimizing UX and performance for Drupal websites. Participants can submit your URL @ https://bit.ly/CWV-DrupalCon-22 to get your UX & performance right on Drupal.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "tag1"
     },
     {
       "startTime": "2022-09-21T15:15:00Z",
@@ -504,8 +948,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Randy Fay"
+      ],
+      "full_description": "Have a DDEV question? Just want to chat? Let's talk about problems, solutions, just getting started, Docker, Local Development in general, or anything else that is on your mind.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -520,7 +966,7 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Triage is not the correct term, because we want to collect as many Novice issues as we can for the contribution. The session focuses on curating issues with the Novice tag to ensure novice contributors can meaningfully advance the work.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -535,7 +981,7 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "If you have experience with Drupal issues and maybe already picked a team/topic, General Contribution is for you. You can join one of the many groups including Drupal 9, documentation, migrate, media, frontend and lots more. Stay tuned for the list of topics. General Contribution does not have formal mentoring available, but if you have questions, there are many friendly people to help or work with you - collaboration is the idea!",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -549,8 +995,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Randy Fay"
+      ],
+      "full_description": "DDEV previously offered 'pull' integration with Pantheon, Platform.sh, and Acquia Cloud. Following Platform's sponsorship of the project, enhanced Platform.sh integration is now available. Users can employ the ddev-get add-on to retrieve upstream project configuration and replicate it in their DDEV environment. The session includes a demonstration and discussion of existing integrations with other services including Pantheon, Acquia, rsync, and git.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -564,10 +1012,12 @@
       "track": [
         "sponsored talk"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Alex Moreno"
+      ],
+      "full_description": "A 30-minute quiz testing knowledge of Drupal and Pantheon. Participants answer Drupal and Pantheon related questions, from history to technical questions, with the chance to win Pantheon-branded prizes. Attendees can research publicly available information online beforehand.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "pantheon"
     },
     {
       "startTime": "2022-09-22T08:30:00Z",
@@ -579,8 +1029,12 @@
       "track": [
         "other"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Baddý Sonja Breidert",
+        "Imre Gmelig Meijling",
+        "Dries Buytaert"
+      ],
+      "full_description": "The session provides an opportunity to catch up, formally and informally, drink some drinks and have fun at DrupalCon Europe. Attendees can share experiences and ideas with local Drupal associations and regions while gaining insights from other communities.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -595,7 +1049,7 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "This BoF session invites mentors to convene, exchange questions about mentoring responsibilities, and learn how the general contributions will run on the Contribution Platform this week. Participants can engage asynchronously via the #mentoring channel on Drupal Slack.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -609,8 +1063,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Randy Fay"
+      ],
+      "full_description": "The session explores DDEV's add-on ecosystem, which enables separately maintained integrations with technologies like Elasticsearch, Cron, and Solr. Almost any DDEV feature can be rolled in an add-on. Attendees will learn about existing add-ons, contribution methods, maintenance practices, and creating custom add-ons for team-specific needs.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -624,10 +1080,12 @@
       "track": [
         "sponsored talk"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Dominique De Cooman"
+      ],
+      "full_description": "The presentation explores how to create compelling personal experiences with Drupal. It covers the importance of digital experiences, what distinguishes a DXP from a CMS, and practical strategies for transforming Drupal into a DXP. The speaker emphasizes that customer experience matters significantly, noting that poor experiences drive customers away from brands.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "dropsolid"
     },
     {
       "startTime": "2022-09-22T10:15:00Z",
@@ -640,7 +1098,7 @@
         "other"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The session welcomes anyone who identifies as a woman. Organizers aim to foster inclusivity and embrace the involvement of individuals across the gender spectrum. A partnership with FFW will feature an award recognizing women's outstanding contributions to Drupal projects.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -654,10 +1112,13 @@
       "track": [
         "sponsored talk"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Janez Urevc",
+        "Andrey Lipattsev"
+      ],
+      "full_description": "Join Google & Tag1 as they discuss Google Web Vitals, improving UX on the web, and their collaboration to revamp Drupal's Core Vitals.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "tag1"
     },
     {
       "startTime": "2022-09-22T11:30:00Z",
@@ -669,8 +1130,10 @@
       "track": [
         "keynote"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Pavlína Louženská"
+      ],
+      "full_description": "The speaker will present essential foundations of scaling your business. From useful frameworks to global case studies, focusing on practical steps for small and medium businesses regarding marketing and HR operations.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -684,8 +1147,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Leslie Glynn"
+      ],
+      "full_description": "The Project Browser Initiative team is evaluating 55 categories used on Drupal project pages to assess whether all categories remain necessary, if some should be combined, whether any are missing, and if categories can be used across Project Browser and Distributions/Recipes. The team is also considering how terminology impacts international audiences and newcomers. Site builders and module maintainers are invited to participate in an iterative discussion using existing spreadsheet work.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -699,10 +1164,12 @@
       "track": [
         "sponsored talk"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Baddý Sonja Breidert"
+      ],
+      "full_description": "The speaker addresses the importance of teamwork and what people can achieve when they come together.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "1xinternet"
     },
     {
       "startTime": "2022-09-22T14:15:00Z",
@@ -714,8 +1181,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Randy Fay"
+      ],
+      "full_description": "Have a DDEV question? Just want to chat? Let's talk about problems, solutions, just getting started, Docker, Local Development or anything else that is on your mind.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -729,8 +1198,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Robin Siudzinski"
+      ],
+      "full_description": "Email addresses constitute sensitive data that can be protected through hashing—a technique long used for passwords. While hashed addresses cannot be easily misused following a data breach, they also limit functionality for site owners. The session explores basic functions like login, registration and password reset that remain possible, discusses which sites benefit from this approach, and demonstrates Drupal implementation.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -744,8 +1215,10 @@
       "track": [
         "bof"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Marco Fernandes"
+      ],
+      "full_description": "This session aims to discuss the Drupal Gutenberg's 'roadmap' for the next months. Let's share ideas about next challenges in terms of development, suggestions to further improve the user experience and also the developer experience.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -760,7 +1233,7 @@
         "other"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Do not miss the wrap up of the event! It is the time to share a last moment all together. We will: CONFIRM key decisions and next steps. DISCUSS Hot Topics. & Have FUN!",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -775,7 +1248,7 @@
         "other"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "In the grand tradition of pub quizzes, there will be 6 rounds of 10 questions covering all things Drupal, and a few more questions about general web topics. Teams of 5 compete for the trivia championship title and prizes.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -790,7 +1263,7 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Those who are new to the process and tools of contributing to Drupal, you are invited to attend one of the 'First-Time Contributor Workshops'. The workshop covers community tools including Drupal.org, issue queues, communication channels, and local Drupal installation. Mentors assist participants in preparing to address actual issues.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -805,7 +1278,7 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "If you have experience with Drupal issues and maybe already picked a team/topic, General Contribution is for you. You can join one of the many groups including Drupal 9, documentation, migrate, media, frontend and lots more.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -820,7 +1293,7 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The Drupal project has grown over the last 20 years because of people, just like you, who contribute their time and talent to it. The session welcomes first-time contributors interested in code, testing, documentation, promotion, or event organization.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -849,8 +1322,10 @@
       "track": [
         "open web & community"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Andrea Pescetti"
+      ],
+      "full_description": "The session examines two decades of Drupal.org issue queue data to assess community health, corporate influence, and diversity. Animated visualizations reveal community expansion, professionalization trends, and Drupal-specific metrics. The analysis covers millions of interactions processed via machine learning, utilizing the public Drupal.org API to demonstrate how Drupal powers data-intensive applications.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -864,8 +1339,10 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Fabian Franz"
+      ],
+      "full_description": "This presentation explores three major topics in Drupal component-based development: (1) Component Library Integration — Component Library is now able to take over the whole theme registry, enabling developers to build complete themes through configuration without PHP knowledge. (2) Decoupled Drupal Administration — a way to keep all functionality that Drupal provides, but use them with a fully decoupled (p)react application using JSON:API. (3) Layout Builder Enhancement — lb_plus, which enables building pages with layout builder through template-based drag-and-drop functionality.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -879,8 +1356,13 @@
       "track": [
         "agency & business"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Baddý Sonja Breidert",
+        "Nick Downton",
+        "Beatriz Martinez",
+        "Julian Valero"
+      ],
+      "full_description": "This roundtable discussion examines how agencies and enterprises manage multisite deployments at scale. Participants explore the challenges of maintaining large site factories, noting that traditional Drupal multisite solved one of those problems: creating several sites in an easy way. However, the format wasn't designed with scaling, performance, security, or maintainability as priorities. The session brings together developers, architects, project managers, and agency leaders to discuss deployment strategies and alternative solutions.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -895,7 +1377,7 @@
         "users & editors"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Layout Paragraphs is a Drupal module combining drag-and-drop editing, Drupal core's layout API, and the Paragraphs module to create accessible authoring experiences. The session demonstrates how this tool enables marketing and editorial teams to produce visually rich, long-form content without requiring developer support.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -909,8 +1391,11 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Shwetaneel Sharma",
+        "Akanksha Singh"
+      ],
+      "full_description": "This presentation explores the critical role of test data management (TDM) within test automation frameworks. The speakers emphasize that a strong test data management strategy is at the heart of any Test Automation framework. The session focuses on the Arrange phase of test automation, demonstrating how to efficiently generate test data for content types like articles and blogs through automated techniques rather than manual UI creation. Key benefits discussed include reduced test flakiness, faster execution, decreased false positives, and more reliable results.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -924,8 +1409,11 @@
       "track": [
         "clients & industry experiences"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Wouter De Bruycker",
+        "Filipe Pereira"
+      ],
+      "full_description": "This presentation chronicles a five-year Drupal initiative spanning 20+ countries and 10+ languages, managing over 12,000 product variations and 100,000 monthly website sessions. The speakers discuss the journey from strategy and development all the way over to maintenance, project management and training. Key topics include communication benefits, understanding customer needs, project challenges (including a China website launch), collaborative problem-solving, and rapid market expansion techniques. The presentation resulted in a 400% increase of organic traffic for the client.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -939,8 +1427,10 @@
       "track": [
         "users & editors"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Wiktor Walc"
+      ],
+      "full_description": "The presenter offers insight into what are the new features in CKEditor 5, additional ready to use plugins you can add to CKEditor 5 via modules and guides attendees on extending CKEditor 5 in Drupal environments. Topics covered include how CKEditor 5 was integrated into Drupal 9/10, distinctions from the earlier version, and practical instruction for developing custom plugins and modules.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -954,8 +1444,10 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Luca Lusso"
+      ],
+      "full_description": "This session addresses observability in complex Drupal 8 applications. The speaker explains that architectures are always more distributed and fragmented, making it essential to track requests across subsystems and microservices. Rather than relying on basic logging, the talk focuses on structured logs, metrics and traces to monitor system behavior. The presentation integrates Drupal with OpenTelemetry, Monolog, and Grafana to collect and visualize telemetry data for performance optimization and troubleshooting.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -969,8 +1461,11 @@
       "track": [
         "agency & business"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Anthony Fox-Davies",
+        "Evgeniy Maslovskiy"
+      ],
+      "full_description": "SystemSeed, a fully-distributed agency, implemented a 4-day work week as an experiment over a year ago to combat burnout among talented engineers. The presenters discuss how they moved to 4-day working weeks for their team as an experiment and have maintained this for over a year, while simultaneously doubling revenue and expanding staff size. Key topics include managing client expectations during the transition, the financial impact on the company, effects on team mental health and retention, and practical implementation strategies.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -984,8 +1479,11 @@
       "track": [
         "clients & industry experiences"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Micheal Cooper",
+        "Chris Wu"
+      ],
+      "full_description": "The presenters explore localization challenges beyond simple translation. Language is more than lexis, grammar, and orthography. It is culture and identity, history and expectations. The session focuses on the Okinawa Institute of Science and Technology's website redesign, which must serve both English-speaking international researchers and Japanese stakeholders equally. Rather than selective translation approaches, the team ensures all content must feel native in both English and Japanese.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -999,8 +1497,10 @@
       "track": [
         "open web & community"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Nick Veenhof"
+      ],
+      "full_description": "Nick Veenhof, GitLab's Director of Contributor Success, draws on 15 years in the Drupal community to explore parallels between two open source ecosystems. The presentation examines differences between the Drupal Ecosystem & the Gitlab ecosystem, how do both Open Source ecosystems work, and compares approaches to contributor incentives and rewards. Veenhof discusses the Drupal community's achievements, GitLab's public roadmap items relevant to Drupal developers, and insights from his transition to GitLab that might benefit Drupal.org.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1014,8 +1514,10 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Simon Helliwell"
+      ],
+      "full_description": "The presenter explores how cognitive psychology principles remain constant despite technological evolution. The session examines individual-level mental processes such as information processing, attention, language use, memory, perception, problem solving, decision-making and thinking and their application to web design. It bridges scientific principles with practical CSS implementation, discussing properties like accent-color and their accessibility implications.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1029,8 +1531,11 @@
       "track": [
         "clients & industry experiences"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Elise West",
+        "Anthony Fox-Davies"
+      ],
+      "full_description": "EQUIP (Ensuring Quality in Psychological Support) is a WHO & UNICEF project utilizing Drupal to deliver mental health training and assessment across low and middle-income countries with limited connectivity. Operational in 20+ countries through implementation partners like War Child Holland and Uganda Ministry of Health, the platform was developed collaboratively with George Washington University. The session covers the complete project journey: end-user needs analysis, why a Drupal Progressive Web App suited the requirements, Human-Centered Design methodology, rapid pivoting during COVID-19, multilingual administration systems, and real-world deployment impacts. The platform has been featured in the Scientific American as an example of new ways of using technology to help fill the gaps in global mental health support provision.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1044,8 +1549,10 @@
       "track": [
         "open web & community"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Alanna Burke"
+      ],
+      "full_description": "This presentation addresses the challenge of building momentum around larger open-source projects that require user knowledge and adoption. Burke explores strategies for establishing communities from scratch, capitalizing on existing users and platforms, and inspiring participation. The session aims to equip attendees with actionable approaches for advancing their projects and fostering genuine engagement.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1059,8 +1566,10 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Toby Bellwood"
+      ],
+      "full_description": "The presenter describes how amazee.io developed Lagoon, an open source Drupal (and more!) hosting platform over five years. Initially focused on developer needs, the team expanded accessibility for non-technical users. The talk covers providing product owners and project managers with site data summaries, enabling Site Reliability Engineers to access uptime metrics, sharing security team information, and helping content editors perform daily tasks.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1075,7 +1584,7 @@
         "clients & industry experiences"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The session explores how to construct a business case for adding languages to websites. Attendees will discover common arguments for and against adding languages, understand the core components for building an ROI model for each additional language, and learn strategies for prioritizing the addition of a language to your site.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1089,8 +1598,10 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Balu Ertl"
+      ],
+      "full_description": "The speaker conducted surveys and interviews exploring critical questions about Drupal localization across installations worldwide. The presentation addresses which locales are used as primary languages, secondary configuration options, budget correlations with localization needs, and how project teams fulfill UI translation requirements.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1104,8 +1615,11 @@
       "track": [
         "agency & business"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Hannah McDermott",
+        "Will Huggins"
+      ],
+      "full_description": "The session addresses how to build strong client-agency relationships through mutual trust and respect. Key topics covered include embedding equality and integrity, creating collaborative rather than blame-focused relationships, establishing clear working procedures to prevent conflict, addressing conflict when it occurs, and recognizing when to exit dysfunctional partnerships. This guidance applies to anyone involved in client/agency relationships, regardless of whether they are on the supplier or buyer side.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1120,7 +1634,7 @@
         "makers & builders"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The session addresses how site speed impacts user experience and SEO. It explains that image file optimization is often overlooked as a performance factor. The presenter will discuss effective strategies to make your image files a fraction of their current size, and the core and contrib modules needed.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1134,8 +1648,10 @@
       "track": [
         "open web & community"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Felip Manyer i Ballester"
+      ],
+      "full_description": "A group of volunteers is porting the Drupal community translation server (localize.drupal.org) from Drupal 7 to Drupal 9. The initial phase focuses on migrating existing functionality, with plans to enhance the user interface, create web services for language statistics, resolve crediting concerns, and potentially integrate a translation memory tool. The team seeks input from translation community members about their needs and welcomes volunteer contributions during the event.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1150,7 +1666,7 @@
         "agency & business"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "This presentation covers agency practices for launching new Drupal 9 sites smoothly. The session progresses from weeks ahead of go live right through to post go live monitoring from both a Developer and DevOps point of view. Key topics include security hardening, pre-launch checklists, risk identification, post-launch testing protocols, team communication, and monitoring setup.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1164,8 +1680,10 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Adelson Ruelle"
+      ],
+      "full_description": "The session covers best practices for SEO optimization in product searches and catalogs. A well polished search page is often the centerpiece of the websites we craft, and as such, it's one of the webpages we take the most time optimizing. The presentation includes practical recommendations based on Search API and Facets tools, along with custom code solutions.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1179,8 +1697,10 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Alexander Varwijk"
+      ],
+      "full_description": "The session covers creating production-ready GraphQL APIs beyond basic data exposure. It demonstrates implementing all three GraphQL operations (query, mutation, subscription) in Open Social, exploring the GraphQL module's inner workings and underlying libraries. Topics include converting schemas to data using Drupal, modular API design via modules, and data loading strategies.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1194,8 +1714,11 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Dries Buytaert",
+        "Stella Power"
+      ],
+      "full_description": "Continue the Driesnote conversation with questions for Drupal Project Founder, Dries Buytaert.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1210,7 +1733,7 @@
         "agency & business"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The session explores how amazee.io applies open source principles beyond code to business operations, including implementing a transparent handbook, inclusive change management processes, and team autonomy structures. The presentation targets business leaders, managers, and employees interested in organizational improvement.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1224,8 +1747,11 @@
       "track": [
         "open web & community"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Leslie Glynn",
+        "Chris Wells"
+      ],
+      "full_description": "The speakers, co-initiative leads, discuss the Project Browser Initiative's current status. They address the problems being tackled, potential benefits for attendees, and opportunities to contribute. This stems from Dries's DrupalCon Portland 2022 vision of getting Drupal back to its roots with a small core and empowering ambitious site builders through tools including Project Browsing, Automatic Updates, and Starter Templates.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1240,7 +1766,7 @@
         "users & editors"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The speaker argues that Design is an investment, not an expense and demonstrates how data and content strategy can enhance web design effectiveness. Rather than relying solely on aesthetics, the session emphasizes using data-driven UX strategy combined with content strategy and Drupal's flexibility to ensure websites meet business goals.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1254,8 +1780,10 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Mauricio Dinarte"
+      ],
+      "full_description": "This beginner-focused training introduces participants to Drupal site building through hands-on exercises. Attendees learn core concepts including nodes, content types, fields, views, users, blocks, taxonomy, and menus. The workshop covers installation, content creation, field configuration, taxonomy setup, view creation, and block management.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1270,7 +1798,7 @@
         "clients & industry experiences"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The session covers digital marketing techniques using Drupal, including creating marketing plans, managing website marketing components, increasing traffic, implementing e-commerce strategies, and customizing your consumers' digital experience.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1285,7 +1813,7 @@
         "makers & builders"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "This presentation addresses Drupal's inherent performance challenges in high-traffic environments. The speaker covers optimization techniques spanning multiple layers: caching solutions like Redis and Igbinary, PHP-FPM configuration strategies, opcode optimization, garbage collection setup, cache bin management, Nginx configuration tricks, and Blackfire performance profiling tools. The session integrates real-world production case studies to demonstrate practical implementation.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1299,8 +1827,10 @@
       "track": [
         "open web & community"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Neil Drumm"
+      ],
+      "full_description": "The Drupal Association engineering team presents updates on Drupal.org improvements and development tools. Key topics include GitLab Migration, New Authentication/SSO for Drupal.org accounts, Secure signing for Automatic Updates, Drupal.org's GDPR strategy, and Drupal 9/10 upgrades. The panel provides an opportunity to meet the technical team maintaining Drupal.org and offer feedback.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1315,7 +1845,7 @@
         "agency & business"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "This presentation covers RFP best practices for selecting Drupal development partners. Key topics include vetting vendors on admin experience design, content migration, multi-site management, hosting expertise, and security approaches. The session addresses scalability for enterprise solutions, third-party integrations, and data privacy compliance.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1329,8 +1859,10 @@
       "track": [
         "users & editors"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Sascha Eggenberger"
+      ],
+      "full_description": "The speaker updates the community on developments with the Gin Admin Theme since DrupalCon Europe 2021. Key topics include: Gin Facelift, secondary toolbar modifications, refactored code, improved developer experience, the Gin API, and upcoming roadmap features.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1345,7 +1877,7 @@
         "open web & community"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The session explores what it means to work in tech-heavy and leadership positions in 2022. Key topics include whether a computer science background is necessary for tech careers, work-life balance considerations, and diversity in enterprise settings. The speaker discusses her experience at Pfizer, highlighting how digital tools and Drupal technology supported COVID-19 vaccine distribution and clinical trial recruitment efforts.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1359,8 +1891,11 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Andy Blum",
+        "Mike Herchel"
+      ],
+      "full_description": "The presenters explain that Drupal 10 will no longer support Internet Explorer, enabling new development possibilities. They discuss modern CSS and JavaScript features including custom properties, advanced selectors, and optional chaining. The session explores how we can use this cornucopia of awesomeness in Drupal core and demonstrates optimization techniques applicable to other projects.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1375,7 +1910,7 @@
         "makers & builders"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The speaker, with 14 years of Drupal experience, presents Drupal-specific best practices from managing hundreds of sites. Topics include organizing the admin, entity and field strategies, user roles, documentation, custom code modules, and miscellaneous items like patches and access control.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1389,8 +1924,11 @@
       "track": [
         "clients & industry experiences"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Enno Langelotz",
+        "José Bellido"
+      ],
+      "full_description": "For a global food company's B2B section rollout, the speakers present strategies for implementing a unified codebase across independent regional portals. Key topics include creating a flexible component system based on Drupal paragraphs that fits everyone, aligning diverse market requirements worldwide, establishing role and permission models for multi-market editorial workflows, and addressing design challenges including RTL support, accessibility, internationalization, and flexible typography.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1404,8 +1942,11 @@
       "track": [
         "users & editors"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Meera Rao",
+        "Enrique Worwa Rangel"
+      ],
+      "full_description": "User experience (UX) design is vital for building brilliant, inclusive Drupal sites. When a robust, strategic UX design process is baked into a Drupal build from the beginning, it doesn't only benefit the end user - it also facilitates a smoother, more efficient and enjoyable build for the developers. The presentation explores how UX, interface design, and service design intersected with Drupal development in their work with Oscar Kilo, a UK-based wellbeing resource platform for police and emergency service workers.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1420,7 +1961,7 @@
         "agency & business"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The session examines how remote work transitions have disproportionately affected underrepresented workplace groups. It addresses challenges including less visibility, fewer opportunities for organic networking and mentorship, and different access to resources that remote arrangements create. The Drupal Diversity and Inclusion initiative will present strategies and tools for intentional inclusion in distributed workplaces.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1434,8 +1975,11 @@
       "track": [
         "agency & business"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Inez De Clercq",
+        "Sara Fiems"
+      ],
+      "full_description": "The presenters address how the pandemic shifted business communication to digital channels. They explore maintaining personal connections with customers and prospects in this new environment. The session offers concrete examples about human connection in the digital world and finding the right dots in a post-corona working environment.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1450,7 +1994,7 @@
         "clients & industry experiences"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The speaker addresses how non-technical leaders can ensure their Drupal sites are secure by asking the right questions and making informed investment decisions. The presentation covers various techniques and technologies we can deploy to protect our investments against growing security threats, progressing from cost-effective solutions to complex ones while balancing budget constraints against risk mitigation.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1464,8 +2008,11 @@
       "track": [
         "open web & community"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Baddý Sonja Breidert",
+        "Dries Buytaert"
+      ],
+      "full_description": "Join the board and staff of the Drupal Association, and learn more about the non-profit that fosters the Drupal Community. Bring questions! This is the traditional Drupal Association and community session that happens at every DrupalCon.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1479,8 +2026,11 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Lauri Eskola",
+        "Mike Herchel"
+      ],
+      "full_description": "Twig was introduced into Drupal over 7 years ago, and the front-end developer experience had remained stagnant until now. This session covers new features including a Starterkit theming experience in Drupal 10, default markup and styling for accessible modern site navigation, default front-end styling for common Drupal components like tabs, new Twig features such as filters, and solutions to various theming layer issues.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1494,8 +2044,10 @@
       "track": [
         "agency & business"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Luis Ribeiro"
+      ],
+      "full_description": "This presentation explores strategies for encouraging developers to adopt Drupal, focusing on CI&T's approach to training. The company addresses the shortage of Drupal developers by creating our own Drupal 9 pathway to training developers in Drupal. The session covers recruitment, bootcamp structure, and real-world project outcomes, including how they approach people with other technology backgrounds and integrate contribution into the curriculum.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1510,7 +2062,7 @@
         "users & editors"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "This session addresses challenges in professional publishing environments. The presenter demonstrates a mapping mechanism that allows content editors to create channel-specific versions of articles for online and print distribution. Key innovations include a content search function integrated into InDesign enabling designers to locate and retrieve articles directly from Drupal, automatic formatting applied during placement, and bidirectional synchronization ensuring updates in either system automatically transfer to the other.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1525,7 +2077,7 @@
         "open web & community"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The presenter discusses five pivotal factors in transitioning from backend developer to CTO: Decision making, stepping out of my comfort zone, being an introvert, being a woman and the people around me – and how to navigate them. The talk covers various career roles held, including Scrum master, Technical PM, and Team Lead, while addressing challenges like imposter syndrome and career pivots away from hands-on coding.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1539,8 +2091,10 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Ted Bowman"
+      ],
+      "full_description": "This session explores how Package Manager facilitates Composer operations behind the scenes for Drupal's Automatic Updates and Project Browser initiatives. These modules will allow site builders to install and update Drupal projects through the user interface without having to deal with Composer at all. Attendees will learn how to integrate programmatically with Package Manager and create custom modules using Composer-based functionality.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1555,7 +2109,7 @@
         "open web & community"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The session explores collaboration through magical metaphors. It covers how Twilight Sparkle demonstrates collaboration through data analysis, Gandalf illustrates strength through diversity, Hermione emphasizes transparent communication, Kvothe teaches countering self-deception, and Elphaba provides insights on fostering a collaborative culture.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1570,7 +2124,7 @@
         "users & editors"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The presentation addresses editor experience issues in decoupled Drupal systems. An editor is not necessarily logged in. The changes are not immediately visible. There is no administration toolbar. The speaker discusses solutions developed over two years of decoupled Drupal work, focusing on tools that bridge gaps between backend and frontend editing workflows.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1584,8 +2138,10 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Ronald te Brake"
+      ],
+      "full_description": "The presenter discusses transitioning Open Social's codebase from multi-repo towards a monorepo. Key topics include defining these architectural approaches, explaining the motivation behind the shift, identifying development challenges around versioning and releases, sharing lessons learned, and discussing areas for continued improvement.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1600,7 +2156,7 @@
         "agency & business"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "This presentation addresses the accessibility crisis in web development. The speaker notes that of the more than 800 in-depth audits carried out across the 28 countries (EU + UK) only four were found to be fully compliant. The session covers common reasons for accessibility failures, team skill-building resources, early issue identification processes, knowledge sharing strategies, and methods to empower all team members in accessibility testing.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1614,8 +2170,10 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Alex Pott"
+      ],
+      "full_description": "The session explores a new initiative proposed at DrupalCon Portland that led to the creation of the Distributions & Recipes initiative. Drupal Recipes provide a pre-packaged set of Drupal modules and configuration to serve a particular use-case or industry vertical. Unlike traditional distributions, these recipes aim to be simpler to create and maintain, installable and combinable through Project Browser tools.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1630,7 +2188,7 @@
         "clients & industry experiences"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "This presentation explores how Support and Maintenance models integrate with Kanban methodology. It covers topics including security update management, uptime/downtime monitoring, capacity planning, and cost estimation for support projects. The session examines benefits for clients and demonstrates Kanban's role in organizing support workflows across multiple Drupal sites.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1644,8 +2202,10 @@
       "track": [
         "users & editors"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Emma Horrell"
+      ],
+      "full_description": "Emma Horrell explores how involving editors in shaping admin interfaces can improve content design. Drawing from the University of Edinburgh's Drupal 7 to 9 migration, she addresses discovering editor needs, how to find out what editors really want (clue: it's not what they say they want), managing diverse requirements, integrating UX into testing, prioritizing accessibility, reducing tech debt, and fostering better designer-developer communication within agile frameworks.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1659,8 +2219,10 @@
       "track": [
         "open web & community"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Gaurav Kapoor"
+      ],
+      "full_description": "The speaker discusses strategies for motivating team members to participate in open-source projects. Based on mentoring 50+ contributors, he explains what possible blockers the individuals/teams face and how those can be resolved. Rather than a beginner workshop, this session focuses on organizational changes that foster a culture of contribution within companies.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1675,7 +2237,7 @@
         "clients & industry experiences"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The presenters discuss their experience building a sustainability-focused solution. Key topics covered include introducing sustainability concepts, providing an overview of features for measuring carbon footprint and emission reduction methods, explaining how Drupal integrates into the technical architecture, and sharing challenges and success factors encountered during development.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1689,8 +2251,10 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Michael Brauner"
+      ],
+      "full_description": "The speaker explains why Twig Extensions are often better suited for frontend development with Drupal than preprocess functions. The session demonstrates quick and easy implementation of Twig Extensions, emphasizing key differences from preprocess functions. A practical example using the in-house module 'twig_query' illustrates how to leverage Twig extensions for recurring requirements across projects.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1704,8 +2268,11 @@
       "track": [
         "agency & business"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Paulina Ryters",
+        "Thomas Haustein"
+      ],
+      "full_description": "The presenters explore challenges in MVP approaches, using their November 2021 migration of Leica Camera AG's platform to Drupal as a case study. They address critical questions including scope management, team composition, stakeholder expectations, and maintaining client relationships. The session covers connecting backend business systems like PIM and CRM, saying no when scope expands, and assessing digital maturity's impact on success.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1719,8 +2286,10 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Rodrigo Panchiniak Fernandes"
+      ],
+      "full_description": "The workshop explores asymmetric encryption using OpenPGP.js for protecting user-generated content. Key topics include: asymmetric encryption and decryption of content, symmetric encryption and decryption of private keys, RSA keys generation and storage in Drupal, selection of recipients embedded in forms and update of encrypted content. This approach grants content ownership control to authors and audiences rather than site administrators or developers.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1735,7 +2304,7 @@
         "clients & industry experiences"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The session explores inclusive product design that serves diverse audiences. Key topics include the foundational pillars of inclusive design, distinctions between inclusive design and accessibility, differences between situational and permanent exclusion, real-world examples and practical implementation strategies, when to prioritize inclusive design versus accessibility approaches, and methods for evaluating inclusive design impact in projects.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1764,8 +2333,10 @@
       "track": [
         "users & editors"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Stefan Weber"
+      ],
+      "full_description": "A European B2B/B2C food retailer implemented a micro frontend solution using Drupal as the orchestrator across separate services. The architecture integrates Drupal content, commercetools applications, Elastic and Microsoft Cognitive Search, with frontends built in React and Vue.js using custom HTML elements. The presentation demonstrates how content is orchestrated across the different applications, including shared data between systems like marketing content created in Drupal for shopping apps and product information from commerce middleware for recipe creation.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1780,7 +2351,7 @@
         "makers & builders"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The speaker explains that serverless architecture hides servers while enabling scalable solutions without provisioning or idle payment costs. The session covers what 'serverless' actually means, differences from containers, execution locations, common types, real-world applications like content moderation and video encoding, and Drupal integration possibilities. Attendees will learn advantages, disadvantages, and how to begin implementation at no cost.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1794,8 +2365,10 @@
       "track": [
         "agency & business"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Jeffrey McGuire"
+      ],
+      "full_description": "The session introduces the 'Agency House,' a five-part content architecture model designed to help agencies improve sales effectiveness. Key topics covered include enhancing sales flow through authoritative website resources, establishing brand authority and expertise, improving search visibility, and connecting with qualified leads. Attendees receive a structure and methodology (and handouts and templates and checklists!) to restructure their websites as sales tools.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1809,8 +2382,10 @@
       "track": [
         "agency & business"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Danny Bluestone"
+      ],
+      "full_description": "The speaker examines why diversity—across age, gender, race, disability, neurodiversity, class, and geography—strengthens digital outcomes. He demonstrates through real examples why this helps deliver global Drupal products at scale and argues that organizations must embed an inclusive culture of continuous improvement in project processes to unlock the true value of diversity.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1824,8 +2399,11 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Stella Power",
+        "Erik Erskine"
+      ],
+      "full_description": "The presenters draw on lessons learnt during the amalgamation of 50 of University of Limerick's sites into one Drupal 9 platform. This involved migrating over 60,000 nodes across 70 content types, 95 paragraph types, and 60+ vocabularies, resulting in more than 3,700 migration processes. Key topics include working with the Migrate API, reasons to rebuild rather than upgrade, migration preparation, converting Paragraphs/Field Collections to Layout Builder, scaling strategies, and project management tracking.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1839,8 +2417,10 @@
       "track": [
         "open web & community"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Wesley De Vrient"
+      ],
+      "full_description": "This interactive workshop explores how Drupal, Mautic, Apache Unomi, and N8N create a Digital Experience Platform without lock-in, without handing over your data. Participants learn technical implementation details of Apache Unomi and how to deliver personalized experiences while maintaining GDPR compliance and user trust.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1854,8 +2434,10 @@
       "track": [
         "clients & industry experiences"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Eirik Morvik"
+      ],
+      "full_description": "The presenter discusses how akademika.no scaled to support 22 million products with between 150K and 1M product updates processed daily. The same codebase now powers three distinct sites. The talk explores unique technical challenges, continuous development requirements, and tailored functionality that must perform reliably at massive scale across multiple properties.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1869,8 +2451,10 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Tiago Simões"
+      ],
+      "full_description": "The presentation examines recurring challenges that Drupal site builders face, such as organizing related fields or creating hierarchical option lists. It explores conventional remedies using core features like Taxonomy and third-party tools like Paragraphs, while acknowledging their limitations. The session then demonstrates how custom field types can address these issues and outlines the decision-making framework for implementing them, supported by practical examples.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1884,8 +2468,10 @@
       "track": [
         "clients & industry experiences"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Annam Ravin"
+      ],
+      "full_description": "This session introduces web accessibility fundamentals, examining how people with disabilities use assistive technologies online. The presenter explores digital web accessibility to understand the experience and use of technology among persons with disabilities, covering WCAG 2.1 guidelines, inclusive design principles, and role-based accessibility practices. Learning objectives include understanding accessibility considerations, relevant laws, and implementing shift-left approaches in project strategy.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1900,7 +2486,7 @@
         "agency & business"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Engage with the Drupal Association team and learn more about our most recent piloted program; the Drupal Certified Partner Program. The session explores an elevated involvement level with the Drupal Association and Project, evolved from the Supporting Partner initiative. Leadership emphasizes that substantially increased contribution is necessary for long-term competitiveness, requiring fresh models to incentivize and acknowledge participant contributions.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1914,8 +2500,10 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Brian Perry"
+      ],
+      "full_description": "This session explores how Drupal State bridges the gap between Drupal's JSON:API capabilities and JavaScript front-end development. The presenter examines framework agnostic utilities that allow JavaScript developers with limited knowledge of Drupal or the JSON:API spec to take advantage of the best features of Drupal's APIs. Key topics include reducing friction for JavaScript developers adopting Drupal as a decoupled CMS, and building an ecosystem of Drupal-friendly components and starter kits under the @drupal namespace on NPM.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1930,7 +2518,7 @@
         "users & editors"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The session explores Drupal's role as a content strategy platform rather than just a CMS. Key topics include the benefits of a content-centric digital experience platform and how Drupal distinguishes itself, the evolving responsibilities of content editors, integration of content strategy into redesigns, importance of flexible content management tools, strong content models, and measuring content success.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1944,8 +2532,10 @@
       "track": [
         "open web & community"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Finn Lewis"
+      ],
+      "full_description": "This presentation explores how open source Drupal distributions build sustainable communities while maintaining security and performance. Lewis discusses Drupal distributions like Thunder, Opingo, Open Social, and LocalGov Drupal—solutions tailored to specific use cases. The session focuses on LocalGov Drupal, a collaborative initiative involving UK councils and suppliers, examining how to develop funding mechanisms to support core teams.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1959,8 +2549,10 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Lauri Eskola"
+      ],
+      "full_description": "CKEditor 5 will replace CKEditor 4 in Drupal 10, offering a whole new way to think about a WYSIWYG. The session covers how this editor simplifies content creation while providing developers with tools to help editors add structured content and styled components without complex workarounds. Attendees will learn how to extend CKEditor 5 and get involved in supporting this upgrade.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1975,7 +2567,7 @@
         "agency & business"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "This session addresses a recurring challenge in agency project management where the final 20% of Drupal projects unexpectedly exceed budgets or timelines. The presenter aims to analyze underlying causes, survey other agencies about similar experiences, and share strategies to maintain project control and avoid these overruns.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1989,8 +2581,11 @@
       "track": [
         "agency & business"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Akshita Rawat",
+        "Abhijeet K. Sinha"
+      ],
+      "full_description": "This session addresses team management challenges in remote environments. The speakers share experiences building high-performance teams, emphasizing clear communication, alignment, and extreme accountability. Key topics include characteristics of effective teams, common management mistakes, success factors, and building trust and respect.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2004,8 +2599,10 @@
       "track": [
         "open web & community"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Floris van Geel"
+      ],
+      "full_description": "This session explores open source culture, its importance, and measurement approaches. Key topics include defining open source culture beyond simply using free code, the 'sharing is caring' philosophy, DevOps, microservices, and security considerations, two-way communication with project maintainers, corporate policies supporting contributions, examples from GitLab and Drupal.org, and opportunities for intensifying PHP collaboration.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2019,8 +2616,10 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Nicolas Grekas"
+      ],
+      "full_description": "Drupal 10 is going to be based on Symfony 6.2, representing a significant advancement. The talk covers new capabilities arriving in Drupal's core from Symfony, including enhanced dependency-injection methods, PHP 8 attributes for configuration, translation providers, and safer subprocess handling.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2034,8 +2633,10 @@
       "track": [
         "users & editors"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Lauren Maffeo"
+      ],
+      "full_description": "This workshop addresses the challenge of auditing large-scale PDF collections for accessibility compliance. The presenter shares practical strategies learned from auditing 50,000+ PDFs for 508 compliance during a major website migration project. Key topics include key differences to audit accessibility for PDFs vs. HTML, tools for large-scale auditing, guidance on web scraping versus crawling, roadmaps for migrating non-compliant PDFs to Drupal, and methods to create accessible PDFs from inception.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2050,7 +2651,7 @@
         "agency & business"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The speaker emphasizes that organizations often overlook employee digital experiences. The session explores five areas where you probably haven't considered using your existing tech stack for the benefit of your own team and demonstrates how to enhance workflows through automation and business intelligence derived from Drupal and Mautic platforms.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2065,7 +2666,7 @@
         "makers & builders"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "This session explores Drupal's Form API system, covering the complete form request lifecycle from initial build through submission. The speaker details form alterations, client transmission, rebuilds triggered by validation errors or multi-step workflows, caching mechanisms, handler execution, and AJAX request handling.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2079,8 +2680,10 @@
       "track": [
         "clients & industry experiences"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Filip Kunc"
+      ],
+      "full_description": "Octophin Digital specializes in digital technology for wildlife conservation. The speaker will discuss building Drupal-based solutions for major conservation organizations including ZSL, WWF, and others. Topics include satellite powered anti-poaching camera traps, scientific databases, and the second iteration of WILDLABS: a home for the global conservation technology community. The new platform features a directory of conservationists, community blogging, message boards, events system, wiki, grant application system, and jobs portal.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2095,7 +2698,7 @@
         "agency & business"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The speaker discusses how agencies can manage growth by implementing cross-functional teams. Cross Functional teams is a concept that allows our agency to have production teams working on projects, and non-production teams that are driving innovation and advancing culture. The session covers basics of the approach, transition planning, and associated challenges.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2110,7 +2713,7 @@
         "makers & builders"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The session explores how Drupal has adopted object-oriented programming and design patterns from other PHP frameworks. Presenters discuss concepts including Dependency Injection, Service containers, Factory Methods, PHP traits, Discovery Methods and various architectural patterns. The workshop additionally covers PHP 8's new features—such as JIT compilation and stricter type checking—and their implications for Drupal 10+, which requires PHP 8.1 minimum.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2124,8 +2727,10 @@
       "track": [
         "agency & business"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Janne Kalliola"
+      ],
+      "full_description": "This interactive presentation shares findings from the annual Drupal Business Survey, which gathered responses from 118 C-level agency leaders worldwide. The survey examined their experiences selling Drupal projects, expectations regarding Drupal 9, and perspectives on community contributions.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2154,8 +2759,12 @@
       "track": [
         "clients & industry experiences"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Andrew Melck",
+        "Jérôme Andrieux",
+        "Leah Goldfarb"
+      ],
+      "full_description": "Platform.sh and Nestlé collaborate to reduce digital carbon emissions. The session explores measuring customers' carbon footprints using observability tools, deploying applications closer to end users for environmental efficiency, and how such partnerships influence product roadmaps. The presentation includes insights from Nestlé's WebCMS team on governance models that promote sustainable IT practices while ensuring compliance and security across a global subsidiary network.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2169,8 +2778,11 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Rajula Vineet Reddy",
+        "Francisco Borges Aurindo Barros"
+      ],
+      "full_description": "At CERN, the speakers maintain a custom distribution of Drupal comprising a Composer project, Docker images, CI pipelines, and operational scripts. They address the challenge of maintaining custom distributions while keeping pace with upstream Drupal releases. The team built an automation pipeline for building, testing, and deploying new versions via GitOps on Kubernetes infrastructure. The work is open source and accessible on GitLab.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2185,7 +2797,7 @@
         "open web & community"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "This panel discussion explores lessons learned managing volunteer contributor communities. Panelists will cover practical strategies for establishing and scaling communities across different disciplines (writers, developers, designers, speakers). Key topics include community program impacts, engagement platforms and communication channels, diversity and inclusion approaches, and preventing volunteer burnout.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2199,8 +2811,11 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Pierre Dureau",
+        "Michael Fanini"
+      ],
+      "full_description": "UI Suite is an unofficial Drupal initiative designed to streamline adoption by standardizing Design Systems integration and offering low-code theming solutions. The ecosystem comprises modules assisting themers, site builders, and backend developers. It's currently deployed across multiple Design Systems and hundreds of websites, including implementations for major companies like Sephora and LVMH, plus public organizations including the French State and European Commission.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2215,7 +2830,7 @@
         "clients & industry experiences"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The session explores how design systems support enterprise digital transformation. It covers building a design system from scratch, integrating it with Drupal, and implementing it across 200+ websites for a global welfare organization while maintaining consistent brand identity.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2229,8 +2844,10 @@
       "track": [
         "open web & community"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Wolfgang Ziegler"
+      ],
+      "full_description": "The session explores how Drupal can appeal to JavaScript frontend developers. It examines shifting the site-builder paradigm to target this new audience, discussing their needs, common challenges, and strategies for making Drupal an attractive platform for JavaScript developers to build upon.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2245,7 +2862,7 @@
         "makers & builders"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Playwright is a web testing and automation framework enabling cross-browser testing. This session shares lessons learned replacing Behat with Playwright in Drupal projects, demonstrating capabilities like auto-wait, web-first assertions, and tracing. The presenter covers integration challenges and benefits of using this alternative test automation framework.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2260,7 +2877,7 @@
         "users & editors"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "This session addresses multilingual website development beyond translation. While Drupal's i18n system handles general localization, the presenters focus on CJK-specific challenges: sorting mechanisms, search indexing, untranslatable formats, and usability issues from CJK input methods. They highlight blind spots for developers with no experience using CJK and provide practical guidance on these overlooked aspects.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2274,8 +2891,10 @@
       "track": [
         "makers & builders"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Joris Vercammen"
+      ],
+      "full_description": "The session addresses how site visitors expect fast information discovery, requiring a shift from keyword-based to problem-based search strategies. The presenter explains how the Google search experience is structured, and about smart ways to get similar behaviour whilst taking a more budget friendly approach.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2289,8 +2908,10 @@
       "track": [
         "users & editors"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Lisa Webster"
+      ],
+      "full_description": "This session examines barriers people encounter when navigating websites, covering physical, cognitive, visual, speech, and hearing disabilities. The presenter discusses common challenges faced when accessing websites and improvement strategies, positioned as beginner level and not specific for developers but relevant to all team members.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2304,8 +2925,10 @@
       "track": [
         "clients & industry experiences"
       ],
-      "speakers": [],
-      "full_description": "",
+      "speakers": [
+        "Will Huggins"
+      ],
+      "full_description": "The initiative aims at providing temporary hotel accommodation to Ukrainian residents, who are forced to leave their homes as a result of the war. A Drupal-based platform originally built for hotel room trading was adapted to create hospitalitysupport.org, enabling over 600 hotels across Europe to offer thousands of free rooms to displaced persons within days of launch.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2320,11 +2943,9 @@
         "agency & business"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The speaker from Cellar Door discusses why many businesses fail by competing rather than collaborating. He shares how his agency achieved success through referrals and collaborations with other agencies, who many would consider our competition. Over 13 years, the company grew without traditional marketing, instead relying on agency partnerships. The session covers their partnership approach, ensuring success, and managing client expectations across collaborative projects.",
       "video_url": "",
       "sponsorIds": ""
     }
-  ],
-  "result": "success",
-  "url": "https://events.drupal.org/prague2022/schedule/all"
+  ]
 }

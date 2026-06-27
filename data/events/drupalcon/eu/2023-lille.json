@@ -10,23 +10,821 @@
     "venue": "Lille Grand Palais",
     "timezone": "Europe/Paris",
     "columns": 3,
-    "enabled": false,
+    "enabled": true,
     "logo": {
       "image": "./img/logos/drupalcon-logo.svg",
       "imageAlt": "DrupalCon logo",
-      "usePlate": false
+      "usePlate": false,
+      "logoDisabled": true,
+      "faIcon": "fa-solid fa-droplet"
     },
     "scheduleURLs": [
       "https://events.drupal.org/lille2023/schedule"
     ],
     "flickr": {
       "enabled": false,
+      "provider": "",
       "groupUrl": "",
       "image": "",
       "imageAlt": ""
     },
-    "sponsors": [],
-    "other_urls": []
+    "sponsors": [
+      {
+        "id": "acquia",
+        "title": "Acquia",
+        "tier": "Diamond",
+        "row": 1,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/acquia.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://www.acquia.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "dropsolid",
+        "title": "Dropsolid",
+        "tier": "Diamond",
+        "row": 1,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/dropsolid.png",
+        "imageAlt": "Dropsolid logo",
+        "link": "https://dropsolid.com/en",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "pantheon",
+        "title": "Pantheon",
+        "tier": "Diamond",
+        "row": 1,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/pantheon.png",
+        "imageAlt": "Pantheon logo",
+        "link": "https://pantheon.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "smile",
+        "title": "Smile",
+        "tier": "Diamond",
+        "row": 1,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/smile.png",
+        "imageAlt": "Smile logo",
+        "link": "https://www.smile.eu/en",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "1xinternet",
+        "title": "1xinternet",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/1xinternet.png",
+        "imageAlt": "1xinternet logo",
+        "link": "https://www.1xinternet.de/en",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "amazee-io",
+        "title": "Amazee.io",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/amazee-io.png",
+        "imageAlt": "Amazee.io logo",
+        "link": "https://www.amazee.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "annertech",
+        "title": "Annertech",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/annertech.png",
+        "imageAlt": "Annertech logo",
+        "link": "https://www.annertech.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "axess",
+        "title": "Axess",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/axess.png",
+        "imageAlt": "Axess logo",
+        "link": "https://www.axess.fr/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "factorial",
+        "title": "Factorial",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/factorial.png",
+        "imageAlt": "Factorial logo",
+        "link": "https://www.factorial.io",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "ffw",
+        "title": "FFW",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/ffw.png",
+        "imageAlt": "FFW logo",
+        "link": "https://ffw.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "calibrate",
+        "title": "Calibrate",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/calibrate.png",
+        "imageAlt": "Calibrate logo",
+        "link": "https://www.calibrate.be/nl",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "ckeditor",
+        "title": "CKEditor",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/ckeditor.png",
+        "imageAlt": "CKEditor logo",
+        "link": "https://ckeditor.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "droptica",
+        "title": "Droptica",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/droptica.png",
+        "imageAlt": "Droptica logo",
+        "link": "https://www.droptica.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "evolving-web",
+        "title": "Evolving Web",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/evolving-web.png",
+        "imageAlt": "Evolving Web logo",
+        "link": "https://evolvingweb.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "platform-sh",
+        "title": "Platform.sh",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/platform-sh.png",
+        "imageAlt": "Platform.sh logo",
+        "link": "https://platform.sh/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "skilld",
+        "title": "Skilld",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/skilld.png",
+        "imageAlt": "Skilld logo",
+        "link": "https://www.skilld.cloud/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sncf",
+        "title": "SNCF Connect & Tech",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 70,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/sncf.png",
+        "imageAlt": "SNCF Connect & Tech logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "valuebound",
+        "title": "Valuebound",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 80,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/valuebound.png",
+        "imageAlt": "Valuebound logo",
+        "link": "https://www.valuebound.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "agiledrop",
+        "title": "Agiledrop",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/agiledrop.png",
+        "imageAlt": "Agiledrop logo",
+        "link": "https://www.agiledrop.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "applura",
+        "title": "Applura",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/applura.png",
+        "imageAlt": "Applura logo",
+        "link": "https://www.applura.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "centarro",
+        "title": "Centarro",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/centarro.png",
+        "imageAlt": "Centarro logo",
+        "link": "https://www.centarro.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "codeenigma",
+        "title": "Code Enigma",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/codeenigma.png",
+        "imageAlt": "Code Enigma logo",
+        "link": "https://www.codeenigma.com",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "koriolis",
+        "title": "Koriolis",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/koriolis.png",
+        "imageAlt": "Koriolis logo",
+        "link": "https://www.koriolis.fr",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "lemberg",
+        "title": "Lemberg Solutions",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/lemberg.png",
+        "imageAlt": "Lemberg Solutions logo",
+        "link": "https://lembergsolutions.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "miniorange",
+        "title": "miniOrange",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 70,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/miniorange.png",
+        "imageAlt": "miniOrange logo",
+        "link": "https://www.miniorange.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "novartis",
+        "title": "Novartis",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 80,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/novartis.png",
+        "imageAlt": "Novartis logo",
+        "link": "https://www.novartis.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "qed42",
+        "title": "QED42",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 90,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/qed42.png",
+        "imageAlt": "QED42 logo",
+        "link": "https://www.qed42.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "srijan",
+        "title": "Srijan",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 100,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/srijan.png",
+        "imageAlt": "Srijan logo",
+        "link": "https://www.srijan.net/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sully-group",
+        "title": "Sully Group",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 110,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/sully-group.png",
+        "imageAlt": "Sully Group logo",
+        "link": "https://www.sully-group.com",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "systemseed",
+        "title": "SystemSeed",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 120,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/systemseed.png",
+        "imageAlt": "SystemSeed logo",
+        "link": "https://systemseed.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "webstanz",
+        "title": "WebstanZ",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 130,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/webstanz.png",
+        "imageAlt": "WebstanZ logo",
+        "link": "https://www.webstanz.be/en",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "1xinternet-module",
+        "title": "1xinternet",
+        "tier": "Module",
+        "row": 5,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/1xinternet.png",
+        "imageAlt": "1xinternet logo",
+        "link": "https://www.1xinternet.de/en",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "acquia-module-reception",
+        "title": "Acquia",
+        "tier": "Module",
+        "row": 5,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/acquia.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://www.acquia.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "acquia-module-tshirt",
+        "title": "Acquia",
+        "tier": "Module",
+        "row": 5,
+        "priority": 25,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/acquia.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://www.acquia.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "amazee-io-module",
+        "title": "Amazee.io",
+        "tier": "Module",
+        "row": 5,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/amazee-io.png",
+        "imageAlt": "Amazee.io logo",
+        "link": "https://www.amazee.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "annertech-module",
+        "title": "Annertech",
+        "tier": "Module",
+        "row": 5,
+        "priority": 35,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/annertech.png",
+        "imageAlt": "Annertech logo",
+        "link": "https://www.annertech.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "calibrate-module",
+        "title": "Calibrate",
+        "tier": "Module",
+        "row": 5,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/calibrate.png",
+        "imageAlt": "Calibrate logo",
+        "link": "https://www.calibrate.be/nl",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "drunomics",
+        "title": "drunomics",
+        "tier": "Module",
+        "row": 5,
+        "priority": 45,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/drunomics.png",
+        "imageAlt": "drunomics logo",
+        "link": "https://drunomics.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "drupal-association",
+        "title": "Drupal Association",
+        "tier": "Module",
+        "row": 5,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/drupal-association.png",
+        "imageAlt": "Drupal Association logo",
+        "link": "https://www.drupal.org/association",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "drupal-france",
+        "title": "Drupal France",
+        "tier": "Module",
+        "row": 5,
+        "priority": 55,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/drupal-france.png",
+        "imageAlt": "Drupal France logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "drupal-ireland",
+        "title": "Drupal Ireland",
+        "tier": "Module",
+        "row": 5,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/drupal-ireland.png",
+        "imageAlt": "Drupal Ireland logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "dug-be",
+        "title": "DUG BE",
+        "tier": "Module",
+        "row": 5,
+        "priority": 65,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/dug-be.png",
+        "imageAlt": "DUG BE logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "evolving-web-module",
+        "title": "Evolving Web",
+        "tier": "Module",
+        "row": 5,
+        "priority": 70,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/evolving-web.png",
+        "imageAlt": "Evolving Web logo",
+        "link": "https://evolvingweb.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "ffw-module-workshop",
+        "title": "FFW",
+        "tier": "Module",
+        "row": 5,
+        "priority": 75,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/ffw.png",
+        "imageAlt": "FFW logo",
+        "link": "https://ffw.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "ffw-module-women",
+        "title": "FFW",
+        "tier": "Module",
+        "row": 5,
+        "priority": 76,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/ffw.png",
+        "imageAlt": "FFW logo",
+        "link": "https://ffw.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "frontkom",
+        "title": "Frontkom",
+        "tier": "Module",
+        "row": 5,
+        "priority": 80,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/frontkom.png",
+        "imageAlt": "Frontkom logo",
+        "link": "https://www.frontkom.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "happy-coding",
+        "title": "Happy Coding",
+        "tier": "Module",
+        "row": 5,
+        "priority": 85,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/happy-coding.png",
+        "imageAlt": "Happy Coding logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "jetbrains",
+        "title": "JetBrains",
+        "tier": "Module",
+        "row": 5,
+        "priority": 90,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/jetbrains.png",
+        "imageAlt": "JetBrains logo",
+        "link": "https://www.jetbrains.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "kuoni",
+        "title": "Kuoni Tumlare Congress",
+        "tier": "Module",
+        "row": 5,
+        "priority": 95,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/kuoni.png",
+        "imageAlt": "Kuoni Tumlare Congress logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "les-tilleuls",
+        "title": "Les Tilleuls",
+        "tier": "Module",
+        "row": 5,
+        "priority": 100,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/les-tilleuls.png",
+        "imageAlt": "Les Tilleuls logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "makina-corpus",
+        "title": "Makina Corpus",
+        "tier": "Module",
+        "row": 5,
+        "priority": 105,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/makina-corpus.png",
+        "imageAlt": "Makina Corpus logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "pantheon-module",
+        "title": "Pantheon",
+        "tier": "Module",
+        "row": 5,
+        "priority": 110,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/pantheon.png",
+        "imageAlt": "Pantheon logo",
+        "link": "https://pantheon.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "platform-sh-module",
+        "title": "Platform.sh",
+        "tier": "Module",
+        "row": 5,
+        "priority": 115,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/platform-sh.png",
+        "imageAlt": "Platform.sh logo",
+        "link": "https://platform.sh/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "searchstax",
+        "title": "SearchStax",
+        "tier": "Module",
+        "row": 5,
+        "priority": 120,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/searchstax.png",
+        "imageAlt": "SearchStax logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "werk21",
+        "title": "Werk21",
+        "tier": "Module",
+        "row": 5,
+        "priority": 125,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/werk21.png",
+        "imageAlt": "Werk21 logo",
+        "link": "https://www.werk21.de/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "zoocha",
+        "title": "Zoocha",
+        "tier": "Module",
+        "row": 5,
+        "priority": 130,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/zoocha.png",
+        "imageAlt": "Zoocha logo",
+        "link": "https://www.zoocha.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "hello-lille",
+        "title": "Hello Lille",
+        "tier": "Summit",
+        "row": 6,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/hello-lille.png",
+        "imageAlt": "Hello Lille logo",
+        "link": "https://hellolille.eu/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "fosslife",
+        "title": "FOSSLife",
+        "tier": "Media",
+        "row": 7,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/fosslife.png",
+        "imageAlt": "FOSSLife logo",
+        "link": "https://fosslife.org",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "linux-magazine",
+        "title": "Linux Magazine",
+        "tier": "Media",
+        "row": 7,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/linux-magazine.png",
+        "imageAlt": "Linux Magazine logo",
+        "link": "https://www.linux-magazine.com",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "open-source-job-hub",
+        "title": "Open Source Job Hub",
+        "tier": "Media",
+        "row": 7,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/open-source-job-hub.png",
+        "imageAlt": "Open Source Job Hub logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "the-drop-times",
+        "title": "The Drop Times",
+        "tier": "Media",
+        "row": 7,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/the-drop-times.png",
+        "imageAlt": "The Drop Times logo",
+        "link": "https://www.thedroptimes.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "other_urls": [],
+    "scheduleComplete": true
   },
   "items": [
     {
@@ -40,9 +838,9 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Experienced contributors join groups focusing on areas such as Drupal core, media, frontend, accessibility, and migration. Select a team or topic and collaborate with others working in the same area throughout the day.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "annertech-module calibrate-module"
     },
     {
       "startTime": "2023-10-17T10:00:00Z",
@@ -55,9 +853,9 @@
         "other"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Kick off DrupalCon Lille 2023 with the Opening Ceremony, starting just after brunch. The Organizing Secretariat, Advisory Board members, and Drupal Association staff welcome attendees to Lille with practical information and the Driesnote keynote. Immediately following, the Women in Drupal Award ceremony celebrates outstanding women contributors — welcoming anyone who wants to celebrate women in Drupal.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "ffw-module-women"
     },
     {
       "startTime": "2023-10-17T11:30:00Z",
@@ -87,7 +885,7 @@
         "other"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Group photo with all DrupalCon Lille 2023 attendees.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -280,7 +1078,7 @@
       ],
       "full_description": "To meet our clients' need for an easily manageable design system approach, we, at Smile, developed the Streamlined CMS platform, based on Drupal, and funded by our R&amp;D investments. In addition to the design system approach, we wanted to give our Streamlined CMS platform a No-Code approach. This approach leverages Drupal's capabilities in terms of site building (site creation through back-office configuration) to the fullest. These features, driven by core modules such as Views or Layout Builder, are enhanced by modules from the UI Suite initiative, which originated within Smile and is now supported by several members of the Drupal community. UI Suite is a community initiative that aims to provide full Design systems integration inside Drupal architecture. It is designed to target Site builder and Back/Front developer experiences in mind. We’ll focus here on developers. Since DrupalCon Prague 2022, the UI Suite ecosystem has gained in maturity and lots of discussions happened about the best ways to integrate a Design system in Drupal. From this emerges Best practices. Today, we are glad to unveil our first stable version at Drupalcon Lille! During this session we are going to present the challenges we overcomed during more than one year of effort, contributing to the UI Suite modules. Then we are going to conclude with a short demo, illustrating our two main goals: to enable non-technical contributors to build complex landing pages from pre-configured blocks while strictly adhering to the site's design system and to enpower experienced and trained site builders creating new content types used to generate sets of pages that follow the same model. If you miss the session don’t hesitate to meet us for a demo during the Drupalcon (Smile booth: 14) or in one of our offices in France (we are located in the main cities), Belgium, Luxembourg, Netherlands or Switzerland.Other",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "smile"
     },
     {
       "startTime": "2023-10-17T14:15:00Z",
@@ -383,7 +1181,7 @@
       ],
       "full_description": "We start off with a demo session of how we’re using Gutenberg today, and some of the great selling points you typically miss when simply trying it out on your own. Divided into 3 groups/topics Editors will experience hands-on the power of the Gutenberg editing capabilities and developers will discover the many ways to extend Gutenberg editor. Group 1: Are you interested in seeing how the editorial experience can be improved for your organization or your clients? Or are you interested in offering this to your clients, but are unsure if the technological investment will be worth it for your team or company? We have workshop content for you either way! Group 2: Developing for Gutenberg We do hands-on work developing your own Gutenberg blocks. Group 3: Migrating into Gutenberg Migrating content into Gutenberg formats, or migrating organizations into the Gutenberg directions are two very different things, but are usually both very relevant topics that you might worry about, considering Gutenberg for your client or for your own organization. We cover both in this session. Discussion for all • Where do you want Gutenberg to go? • What is blocking you from using Gutenberg in your organization Closing session end game: Workshots Optional and on the house. Key takeaways from this workshop: • What is Drupal Gutenberg and how can it benefit your organization? • How do you work with Gutenberg as an editor or site builder? • How do you customize Drupal Gutenberg and deliver tailored solutions Other",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "frontkom"
     },
     {
       "startTime": "2023-10-17T14:15:00Z",
@@ -504,9 +1302,9 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "A hands-on workshop for newcomers to the Drupal contribution process. Participants get up to speed with Drupal.org, issue queues, community communication channels, and local Drupal installation. Mentors are on hand to get you ready to tackle real issues.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "european-commission-module-ftc"
     },
     {
       "startTime": "2023-10-17T15:15:00Z",
@@ -729,9 +1527,9 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Experienced contributors join groups focusing on areas such as Drupal core, media, frontend, accessibility, and migration. Select a team or topic and collaborate with others working in the same area throughout the day.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "annertech-module calibrate-module"
     },
     {
       "startTime": "2023-10-18T08:00:00Z",
@@ -748,7 +1546,7 @@
       ],
       "full_description": "Embark on a thrilling 15-minute Drupal adventure as we unveil UNESCO's web evolution. Objective: to normalize and industrialize this complex ecosystem, connected to various Information Systems, and ensure scalability for the next 15 years.Other",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "axess"
     },
     {
       "startTime": "2023-10-18T08:15:00Z",
@@ -765,7 +1563,7 @@
       ],
       "full_description": "LocalGov Drupal got funding to build the most requested feature from our council partners: a platform to be able to manage all our microsites with. Annertech's Mark Conroy was one of the lead developers on the project. The platform was built in a very generic manner, so it can be used by any organisation that needs to manage a fleet of microsites - universities, political parties, multinationals, etc. Come take a look at how easy it is to manage an unlimited number of microsites on the same platform, allowing each microsite in your fleet to share the same design (hello brand consistency), or have its own theme (hi there independent event), or use the UI to change the design at will (HO HO HO, it's got a red colour scheme, just for Christmas). Check out how the permissions system lets users only edit the microsites they are members of.Other",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "annertech"
     },
     {
       "startTime": "2023-10-18T08:30:00Z",
@@ -831,9 +1629,9 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "A second workshop for newcomers to the Drupal contribution process. Participants get up to speed with Drupal.org, issue queues, community communication channels, and local Drupal installation. Mentors are on hand to get you ready to tackle real issues.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "european-commission-module-ftc"
     },
     {
       "startTime": "2023-10-18T08:30:00Z",
@@ -903,7 +1701,7 @@
       ],
       "full_description": "Improving Layout Builder user experience When using Layout Builder the goal is to empower the users to actually own their website and create amazing content with a smooth experience. Though, there are certain issues users face, for example: by default the users have way too many options for adding elements into layout builder, which makes it difficult and confusing for them, also they can’t see how a component looks like until they have filled up the form, the Save button is not placed in the most intuitive place, and so on. So just using what is in core is not enough most of the times and there are big needs to customize it. In this workshop we will be making an advanced use of Layout Builder, we’ll go through some modules involved in making Layout Builder a more pleasant experience for content editors, we’ll see how they can be configured to make the most out of it and we’ll learn how to extend it using plugins. Key takeaways: • Understand the main challenges of working with Layout Builder and different ways of improving it • Use contributed modules to improve layout builder and extend it through configuration • Create plugins for providing new types of sections to layout builder Other",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "evolving-web"
     },
     {
       "startTime": "2023-10-18T08:30:00Z",
@@ -1134,7 +1932,7 @@
       ],
       "full_description": "Drupal offers multiple native security layers, however there are many points to check to be sure to deliver a more secured experience to our users. This session aims to familiarize with the most interesting practices and modules that will make your projects stronger with the additional layer of security that will protect you from the main risk referenced by OWASP Other",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "platform-sh"
     },
     {
       "startTime": "2023-10-18T10:15:00Z",
@@ -1168,7 +1966,7 @@
       ],
       "full_description": "End-to-End DevOps Workflow Inefficient toolchains are a major source of lost productivity for development teams. This talk will demonstrate managed, cloud-based tools that make your team more efficient at every stage of the software delivery life cycle, including: • A turn-key solution for automated testing of Drupal sites • Automatically keeping your site up-to-date, including deprecated code in your custom modules • A Drupal-optimized IDE that allows new team members to start contributing in minutesOther",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "acquia"
     },
     {
       "startTime": "2023-10-18T11:15:00Z",
@@ -1186,7 +1984,7 @@
       ],
       "full_description": "Showcasing \"Try Drupal\" - the CMS solution powered by 1xINTERNETOther",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "1xinternet"
     },
     {
       "startTime": "2023-10-18T11:30:00Z",
@@ -1201,7 +1999,7 @@
       "speakers": [
         "Sarah Furness"
       ],
-      "full_description": "",
+      "full_description": "Former combat helicopter pilot and Squadron Leader Sarah Furness delivers a keynote on fearless leadership, sharing thoughtful and relatable insights on overcoming fear as a barrier to unlocking your potential — and those of the people around you.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1267,7 +2065,7 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "An orientation for volunteer mentors participating in DrupalCon's contribution events. Mentors are briefed on their roles, responsibilities, and how to best guide first-time and mentored contributors.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1339,7 +2137,7 @@
       ],
       "full_description": "How to merge multiple platforms into a single unified multi-brand ecosystem. Join us as we share our experience of executing a successful digital transformation program on Drupal for Saint-Gobain, the worldwide leader in light and sustainable construction. Over the past 10+ years, Saint-Gobain has been using Drupal at a scale, starting from Drupal 7, and had multiple multisite Drupal platforms created for each brand. Our project aimed to merge these multiple platforms into a single unified multi-brand platform, and we want to share our journey and insights with the Drupal community. In this session, we will discuss the objectives of the project, the main building blocks of the Drupal implementation, the governance and organization model that we followed, and the current state of the platform roadmap. We will also highlight the challenges we faced and the solutions we implemented during the project. Our co-presenters from Saint-Gobain Marketing &amp; Development and Group Digital &amp; IT departments will provide insights from the client's perspective and share their experience working closely with multiple markets worldwide and our team. Key Takeaways: - Learn about the challenges and opportunities of executing a digital transformation program on Drupal for a global leader in the construction industry. - Understand the main building blocks of a Drupal implementation for a complex multisite platform. - Gain insights into the governance and organization model for managing a large-scale Drupal project. - Learn about the current state of the platform roadmap and future plans for further enhancement. Whether you're a Drupal developer, a product owner, or a digital strategist, this session will provide you with valuable insights on executing large-scale digital transformation programs on Drupal.Other Experience level of the audience Beginner",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "ffw"
     },
     {
       "startTime": "2023-10-18T13:00:00Z",
@@ -1407,7 +2205,7 @@
       ],
       "full_description": "In today's digital landscape, the agility of a team isn't just a nice-to-have—it's a cornerstone of success. This session delves deep into the crucial decision-making that emphasizes team agility across all roles in a web team and why those decisions ultimately are a key component of the organization's ability to drive impact via the web. Join us as we uncover the pivotal role of team agility in digital success and equip you with the tools to harness its full potential. Other",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "pantheon"
     },
     {
       "startTime": "2023-10-18T14:15:00Z",
@@ -1630,7 +2428,7 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "A focused contribution session for experienced community members to triage open issues in Drupal's issue queues — categorising, prioritising, and tagging issues to improve the efficiency of the contribution process.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1833,9 +2631,9 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Experienced contributors join groups focusing on areas such as Drupal core, media, frontend, accessibility, and migration. Select a team or topic and collaborate with others working in the same area throughout the day.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "annertech-module calibrate-module"
     },
     {
       "startTime": "2023-10-19T07:15:00Z",
@@ -2027,7 +2825,7 @@
       ],
       "full_description": "Using actual business cases, Dominique shows how much time and money you can save, how to provide a better customer service, and how to generate more leads.Other",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "dropsolid"
     },
     {
       "startTime": "2023-10-19T08:15:00Z",
@@ -2044,7 +2842,7 @@
       ],
       "full_description": "With the seemingly sudden advent of AI, many people and organizations are struggling to comprehend it. Over the past few months, the state of AI systems has changed dramatically, and it continues to change at a staggering pace. However, its use in Drupal is not new, as it dates back several years. There are both older implementations and numerous new ones that respond to the current AI services available. Join us to gain insight into the evolution and current situation of AI within the Drupal ecosystem. What does AI mean in the context of Drupal, and how has its evolution been? What can be accomplished with contributed modules, and which ones are recommended? Key takeaways: - Learn about the relationship between Drupal and AI over time. - Explore the AI services currently available for leverage within Drupal. - Identify which modules are interesting starting points for developing AI-powered functionality. Whether you’re a Drupal developer, a product owner, or a digital strategist, this session will provide you with valuable insights into how to understand the possibilities of AI in Drupal. Audience experience level: - beginnerOther",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "ffw"
     },
     {
       "startTime": "2023-10-19T08:30:00Z",
@@ -2108,7 +2906,7 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "A second mentor orientation session for volunteer mentors participating in DrupalCon's contribution events. Mentors are briefed on their roles, responsibilities, and how to best guide first-time and mentored contributors.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2179,7 +2977,7 @@
       ],
       "full_description": "Key Takeaways: This workshop is for people who want to improve their website search experience in a quick and easy way. No deep technical knowledge is required, either in Drupal or site search technologies. The goal of this workshop is to provide a hands-on, guided set of exercises that walk the attendee through the provisioning, setup, configuration, and management of a fully functional site search experience. You'll learn the basic concepts of SearchStax Studio capabilities - installing a Search UI app, setting up facets and filters, synonyms, stopwords, spell check, auto-suggest, related searches, relevance models, and more. Upon completion of this workshop, attendees will receive a SearchStax Professional badge that acknowledges their skill level in SearchStax technologies. The SearchStax Professional level is the first step in the SearchStax Certification Program. Other",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "searchstax"
     },
     {
       "startTime": "2023-10-19T08:30:00Z",
@@ -2404,7 +3202,7 @@
       ],
       "full_description": "AI is all the rage, but how do we teach our ChatBots about the contents of our website so that visitors can ask for content about it? We’re going to show you how it works! And also talk about possible pitfalls and how to prevent them.Other",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "amazee-io"
     },
     {
       "startTime": "2023-10-19T11:00:00Z",
@@ -2421,7 +3219,7 @@
       ],
       "full_description": "A live demo combining ChatGPT with Drupal, Mautic, and personalization. The focus is on the effective and practical use of the tools. So you can implement them yourself after the session.Other",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "dropsolid"
     },
     {
       "startTime": "2023-10-19T11:30:00Z",
@@ -2638,7 +3436,7 @@
       ],
       "full_description": "This session explores the key work benefits that software developers truly value. Join me to discover how organisations can create an environment that caters to the specific needs of software developers, boosting their productivity and making them happy. As part of the session, I’d like to share some best practices from our work culture at Factorial.Other",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "factorial"
     },
     {
       "startTime": "2023-10-19T14:15:00Z",
@@ -3066,7 +3864,7 @@
         "other"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The closing ceremony for DrupalCon Lille 2023, featuring key decisions, hot-topic discussions, and a celebration of the community's accomplishments — including the announcement of the host city for DrupalCon Europe 2024.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -3081,9 +3879,9 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The final day of DrupalCon Lille 2023 is dedicated to giving back to the Drupal community. Attendees collaborate on marketing materials, events, curriculum, code, documentation, and other vital aspects of the platform.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "drunomics werk21 happy-coding"
     },
     {
       "startTime": "2023-10-20T07:00:00Z",
@@ -3096,9 +3894,9 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "A hands-on workshop for newcomers to the Drupal contribution process. Participants get up to speed with Drupal.org, issue queues, community communication channels, and local Drupal installation. Mentors are on hand to get you ready to tackle real issues.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "european-commission-module-ftc"
     },
     {
       "startTime": "2023-10-20T07:00:00Z",
@@ -3111,7 +3909,7 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Designed for contributors who are comfortable with contribution tools but want guidance on selecting issues and navigating workflows. Experienced mentors provide hands-on support throughout the day to help you make your next contribution.",
       "video_url": "",
       "sponsorIds": ""
     }

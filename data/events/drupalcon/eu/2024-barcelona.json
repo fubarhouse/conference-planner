@@ -10,23 +10,626 @@
     "venue": "International Barcelona Convention Center",
     "timezone": "Europe/Madrid",
     "columns": 3,
-    "enabled": false,
+    "enabled": true,
     "logo": {
       "image": "./img/logos/drupalcon-logo.svg",
       "imageAlt": "DrupalCon logo",
-      "usePlate": false
+      "usePlate": false,
+      "logoDisabled": true,
+      "faIcon": "fa-solid fa-droplet"
     },
     "scheduleURLs": [
       "https://events.drupal.org/barcelona2024/session-schedule"
     ],
     "flickr": {
       "enabled": false,
+      "provider": "",
       "groupUrl": "",
       "image": "",
       "imageAlt": ""
     },
-    "sponsors": [],
-    "other_urls": []
+    "sponsors": [
+      {
+        "id": "acquia",
+        "title": "Acquia",
+        "tier": "Diamond",
+        "row": 1,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/acquia.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://www.acquia.com/drupalcon-barcelona",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "dropsolid",
+        "title": "Dropsolid",
+        "tier": "Diamond",
+        "row": 1,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/dropsolid.png",
+        "imageAlt": "Dropsolid logo",
+        "link": "https://dropsolid.com/en",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "herodevs",
+        "title": "HeroDevs",
+        "tier": "Diamond",
+        "row": 1,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/herodevs.png",
+        "imageAlt": "HeroDevs logo",
+        "link": "https://www.herodevs.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "pantheon",
+        "title": "Pantheon",
+        "tier": "Diamond",
+        "row": 1,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/pantheon.png",
+        "imageAlt": "Pantheon logo",
+        "link": "https://pantheon.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "1xinternet",
+        "title": "1xinternet",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/1xinternet.png",
+        "imageAlt": "1xinternet logo",
+        "link": "https://www.1xinternet.de/en",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "amazee-io",
+        "title": "Amazee.io",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/amazee-io.png",
+        "imageAlt": "Amazee.io logo",
+        "link": "https://www.amazee.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "annertech",
+        "title": "Annertech",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/annertech.png",
+        "imageAlt": "Annertech logo",
+        "link": "https://www.annertech.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "factorial",
+        "title": "Factorial",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/factorial.png",
+        "imageAlt": "Factorial logo",
+        "link": "https://www.factorial.io",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "jakala",
+        "title": "Jakala",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/jakala.png",
+        "imageAlt": "Jakala logo",
+        "link": "https://www.jakala.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "platform-sh",
+        "title": "Platform.sh",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/platform-sh.jpg",
+        "imageAlt": "Platform.sh logo",
+        "link": "https://platform.sh/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "cti-digital",
+        "title": "CTI Digital",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/cti-digital.png",
+        "imageAlt": "CTI Digital logo",
+        "link": "https://www.ctidigital.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "qed42",
+        "title": "QED42",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/qed42.png",
+        "imageAlt": "QED42 logo",
+        "link": "https://www.qed42.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "systemseed",
+        "title": "SystemSeed",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/systemseed.png",
+        "imageAlt": "SystemSeed logo",
+        "link": "https://systemseed.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "agiledrop",
+        "title": "Agiledrop",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/agiledrop.png",
+        "imageAlt": "Agiledrop logo",
+        "link": "https://www.agiledrop.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "caci",
+        "title": "CACI Digital Experience",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/caci.png",
+        "imageAlt": "CACI Digital Experience logo",
+        "link": "https://www.cyber-duck.co.uk/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "centarro",
+        "title": "Centarro",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/centarro.png",
+        "imageAlt": "Centarro logo",
+        "link": "https://www.centarro.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "european-commission",
+        "title": "European Commission",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/european-commission.png",
+        "imageAlt": "European Commission logo",
+        "link": "https://joinup.ec.europa.eu/interoperable-europe",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "halvar",
+        "title": "Halvar",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/halvar.png",
+        "imageAlt": "Halvar logo",
+        "link": "https://www.halvar.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "hiberius",
+        "title": "Hiberius",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/hiberius.png",
+        "imageAlt": "Hiberius logo",
+        "link": "https://www.hiberius.com",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "hounder",
+        "title": "Hounder",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 70,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/hounder.png",
+        "imageAlt": "Hounder logo",
+        "link": "https://hounder.co/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "lemberg",
+        "title": "Lemberg Solutions",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 80,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/lemberg.png",
+        "imageAlt": "Lemberg Solutions logo",
+        "link": "https://lembergsolutions.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "lnwebworks",
+        "title": "LN Webworks",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 90,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/lnwebworks.png",
+        "imageAlt": "LN Webworks logo",
+        "link": "https://www.lnwebworks.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "srijan",
+        "title": "Material+/Srijan",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 100,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/srijan.png",
+        "imageAlt": "Material+/Srijan logo",
+        "link": "https://www.materialplus.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "nttdata",
+        "title": "NTT DATA",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 110,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/nttdata.png",
+        "imageAlt": "NTT DATA logo",
+        "link": "https://www.nttdata.com/global/en/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "opensenselabs",
+        "title": "OpenSenseLabs",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 120,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/opensenselabs.png",
+        "imageAlt": "OpenSenseLabs logo",
+        "link": "https://opensenselabs.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "amazee-labs",
+        "title": "Amazee Labs",
+        "tier": "Module",
+        "row": 5,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/amazee-labs.png",
+        "imageAlt": "Amazee Labs logo",
+        "link": "https://www.amazeelabs.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "drunomics",
+        "title": "drunomics",
+        "tier": "Module",
+        "row": 5,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/drunomics.png",
+        "imageAlt": "drunomics logo",
+        "link": "https://drunomics.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "jetbrains",
+        "title": "JetBrains",
+        "tier": "Module",
+        "row": 5,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/jetbrains.png",
+        "imageAlt": "JetBrains logo",
+        "link": "https://www.jetbrains.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "tag1-consulting",
+        "title": "Tag1 Consulting",
+        "tier": "Module",
+        "row": 5,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/tag1-consulting.png",
+        "imageAlt": "Tag1 Consulting logo",
+        "link": "https://tag1consulting.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "werk21",
+        "title": "Werk21",
+        "tier": "Module",
+        "row": 5,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/werk21.png",
+        "imageAlt": "Werk21 logo",
+        "link": "https://www.werk21.de/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "zoocha",
+        "title": "Zoocha",
+        "tier": "Module",
+        "row": 5,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/zoocha.jpg",
+        "imageAlt": "Zoocha logo",
+        "link": "https://www.zoocha.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "aperta",
+        "title": "Aperta",
+        "tier": "Drupal Village",
+        "row": 6,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/aperta.png",
+        "imageAlt": "Aperta logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "e-sepia",
+        "title": "E-sepia",
+        "tier": "Drupal Village",
+        "row": 6,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/e-sepia.png",
+        "imageAlt": "E-sepia logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "lakedrops",
+        "title": "LakeDrops",
+        "tier": "Drupal Village",
+        "row": 6,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/lakedrops.png",
+        "imageAlt": "LakeDrops logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "react-online",
+        "title": "React Online",
+        "tier": "Drupal Village",
+        "row": 6,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/react-online.png",
+        "imageAlt": "React Online logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "umadgera",
+        "title": "umadgera",
+        "tier": "Drupal Village",
+        "row": 6,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/umadgera.jpg",
+        "imageAlt": "umadgera logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "linux-magazine",
+        "title": "Linux Magazine",
+        "tier": "Media",
+        "row": 7,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/linux-magazine.png",
+        "imageAlt": "Linux Magazine logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "open-source-job-hub",
+        "title": "Open Source Job Hub",
+        "tier": "Media",
+        "row": 7,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/open-source-job-hub.png",
+        "imageAlt": "Open Source Job Hub logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "the-drop-times",
+        "title": "The Drop Times",
+        "tier": "Media",
+        "row": 7,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/the-drop-times.png",
+        "imageAlt": "The Drop Times logo",
+        "link": "https://www.thedroptimes.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "acquia-module",
+        "title": "Acquia",
+        "tier": "Module",
+        "row": 5,
+        "priority": 5,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/acquia.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://www.acquia.com/drupalcon-barcelona",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "amazee-io-module",
+        "title": "Amazee.io",
+        "tier": "Module",
+        "row": 5,
+        "priority": 15,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/amazee-io.png",
+        "imageAlt": "Amazee.io logo",
+        "link": "https://www.amazee.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "annertech-module",
+        "title": "Annertech",
+        "tier": "Module",
+        "row": 5,
+        "priority": 18,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/annertech.png",
+        "imageAlt": "Annertech logo",
+        "link": "https://www.annertech.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "factorial-module",
+        "title": "Factorial",
+        "tier": "Module",
+        "row": 5,
+        "priority": 25,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/factorial.png",
+        "imageAlt": "Factorial logo",
+        "link": "https://www.factorial.io",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "hounder-module",
+        "title": "Hounder",
+        "tier": "Module",
+        "row": 5,
+        "priority": 28,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/hounder.png",
+        "imageAlt": "Hounder logo",
+        "link": "https://hounder.co/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "european-commission-module-ftc",
+        "title": "European Commission",
+        "tier": "Module",
+        "row": 5,
+        "priority": 22,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/european-commission.png",
+        "imageAlt": "European Commission logo",
+        "link": "https://joinup.ec.europa.eu/interoperable-europe",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "european-commission-module-lunch",
+        "title": "European Commission",
+        "tier": "Module",
+        "row": 5,
+        "priority": 23,
+        "image": "./img/sponsors/drupalcon-europe/2024-barcelona/european-commission.png",
+        "imageAlt": "European Commission logo",
+        "link": "https://joinup.ec.europa.eu/interoperable-europe",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "other_urls": [],
+    "scheduleComplete": true
   },
   "items": [
     {
@@ -40,9 +643,9 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Experienced contributors join groups focusing on areas such as Drupal core, media, frontend, accessibility, and migration. Select a team or topic and collaborate with others working in the same area throughout the day.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "annertech-module tag1-consulting"
     },
     {
       "startTime": "2024-09-24T09:00:00Z",
@@ -57,7 +660,7 @@
       "speakers": [],
       "full_description": "Join the Opening Ceremony for an exciting start to DrupalCon Barcelona 2024. Right after the welcome coffee, the Organizing Secretariat, Advisory Board members, and Drupal Association staff are eager to welcome you to the vibrant city of Barcelona. We'll kick things off with practical information and set the stage for the first keynote of the week - the Driesnote. Don't miss this chance to begin your DrupalCon experience on a high note and prepare for an incredible days ahead.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "jakala"
     },
     {
       "startTime": "2024-09-24T10:30:00Z",
@@ -70,7 +673,7 @@
         "coffee & lunch break time"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Lunch break.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -102,7 +705,7 @@
         "other"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Group photo with all DrupalCon Barcelona 2024 attendees.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -273,7 +876,7 @@
         "other"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "A wellness session combining gentle movement and music to help attendees recharge mid-conference. Held in the dedicated DrupalCon well-being space.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -292,7 +895,7 @@
       ],
       "full_description": "Drupal 7 is reaching end of life, but extended security support from HeroDevs means you can stay secure and compliant until you’re ready to migrate. Whether you’re facing resource constraints or just haven’t had the time to migrate, this session will equip you with the tools to ensure your site’s security post-EOL. Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "herodevs"
     },
     {
       "startTime": "2024-09-24T14:00:00Z",
@@ -305,7 +908,7 @@
         "coffee & lunch break time"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Coffee break.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -325,7 +928,7 @@
       ],
       "full_description": "TraceLink has revolutionized the healthcare supply chain by creating the world’s largest digital network, which simplifies the global track-and-trace processes for pharmaceuticals. Their digitalization efforts have connected over 290,000 entities, including 1,600+ customers and 900+ employees worldwide. By fostering seamless collaboration and providing collective intelligence, TraceLink has redefined its brand from a serialization solution to a comprehensive supply chain platform. Their redesigned website enhances user engagement, updated content, further driving business growth and establishing TraceLink as a leader in digital innovation for the healthcare and life sciences industries.\" Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "srijan"
     },
     {
       "startTime": "2024-09-24T14:15:00Z",
@@ -342,7 +945,7 @@
       ],
       "full_description": "Hey there! I’m excited to talk to you about a cool new Drupal module I’ve been working on. You know how writing alt text for images can be a real pain, especially when you’ve got tons of pictures? Well, I’ve found a way to make it super easy using AI. Basically, this module taps into OpenAI’s smart image recognition tech to automatically create great descriptions for your images. It’s a game-changer for making websites more accessible and boosting SEO at the same time. I’ll show you how it works, why it’s so helpful, and chat about some exciting possibilities for the future. If you’re into Drupal and want to make your site more user-friendly without the headache, you won’t want to miss this! Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "hounder"
     },
     {
       "startTime": "2024-09-24T14:30:00Z",
@@ -511,11 +1114,11 @@
         "contribution topic"
       ],
       "speakers": [
-        "Chris Darke (Chrisdarke)"
+        "Chris Darke"
       ],
-      "full_description": "",
+      "full_description": "A hands-on workshop for newcomers to the Drupal contribution process. Participants get up to speed with Drupal.org, issue queues, community communication channels, and local Drupal installation. Mentors are on hand to get you ready to tackle real issues.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "european-commission-module-ftc"
     },
     {
       "startTime": "2024-09-24T14:30:00Z",
@@ -532,7 +1135,7 @@
       ],
       "full_description": "43% of the entire Drupal community is on Drupal 7. Drupal 7 end of life is coming in 2025. Acquia recently open sourced our migration automation tool, Acquia Migrate: Accelerate (AM:A) to help the community get to D10 and prepare for D11. This will be hands-on learning session for integrating the Drupal module into your application: Live demo Real-world use cases Customer success stories Whether you're a seasoned developer or a migration newbie, learn how to leverage AM:A to automate your content migration, give you the confidence to be a migration expert, and help keep your application on the latest version of Drupal Core. Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "acquia"
     },
     {
       "startTime": "2024-09-24T15:30:00Z",
@@ -700,7 +1303,7 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "A focused contribution session for experienced community members to triage open issues in Drupal's issue queues — categorising, prioritising, and tagging issues to improve the efficiency of the contribution process.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -720,7 +1323,7 @@
       ],
       "full_description": "Join us to explore the journey of TotalEnergies in migrating 200 websites from Drupal 7 to Drupal 10. This session will delve into the strategies employed to eliminate legacy issues and optimize various facets of the project, including build quality, editorial experience, graphical charter, accessibility, SEO, performance, and eco-responsibility. Discover the challenges faced, the solutions implemented and the lessons learned from this large-scale migration project. Gain insights that can be applied to your own Drupal initiatives. Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "jakala"
     },
     {
       "startTime": "2024-09-24T15:55:00Z",
@@ -802,7 +1405,7 @@
         "other"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The official opening social event of DrupalCon Barcelona 2024. Join fellow attendees in the CCIB Exhibition Halls for drinks and conversation to kick off the week together.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -961,7 +1564,7 @@
         "Jitka Pilar (Jitka_pilar)",
         "Julia Kranzthor (JR_KThor)"
       ],
-      "full_description": "",
+      "full_description": "An exclusive breakfast hosted by the Drupal Association for Ripple Makers — members of the Drupal Association's individual membership program. Ripple Makers support driving innovation and adoption of Drupal as a high-impact digital public good. Limited to the first 50 RSVPs.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -997,7 +1600,7 @@
       ],
       "full_description": "At amazee.io, we’ve encountered virtually every method of managing the deployment of multiple Drupal sites. Whether you’re running a few personal sites, managing a medium-sized agency, or overseeing a vast portfolio of brand sites, you’ll find valuable insights here. In this talk, Toby will discuss common patterns such as multisite, push/pull polysite, base image inheritance, and more. He’ll explore their pros, cons, and challenges, sharing behind-the-scenes work done with clients to optimize their scenarios. He’ll also cover persuasive arguments used to sway everyone from dedicated CI enthusiasts to free-spirited YOLO developers. Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "amazee-io"
     },
     {
       "startTime": "2024-09-25T07:00:00Z",
@@ -1010,9 +1613,9 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Experienced contributors join groups focusing on areas such as Drupal core, media, frontend, accessibility, and migration. Select a team or topic and collaborate with others working in the same area throughout the day.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "annertech-module tag1-consulting"
     },
     {
       "startTime": "2024-09-25T07:30:00Z",
@@ -1025,7 +1628,7 @@
         "coffee & lunch break time"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Coffee break.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1044,7 +1647,7 @@
       ],
       "full_description": "We are one of the leading technology consulting companies with 100% private capital nationwide in Spain. Our specialization in the provision of business consulting, technological development, digital transformation and outsourcing services, makes us a national benchmark for multiple public administrations and private entities that today, thanks to our work, consider us as their main partner, when it comes to solving (hand in hand with technology) their needs related to processes and businesses. We currently have more than 3,000 employees on staff and, by the end of 2023, we had a turnover of more than €180M. We are present all-around Spain, in Europe and America. We provide services to our more than 2,000 clients thanks both to our international presence and our 6 business areas (consolidated through 48 areas of technological competence). We are a company with the flexibility and efficiency of a start-up and the solvency of a large multinational.\" Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "hiberus"
     },
     {
       "startTime": "2024-09-25T07:45:00Z",
@@ -1061,7 +1664,7 @@
       ],
       "full_description": "CACI Digital Experience (formerly Cyber-Duck) has been driving digital transformation for over 19 years, leveraging Drupal to deliver impactful solutions. Our clients include renowned organisations such as Sport England, the College of Policing, and the Bank of England. Enrique Worwa will showcase how CACI Digital Experience (formerly Cyber-Duck) developed SiteGuardian, an innovative console and dashboard designed to help multi-site owners, such as agencies and large brands, efficiently monitor critical upgrades, security patches, performance issues, and vulnerabilities across their websites. Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "caci"
     },
     {
       "startTime": "2024-09-25T08:00:00Z",
@@ -1248,11 +1851,11 @@
         "contribution topic"
       ],
       "speakers": [
-        "James Shields (Lostcarpark)"
+        "James Shields"
       ],
-      "full_description": "",
+      "full_description": "A hands-on workshop for newcomers to the Drupal contribution process. Participants get up to speed with Drupal.org, issue queues, community communication channels, and local Drupal installation. Mentors are on hand to get you ready to tackle real issues.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "european-commission-module-ftc"
     },
     {
       "startTime": "2024-09-25T09:30:00Z",
@@ -1269,7 +1872,7 @@
       ],
       "full_description": "Now that everyone sees how important it is to build an open DXP to deliver personalised digital experiences to deliver ROI to customers in the form of double engagement and conversion rates, let's look at the fundamentals needed. Learn about how Dropsolid became a Digital experience company by using a great Drupal and Mautic managed service &amp; devops experience as the basis of the open DXP. Learn how Dropsolid optimised its cloud platform to deliver an open DXP. Learn how to unlock personalisation and AI on top of this basis in a sovereign way and also get a sneak preview of the long term vision for the Open DXP with Drupal.Learn how to go from a web-developer to a DXP-developer, from a web-master to a DXP-master and from a web-agency to a DXP-agency and expand your capabilities with Drupal. Leverage your Drupal career and Drupal business by going from CMS to DXP. Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "dropsolid"
     },
     {
       "startTime": "2024-09-25T10:30:00Z",
@@ -1451,7 +2054,7 @@
       ],
       "full_description": "Personalization has long been a \"holy grail\" for many web teams. Legendary in its power. But also hidden in parts unknown, out of reach. It takes a heroic journey to get there. Or does it? By leveraging modern Artificial Intelligence and Machine Learning capabilities some people are seeing results quickly and with much less up-front cost. Contrary to the standard story of multi-quarter projects and six or seven-figure budget requirements, Drupal projects can get started with personalization in as little as 30 days, often with zero software license fees. If you are an organization using Drupal, this approach can help you improve the effectiveness of your website. If you are a digital agency using Drupal to serve clients, this can be a way to add a high-value service offering for 2025. We will discuss how to leverage the right partners to accelerate the process and minimize the risks, including privacy and data regulation compliance. With the information in this session, you can start leveraging first-party data and existing visitor behaviour to build a web personalization practice quickly. Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "pantheon"
     },
     {
       "startTime": "2024-09-25T10:55:00Z",
@@ -1482,7 +2085,7 @@
         "coffee & lunch break time"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Lunch break.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1501,7 +2104,7 @@
       ],
       "full_description": "Discover how to navigate the complexities of migrating large-scale Drupal 7 applications. Our session will delve into real-world case studies, best practices, and expert insights to help you successfully transition to the latest Drupal versions. Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "opensenselabs"
     },
     {
       "startTime": "2024-09-25T11:30:00Z",
@@ -1519,7 +2122,7 @@
       ],
       "full_description": "The Single Directory Component module (SDC), now integrated into Drupal core, offers indispensable benefits for effectively managing content organization and presentation on your website and directly support the Starshot initiative. Its inclusion in core underscores its importance in streamlining directory functionalities within Drupal. Key reasons for utilizing the SDC include: 1. Simplified Content Management: The module provides a straightforward interface for managing directory listings, making it easy to add, edit, and categorize entries such as businesses, individuals, or resources. 2. Enhanced User Experience: With powerful search and filtering capabilities, the Single Directory Component module improves the user experience by enabling visitors to quickly locate relevant information within the directory. 3. Customizable Display Options: Website administrators can customize the display of directory listings to suit their specific needs, ensuring consistency with the overall design and branding of the site. 4. Integration with Other Modules: The module seamlessly integrates with other Drupal modules, allowing for enhanced functionality and expanded features within the directory. Key takeaways will be: • Understanding the importance of the Single Directory Component module in Drupal core for efficient content management. • How to use the SDC • Learning how to leverage the module's features to create dynamic and user-friendly directories tailored to the website's requirements. • Exploring integration possibilities with other Drupal modules to extend the functionality of the directory and enhance the overall website experience. Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "hounder"
     },
     {
       "startTime": "2024-09-25T11:30:00Z",
@@ -1536,7 +2139,7 @@
       ],
       "full_description": "Commitment is an intrinsic part of NTT DATA’s corporate culture, and this of course applies to the Drupal community. We are aware of the responsibility that a company of NTT DATA’s size has acquired with the community, and we want to contribute back through our dedicated support that ranges from active participation and sponsorship in events to contributing to the community with modules and patches created by our certified professionals. Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "nttdata"
     },
     {
       "startTime": "2024-09-25T11:45:00Z",
@@ -1553,7 +2156,7 @@
       ],
       "full_description": "Drupal Commerce 2.37 added a dashboard for merchants to track their store's performance and receive updates from the project and module maintainers. It delivers useful summary statistics, but it is limited just to basic queries against the order tables in your store. To gain insight into your conversion rates, top performing campaigns, or finer-grained sales performance over time, you need Centarro Insights. Take a guided tour of Centarro's exciting new product that gives your Drupal Commerce merchants greater insight into their store's performance. Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "centarro"
     },
     {
       "startTime": "2024-09-25T12:00:00Z",
@@ -1570,7 +2173,7 @@
       ],
       "full_description": "Are you an agency considering extending your offering with AI services or a business looking to enhance your product using AI technologies? If any of the latter describes your case, you're in the right place. I’ll share tried and tested insights into cooperating with an AI vendor based on my company’s experience delivering intelligent AI solutions to clients worldwide and helping businesses fill their AI expertise gaps. You’ll learn the possible reasons why agencies and businesses consider using the services of an AI vendor, unlock the specifics of preparing for an AI project, and find three simple steps to successfully building your AI project. Besides, we’ll discuss the actual use cases of companies outsourcing their AI development and discover ways to tackle potential risks during AI project development. At the end of the speech, you’ll also have the opportunity to ask any questions concerning AI development.\" Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "lemberg"
     },
     {
       "startTime": "2024-09-25T12:30:00Z",
@@ -1779,9 +2382,10 @@
         "contribution topic"
       ],
       "speakers": [
-        "Rachel Lawson (Rachel_norfolk)"
+        "Rachel Lawson",
+        "Chris Darke"
       ],
-      "full_description": "",
+      "full_description": "An orientation for volunteer mentors participating in DrupalCon's contribution events. Mentors are briefed on their roles, responsibilities, and how to best guide first-time and mentored contributors.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1800,7 +2404,7 @@
       ],
       "full_description": "In this session we'll explore how we used several key Contrib modules to create a complex, enterprise-level solution in one of our recent projects. We'll look at how we integrated Drupal Commerce, Translation Management, Paragraphs, Fastly &amp; Purge, Search API, Redis, RabbitMQ and other modules to build systems that are both scalable and efficient, often right out of the box. We will share practical insights into managing complex digital architectures and how Contrib modules can help you build sophisticated, enterprise-ready solutions. Designed for both experienced developers and those new to Drupal, this session will provide valuable knowledge on how to use Drupal contrib modules to enrich and extend Drupal for enterprise needs. Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "factorial"
     },
     {
       "startTime": "2024-09-25T14:45:00Z",
@@ -1813,7 +2417,7 @@
         "coffee & lunch break time"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Coffee break.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1832,7 +2436,7 @@
       ],
       "full_description": "Piyuesh Kumar, Director of Technology at QED42, will explore the evolution of Digital Experience Platforms (DXPs) in addressing modern digital engagement needs and discuss the future of digital solutions with Space DXP integrated with AI technologies. We'll start with a basic introduction to QED42, a little bit about Drupal, and the reasons for our faith in this CMS. Further in the session, we will explore the evolution and future of Digital Experience Platforms (DXPs) and their integration with AI. Key topics will include: Evolution of DXPs: Understanding how DXPs have developed to meet the needs of modern digital engagement. AI Integration: Examining the role of AI in enhancing DXPs through personalized user experiences, automation, and advanced analytics. Future Trends: Discussing upcoming trends in DXP and AI technologies, including predictive analytics, intelligent chatbots, and adaptive content delivery. Use Cases: Reviewing real-world examples of successful AI integration in DXPs across various industries.\" Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "qed42"
     },
     {
       "startTime": "2024-09-25T15:15:00Z",
@@ -1999,7 +2603,7 @@
         "other"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "A wellness session offering mindfulness and stress reduction activities to help attendees find balance and recharge. Held in the dedicated DrupalCon well-being space.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2018,7 +2622,7 @@
       ],
       "full_description": "Introduction Orange is synonymous with innovation and clear messaging. The brand.orange.com has two clear purposes - Bring the disparate communities who use the Orange brand together - Tight integration with, and a brilliant search experience for the Digital Asset Management system We’ll show you how we’ve achieved this Prerequisite Prerequisite is the foundational understanding required for participants to fully engage and benefit from the content. What do they need to know to maximize the session's value? An appreciation of the challenges of Community building within a multinational organization Some familiarity with Digital Asset Management systems and the obstacles faced when pushing their capabilities to the limit Outline Outline is the session description, key topics, brief overview. Brand.orange.com is tasked with bringing a broad set of users together, and giving them the tools they need to tell the Orange story in a coherent and consistent manner. We’ll explain how we used Drupal’s community tools to achieve this. All of Orange’s digital assets are stored and maintained in a third party Digital Asset Management system [Mastermedia] We’ll explain how we integrated with this system to deliver the powerful search interface required for the project. Key Topics: Using Layout builder to integrate with an existing design system Using Group module to facilitate communities within Orange Leveraging Drupal’s custom APIs to facilitate different registration flows for external and internal users Building a custom React front-end for the DAM using the 3rd party API, while still using Drupal’s user management to maintain access control across the assets Learning Objectives Learning Objectives are valuable insights and practical takeaways for participants to apply, skills gained from the session. The power of Drupal’s Layout builder and how it can extended to facilitate fine-grained access control When using Drupal’s search API make sense, and when it is more practical to leverage front-end tooling The practicalities of dealing with 3rd party APIs - some lessons learned Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "annertech"
     },
     {
       "startTime": "2024-09-25T15:40:00Z",
@@ -2116,9 +2720,9 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Experienced contributors join groups focusing on areas such as Drupal core, media, frontend, accessibility, and migration. Select a team or topic and collaborate with others working in the same area throughout the day.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "annertech-module tag1-consulting"
     },
     {
       "startTime": "2024-09-26T07:30:00Z",
@@ -2285,7 +2889,7 @@
         "other"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "A wellness session exploring practical techniques for shifting from conference stress to a positive, energised mindset. Held in the dedicated DrupalCon well-being space.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2336,7 +2940,7 @@
         "coffee & lunch break time"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Coffee break.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2355,7 +2959,7 @@
       ],
       "full_description": "Anu LMS is our open-source, Drupal-based, learning management system, currently used in over 70 countries. Join SystemSeed CTO, Evgeniy Maslovskiy, for a project update, to understand how you can use Anu, and learn about what's coming next. Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "systemseed"
     },
     {
       "startTime": "2024-09-26T08:30:00Z",
@@ -2372,7 +2976,7 @@
       ],
       "full_description": "Join our session for a short demo of the EU Open Source Solutions Catalogue – an MVP developed by the European Commission on Drupal to showcase open source software created by public administrations across Europe. The platform will serve as a centralized repository, enabling public administrations to discover, explore, and evaluate open source software solutions that can be reused or adapted by other government entities, fostering collaboration and reducing redundant efforts in software development. Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "european-commission"
     },
     {
       "startTime": "2024-09-26T08:45:00Z",
@@ -2541,9 +3145,10 @@
         "contribution topic"
       ],
       "speakers": [
-        "Chris Darke (Chrisdarke)"
+        "Rachel Lawson",
+        "Chris Darke"
       ],
-      "full_description": "",
+      "full_description": "An orientation for volunteer mentors participating in DrupalCon's contribution events. Mentors are briefed on their roles, responsibilities, and how to best guide first-time and mentored contributors.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2562,7 +3167,7 @@
       ],
       "full_description": "Snippet: Imagine you are tasked with integrating a legacy Drupal site into a microservices environment. How do you automate testing for stable code delivery? How do you set up your CI/CD pipelines Prerequisite: You use drupal and have a rough idea about APIs and microservices Outline: Let’s have a look at how a drupal site may be integrated into a Microservices environment, whilst ensuring stable delivery. We will be looking at setting up a CI/CD-pipeline that implements multiple automated testing requirements. We will also take a look at how the test setup can be implemented on the Drupal side and what pitfalls you may face. Learning Objectives: How to set up a CI/CD-pipeline and test setup for Drupal in a microservices environment Experience levelBeginner Session sponsored by Slide Deck Presentation LinkSlides",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "platform-sh"
     },
     {
       "startTime": "2024-09-26T09:45:00Z",
@@ -2599,7 +3204,7 @@
         "coffee & lunch break time"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Lunch break.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -2619,7 +3224,7 @@
       ],
       "full_description": "Learn how the European Commission is pioneering digital transformation through its Open Source Strategy, driving innovation and transparency across EU institutions. This presentation will explore the Commission's commitment to open source, highlighting key initiatives and platforms like the Interoperable Europe Portal, a collaborative solution based on Drupal. Learn how these efforts are fostering greater collaboration, efficiency, and accessibility within the EU, and how the open source approach is little by little changing the working approach at the European Commission. Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "european-commission"
     },
     {
       "startTime": "2024-09-26T11:15:00Z",
@@ -2636,7 +3241,7 @@
       ],
       "full_description": "This presentation is about what you as a web developer or website owner can do with your site but also with your company to get a lower footprint. With just a few small adjustments you can make a big difference. Ramon explains to you what you can do so that you too can easily reduce your footprint and also achieve profit on a personal and business level.\" Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "halvar"
     },
     {
       "startTime": "2024-09-26T11:30:00Z",
@@ -2654,7 +3259,7 @@
       ],
       "full_description": "In this technical deep dive, we will explore how we transformed a sluggish membership registration process into a swift and seamless experience. Our client faced a critical challenge: integrating their enterprise CRM via middleware resulted in long-running calls, destroying the customer experience with disastrous 45-second response times. Our solution architect stepped in, leveraging ReactPHP to implement asynchronous calls. This approach allowed us to offload long-running processes to separate services, dramatically improving page load times and preserving the user experience. Join us as we walk you through our problem-solving journey, including: • The architectural challenges of slow CRM and middleware integration. • How ReactPHP was pivotal in offloading and processing long-running calls asynchronously. • The stress testing of our solution with BlazeMeter and the discovery of the API limits • of the underlying enterprise software. This session is a must-attend for Drupal developers and technical leaders looking to optimise user experience through cutting-edge techniques. Learn from our real-world experience and discover how you can implement similar high-performance solutions in your projects. Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "cti-digital"
     },
     {
       "startTime": "2024-09-26T11:45:00Z",
@@ -2671,7 +3276,7 @@
       ],
       "full_description": "The session will address the challenges of attracting developers to use PHP and sequentially recruiting them in companies and teams where Drupal is the framework of choice. I will focus on the strategy and tactics that we have developed over the last 5 years in our team to grow and onboard engineers (from 0 to 70+). Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "agiledrop"
     },
     {
       "startTime": "2024-09-26T12:00:00Z",
@@ -2688,7 +3293,7 @@
       ],
       "full_description": "Little Background about Ubercart: Ubercart and Drupal commerce are two famous alternate solutions to get your ecommerce store settled up very quickly in Drupal. Ubercart has been heavily used for e-commerce setups by Drupal, but it's support has been deprecated after Drupal 7 Key differences between Ubercart and Drupal Commerce: Without taking lot of time here, I would like to share the scenario on choosing Drupal commerce v/s ubercart or vice-versa. When to Choose Drupal Commerce : - you want to build a merchant portal (marketplace). It has support to add multiple stores. - You have a basic apparel store - You want to have a big basket type of store. It supports adding different types of Product types And Ubercart : - For new websites, I wouldn't recommend ? - But what if you have a store that sells one product in 100's of variations ? Would you setup each variation as separate entry ? Examples : : one website selling one stole in multiple colors, sizes, styles etc. And you need to have different SKU for tracking this data but same price. : Second example : an ecomm store for online catering that let customers select the different options from available set of attributes to customise the meal? Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "lnwebworks"
     },
     {
       "startTime": "2024-09-26T12:15:00Z",
@@ -3090,7 +3695,7 @@
       ],
       "full_description": "Over the years we have built very many and very different websites. Some have many authenticated users, some integrate many APIs, some have many different editorial roles, some have a lot of content, some have highly structured content. Whenever we create nice solutions we share the knowledge in our team and create best practices about it. As a result we have a very nice set of Drupal Contrib modules that we use for different use cases that allow us to achieve nice results fast. To give a small teaser, we are talking about modules like: • https://www.drupal.org/project/config_patch_gitlab_api • https://www.drupal.org/project/content_templates • https://www.drupal.org/project/frontend_editing • And many more In this session we will present these modules organised by topics. For each we will demonstrate how to use them. The session will be entertaining and useful for all Drupal users, especially for site builders, developers, content editors and Drupal consultants. Attendees will • learn about new contrib modules and see them in action • learn in what use cases these modules can be used and how they are configured • be inspired how to make their Drupal websites even better. Session sponsored by",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "1xinternet"
     },
     {
       "startTime": "2024-09-26T14:00:00Z",
@@ -3103,7 +3708,7 @@
         "coffee & lunch break time"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Coffee break.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -3359,7 +3964,7 @@
         "other"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The closing ceremony for DrupalCon Barcelona 2024, featuring key decisions, hot-topic discussions, and a celebration of the community's accomplishments — including the announcement of the host city for DrupalCon Europe 2025.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -3374,9 +3979,9 @@
         "other"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Pub quiz night with six rounds of ten questions covering all things Drupal and general web topics. Teams of five compete for the title of Drupal trivia champions and small prizes. Held at L'Estació, Espai Gastronòmic. Badge required for entry. Food and drinks available for purchase. Sponsored by Amazee Labs and Zoocha.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "amazee-labs zoocha"
     },
     {
       "startTime": "2024-09-27T07:00:00Z",
@@ -3389,11 +3994,11 @@
         "contribution topic"
       ],
       "speakers": [
-        "Rodrigo Aguilera (Rodrigoaguilera)"
+        "Chris Darke"
       ],
-      "full_description": "",
+      "full_description": "A hands-on workshop for newcomers to the Drupal contribution process. Participants get up to speed with Drupal.org, issue queues, community communication channels, and local Drupal installation. Mentors are on hand to get you ready to tackle real issues.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "european-commission-module-ftc"
     },
     {
       "startTime": "2024-09-27T07:00:00Z",
@@ -3408,7 +4013,7 @@
       "speakers": [
         "Chris Darke (Chrisdarke)"
       ],
-      "full_description": "",
+      "full_description": "Designed for contributors who are comfortable with contribution tools but want guidance on selecting issues and navigating workflows. Experienced mentors provide hands-on support throughout the day to help you make your next contribution.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -3423,9 +4028,9 @@
         "contribution topic"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "The final day of DrupalCon Barcelona 2024 is dedicated to giving back to the Drupal community. Attendees collaborate on marketing materials, events, curriculum, code, documentation, and other vital aspects of the platform.",
       "video_url": "",
-      "sponsorIds": ""
+      "sponsorIds": "drunomics werk21"
     },
     {
       "startTime": "2024-09-27T08:00:00Z",
@@ -3438,7 +4043,7 @@
         "coffee & lunch break time"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Coffee break.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -3453,7 +4058,7 @@
         "coffee & lunch break time"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Lunch break.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -3468,7 +4073,7 @@
         "coffee & lunch break time"
       ],
       "speakers": [],
-      "full_description": "",
+      "full_description": "Coffee break.",
       "video_url": "",
       "sponsorIds": ""
     }
