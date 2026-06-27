@@ -3,3 +3,6 @@ cache
 .codex
 .idea
 .git
+.docker-compose.yml
+.env
+.env*

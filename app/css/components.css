@@ -1,0 +1,1488 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   components.css — shared macOS/iOS design language
+   Loaded by both planner.html and editor.html, after app.css / forms.css.
+   Contains: app shell, sidebar classes, button treatments, modal design.
+   ─────────────────────────────────────────────────────────────────────────
+   NOT in this file: page-specific IDs (#plannerSidebar, #editorSidebar,
+   #plannerMain, #editorMain). Those live in planner.css / editor-design.css.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Desktop app shell ────────────────────────────────────────────────────────
+   Transforms the page into a fixed-height sidebar + content-area layout.
+   Both planner and editor use this shell on ≥ 640px.                         */
+
+@media (min-width: 640px) {
+  html:has(#plannerMain),
+  html:has(#editorMain) { overflow: hidden; height: 100%; }
+
+  body:has(#plannerMain),
+  body:has(#editorMain) {
+    display: flex;
+    flex-direction: row;
+    height: 100dvh;
+    overflow: hidden;
+    background: #f2f2f7;
+    min-height: unset;
+  }
+
+  /* Site header moves into the sidebar — hide the top bar */
+  body:has(#plannerMain) .header-shell,
+  body:has(#editorMain) .header-shell { display: none; }
+
+  /* Strip the dark accordion shell — sidebar provides the nav chrome. */
+  body:has(#plannerMain) .editor-meta-accordion,
+  body:has(#editorMain) .editor-meta-accordion {
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+  }
+}
+
+/* ── Sidebar: shared classes ──────────────────────────────────────────────────
+   Design: macOS sidebar — subtle tinted background, tinted selection,
+   SF Pro system font, tight density, no uppercase group headers.
+   ID-specific dimensions (#plannerSidebar, #editorSidebar) live in their
+   respective stylesheets. These class rules apply to both.                    */
+
+@media (min-width: 640px) {
+
+  /* ── Brand area ── */
+  .sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    padding: 0.75rem 0.625rem 0.625rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .sidebar-app-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: #007AFF;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sidebar-event-name {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #1c1c1e;
+    line-height: 1.2;
+  }
+
+  .sidebar-dirty-row {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.15rem;
+  }
+
+  .sidebar-dirty-dot  { font-size: 0.4rem; }
+  .sidebar-dirty-label { font-size: 0.6875rem; color: #8e8e93; }
+
+  /* Collapse toggle */
+  .sidebar-toggle-btn {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 0.6875rem;
+    transition: background 120ms, color 120ms;
+  }
+  .sidebar-toggle-btn:hover { background: rgba(0, 0, 0, 0.06); color: rgba(0, 0, 0, 0.55); }
+
+  /* ── Group headers ── */
+  .sidebar-group { margin-bottom: 0.125rem; }
+
+  .sidebar-group-label {
+    display: block;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: rgba(0, 0, 0, 0.35);
+    padding: 0.5rem 0.625rem 0.15rem;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  /* ── Nav items ── */
+  .sidebar-tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    min-height: 26px;
+    padding: 0.25rem 0.625rem;
+    border-radius: 6px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #1c1c1e;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: background 100ms;
+  }
+  .sidebar-tab-btn:hover:not(.is-active) { background: rgba(0, 0, 0, 0.04); }
+  .sidebar-tab-btn.is-active {
+    background: rgba(0, 122, 255, 0.12);
+    color: #007AFF;
+  }
+  .sidebar-tab-btn.is-active .sidebar-item-icon { color: #007AFF; }
+
+  .sidebar-item-icon {
+    font-size: 0.8125rem;
+    flex-shrink: 0;
+    color: rgba(0, 0, 0, 0.45);
+    line-height: 1;
+  }
+
+  .sidebar-label {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* ── Collapsed state (class-based — works for any sidebar element) ── */
+  .sidebar-collapsed .sidebar-label       { display: none; }
+  .sidebar-collapsed .sidebar-group-label { display: none; }
+  .sidebar-collapsed .sidebar-brand-text  { display: none; }
+
+  .sidebar-collapsed .sidebar-tab-btn {
+    justify-content: center;
+    padding: 0.3rem 0;
+    gap: 0;
+    min-height: 30px;
+  }
+
+  .sidebar-collapsed .sidebar-toggle-btn { margin: 0 auto; }
+  .sidebar-collapsed .sidebar-brand      { justify-content: center; padding: 0.625rem 0.25rem; }
+
+  /* ── Dark theme ── */
+  .theme-dark .sidebar-brand        { border-bottom-color: rgba(255, 255, 255, 0.06); }
+  .theme-dark .sidebar-event-name   { color: rgba(255, 255, 255, 0.88); }
+  .theme-dark .sidebar-dirty-label  { color: rgba(255, 255, 255, 0.3); }
+  .theme-dark .sidebar-toggle-btn   { color: rgba(255, 255, 255, 0.25); }
+  .theme-dark .sidebar-toggle-btn:hover { background: rgba(255, 255, 255, 0.07); color: rgba(255, 255, 255, 0.55); }
+  .theme-dark .sidebar-tab-btn      { color: rgba(255, 255, 255, 0.82); }
+  .theme-dark .sidebar-tab-btn:hover:not(.is-active) { background: rgba(255, 255, 255, 0.05); }
+  .theme-dark .sidebar-tab-btn.is-active {
+    background: rgba(10, 132, 255, 0.2);
+    color: #0a84ff;
+  }
+  .theme-dark .sidebar-tab-btn.is-active .sidebar-item-icon { color: #0a84ff; }
+  .theme-dark .sidebar-item-icon    { color: rgba(255, 255, 255, 0.42); }
+  .theme-dark .sidebar-group-label  { color: rgba(255, 255, 255, 0.25); }
+}
+
+/* ── Buttons: native design language ─────────────────────────────────────────
+   Applied globally (modals are outside app containers, so unscoped selectors
+   are required). Both planner and editor use these treatments.                */
+
+@media (min-width: 640px) {
+
+  button, a[role="button"] {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  }
+
+  /* Primary filled → system blue */
+  button.bg-gray-800, a.bg-gray-800,
+  button.bg-gray-700 {
+    background-color: #007AFF;
+    border-color: transparent;
+    border-radius: 6px;
+    letter-spacing: -0.01em;
+  }
+  button.bg-gray-800:hover, a.bg-gray-800:hover,
+  button.bg-gray-700:hover { background-color: #0071e3; }
+
+  .theme-dark button.bg-gray-800, .theme-dark a.bg-gray-800,
+  .theme-dark button.bg-gray-700 { background-color: #0a84ff; }
+  .theme-dark button.bg-gray-800:hover, .theme-dark a.bg-gray-800:hover,
+  .theme-dark button.bg-gray-700:hover { background-color: #409cff; }
+
+  /* Cancel / secondary */
+  button.bg-gray-50, button.bg-gray-100 {
+    background: rgba(0, 0, 0, 0.05);
+    color: #3c3c3e;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+  }
+  button.bg-gray-50:hover, button.bg-gray-100:hover {
+    background: rgba(0, 0, 0, 0.09);
+  }
+  .theme-dark button.bg-gray-50, .theme-dark button.bg-gray-100 {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.82);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  .theme-dark button.bg-gray-50:hover, .theme-dark button.bg-gray-100:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+}
+
+/* ── Touch: always-visible action buttons ────────────────────────────────────
+   Card action buttons use opacity-0 group-hover:opacity-100 — invisible on
+   touch devices that have no hover event. Make them permanently visible.      */
+@media (pointer: coarse) {
+  .opacity-0[class*="group-hover"] { opacity: 1; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Modal: macOS-native design language
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Desktop (≥640px): frosted backdrop + flat card ──────────────────────── */
+@media (min-width: 640px) {
+
+  [role="dialog"] {
+    background: rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+  }
+
+  [role="dialog"] > div {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+    border-radius: 12px;
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+    box-shadow:
+      0 2px 8px  rgba(0, 0, 0, 0.08),
+      0 16px 48px rgba(0, 0, 0, 0.10);
+  }
+
+  .theme-dark [role="dialog"] > div {
+    background: #2c2c2e;
+    border-color: rgba(255, 255, 255, 0.09);
+    box-shadow:
+      0 2px 8px  rgba(0, 0, 0, 0.30),
+      0 16px 48px rgba(0, 0, 0, 0.45);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  [role="dialog"] .border-b.border-gray-200,
+  [role="dialog"] .border-t.border-gray-200 {
+    border-color: rgba(0, 0, 0, 0.07);
+  }
+  .theme-dark [role="dialog"] .border-b.border-gray-200,
+  .theme-dark [role="dialog"] .border-t.border-gray-200 {
+    border-color: rgba(255, 255, 255, 0.07);
+  }
+
+  [role="dialog"] h2 {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #1c1c1e;
+  }
+  .theme-dark [role="dialog"] h2 { color: rgba(255, 255, 255, 0.9); }
+
+  [role="dialog"] button[aria-label="Close"] {
+    width: 28px;
+    height: 28px;
+    min-height: 28px;
+    padding: 0;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.06);
+    color: rgba(0, 0, 0, 0.40);
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  [role="dialog"] button[aria-label="Close"]:hover {
+    background: rgba(0, 0, 0, 0.10);
+    color: rgba(0, 0, 0, 0.65);
+  }
+  .theme-dark [role="dialog"] button[aria-label="Close"] {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.40);
+  }
+  .theme-dark [role="dialog"] button[aria-label="Close"]:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  [role="dialog"] .editor-field-label {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    color: #3c3c3e;
+  }
+  .theme-dark [role="dialog"] .editor-field-label { color: rgba(255, 255, 255, 0.70); }
+
+  [role="dialog"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  [role="dialog"] select {
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: none;
+    background: rgba(0, 0, 0, 0.03);
+    color: #1c1c1e;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+    font-size: 0.875rem;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+  }
+  [role="dialog"] textarea {
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: none;
+    background: rgba(0, 0, 0, 0.03);
+    color: #1c1c1e;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.625rem;
+  }
+  [role="dialog"] input:focus:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  [role="dialog"] select:focus,
+  [role="dialog"] textarea:focus {
+    border-color: #007AFF;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15);
+    outline: none;
+    background: #fff;
+  }
+  .theme-dark [role="dialog"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  .theme-dark [role="dialog"] select,
+  .theme-dark [role="dialog"] textarea {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.90);
+  }
+  .theme-dark [role="dialog"] input:focus:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  .theme-dark [role="dialog"] select:focus,
+  .theme-dark [role="dialog"] textarea:focus {
+    border-color: #0a84ff;
+    box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.20);
+    background: rgba(255, 255, 255, 0.09);
+  }
+
+  [role="dialog"] .border-t button,
+  [role="dialog"] .border-t a[role="button"] {
+    height: 32px;
+    min-height: 32px;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    border-radius: 6px;
+  }
+
+  [role="dialog"] button.border-red-200,
+  [role="dialog"] button.text-red-600 {
+    color: #FF3B30;
+    border-color: rgba(255, 59, 48, 0.25);
+    background: transparent;
+  }
+  [role="dialog"] button.border-red-200:hover,
+  [role="dialog"] button.text-red-600:hover {
+    background: rgba(255, 59, 48, 0.06);
+    border-color: rgba(255, 59, 48, 0.40);
+  }
+  .theme-dark [role="dialog"] button.border-red-200,
+  .theme-dark [role="dialog"] button.text-red-600 {
+    color: #FF453A;
+    border-color: rgba(255, 69, 58, 0.30);
+  }
+  .theme-dark [role="dialog"] button.border-red-200:hover,
+  .theme-dark [role="dialog"] button.text-red-600:hover {
+    background: rgba(255, 69, 58, 0.10);
+    border-color: rgba(255, 69, 58, 0.50);
+  }
+}
+
+/* ── Mobile (<640px): modals as bottom sheets ─────────────────────────────── */
+@media (max-width: 639px) {
+
+  /* .session-modal-card uses role="dialog" on the card itself (not a wrapper),
+     so all these bottom-sheet rules must exclude it to avoid layout conflicts. */
+  [role="dialog"]:not(.session-modal-card) {
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+    overflow: hidden;
+    z-index: 150;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  [role="dialog"]:not(.session-modal-card) > div {
+    width: 100%;
+    max-width: 100%;
+    max-height: 90dvh;
+    margin: 0;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: planner-sheet-up 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+    background: #f2f2f7;
+  }
+  .theme-dark [role="dialog"]:not(.session-modal-card) > div { background: #1c1c1e; }
+  /* eventAssocModal is a full-height list panel — keep its white card surface */
+  #eventAssocModal > div { background: #ffffff; border-radius: 0; max-height: 100dvh; }
+  .theme-dark #eventAssocModal > div { background: #1c1c1e; }
+
+  /* Header and footer: white surface contrasting the grouped body */
+  [role="dialog"]:not(.session-modal-card) > div > .border-b { background: #ffffff; }
+  [role="dialog"]:not(.session-modal-card) > div > .border-t { background: #ffffff; }
+  .theme-dark [role="dialog"]:not(.session-modal-card) > div > .border-b { background: #2c2c2e; }
+  .theme-dark [role="dialog"]:not(.session-modal-card) > div > .border-t { background: #2c2c2e; }
+
+  @keyframes planner-sheet-up {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+  }
+
+  [role="dialog"]:not(.session-modal-card) > div::before {
+    content: '';
+    display: block;
+    flex-shrink: 0;
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(0, 0, 0, 0.15);
+    margin: 10px auto 4px;
+  }
+  .theme-dark [role="dialog"]:not(.session-modal-card) > div::before { background: rgba(255, 255, 255, 0.20); }
+
+  /* Header: fixed — never scrolls away */
+  [role="dialog"]:not(.session-modal-card) > div > .border-b { flex-shrink: 0; }
+
+  /* Body: fills remaining height, scrolls internally.
+     Excludes #eventAssocModal and .session-modal-card. */
+  [role="dialog"]:not(#eventAssocModal):not(.session-modal-card) > div > div:not(.border-b):not(.border-t) {
+    flex: 1;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    max-height: none !important;
+    /* 16px is iOS's standard inset margin; overrides px-6 (24px) from HTML */
+    padding-left: 1rem;
+    padding-right: 1rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Footer: pinned at bottom, clears the home-indicator bar */
+  [role="dialog"]:not(.session-modal-card) > div > .border-t { flex-shrink: 0; }
+  [role="dialog"]:not(.session-modal-card) > div > div:last-child {
+    flex-shrink: 0;
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 0.25rem);
+  }
+
+  /* Footer buttons: 44 px minimum tap target */
+  [role="dialog"] > div > .border-t button,
+  [role="dialog"] > div > .border-t a[role="button"] {
+    min-height: 44px;
+    height: auto;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    border-radius: 10px;
+  }
+
+  /* iOS zoom prevention: inputs must be ≥ 16 px or Safari zooms on focus */
+  [role="dialog"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  [role="dialog"] select,
+  [role="dialog"] textarea {
+    font-size: 1rem;
+  }
+
+  /* Modal inputs/selects: 44px tap target (most modal fields are h-10 = 40px) */
+  [role="dialog"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="hidden"]),
+  [role="dialog"] select {
+    min-height: 44px;
+    height: auto;
+  }
+
+  /* Modal body buttons (e.g. Attach, Remove file) — not in .border-t footer */
+  [role="dialog"] button.h-6,
+  [role="dialog"] button.h-7,
+  [role="dialog"] button.h-8,
+  [role="dialog"] button.h-9,
+  [role="dialog"] button.h-10,
+  [role="dialog"] button.h-11 {
+    min-height: 44px;
+    height: auto;
+  }
+  /* Square modal icon buttons (h-8 w-8 close/action buttons not caught by aria-label rule) */
+  [role="dialog"] button.h-8.w-8 {
+    min-height: 44px;
+    min-width: 44px;
+    height: auto;
+    width: auto;
+  }
+
+  /* ── Inputs, selects, textareas: iOS native surface ─────────────────────
+     White on the grouped gray body; 10px system radius; hairline border;
+     no Tailwind shadow-sm. Box-shadow already set to none by desktop block
+     for min-width:640 but needs re-asserting at mobile. */
+  [role="dialog"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="hidden"]),
+  [role="dialog"] select,
+  [role="dialog"] textarea {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    box-shadow: none;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  .theme-dark [role="dialog"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="hidden"]),
+  .theme-dark [role="dialog"] select,
+  .theme-dark [role="dialog"] textarea {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.14);
+    color: rgba(255, 255, 255, 0.90);
+  }
+
+  /* Textarea: no resize handle (useless on touch) */
+  [role="dialog"] textarea { resize: none; }
+
+  /* ── Section headers inside modals: iOS sentence-case, system gray ──────── */
+  [role="dialog"] p.uppercase,
+  [role="dialog"] .font-semibold.uppercase {
+    text-transform: none;
+    letter-spacing: 0.01em;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #3c3c3e;
+  }
+  .theme-dark [role="dialog"] p.uppercase,
+  .theme-dark [role="dialog"] .font-semibold.uppercase {
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  /* ── <section> cards: white surfaces on the grouped gray body ────────────
+     Also suppresses border-t separators that become redundant as card edges. */
+  [role="dialog"] section {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 0.75rem;
+    border-top: none;
+    margin-bottom: 0.5rem;
+  }
+  .theme-dark [role="dialog"] section {
+    background: rgba(255, 255, 255, 0.07);
+    border: 0.5px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* ── Inset nested field groups (companion/member subforms) ──────────────── */
+  [role="dialog"] .bg-gray-50.rounded-md {
+    background: #f2f2f7;
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+  .theme-dark [role="dialog"] .bg-gray-50.rounded-md {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.07);
+  }
+
+  /* Collapse bare two-column grids — sm:grid-cols-2 is already responsive */
+  [role="dialog"] .grid-cols-2 {
+    grid-template-columns: 1fr;
+    /* Increase row gap when collapsed from 2-col — labels need more breathing room */
+    row-gap: 0.75rem;
+  }
+  /* Reset col-span-2 inside collapsed grids — without this the item spans into
+     an implicit second column, creating overflow wider than the modal card. */
+  [role="dialog"] .grid-cols-2 > .col-span-2 {
+    grid-column: span 1;
+  }
+
+  /* ── Waypoint stop rows: mobile-native reflow ───────────────────────────────
+     Scoped through list IDs for 1,x,x specificity — necessary to beat the
+     general `[role="dialog"] input:not(...)` rule at 0,5,1 which would
+     otherwise clobber our border-radius, padding, and coords input resets.
+
+     Layout goal:
+       Row card — white, full width, padding increased for touch
+       Line 1  — [location name field] [↑↓ reorder] [✕ remove]
+       Line 2  — [date input ──────] [time input ──]   (each flex:1)
+       Below   — coords search field, full width
+
+     `order` values push date/time (order:3) and coords wrapper (order:4)
+     below line 1 without touching the DOM.                                  */
+
+  :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) [data-stop-id] {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    column-gap: 0.5rem;
+    row-gap: 0.75rem;
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.09);
+    padding: 0.75rem 0.625rem;
+  }
+  .theme-dark :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) [data-stop-id] {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.09);
+  }
+
+  /* Drag handle: remove from layout on touch (drag events don't fire) */
+  :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) .waypoint-stop-drag-handle {
+    display: none;
+  }
+
+  /* Text column: grows to fill first line; gives location + coords stacked */
+  :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) [data-stop-id] > div:nth-of-type(1) {
+    flex: 1 0 0;
+    min-width: 0;
+    order: 1;
+  }
+
+  /* Location name: 44px tap target, white surface, 8px radius */
+  :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) input[data-stop-field="location"] {
+    min-height: 44px;
+    height: auto;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    box-shadow: none;
+    font-size: 1rem;
+    padding: 0 0.75rem;
+  }
+  .theme-dark :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) input[data-stop-field="location"] {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.14);
+    color: rgba(255, 255, 255, 0.90);
+  }
+
+  /* Coords wrapper: now a direct flex child of the row — full width, own line */
+  :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) .waypoint-coords-wrapper {
+    flex: 0 0 100%;
+    order: 4;
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    border-radius: 8px;
+    min-height: 36px;
+    align-items: center;
+  }
+  .theme-dark :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) .waypoint-coords-wrapper {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.10);
+  }
+
+  /* Coords input: transparent inside its wrapper */
+  :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) input[data-stop-field="coords"] {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    font-size: 0.875rem;
+    min-height: 28px;
+    height: auto;
+    color: inherit;
+  }
+
+  /* Date/time container: pushed to second line, fills full width */
+  :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) [data-stop-id] > div:nth-of-type(2) {
+    order: 3;
+    flex: 0 0 100%;
+    margin-top: 0;
+  }
+
+  /* Date + time inputs: equal halves of the full-width container */
+  :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) input[data-stop-field="date"],
+  :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) input[data-stop-field="time"] {
+    flex: 1;
+    width: auto !important;
+    min-width: 0;
+    min-height: 44px;
+    height: auto;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    box-shadow: none;
+    font-size: 1rem;
+    padding: 0 0.5rem;
+  }
+  .theme-dark :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) input[data-stop-field="date"],
+  .theme-dark :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) input[data-stop-field="time"] {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.14);
+    color: rgba(255, 255, 255, 0.90);
+  }
+
+  /* Up/down reorder buttons: side-by-side, generous touch targets */
+  :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) [data-stop-id] > div:nth-of-type(3) {
+    flex-direction: row;
+    order: 2;
+    margin-top: 0;
+    align-self: flex-start;
+  }
+  :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) .move-waypoint-stop-up-btn,
+  :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) .move-waypoint-stop-down-btn {
+    min-width: 36px;
+    min-height: 44px;
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Remove button: always visible on touch; aligns to top of content column */
+  :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) .remove-waypoint-stop-btn {
+    opacity: 1;
+    order: 2;
+    margin-top: 0;
+    min-width: 44px;
+    min-height: 44px;
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  [role="dialog"] h2 {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  [role="dialog"] button[aria-label="Close"] {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: rgba(0, 0, 0, 0.35);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .theme-dark [role="dialog"] button[aria-label="Close"] {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  /* Mobile: Apple design language baseline */
+  #plannerMain,
+  .editor-meta-accordion {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  }
+
+  button.bg-gray-800, a.bg-gray-800,
+  button.bg-gray-700, a.bg-gray-700 {
+    background-color: #007AFF;
+    border-color: transparent;
+    border-radius: 8px;
+    letter-spacing: 0;
+  }
+  button.bg-gray-800:hover, a.bg-gray-800:hover,
+  button.bg-gray-700:hover, a.bg-gray-700:hover { background-color: #0071e3; }
+  .theme-dark button.bg-gray-800, .theme-dark a.bg-gray-800,
+  .theme-dark button.bg-gray-700, .theme-dark a.bg-gray-700 { background-color: #0a84ff; }
+  .theme-dark button.bg-gray-800:hover, .theme-dark a.bg-gray-800:hover,
+  .theme-dark button.bg-gray-700:hover, .theme-dark a.bg-gray-700:hover { background-color: #409cff; }
+
+  button.bg-gray-50, button.bg-gray-100 {
+    background: rgba(0, 0, 0, 0.05);
+    color: #3c3c3e;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    border-radius: 8px;
+  }
+  button.bg-gray-50:hover, button.bg-gray-100:hover { background: rgba(0, 0, 0, 0.09); }
+  .theme-dark button.bg-gray-50, .theme-dark button.bg-gray-100 {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.82);
+    border-color: rgba(255, 255, 255, 0.10);
+  }
+  .theme-dark button.bg-gray-50:hover, .theme-dark button.bg-gray-100:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Mobile (<640px): iOS native design language — planner & editor pages
+   Scoped via :has() so the schedule page (index.html) aurora header is
+   left untouched on mobile.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 639px) {
+
+  /* ── App page body: flat system backgrounds (no aurora gradient bleed) ─────
+     Light → #f2f2f7 (iOS grouped background). Dark → #000 (iOS true black).   */
+  body:has(#plannerMain),
+  body:has(#editorMain) { background: #f2f2f7; }
+  body.theme-dark:has(#plannerMain),
+  body.theme-dark:has(#editorMain) { background: #000000; }
+
+  /* ── App header: iOS navigation bar ───────────────────────────────────────
+     On desktop the header-shell is replaced by the sidebar. On mobile it
+     should feel like a native iOS nav bar — light, translucent, flat.        */
+  body:has(#plannerMain) .header-shell,
+  body:has(#editorMain) .header-shell {
+    background: rgba(246, 246, 248, 0.95);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    animation: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+    box-shadow: none;
+  }
+  body:has(#plannerMain) .header-shell::before,
+  body:has(#editorMain) .header-shell::before { display: none; }
+  body:has(#plannerMain) .header-shell::after,
+  body:has(#editorMain) .header-shell::after  { display: none; }
+
+  body:has(#plannerMain) .header-title,
+  body:has(#editorMain) .header-title { color: #1c1c1e; }
+
+  body:has(#plannerMain) .header-title .header-event,
+  body:has(#editorMain) .header-title .header-event {
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    -webkit-text-fill-color: #1c1c1e;
+  }
+  body:has(#plannerMain) .header-title .header-suffix,
+  body:has(#editorMain) .header-title .header-suffix {
+    color: #007AFF;
+    border-color: rgba(0, 122, 255, 0.30);
+    background: rgba(0, 122, 255, 0.08);
+  }
+  body:has(#plannerMain) .header-logo,
+  body:has(#editorMain) .header-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    font-size: 0.8125rem;
+    border-color: rgba(0, 0, 0, 0.12);
+    background: rgba(0, 122, 255, 0.08);
+    animation: none;
+    box-shadow: none;
+    color: #007AFF;
+  }
+
+  /* ── Header inner wrapper: compact nav bar height ────────────────────────── */
+  body:has(#plannerMain) .header-shell > div,
+  body:has(#editorMain) .header-shell > div {
+    padding-top: 0.5rem;
+    padding-bottom: 0.375rem;
+  }
+
+  /* ── Header icon+title row: tighter gap for 32px icon ──────────────────── */
+  body:has(#plannerMain) .header-shell > div > div,
+  body:has(#editorMain) .header-shell > div > div { gap: 0.5rem; }
+
+  /* ── SF Pro throughout the nav bar ──────────────────────────────────────── */
+  body:has(#plannerMain) .header-shell,
+  body:has(#editorMain) .header-shell {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  }
+
+  body:has(#plannerMain) .header-kicker,
+  body:has(#editorMain) .header-kicker {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.10em;
+  }
+
+  body:has(#plannerMain) .header-title,
+  body:has(#editorMain) .header-title {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    letter-spacing: -0.022em;
+    margin-top: 0.05rem;
+  }
+
+  /* ── Dark theme: app header ──────────────────────────────────────────────── */
+  body.theme-dark:has(#plannerMain) .header-shell,
+  body.theme-dark:has(#editorMain) .header-shell {
+    background: rgba(28, 28, 30, 0.95);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+  body.theme-dark:has(#plannerMain) .header-kicker,
+  body.theme-dark:has(#editorMain) .header-kicker { color: rgba(255, 255, 255, 0.40); }
+  body.theme-dark:has(#plannerMain) .header-title,
+  body.theme-dark:has(#editorMain) .header-title {
+    color: rgba(255, 255, 255, 0.90);
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.90);
+  }
+  body.theme-dark:has(#plannerMain) .header-title .header-event,
+  body.theme-dark:has(#editorMain) .header-title .header-event {
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.90);
+  }
+  body.theme-dark:has(#plannerMain) .header-title .header-suffix,
+  body.theme-dark:has(#editorMain) .header-title .header-suffix {
+    color: #0a84ff;
+    border-color: rgba(10, 132, 255, 0.30);
+    background: rgba(10, 132, 255, 0.12);
+  }
+  body.theme-dark:has(#plannerMain) .header-logo,
+  body.theme-dark:has(#editorMain) .header-logo {
+    border-color: rgba(255, 255, 255, 0.10);
+    background: rgba(10, 132, 255, 0.15);
+    color: #0a84ff;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   iOS native bottom tab bar
+   ══════════════════════════════════════════════════════════════════════════ */
+
+#mobileBottomBar,
+#editorMobileBottomBar,
+#scheduleBottomBar {
+  display: flex;
+  align-items: stretch;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(248, 248, 248, 0.94);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top: 0.5px solid rgba(0, 0, 0, 0.15);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (min-width: 640px) {
+  #mobileBottomBar,
+  #editorMobileBottomBar,
+  #scheduleBottomBar { display: none; }
+}
+
+.mobile-bottom-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1875rem;
+  padding: 0.375rem 0.25rem 0.3125rem;
+  min-height: 49px;
+  border: none;
+  background: transparent;
+  color: rgba(0, 0, 0, 0.38);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 80ms;
+}
+.mobile-bottom-tab.is-active { color: #007AFF; }
+.mobile-bottom-tab:active:not(.is-active) { color: rgba(0, 0, 0, 0.6); }
+
+.mobile-bottom-tab-icon {
+  font-size: 1.375rem;
+  line-height: 1;
+}
+.mobile-bottom-tab-label {
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.theme-dark #mobileBottomBar,
+.theme-dark #editorMobileBottomBar,
+.theme-dark #scheduleBottomBar {
+  background: rgba(28, 28, 30, 0.94);
+  border-top-color: rgba(255, 255, 255, 0.10);
+}
+.theme-dark .mobile-bottom-tab { color: rgba(255, 255, 255, 0.38); }
+.theme-dark .mobile-bottom-tab.is-active { color: #0a84ff; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Schedule page — mobile compact header (aurora gradient preserved)
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 639px) {
+  /* Banner logo — larger than planner/editor nav, aurora animation kept */
+  body:has(#scheduleMain) .header-logo {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    font-size: 1.125rem;
+  }
+  body:has(#scheduleMain) .header-logo::before {
+    inset: 5px;
+    border-radius: 10px;
+  }
+  body:has(#scheduleMain) .header-logo-image {
+    padding: 0.5rem;
+  }
+
+  /* Banner padding — room to breathe and show the aurora */
+  body:has(#scheduleMain) .header-shell .w-\[94\%\] {
+    padding-top: 0;
+    padding-bottom: 0.5rem;
+  }
+  body:has(#scheduleMain) .header-shell .flex.justify-between {
+    padding-top: 1.125rem;
+    padding-bottom: 0.875rem;
+  }
+  body:has(#scheduleMain) .header-shell .flex.items-center.gap-3 {
+    gap: 0.75rem;
+  }
+
+  /* Flag: show on mobile for the schedule banner */
+  body:has(#scheduleMain) .header-flag {
+    display: inline-block;
+  }
+
+  /* SF Pro + generous title for banner feel */
+  body:has(#scheduleMain) .header-shell {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  }
+  body:has(#scheduleMain) .header-kicker {
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+  }
+  body:has(#scheduleMain) .header-title {
+    font-size: clamp(1.2rem, 5.5vw, 1.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  /* Main content: pad bottom so tab bar doesn't overlap */
+  #scheduleMain,
+  #plannerMain,
+  #editorMain {
+    padding-bottom: calc(49px + env(safe-area-inset-bottom, 0px) + 1rem);
+  }
+
+  /* Selection overview: sit above the tab bar */
+  body:has(#scheduleMain) #selectionOverview {
+    bottom: calc(49px + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Find Event tab: highlights while modal is open */
+  body.session-modal-open #scheduleEventFinderTab { color: #007AFF; }
+  body.theme-dark.session-modal-open #scheduleEventFinderTab { color: #0a84ff; }
+
+  /* ── Pill action buttons ─────────────────────────────────────────────────── */
+  body:has(#scheduleMain) #filtersPanel button:not(#clearKeywords),
+  body:has(#scheduleMain) #sessionFiltersContent button:not(#clearKeywords) {
+    height: 34px;
+    border: none;
+    border-radius: 100px;
+    background: rgba(0, 0, 0, 0.06);
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 0.875rem;
+  }
+  body.theme-dark:has(#scheduleMain) #filtersPanel button:not(#clearKeywords),
+  body.theme-dark:has(#scheduleMain) #sessionFiltersContent button:not(#clearKeywords) {
+    background: rgba(255, 255, 255, 0.10);
+    color: rgba(255, 255, 255, 0.85);
+  }
+  /* Primary action — blue pill (must come after generic rule to win source order) */
+  body:has(#scheduleMain) #filtersPanel button#searchEvents {
+    background: #007AFF;
+    color: #fff;
+  }
+  body.theme-dark:has(#scheduleMain) #filtersPanel button#searchEvents {
+    background: #0a84ff;
+    color: #fff;
+  }
+
+  /* ── Strip accordion card chrome ────────────────────────────────────────── */
+  body:has(#scheduleMain) .mobile-instructions-panel,
+  body:has(#scheduleMain) #sessionFiltersPanel {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.12);
+  }
+  body.theme-dark:has(#scheduleMain) .mobile-instructions-panel,
+  body.theme-dark:has(#scheduleMain) #sessionFiltersPanel {
+    border-bottom-color: rgba(255, 255, 255, 0.10);
+  }
+
+  /* Accordion toggle: section-label colour (overrides the neon #d7e7f8 default) */
+  body:has(#scheduleMain) .mobile-instructions-panel .mobile-accordion-toggle,
+  body:has(#scheduleMain) #sessionFiltersPanel .mobile-accordion-toggle {
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  }
+  body.theme-dark:has(#scheduleMain) .mobile-instructions-panel .mobile-accordion-toggle,
+  body.theme-dark:has(#scheduleMain) #sessionFiltersPanel .mobile-accordion-toggle {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  /* Accordion content: pad top/bottom so it breathes inside the stripped panel */
+  body:has(#scheduleMain) #usageInstructionsContent,
+  body:has(#scheduleMain) #sessionFiltersContent {
+    padding-bottom: 0.75rem;
+  }
+
+  /* ── System background ───────────────────────────────────────────────────── */
+  body:has(#scheduleMain) {
+    background: #f2f2f7;
+  }
+  body.theme-dark:has(#scheduleMain) {
+    background: #000000;
+  }
+
+  /* ── Flat content cards (light) ──────────────────────────────────────────── */
+  body:has(#scheduleMain) .bg-white.rounded-lg:not(button):not(a) {
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    backdrop-filter: none;
+  }
+
+  /* ── Flat content cards (dark) ───────────────────────────────────────────── */
+  body.theme-dark:has(#scheduleMain) .bg-white.rounded-lg:not(button):not(a) {
+    box-shadow: none;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: #1e1e20;
+    backdrop-filter: none;
+  }
+
+  /* ── Edge-to-edge schedule grid ──────────────────────────────────────────── */
+  body:has(#scheduleMain) #eventsContainer {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  /* ── Accordion rows: compact iOS grouped-list style ─────────────────────── */
+  /* Force flat appearance — beat the .bg-white.rounded-lg dark-mode card rule */
+  body:has(#scheduleMain) .mobile-instructions-panel,
+  body:has(#scheduleMain) #sessionFiltersPanel {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.12) !important;
+  }
+  body.theme-dark:has(#scheduleMain) .mobile-instructions-panel,
+  body.theme-dark:has(#scheduleMain) #sessionFiltersPanel {
+    border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  /* Remove gap between the two rows so they read as one group */
+  body:has(#scheduleMain) .mobile-instructions-panel {
+    margin-bottom: 0;
+  }
+  /* Each toggle row: proper 44px touch target with side padding, no card background */
+  body:has(#scheduleMain) .mobile-accordion-toggle {
+    min-height: 44px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background: transparent !important;
+  }
+  /* Chevron: muted disclosure-arrow style (iOS convention) */
+  body:has(#scheduleMain) .mobile-accordion-icon {
+    color: rgba(0, 0, 0, 0.25);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+  }
+  body.theme-dark:has(#scheduleMain) .mobile-accordion-icon {
+    color: rgba(255, 255, 255, 0.25);
+  }
+}
+.theme-dark .mobile-bottom-tab:active:not(.is-active) { color: rgba(255, 255, 255, 0.7); }
+
+/* ── Shared toolbar elements (planner + editor) ──────────────────────────── */
+
+.toolbar-back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  color: #374151;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.toolbar-back-btn:hover { background: #f9fafb; color: #111827; }
+
+.toolbar-path-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.75rem;
+  height: 2.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: #6b7280;
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 0;
+}
+.toolbar-path-chip i { flex-shrink: 0; font-size: 0.7rem; }
+.toolbar-path-text { overflow: hidden; text-overflow: ellipsis; }
+
+.theme-dark .toolbar-back-btn {
+  background: var(--surface-1);
+  border-color: var(--line-0);
+  color: var(--text-1);
+}
+.theme-dark .toolbar-back-btn:hover { background: var(--surface-2); color: var(--text-0); }
+.theme-dark .toolbar-path-chip {
+  background: var(--surface-1);
+  border-color: var(--line-0);
+  color: var(--text-2);
+}
+
+/* ── Home Layout (shared between planner + editor) ───────────────────────── */
+
+.hl-root {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 860px;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+/* Hero banner */
+.hl-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  padding: 1.75rem 1.5rem 1.5rem;
+  background: linear-gradient(135deg, #1a3a5c 0%, #34526f 100%);
+  border-radius: 12px;
+  color: #fff;
+}
+.hl-hero-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+.hl-hero-icon { font-size: 1.75rem; opacity: 0.75; }
+.hl-hero-title { font-size: 1.5rem; font-weight: 700; margin: 0; line-height: 1.2; }
+.hl-hero-lead  { font-size: 0.9375rem; opacity: 0.8; margin: 0.25rem 0 0; line-height: 1.5; }
+
+/* CTA cards */
+.hl-cta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.875rem;
+}
+@media (max-width: 560px) {
+  .hl-cta-grid { grid-template-columns: 1fr; }
+}
+.hl-cta-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.15rem;
+  background: #fff;
+  border: 1px solid #e2eaf3;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  width: 100%;
+}
+.hl-cta-card:hover { border-color: #34526f; box-shadow: 0 2px 10px rgba(52,82,111,0.1); }
+.hl-cta-card--disabled { opacity: 0.5; cursor: not-allowed; }
+.hl-cta-card--disabled:hover { border-color: #e2eaf3; box-shadow: none; }
+.hl-cta-icon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #eef4fb;
+  color: #34526f;
+  font-size: 1.1rem;
+}
+.hl-cta-icon--api { background: #f0f4ff; color: #4f6bbd; }
+.hl-cta-body  { flex: 1; min-width: 0; }
+.hl-cta-title { display: block; font-size: 0.9375rem; font-weight: 600; color: #1a2e40; margin-bottom: 0.2rem; }
+.hl-cta-desc  { display: block; font-size: 0.8125rem; color: #5a7390; line-height: 1.4; }
+.hl-cta-arrow { color: #c0cfd9; font-size: 0.75rem; flex-shrink: 0; }
+
+/* Status bar */
+.hl-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.9rem;
+  background: #f0f7f0;
+  border: 1px solid #b6ddb8;
+  border-radius: 8px;
+  font-size: 0.8375rem;
+}
+.hl-status-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; flex-shrink: 0; }
+.hl-status-dot--ok { background: #22c55e; }
+.hl-status-label  { flex: 1; color: #34526f; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hl-status-action {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #e85555;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.hl-status-action:hover { text-decoration: underline; }
+
+/* Section header */
+.hl-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.hl-section-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6b7280;
+  margin: 0;
+}
+.hl-section-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.hl-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 0.875rem;
+  border-radius: 6px;
+  background: #1f2937;
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.hl-primary-btn:hover { background: #374151; }
+.hl-settings-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.12);
+  color: #6b7280;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.hl-settings-btn:hover { background: rgba(0,0,0,0.05); color: #374151; }
+
+/* Search */
+.hl-search-wrap { position: relative; }
+.hl-search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9eb2c8;
+  pointer-events: none;
+  font-size: 0.8rem;
+}
+.hl-search-input {
+  width: 100%;
+  height: 2.625rem;
+  border: 1px solid #e2eaf3;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 0.875rem;
+  color: #1a2e40;
+  padding: 0 0.875rem 0 2.25rem;
+  outline: none;
+  transition: border-color 0.12s;
+}
+.hl-search-input:focus { border-color: #34526f; }
+.hl-search-input::placeholder { color: #9eb2c8; }
+
+/* Card grid */
+.hl-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.875rem;
+}
+.hl-loading { grid-column: 1 / -1; text-align: center; color: #9eb2c8; font-size: 0.875rem; padding: 2rem; }
+.hl-empty   { grid-column: 1 / -1; color: #9eb2c8; font-size: 0.875rem; padding: 2.5rem 0; text-align: center; }
+
+/* Dark mode */
+.theme-dark .hl-hero { background: linear-gradient(135deg, #0f2238 0%, #1c3652 100%); }
+.theme-dark .hl-cta-card { background: var(--surface-1); border-color: var(--line-0); }
+.theme-dark .hl-status-bar { background: rgba(34,197,94,0.07); border-color: rgba(34,197,94,0.2); }
+.theme-dark .hl-cta-title { color: var(--text-0); }
+.theme-dark .hl-cta-desc,
+.theme-dark .hl-status-label { color: var(--text-2); }
+.theme-dark .hl-search-input { background: var(--surface-1); border-color: var(--line-0); color: var(--text-0); }
+.theme-dark .hl-cta-icon { background: rgba(52,82,111,0.3); color: #7aaccc; }
+.theme-dark .hl-section-title { color: rgba(255,255,255,0.40); }
+.theme-dark .hl-primary-btn { background: rgba(255,255,255,0.10); color: var(--text-0, rgba(255,255,255,0.9)); }
+.theme-dark .hl-primary-btn:hover { background: rgba(255,255,255,0.16); }
+.theme-dark .hl-settings-btn { border-color: var(--line-0); color: var(--text-2); }
+.theme-dark .hl-settings-btn:hover { background: var(--surface-1); color: var(--text-1); }
+
+/* ── S3 result message: uses inline style for colour so it's immune to dark
+   accordion / theme overrides. This rule just locks down the font baseline. ── */
+.s3-result { line-height: 1.55; }
+.s3-result strong, .s3-result span { color: inherit; }
+
+/* ── S3 sync progress bar ────────────────────────────────────────────────── */
+.s3-progress-track {
+  height: 3px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.s3-progress-bar {
+  height: 100%;
+  width: 40%;
+  background: #3b82f6;
+  border-radius: 2px;
+  animation: s3-sweep 1.4s ease-in-out infinite;
+}
+@keyframes s3-sweep {
+  0%   { transform: translateX(-150%); }
+  100% { transform: translateX(350%); }
+}

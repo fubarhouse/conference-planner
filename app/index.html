@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#10263e">
+    <title>Drupal Event Schedule Builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/utilities.css">
+    <link rel="stylesheet" href="./css/app.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/schedule.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div id="ariaStatus" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+    <div id="pageLoadingOverlay" class="page-loading-overlay" role="status" aria-live="polite" aria-label="Loading schedule">
+        <div class="page-loading-card">
+            <div class="page-loading-spinner" aria-hidden="true"></div>
+            <div class="page-loading-text">Loading schedule...</div>
+        </div>
+    </div>
+    <!-- Header with Navigation -->
+    <header class="header-shell text-white shadow-lg">
+        <div class="sm:w-[90%] sm:mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <div id="headerLogo" class="header-logo brand-drupalsouth">
+                        <img id="headerLogoImage" class="header-logo-image hidden" src="" alt="Event logo">
+                        <i id="headerLogoIcon" class="fas fa-water"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <div id="headerKicker" class="header-kicker">DrupalSouth Schedule</div>
+                            <img id="headerFlag" class="header-flag hidden" src="" alt="">
+                        </div>
+                        <h1 id="pageTitle" class="header-title">
+                            <span class="header-event">Custom Schedule Builder</span>
+                            <span class="header-suffix">Planner</span>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <nav class="site-nav" aria-label="Site navigation">
+                <a href="./index.html" class="site-nav-link is-active" aria-current="page">
+                    <i class="fas fa-calendar-alt" aria-hidden="true"></i><span>Schedule</span>
+                </a>
+                <a href="./planner.html" class="site-nav-link">
+                    <i class="fas fa-clipboard-list" aria-hidden="true"></i><span>My Planner</span>
+                </a>
+                <a id="editorNavLink" href="./editor.html" class="site-nav-link hidden">
+                    <i class="fas fa-pen-ruler" aria-hidden="true"></i><span>Editor</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <div id="scheduleMain" class="sm:w-[90%] sm:mx-auto px-4 py-4 sm:py-8">
+        <!-- Event Selector -->
+        <div id="filtersPanel" class="bg-white rounded-lg shadow-md p-4 mb-6">
+            <div class="flex flex-col sm:flex-row items-stretch gap-2">
+                <button id="searchEvents" type="button" class="w-full sm:w-auto h-11 inline-flex items-center justify-center px-5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
+                    <i class="fas fa-search mr-2" aria-hidden="true"></i>Find event
+                </button>
+                <button id="shareSchedule" type="button" class="w-full sm:w-auto h-11 inline-flex items-center justify-center px-5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
+                    <i class="fas fa-link mr-2" aria-hidden="true"></i>Share schedule
+                </button>
+                <button id="jumpToNow" type="button" class="hidden w-full sm:w-auto h-11 inline-flex items-center justify-center px-5 border border-gray-300 rounded-md text-sm font-medium whitespace-nowrap now-jump-btn">
+                    <i class="fas fa-circle-dot mr-2" aria-hidden="true"></i>Jump to now
+                </button>
+            </div>
+            <div id="eventMediaPromo" class="hidden mt-4"></div>
+        </div>
+
+        <div class="mobile-instructions-panel bg-white rounded-lg shadow-md p-4 mb-4 sm:mb-6">
+            <button
+                id="usageInstructionsToggle"
+                type="button"
+                class="mobile-accordion-toggle sm:hidden w-full"
+                aria-expanded="false"
+                aria-controls="usageInstructionsContent"
+            >
+                <span>Usage Instructions</span>
+                <i class="fas fa-chevron-down mobile-accordion-icon" aria-hidden="true"></i>
+            </button>
+            <div id="usageInstructionsContent" class="mobile-accordion-content hidden sm:block">
+                <h2 class="hidden sm:block text-xl font-bold text-gray-800 mb-2">Usage Instructions</h2>
+                <ul class="list-disc list-inside pl-1 text-gray-600 space-y-1">
+                    <li>Browse and filter sessions and events to find the ones you want to attend.</li>
+                    <li>Open a session card for details, and use the checkbox on each card to quickly select sessions. Your selections are automatically saved to your browser.</li>
+                    <li>Use the download button of prefernce to download your personalized schedule and import it into your calendar application.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Filters and Controls -->
+        <div id="sessionFiltersPanel" class="bg-white rounded-lg shadow-md p-4 mb-6">
+            <button
+                id="sessionFiltersToggle"
+                type="button"
+                class="mobile-accordion-toggle sm:hidden w-full"
+                aria-expanded="false"
+                aria-controls="sessionFiltersContent"
+            >
+                <span>Filters</span>
+                <i class="fas fa-chevron-down mobile-accordion-icon" aria-hidden="true"></i>
+            </button>
+            <div id="sessionFiltersContent" class="mobile-accordion-content hidden sm:block">
+            <div class="space-y-4">
+                <!-- Keywords filter - full width on its own row -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Keywords</label>
+                    <div class="relative">
+                        <input type="text" id="keywordsFilter" placeholder="Search by title, speaker, track..." class="w-full h-11 rounded-md border-gray-300 shadow-sm drupal-blue-focus pr-12 pl-3 text-base font-medium bg-white">
+                        <button id="clearKeywords" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none hidden" title="Clear search">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Other filters in a row -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Day</label>
+                        <select id="dateFilter" class="w-full h-11 pr-10 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-base font-medium bg-white">
+                            <option value="">All Days</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Track</label>
+                        <select id="trackFilter" class="w-full h-11 pr-10 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-base font-medium bg-white">
+                            <option value="">All Tracks</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Show</label>
+                        <select id="selectionFilter" class="w-full h-11 pr-10 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-base font-medium bg-white">
+                            <option value="all">All</option>
+                            <option value="selected">Selected only</option>
+                            <option value="unselected">Unselected only</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Action buttons -->
+                <div class="flex flex-wrap gap-2 pt-2 border-t border-gray-200">
+                    <button id="resetFilters" class="h-11 inline-flex items-center justify-center px-5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
+                        <i class="fas fa-redo mr-2"></i>Reset filters
+                    </button>
+                    <button id="selectAllDisplayed" class="h-11 inline-flex items-center justify-center px-5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
+                        <i class="fas fa-check-square mr-2"></i>Select all
+                    </button>
+                    <button id="deselectAllDisplayed" class="h-11 inline-flex items-center justify-center px-5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
+                        <i class="fas fa-square mr-2"></i>Deselect all
+                    </button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Selection Overview Panel -->
+        <div id="selectionOverview" class="selection-overview fixed bottom-0 left-0 right-0 bg-black shadow-lg border-t border-gray-200 transform transition-transform duration-300 translate-y-full z-50 max-h-[90vh] flex flex-col">
+            <div class="selection-overview-inner w-[94%] sm:w-[90%] mx-auto flex flex-col flex-1 min-h-0">
+                <!-- Sticky top bar -->
+                <div class="selection-overview-summary p-0">
+                    <button id="toggleDetails" type="button" class="selection-overview-toggle w-full flex p-4 pb-2 justify-between text-white hover:text-gray-300 text-sm font-medium items-center text-left">
+                        <span>Selected sessions: <span id="totalEvents">0</span> sessions in <span id="totalDuration">0 hours</span> (expand to see details)</span>
+                        <i class="fas fa-chevron-up transform transition-transform duration-200"></i>
+                    </button>
+                </div>
+                <!-- Scrollable content area (only expanded details) -->
+                <div id="stageDetails" class="selection-overview-details overflow-y-auto flex-1 mt-4 px-4 hidden">
+                    <div class="selection-overview-details-inner border-t border-gray-700 py-4">
+                        <div id="stageStats" class="space-y-2">
+                            <!-- Stage statistics will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Sticky button area -->
+                <div class="selection-overview-actions p-4 border-t border-gray-700">
+                    <div class="selection-overview-actions-row">
+                        <button id="downloadIcs" class="selection-overview-action selection-overview-action-primary drupal-blue text-white px-4 py-2 rounded-md drupal-blue-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            <i class="fas fa-calendar-plus mr-2"></i>Add to Calendar
+                        </button>
+                        <button id="addGoogleCalendar" class="selection-overview-action selection-overview-action-secondary px-4 py-2 rounded-md border border-gray-300 text-sm font-medium text-gray-100 bg-transparent hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            <i class="fab fa-google mr-2"></i>Add to Google Calendar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Events Display -->
+        <div id="eventsContainer" class="bg-white rounded-lg shadow-md p-4 mb-24">
+            <!-- Events will be dynamically inserted here -->
+        </div>
+        <section id="sponsorsContainer" class="hidden bg-white rounded-lg shadow-md p-4 mb-10" aria-labelledby="sponsorsHeading">
+            <div class="sponsors-shell">
+                <div class="sponsors-heading-wrap">
+                    <div class="header-kicker">Event Sponsors</div>
+                    <h2 id="sponsorsHeading" class="sponsors-heading">Sponsors</h2>
+                </div>
+                <div id="sponsorsContent" class="sponsors-content"></div>
+            </div>
+        </section>
+        <div id="creditsContainer" class="text-center p-4 mb-24">
+            <p id="creditsEventLink" class="text-sm text-gray-600"></p>
+            <p class="text-sm text-gray-600 my-2">❤️ Please support <a href="https://www.drupal.org/u/aboros" target="_blank" class="drupal-blue-text font-semibold">aboros</a> who inspired this from his own work, built proudly from pure love of <a href="https://www.drupal.org" target="_blank" class="drupal-blue-text">Drupal</a>. ❤️</p>
+            <p class="text-sm text-gray-600">No tracking, no cookies, no data collection. 100% privacy-first analytics.</p>
+        </div>
+    </div>
+
+    <!-- iOS bottom tab bar (mobile only) -->
+    <nav id="scheduleBottomBar" class="sm:hidden" aria-label="Site navigation">
+      <a href="./index.html" class="mobile-bottom-tab is-active" aria-label="Schedule" aria-current="page">
+        <i class="fas fa-calendar-alt mobile-bottom-tab-icon" aria-hidden="true"></i>
+        <span class="mobile-bottom-tab-label">Schedule</span>
+      </a>
+      <button type="button" id="scheduleEventFinderTab" class="mobile-bottom-tab" aria-label="Find Event">
+        <i class="fas fa-search mobile-bottom-tab-icon" aria-hidden="true"></i>
+        <span class="mobile-bottom-tab-label">Find Event</span>
+      </button>
+      <a href="./planner.html" class="mobile-bottom-tab" aria-label="My Planner">
+        <i class="fas fa-clipboard-list mobile-bottom-tab-icon" aria-hidden="true"></i>
+        <span class="mobile-bottom-tab-label">My Planner</span>
+      </a>
+      <a id="scheduleEditorTab" href="./editor.html" class="mobile-bottom-tab hidden" aria-label="Editor">
+        <i class="fas fa-pen-ruler mobile-bottom-tab-icon" aria-hidden="true"></i>
+        <span class="mobile-bottom-tab-label">Editor</span>
+      </a>
+    </nav>
+    <script>
+      document.getElementById('scheduleEventFinderTab')?.addEventListener('click', () => {
+        document.getElementById('searchEvents')?.click();
+      });
+    </script>
+
+    <script type="module" src="./js/app.js"></script>
+    <!-- 100% privacy-first analytics -->
+    <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+</body>
+</html> 

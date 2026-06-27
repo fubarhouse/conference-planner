@@ -1,0 +1,1761 @@
+{
+  "event": {
+    "designation": "DrupalCon",
+    "location": "Chicago",
+    "year": "2026",
+    "website": "https://events.drupal.org/chicago2026",
+    "region": "America",
+    "startDate": "2026-03-23T12:00:00Z",
+    "endDate": "2026-03-27T02:00:00Z",
+    "venue": "Hilton Chicago",
+    "timezone": "America/Chicago",
+    "columns": 3,
+    "enabled": false,
+    "logo": {
+      "image": "./img/logos/drupalcon-logo.svg",
+      "imageAlt": "DrupalCon logo",
+      "usePlate": false,
+      "logoDisabled": true,
+      "faIcon": "fa-solid fa-dropletfa-solid fa-droplet"
+    },
+    "scheduleComplete": true,
+    "scheduleURLs": [
+      "https://events.drupal.org/chicago2026/schedule"
+    ],
+    "flickr": {
+      "enabled": false,
+      "provider": "",
+      "groupUrl": "",
+      "image": "",
+      "imageAlt": ""
+    },
+    "sponsors": [],
+    "other_urls": []
+  },
+  "items": [
+    {
+      "startTime": "2026-03-23T12:00:00Z",
+      "endTime": "2026-03-24T00:00:00Z",
+      "duration": "P720M",
+      "title": "REGISTRATION",
+      "location": "Location 8th Street North (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/registration",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-23T13:00:00Z",
+      "endTime": "2026-03-23T22:00:00Z",
+      "duration": "P540M",
+      "title": "General Contribution / New Member + Local Drupal Community Meeting Space",
+      "location": "Location International Ballroom South (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/general-contribution-new-member-local-drupal-community-meeting-space",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-23T13:55:00Z",
+      "endTime": "2026-03-23T21:00:00Z",
+      "duration": "P425M",
+      "title": "Summit: Community (guests must pre-register)",
+      "location": "Location Williford C (3rd Floor)",
+      "link": "https://events.drupal.org//chicago2026/session/summit-community-guests-must-pre-register",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "johnpicozzi",
+        "MayaLena"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-23T14:00:00Z",
+      "endTime": "2026-03-23T21:00:00Z",
+      "duration": "P420M",
+      "title": "Training: Introduction to Drupal Module Development",
+      "location": "Location Continental Room A (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/training-introduction-drupal-module-development",
+      "track": [],
+      "speakers": [
+        "ultimike"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-23T14:00:00Z",
+      "endTime": "2026-03-23T21:00:00Z",
+      "duration": "P420M",
+      "title": "Training: Future Proof Theming: Best Practices for Drupal’s New Era",
+      "location": "Location Continental Room B (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/training-future-proof-theming-best-practices-drupals-new-era",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "mherchel",
+        "andy-blum"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-23T14:00:00Z",
+      "endTime": "2026-03-23T21:00:00Z",
+      "duration": "P420M",
+      "title": "Training: Building with Drupal Recipes: Site Features for the Next Era of Drupal",
+      "location": "Location Continental Room C (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/training-building-drupal-recipes-site-features-next-era-drupal",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "thejimbirch",
+        "phenaproxima"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-23T14:00:00Z",
+      "endTime": "2026-03-23T21:00:00Z",
+      "duration": "P420M",
+      "title": "Summit: Government (guests must pre-register)",
+      "location": "Location Salon A-1 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/summit-government-guests-must-pre-register",
+      "track": [],
+      "speakers": [
+        "joshuami",
+        "will-kirchheimer",
+        "minneapolisdan",
+        "pixelite"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-23T14:00:00Z",
+      "endTime": "2026-03-23T21:00:00Z",
+      "duration": "P420M",
+      "title": "Summit: Healthcare (guests must pre-register)",
+      "location": "Location Salon A-2 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/summit-healthcare-guests-must-pre-register",
+      "track": [],
+      "speakers": [
+        "thefancywizard",
+        "andywaldrop",
+        "jjchinquist",
+        "heatherwoz",
+        "jannafiester"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-23T14:00:00Z",
+      "endTime": "2026-03-23T21:00:00Z",
+      "duration": "P420M",
+      "title": "Summit: Higher Education (guests must pre-register)",
+      "location": "Location Salon A-3 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/summit-higher-education-guests-must-pre-register",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-23T14:00:00Z",
+      "endTime": "2026-03-23T21:00:00Z",
+      "duration": "P420M",
+      "title": "Summit: Non-Profit (guests must pre-register)",
+      "location": "Location Salon A-4 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/summit-non-profit-guests-must-pre-register",
+      "track": [],
+      "speakers": [
+        "hestenet"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-23T14:00:00Z",
+      "endTime": "2026-03-23T21:00:00Z",
+      "duration": "P420M",
+      "title": "Summit: AI (guests must pre-register)",
+      "location": "Location Salon A-5 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/summit-ai-guests-must-pre-register",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-23T18:00:00Z",
+      "endTime": "2026-03-23T21:00:00Z",
+      "duration": "P180M",
+      "title": "Summit: Drupal Partner (guests must pre-register)",
+      "location": "Location Buckingham Room (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/summit-drupal-partner-guests-must-pre-register",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-23T19:00:00Z",
+      "endTime": "2026-03-23T20:00:00Z",
+      "duration": "P60M",
+      "title": "Mentor Orientation",
+      "location": "Location Williford B (3rd Floor)",
+      "link": "https://events.drupal.org//chicago2026/session/mentor-orientation",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-23T21:00:00Z",
+      "endTime": "2026-03-23T23:00:00Z",
+      "duration": "P120M",
+      "title": "Welcome Reception",
+      "location": "Location Salon C&D (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/welcome-reception",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T13:00:00Z",
+      "endTime": "2026-03-24T22:00:00Z",
+      "duration": "P540M",
+      "title": "REGISTRATION",
+      "location": "Location 8th Street North (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/registration-0",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T13:00:00Z",
+      "endTime": "2026-03-24T22:00:00Z",
+      "duration": "P540M",
+      "title": "General Contribution / New Member + Local Drupal Community Meeting Space",
+      "location": "Location International Ballroom South (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/general-contribution-new-member-local-drupal-community-meeting-space-0",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T14:00:00Z",
+      "endTime": "2026-03-24T14:50:00Z",
+      "duration": "P50M",
+      "title": "Config Pages: The Missing Admin UI for Your Custom Site Settings",
+      "location": "Location Continental Room A (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/config-pages-missing-admin-ui-your-custom-site-settings",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "afem"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T14:00:00Z",
+      "endTime": "2026-03-24T14:50:00Z",
+      "duration": "P50M",
+      "title": "How to Land an EPIC Contribution in Drupal (Without Losing Your Mind)",
+      "location": "Location Continental Room B (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/how-land-epic-contribution-drupal-without-losing-your-mind",
+      "track": [
+        "success stories and innovation"
+      ],
+      "speakers": [
+        "mherchel",
+        "mglaman"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T14:00:00Z",
+      "endTime": "2026-03-24T14:50:00Z",
+      "duration": "P50M",
+      "title": "Innovation at Odds: How Conflict Fuels Great Ideas",
+      "location": "Location Continental Room C (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/innovation-odds-how-conflict-fuels-great-ideas",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T14:00:00Z",
+      "endTime": "2026-03-24T14:50:00Z",
+      "duration": "P50M",
+      "title": "Drupal Test Traits - Learn by example",
+      "location": "Location Salon A-1 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/drupal-test-traits-learn-example",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "moshe weitzman"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T14:00:00Z",
+      "endTime": "2026-03-24T15:00:00Z",
+      "duration": "P60M",
+      "title": "First-Time Contributor Workshop",
+      "location": "Location Salon A-2 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/first-time-contributor-workshop-1",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T14:00:00Z",
+      "endTime": "2026-03-24T14:50:00Z",
+      "duration": "P50M",
+      "title": "From Insights to Innovation: How UX Research is driving the future of Drupal CMS",
+      "location": "Location Salon A-3 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/insights-innovation-how-ux-research-driving-future-drupal-cms",
+      "track": [
+        "core, cms, & strategic initiatives"
+      ],
+      "speakers": [
+        "emma horrell"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T14:00:00Z",
+      "endTime": "2026-03-24T14:50:00Z",
+      "duration": "P50M",
+      "title": "Drupal CMS, site templates and beyond",
+      "location": "Location Salon A-4 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/drupal-cms-site-templates-and-beyond",
+      "track": [
+        "core, cms, & strategic initiatives"
+      ],
+      "speakers": [
+        "pameeela",
+        "ckrina"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T14:00:00Z",
+      "endTime": "2026-03-24T14:50:00Z",
+      "duration": "P50M",
+      "title": "Increasing enrolment amidst changing student demographics.",
+      "location": "Location Salon A-5 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/increasing-enrolment-amidst-changing-student-demographics",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "cjpagtakhan"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T14:00:00Z",
+      "endTime": "2026-03-24T14:30:00Z",
+      "duration": "P30M",
+      "title": "EXPO HALL OPEN",
+      "location": "Location Salon C&D (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/expo-hall-open-0",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T14:00:00Z",
+      "endTime": "2026-03-24T14:50:00Z",
+      "duration": "P50M",
+      "title": "Design Logic Unearthed: Code rock-solid sites via the lost art of design interrogation",
+      "location": "Location Williford A (3rd Floor)",
+      "link": "https://events.drupal.org//chicago2026/session/design-logic-unearthed-code-rock-solid-sites-lost-art-design-interrogation",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "daniel-oconnor"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T14:00:00Z",
+      "endTime": "2026-03-24T14:50:00Z",
+      "duration": "P50M",
+      "title": "A Dashboard that Works: Giving Editors What They Want, But Focusing on What They Need",
+      "location": "Location Williford B (3rd Floor)",
+      "link": "https://events.drupal.org//chicago2026/session/dashboard-works-giving-editors-what-they-want-focusing-what-they-need",
+      "track": [
+        "success stories and innovation"
+      ],
+      "speakers": [
+        "ahughes3",
+        "dalin"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T14:00:00Z",
+      "endTime": "2026-03-24T14:50:00Z",
+      "duration": "P50M",
+      "title": "The Bug Stops Here: The State of Georgia Shifts Left",
+      "location": "Location Williford C (3rd Floor)",
+      "link": "https://events.drupal.org//chicago2026/session/bug-stops-here-state-georgia-shifts-left",
+      "track": [
+        "success stories and innovation"
+      ],
+      "speakers": [
+        "q0rban",
+        "jasmyneepps"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T15:30:00Z",
+      "endTime": "2026-03-24T15:50:00Z",
+      "duration": "P20M",
+      "title": "KEYNOTE: Welcome & Aaron Winborn Award",
+      "location": "Location International Ballroom North (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/keynote-welcome-aaron-winborn-award",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T15:50:00Z",
+      "endTime": "2026-03-24T16:50:00Z",
+      "duration": "P60M",
+      "title": "KEYNOTE: Driesnote",
+      "location": "Location International Ballroom North (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/keynote-driesnote",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T17:00:00Z",
+      "endTime": "2026-03-24T18:15:00Z",
+      "duration": "P75M",
+      "title": "Black in Drupal Luncheon (guests must pre-register)",
+      "location": "Location Continental Room C (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/black-drupal-luncheon-guests-must-pre-register",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T17:00:00Z",
+      "endTime": "2026-03-24T18:15:00Z",
+      "duration": "P75M",
+      "title": "Lunch & Expo Hall",
+      "location": "Location Salon C&D (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/lunch-expo-hall",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T18:30:00Z",
+      "endTime": "2026-03-24T19:20:00Z",
+      "duration": "P50M",
+      "title": "Separated by an Ocean, United by Drupal: LocalGov & ProvusGov",
+      "location": "Location Continental Room A (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/separated-ocean-united-drupal-localgov-provusgov",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "akucharski"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T18:30:00Z",
+      "endTime": "2026-03-24T19:20:00Z",
+      "duration": "P50M",
+      "title": "AI Crawlers Are Crushing Your Website: Here's What You Can Do About It",
+      "location": "Location Continental Room B (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/ai-crawlers-are-crushing-your-website-heres-what-you-can-do-about-it",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "MattDanger",
+        "bburg"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T18:30:00Z",
+      "endTime": "2026-03-24T19:20:00Z",
+      "duration": "P50M",
+      "title": "Mentor Orientation",
+      "location": "Location Continental Room C (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/mentor-orientation-0",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T18:30:00Z",
+      "endTime": "2026-03-24T19:20:00Z",
+      "duration": "P50M",
+      "title": "Misusing...er...uh... Re-purposing Recipes to achieve development bliss",
+      "location": "Location Salon A-1 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/misusingeruh-re-purposing-recipes-achieve-development-bliss",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "pfrilling"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T18:30:00Z",
+      "endTime": "2026-03-24T19:20:00Z",
+      "duration": "P50M",
+      "title": "Streamlining Content Relevance, Translation, and Migration with a Content Audit tool",
+      "location": "Location Salon A-2 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/streamlining-content-relevance-translation-and-migration-content-audit-tool",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "mhespanhol"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T18:30:00Z",
+      "endTime": "2026-03-24T19:20:00Z",
+      "duration": "P50M",
+      "title": "The Strategic Evolution of Drupal and the AI Initiative - Orchestration and Beyond",
+      "location": "Location Salon A-3 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/strategic-evolution-drupal-and-ai-initiative-orchestration-and-beyond",
+      "track": [
+        "core, cms, & strategic initiatives"
+      ],
+      "speakers": [
+        "yautja_cetanu"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T18:30:00Z",
+      "endTime": "2026-03-24T19:20:00Z",
+      "duration": "P50M",
+      "title": "Security Team Panel",
+      "location": "Location Salon A-5 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/security-team-panel",
+      "track": [],
+      "speakers": [
+        "hestenet",
+        "greggles"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T18:30:00Z",
+      "endTime": "2026-03-24T19:20:00Z",
+      "duration": "P50M",
+      "title": "Designing for Difference: Practical Strategies for Building a Neuroinclusive Organization",
+      "location": "Location Williford A (3rd Floor)",
+      "link": "https://events.drupal.org//chicago2026/session/designing-difference-practical-strategies-building-neuroinclusive-organization",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "MatthewS"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T18:30:00Z",
+      "endTime": "2026-03-24T19:20:00Z",
+      "duration": "P50M",
+      "title": "Serious Results, Surprisingly Fun: A Playbook for KPI-Driven Digital Transformation",
+      "location": "Location Williford B (3rd Floor)",
+      "link": "https://events.drupal.org//chicago2026/session/serious-results-surprisingly-fun-playbook-kpi-driven-digital-transformation",
+      "track": [
+        "success stories and innovation"
+      ],
+      "speakers": [
+        "farriss"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T18:30:00Z",
+      "endTime": "2026-03-24T19:20:00Z",
+      "duration": "P50M",
+      "title": "Open Y: A Drupal-Powered Platform for Good",
+      "location": "Location Williford C (3rd Floor)",
+      "link": "https://events.drupal.org//chicago2026/session/open-y-drupal-powered-platform-good",
+      "track": [
+        "success stories and innovation"
+      ],
+      "speakers": [
+        "froboy"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T19:20:00Z",
+      "endTime": "2026-03-24T20:00:00Z",
+      "duration": "P40M",
+      "title": "Expo Hall",
+      "location": "Location Salon C&D (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/expo-hall",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T20:00:00Z",
+      "endTime": "2026-03-24T20:50:00Z",
+      "duration": "P50M",
+      "title": "Facilitating Like a Dungeon Master: Using RPG Skills for Stakeholder Magic",
+      "location": "Location Continental Room A (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/facilitating-dungeon-master-using-rpg-skills-stakeholder-magic",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "erykmynn"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T20:00:00Z",
+      "endTime": "2026-03-24T20:50:00Z",
+      "duration": "P50M",
+      "title": "No Code Queries: Dynamic Content with Views",
+      "location": "Location Continental Room B (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/no-code-queries-dynamic-content-views",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "Amani.Mansour92"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T20:00:00Z",
+      "endTime": "2026-03-24T20:50:00Z",
+      "duration": "P50M",
+      "title": "Future-Proofing Accessibility: Strategies for Government & University Platforms",
+      "location": "Location Continental Room C (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/future-proofing-accessibility-strategies-government-university-platforms",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "katannshaw",
+        "monicadear",
+        "javi-er"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T20:00:00Z",
+      "endTime": "2026-03-24T20:50:00Z",
+      "duration": "P50M",
+      "title": "Drupal Association Public Board Meeting",
+      "location": "Location International Ballroom North (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/drupal-association-public-board-meeting",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T20:00:00Z",
+      "endTime": "2026-03-24T20:50:00Z",
+      "duration": "P50M",
+      "title": "Stop creating Drupal Forms! Just describe a schema - the form will appear automatically!",
+      "location": "Location Salon A-1 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/stop-creating-drupal-forms-just-describe-schema-form-will-appear-automatically",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "murz"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T20:00:00Z",
+      "endTime": "2026-03-24T20:50:00Z",
+      "duration": "P50M",
+      "title": "Exposing Your Drupal Site’s Unique Content and Features to LLMs with MCP",
+      "location": "Location Salon A-2 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/exposing-your-drupal-sites-unique-content-and-features-llms-mcp",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "eojthebrave"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T20:00:00Z",
+      "endTime": "2026-03-24T20:50:00Z",
+      "duration": "P50M",
+      "title": "Context is Everything: Configuring Drupal AI for Consistent, On-Brand Content",
+      "location": "Location Salon A-3 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/context-everything-configuring-drupal-ai-consistent-brand-content",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "Kristen Pol",
+        "afoster"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T20:00:00Z",
+      "endTime": "2026-03-24T20:50:00Z",
+      "duration": "P50M",
+      "title": "Next steps for Drupal Canvas",
+      "location": "Location Salon A-4 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/next-steps-drupal-canvas",
+      "track": [
+        "core, cms, & strategic initiatives"
+      ],
+      "speakers": [
+        "lauriii"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T20:00:00Z",
+      "endTime": "2026-03-24T20:50:00Z",
+      "duration": "P50M",
+      "title": "From Chaos to Clarity: Building a Sustainable Content Governance Model with Drupal",
+      "location": "Location Salon A-5 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/chaos-clarity-building-sustainable-content-governance-model-drupal",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "richard-nosek",
+        "cjpagtakhan"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T20:00:00Z",
+      "endTime": "2026-03-24T20:50:00Z",
+      "duration": "P50M",
+      "title": "Next Generation ECA - Vision and Progress update",
+      "location": "Location Williford C (3rd Floor)",
+      "link": "https://events.drupal.org//chicago2026/session/next-generation-eca-vision-and-progress-update",
+      "track": [
+        "success stories and innovation"
+      ],
+      "speakers": [
+        "jurgenhaas"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T20:50:00Z",
+      "endTime": "2026-03-24T21:10:00Z",
+      "duration": "P20M",
+      "title": "Expo Hall",
+      "location": "Location Salon C&D (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/expo-hall-0",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T21:10:00Z",
+      "endTime": "2026-03-24T22:00:00Z",
+      "duration": "P50M",
+      "title": "Proposing a 'Code of Care' for the Drupal Community",
+      "location": "Location Continental Room A (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/proposing-code-care-drupal-community",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "Zoocha Will"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T21:10:00Z",
+      "endTime": "2026-03-24T22:00:00Z",
+      "duration": "P50M",
+      "title": "Building AI-Powered Drupal Applications: From Setup to Production-Ready Features",
+      "location": "Location Continental Room B (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/building-ai-powered-drupal-applications-setup-production-ready-features",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "breidert"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T21:10:00Z",
+      "endTime": "2026-03-24T22:00:00Z",
+      "duration": "P50M",
+      "title": "Winning the Higher Ed CMS Battle: How to Outsell Proprietary Platforms with Drupal",
+      "location": "Location Continental Room C (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/winning-higher-ed-cms-battle-how-outsell-proprietary-platforms-drupal",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T21:10:00Z",
+      "endTime": "2026-03-24T22:00:00Z",
+      "duration": "P50M",
+      "title": "Managing Configuration for Drupal Multisites: Config Splits, Templates, and Automation",
+      "location": "Location Salon A-1 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/managing-configuration-drupal-multisites-config-splits-templates-and-automation",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "nord102"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T21:10:00Z",
+      "endTime": "2026-03-24T22:00:00Z",
+      "duration": "P50M",
+      "title": "Elevating Drupal Experiences with Vanilla Javascript",
+      "location": "Location Salon A-2 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/elevating-drupal-experiences-vanilla-javascript",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "adiaz",
+        "mariannuar"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T21:10:00Z",
+      "endTime": "2026-03-24T22:00:00Z",
+      "duration": "P50M",
+      "title": "Launching the Drupal Site Template Marketplace",
+      "location": "Location Salon A-3 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/launching-drupal-site-template-marketplace",
+      "track": [
+        "core, cms, & strategic initiatives"
+      ],
+      "speakers": [
+        "hestenet"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T21:10:00Z",
+      "endTime": "2026-03-24T22:00:00Z",
+      "duration": "P50M",
+      "title": "The state of JavaScript Code Components in Drupal Canvas",
+      "location": "Location Salon A-4 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/state-javascript-code-components-drupal-canvas",
+      "track": [
+        "core, cms, & strategic initiatives"
+      ],
+      "speakers": [
+        "balintbrews"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T21:10:00Z",
+      "endTime": "2026-03-24T22:00:00Z",
+      "duration": "P50M",
+      "title": "Preparing your Pipeline for the AI Era",
+      "location": "Location Williford B (3rd Floor)",
+      "link": "https://events.drupal.org//chicago2026/session/preparing-your-pipeline-ai-era",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "q0rban"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-24T21:10:00Z",
+      "endTime": "2026-03-24T22:00:00Z",
+      "duration": "P50M",
+      "title": "Teaching an old site new tricks: Refreshing the Flagship at Harvard Medical School",
+      "location": "Location Williford C (3rd Floor)",
+      "link": "https://events.drupal.org//chicago2026/session/teaching-old-site-new-tricks-refreshing-flagship-harvard-medical-school",
+      "track": [
+        "success stories and innovation"
+      ],
+      "speakers": [
+        "antiorario"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T13:00:00Z",
+      "endTime": "2026-03-25T22:00:00Z",
+      "duration": "P540M",
+      "title": "REGISTRATION",
+      "location": "Location 8th Street North (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/registration-1",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T13:00:00Z",
+      "endTime": "2026-03-25T22:00:00Z",
+      "duration": "P540M",
+      "title": "General Contribution / New Member + Local Drupal Community Meeting Space",
+      "location": "Location International Ballroom South (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/general-contribution-new-member-local-drupal-community-meeting-space-1",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T14:00:00Z",
+      "endTime": "2026-03-25T14:50:00Z",
+      "duration": "P50M",
+      "title": "Headings the Right Way: Site Building Tips for Accessible Page Content",
+      "location": "Location Continental Room A (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/headings-right-way-site-building-tips-accessible-page-content",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "mikemccaffrey"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T14:00:00Z",
+      "endTime": "2026-03-25T14:50:00Z",
+      "duration": "P50M",
+      "title": "Deploy with Confidence: Automated Testing for Drupal",
+      "location": "Location Continental Room B (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/deploy-confidence-automated-testing-drupal",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "dharizza",
+        "garphy"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T14:00:00Z",
+      "endTime": "2026-03-25T14:50:00Z",
+      "duration": "P50M",
+      "title": "Selling Drupal: How to win projects, and not alienate delivery teams",
+      "location": "Location Continental Room C (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/selling-drupal-how-win-projects-and-not-alienate-delivery-teams",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "hannaholeary",
+        "hannah mcdermott"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T14:00:00Z",
+      "endTime": "2026-03-25T14:50:00Z",
+      "duration": "P50M",
+      "title": "Display Builder, the HTMX-powered visual builder",
+      "location": "Location Salon A-1 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/display-builder-htmx-powered-visual-builder",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "pdureau"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T14:00:00Z",
+      "endTime": "2026-03-25T14:50:00Z",
+      "duration": "P50M",
+      "title": "Breaking the Theme Barrier: Simplifying Drupal with SDC & SDC Display",
+      "location": "Location Salon A-2 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/breaking-theme-barrier-simplifying-drupal-sdc-sdc-display",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "jldust"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T14:00:00Z",
+      "endTime": "2026-03-25T14:50:00Z",
+      "duration": "P50M",
+      "title": "Advanced Site Building with Drupal Canvas",
+      "location": "Location Salon A-3 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/advanced-site-building-drupal-canvas",
+      "track": [
+        "core, cms, & strategic initiatives"
+      ],
+      "speakers": [
+        "tedbow"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T14:00:00Z",
+      "endTime": "2026-03-25T14:50:00Z",
+      "duration": "P50M",
+      "title": "Workspaces is revolutionizing Drupal Core: Unlock True Enterprise Content Management in Drupal",
+      "location": "Location Salon A-4 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/workspaces-revolutionizing-drupal-core-unlock-true-enterprise-content",
+      "track": [
+        "core, cms, & strategic initiatives"
+      ],
+      "speakers": [
+        "Fabianx",
+        "Phoyes"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T14:00:00Z",
+      "endTime": "2026-03-25T14:30:00Z",
+      "duration": "P30M",
+      "title": "EXPO HALL OPEN",
+      "location": "Location Salon C&D (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/expo-hall-open",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T14:00:00Z",
+      "endTime": "2026-03-25T14:50:00Z",
+      "duration": "P50M",
+      "title": "Navigating design governance in healthcare and higher education",
+      "location": "Location Williford B (3rd Floor)",
+      "link": "https://events.drupal.org//chicago2026/session/navigating-design-governance-healthcare-and-higher-education",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "pixelite",
+        "chazchumley",
+        "klineberger"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T14:00:00Z",
+      "endTime": "2026-03-25T14:50:00Z",
+      "duration": "P50M",
+      "title": "Steal This Playbook: UX Lessons From Nonprofit Websites",
+      "location": "Location Williford C (3rd Floor)",
+      "link": "https://events.drupal.org//chicago2026/session/steal-playbook-ux-lessons-nonprofit-websites",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "jannafiester",
+        "joannajackson"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T15:30:00Z",
+      "endTime": "2026-03-25T17:00:00Z",
+      "duration": "P90M",
+      "title": "KEYNOTE: Alexandra Bell, The Security Implications of AI",
+      "location": "Location International Ballroom North (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/keynote-alexandra-bell-security-implications-ai",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T17:00:00Z",
+      "endTime": "2026-03-25T18:15:00Z",
+      "duration": "P75M",
+      "title": "Women in Drupal Luncheon (guests must pre-register)",
+      "location": "Location Continental Room C (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/women-drupal-luncheon-guests-must-pre-register",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T17:00:00Z",
+      "endTime": "2026-03-25T18:15:00Z",
+      "duration": "P75M",
+      "title": "Lunch & Expo Hall",
+      "location": "Location Salon C&D (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/lunch-expo-hall-0",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T18:30:00Z",
+      "endTime": "2026-03-25T19:20:00Z",
+      "duration": "P50M",
+      "title": "Beyond the Drupal bubble: Building inclusive pathways for growth",
+      "location": "Location Buckingham Room (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/beyond-drupal-bubble-building-inclusive-pathways-growth",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "MayaLena"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T18:30:00Z",
+      "endTime": "2026-03-25T19:20:00Z",
+      "duration": "P50M",
+      "title": "You can (and should!) build a site template",
+      "location": "Location Continental Room A (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/you-can-and-should-build-site-template",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "andyg5000",
+        "phenaproxima"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T18:30:00Z",
+      "endTime": "2026-03-25T19:20:00Z",
+      "duration": "P50M",
+      "title": "Engineering for security compliance: How to prepare before the audit",
+      "location": "Location Continental Room B (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/engineering-security-compliance-how-prepare-audit",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "mrconnerton"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T18:30:00Z",
+      "endTime": "2026-03-25T19:20:00Z",
+      "duration": "P50M",
+      "title": "10 Ways to Learn AI in Drupal (Live Examples and Ready-to-Use Templates)",
+      "location": "Location Salon A-1 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/10-ways-learn-ai-drupal-live-examples-and-ready-use-templates",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "salimlakhani",
+        "darren oh"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T18:30:00Z",
+      "endTime": "2026-03-25T19:20:00Z",
+      "duration": "P50M",
+      "title": "Drupal developer's guide to Canvas",
+      "location": "Location Salon A-2 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/drupal-developers-guide-canvas",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "fmazeikis"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T18:30:00Z",
+      "endTime": "2026-03-25T19:20:00Z",
+      "duration": "P50M",
+      "title": "Strategies for Integrating Drupal Canvas in Your Existing Drupal Platform",
+      "location": "Location Salon A-3 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/strategies-integrating-drupal-canvas-your-existing-drupal-platform",
+      "track": [
+        "core, cms, & strategic initiatives"
+      ],
+      "speakers": [
+        "boyan.borisov"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T18:30:00Z",
+      "endTime": "2026-03-25T19:20:00Z",
+      "duration": "P50M",
+      "title": "Publish once in Drupal, Syndicate Everywhere",
+      "location": "Location Salon A-4 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/publish-once-drupal-syndicate-everywhere",
+      "track": [
+        "content & marketing"
+      ],
+      "speakers": [
+        "megakeegman"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T18:30:00Z",
+      "endTime": "2026-03-25T19:20:00Z",
+      "duration": "P50M",
+      "title": "First-Time Contributor Workshop",
+      "location": "Location Salon A-5 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/first-time-contributor-workshop-0",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T18:30:00Z",
+      "endTime": "2026-03-25T19:20:00Z",
+      "duration": "P50M",
+      "title": "Designing for Depth: Information Architecture Strategies in Large Drupal Sites",
+      "location": "Location Williford C (3rd Floor)",
+      "link": "https://events.drupal.org//chicago2026/session/designing-depth-information-architecture-strategies-large-drupal-sites",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "alentino"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T19:20:00Z",
+      "endTime": "2026-03-25T20:00:00Z",
+      "duration": "P40M",
+      "title": "Expo Hall",
+      "location": "Location Salon C&D (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/expo-hall-1",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T20:00:00Z",
+      "endTime": "2026-03-25T20:50:00Z",
+      "duration": "P50M",
+      "title": "A Taste of the Future: Site Templates and Recipes in Drupal",
+      "location": "Location Continental Room A (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/taste-future-site-templates-and-recipes-drupal",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "thejimbirch"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T20:00:00Z",
+      "endTime": "2026-03-25T20:50:00Z",
+      "duration": "P50M",
+      "title": "A peek behind the curtain on how we run an open source, global, and privacy-first AI Infrastructure",
+      "location": "Location Continental Room B (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/peek-behind-curtain-how-we-run-open-source-global-and-privacy-first-ai",
+      "track": [
+        "devops"
+      ],
+      "speakers": [
+        "schnitzel"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T20:00:00Z",
+      "endTime": "2026-03-25T20:50:00Z",
+      "duration": "P50M",
+      "title": "AI as a PM’s Co-Pilot: Decision-Making with the OODA Loop",
+      "location": "Location Continental Room C (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/ai-pms-co-pilot-decision-making-ooda-loop",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "jaspreetsingh31"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T20:00:00Z",
+      "endTime": "2026-03-25T20:50:00Z",
+      "duration": "P50M",
+      "title": "KEYNOTE: Drupal CMS Spotlights",
+      "location": "Location International Ballroom North (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/keynote-drupal-cms-spotlights",
+      "track": [
+        "core, cms, & strategic initiatives"
+      ],
+      "speakers": [
+        "gábor hojtsy"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T20:00:00Z",
+      "endTime": "2026-03-25T20:50:00Z",
+      "duration": "P50M",
+      "title": "Building Enterprise AI Tools: From Concept to Production",
+      "location": "Location Salon A-1 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/building-enterprise-ai-tools-concept-production",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "shrop",
+        "mwilbur"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T20:00:00Z",
+      "endTime": "2026-03-25T20:50:00Z",
+      "duration": "P50M",
+      "title": "Using Drupal Doesn't Make You Open Source — Lessons from Europe's Largest Public Sector Platform",
+      "location": "Location Salon A-2 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/using-drupal-doesnt-make-you-open-source-lessons-europes-largest-public-sector",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "joevagyok"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T20:00:00Z",
+      "endTime": "2026-03-25T20:50:00Z",
+      "duration": "P50M",
+      "title": "From Search Bars to Chatbots: Decoding User Expectations for AI Chat",
+      "location": "Location Williford C (3rd Floor)",
+      "link": "https://events.drupal.org//chicago2026/session/search-bars-chatbots-decoding-user-expectations-ai-chat",
+      "track": [
+        "user experience, accessibility & design"
+      ],
+      "speakers": [
+        "emoleee",
+        "Ameshes"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T20:50:00Z",
+      "endTime": "2026-03-25T21:10:00Z",
+      "duration": "P20M",
+      "title": "Expo Hall",
+      "location": "Location Salon C&D (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/expo-hall-2",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T21:10:00Z",
+      "endTime": "2026-03-25T22:00:00Z",
+      "duration": "P50M",
+      "title": "Get Aligned or Stay Stuck: How Experiments Unlock Team Potential",
+      "location": "Location Buckingham Room (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/get-aligned-or-stay-stuck-how-experiments-unlock-team-potential",
+      "track": [
+        "community health"
+      ],
+      "speakers": [
+        "cneslund"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T21:10:00Z",
+      "endTime": "2026-03-25T22:00:00Z",
+      "duration": "P50M",
+      "title": "Let the Browser Decide: Responsive Images as a Tool to Bridge the Digital Divide",
+      "location": "Location Continental Room A (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/let-browser-decide-responsive-images-tool-bridge-digital-divide",
+      "track": [
+        "site building"
+      ],
+      "speakers": [
+        "uptil4music"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T21:10:00Z",
+      "endTime": "2026-03-25T22:00:00Z",
+      "duration": "P50M",
+      "title": "Drupal AI Initiative: A Year in Review with Panel Q&A",
+      "location": "Location Continental Room C (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/drupal-ai-initiative-year-review-panel-qa",
+      "track": [
+        "leadership, management & business"
+      ],
+      "speakers": [
+        "pdjohnson",
+        "domidc",
+        "breidert",
+        "yautja_cetanu"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T21:10:00Z",
+      "endTime": "2026-03-25T22:00:00Z",
+      "duration": "P50M",
+      "title": "Beyond Chunk and Pray: Smarter RAG for Drupal AI",
+      "location": "Location Salon A-1 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/beyond-chunk-and-pray-smarter-rag-drupal-ai",
+      "track": [
+        "development & coding"
+      ],
+      "speakers": [
+        "vincenzo gambino"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T21:10:00Z",
+      "endTime": "2026-03-25T22:00:00Z",
+      "duration": "P50M",
+      "title": "HTMX: a new toolset in Drupal Core",
+      "location": "Location Salon A-3 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/htmx-new-toolset-drupal-core",
+      "track": [
+        "core, cms, & strategic initiatives"
+      ],
+      "speakers": [
+        "fathershawn"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-25T21:10:00Z",
+      "endTime": "2026-03-25T22:00:00Z",
+      "duration": "P50M",
+      "title": "AI Agents for Site Builders",
+      "location": "Location Salon A-4 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/ai-agents-site-builders",
+      "track": [
+        "core, cms, & strategic initiatives"
+      ],
+      "speakers": [
+        "marcus_johansson"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-26T13:00:00Z",
+      "endTime": "2026-03-26T17:00:00Z",
+      "duration": "P240M",
+      "title": "REGISTRATION",
+      "location": "Location 8th Street North (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/registration-2",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-26T13:00:00Z",
+      "endTime": "2026-03-26T22:00:00Z",
+      "duration": "P540M",
+      "title": "General Contribution / New Member + Local Drupal Community Meeting Space",
+      "location": "Location International Ballroom South (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/general-contribution-new-member-local-drupal-community-meeting-space-2",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-26T13:00:00Z",
+      "endTime": "2026-03-26T22:00:00Z",
+      "duration": "P540M",
+      "title": "Mentored Contribution",
+      "location": "Location Salon A-2 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/mentored-contribution",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-26T14:00:00Z",
+      "endTime": "2026-03-26T22:00:00Z",
+      "duration": "P480M",
+      "title": "Drupal in a Day",
+      "location": "Location Buckingham Room (Lobby Level)",
+      "link": "https://events.drupal.org//chicago2026/session/drupal-day",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-26T14:00:00Z",
+      "endTime": "2026-03-26T16:00:00Z",
+      "duration": "P120M",
+      "title": "First-Time Contributor Workshop",
+      "location": "Location Salon A-1 (LL)",
+      "link": "https://events.drupal.org//chicago2026/session/first-time-contributor-workshop",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-03-26T23:00:00Z",
+      "endTime": "2026-03-27T02:00:00Z",
+      "duration": "P180M",
+      "title": "Trivia Night",
+      "location": "Location Weather Mark Tavern (Offsite)",
+      "link": "https://events.drupal.org//chicago2026/session/trivia-night",
+      "track": [],
+      "speakers": [
+        "froboy"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    }
+  ],
+  "result": "success",
+  "url": "https://events.drupal.org/chicago2026/schedule"
+}

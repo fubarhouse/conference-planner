@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Style Guide — Home Layout</title>
+  <link rel="stylesheet" href="./css/utilities.css">
+  <link rel="stylesheet" href="./css/app.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { padding: 2rem 1.5rem; background: #f4f6f8; }
+    .sg-section { margin-bottom: 3rem; }
+    .sg-label {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: #9eb2c8; margin-bottom: 0.75rem;
+    }
+    .sg-controls {
+      position: fixed; top: 1rem; right: 1rem;
+      display: flex; gap: 0.5rem; z-index: 100;
+    }
+    .sg-btn {
+      padding: 0.4rem 0.75rem; border-radius: 6px; border: 1px solid #d1d5db;
+      background: #fff; font-size: 0.8125rem; font-weight: 500; cursor: pointer;
+    }
+    .theme-dark body { background: #0c1f33; }
+    .theme-dark .sg-label { color: rgba(255,255,255,0.3); }
+    .theme-dark .sg-btn { background: #1c3050; border-color: #2d4a68; color: #c2d4e6; }
+  </style>
+</head>
+<body>
+
+  <div class="sg-controls">
+    <button class="sg-btn" onclick="document.documentElement.classList.toggle('theme-dark')">Toggle dark</button>
+    <button class="sg-btn" id="sgNarrow">Narrow (375px)</button>
+  </div>
+
+  <div style="max-width: 860px; margin: 0 auto;">
+
+    <h1 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 2.5rem; color: #6b7280;">
+      Shared Components — <code style="font-size: 0.875rem;">hl-*</code> + <code style="font-size: 0.875rem;">toolbar-*</code>
+      <span style="font-size: 0.75rem; margin-left: 0.5rem; font-weight: 400;">Loaded from <code>components.css</code> only</span>
+    </h1>
+
+    <!-- Toolbar shared elements -->
+    <div class="sg-section">
+      <p class="sg-label">toolbar-back-btn + toolbar-path-chip</p>
+      <div style="display: flex; gap: 0.5rem; align-items: center; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1rem; flex-wrap: wrap;">
+        <button type="button" class="toolbar-back-btn" title="Back" aria-label="Back">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="toolbar-path-chip" style="flex: 1; min-width: 120px;">
+          <i class="fas fa-file-code"></i>
+          <span class="toolbar-path-text">data/events/drupalcon/eu/2025-vienna.json</span>
+        </div>
+        <div class="toolbar-path-chip" style="min-width: 80px;">
+          <i class="fas fa-file-code"></i>
+          <span class="toolbar-path-text">No file open</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- heroPanel -->
+    <div class="sg-section">
+      <p class="sg-label">heroPanel</p>
+      <div class="hl-hero">
+        <div class="hl-hero-top">
+          <div class="hl-hero-icon" aria-hidden="true"><i class="fas fa-pen-ruler"></i></div>
+          <button type="button" class="hl-settings-btn" title="Settings" aria-label="Settings">
+            <i class="fas fa-gear"></i>
+          </button>
+        </div>
+        <h1 class="hl-hero-title">Dataset Editor</h1>
+        <p class="hl-hero-lead">Build and edit Drupal event schedules. Connect your project folder or an API server to get started.</p>
+      </div>
+    </div>
+
+    <!-- ctaGrid + ctaCard -->
+    <div class="sg-section">
+      <p class="sg-label">ctaGrid + ctaCard (normal + disabled)</p>
+      <div class="hl-cta-grid">
+        <button type="button" class="hl-cta-card">
+          <div class="hl-cta-icon"><i class="fas fa-folder-open"></i></div>
+          <div class="hl-cta-body">
+            <span class="hl-cta-title">Open Project Folder</span>
+            <span class="hl-cta-desc">Grant access to your local project directory. Works in Chrome and Edge.</span>
+          </div>
+          <i class="fas fa-chevron-right hl-cta-arrow" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="hl-cta-card hl-cta-card--disabled" disabled title="Not available in this browser">
+          <div class="hl-cta-icon hl-cta-icon--api"><i class="fas fa-server"></i></div>
+          <div class="hl-cta-body">
+            <span class="hl-cta-title">Connect to API Server</span>
+            <span class="hl-cta-desc">Not available in this browser — use the API server instead.</span>
+          </div>
+          <i class="fas fa-chevron-right hl-cta-arrow" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- statusBar -->
+    <div class="sg-section">
+      <p class="sg-label">statusBar</p>
+      <div class="hl-status-bar">
+        <span class="hl-status-dot hl-status-dot--ok"></span>
+        <span class="hl-status-label">/home/user/my-drupal-project</span>
+        <button type="button" class="hl-status-action">Disconnect folder</button>
+      </div>
+    </div>
+
+    <!-- sectionHeader -->
+    <div class="sg-section">
+      <p class="sg-label">sectionHeader (primary btn + secondary settings btn)</p>
+      <div class="hl-section-header">
+        <h2 class="hl-section-title">Events</h2>
+        <div class="hl-section-actions">
+          <button type="button" class="hl-primary-btn">
+            <i class="fas fa-file-circle-plus" style="margin-right:0.35rem"></i>New event
+          </button>
+          <button type="button" class="hl-settings-btn" title="Settings" aria-label="Settings">
+            <i class="fas fa-gear"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- searchBar -->
+    <div class="sg-section">
+      <p class="sg-label">searchBar</p>
+      <div class="hl-search-wrap">
+        <i class="fas fa-search hl-search-icon" aria-hidden="true"></i>
+        <input type="search" placeholder="Filter events…" class="hl-search-input" autocomplete="off">
+      </div>
+    </div>
+
+    <!-- cardGrid: loadingState -->
+    <div class="sg-section">
+      <p class="sg-label">cardGrid — loadingState</p>
+      <div class="hl-card-grid">
+        <div class="hl-loading"><i class="fas fa-circle-notch fa-spin"></i> Loading events…</div>
+      </div>
+    </div>
+
+    <!-- cardGrid: emptyState -->
+    <div class="sg-section">
+      <p class="sg-label">cardGrid — emptyState</p>
+      <div class="hl-card-grid">
+        <p class="hl-empty">No event files found.</p>
+      </div>
+    </div>
+
+    <!-- Full Phase 1 layout -->
+    <div class="sg-section">
+      <p class="sg-label">Full Phase 1 (editor — no connection)</p>
+      <div class="hl-root" style="max-width: none;">
+        <div class="hl-hero">
+          <div class="hl-hero-top">
+            <div class="hl-hero-icon" aria-hidden="true"><i class="fas fa-pen-ruler"></i></div>
+            <button type="button" class="hl-settings-btn" title="Settings" aria-label="Settings">
+              <i class="fas fa-gear"></i>
+            </button>
+          </div>
+          <h1 class="hl-hero-title">Dataset Editor</h1>
+          <p class="hl-hero-lead">Build and edit Drupal event schedules. Connect your project folder or an API server to get started.</p>
+        </div>
+        <div class="hl-cta-grid">
+          <button type="button" class="hl-cta-card">
+            <div class="hl-cta-icon"><i class="fas fa-folder-open"></i></div>
+            <div class="hl-cta-body">
+              <span class="hl-cta-title">Open Project Folder</span>
+              <span class="hl-cta-desc">Grant access to your local project directory. Works in Chrome and Edge.</span>
+            </div>
+            <i class="fas fa-chevron-right hl-cta-arrow" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="hl-cta-card">
+            <div class="hl-cta-icon hl-cta-icon--api"><i class="fas fa-server"></i></div>
+            <div class="hl-cta-body">
+              <span class="hl-cta-title">Connect to API Server</span>
+              <span class="hl-cta-desc">Use a local server for Firefox-compatible saving and image uploads.</span>
+            </div>
+            <i class="fas fa-chevron-right hl-cta-arrow" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const narrowBtn = document.getElementById('sgNarrow');
+    let narrow = false;
+    narrowBtn.addEventListener('click', () => {
+      narrow = !narrow;
+      document.body.style.maxWidth = narrow ? '375px' : '';
+      narrowBtn.textContent = narrow ? 'Restore width' : 'Narrow (375px)';
+    });
+  </script>
+</body>
+</html>

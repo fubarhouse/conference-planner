@@ -1,22 +1,30 @@
 {
-  "name": "conference-calendar-planner",
+  "name": "conference-planner",
   "version": "1.0.0",
   "type": "module",
   "description": "Conference calendar data editor with local API server",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js",
+    "start": "node --env-file-if-exists=.env server.js",
+    "dev": "node --env-file-if-exists=.env --watch server.js",
     "test": "vitest run",
     "test:watch": "vitest",
-    "validate": "node scripts/validate-data.mjs"
+    "validate": "node scripts/validate-data.mjs",
+    "build:css": "unocss 'app/*.html' 'app/js/**/*.js' --out-file app/css/utilities.css",
+    "watch:css": "unocss 'app/*.html' 'app/js/**/*.js' --out-file app/css/utilities.css --watch"
   },
   "devDependencies": {
     "ajv": "^6.12.6",
     "playwright": "^1.60.0",
+    "unocss": "^0.65.0",
     "vitest": "^2.0.0"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.1069.0",
+    "@aws-sdk/client-s3": "^3.1069.0",
+    "@aws-sdk/lib-dynamodb": "^3.1069.0",
+    "bcryptjs": "^3.0.3",
     "express": "^4.21.2",
+    "jose": "^6.2.3",
     "multer": "^1.4.5-lts.1"
   }
 }
