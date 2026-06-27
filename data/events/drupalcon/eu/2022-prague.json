@@ -10,7 +10,7 @@
     "venue": "O2 Universum",
     "timezone": "Europe/Prague",
     "columns": 3,
-    "enabled": true,
+    "enabled": false,
     "scheduleComplete": true,
     "logo": {
       "image": "./img/logos/drupalcon-logo.svg",

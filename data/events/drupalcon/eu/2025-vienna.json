@@ -10,7 +10,7 @@
     "venue": "Austria Center Vienna",
     "timezone": "Europe/Vienna",
     "columns": 3,
-    "enabled": true,
+    "enabled": false,
     "logo": {
       "image": "./img/logos/drupalcon-logo.svg",
       "imageAlt": "DrupalCon logo",

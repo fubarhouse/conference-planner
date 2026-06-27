@@ -10,7 +10,7 @@
     "venue": "Beurs van Berlage",
     "timezone": "Europe/Amsterdam",
     "columns": 3,
-    "enabled": true,
+    "enabled": false,
     "scheduleComplete": true,
     "logo": {
       "image": "./img/logos/drupalcon-logo.svg",
