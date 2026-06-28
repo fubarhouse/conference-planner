@@ -160,7 +160,7 @@
         "tier": "Day Stage, Biergarten & Cafe",
         "row": 3,
         "priority": 30,
-        "image": "./img/sponsors/drupalcon-europe/2012-munich/sugarcrm.png",
+        "image": "./img/sponsors/drupalcon-europe/2012-munich/sugarcrm.jpg",
         "imageAlt": "SugarCRM logo",
         "link": "https://www.sugarcrm.com/",
         "bgStyle": "auto",
@@ -212,7 +212,7 @@
         "tier": "Gold",
         "row": 4,
         "priority": 40,
-        "image": "./img/sponsors/drupalcon-europe/2012-munich/propeople.png",
+        "image": "./img/sponsors/drupalcon-europe/2012-munich/propeople.jpg",
         "imageAlt": "Propeople logo",
         "link": "",
         "bgStyle": "auto",
@@ -251,7 +251,7 @@
         "tier": "Gold",
         "row": 4,
         "priority": 70,
-        "image": "./img/sponsors/drupalcon-europe/2012-munich/ausy-dataflow.png",
+        "image": "./img/sponsors/drupalcon-europe/2012-munich/ausy-dataflow.jpg",
         "imageAlt": "Ausy/DataFlow logo",
         "link": "",
         "bgStyle": "auto",
@@ -264,7 +264,7 @@
         "tier": "Gold",
         "row": 4,
         "priority": 80,
-        "image": "./img/sponsors/drupalcon-europe/2012-munich/zoocha.png",
+        "image": "./img/sponsors/drupalcon-europe/2012-munich/zoocha.jpg",
         "imageAlt": "Zoocha logo",
         "link": "https://www.zoocha.com/",
         "bgStyle": "auto",
@@ -394,7 +394,7 @@
         "tier": "Silver",
         "row": 6,
         "priority": 30,
-        "image": "./img/sponsors/drupalcon-europe/2012-munich/jetbrains.png",
+        "image": "./img/sponsors/drupalcon-europe/2012-munich/jetbrains.jpg",
         "imageAlt": "JetBrains logo",
         "link": "https://www.jetbrains.com/",
         "bgStyle": "auto",
@@ -472,7 +472,7 @@
         "tier": "Silver",
         "row": 6,
         "priority": 90,
-        "image": "./img/sponsors/drupalcon-europe/2012-munich/maloon.png",
+        "image": "./img/sponsors/drupalcon-europe/2012-munich/maloon.jpg",
         "imageAlt": "Maloon logo",
         "link": "",
         "bgStyle": "auto",
@@ -576,7 +576,7 @@
         "tier": "Silver",
         "row": 6,
         "priority": 170,
-        "image": "./img/sponsors/drupalcon-europe/2012-munich/blackmesh.png",
+        "image": "./img/sponsors/drupalcon-europe/2012-munich/blackmesh.jpg",
         "imageAlt": "BlackMesh logo",
         "link": "",
         "bgStyle": "auto",
@@ -628,7 +628,7 @@
         "tier": "Silver",
         "row": 6,
         "priority": 210,
-        "image": "./img/sponsors/drupalcon-europe/2012-munich/one-shoe.png",
+        "image": "./img/sponsors/drupalcon-europe/2012-munich/one-shoe.jpg",
         "imageAlt": "One Shoe logo",
         "link": "https://oneshoe.com/",
         "bgStyle": "auto",
@@ -641,7 +641,7 @@
         "tier": "Silver",
         "row": 6,
         "priority": 220,
-        "image": "./img/sponsors/drupalcon-europe/2012-munich/drupalsquad.png",
+        "image": "./img/sponsors/drupalcon-europe/2012-munich/drupalsquad.jpg",
         "imageAlt": "DrupalSquad logo",
         "link": "",
         "bgStyle": "auto",
@@ -667,7 +667,7 @@
         "tier": "Bronze",
         "row": 7,
         "priority": 20,
-        "image": "./img/sponsors/drupalcon-europe/2012-munich/full-fat-things.png",
+        "image": "./img/sponsors/drupalcon-europe/2012-munich/full-fat-things.jpg",
         "imageAlt": "Full Fat Things logo",
         "link": "",
         "bgStyle": "auto",
@@ -784,7 +784,7 @@
         "tier": "Supporter & Scholarship",
         "row": 8,
         "priority": 30,
-        "image": "./img/sponsors/drupalcon-europe/2012-munich/bluehost.png",
+        "image": "./img/sponsors/drupalcon-europe/2012-munich/bluehost.jpg",
         "imageAlt": "BlueHost logo",
         "link": "https://www.bluehost.com/",
         "bgStyle": "auto",
@@ -797,7 +797,7 @@
         "tier": "Media",
         "row": 9,
         "priority": 10,
-        "image": "./img/sponsors/drupalcon-europe/2012-munich/drupal-watchdog.png",
+        "image": "./img/sponsors/drupalcon-europe/2012-munich/drupal-watchdog.jpg",
         "imageAlt": "Drupal Watchdog logo",
         "link": "",
         "bgStyle": "auto",
@@ -840,7 +840,9 @@
       "title": "CxO Event",
       "location": "Sydney",
       "link": "https://munich2012.drupal.org/program/cxo.1.html",
-      "track": ["Community"],
+      "track": [
+        "Community"
+      ],
       "speakers": [],
       "full_description": "Open Up! Connecting People for Business Success. A one-day business gathering targeting business leaders offering Drupal services, including web development agencies and training companies. Features open space peer discussions and networking with Drupal executives focused on sharing best practices, maintaining market relevance, collaboration strategies, and business value generation. The keynote featured Robert Kerner, Chief Digital Officer of NYSE Euronext, discussing digital strategy and agile culture development.",
       "video_url": "",
@@ -853,8 +855,14 @@
       "title": "Training - Building Multilingual Websites with Drupal 7",
       "location": "Barcelona",
       "link": "https://munich2012.drupal.org/program/training/building-multilingual-websites-drupal-7.html",
-      "track": ["Trainings"],
-      "speakers": ["pixelite", "Gábor Hojtsy", "evolvingweb"],
+      "track": [
+        "Trainings"
+      ],
+      "speakers": [
+        "pixelite",
+        "Gábor Hojtsy",
+        "evolvingweb"
+      ],
       "full_description": "While setting up a single language site is straightforward, this training teaches how to enable users to switch languages and support different paths for different languages with a fully multilingual interface. Participants explore module selection strategies, hands-on configuration procedures, and planning techniques. Topics include critical decisions when planning multilingual sites, identifying all translatable site elements, configuring content type multilingual settings, distinguishing between field-level and node-level translation approaches, setting up core and contributed modules, managing Drupal UI translation challenges, and leveraging localize.drupal.org resources.",
       "video_url": "",
       "sponsorIds": ""
@@ -866,8 +874,13 @@
       "title": "Training - Code-driven Development: Features and Beyond",
       "location": "Atlanta",
       "link": "https://munich2012.drupal.org/program/training/code-driven-development-features-and-beyond.html",
-      "track": ["Trainings"],
-      "speakers": ["pescetti", "antoniodemarco"],
+      "track": [
+        "Trainings"
+      ],
+      "speakers": [
+        "pescetti",
+        "antoniodemarco"
+      ],
       "full_description": "This full-day training demonstrates workflow improvements through code-driven development techniques and Features, focusing on change traceability, production site upgrades, and distributed team collaboration. Topics include implementing site configuration entirely in code even for modules lacking Features integration, using controller features for managing site updates, accelerating feature deployment via Drush and optimized shell configuration, creating reusable features, and integrating Features, Drush Make, and installation profiles to automate a large part of the Drupal development process. Participants will gain the ability to automate their Drupal development workflow, reuse work across projects, and cooperate in a fast, efficient way.",
       "video_url": "",
       "sponsorIds": ""
@@ -879,8 +892,12 @@
       "title": "Training - Drupal 7 Front-End Development",
       "location": "Rom",
       "link": "https://munich2012.drupal.org/program/training/drupal-7-front-end-development.html",
-      "track": ["Trainings"],
-      "speakers": ["Jody Lynn"],
+      "track": [
+        "Trainings"
+      ],
+      "speakers": [
+        "Jody Lynn"
+      ],
       "full_description": "Drupal's powerful theme system facilitates the construction of beautiful websites and the ability to fully customize their display. The workshop covers an overview of the theme system, base theme setup and configuration, front-end related modules, and customizing the display of forms, menus, and node templates. Instructors highlight intersections between the theme and hook system, plus working with Drupal 7 render arrays. Participants will leave with a solid understanding of the Drupal 7 theme system.",
       "video_url": "",
       "sponsorIds": ""
@@ -892,8 +909,15 @@
       "title": "Training - Drupal Performance and Scalability with the Dream Team",
       "location": "Garmisch/Partenkiershen",
       "link": "https://munich2012.drupal.org/program/training/drupal-performance-and-scalabiity-dream-team.html",
-      "track": ["Trainings"],
-      "speakers": ["nstielau", "msonnabaum", "Steven Merrill", "quicksketch"],
+      "track": [
+        "Trainings"
+      ],
+      "speakers": [
+        "nstielau",
+        "msonnabaum",
+        "Steven Merrill",
+        "quicksketch"
+      ],
       "full_description": "This all-day workshop teaches best practices for operating high-performance Drupal sites at scale. Instructors guide attendees through configuring a Linux server with performance-enhancing tools including Varnish, Pressflow, Apache, MySQL, Memcache, and Apache Solr. Participants will master deploying Drupal using industry-standard performance stacks, implementing reverse-proxy caching mechanisms, optimizing database configurations, utilizing in-memory object caching, applying opcode caching techniques, code profiling methodologies, and fundamental load testing procedures. Topics also include MySQL configuration and optimization, Apache Solr search implementation, and performance profiling using Xdebug.",
       "video_url": "",
       "sponsorIds": ""
@@ -905,8 +929,15 @@
       "title": "Training - Drupal Powered E-commerce",
       "location": "Montreal",
       "link": "https://munich2012.drupal.org/program/training/drupal-powered-e-commerce.html",
-      "track": ["Trainings"],
-      "speakers": ["rszrama", "smokinggoat", "pcambra", "bojanz"],
+      "track": [
+        "Trainings"
+      ],
+      "speakers": [
+        "rszrama",
+        "smokinggoat",
+        "pcambra",
+        "bojanz"
+      ],
       "full_description": "Drupal Commerce is an e-commerce framework built from the ground up on Drupal 7 that leverages Views and Rules modules. The training by Commerce Guys guides participants through implementing this system using alternating concept lessons and practical exercises. Participants will build an example store exploring configuring multiple product types with attributes and customizations, customizing cart forms and shopping cart views, applying discounts and calculating taxes through Rules, and processing various payment methods. The course also surveys contributed modules including shipping quotes, stock control, file downloads, coupons, and address books.",
       "video_url": "",
       "sponsorIds": ""
@@ -918,8 +949,14 @@
       "title": "Training - Responsive Websites: Design and Build for All Devices",
       "location": "Munchen",
       "link": "https://munich2012.drupal.org/program/training/responsive-websites-design-and-build-all-devices.html",
-      "track": ["Trainings"],
-      "speakers": ["dianadupuis", "rupl", "Todd Nienkerk"],
+      "track": [
+        "Trainings"
+      ],
+      "speakers": [
+        "dianadupuis",
+        "rupl",
+        "Todd Nienkerk"
+      ],
       "full_description": "This hands-on training teaches participants to develop responsive Drupal sites from the ground up, covering the past, present, and future of responsive design. Topics include creating responsive layouts and planning content delivery, CSS3 media queries and mobile first philosophy, implementing plans within the Drupal theme layer, JavaScript enhancements and feature detection, and front-end performance optimization. Participants will build a functional website while mastering mobile-first methodology, fluid layouts, CSS3 media queries, managing images across devices, creating responsive Drupal 7 themes, and leveraging JavaScript.",
       "video_url": "",
       "sponsorIds": ""
@@ -931,8 +968,13 @@
       "title": "Training - Security: Process, Code & Hands-on Training",
       "location": "Athen",
       "link": "https://munich2012.drupal.org/program/training/security-process-code-hands-training.html",
-      "track": ["Trainings"],
-      "speakers": ["greggles", "coltrane"],
+      "track": [
+        "Trainings"
+      ],
+      "speakers": [
+        "greggles",
+        "coltrane"
+      ],
       "full_description": "This full-day training addresses web security vulnerabilities in Drupal environments, emphasizing that your site is probably insecure and providing comprehensive instruction on evaluating and mitigating risks. The session begins by reviewing prevalent vulnerability types found in Drupal installations, then examines specific remediation approaches for both configuration and code-level issues. Topics include insecure configurations, Cross Site Scripting vulnerabilities, Cross Site Request Forgeries, access bypass mechanisms and permissions, SQL Injection and database API security, and a practical hands-on site review where attendees identify and fix vulnerabilities.",
       "video_url": "",
       "sponsorIds": ""
@@ -944,7 +986,9 @@
       "title": "Tropo Hackathon",
       "location": "Sheraton Hotel Cuvillies",
       "link": "https://munich2012.drupal.org/community/events/tropo-hackathon.html",
-      "track": ["Community"],
+      "track": [
+        "Community"
+      ],
       "speakers": [],
       "full_description": "Learn some new APIs, meet some new friends, win some prizes and hack on some Drupal projects at the Tropo Hackathon. The event welcomes participants of all skill levels — whether you're a developer, designer, or someone with an idea — and encourages attendees to bring laptops and enthusiasm for creating innovative solutions. The schedule flows from introductions and API presentations through team formation, extended hacking sessions, dinner, and concludes with team presentations and prize awards spanning six hours of development time.",
       "video_url": "",
@@ -957,8 +1001,13 @@
       "title": "Welcome! Get your Drupal(Con) on!",
       "location": "Ballsaal A/B",
       "link": "https://munich2012.drupal.org/program/sessions/welcome-get-your-drupalcon-on.html",
-      "track": ["Community"],
-      "speakers": ["horncologne", "robertDouglass"],
+      "track": [
+        "Community"
+      ],
+      "speakers": [
+        "horncologne",
+        "robertDouglass"
+      ],
       "full_description": "An opening session to help both experienced attendees and newcomers maximize their DrupalCon experience. We'll help veterans and n00bs alike find their bearings, get fired up and contributing. The session features entertaining elements like music, humor, and occasional guest appearances by prominent community members.",
       "video_url": "",
       "sponsorIds": ""
@@ -970,8 +1019,12 @@
       "title": "Keynote: Dries Buytaert",
       "location": "Ballsaal A/B",
       "link": "https://munich2012.drupal.org/speakers/keynote/dries-buytaert.html",
-      "track": ["Keynote"],
-      "speakers": ["Dries Buytaert"],
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Dries Buytaert"
+      ],
       "full_description": "The State of Drupal. An extended interview with Dries conducted by Josh Koenig, discussing the current state of Drupal and previewing what's coming in Drupal 8.",
       "video_url": "",
       "sponsorIds": ""
@@ -983,7 +1036,9 @@
       "title": "Group Photo",
       "location": "Ballsaal A/B",
       "link": "https://munich2012.drupal.org/program/schedule.1.html",
-      "track": ["Community"],
+      "track": [
+        "Community"
+      ],
       "speakers": [],
       "full_description": "",
       "video_url": "",
@@ -996,8 +1051,12 @@
       "title": "Negotiating Open Source",
       "location": "Sheraton Hotel Cuvillies",
       "link": "https://munich2012.drupal.org/program/sessions/negotiating-open-source.html",
-      "track": ["Business & Strategy"],
-      "speakers": ["farriss"],
+      "track": [
+        "Business & Strategy"
+      ],
+      "speakers": [
+        "farriss"
+      ],
       "full_description": "As Drupal adoption expands beyond open source enthusiasts, organizations unfamiliar with GPL requirements present two main challenges: helping prospective clients understand the advantages of contributing back and becoming part of a free and open source software ecosystem, and addressing outdated intellectual property clauses in software agreements that don't align with open source realities. The session shares practical experience in selling Drupal solutions and negotiating contracts with clients across various company sizes, including Fortune 500 organizations, covering approaches for discussing open source with clients and incorporating GPL-compatible language into contracts.",
       "video_url": "",
       "sponsorIds": ""
@@ -1009,8 +1068,13 @@
       "title": "Bootstrapping Solr search clusters and maintaining them",
       "location": "Atlanta",
       "link": "https://munich2012.drupal.org/program/sessions/bootstrapping-solr-search-clusters-and-maintaining-them.html",
-      "track": ["DevOps"],
-      "speakers": ["Nick_vh", "pwolanin"],
+      "track": [
+        "DevOps"
+      ],
+      "speakers": [
+        "Nick_vh",
+        "pwolanin"
+      ],
       "full_description": "Covers enterprise-level Apache Solr deployment and management practices used by Acquia's Search service. Topics include foundational Solr concepts and query optimization, Ruby-based monitoring integrated with Nagios for tracking query performance and memory usage, optimal server architecture design using Puppet configuration management, Nginx request handling for load balancing, scaling infrastructure to support up to 1000+ Solr cores using a Master and Slave architecture, automated core provisioning for multi-tenant customer environments, and custom authentication implementation for Apache Solr.",
       "video_url": "",
       "sponsorIds": ""
@@ -1022,8 +1086,12 @@
       "title": "Evaluating Base Themes",
       "location": "Ballsaal A/B",
       "link": "https://munich2012.drupal.org/program/sessions/evaluating-base-themes.html",
-      "track": ["Frontend"],
-      "speakers": ["emmajane"],
+      "track": [
+        "Frontend"
+      ],
+      "speakers": [
+        "emmajane"
+      ],
       "full_description": "An exploration of Drupal's base theme ecosystem, comparing five prominent themes: Mothership, Zen, Omega, Bartik, and Fusion. Base themes have matured significantly since Front End Drupal was written, with some evolving to require learning curves comparable to full theming engines. Topics include a methodology for evaluating base themes, which themes offer the best themer experience, why no single base theme can meet all developers' needs, and how to determine if your current base theme is the right choice.",
       "video_url": "",
       "sponsorIds": ""
@@ -1035,8 +1103,12 @@
       "title": "Developers, Get Off the Couch and Contribute!",
       "location": "Barcelona",
       "link": "https://munich2012.drupal.org/program/sessions/developers-get-couch-and-contribute.html",
-      "track": ["Community"],
-      "speakers": ["frubim"],
+      "track": [
+        "Community"
+      ],
+      "speakers": [
+        "frubim"
+      ],
       "full_description": "Ci&T developed an internal program to encourage their Drupal developers to contribute to the broader community using hackathons enhanced with gamification elements and collaborative activities. Grounded in Drupal's principle of collaboration, not competition, the program aims to bring developers together to work on diverse projects alongside their regular duties. Topics include removing barriers to contribution, facilitating immersion into the Drupal community, enhancing coding skills through practical experience, and making the process engaging for both new and experienced developers.",
       "video_url": "",
       "sponsorIds": ""
@@ -1048,8 +1120,12 @@
       "title": "Introduction to Drupal: What I Wish Someone Told Me in the Beginning",
       "location": "Sydney",
       "link": "https://munich2012.drupal.org/program/sessions/introduction-drupal-what-i-wish-someone-told-me-beginning.html",
-      "track": ["Sitebuilding"],
-      "speakers": ["eojthebrave"],
+      "track": [
+        "Sitebuilding"
+      ],
+      "speakers": [
+        "eojthebrave"
+      ],
       "full_description": "Building a site with Drupal isn't self-explanatory, yet abundant resources exist for those who know what questions to ask. Topics include understanding Drupal terminology to enable effective communication with the community (such as the distinction between node versus page), strategic approaches to finding and selecting the right contributed modules, protecting production sites, understanding community principles like reciprocity and contributions, and finding quality help beyond search engines.",
       "video_url": "",
       "sponsorIds": ""
@@ -1061,8 +1137,13 @@
       "title": "Caching without fear",
       "location": "Garmisch/Partenkiershen",
       "link": "https://munich2012.drupal.org/program/sessions/caching-without-fear.html",
-      "track": ["Coding & Development"],
-      "speakers": ["Steven Merrill", "tekante"],
+      "track": [
+        "Coding & Development"
+      ],
+      "speakers": [
+        "Steven Merrill",
+        "tekante"
+      ],
       "full_description": "There are only two hard problems in Computer Science: cache invalidation, naming things and off-by-one errors. This session covers behavioral differences between various internal cache storage systems, tips and techniques for interacting with Drupal's internal caches, modules and techniques for controlling external caches like Varnish, Drupal 8 cache tags and current implementation approaches, and managing multiple caching levels (local object cache, local reverse proxy cache, CDN) with minimal complexity. Also covers alternative object caching daemons beyond memcached including Membase and Redis.",
       "video_url": "",
       "sponsorIds": ""
@@ -1074,8 +1155,13 @@
       "title": "The New Entity and Property API",
       "location": "Sheraton Hotel Asam I",
       "link": "https://munich2012.drupal.org/content/new-entity-and-property-api.html",
-      "track": ["Core Conversations"],
-      "speakers": ["fago", "dixon_"],
+      "track": [
+        "Core Conversations"
+      ],
+      "speakers": [
+        "fago",
+        "dixon_"
+      ],
       "full_description": "The new entity property API aims to provide a unified interface to entity properties, avoiding the split between fields and non-field properties. This includes improving consistency across all property types and enabling developers to examine entity type definitions in advance. Topics include the status of D8 entity API enhancements, entity serialization roadmap, entity property API roadmap, and implementation details. The initiative addresses the goal of achieving fully translatable entities and having a default entity serialization for import/export. Related areas include entity validation, translation capabilities, unified storage mechanisms, querying improvements, Field API enhancements, and UUID implementation.",
       "video_url": "",
       "sponsorIds": ""
@@ -1087,8 +1173,12 @@
       "title": "Be a Drupal Hero with Acquia Cloud and the Acquia Network",
       "location": "Day Stage",
       "link": "https://munich2012.drupal.org/program/day-stage/be-drupal-hero-acquia-cloud-and-acquia-network.html",
-      "track": ["Day Stage"],
-      "speakers": ["Jess Iandiorio"],
+      "track": [
+        "Day Stage"
+      ],
+      "speakers": [
+        "Jess Iandiorio"
+      ],
       "full_description": "Learn about Acquia's latest offerings for enhancing Drupal development. Acquia Cloud and the Acquia Network help developers simplify development workflows, adopt continuous integration processes and manage the performance of their Drupal applications. Covers improvements to Insight, Acquia Search, and Acquia Cloud, including Acquia Cloud's capacity to handle over 7 billion monthly requests and the Acquia Network's suite of services for operating and extending Drupal sites.",
       "video_url": "",
       "sponsorIds": "acquia"
@@ -1100,8 +1190,12 @@
       "title": "Keynote: Anke Domscheit-Berg",
       "location": "Ballsaal A/B",
       "link": "https://munich2012.drupal.org/speakers/keynotes/anke-domscheit-berg.html",
-      "track": ["Keynote"],
-      "speakers": ["Anke Domscheit-Berg"],
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Anke Domscheit-Berg"
+      ],
       "full_description": "Digital Democracy - How Technology helps Governments and Citizens to Open Up Politics and Public Administration.\n\nAll over the world, more and more governments embrace open government concepts. Many administrations unlock their data vaults and make uncounted data sets available to the public as open data - machine readable, in multiple formats.\n\nThese data treasures become a source for innovation and development of new services but they are also a basis for more and better participation of people. Visualizations make complex concepts more easily understandable and hence enable better informed citizens to voice their opinions. Today, citizens demand more transparency and inclusion in political decision-making. Recent legislation failures such as on SOPA (USA) or ACTA (EU) show that in a digital democracy, law making can no longer be done behind closed doors.\n\nTechnology makes it possible for public administrations to open up and become more participative on the one hand. But it also helps people across national borders to connect and mobilize, to force transparency where it is lacking, to get rid of laws they don't like and collaboratively write laws they want on the other. Community Public Partnerships evolve, where governments and civil society work jointly for common goals.\n\nTools used by governments as well as by civil society are often open source and shared with others. Some of the best open government platforms are running on Drupal. Open(ing) Government is still in its early phase. Its getting more global, more mobile, more open source. Engaging in Open Government means not only benefiting our society, it also means business opportunities.",
       "video_url": "",
       "sponsorIds": ""
@@ -1113,8 +1207,12 @@
       "title": "Theme <3 Drupal",
       "location": "Garmisch/Partenkiershen",
       "link": "https://munich2012.drupal.org/program/sessions/theme.html",
-      "track": ["Frontend"],
-      "speakers": ["mortendk"],
+      "track": [
+        "Frontend"
+      ],
+      "speakers": [
+        "mortendk"
+      ],
       "full_description": "The theme is where the code and design make hot steamy love. The session focuses on fostering collaboration between themers, designers, and developers while addressing practical challenges including HTML5, cross-browser compatibility, and responsive viewports. Topics include collaboration strategies among team roles, handling real-world technical constraints, and frontend development best practices.",
       "video_url": "",
       "sponsorIds": ""
@@ -1126,8 +1224,12 @@
       "title": "Next Steps for Drupal Commerce",
       "location": "Ballsaal A/B",
       "link": "https://munich2012.drupal.org/program/sessions/next-steps-drupal-commerce.html",
-      "track": ["Sitebuilding"],
-      "speakers": ["rszrama"],
+      "track": [
+        "Sitebuilding"
+      ],
+      "speakers": [
+        "rszrama"
+      ],
       "full_description": "Drupal Commerce is an open-source framework for creating distinctive online retail experiences. This session presents two major announcements: Commerce Kickstart 2.0, an expanded distribution providing a complete solution for powering small to medium sized businesses online with additional contributed modules, comprehensive example store content, and an attractive eCommerce theme; and Drupal Commerce 2.x planning, examining modules developed since the 1.0 release that might become new core dependencies and inviting community input on the roadmap.",
       "video_url": "",
       "sponsorIds": ""
@@ -1139,8 +1241,14 @@
       "title": "Plan and run a Drupal Camp while having fun, empowering others, sharing knowledge, and getting enough sleep",
       "location": "Sheraton Hotel Cuvillies",
       "link": "https://munich2012.drupal.org/program/sessions/plan-and-run-drupal-camp-successfully.html",
-      "track": ["Community"],
-      "speakers": ["horncologne", "segments", "Scandimelia"],
+      "track": [
+        "Community"
+      ],
+      "speakers": [
+        "horncologne",
+        "segments",
+        "Scandimelia"
+      ],
       "full_description": "Drupal Community events are one of the keys to our community's growth, solidarity and success. Leading, supporting, and planning Drupal community events is time consuming and worth getting right. This session addresses major challenges organizers face including PR, outreach, sponsorship, and resource allocation, and includes the beta release of The Great Drupal Camp Kit: plan, promote, and execute your very own Drupal Event. The session draws from collective experience with dozens of community events worldwide, aiming to help organizers avoid burnout while delivering quality experiences for stakeholders.",
       "video_url": "",
       "sponsorIds": ""
@@ -1152,8 +1260,13 @@
       "title": "Migrating to Drupal: Who? What? Why? and How?",
       "location": "Atlanta",
       "link": "https://munich2012.drupal.org/program/sessions/migrating-drupal-who-what-why-and-how.html",
-      "track": ["Business & Strategy"],
-      "speakers": ["agentrickard", "Nicole Lind"],
+      "track": [
+        "Business & Strategy"
+      ],
+      "speakers": [
+        "agentrickard",
+        "Nicole Lind"
+      ],
       "full_description": "Two industry veterans, one a project manager and one a development manager, show how to plan a successful move onto Drupal. Contemporary Drupal implementations typically involve transitioning from existing systems rather than building from scratch. Topics include process management of both technical and human elements of migrations, stakeholder alignment between developers and business teams, technical assessment of anticipated and unforeseen obstacles, available migration strategies and instruments, and risk mitigation around content migration uncertainties. Speakers bring experience managing large-scale migrations for organizations including LifetimeTV, FastCompany.com, and the Department of Energy.",
       "video_url": "",
       "sponsorIds": ""
@@ -1165,8 +1278,12 @@
       "title": "Alfresco: Drupal's Document Management Solution",
       "location": "Barcelona",
       "link": "https://munich2012.drupal.org/program/sessions/alfresco-drupal%E2%80%99s-document-management-solution.html",
-      "track": ["Coding & Development"],
-      "speakers": ["jmacinne"],
+      "track": [
+        "Coding & Development"
+      ],
+      "speakers": [
+        "jmacinne"
+      ],
       "full_description": "",
       "video_url": "",
       "sponsorIds": ""
@@ -1178,8 +1295,12 @@
       "title": "New Developments In MySQL",
       "location": "Sydney",
       "link": "https://munich2012.drupal.org/program/sessions/new-developments-mysql.html",
-      "track": ["DevOps"],
-      "speakers": ["nnewton"],
+      "track": [
+        "DevOps"
+      ],
+      "speakers": [
+        "nnewton"
+      ],
       "full_description": "While focus in the Drupal Community has been on replacements and additions to MySQL such as Redis, MongoDB and Cassandra, MySQL itself has advanced significantly. The presentation covers comparisons of newer database variants including MariaDB, PerconaDB, Percona Cluster, Drizzle, and NDB/MySQL Cluster alongside MySQL 5.5. Topics include performance and vertical scalability, replication stability, clustering technologies (NDB/Galera), monitoring capabilities, online schema modifications, and SQL/schema features such as BLOB/TEXT support in HEAP tables. Also covers recently stabilized toolkits: OAK, Percona Toolkit, and Percona Monitoring Suite.",
       "video_url": "",
       "sponsorIds": ""
@@ -1191,8 +1312,12 @@
       "title": "Lightning talks for module introductions",
       "location": "Day Stage",
       "link": "https://munich2012.drupal.org/program/day-stage/lightning-talks-module-introductions.html",
-      "track": ["Day Stage"],
-      "speakers": ["TomiMikola"],
+      "track": [
+        "Day Stage"
+      ],
+      "speakers": [
+        "TomiMikola"
+      ],
       "full_description": "This session will review 20+ modules.",
       "video_url": "",
       "sponsorIds": ""
@@ -1204,8 +1329,12 @@
       "title": "Web Services and Symfony Core Initiative",
       "location": "Sheraton Hotel Asam I",
       "link": "https://munich2012.drupal.org/content/web-services-and-symfony-core-initiative.html",
-      "track": ["Core Conversations"],
-      "speakers": ["Crell"],
+      "track": [
+        "Core Conversations"
+      ],
+      "speakers": [
+        "Crell"
+      ],
       "full_description": "The modern web consists of linked resources rather than just pages. Servers now respond with diverse formats — HTML, SVG, PDF, JSON, XML, and Atom — making HTML just another web service. Drupal's architecture wasn't designed for this paradigm shift. The initiative aims to rebuild Drupal around request/response handling instead of globals and HTML strings, resulting in a system that is object-oriented, dependency-injected, unit testable, and built largely on Symfony2 components. The Drupal TNG project represents a radical and welcome departure from what came before.",
       "video_url": "",
       "sponsorIds": ""
@@ -1217,7 +1346,9 @@
       "title": "Drupal Association Board Meeting & Strategy Session",
       "location": "Barcelona",
       "link": "https://munich2012.drupal.org/schedule/drupal-association-board-meeting-strategy-session.html",
-      "track": ["Community"],
+      "track": [
+        "Community"
+      ],
       "speakers": [],
       "full_description": "Attendees are invited to observe how the Drupal Association Board operates by sitting in on an actual working board meeting. This will be a working meeting, not a meet and greet. All are welcome to join.",
       "video_url": "",
@@ -1230,8 +1361,12 @@
       "title": "Keynote: Fabien Potencier",
       "location": "Ballsaal A/B",
       "link": "https://munich2012.drupal.org/speakers/keynotes/fabien-potencier.html",
-      "track": ["Keynote"],
-      "speakers": ["Fabien Potencier"],
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Fabien Potencier"
+      ],
       "full_description": "Dream, Experiment, Create, and Share.\n\nThe Internet changes the world one industry at a time thanks to Open-Source software and, of course, thanks to a lot of passionate hackers. What does it mean for web developers? Join Fabien as he shows why being a web developer cannot just be a \"regular\" job. Great developers are passionate, great developers are curious, great developers collaborate.",
       "video_url": "",
       "sponsorIds": ""
@@ -1243,8 +1378,12 @@
       "title": "There Might (Not) Be A Module For That",
       "location": "Sheraton Hotel Cuvillies",
       "link": "https://munich2012.drupal.org/program/sessions/there-might-not-be-module.html",
-      "track": ["Business & Strategy"],
-      "speakers": ["KarenS"],
+      "track": [
+        "Business & Strategy"
+      ],
+      "speakers": [
+        "KarenS"
+      ],
       "full_description": "Explores how Drupal developers evaluate whether to use existing contributed modules or build custom solutions during project discovery phases. With over 15,000 contributed modules, projects often face scenarios where no ready-made solution adequately meets requirements. Topics include how to find existing modules that might solve your problems and test their suitability, evaluation methods using documentation, issue queues, and version stability, choosing between competing modules when multiple options exist, determining when to build custom solutions, deciding when and how to share custom work back with the community, and making sound choices despite incomplete information.",
       "video_url": "",
       "sponsorIds": ""
@@ -1256,8 +1395,12 @@
       "title": "Use datacenter tools to make your dev life easier",
       "location": "Sydney",
       "link": "https://munich2012.drupal.org/program/sessions/use-datacenter-tools-make-your-dev-life-easier.html",
-      "track": ["DevOps"],
-      "speakers": ["freistil"],
+      "track": [
+        "DevOps"
+      ],
+      "speakers": [
+        "freistil"
+      ],
       "full_description": "Managing large IT infrastructure requires automation tools. Even if you only have to set up a few development VMs now and again, you can use those tools to make your work much more efficient. The talk focuses on deploying consistent development and testing environments for Drupal projects by incorporating IT automation applications like Chef into a developer's toolkit, drawing from experience managing over 120 servers with just 2 full-time system administrators.",
       "video_url": "",
       "sponsorIds": ""
@@ -1269,8 +1412,12 @@
       "title": "UX Under Fire - On Communicating the Value of UX",
       "location": "Atlanta",
       "link": "https://munich2012.drupal.org/program/sessions/ux-under-fire-communicating-value-ux.html",
-      "track": ["Frontend"],
-      "speakers": ["solipsist"],
+      "track": [
+        "Frontend"
+      ],
+      "speakers": [
+        "solipsist"
+      ],
       "full_description": "As a UX professional you've probably found yourself forced to argue for the importance of UX in a project. You've probably heard people say that UX is of little importance. And as a designer it's not always easy to explain why UX matters. But UX needs to be justified. And it's your job to do so. This session presents methods to visualize and communicate the value of UX and usability, and tools to argue convincingly that UX proves essential for websites meeting stakeholder expectations — even to project managers from hell.",
       "video_url": "",
       "sponsorIds": ""
@@ -1282,8 +1429,12 @@
       "title": "Multi-headed Drupal",
       "location": "Ballsaal A/B",
       "link": "https://munich2012.drupal.org/program/sessions/multi-headed-drupal.html",
-      "track": ["Sitebuilding"],
-      "speakers": ["Crell"],
+      "track": [
+        "Sitebuilding"
+      ],
+      "speakers": [
+        "Crell"
+      ],
       "full_description": "One of the strengths of Drupal is that it's not just a tool for building a single website. It can be used equally well for managing multiple companion sites together. The presentation explores several approaches to running multiple Drupal installations simultaneously including Domain Access, Organic Groups, and Multi-site configurations, each with distinct advantages and disadvantages. The session also addresses the critical strategic question of whether a multi-headed approach is actually necessary for a given project.",
       "video_url": "",
       "sponsorIds": ""
@@ -1295,8 +1446,13 @@
       "title": "Drupal Strategies for Nonprofits",
       "location": "Barcelona",
       "link": "https://munich2012.drupal.org/program/sessions/drupal-strategies-nonprofits.html",
-      "track": ["Business & Strategy"],
-      "speakers": ["sreynen", "Lydia2pin"],
+      "track": [
+        "Business & Strategy"
+      ],
+      "speakers": [
+        "sreynen",
+        "Lydia2pin"
+      ],
       "full_description": "While Drupal adoption by nonprofits is now widespread, many groups duplicate efforts unnecessarily. Drawing from work with organizations like the United Nations, International Center for Transitional Justice, and Center for Investigative Reporting, this session presents case studies examining different nonprofit implementations, processes for recognizing shared requirements across the nonprofit sector, current Drupal solutions addressing nonprofit needs, collaborative opportunities for developing shared resources, and effective approaches nonprofits have used when contributing to open source initiatives.",
       "video_url": "",
       "sponsorIds": ""
@@ -1308,8 +1464,12 @@
       "title": "Designing high performance Drupal sites",
       "location": "Day Stage",
       "link": "https://munich2012.drupal.org/program/day-stage/designing-high-performance-drupal-sites.html",
-      "track": ["Day Stage"],
-      "speakers": ["kvirta"],
+      "track": [
+        "Day Stage"
+      ],
+      "speakers": [
+        "kvirta"
+      ],
       "full_description": "This session will look at the UGC heavy Drupal site and how Exove achieved high performance with front-end off loading modules.",
       "video_url": "",
       "sponsorIds": ""
@@ -1321,8 +1481,12 @@
       "title": "Move over PIFR, there's a new bot in town!",
       "location": "Sheraton Hotel Asam I",
       "link": "https://munich2012.drupal.org/content/move-over-pifr-theres-new-bot-town.html",
-      "track": ["Core Conversations"],
-      "speakers": ["jthorson"],
+      "track": [
+        "Core Conversations"
+      ],
+      "speakers": [
+        "jthorson"
+      ],
       "full_description": "Nearly four years after testing.drupal.org's launch, the original PIFT and PIFR systems have become outdated. Architectural limitations within the code mean that this dog is simply too old to learn any new tricks. This session introduces replacement projects called Conduit and Worker, written from the ground up to address the architectural limitations inherent in the existing PIFT/PIFR solution. Topics include the Conduit/Worker architecture overview, new testing capabilities enabled by this solution, how developers can create new testing plugins, long-term sustainability improvements, and contribution opportunities for improving Drupal's testing infrastructure.",
       "video_url": "",
       "sponsorIds": ""
@@ -1334,8 +1498,12 @@
       "title": "Designing HTTP Interfaces and RESTful Web Services",
       "location": "Garmisch/Partenkiershen",
       "link": "https://munich2012.drupal.org/program/sessions/designing-http-interfaces-and-restful-web-services.html",
-      "track": ["Coding & Development"],
-      "speakers": ["dzuelke"],
+      "track": [
+        "Coding & Development"
+      ],
+      "speakers": [
+        "dzuelke"
+      ],
       "full_description": "A lot of Web Services today claim to be RESTful APIs. But are they really? Do the URLs accurately identify resources? Are the powers of HTTP leveraged properly? What is \"Hypermedia\", what is the Uniform Interface, and what is the secret behind the HATEOAS acronym that is so essential to the REST architectural style? This talk gives answers and guidelines using real-life examples.",
       "video_url": "",
       "sponsorIds": ""
@@ -1347,8 +1515,13 @@
       "title": "Drupal Community in China & Pakistan",
       "location": "Barcelona",
       "link": "https://munich2012.drupal.org/program/sessions/drupal-community-china-pakistan.html",
-      "track": ["Community"],
-      "speakers": ["shenzhuxi", "Kubair Shirazee"],
+      "track": [
+        "Community"
+      ],
+      "speakers": [
+        "shenzhuxi",
+        "Kubair Shirazee"
+      ],
       "full_description": "An examination of Drupal adoption and community development in China and Pakistan, two regions underrepresented in global Drupal discussions. Liang shares experiences from organizing Drupal events in Beijing since 2010, covering community growth, developer involvement, market conditions, and the internet environment in China. Kubair, a British technology investor, describes Pakistan as one of the fastest adopters of Drupal in the developing world, discussing establishing Pakistan's first Drupal meetup in April 2012, organizing the inaugural Drupal camp, founding a Drupal software company locally, and analyzing community engagement obstacles and market potential.",
       "video_url": "",
       "sponsorIds": ""
@@ -1360,8 +1533,12 @@
       "title": "Introduction to MongoDB",
       "location": "Atlanta",
       "link": "https://munich2012.drupal.org/program/sessions/introduction-mongodb.html",
-      "track": ["Coding & Development"],
-      "speakers": ["derickr"],
+      "track": [
+        "Coding & Development"
+      ],
+      "speakers": [
+        "derickr"
+      ],
       "full_description": "MongoDB documents can represent rich, schema-free data structures offering alternatives to traditional relational models. Moving to MongoDB requires rethinking database design, as relational database principles don't always apply in document-oriented systems. Topics include data modeling challenges, unique MongoDB features such as atomic updates and indexed array keys, data modeling guidelines, tradeoffs between different approaches, and MongoDB's strengths in scalability and performance.",
       "video_url": "",
       "sponsorIds": ""
@@ -1373,8 +1550,12 @@
       "title": "Drupal 8: What you need to know",
       "location": "Ballsaal A/B",
       "link": "https://munich2012.drupal.org/program/sessions/drupal-8-what-you-need-know.html",
-      "track": ["Sitebuilding"],
-      "speakers": ["webchick"],
+      "track": [
+        "Sitebuilding"
+      ],
+      "speakers": [
+        "webchick"
+      ],
       "full_description": "Covers Drupal 8's active development since March 2011, highlighting significant improvements coming in this revolutionary release and their implications for future projects. Topics include answers to frequently asked questions about Drupal 8, changes affecting clients, site builders, designers, and developers, core development process overview, and action items for community contribution.",
       "video_url": "",
       "sponsorIds": ""
@@ -1386,8 +1567,12 @@
       "title": "Agile Gymnastics and Timebox Tumbling - A Hybrid Approach",
       "location": "Garmisch/Partenkiershen",
       "link": "https://munich2012.drupal.org/program/sessions/agile-gymnastics-and-timebox-tumbling-hybrid-approach.html",
-      "track": ["Business & Strategy"],
-      "speakers": ["MatthewS"],
+      "track": [
+        "Business & Strategy"
+      ],
+      "speakers": [
+        "MatthewS"
+      ],
       "full_description": "Drawing from Examiner.com's extensive project management experience across multiple methodologies, exploring why Waterfall doesn't always work and why Agile has a place, but isn't the holy grail. Topics include why cowboy development can damage stakeholder relationships, the reality that Fixed Scope is a lie, and how combining different approaches yields better results. Project management requires a blend of techniques and tools to effectively shepherd projects from ideation to release.",
       "video_url": "",
       "sponsorIds": ""
@@ -1399,8 +1584,12 @@
       "title": "Simple devops workflows with Kanban",
       "location": "Sydney",
       "link": "https://munich2012.drupal.org/program/sessions/simple-devops-workflows-kanban.html",
-      "track": ["DevOps"],
-      "speakers": ["freistil"],
+      "track": [
+        "DevOps"
+      ],
+      "speakers": [
+        "freistil"
+      ],
       "full_description": "Efficient teamwork in Drupal projects can be a challenge even with modern tools like Git, Redmine and so on. We also need the right processes to distribute tasks, detect bottlenecks and make well-directed improvements. Only if we're able to keep work flowing at a steady and realistic pace, we'll have happy clients and team members.\n\nKanban is a great way to achieve this goal. It's a lean workflow management method that is both powerful enough to revolutionize car manufacturing in Japan and simple enough to quickly adopt it in IT teams without throwing all existing processes over board.\n\nIn this talk, I will explain all important aspects of the Kanban method and demonstrate how it works in an easy to understand example.",
       "video_url": "",
       "sponsorIds": ""
@@ -1412,8 +1601,13 @@
       "title": "Bonuses for your mobile Drupal website",
       "location": "Sheraton Hotel Cuvillies",
       "link": "https://munich2012.drupal.org/program/sessions/bonuses-your-mobile-drupal-website.html",
-      "track": ["Frontend"],
-      "speakers": ["dealancer", "Fabianx"],
+      "track": [
+        "Frontend"
+      ],
+      "speakers": [
+        "dealancer",
+        "Fabianx"
+      ],
       "full_description": "Addresses mobile-friendly Drupal development for smartphones covering practical implementation techniques including iPhone-like scroll, touch carousels, slideshows, page transitions, and popup interfaces. The presentation explores ready-to-use mobile themes and modules while introducing PhoneGap and the Mobile App Generator (MAG) module enabling developers to transform Drupal websites into native iOS and Android applications suitable for distribution through app stores.",
       "video_url": "",
       "sponsorIds": ""
@@ -1425,8 +1619,12 @@
       "title": "Drupalizing Greenpeace Germany",
       "location": "Day Stage",
       "link": "https://munich2012.drupal.org/program/day-stage/drupalizing-greenpeace-germany.html",
-      "track": ["Day Stage"],
-      "speakers": ["Jaganaud"],
+      "track": [
+        "Day Stage"
+      ],
+      "speakers": [
+        "Jaganaud"
+      ],
       "full_description": "Describes Greenpeace Germany's comprehensive migration to Drupal across all online projects, including setting up an Aegir based server infrastructure for smooth project rollout and maintenance, creating a Drupal based OpenID provider for single sign-on between the various Greenpeace websites, developing a powerful internal community platform allowing German Greenpeace volunteers to share information, creating a customizable Greenpeace Groups distribution enabling local volunteers to introduce themselves and share news and events, and rebuilding the greenpeace.de website in Drupal 7 replacing the old Typo3 platform.",
       "video_url": "",
       "sponsorIds": ""
@@ -1438,8 +1636,12 @@
       "title": "Drupal 8: UX Team update",
       "location": "Sheraton Hotel Asam I",
       "link": "https://munich2012.drupal.org/content/drupal-8-ux-team-update.html",
-      "track": ["Core Conversations"],
-      "speakers": ["Bojhan"],
+      "track": [
+        "Core Conversations"
+      ],
+      "speakers": [
+        "Bojhan"
+      ],
       "full_description": "An overview of the Drupal 8 UX Team's redesign efforts addressing three major topics: the redesign of the content creation interface, block placement in layouts, and mobile compatibility improvements including current activities and the intended endpoint for Drupal 8; usability test coverage and strategies for comprehensive testing of core functionality and implementing community-based testing approaches; and the significant lack of resources facing the team as momentum from D7UX initiatives has diminished.",
       "video_url": "",
       "sponsorIds": ""
@@ -1451,8 +1653,12 @@
       "title": "Improved file management in core",
       "location": "Sheraton Hotel Asam I",
       "link": "https://munich2012.drupal.org/content/improved-file-management-core.html",
-      "track": ["Core Conversations"],
-      "speakers": ["Dave Reid"],
+      "track": [
+        "Core Conversations"
+      ],
+      "speakers": [
+        "Dave Reid"
+      ],
       "full_description": "Drupal core lacked comprehensive file management capabilities where users couldn't add, edit, or delete files independently without using raw API functions or attaching them to entity fields. The File Management Initiative merged the File Entity module into Drupal 8 core, enabling fields on file entities through bundles or types, creating administrative interfaces for individual file operations (add, view, edit, delete), and developing extensible file access and metadata APIs. The presenter outlines proposed changes, discusses progress, identifies remaining challenges, and explains how the community can contribute to this broader Media initiative.",
       "video_url": "",
       "sponsorIds": ""
@@ -1464,8 +1670,12 @@
       "title": "Building real-time systems on top of Drupal with Node.js",
       "location": "Atlanta",
       "link": "https://munich2012.drupal.org/program/sessions/building-real-time-systems-top-drupal-nodejs.html",
-      "track": ["Coding & Development"],
-      "speakers": ["mikl"],
+      "track": [
+        "Coding & Development"
+      ],
+      "speakers": [
+        "mikl"
+      ],
       "full_description": "The creator of the Drupal package for Node.js goes over how to leverage the strengths of Node.js to compensate for some of the Drupal stack's weaknesses, especially when creating real-time systems with chat and queue systems as examples.",
       "video_url": "",
       "sponsorIds": ""
@@ -1477,8 +1687,12 @@
       "title": "Configuration Management in Drupal 7",
       "location": "Ballsaal A/B",
       "link": "https://munich2012.drupal.org/program/sessions/configuration-management-drupal-7.html",
-      "track": ["Sitebuilding"],
-      "speakers": ["dragonwize"],
+      "track": [
+        "Sitebuilding"
+      ],
+      "speakers": [
+        "dragonwize"
+      ],
       "full_description": "Configuration management is a big initiative for Drupal 8, but what can you do now in Drupal 7? The session covers the current landscape of configuration management solutions including Exportables via the CTools module as the primary format for configuration export in Drupal 7, the Features module for bundling site-building components into a single feature module, and the Configuration module which enables keeping track of specific configurations on a Drupal site and moving configurations across different environments and between distinct sites at a granular level.",
       "video_url": "",
       "sponsorIds": ""
@@ -1490,8 +1704,12 @@
       "title": "The State of Drupal Community Education",
       "location": "Sheraton Hotel Cuvillies",
       "link": "https://munich2012.drupal.org/program/sessions/state-drupal-community-education.html",
-      "track": ["Community"],
-      "speakers": ["add1sun"],
+      "track": [
+        "Community"
+      ],
+      "speakers": [
+        "add1sun"
+      ],
       "full_description": "There are so many community projects around education that it is overwhelming to figure out what is going on. Projects range from using Drupal as an educational platform to certification programs and training courses about Drupal itself. This session breaks them down into some manageable categories, evaluates where we are, figures out where things overlap, and makes proposals for where we can go in the future. Focuses exclusively on community-based efforts including Drupal for Education, Drupal Dojo, Learn Drupal, and skill maps — excluding commercial education projects.",
       "video_url": "",
       "sponsorIds": ""
@@ -1503,8 +1721,12 @@
       "title": "The strategy behind designing for a CMS",
       "location": "Garmisch/Partenkiershen",
       "link": "https://munich2012.drupal.org/program/sessions/strategy-behind-designing-cms.html",
-      "track": ["Frontend"],
-      "speakers": ["mogdesign"],
+      "track": [
+        "Frontend"
+      ],
+      "speakers": [
+        "mogdesign"
+      ],
       "full_description": "While there isn't a hard-to-theme design, only a lazy or bad themer, experience has taught that some designs are simply more cost-effective to implement. Topics include distinctions between print and web design approaches, typography and grid systems, understanding Drupal architecture including theme layers, blocks, and regions, balancing aesthetic appeal with user experience, maintaining visual consistency across layouts and typography, creating comprehensive style guides documenting HTML and Drupal elements, and achieving pixel-perfect design standards.",
       "video_url": "",
       "sponsorIds": ""
@@ -1516,8 +1738,12 @@
       "title": "Deploy with Capistrano",
       "location": "Sydney",
       "link": "https://munich2012.drupal.org/program/sessions/deploy-capistrano.html",
-      "track": ["DevOps"],
-      "speakers": ["pingers"],
+      "track": [
+        "DevOps"
+      ],
+      "speakers": [
+        "pingers"
+      ],
       "full_description": "Prepare to be dazzled with how easily you save yourself time, money and unicorns by using a deployment tool like Capistrano. This intermediate-level DevOps talk introduces installing and configuring Capistrano for project deployment, combining practical hands-on instruction with a live demonstration showing how Capistrano works alongside Git to streamline deployment workflows.",
       "video_url": "",
       "sponsorIds": ""
@@ -1529,8 +1755,12 @@
       "title": "LSD: Getting the Most Out of Your Investment in Drupal",
       "location": "Barcelona",
       "link": "https://munich2012.drupal.org/program/sessions/lsd-getting-most-out-your-investment-drupal.html",
-      "track": ["Business & Strategy"],
-      "speakers": ["michaelemeyers"],
+      "track": [
+        "Business & Strategy"
+      ],
+      "speakers": [
+        "michaelemeyers"
+      ],
       "full_description": "No software solution fully meets all current and future needs, requiring organizations to customize and extend functionality. Large Drupal users rarely share knowledge, leading to duplicate solutions developed incompatibly. To address this, Acquia established the Large Scale Drupal strategic alliance — a consortium where major Drupal organizations collaborate on common challenges. The group meets regularly to discuss needs, prioritize solutions, and share findings through knowledge transfer, white papers, training, and development work, channeling resources back into the community through vendors and service providers.",
       "video_url": "",
       "sponsorIds": ""
@@ -1542,8 +1772,12 @@
       "title": "Drupal 8",
       "location": "Sheraton Hotel Asam I",
       "link": "https://munich2012.drupal.org/program/sessions/drupal-8.html",
-      "track": ["Core Conversations"],
-      "speakers": ["Dries Buytaert"],
+      "track": [
+        "Core Conversations"
+      ],
+      "speakers": [
+        "Dries Buytaert"
+      ],
       "full_description": "Dries Buytaert, Drupal founder and Project Lead, presents on the state of Drupal 8, covering new initiatives, discussing any course directions needed, proposing refined development policies, and more. Includes time allocated for discussion and Q&A. Note: there are no slides with this presentation; the recording is audio only.",
       "video_url": "",
       "sponsorIds": ""
@@ -1555,7 +1789,9 @@
       "title": "Closing Plenary",
       "location": "Ballsaal A/B",
       "link": "https://munich2012.drupal.org/schedule/closing-plenary.html",
-      "track": ["Community"],
+      "track": [
+        "Community"
+      ],
       "speakers": [],
       "full_description": "",
       "video_url": "",
@@ -1568,7 +1804,9 @@
       "title": "Trivia Night!",
       "location": "Ballsaal A/B",
       "link": "https://munich2012.drupal.org/program/drupalcon-trivia-night.html",
-      "track": ["Community"],
+      "track": [
+        "Community"
+      ],
       "speakers": [],
       "full_description": "",
       "video_url": "",
@@ -1581,7 +1819,9 @@
       "title": "Sprints",
       "location": "Ballsaal A/B",
       "link": "https://munich2012.drupal.org/program/schedule/2012-08-24.html",
-      "track": ["Community"],
+      "track": [
+        "Community"
+      ],
       "speakers": [],
       "full_description": "",
       "video_url": "",
