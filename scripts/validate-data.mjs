@@ -8,11 +8,11 @@ const Ajv = require('../node_modules/ajv/dist/ajv.bundle.js');
 const ajv = new Ajv({ allErrors: true });
 
 const schemas = {
-  'index.json':   'schemas/index.schema.json',
-  'sponsors.json': 'schemas/sponsors.schema.json',
-  'themes.json':  'schemas/themes.schema.json',
+  'index.json':   'app/schemas/index.schema.json',
+  'sponsors.json': 'app/schemas/sponsors.schema.json',
+  'themes.json':  'app/schemas/themes.schema.json',
 };
-const eventSchema = 'schemas/event.schema.json';
+const eventSchema = 'app/schemas/event.schema.json';
 
 function loadValidator(schemaPath) {
   const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
@@ -43,7 +43,7 @@ function collectJsonFiles(dir) {
 
 const targets = args.length
   ? args
-  : collectJsonFiles('data');
+  : collectJsonFiles('app/data');
 
 let pass = 0;
 let fail = 0;
