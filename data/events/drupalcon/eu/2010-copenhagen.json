@@ -1,0 +1,2165 @@
+{
+  "event": {
+    "designation": "DrupalCon Europe",
+    "location": "Copenhagen",
+    "year": "2010",
+    "website": "https://cph2010.drupal.org",
+    "region": "Europe",
+    "startDate": "2010-08-23T00:00:00Z",
+    "endDate": "2010-08-27T23:59:59Z",
+    "venue": "Bella Center Copenhagen",
+    "timezone": "Europe/Copenhagen",
+    "columns": 6,
+    "enabled": false,
+    "scheduleComplete": true,
+    "logo": {
+      "image": "./img/logos/drupalcon/2010-copenhagen.png",
+      "imageAlt": "DrupalCon Copenhagen 2010 logo",
+      "usePlate": false,
+      "logoDisabled": true,
+      "faIcon": ""
+    },
+    "flickr": {
+      "enabled": true,
+      "provider": "Flickr",
+      "groupUrl": "https://www.flickr.com/groups/drupalcon/",
+      "image": "",
+      "imageAlt": "DrupalCon Copenhagen 2010 photos on Flickr"
+    },
+    "sponsors": [
+      {
+        "id": "sponsor-1",
+        "title": "Acquia",
+        "tier": "Platinum",
+        "row": 1,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-1.jpg",
+        "imageAlt": "Acquia logo",
+        "link": "https://cph2010.drupal.org/sponsors/acquia.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-2",
+        "title": "Microsoft /web",
+        "tier": "Platinum",
+        "row": 1,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-2.png",
+        "imageAlt": "Microsoft /web logo",
+        "link": "https://cph2010.drupal.org/sponsors/microsoft-web.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-3",
+        "title": "Propeople",
+        "tier": "Platinum",
+        "row": 1,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-3.png",
+        "imageAlt": "Propeople logo",
+        "link": "https://cph2010.drupal.org/sponsors/propeople.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-4",
+        "title": "Trellon",
+        "tier": "Platinum",
+        "row": 1,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-4.jpg",
+        "imageAlt": "Trellon logo",
+        "link": "https://cph2010.drupal.org/sponsors/trellon.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-5",
+        "title": "VPS.NET",
+        "tier": "Platinum",
+        "row": 1,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-5.png",
+        "imageAlt": "VPS.NET logo",
+        "link": "https://cph2010.drupal.org/sponsors/vpsnet.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-6",
+        "title": "Lullabot",
+        "tier": "Gold",
+        "row": 1,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-6.png",
+        "imageAlt": "Lullabot logo",
+        "link": "https://cph2010.drupal.org/sponsors/lullabot.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-7",
+        "title": "Mearra",
+        "tier": "Gold",
+        "row": 1,
+        "priority": 70,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-7.png",
+        "imageAlt": "Mearra logo",
+        "link": "https://cph2010.drupal.org/sponsors/mearra.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-8",
+        "title": "NodeOne",
+        "tier": "Gold",
+        "row": 1,
+        "priority": 80,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-8.png",
+        "imageAlt": "NodeOne logo",
+        "link": "https://cph2010.drupal.org/sponsors/nodeone.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-9",
+        "title": "Rackhosting",
+        "tier": "Gold",
+        "row": 1,
+        "priority": 90,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-9.jpg",
+        "imageAlt": "Rackhosting logo",
+        "link": "https://cph2010.drupal.org/sponsors/rackhosting.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-10",
+        "title": "Ciklum",
+        "tier": "Silver",
+        "row": 1,
+        "priority": 100,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-10.jpg",
+        "imageAlt": "Ciklum logo",
+        "link": "https://cph2010.drupal.org/sponsors/ciklum.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-11",
+        "title": "Commerce Guys",
+        "tier": "Silver",
+        "row": 1,
+        "priority": 110,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-11.jpg",
+        "imageAlt": "Commerce Guys logo",
+        "link": "https://cph2010.drupal.org/sponsors/commerce-guys.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-12",
+        "title": "Dataflow",
+        "tier": "Silver",
+        "row": 1,
+        "priority": 120,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-12.jpg",
+        "imageAlt": "Dataflow logo",
+        "link": "https://cph2010.drupal.org/sponsors/dataflow.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-13",
+        "title": "Peytz & Co",
+        "tier": "Silver",
+        "row": 1,
+        "priority": 130,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-13.jpg",
+        "imageAlt": "Peytz & Co logo",
+        "link": "https://cph2010.drupal.org/sponsors/peytz-co.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-14",
+        "title": "Web Spiders Ltd",
+        "tier": "Silver",
+        "row": 1,
+        "priority": 140,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-14.png",
+        "imageAlt": "Web Spiders Ltd logo",
+        "link": "https://cph2010.drupal.org/sponsors/web-spiders-ltd.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-15",
+        "title": "Aten Design Group",
+        "tier": "Bronze",
+        "row": 1,
+        "priority": 150,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-15.png",
+        "imageAlt": "Aten Design Group logo",
+        "link": "https://cph2010.drupal.org/sponsors/aten-design-group.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-16",
+        "title": "data in transit",
+        "tier": "Bronze",
+        "row": 1,
+        "priority": 160,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-16.png",
+        "imageAlt": "data in transit logo",
+        "link": "https://cph2010.drupal.org/sponsors/data-transit.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-17",
+        "title": "Development Seed",
+        "tier": "Bronze",
+        "row": 1,
+        "priority": 170,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-17.jpg",
+        "imageAlt": "Development Seed logo",
+        "link": "https://cph2010.drupal.org/sponsors/development-seed.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-18",
+        "title": "Evolving Web",
+        "tier": "Bronze",
+        "row": 1,
+        "priority": 180,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-18.png",
+        "imageAlt": "Evolving Web logo",
+        "link": "https://cph2010.drupal.org/sponsors/evolving-web.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-19",
+        "title": "Google",
+        "tier": "Bronze",
+        "row": 1,
+        "priority": 190,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-19.jpg",
+        "imageAlt": "Google logo",
+        "link": "https://cph2010.drupal.org/sponsors/google.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-20",
+        "title": "Koriolis",
+        "tier": "Bronze",
+        "row": 1,
+        "priority": 200,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-20.png",
+        "imageAlt": "Koriolis logo",
+        "link": "https://cph2010.drupal.org/sponsors/koriolis.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-21",
+        "title": "Operate IT",
+        "tier": "Bronze",
+        "row": 1,
+        "priority": 210,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-21.png",
+        "imageAlt": "Operate IT logo",
+        "link": "https://cph2010.drupal.org/sponsors/operate-it.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-22",
+        "title": "OSInet",
+        "tier": "Bronze",
+        "row": 1,
+        "priority": 220,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-22.png",
+        "imageAlt": "OSInet logo",
+        "link": "https://cph2010.drupal.org/sponsors/osinet.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-23",
+        "title": "Packt",
+        "tier": "Bronze",
+        "row": 1,
+        "priority": 230,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-23.jpg",
+        "imageAlt": "Packt logo",
+        "link": "https://cph2010.drupal.org/sponsors/packt.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-24",
+        "title": "Phase2 Technology",
+        "tier": "Bronze",
+        "row": 1,
+        "priority": 240,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-24.png",
+        "imageAlt": "Phase2 Technology logo",
+        "link": "https://cph2010.drupal.org/sponsors/phase2-technology.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-25",
+        "title": "Varnish",
+        "tier": "Bronze",
+        "row": 1,
+        "priority": 250,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-25.png",
+        "imageAlt": "Varnish logo",
+        "link": "https://cph2010.drupal.org/sponsors/varnish.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-26",
+        "title": "Ad Bard Network",
+        "tier": "Media",
+        "row": 1,
+        "priority": 260,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-26.jpg",
+        "imageAlt": "Ad Bard Network logo",
+        "link": "https://cph2010.drupal.org/sponsors/ad-bard-network.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-27",
+        "title": "Berlingske Media",
+        "tier": "Media",
+        "row": 1,
+        "priority": 270,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-27.png",
+        "imageAlt": "Berlingske Media logo",
+        "link": "https://cph2010.drupal.org/sponsors/berlingske-media.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-28",
+        "title": "Brightcove",
+        "tier": "Media",
+        "row": 1,
+        "priority": 280,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-28.jpg",
+        "imageAlt": "Brightcove logo",
+        "link": "https://cph2010.drupal.org/sponsors/brightcove.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-29",
+        "title": "Drupal Radar",
+        "tier": "Media",
+        "row": 1,
+        "priority": 290,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-29.png",
+        "imageAlt": "Drupal Radar logo",
+        "link": "https://cph2010.drupal.org/sponsors/drupal-radar.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-30",
+        "title": "Linux Journal",
+        "tier": "Media",
+        "row": 1,
+        "priority": 300,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-30.jpg",
+        "imageAlt": "Linux Journal logo",
+        "link": "https://cph2010.drupal.org/sponsors/linux-journal.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-31",
+        "title": "Linux Magazine",
+        "tier": "Media",
+        "row": 1,
+        "priority": 310,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-31.jpg",
+        "imageAlt": "Linux Magazine logo",
+        "link": "https://cph2010.drupal.org/sponsors/linux-magazine.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-32",
+        "title": "Version2",
+        "tier": "Media",
+        "row": 1,
+        "priority": 320,
+        "image": "./img/sponsors/drupalcon-europe/2010-copenhagen/sponsor-32.png",
+        "imageAlt": "Version2 logo",
+        "link": "https://cph2010.drupal.org/sponsors/version2.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "scheduleURLs": [
+      "https://cph2010.drupal.org/sessions/timetable.html"
+    ],
+    "other_urls": []
+  },
+  "items": [
+    {
+      "startTime": "2010-08-24T07:00:00Z",
+      "endTime": "2010-08-24T07:50:00Z",
+      "duration": "P50M",
+      "title": "Welcome to Drupal",
+      "location": "Room 10",
+      "link": "https://cph2010.drupal.org/sessions/welcome-drupal.html",
+      "track": [
+        "Introducing Drupal"
+      ],
+      "speakers": [
+        "Jeffrey A. McGuire",
+        "Robert Douglass"
+      ],
+      "full_description": "An introductory session addressing common questions about Drupal adoption and usage. The presenters cover fundamental topics including terminology, core functionality, custom content creation, taxonomy, content reuse, team collaboration, theming, and internationalization. The session aims to help attendees determine if Drupal suits their needs and provides pointers to additional DrupalCon sessions for deeper learning on specific subjects.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T07:00:00Z",
+      "endTime": "2010-08-24T07:50:00Z",
+      "duration": "P50M",
+      "title": "Drupal Commerce: Setting up Shop on Drupal 7",
+      "location": "Room 11",
+      "link": "https://cph2010.drupal.org/sessions/drupal-commerce-setting-shop-drupal-7.html",
+      "track": [
+        "Configuration, Set-Up & Performance"
+      ],
+      "speakers": [
+        "Ryan Szrama"
+      ],
+      "full_description": "This session introduces the fundamentals of Drupal Commerce, the next-generation e-commerce module suite for Drupal 7. Key topics include product creation and display, shopping cart functionality, checkout workflows, and back-end order administration.\n\nThe presentation covers development standards, core systems utilization, integration with fields and Views, Drupal Commerce distributions, and the Features module. Attendees learn how Drupal Commerce evolves from Ubercart while leveraging Drupal 7's strongest core features and contributions.\n\n**Key Points Covered:**\n- What exactly is Drupal Commerce?\n- Development standards and principles\n- How Drupal Commerce functions\n- Utilization of fields in core and Views\n- Core systems and implementation\n- Drupal Commerce distributions and Features\n- Contribution opportunities",
+      "sponsorIds": "",
+      "video_url": "http://vimeo.com/14406353"
+    },
+    {
+      "startTime": "2010-08-24T07:00:00Z",
+      "endTime": "2010-08-24T07:50:00Z",
+      "duration": "P50M",
+      "title": "Drupal Security for Coders and Themers",
+      "location": "Room 12",
+      "link": "https://cph2010.drupal.org/sessions/drupal-security-coders-and-themers.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Peter Wolanin",
+        "Jakub Suchy"
+      ],
+      "full_description": "Learn from members of the Drupal security team about common vulnerabilities in module and theme code, how to spot them, and how to write secure code yourself.\n\nA conceptual framework for handling user input safely, as well as the security aspects of Drupal APIs will be covered.\n\nWe will demonstrate Cross Site Scripting vulnerability and Cross Site Request Forgery vulnerabilities that have been found in contributed modules, and show how dangerous they are to your site and how they were fixed.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T07:00:00Z",
+      "endTime": "2010-08-24T07:50:00Z",
+      "duration": "P50M",
+      "title": "Architecting a Drupal Site: From Composition to Completion",
+      "location": "Room 18",
+      "link": "https://cph2010.drupal.org/sessions/architecting-drupal-site-composition-completion.html",
+      "track": [
+        "Configuration, Set-Up & Performance"
+      ],
+      "speakers": [
+        "Jon Skulski"
+      ],
+      "full_description": "One of the first challenges of building a Drupal site is generating a complete guide to development. This session explores how to architect sites by asking key questions: \"What data do we want to capture?\" \"How are we going to display it?\" \"Are there already modules we can leverage?\" \"When do we write custom code?\"\n\nThe presenter walks through breaking down design compositions into repeatable components that form a blueprint for development and launch. The talk covers digesting a design composition into a Drupal development roadmap by breaking down components into content types, views and panels. Strategies for finding quality modules and deciding when to write custom code are also discussed.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T07:00:00Z",
+      "endTime": "2010-08-24T07:50:00Z",
+      "duration": "P50M",
+      "title": "HipHop for PHP - an introduction",
+      "location": "Room 19",
+      "link": "https://cph2010.drupal.org/sessions/hiphop-php-%c2%a0-introduction.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Scott MacVicar"
+      ],
+      "full_description": "HipHop for PHP transforms PHP source code into highly optimized C++. It was developed by Facebook and was released as open source in early 2010.\n\nHipHop transforms your PHP source code into highly optimized C++ and then compiles it with g++ to build binary files. You keep coding in simpler PHP, then HipHop executes your source code in a semantically equivalent manner and sacrifices some rarely used features – such as eval() – in exchange for improved performance.\n\nFacebook sees about a 50% reduction in CPU usage when serving equal amounts of Web traffic when compared to Apache and PHP. Facebook's API tier can serve twice the traffic using 30% less CPU.\n\n[HipHop for PHP](http://github.com/facebook/hiphop-php/)",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T07:00:00Z",
+      "endTime": "2010-08-24T07:50:00Z",
+      "duration": "P50M",
+      "title": "Drupal Distributions: The Dos and Don'ts",
+      "location": "Room 20",
+      "link": "https://cph2010.drupal.org/sessions/drupal-distributions-dos-and-don%e2%80%99ts.html",
+      "track": [
+        "Configuration, Set-Up & Performance"
+      ],
+      "speakers": [
+        "Irakli Nadareishvili",
+        "Jeff Miccolis"
+      ],
+      "full_description": "This session shares firsthand experience constructing multiple popular Drupal distributions including Managing News, OpenAtrium, OpenPublish, Tattler, and OpenPublic. Presenters discuss architectural challenges in building and managing distributions, solutions like Installation Profiles, CTools, Features, Context, and Drush, plus strategies for facilitating community communication, engaging users, and accessing support resources.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T08:00:00Z",
+      "endTime": "2010-08-24T08:50:00Z",
+      "duration": "P50M",
+      "title": "The Drupal Distro for Publishers - OpenPublish",
+      "location": "Room 11",
+      "link": "https://cph2010.drupal.org/sessions/drupal-distro-publishers-openpublish.html",
+      "track": [
+        "Drupal for Business"
+      ],
+      "speakers": [
+        "Irakli Nadareishvili",
+        "Frank Febbraro"
+      ],
+      "full_description": "OpenPublish is a packaged distribution of Drupal designed for online publishers. This session explores why publications are adopting OpenPublish as their publishing platform, how it expands Drupal's reach, capabilities for publishers, and upcoming features. Attendees will engage directly with OpenPublish creators.\n\n**Resources:** [OpenPublish Website](http://openpublishapp.com/)",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T08:00:00Z",
+      "endTime": "2010-08-24T08:50:00Z",
+      "duration": "P50M",
+      "title": "About the Rules Ecosystem",
+      "location": "Room 12",
+      "link": "https://cph2010.drupal.org/sessions/about-rules-ecosystem.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Wolfgang Ziegler",
+        "Klaus Purer"
+      ],
+      "full_description": "Presentation covering Rules 2 and Drupal 7 developments, including new features, Rules Web for remote system interaction, and Google Summer of Code project outcomes. Topics include Entities, Data selectors, new UI, developer integration methods, Rules Web for service invocation, and optimization/transformer projects.\n\n**Agenda:**\n- Rules in Drupal 7 (Entities, Data selectors, New UI)\n- Rules 2 for developers (integration and API leverage)\n- Rules Web introduction (service invocation, remote events)\n- Summer of Code projects ([Rules Optimization](http://drupal.org/project/rules_optimization), [Transformers](http://drupal.org/project/transformers))\n- Outlook",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T08:00:00Z",
+      "endTime": "2010-08-24T08:50:00Z",
+      "duration": "P50M",
+      "title": "Propeople: behind the scene",
+      "location": "Room 18",
+      "link": "https://cph2010.drupal.org/sessions/propeople-sponsored-session-propeople-behind-scene.html",
+      "track": [
+        "Sponsored Sessions"
+      ],
+      "speakers": [
+        "Drejer",
+        "Welin Welchev",
+        "Rumen Yordanov",
+        "Mihai Moscovici"
+      ],
+      "full_description": "This presentation offers an insider's look at Propeople, \"a leading Drupal company with offices in five countries on two continents.\" The team shares development strategies and optimization techniques, featuring case studies of complex Danish Drupal implementations.\n\n**Featured Projects:**\n\n- **FDM.dk**: Described as among the largest Drupal websites in Denmark, combining a customized CMS, e-shop, e-magazine platform, social network capabilities, user registration, classified ads, and Wiki functionality.\n\n- **UNICEF.dk**: An integrated solution incorporating Drupal customization, DonorPerfect CRM integration, newsletter capabilities, publishing functions, full-text search, campaign management, and a Knowledge Universe Content Type module.\n\nThe Propeople team demonstrates advanced development solutions and invites attendees to ask technical questions about their implementation approaches.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T09:00:00Z",
+      "endTime": "2010-08-24T10:30:00Z",
+      "duration": "P90M",
+      "title": "Opening Keynote — Dries Buytaert",
+      "location": "Main Hall",
+      "link": "https://cph2010.drupal.org",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Dries Buytaert"
+      ],
+      "full_description": "Opening keynote from Drupal project founder and lead Dries Buytaert, setting the direction for Drupal and the community at DrupalCon Copenhagen 2010.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T11:30:00Z",
+      "endTime": "2010-08-24T12:30:00Z",
+      "duration": "P60M",
+      "title": "The Future of Drupal.org",
+      "location": "Room 10",
+      "link": "https://cph2010.drupal.org/sessions/future-drupalorg.html",
+      "track": [
+        "Introducing Drupal"
+      ],
+      "speakers": [
+        "Lisa Rex",
+        "Kieran Lal",
+        "Todd Nienkerk",
+        "Neil Drumm"
+      ],
+      "full_description": "Drupal.org is undergoing significant transformation. The session covers why the redesign was necessary, technical challenges in the redevelopment process, project management lessons learned, reasons for Drupal Association staffing decisions, and contributor overview. This represents an unconventional open source initiative.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T11:30:00Z",
+      "endTime": "2010-08-24T12:30:00Z",
+      "duration": "P60M",
+      "title": "Varnish HTTP cache server",
+      "location": "Room 11",
+      "link": "https://cph2010.drupal.org/sessions/varnish-http-cache-server-poul-henning-kamp.html",
+      "track": [
+        "Configuration, Set-Up & Performance"
+      ],
+      "speakers": [
+        "Poul-Henning Kamp"
+      ],
+      "full_description": "Varnish is described as \"a very fast HTTP cache server, which is to your Drupal what a big rotation press is to a newspapers DTP system.\" The session promises to demonstrate how to \"deliver thousands of pages per second with very low responsetime.\" Poul-Henning Kamp, the creator of Varnish, will examine the technology in depth and help attendees \"think about servers and content delivery in an entirely new way.\" The platform is utilized by major organizations including Facebook, BBC, and Slashdot.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T11:30:00Z",
+      "endTime": "2010-08-24T12:30:00Z",
+      "duration": "P60M",
+      "title": "Drupal: The Next Generation",
+      "location": "Room 12",
+      "link": "https://cph2010.drupal.org/sessions/drupal-next-generation.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Larry Garfield"
+      ],
+      "full_description": "Explores merging separate Drupal systems like Blocks, Panels, Services, and Context into a unified, context-sensitive framework. Presents the \"Butler project\" vision for rebuilding Drupal 8 with modern architecture to enable high-performance interactive sites and lighter-weight implementations. Discusses current progress, remaining challenges, and opportunities for community contribution to this ambitious initiative.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T11:30:00Z",
+      "endTime": "2010-08-24T12:30:00Z",
+      "duration": "P60M",
+      "title": "Use case - Brightcove.com on Drupal",
+      "location": "Room 18",
+      "link": "https://cph2010.drupal.org/sessions/use-case-brightcovecom-drupal.html",
+      "track": [
+        "Drupal for Business"
+      ],
+      "speakers": [
+        "Eric Johnson"
+      ],
+      "full_description": "Brightcove, a leading online video platform, shares how they leverage Drupal multisite instances for their corporate website, support site, developer site, and blog across multiple language translations (English, German, French, Spanish, and Japanese).\n\nThe session covers:\n- System overview based on Drupal architecture\n- Specialized localization processes\n- Custom module development including Google CSE Advanced module with open source plans\n- Brightcove's proprietary Drupal video module\n- Strategic insights for Drupal's enterprise CMS positioning\n\nEric Johnson, Director of Online Marketing and Web Architect at Brightcove, brings experience from the localization industry and agency background in web solutions.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T11:30:00Z",
+      "endTime": "2010-08-24T12:30:00Z",
+      "duration": "P60M",
+      "title": "See Through Their Eyes: How to Anticipate The Needs of Your Clients",
+      "location": "Room 19",
+      "link": "https://cph2010.drupal.org/sessions/see-through-their-eyes-how-anticipate-needs-your-clients.html",
+      "track": [
+        "Providing Professional Drupal Services"
+      ],
+      "speakers": [
+        "Stuart Broz"
+      ],
+      "full_description": "This session focuses on understanding your clients' perspectives and needs. Key topics include:\n\n* Identifying client types and anticipating communication gaps\n* Converting client needs into functional specifications\n* Addressing features that Drupal makes difficult or easy relative to client expectations\n* The value of gradual client training\n* Making meaningful refinements beyond basic requirements\n\n\"Whether you are working for a non-profit, a corporation, or your mom... we will cover some tricks that will help you understand what they want even if they can't explain it to you in Drupalspeak.\" The presenter, Stuart Broz, is a project manager at Trellon with experience serving nonprofits and academic institutions.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T11:30:00Z",
+      "endTime": "2010-08-24T12:30:00Z",
+      "duration": "P60M",
+      "title": "Theme Preprocess Functions: an Introduction",
+      "location": "Room 20",
+      "link": "https://cph2010.drupal.org/sessions/theme-preprocess-functions-introduction.html",
+      "track": [
+        "Theming, Design & Usability"
+      ],
+      "speakers": [
+        "Carl Wiedemann"
+      ],
+      "full_description": "A session addressing common theming challenges in Drupal. The presenter explores how preprocess functions serve as \"the missing link between what happens in the modules, and what gets sent to the template files.\"\n\nKey topics include:\n- Understanding where template variables originate\n- Adding dynamic CSS classes based on content attributes\n- Modifying theme output without altering core template files\n\nThe session emphasizes practical applications over deep technical details, making it accessible to themers with basic PHP familiarity. Prerequisites include experience with Drupal theming, understanding of the templating system, proficiency in HTML/CSS, and introductory PHP knowledge.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T12:45:00Z",
+      "endTime": "2010-08-24T13:45:00Z",
+      "duration": "P60M",
+      "title": "Drupal 7: What you need to know",
+      "location": "Room 10",
+      "link": "https://cph2010.drupal.org/sessions/drupal-7-what-you-need-know.html",
+      "track": [
+        "Introducing Drupal"
+      ],
+      "speakers": [
+        "Angela Byron"
+      ],
+      "full_description": "Since February 2008, the community has been working on Drupal 7, which is \"rapidly nearing completion.\" This release includes \"literally hundreds of improvements.\" Angela Byron, the Drupal 7 co-maintainer, covers the most important changes and their impact on site building. The session addresses frequently asked questions, discusses changes for clients, site builders, designers, and developers, explains the core development process, and provides action items for community contribution.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T12:45:00Z",
+      "endTime": "2010-08-24T13:45:00Z",
+      "duration": "P60M",
+      "title": "Designing UI with Seven",
+      "location": "Room 11",
+      "link": "https://cph2010.drupal.org/sessions/designing-ui-seven.html",
+      "track": [
+        "Theming, Design & Usability"
+      ],
+      "speakers": [
+        "Mark Boulton"
+      ],
+      "full_description": "Drupal 7's new admin theme, Seven, represents a significant departure from previous iterations. Developed through the D7UX initiative led by Leisa Reichelt and Mark Boulton Design, this session explores \"the why Seven looks the way it does.\" The presenter outlines design principles and UI conventions to help the community create modules that \"look fantastic for the people who use it.\" While Seven provides a foundation, contributed modules will ultimately determine the quality of the admin experience.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T12:45:00Z",
+      "endTime": "2010-08-24T13:45:00Z",
+      "duration": "P60M",
+      "title": "MongoDB - Humongous Drupal",
+      "location": "Room 12",
+      "link": "https://cph2010.drupal.org/sessions/mongodb-humongous-drupal.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "chx"
+      ],
+      "full_description": "This session examines limitations of traditional SQL databases and demonstrates how MongoDB addresses these challenges within a Drupal context. The presentation covers MongoDB 1.6 features and explores how Drupal can operate independently of SQL infrastructure, building upon concepts introduced at previous conferences.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T12:45:00Z",
+      "endTime": "2010-08-24T13:45:00Z",
+      "duration": "P60M",
+      "title": "Drupal Security - Configuration and Process",
+      "location": "Room 18",
+      "link": "https://cph2010.drupal.org/sessions/drupal-security-configuration-and-process.html",
+      "track": [
+        "Configuration, Set-Up & Performance"
+      ],
+      "speakers": [
+        "Ben Jeavons",
+        "Gábor Hojtsy"
+      ],
+      "full_description": "This session examines how Drupal can be configured securely. Presenters from the Drupal Security Team address \"common vulnerabilities and what they mean,\" \"Drupal defaults and why you should care,\" \"trusting site visitors,\" and recovery strategies. The session provides foundational knowledge on web security and maintaining site protection, targeting site administrators of varying experience levels.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T12:45:00Z",
+      "endTime": "2010-08-24T13:45:00Z",
+      "duration": "P60M",
+      "title": "A method for getting early estimates right",
+      "location": "Room 19",
+      "link": "https://cph2010.drupal.org/sessions/method-getting-early-estimates-right.html",
+      "track": [
+        "Providing Professional Drupal Services"
+      ],
+      "speakers": [
+        "Jakob Persson"
+      ],
+      "full_description": "This session presents a practical approach for creating initial project estimates that support the sales process. The method enables agencies to quickly assess client requirements and provide accurate cost projections within hours, rather than days.\n\nKey topics covered:\n- Gathering client requirements efficiently within 1-2 hours\n- Leveraging fixed estimates to handle project uncertainty\n- Decomposing requirements into distinct features\n- Developing preliminary Drupal architecture outlines\n- Building estimates grounded in experience rather than speculation\n\nPresented by Jakob Persson, co-founder of NodeOne and Drupal solutions architect, this talk addresses a critical challenge: clients expect upfront pricing from incomplete information. The method bridges this gap by producing estimates that are \"accurate enough to close the sale,\" enabling faster decision-making on project scope and focus.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T12:45:00Z",
+      "endTime": "2010-08-24T13:45:00Z",
+      "duration": "P60M",
+      "title": "What Microsoft is doing to make Drupal better",
+      "location": "Room 20",
+      "link": "https://cph2010.drupal.org/sessions/what-have-you-done-me-lately-what-microsoft-doing-make-drupal-better.html",
+      "track": [
+        "Sponsored Sessions"
+      ],
+      "speakers": [
+        "Mark Brown"
+      ],
+      "full_description": "Microsoft is enabling Drupal development on Windows through SQL Server support in Drupal 7 and WebMatrix. This session demonstrates the open source PDO_SQLSRV Driver and SQL Server Contributed Module by Commerce Guys. Attendees will see how WebMatrix streamlines the process of building and deploying Drupal on Windows infrastructure, from initial setup through production deployment.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T14:00:00Z",
+      "endTime": "2010-08-24T15:00:00Z",
+      "duration": "P60M",
+      "title": "Introduction to the Semantic Web and RDF in Drupal 7",
+      "location": "Room 10",
+      "link": "https://cph2010.drupal.org/sessions/introduction-semantic-web-and-rdf-drupal-7.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Lin Clark",
+        "scor"
+      ],
+      "full_description": "Drupal pioneered adoption of Semantic Web technologies like RDF among major CMS platforms. Once confined to academia, these technologies have matured and are now employed by standards such as Facebook's Open Graph and major organizations including Google, Yahoo!, the New York Times, and BBC.\n\nThis introductory session covers:\n\n* Semantic Web fundamentals and related concepts (Linked Data, RDF, FOAF, SIOC, SPARQL)\n* Core components utilizing RDF\n* How machines interpret RDF and its practical value\n* Overview of RDF in contributed modules\n* Practical approaches for building RDF-enabled sites\n\nDesigned for attendees new to Semantic Web technologies seeking to understand its integration within Drupal.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T14:00:00Z",
+      "endTime": "2010-08-24T15:00:00Z",
+      "duration": "P60M",
+      "title": "10 Reasons why you should be using Features for your Drupal project",
+      "location": "Room 11",
+      "link": "https://cph2010.drupal.org/sessions/10-reasons-why-you-should-be-using-features-your-drupal-project.html",
+      "track": [
+        "Configuration, Set-Up & Performance"
+      ],
+      "speakers": [
+        "Florian Loretan"
+      ],
+      "full_description": "The Features module enables developers to capture and manage bundled sets of configuration in Drupal. This session explores how Features facilitates team collaboration, versioning, upgrades, and deployment. Attendees will discover practical applications beyond sharing and distributing reusable feature bundles, learning why this module should be integral to their development workflow.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T14:00:00Z",
+      "endTime": "2010-08-24T15:00:00Z",
+      "duration": "P60M",
+      "title": "Advanced Drush",
+      "location": "Room 12",
+      "link": "https://cph2010.drupal.org/sessions/advanced-drush.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Moshe Weitzman"
+      ],
+      "full_description": "A comprehensive overview of Drush, the Drupal shell. The session begins with \"handy\" administrative features for accelerating site management, progressing to custom command development and remote server execution. Attendees will discover capabilities through a \"whirlwind tour,\" with presentation notes documenting all commands. Updates from prior conferences include new user and Fields management commands plus the --sanitize feature for sql-sync operations.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T14:00:00Z",
+      "endTime": "2010-08-24T15:00:00Z",
+      "duration": "P60M",
+      "title": "Building Scalable, High Performance Drupal Sites in the Cloud",
+      "location": "Room 18",
+      "link": "https://cph2010.drupal.org/sessions/building-scalable-high-performance-drupal-sites-cloud.html",
+      "track": [
+        "Configuration, Set-Up & Performance"
+      ],
+      "speakers": [
+        "Barry Jaspan"
+      ],
+      "full_description": "Cloud computing offers numerous benefits for hosting Drupal sites but presents distinct challenges. This session explores how Acquia developed Acquia Hosting and the Drupal-as-a-Service platform Drupal Gardens. The presentation covers specific issues encountered while building on Amazon Web Services (AWS) and solutions developed to address them.\n\nTopics include:\n\n* Load balancing: Elastic IP vs. Elastic Load Balancing\n* Handling user-uploaded files with multiple web nodes\n* Achieving true high-availability with multiple availability zones\n* Choosing between Amazon Relational Database Service and building it yourself\n* Configuring and managing cloud servers",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T14:00:00Z",
+      "endTime": "2010-08-24T15:00:00Z",
+      "duration": "P60M",
+      "title": "The Drupal Process - Great Projects, No Slavery Required",
+      "location": "Room 19",
+      "link": "https://cph2010.drupal.org/sessions/drupal-process-great-projects-no-slavery-required.html",
+      "track": [
+        "Providing Professional Drupal Services"
+      ],
+      "speakers": [
+        "Vesa Palmu"
+      ],
+      "full_description": "A presentation exploring effective project management approaches for Drupal initiatives. The speaker shares insights from 15 years of web project experience, discussing why both agile scrum and traditional waterfall methodologies can struggle with Drupal work. The session addresses unique challenges posed by Drupal's dual nature as framework and product, plus complications arising from distributed teams. The presenter outlines current best practices for successful delivery, emphasizing practical solutions without claiming universal fixes, and invites audience participation to exchange experiences and strategies.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T14:00:00Z",
+      "endTime": "2010-08-24T15:00:00Z",
+      "duration": "P60M",
+      "title": "Don't design websites. Design web SYSTEMS!",
+      "location": "Room 20",
+      "link": "https://cph2010.drupal.org/sessions/dont-design-websites-design-web-systems.html",
+      "track": [
+        "Theming, Design & Usability"
+      ],
+      "speakers": [
+        "Todd Nienkerk",
+        "Aaron Stanush"
+      ],
+      "full_description": "Drupal's theme layer is very flexible and can accommodate just about any web design. It's important for designers to remember, however, that they're not really creating a page — they're building a complete system to house all of the site's content.\n\nIn this session, we will talk about concepting and creating a Drupal-optimized design.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T15:15:00Z",
+      "endTime": "2010-08-24T16:00:00Z",
+      "duration": "P45M",
+      "title": "Building Content Types and Displaying Content",
+      "location": "Room 10",
+      "link": "https://cph2010.drupal.org/sessions/building-content-types-and-displaying-content.html",
+      "track": [
+        "Introducing Drupal"
+      ],
+      "speakers": [
+        "Ryan Szrama"
+      ],
+      "full_description": "An introductory walkthrough on leveraging Drupal's core systems to create and display custom content types. Topics covered include creating custom content types, menu items, visibility settings, field management, display controls, and content management strategies using Views and Flag modules.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T15:15:00Z",
+      "endTime": "2010-08-24T16:00:00Z",
+      "duration": "P45M",
+      "title": "Awesomeness redefined: Drupal 7 Theming",
+      "location": "Room 11",
+      "link": "https://cph2010.drupal.org/sessions/awesomeness-redefined-drupal7-theming.html",
+      "track": [
+        "Theming, Design & Usability"
+      ],
+      "speakers": [
+        "mortendk",
+        "Jen Simmons"
+      ],
+      "full_description": "An introductory session exploring updates in Drupal 7 for themers. Topics covered include new theme designs, improved CSS naming conventions, block variables with more intuitive names, updated template files, the Hide & Render functionality, and enhanced theming capabilities. The session promises insights into how these changes simplify workflow and empower theme development.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T15:15:00Z",
+      "endTime": "2010-08-24T16:00:00Z",
+      "duration": "P45M",
+      "title": "Debugging Drupal: Hands-on techniques",
+      "location": "Room 12",
+      "link": "https://cph2010.drupal.org/sessions/debugging-drupal-hands-techniques.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Randy Fay"
+      ],
+      "full_description": "A session addressing common software issues in Drupal installations. The presenter outlines key approaches: preparation before crises by solving problems locally and maintaining source control, examining logs for obvious issues, applying divide-and-conquer strategies, and organizing tools effectively.\n\nCoverage includes practical code hacks for identifying problematic database queries, hook invocations, and cron failures. Tools discussed feature the Devel module and step debuggers like Eclipse. The presentation provides step-by-step Eclipse configuration instructions applicable across Linux, Windows, and Macintosh platforms, with guidance for developers, themers, and site administrators.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T15:15:00Z",
+      "endTime": "2010-08-24T16:00:00Z",
+      "duration": "P45M",
+      "title": "Awesome graphs and statistics with Drupal and gRaphaël",
+      "location": "Room 18",
+      "link": "https://cph2010.drupal.org/sessions/awesome-graphs-and-statistics-drupal-and-grapha%c3%abl.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Mikkel Høgh"
+      ],
+      "full_description": "This presentation explores tools and methods for presenting data to users in engaging ways. The session covers using the gRaphaël JavaScript library alongside Drupal's API, SQL, caching, and statistics features to create appealing data visualizations. Resources mentioned include [gRaphaël](http://g.raphaeljs.com/) and the [Raphaël/gRaphaël module for Drupal](http://drupal.org/project/raphael).",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T15:15:00Z",
+      "endTime": "2010-08-24T16:00:00Z",
+      "duration": "P45M",
+      "title": "Teaching Drupal",
+      "location": "Room 19",
+      "link": "https://cph2010.drupal.org/sessions/teaching-drupal.html",
+      "track": [
+        "Providing Professional Drupal Services"
+      ],
+      "speakers": [
+        "Diana Montalion Dupuis"
+      ],
+      "full_description": "A session addressing how to effectively teach clients and non-technical users about Drupal. The presenter covers essential strategies including: defining core concepts, adopting a user-centric mentality, employing accessible language, tailoring instruction to individual backgrounds, adapting based on feedback, and interpreting technical issues constructively. Ideal for those seeking to bridge the gap between technical expertise and user comprehension.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-24T15:15:00Z",
+      "endTime": "2010-08-24T16:00:00Z",
+      "duration": "P45M",
+      "title": "Lightning talks",
+      "location": "Room 20",
+      "link": "https://cph2010.drupal.org/sessions/lightning-talks.html",
+      "track": [
+        "Community"
+      ],
+      "speakers": [
+        "Chris Mavergames",
+        "Randy Fay",
+        "Claudiu Cristea",
+        "Olav Schettler",
+        "J-P Stacey",
+        "Mixel Kiemen"
+      ],
+      "full_description": "A collection of short presentations covering multiple topics: Pro-active Selenium testing with Drupal, Send Targeted & Personalized mails with Views Send, Autosite: A minimal approach to Drupal mass hosting, Migrating 70+ websites into a single Drupal codebase: pitfalls and challenges, Using and Contributing to the Examples for Developers Project, Liberty without muskets, and Getting visibility on the Drupal Business ecosystem.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T07:00:00Z",
+      "endTime": "2010-08-25T07:50:00Z",
+      "duration": "P50M",
+      "title": "Drupal Rights and Responsibilities",
+      "location": "Room 10",
+      "link": "https://cph2010.drupal.org/sessions/drupal-rights-and-responsibilities.html",
+      "track": [
+        "Introducing Drupal"
+      ],
+      "speakers": [
+        "Ken Rickard",
+        "Gábor Hojtsy",
+        "Larry Garfield",
+        "Moshe Weitzman",
+        "George DeMet"
+      ],
+      "full_description": "Working with Drupal engages you in its community in unexpected ways. This panel explores \"hidden costs of bringing Drupal into your organization\" and necessary resources for sustainable projects.\n\nKey topics:\n* Rights and responsibilities of open-source developers and users\n* Code management on Drupal.org\n* Defining stable releases\n* Security team collaboration\n* Maintainer support and issue resolution\n* Common reasons issues are overlooked",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T07:00:00Z",
+      "endTime": "2010-08-25T07:50:00Z",
+      "duration": "P50M",
+      "title": "From a html/css template to a Drupal theme",
+      "location": "Room 11",
+      "link": "https://cph2010.drupal.org/sessions/htmlcss-template-drupal-theme.html",
+      "track": [
+        "Theming, Design & Usability"
+      ],
+      "speakers": [
+        "Hans Rossel"
+      ],
+      "full_description": "This session demonstrates the process of converting an html/css prototype into a Drupal theme. Topics covered include:\n\n- Drupal Theme anatomy\n- Filestructure of a Drupal theme\n- Creating a theme as a subtheme of a base theme or starter theme\n- Creating a theme from scratch from your own html/css template\n- .info file\n- css and js in a theme\n- page.tpl.php\n- node.tpl.php\n- regions\n- multiple page, node, block template files\n- variables and preprocessing examples\n- Theme developer module",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T07:00:00Z",
+      "endTime": "2010-08-25T07:50:00Z",
+      "duration": "P50M",
+      "title": "Drupal 7 entities and fields ... transitioning to D7",
+      "location": "Room 12",
+      "link": "https://cph2010.drupal.org/sessions/drupal-7-entities-and-fields-transitioning-d7.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Kevin Bridges"
+      ],
+      "full_description": "A technical overview exploring Drupal 7 entities, bundles and fields from a developer's perspective. The session covers \"the changes that have been introduced to content types in Drupal 7\" and demonstrates creation of basic content types including widgets, fields and formatters.\n\nKey topics include entity concepts, field instances, bundles, view modes, and formatters with custom settings. The presentation uses the Examples module's node_example sub-module as its foundation, illustrating how to display images in different sizes across various view modes using core file and image modules.\n\nParticipants will understand the evolution from disparate concepts like nodes and taxonomy to the unified Entities framework. This code-heavy presentation is geared toward module developers transitioning to Drupal 7's content architecture.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T07:00:00Z",
+      "endTime": "2010-08-25T07:50:00Z",
+      "duration": "P50M",
+      "title": "Case study: VF.se on NodeStream - a Drupal distribution for newspapers and magazines",
+      "location": "Room 18",
+      "link": "https://cph2010.drupal.org/sessions/case-study-vfse-nodestream-drupal-distribution-newspapers-and-magazines.html",
+      "track": [
+        "Drupal for Business"
+      ],
+      "speakers": [
+        "Thomas Barregren",
+        "Christian Edwertz",
+        "Odd Råberg",
+        "Dick Olsson",
+        "Andy Olsson"
+      ],
+      "full_description": "Värmland Folkblad (VF), a Swedish newspaper, transitioned their online publication from EPiServer to NodeStream, a Drupal-based distribution for news outlets. Business developer Christian Edwertz and web editor Odd Råberg explain their decision to adopt open source technology over vendor-driven solutions.\n\nThe session includes a demonstration of NodeStream's capabilities by lead developer Dick Olsson and project manager Thomas Barregren discussing the platform's vision. Additionally, Andy Olsson from Infomaker showcases the integration between NodeStream and Newspilot editorial system, highlighting how content flows seamlessly between platforms.\n\nKey topics covered include NodeStream's features for publishing organizations, integration with third-party editorial systems, and comparative experiences managing open source versus proprietary projects.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T07:00:00Z",
+      "endTime": "2010-08-25T07:50:00Z",
+      "duration": "P50M",
+      "title": "Go real-time with PubSubHubbub and Feeds",
+      "location": "Room 19",
+      "link": "https://cph2010.drupal.org/sessions/go-real-time-pubsubhubbub-and-feeds.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Alex Barth"
+      ],
+      "full_description": "PubSubHubbub (PuSH) is a publish/subscribe protocol for RSS and Atom feeds that enables instant delivery of new content rather than periodic polling. This session explains how the protocol works, covering the publisher, hub, and subscriber components.\n\nThe presentation demonstrates using the [Feeds module](http://drupal.org/project/feeds) to subscribe to PuSH feeds within Drupal, and the [PuSH Hub module](http://drupal.org/project/push_hub) to push Drupal content to other applications in real time.\n\nTopics covered include unconventional use cases such as pushing users, non-RSS/Atom content like CSV files, and protected content. The session concludes with an assessment of current PubSubHubbub support in Drupal and recommendations for future enhancements.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T07:00:00Z",
+      "endTime": "2010-08-25T07:50:00Z",
+      "duration": "P50M",
+      "title": "SEO for Drupal 6 & 7",
+      "location": "Room 20",
+      "link": "https://cph2010.drupal.org/sessions/seo-drupal-6-7.html",
+      "track": [
+        "Configuration, Set-Up & Performance"
+      ],
+      "speakers": [
+        "Ben Finklea",
+        "Ivo Radulovski"
+      ],
+      "full_description": "Drupal 7 introduces significant changes to search engine optimization approaches, while Drupal 6 remains actively used. This presentation explores SEO strategies for both versions.\n\nBen Finklea, author of *Drupal 6 Search Engine Optimization*, and Ivo Radulovski, an Austrian SEO consultant, demonstrate essential optimization techniques. Topics include selecting and configuring modules, implementing search engine-friendly content structures, and optimizing title tags, paths, sitemaps, headings, and navigation.\n\nKey takeaways:\n- Practical, measurable steps to increase website traffic\n- D6 and D7 specific SEO methods\n- Microformats implementation in D7\n- Module installation and configuration best practices\n- Content silo creation and optimization\n\nIntended for Drupal site owners, themers, developers, and consultants with basic Drupal knowledge.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T08:00:00Z",
+      "endTime": "2010-08-25T08:50:00Z",
+      "duration": "P50M",
+      "title": "Communicating Drupal visually",
+      "location": "Room 11",
+      "link": "https://cph2010.drupal.org/sessions/communicating-drupal-visually.html",
+      "track": [
+        "Introducing Drupal"
+      ],
+      "speakers": [
+        "Heather James",
+        "Stella Power"
+      ],
+      "full_description": "This session aims to \"create informative visuals to assist in Drupal adoption.\" Participants will learn principles for designing graphics that explain complex processes and abstract concepts. The workshop covers guidelines for communicating abstract ideas, existing visual language techniques, and strategies for matching approaches to audience needs.\n\nKey topics include addressing how new Drupal users perceive the system using \"metaphors of mountains, walls and chaotic messes,\" and offering visual alternatives. Attendees will examine conceptual stumbling blocks that distinguish Drupal from other systems and create visual contributions for the community.\n\nThe session welcomes all expertise levels and encourages mixed-experience groups. Participants should bring creative materials like coloured paper, scissors, markers, or digital tools, along with questions about Drupal concepts.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T08:00:00Z",
+      "endTime": "2010-08-25T08:50:00Z",
+      "duration": "P50M",
+      "title": "Semantic Taxonomies",
+      "location": "Room 12",
+      "link": "https://cph2010.drupal.org/sessions/semantic-taxonomies.html",
+      "track": [
+        "Configuration, Set-Up & Performance"
+      ],
+      "speakers": [
+        "Johannes Wehner"
+      ],
+      "full_description": "Information.dk, a Danish daily newspaper, launched a taxonomy initiative encompassing 22,386 persons, 3,185 organisations, 1,721 places, and 1,976 subjects. Most of these tags are linked to da.wikipedia.org, en.wikipedia.org and dbpedia.org. The places are also linked to geonames. This presentation explores the project's foundational concepts, developmental phases, and future possibilities. Examples include pages for Barack Obama, FC Barcelona, and Denmark.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T08:00:00Z",
+      "endTime": "2010-08-25T08:50:00Z",
+      "duration": "P50M",
+      "title": "Making Drupal Scale: How Earth Day Handled 80 Million Hits in 2 Days",
+      "location": "Room 18",
+      "link": "https://cph2010.drupal.org/sessions/trellon-sponsored-session-making-drupal-scale-how-earth-day-handled-80-million-hits-2-days.html",
+      "track": [
+        "Sponsored Sessions"
+      ],
+      "speakers": [
+        "Michael Haggerty",
+        "Stuart Broz",
+        "John Snow",
+        "Chris Miller",
+        "Kyle Cunningham"
+      ],
+      "full_description": "The Trellon team presents a case study examining scalability techniques used to manage massive traffic spikes. The Earth Day Network site handled 80 million requests across two days while supporting personalized content, geocoding, iPhone and Facebook integrations.\n\nKey topics covered:\n1. Initial server and application configuration\n2. Traffic surge response when Google promoted the site\n3. Pressflow, Varnish, and Memcached limitations and solutions\n4. Drupal core patches implemented\n5. Database query optimization (reduced to under 20 per page)\n6. Caching strategies and custom patches\n7. Database clustering approaches\n8. Cloud hosting leverage and server scaling considerations\n9. Lessons applicable to Drupal 7\n\nThe presentation demonstrates achieving \"1.2 seconds average response time for authenticated users\" during peak load. [Full case study](http://www.trellon.com/project/earth-day-network) available.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T09:00:00Z",
+      "endTime": "2010-08-25T10:30:00Z",
+      "duration": "P90M",
+      "title": "Keynote — Rasmus Lerdorf",
+      "location": "Main Hall",
+      "link": "https://cph2010.drupal.org",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Rasmus Lerdorf"
+      ],
+      "full_description": "Keynote address by Rasmus Lerdorf, creator of PHP, at DrupalCon Copenhagen 2010.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T11:30:00Z",
+      "endTime": "2010-08-25T12:30:00Z",
+      "duration": "P60M",
+      "title": "Introduction to internationalization in Drupal 7",
+      "location": "Room 10",
+      "link": "https://cph2010.drupal.org/sessions/introduction-internationalization-drupal-7.html",
+      "track": [
+        "Introducing Drupal"
+      ],
+      "speakers": [
+        "Olivier Jacquet"
+      ],
+      "full_description": "This session demonstrates how to activate different languages in Drupal 7, configure language negotiation, and build a multilingual brochure website. It covers the locale and content translation modules from core, plus functionality from i18n and views modules. The presentation highlights changes between D6 and D7.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T11:30:00Z",
+      "endTime": "2010-08-25T12:30:00Z",
+      "duration": "P60M",
+      "title": "What you need to know about grids that 960 won't teach you",
+      "location": "Room 11",
+      "link": "https://cph2010.drupal.org/sessions/what-you-need-know-about-grids-960-wont-teach-you.html",
+      "track": [
+        "Theming, Design & Usability"
+      ],
+      "speakers": [
+        "Mark Boulton"
+      ],
+      "full_description": "While 960.gs is valuable, grid design extends far beyond it. This session explores foundational grid theory from print, architecture, and interior design, examining how web constraints differ. The presenter discusses how modern content appears across multiple formats (RSS, email) and devices (mobile to desktop), requiring designers to consider user control over presentation. Attendees will learn grid system composition principles and techniques for designing custom grids from scratch rather than adopting existing frameworks as shortcuts.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T11:30:00Z",
+      "endTime": "2010-08-25T12:30:00Z",
+      "duration": "P60M",
+      "title": "Apache Solr Search Mastery",
+      "location": "Room 12",
+      "link": "https://cph2010.drupal.org/sessions/apache-solr-search-mastery.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Peter Wolanin",
+        "Robert Douglass"
+      ],
+      "full_description": "This session explores advanced Apache Solr capabilities for Drupal. Participants will learn to take control of search interfaces and implement custom features beyond defaults.\n\n**Key Topics:**\n\n- **Introducing the Solr Index**: Understanding Solr fields, mapping Drupal data, adding data to search indexes, and executing searches in PHP code\n- **Using the API**: Preparing and altering query objects; making user-facing changes and transparent filters\n- **Custom Facets**: Building facets based on node fields, exploring out-of-the-box options and hooks for additional field types\n\nThe presentation focuses on Drupal 7 API implementation, building on material previously covered at DrupalCon SF for Drupal 6.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T11:30:00Z",
+      "endTime": "2010-08-25T12:30:00Z",
+      "duration": "P60M",
+      "title": "Mapping in Drupal with OpenLayers",
+      "location": "Room 18",
+      "link": "https://cph2010.drupal.org/sessions/mapping-drupal-openlayers.html",
+      "track": [
+        "Configuration, Set-Up & Performance"
+      ],
+      "speakers": [
+        "Alan Palazzolo",
+        "Thomas Turnbull"
+      ],
+      "full_description": "Web mapping enables users to explore data meaningfully. This session demonstrates how [OpenLayers](http://openlayers.org/), a robust Javascript library, combines with Drupal to create interactive maps. The [Drupal OpenLayers module](http://drupal.org/project/openlayers) provides architecture for map creation and Drupal data integration, powering sites like Managing News, Haiti Aid Map, and Data.WorldBank. Presenters will explain OpenLayers functionality and showcase the module in action.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T11:30:00Z",
+      "endTime": "2010-08-25T12:30:00Z",
+      "duration": "P60M",
+      "title": "Node Access in Drupal 7",
+      "location": "Room 19",
+      "link": "https://cph2010.drupal.org/sessions/node-access-drupal-7.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Ken Rickard"
+      ],
+      "full_description": "This session explores Drupal's Node Access system for managing complex editorial controls. The presenter covers how Node Access enables developers to create and enforce sophisticated permission rules for user content management.\n\nKey topics include:\n- Node Access compared to user_access() and other permission checks\n- How Drupal grants node permissions\n- The node_access() function\n- hook_node_access() compared to {node_access}\n- Controlling permission to create content\n- When to write a Node Access module\n- The {node_access} table and its role\n- Using hook_node_access_records()\n- Using hook_node_grants()\n- Rebuilding the {node_access} table\n- Testing and debugging with Devel Node Access\n\nKen Rickard maintains the Domain Access module and contributed patches for Node Access in Drupal 7.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T11:30:00Z",
+      "endTime": "2010-08-25T12:30:00Z",
+      "duration": "P60M",
+      "title": "On the importance of DONE: Scrum and Drupal at the Economist",
+      "location": "Room 20",
+      "link": "https://cph2010.drupal.org/sessions/importance-done-scrum-and-drupal-economist.html",
+      "track": [
+        "Drupal for Business"
+      ],
+      "speakers": [
+        "Ezra Barnett Gildesgame",
+        "Rob Purdie"
+      ],
+      "full_description": "Join Rob Purdie, ScrumMaster at the Economist, and Ezra Barnett Gildesgame, Developer at Growing Venture Solutions, as they discuss how the Economist uses Scrum to focus on completing work according to an exacting \"definition of done.\"\n\nTopics covered include:\n- Introduction to Scrum\n- Why a complete, shared Definition of Done is critical\n- Benefits & challenges of having 3 teams working in 3 timezones\n- Launchpad and Bazaar workflow for code review and management, pushing configuration changes to production\n- Measuring progress\n- Getting products 100% Done",
+      "sponsorIds": "",
+      "video_url": "http://www.archive.org/details/OnTheImportanceOfDoneScrumAndDrupalAtTheEconomist"
+    },
+    {
+      "startTime": "2010-08-25T12:45:00Z",
+      "endTime": "2010-08-25T13:45:00Z",
+      "duration": "P60M",
+      "title": "Come for the software, stay for the community - how Drupal improves and evolves",
+      "location": "Room 10",
+      "link": "https://cph2010.drupal.org/sessions/come-software-stay-community-how-drupal-improves-and-evolves.html",
+      "track": [
+        "Introducing Drupal"
+      ],
+      "speakers": [
+        "Gábor Hojtsy"
+      ],
+      "full_description": "An overview session examining what Drupal is and how the community collaborates to enhance it. Rather than technical specifics, the presentation focuses on \"different avenues to improve Drupal\" including distributions, localizations, issue queues, repositories, security teams, and automated testing. The session explores how participants can engage with the community while generating income within the Drupal ecosystem. Designed for newcomers or those seeking a comprehensive understanding of Drupal's various areas.",
+      "sponsorIds": "",
+      "video_url": "http://www.archive.org/details/ComeForTheSoftwareStayForTheCommunity-HowDrupalImprovesAndEvolves"
+    },
+    {
+      "startTime": "2010-08-25T12:45:00Z",
+      "endTime": "2010-08-25T13:45:00Z",
+      "duration": "P60M",
+      "title": "Design for Drupal: A Template Approach - Cut Your Design Time Down By 200%",
+      "location": "Room 11",
+      "link": "https://cph2010.drupal.org/sessions/design-drupal-template-approach-cut-your-design-time-down-200.html",
+      "track": [
+        "Theming, Design & Usability"
+      ],
+      "speakers": [
+        "Nica Lorber",
+        "Floor Vahn"
+      ],
+      "full_description": "This session focuses on a unique templated design approach developed at Chapter Three using Adobe Fireworks. The presenters showcase methods to address common Drupal-specific design elements and create extensible, future-proof designs.\n\nThe session emphasizes it contains \"No code no code no code. No really, no code.\" Instead, it demonstrates how leveraging an in-house template transforms designs from good to exceptional, whether creating elaborate original designs or producing quick solutions for various project sizes.\n\nFloor Vahn, Chapter Three's lead designer, provides a live demonstration of how using Fireworks with the Chapter Three template accelerates the design workflow. Resources include a downloadable [Fireworks Template](http://dl.dropbox.com/u/503168/c3_drupal_template.png.zip).",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T12:45:00Z",
+      "endTime": "2010-08-25T13:45:00Z",
+      "duration": "P60M",
+      "title": "For every site, a .make file",
+      "location": "Room 12",
+      "link": "https://cph2010.drupal.org/sessions/every-site-make-file.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Jeff Miccolis"
+      ],
+      "full_description": "This presentation demonstrates using Drush and .make files for building Drupal sites faster. Topics covered include:\n\n* **Increasing open source karma through forking** — Incorporating patches from drupal.org while advancing projects\n* **Automating module assembly** — Using .make files to automatically download Drupal core and contrib modules via Drush, with tools like Build Kit managing core module sets\n* **Building reusable functionality** — Leveraging Features and Kit projects to create portable functionality across multiple projects\n\nThe session balances lecture-style content with live demonstrations of these tools and workflows. Prerequisites include familiarity with Drush, Features, and Drupal website development.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T12:45:00Z",
+      "endTime": "2010-08-25T13:45:00Z",
+      "duration": "P60M",
+      "title": "A foundation for change - Drupal on top",
+      "location": "Room 18",
+      "link": "https://cph2010.drupal.org/sessions/foundation-change-drupal-top.html",
+      "track": [
+        "Drupal for Business"
+      ],
+      "speakers": [
+        "Thomas Angermann",
+        "Mats Hernvall"
+      ],
+      "full_description": "This presentation examines how libraries can remain relevant in the digital age. TING.concept, a collaborative initiative by Denmark's major public libraries and DBC, demonstrates an open-source approach using Apache Lucene, Solr, Fedora Commons, and PostgreSQL backend with Drupal for front-end interfaces.\n\nKey topics include:\n- Ensuring library relevance in digital society\n- Engaging users through contemporary platforms\n- Contextualizing extensive content and knowledge\n- Leveraging collective community innovation\n- Building mutually beneficial relationships among nonprofits, commercial entities, and patrons\n- Developing scalable, cost-effective solutions",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T12:45:00Z",
+      "endTime": "2010-08-25T13:45:00Z",
+      "duration": "P60M",
+      "title": "Drupal project management tools: time to build our own dogfood",
+      "location": "Room 19",
+      "link": "https://cph2010.drupal.org/sessions/drupal-project-management-tools-time-build-our-own-dogfood.html",
+      "track": [
+        "Providing Professional Drupal Services"
+      ],
+      "speakers": [
+        "Kristof Van Tomme"
+      ],
+      "full_description": "This session reviews Drupal-based project management tools, featuring an introduction to Open Atrium and knowledge management capabilities. The presenter explores aspirational community resources including:\n\n* A documentation service for sharing Drupal use case documentation\n* A configuration analysis tool for comparing site setups\n* A federated project management platform enabling collaboration between freelancers and agencies\n\nThe session aims to demonstrate how the Drupal community can build specialized tools for its own collaborative needs.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T12:45:00Z",
+      "endTime": "2010-08-25T13:45:00Z",
+      "duration": "P60M",
+      "title": "Lightning talks – open mic",
+      "location": "Room 20",
+      "link": "https://cph2010.drupal.org/sessions/lightning-talks-%e2%80%93-open-mic.html",
+      "track": [
+        "Community"
+      ],
+      "speakers": [],
+      "full_description": "A session reserved for brief 5-minute lightning talks where presenters can showcase cool Drupal projects by registering at the lobby desk. Presenters should bring materials on USB or use web-browser compatible formats, as personal laptops won't be permitted to minimise setup time between speakers.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T14:00:00Z",
+      "endTime": "2010-08-25T15:00:00Z",
+      "duration": "P60M",
+      "title": "Views: The Key to the Drupal Castle",
+      "location": "Room 10",
+      "link": "https://cph2010.drupal.org/sessions/views-key-drupal-castle.html",
+      "track": [
+        "Introducing Drupal"
+      ],
+      "speakers": [
+        "Ezra Barnett Gildesgame"
+      ],
+      "full_description": "The [Views](http://drupal.org/project/views) module stands as \"one of the most innovative and important Contributed Drupal modules, second in [usage](http://drupal.org/project/usage) only to Drupal core.\" This session focuses on how Views empowers site administrators to build complex content listings without programming knowledge.\n\nParticipants learn fundamentals through a mental framework addressing filters, displays, fields, and relationships. The session demonstrates practical applications including:\n\n* Dynamic photo galleries based on tags\n* Maps of user locations\n* Blog post listings sorted by date\n* Custom content listings\n\nDesigned for first-time Views users who may feel intimidated by its powerful interface, this beginner-level introduction clarifies why Views remains central to Drupal site-building.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T14:00:00Z",
+      "endTime": "2010-08-25T15:00:00Z",
+      "duration": "P60M",
+      "title": "Display Suite - central and clean administration of your object displays",
+      "location": "Room 11",
+      "link": "https://cph2010.drupal.org/sessions/display-suite-central-and-clean-administration-your-object-displays.html",
+      "track": [
+        "Theming, Design & Usability"
+      ],
+      "speakers": [
+        "Kristof De Jaeger",
+        "Jochen Stals",
+        "Nils Destoop"
+      ],
+      "full_description": "This session explores how the Display Suite API and modules provide a centralized approach to managing object displays (nodes, comments, users, etc.). Rather than scattered theming across multiple locations—template files, theming functions, CCK fields, and Views—Display Suite offers a unified solution. The presentation covers the API for developers, demonstrates the drag-and-drop UI for easier theming workflows, and shows how CSS implementations become more manageable.\n\n**Resources:**\n- [Display Suite project page](http://drupal.org/project/ds)\n- [Display Suite demo site](http://demo.customsource.be/)",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T14:00:00Z",
+      "endTime": "2010-08-25T15:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal making news",
+      "location": "Room 12",
+      "link": "https://cph2010.drupal.org/sessions/drupal-making-news.html",
+      "track": [
+        "Drupal for Business"
+      ],
+      "speakers": [
+        "Christian Schmidt",
+        "Arne Jørgensen"
+      ],
+      "full_description": "A presentation examining how Berlingske Media operates 5 major Danish news sites, 250 online journalists, 5 million daily page views, 1 million news articles in the database and another 500 being added every day — all in one database. The systems architects discuss their platform architecture, including hosting multiple sites with individual editors within a shared database, content and media workflows, and the challenges of scaling Drupal for large news publishing operations. The migration began in 2009 and represents one of the world's largest Drupal installations.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T14:00:00Z",
+      "endTime": "2010-08-25T15:00:00Z",
+      "duration": "P60M",
+      "title": "Translation Management for the Enterprise",
+      "location": "Room 18",
+      "link": "https://cph2010.drupal.org/sessions/translation-management-enterprise.html",
+      "track": [
+        "Drupal for Business"
+      ],
+      "speakers": [
+        "Amir Helzer",
+        "Robert Douglass"
+      ],
+      "full_description": "Drupal provides technical infrastructure for multilingual sites, yet configuring translation workflows remains complex. This session explores how the Translation Management module—built on core translation tools and the i18n module—streamlines the entire process.\n\nKey topics include:\n- Benefits of a dedicated \"Translator\" role\n- Consolidating translation tools with managed queues\n- Workflow management for initiating and tracking translations\n- Quality assurance practices\n\n\"How can you run a truly multilingual site with Drupal without going insane or broke?\" The session demonstrates organisational approaches to prevent translation tasks from scattering across your site.\n\n**Resources:** [Translation Management Module](http://drupal.org/project/translation_management)",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T14:00:00Z",
+      "endTime": "2010-08-25T15:00:00Z",
+      "duration": "P60M",
+      "title": "Creating better solutions through incremental change",
+      "location": "Room 19",
+      "link": "https://cph2010.drupal.org/sessions/creating-better-solutions-through-incremental-change.html",
+      "track": [
+        "Providing Professional Drupal Services"
+      ],
+      "speakers": [
+        "Rasmus Frey",
+        "Martin Elneff"
+      ],
+      "full_description": "A session exploring how small studios can deliver enterprise-scale solutions through incremental approaches rather than attempting to serve everything at once. Topics covered include:\n\n- Shifting work approaches with clients, developers, and sub-contractors\n- Moving from short-term engagements to long-term relationships\n- Addressing challenges like resource management and maintaining strategic vision\n- Benefits such as scope creep reduction and improved solutions\n- Opportunities for genuine client collaboration\n\nThe speakers demonstrate practical applications of incremental design and development through concrete examples of sustained client partnerships.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T14:00:00Z",
+      "endTime": "2010-08-25T15:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal Performance: Then, now, and the future of a speedy Drupal site",
+      "location": "Room 20",
+      "link": "https://cph2010.drupal.org/sessions/drupal-performance-then-now-and-future-speedy-drupal-site.html",
+      "track": [
+        "Configuration, Set-Up & Performance"
+      ],
+      "speakers": [
+        "slantview"
+      ],
+      "full_description": "An in-depth examination of technologies supporting Drupal performance and scaling. The presenter explores historical context and emerging best practices within the Drupal ecosystem.\n\nCoverage includes: caching strategies, Pressflow, Pantheon, cloud hosting solutions, monitoring and debugging tools, Drupal 7/8 developments, memcache, APC, nginx/Apache configurations, and MongoDB integration.\n\nAudience should possess foundational knowledge of LAMP architecture and basic Drupal optimisation techniques. The session also addresses cloud deployment methodologies for various Drupal implementations.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T15:15:00Z",
+      "endTime": "2010-08-25T16:00:00Z",
+      "duration": "P45M",
+      "title": "Connect Drupal.",
+      "location": "Room 10",
+      "link": "https://cph2010.drupal.org/sessions/connect-drupal.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Bèr Kessels"
+      ],
+      "full_description": "A pragmatic session exploring how to integrate Drupal with external services and APIs. Topics include:\n\n- Pulling remote data into Drupal from services like Facebook or NoSQL databases\n- Using web-based statuses, information, and authentication (XMPP, XMLRPC, OAuth)\n- Pushing Drupal data to remote services\n- Offering custom services and APIs from Drupal\n\nThe presentation emphasises rapid, agile approaches over lengthy design phases, discussing both successful implementations and edge cases where Drupal may not be the optimal choice. Real-world examples include connecting to CouchDB, integrating cinema ticketing systems, and using Drupal as an interface for RESTful databases.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T15:15:00Z",
+      "endTime": "2010-08-25T16:00:00Z",
+      "duration": "P45M",
+      "title": "All your HTML are Belong to us #2.5 Revenge of the Markup",
+      "location": "Room 11",
+      "link": "https://cph2010.drupal.org/sessions/all-your-html-are-belong-us-25-revenge-markup.html",
+      "track": [
+        "Theming, Design & Usability"
+      ],
+      "speakers": [
+        "mortendk"
+      ],
+      "full_description": "A session examining markup control in Drupal theming. The presenter explores how modules add predefined styles and markup that can limit themer control, and provides methods for cleaning up and customising HTML output.\n\nKey topics covered:\n- Understanding Drupal's theming markup philosophy\n- Controlling markup through CCK, Views, and Panels\n- Subtheming and template inheritance strategies\n- HTML5 implementation in Drupal themes\n- Balancing custom markup needs with Drupal's default structures",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T15:15:00Z",
+      "endTime": "2010-08-25T16:00:00Z",
+      "duration": "P45M",
+      "title": "Use SimpleTest!",
+      "location": "Room 12",
+      "link": "https://cph2010.drupal.org/sessions/use-simpletest.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Karsten Frohwein"
+      ],
+      "full_description": "Testing with SimpleTest rocks! This session explores how to create tests for modules using SimpleTest, covering:\n\n- Testing requirements\n- DrupalWebTestCase\n- How to structure and debug tests\n- Selenium for additional testing\n\nThe presenter demonstrates how investing initial effort in test creation reduces debugging time later. Resources include slides in English and German available at comm-press.de.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T15:15:00Z",
+      "endTime": "2010-08-25T16:00:00Z",
+      "duration": "P45M",
+      "title": "Sharpen your Axe - How We Reduced Development Time by more than 80%",
+      "location": "Room 18",
+      "link": "https://cph2010.drupal.org/sessions/sharpen-your-axe-how-we-reduced-development-time-more-80.html",
+      "track": [
+        "Drupal for Business"
+      ],
+      "speakers": [
+        "Richard Jones"
+      ],
+      "full_description": "A session exploring how to dramatically accelerate Drupal development through strategic planning and preparation. The presenter shares lessons learned while building a comprehensive Drupal \"Startpoint\" over two years, demonstrating how to eliminate repetitive work and streamline the development process through command-line installation tools.\n\nKey topics covered include:\n- Eliminating redundant development tasks\n- Single-command installation capabilities\n- Rationale behind developing a custom Startpoint framework\n\nThe speaker draws inspiration from Abraham Lincoln's philosophy about taking time for proper preparation before beginning work, contrasting this with industry pressure to rush into projects with minimal planning.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T15:15:00Z",
+      "endTime": "2010-08-25T16:00:00Z",
+      "duration": "P45M",
+      "title": "Panel: Managing a Drupal consulting firm",
+      "location": "Room 19",
+      "link": "https://cph2010.drupal.org/sessions/panel-managing-drupal-consulting-firm.html",
+      "track": [
+        "Providing Professional Drupal Services"
+      ],
+      "speakers": [
+        "Todd Nienkerk",
+        "Aaron Stanush",
+        "Thomas Barregren",
+        "Vesa Palmu",
+        "Matt Cheney",
+        "Liza Kindred",
+        "Eric Gundersen",
+        "Tiffany Farriss",
+        "Addison Berry"
+      ],
+      "full_description": "Running a Drupal consulting firm requires much more than development or design skills. Successful firms need \"excellent customer service, sales, project management, operations, accounting, recruiting, human resources.\" This panel examines what it takes to operate a thriving consulting business beyond technical expertise. Moderated by Addison Berry of Lullabot, featuring firm owners and managers discussing their approaches, with audience Q&A.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-25T15:15:00Z",
+      "endTime": "2010-08-25T16:00:00Z",
+      "duration": "P45M",
+      "title": "Building Conference & Event Websites in Drupal with COD",
+      "location": "Room 20",
+      "link": "https://cph2010.drupal.org/sessions/building-conference-event-websites-drupal-cod.html",
+      "track": [
+        "Configuration, Set-Up & Performance"
+      ],
+      "speakers": [
+        "Ezra Barnett Gildesgame",
+        "Ben Jeavons",
+        "Lisa Rex"
+      ],
+      "full_description": "This session demonstrates why Drupal excels at building conference and event websites. Presenters will construct a conference site from scratch, showcasing features such as session proposals and voting, attendee scheduling, registration and payment processing, waiting list management, and sponsor information collection. The session highlights how Drupal's Conference Organizing Distribution (COD) enables rapid deployment, allowing organisers to focus on event execution while attendees engage before, during, and after events.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T07:00:00Z",
+      "endTime": "2010-08-26T07:50:00Z",
+      "duration": "P50M",
+      "title": "Drupal Gardens: The fastest way to create a gorgeous Drupal 7 site",
+      "location": "Room 10",
+      "link": "https://cph2010.drupal.org/sessions/drupal-gardens-fastest-way-create-gorgeous-drupal-7-site.html",
+      "track": [
+        "Introducing Drupal"
+      ],
+      "speakers": [
+        "Bryan House"
+      ],
+      "full_description": "Fast theming + fast site building + hosted Drupal 7.\n\nLearn how to easily create a free Drupal 7 site and make it beautiful without opening a text editor or using CSS tools. This session demonstrates how to quickly build a Drupal site with a wide set of features and custom theme using Drupal Gardens.\n\nSuitable for beginners to experts, the presentation covers custom themes and layouts, rotating banners, blocks and navigation, blog and forums, custom content types, media library and image browser, custom roles and permissions, social sharing capabilities, and more.\n\nParticipants will learn to start with a theme, customise it, duplicate sites as templates, and export complete code and database for self-hosting.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T07:00:00Z",
+      "endTime": "2010-08-26T07:50:00Z",
+      "duration": "P50M",
+      "title": "Be a happier Drupal developer with Rules",
+      "location": "Room 11",
+      "link": "https://cph2010.drupal.org/sessions/be-happier-drupal-developer-rules.html",
+      "track": [
+        "Configuration, Set-Up & Performance"
+      ],
+      "speakers": [
+        "Johan Falk"
+      ],
+      "full_description": "An intermediate-level session on leveraging the Rules module to automate Drupal processes without custom coding. The presentation covers foundational concepts, intermediate implementations using Rule sets and the Rules scheduler, and advanced techniques combining Rules with Views Bulk Operations or PHP snippets.\n\nKey topics include:\n- Introduction to Rules and basic use cases\n- Hands-on demonstrations of intermediate configurations\n- Advanced examples showing Rules and Views Bulk Operations integration\n- Best practices and cautionary guidance\n\nThe session emphasises that \"every line of code is also one line to debug, update and document,\" positioning Rules as a robust framework benefiting both developers and site managers.\n\n*Note: This session focuses on Rules 1 for Drupal 6 only.*",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T07:00:00Z",
+      "endTime": "2010-08-26T07:50:00Z",
+      "duration": "P50M",
+      "title": "WordPress is better than Drupal: developers take note.",
+      "location": "Room 12",
+      "link": "https://cph2010.drupal.org/sessions/wordpress-better-drupal-developers-take-note.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Jennifer Lea Lampton"
+      ],
+      "full_description": "A session examining WordPress's market dominance and what the Drupal community can learn from it. The presenter demonstrates building a basic WordPress site quickly while discussing WordPress's estimated 11.4 million active installations versus Drupal's smaller user base. The talk addresses strategies for lowering Drupal's barrier to entry, improving core functionality for version 8, and enhancing individual modules to prevent users from abandoning Drupal for alternative platforms.",
+      "sponsorIds": "",
+      "video_url": "http://www.archive.org/details/WordpressIsBetterThanDrupalDevelopersTakeNote_21"
+    },
+    {
+      "startTime": "2010-08-26T07:00:00Z",
+      "endTime": "2010-08-26T07:50:00Z",
+      "duration": "P50M",
+      "title": "A sprint in the life of a highly agile Drupal development organization",
+      "location": "Room 18",
+      "link": "https://cph2010.drupal.org/sessions/sprint-life-highly-agile-drupal-development-organization.html",
+      "track": [
+        "Providing Professional Drupal Services"
+      ],
+      "speakers": [
+        "Jacob Singh",
+        "Chris Brookins"
+      ],
+      "full_description": "Acquia's engineering team shares their experience building DrupalGardens using agile methodology. The presentation covers how the team executes \"planning, designing, implementing, releasing and marketing in 3 week sprints.\"\n\nKey topics include:\n- Scrum overview and planning concepts including velocity and retrospectives\n- Managing requirements within open source software dependencies\n- Backlog management strategies\n- Frequent release practices for faster feedback\n- Community contribution benefits\n- Automated testing and deployment processes\n\n[Slides available on SlideShare](http://www.slideshare.net/JacobSingh/sprint-inthelifeofdrupalgardens)",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T07:00:00Z",
+      "endTime": "2010-08-26T07:50:00Z",
+      "duration": "P50M",
+      "title": "Add a mobile version to your Drupal site",
+      "location": "Room 19",
+      "link": "https://cph2010.drupal.org/sessions/add-mobile-version-your-drupal-site.html",
+      "track": [
+        "Theming, Design & Usability"
+      ],
+      "speakers": [
+        "Martin Joergensen"
+      ],
+      "full_description": "This session focuses on adapting themes, templates, views and other elements to make Drupal sites functional on small screens with limited capabilities. Rather than creating native applications, the presenter covers customising content like news, articles, and discussions for mobile devices.\n\nThe session explores existing mobile modules and customised adaptation approaches. Demonstrations use an Android simulator, with live testing available via iPhone, Android phones, or desktop browsers with agent-switchers.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T07:00:00Z",
+      "endTime": "2010-08-26T07:50:00Z",
+      "duration": "P50M",
+      "title": "jQuery: Small Library, big Effects",
+      "location": "Room 20",
+      "link": "https://cph2010.drupal.org/sessions/jquery-small-library-big-effects.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Christophe"
+      ],
+      "full_description": "An intermediate-level session exploring jQuery's capabilities through live demonstrations. Topics covered include:\n\n- What is jQuery and when to use it\n- DOM, CSS, and jQuery manipulation techniques\n- jQuery UI and third-party libraries\n- Drupal integration and Drupal 7 changes\n- AJAX implementation for server communication\n- Finding resources and plugins\n\nThe presentation emphasises practical, simple-to-complex examples suitable for developers new to jQuery.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T08:00:00Z",
+      "endTime": "2010-08-26T08:50:00Z",
+      "duration": "P50M",
+      "title": "Lesser-known Drupal 7",
+      "location": "Room 11",
+      "link": "https://cph2010.drupal.org/sessions/lesser-known-drupal-7.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Damien Tournoud"
+      ],
+      "full_description": "Explore lesser-known features of Drupal 7 beyond the popular attractions like Entity API and Fields. The session covers:\n\n* **Queues and Jobs:** execute long-running jobs easily and reliably\n* **Pluggable caches:** alternatives to Cache Router\n* **Extensible database drivers:** optimise cluster behaviour\n* **Stream wrappers:** scalable file storage\n* **Intelligent session handler and external cache:** serve anonymous pages entirely from cache\n\nTargeted at intermediate to expert developers seeking unexpected capabilities in Drupal 7.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T08:00:00Z",
+      "endTime": "2010-08-26T08:50:00Z",
+      "duration": "P50M",
+      "title": "Theming the Enterprise",
+      "location": "Room 12",
+      "link": "https://cph2010.drupal.org/sessions/theming-enterprise.html",
+      "track": [
+        "Theming, Design & Usability"
+      ],
+      "speakers": [
+        "Jen Simmons"
+      ],
+      "full_description": "A session covering strategies for theming multiple websites simultaneously. The presenter discusses her experience moving an enterprise-level corporation to Drupal while managing dozens of concurrent site projects across a large development team. Key focus areas include code reuse strategies, team coordination, and the role of Skinr in enabling rapid, coordinated re-theming across multiple sites.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T08:00:00Z",
+      "endTime": "2010-08-26T08:50:00Z",
+      "duration": "P50M",
+      "title": "Accelerating Drupal Adoption through SaaS, Distros and more",
+      "location": "Room 18",
+      "link": "https://cph2010.drupal.org/sessions/acquia-sponsored-session.html",
+      "track": [
+        "Sponsored Sessions"
+      ],
+      "speakers": [
+        "Dries Buytaert"
+      ],
+      "full_description": "Acquia's co-founder and CTO demonstrates Drupal Commons and Drupal Gardens, discussing how these products enable enterprises to succeed with Drupal. The session covers theming and site-building capabilities, enterprise deployment platforms, customisable social business distributions, and managed hosting solutions for high-performance Drupal websites.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T09:00:00Z",
+      "endTime": "2010-08-26T10:30:00Z",
+      "duration": "P90M",
+      "title": "Keynote — Jeremy Keith",
+      "location": "Main Hall",
+      "link": "https://cph2010.drupal.org",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Jeremy Keith"
+      ],
+      "full_description": "Keynote address by Jeremy Keith, web standards pioneer and author of *DOM Scripting* and *HTML5 for Web Designers*, at DrupalCon Copenhagen 2010.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T11:30:00Z",
+      "endTime": "2010-08-26T12:30:00Z",
+      "duration": "P60M",
+      "title": "The Command Line is your friend",
+      "location": "Room 10",
+      "link": "https://cph2010.drupal.org/sessions/command-line-your-friend.html",
+      "track": [
+        "Introducing Drupal"
+      ],
+      "speakers": [
+        "Addison Berry"
+      ],
+      "full_description": "An introductory session exploring command line interface (CLI) usage for *nix systems. Covers fundamental concepts for beginners, including terminal access, file navigation and editing, searching capabilities, and Drupal installation via CLI including database setup. Windows users will learn how to access equivalent CLI tools available to Linux and Mac users.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T11:30:00Z",
+      "endTime": "2010-08-26T12:30:00Z",
+      "duration": "P60M",
+      "title": "Aegir - one Drupal to rule them all!",
+      "location": "Room 11",
+      "link": "https://cph2010.drupal.org/sessions/aegir-one-drupal-rule-them-all.html",
+      "track": [
+        "Configuration, Set-Up & Performance"
+      ],
+      "speakers": [
+        "Adrian Rossouw",
+        "Antoine Beaupré"
+      ],
+      "full_description": "Aegir is a distributed provisioning system for Drupal that enables management of thousands of sites across multiple Drupal instances and servers. Built on Drupal itself, it provides a 'meta-drupal' interface where nodes represent hosted sites and infrastructure components.\n\nThis presentation covers recent developments including multi-server support and DNS functionality, plus improvements to staging workflows. The agenda includes:\n\n- Installing the Aegir hosting system\n- Spawning OpenAtrium instances\n- Cloning, upgrading and maintaining sites\n- Addressing staging workflow challenges\n- The Aegir project roadmap\n\nFor more information, visit the [Aegir hosting system user group](http://groups.drupal.org/aegir-hosting-system).",
+      "sponsorIds": "",
+      "video_url": "http://www.archive.org/details/Aegir-OneDrupalToRuleThemAll"
+    },
+    {
+      "startTime": "2010-08-26T11:30:00Z",
+      "endTime": "2010-08-26T12:30:00Z",
+      "duration": "P60M",
+      "title": "Git Fundamentals",
+      "location": "Room 12",
+      "link": "https://cph2010.drupal.org/sessions/git-fundamentals.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Sam Boyer"
+      ],
+      "full_description": "RIP CVS — Drupal is going git! This session covers fundamentals needed to work with git, including basic instruction and techniques for drupal.org git infrastructure. Suitable for maintainers, contributors, and Drupal users seeking working knowledge of git and Drupal integration. Even experienced git users will benefit from coverage of drupal.org-specific idiosyncrasies.",
+      "sponsorIds": "",
+      "video_url": "http://www.archive.org/details/GitFundamentals"
+    },
+    {
+      "startTime": "2010-08-26T11:30:00Z",
+      "endTime": "2010-08-26T12:30:00Z",
+      "duration": "P60M",
+      "title": "Drupal Performance Boost Solutions",
+      "location": "Room 18",
+      "link": "https://cph2010.drupal.org/sessions/drupal-performance-boost-solutions.html",
+      "track": [
+        "Configuration, Set-Up & Performance"
+      ],
+      "speakers": [
+        "Welin Welchev"
+      ],
+      "full_description": "A presentation addressing how \"Drupal performance can be vastly improved according to your website's goals.\" The session shares best practices from developing over 250 projects and explains the approach behind building one of Denmark's largest Drupal sites. Topics include identifying scalable solutions tailored to specific site objectives, optimising queries and memory usage, and achieving powerful CMS functionality with strong performance outcomes.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T11:30:00Z",
+      "endTime": "2010-08-26T12:30:00Z",
+      "duration": "P60M",
+      "title": "Responsive Webdesign - Drupal Theming",
+      "location": "Room 19",
+      "link": "https://cph2010.drupal.org/sessions/responsive-webdesign-drupal-theming.html",
+      "track": [
+        "Theming, Design & Usability"
+      ],
+      "speakers": [
+        "Kristof Orts",
+        "Matthias Vandermaesen"
+      ],
+      "full_description": "Fluid grids, flexible images, and media queries form the foundation for responsive web design, requiring a shift in approach. Rather than creating separate experiences for different devices, media queries enable progressive enhancement across viewing contexts.\n\nResponsive design extends beyond layout adjustments. Media queries facilitate precise refinements as pages adapt: increasing link target areas for mobile devices, adjusting column structures, and optimising for various screen sizes.\n\n[Demo](http://www.alistapart.com/d/responsive-web-design/ex/ex-site-FINAL.html)",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T11:30:00Z",
+      "endTime": "2010-08-26T12:30:00Z",
+      "duration": "P60M",
+      "title": "Creating a generic platform for a national media company: showcase",
+      "location": "Room 20",
+      "link": "https://cph2010.drupal.org/sessions/creating-generic-platform-national-media-company-showcase.html",
+      "track": [
+        "Drupal for Business"
+      ],
+      "speakers": [
+        "Cédric Perronnet",
+        "Franck Deroche"
+      ],
+      "full_description": "This presentation covers the development of a unified media platform for Radio France. Topics include workflow and team collaboration approaches, project metrics, and technical solutions including WYSIWYG editors, media libraries, drag-and-drop functionality, data migration from existing systems, complex editorial workflows, copyright management, single sign-on across multiple sites, search optimisation, continuous integration, content scheduling, data archival, and high-availability caching infrastructure.\n\nThe session features the Scald module for content management and node composition.\n\n[Live implementation: www.franceculture.com](http://www.franceculture.com/)",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T12:45:00Z",
+      "endTime": "2010-08-26T13:45:00Z",
+      "duration": "P60M",
+      "title": "15 Modules to help you build a community website",
+      "location": "Room 10",
+      "link": "https://cph2010.drupal.org/sessions/15-modules-help-you-build-community-website.html",
+      "track": [
+        "Introducing Drupal"
+      ],
+      "speakers": [
+        "Adrien Baumann",
+        "Frédéric G. Marand",
+        "Sandrine",
+        "Sibel Demircan"
+      ],
+      "full_description": "This presentation shares experience building community features using 15 contributed modules for the French news website www.lefigaro.fr. Topics covered include module pros/cons, configuration tweaks, and interactions between: Messaging, Private Message, Notifications, Activity, Facebook Status, Profile Privacy, Profile Complete Percent, Content Profile, Avatar Selection, User Relationship, User Workflow, Flags, Organic Groups, Weblinks, and Shorten modules.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T12:45:00Z",
+      "endTime": "2010-08-26T13:45:00Z",
+      "duration": "P60M",
+      "title": "Inside Pantheon: Pressflow, Hudson and Varnish, Oh My!",
+      "location": "Room 11",
+      "link": "https://cph2010.drupal.org/sessions/inside-pantheon-pressflow-hudson-and-varnish-oh-my.html",
+      "track": [
+        "Configuration, Set-Up & Performance"
+      ],
+      "speakers": [
+        "Josh Koenig",
+        "David Strauss"
+      ],
+      "full_description": "This session explores how Drupal can expand its reach across the internet by empowering users through standardised, open-sourced enterprise hosting techniques. Pantheon aims to democratise advanced deployment practices via cloud computing.\n\nThe presentation covers key components of the Pantheon stack:\n\n* Pressflow\n* Varnish\n* Memcached\n* Apache Solr\n* Hudson\n* BCFG2\n* Cloud Computing (EC2, Rackspace and others)\n\nAttendees will learn how these technologies combine to create \"the first completely mapped-out end-to-end Drupal production process.\"",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T12:45:00Z",
+      "endTime": "2010-08-26T13:45:00Z",
+      "duration": "P60M",
+      "title": "Views 3",
+      "location": "Room 12",
+      "link": "https://cph2010.drupal.org/sessions/views-3.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Daniel Wehner"
+      ],
+      "full_description": "This session explores changes in the Views 3.x development cycle. Key improvements include pluggable query backends (enabling queries from sources like Flickr), enhanced SQL support, better export functionality, AND/OR logic support, GROUPBY capabilities, improved UI elements, exposed forms, pluggable pagers, semantic support, and comprehensive translation features.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T12:45:00Z",
+      "endTime": "2010-08-26T13:45:00Z",
+      "duration": "P60M",
+      "title": "Backstage with Drupal localization",
+      "location": "Room 18",
+      "link": "https://cph2010.drupal.org/sessions/backstage-drupal-localization.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Gábor Hojtsy",
+        "Jose Reyero"
+      ],
+      "full_description": "This session explores how localising Drupal software operates and demonstrates methods for integrating modules and themes into localisation workflows. The presenters discuss supported features on drupal.org, in-house localisation approaches, and relevant APIs for module localisation. The session addresses common pitfalls and distinguishes localisation from user-provided content translation. Additionally, it covers leveraging similar modules to facilitate translation of custom modules and full Drupal distributions.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T12:45:00Z",
+      "endTime": "2010-08-26T13:45:00Z",
+      "duration": "P60M",
+      "title": "Imaginary users can save your Drupal site",
+      "location": "Room 19",
+      "link": "https://cph2010.drupal.org/sessions/imaginary-users-can-save-your-drupal-site.html",
+      "track": [
+        "Theming, Design & Usability"
+      ],
+      "speakers": [
+        "J-P Stacey",
+        "Rich Middleditch"
+      ],
+      "full_description": "This session explores how user personas—fabricated representatives of core user segments—can be integrated into Drupal projects to minimise risk and ensure alignment across distributed teams.\n\nKey topics covered:\n\n* Understanding user personas and their purpose\n* Influencing specifications through personas\n* Implementing personas within Drupal systems\n* Determining project completion criteria\n* Establishing decision-making authority\n* Identifying when personas lose relevance\n\n\"Personas are fabricated users, intended to represent core segments of the user base for a website.\" In meetings, they facilitate constructive debates about feature priorities. Within your Drupal environment, personas gain operational significance through \"easily configurable automation and testing software\" that validates both new and existing features.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T12:45:00Z",
+      "endTime": "2010-08-26T13:45:00Z",
+      "duration": "P60M",
+      "title": "Hosting Drupal in the cloud: How your site can benefit from the power of the cloud",
+      "location": "Room 20",
+      "link": "https://cph2010.drupal.org/sessions/hosting-drupal-cloud-how-your-site-can-benefit-power-cloud-vpsnet.html",
+      "track": [
+        "Sponsored Sessions"
+      ],
+      "speakers": [
+        "Nick Nelson"
+      ],
+      "full_description": "VPS.NET Managing Director Nick Nelson discusses cloud hosting fundamentals. The presentation clarifies distinctions between cloud hosting, shared hosting, and dedicated hosting options. Topics include reliability and redundancy benefits, operating system choices (Linux vs Windows), geographic distribution of cloud infrastructure, and CDN implementation. The session also examines how VPS.NET optimised its hosting platform specifically for Drupal deployments and explores integration of CDN and cloud solutions within Drupal environments.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T14:00:00Z",
+      "endTime": "2010-08-26T15:00:00Z",
+      "duration": "P60M",
+      "title": "How to Manage Your Cloud by Drupal",
+      "location": "Room 10",
+      "link": "https://cph2010.drupal.org/sessions/how-manage-your-cloud-drupal.html",
+      "track": [
+        "Drupal for Business"
+      ],
+      "speakers": [
+        "Yas Naoi"
+      ],
+      "full_description": "This session explores hybrid cloud management using Drupal. The presenter discusses managing both public cloud infrastructure (Amazon EC2) and private cloud systems through a custom tool called Virtual Infra Manager. Key topics include cloud computing definitions, infrastructure management approaches, use cases, system architecture, and features. The presentation emphasises \"Drupal as a fundamental of PaaS (Platform as a Service)\" and demonstrates how Drupal functions as a web application framework beyond traditional content management.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T14:00:00Z",
+      "endTime": "2010-08-26T15:00:00Z",
+      "duration": "P60M",
+      "title": "A survey of rich multimedia in Drupal 7",
+      "location": "Room 11",
+      "link": "https://cph2010.drupal.org/sessions/survey-rich-multimedia-drupal-7.html",
+      "track": [
+        "Configuration, Set-Up & Performance"
+      ],
+      "speakers": [
+        "Jacob Singh"
+      ],
+      "full_description": "Jacob Singh, a Drupal core developer and Media module maintainer, presents an overview of media file management capabilities in Drupal 7. The session covers image and file fields in core, adding metadata to files through the Media module, the Media module browser for file management, WYSIWYG integration for embedding media in text areas, and third-party integrations with services like Flickr and YouTube. The presenter also discusses emerging technologies including HTML5 drag and drop uploads, video, and audio. The presentation concludes with an extended Q&A and brainstorming session.",
+      "sponsorIds": "",
+      "video_url": "http://www.jacobsingh.name/content/future-multimedia-d7-or-you-dont-want-me-kill-monkey-do-you"
+    },
+    {
+      "startTime": "2010-08-26T14:00:00Z",
+      "endTime": "2010-08-26T15:00:00Z",
+      "duration": "P60M",
+      "title": "Group (the new Organic groups) -- Building social networks in Drupal 7",
+      "location": "Room 12",
+      "link": "https://cph2010.drupal.org/sessions/group-new-organic-groups-building-social-networks-drupal-7.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Amitai Burstein"
+      ],
+      "full_description": "Organic groups underwent a complete rewrite for Drupal 7 compatibility. This session explores differences between Group and Organic groups, highlighting how Group leverages the field API.\n\nThe presentation demonstrates building a basic groups site without coding. For module maintainers, an example module integrating with Group is developed to illustrate API usage, helping attendees understand upgrading OG modules from version 6.",
+      "sponsorIds": "",
+      "video_url": "http://www.archive.org/details/GrouptheNewOrganicGroups-BuildingSocialNetworksInDrupal7"
+    },
+    {
+      "startTime": "2010-08-26T14:00:00Z",
+      "endTime": "2010-08-26T15:00:00Z",
+      "duration": "P60M",
+      "title": "Developing Apps for iPhone/iPad/Android using Drupal as Base System",
+      "location": "Room 18",
+      "link": "https://cph2010.drupal.org/sessions/developing-apps-iphoneipadandroid-using-drupal-base-system.html",
+      "track": [
+        "Code & Development"
+      ],
+      "speakers": [
+        "Sumit Kataria"
+      ],
+      "full_description": "A follow-up to the DrupalCon SF 2010 session covering advanced mobile app development. This session explores building native iPhone, iPad, and Android applications using the Titanium Framework alongside Drupal as a backend system.\n\n**Topics covered:**\n- Introduction to Titanium Framework for developing cross-platform mobile apps\n- ServicesAPI and web standards (JSON, XML-RPC)\n- Managing application data through Drupal (content, users, views, permissions, taxonomy)\n- Live app development demonstration\n- Practical code examples using ServicesAPI, YQL, jQuery, and Titanium API\n- Demos of completed Android and iPhone applications",
+      "sponsorIds": "",
+      "video_url": "http://www.youtube.com/watch?v=GOzwOnEDinM"
+    },
+    {
+      "startTime": "2010-08-26T14:00:00Z",
+      "endTime": "2010-08-26T15:00:00Z",
+      "duration": "P60M",
+      "title": "Writing Better CSS for Drupal",
+      "location": "Room 19",
+      "link": "https://cph2010.drupal.org/sessions/writing-better-css-drupal.html",
+      "track": [
+        "Theming, Design & Usability"
+      ],
+      "speakers": [
+        "Maarten Verbaarschot"
+      ],
+      "full_description": "This session explores techniques for creating maintainable stylesheets within Drupal's theming ecosystem. Key topics include understanding CSS from modules, managing style.css effectively, implementing Reset CSS properly, working with grid frameworks like 960.gs, and examining CSS improvements in Drupal 7 and 8. The presenter addresses common pitfalls such as \"adding new styles at the bottom of the file\" and emphasises sustainable practices for teams of themers.",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T14:00:00Z",
+      "endTime": "2010-08-26T15:00:00Z",
+      "duration": "P60M",
+      "title": "Showcase - Drupal powers sports (and more) at France Televisions",
+      "location": "Room 20",
+      "link": "https://cph2010.drupal.org/sessions/showcase-drupal-powers-sports-and-more-france-televisions.html",
+      "track": [
+        "Drupal for Business"
+      ],
+      "speakers": [
+        "Alexandre Bulté"
+      ],
+      "full_description": "France Télévisions, the French public national television group, switched to Drupal as their CMS in mid-2009. This session covers their successful implementation journey, beginning with the sports news site sport.francetv.fr as a pilot project.\n\nKey topics include:\n- Organisational needs and constraints driving the overhaul\n- Why Drupal was selected over competing open-source platforms\n- Site design methodology accommodating journalist workflows through agile project management\n- Visitor and journalist-facing features\n- Integration with existing infrastructure\n- Architecture handling the site's significant traffic demands\n- Multisite strategy for scaling across France Télévisions' 1000+ websites",
+      "sponsorIds": "",
+      "video_url": ""
+    },
+    {
+      "startTime": "2010-08-26T15:15:00Z",
+      "endTime": "2010-08-26T16:00:00Z",
+      "duration": "P45M",
+      "title": "Closing Keynote",
+      "location": "Main Hall",
+      "link": "https://cph2010.drupal.org",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "DrupalCon Copenhagen team"
+      ],
+      "full_description": "Closing keynote from the DrupalCon Copenhagen 2010 organising team, wrapping up the conference and looking ahead to the future of Drupal and the community.",
+      "sponsorIds": "",
+      "video_url": ""
+    }
+  ]
+}

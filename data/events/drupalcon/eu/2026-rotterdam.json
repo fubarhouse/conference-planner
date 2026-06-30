@@ -10,11 +10,13 @@
     "venue": "Postillion Hotel & Convention Centre WTC Rotterdam",
     "timezone": "Europe/Amsterdam",
     "columns": 6,
-    "enabled": true,
+    "enabled": false,
     "logo": {
       "image": "./img/logos/drupalcon-logo.svg",
       "imageAlt": "DrupalCon logo",
-      "usePlate": false
+      "usePlate": false,
+      "logoDisabled": true,
+      "faIcon": "fa-solid fa-droplet"
     },
     "scheduleURLs": [
       "https://events.drupal.org/rotterdam2026/schedule"
@@ -168,8 +170,7 @@
         "link": "https://www.1xinternet.de/en",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true,
-        "subtitle": "Lanyards"
+        "enabled": true
       },
       {
         "id": "jetbrains",
@@ -183,7 +184,7 @@
         "bgStyle": "auto",
         "aspect": "auto",
         "enabled": true,
-        "subtitle": "Prizes Provider"
+        "subtitle": "Women in Drupal Award & Networking Event"
       },
       {
         "id": "tag1-consulting",
@@ -197,7 +198,7 @@
         "bgStyle": "auto",
         "aspect": "auto",
         "enabled": true,
-        "subtitle": "Attendee Badges"
+        "subtitle": "Prizes Provider & Attendee Badges"
       },
       {
         "id": "admin-magazine",
@@ -250,6 +251,128 @@
         "bgStyle": "auto",
         "aspect": "auto",
         "enabled": true
+      },
+      {
+        "id": "io-digital",
+        "title": "iO Digital",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/io-digital.png",
+        "imageAlt": "iO Digital logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "droptica",
+        "title": "Droptica",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/droptica.png",
+        "imageAlt": "Droptica logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "vardot",
+        "title": "Vardot",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/vardot.png",
+        "imageAlt": "Vardot logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "calibrate",
+        "title": "Calibrate",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/calibrate.png",
+        "imageAlt": "Calibrate logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "jakala",
+        "title": "Jakala",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 25,
+        "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/jakala.png",
+        "imageAlt": "Jakala logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "subtitle": "Drupal in a Day"
+      },
+      {
+        "id": "amazee-ai",
+        "title": "amazee.ai",
+        "tier": "Summit Sponsors",
+        "row": 6,
+        "priority": 15,
+        "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/amazee-ai.png",
+        "imageAlt": "amazee.ai logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "subtitle": "Enterprise AI Summit (Bronze)"
+      },
+      {
+        "id": "acquia-module",
+        "title": "Acquia",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 5,
+        "subtitle": "Lanyards",
+        "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/acquia.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://www.acquia.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "acquia-summit",
+        "title": "Acquia",
+        "tier": "Summit Sponsors",
+        "row": 6,
+        "priority": 5,
+        "subtitle": "Enterprise AI Summit (Gold)",
+        "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/acquia.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://www.acquia.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "dropsolid-summit",
+        "title": "Dropsolid",
+        "tier": "Summit Sponsors",
+        "row": 6,
+        "priority": 10,
+        "subtitle": "Enterprise AI Summit (Gold)",
+        "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/dropsolid.jpg",
+        "imageAlt": "Dropsolid logo",
+        "link": "https://dropsolid.com/en",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
       }
     ],
     "sourceCache": "cache/remote/2026-06-01T23-25-29Z/drupalcon-eu-rotterdam-2026-descriptions",
@@ -260,7 +383,7 @@
       "startTime": "2026-09-28T07:00:00Z",
       "endTime": "2026-09-28T16:00:00Z",
       "duration": "P540M",
-      "title": "AI Summit",
+      "title": "AI Dev Summit",
       "location": "Location Postillion Hotel & Convention Centre WTC Rotterdam",
       "link": "https://events.drupal.org//rotterdam2026/session/ai-summit",
       "track": [
@@ -362,6 +485,36 @@
       "sponsorIds": ""
     },
     {
+      "startTime": "2026-09-29T07:00:00Z",
+      "endTime": "2026-09-29T17:30:00Z",
+      "duration": "P630M",
+      "title": "Exhibition – Tuesday",
+      "location": "Location Exhibition Hall",
+      "link": "https://events.drupal.org/rotterdam2026/schedule",
+      "track": [
+        "other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-09-29T07:00:00Z",
+      "endTime": "2026-09-29T16:00:00Z",
+      "duration": "P540M",
+      "title": "General Contribution - Tuesday",
+      "location": "Location Diamond I&II",
+      "link": "https://events.drupal.org/rotterdam2026/schedule",
+      "track": [
+        "contribution topic"
+      ],
+      "speakers": [],
+      "full_description": "Join our mailing list to keep up to date on future events.",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
       "startTime": "2026-09-29T08:30:00Z",
       "endTime": "2026-09-29T09:45:00Z",
       "duration": "P75M",
@@ -427,24 +580,7 @@
       "startTime": "2026-09-29T11:30:00Z",
       "endTime": "2026-09-29T12:15:00Z",
       "duration": "P45M",
-      "title": "Beyond Page Building: AI-Powered Canvas Extensions",
-      "location": "Location Mees Room I",
-      "link": "https://events.drupal.org/rotterdam2026/session/beyond-page-building-ai-powered-canvas-extensions-drupal-cms-20",
-      "track": [
-        "drupal cms"
-      ],
-      "speakers": [
-        "Deepak Kumar Mishra"
-      ],
-      "full_description": "Drupal CMS 2.0 is a milestone — batteries included, editor-friendly, and built around Canvas. For the first time, Drupal ships with a visual editing experience that competes with proprietary platforms. But even with Canvas, editors face the same daily friction.\n\nNeed to remove a background from a photo? Open Photoshop. Merge PDFs? Find an online tool. Alt text for a dozen images? Do it manually, or skip it. Every time editors leave the CMS, they lose focus, waste time, and risk inconsistency.\n\n**Prerequisite**\n\n- Drupal knowledge — Comfortable with Drupal site building, module architecture, and configuration management\n\n- JavaScript fundamentals — Working knowledge of modern JavaScript (ES6+) and basic familiarity with React or similar component frameworks\n\n- Drupal CMS / Canvas familiarity — Basic experience using Drupal CMS and Canvas as an editor or site builder\n\n- No AI/ML expertise required — We treat AI services as external APIs; no machine learning background needed\n\n- No prior extension development experience required — We start from scratch\n\n**Target Audience**\n\nIntermediate is the right level because this session assumes foundational knowledge but teaches something entirely new.\n\n**Outline**\n\nDrupal CMS 2.0 ships with Canvas as its built-in experience builder. It's a huge leap forward for editors — but they still hit a wall when everyday tasks force them out of the CMS. Removing image backgrounds, merging PDFs, generating alt text, checking accessibility — every one of these sends editors to an external tool, breaking their flow and wasting time.\n\nCanvas extensions change this. They let developers build tools that live directly inside the Canvas sidebar, feel native to the editor, and operate on the content editors are already working with. When combined with AI services, the possibilities multiply.\n\nThis session presents a vision for a comprehensive Canvas extension ecosystem and then gets hands-on by live-building two extensions on stage.\n\n**Learning Objectives**\n\n1. Understand the Canvas extension ecosystem — Learn the full landscape of what extensions can solve across media, content, SEO, accessibility, documents, design, and workflow within Drupal CMS.\n\n2. Master the extension architecture — Understand how extensions integrate with Canvas through lifecycle hooks, sidebar rendering, event communication, and data flow.\n\n3. Build an AI-powered extension from scratch — Follow along as we create an Alt Text Generator covering AI API integration, error handling, and editor UX patterns.\n\n4. Build a file-processing utility extension — See how to create a PDF Merge tool handling file uploads, client-side processing, progress feedback, and output delivery within Canvas.\n\n5. Integrate AI services into Drupal CMS — Learn patterns for connecting to vision, NLP, and document intelligence APIs while managing keys, rate limits, and fallbacks.\n\n6. Keep the editor responsive under heavy processing — Apply async patterns, web workers, and progress indicators so extensions never block the editing experience.\n\n7. Design editor-first UIs — Build interfaces that feel native to Canvas and handle real-world edge cases gracefully.\n\n8. Contribute to the ecosystem — Understand how to package and share extensions as a new form of community contribution alongside modules and recipes.\n\n**Experience level**\nIntermediate",
-      "video_url": "",
-      "sponsorIds": ""
-    },
-    {
-      "startTime": "2026-09-29T11:30:00Z",
-      "endTime": "2026-09-29T12:15:00Z",
-      "duration": "P45M",
-      "title": "Culture Mapping & the Human Side of AI",
+      "title": "Culture mapping the human side of AI",
       "location": "Location Mees Room II",
       "link": "https://events.drupal.org/rotterdam2026/session/culture-mapping-human-side-ai-workshop-meet-your-people-where-they-are",
       "track": [
@@ -510,6 +646,23 @@
       "sponsorIds": ""
     },
     {
+      "startTime": "2026-09-29T11:30:00Z",
+      "endTime": "2026-09-29T12:15:00Z",
+      "duration": "P45M",
+      "title": "Why Your AI Agent Hallucinates",
+      "location": "Location Mees Room I",
+      "link": "https://events.drupal.org/rotterdam2026/session/why-your-ai-agent-hallucinates-engineering-lessons-production-workflow",
+      "track": [
+        "development, ai & agentic architecture"
+      ],
+      "speakers": [
+        "Shibin Devadas Kakanat"
+      ],
+      "full_description": "LLMs are now table stakes in Drupal. Modules like AI, ECA, and a growing set of agentic tools make it trivial to wire a model into a site. What's not trivial is making that integration trustworthy enough to put in front of a real editor or site builder.\n\nOver the last several months, building FlowDrop's chat-based workflow editor, we collected a set of failure modes that recur across every LLM-driven Drupal feature we've seen: hallucinated field names, half-applied state changes, prompt-injection through user content, runaway token costs as state grows, and the \"what ID did you just create?\" round-trip problem.\n\nThis session is the post-mortem. It's the engineering log of what we changed, why each change mattered, and how each pattern generalises beyond FlowDrop. Every claim is backed by code/data we'll show on screen.\n\n---\n\nSession is not for: attendees looking for a vendor comparison of LLM providers, or a pure prompt-engineering talk with no code. This is an engineering session about the system around the prompt.\n\n**Prerequisite**\n\nAttendees should be comfortable with:\n\n- Drupal module development (services, plugins, config entities)\n\n- Basic LLM concepts: system prompts, context windows, tool/function calling. You do not need to have built an agent before.\n\n- PHP 8.2+ syntax (readonly properties, attributes, enums)\n\nNo prior FlowDrop knowledge is required. The patterns are framed in general terms; FlowDrop is the case study.\n\n**Target Audience**\n\nModule developers building AI-powered features (content assistants, agents, workflow tools, chatbots) who have hit the \"demo works, production doesn't\" wall.\n\n**Outline**\n\nMost \"AI agent\" demos look great in a screencast and fall apart the moment a real user touches them. They invent fields, corrupt state, and forget what they did two turns ago. The fix isn't a smarter model -- it's the boring engineering around the model.\n\nThis session is a code-level walkthrough of FlowDrop Chat, a production AI agent that builds and modifies visual workflows inside Drupal from natural-language chat. It works reliably not because of the LLM choice, but because of seven specific architectural decisions: a tiny domain-specific language instead of JSON tool calls, aggressive context slimming, predictable IDs the model can plan against, prompt-injection hardening, atomic batched commands with rollback, and a self-hosted prompt pipeline that ships as a workflow rather than as code.\n\nYou'll leave with concrete patterns you can apply to any Drupal AI feature -- whether you're building an agent, a content assistant, or just trying to keep an LLM from melting your editorial workflow.\n\n**Learning Objectives**\n\nBy the end of this session, attendees will be able to:\n\n1. Choose the right LLM output format for their use case -- and explain why a small DSL often beats JSON tool-calling for editor-style agents (token economy, atomic batching, deterministic parsing, undoability).\n\n2. Slim context aggressively by separating what the LLM needs to know from what the system needs to store -- including a reusable pattern for reducing Drupal config schemas, entity references, and plugin metadata for prompt injection.\n\n3. Defend against prompt injection in chat history and user-supplied state with concrete, copy-pastable techniques (XML wrapping, JSON validation gates, never echoing raw user input into system instructions).\n\n4. Design predictable identifiers so the LLM can plan multi-step changes in a single response without round-trips; and recognise where this pattern applies outside agents (slugs, machine names, batch operations).\n\n5. Make agent actions atomic and reversible, turning \"the model needs to be right\" into \"the model needs to be right or recoverable\" (a dramatically lower bar).\n\n6. Encode prior failures into the system prompt as worked examples and explicit anti-patterns, instead of hoping a bigger model will figure it out.\n\n7. Dogfood the agent through their own platform so improvements ship as configuration, not code deploys.\n\n**Experience level**\nIntermediate",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
       "startTime": "2026-09-29T12:25:00Z",
       "endTime": "2026-09-29T13:10:00Z",
       "duration": "P45M",
@@ -565,7 +718,7 @@
       "startTime": "2026-09-29T12:25:00Z",
       "endTime": "2026-09-29T13:10:00Z",
       "duration": "P45M",
-      "title": "Encoding Expertise & UX Research",
+      "title": "Encoding Expertise: How UX Research Powers Human-First AI",
       "location": "Location Goudriaan Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/encoding-expertise-how-ux-research-powers-human-first-ai",
       "track": [
@@ -582,7 +735,7 @@
       "startTime": "2026-09-29T12:25:00Z",
       "endTime": "2026-09-29T13:10:00Z",
       "duration": "P45M",
-      "title": "Sharp Pan-European Partner Ecosystem",
+      "title": "One Portal, 16 Markets: Sharp's Pan-European Partner Ecosystem",
       "location": "Location Mees Room II",
       "link": "https://events.drupal.org/rotterdam2026/session/one-portal-16-markets-how-sharp-built-pan-european-partner-ecosystem-drupal",
       "track": [
@@ -599,7 +752,7 @@
       "startTime": "2026-09-29T12:25:00Z",
       "endTime": "2026-09-29T13:10:00Z",
       "duration": "P45M",
-      "title": "Government Platform Roadmap",
+      "title": "When the roadmap is a battleground: building a shared Drupal platform for government",
       "location": "Location Penn Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/when-roadmap-battleground-building-shared-drupal-platform-government",
       "track": [
@@ -610,6 +763,21 @@
         "Esmeralda Tijhoff"
       ],
       "full_description": "Come for the architecture, stay for the honest story. This session takes you inside the Government Drupal Platform, the recipe-driven foundation behind Dutch central government websites. What choices did we make, and would we make them again? Where does technical architecture meet the people who have to live with it? This is where developers and product owners sit in the same room and actually learn from each other.\n\n**Prerequisite**\n\nFamiliarity with Drupal site building concepts is helpful, particularly an understanding of content types, configuration management, and the basics of Drupal recipes. Product owners and managers without a technical background are equally welcome: the session is structured so that both audiences can follow and take value from every part.\n\n**Target Audience**\n\nall\n\n**Outline**\n\nEveryone building a shared Drupal platform for government hits the same wall. Your stakeholders all think their case is the exception. Your roadmap is a battleground. And every release that makes one agency happy, can break something for another. Governments across Europe are wrestling with this and so did we.\n\nWhen your platform becomes the preferred solution for an entire ministry, growth stops being optional. New users arrive with expectations, preferences, and sometimes reluctance.\n\nDICTU's Government Drupal Platform provisions fully accessible, Rijksoverheid-branded government websites in under 10 minutes using 30+ recipes, aligned with Drupal CMS. Winner of the Drupal Splash Awards Government category 2025. One year in production by the time we take this stage.\n\nA talk where technology and product management go hand in hand. Every technical decision shapes the experience of the people using it, and every lesson from users feeds directly back into the architecture.\n\nWe will show how we keep recipes composable and conflict-free, how CI/CD makes 10-minute provisioning possible, and how technical decisions ripple through to the editors who use them. We will share what reluctant users taught us, how early adopters became co-creators, and what we learned from those who walked away.\n\nDrupalCon Rotterdam is our moment to give back. We are releasing new recipes for this event. Our design system is already public. Come and take it home.\n\n**Learning Objectives**\n\nYou will learn how a recipe-driven architecture works at scale in a production government environment, including how we keep 30+ recipes composable and conflict-free. You will learn how a technology-agnostic design system connects a national design system to Drupal through a Figma-to-code pipeline. You will learn how CI/CD automation makes 10-minute site provisioning possible and what that requires in practice. You will gain insight into how technical decisions directly shape the experience of editors and end users. You will feel what it means to manage a shared platform when not all users chose it, including how reluctant users became a source of product improvement and how early adopters were turned into co-creators. And you will leave with concrete open source assets you can use immediately: recipes and a design system published openly for reuse.\n\n**Experience level**\nAnyone",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-09-29T12:25:00Z",
+      "endTime": "2026-09-29T13:10:00Z",
+      "duration": "P45M",
+      "title": "Mentor Orientation - Tuesday",
+      "location": "Location J.F. Staal Room",
+      "link": "https://events.drupal.org/rotterdam2026/schedule",
+      "track": [
+        "other"
+      ],
+      "speakers": [],
+      "full_description": "Join our mailing list to keep up to date on future events.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -632,7 +800,7 @@
       "startTime": "2026-09-29T13:45:00Z",
       "endTime": "2026-09-29T14:30:00Z",
       "duration": "P45M",
-      "title": "Agentic Debugging",
+      "title": "Agentic Debugging: Teaching AI to Step Through Your Code",
       "location": "Location Penn Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/agentic-debugging-teaching-ai-step-through-your-code",
       "track": [
@@ -666,7 +834,7 @@
       "startTime": "2026-09-29T13:45:00Z",
       "endTime": "2026-09-29T14:30:00Z",
       "duration": "P45M",
-      "title": "Beyond Content Staging: Drupal Workspaces",
+      "title": "Beyond content staging: where Drupal Workspaces is heading",
       "location": "Location Leeuwen Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/beyond-content-staging-where-drupal-workspaces-heading",
       "track": [
@@ -681,9 +849,9 @@
     },
     {
       "startTime": "2026-09-29T13:45:00Z",
-      "endTime": "2026-09-29T14:30:00Z",
-      "duration": "P45M",
-      "title": "Building Production-Ready AI Applications",
+      "endTime": "2026-09-29T15:25:00Z",
+      "duration": "P100M",
+      "title": "Building Production-Ready AI Applications Using Curated Drupal Recipes",
       "location": "Location Mees Room II",
       "link": "https://events.drupal.org/rotterdam2026/session/building-production-ready-ai-applications-using-curated-drupal-recipes",
       "track": [
@@ -717,7 +885,7 @@
       "startTime": "2026-09-29T13:45:00Z",
       "endTime": "2026-09-29T14:30:00Z",
       "duration": "P45M",
-      "title": "Digital Sovereignty & Vendor Lock-In",
+      "title": "From Vendor Lock-In to Digital Sovereignty",
       "location": "Location Mees Room I",
       "link": "https://events.drupal.org/rotterdam2026/session/vendor-lock-digital-sovereignty-practical-roadmap-governments-eu-institutions",
       "track": [
@@ -732,10 +900,25 @@
       "sponsorIds": ""
     },
     {
+      "startTime": "2026-09-29T13:45:00Z",
+      "endTime": "2026-09-29T14:30:00Z",
+      "duration": "P45M",
+      "title": "First-Time Contributor Workshop - Tuesday",
+      "location": "Location J.F. Staal Room",
+      "link": "https://events.drupal.org/rotterdam2026/schedule",
+      "track": [
+        "contribution topic"
+      ],
+      "speakers": [],
+      "full_description": "Join our mailing list to keep up to date on future events.",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
       "startTime": "2026-09-29T14:40:00Z",
       "endTime": "2026-09-29T15:25:00Z",
       "duration": "P45M",
-      "title": "Drupal as Open Health Platform Backbone",
+      "title": "Beyond the CMS: Drupal as the Backbone of an Open Health Platform",
       "location": "Location Leeuwen Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/beyond-cms-drupal-backbone-open-health-platform",
       "track": [
@@ -771,7 +954,7 @@
       "startTime": "2026-09-29T14:40:00Z",
       "endTime": "2026-09-29T15:25:00Z",
       "duration": "P45M",
-      "title": "Building a Site Template",
+      "title": "You can (and should!) build a site template",
       "location": "Location Van Oldenbarnevelt Room",
       "link": "https://events.drupal.org/rotterdam2026/session/you-can-and-should-build-site-template",
       "track": [
@@ -788,7 +971,7 @@
       "startTime": "2026-09-29T14:40:00Z",
       "endTime": "2026-09-29T15:25:00Z",
       "duration": "P45M",
-      "title": "Dashboard Metrics & Goodhart's Law",
+      "title": "Your Dashboard Is Lying: Goodhart's Law and the Metrics Crisis in the AI Era",
       "location": "Location Mees Room I",
       "link": "https://events.drupal.org/rotterdam2026/session/your-dashboard-lying-goodharts-law-and-metrics-crisis-ai-era-drupal-delivery",
       "track": [
@@ -805,7 +988,7 @@
       "startTime": "2026-09-29T15:35:00Z",
       "endTime": "2026-09-29T15:55:00Z",
       "duration": "P20M",
-      "title": "Developer Growth & Mentoring",
+      "title": "A developer is more than their code",
       "location": "Location Mees Room I",
       "link": "https://events.drupal.org/rotterdam2026/session/developer-more-their-code-growing-seniors-2031",
       "track": [
@@ -822,7 +1005,7 @@
       "startTime": "2026-09-29T15:35:00Z",
       "endTime": "2026-09-29T15:55:00Z",
       "duration": "P20M",
-      "title": "Automated Accessibility Challenges",
+      "title": "Can AI Fix the Web? Automated Accessibility Promises and Perils",
       "location": "Location Mees Room II",
       "link": "https://events.drupal.org/rotterdam2026/session/can-ai-fix-web-promises-and-perils-automated-accessibility",
       "track": [
@@ -839,7 +1022,7 @@
       "startTime": "2026-09-29T15:35:00Z",
       "endTime": "2026-09-29T15:55:00Z",
       "duration": "P20M",
-      "title": "Drupal CMS UX Research",
+      "title": "Drupal CMS by design: Continuous UX Research",
       "location": "Location Van Oldenbarnevelt Room",
       "link": "https://events.drupal.org/rotterdam2026/session/drupal-cms-design-how-continuous-ux-research-building-product-you-can-depend",
       "track": [
@@ -856,7 +1039,7 @@
       "startTime": "2026-09-29T15:35:00Z",
       "endTime": "2026-09-29T15:55:00Z",
       "duration": "P20M",
-      "title": "Legacy to Drupal CMS Migration",
+      "title": "From Legacy Chaos to Drupal CMS: AI-Assisted Content Modeling",
       "location": "Location Penn Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/legacy-chaos-drupal-cms-ai-assisted-content-modeling-migration",
       "track": [
@@ -873,7 +1056,7 @@
       "startTime": "2026-09-29T15:35:00Z",
       "endTime": "2026-09-29T15:55:00Z",
       "duration": "P20M",
-      "title": "Gander Performance Monitoring",
+      "title": "Gander in the Wild: Performance Safety Net in CI/CD Pipeline",
       "location": "Location Goudriaan Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/gander-wild-how-we-built-performance-safety-net-our-cicd-pipeline",
       "track": [
@@ -890,7 +1073,7 @@
       "startTime": "2026-09-29T15:35:00Z",
       "endTime": "2026-09-29T15:55:00Z",
       "duration": "P20M",
-      "title": "Autonomy in AI Development",
+      "title": "Take Back Your Autonomy",
       "location": "Location Leeuwen Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/take-back-your-autonomy",
       "track": [
@@ -934,14 +1117,59 @@
       "sponsorIds": ""
     },
     {
+      "startTime": "2026-09-30T06:00:00Z",
+      "endTime": "2026-09-30T16:00:00Z",
+      "duration": "P600M",
+      "title": "General Contribution - Wednesday",
+      "location": "Location Diamond I&II",
+      "link": "https://events.drupal.org/rotterdam2026/schedule",
+      "track": [
+        "contribution topic"
+      ],
+      "speakers": [],
+      "full_description": "Join our mailing list to keep up to date on future events.",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
       "startTime": "2026-09-30T07:00:00Z",
-      "endTime": "2026-09-30T08:30:00Z",
-      "duration": "P90M",
+      "endTime": "2026-09-30T08:15:00Z",
+      "duration": "P75M",
       "title": "Keynote, Wednesday",
       "location": "Location Rotterdam Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/keynote",
       "track": [
         "keynote"
+      ],
+      "speakers": [],
+      "full_description": "Join our mailing list to keep up to date on future events.",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-09-30T07:00:00Z",
+      "endTime": "2026-09-30T16:30:00Z",
+      "duration": "P570M",
+      "title": "Exhibition – Wednesday",
+      "location": "Location Exhibition Hall",
+      "link": "https://events.drupal.org/rotterdam2026/schedule",
+      "track": [
+        "other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-09-30T08:15:00Z",
+      "endTime": "2026-09-30T08:45:00Z",
+      "duration": "P30M",
+      "title": "Coffee Break 1, Wednesday",
+      "location": "Location Exhibition Hall",
+      "link": "https://events.drupal.org/rotterdam2026/session/coffee-break-1-wednesday",
+      "track": [
+        "coffee & lunch break time"
       ],
       "speakers": [],
       "full_description": "Join our mailing list to keep up to date on future events.",
@@ -969,13 +1197,14 @@
       "startTime": "2026-09-30T08:45:00Z",
       "endTime": "2026-09-30T09:30:00Z",
       "duration": "P45M",
-      "title": "AI-Assisted Canvas Migration Case Study",
+      "title": "AI-assisted site migration to Drupal Canvas: a real-world case study",
       "location": "Location Van Oldenbarnevelt Room",
       "link": "https://events.drupal.org/rotterdam2026/session/ai-assisted-site-migration-drupal-canvas-real-world-case-study",
       "track": [
         "development, ai & agentic architecture"
       ],
       "speakers": [
+        "Wolfgang Ziegler",
         "Jeremy Chinquist"
       ],
       "full_description": "AI coding agents are changing how we build software, but can they migrate a real production site to Drupal Canvas? We put it to the test on a live project and share what worked, what didn't, and what the numbers actually say.\n\n**Prerequisite**\n\nFamiliarity with Drupal site building, Drupal Canvas and content modelling. Basic awareness of decoupled Drupal architectures and AI coding agents is helpful but not required.\n\n**Target Audience**\n\nDevelopers, tech leads, architects, and agency decision-makers who are evaluating Drupal Canvas, decoupled architectures, or AI-assisted development workflows. Anyone planning a migration to Drupal Canvas, or curious whether AI coding agents are ready for production Drupal work, will benefit from this session.\n\n**Outline**\n\nMigrating an existing site to Drupal Canvas is a significant undertaking. What if you could bring an AI coding agent along for the ride?\n\nIn this session, we share a real-world case study of migrating a live site to a Drupal Canvas installation using decoupled rendering, with an AI coding agent driving a large portion of the work. We will walk through:\n\nThe starting point: the legacy site, its content model, and the goals of the migration\n\nWhy Drupal Canvas and why decoupled: the architectural decisions behind the project\n\nAI driven: how we planned the the task to be AI agent led\n\nWhat worked well: the tasks where the AI agent was genuinely productive\n\nWhat needs improvement: the pitfalls, dead ends, and places where the human had to take over\n\nMeasuring efficiency: KPIs, time saved (or not), and honest numbers from the project\n\nYou will leave with a realistic picture of what an AI-assisted Drupal Canvas migration looks like today — the opportunities, the risks, and a practical framework you can apply to your own projects.\n\n**Learning Objectives**\n\nUnderstand how to scope a site migration for an AI coding agent: what to delegate, what to keep\n\nLearn the architectural decisions involved in moving to a decoupled Drupal Canvas setup\n\nSee a real-world efficiency comparison: where AI agents saved time and where they slowed it down\n\nTake away a practical framework for evaluating AI-assisted migrations on your own projects\n\nRecognize the common pitfalls and failure modes when mixing AI agents with Drupal development\n\n**Experience level**\nIntermediate",
@@ -1023,7 +1252,7 @@
       "startTime": "2026-09-30T08:45:00Z",
       "endTime": "2026-09-30T09:30:00Z",
       "duration": "P45M",
-      "title": "Team Health & Development Skills",
+      "title": "Hidden Skills of Development",
       "location": "Location Mees Room II",
       "link": "https://events.drupal.org/rotterdam2026/session/hidden-skills-development-practical-building-blocks-team-health",
       "track": [
@@ -1041,7 +1270,7 @@
       "startTime": "2026-09-30T08:45:00Z",
       "endTime": "2026-09-30T09:30:00Z",
       "duration": "P45M",
-      "title": "CMS to Answer Delivery in AI Era",
+      "title": "Nobody Asked for a CMS",
       "location": "Location Penn Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/nobody-asked-cms-content-management-answer-delivery-age-ai",
       "track": [
@@ -1059,16 +1288,31 @@
       "startTime": "2026-09-30T08:45:00Z",
       "endTime": "2026-09-30T09:30:00Z",
       "duration": "P45M",
-      "title": "Testing Tools for Product Velocity",
+      "title": "Shipping products with confidence: how we rebuilt our testing tools for velocity",
       "location": "Location Goudriaan Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/shipping-products-confidence-how-we-rebuilt-our-testing-tools-velocity",
       "track": [
         "development, ai & agentic architecture"
       ],
       "speakers": [
-        "Alexander Varwijk"
+        "Rfewrew Kuoni"
       ],
       "full_description": "Confidence in shipping a Drupal-based product shouldn't take 6 days of GitHub runner time, only to be greeted by flaky tests in some of our 500+ jobs. This is the story of how we migrated from Behat and PHPUnit to custom tooling on top of Playwright to reclaim velocity and confidence in our testing suite.\n\n**Prerequisite**\n\nBasic programming understanding and a familiarity with testing in PHP will help you get the most out of this session.\n\n**Target Audience**\n\nA medior developer with an interest in testing or a QA person who is responsible for continuous integration\n\n**Outline**\n\nEvery project accumulates complexity. After 10 years, Open Social's test suite demanded 500 CI runners and hours of waiting, sometimes stumbling on flaky tests. This is the story of how we revisited that foundation and rebuilt our testing tooling on top of Playwright to reclaim velocity and confidence.\n\nIn this session I'll use the testing pyramid to audit a test suite: what are you testing, at what cost, is the confidence worth it.\n\nFrom there, I'll explain the three concrete building blocks of our new tooling:\n\nQA API or Test Control Interface (TCI) – a hidden, environment-gated HTTP API inside Drupal that provides attribute-driven PHP operations. Modules declare QA operations; the TCI publishes them as an OpenAPI spec. This decouples test data setup from the test runner entirely and allows tooling to reach into your product in a version agnostic way.\n\nPlaywright as the harness – unlocks first-class trace files, automatic retries, and parallel execution that actually scales. We'll cover how Playwright's test insights changed how we debug failures.\n\nHuman-readable specs – Using the TCI, Cucumber makes UI tests readable by non-engineers and increasingly useful as context for AI tooling. For GraphQL, a new Markdown-based spec format lets you embed queries, variables, and expectations in a file that doubles as documentation.\n\nYou'll leave with a concrete mental model and a replicable architecture for rebuilding test confidence without rebuilding your entire stack at once.\n\n**Learning Objectives**\n\nYou'll learn to critically evaluate your testing suite by and thinking about tests according to the testing pyramid.\n\nYou'll learn about Playwright's amazing testing insights for integration and end-to-end testing to help solve bugs sooner.\n\nYou'll learn about how we use Cucumber and Markdown to create human readable UI and API tests on top of Playwright.\n\n**Experience level**\nIntermediate",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-09-30T08:45:00Z",
+      "endTime": "2026-09-30T09:30:00Z",
+      "duration": "P45M",
+      "title": "Mentor Orientation - Wednesday",
+      "location": "Location J.F. Staal Room",
+      "link": "https://events.drupal.org/rotterdam2026/schedule",
+      "track": [
+        "other"
+      ],
+      "speakers": [],
+      "full_description": "Join our mailing list to keep up to date on future events.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1076,7 +1320,7 @@
       "startTime": "2026-09-30T09:40:00Z",
       "endTime": "2026-09-30T10:25:00Z",
       "duration": "P45M",
-      "title": "Clean Code in AI Era",
+      "title": "Clean Code in the Age of AI",
       "location": "Location Mees Room II",
       "link": "https://events.drupal.org/rotterdam2026/session/clean-code-age-ai-writing-humans-when-machines-write-code",
       "track": [
@@ -1093,7 +1337,7 @@
       "startTime": "2026-09-30T09:40:00Z",
       "endTime": "2026-09-30T10:25:00Z",
       "duration": "P45M",
-      "title": "Drupal as Low-Code Enterprise Framework",
+      "title": "Democratizing Enterprise Applications: Drupal as a Low-Code Platform",
       "location": "Location Leeuwen Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/democratizing-enterprise-applications-positioning-drupal-strategic-low-code",
       "track": [
@@ -1110,7 +1354,7 @@
       "startTime": "2026-09-30T09:40:00Z",
       "endTime": "2026-09-30T10:25:00Z",
       "duration": "P45M",
-      "title": "Drupal CMS 2, Site Templates & Beyond",
+      "title": "Drupal CMS, site templates and beyond",
       "location": "Location Rotterdam Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/drupal-cms-site-templates-and-beyond",
       "track": [
@@ -1128,7 +1372,7 @@
       "startTime": "2026-09-30T09:40:00Z",
       "endTime": "2026-09-30T10:25:00Z",
       "duration": "P45M",
-      "title": "Test Pyramid & Drupal Testing",
+      "title": "Inside the Pyramid - A path to faster Drupal testing",
       "location": "Location Penn Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/inside-pyramid-path-faster-clearer-drupal-testing",
       "track": [
@@ -1162,7 +1406,7 @@
       "startTime": "2026-09-30T09:40:00Z",
       "endTime": "2026-09-30T10:25:00Z",
       "duration": "P45M",
-      "title": "VisitEurope.com Brand Unification",
+      "title": "One Brand Voice from 35 Sources: How VisitEurope.com used Drupal AI to unify its brand",
       "location": "Location Mees Room I",
       "link": "https://events.drupal.org/rotterdam2026/session/one-brand-voice-35-sources-how-we-rebuilt-visiteuropecom-and-how-drupal-ai",
       "track": [
@@ -1195,7 +1439,7 @@
       "startTime": "2026-09-30T11:40:00Z",
       "endTime": "2026-09-30T12:25:00Z",
       "duration": "P45M",
-      "title": "CLI in Drupal Core",
+      "title": "A joyful tour through the CLI now in Drupal Core",
       "location": "Location Penn Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/joyful-tour-through-cli-now-drupal-core",
       "track": [
@@ -1212,7 +1456,7 @@
       "startTime": "2026-09-30T11:40:00Z",
       "endTime": "2026-09-30T12:25:00Z",
       "duration": "P45M",
-      "title": "Agency Teams & Unlearning",
+      "title": "Built for Yesterday: Helping Agency Teams Unlearn Without Losing Ground",
       "location": "Location Goudriaan Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/built-yesterday-helping-agency-teams-unlearn-without-losing-themselves",
       "track": [
@@ -1229,7 +1473,7 @@
       "startTime": "2026-09-30T11:40:00Z",
       "endTime": "2026-09-30T12:25:00Z",
       "duration": "P45M",
-      "title": "Client Experience Ownership",
+      "title": "Client Experience is Everyone's Responsibility",
       "location": "Location Mees Room I",
       "link": "https://events.drupal.org/rotterdam2026/session/client-experience-everyones-responsibility",
       "track": [
@@ -1264,7 +1508,7 @@
       "startTime": "2026-09-30T11:40:00Z",
       "endTime": "2026-09-30T12:25:00Z",
       "duration": "P45M",
-      "title": "Open Source Sustainability",
+      "title": "From Passion to Pressure: Rethinking Sustainability in Open Source",
       "location": "Location Van Oldenbarnevelt Room",
       "link": "https://events.drupal.org/rotterdam2026/session/passion-pressure-rethinking-sustainability-open-source-communities",
       "track": [
@@ -1281,7 +1525,7 @@
       "startTime": "2026-09-30T11:40:00Z",
       "endTime": "2026-09-30T12:25:00Z",
       "duration": "P45M",
-      "title": "Canvas vs Display Builder",
+      "title": "Page Builder Deathmatch: Canvas vs Display Builder",
       "location": "Location Leeuwen Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/page-builder-deathmatch-canvas-vs-display-builder-real-world-project",
       "track": [
@@ -1299,7 +1543,7 @@
       "startTime": "2026-09-30T11:40:00Z",
       "endTime": "2026-09-30T12:25:00Z",
       "duration": "P45M",
-      "title": "Digital Sovereignty & AI in Drupal",
+      "title": "Skin in the game: Digital Sovereignty, AI and Sustainability",
       "location": "Location Rotterdam Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/skin-game-digital-sovereignty-ai-and-sustainability-drupal",
       "track": [
@@ -1316,7 +1560,7 @@
       "startTime": "2026-09-30T12:05:00Z",
       "endTime": "2026-09-30T12:25:00Z",
       "duration": "P20M",
-      "title": "Web Sustainability Guidelines",
+      "title": "Applying Web Sustainability Guidelines to Drupal Projects",
       "location": "Location Goudriaan Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/applying-web-sustainability-guidelines-drupal-projects-design-refactoring",
       "track": [
@@ -1333,7 +1577,7 @@
       "startTime": "2026-09-30T12:05:00Z",
       "endTime": "2026-09-30T12:25:00Z",
       "duration": "P20M",
-      "title": "NHS Career Journey Design",
+      "title": "From Overwhelm to Opportunity: NHS Career Journey Design",
       "location": "Location Van Oldenbarnevelt Room",
       "link": "https://events.drupal.org/rotterdam2026/session/overwhelm-opportunity-designing-personalised-career-journey-350-nhs-roles",
       "track": [
@@ -1350,7 +1594,7 @@
       "startTime": "2026-09-30T12:05:00Z",
       "endTime": "2026-09-30T12:25:00Z",
       "duration": "P20M",
-      "title": "Accessibility Automation Reality",
+      "title": "The Reality of Accessibility Automation",
       "location": "Location Penn Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/reality-accessibility-automation",
       "track": [
@@ -1382,7 +1626,7 @@
       "startTime": "2026-09-30T13:00:00Z",
       "endTime": "2026-09-30T13:45:00Z",
       "duration": "P45M",
-      "title": "Paragraph Type Migration with AI",
+      "title": "163 → 42: Dismantling and Reassembling a Drupal Migration with AI",
       "location": "Location Leeuwen Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/163-42-dismantling-and-reassembling-drupal-migration-ai",
       "track": [
@@ -1399,7 +1643,7 @@
       "startTime": "2026-09-30T13:00:00Z",
       "endTime": "2026-09-30T13:45:00Z",
       "duration": "P45M",
-      "title": "AI Failure Stories",
+      "title": "AI Mid-Life Crisis: failure stories from the silent majority",
       "location": "Location Penn Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/ai-mid-life-crisis-failure-stories-silent-majority",
       "track": [
@@ -1417,7 +1661,7 @@
       "startTime": "2026-09-30T13:00:00Z",
       "endTime": "2026-09-30T13:45:00Z",
       "duration": "P45M",
-      "title": "Canvas Code Components",
+      "title": "Drupal Canvas Code Components",
       "location": "Location Rotterdam Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/drupal-canvas-code-components-modern-javascript-agentic-engineering-and-road",
       "track": [
@@ -1434,7 +1678,7 @@
       "startTime": "2026-09-30T13:00:00Z",
       "endTime": "2026-09-30T13:45:00Z",
       "duration": "P45M",
-      "title": "Scolta: AI Search Without Server",
+      "title": "Scolta: Drop-in AI Search Without a Search Server",
       "location": "Location Mees Room II",
       "link": "https://events.drupal.org/rotterdam2026/session/scolta-drop-ai-search-without-search-server",
       "track": [
@@ -1451,7 +1695,7 @@
       "startTime": "2026-09-30T13:00:00Z",
       "endTime": "2026-09-30T13:45:00Z",
       "duration": "P45M",
-      "title": "SDCs & Agent Building",
+      "title": "SDCs, Canvas, and the Agent That Builds With Them",
       "location": "Location Van Oldenbarnevelt Room",
       "link": "https://events.drupal.org/rotterdam2026/session/sdcs-canvas-and-agent-builds-them",
       "track": [
@@ -1468,7 +1712,7 @@
       "startTime": "2026-09-30T13:00:00Z",
       "endTime": "2026-09-30T13:45:00Z",
       "duration": "P45M",
-      "title": "Web Components & SDC Design Systems",
+      "title": "Super charging SDC design systems with Web Components",
       "location": "Location Mees Room I",
       "link": "https://events.drupal.org/rotterdam2026/session/super-charging-sdc-design-systems-web-components",
       "track": [
@@ -1482,17 +1726,32 @@
       "sponsorIds": ""
     },
     {
+      "startTime": "2026-09-30T13:00:00Z",
+      "endTime": "2026-09-30T13:45:00Z",
+      "duration": "P45M",
+      "title": "First-Time Contributor Workshop - Wednesday",
+      "location": "Location J.F. Staal Room",
+      "link": "https://events.drupal.org/rotterdam2026/schedule",
+      "track": [
+        "contribution topic"
+      ],
+      "speakers": [],
+      "full_description": "Join our mailing list to keep up to date on future events.",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
       "startTime": "2026-09-30T14:00:00Z",
       "endTime": "2026-09-30T14:45:00Z",
       "duration": "P45M",
-      "title": "European Commission AI Hackathon",
+      "title": "AI Assists, Humans Decide: Agentic Workflows in Drupal",
       "location": "Location Mees Room I",
       "link": "https://events.drupal.org/rotterdam2026/session/ai-assists-humans-decide-agentic-workflows-drupal-drupal-ai-hackathon-story",
       "track": [
         "development, ai & agentic architecture"
       ],
       "speakers": [
-        "Shibin Devadas Kakanat",
+        "David Galeano Barrado",
         "Adam Nagy"
       ],
       "full_description": "Content editors at the European Commission manage hundreds of websites in 24 languages. Every publication needs to be accurate, readable, and compliant with policy, and it needs to stay that way as policies change. Doing that manually across thousands of pages does not scale. During the EC's Drupal AI Hackathon, our team built an AI content validation engine that helps editors run structured checks, review AI suggestions in an isolated environment, and approve changes on their terms. No auto-changes, no data leaving the stack. This session walks through the problem, a demo, and the architectural decisions behind a solution where AI assists and humans stay in control.\n\n**Prerequisite**\n\n- General knowledge of Drupal site building and content editing\n\n- Basic concepts of AI and Agentic AI\n\n- Familiarity with concepts like entities, forms, or APIs\n\n- No prior experience with AI required\n\n**Target Audience**\n\nAgency leaders, solution architects, innovation teams, technical strategists\n\n**Outline**\n\nAt the European Commission, content editors manage hundreds of websites in 24 official languages. The real challenge is not creating content but validating it: checking facts against policy, enforcing SEO standards, maintaining accessibility, and ensuring consistency.\n\nDuring the EC's Drupal AI Hackathon in January 2026, our team built an AI-powered content validation engine that helps editors validate, improve, and monitor content across its lifecycle. The solution won first place.\n\nThis session covers the problem, the hackathon challenge, a demo, and a technical walkthrough of the architecture behind it.\n\nYou will see how we built an AI assistant that evaluates content against configurable editorial rules covering fact accuracy, readability, SEO, and policy alignment. The assistant works in an isolated environment where editors review suggestions before anything touches published content. Every change requires explicit human approval, enforced deterministically outside the AI layer.\n\nOn the architecture side, we explain why we chose to let Drupal orchestrate the AI steps rather than delegating that to an LLM agent and how that decision shaped the entire solution. We also cover async execution, vendor-independent model integration, and data sovereignty by design.\n\nIf you are building agentic AI workflows in Drupal, this session gives you a practical inspiration: what worked, what didn't, and the principles.\n\n**Learning Objectives**\n\n- How to architect agentic AI workflows in Drupal where the CMS orchestrates the process and the LLM executes discrete steps, and why this matters for cost, speed, and reliability\n\n- A practical approach to human-in-the-loop design that is enforced deterministically, not by prompting an AI to \"always ask for approval\"\n\n- How to build AI content validation that combines rule-based checks with contextual AI evaluation, using each where it performs best.\n\n- Strategies for keeping agentic workflows data sovereign.\n\n**Experience level**\nIntermediate",
@@ -1503,7 +1762,7 @@
       "startTime": "2026-09-30T14:00:00Z",
       "endTime": "2026-09-30T14:45:00Z",
       "duration": "P45M",
-      "title": "AI-Powered Conversational Site Building",
+      "title": "AI-Powered Site Building in Drupal: From a Blank Site to Styled Pages in a Conversation",
       "location": "Location Leeuwen Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/ai-powered-site-building-drupal-blank-site-styled-pages-conversation",
       "track": [
@@ -1522,7 +1781,7 @@
       "startTime": "2026-09-30T14:00:00Z",
       "endTime": "2026-09-30T14:45:00Z",
       "duration": "P45M",
-      "title": "Building for Drupal Canvas",
+      "title": "Building for Drupal Canvas: Lessons Learned",
       "location": "Location Rotterdam Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/building-drupal-canvas-lessons-learned-real-world-use",
       "track": [
@@ -1539,7 +1798,7 @@
       "startTime": "2026-09-30T14:00:00Z",
       "endTime": "2026-09-30T14:45:00Z",
       "duration": "P45M",
-      "title": "Drupal to AI Answers: EPSY Case Study",
+      "title": "From Drupal Content to AI Answers: Learnings from EPSY",
       "location": "Location Penn Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/drupal-content-ai-answers-learnings-epsy",
       "track": [
@@ -1556,7 +1815,7 @@
       "startTime": "2026-09-30T14:00:00Z",
       "endTime": "2026-09-30T14:45:00Z",
       "duration": "P45M",
-      "title": "SEO to GEO: Search Landscape Shift",
+      "title": "From SEO to GEO: What Changes, What Doesn't",
       "location": "Location Mees Room II",
       "link": "https://events.drupal.org/rotterdam2026/session/seo-geo-what-changes-what-doesnt",
       "track": [
@@ -1573,7 +1832,7 @@
       "startTime": "2026-09-30T14:00:00Z",
       "endTime": "2026-09-30T14:45:00Z",
       "duration": "P45M",
-      "title": "Editoria11y v3 Accessibility Tool",
+      "title": "Getting the most out of Editoria11y v3",
       "location": "Location Goudriaan Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/getting-most-out-editoria11y-v3",
       "track": [
@@ -1590,7 +1849,7 @@
       "startTime": "2026-09-30T14:00:00Z",
       "endTime": "2026-09-30T14:45:00Z",
       "duration": "P45M",
-      "title": "Mars Drupal Canvas Innovation",
+      "title": "Reinventing the Editorial Experience: Mars & Drupal Canvas at Scale",
       "location": "Location Van Oldenbarnevelt Room",
       "link": "https://events.drupal.org/rotterdam2026/session/reinventing-editorial-experience-how-mars-innovated-drupal-canvas-enterprise",
       "track": [
@@ -1608,7 +1867,7 @@
       "startTime": "2026-09-30T15:00:00Z",
       "endTime": "2026-09-30T15:45:00Z",
       "duration": "P45M",
-      "title": "AI-First Search Marketing Playbook",
+      "title": "How Marketers Win in an AI-First Search World",
       "location": "Location Goudriaan Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/how-marketers-win-ai-first-search-world-aeo-geo-playbook",
       "track": [
@@ -1626,7 +1885,7 @@
       "startTime": "2026-09-30T15:00:00Z",
       "endTime": "2026-09-30T15:45:00Z",
       "duration": "P45M",
-      "title": "Performance Gains in Drupal Core",
+      "title": "How we made the biggest performance gains in Drupal core",
       "location": "Location Van Oldenbarnevelt Room",
       "link": "https://events.drupal.org/rotterdam2026/session/how-we-made-biggest-performance-gains-decade-drupal-core",
       "track": [
@@ -1660,7 +1919,7 @@
       "startTime": "2026-09-30T15:00:00Z",
       "endTime": "2026-09-30T15:45:00Z",
       "duration": "P45M",
-      "title": "Drupal in Agentic Operations Platform",
+      "title": "Okay, Houston, we've had a problem here",
       "location": "Location Penn Room I&II",
       "link": "https://events.drupal.org/rotterdam2026/session/okay-houston-weve-had-problem-here-wiring-drupal-full-scale-agentic",
       "track": [
@@ -1689,23 +1948,6 @@
         "Christopher Gervais"
       ],
       "full_description": "This session will explore the ongoing work of the Drupal Association to fortify Drupal sites against evolving threats. Beginning with an overview of software supply chain vulnerabilities, we delve into the transformative Auto-Updates Initiative, empowering smaller site operators with tools for seamless updates. We'll survey The Update Framework (TUF) and its protocols to ensure package integrity. We'll then showcase the robust Rugged TUF Server and Composer TUF plugin, that together help to safeguard the Drupal community. Come see how we're shaping the future of Drupal security.\n\n**Prerequisite**\n\n- Familiarity with how Composer is used to install package dependencies\n\n- Basic understanding of deployment processes\n\n- Basic understanding of web application security fundamentals\n\n- Knowledge of Drupal deployment and update best-practices would be beneficial.\n\n**Target Audience**\n\nDrupal developers, site administrators, security professionals, PHP developers, DevOps engineers, technical decision-makers, and researchers interested in software supply chain security and best practices.\n\n**Outline**\n\nThe developers behind the Rugged TUF Server will provide a comprehensive overview of the efforts and initiatives undertaken by the Drupal Association to address software supply chain attacks and enhance the security of Drupal sites.\n\n1. Introduction: What is a software supply chain? What are software supply chain attacks? How are Drupal sites vulnerable to such attacks?\n\n2. The Auto-Updates Initiative: The Drupal Association has been a leader in developing solutions to address these threats. Chief among these are the development of tools to help smaller Drupal site operators keep their sites up-to-date.\n\n3. The Update Framework (TUF): Coming from an academic analysis of supply chain attack vectors, the TUF Specification outlines protocols for generating metadata that can be used by clients to verify that the packages they are downloading haven't been tampered with by bad actors.\n\n4. Composer TUF Extension: The Drupal Association sponsored the development of an extension to Composer that verifies each module, theme and profile downloaded from drupal.org.\n\n5. Rugged TUF Server: The Drupal Association also sponsored the development and security audit of the Rugged TUF Server. It's architecture was designed to to keep the signing keys used in generating TUF metadata isolated and secure, while keeping up with the needs of the drupal.org packaging pipeline.\n\n**Learning Objectives**\n\n- Better understand the threats of software supply chain attacks\n\n- Learn best-practices for securing Drupal sites against supply chain attacks\n\n- Learn how the Drupal Association has been building solutions that will protect the entire Drupal community from supply chain attacks\n\n**Experience level**\nIntermediate",
-      "video_url": "",
-      "sponsorIds": ""
-    },
-    {
-      "startTime": "2026-09-30T15:00:00Z",
-      "endTime": "2026-09-30T15:45:00Z",
-      "duration": "P45M",
-      "title": "AI Agent Hallucination Prevention",
-      "location": "Location Mees Room II",
-      "link": "https://events.drupal.org/rotterdam2026/session/why-your-ai-agent-hallucinates-engineering-lessons-production-workflow",
-      "track": [
-        "development, ai & agentic architecture"
-      ],
-      "speakers": [
-        "Shibin Devadas Kakanat"
-      ],
-      "full_description": "LLMs are now table stakes in Drupal. Modules like AI, ECA, and a growing set of agentic tools make it trivial to wire a model into a site. What's not trivial is making that integration trustworthy enough to put in front of a real editor or site builder.\n\nOver the last several months, building FlowDrop's chat-based workflow editor, we collected a set of failure modes that recur across every LLM-driven Drupal feature we've seen: hallucinated field names, half-applied state changes, prompt-injection through user content, runaway token costs as state grows, and the \"what ID did you just create?\" round-trip problem.\n\nThis session is the post-mortem. It's the engineering log of what we changed, why each change mattered, and how each pattern generalises beyond FlowDrop. Every claim is backed by code/data we'll show on screen.\n\n---\n\nSession is not for: attendees looking for a vendor comparison of LLM providers, or a pure prompt-engineering talk with no code. This is an engineering session about the system around the prompt.\n\n**Prerequisite**\n\nAttendees should be comfortable with:\n\n- Drupal module development (services, plugins, config entities)\n\n- Basic LLM concepts: system prompts, context windows, tool/function calling. You do not need to have built an agent before.\n\n- PHP 8.2+ syntax (readonly properties, attributes, enums)\n\nNo prior FlowDrop knowledge is required. The patterns are framed in general terms; FlowDrop is the case study.\n\n**Target Audience**\n\nModule developers building AI-powered features (content assistants, agents, workflow tools, chatbots) who have hit the \"demo works, production doesn't\" wall.\n\n**Outline**\n\nMost \"AI agent\" demos look great in a screencast and fall apart the moment a real user touches them. They invent fields, corrupt state, and forget what they did two turns ago. The fix isn't a smarter model -- it's the boring engineering around the model.\n\nThis session is a code-level walkthrough of FlowDrop Chat, a production AI agent that builds and modifies visual workflows inside Drupal from natural-language chat. It works reliably not because of the LLM choice, but because of seven specific architectural decisions: a tiny domain-specific language instead of JSON tool calls, aggressive context slimming, predictable IDs the model can plan against, prompt-injection hardening, atomic batched commands with rollback, and a self-hosted prompt pipeline that ships as a workflow rather than as code.\n\nYou'll leave with concrete patterns you can apply to any Drupal AI feature -- whether you're building an agent, a content assistant, or just trying to keep an LLM from melting your editorial workflow.\n\n**Learning Objectives**\n\nBy the end of this session, attendees will be able to:\n\n1. Choose the right LLM output format for their use case -- and explain why a small DSL often beats JSON tool-calling for editor-style agents (token economy, atomic batching, deterministic parsing, undoability).\n\n2. Slim context aggressively by separating what the LLM needs to know from what the system needs to store -- including a reusable pattern for reducing Drupal config schemas, entity references, and plugin metadata for prompt injection.\n\n3. Defend against prompt injection in chat history and user-supplied state with concrete, copy-pastable techniques (XML wrapping, JSON validation gates, never echoing raw user input into system instructions).\n\n4. Design predictable identifiers so the LLM can plan multi-step changes in a single response without round-trips; and recognise where this pattern applies outside agents (slugs, machine names, batch operations).\n\n5. Make agent actions atomic and reversible, turning \"the model needs to be right\" into \"the model needs to be right or recoverable\" (a dramatically lower bar).\n\n6. Encode prior failures into the system prompt as worked examples and explicit anti-patterns, instead of hoping a bigger model will figure it out.\n\n7. Dogfood the agent through their own platform so improvements ship as configuration, not code deploys.\n\n**Experience level**\nIntermediate",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1741,8 +1983,8 @@
     },
     {
       "startTime": "2026-10-01T07:00:00Z",
-      "endTime": "2026-10-01T14:30:00Z",
-      "duration": "P450M",
+      "endTime": "2026-10-01T16:00:00Z",
+      "duration": "P540M",
       "title": "General Contribution Day",
       "location": "Location Postillion Hotel & Convention Centre WTC Rotterdam",
       "link": "https://events.drupal.org/rotterdam2026/session/general-contribution-thursday",
@@ -1771,8 +2013,8 @@
     },
     {
       "startTime": "2026-10-01T07:00:00Z",
-      "endTime": "2026-10-01T10:30:00Z",
-      "duration": "P210M",
+      "endTime": "2026-10-01T16:00:00Z",
+      "duration": "P540M",
       "title": "Mentored Contribution",
       "location": "Location Postillion Hotel & Convention Centre WTC Rotterdam",
       "link": "https://events.drupal.org//rotterdam2026/session/mentored-contribution",
@@ -1800,6 +2042,21 @@
       "sponsorIds": ""
     },
     {
+      "startTime": "2026-10-01T08:00:00Z",
+      "endTime": "2026-10-01T08:30:00Z",
+      "duration": "P30M",
+      "title": "Coffee Break 1, Thursday",
+      "location": "Location Exhibition Hall",
+      "link": "https://events.drupal.org/rotterdam2026/schedule",
+      "track": [
+        "coffee & lunch break time"
+      ],
+      "speakers": [],
+      "full_description": "Join our mailing list to keep up to date on future events.",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
       "startTime": "2026-10-01T10:30:00Z",
       "endTime": "2026-10-01T12:00:00Z",
       "duration": "P90M",
@@ -1811,6 +2068,66 @@
       ],
       "speakers": [],
       "full_description": "Join our mailing list to keep up to date on future events.",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-10-01T13:30:00Z",
+      "endTime": "2026-10-01T14:00:00Z",
+      "duration": "P30M",
+      "title": "Coffee Break 2, Thursday",
+      "location": "Location Exhibition Hall",
+      "link": "https://events.drupal.org/rotterdam2026/schedule",
+      "track": [
+        "coffee & lunch break time"
+      ],
+      "speakers": [],
+      "full_description": "Join our mailing list to keep up to date on future events.",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-09-29T10:00:00Z",
+      "endTime": "2026-09-29T12:15:00Z",
+      "duration": "P135M",
+      "title": "Drupal Partner Summit",
+      "location": "Location TBC",
+      "link": "https://events.drupal.org/rotterdam2026/schedule",
+      "track": [
+        "summit"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-09-29T12:25:00Z",
+      "endTime": "2026-09-29T13:10:00Z",
+      "duration": "P45M",
+      "title": "Drupal Association Public Board Meeting",
+      "location": "Location Rotterdam Room I&II",
+      "link": "https://events.drupal.org/rotterdam2026/schedule",
+      "track": [
+        "community health"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-09-30T08:15:00Z",
+      "endTime": "2026-09-30T08:45:00Z",
+      "duration": "P30M",
+      "title": "Ripple Makers Coffee Break",
+      "location": "Location J.F. Staal Room",
+      "link": "https://events.drupal.org/rotterdam2026/schedule",
+      "track": [
+        "other"
+      ],
+      "speakers": [],
+      "full_description": "",
       "video_url": "",
       "sponsorIds": ""
     }
