@@ -365,12 +365,8 @@
         "link": "https://www.amazeelabs.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-<<<<<<< HEAD:app/data/events/drupalcon/eu/2024-barcelona.json
-        "enabled": true
-=======
         "enabled": true,
         "subtitle": "Trivia Night"
->>>>>>> origin/main:data/events/drupalcon/eu/2024-barcelona.json
       },
       {
         "id": "drunomics",
@@ -383,12 +379,8 @@
         "link": "https://drunomics.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-<<<<<<< HEAD:app/data/events/drupalcon/eu/2024-barcelona.json
-        "enabled": true
-=======
         "enabled": true,
         "subtitle": "Contribution Day"
->>>>>>> origin/main:data/events/drupalcon/eu/2024-barcelona.json
       },
       {
         "id": "jetbrains",
@@ -401,12 +393,8 @@
         "link": "https://www.jetbrains.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-<<<<<<< HEAD:app/data/events/drupalcon/eu/2024-barcelona.json
-        "enabled": true
-=======
         "enabled": true,
         "subtitle": "Prizes Provider"
->>>>>>> origin/main:data/events/drupalcon/eu/2024-barcelona.json
       },
       {
         "id": "tag1-consulting",
@@ -419,12 +407,8 @@
         "link": "https://tag1consulting.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-<<<<<<< HEAD:app/data/events/drupalcon/eu/2024-barcelona.json
-        "enabled": true
-=======
         "enabled": true,
         "subtitle": "Contribution Room"
->>>>>>> origin/main:data/events/drupalcon/eu/2024-barcelona.json
       },
       {
         "id": "werk21",
@@ -437,12 +421,8 @@
         "link": "https://www.werk21.de/",
         "bgStyle": "auto",
         "aspect": "auto",
-<<<<<<< HEAD:app/data/events/drupalcon/eu/2024-barcelona.json
-        "enabled": true
-=======
         "enabled": true,
         "subtitle": "Contribution Day"
->>>>>>> origin/main:data/events/drupalcon/eu/2024-barcelona.json
       },
       {
         "id": "zoocha",
@@ -455,12 +435,8 @@
         "link": "https://www.zoocha.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-<<<<<<< HEAD:app/data/events/drupalcon/eu/2024-barcelona.json
-        "enabled": true
-=======
         "enabled": true,
         "subtitle": "Trivia Night"
->>>>>>> origin/main:data/events/drupalcon/eu/2024-barcelona.json
       },
       {
         "id": "aperta",
@@ -577,12 +553,8 @@
         "link": "https://www.acquia.com/drupalcon-barcelona",
         "bgStyle": "auto",
         "aspect": "auto",
-<<<<<<< HEAD:app/data/events/drupalcon/eu/2024-barcelona.json
-        "enabled": true
-=======
         "enabled": true,
         "subtitle": "Conference T-Shirt"
->>>>>>> origin/main:data/events/drupalcon/eu/2024-barcelona.json
       },
       {
         "id": "amazee-io-module",
@@ -595,12 +567,8 @@
         "link": "https://www.amazee.io/",
         "bgStyle": "auto",
         "aspect": "auto",
-<<<<<<< HEAD:app/data/events/drupalcon/eu/2024-barcelona.json
-        "enabled": true
-=======
         "enabled": true,
         "subtitle": "Reviewing Portal Hosting Partner"
->>>>>>> origin/main:data/events/drupalcon/eu/2024-barcelona.json
       },
       {
         "id": "annertech-module",
@@ -613,12 +581,8 @@
         "link": "https://www.annertech.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-<<<<<<< HEAD:app/data/events/drupalcon/eu/2024-barcelona.json
-        "enabled": true
-=======
         "enabled": true,
         "subtitle": "Contribution Room"
->>>>>>> origin/main:data/events/drupalcon/eu/2024-barcelona.json
       },
       {
         "id": "factorial-module",
@@ -631,12 +595,8 @@
         "link": "https://www.factorial.io",
         "bgStyle": "auto",
         "aspect": "auto",
-<<<<<<< HEAD:app/data/events/drupalcon/eu/2024-barcelona.json
-        "enabled": true
-=======
         "enabled": true,
         "subtitle": "Lanyards"
->>>>>>> origin/main:data/events/drupalcon/eu/2024-barcelona.json
       },
       {
         "id": "hounder-module",
@@ -649,12 +609,8 @@
         "link": "https://hounder.co/",
         "bgStyle": "auto",
         "aspect": "auto",
-<<<<<<< HEAD:app/data/events/drupalcon/eu/2024-barcelona.json
-        "enabled": true
-=======
         "enabled": true,
         "subtitle": "Lunch Symposium"
->>>>>>> origin/main:data/events/drupalcon/eu/2024-barcelona.json
       },
       {
         "id": "european-commission-module-ftc",
@@ -667,12 +623,8 @@
         "link": "https://joinup.ec.europa.eu/interoperable-europe",
         "bgStyle": "auto",
         "aspect": "auto",
-<<<<<<< HEAD:app/data/events/drupalcon/eu/2024-barcelona.json
-        "enabled": true
-=======
         "enabled": true,
         "subtitle": "First-Time Contributor Session"
->>>>>>> origin/main:data/events/drupalcon/eu/2024-barcelona.json
       },
       {
         "id": "european-commission-module-lunch",
@@ -685,12 +637,8 @@
         "link": "https://joinup.ec.europa.eu/interoperable-europe",
         "bgStyle": "auto",
         "aspect": "auto",
-<<<<<<< HEAD:app/data/events/drupalcon/eu/2024-barcelona.json
-        "enabled": true
-=======
         "enabled": true,
         "subtitle": "Lunch Symposium"
->>>>>>> origin/main:data/events/drupalcon/eu/2024-barcelona.json
       }
     ],
     "other_urls": [],

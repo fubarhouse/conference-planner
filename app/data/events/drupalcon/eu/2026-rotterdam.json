@@ -183,12 +183,8 @@
         "link": "https://www.jetbrains.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-<<<<<<< HEAD:app/data/events/drupalcon/eu/2026-rotterdam.json
-        "enabled": true
-=======
         "enabled": true,
         "subtitle": "Women in Drupal Award & Networking Event"
->>>>>>> origin/main:data/events/drupalcon/eu/2026-rotterdam.json
       },
       {
         "id": "tag1-consulting",
@@ -201,12 +197,8 @@
         "link": "https://www.tag1consulting.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-<<<<<<< HEAD:app/data/events/drupalcon/eu/2026-rotterdam.json
-        "enabled": true
-=======
         "enabled": true,
         "subtitle": "Prizes Provider & Attendee Badges"
->>>>>>> origin/main:data/events/drupalcon/eu/2026-rotterdam.json
       },
       {
         "id": "admin-magazine",
@@ -2093,8 +2085,6 @@
       "full_description": "Join our mailing list to keep up to date on future events.",
       "video_url": "",
       "sponsorIds": ""
-<<<<<<< HEAD:app/data/events/drupalcon/eu/2026-rotterdam.json
-=======
     },
     {
       "startTime": "2026-09-29T10:00:00Z",
@@ -2140,7 +2130,6 @@
       "full_description": "",
       "video_url": "",
       "sponsorIds": ""
->>>>>>> origin/main:data/events/drupalcon/eu/2026-rotterdam.json
     }
   ]
 }
