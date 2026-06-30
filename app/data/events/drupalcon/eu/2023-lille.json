@@ -61,7 +61,11 @@
         "tier": "Diamond",
         "row": 1,
         "priority": 30,
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "image": "./img/sponsors/drupalcon-europe/2023-lille/pantheon.png",
+=======
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/pantheon.jpg",
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
         "imageAlt": "Pantheon logo",
         "link": "https://pantheon.io/",
         "bgStyle": "auto",
@@ -243,7 +247,11 @@
         "tier": "Gold",
         "row": 3,
         "priority": 70,
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "image": "./img/sponsors/drupalcon-europe/2023-lille/sncf.png",
+=======
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/sncf.jpg",
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
         "imageAlt": "SNCF Connect & Tech logo",
         "link": "",
         "bgStyle": "auto",
@@ -334,7 +342,11 @@
         "tier": "Silver",
         "row": 4,
         "priority": 60,
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "image": "./img/sponsors/drupalcon-europe/2023-lille/lemberg.png",
+=======
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/lemberg.jpg",
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
         "imageAlt": "Lemberg Solutions logo",
         "link": "https://lembergsolutions.com/",
         "bgStyle": "auto",
@@ -438,12 +450,21 @@
         "tier": "Module",
         "row": 5,
         "priority": 10,
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "image": "./img/sponsors/drupalcon-europe/2023-lille/1xinternet.png",
+=======
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/1xinternet-module.png",
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
         "imageAlt": "1xinternet logo",
         "link": "https://www.1xinternet.de/en",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Lanyards"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "acquia-module-reception",
@@ -456,7 +477,12 @@
         "link": "https://www.acquia.com/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Opening Reception"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "acquia-module-tshirt",
@@ -469,7 +495,12 @@
         "link": "https://www.acquia.com/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Conference T-Shirt"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "amazee-io-module",
@@ -482,7 +513,12 @@
         "link": "https://www.amazee.io/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Reviewing Portal Hosting Partner"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "annertech-module",
@@ -495,7 +531,12 @@
         "link": "https://www.annertech.com/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Contribution Room"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "calibrate-module",
@@ -508,7 +549,12 @@
         "link": "https://www.calibrate.be/nl",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Contribution Room"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "drunomics",
@@ -521,7 +567,12 @@
         "link": "https://drunomics.com/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Contribution Day"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "drupal-association",
@@ -534,7 +585,12 @@
         "link": "https://www.drupal.org/association",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Grants, Scholarships & Inclusion Funds"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "drupal-france",
@@ -542,12 +598,21 @@
         "tier": "Module",
         "row": 5,
         "priority": 55,
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "image": "./img/sponsors/drupalcon-europe/2023-lille/drupal-france.png",
+=======
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/drupal-france.jpg",
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
         "imageAlt": "Drupal France logo",
         "link": "",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Branded Seats"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "drupal-ireland",
@@ -560,7 +625,12 @@
         "link": "",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Grants, Scholarships & Inclusion Funds"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "dug-be",
@@ -573,7 +643,12 @@
         "link": "",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Grants, Scholarships & Inclusion Funds"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "evolving-web-module",
@@ -581,12 +656,21 @@
         "tier": "Module",
         "row": 5,
         "priority": 70,
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "image": "./img/sponsors/drupalcon-europe/2023-lille/evolving-web.png",
+=======
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/evolving-web-module.png",
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
         "imageAlt": "Evolving Web logo",
         "link": "https://evolvingweb.com/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "In-Depth Workshop"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "ffw-module-workshop",
@@ -599,7 +683,12 @@
         "link": "https://ffw.com/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "In-Depth Workshop & Showcase"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "ffw-module-women",
@@ -612,7 +701,12 @@
         "link": "https://ffw.com/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Women in Drupal Award"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "frontkom",
@@ -620,12 +714,21 @@
         "tier": "Module",
         "row": 5,
         "priority": 80,
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "image": "./img/sponsors/drupalcon-europe/2023-lille/frontkom.png",
+=======
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/frontkom.jpg",
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
         "imageAlt": "Frontkom logo",
         "link": "https://www.frontkom.com/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "In-Depth Workshop"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "happy-coding",
@@ -638,7 +741,12 @@
         "link": "",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Contribution Day"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "jetbrains",
@@ -651,7 +759,12 @@
         "link": "https://www.jetbrains.com/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Prizes Provider"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "kuoni",
@@ -659,12 +772,21 @@
         "tier": "Module",
         "row": 5,
         "priority": 95,
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "image": "./img/sponsors/drupalcon-europe/2023-lille/kuoni.png",
+=======
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/kuoni.jpg",
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
         "imageAlt": "Kuoni Tumlare Congress logo",
         "link": "",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Conference Wellness, Grants/Scholarships & Power Up Corner"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "les-tilleuls",
@@ -677,7 +799,12 @@
         "link": "",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Trivia Night"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "makina-corpus",
@@ -690,7 +817,12 @@
         "link": "",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Eco Cup"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "pantheon-module",
@@ -698,12 +830,21 @@
         "tier": "Module",
         "row": 5,
         "priority": 110,
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "image": "./img/sponsors/drupalcon-europe/2023-lille/pantheon.png",
+=======
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/pantheon-module.jpg",
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
         "imageAlt": "Pantheon logo",
         "link": "https://pantheon.io/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Water Bottle"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "platform-sh-module",
@@ -711,12 +852,21 @@
         "tier": "Module",
         "row": 5,
         "priority": 115,
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "image": "./img/sponsors/drupalcon-europe/2023-lille/platform-sh.png",
+=======
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/platform-sh-module.png",
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
         "imageAlt": "Platform.sh logo",
         "link": "https://platform.sh/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Exhibition Stage Session"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "searchstax",
@@ -729,7 +879,12 @@
         "link": "",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "In-Depth Workshop"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "werk21",
@@ -742,7 +897,12 @@
         "link": "https://www.werk21.de/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Contribution Day"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "zoocha",
@@ -750,12 +910,21 @@
         "tier": "Module",
         "row": 5,
         "priority": 130,
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "image": "./img/sponsors/drupalcon-europe/2023-lille/zoocha.png",
+=======
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/zoocha.jpg",
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
         "imageAlt": "Zoocha logo",
         "link": "https://www.zoocha.com/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2023-lille.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Trivia Night"
+>>>>>>> origin/main:data/events/drupalcon/eu/2023-lille.json
       },
       {
         "id": "hello-lille",

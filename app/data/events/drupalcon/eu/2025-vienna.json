@@ -49,7 +49,11 @@
         "tier": "Diamond",
         "row": 1,
         "priority": 20,
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2025-vienna.json
         "image": "./img/sponsors/drupalcon-europe/2025-vienna/dropsolid.png",
+=======
+        "image": "./img/sponsors/drupalcon-europe/2025-vienna/dropsolid.jpg",
+>>>>>>> origin/main:data/events/drupalcon/eu/2025-vienna.json
         "imageAlt": "Dropsolid logo",
         "link": "https://dropsolid.com/en",
         "bgStyle": "auto",
@@ -84,7 +88,11 @@
       },
       {
         "id": "amazee-io",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2025-vienna.json
         "title": "AmazeeIO",
+=======
+        "title": "Amazee.io",
+>>>>>>> origin/main:data/events/drupalcon/eu/2025-vienna.json
         "tier": "Platinum",
         "row": 2,
         "priority": 20,
@@ -140,7 +148,11 @@
         "tier": "Gold",
         "row": 3,
         "priority": 20,
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2025-vienna.json
         "image": "./img/sponsors/drupalcon-europe/2025-vienna/annertech.png",
+=======
+        "image": "./img/sponsors/drupalcon-europe/2025-vienna/annertech.jpg",
+>>>>>>> origin/main:data/events/drupalcon/eu/2025-vienna.json
         "imageAlt": "Annertech logo",
         "link": "https://www.annertech.com/",
         "bgStyle": "auto",
@@ -309,12 +321,21 @@
         "tier": "Module",
         "row": 5,
         "priority": 10,
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2025-vienna.json
         "image": "./img/sponsors/drupalcon-europe/2025-vienna/1xinternet.png",
+=======
+        "image": "./img/sponsors/drupalcon-europe/2025-vienna/1xinternet-module.png",
+>>>>>>> origin/main:data/events/drupalcon/eu/2025-vienna.json
         "imageAlt": "1xInternet logo",
         "link": "https://www.1xinternet.de/en",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2025-vienna.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Women in Drupal Award & Networking Event"
+>>>>>>> origin/main:data/events/drupalcon/eu/2025-vienna.json
       },
       {
         "id": "amazee-ai",
@@ -327,11 +348,20 @@
         "link": "https://amazee.ai",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2025-vienna.json
         "enabled": true
       },
       {
         "id": "amazee-io-module",
         "title": "AmazeeIO",
+=======
+        "enabled": true,
+        "subtitle": "Lanyards"
+      },
+      {
+        "id": "amazee-io-module",
+        "title": "Amazee.io",
+>>>>>>> origin/main:data/events/drupalcon/eu/2025-vienna.json
         "tier": "Module",
         "row": 5,
         "priority": 30,
@@ -340,7 +370,12 @@
         "link": "https://www.amazee.io/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2025-vienna.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Relaxing Area"
+>>>>>>> origin/main:data/events/drupalcon/eu/2025-vienna.json
       },
       {
         "id": "crowdsec",
@@ -353,7 +388,12 @@
         "link": "https://www.crowdsec.net",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2025-vienna.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Reviewing Portal Hosting Partner"
+>>>>>>> origin/main:data/events/drupalcon/eu/2025-vienna.json
       },
       {
         "id": "drupal-association",
@@ -366,7 +406,12 @@
         "link": "https://www.drupal.org/association",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2025-vienna.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Lunch Symposium"
+>>>>>>> origin/main:data/events/drupalcon/eu/2025-vienna.json
       },
       {
         "id": "drupal-france",
@@ -379,7 +424,12 @@
         "link": "https://www.drupal.fr/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2025-vienna.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Grants & Scholarship"
+>>>>>>> origin/main:data/events/drupalcon/eu/2025-vienna.json
       },
       {
         "id": "jakala",
@@ -392,7 +442,12 @@
         "link": "https://www.jakala.com/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2025-vienna.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Women in Drupal Award & Networking Event"
+>>>>>>> origin/main:data/events/drupalcon/eu/2025-vienna.json
       },
       {
         "id": "jetbrains",
@@ -405,7 +460,12 @@
         "link": "https://www.jetbrains.com/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2025-vienna.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Prizes Provider"
+>>>>>>> origin/main:data/events/drupalcon/eu/2025-vienna.json
       },
       {
         "id": "kuoni",
@@ -413,12 +473,21 @@
         "tier": "Module",
         "row": 5,
         "priority": 90,
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2025-vienna.json
         "image": "./img/sponsors/drupalcon-europe/2025-vienna/kuoni.png",
+=======
+        "image": "./img/sponsors/drupalcon-europe/2025-vienna/kuoni.jpg",
+>>>>>>> origin/main:data/events/drupalcon/eu/2025-vienna.json
         "imageAlt": "Kuoni Tumlare Congress logo",
         "link": "https://www.kuonitumlare.com/congress",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2025-vienna.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Grants & Scholarship"
+>>>>>>> origin/main:data/events/drupalcon/eu/2025-vienna.json
       },
       {
         "id": "mindcraft",
@@ -431,6 +500,7 @@
         "link": "https://mindcraftgroup.com/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2025-vienna.json
         "enabled": true
       },
       {
@@ -445,6 +515,10 @@
         "bgStyle": "auto",
         "aspect": "auto",
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "PHP Community Supporter"
+>>>>>>> origin/main:data/events/drupalcon/eu/2025-vienna.json
       },
       {
         "id": "umadgera",
@@ -457,7 +531,12 @@
         "link": "https://umadgera.is",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2025-vienna.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Attendee Badges & Drupal in a Day"
+>>>>>>> origin/main:data/events/drupalcon/eu/2025-vienna.json
       },
       {
         "id": "admin-magazine",

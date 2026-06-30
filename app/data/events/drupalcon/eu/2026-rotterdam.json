@@ -10,7 +10,7 @@
     "venue": "Postillion Hotel & Convention Centre WTC Rotterdam",
     "timezone": "Europe/Amsterdam",
     "columns": 6,
-    "enabled": true,
+    "enabled": false,
     "logo": {
       "image": "./img/logos/drupalcon-logo.svg",
       "imageAlt": "DrupalCon logo",
@@ -183,7 +183,12 @@
         "link": "https://www.jetbrains.com/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2026-rotterdam.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Women in Drupal Award & Networking Event"
+>>>>>>> origin/main:data/events/drupalcon/eu/2026-rotterdam.json
       },
       {
         "id": "tag1-consulting",
@@ -196,7 +201,12 @@
         "link": "https://www.tag1consulting.com/",
         "bgStyle": "auto",
         "aspect": "auto",
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2026-rotterdam.json
         "enabled": true
+=======
+        "enabled": true,
+        "subtitle": "Prizes Provider & Attendee Badges"
+>>>>>>> origin/main:data/events/drupalcon/eu/2026-rotterdam.json
       },
       {
         "id": "admin-magazine",
@@ -246,6 +256,128 @@
         "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/the-weekly-drop.png",
         "imageAlt": "The Weekly Drop logo",
         "link": "https://www.theweeklydrop.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "io-digital",
+        "title": "iO Digital",
+        "tier": "Platinum",
+        "row": 2,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/io-digital.png",
+        "imageAlt": "iO Digital logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "droptica",
+        "title": "Droptica",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/droptica.png",
+        "imageAlt": "Droptica logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "vardot",
+        "title": "Vardot",
+        "tier": "Gold",
+        "row": 3,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/vardot.png",
+        "imageAlt": "Vardot logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "calibrate",
+        "title": "Calibrate",
+        "tier": "Silver",
+        "row": 4,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/calibrate.png",
+        "imageAlt": "Calibrate logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "jakala",
+        "title": "Jakala",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 25,
+        "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/jakala.png",
+        "imageAlt": "Jakala logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "subtitle": "Drupal in a Day"
+      },
+      {
+        "id": "amazee-ai",
+        "title": "amazee.ai",
+        "tier": "Summit Sponsors",
+        "row": 6,
+        "priority": 15,
+        "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/amazee-ai.png",
+        "imageAlt": "amazee.ai logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "subtitle": "Enterprise AI Summit (Bronze)"
+      },
+      {
+        "id": "acquia-module",
+        "title": "Acquia",
+        "tier": "Module Sponsors",
+        "row": 5,
+        "priority": 5,
+        "subtitle": "Lanyards",
+        "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/acquia.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://www.acquia.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "acquia-summit",
+        "title": "Acquia",
+        "tier": "Summit Sponsors",
+        "row": 6,
+        "priority": 5,
+        "subtitle": "Enterprise AI Summit (Gold)",
+        "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/acquia.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://www.acquia.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "dropsolid-summit",
+        "title": "Dropsolid",
+        "tier": "Summit Sponsors",
+        "row": 6,
+        "priority": 10,
+        "subtitle": "Enterprise AI Summit (Gold)",
+        "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/dropsolid.jpg",
+        "imageAlt": "Dropsolid logo",
+        "link": "https://dropsolid.com/en",
         "bgStyle": "auto",
         "aspect": "auto",
         "enabled": true
@@ -1961,6 +2093,54 @@
       "full_description": "Join our mailing list to keep up to date on future events.",
       "video_url": "",
       "sponsorIds": ""
+<<<<<<< HEAD:app/data/events/drupalcon/eu/2026-rotterdam.json
+=======
+    },
+    {
+      "startTime": "2026-09-29T10:00:00Z",
+      "endTime": "2026-09-29T12:15:00Z",
+      "duration": "P135M",
+      "title": "Drupal Partner Summit",
+      "location": "Location TBC",
+      "link": "https://events.drupal.org/rotterdam2026/schedule",
+      "track": [
+        "summit"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-09-29T12:25:00Z",
+      "endTime": "2026-09-29T13:10:00Z",
+      "duration": "P45M",
+      "title": "Drupal Association Public Board Meeting",
+      "location": "Location Rotterdam Room I&II",
+      "link": "https://events.drupal.org/rotterdam2026/schedule",
+      "track": [
+        "community health"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2026-09-30T08:15:00Z",
+      "endTime": "2026-09-30T08:45:00Z",
+      "duration": "P30M",
+      "title": "Ripple Makers Coffee Break",
+      "location": "Location J.F. Staal Room",
+      "link": "https://events.drupal.org/rotterdam2026/schedule",
+      "track": [
+        "other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+>>>>>>> origin/main:data/events/drupalcon/eu/2026-rotterdam.json
     }
   ]
 }

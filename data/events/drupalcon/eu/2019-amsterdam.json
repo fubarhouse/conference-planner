@@ -1,0 +1,3435 @@
+{
+  "event": {
+    "designation": "DrupalCon Europe",
+    "location": "Amsterdam",
+    "year": "2019",
+    "website": "https://events.drupal.org/amsterdam2019/",
+    "region": "Europe",
+    "startDate": "2019-10-28T09:00:00Z",
+    "endDate": "2019-10-31T17:00:00Z",
+    "venue": "Beurs van Berlage",
+    "timezone": "Europe/Amsterdam",
+    "columns": 3,
+    "enabled": false,
+    "scheduleComplete": true,
+    "logo": {
+      "image": "./img/logos/drupalcon-logo.svg",
+      "imageAlt": "DrupalCon logo",
+      "usePlate": false,
+      "logoDisabled": true,
+      "faIcon": "fa-solid fa-droplet"
+    },
+    "scheduleURLs": [
+      "https://events.drupal.org/amsterdam2019/schedule"
+    ],
+    "other_urls": [
+      "https://events.drupal.org/amsterdam2019/"
+    ],
+    "videoPlaylist": "https://www.youtube.com/playlist?list=PLpeDXSh4nHjSZET8xL2RyK3_2WeXxyWkY",
+    "flickr": {
+      "enabled": true,
+      "provider": "Flickr",
+      "groupUrl": "https://www.flickr.com/groups/drupalconamsterdam2019/pool/",
+      "image": "",
+      "imageAlt": "DrupalCon Amsterdam 2019 photos on Flickr"
+    },
+    "sponsors": [
+      {
+        "id": "acquia",
+        "title": "Acquia",
+        "tier": "Presenting",
+        "row": 1,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/acquia.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://www.acquia.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "dropsolid",
+        "title": "Dropsolid",
+        "tier": "Presenting",
+        "row": 1,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/dropsolid.png",
+        "imageAlt": "Dropsolid logo",
+        "link": "https://dropsolid.com/en",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "pantheon",
+        "title": "Pantheon",
+        "tier": "Presenting",
+        "row": 1,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/pantheon.png",
+        "imageAlt": "Pantheon logo",
+        "link": "https://pantheon.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "amazeeio",
+        "title": "amazee.io",
+        "tier": "Champion",
+        "row": 2,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/amazeeio.png",
+        "imageAlt": "amazee.io logo",
+        "link": "https://www.amazee.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "centarro",
+        "title": "Centarro",
+        "tier": "Champion",
+        "row": 2,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/centarro.png",
+        "imageAlt": "Centarro logo",
+        "link": "https://www.centarro.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "ddev",
+        "title": "DDEV",
+        "tier": "Champion",
+        "row": 2,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/ddev.png",
+        "imageAlt": "DDEV logo",
+        "link": "https://www.ddev.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "blackfire",
+        "title": "Blackfire.io",
+        "tier": "Advocate",
+        "row": 3,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/blackfire.png",
+        "imageAlt": "Blackfire.io logo",
+        "link": "https://blackfire.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "factorial",
+        "title": "Factorial",
+        "tier": "Advocate",
+        "row": 3,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/factorial.png",
+        "imageAlt": "Factorial logo",
+        "link": "https://www.factorial.io/en/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "ffw",
+        "title": "FFW",
+        "tier": "Advocate",
+        "row": 3,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/ffw.png",
+        "imageAlt": "FFW logo",
+        "link": "https://ffwagency.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "one-shoe",
+        "title": "One Shoe",
+        "tier": "Advocate",
+        "row": 3,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/one-shoe.png",
+        "imageAlt": "One Shoe logo",
+        "link": "https://oneshoe.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "smartling",
+        "title": "Smartling",
+        "tier": "Advocate",
+        "row": 3,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/smartling.png",
+        "imageAlt": "Smartling logo",
+        "link": "https://www.smartling.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "srijan",
+        "title": "Srijan",
+        "tier": "Advocate",
+        "row": 3,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/srijan.png",
+        "imageAlt": "Srijan logo",
+        "link": "https://www.srijan.net/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "agiledrop",
+        "title": "Agiledrop",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/agiledrop.png",
+        "imageAlt": "Agiledrop logo",
+        "link": "https://www.agiledrop.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "biologis",
+        "title": "bio.logis",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/biologis.png",
+        "imageAlt": "bio.logis logo",
+        "link": "https://www.biologis.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "funnelback",
+        "title": "Funnelback",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/funnelback.png",
+        "imageAlt": "Funnelback logo",
+        "link": "https://www.funnelback.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "gatsby",
+        "title": "Gatsby",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/gatsby.png",
+        "imageAlt": "Gatsby logo",
+        "link": "https://www.gatsbyjs.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "lemberg",
+        "title": "Lemberg Solutions",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/lemberg.png",
+        "imageAlt": "Lemberg Solutions logo",
+        "link": "https://lembergsolutions.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "open-social",
+        "title": "Open Social",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/open-social.png",
+        "imageAlt": "Open Social logo",
+        "link": "https://getopensocial.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "opensenselabs",
+        "title": "OpenSense Labs",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 70,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/opensenselabs.png",
+        "imageAlt": "OpenSense Labs logo",
+        "link": "https://opensenselabs.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "qed42",
+        "title": "QED42",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 80,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/qed42.png",
+        "imageAlt": "QED42 logo",
+        "link": "https://www.qed42.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "websolutions",
+        "title": "WebSolutions",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 90,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/websolutions.png",
+        "imageAlt": "WebSolutions logo",
+        "link": "https://ws.agency/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "werk21",
+        "title": "Werk21",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 100,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/werk21.png",
+        "imageAlt": "Werk21 logo",
+        "link": "https://www.werk21.de/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "wunder",
+        "title": "Wunder",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 110,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/wunder.png",
+        "imageAlt": "Wunder logo",
+        "link": "https://wunder.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "youpal",
+        "title": "Youpal",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 120,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/youpal.png",
+        "imageAlt": "Youpal logo",
+        "link": "https://youpal.se/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "1xinternet",
+        "title": "1xINTERNET",
+        "tier": "Module",
+        "row": 5,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/1xinternet.png",
+        "imageAlt": "1xINTERNET logo",
+        "link": "https://www.1xinternet.de/en",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "amazeelabs",
+        "title": "Amazee Labs",
+        "tier": "Event",
+        "row": 6,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/amazeelabs.png",
+        "imageAlt": "Amazee Labs logo",
+        "link": "https://www.amazeelabs.com/en",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "subtitle": "Thursday Contribution Day"
+      },
+      {
+        "id": "digitalocean",
+        "title": "DigitalOcean",
+        "tier": "Event",
+        "row": 6,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/digitalocean.png",
+        "imageAlt": "DigitalOcean logo",
+        "link": "https://www.digitalocean.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "subtitle": "Attendee Badge"
+      },
+      {
+        "id": "druid",
+        "title": "Druid",
+        "tier": "Event",
+        "row": 6,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/druid.png",
+        "imageAlt": "Druid logo",
+        "link": "https://www.druid.fi/en",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "subtitle": "Coffee Breaks (Wednesday) & Trivia Night"
+      },
+      {
+        "id": "facebook-opensource",
+        "title": "Facebook Open Source",
+        "tier": "Event",
+        "row": 6,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/facebook-opensource.png",
+        "imageAlt": "Facebook Open Source logo",
+        "link": "https://opensource.facebook.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "subtitle": "Women in Drupal"
+      },
+      {
+        "id": "platformsh",
+        "title": "Platform.sh",
+        "tier": "Event",
+        "row": 6,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/platformsh.png",
+        "imageAlt": "Platform.sh logo",
+        "link": "https://platform.sh/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "subtitle": "Coffee Breaks (Tuesday)"
+      },
+      {
+        "id": "siili",
+        "title": "Siili Solutions",
+        "tier": "Event",
+        "row": 6,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/siili.png",
+        "imageAlt": "Siili Solutions logo",
+        "link": "https://www.siili.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "subtitle": "Power Up Corner"
+      },
+      {
+        "id": "synetic",
+        "title": "Synetic",
+        "tier": "Event",
+        "row": 6,
+        "priority": 70,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/synetic.jpg",
+        "imageAlt": "Synetic logo",
+        "link": "https://synetic.nl/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "subtitle": "Opening Reception"
+      },
+      {
+        "id": "thunder",
+        "title": "Thunder",
+        "tier": "Event",
+        "row": 6,
+        "priority": 80,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/thunder.jpg",
+        "imageAlt": "Thunder logo",
+        "link": "https://thunder.org/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "subtitle": "Photography Stand & Thursday Contribution Day"
+      },
+      {
+        "id": "twisper",
+        "title": "Twisper",
+        "tier": "Event",
+        "row": 6,
+        "priority": 90,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/twisper.png",
+        "imageAlt": "Twisper logo",
+        "link": "https://business.twisper.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "subtitle": "Contribution Lounge & Tuesday Lunch"
+      },
+      {
+        "id": "admin-magazine",
+        "title": "ADMIN Network & Security",
+        "tier": "Media Partner",
+        "row": 7,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/admin-magazine.png",
+        "imageAlt": "ADMIN Magazine logo",
+        "link": "https://www.admin-magazine.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "drupal-watchdog",
+        "title": "Drupal Watchdog",
+        "tier": "Media Partner",
+        "row": 7,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/drupal-watchdog.png",
+        "imageAlt": "Drupal Watchdog logo",
+        "link": "https://drupalwatchdog.com/home",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "linux-magazine",
+        "title": "Linux Magazine",
+        "tier": "Media Partner",
+        "row": 7,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/linux-magazine.png",
+        "imageAlt": "Linux Magazine logo",
+        "link": "https://www.linux-magazine.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ]
+  },
+  "items": [
+    {
+      "startTime": "2019-10-28T09:00:00Z",
+      "endTime": "2019-10-28T17:00:00Z",
+      "duration": "P480M",
+      "title": "Training - Advanced ReactJS development for Drupal 8",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/525",
+      "track": [
+        "Trainings"
+      ],
+      "speakers": [
+        "Ashraf Abed"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T09:00:00Z",
+      "endTime": "2019-10-28T17:00:00Z",
+      "duration": "P480M",
+      "title": "Training - Component Based Development in Drupal 8 with Pattern Lab",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/526",
+      "track": [
+        "Trainings"
+      ],
+      "speakers": [
+        "Mark Casias",
+        "Eric Huffman"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T09:00:00Z",
+      "endTime": "2019-10-28T17:00:00Z",
+      "duration": "P480M",
+      "title": "Training - Drupal 8 Migration as a process",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/527",
+      "track": [
+        "Trainings"
+      ],
+      "speakers": [
+        "Antonio De Marco",
+        "Andrea Pescetti",
+        "Daniel Sipos"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T09:00:00Z",
+      "endTime": "2019-10-28T17:00:00Z",
+      "duration": "P480M",
+      "title": "Training - PHP Code performance profiling and optimization",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/529",
+      "track": [
+        "Trainings"
+      ],
+      "speakers": [
+        "Dmytro Olaresko",
+        "Oleksandr Senenko",
+        "Marc Weistroff"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T09:00:00Z",
+      "endTime": "2019-10-28T17:00:00Z",
+      "duration": "P480M",
+      "title": "Training - Drupal + Gatsby",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/530",
+      "track": [
+        "Trainings"
+      ],
+      "speakers": [
+        "Suzanne Dergacheva"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T09:00:00Z",
+      "endTime": "2019-10-28T17:00:00Z",
+      "duration": "P480M",
+      "title": "General Contribution (day 1)",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1012",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T13:30:00Z",
+      "endTime": "2019-10-28T14:45:00Z",
+      "duration": "P75M",
+      "title": "Drupal initiative leads keynote",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1001",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Greg Anderson",
+        "Fabian Bircher",
+        "Sean Blommaert",
+        "Ted Bowman",
+        "Cristina Chumillas",
+        "Suzanne Dergacheva",
+        "Tara King",
+        "Wim Leers",
+        "Elli Ludwigson",
+        "Dick Olsson"
+      ],
+      "full_description": "Room: Auditorium\nPerformer: Cristina Chumillas, Wim Leers, Fabian Bircher, Tara King, Suzanne Dergacheva, Greg Anderson, Elli Ludwigson, Dick Olsson, Sean Blommaert, Ted Bowman\nDescription: Drupal 8's continuous innovation cycle resulted in amazing improvements that made today's Drupal stand out far above Drupal 8.0.0 as originally released. Drupal core initiatives played a huge role in making that transformation happen. In this keynote, various initiative leads will take turns to highlight new capabilities, challenges they faced on the way and other stories from core development.",
+      "video_url": "https://www.youtube.com/watch?v=GwxMyzl7_nU",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T15:00:00Z",
+      "endTime": "2019-10-28T15:40:00Z",
+      "duration": "P40M",
+      "title": "[Machine Learning] Creating more relevant search results with \"Learn to Rank\"",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/28",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Mattias Michaux",
+        "Nick Veenhof"
+      ],
+      "full_description": "Room: Auditorium\nPerformer: Nick Veenhof, Mattias Michaux\nDescription: In this session I'll give you a summary of what machine learning is but more importantly how can you use it for a very common problem, namely the relevancy of your internal site search.\n\nRecently, a client of ours shared with us their frustration that their website's internal site search results didn't display the most relevant items when searching for certain keywords. They had done their homework and provided us with a list of over 150 keywords and the expected corresponding search result performance. I'll take you on a roadshow how complex Search is and why we all came to rely on Google and came to expect similar quality from our other searches online. You can expect to learn new concepts.",
+      "video_url": "https://www.youtube.com/watch?v=7CAmwIxueag",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T15:00:00Z",
+      "endTime": "2019-10-28T15:40:00Z",
+      "duration": "P40M",
+      "title": "Houdini - New Era of CSS",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/169",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Vidit Anjaria",
+        "Saket Kumar"
+      ],
+      "full_description": "Vidit Anjaria, Saket Kumar\nQED42, Pune, India\n\nNow the hooks of the CSS are made public. Doesn't it sound cool that from now we can create our own style property?\n\nWe would be able to extend the CSS using Javascript, it is very important as currently we are unable to extend CSS using Javascript.\n\nCSS Houdini will let authors hook in to the actual CSS engine, which allows to extend CSS and that at CSS speeds.\n\nHoudini - provides bunch of APIs which will be helpful to create own properties.\n\nWhat you will get:\n1. What is houdini?\n2. What is rendering pipeline?\n3. Which are the major APIs being provided?\n4. What is Worklets?\n5. What is TypedOM?\n6. More information on Paint, Animation & Layout API.\n7. How to create custom properties?",
+      "video_url": "https://www.youtube.com/watch?v=QV3B9CCCNXU",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T15:00:00Z",
+      "endTime": "2019-10-28T15:20:00Z",
+      "duration": "P20M",
+      "title": "[PANEL] The Proposed Drupal Privacy Initiative: What Is It and Why Now?",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/206",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Chris Teitzel"
+      ],
+      "full_description": "Chris Teitzel\nLockr\n\nLast fall at Drupal Europe, a group of privacy advocates both from within and outside of the Drupal community met to discuss what privacy would look like in Drupal core.\n\nFrom those conversations, the Cross-CMS Privacy Working Group was formed (https://github.com/joomla/cross-cms-compliance) bringing together teams from Drupal, WordPress, Joomla, Umbraco and Typo3. As a cooperative group representing the majority of the CMS and web world, this is a great opportunity for Drupal to have a seat at the table and work with other groups to form a unified foundation for privacy on the web.\n\nTo do this effectively, and to put to practice the work from the Cross-CMS Privacy Working Group, Drupal should adopt a core privacy initiative.",
+      "video_url": "https://www.youtube.com/watch?v=W7I06MB2prU",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T15:00:00Z",
+      "endTime": "2019-10-28T15:20:00Z",
+      "duration": "P20M",
+      "title": "A Journey of Building a Media Publishing Platform for a \"GIANT Enterprise\"!!",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/297",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Kapil Kataria",
+        "Rupa Mistry"
+      ],
+      "full_description": "Kapil Kataria, Rupa Mistry\nSrijan Technologies Pvt Ltd\n\nIn this session I will share my experience working with over 35 team members on the same code base which is a Multi-site project. The Project has so many wow factors and lessons to be learned that can be segregated into:\n\nArchitecture: It works on a Multi-site Architecture of Drupal 8, but we can deploy any single brand individually with their respective configurations with ease as a normal project.\n\nPlatform/Profile: We have created one core profile based on Acquia Lightning that shares common code base on all the brands. Rest all brand level features is placed in Brand Level Itself.\n\nDevOps/Environment/Continuous Integration: We have written Jenkins jobs based on aliases of the brand and extended some of the Acquia BLT functionality.",
+      "video_url": "https://www.youtube.com/watch?v=eWtRkCvqiqI",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T15:00:00Z",
+      "endTime": "2019-10-28T15:20:00Z",
+      "duration": "P20M",
+      "title": "Choosing tech for the enterprise, like you work on The Enterprise",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/418",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Jordan Harrison"
+      ],
+      "full_description": "Jordan Harrison\nAcquia, Pittsburgh, United States\n\nVetting, selecting and implementing enterprise IT solutions can be a daunting task; but it doesn't have to be! With the right planning, research, and methodology, you and your organization can explore strange new worlds--from Drupal to hosting to your own corporate procurement process--with composure and confidence. In this session, we'll discuss a practical approach that ensures you'll find the right tech, at the right time, for the right budget, and boldly go where your IT org has never gone before.\n\nTopics include:\n- Requirements analysis\n- Identifying and working within constraints\n- Market research\n- Technical bake-offs\n- Vendor selection and management\n- Implementation planning\n- Support and maintenance",
+      "video_url": "https://www.youtube.com/watch?v=MoXqqAIk9kQ",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T15:00:00Z",
+      "endTime": "2019-10-28T23:00:00Z",
+      "duration": "P480M",
+      "title": "Mentor Orientation 1",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1019",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T15:00:00Z",
+      "endTime": "2019-10-28T15:45:00Z",
+      "duration": "P45M",
+      "title": "BoF 01 - Solutions for content deployment",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1024",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Florent Torregrosa"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T15:25:00Z",
+      "endTime": "2019-10-28T15:45:00Z",
+      "duration": "P20M",
+      "title": "How to start contributing to Drupal without Code",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/95",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Paul Johnson"
+      ],
+      "full_description": "Paul Johnson\nCTI Digital, Macclesfield, United Kingdom\n\nNot all of us are destined or even want an illustrious role as in core or contributed module developer. I don't even know how to roll a patch and by now I'd be dangerous in git. If you've ever struggled to find a way to contribute this IS the session for you.\n\nIt is a common misconception about contributing to open source is that you need to contribute code. Historically open source projects have neglected non code contributions. \"You'll do the project a huge favor by offering to pitch in with these types of contributions!\"\n\nMy passion has always been in non code contributions and I want to help those of you who have yet to find your outlet, or want to get more involved.",
+      "video_url": "https://www.youtube.com/watch?v=HyeXA6wQRhE",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T15:25:00Z",
+      "endTime": "2019-10-28T15:45:00Z",
+      "duration": "P20M",
+      "title": "Communication strategy to build digital experiences that connect.",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/444",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Tracy Evans",
+        "Jeffrey McGuire"
+      ],
+      "full_description": "Tracy Evans, Jeffrey McGuire\nOpen Strategy Partners GmbH, Cologne, Germany\n\nUsing Drupal, we can create amazing digital experiences, but you are only going to have the impact you want by giving just as much priority to your communication strategy as you do to choosing how to put it together.\n\nAs geeks and developers, it's really easy for us to succumb to the temptation of planning a website project based on the bells, the whistles, and the new shiny. \"What Drupal modules do we need? Paragraphs? Domain access?\" \"Should we do a decoupled app? If decoupled, what front-end framework should we use?\"\n\nWhat we need to remember is that our technologies are a means to an end - to communicate. And when we say \"we need a website,\" what we actually need is to connect our vision, client, or organization to their audience.",
+      "video_url": "https://www.youtube.com/watch?v=RL55-Jrrrb8",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T15:25:00Z",
+      "endTime": "2019-10-28T15:45:00Z",
+      "duration": "P20M",
+      "title": "Forget YouTube! We take Drupal to the next level with a state-of-the-art enterprise video on demand platform!",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/472",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Nikolay Borisov",
+        "Christian Kretzschmar",
+        "Kay Werner"
+      ],
+      "full_description": "Kay Werner, Christian Kretzschmar, Nikolay Borisov\nT-Systems Multimedia Solutions GmbH, Dresden, Germany\n\nWe developed an enterprise video on demand platform to make YouTube embedding obsolete for those who want to use the power of moving images. Enhanced by our Drupal VoD solution, management information becomes more vivid and personal. We're taking corporate communication to the next level by offering vlogs and online sessions instead of manuals and written announcements. Editors get full control on their content by using their own platform instead of YouTube & Co. Employees expect to have the same comforts they find in their private lives. With VoD, participation is visible through clicks and comments on videos. Direct feedback is a key to user engagement.",
+      "video_url": "https://www.youtube.com/watch?v=bOANOn9oqMo",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T16:25:00Z",
+      "endTime": "2019-10-28T17:05:00Z",
+      "duration": "P40M",
+      "title": "Linux Server Deep Dives",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/67",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Amin Astaneh"
+      ],
+      "full_description": "Amin Astaneh\nAcquia, Arlington, United States\n\nOver the past few years the Linux kernel has gained features that allow us to learn more about what's really happening on our servers and the applications that run on them.\n\nThis talk will explore how these new features, particularly perf_events and ebpf, enable us to answer questions about what a Drupal site is doing in real time beyond what the standard logs, server performance tools, and even strace will reveal. Attendees will be provided a brief introduction to example uses of these tools to diagnose performance problems.\n\nThis talk is intended for attendees that are familiar with Linux, the command line, and have used host observability tools in the past (top, netstat, etc).",
+      "video_url": "https://www.youtube.com/watch?v=86lHTLB6fNo",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T16:25:00Z",
+      "endTime": "2019-10-28T16:45:00Z",
+      "duration": "P20M",
+      "title": "The Art of Mentorship",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/214",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Todor Nikolov",
+        "Maria Totova"
+      ],
+      "full_description": "Maria Totova, Todor Nikolov\n\nWhat is this session about?\n\nHaving a mentor is amazing and being one yourself goes beyond all your expectations. Unfortunately, a lot of talented people, women especially, have never had a formal mentor in their career. This is a huge problem - a total waste of talent, that we all must do our best to solve. Indeed, mentorship matters a lot: it is a rewarding experience not only for the mentees but also for the mentors and the companies they work for.\n\nIn this session we will share with you our own experience as mentors while conducting workshops, courses and internship programs for high-school and university students as well as giving you some valuable tips, techniques and advice on how to break the stereotype and be a successful mentor.",
+      "video_url": "https://www.youtube.com/watch?v=keLAgqeaGNA",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T16:25:00Z",
+      "endTime": "2019-10-28T16:45:00Z",
+      "duration": "P20M",
+      "title": "Let’s take the best route - Exploring Drupal 8 Routing System",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/471",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Surbhi Sriwal"
+      ],
+      "full_description": "Surbhi Sriwal\nSrijan Technologies, India\n\nDrupal 8's routing system came from Symfony's. Drupal's routing system can do everything Symfony's can (and more). Drupal 7 used hook_menus. In Drupal 8 module's routes are defined in yaml files and these trigger actions defined in module's controller.\n\nIn our talk, we're going to cover:\n- How Routing happens in Symfony\n- How Drupal 8 makes use of Symfony's routing system using yaml and controllers\n- How it is different from Drupal 7\n- What all Drupal's routing system can do\n- Execution precedence of same routes\n- Structuring Drupal 8 routes\n- A working demo",
+      "video_url": "https://www.youtube.com/watch?v=r2tmfiuts0M",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T16:25:00Z",
+      "endTime": "2019-10-28T17:05:00Z",
+      "duration": "P40M",
+      "title": "[PANEL] Tips for a successful and amazing conference, camp or meetup",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/513",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Michael Anello",
+        "Cristina Chumillas",
+        "Doug Cone",
+        "Jordana Fung"
+      ],
+      "full_description": "Michael Anello, Cristina Chumillas, Doug Cone, Jordana Fung\n\nSome tips for organizers and community members on setting up, having and continuing a successful meetups and other gatherings.\n\nThe Drupal CWG has started a few relevant initiatives and resources about Code of Conduct issues and how to handle them, diversity and inclusivity training and allyship and supporting community members. We will discuss some caveats and resources on finding help.",
+      "video_url": "https://www.youtube.com/watch?v=8glVBZWKbk0",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T16:25:00Z",
+      "endTime": "2019-10-28T17:10:00Z",
+      "duration": "P45M",
+      "title": "BoF 02 - Drupal Commerce Ecosystem",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1025",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Eirik Morland"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T16:50:00Z",
+      "endTime": "2019-10-28T17:10:00Z",
+      "duration": "P20M",
+      "title": "Dive deep into Drupal 8 Render API",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/184",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Surbhi Sriwal"
+      ],
+      "full_description": "Surbhi Sriwal\nSrijan Technologies, NEW DELHI, India\n\nDeep diving into Drupal 8 Render API, how it is different and better than Drupal 7 rendering mechanism. How Drupal uses placeholders and pipelines to improve page performance.\n\nIn this talk, we're going to cover:\n1. What Render API is\n2. How it is Different from D7\n3. What Placeholders and Pipelines are\n4. How Drupal makes use of Placeholders\n5. Rendering custom content using Render API - Render arrays, elements\n6. How was theme() function used in Drupal 7 and what are we doing in Drupal 8 to replicate it and its benefits from a data rendering standpoint",
+      "video_url": "https://www.youtube.com/watch?v=hwHcHmD_aIM",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T16:50:00Z",
+      "endTime": "2019-10-28T17:10:00Z",
+      "duration": "P20M",
+      "title": "Autosave and Concurrent editing (conflict resolution) in Drupal 8",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/257",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Hristo Chonov"
+      ],
+      "full_description": "Hristo Chonov\nbio.logis Genetic Information Management (GIM) GmbH, Frankfurt am Main, Germany\n\nThis session will introduce two modules enhancing the editorial experience in Drupal 8 - Autosave Form and Conflict.\n\nAutosave ensures that content changes will not be lost if a sudden power outage or network disruption occurs. The current state of each entity form is continuously autosaved, so that the user is able to always resume from the last autosaved state.\n\nThe concurrent editing feature provided by the conflict module allows for the simultaneous editing of the same content by multiple users. Whenever possible automatic merges are performed. When conflicts occur the user is provided with a visual tool for resolving them.",
+      "video_url": "https://www.youtube.com/watch?v=eIj6P5mH3iU",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T17:15:00Z",
+      "endTime": "2019-10-28T17:55:00Z",
+      "duration": "P40M",
+      "title": "Fast UX Feedback for Your Drupal Project",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/45",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Suzanne Dergacheva"
+      ],
+      "full_description": "Room: Auditorium\nPerformer: Suzanne Dergacheva\nDescription: This is an interactive session in which we run a series of 3 very short demos of Drupal projects, and the audience provides structured UX feedback.\n\nIn the demos, presenters show us a 3-minute version of their prototype or working interface. The audience gives feedback structured into three rounds: first impressions, positive feedback, and constructive feedback.\n\nFor the last two years, I've helped organize a series of UX feedback events in Montreal, Ottawa, and various Drupal events that follows the same format. The structure allows us to fit in a lot of content in a short time, and gets everyone participating and practicing their UX skills.",
+      "video_url": "https://www.youtube.com/watch?v=IxzY4Qn2Fl8",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T17:15:00Z",
+      "endTime": "2019-10-28T17:35:00Z",
+      "duration": "P20M",
+      "title": "Splash Awards initiative update",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/261",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Imre Gmelig Meijling"
+      ],
+      "full_description": "Imre Gmelig Meijling\nDrupal Nl, Rotterdam, The Netherlands\n\nThe Splash Awards celebrate the best Drupal work and put the clients behind our beloved Drupal projects center-stage. The Splash Awards are being organized in countries all over the world. Initiatives to promote Drupal are vital to maintain a strong market position and the enduring success of Drupal. With the Splash Awards gaining momentum, the need for a consistent brand is essential. A small team of volunteers also involved in organizing the next International Splash Awards during DrupalCon Amsterdam aims to take the Splash Awards brand to the next level in a way that it can be used for Splash Awards organizers around the globe.",
+      "video_url": "https://www.youtube.com/watch?v=PGRNEqlD71A",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T17:15:00Z",
+      "endTime": "2019-10-28T17:55:00Z",
+      "duration": "P40M",
+      "title": "Configuration Management Initiative 2.0 updates",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/308",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Fabian Bircher"
+      ],
+      "full_description": "Fabian Bircher\nNuvole Web Srl, Parma, Italy\n\nThe Configuration Management is one of the signature improvements of Drupal 8.\n\nHowever, now that the community has a couple of years of building Drupal 8 sites behind them, various limitations have surfaced: various common workflows are not natively supported; core's config APIs have missing functionality. While many of these problems have contrib workarounds, often these solutions can conflict with one another, and there's no one set of best practices that works for all.\n\nHence the Configuration Management Initiative 2.0.\n\nThe key aspects are:\n- Installing sites from config: Config Installer in core (8.6)\n- Replacing Config Filter: The new ConfigTransform api (8.8)\n- Environment-specific configuration: Config Exclude in core (8.8) / Config Split",
+      "video_url": "https://www.youtube.com/watch?v=k-I3oOWHWVA",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T17:15:00Z",
+      "endTime": "2019-10-28T17:35:00Z",
+      "duration": "P20M",
+      "title": "The Good, The Bad, and The Data: Marketing Strategies for Open Source Companies",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/407",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Felix Morgan"
+      ],
+      "full_description": "Felix Morgan\nAmazee Group, Austin, United States\n\nMarketing strategies that focus on leads are only addressing one aspect of successful positioning for companies promoting and using open source software. In this introductory session we will look at marketing best practices specifically for businesses that are creating, customizing, and contributing to open source software for their clients. Topics covered will include:\n\nPersonas and Stakeholders: beyond just the buyer.\nCommunity and Narrative: the stories we tell are important.\nData: what to measure and when.",
+      "video_url": "https://www.youtube.com/watch?v=S9cZZ8DU6Mc",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T17:15:00Z",
+      "endTime": "2019-10-28T17:35:00Z",
+      "duration": "P20M",
+      "title": "Drupal for Social Impact: The ILO Employment Counselling System for Syrian Refugees in Jordan",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/511",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Paco Gracia",
+        "Olga Leon"
+      ],
+      "full_description": "Paco Gracia, Olga Leon\nEveris, Zaragoza, Spain\n\nThe International Labour Organisation (ILO) in consultation with the Ministry of Labour of the Kingdom of Jordan launched the first on-line job counselling and guidance platform to target Syrian workers in Jordan. It is co-funded by the European Union, The US Department of State Bureau of Population, Refugees and Migration, the Norwegian Ministry of Foreign Affairs, the Kingdom of the Netherlands and the UK Foreign and Commonwealth Office.\n\nThe Drupal based platform is available both in arabic and english and integrates web, mobile and telephone services, making the new system easily accessible to workers, reaching out to a greater number of people.",
+      "video_url": "https://www.youtube.com/watch?v=XFYUI_MFFMw",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T17:15:00Z",
+      "endTime": "2019-10-28T18:00:00Z",
+      "duration": "P45M",
+      "title": "BoF 04 - But, hey, where do I start in Drupal Community?",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1014",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Shadab Ashraf"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T17:15:00Z",
+      "endTime": "2019-10-29T01:15:00Z",
+      "duration": "P480M",
+      "title": "Issue Triage",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1018",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T17:40:00Z",
+      "endTime": "2019-10-28T18:00:00Z",
+      "duration": "P20M",
+      "title": "Digital Transformation of Customer Selfcare in a Developing Country",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/119",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Sheikh Faiyaz Moorsalin"
+      ],
+      "full_description": "Sheikh Faiyaz Moorsalin\nErgo Ventures Pvt. Ltd., Dhaka, Bangladesh\n\nErgo Ventures Pvt. Ltd. and the proposed speaker both are working in Drupal platform for more than 8 years now. Started the journey with Drupal 6. Now working with Drupal 7 and gradually migrating to Drupal 8. During the aforementioned time, about 25 projects developed in Drupal platform have been deployed and maintained. As a Drupal agency in Bangladesh (a developing country in South Asia), we are providing enterprise grade solution and ecommerce platform to several clients. One of our prestigious clients is a telecom giant with 70 million+ subscriber base in Bangladesh. In this session, we are going to share the minor and major challenges faced by us during the development and deployment lifecycle.",
+      "video_url": "https://www.youtube.com/watch?v=Y6AehTonFW4",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T17:40:00Z",
+      "endTime": "2019-10-28T18:00:00Z",
+      "duration": "P20M",
+      "title": "Content Marketing for Drupal Agencies: Our Simple Strategy for 1100% growth in 8 months",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/309",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Arora Devanshu",
+        "Vidhatanand V"
+      ],
+      "full_description": "Arora Devanshu, Vidhatanand V\nOpenSense Labs, New Delhi, India\n\nHaving excellent technical capabilities is cool, but does your content strategy reflect that.\nGetting clients via word of mouth is cool but are you able to get enough new eyeballs.\n\n\"Give value, give value, give value, give value, then ask for business.\" - Gary V.\n\nIn this session, we will talk about how we grew our organic traffic 1100% in the last 8 months alone.\n\nMOST Importantly:\nNo quick hacks\nNo keyword stuffing\nNo black-hat\nNot even grey-hat techniques\nJust content that is valuable for users.\n\n\"It's not about creating a ton of content, it's about creating impactful content.\"",
+      "video_url": "https://www.youtube.com/watch?v=jrp1rAO74UM",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T17:40:00Z",
+      "endTime": "2019-10-28T18:00:00Z",
+      "duration": "P20M",
+      "title": "Pivot Points - Recognizing Opportunity, Turning Challenges to Strengths.",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/346",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Matthew Saunders"
+      ],
+      "full_description": "Matthew Saunders\nSelf, Littleton, United States\n\nLike many in our community, I came to opensource though a non-traditional path. In this session I will share my journey to open source technology professional from a beginning where my parents were told, while I was bright, I would never learn to read or write - my learning disabilities were considered too far a reach to allow it.\n\nThrough a series of pivots I learned to read and write, became an accomplished child vocalist, completed a Bachelor of Arts degree majoring in Studio Art and minoring in Theatre, earned a certification in Non-Profit Management, went on to complete a Masters of Fine Arts in Theater and became a technology professional.",
+      "video_url": "https://www.youtube.com/watch?v=DwsHz_SxHbk",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T18:00:00Z",
+      "endTime": "2019-10-29T02:00:00Z",
+      "duration": "P480M",
+      "title": "Opening Reception",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1023",
+      "track": [
+        "Social Events"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-28T19:00:00Z",
+      "endTime": "2019-10-29T03:00:00Z",
+      "duration": "P480M",
+      "title": "Splash Awards",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1017",
+      "track": [
+        "Awards"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T08:45:00Z",
+      "endTime": "2019-10-29T10:00:00Z",
+      "duration": "P75M",
+      "title": "Driesnote",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1002",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Dries Buytaert",
+        "Heather Rocker"
+      ],
+      "full_description": "Room: Auditorium\nPresenter: Dries Buytaert, Heather Rocker\nDescription: During his keynote - a.k.a. Driesnote - at DrupalCon Amsterdam, Dries will give one of his engaging keynotes about the state of the Drupal project as well as updates on Drupal 8.8 and next year's Drupal 9 release.\nBelgium-born Drupal founder Dries Buytaert is a pioneer in the open source web publishing and digital experience platform space.",
+      "video_url": "https://www.youtube.com/watch?v=Apqd4ff0NRI",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T09:00:00Z",
+      "endTime": "2019-10-29T17:00:00Z",
+      "duration": "P480M",
+      "title": "General Contribution (day 2)",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1013",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T10:00:00Z",
+      "endTime": "2019-10-29T18:00:00Z",
+      "duration": "P480M",
+      "title": "Group Photo",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1022",
+      "track": [
+        "Social Events"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T11:25:00Z",
+      "duration": "P40M",
+      "title": "Components everywhere! - Bridging the gap between backend and frontend: A vision for Drupal Core and the Real-time Web",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/84",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Fabian Franz"
+      ],
+      "full_description": "Room: Auditorium\nPresenter: Fabian Franz\nDescription: React, Webcomponents, Vue, Svelte, ... the number of frontend technologies has increased steadily, but it is still a challenge to bridge the gap between the backend and interactive digital experiences within Drupal.\n\nWhile decoupled Drupal is one answer, not every application is suited for the decoupled way.\n\nI think I have finally cracked the code and want to propose a way to structure web sites so that (web-)components become a first-class citizen -- also on the backend.\n\nThe goal is to convert a 'most_recent' content block from being rendered server-side in the traditional way to being rendered in a hybrid way first by Drupal that is then updated in real-time via React.\n\nThere will be a sweet demo that you don't want to miss!",
+      "video_url": "https://www.youtube.com/watch?v=RK4BG3hsN3I",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T11:25:00Z",
+      "duration": "P40M",
+      "title": "Why Open Source Matters by Making People and Companies Better through Virtual Barnraising",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/111",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Janne Kalliola"
+      ],
+      "full_description": "Janne Kalliola\nExove, Helsinki, Finland\n\nThis session explores the open source projects and communities from within, and explains why people want to contribute and how this makes both the person and the world a better place.\n\nA good open source project is analogous to barnraising. People strive to accomplish the actual goal and also work side by side for the common good. This creates a strong feeling of belonging to something bigger than themselves alone - a local community.\n\nBelonging and meaningfulness are extremely strong motivators in the current very fragmented era - and they can be harnessed for the good of the open source project, community, and participating companies. This session tells you first why and then also how.",
+      "video_url": "https://www.youtube.com/watch?v=VtzxhNi1tN8",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T11:25:00Z",
+      "duration": "P40M",
+      "title": "Security, Drupal 9, and Navigating the Changing Web Landscape",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/212",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Jess (xjm)"
+      ],
+      "full_description": "Jess (xjm)\nAcquia, United States\n\nDrupal 8 core has made its way \"off the island\" by leveraging industry standards like semantic versioning, package management, third-party libraries, and other external tools. This shift brings a lot of benefits, but has also impacted how we manage release schedules, backwards compatibility, and security. Drupal isn't alone in experiencing these impacts; they affect many CMSes, frameworks, and individual applications. This session explores some of the impacts, including:\n- What's different about Drupal 8?\n- What will be different about Drupal 9?\n- And what about Drupal 10?\n- How do third-party libraries affect release schedules and security procedures?\n- What are some of the risks and drawbacks for applications that rely heavily on external dependencies?",
+      "video_url": "https://www.youtube.com/watch?v=42S24LPe4XY",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T11:05:00Z",
+      "duration": "P20M",
+      "title": "Dream Migrations and Imports : Feeds UI + Migrate Engine",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/311",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Youri Van Koppen",
+        "Irina Zaks"
+      ],
+      "full_description": "Youri Van Koppen, Irina Zaks\n\nThis year we celebrate 4 years since Drupal 8 was released. A one-click upgrade from older versions is one of its greatest features, thanks to the Migrate module being in core. While Migrate is powerful, it lacks a good UI. In contrib, we have Feeds for importing content. This module does have a UI perfectly tuned for site builders, but it defines its own import framework. Wouldn't it be great if the two frameworks could be combined together?\n\nThis would be a win-win solution for everyone, because:\n- Developers would only have to maintain one import framework;\n- Site builders could use the power of Migrate without having to write code;\n- Content managers gain the flexibility to import their content without the need to go through another round of development effort.",
+      "video_url": "https://www.youtube.com/watch?v=tS6JmdX8R2A",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T11:25:00Z",
+      "duration": "P40M",
+      "title": "Drupal’s place in an evolving landscape - Modernising your Commerce architecture",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/423",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Richard Jones"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T11:05:00Z",
+      "duration": "P20M",
+      "title": "Adoptable Goats Near Me: What I Googled the Year I Became a Developer",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/495",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Qymana Botts"
+      ],
+      "full_description": "Qymana Botts\nNerdery, Chicago, United States\n\nWhether building a new skill or rebounding after one of life's inevitable setbacks, having the right mindset can save you time and headaches.\n\nTold through the lens of the speaker's errant Googlings, this session will take participants on a journey from music teacher to web developer, all the while examining the different types of learning that occurred along the way. This session will delve into theories about learning, techniques to improve information retention and problem solving, and how to shift your perspective to learn from even the bleakest situations.\n\nEmbark on a harrowing adventure through a stranger's search history, and emerge on the other side with a greater understanding of the learning process and practical strategies.",
+      "video_url": "https://www.youtube.com/watch?v=rPYihCbdFzU",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T11:25:00Z",
+      "duration": "P40M",
+      "title": "Planning Enterprises Path for Your Drupal 9 Journey",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/522",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Dinesh Waghmare"
+      ],
+      "full_description": "Dinesh Waghmare\nTata Consultancy Services, Redhill, Surrey, United Kingdom\n\nAs we know Drupal 9 will be released in 2020, Considering the fact 2020 is nearly two quarters away, I would like to take this opportunity to touch upon various journey paths organizations or enterprises should think and adopt while moving to Drupal 9 platform.\n\n- What's the current state of Drupal 8\n- What is the timeline for upcoming Drupal 7 / 8 / 9 Releases?\n- What is Drupal 9 and how does it look?\n- Drupal 9: What does it mean for organizations or enterprises who want to use Drupal\n- How the upgrade path looks if you are organizations or enterprises planning to move to Drupal 9\n  * Drupal 9 from Drupal 8\n  * Drupal 9 from Drupal 7\n- How to best prepare your Drupal site or sites for a smooth upgrade",
+      "video_url": "https://www.youtube.com/watch?v=27TMzdAI3j8",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T11:30:00Z",
+      "duration": "P45M",
+      "title": "BoF 05 - Holacracy, agile, S3 ... - discussion and sharing learnings about responsive organisations",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1007",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Roy Voggenberger"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T18:45:00Z",
+      "duration": "P480M",
+      "title": "First-Time Contributor Workshop 1",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1011",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": [],
+      "full_description": "Brian Gilbert, Jordana Fung\n\nThose who are new to the process and tools of contributing to Drupal, you are invited to attend one of the \"First-Time Contributor Workshops\". Many people will be new to contributing and different opportunities arise based on experience level.\n\nGet up to speed with community tools: Drupal.org, issue queues, communication channels, and if needed, installing Drupal 8 or 9 locally. Our mentors are excited to get you ready to tackle real issues.",
+      "video_url": "https://www.youtube.com/watch?v=ukV1veuTTps",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T10:45:00Z",
+      "endTime": "2019-10-29T11:30:00Z",
+      "duration": "P45M",
+      "title": "Drupal Ladder",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1048",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Ashish Jain"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T11:10:00Z",
+      "endTime": "2019-10-29T11:30:00Z",
+      "duration": "P20M",
+      "title": "Mindless multitasking: a dummy’s guide to productivity",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/115",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Sarah Wall"
+      ],
+      "full_description": "Sarah Wall\nImagex, Vancouver, Canada\n\nIn today's fast-paced workplace, many people are struggling to keep up with the constant influx of information in the various tools that we use to communicate. For example, how many times have you attended a meeting while also chatting on Slack, checking your phone for texts, or responding to emails?\n\nDid you know that multitasking is detrimental to your productivity? The more you multask, the less you accomplish. Constant jumping around from task to task not only affects your productivity, but can affect your mental health and level of stress over time.\n\nThe mind is not capable of effectively focusing on more than one thing at once. You have the power and ability to choose a different way of working that will have you accomplishing more while feeling better.",
+      "video_url": "https://www.youtube.com/watch?v=cAwteThHoYI",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T11:10:00Z",
+      "endTime": "2019-10-29T11:30:00Z",
+      "duration": "P20M",
+      "title": "Config management: 1 to 100 sites",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/155",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Ashley Hazle"
+      ],
+      "full_description": "Ashley Hazle\nHogarth Worldwide, London, United Kingdom\n\nConfig management (CM) is now commonplace, yet there are still people who are struggling to navigate the multitude of CM modules and with getting the basics right.\n\nWe have gone from running dozens of D8 sites without any config management to well over 100, as a single multisite, running with shared config.\n\nThis session would jump into getting 1 site running with CM, including relevant modules such as using split for environments and working with Webforms. Then show how to upscale your config to work with a large 100 sites multisite. Closing with showing how the learnings from a large multisite can help you structure your CM better, and make it more reusable and portable.",
+      "video_url": "https://www.youtube.com/watch?v=5eqL4-VlqzU",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T11:30:00Z",
+      "endTime": "2019-10-29T12:15:00Z",
+      "duration": "P45M",
+      "title": "BoF 09 - Open Source E-commerce solutions : Stop to compare, start to analyze",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1028",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Fabien Clément",
+        "Mathieu Le Cain"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T11:45:00Z",
+      "endTime": "2019-10-29T12:05:00Z",
+      "duration": "P20M",
+      "title": "Mastering the CDN: Present & Future",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/213",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Matthew Cheney"
+      ],
+      "full_description": "Room: Auditorium\nPresenter: Matthew Cheney\nDescription: If your site is not running on a CDN, you are missing out. Modern websites receive enormous benefits in terms of speed & reliability when utilizing a content delivery network - and setting one up for your site has never been easier.\n\nCDNs offer the best in class support for making websites fast utilizing techniques such as HTTPS/2 (soon HTTPS/3), image compression, global points of presence, TLS integration, cache tags (in D8 core!), & much more!\n\nThis presentation will review how a CDN works, how to integrate it into your site, and how to get the fastest and best site on the internet using other peoples servers around the world.",
+      "video_url": "https://www.youtube.com/watch?v=ao1tci-n3Ag",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T11:45:00Z",
+      "endTime": "2019-10-29T12:25:00Z",
+      "duration": "P40M",
+      "title": "What's Next for the Layout Initiative",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/319",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Tim Plunkett"
+      ],
+      "full_description": "Tim Plunkett\nAcquia, Philadelphia, United States\n\nAfter over two years of work done by the Layout Initiative, Drupal 8.7 was the first release of Drupal Core to include a stable layout tool.\n\nThis tool, Layout Builder, is primarily intended for content editors to use for simply making complex pages. It is also a powerful site building tool that affords great flexibility across all content.\n\nAttendees do not need any prior experience with Layout Builder. Comparisons will be made to existing layout tools like Panels, Panelizer, Display Suite, Block UI, and Paragraphs.",
+      "video_url": "https://www.youtube.com/watch?v=eHuMYxJ9gus",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T11:45:00Z",
+      "endTime": "2019-10-29T12:05:00Z",
+      "duration": "P20M",
+      "title": "Using Drupal as a Content Hub to create an interactive,  visual product exploration application. Of course, decoupled with vueJS ;-)",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/339",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Jan Pilarzeck"
+      ],
+      "full_description": "Jan Pilarzeck\ntrio-interactive it services gmbh, Mannheim, Germany\n\nToday it is a big challenge for marketers to manage their contents. A lot of pages and fragments, multiple languages, different data sources, different IT systems and tools...\n\nThis talk is about how we used Drupal as a content hub to collect and centralize contents and how we enabled the editors to re-use their contents and combine them in new and different ways.\n\nOnce we achieved this, we were ready to create a whole new interactive application to visually explore our clients' products: Decoupled with vueJS, on the website, on touch panels at trade fairs or even offline on touch devices.",
+      "video_url": "https://www.youtube.com/watch?v=tIKGHEE4C84",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T11:45:00Z",
+      "endTime": "2019-10-29T12:05:00Z",
+      "duration": "P20M",
+      "title": "CERN’s D8 Digital Portfolio",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/484",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Diego Catalan Garcia",
+        "Montaña Franco"
+      ],
+      "full_description": "Montaña Franco, Diego Catalan Garcia\nEveris, Belgium, Brussels\n\nCERN, the European Organization for Nuclear Research, is one of the world's largest and most respected centres for scientific research. The World Wide Web was born at CERN, and the laboratory's extensive community has a long history of communicating and collaborating online. CERN's web includes thousands of websites with several purposes and audiences managed by different departments.\n\nThis is the context in which the Digital Portfolio (Drupal 8 Multisite oriented distribution) is conceptualized with the objective to provide a unique and personal experience online.\n\nDuring this session we will explain how we afforded the key points to build the mentioned online experience which is based on:\n1. Design system and conceptualization\n2. Multi-tenancy and scalability",
+      "video_url": "https://www.youtube.com/watch?v=MsIEeX3Tt9Y",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T11:45:00Z",
+      "endTime": "2019-10-29T12:25:00Z",
+      "duration": "P40M",
+      "title": "Open Source Contribution Panel",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/488",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Josef Dabernig",
+        "Julia Pradel",
+        "Michael Schmid",
+        "Sally Young",
+        "Bojan Zivanovic"
+      ],
+      "full_description": "Josef Dabernig, Julia Pradel, Sally Young, Michael Schmid, Bojan Zivanovic\n\nIn this panel discussion, we discuss the current state of open source contribution as part of our daily life and work.\n\n* What's your source of motivation for open source contribution?\n* Which models work well to include open source contribution into one's personal agenda?\n* What strategies do agencies implement to participate and benefit from open source contribution?\n* Which projects and initiatives can act as source of inspiration for open source contribution?\n* What's mostly blocking open source contribution and what can we do to overcome those blockers?\n\nThe panel is aimed at anyone interested in open source contribution.",
+      "video_url": "https://www.youtube.com/watch?v=3jKs_gfzjJU",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T11:45:00Z",
+      "endTime": "2019-10-29T12:25:00Z",
+      "duration": "P40M",
+      "title": "LIVE DEMO: Using GatsbyJS to build a decoupled (Drupal) website",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/498",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Mark Conroy"
+      ],
+      "full_description": "Mark Conroy\nAnnertech, Portumna, Ireland\n\nIn the beginning there was HTML, then there was CSS, then JS, then JS frameworks, then CSS in JS, then... Things started to get a little complicated a little while back. To try to make sense of some of this, let's get together for a live demo presentation of building out a site with GatsbyJS.\n\nHere's what we'll do:\n- install Gatsby\n- investigate some components - custom header, footer, menu, etc\n- create some static pages\n- discuss how some React functions work - simple ones like Link function\n\nOnce we're that far, how about we hook it up to a Drupal backend for fetching real content, and then deploy it as a blazingly fast, static website (just HTML, CSS, and JS).",
+      "video_url": "https://www.youtube.com/watch?v=8a4g9N8lCP0",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T11:45:00Z",
+      "endTime": "2019-10-29T12:05:00Z",
+      "duration": "P20M",
+      "title": "Telling the Full Story - Use Cases and User Stories",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/510",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Lauren Kelly"
+      ],
+      "full_description": "Lauren Kelly\nPantheon Systems, San Francisco, United States\n\nMost of us have been trained to write user stories.\n\nAs a type of user, I want some goal so that some reason.\n\nWe write these on whiteboards. We write these on notecards. We write these in crazy software that promises to help us work more efficiently.\n\nIn the end, they end up being used as a checkbox. Do the tasks I just completed allow this user to complete their goal? Yes? Done! Check the box, take down the card.\n\nAnd this is how Frankenstein's monster was built. Piece by piece. Stitched together. Ugly at the seams - nothing fit together quite right.\n\nYou want more for your projects, don't you? For that, we need to look at Use Cases. They help us track all the parts and make sure they fit together to tell the whole story.",
+      "video_url": "https://www.youtube.com/watch?v=yi2S_UYesI8",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T11:45:00Z",
+      "endTime": "2019-10-29T19:45:00Z",
+      "duration": "P480M",
+      "title": "First-Time Contributor Workshop 1bis",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1015",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": [],
+      "full_description": "Brian Gilbert, Jordana Fung\n\nThose who are new to the process and tools of contributing to Drupal, you are invited to attend one of the \"First-Time Contributor Workshops\". Many people will be new to contributing and different opportunities arise based on experience level.\n\nGet up to speed with community tools: Drupal.org, issue queues, communication channels, and if needed, installing Drupal 8 or 9 locally. Our mentors are excited to get you ready to tackle real issues.",
+      "video_url": "https://www.youtube.com/watch?v=ukV1veuTTps",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T11:45:00Z",
+      "endTime": "2019-10-29T12:30:00Z",
+      "duration": "P45M",
+      "title": "BoF 10 - Privacy Initivtive Proposal (GDPR /CCPA)",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1054",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T12:10:00Z",
+      "endTime": "2019-10-29T12:30:00Z",
+      "duration": "P20M",
+      "title": "How to lower the costs of your Drupal Site's resources and plan Capacity in advance",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/69",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Ricardo Amaro"
+      ],
+      "full_description": "Room: Auditorium\nTitle: How to lower the costs of your Drupal Site's resources and plan Capacity in advance\nPresenter: Ricardo Amaro\nDescription: In this session we will try to solve a couple of recurring problems:\nSite Launch and User expectations\n\nImagine a customer that provides a set of needs for hardware, sets a date and launches the site, but then he forgets to warn that they have sent out some (thousands of) emails to half the world announcing their new website launch! What do you think it will happen?\n\nOf course launching a Drupal Site involves a lot of preparation steps and there are plenty of guides out there about common Drupal Launch Readiness Checklists which is not a problem anymore.\nWhat we are really missing here is a Plan for Capacity.\n\nCapacity, in Site Reliability Engineering terms, is the maximum amount of load a system can bear.",
+      "video_url": "https://www.youtube.com/watch?v=Tyts99q9EQs",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T12:10:00Z",
+      "endTime": "2019-10-29T12:30:00Z",
+      "duration": "P20M",
+      "title": "Team London - Connecting Volunteers with Causes in London",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/103",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Will Huggins",
+        "Kinda Youssef Allamaa"
+      ],
+      "full_description": "Will Huggins, Kinda Youssef Allamaa\n\nTeam London is the Mayor of London Sadiq Khan's volunteering programme, encouraging all Londoners to become active citizens and to give their time to make the UK's capital city a better place.\n\nWorking with the Greater London Authority, Zoocha undertook a project to reinvent the Team London digital experience, bring together volunteers and good causes to connect online.\n\nFrom user research to launch, this case study demonstrates how Drupal is used to connect citizens in one of the World's greatest and most diverse cities.",
+      "video_url": "https://www.youtube.com/watch?v=3Yt05l7Zytc",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T12:10:00Z",
+      "endTime": "2019-10-29T12:30:00Z",
+      "duration": "P20M",
+      "title": "Stop buying Drupal websites, buy open digital experiences to increase customer life time value",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/180",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Dominique De Cooman"
+      ],
+      "full_description": "Dominique De Cooman\nDropsolid, Gent, Belgium\n\nAccording to Gartner 93% of customer experience projects yield return on investment. Visionary enterprises are moving away from building individual Drupal websites and are moving towards digital experience platforms (DXP).\n\nThis session explains how Drupal can be deployed as a digital experience platform. Dropsolid platform and the distribution called rocketship (https://www.drupal.org/project/dropsolid_rocketship) allows midsize enterprises to deploy Drupal as DXP.\n\nAttendees will learn what the key differences are between regular websites and the DXP. Enterprises will be able to learn how they can use a digital experience platform to drive their digital transformation and how they increase customer life time values.",
+      "video_url": "https://www.youtube.com/watch?v=NUBnIys5JOk",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T12:10:00Z",
+      "endTime": "2019-10-29T12:30:00Z",
+      "duration": "P20M",
+      "title": "#Startuplife. Lessons from 3 years Open Social moving from services to a product company.",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/272",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Taco Potze"
+      ],
+      "full_description": "Taco Potze\nOpen Social, Amsterdam, The Netherlands\n\nThis presentation will teach you the things that went well, and the things that did not go well in our journey to move our 25 people Drupal agency from a service company (bill by the hour) to a product SaaS company (bill per product, per month) called Open Social.\n\nWe will talk about funding your product, building a product, how to do marketing, sales and business development and how to grow internationally. We hope to discuss some questions as how to work with open-source and SaaS and does it help us or limit us competing with proprietary software vendors.\n\nIf you are thinking about building a product on Drupal or building a SaaS company, this is your session!",
+      "video_url": "https://www.youtube.com/watch?v=LlNFlbSYkk0",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T12:55:00Z",
+      "endTime": "2019-10-29T20:55:00Z",
+      "duration": "P480M",
+      "title": "Creating a healthy technology ecosystem for Drupal",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1032",
+      "track": [
+        "Open Stage"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T13:30:00Z",
+      "endTime": "2019-10-29T14:45:00Z",
+      "duration": "P75M",
+      "title": "Humanity in tech",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1003",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Boris Veldhuijzen Van Zanten"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:40:00Z",
+      "duration": "P40M",
+      "title": "Drupal 8 Commerce: Under the hood",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/35",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Robin Ingelbrecht"
+      ],
+      "full_description": "Robin Ingelbrecht\nEntityone, Ghent, Belgium\n\nThis session will give you an in-depth understanding of how Commerce 2.x gives you the possibility to completely customize your web shop.\n\nIt will cover following topics:\n- Behind the scenes structure of Drupal Commerce 2.x\n- Different Plugins provided by Commerce\n- Useful event subscribers\n- The purpose of order processors and price adjustments\n- Custom workflows and transitions\n\nFollowing topics will not be covered:\n- Configuring your Commerce store\n- Managing products and orders\n\nYou are presumed to have a basic understanding of how Commerce works.",
+      "video_url": "https://www.youtube.com/watch?v=gknvo8-Hkkw",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:40:00Z",
+      "duration": "P40M",
+      "title": "OWASP Top 10: What are them and how to prevent them",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/76",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Ayesh Karunaratne"
+      ],
+      "full_description": "Ayesh Karunaratne\nAKCS, Maradankadawala, Sri Lanka\n\nOWASP is an online community of people who care about web application security (like you and I), and they provide several recommendations to prevent many sorts of online attacks.\n\nThis is a 40 minute session that we go through the most common (with OWASP statistics), and how we can prevent them. The focus is on PHP language, but the concepts are all the same. PHP 7, 7.1 and 7.2 were released with several features that can help us with security tightening too, with PHP 7.4 just around the corner will have a few more tricks up its sleeve too!\n\nWe will also talk about which type of attacks are most common using historical data of CVEs. CMSs such as Drupal and WordPress are covered.",
+      "video_url": "https://www.youtube.com/watch?v=vf_ok-XkVcE",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:40:00Z",
+      "duration": "P40M",
+      "title": "Lessons from a first time Drupal Camp organizer",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/130",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Camilo Bravo"
+      ],
+      "full_description": "Camilo Bravo\nToptal, Quito, Ecuador\n\nContributing to Drupal does not always need to take the form of writing code. There are many ways you can apply your skills that can be helpful to this community. Organizing an event is one such way, though it is arguably not one of the easiest.\n\nBetween planning the program, getting people to attend, contacting sponsors, balancing a budget, working on the website, handling unexpected circumstances, and myriad other activities, putting a Drupal Camp together can be challenging. It also seems like we're constantly reinventing the wheel, which, as programmers, strikes us as quite sinful.\n\nThis session will tell the tale of the 2017 Drupal Camp in Quito, Ecuador; how the team approached each of these issues, and how we failed at some of them (but succeeded at others!).",
+      "video_url": "https://www.youtube.com/watch?v=4Vi-XYQVPdA",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:40:00Z",
+      "duration": "P40M",
+      "title": "Don't trust, verify",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/142",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Nikola Krstic"
+      ],
+      "full_description": "Nikola Krstic\nDiploFoundation, Belgrade, Serbia\n\nEvery educational institution has to cover successful graduation process with an adequate certificate. We are living in the digital age and according to that the good old standard printed certificates are almost obsolete. The new digital certificates stored and protected into Blockchain is potential future of the certification process.\n\nThis presentation covers the whole process to store digital certificates into Blockchain. The first part presents MIT solution. MIT solution is mostly proof of concept with shortcomings such as all code being written in Python and the whole process being too complex for a university officer. That process asks for a highly skilled developer to issue certificates. Drupal-based solution addresses these shortcomings.",
+      "video_url": "https://www.youtube.com/watch?v=W5euBPurh5k",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:40:00Z",
+      "duration": "P40M",
+      "title": "Massive Multisite and Multilingual - Localisation in the Large!",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/270",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Bansi Kotecha",
+        "Justin Woodington"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:20:00Z",
+      "duration": "P20M",
+      "title": "Making Drupal as easy to use as Squarespace: A programmer gone marketer approach to building web applications",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/442",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Philippe Von Bergen"
+      ],
+      "full_description": "Philippe Von Bergen\niqual Lim., Bern, Switzerland\n\nThis talk will show how to make Drupal's power usable for businesses of any size and provide insights on how to increase customer satisfaction by enabling the client to do the work for you.\n\nIn projects for small, medium and national companies, we often must combine structured data with the ease of use of a landing page editor like Squarespace. While Drupal and its community provides a wonderful eco-system for building data and automation heavy applications, it lacks the ease and graphical approach many page builders offer.\n\nI will present how we bridged this gap, empowered our clients and increased productivity and customer loyalty by building a drag&drop page builder (drupal.org/project/pagedesigner) which integrates with the data structures of Drupal.",
+      "video_url": "https://www.youtube.com/watch?v=na-ZTwMj2iE",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:20:00Z",
+      "duration": "P20M",
+      "title": "Next steps on modernizing the Drupal theme system (Drupal 9 and beyond)",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/517",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Lauri Eskola"
+      ],
+      "full_description": "Room: Auditorium\nPresenter: Lauri Eskola\nDescription: Drupal's theme system is too complex to use. Doing basic tasks such as changing markup, preprocessing data and attaching new CSS and JavaScript takes a lot of knowledge.\n\nDrupal theme system, which is over a decade old system also fails to support some of the modern software engineering practices applied commonly these days, such as semver and component driven development. Support to both of these has been added as an hacked-on after-thought, that have big downsides.\n\nOn this session, I will give an overview of what changes has been made prior to Drupal 9 to tackle some of these issues. I will also walk through some of the ideas on how we could further improve the frontend development experience during the development of Drupal 9 minor versions.",
+      "video_url": "https://www.youtube.com/watch?v=rBZaKXYG79c",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:45:00Z",
+      "duration": "P45M",
+      "title": "BoF 11 - Introduction to entity_staging module",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1030",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Fabien Clément"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:45:00Z",
+      "duration": "P45M",
+      "title": "BoF 12 - About API-First Decoupled Drupal Camp Tokyo 2019",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1036",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Kazu Hodota"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T15:00:00Z",
+      "endTime": "2019-10-29T15:45:00Z",
+      "duration": "P45M",
+      "title": "BoF 13 - Taking control of your infrastructure / hosting",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1040",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Andre Baumeier"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T15:25:00Z",
+      "endTime": "2019-10-29T15:45:00Z",
+      "duration": "P20M",
+      "title": "The transformation from Print paper to Digital News & Media with Drupal",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/226",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Pratik Mehta"
+      ],
+      "full_description": "Pratik Mehta\nSingapore Press Holdings, Singapore, Singapore\n\nSPH is one of the biggest News and Media companies in Singapore having 20+ Publication websites built with Drupal. All Major publications have Mobile apps which are integrated with Drupal backend.\n\nAs the globe is going through digital transformation, News and Media also need to have a transformation. Day by day physical newspapers are reducing and revenues are declining. There comes a need for digitalization and with the help of Drupal, all end to end features are built.\n\nProblem: Revenue of physical newspaper is declining. Get print center news article into a news portal. Website Scaling. Data Security. Marketing.\n\nApproaches: Using Drupal as CMS, we are able to integrate print center news articles into the Drupal system.",
+      "video_url": "https://www.youtube.com/watch?v=D6UZog1SGgs",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T15:25:00Z",
+      "endTime": "2019-10-29T15:45:00Z",
+      "duration": "P20M",
+      "title": "Frontend Security is a Thing",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/421",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Madalina Cotumbeanu"
+      ],
+      "full_description": "Room: Auditorium\nPresenter: Madalina Cotumbeanu\nDescription: When we say FrontEnd, we mainly think of the glue that sticks, the Designer's vision and the BackEnd's implementation, together.\n\nWe make things look pretty for the final user, we make it easier for people to surface our page in style, we make everything flashy.\n\nThinking about security you might be tempted to correlate it with Backend development. But I am here to try and show that FrontEnders have the same level of responsibility when it comes to securing our web pages. We will go through the main issues that make up the FrontEnd Security Checklist.",
+      "video_url": "https://www.youtube.com/watch?v=VsOFvJdHeKI",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T15:55:00Z",
+      "endTime": "2019-10-29T23:55:00Z",
+      "duration": "P480M",
+      "title": "Matsmart eliminates food waste with headless Drupal Commerce",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1034",
+      "track": [
+        "Open Stage"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T16:15:00Z",
+      "endTime": "2019-10-29T16:55:00Z",
+      "duration": "P40M",
+      "title": "Drupal Association Town Hall",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/109",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Adam Goodman",
+        "Timothy Lehnen",
+        "Heather Rocker"
+      ],
+      "full_description": "Heather Rocker, Timothy Lehnen, Adam Goodman\nDrupal Association, Portland, United States\n\nPlease join Executive Director Heather Rocker for a Town Hall about the Drupal Association.\n\nThis will be a collaborative session, taking audience questions, and diving in to topics important to the community.",
+      "video_url": "https://www.youtube.com/watch?v=zJXFgrM0p8U",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T16:15:00Z",
+      "endTime": "2019-10-29T16:55:00Z",
+      "duration": "P40M",
+      "title": "QUIC and HTTP/3: Too Big to Fail?!",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/113",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Robin Marx"
+      ],
+      "full_description": "Robin Marx\nHasselt University, Diepenbeek, Belgium\n\nThere is a revolution coming to the web in the form of the new QUIC and HTTP/3 protocols. They promise many fantastic things, such as deep end-to-end encryption and, above all, much improved page loading performance compared to TCP and HTTP/2.\n\nSadly, these advancements come at the price of increased complexity, as QUIC aims to incorporate 30 years of web protocol knowledge into a single \"Protocol to Rule Them All\". There are also other challenges ahead for this new generation, such as network operators unwilling to allow the protocols to pass through their systems.\n\nIn this talk, I will explain the details of the new QUIC and HTTP/3 protocols: why they are needed, how they work behind the scenes, and how they are able to claim such impressive performance improvements.",
+      "video_url": "https://www.youtube.com/watch?v=W3xiMq5A0i0",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T16:15:00Z",
+      "endTime": "2019-10-29T16:55:00Z",
+      "duration": "P40M",
+      "title": "[PANEL] Drupal Diversity & Inclusion: Volunteer-led strategies for helping the Drupal community",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/228",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Alanna Burke",
+        "Tara King",
+        "Elli Ludwigson"
+      ],
+      "full_description": "Tara King, Elli Ludwigson, Alanna Burke\n\nAs Dries discussed in the DrupalCon Seattle Driesnote, open source has a serious diversity problem--and that includes our own Drupal community.\n\nThe Drupal Diversity & Inclusion (DDI) group is working to make the Drupal community more equitable and more successful. The group of volunteers was founded by and for marginalized individuals in the Drupal community in 2016. We work to create space for important discussions about the Drupal community and for initiatives that support historically-marginalized communities and further their inclusion in the Drupal project. We have over 650 people in our Slack channel, and hold multiple meetings each week.\n\nThis talk, presented by members of DDI's leadership team, will discuss the specific issues facing the Drupal community and what the group is doing to address them.",
+      "video_url": "https://www.youtube.com/watch?v=FoolIDaFQIc",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T16:15:00Z",
+      "endTime": "2019-10-29T16:55:00Z",
+      "duration": "P40M",
+      "title": "React as a decoupled theme engine for Drupal",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/277",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Nikolay Dobromirov",
+        "Petyo Stoyanov"
+      ],
+      "full_description": "Nikolay Dobromirov, Petyo Stoyanov\nFFW, Sofia, Bulgaria\n\nImplementing a decoupled application in 2019 with Drupal has never been easier than now, having JSON:API in core. The problem is that this is covering only one side of the story - the back end one. On the application side you are starting from scratch.\n\nIn this session we will cover:\n- The process of replacing the whole theming layer with React in a fully decoupled multi-site context.\n- How we've achieved Drupal's level of flexibility on content level with displays and field formatters.\n- Handling the data visualization for dynamic nested pieces of content.\n- SEO considerations and server side rendering\n- How all ties together and plays nice with Drupal's page cache meta-data, so reverse proxies can be invalidated and keep the site performant.",
+      "video_url": "https://www.youtube.com/watch?v=_3NGlxLV2qo",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T16:15:00Z",
+      "endTime": "2019-10-29T16:35:00Z",
+      "duration": "P20M",
+      "title": "Before decoupling, understand JS. JavaScript for Drupalers: Let's learn this",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/361",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Ashraf Abed"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T16:15:00Z",
+      "endTime": "2019-10-29T16:55:00Z",
+      "duration": "P40M",
+      "title": "Drupal Gutenberg and Unicef: A Case Study",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/382",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Marco Fernandes",
+        "Thor Andre Gretland"
+      ],
+      "full_description": "Room: Auditorium\nPresenter: Thor Andre Gretland, Marco Fernandes\nDescription: Drupal and the Gutenberg editor is a killer combination, empowering content authors to build rich landing pages inside a rock solid CMS framework. The Drupal Gutenberg module is stable and continuously updated and improved!\n\nAuthors and marketeers want to focus on effectively perfecting their content. They want to adjust and improve, and have the flexibility to create exciting content that stands out. All of this needs to happen within the agreed boundaries of their own design manual.",
+      "video_url": "https://www.youtube.com/watch?v=TT-psUA_oEU",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T16:15:00Z",
+      "endTime": "2019-10-29T16:35:00Z",
+      "duration": "P20M",
+      "title": "Alexa skills design patterns and principles",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/441",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Raffaele Chiocca",
+        "Alessandra Petromilli"
+      ],
+      "full_description": "Alessandra Petromilli, Raffaele Chiocca\nIbuildings, Italy\n\nVoice user interfaces have more and more impact on our daily lives: on our mobile phones, in our homes and in the offices. The techniques and metaphors of graphical user interfaces do not apply to the world of voice. VUI design must be based on the \"conversation\", the first communication system we have learned and also the one we know best.\n\nDuring the session, Alessandra will uncover the potential of these new interaction models and how they can be integrated with a Drupal website through a PHP SDK. She guides you through the challenges related to the design and development of Alexa Skills through a real use case.\n\nWhat you will learn:\n- How to get started exploring and developing an Alexa Skill\n- How to face the design challenges of a voice user interface",
+      "video_url": "https://www.youtube.com/watch?v=KwAW-RDKzIY",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T16:15:00Z",
+      "endTime": "2019-10-29T17:00:00Z",
+      "duration": "P45M",
+      "title": "BoF 15 - Promote Drupal Pitch Deck",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1029",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Paul Johnson"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T16:15:00Z",
+      "endTime": "2019-10-29T17:00:00Z",
+      "duration": "P45M",
+      "title": "BoF 18 - Native Drupal CRM + Integrations",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1045",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T16:40:00Z",
+      "endTime": "2019-10-29T17:00:00Z",
+      "duration": "P20M",
+      "title": "Storybook and Drupal: Seamless frontend integration for decoupled sites.",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/247",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Jamie Hollern",
+        "Mattia Simonato"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T16:40:00Z",
+      "endTime": "2019-10-29T17:00:00Z",
+      "duration": "P20M",
+      "title": "Drop your Excel Sheets: Drupal native editorial planning",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/296",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Lukas Fischer"
+      ],
+      "full_description": "Lukas Fischer\nNETNODE AG, Luzern, Switzerland\n\nDrupal is an excellent Content Management System. It allows us to build and manage articles at scale. However, we see a lot of content teams planning content \"outside\" of Drupal - in Excel sheets or the like.\n\nWe created and open sourced a new module called \"Drupal Content Planner\" which allows content teams to plan content directly in Drupal.\n\nIn this presentation I'll explain how the Content Dashboard, Content Calendar and Kanban Board can help editorial teams to deliver better content.\n\nI'll also give an update about the latest developments and features of Drupal Content Planner.",
+      "video_url": "https://www.youtube.com/watch?v=W5-i8ZsZ4M0",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T17:15:00Z",
+      "endTime": "2019-10-29T17:35:00Z",
+      "duration": "P20M",
+      "title": "Fostering Community Health and demystifying the CWG",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/89",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Michael Anello",
+        "Jordana Fung"
+      ],
+      "full_description": "Michael Anello, Jordana Fung\n\nThe Drupal Community Working Group is tasked with fostering community health. Our charter states that \"the mission of the Community Working Group (CWG) is to uphold the Drupal Code of Conduct in order to maintain a friendly and welcoming community for the Drupal project.\"\n\nWe have found that often many community members are unaware of what we actually do, how we do it and the motivations behind the group. We will to use this session to bring to light our charter, our processes, our impact and how we can improve.",
+      "video_url": "https://www.youtube.com/watch?v=-rMbp26zsis",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T17:15:00Z",
+      "endTime": "2019-10-29T17:55:00Z",
+      "duration": "P40M",
+      "title": "Winning and retaining long term clients",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/126",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Owen Lansbury"
+      ],
+      "full_description": "Owen Lansbury\nPreviousNext, Sydney, Australia\n\nEvery successful Drupal agency has a roster of long term clients who probably account for 80% of their ongoing revenue. It's these type of clients that we all aspire to winning and retaining, but how can you do this year after year through constant change of personnel, strategies and budgets?\n\nThis talk will go into detail about how to first identify and secure the types of clients that you can form multi-year relationships with. Once you've delivered that first successful project, how do you put the processes and relationship management in place to ensure you can replicate this success time and again?\n\nAimed at agency leaders and project managers we'll be using real world examples of what happens when you get it right and, of course, sometimes when you get it wrong.",
+      "video_url": "https://www.youtube.com/watch?v=s_bibMMKIa0",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T17:15:00Z",
+      "endTime": "2019-10-29T17:55:00Z",
+      "duration": "P40M",
+      "title": "External Design Systems in Practice",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/195",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Brian Perry"
+      ],
+      "full_description": "Room: Auditorium\nPresenter: Brian Perry\nDescription: When developing a pattern library or design system that will be used in support of a Drupal project, a key decision must be made regarding where the design system should live. Conceptually, many agree that it should be an external dependency of a Drupal theme in order to promote reuse, but a large number of projects still embed the design system inside of the theme in order to simplify workflow and component integration.\n\nWhile in the past I've occasionally found it difficult to justify developing a design system independently from Drupal, on a recent rebranding project I made the case to configure a workflow using this approach.",
+      "video_url": "https://www.youtube.com/watch?v=69GOvYIY8p4",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T17:15:00Z",
+      "endTime": "2019-10-29T17:35:00Z",
+      "duration": "P20M",
+      "title": "Hardships faced while theming e-commerce site in Drupal 8",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/332",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Meenakshi Gupta",
+        "Lakshay Kumar Mutreja"
+      ],
+      "full_description": "Meenakshi Gupta, Lakshay Kumar Mutreja\nOpensense Labs, New Delhi, India\n\nTheming Drupal 8 Commerce is a challenging job. Here are some major components which are to be focused on while theming a Drupal Commerce site:\n\nProducts:\n- Product Pages\n- Product-level Field variables\n- Product variation level variables\n\nCheckout Flows:\n- Creating Flow as per the requirements\n- Customizing checkout progress",
+      "video_url": "https://www.youtube.com/watch?v=wrS7SRSdR6g",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T17:15:00Z",
+      "endTime": "2019-10-29T17:35:00Z",
+      "duration": "P20M",
+      "title": "Pre-Rendering Media Sites with Nuxt.js & Netlify",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/344",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Wolfgang Ziegler"
+      ],
+      "full_description": "Wolfgang Ziegler\nDrunomics GmbH, Linz, Austria\n\nThis session will show how the static site generation feature of Nuxt.js can be combined with Drupal to easily pre-render sites, while leveraging client-side rendering for dynamic functionality.\n\nTopics covered will be:\n* How to decouple to meet the SEO & caching requirements for publishing and media sites\n* Why Vue.js & Nuxt.js\n* Pre-rendering for sites via Netlify\n* Handling dynamic content via Custom Elements",
+      "video_url": "https://www.youtube.com/watch?v=rvz6Evfg1FU",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T17:15:00Z",
+      "endTime": "2019-10-29T17:55:00Z",
+      "duration": "P40M",
+      "title": "Building Your Legos: A Practitioner’s Guide to Building Reusable Components",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/360",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Chris Greatens"
+      ],
+      "full_description": "Chris Greatens\nBounteous, Chicago, United States\n\nIf you have built several Drupal websites, you have undoubtedly noticed that all websites share some common components. Most sites have hero banners, quotes, 2-ups, 3-ups, among other repeatable patterns. Building these components over and over again loses its luster and, more importantly, distracts you from building the really unique and interesting components of the site. Instead of reinventing the wheel with every Drupal site you build, wouldn't it be great if you could build these components once and leverage them across multiple sites?\n\nAt Bounteous, we have built a library of reusable components to build Drupal sites. The components are versatile, flexible, and easy to update.",
+      "video_url": "https://www.youtube.com/watch?v=_22rvgYs-P0",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T17:15:00Z",
+      "endTime": "2019-10-29T17:55:00Z",
+      "duration": "P40M",
+      "title": "Memory of Nations - how Drupal helps to preserve memories of humankind",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/386",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Miro Michalicka"
+      ],
+      "full_description": "Miro Michalicka\nMade It Digital\n\nMemory of Nations is a non-profit project. Drupal was chosen as a technical solution to help researchers and volunteers from all over the world to preserve memories of people who witnessed holocaust and other tragic events in history of humankind. The website was awarded Global Drupal Splash Award in category Non-profit and DrupalCS Award in category Companies.\n\nIn this session I will cover:\n- more details about the project\n- why Drupal was chosen\n- unique language solution\n- other technical choices\n- and lessons learned about the project",
+      "video_url": "https://www.youtube.com/watch?v=64WABLhjOaM",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T17:40:00Z",
+      "endTime": "2019-10-29T18:00:00Z",
+      "duration": "P20M",
+      "title": "Extreme Makeover: Drupal.org Profile Edition",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/25",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Amanda Marshall",
+        "Gregg Marshall"
+      ],
+      "full_description": "Gregg Marshall, Amanda Marshall\n\nYour profile likely needs a major remodeling.\n\nImagine competing for a job, or as a team competing for business, and the person hiring you decides to check out your profile.\n\nWill it look the same as the day you registered your account? Has it even been confirmed?\n\nIs your profile picture the default outline?\n\nCome learn how to improve your profile with a minimum of time and effort.",
+      "video_url": "https://www.youtube.com/watch?v=aN63QsECraA",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-29T17:40:00Z",
+      "endTime": "2019-10-29T18:00:00Z",
+      "duration": "P20M",
+      "title": "IT news portal migrated from a highly customized Wordpress to Drupal 8",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/512",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Peter Ponya",
+        "Dominika Péterová"
+      ],
+      "full_description": "Peter Ponya, Dominika Péterová\nBRAINSUM, Budapest, Hungary\n\nThe first version of diginomica.com was launched in 2013 on WordPress. It's an IT news portal with a global audience. The site has been remade on Drupal 8 due to the WordPress' lack of adaptivity to a 21st century CMS and its needs. \"I had seen how Drupal is getting into technologies that allow all manner of amazing things to come to life and that encouraged me to take a closer look.\" - said the co-founder of Diginomica.\n\nIn this session, our aim is to share the lessons learned from a Wordpress to Drupal migration including media handling, editorial experience challenges and the many 3rd party integrations. We'd like to highlight the main differences, strengths, and weaknesses discovered in both systems.",
+      "video_url": "https://www.youtube.com/watch?v=E_CBI0UFPVA",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T09:00:00Z",
+      "endTime": "2019-10-30T09:40:00Z",
+      "duration": "P40M",
+      "title": "Do you know what your Drupal is doing? Observe it!",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/38",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Luca Lusso"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T09:00:00Z",
+      "endTime": "2019-10-30T09:40:00Z",
+      "duration": "P40M",
+      "title": "Content Management as Critical Success Factor for Personalized Medicine",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/56",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Markus Kalkbrenner",
+        "Rudolf Koopmann"
+      ],
+      "full_description": "Rudolf Koopmann, Markus Kalkbrenner\nbio.logis GIM GmbH, Frankfurt am Main, Germany\n\n\"Did you know that Drupal is part of a CE-certified Medical Device Class 1 in Europe?\"\n\nPersonalized medicine isn't just a buzzword anymore. The number of scientific findings and the knowledge about different factors of an individual patient that influence medical decisions grow every day.\n\nBut the quick increase of data and knowledge raises common technology problems like managing content and knowledge, ensuring quick findability and easy access, translating content, quality assurance and workflows.\n\nSuch technical topics should be well-known and per definition addressed by a \"Content Management System\".\n\nThe \"ubiquitous pharmacogenomics\" project (U-PGx) is funded by the European Union and leverages Drupal as its CMS.",
+      "video_url": "https://www.youtube.com/watch?v=rn1Rt17mJZ8",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T09:00:00Z",
+      "endTime": "2019-10-30T09:20:00Z",
+      "duration": "P20M",
+      "title": "How to utilize Open Source tools to create CI/CD & DevOps workflows without the vendor lock-in",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/149",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Aleksandr Tolstikov"
+      ],
+      "full_description": "Aleksandr Tolstikov\nSmile Open Source Solutions, Paris, France\n\nThere are lots of CI/CD tools available at the market and lots of new tools are appearing every day. How to avoid drowning in all these new tools, configurations formats, and technology?\n\nThe goal of this session is to share our experience in creating reusable workflows that are not dependable on particular CI/CD engine you use. It can be Jenkins, Gitlab CI, Codefresh, Drone, Github actions or literally any other tool available and you'll just need to call your pipeline from it. It also can be called from your local PC (very useful to debug the actual workflow) and from Docker (or any other type of) containers.\n\nThe big advantage of this approach is the fact that you will be able to quickly switch between different CI/CD engines.",
+      "video_url": "https://www.youtube.com/watch?v=PZgZAkRWcEM",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T09:00:00Z",
+      "endTime": "2019-10-30T09:40:00Z",
+      "duration": "P40M",
+      "title": "Women in Tech: How to get (and keep) women in your leadership roles",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/185",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Lindsey Catlett",
+        "Ruth Cheesley"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T09:00:00Z",
+      "endTime": "2019-10-30T09:40:00Z",
+      "duration": "P40M",
+      "title": "Scaling up and accelerating Drupal 8 with NoSQL",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/249",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Frédéric Marand"
+      ],
+      "full_description": "Frédéric Marand\nOSInet, Villebon sur Yvette, France\n\nThis session will explain the differences between backend performance and scalability, detail what kind of data can be taken off the main DB in Drupal 8(9) and put into non-SQL storage, and what the use cases, capabilities and limitations are.\n\nThis will cover key-value, state, caches, lock, path, logging, sessions, queues, and more.\n\nBeyond simple usage, this session will cover rules for optimal scaling up with these tools, as well as the extra APIs added by the modules to core Drupal.\n\nIn the shorter 20 minutes format, the session will only list available features in the main NoSQL storages. In the longer 40 minutes format, specific detail will be given about the MongoDB implementation.",
+      "video_url": "https://www.youtube.com/watch?v=LQBYZymWnKU",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T09:00:00Z",
+      "endTime": "2019-10-30T09:40:00Z",
+      "duration": "P40M",
+      "title": "Designing the future of the Drupal Admin UI",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/341",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Archita Arora",
+        "Cristina Chumillas",
+        "Sascha Eggenberger"
+      ],
+      "full_description": "Sascha Eggenberger, Archita Arora, Cristina Chumillas\n\nThe Admin UI & JavaScript Modernisation initiative is re-imagining the current content authoring experience and site administration. By now you might have seen the new Admin UI \"Claro\" out in the wild already, but this is just an intermediate step to apply the newly crafted Drupal Design System and deliver a first change to Drupal Core. In this session we'll talk about what we're working on for the future of the Drupal Admin UI - the so called \"next-generation Admin UI experience\" going through the following main topics:\n\n- We will talk on the new Drupal Admin UI Design System\n- We will take a look at the new UX improvements that have happened\n- Glimpses of the next-gen Admin UI\n- Now it's time to think big",
+      "video_url": "https://www.youtube.com/watch?v=bmO4FYmj6uI",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T09:00:00Z",
+      "endTime": "2019-10-30T09:40:00Z",
+      "duration": "P40M",
+      "title": "Judging a book by its cover - how inclusive is your community?",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/458",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Alanna Burke"
+      ],
+      "full_description": "Alanna Burke\n\nWhen it comes to issues of diversity and inclusion, appearances matter. A newcomer looking at an open-source community or project for the first time is going to make judgments based on what they see - on your website, on social media, at events, and what they hear from people who represent your community, either officially or unofficially. So, how are they judging your community? You may feel that you've done a lot of work to make your community welcoming to a diverse population, but if that initial look turns someone off, you may have lost them forever.\n\nIn this session, we'll talk about what you should be paying attention to, and how you can make sure your community is a welcoming place for all. We'll go over things like: leadership and how leaders are presented, who is visible in your community, and how to audit your first impressions.",
+      "video_url": "https://www.youtube.com/watch?v=o5RKrQQ9Jyk",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T09:00:00Z",
+      "endTime": "2019-10-30T09:40:00Z",
+      "duration": "P40M",
+      "title": "Making support the backbone of your business",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/486",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Anthony Lindsay",
+        "Stella Power"
+      ],
+      "full_description": "Room: Auditorium\nPresenter: Anthony Lindsay, Stella Power\nDescription: Is this you?\n\n\"Support isn't where we're focused. It's boring. We don't need it. We're pushing the boundaries, building new and innovative projects, reaching for the sky... and our cashflow and sales pipeline sucks.\"\n\nWell, you might be surprised to learn that:\n\n* Supporting existing clients makes sense.\n* It's steady, predictable work.\n* It maintains profitable relationships with household names who bolster your brand.\n\nFinding new projects is expensive, whilst retaining current clients provides the financial stability necessary for growth. As support work is predictable, your revenue stream becomes more predictable, allowing you to plan for the future and weather the ups and downs of project work.",
+      "video_url": "https://www.youtube.com/watch?v=Y9yFlnpFy_E",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T09:25:00Z",
+      "endTime": "2019-10-30T09:45:00Z",
+      "duration": "P20M",
+      "title": "Drupal HA:  a story from the trenches",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/387",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Bram Vogelaar"
+      ],
+      "full_description": "Bram Vogelaar\nInuits.eu, Rotterdam, Netherlands\n\nAs engineers we spend much of our time getting stuff to production and making sure our infrastructure doesn't burn down outright. Does our platform degrade in a graceful way or what does a high cpu load really mean? What can we learn from level 1 outages to be able to run our platforms more reliably.\n\nFrom things like Infrastructure as Code, Service Discovery and Config Management to replicated databases, caching strategies and geo spatial considerations of the replicas. We have tried, failed and tried again until we got to a solution that works for us.\n\nThis allows for teams to quickly put infrastructure in place while allowing teams to separate deployment and release phases of their work without having to switch over big bang style.",
+      "video_url": "https://www.youtube.com/watch?v=p243Oq-bMDQ",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T10:15:00Z",
+      "endTime": "2019-10-30T10:55:00Z",
+      "duration": "P40M",
+      "title": "Accelerating International Education via Drupal: A Georgia Tech Case Study",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/96",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Jimmy Kriigel"
+      ],
+      "full_description": "Jimmy Kriigel\nGeorgia Institute Of Technology, Atlanta, United States\n\nGeorgia Tech's Office of International Education (OIE) uses Drupal to engage incoming international students with immigration content and orientation information critical for their success at Tech. This talk will discuss HTTPS, CDNs, Google Amp, and how these programs impact students and improve technology effectiveness. Cat and raccoon gifs help attendees visualize how this information can be applied at your institution.",
+      "video_url": "https://www.youtube.com/watch?v=-EoOlK3SaD0",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T10:15:00Z",
+      "endTime": "2019-10-30T10:55:00Z",
+      "duration": "P40M",
+      "title": "Dries Q&A",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/165",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Dries Buytaert",
+        "Rachel Lawson"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T10:15:00Z",
+      "endTime": "2019-10-30T10:55:00Z",
+      "duration": "P40M",
+      "title": "[PANEL] How companies are currently using Kubernetes with Drupal",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/324",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Kevin Bridges",
+        "Florian Loretan",
+        "Michael Schmid",
+        "Thom Toogood"
+      ],
+      "full_description": "Michael Schmid, Kevin Bridges, Thom Toogood, Florian Loretan\n\nKubernetes is starting to be used by many Hosting Companies, Drupal Agencies and also Drupal End Customers. In this session, we're bringing together a panel of people who are using Kubernetes in one way or another in conjunction with Drupal. We'll discuss the choice of doubling down on Kubernetes, what exactly they're using it for, and how they've implemented and are maintaining it. We welcome a healthy debate and discussion is the main driver here so any questions or concerns regarding the subject are welcome.",
+      "video_url": "https://www.youtube.com/watch?v=boEjn_22wNA",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T10:15:00Z",
+      "endTime": "2019-10-30T10:55:00Z",
+      "duration": "P40M",
+      "title": "Advanced migration techniques",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/334",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Daniel Sipos"
+      ],
+      "full_description": "Daniel Sipos\nWebomelette\n\nIn this session we are going to explore some advanced techniques for building and running migrations.\n\nSometimes you can define your migrations in a single file, run them, close your laptop and go grab a beer. But let's face it, most other times things are a bit more complicated. What we will talk about in this session are some of the cases in which you need to get a bit creative. Such as standardise your source data. Transform it before it gets imported. Or use templates to build dynamic migrations.\n\nAn important example we will look at is how we can migrate multilingual content from various types of sources.\n\nA general run-down of what we will cover in the session:\n* The basics of setting up a migration and how it actually works under the hood\n* Multilingual migrations\n* Dynamic migration templates\n* Source data normalisation",
+      "video_url": "https://www.youtube.com/watch?v=7lIhnToMFxA",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T10:15:00Z",
+      "endTime": "2019-10-30T10:55:00Z",
+      "duration": "P40M",
+      "title": "Taking Drupal Commerce to Market: 2019 Roadmap",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/398",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Ryan Szrama"
+      ],
+      "full_description": "Room: Auditorium\nPresenter: Ryan Szrama\nDescription: Drupal Commerce has been in active development since February 2010. We've seen tens of thousands of sites launch with it and process billions of dollars in transactions, including some of the world's most recognizable brands. However, even as the Drupal 8 branch picks up steam (8,000 sites and counting!), it still feels like the project's best days are ahead of it.\n\nAt DrupalCon Seattle, Commerce Guys went public with its new brand, Centarro, and a product / marketing roadmap that will lead the broader eCommerce market to give the project a fresh look.",
+      "video_url": "https://www.youtube.com/watch?v=bSeG7YTCvks",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T10:15:00Z",
+      "endTime": "2019-10-30T10:55:00Z",
+      "duration": "P40M",
+      "title": "Composer and Drupal: Past, Present and Future",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/445",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Greg Anderson",
+        "Ryan Aslett"
+      ],
+      "full_description": "Greg Anderson, Ryan Aslett\n\nDrupal has leveraged Composer to manage its internal dependencies since version 8.0; however, the way that Drupal has been using Composer is unconventional. Our unconventional hybrid approach has allowed a loose continuity between managing codebases using Drupal 7 methods while simultaneously enabling more modern Composer based workflows. However, the modern Composer based approach was incomplete and unofficial, requiring third-party tools and examples such as drupal-composer/drupal-project. Because of the lack of a clear standard way of doing things, many sites found themselves in difficult to solve dead ends. Presently, the Composer in Core Initiative is changing the way that Drupal uses Composer.",
+      "video_url": "https://www.youtube.com/watch?v=ddPL91oHQdU",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T10:15:00Z",
+      "endTime": "2019-10-30T10:55:00Z",
+      "duration": "P40M",
+      "title": "Fixing the mistakes we -all- make as developers, leaders and teams",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/499",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Jordana Fung",
+        "Jacqui Tenderwolf"
+      ],
+      "full_description": "Jordana Fung, Jacqui Tenderwolf\n\nWe all make mistakes - yes all - and that's okay; it's what happens after that matters. How do we learn from them and how do we make sure they don't happen again?\n\nWith the rise of remote working, distributed teams and online collaboration the impact of good communication and healthy work (and online) spaces has become one of the most important factors in the success or failure of projects.\n\nThis will be a session exploring what good leadership and teamwork consists of, what makes that possible and, more importantly, what to work on so we can be better leaders and teams ourselves. The session will be mostly focused on the skills we may have but sometimes take for granted, forget to work on or simply don't master as much as we want to.",
+      "video_url": "https://www.youtube.com/watch?v=BGZzTsBjuUE",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T10:15:00Z",
+      "endTime": "2019-10-30T18:15:00Z",
+      "duration": "P480M",
+      "title": "Mentor Orientation 2",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1020",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:10:00Z",
+      "duration": "P40M",
+      "title": "Find security vulnerabilities through code review",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/91",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Klaus Purer"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:10:00Z",
+      "duration": "P40M",
+      "title": "Drupal Association Public Board Meeting",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/108",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Heather Rocker"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:10:00Z",
+      "duration": "P40M",
+      "title": "Progressive decoupling in action: using Vue.js to add rich application-like functionality to the course pages of a UK Higher Education institution's Drupal 8 site",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/187",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Phil Wolstenholme"
+      ],
+      "full_description": "Room: Auditorium\nTitle: Progressive decoupling in action: using Vue.js to add rich application-like functionality to the course pages of a UK Higher Education institution's Drupal 8 site\nPresenter: Phil Wolstenholme\nDescription: This session will:\n\n– Provide real-world examples of using Vue for adding rich application-like functionality to parts of an otherwise standard ('coupled') Drupal 8 site\n\n– Discuss why Vue is a particularly good fit for a lightly or progressively decoupled site compared to other options such as React\n\n– Run through some Vue fundamentals in a Drupal context, including passing data to Vue's data object from Drupal, moving away from jQuery-style DOM manipulation, and instead taking advantage of Vue's reactivity, computed properties and watchers for less bug-prone code.",
+      "video_url": "https://www.youtube.com/watch?v=TBLlwvM_uPc",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:10:00Z",
+      "duration": "P40M",
+      "title": "I Think It’s a Kitten Wearing a Bowtie? Drupal Media Image Caption Suggestions Using AI",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/201",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Laura Johnson",
+        "Boban Stanojevic"
+      ],
+      "full_description": "Laura Johnson, Boban Stanojevic\nMyplanet, Toronto, Canada\n\nAs developers and content editors, we often feel the urge to take shortcuts when entering image captions. It's time consuming! But what if you had an option to have your caption automatically generated with AI? Well that would be very nice, indeed.\n\nIn this session, we'll showcase a proof of concept using an AI-driven image captioning API from IBM to suggest image captions when uploading images to the media module. AI image captioning could be extremely helpful, but it's never going to be as good as human image captioning (and often gives hilariously bad suggestions), which is why our POC includes a user prompt to review the caption before saving.",
+      "video_url": "https://www.youtube.com/watch?v=QCQzSwxYO8k",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:10:00Z",
+      "duration": "P40M",
+      "title": "Expanding Drupal Universe : Exploring how new technologies help finding new customers",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/304",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Ashish Goyal",
+        "Shashank Merothiya"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:10:00Z",
+      "duration": "P40M",
+      "title": "Building a platform for sustainability",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/314",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Jari Nousiainen",
+        "Eveliina Vikström"
+      ],
+      "full_description": "Eveliina Vikström, Jari Nousiainen\n\nWe have built a service for collecting and reporting the sustainability, supply chain and delivery related information of Neste's renewable products on Drupal. The requirement was a solution for gathering large amounts of data from suppliers with different raw materials, geographical locations and ways of operation. Among the goals of the service are to harmonize processes and reduce manual workload, improve suppliers' affiliation with Neste as a partner and most importantly of all, facilitate gathering high quality sustainability information and enable Neste's ambitious growth targets for renewable products business.",
+      "video_url": "https://www.youtube.com/watch?v=DrNc2RsYM0A",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:10:00Z",
+      "duration": "P40M",
+      "title": "[PANEL] The \"battle\" of the local development tools",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/321",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Ricardo Amaro",
+        "Mark Casias",
+        "Randy Fay",
+        "Mattias Michaux",
+        "Alejandro Moreno-Lopez",
+        "Michael Schmid",
+        "Engin Yilmaz"
+      ],
+      "full_description": "Ricardo Amaro, Randy Fay, Mattias Michaux, Michael Schmid, Engin Yilmaz, Mark Casias, Alejandro Moreno-Lopez\n\nIt seems everyone has their own favorite local development tool these days. From Lando to DDEV to custom solutions, developers have strong opinions of which tools rank supreme. In this session, creators and users of different local development tools will provide their story of why they made the choices they made. We welcome a healthy debate and discussion is the main driver here so any questions or concerns regarding the subject are welcome.",
+      "video_url": "https://www.youtube.com/watch?v=5RyehstAgdg",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:10:00Z",
+      "duration": "P40M",
+      "title": "How to build up resilience and keep burnout at bay",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/463",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Jochen Lillich"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:15:00Z",
+      "duration": "P45M",
+      "title": "BoF 29 - The state of the Drupal Community in Poland",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1021",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Adam Szałapski"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T11:30:00Z",
+      "endTime": "2019-10-30T12:15:00Z",
+      "duration": "P45M",
+      "title": "BoF 30 - Discuss about DSP2 and Commerce Stripe Payment Intent",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1031",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Fabien Clément"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T12:15:00Z",
+      "endTime": "2019-10-30T20:15:00Z",
+      "duration": "P480M",
+      "title": "Women in Drupal Luncheon",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1027",
+      "track": [
+        "Social Events"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T13:15:00Z",
+      "endTime": "2019-10-30T21:15:00Z",
+      "duration": "P480M",
+      "title": "Amazecapades",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1035",
+      "track": [
+        "Open Stage"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T13:30:00Z",
+      "endTime": "2019-10-30T14:45:00Z",
+      "duration": "P75M",
+      "title": "If I can do it, so can you",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1004",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Sue Black"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T15:00:00Z",
+      "endTime": "2019-10-30T15:40:00Z",
+      "duration": "P40M",
+      "title": "Quick wins for an accessible website",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/141",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Marloes Bosch"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T15:00:00Z",
+      "endTime": "2019-10-30T15:40:00Z",
+      "duration": "P40M",
+      "title": "4 Keys to a Successful Globalization Strategy and CMS Platform Architecture",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/177",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Tina Williams"
+      ],
+      "full_description": "Room: Auditorium\nTitle: 4 Keys to a Successful Globalization Strategy and CMS Platform Architecture\nPresenter: Tina Williams\nDescription: How do you deploy and manage web sites in 137 countries and over 30 languages around the globe? IBM is using Drupal 8 translation and inheritance capabilities to help transform Enterprise Globalization Strategy, Processes and Roles. The result? The new global marketing web footprint is now delivering higher client engagement in global markets.\n\nThis session includes a review of the key elements of this successful transformation: Strategy, Process, Roles and the supporting CMS platform functions. The session will cover the business requirements and the technical solution. IBM uses Drupal 8 core translation modules and the TMGMT contrib module.",
+      "video_url": "https://www.youtube.com/watch?v=bT7vFrTNRgA",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T15:00:00Z",
+      "endTime": "2019-10-30T15:20:00Z",
+      "duration": "P20M",
+      "title": "Create and theme amazing PDFs using Drupal 8",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/196",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Taher Jodhpurwala"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T15:00:00Z",
+      "endTime": "2019-10-30T15:40:00Z",
+      "duration": "P40M",
+      "title": "The Pains And Gains Of Bringing Agile ABM Marketing To A Global Drupal Development Agency",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/220",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Nathan Roach"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T15:00:00Z",
+      "endTime": "2019-10-30T15:20:00Z",
+      "duration": "P20M",
+      "title": "Combining DevOps and Emotional Intelligence",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/343",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Kevin Bridges",
+        "Elli Ludwigson"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T15:00:00Z",
+      "endTime": "2019-10-30T15:40:00Z",
+      "duration": "P40M",
+      "title": "Caching in Drupal 8 has evolved: Tips on how to improve your code",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/461",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Kristiaan Van den Eynde"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T15:00:00Z",
+      "endTime": "2019-10-30T15:40:00Z",
+      "duration": "P40M",
+      "title": "Building amazing searches with Search API",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/466",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Thomas Seidl"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T15:00:00Z",
+      "endTime": "2019-10-30T15:20:00Z",
+      "duration": "P20M",
+      "title": "Green Tech Thinking",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/480",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Janne Koponen"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T15:00:00Z",
+      "endTime": "2019-10-30T15:45:00Z",
+      "duration": "P45M",
+      "title": "BoF 33 - How to develop site & don't mind of security, backups, PHP configuration, etc",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1053",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T15:25:00Z",
+      "endTime": "2019-10-30T15:45:00Z",
+      "duration": "P20M",
+      "title": "Deploying PHP applications with Ansible, Ansible Vault and Ansistrano",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/64",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Oliver Davies"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T15:25:00Z",
+      "endTime": "2019-10-30T15:45:00Z",
+      "duration": "P20M",
+      "title": "In Their Own Words: Stories of Web Accessibility",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/99",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Helena McCabe"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T15:25:00Z",
+      "endTime": "2019-10-30T15:45:00Z",
+      "duration": "P20M",
+      "title": "What digital marketeers and Drupal can learn from the Brexit campaign",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/413",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Michel Van Velde"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T16:15:00Z",
+      "endTime": "2019-10-30T16:55:00Z",
+      "duration": "P40M",
+      "title": "7 cultural models to adapt to a world of increased complexity",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/80",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Kristof Van Tomme"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T16:15:00Z",
+      "endTime": "2019-10-30T16:55:00Z",
+      "duration": "P40M",
+      "title": "Multilingualism makes better programmers - a look beyond PHP and JavaScript",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/83",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Alexander Varwijk"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T16:15:00Z",
+      "endTime": "2019-10-30T16:55:00Z",
+      "duration": "P40M",
+      "title": "Your First Drupal 8(or 9!) Module",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/138",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Ted Bowman"
+      ],
+      "full_description": "Room: Auditorium\nPresenter: Ted Bowman\nDescription: This presentation will start you on your journey into Drupal 8(and 9) module development. It will show you the steps you need to take to make a simple but useful Drupal module. The module will also work on the upcoming Drupal 9.\n\nTopics that will be covered:\n* The Plugin System\n* Providing Blocks as Plugins\n* Creating Routes and Menu items\n* Creating Forms\n* Module Permissions\n* Drupal's Hook System (yes it's still there)\n* Letting other modules integrate with your module\n* Making sure your module works with Drupal 9",
+      "video_url": "https://www.youtube.com/watch?v=NSE_mYn-o8c",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T16:15:00Z",
+      "endTime": "2019-10-30T16:55:00Z",
+      "duration": "P40M",
+      "title": "SVGs in Drupal Frontends - Creating configurable blazing effects",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/175",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Melinda Kovacs - Sztankovits",
+        "Francisco Jose Seva Mora"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T16:15:00Z",
+      "endTime": "2019-10-30T16:55:00Z",
+      "duration": "P40M",
+      "title": "How to be a good boss, tech lead, or project maintainer: Inclusive Leadership Edition",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/215",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Tara King"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T16:15:00Z",
+      "endTime": "2019-10-30T16:35:00Z",
+      "duration": "P20M",
+      "title": "Drupal marketing headstart for local associations",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/260",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Jeroen van den Berg"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T16:15:00Z",
+      "endTime": "2019-10-30T16:35:00Z",
+      "duration": "P20M",
+      "title": "Layout builder ecosystem",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/402",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Boyan Borisov"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T16:15:00Z",
+      "endTime": "2019-10-30T16:55:00Z",
+      "duration": "P40M",
+      "title": "How we implemented a Drupal Commerce marketplace for safety equipment",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/438",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Kai Hartung",
+        "Mario Thiele"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T16:40:00Z",
+      "endTime": "2019-10-30T17:00:00Z",
+      "duration": "P20M",
+      "title": "Drupal SEO Pitfalls and How To Avoid Them",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/186",
+      "track": [
+        "Business + Marketing"
+      ],
+      "speakers": [
+        "Wouter De Bruycker",
+        "Brent Gees"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T16:40:00Z",
+      "endTime": "2019-10-30T17:00:00Z",
+      "duration": "P20M",
+      "title": "Design your workplace embracing \"Diversity and Inclusion\" and walk on air all the time",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/342",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Rakhi Mandhania"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T17:55:00Z",
+      "duration": "P40M",
+      "title": "Content driven eCommerce with Drupal Commerce",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/29",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Eirik Morland"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T17:55:00Z",
+      "duration": "P40M",
+      "title": "Drupal.org Infrastructure Update",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/107",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Ryan Aslett",
+        "Neil Drumm",
+        "Timothy Lehnen"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T17:55:00Z",
+      "duration": "P40M",
+      "title": "Connecting Drupal to Print: A seamless, smart, and bidirectional integration into an Adobe InDesign based publishing workflow",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/259",
+      "track": [
+        "Industry"
+      ],
+      "speakers": [
+        "Christian Kreutzer"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T17:35:00Z",
+      "duration": "P20M",
+      "title": "Drupal Docker and Debugging",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/262",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Rahul Kumar"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T17:35:00Z",
+      "duration": "P20M",
+      "title": "Drupal 8 BOGOFs: A Hitchhiker's Guide to Less Popular Symfony Components",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/278",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Deji Akala"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T17:55:00Z",
+      "duration": "P40M",
+      "title": "Live preview with Gatsby and decoupled Drupal",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/368",
+      "track": [
+        "Drupal + Frontend"
+      ],
+      "speakers": [
+        "Matt Davis",
+        "Preston So"
+      ],
+      "full_description": "Room: Auditorium\nPresenter: Preston So, Matt Davis\nDescription: Gatsby and Drupal fit together like peas in a pod, thanks to Gatsby's first-class support for consuming Drupal data and Drupal's improving API-first support. Gatsby, a web compiler for blazing fast websites and applications, is capable of building highly performant web experiences off the shelf, enriched even more by the administrative power of Drupal.\n\nNonetheless, though Drupal and Gatsby get along like a house on fire for developers, the same is not necessarily true for content editors and marketing teams that need high-fidelity content preview irrespective of the coupled or decoupled architecture underpinning websites.",
+      "video_url": "https://www.youtube.com/watch?v=YDFRsEJLXxo",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T17:35:00Z",
+      "duration": "P20M",
+      "title": "Mentoring Metamorphosis",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/393",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Elli Ludwigson"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T17:55:00Z",
+      "duration": "P40M",
+      "title": "Core initiatives and corporate roadmaps — Lessons learnt from 5 years of running an initiative",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/474",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "Dick Olsson"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T18:00:00Z",
+      "duration": "P45M",
+      "title": "BoF 40 – Kuoni Congress - Give us your feedback about DrupalCon 2019",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1033",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T17:15:00Z",
+      "endTime": "2019-10-30T18:00:00Z",
+      "duration": "P45M",
+      "title": "BoF 38 - Kubernetes, Drupal, and other CMSs",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1038",
+      "track": [
+        "BoFs"
+      ],
+      "speakers": [
+        "Kevin Bridges"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T17:40:00Z",
+      "endTime": "2019-10-30T18:00:00Z",
+      "duration": "P20M",
+      "title": "Death Star Security: A Realtime Look At How A Site Is Hacked",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/198",
+      "track": [
+        "DevOps + Infrastructure"
+      ],
+      "speakers": [
+        "Chris Teitzel"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T17:40:00Z",
+      "endTime": "2019-10-30T18:00:00Z",
+      "duration": "P20M",
+      "title": "Deep dive into Content Security Policy",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/284",
+      "track": [
+        "Drupal + Backend"
+      ],
+      "speakers": [
+        "Priya Sundharam"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T17:40:00Z",
+      "endTime": "2019-10-30T18:00:00Z",
+      "duration": "P20M",
+      "title": "Beating imposter syndrome and burnout - how I rebuilt myself as a developer and learned to love Drupal again",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/453",
+      "track": [
+        "Drupal Community + Being Human"
+      ],
+      "speakers": [
+        "David Thorne"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-30T20:30:00Z",
+      "endTime": "2019-10-31T04:30:00Z",
+      "duration": "P480M",
+      "title": "Trivia Night",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1026",
+      "track": [
+        "Social Events"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-31T09:00:00Z",
+      "endTime": "2019-10-31T17:00:00Z",
+      "duration": "P480M",
+      "title": "First-Time Contributor Workshop",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1008",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": [],
+      "full_description": "Brian Gilbert, Jordana Fung\n\nThose who are new to the process and tools of contributing to Drupal, you are invited to attend one of the \"First-Time Contributor Workshops\". Many people will be new to contributing and different opportunities arise based on experience level.\n\nGet up to speed with community tools: Drupal.org, issue queues, communication channels, and if needed, installing Drupal 8 or 9 locally. Our mentors are excited to get you ready to tackle real issues.",
+      "video_url": "https://www.youtube.com/watch?v=ukV1veuTTps",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-31T09:00:00Z",
+      "endTime": "2019-10-31T17:00:00Z",
+      "duration": "P480M",
+      "title": "General Contribution",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1009",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    },
+    {
+      "startTime": "2019-10-31T09:00:00Z",
+      "endTime": "2019-10-31T17:00:00Z",
+      "duration": "P480M",
+      "title": "Mentored Contribution",
+      "location": "",
+      "link": "https://events.drupal.org/amsterdam2019/sessions/1010",
+      "track": [
+        "Contribution Lounge"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": ""
+    }
+  ]
+}
