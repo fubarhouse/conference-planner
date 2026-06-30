@@ -61,7 +61,7 @@
         "tier": "Diamond",
         "row": 1,
         "priority": 30,
-        "image": "./img/sponsors/drupalcon-europe/2023-lille/pantheon.png",
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/pantheon.jpg",
         "imageAlt": "Pantheon logo",
         "link": "https://pantheon.io/",
         "bgStyle": "auto",
@@ -243,7 +243,7 @@
         "tier": "Gold",
         "row": 3,
         "priority": 70,
-        "image": "./img/sponsors/drupalcon-europe/2023-lille/sncf.png",
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/sncf.jpg",
         "imageAlt": "SNCF Connect & Tech logo",
         "link": "",
         "bgStyle": "auto",
@@ -334,7 +334,7 @@
         "tier": "Silver",
         "row": 4,
         "priority": 60,
-        "image": "./img/sponsors/drupalcon-europe/2023-lille/lemberg.png",
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/lemberg.jpg",
         "imageAlt": "Lemberg Solutions logo",
         "link": "https://lembergsolutions.com/",
         "bgStyle": "auto",
@@ -438,12 +438,13 @@
         "tier": "Module",
         "row": 5,
         "priority": 10,
-        "image": "./img/sponsors/drupalcon-europe/2023-lille/1xinternet.png",
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/1xinternet-module.png",
         "imageAlt": "1xinternet logo",
         "link": "https://www.1xinternet.de/en",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Lanyards"
       },
       {
         "id": "acquia-module-reception",
@@ -456,7 +457,8 @@
         "link": "https://www.acquia.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Opening Reception"
       },
       {
         "id": "acquia-module-tshirt",
@@ -469,7 +471,8 @@
         "link": "https://www.acquia.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Conference T-Shirt"
       },
       {
         "id": "amazee-io-module",
@@ -482,7 +485,8 @@
         "link": "https://www.amazee.io/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Reviewing Portal Hosting Partner"
       },
       {
         "id": "annertech-module",
@@ -495,7 +499,8 @@
         "link": "https://www.annertech.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Contribution Room"
       },
       {
         "id": "calibrate-module",
@@ -508,7 +513,8 @@
         "link": "https://www.calibrate.be/nl",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Contribution Room"
       },
       {
         "id": "drunomics",
@@ -521,7 +527,8 @@
         "link": "https://drunomics.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Contribution Day"
       },
       {
         "id": "drupal-association",
@@ -534,7 +541,8 @@
         "link": "https://www.drupal.org/association",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Grants, Scholarships & Inclusion Funds"
       },
       {
         "id": "drupal-france",
@@ -542,12 +550,13 @@
         "tier": "Module",
         "row": 5,
         "priority": 55,
-        "image": "./img/sponsors/drupalcon-europe/2023-lille/drupal-france.png",
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/drupal-france.jpg",
         "imageAlt": "Drupal France logo",
         "link": "",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Branded Seats"
       },
       {
         "id": "drupal-ireland",
@@ -560,7 +569,8 @@
         "link": "",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Grants, Scholarships & Inclusion Funds"
       },
       {
         "id": "dug-be",
@@ -573,7 +583,8 @@
         "link": "",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Grants, Scholarships & Inclusion Funds"
       },
       {
         "id": "evolving-web-module",
@@ -581,12 +592,13 @@
         "tier": "Module",
         "row": 5,
         "priority": 70,
-        "image": "./img/sponsors/drupalcon-europe/2023-lille/evolving-web.png",
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/evolving-web-module.png",
         "imageAlt": "Evolving Web logo",
         "link": "https://evolvingweb.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "In-Depth Workshop"
       },
       {
         "id": "ffw-module-workshop",
@@ -599,7 +611,8 @@
         "link": "https://ffw.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "In-Depth Workshop & Showcase"
       },
       {
         "id": "ffw-module-women",
@@ -612,7 +625,8 @@
         "link": "https://ffw.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Women in Drupal Award"
       },
       {
         "id": "frontkom",
@@ -620,12 +634,13 @@
         "tier": "Module",
         "row": 5,
         "priority": 80,
-        "image": "./img/sponsors/drupalcon-europe/2023-lille/frontkom.png",
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/frontkom.jpg",
         "imageAlt": "Frontkom logo",
         "link": "https://www.frontkom.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "In-Depth Workshop"
       },
       {
         "id": "happy-coding",
@@ -638,7 +653,8 @@
         "link": "",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Contribution Day"
       },
       {
         "id": "jetbrains",
@@ -651,7 +667,8 @@
         "link": "https://www.jetbrains.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Prizes Provider"
       },
       {
         "id": "kuoni",
@@ -659,12 +676,13 @@
         "tier": "Module",
         "row": 5,
         "priority": 95,
-        "image": "./img/sponsors/drupalcon-europe/2023-lille/kuoni.png",
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/kuoni.jpg",
         "imageAlt": "Kuoni Tumlare Congress logo",
         "link": "",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Conference Wellness, Grants/Scholarships & Power Up Corner"
       },
       {
         "id": "les-tilleuls",
@@ -677,7 +695,8 @@
         "link": "",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Trivia Night"
       },
       {
         "id": "makina-corpus",
@@ -690,7 +709,8 @@
         "link": "",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Eco Cup"
       },
       {
         "id": "pantheon-module",
@@ -698,12 +718,13 @@
         "tier": "Module",
         "row": 5,
         "priority": 110,
-        "image": "./img/sponsors/drupalcon-europe/2023-lille/pantheon.png",
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/pantheon-module.jpg",
         "imageAlt": "Pantheon logo",
         "link": "https://pantheon.io/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Water Bottle"
       },
       {
         "id": "platform-sh-module",
@@ -711,12 +732,13 @@
         "tier": "Module",
         "row": 5,
         "priority": 115,
-        "image": "./img/sponsors/drupalcon-europe/2023-lille/platform-sh.png",
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/platform-sh-module.png",
         "imageAlt": "Platform.sh logo",
         "link": "https://platform.sh/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Exhibition Stage Session"
       },
       {
         "id": "searchstax",
@@ -729,7 +751,8 @@
         "link": "",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "In-Depth Workshop"
       },
       {
         "id": "werk21",
@@ -742,7 +765,8 @@
         "link": "https://www.werk21.de/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Contribution Day"
       },
       {
         "id": "zoocha",
@@ -750,12 +774,13 @@
         "tier": "Module",
         "row": 5,
         "priority": 130,
-        "image": "./img/sponsors/drupalcon-europe/2023-lille/zoocha.png",
+        "image": "./img/sponsors/drupalcon-europe/2023-lille/zoocha.jpg",
         "imageAlt": "Zoocha logo",
         "link": "https://www.zoocha.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Trivia Night"
       },
       {
         "id": "hello-lille",

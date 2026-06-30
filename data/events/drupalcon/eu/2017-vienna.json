@@ -10,7 +10,7 @@
     "venue": "Messe Wien Exhibition & Congress Centre",
     "timezone": "Europe/Vienna",
     "columns": 5,
-    "enabled": true,
+    "enabled": false,
     "scheduleComplete": false,
     "logo": {
       "image": "./img/logos/drupalcon-logo.svg",
@@ -604,6 +604,19 @@
         "image": "./img/sponsors/drupalcon-europe/2017-vienna/wunder.png",
         "imageAlt": "Wunder logo",
         "link": "https://www.wunderkraut.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "access",
+        "title": "Access",
+        "tier": "Module",
+        "row": 5,
+        "priority": 150,
+        "image": "./img/sponsors/drupalcon-europe/2017-vienna/access.png",
+        "imageAlt": "Access",
+        "link": "",
         "bgStyle": "auto",
         "aspect": "auto",
         "enabled": true

@@ -370,7 +370,8 @@
         "link": "https://www.amazeelabs.com/en",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Thursday Contribution Day"
       },
       {
         "id": "digitalocean",
@@ -383,7 +384,8 @@
         "link": "https://www.digitalocean.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Attendee Badge"
       },
       {
         "id": "druid",
@@ -396,7 +398,8 @@
         "link": "https://www.druid.fi/en",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Coffee Breaks (Wednesday) & Trivia Night"
       },
       {
         "id": "facebook-opensource",
@@ -409,7 +412,8 @@
         "link": "https://opensource.facebook.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Women in Drupal"
       },
       {
         "id": "platformsh",
@@ -422,7 +426,8 @@
         "link": "https://platform.sh/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Coffee Breaks (Tuesday)"
       },
       {
         "id": "siili",
@@ -435,7 +440,8 @@
         "link": "https://www.siili.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Power Up Corner"
       },
       {
         "id": "synetic",
@@ -443,12 +449,13 @@
         "tier": "Event",
         "row": 6,
         "priority": 70,
-        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/synetic.png",
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/synetic.jpg",
         "imageAlt": "Synetic logo",
         "link": "https://synetic.nl/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Opening Reception"
       },
       {
         "id": "thunder",
@@ -456,12 +463,13 @@
         "tier": "Event",
         "row": 6,
         "priority": 80,
-        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/thunder.png",
+        "image": "./img/sponsors/drupalcon-europe/2019-amsterdam/thunder.jpg",
         "imageAlt": "Thunder logo",
         "link": "https://thunder.org/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Photography Stand & Thursday Contribution Day"
       },
       {
         "id": "twisper",
@@ -474,7 +482,8 @@
         "link": "https://business.twisper.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Contribution Lounge & Tuesday Lunch"
       },
       {
         "id": "admin-magazine",

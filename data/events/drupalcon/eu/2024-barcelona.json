@@ -365,7 +365,8 @@
         "link": "https://www.amazeelabs.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Trivia Night"
       },
       {
         "id": "drunomics",
@@ -378,7 +379,8 @@
         "link": "https://drunomics.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Contribution Day"
       },
       {
         "id": "jetbrains",
@@ -391,7 +393,8 @@
         "link": "https://www.jetbrains.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Prizes Provider"
       },
       {
         "id": "tag1-consulting",
@@ -404,7 +407,8 @@
         "link": "https://tag1consulting.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Contribution Room"
       },
       {
         "id": "werk21",
@@ -417,7 +421,8 @@
         "link": "https://www.werk21.de/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Contribution Day"
       },
       {
         "id": "zoocha",
@@ -430,7 +435,8 @@
         "link": "https://www.zoocha.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Trivia Night"
       },
       {
         "id": "aperta",
@@ -547,7 +553,8 @@
         "link": "https://www.acquia.com/drupalcon-barcelona",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Conference T-Shirt"
       },
       {
         "id": "amazee-io-module",
@@ -560,7 +567,8 @@
         "link": "https://www.amazee.io/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Reviewing Portal Hosting Partner"
       },
       {
         "id": "annertech-module",
@@ -573,7 +581,8 @@
         "link": "https://www.annertech.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Contribution Room"
       },
       {
         "id": "factorial-module",
@@ -586,7 +595,8 @@
         "link": "https://www.factorial.io",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Lanyards"
       },
       {
         "id": "hounder-module",
@@ -599,7 +609,8 @@
         "link": "https://hounder.co/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Lunch Symposium"
       },
       {
         "id": "european-commission-module-ftc",
@@ -612,7 +623,8 @@
         "link": "https://joinup.ec.europa.eu/interoperable-europe",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "First-Time Contributor Session"
       },
       {
         "id": "european-commission-module-lunch",
@@ -625,7 +637,8 @@
         "link": "https://joinup.ec.europa.eu/interoperable-europe",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Lunch Symposium"
       }
     ],
     "other_urls": [],

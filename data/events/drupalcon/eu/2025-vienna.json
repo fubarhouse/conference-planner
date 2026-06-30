@@ -49,7 +49,7 @@
         "tier": "Diamond",
         "row": 1,
         "priority": 20,
-        "image": "./img/sponsors/drupalcon-europe/2025-vienna/dropsolid.png",
+        "image": "./img/sponsors/drupalcon-europe/2025-vienna/dropsolid.jpg",
         "imageAlt": "Dropsolid logo",
         "link": "https://dropsolid.com/en",
         "bgStyle": "auto",
@@ -84,7 +84,7 @@
       },
       {
         "id": "amazee-io",
-        "title": "AmazeeIO",
+        "title": "Amazee.io",
         "tier": "Platinum",
         "row": 2,
         "priority": 20,
@@ -140,7 +140,7 @@
         "tier": "Gold",
         "row": 3,
         "priority": 20,
-        "image": "./img/sponsors/drupalcon-europe/2025-vienna/annertech.png",
+        "image": "./img/sponsors/drupalcon-europe/2025-vienna/annertech.jpg",
         "imageAlt": "Annertech logo",
         "link": "https://www.annertech.com/",
         "bgStyle": "auto",
@@ -309,12 +309,13 @@
         "tier": "Module",
         "row": 5,
         "priority": 10,
-        "image": "./img/sponsors/drupalcon-europe/2025-vienna/1xinternet.png",
+        "image": "./img/sponsors/drupalcon-europe/2025-vienna/1xinternet-module.png",
         "imageAlt": "1xInternet logo",
         "link": "https://www.1xinternet.de/en",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Women in Drupal Award & Networking Event"
       },
       {
         "id": "amazee-ai",
@@ -327,11 +328,12 @@
         "link": "https://amazee.ai",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Lanyards"
       },
       {
         "id": "amazee-io-module",
-        "title": "AmazeeIO",
+        "title": "Amazee.io",
         "tier": "Module",
         "row": 5,
         "priority": 30,
@@ -340,7 +342,8 @@
         "link": "https://www.amazee.io/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Relaxing Area"
       },
       {
         "id": "crowdsec",
@@ -353,7 +356,8 @@
         "link": "https://www.crowdsec.net",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Reviewing Portal Hosting Partner"
       },
       {
         "id": "drupal-association",
@@ -366,7 +370,8 @@
         "link": "https://www.drupal.org/association",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Lunch Symposium"
       },
       {
         "id": "drupal-france",
@@ -379,7 +384,8 @@
         "link": "https://www.drupal.fr/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Grants & Scholarship"
       },
       {
         "id": "jakala",
@@ -392,7 +398,8 @@
         "link": "https://www.jakala.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Women in Drupal Award & Networking Event"
       },
       {
         "id": "jetbrains",
@@ -405,7 +412,8 @@
         "link": "https://www.jetbrains.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Prizes Provider"
       },
       {
         "id": "kuoni",
@@ -413,12 +421,13 @@
         "tier": "Module",
         "row": 5,
         "priority": 90,
-        "image": "./img/sponsors/drupalcon-europe/2025-vienna/kuoni.png",
+        "image": "./img/sponsors/drupalcon-europe/2025-vienna/kuoni.jpg",
         "imageAlt": "Kuoni Tumlare Congress logo",
         "link": "https://www.kuonitumlare.com/congress",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Grants & Scholarship"
       },
       {
         "id": "mindcraft",
@@ -431,20 +440,8 @@
         "link": "https://mindcraftgroup.com/",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
-      },
-      {
-        "id": "tag1-consulting",
-        "title": "Tag1 Consulting",
-        "tier": "Module",
-        "row": 5,
-        "priority": 110,
-        "image": "./img/sponsors/drupalcon-europe/2025-vienna/tag1-consulting.png",
-        "imageAlt": "Tag1 Consulting logo",
-        "link": "https://www.tag1consulting.com/",
-        "bgStyle": "auto",
-        "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "PHP Community Supporter"
       },
       {
         "id": "umadgera",
@@ -457,7 +454,8 @@
         "link": "https://umadgera.is",
         "bgStyle": "auto",
         "aspect": "auto",
-        "enabled": true
+        "enabled": true,
+        "subtitle": "Attendee Badges & Drupal in a Day"
       },
       {
         "id": "admin-magazine",

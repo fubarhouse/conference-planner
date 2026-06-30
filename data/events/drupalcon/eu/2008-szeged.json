@@ -16,7 +16,7 @@
       "image": "./img/logos/drupalcon/2008-szeged.png",
       "imageAlt": "DrupalCon Szeged 2008 logo",
       "usePlate": false,
-      "logoDisabled": false,
+      "logoDisabled": true,
       "faIcon": ""
     },
     "flickr": {
@@ -358,7 +358,7 @@
         "tier": "Code Sprint",
         "row": 1,
         "priority": 260,
-        "image": "./img/sponsors/drupalcon/2008-szeged/sponsor-26.png",
+        "image": "./img/sponsors/drupalcon-europe/2008-szeged/sponsor-26.webp",
         "imageAlt": "Apress logo",
         "link": "http://www.apress.com/",
         "bgStyle": "auto",

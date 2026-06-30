@@ -10,7 +10,7 @@
     "venue": "Prague Congress Centre",
     "timezone": "Europe/Prague",
     "columns": 5,
-    "enabled": true,
+    "enabled": false,
     "scheduleComplete": false,
     "logo": {
       "image": "./img/logos/drupalcon-logo.svg",
@@ -55,19 +55,6 @@
         "image": "./img/sponsors/drupalcon-europe/2013-prague/wunderkraut.png",
         "imageAlt": "Wunderkraut logo",
         "link": "https://www.wunderkraut.com/",
-        "bgStyle": "auto",
-        "aspect": "auto",
-        "enabled": true
-      },
-      {
-        "id": "actency",
-        "title": "Actency",
-        "tier": "Champion",
-        "row": 2,
-        "priority": 10,
-        "image": "./img/sponsors/drupalcon-europe/2013-prague/actency.png",
-        "imageAlt": "Actency logo",
-        "link": "https://www.actency.fr/",
         "bgStyle": "auto",
         "aspect": "auto",
         "enabled": true
@@ -437,6 +424,19 @@
         "enabled": true
       },
       {
+        "id": "amx",
+        "title": "AMX",
+        "tier": "Exhibitor",
+        "row": 4,
+        "priority": 160,
+        "image": "./img/sponsors/drupalcon-europe/2013-prague/amx.png",
+        "imageAlt": "AMX logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
         "id": "bright-solutions",
         "title": "Bright Solutions",
         "tier": "Module",
@@ -452,9 +452,9 @@
       {
         "id": "capgemini",
         "title": "Capgemini",
-        "tier": "Module",
-        "row": 5,
-        "priority": 20,
+        "tier": "Champion",
+        "row": 2,
+        "priority": 80,
         "image": "./img/sponsors/drupalcon-europe/2013-prague/capgemini.png",
         "imageAlt": "Capgemini logo",
         "link": "https://www.capgemini.com/",
@@ -582,7 +582,7 @@
       "speakers": [
         "msvalima"
       ],
-      "full_description": "This session examines two critical intellectual property considerations in open source development: the GPL license and software patents. While often perceived as opposing forces, the talk explores their practical implications for software businesses within the Drupal community.\n\nThe presentation challenges polarized viewpoints by analyzing how GPL, though it \"makes it difficult to create scalable software licensing business,\" can simultaneously enhance platform popularity and enable innovative business models. Similarly, patent considerations are reframed\u2014third-party patents may create uncertainty, yet patent threats rarely impact smaller companies significantly. When strategically pursued, patents can provide competitive advantages and facilitate business growth.",
+      "full_description": "This session examines two critical intellectual property considerations in open source development: the GPL license and software patents. While often perceived as opposing forces, the talk explores their practical implications for software businesses within the Drupal community.\n\nThe presentation challenges polarized viewpoints by analyzing how GPL, though it \"makes it difficult to create scalable software licensing business,\" can simultaneously enhance platform popularity and enable innovative business models. Similarly, patent considerations are reframed—third-party patents may create uncertainty, yet patent threats rarely impact smaller companies significantly. When strategically pursued, patents can provide competitive advantages and facilitate business growth.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -670,7 +670,7 @@
         "amanaplan",
         "eschma"
       ],
-      "full_description": "This presentation addresses the challenge of keeping reverse-proxy caches current in production environments. While Varnish, Squid, or Nginx accelerate Drupal sites, outdated content often persists despite using Expire and Purge modules.\n\nColumbia Law School developed a cache tagging approach to maximise Varnish performance while ensuring fresh content delivery. The session covers:\n\n- Current cache invalidation limitations and why they sometimes fail\n- Emerging smart cache developments in Drupal 8 and Varnish Cache Tagging\n- HTTP Cache Tag Auto module \u2014 a Drupal 7 solution supporting automatic tagging based on entities, menu items, themes, blocks, taxonomy terms, and views\n- Rules integration\n- Hooks for module extensibility\n- Sample reverse-proxy configuration files",
+      "full_description": "This presentation addresses the challenge of keeping reverse-proxy caches current in production environments. While Varnish, Squid, or Nginx accelerate Drupal sites, outdated content often persists despite using Expire and Purge modules.\n\nColumbia Law School developed a cache tagging approach to maximise Varnish performance while ensuring fresh content delivery. The session covers:\n\n- Current cache invalidation limitations and why they sometimes fail\n- Emerging smart cache developments in Drupal 8 and Varnish Cache Tagging\n- HTTP Cache Tag Auto module — a Drupal 7 solution supporting automatic tagging based on entities, menu items, themes, blocks, taxonomy terms, and views\n- Rules integration\n- Hooks for module extensibility\n- Sample reverse-proxy configuration files",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -705,7 +705,7 @@
         "rszrama",
         "Damien Tournoud"
       ],
-      "full_description": "rszrama, Damien Tournoud\nCommerce Guys\n\n\"We're not just talking about a shopping cart any more...Commerce is broader than you think. It's transactions. Information. Connection.\"\n\nThe session explores how Drupal Commerce extends beyond ecommerce to encompass broader site interactions. Participants will learn how commerce principles apply across government, education, and other sectors where \"the exchange of ideas is just as important as the exchange of money.\"\n\nCommerce Guys presents their toolkit \u2014 including Commerce Kickstart, Commerce Marketplace, Commerce Platform, and Commerce Mobile \u2014 demonstrating how Drupal Commerce serves as \"a competitive framework for high profile eCommerce projects\" and helps organisations win significant ecommerce contracts.",
+      "full_description": "rszrama, Damien Tournoud\nCommerce Guys\n\n\"We're not just talking about a shopping cart any more...Commerce is broader than you think. It's transactions. Information. Connection.\"\n\nThe session explores how Drupal Commerce extends beyond ecommerce to encompass broader site interactions. Participants will learn how commerce principles apply across government, education, and other sectors where \"the exchange of ideas is just as important as the exchange of money.\"\n\nCommerce Guys presents their toolkit — including Commerce Kickstart, Commerce Marketplace, Commerce Platform, and Commerce Mobile — demonstrating how Drupal Commerce serves as \"a competitive framework for high profile eCommerce projects\" and helps organisations win significant ecommerce contracts.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -795,7 +795,7 @@
         "site building"
       ],
       "speakers": [
-        "G\u00e1bor Hojtsy"
+        "Gábor Hojtsy"
       ],
       "full_description": "Drupal 8 fundamentally changes how language is understood on sites. This session covers installation, language settings, content language and translation support, software translation, and configuration language.\n\n\"Drupal 8 aims to provide a familiar environment yet it has many fundamental underlying changes in terms of how it understands language on your site.\"\n\nThe presentation explores new features for both single foreign language and multilingual sites. It's designed for those with Drupal 6 or 7 multilingual building experience seeking Drupal 8 capabilities, though beginners will also benefit from the content.",
       "video_url": "",
@@ -899,7 +899,7 @@
       "speakers": [
         "jessebeach"
       ],
-      "full_description": "Front end development constantly evolves with shifting tools, standards, and best practices. Since the iPhone's introduction, progressive enhancement, responsive design, HTML5, JavaScript frameworks, and mobile web access have transformed the landscape.\n\nDrupal 7 produced HTML by default, but \"Drupal 8 installation, we can now request JSON in addition to HTML.\" This architectural shift enables dynamic front end applications, though gaps remain \u2014 the entity CRUD API will be incomplete, requiring contrib developers to fill voids.\n\nThe session explores how Drupal supports complex front end architectures through:\n- Decoupling front end templates from backend data using frameworks like Backbone.js\n- Balancing single page application dynamism with RESTful, addressable content management\n- Identifying Drupal 8 functionality gaps for modern web development\n- Using tools to maintain pace with evolving front end practices\n\nThe discussion aims to help front end developers identify necessary Drupal features, understand their mechanisms, and write code effectively.",
+      "full_description": "Front end development constantly evolves with shifting tools, standards, and best practices. Since the iPhone's introduction, progressive enhancement, responsive design, HTML5, JavaScript frameworks, and mobile web access have transformed the landscape.\n\nDrupal 7 produced HTML by default, but \"Drupal 8 installation, we can now request JSON in addition to HTML.\" This architectural shift enables dynamic front end applications, though gaps remain — the entity CRUD API will be incomplete, requiring contrib developers to fill voids.\n\nThe session explores how Drupal supports complex front end architectures through:\n- Decoupling front end templates from backend data using frameworks like Backbone.js\n- Balancing single page application dynamism with RESTful, addressable content management\n- Identifying Drupal 8 functionality gaps for modern web development\n- Using tools to maintain pace with evolving front end practices\n\nThe discussion aims to help front end developers identify necessary Drupal features, understand their mechanisms, and write code effectively.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -916,7 +916,7 @@
       "speakers": [
         "slybud"
       ],
-      "full_description": "This presentation celebrates the Scald module's CMSDay award for \"Best Back-Office Innovation\" and addresses the historical gap in Drupal's media management capabilities. The session covers:\n\n- Evolution of media management in Drupal (versions 6\u20137)\n- Core Scald concepts and architecture\n- Media Library interface, WYSIWYG integration, and atom reference fields\n- Supported media providers including videos, sounds, images, pdf, soundcloud, embed.ly, twitter, flickr, facebook, and commerce products\n- Version 1.1 features: inline editing, cut/paste functionality, RTE contextualisation, custom players, responsive design, CKEditor integration, and multimedia galleries\n- Real-world user implementations and feedback\n- Future roadmap announcements",
+      "full_description": "This presentation celebrates the Scald module's CMSDay award for \"Best Back-Office Innovation\" and addresses the historical gap in Drupal's media management capabilities. The session covers:\n\n- Evolution of media management in Drupal (versions 6–7)\n- Core Scald concepts and architecture\n- Media Library interface, WYSIWYG integration, and atom reference fields\n- Supported media providers including videos, sounds, images, pdf, soundcloud, embed.ly, twitter, flickr, facebook, and commerce products\n- Version 1.1 features: inline editing, cut/paste functionality, RTE contextualisation, custom players, responsive design, CKEditor integration, and multimedia galleries\n- Real-world user implementations and feedback\n- Future roadmap announcements",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -969,7 +969,7 @@
       "speakers": [
         "Wim Leers"
       ],
-      "full_description": "Drupal 8 delivers improved front-end performance by eliminating unnecessary JavaScript loads and implementing efficient entity caching to reduce HTML generation time. This accelerates page rendering on all devices, including mobile.\n\nThe framework addresses personalisation through client-side caching using localStorage/sessionStorage with intelligent cache invalidation, allowing \"the same HTML (well, >90% the same \u2014 i.e. the most expensive parts)\" to serve multiple users while maintaining individual customisation based on permissions and user interests.\n\nAdditionally, Drupal 8 introduces pluggable CSS and JavaScript optimisation, enabling custom minifiers and data-driven grouping strategies to achieve globally optimal asset bundling.\n\nThe session explores achieving comparable performance gains in Drupal 7 where applicable, focusing on delivering fast websites with strong perceived performance.",
+      "full_description": "Drupal 8 delivers improved front-end performance by eliminating unnecessary JavaScript loads and implementing efficient entity caching to reduce HTML generation time. This accelerates page rendering on all devices, including mobile.\n\nThe framework addresses personalisation through client-side caching using localStorage/sessionStorage with intelligent cache invalidation, allowing \"the same HTML (well, >90% the same — i.e. the most expensive parts)\" to serve multiple users while maintaining individual customisation based on permissions and user interests.\n\nAdditionally, Drupal 8 introduces pluggable CSS and JavaScript optimisation, enabling custom minifiers and data-driven grouping strategies to achieve globally optimal asset bundling.\n\nThe session explores achieving comparable performance gains in Drupal 7 where applicable, focusing on delivering fast websites with strong perceived performance.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1125,7 +1125,7 @@
       "speakers": [
         "VioMeneux"
       ],
-      "full_description": "VioMeneux\nActency\n\nOver years in project management, two principles emerge: developers are always right, and project managers never walk alone. Success requires placing team members' profiles and skills at the heart of your process.\n\nThe session explores how to build the right team for your project \u2014 identifying who among Sitebuilders, Themers, Developers, Technical Project Managers, and Drupal Architects fits where. However, assembling talented people isn't enough; \"Setting up a rugbymen team in the middle of the field might turn soon enough into a gigantic scrum mess, if you don't give each of them a clear scope.\"\n\nFocusing on large project organisation and Drupal's suitability for such work, this presentation covers scopes, governance, and team member empowerment to create healthy, productive cycles where everyone thrives.",
+      "full_description": "VioMeneux\nActency\n\nOver years in project management, two principles emerge: developers are always right, and project managers never walk alone. Success requires placing team members' profiles and skills at the heart of your process.\n\nThe session explores how to build the right team for your project — identifying who among Sitebuilders, Themers, Developers, Technical Project Managers, and Drupal Architects fits where. However, assembling talented people isn't enough; \"Setting up a rugbymen team in the middle of the field might turn soon enough into a gigantic scrum mess, if you don't give each of them a clear scope.\"\n\nFocusing on large project organisation and Drupal's suitability for such work, this presentation covers scopes, governance, and team member empowerment to create healthy, productive cycles where everyone thrives.",
       "video_url": "",
       "sponsorIds": ""
     },
@@ -1162,7 +1162,7 @@
         "nod_",
         "alexku"
       ],
-      "full_description": "This session presents a real-world case study of diagnosing and fixing a severely broken Drupal site. Starting from a white screen of death, presenters guide the audience through identifying architectural issues, including poor module decisions, configuration problems, and code quality concerns.\n\nThe workshop covers \"how the site is built and how is the balance made between contributed and custom modules,\" examining what commonly goes wrong across these layers. Participants learn to troubleshoot performance issues and security vulnerabilities through practical examples.\n\nThe presenters emphasise that \"Drupal is a complex system\" requiring understanding of all application layers. By working through real-world examples from large-scale Drupal websites, attendees gain exposure to debugging techniques and best practices across site architecture, code quality, and system administration \u2014 ultimately learning how to restore a compromised site to normal operation.",
+      "full_description": "This session presents a real-world case study of diagnosing and fixing a severely broken Drupal site. Starting from a white screen of death, presenters guide the audience through identifying architectural issues, including poor module decisions, configuration problems, and code quality concerns.\n\nThe workshop covers \"how the site is built and how is the balance made between contributed and custom modules,\" examining what commonly goes wrong across these layers. Participants learn to troubleshoot performance issues and security vulnerabilities through practical examples.\n\nThe presenters emphasise that \"Drupal is a complex system\" requiring understanding of all application layers. By working through real-world examples from large-scale Drupal websites, attendees gain exposure to debugging techniques and best practices across site architecture, code quality, and system administration — ultimately learning how to restore a compromised site to normal operation.",
       "video_url": "",
       "sponsorIds": ""
     },

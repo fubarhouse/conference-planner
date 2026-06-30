@@ -10,13 +10,13 @@
     "venue": "Bella Center Copenhagen",
     "timezone": "Europe/Copenhagen",
     "columns": 6,
-    "enabled": true,
+    "enabled": false,
     "scheduleComplete": true,
     "logo": {
       "image": "./img/logos/drupalcon/2010-copenhagen.png",
       "imageAlt": "DrupalCon Copenhagen 2010 logo",
       "usePlate": false,
-      "logoDisabled": false,
+      "logoDisabled": true,
       "faIcon": ""
     },
     "flickr": {

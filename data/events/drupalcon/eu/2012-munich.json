@@ -10,7 +10,7 @@
     "venue": "Sheraton München Arabellapark Hotel",
     "timezone": "Europe/Berlin",
     "columns": 8,
-    "enabled": true,
+    "enabled": false,
     "scheduleComplete": false,
     "logo": {
       "image": "./img/logos/drupalcon-logo.svg",
@@ -787,6 +787,19 @@
         "image": "./img/sponsors/drupalcon-europe/2012-munich/bluehost.jpg",
         "imageAlt": "BlueHost logo",
         "link": "https://www.bluehost.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "adam-hill",
+        "title": "Adam Hill",
+        "tier": "Supporter & Scholarship",
+        "row": 8,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcon-europe/2012-munich/adam-hill.png",
+        "imageAlt": "Adam Hill",
+        "link": "",
         "bgStyle": "auto",
         "aspect": "auto",
         "enabled": true

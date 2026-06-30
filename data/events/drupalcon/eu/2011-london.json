@@ -1071,7 +1071,8 @@
         "Steve Rude"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-22T09:00:00Z",
@@ -1089,7 +1090,8 @@
         "Sofian Benaissa"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-22T09:00:00Z",
@@ -1106,7 +1108,8 @@
         "Erik Stielstra"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-22T09:00:00Z",
@@ -1122,7 +1125,8 @@
         "Mixel Kiemen"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T08:15:00Z",
@@ -1139,7 +1143,8 @@
         "Robert Douglass"
       ],
       "full_description": "This opening session aims to orient attendees to the conference experience. The presenters, described as 'two Drupal(Con) veterans,' seek to provide 'helpful tips about getting the most from your experience' while delivering an 'entertaining and informative' introduction to the event. The session addresses key questions including: 'I am at a tech conference, why do I keep hearing about a community?' and 'How do I get the most out of Drupal(Con)?' It welcomes all attendees\u2014'first, second or 8th DrupalCon'\u2014including coders, designers, decision makers, and marketers. A video recording is available through the Internet Archive.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T09:00:00Z",
@@ -1155,7 +1160,8 @@
         "Dries Buytaert"
       ],
       "full_description": "The State of Drupal keynote by Drupal project lead Dries Buytaert, discussing the current state of the Drupal platform and previewing what is coming in Drupal 8.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T10:10:00Z",
@@ -1169,7 +1175,8 @@
       ],
       "speakers": [],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T10:15:00Z",
@@ -1183,7 +1190,8 @@
       ],
       "speakers": [],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T10:30:00Z",
@@ -1200,7 +1208,8 @@
         "Simon Surtees"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T10:45:00Z",
@@ -1216,7 +1225,8 @@
         "John Albin Wilkins"
       ],
       "full_description": "The presentation addresses how 'mobile device usage grows exponentially' while challenging traditional web development assumptions. It explores four primary approaches: responsive designs, adaptive designs, mobile-first sites, and mobile-only sites. The session examines key technologies including media queries, fluid grids, and responsive images, alongside tools like adapt.js, 320 and Up, and WURFL. A critical emphasis is placed on performance considerations. The presenter highlights 'Drupal is uniquely positioned above most frameworks' due to its low cost of failure in mobile experimentation. Key topics covered include mobile context definition, performance implications for mobile devices, mobile technique comparison, Drupal modules for mobile development, and Drupal's advantages in mobile experimentation.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T10:45:00Z",
@@ -1232,7 +1242,8 @@
         "George DeMet"
       ],
       "full_description": "This non-technical session explores Drupal development through narrative frameworks. The presenter examines how 'the lifecycle of a Drupal development project' parallels Hollywood storytelling structures, including three-act screenplay format, the Hero's Journey, and other narrative models. Key topics covered include process models for Drupal site development, best practices for delivering projects 'on time, on budget, and meet customer expectations,' incorporating agile methodologies into Drupal work, and elements of successful Drupal platforms. The session targets freelancers, small shop developers, organizational decision-makers considering Drupal, and project collaborators.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T10:45:00Z",
@@ -1248,7 +1259,8 @@
         "webkenny"
       ],
       "full_description": "The presenter explores how Drupal processes requests from initial user interaction through final browser output. The session uses creative storytelling and visual exploration to demystify core concepts including the bootstrap process, the hook system, theme layer functionality, and the update.php mechanism. Key topics covered include understanding Drupal's linear execution model starting from index.php, navigating the hook system, preprocessing in the theme layer, and troubleshooting strategies for developers. The presentation emphasizes practical applications for site building and debugging. Intended audience: 'Existing Drupal developers who want to understand the system and graduate from roadie to rock star.' While focused on Drupal 7, most content applies to Drupal 6.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T10:45:00Z",
@@ -1264,7 +1276,8 @@
         "Jacob Redding"
       ],
       "full_description": "The session explores the Drupal Association, described as 'a not-for-profit trade organization that tasks itself with fostering and supporting the Drupal software project, the community and its growth.' The organization was established in 2006 and formed DrupalCon Inc. in 2010 to hire full-time staff for event organization. Key support areas include maintaining Drupal.org infrastructure, empowering community participation, protecting GPL source code, providing legal advocacy, organizing global events, and promoting Drupal software benefits. Core questions addressed: What is the Drupal Association? Why does Drupal need one? Who funds Drupal.org infrastructure? How can community members participate?",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T10:45:00Z",
@@ -1280,7 +1293,8 @@
         "Marcus Deglos"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T10:45:00Z",
@@ -1296,7 +1310,8 @@
         "Sam Lowe"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T10:45:00Z",
@@ -1312,7 +1327,8 @@
         "Yuriy Gerasimov"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T11:15:00Z",
@@ -1328,7 +1344,8 @@
         "Damien Tournoud"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T11:45:00Z",
@@ -1342,7 +1359,8 @@
       ],
       "speakers": [],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T13:00:00Z",
@@ -1358,7 +1376,8 @@
         "Barry Jaspan"
       ],
       "full_description": "The session addresses the complete workflow for managing Drupal sites across multiple environments. As Jaspan explains, the approach covers 'initial development on local workstation, testing in a staging environment, and a production environment ranging from a single server to a high-performance high-availability cluster.' The presentation tackles five key questions: developing locally while deploying to high-performance servers or clusters, scaling production websites automatically to handle variable traffic without downtime, managing multiple Drupal sites with separate development, testing, and production environments, maintaining 24/7 uptime despite potential server failures, and finding appropriate support for operational and technical challenges. Intended for site builders and Drupal site deployers for organizations or clients.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T13:00:00Z",
@@ -1374,7 +1393,8 @@
         "Jeff Eaton"
       ],
       "full_description": "As Drupal's user base expanded beyond hobbyist developers to include 'businesses, nonprofits, independent developers, startups, and governments,' a fundamental question emerged about the software's identity. The session explores whether Drupal functions as a product for website builders, a framework for developers, or a platform for building other products. Eaton argues that while the 'both' answer was once satisfactory, critical decisions about design, requirements, and complexity demand clearer strategic direction. He examines the historical forces shaping Drupal's current trajectory and the trade-offs inherent in different approaches\u2014particularly relevant to those pursuing the 'smallcore' initiative. Target audience: core developers and decision-makers seeking historical context; API developers interested in platform direction; business stakeholders evaluating Drupal for future projects.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T13:00:00Z",
@@ -1390,7 +1410,8 @@
         "Jason Pamental"
       ],
       "full_description": "The session explores how web font embedding can modernize Drupal sites beyond the limited default typefaces. Pamental explains that 'Arial's days are numbered, and we should all celebrate,' arguing that relying on system fonts undermines brand identity investments. Key topics covered include the evolution of font embedding technology, practical implementation across browsers and devices (desktop to mobile), and performance optimization. The presenter discusses major web font services, API-enabled Drupal modules for font selection, and managing font loading appearance. Advanced features addressed include font-subsetting for non-Latin character sets and fallback strategies for devices with limited font support. The session targets designers, design directors, and front-end developers seeking to incorporate web typography into their workflows while maintaining page load performance.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T13:00:00Z",
@@ -1406,7 +1427,8 @@
         "ergonlogic"
       ],
       "full_description": "Christopher Gervais presents how Aegir, a distributed provisioning system for Drupal, enables multiple business approaches. The session covers four distinct models: 1. Classic Web Development: Streamlined workflows across development, staging, and production environments with improved scalability. 2. Infrastructure-as-a-Service (IaaS): Leveraging Debian packaging for Aegir to automate virtual server setup and maintenance using configuration management tools. 3. Platform-as-a-Service (PaaS): Enabling developers to create and manage custom Drupal instances within a managed Aegir system, opening reseller opportunities. 4. Software-as-a-Service (SaaS): Clients purchase subscriptions to pre-built Drupal sites provisioned automatically. The presenter demonstrates this through AlternD.com, Koumbit's own SaaS offering. Intended for freelancers, business owners, Drupal developers, site builders, and system administrators building Drupal-based businesses.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T13:00:00Z",
@@ -1422,7 +1444,8 @@
         "moshe-weitzman"
       ],
       "full_description": "The session addresses migrating legacy content into Drupal systems. According to the page, 'their existing content, in the form of square pegs, needs to fit into nice round Drupal objects.' Weitzman, a maintainer of the Migrate module and Drush, presents 'a native Drupal solution for sucking in content from many different sources and saving it cleanly into Drupal.' Key topics covered include moving sites to Drupal, robust data migration processes, and building applications using Drush.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T13:00:00Z",
@@ -1438,7 +1461,8 @@
         "Andy Stynen"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T13:00:00Z",
@@ -1454,7 +1478,8 @@
         "John Albin Wilkins"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T13:30:00Z",
@@ -1472,7 +1497,8 @@
         "Tam\u00e1s Demeter-Haludka"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T14:00:00Z",
@@ -1488,7 +1514,8 @@
         "Adam Kalsey"
       ],
       "full_description": "An introductory event for a development competition sponsored by Tropo, kicking off the Drupal Module Developer Challenge at DrupalCon London 2011.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T14:15:00Z",
@@ -1504,7 +1531,8 @@
         "Larry Garfield"
       ],
       "full_description": "The session explores 'code smell'\u2014patterns within code that signal underlying issues. Garfield explains that recognizing these warning signs is essential for software engineers to prevent bugs and avoid costly rewrites. The presentation covers key code smells, anti-patterns, and problematic practices to identify in both personal and others' code. It emphasizes how this skill benefits quality assurance, code reviews, and module evaluation, particularly for identifying code that resists unit testing. Key questions addressed include how to identify problems before they escalate, responses to potential problems, balancing code quality with deadline pressures, developing habits for cleaner code, and understanding unit tests and their benefits.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T14:15:00Z",
@@ -1520,7 +1548,8 @@
         "g\u00e1bor-hojtsy"
       ],
       "full_description": "Drupal aims to be inherently secure, yet requires careful attention from site architects, maintainers, and system administrators. This presentation explores 'the main responsibilities and fallacies of the respective roles.' The session covers three primary areas: setup best practices for Drupal installations, recommended security-focused modules, and secure coding guidelines. The content addresses multiple skill levels, with emphasis on site builders while including technical backend material and development practices. Key topics covered include common security mistakes Drupal developers make, methods for avoiding dangerous permission configurations and settings, and security-enhancing modules for site protection.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T14:15:00Z",
@@ -1536,7 +1565,8 @@
         "Emma Jane Hogbin"
       ],
       "full_description": "The session addresses how website themes can feature 'beautiful, semantic markup...and also the hacky HTML soup.' Hogbin teaches attendees to 'become a theme surgeon' by mastering two critical skills: identifying Drupal elements within design files and using effective tools for theme recreation. The presentation covers transforming design files into functional Drupal themes while addressing practical concerns: leveraging grid-based design, determining when to use Panels, positioning page elements strategically, and knowing where to begin the theming process. Target audience includes small business site builders partnering with graphic designers, intermediate themers who customize existing free themes, those unfamiliar with base themes seeking to streamline their workflow.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T14:15:00Z",
@@ -1555,7 +1585,8 @@
         "Karen Borchert"
       ],
       "full_description": "This panel discussion examines the evolving Drupal business landscape, where 'consolidation is already happening' among companies ranging from established integrators to venture-backed startups. The session explores strategic questions about positioning companies for acquisition and maximizing value from mergers. Key topics covered include successful M&A examples (Lullabot acquiring Rapid Waters Development, Propeople acquiring Segments, af83 and Commerce Guys joining forces) and how Drupal organizations benefit from economies of scale through mergers and alliances. Target audience: Drupal shops, business leaders, project owners, business evaluators, strategy planners, consultants, and startups.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-23T14:15:00Z",
@@ -1572,7 +1603,8 @@
         "Heather James"
       ],
       "full_description": "The session addresses challenges in identifying and developing Drupal talent as the community grows. The presenters note that 'it is becoming increasingly important to assess Drupal skills of and provide training for those for whom Drupal is a 9-5 job.' The discussion examines existing training initiatives including Acquia Training, DrupalKata, and the Drupal Open Learning Initiative, alongside e-learning platforms like Drupalize.me and BuildaModule.com. The speakers propose a reputation-based certification framework modeled on the Web of Trust concept rather than traditional testing approaches. Key topics include identifying Drupal talent, training methodologies, required skill sets, hiring criteria, and curriculum design.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T09:00:00Z",
@@ -1588,7 +1620,8 @@
         "Tom Standage"
       ],
       "full_description": "Tom Standage, Digital Editor of The Economist, presents a keynote examining the future of social media through the lens of historical analogies. Standage is the author of 'A History of the World in Six Glasses' and 'The Victorian Internet,' bringing his expertise in technology history to bear on modern social media trends.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T10:00:00Z",
@@ -1602,7 +1635,8 @@
       ],
       "speakers": [],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T10:30:00Z",
@@ -1619,7 +1653,8 @@
         "pescetti"
       ],
       "full_description": "The presenters explore how Drupal 7 enables creation of repeatable website templates applicable to both large-scale deployments and single-site maintenance. Key topics include packaging core and contributed modules using Makefiles and installation profiles while maintaining updates throughout development, implementing Code-Driven Development to store configuration sustainably via the Features module, designing Features for code reusability and extensibility, leveraging CTools and Exportables to codify configuration when modules lack native support, and using distribution update mechanisms for safe configuration updates on live sites. Intended for developers seeking clean development workflows that enable collaboration, code reuse, and secure updates.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T10:30:00Z",
@@ -1637,7 +1672,8 @@
         "Jennifer Lea Lampton"
       ],
       "full_description": "The presenters conducted formal usability testing at the University of Minnesota in May 2011 to identify usability challenges and patterns in Drupal 7. Eight site builders with no prior Drupal experience participated in task-based testing. The session explores 'what works well and what needs improvement in D7,' examining the overall user experience and implications for Drupal 8 development. The presentation addresses how the study was conducted, what was tested, what succeeded and what requires refinement in the interface, and how findings should guide future development.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T10:30:00Z",
@@ -1654,7 +1690,8 @@
         "Jose Antonio Reyero del Prado"
       ],
       "full_description": "The session addresses the complexity of creating multilingual websites. As the organizers note, 'Building multilingual websites is hard' because numerous decisions must be made across business logic and technical considerations. The presenters examine five multilingual website scenarios, progressing from foundational assumptions through module selection and configuration. They explore how different factors\u2014including countries, languages, organizational structures, content workflows, and cultural elements\u2014affect implementation choices. Key topics covered include creating simple multilingual blogs, building international corporate websites, translation versus localization approaches, and current possibilities and limitations in Drupal multilingual solutions.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T10:30:00Z",
@@ -1671,7 +1708,8 @@
         "Benjamin Koether"
       ],
       "full_description": "This session addresses building quality Drupal sites within budget and time constraints. The presenters work toward three main objectives: dispelling common misconceptions about Drupal design and development, applying Lean Manufacturing principles to web design and development to 'achieve higher quality, at lower costs and record speeds,' and providing practical guidance for project planning, including feature selection and optimizing designer resources. Key questions addressed include maximizing Drupal functionality on limited budgets, feature selection strategies and best practices, when custom development is unnecessary, maximizing value from web designers, and whether simultaneous achievement of low cost, high quality, and speed is possible.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T10:30:00Z",
@@ -1690,7 +1728,8 @@
         "Kristof Van Tomme"
       ],
       "full_description": "The Drupal community ecosystem is evolving with numerous emerging event formats. This session explores how these gatherings\u2014including Design Camps, Dev Days, Business Days, and vertical-specific summits\u2014foster professional networks and knowledge exchange. Key topics addressed include what drives community engagement, why some local groups thrive while others struggle, how to establish meaningful community objectives, and strategies for measuring progress. The presenters examine what makes certain events effective and identify emerging best practices. The session targets community members, leaders, and business stakeholders interested in event organization, grassroots community building, and expanding Drupal's reach across different sectors and geographies.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T10:30:00Z",
@@ -1706,7 +1745,8 @@
         "Nathan Haug"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T11:30:00Z",
@@ -1720,7 +1760,8 @@
       ],
       "speakers": [],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T12:30:00Z",
@@ -1736,7 +1777,8 @@
         "soyarma"
       ],
       "full_description": "The presenter addresses common misconceptions about Drupal's scalability. He explains that 'Drupal has been a victim of it's own success' because developers often treat the system as a black box rather than leveraging built-in caching and optimization features. The session demonstrates techniques for achieving sub-100ms page loads with 100 concurrent users, and serving millions of monthly page views across just two servers. It covers both anonymous and authenticated user scenarios. Topics covered include performance enhancement strategies, differences between caching technologies (APC, memcache, memcached, authcache, boost), Pressflow optimization, identifying caching priorities, and trade-offs and implementation considerations.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T12:30:00Z",
@@ -1752,7 +1794,8 @@
         "noyz"
       ],
       "full_description": "This session addresses three core areas of user-centered design practice. Requirements and Idea Validation: The presenter explores 'methods to flush out requirements and uncover both good and bad ideas,' focusing on stakeholder engagement techniques and rapid identification of viable concepts. Design Acceleration: The discussion covers 'tools and methods to accelerate user interface design,' examining processes and roles needed for expedited wireframing and visual design creation. Testing and Measurement: Attendees learn 'tools and methods to test designs for accuracy and measure for continued improvement,' with methodologies ensuring each feature enhancement benefits user experience. The session applies to both waterfall and agile methodologies, using Drupal and Drupal Gardens as practical examples.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T12:30:00Z",
@@ -1768,7 +1811,8 @@
         "Nicole Lind"
       ],
       "full_description": "Nicole Lind addresses the complexities of migrating from legacy content management systems to Drupal. She notes that 'most major Drupal projects are now migrations from other content management systems' rather than greenfield builds. The session focuses on managing organizational change rather than advocating for Drupal adoption. Key topics include setting stakeholder expectations, documenting risk analyses and mitigation strategies, and addressing resistance from legacy CMS users. The presentation targets project managers and organizational leaders overseeing significant platform migrations.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T12:30:00Z",
@@ -1785,7 +1829,8 @@
         "Larry Garfield"
       ],
       "full_description": "This session explores the practical implications of open source software beyond cost savings. The presenters explain that 'Free and Open Source Software means more than just no licensing costs.' The session covers how GPL licensing creates a 'common good' where contributions can be shared but not converted into proprietary products, fostering collaboration and trust across competing organizations. Key topics include comparing open source and proprietary consulting models from both developer and client perspectives, examining 'a trust-based economy rather than a fear-based economy,' and discussing how to maintain good standing in the open source community. The presenters also address contracting and agreements that allow work to benefit both individual developers and the broader community.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T12:30:00Z",
@@ -1802,7 +1847,8 @@
         "steven-jones"
       ],
       "full_description": "This session introduces Aegir, a 'distributed provisioning system for Drupal' enabling management of thousands of sites across multiple servers. The presentation covers automating deployment and site management tasks, including the one-line Debian installer, site installation, and upgrade management. Attendees learn about recent progress since version 1.0 and the roadmap toward 2.0. The session targets Drush users advancing their skills, developers managing multiple sites, those concerned with maintenance and security, custom application developers needing rapid site rollout, and anyone seeking to eliminate tedious manual tasks. Key questions addressed include what is Aegir and why adopt it, how to manage security upgrades across multiple Drupal sites efficiently, how to deploy custom Drupal distributions rapidly, and real-world Aegir usage examples.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T12:30:00Z",
@@ -1821,7 +1867,8 @@
         "Leisa Reichelt"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T13:45:00Z",
@@ -1837,7 +1884,8 @@
         "Robert Douglass"
       ],
       "full_description": "The session examines the emerging landscape of Drupal-based products and app stores. Douglass explores which companies are succeeding in this space and identifies the critical factors behind their success. Key topics addressed include what products are doing well and what ingredients make them succeed, the role of GPL licensing in product development, whether distributions and app stores represent the future of Drupal commerce, and essential APIs and technology platforms for product viability. The presentation targets 'C Types, business minded developers, analysts, and decisions makers of all stripes,' making it suitable for executives and strategists evaluating Drupal-based business opportunities.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T13:45:00Z",
@@ -1854,7 +1902,8 @@
         "Howard Tyson"
       ],
       "full_description": "The session explores integrating Node.js with Drupal to enable real-time capabilities. According to the page, 'Drupal is a powerful, flexible platform for building applications, but not something that handles realtime notifications easily.' Node.js, by contrast, 'makes writing applications that handle thousands of open connections at the same time easy.' The Nodejs module bridges these technologies, allowing developers to leverage both platforms' strengths. Topics covered include the importance of real-time functionality, Node.js advantages, how the Nodejs module integrates the two systems, current module features, and future development directions.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T13:45:00Z",
@@ -1870,7 +1919,8 @@
         "Leisa Reichelt"
       ],
       "full_description": "This session covered an ongoing community initiative launched at DrupalCon Chicago. The presentation addressed two primary objectives: enhancing collaboration infrastructure on Drupal.org and reducing barriers for new contributors by making the platform more welcoming. Key topics included redesigning the issue queue, establishing spaces for contributors with common interests, improving notification systems, and lowering entry barriers for people contributing code, design, documentation, and other needed skills. The session explored the initiative's methodology, guiding principles, and current progress while inviting attendees to participate.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T13:45:00Z",
@@ -1887,7 +1937,8 @@
         "Adam Snetman"
       ],
       "full_description": "This session explores how designers must think systemically when working with content management systems. The presenters emphasize that 'they're not really creating a page \u2014 they're building a complete system to house the all of the site's content.' The session covers essential practices including sitemaps, wireframes, and mockups as tools for outlining a site's feature set and functionality. Key topics include understanding CMS requirements during initial design phases and creating Drupal-optimized designs. A real-world case study showcases the Expeditionary Learning relaunch, demonstrating how to translate CMS-agnostic designs into Drupal implementations while managing costs and client expectations.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T13:45:00Z",
@@ -1905,7 +1956,8 @@
         "Dick Olsson"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T13:45:00Z",
@@ -1924,7 +1976,8 @@
         "Greg Dunlap"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T13:45:00Z",
@@ -1940,7 +1993,8 @@
         "Bryan House"
       ],
       "full_description": "The session focuses on Acquia's comprehensive developer toolkit for Drupal projects. It covers 'From local development to our proven cloud platform to site management, Acquia gives Drupal developers the ultimate suite of tools to make Drupal development easy and fun.' Key topics include the latest updates to Dev Cloud and Managed Cloud platforms, Git and Drush support integration, Insight (a Drupal site monitoring service), and enhancements to the Acquia Network.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T15:00:00Z",
@@ -1956,7 +2010,8 @@
         "Diana Montalion Dupuis"
       ],
       "full_description": "This session targets themers and developers seeking advancement to more complex projects and career growth. The presenter guides attendees through 'creating your plan' for skill development with a take-home list of essential traits and competencies. The session addresses three core questions: what specific skills require building, what experiences demonstrate those capabilities, and which non-technical abilities matter most. The presentation synthesizes feedback from top Drupal shops and team leaders regarding 'Most Important Skillz' their strongest developers possess. Content benefits both individual contributors and team builders, offering 'a master list of skills to use for team development plans, hiring assessments.'",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T15:00:00Z",
@@ -1972,7 +2027,8 @@
         "Sumit Kataria"
       ],
       "full_description": "This session explores using Drupal as a cloud-based backend for native mobile applications. The presenter explains that 'you can totally use Drupal to manage your iPhone/Android native apps data in cloud.' Key topics covered include Titanium Framework for cross-platform app development, Services API and web standards (JSON, XML-RPC), data management through Drupal (content, views, users, menus, taxonomy), live app development demonstration, photo galleries, video uploads, geolocation, and user-generated content, and Android and iPhone app demonstrations.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T15:00:00Z",
@@ -1988,7 +2044,8 @@
         "sdboyer"
       ],
       "full_description": "Dog represents an innovative methodology that 'deeply embraces Git in order to build portable, deployable Drupal site packages.' The tool streamlines workflows for developers and teams managing Drupal installations across various scales, from individual projects to enterprise-level deployments. The session explores how a single command can deploy complete site instances for different purposes\u2014development, testing, and production environments. This unified approach simplifies deployment, updates, and ongoing maintenance through an accessible command interface suitable for both human operators and automated systems. Key topics covered include implementing dog for basic Drupal site development, integrating dog into organizational development workflows, connecting with external tools like build systems and configuration management, implications for Drupal distributions, and relationship to existing packaging methods such as drush make and site tarballs.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-24T15:00:00Z",
@@ -2004,7 +2061,8 @@
         "kalms"
       ],
       "full_description": "Theming presents challenges on larger-scale Drupal projects, particularly when themers join at difficult moments or without clear visibility into information architecture, design, and functionality. This session provides tools for rapid onboarding and demonstrates developing a robust theme supporting agile workflows. The presenter emphasizes that 'speed and the ability to react to sudden changes in specifications, or the team itself, is key to reaching any goal.' The session covers CSS preprocessing, HTML5, CSS3, and rapid prototyping as modern tools enabling efficient expression and maintenance. Topics covered include designing themes that work with Drupal rather than against it, identifying foundational design elements to minimize iterations, leveraging HTML5 and CSS3 capabilities, using themers more effectively, and designing directly in the browser.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T09:00:00Z",
@@ -2021,7 +2079,8 @@
         "Nicklas Persson"
       ],
       "full_description": "The Web Standardistas\u2014Christopher Murphy and Nicklas Persson, lecturers and practising designers at the University of Ulster\u2014present a keynote on designing for a sustainable web, drawing on their expertise in standards-based web design and web design education.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T10:00:00Z",
@@ -2035,7 +2094,8 @@
       ],
       "speakers": [],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T11:00:00Z",
@@ -2052,7 +2112,8 @@
         "katbailey"
       ],
       "full_description": "The session addresses challenges site builders encounter when managing content publication workflows. Key scenarios include: 'Publishers wants to preview and optimize content or whole sections of a site, before publishing it live' and deploying content across multiple affiliated sites. Presenters explore the Deploy module for Drupal 7, covering setup and configuration to meet specific organizational needs. Topics include pushing content via REST APIs or PubSubHubBub feeds, filtering deployment plans through Views, manually flagging content, and scheduling deployments via Drush scripting. The session also previews how the Configuration Management Initiative will reshape content staging approaches in Drupal 8.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T11:00:00Z",
@@ -2071,7 +2132,8 @@
         "googletorp"
       ],
       "full_description": "This panel discussion explores real-world experiences deploying Drupal Commerce across complex European projects. The moderator and panelists discuss sites handling 'global language course sales, subscription management, and traditional physical product sales.' Key topics covered include understanding the pricing system, VAT tax collection, shipping charge integration, payment gateway and recurring payment best practices, custom Add to Cart and Checkout forms, and custom line item types. The session targets 'developers who need to know how to plan and deploy Drupal Commerce sites that integrate with a variety of e-commerce web services and / or require custom solutions based on the core Commerce components and systems.'",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T11:00:00Z",
@@ -2087,7 +2149,8 @@
         "himerus"
       ],
       "full_description": "This presentation addresses the shift toward mobile-first web design, covering how developers can build websites that function seamlessly across all device sizes without requiring multiple site versions. The session is divided into two main components: Responsive Design Fundamentals - Explores adaptive and responsive layout concepts, their implementation in Drupal, current framework limitations, and potential improvements for mobile-focused development. Omega Framework Implementation - Demonstrates the Omega theme framework's approach to responsive design, including its mobile-first methodology, customizable grid systems based on the 960.gs framework, and CSS3 media queries for device-specific rendering. The presenter explains that 'This session, while labeled intermediate will be suitable for Beginner to Advanced Drupal themers/designers' seeking knowledge on responsive HTML5 layouts targeting multiple devices. Key topics include user agent detection limitations, mobile device considerations, CSS3 media query techniques, JavaScript solutions like Adapt.js, and practical implementation strategies.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T11:00:00Z",
@@ -2103,7 +2166,8 @@
         "kvantomme"
       ],
       "full_description": "The session explores how Drupal companies can differentiate themselves through innovation and sustainable business practices. Van Tomme shares insights gained from studying customer development, lean startup methodology, and business model generation frameworks. The presentation addresses a key challenge: 'Commercially however this innovation has not always been particularly successful.' The speaker applies these business concepts to the Drupal ecosystem, arguing that projects should be 'driven by validated customer demand.' The second portion proposes creating 'an ethical Drupal appstore' to diversify business models within the community while preserving existing collaborative values. Key topics covered include customer development fundamentals, lean startup principles, Business Model Canvas application, ethical Drupal app marketplace concept, and issues with alpha/beta release mentality.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T11:00:00Z",
@@ -2119,7 +2183,8 @@
         "David Needham"
       ],
       "full_description": "This session addresses a common challenge for Drupal professionals: articulating what they do to people unfamiliar with the platform. The presenter uses a relatable scenario where someone struggles to explain their Drupal work during casual conversation, eventually defaulting to the vague term 'web designer.' The session covers 'best practices' for describing your professional role to non-technical audiences, along with strategies for handling skeptics and Drupal critics. It also explores methods for marketing yourself as a Drupal professional seeking freelance or full-time opportunities. Key topics covered include Drupal definition and history, explaining Drupal to the uninitiated, persuading management or colleagues of Drupal's value, and self-marketing for Drupal professionals.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T11:00:00Z",
@@ -2136,7 +2201,8 @@
         "Wolfgang Ziegler"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T12:00:00Z",
@@ -2150,7 +2216,8 @@
       ],
       "speakers": [],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T13:30:00Z",
@@ -2166,7 +2233,8 @@
         "Amitai Burstein"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T13:30:00Z",
@@ -2183,7 +2251,8 @@
         "Al Croston"
       ],
       "full_description": "Colin Sweetman and Al Croston discuss managing enterprise-scale Drupal initiatives with 100+ team members and multi-million pound budgets. The presenters share practical insights on structuring large teams, implementing Agile methodologies within waterfall client expectations, and managing stakeholder relationships. Key topics covered include scaling Drupal teams for enterprise deployments, maintaining agility while providing waterfall governance for clients, recruiting top talent, fostering team cohesion, and positioning Drupal to risk-averse organizations.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T13:30:00Z",
@@ -2199,7 +2268,8 @@
         "mortendk"
       ],
       "full_description": "The session challenges the misconception that theming merely involves 'doing a grid, modifying the CSS & changing a bit of HTML.' Instead, the presenter argues that 'Theming starts when the first field is created!' The speaker explores how design, UX, Drupal functionality, and content converge during the theming process, highlighting common pitfalls where 'quick n dirty solutions will hunt you down in about 6 months.' Key topics covered include planning's value in preventing future problems, establishing style guides for Drupal's core elements, creating clean semantic markup utilizing CCK/fields, views, and forms, handling non-grid-based designs, and backend theming considerations. Intended for experienced themers with basic familiarity with Drupal's base theme system, HTML, CSS, and introductory PHP knowledge.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T13:30:00Z",
@@ -2215,7 +2285,8 @@
         "quicksketch"
       ],
       "full_description": "This session explores Form Builder, a universal interface for creating form structures across Drupal modules. Nathan Haug explains that 'Form Builder provides a single, universal interface for creating form structures' that works with Webform, CCK, Profile, and other modules. The presentation covers Form Builder's modern approach using jQuery UI and AJAX-based editing. Haug demonstrates current compatibility with modules like Webform and explains the API for making Form API elements editable. Key topics addressed include what Form Builder is and its current applications, future potential uses, implementation guidance for developers, and how to prepare for adoption. Primarily for developers interested in Form Builder development, plus those focused on UX and interface design.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T13:30:00Z",
@@ -2232,7 +2303,8 @@
         "Angel Brown"
       ],
       "full_description": "The session explores how software designers and developers frequently overlook customer capabilities and treat constraints as hindrances rather than opportunities. The presenters argue that 'by applying systems thinking, designers and developers can create idealized designs that deliver the most value to customers and businesses alike.' The session addresses five key questions: what is systems thinking and why is it important, how does idealized design differ from other design approaches, how can mental models assist in software design and architecture, why are constraints beneficial, and how can designers understand audience capabilities and self-sufficiency.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T13:30:00Z",
@@ -2248,7 +2320,8 @@
         "moshe-weitzman"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T14:00:00Z",
@@ -2264,7 +2337,8 @@
         "Jeff Eaton"
       ],
       "full_description": "",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T14:45:00Z",
@@ -2281,7 +2355,8 @@
         "moshe-weitzman"
       ],
       "full_description": "The session explores how Drush facilitates automated deployment processes for Drupal sites of any scale. The presenters, who maintain Drush, introduce a new deployment management tool called Drush Deploy. They explain that while developers commonly use various Drush commands during deployment workflows\u2014such as rsync, sql-sync, features-revert, and updatedb\u2014they often rely on external tools like Capistrano, Fabric, or Puppet, which require knowledge of non-PHP languages. Drush Deploy offers similar functionality within a PHP and Drush environment. The session addresses key questions including why deployment tools matter, what Drush Deploy accomplishes, and how it compares to alternative deployment solutions.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T14:45:00Z",
@@ -2298,7 +2373,8 @@
         "Terrence Kevin O'Leary"
       ],
       "full_description": "The presenters explore how Drupal themes can accommodate organic brand evolution and design changes. Their session addresses strategic approaches to theming that support scalability. Key topics covered include strategic vision and theme planning tools, semantic markup creation, systems thinking versus page-by-page design, leveraging CSS frameworks, base themes, and supporting modules, balancing theoretical ideals with practical implementation, cross-functional team collaboration, and documentation and asset management. Questions addressed include template control strategies and reducing view overrides, CSS system architecture, design methodology for Drupal platforms, brand asset management within Drupal, and team optimization and leadership.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-25T14:45:00Z",
@@ -2314,7 +2390,8 @@
         "Jacob Singh"
       ],
       "full_description": "The session addresses balancing professional obligations with community contributions. Singh explains: 'Like many of us, we have to balance the real needs to earning a living and spending time with our families (or going out drinking) with our desire to be contributors in the Drupal community.' Drawing from five years as a Drupal developer and four years contributing to open source, Singh shares practical strategies including code architecture that facilitates community contributions, regular technical blogging, structured community time for development teams, professional networking and collaborative support systems, client communication about contribution initiatives, version control management across projects and patches, and agile process integration for open source work.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-26T08:00:00Z",
@@ -2330,7 +2407,8 @@
         "Greg Dunlap"
       ],
       "full_description": "A code sprint focused on the Drupal 8 Configuration Management Initiative, self-organising as part of the post-conference sprint day.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-26T08:00:00Z",
@@ -2347,7 +2425,8 @@
         "Ariane Khachatourians"
       ],
       "full_description": "A sprint focused on improving Drupal documentation, self-organising as part of the post-conference sprint day.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-26T08:00:00Z",
@@ -2363,7 +2442,8 @@
         "Karoly Negyesi"
       ],
       "full_description": "A code sprint focused on upgrading modules from Drupal 6 to Drupal 7, self-organising as part of the post-conference sprint day.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-26T08:00:00Z",
@@ -2379,7 +2459,8 @@
         "G\u00e1bor Hojtsy"
       ],
       "full_description": "A code sprint focused on the Drupal 8 Multilingual Initiative, self-organising as part of the post-conference sprint day.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-26T08:00:00Z",
@@ -2396,7 +2477,8 @@
         "Bojhan Somers"
       ],
       "full_description": "A sprint focused on improving user experience for Drupal 8, self-organising as part of the post-conference sprint day.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-26T08:00:00Z",
@@ -2414,7 +2496,8 @@
         "James Abrahams"
       ],
       "full_description": "A code sprint focused on Drupal CRM (Customer Relationship Management) modules and integrations, self-organising as part of the post-conference sprint day.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-26T08:00:00Z",
@@ -2428,7 +2511,8 @@
       ],
       "speakers": [],
       "full_description": "A sprint focused on the Maxlength module, self-organising as part of the post-conference sprint day.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     },
     {
       "startTime": "2011-08-26T08:00:00Z",
@@ -2444,7 +2528,8 @@
         "Larry Garfield"
       ],
       "full_description": "A code sprint focused on the Drupal 8 Web Services Initiative, self-organising as part of the post-conference sprint day.",
-      "video_url": ""
+      "video_url": "",
+      "sponsorIds": ""
     }
   ]
 }

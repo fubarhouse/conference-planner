@@ -15,7 +15,8 @@
     "logo": {
       "image": "./img/logos/drupalcon/2009-paris.gif",
       "imageAlt": "DrupalCon logo",
-      "usePlate": false
+      "usePlate": false,
+      "logoDisabled": true
     },
     "flickr": {
       "enabled": true,
