@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Product mark">
+  <!--
+    The masthead lockup reduced to a glyph: the seal bar that opens the wordmark,
+    plus the two rules that carry the name and the line beneath it. No new
+    vocabulary, no radius, no gradient, no elevation.
+
+    Colours are inlined because an SVG favicon cannot resolve var(--…). They are
+    the DARK-mode tokens — --paper-0 #131614 and --ink-0 #eaede6 — so the mark
+    reads on both a light and a dark browser chrome, which a light ground would
+    not.
+
+    It deliberately does NOT use --brand-1: that is the ORGANISER's colour,
+    injected per event by theme.js, and the product's own mark has to survive a
+    dataset that turns it magenta. It carries no letterform either, so the
+    pending rename costs nothing here.
+  -->
+  <rect width="512" height="512" fill="#131614"/>
+  <g fill="#eaede6">
+    <rect x="96" y="96" width="72" height="320"/>
+    <rect x="224" y="168" width="192" height="44"/>
+    <rect x="224" y="300" width="192" height="44"/>
+  </g>
+</svg>

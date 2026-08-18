@@ -1,7 +1,7 @@
+import './modules/pwa.js'; // registers the service worker (PWA/offline)
 import {
   loadThemes,
   normalizeThemeId,
-  setCurrentThemeId,
   applyThemeClass,
   applyEventColors,
   getCurrentThemeId,
@@ -11,29 +11,272 @@ import {
   loadPlanner,
   savePlanner,
   makeItemId,
-  makeSessionId,
-  exportPlannerJson,
-  parsePlannerImport,
-  savePlannerViaApi,
   listPlannerFiles,
   loadGlobal,
   saveGlobal,
   GLOBAL_KEY,
-  STORAGE_PREFIX,
+  STORAGE_KEYS,
+  getPlannerKey,
+  readJson,
+  writeJson,
+  readText,
+  writeText,
+  removeKey,
+  isPlannerEntry,
+  plannerDisplayName,
+  plannerFilename,
+  normalizeEventFiles,
+  saveReceiptViaApi,
 } from './modules/plannerStorage.js';
+import { guardPlannerLock, lockEnforceable, grantUnlockGrace } from './modules/plannerLock.js';
+import { loadRatesIntoCache } from './modules/currency.js';
 
-import { escapeHtml, parseSponsorIds, isLocalhost } from './modules/utils.js';
+import { escapeHtml, isLocalhost, normalizeString } from './modules/utils.js';
+import { showToast, showUndoToast, reportError } from './modules/notify.js';
+import {
+  initPlannerFields,
+  CURRENCIES,
+  getDefaultCurrency,
+  currencyOptions,
+  plannerDisplayCurrency,
+  tzDatalist,
+  sessionOptionsHtml,
+  buildSelectOptions,
+} from './modules/plannerFields.js';
+import { showModal, hideModal, touchDevice } from './modules/modal.js';
+import {
+  initTasks,
+  renderTasksTab,
+  wireTasksPanel,
+  tasksPanelHtml,
+} from './modules/plannerTasks.js';
+import {
+  initNotes,
+  renderNotesTab,
+  wireNotesPanel,
+  notesPanelHtml,
+} from './modules/plannerNotes.js';
+import {
+  initContacts,
+  renderContactsTab,
+  wireContactsPanel,
+  contactsPanelHtml,
+} from './modules/plannerContacts.js';
+import {
+  initReceipts,
+  renderReceiptsTab,
+  wireReceiptsPanel,
+  receiptsPanelHtml,
+  openReceiptModal,
+} from './modules/plannerReceipts.js';
+import {
+  initDocuments,
+  renderDocumentsTab,
+  wireDocumentsPanel,
+  documentsPanelHtml,
+} from './modules/plannerDocuments.js';
+import {
+  initTickets,
+  renderTicketsTab,
+  wireTicketsPanel,
+  ticketsPanelHtml,
+} from './modules/plannerTickets.js';
+import {
+  initTrackedSessions,
+  syncSponsoredSessions,
+  wireTrackedSessionModal,
+  wireTrackedSessionSearch,
+} from './modules/plannerTrackedSessions.js';
+import { initMap, renderMapTab, wireMapPanel, mapPanelHtml } from './modules/plannerMap.js';
+import {
+  initSplit,
+  renderSplitTab,
+  wireSplitPanel,
+  splitPanelHtml,
+} from './modules/plannerSplit.js';
+import {
+  initChecklists,
+  renderChecklistsTab,
+  wireChecklistsPanel,
+  checklistsPanelHtml,
+} from './modules/plannerChecklists.js';
+import {
+  initWeather,
+  renderWeatherTab,
+  renderItineraryWeather,
+  renderWeatherSummary,
+  wireWeatherPanel,
+  weatherPanelHtml,
+} from './modules/plannerWeather.js';
+import {
+  initPersonalLeg,
+  openPersonalLegModal,
+  wirePersonalLegModal,
+} from './modules/plannerPersonalLeg.js';
+import { itineraryItemToCalEvent, accommodationToCalEvent } from './modules/plannerCalendar.js';
+import { openCalendarMenu } from './modules/plannerCalendarUi.js';
+import {
+  renderSurfaceView,
+  viewAttrsFor,
+  isClickableEvent,
+} from './modules/plannerCalendarView.js';
+import {
+  initAccommodation,
+  openAccommodationModal,
+  checklistItemHtml,
+  swagCardHtml,
+  renderAccomMembersSection,
+  loadMemberStayFields,
+} from './modules/plannerAccommodation.js';
+import {
+  initCompanions,
+  renderCompanionsTab,
+  wireCompanionsPanel,
+  companionsPanelHtml,
+  openCompanionDetail,
+} from './modules/plannerCompanions.js';
+import {
+  initSchedule,
+  renderScheduleTab,
+  wireSchedulePanel,
+  schedulePanelHtml,
+} from './modules/plannerSchedule.js';
+import { wirePersonDetailModal } from './modules/plannerPersonDetail.js';
+import {
+  initAssignments,
+  makeTripAssignment,
+  renderSettingsPersonalContactsSection,
+  openPersonalContactModal,
+  wirePersonalContactModal,
+  companionCardHtml,
+  renderPersonalCompanionsSection,
+  openTripAssignmentModal,
+  openLocalCompanionAssignmentModal,
+  renderPersonalAccomMembersSection,
+  loadPersonalCompanionStayFields,
+  _hideAssignmentModalImportButtons,
+} from './modules/plannerAssignments.js';
+import {
+  initBudget,
+  getEventBudgetCategories,
+  getActiveBudgetCategoryOptions,
+  renderBudgetItems,
+  renderBudgetTab,
+  wireBudgetPanel,
+  wireBudgetItemsPanel,
+  renderBudgetCategoryManager,
+  addBudgetCategory,
+  removeBudgetCategory,
+  setDefaultBudgetCategories,
+  budgetPanelHtml,
+} from './modules/plannerBudget.js';
+import {
+  initSummary,
+  buildEventBudgetData,
+  buildPersonalBudgetData,
+  renderSummaryTab,
+  wireSummaryPanel,
+  summaryPanelHtml,
+} from './modules/plannerSummary.js';
+import { makeLeg, TRAVEL_STATUSES } from './modules/plannerTravel.js';
+import {
+  initPersonal,
+  renderPersonalTab,
+  renderPersonalItinerary,
+  renderPersonalTimeline,
+  renderPersonalAccomList,
+  renderPersonalNotes,
+  renderPersonalBudgetBreakdown,
+  renderSponsorBudgetBreakdown,
+  personalPanelHtml,
+} from './modules/plannerPersonal.js';
+import {
+  initOrg,
+  renderOrgTab,
+  renderAssignmentLegsInModal,
+  accomTypeIcon,
+  makeWaypointStop,
+  renderWaypointStops,
+  toggleWaypointStopsSection,
+  wireWaypointStopsDragDrop,
+  initMapCoordPickers,
+  renderTimeline,
+  refreshAssignMemberSelect,
+  sponsorPanelHtml,
+} from './modules/plannerOrg.js';
+import {
+  initImportExport,
+  handleExport,
+  openCalendarExportModal,
+  downloadTripIcs,
+  createFeedToken,
+  copyFeedUrl,
+  revokeFeedToken,
+  handleImport,
+  handleSaveToFile,
+  mergeGlobalTeamMembers,
+} from './modules/plannerImportExport.js';
+import { initGlobalSettings, wireGlobalSettingsModal } from './modules/plannerGlobalSettings.js';
+import {
+  initCreatePlanner,
+  openCreatePlannerModal,
+  wireCreatePlannerModal,
+} from './modules/plannerCreate.js';
+import { initDashEdit, wireDashboardPlannerEditModal } from './modules/plannerDashEdit.js';
+import { initCogMenu, wireTripCogMenu } from './modules/plannerCogMenu.js';
+import { initDashboard, renderTripDashboard } from './modules/plannerDashboard.js';
+import {
+  initTeam,
+  renderTeamTab,
+  openTeamMemberModal,
+  openTeamMemberDetailModal,
+  wireTeamPanel,
+  teamPanelHtml,
+} from './modules/plannerTeam.js';
+import {
+  initItinerary,
+  wireItineraryPanel,
+  renderOrgItinerary,
+  openOrgEventModal,
+  personalAssigneeChips,
+  personalAssignablePeople,
+  makeItineraryItem,
+  itineraryPanelHtml,
+} from './modules/plannerItinerary.js';
 import { configureEventSearch, openEventSearchModal } from './modules/eventSearch.js';
+import {
+  renderEntityReceiptStatus,
+  createReceiptForEntity,
+  linkEntityReceipt,
+  unlinkEntityReceipt,
+  linkedReceipt,
+  openReceiptPicker,
+} from './modules/plannerEntityReceipt.js';
 import { loadEventCatalog } from './modules/eventCatalog.js';
-import { homeRoot, sectionHeader, cardGrid, emptyState } from './modules/homeLayout.js';
+import { bottomBarHtml, moreSheetHtml } from './modules/mobileNav.js';
+import { parsePlannerRoute, plannerHref, plannerCrumbs } from './modules/plannerRoute.js';
+import { initThemePicker } from './modules/themePicker.js';
+import { toWednesdayOfWeek, autoArriveDate, localDateStr } from './modules/plannerDates.js';
+import { buildDayItinerary } from './modules/plannerAgenda.js';
+import { detectPersonalConflicts, accommodationGaps } from './modules/plannerConflicts.js';
+import { bottomBarPrimary } from './modules/plannerNav.js';
+import { renderApiTokenSection } from './modules/plannerApiTokens.js';
+import {
+  SPONSOR_TABS_BASE,
+  PERSONAL_TABS_BASE,
+  CONFERENCE_TABS,
+  visibleTabsOrdered,
+  visibleTabs,
+} from './modules/plannerTabs.js';
 
 // ── State ────────────────────────────────────────────────────────────────────
 
 const state = {
-  plannerKey: null,  // storage key (may differ from eventFile for custom planners)
-  eventFile: null,   // schedule association (.json file), null when unassociated
-  eventMeta: null,
-  allSessions: [],
+  plannerKey: null, // storage key (may differ from eventFile for custom planners)
+  eventFile: null, // PRIMARY schedule association (.json file) = _eventFiles[0], null when none
+  eventMeta: null, // primary event's metadata (drives timezone/theme/weather/header)
+  allSessions: [], // sessions merged across ALL associated events (each tagged _eventFile/_eventLabel)
+  events: [], // [{ file, meta, label }] one per associated event — for multi-event conference bands
   planner: null,
   global: null,
   activeTab: 'personal',
@@ -42,140 +285,43 @@ const state = {
   dirty: false,
 };
 
-// Filter state for the All Events summary sub-tab (persists across re-renders)
-// person: '' = everyone, 'me' = personal planners only, '<memberId>' = sponsor planners for that member
-const _globalSummaryFilter = { start: '', end: '', hidden: new Set(), person: '' }
+// Summary UI state (display currency, global filter) + rate notice moved to
+// ./modules/plannerSummary.js.
 
-// ── Currency conversion ──────────────────────────────────────────────────────
-// Rates from frankfurter.app (ECB, daily). Keyed by `${base}:${date}` (date='' → 'current').
-// Historical rates (date specified) are cached permanently; current rates expire after 24h.
+// ── Per-event date cache ──────────────────────────────────────────────────────
+// eventFile → { wednesday, start, end } once fetched. A fetched-but-unusable
+// event (missing/HTTP-error/no startDate) caches an all-null record so it is not
+// refetched. `wednesday` feeds the chart time axis, `start` the FX rate lookup,
+// `end` the trip dashboard.
+const _eventDates = new Map();
+const EVENT_DATES_MISS = { wednesday: null, start: null, end: null };
 
-let _summaryCurrency = ''          // '' = as-entered; ISO code = convert everything to this
-let _primaryDisplayCurrency = ''   // detected primary currency from current planner data
-let _currentRenderDate = ''        // event start date used in the current This Event render
-
-const _rateCache   = new Map()     // key: `${base}:${date||'current'}` → { rates, fetchedAt, rateDate }
-const _RATE_LS_KEY = '__plannerRates_v2__'
-const _RATE_TTL    = 86_400_000    // 24h TTL for current rates; historical entries never expire
-
-function _loadRatesFromStorage() {
+async function fetchEventDates(eventFile) {
+  if (_eventDates.has(eventFile)) return _eventDates.get(eventFile);
   try {
-    const stored = JSON.parse(localStorage.getItem(_RATE_LS_KEY) || 'null')
-    if (stored && typeof stored === 'object') {
-      Object.entries(stored).forEach(([key, val]) => {
-        if (val?.rates && typeof val.fetchedAt === 'number') _rateCache.set(key, val)
-      })
-    }
-  } catch { /* ignore corrupt cache */ }
-}
-
-function _saveRatesToStorage() {
-  try {
-    const obj = {}
-    _rateCache.forEach((val, key) => { obj[key] = val })
-    localStorage.setItem(_RATE_LS_KEY, JSON.stringify(obj))
-  } catch { /* ignore */ }
-}
-
-// date: 'YYYY-MM-DD' for historical lookup, '' for current/latest rates.
-async function _fetchRates(currency, date = '') {
-  const key = `${currency}:${date || 'current'}`
-  const cached = _rateCache.get(key)
-  const ttl = date ? Infinity : _RATE_TTL  // historical rates never go stale
-  if (cached && (Date.now() - cached.fetchedAt) < ttl) return cached
-  const url = date
-    ? `/api/rates?base=${encodeURIComponent(currency)}&date=${encodeURIComponent(date)}`
-    : `/api/rates?base=${encodeURIComponent(currency)}`
-  const res = await fetch(url)
-  if (!res.ok) throw new Error(`HTTP ${res.status}`)
-  const data = await res.json()
-  const entry = { rates: { ...data.rates, [currency]: 1 }, fetchedAt: Date.now(), rateDate: data.date || date || '' }
-  _rateCache.set(key, entry)
-  _saveRatesToStorage()
-  return entry
-}
-
-// Returns (amount, fromCurrency) → converted amount, or null when no conversion is active.
-// date: the event date to look up historical rates for; '' uses current rates.
-function _buildConvFn(date = '') {
-  if (!_summaryCurrency) return null
-  const key = `${_summaryCurrency}:${date || 'current'}`
-  const cached = _rateCache.get(key)
-  if (!cached) return null
-  const target = _summaryCurrency
-  const { rates } = cached
-  return (n, curr) => {
-    if (!n || !curr || curr === target) return n
-    const rate = rates[curr]
-    return rate != null ? n / rate : n
-  }
-}
-
-// rateKey: the specific cache key whose rateDate to display in the notice.
-// Pass '' to auto-detect from _summaryCurrency + current.
-function _showRateNotice(error, rateKey = '') {
-  const notice = document.getElementById('summaryRateNotice')
-  const text   = document.getElementById('summaryRateNoticeText')
-  if (!notice || !text) return
-  if (!_summaryCurrency) { notice.classList.add('hidden'); return }
-  notice.classList.remove('hidden')
-  const key    = rateKey || `${_summaryCurrency}:current`
-  const cached = _rateCache.get(key)
-  if (error || !cached) {
-    text.textContent = error
-      ? `Could not fetch exchange rates for ${_summaryCurrency} — values shown as entered. Check your connection and try again.`
-      : `Exchange rates for ${_summaryCurrency} not loaded — values shown as entered.`
-  } else {
-    const isHistorical = !key.endsWith(':current')
-    const dateLabel    = isHistorical ? `${cached.rateDate} (event date)` : (cached.rateDate || 'latest available')
-    text.textContent =
-      `Values shown as approximate ${_summaryCurrency} equivalents using ECB rates from ${dateLabel}. ` +
-      `Currencies outside ECB coverage are shown as-entered. Suitable for budgeting; use actual transaction rates for formal bookkeeping.`
-  }
-}
-
-// ── Per-event date caches ─────────────────────────────────────────────────────
-const _eventDateCache      = new Map()  // eventFile → Wednesday of event week (chart time axis)
-const _eventStartDateCache = new Map()  // eventFile → raw startDate 'YYYY-MM-DD' (FX rate lookup)
-const _eventEndDateCache   = new Map()  // eventFile → raw endDate   'YYYY-MM-DD' (trip dashboard)
-
-function toWednesdayOfWeek(dateStr) {
-  const d = new Date(dateStr.length === 10 ? `${dateStr}T00:00:00Z` : dateStr)
-  const offset = 3 - d.getUTCDay() // range [-3..3]; gives Wednesday of the same Mon-Sun week
-  const wed = new Date(d)
-  wed.setUTCDate(d.getUTCDate() + offset)
-  return wed.toISOString().slice(0, 10)
-}
-
-async function fetchEventWednesday(eventFile) {
-  if (_eventDateCache.has(eventFile)) return _eventDateCache.get(eventFile)
-  try {
-    const res = await fetch(`./data/${eventFile}`)
+    const res = await fetch(`./data/${resolveEventFile(eventFile)}`);
     if (!res.ok) {
-      _eventDateCache.set(eventFile, null)
-      _eventStartDateCache.set(eventFile, null)
-      _eventEndDateCache.set(eventFile, null)
-      return null
+      _eventDates.set(eventFile, EVENT_DATES_MISS);
+      return EVENT_DATES_MISS;
     }
-    const data = await res.json()
-    const startDate = data?.event?.startDate
-    const endDate   = data?.event?.endDate
+    const data = await res.json();
+    const startDate = data?.event?.startDate;
+    const endDate = data?.event?.endDate;
     if (!startDate) {
-      _eventDateCache.set(eventFile, null)
-      _eventStartDateCache.set(eventFile, null)
-      _eventEndDateCache.set(eventFile, null)
-      return null
+      _eventDates.set(eventFile, EVENT_DATES_MISS);
+      return EVENT_DATES_MISS;
     }
-    const wed = toWednesdayOfWeek(startDate)
-    _eventDateCache.set(eventFile, wed)
-    _eventStartDateCache.set(eventFile, startDate.slice(0, 10))
-    _eventEndDateCache.set(eventFile, endDate ? endDate.slice(0, 10) : null)
-    return wed
-  } catch {
-    _eventDateCache.set(eventFile, null)
-    _eventStartDateCache.set(eventFile, null)
-    _eventEndDateCache.set(eventFile, null)
-    return null
+    const record = {
+      wednesday: toWednesdayOfWeek(startDate),
+      start: startDate.slice(0, 10),
+      end: endDate ? endDate.slice(0, 10) : null,
+    };
+    _eventDates.set(eventFile, record);
+    return record;
+  } catch (err) {
+    reportError(`fetchEventDates(${eventFile})`, err);
+    _eventDates.set(eventFile, EVENT_DATES_MISS);
+    return EVENT_DATES_MISS;
   }
 }
 
@@ -183,39 +329,26 @@ async function fetchEventWednesday(eventFile) {
 
 const esc = escapeHtml;
 
-// Slugs that share the STORAGE_PREFIX but are never planner data.
-const NON_PLANNER_SLUGS = new Set(['geocache', 'rates', 'exchangerates']);
-
-// Returns true only for a slug+data pair that represents actual planner data.
-function isPlannerEntry(slug, data) {
-  if (NON_PLANNER_SLUGS.has(slug)) return false;
-  if (!data || typeof data !== 'object' || Array.isArray(data)) return false;
-  return !!(data._displayName || data._eventFile || data.mode || data.personal || data.org);
-}
-
 function getTimezone() {
   return state.eventMeta?.timezone || undefined;
-}
-
-function autoArriveDate(departDate, departTime, arriveTime) {
-  if (!departDate || !departTime || !arriveTime) return '';
-  if (arriveTime >= departTime) return '';
-  const d = new Date(departDate + 'T12:00:00');
-  d.setDate(d.getDate() + 1);
-  return d.toISOString().slice(0, 10);
 }
 
 function fmtTime(iso) {
   if (!iso) return '';
   return new Date(iso).toLocaleTimeString(undefined, {
-    hour: '2-digit', minute: '2-digit', timeZone: getTimezone(),
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: getTimezone(),
   });
 }
 
 function fmtDate(iso) {
   if (!iso) return '';
   return new Date(iso).toLocaleDateString(undefined, {
-    weekday: 'long', month: 'long', day: 'numeric', timeZone: getTimezone(),
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    timeZone: getTimezone(),
   });
 }
 
@@ -228,67 +361,16 @@ function groupByDate(sessions) {
   return groups;
 }
 
-function localDateStr(d) {
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-}
-
 // ── Toast & dirty state ──────────────────────────────────────────────────────
-
-let _toastTimer = null;
-
-function showToast() {
-  const el = document.getElementById('plannerSaveToast');
-  if (!el) return;
-  clearTimeout(_toastTimer);
-  el.classList.add('is-visible');
-  _toastTimer = setTimeout(() => el.classList.remove('is-visible'), 2500);
-}
-
-// ── Soft-delete undo toast ───────────────────────────────────────────────────
-
-let _undoTimer = null;
-let _undoToastEl = null;
-
-function showUndoToast(label, undoFn) {
-  if (_undoTimer) clearTimeout(_undoTimer);
-  if (!_undoToastEl) {
-    _undoToastEl = document.createElement('div');
-    _undoToastEl.id = 'plannerUndoToast';
-    document.body.appendChild(_undoToastEl);
-  }
-  _undoToastEl.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-gray-900 text-white text-sm px-4 py-2.5 rounded-full shadow-lg z-[9999] opacity-0 translate-y-1 transition-all duration-200 pointer-events-none';
-  _undoToastEl.innerHTML = `<i class="fas fa-trash-can text-gray-400 text-xs"></i><span>${esc(label)} deleted</span><button class="planner-undo-btn ml-2 font-semibold text-blue-300 hover:text-blue-100 text-xs underline underline-offset-2 transition-colors">Undo</button>`;
-  requestAnimationFrame(() => {
-    _undoToastEl.classList.remove('opacity-0', 'translate-y-1', 'pointer-events-none');
-    _undoToastEl.classList.add('opacity-100', 'translate-y-0');
-  });
-  _undoToastEl.querySelector('.planner-undo-btn').addEventListener('click', () => {
-    undoFn();
-    _dismissUndoToast();
-  }, { once: true });
-  _undoTimer = setTimeout(_dismissUndoToast, 5000);
-}
-
-function _dismissUndoToast() {
-  if (_undoTimer) { clearTimeout(_undoTimer); _undoTimer = null; }
-  if (!_undoToastEl) return;
-  _undoToastEl.classList.add('opacity-0', 'translate-y-1', 'pointer-events-none');
-  _undoToastEl.classList.remove('opacity-100', 'translate-y-0');
-}
 
 function markDirty(flag) {
   state.dirty = flag;
   const el = document.getElementById('plannerDirtyState');
   if (el) {
-    const dot = el.querySelector('i');
-    const label = el.querySelector('span');
-    if (flag) {
-      dot?.classList.replace('text-emerald-400', 'text-amber-400');
-      if (label) label.textContent = 'Unsaved changes';
-    } else {
-      dot?.classList.replace('text-amber-400', 'text-emerald-400');
-      if (label) label.textContent = 'Saved';
-    }
+    const dot = el.querySelector('.sidebar-dirty-dot');
+    const label = el.querySelector('span:not(.sidebar-dirty-dot)');
+    dot?.classList.toggle('is-dirty', flag);
+    if (label) label.textContent = flag ? 'Unsaved changes' : 'Saved';
   }
   _syncSidebarDirty(flag);
 }
@@ -308,71 +390,82 @@ function scheduleAutoSave() {
 
 // ── Modal visibility helpers ─────────────────────────────────────────────────
 
-const touchDevice = () => window.matchMedia('(pointer: coarse)').matches;
-
-function showModal(id, focusId) {
-  const modal = document.getElementById(id);
-  if (!modal) return;
-  const sw = window.innerWidth - document.documentElement.clientWidth;
-  document.body.style.overflow = 'hidden';
-  if (sw) document.body.style.paddingRight = `${sw}px`;
-  modal.classList.remove('hidden');
-  if (focusId && !touchDevice()) document.getElementById(focusId)?.focus();
-}
-
-function hideModal(id) {
-  document.getElementById(id)?.classList.add('hidden');
-  document.body.style.overflow = '';
-  document.body.style.paddingRight = '';
-}
-
 // ── Disk recovery ────────────────────────────────────────────────────────────
+
+// Cached probe: can this client read authorized API endpoints? Lets the disk-seed
+// helpers below skip authorized-only requests when the API is unavailable or the
+// user isn't logged in — so an unauthenticated/static setup degrades quietly
+// instead of firing 401s. The shared promise means concurrent callers probe once.
+let _apiCanReadPromise = null;
+function apiCanRead() {
+  if (!_apiCanReadPromise) {
+    _apiCanReadPromise = (async () => {
+      try {
+        const res = await fetch('./api/auth/status');
+        if (!res.ok) return false;
+        const { authenticated } = await res.json();
+        return !!authenticated;
+      } catch {
+        return false; // no server / offline → disk sync unavailable
+      }
+    })();
+  }
+  return _apiCanReadPromise;
+}
 
 // Seeds localStorage from the API disk copy when the local entry is missing or has a corrupted
 // event association (e.g. _eventFile was overwritten by a stale bug and points to the wrong event).
 async function seedFromDiskIfMissing(plannerKey) {
+  if (!(await apiCanRead())) return;
   if (_getDeletedSlugs().has(plannerKey)) return;
-  const raw = localStorage.getItem(`${STORAGE_PREFIX}${plannerKey}`);
+  const raw = readText(getPlannerKey(plannerKey));
   if (raw) {
     // For schedule-linked planners (key ends in .json), the _eventFile must equal the plannerKey.
     // If they differ the local entry was corrupted — fall through to re-seed from disk.
     try {
       const local = JSON.parse(raw);
-      const corrupted = plannerKey.endsWith('.json') && local._eventFile && local._eventFile !== plannerKey;
+      const corrupted =
+        plannerKey.endsWith('.json') && local._eventFile && local._eventFile !== plannerKey;
       if (!corrupted) return;
-    } catch { /* parse error — fall through to re-seed */ }
+    } catch {
+      /* parse error — fall through to re-seed */
+    }
   }
   try {
-    const filename = plannerKey.endsWith('.json') ? plannerKey : `${plannerKey}.json`;
+    const filename = plannerFilename(plannerKey);
     const res = await fetch(`./api/planner/${filename}`);
     if (!res.ok) return;
     const data = await res.json();
     if (!data || typeof data !== 'object') return;
     if (!data._eventFile && !data._plannerKey && !data._displayName) return;
     delete data._globalTeamMembers; // strip before saving; global.json handles team member seeding
-    localStorage.setItem(`${STORAGE_PREFIX}${plannerKey}`, JSON.stringify(data));
-  } catch { /* server not running or file not found — silent */ }
+    writeJson(getPlannerKey(plannerKey), data);
+  } catch {
+    /* server not running or file not found — silent */
+  }
 }
 
 // Seeds global state from disk on every startup, merging non-destructively by key.
 // Team members + budget categories: merged by ID — new entries are appended, existing ones are never overwritten.
 // defaultMode: seeded only when the local value is empty/missing.
 async function seedGlobalFromDiskIfMissing() {
+  if (!(await apiCanRead())) return;
   try {
     const res = await fetch('./api/planner/global.json');
     if (!res.ok) return;
     const data = await res.json();
     if (!data || typeof data !== 'object') return;
-    const existing = (() => {
-      try { return JSON.parse(localStorage.getItem(GLOBAL_KEY) || 'null') || {}; } catch { return {}; }
-    })();
+    const existing = readJson(GLOBAL_KEY, {});
     let changed = false;
 
     // Merge team members by ID
     if (Array.isArray(data.teamMembers)) {
       const existingIds = new Set((existing.teamMembers || []).map((m) => m.id));
       const toAdd = data.teamMembers.filter((m) => m?.id && !existingIds.has(m.id));
-      if (toAdd.length) { existing.teamMembers = [...(existing.teamMembers || []), ...toAdd]; changed = true; }
+      if (toAdd.length) {
+        existing.teamMembers = [...(existing.teamMembers || []), ...toAdd];
+        changed = true;
+      }
     }
 
     // Merge budget categories by ID — adds any from global.json not yet in localStorage
@@ -395,24 +488,25 @@ async function seedGlobalFromDiskIfMissing() {
       changed = true;
     }
 
-    if (changed) localStorage.setItem(GLOBAL_KEY, JSON.stringify(existing));
-  } catch { /* server not running or file not found — silent */ }
+    if (changed) writeJson(GLOBAL_KEY, existing);
+  } catch {
+    /* server not running or file not found — silent */
+  }
 }
 
 // ── Shared planner delete ────────────────────────────────────────────────────
 
 // Tombstone list — slugs deleted by the user. Prevents seedFromDiskIfMissing
 // from restoring disk files when the API delete fails or is unavailable.
-const DELETED_SLUGS_KEY = `${STORAGE_PREFIX}_deleted`;
+const DELETED_SLUGS_KEY = STORAGE_KEYS.deletedPlanners;
 
 function _getDeletedSlugs() {
-  try { return new Set(JSON.parse(localStorage.getItem(DELETED_SLUGS_KEY) || '[]')); }
-  catch { return new Set(); }
+  return new Set(readJson(DELETED_SLUGS_KEY, []));
 }
 function _markDeleted(slug) {
   const set = _getDeletedSlugs();
   set.add(slug);
-  localStorage.setItem(DELETED_SLUGS_KEY, JSON.stringify([...set]));
+  writeJson(DELETED_SLUGS_KEY, [...set]);
 }
 
 // Removes from localStorage, records a tombstone, then attempts disk + S3 removal.
@@ -421,19 +515,24 @@ function _markDeleted(slug) {
 // Returns { ok: boolean, error: string|null }
 async function deletePlannerBySlug(slug) {
   if (!slug) return { ok: false, error: 'No slug provided' };
-  localStorage.removeItem(`${STORAGE_PREFIX}${slug}`);
+  removeKey(getPlannerKey(slug));
   _markDeleted(slug);
 
-  const filename = slug.endsWith('.json') ? slug : `${slug}.json`;
+  const filename = plannerFilename(slug);
   // Use the same base URL logic as s3Settings.js — falls back to current origin
-  const stored = (localStorage.getItem('editorApiEndpoint') || '').replace(/\/$/, '');
-  const base   = stored || window.location.origin;
+  const stored = (readText(STORAGE_KEYS.editorApiEndpoint) || '').replace(/\/$/, '');
+  const base = stored || window.location.origin;
 
   try {
     const res = await fetch(`${base}/api/planner/${filename}`, { method: 'DELETE' });
     if (res.ok) return { ok: true, error: null };
     let msg = `Server returned ${res.status}`;
-    try { const body = await res.json(); msg = body.error || body.message || msg; } catch {}
+    try {
+      const body = await res.json();
+      msg = body.error || body.message || msg;
+    } catch {
+      /* non-JSON error body → keep status message */
+    }
     return { ok: false, error: msg };
   } catch (e) {
     return { ok: false, error: e.message || 'Network error' };
@@ -445,22 +544,40 @@ async function deletePlannerBySlug(slug) {
 let _eventCatalog = [];
 let _searchCatalog = [];
 
+// Resolve a planner's stored `_eventFile` to a real schedule path in the catalog.
+// Older planners saved a flattened name (e.g. "drupalsouth-2026-wellington.json")
+// from before schedules were reorganized under events/<series>/…; map those back
+// to the nested path so the schedule still loads. Returns the input unchanged when
+// it already matches a catalog entry or has no flattened equivalent (used only for
+// the schedule fetch — the stored `_eventFile`/plannerKey is left untouched).
+function resolveEventFile(eventFile) {
+  if (!eventFile || !_eventCatalog.length) return eventFile;
+  const files = _eventCatalog.map((e) => e.file);
+  if (files.includes(eventFile)) return eventFile;
+  const flatten = (f) => f.replace(/^events\//, '').replace(/\//g, '-');
+  return files.find((f) => flatten(f) === eventFile) || eventFile;
+}
+
 // Builds a search-ready catalog with labels, matching the shape expected by eventSearch.js.
 // Tries /api/meta first (one request); falls back to fetching each event file in parallel.
 async function buildPlannerSearchCatalog(catalog) {
   function mapMeta(file, meta, enabled) {
-    const designation = String(meta.designation || '').trim();
-    const year        = String(meta.year        || '').trim();
-    const location    = String(meta.location    || '').trim();
-    const label = designation && year && location
-      ? `${designation} ${year}: ${location}`
-      : [designation, year, location].filter(Boolean).join(' ') || file;
+    const designation = normalizeString(meta.designation);
+    const year = normalizeString(meta.year);
+    const location = normalizeString(meta.location);
+    const label =
+      designation && year && location
+        ? `${designation} ${year}: ${location}`
+        : [designation, year, location].filter(Boolean).join(' ') || file;
     return {
-      file, label,
-      category:    designation || 'Other',
-      designation, location, year,
-      region:  String(meta.region  || '').trim(),
-      venue:   String(meta.venue   || '').trim(),
+      file,
+      label,
+      category: designation || 'Other',
+      designation,
+      location,
+      year,
+      region: normalizeString(meta.region),
+      venue: normalizeString(meta.venue),
       enabled: enabled !== false,
     };
   }
@@ -479,10 +596,14 @@ async function buildPlannerSearchCatalog(catalog) {
     if (res.ok) {
       const metas = await res.json();
       if (Array.isArray(metas) && metas.length > 0) {
-        return sortByYearDesc(metas.filter((m) => m?.file).map((m) => mapMeta(m.file, m, m.enabled)));
+        return sortByYearDesc(
+          metas.filter((m) => m?.file).map((m) => mapMeta(m.file, m, m.enabled)),
+        );
       }
     }
-  } catch { /* API not running — fall through */ }
+  } catch {
+    /* API not running — fall through */
+  }
 
   const results = await Promise.all(
     catalog.map(async (item) => {
@@ -491,31 +612,80 @@ async function buildPlannerSearchCatalog(catalog) {
         if (!res.ok) return null;
         const data = await res.json();
         return mapMeta(item.file, data?.event || {}, item.enabled);
-      } catch { return null; }
-    })
+      } catch {
+        return null; /* skip a dataset that fails to load */
+      }
+    }),
   );
   return sortByYearDesc(results.filter(Boolean));
 }
 
-// Keep ?event= or ?id= in the address bar so refresh stays on the same planner.
-function pushPlannerUrl(plannerKey) {
-  if (!plannerKey) return;
-  const params = new URLSearchParams();
-  plannerKey.endsWith('.json') ? params.set('event', plannerKey) : params.set('id', plannerKey);
-  history.replaceState(null, '', `${location.pathname}?${params}`);
+// The address bar always describes what you are looking at, so a refresh — or a
+// link you send someone — lands in the same place. `plannerRoute.js` decides the
+// FORM (path when served, query when opened as files); this only decides when to
+// write, and whether it is a navigation or a correction.
+// Until boot finishes, every URL write is a REPLACE. Rendering the app is not
+// navigating through it, and a stray push during start-up leaves a history entry
+// you can go Back to but never reach again — which is exactly what happened:
+// Back landed on the sponsor tab of a personal planner.
+let _routeReady = false;
+
+function writePlannerUrl(plannerKey, tab, { push = false } = {}) {
+  try {
+    const href = plannerHref(plannerKey, tab);
+    if (href === `${location.pathname}${location.search}`) return;
+    const state = { plannerKey, tab };
+    if (push && _routeReady) history.pushState(state, '', href);
+    else history.replaceState(state, '', href);
+  } catch {
+    /* history API blocked (e.g. sandboxed) → ignore */
+  }
 }
 
-// Return the storage key of any existing planner already linked to eventFile.
-function findPlannerKeyForEvent(eventFile) {
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    if (!key?.startsWith(STORAGE_PREFIX) || key === `${STORAGE_PREFIX}global`) continue;
-    try {
-      const data = JSON.parse(localStorage.getItem(key) || '{}');
-      if (data._eventFile === eventFile) return key.slice(STORAGE_PREFIX.length);
-    } catch { /* skip */ }
-  }
-  return null;
+function pushPlannerUrl(plannerKey) {
+  if (!plannerKey) return;
+  writePlannerUrl(plannerKey, parsePlannerRoute(location).tab);
+}
+
+// Changing tab is a navigation — it is the thing Back should undo. Loading the
+// page is not, so `setActiveTab` is called with `{push:false}` during boot.
+function writeTabParam(tab, opts) {
+  writePlannerUrl(state.plannerKey, tab, opts);
+}
+
+// ── Breadcrumbs ──────────────────────────────────────────────────────────────
+// The route, rendered. Same contract as the archive's, so the two sections read
+// alike: Home → Planner → this trip → this tab.
+// The tab a planner opens on — the first one visible for its mode.
+function defaultTabForMode() {
+  const mode = state.planner?.mode || 'personal';
+  return getVisibleTabsOrdered(mode)[0] || TABS[0];
+}
+
+function renderPlannerCrumbs() {
+  const nav = document.getElementById('plannerCrumbs');
+  if (!nav) return;
+  const key = state.plannerKey;
+  const trail = plannerCrumbs({
+    key,
+    name: key ? state.planner?._displayName || plannerDisplayName(state.planner, key) : null,
+    tab: state.activeTab,
+    // A trip's home IS its default tab, so that tab is not a step of its own in
+    // the trail. The default differs by mode, so ask rather than assume.
+    tabLabel:
+      key && state.activeTab && state.activeTab !== defaultTabForMode()
+        ? TAB_LABELS[state.activeTab]
+        : null,
+  });
+  nav.innerHTML = trail
+    .map((c, i) =>
+      i === trail.length - 1
+        ? `<span aria-current="page">${escapeHtml(c.label)}</span>`
+        : c.href
+          ? `<a href="${escapeHtml(c.href)}">${escapeHtml(c.label)}</a>`
+          : `<span>${escapeHtml(c.label)}</span>`,
+    )
+    .join('<span class="app-crumbs__sep" aria-hidden="true">&rarr;</span>');
 }
 
 // ── Theme ────────────────────────────────────────────────────────────────────
@@ -527,10 +697,10 @@ function applyTheme() {
   // Use the schedule viewer's last effective theme as the fallback so the
   // planner always matches the schedule even when the event overrides the
   // user's saved preference without updating localStorage.
-  const fallbackId = localStorage.getItem('scheduleCurrentThemeId') || getCurrentThemeId();
+  const fallbackId = readText(STORAGE_KEYS.currentThemeId) || getCurrentThemeId();
   const effectiveThemeId = themeId ? normalizeThemeId(themeId) : fallbackId;
   applyThemeClass(effectiveThemeId);
-  localStorage.setItem('scheduleCurrentThemeId', effectiveThemeId);
+  writeText(STORAGE_KEYS.currentThemeId, effectiveThemeId);
   applyEventColors(
     typeof themeVal === 'object' ? themeVal?.primaryColor : meta.primaryColor,
     typeof themeVal === 'object' ? themeVal?.secondaryColor : meta.secondaryColor,
@@ -540,210 +710,263 @@ function applyTheme() {
 
 // ── Constants ────────────────────────────────────────────────────────────────
 
-const CURRENCIES = ['AUD', 'USD', 'EUR', 'GBP', 'NZD', 'CHF', 'CAD', 'INR', 'JPY', 'SGD']
-
 // Budget categories — loaded from data/budget.json at init, then overridden per-event
-let _defaultBudgetCategories = [
-  { id: 'travel',        name: 'Travel' },
-  { id: 'accommodation', name: 'Accommodation' },
-  { id: 'food',          name: 'Food & Drink' },
-  { id: 'customer',      name: 'Customer' },
-  { id: 'team',          name: 'Team' },
-  { id: 'tickets',       name: 'Tickets' },
-  { id: 'swag',          name: 'Swag' },
-  { id: 'sponsor',       name: 'Sponsor' },
-  { id: 'marketing',     name: 'Marketing' },
-  { id: 'misc',          name: 'Misc' },
-]
-
-function getEventBudgetCategories(mode) {
-  const stored = mode === 'personal'
-    ? (state.planner?.personal?.budgetCategories || [])
-    : (state.planner?.org?.budgetCategories || [])
-  return stored.length ? stored : _defaultBudgetCategories
-}
-
-function budgetCatList(mode) {
-  return getEventBudgetCategories(mode).map((c) => ({ value: c.id, label: c.name }))
-}
-
-function BUDGET_ITEM_CATS_PERSONAL() { return budgetCatList('personal') }
-function BUDGET_ITEM_CATS_SPONSOR()  { return budgetCatList('org') }
-
-// Returns budget categories for the active mode as { value, label } pairs.
-// Used by receipts, documents, and any other place that should stay in sync
-// with the event's configured budget categories.
-function getActiveBudgetCategoryOptions() {
-  const mode = state.planner?.mode || 'personal'
-  return getEventBudgetCategories(mode === 'sponsor' ? 'org' : 'personal')
-    .map((c) => ({ value: c.id, label: c.name }))
-}
-
-function getDocCategoryOptions() {
-  return [{ value: '', label: 'No category' }, ...getActiveBudgetCategoryOptions()]
-}
-
-function getDefaultCurrency() {
-  return state.global?.defaultCurrency || 'AUD';
-}
-
-function currencyOptions(selected) {
-  const active = selected || getDefaultCurrency();
-  return CURRENCIES.map((c) => `<option value="${c}"${c === active ? ' selected' : ''}>${c}</option>`).join('')
-}
-
-function buildSelectOptions(options, selected = '') {
-  return options.map((c) => `<option value="${esc(c.value)}"${c.value === selected ? ' selected' : ''}>${esc(c.label)}</option>`).join('');
-}
+// Budget categories + getEventBudgetCategories/getActiveBudgetCategoryOptions -> plannerBudget.js
 
 function renderListPanel(listId, emptyId, items, cardFn) {
-  const list  = document.getElementById(listId);
+  const list = document.getElementById(listId);
   const empty = document.getElementById(emptyId);
   if (!list) return;
   empty?.classList.toggle('hidden', items.length > 0);
   list.innerHTML = items.map(cardFn).join('');
 }
 
-function tzDatalist() {
-  const tzs = typeof Intl !== 'undefined' && Intl.supportedValuesOf
-    ? Intl.supportedValuesOf('timeZone')
-    : []
-  return tzs.map((tz) => `<option value="${tz}">`).join('')
-}
-
 // Upload file to API server or, when no server is configured, encode as a base64
 // data URL stored in localStorage via the planner JSON. Files > 1.5 MB are rejected
 // in the no-API path to stay within localStorage's ~5 MB quota.
+// Turn a human description into a sensible file base name (no extension), e.g.
+// "Conference pass (early bird)" → "conference-pass-early-bird". Empty when the
+// description has no usable characters, so callers fall back to the original name.
+function fileBaseFromName(name) {
+  return String(name || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 60);
+}
+
 // destination: 'receipts' (default) | 'documents'
-async function uploadOrReadFile(file, destination = 'receipts') {
-  const apiEndpoint = localStorage.getItem('editorApiEndpoint') || '';
+// desiredName: optional human label (e.g. the receipt description) used to rename
+// Delete a previously-uploaded file from the server (disk + S3). Best-effort and
+// a no-op when there's no API, or when the path is an inline data: URL (which
+// lives in the planner JSON, so dropping the reference is the whole deletion).
+async function deleteUploadedFile(path) {
+  const apiEndpoint = readText(STORAGE_KEYS.editorApiEndpoint) || '';
+  if (!apiEndpoint || !path || String(path).startsWith('data:')) return;
+  const clean = String(path).replace(/^\.?\//, '');
+  if (!clean.startsWith('receipts/') && !clean.startsWith('documents/')) return;
+  try {
+    await fetch(`${apiEndpoint.replace(/\/$/, '')}/api/${clean}`, { method: 'DELETE' });
+  } catch {
+    /* best-effort — a failed cleanup must not block deleting the record */
+  }
+}
+
+// Resolve a stored file path to a viewable absolute URL. Files are served by the
+// same server they were uploaded to, so use the same base as uploads (the
+// configured API endpoint, else the current origin). Inline (data:/blob:) and
+// already-absolute URLs pass through untouched.
+function resolveFileUrl(path) {
+  if (!path) return '';
+  if (/^(data:|blob:|https?:)/i.test(path)) return path;
+  const clean = String(path).replace(/^\.?\//, '');
+  // Uploads are read through the API — `/api/receipts/…`, `/api/documents/…` —
+  // not from the static paths they are stored under. Both are gated at the
+  // origin, but only this one keeps working when `/receipts` and `/documents`
+  // are blocked outright at the CDN, which is the point: personal files should
+  // not be one guard away from the open internet.
+  //
+  // A hosted app uses its OWN origin, so the preview iframe stays same-origin
+  // (X-Frame-Options: SAMEORIGIN) and survives a stale API-endpoint setting.
+  // Only a file:// launch, which has no origin server, uses the configured one.
+  if (window.location.protocol !== 'file:') return `/api/${clean}`;
+  const ep = (readText(STORAGE_KEYS.editorApiEndpoint) || '').replace(/\/$/, '');
+  return ep ? `${ep}/api/${clean}` : clean;
+}
+
+// the stored file to something sensible instead of the camera/scan filename.
+async function uploadOrReadFile(file, destination = 'receipts', desiredName = '') {
+  const base = fileBaseFromName(desiredName);
+  const ext = (file.name.match(/\.([a-zA-Z0-9]+)$/)?.[1] || '').toLowerCase();
+  const label = base ? (ext ? `${base}.${ext}` : base) : file.name;
+  const apiEndpoint = readText(STORAGE_KEYS.editorApiEndpoint) || '';
   if (apiEndpoint) {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('eventFile', state.plannerKey);
-    const res  = await fetch(`${apiEndpoint.replace(/\/$/, '')}/api/${destination}`, { method: 'POST', body: formData });
+    if (base) formData.append('fileName', base);
+    const res = await fetch(`${apiEndpoint.replace(/\/$/, '')}/api/${destination}`, {
+      method: 'POST',
+      body: formData,
+    });
     const data = await res.json();
     if (!res.ok || !data.ok) throw new Error(data.error || `HTTP ${res.status}`);
-    return { path: data.path, label: file.name };
+    // Label from the server's ACTUAL stored filename, not the client's guess — so the
+    // displayed name always matches what's on disk (even if the server sanitised or
+    // de-duplicated it differently, e.g. "conference-pass-2.jpg").
+    const storedName = String(data.path || '')
+      .split('/')
+      .pop();
+    return { path: data.path, label: storedName || label };
   }
   const MAX_BYTES = 1_500_000;
   if (file.size > MAX_BYTES) {
-    throw new Error(`File too large to store locally (${(file.size / 1_048_576).toFixed(1)} MB). Connect the API server to upload larger files.`);
+    throw new Error(
+      `File too large to store locally (${(file.size / 1_048_576).toFixed(1)} MB). Connect the API server to upload larger files.`,
+    );
   }
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.onload  = () => resolve({ path: reader.result, label: file.name });
+    reader.onload = () => resolve({ path: reader.result, label });
     reader.onerror = () => reject(new Error('Could not read file'));
     reader.readAsDataURL(file);
   });
 }
 
-function fileDisplayName(filePath, fileLabel) {
-  if (!filePath) return '';
-  return fileLabel || (filePath.startsWith('data:') ? 'Attached file' : filePath.split('/').pop());
-}
-
-function parseBudget(str) {
-  const n = parseFloat(String(str || ''))
-  return isNaN(n) ? 0 : n
-}
-
-function slugify(text) {
-  return String(text).toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    || 'planner'
-}
-
-function plannerDisplayName(planner, plannerKey) {
-  if (planner?._displayName) return planner._displayName;
-  if (planner?._eventFile)   return (planner._eventFile || '').replace('.json', '');
-  return (plannerKey || '').replace(/^planner-/, '').replace(/-/g, ' ');
+// Best-effort per-collection receipt sync (Phase 4). Pushes an individual receipt
+// change straight to the v1 CRUD API so it reaches the server between manual "Save to
+// file" blob saves (which stay authoritative). Skips when there's no server to reach
+// (opened as a static file with no configured endpoint); errors never block the UI.
+function syncReceiptToApi(op, receipt) {
+  const apiEndpoint = readText(STORAGE_KEYS.editorApiEndpoint) || '';
+  if (!apiEndpoint && window.location.protocol === 'file:') return; // offline / static
+  if (!state.plannerKey) return;
+  saveReceiptViaApi(apiEndpoint, state.plannerKey, op, receipt).catch((err) => {
+    // Non-fatal: the authoritative whole-blob save will reconcile on the next manual save.
+    console.warn(`[receipts] granular ${op} sync failed: ${err.message}`);
+  });
 }
 
 function scheduleMetaTitle() {
-  const meta = state.eventMeta || {}
-  return [meta.location || meta.designation, meta.year].filter(Boolean).join(' ')
+  const meta = state.eventMeta || {};
+  return [meta.location || meta.designation, meta.year].filter(Boolean).join(' ');
 }
 
 function syncEventTitleField(inputId, hintId) {
-  const el   = document.getElementById(inputId)
-  const hint = document.getElementById(hintId)
-  if (!el) return
-  const metaTitle = scheduleMetaTitle()
+  const el = document.getElementById(inputId);
+  const hint = document.getElementById(hintId);
+  if (!el) return;
+  const metaTitle = scheduleMetaTitle();
   // Only treat as associated when the schedule actually loaded meaningful metadata.
   // state.eventFile can be truthy due to backward-compat even when the file is
   // a planner (not a schedule), in which case eventMeta is empty.
   if (state.eventFile && metaTitle) {
-    el.value    = metaTitle
-    el.disabled = true
-    hint?.classList.remove('hidden')
+    el.value = metaTitle;
+    el.disabled = true;
+    hint?.classList.remove('hidden');
   } else {
-    el.value    = state.planner?._displayName || plannerDisplayName(state.planner, state.plannerKey) || ''
-    el.disabled = false
-    hint?.classList.add('hidden')
+    el.value =
+      state.planner?._displayName || plannerDisplayName(state.planner, state.plannerKey) || '';
+    el.disabled = false;
+    hint?.classList.add('hidden');
   }
 }
 
 // ── Tab system ───────────────────────────────────────────────────────────────
 
-const TABS = ['sponsor', 'team', 'documents', 'tasks', 'contacts', 'personal', 'companions', 'notes', 'receipts', 'tickets', 'budget', 'map', 'itinerary', 'summary', 'settings'];
+const TABS = [
+  'sponsor',
+  'team',
+  'documents',
+  'tasks',
+  'checklists',
+  'contacts',
+  'personal',
+  'companions',
+  'notes',
+  'receipts',
+  'tickets',
+  'budget',
+  'split',
+  'map',
+  'weather',
+  'schedule',
+  'itinerary',
+  'summary',
+  'settings',
+];
 
-const TAB_ICONS = {
-  sponsor:   'fas fa-handshake',
-  team:      'fas fa-users',
-  personal:  'fas fa-person',
-  tasks:     'fas fa-list-check',
-  contacts:  'fas fa-address-book',
-  notes:     'fas fa-file-lines',
-  receipts:  'fas fa-receipt',
-  tickets:   'fas fa-ticket',
-  companions:'fas fa-user-group',
-  budget:    'fas fa-wallet',
-  map:       'fas fa-map',
-  itinerary: 'fas fa-calendar-days',
-  documents: 'fas fa-folder-open',
-  summary:   'fas fa-chart-bar',
-  settings:  'fas fa-gear',
+// Two-letter codes for the COLLAPSED sidebar only.
+//
+// The planner used a Font Awesome glyph per tab; the icon font is gone with the
+// CDN, and nineteen bespoke SVGs would be nineteen things to maintain. Expanded,
+// the label identifies the tab and needs no help. Collapsed to the 56px rail
+// there is no label at all, and something has to distinguish IT from TI.
+const TAB_CODES = {
+  sponsor: 'PL',
+  team: 'TM',
+  personal: 'PL',
+  tasks: 'TK',
+  checklists: 'CL',
+  contacts: 'CT',
+  notes: 'NT',
+  receipts: 'RC',
+  tickets: 'TI',
+  companions: 'CP',
+  budget: 'BD',
+  split: 'SC',
+  map: 'MP',
+  weather: 'WX',
+  schedule: 'CS',
+  itinerary: 'IT',
+  documents: 'DC',
+  summary: 'SM',
+  settings: 'ST',
 };
 
 const PANEL_IDS = {
-  contacts:  'plannerContactsPanel',
-  tasks:     'plannerTasksPanel',
-  sponsor:   'plannerSponsorPanel',
-  personal:  'plannerPersonalPanel',
-  notes:     'plannerNotesPanel',
-  team:      'plannerTeamPanel',
+  contacts: 'plannerContactsPanel',
+  tasks: 'plannerTasksPanel',
+  checklists: 'plannerChecklistsPanel',
+  sponsor: 'plannerSponsorPanel',
+  personal: 'plannerPersonalPanel',
+  notes: 'plannerNotesPanel',
+  team: 'plannerTeamPanel',
   documents: 'plannerDocumentsPanel',
-  receipts:  'plannerReceiptsPanel',
-  tickets:   'plannerTicketsPanel',
-  companions:'plannerCompanionsPanel',
-  budget:    'plannerBudgetPanel',
-  map:       'plannerMapPanel',
+  receipts: 'plannerReceiptsPanel',
+  tickets: 'plannerTicketsPanel',
+  companions: 'plannerCompanionsPanel',
+  budget: 'plannerBudgetPanel',
+  split: 'plannerSplitPanel',
+  map: 'plannerMapPanel',
+  weather: 'plannerWeatherPanel',
+  schedule: 'plannerSchedulePanel',
   itinerary: 'plannerItineraryPanel',
-  summary:   'plannerSummaryPanel',
-  settings:  'plannerSettingsPanel',
+  summary: 'plannerSummaryPanel',
+  settings: 'plannerSettingsPanel',
 };
 
 const TAB_BTN_IDS = {
-  contacts:  'showContactsTab',
-  tasks:     'showTasksTab',
-  sponsor:   'showSponsorTab',
-  personal:  'showPersonalTab',
-  notes:     'showNotesTab',
-  team:      'showTeamTab',
+  contacts: 'showContactsTab',
+  tasks: 'showTasksTab',
+  checklists: 'showChecklistsTab',
+  sponsor: 'showSponsorTab',
+  personal: 'showPersonalTab',
+  notes: 'showNotesTab',
+  team: 'showTeamTab',
   documents: 'showDocumentsTab',
-  receipts:  'showReceiptsTab',
-  tickets:   'showTicketsTab',
-  companions:'showCompanionsTab',
-  budget:    'showBudgetTab',
-  map:       'showMapTab',
+  receipts: 'showReceiptsTab',
+  tickets: 'showTicketsTab',
+  companions: 'showCompanionsTab',
+  budget: 'showBudgetTab',
+  split: 'showSplitTab',
+  map: 'showMapTab',
+  weather: 'showWeatherTab',
+  schedule: 'showScheduleTab',
   itinerary: 'showItineraryTab',
-  summary:   'showSummaryTab',
-  settings:  'showSettingsTab',
+  summary: 'showSummaryTab',
+  settings: 'showSettingsTab',
 };
 
-function setActiveTab(tab) {
+// Back and Forward move between tabs, and out to the selection screen. A
+// planner CHANGE cannot be done in place — too much module state is keyed to the
+// open planner — so that reloads; a tab change is just a render.
+function wirePlannerHistory() {
+  window.addEventListener('popstate', () => {
+    const { key, tab } = parsePlannerRoute(location);
+    if ((key || null) !== (state.plannerKey || null)) {
+      location.reload();
+      return;
+    }
+    // The default here must be the mode's default tab, not TABS[0] — that is
+    // 'sponsor', which a personal planner does not have. Going Back to a
+    // no-tab entry was selecting it, finding nothing, and rewriting the entry's
+    // URL to a tab you could never reach.
+    if (key) setActiveTab(tab || defaultTabForMode(), { push: false });
+  });
+}
+
+function setActiveTab(tab, { push = true } = {}) {
   const next = TABS.includes(tab) ? tab : TABS[0];
   state.activeTab = next;
   TABS.forEach((t) => {
@@ -755,992 +978,28 @@ function setActiveTab(tab) {
     btn.classList.toggle('is-active', active);
     btn.setAttribute('aria-selected', active ? 'true' : 'false');
   });
-  try { history.replaceState(null, '', `${location.pathname}${location.search}#${next}`); } catch {}
+  writeTabParam(next, { push });
+  renderPlannerCrumbs();
   renderMobileTabNav();
 }
 
-// ── Session Notes tab ────────────────────────────────────────────────────────
-
-function starRatingHtml(sessionId, rating) {
-  return [1, 2, 3, 4, 5].map((n) => {
-    const filled = n <= rating;
-    return `<button type="button" class="star-btn appearance-none bg-transparent border-0 p-0 cursor-pointer leading-none text-base transition-colors ${filled ? 'text-yellow-400' : 'text-gray-400 hover:text-yellow-400'}" data-note-id="${esc(sessionId)}" data-rating="${n}" aria-label="Rate ${n} star${n > 1 ? 's' : ''}"><i class="${filled ? 'fas' : 'far'} fa-star"></i></button>`;
-  }).join('');
-}
-
-function noteCardHtml(session, note) {
-  const sid = session.id;
-  const time = fmtTime(session.startTime);
-  const track = Array.isArray(session.track) ? session.track.join(', ') : (session.track || '');
-  const hasNote = note.notes || note.rating || note.attended;
-
-  return `
-    <details class="planner-note-card rounded-md border border-gray-200 overflow-hidden" data-session-id="${esc(sid)}" ${hasNote ? 'open' : ''}>
-      <summary class="flex items-center gap-2.5 px-3 py-2 cursor-pointer select-none hover:bg-gray-50 transition-colors list-none">
-        <i class="fas fa-chevron-right note-card-chevron text-gray-500 text-xs flex-shrink-0 transition-transform"></i>
-        <div class="flex-1 min-w-0">
-          <p class="text-sm font-medium text-gray-800 truncate">${esc(session.title)}</p>
-          <p class="text-xs text-gray-500">${esc(time)}${session.location ? ` · ${esc(session.location)}` : ''}${track ? ` · ${esc(track)}` : ''}</p>
-        </div>
-        <div class="flex items-center gap-2 flex-shrink-0">
-          ${note.attended ? '<span class="text-[0.6rem] px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-semibold uppercase tracking-wide">Attended</span>' : ''}
-          ${note.rating ? `<span class="text-xs text-yellow-500">${'★'.repeat(note.rating)}</span>` : ''}
-          ${note.notes ? '<i class="fas fa-file-lines text-gray-500 text-xs"></i>' : ''}
-        </div>
-      </summary>
-      <div class="px-3 pb-3 pt-2 border-t border-gray-100 space-y-2.5 bg-white">
-        <div class="flex items-center gap-6 flex-wrap">
-          <label class="inline-flex items-center gap-2 cursor-pointer text-sm text-gray-700">
-            <input type="checkbox" class="h-4 w-4 rounded" data-note-field="attended" data-note-id="${esc(sid)}" ${note.attended ? 'checked' : ''}>
-            Attended
-          </label>
-          <div class="flex items-center gap-1" role="group" aria-label="Rating">
-            <span class="text-sm text-gray-500 mr-1">Rating:</span>
-            ${starRatingHtml(sid, note.rating)}
-            ${note.rating ? `<button type="button" class="clear-rating-btn appearance-none bg-transparent border-0 p-0 ml-1 cursor-pointer leading-none text-gray-500 hover:text-gray-700 transition-colors" data-note-id="${esc(sid)}" title="Clear rating"><i class="fas fa-times text-[0.6rem]"></i></button>` : ''}
-          </div>
-        </div>
-        <label class="block">
-          <span class="text-xs font-medium text-gray-600 block mb-1">Notes</span>
-          <textarea data-note-field="notes" data-note-id="${esc(sid)}" rows="3"
-            class="w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white p-2 resize-y"
-            placeholder="Your notes for this session…">${esc(note.notes)}</textarea>
-        </label>
-      </div>
-    </details>`;
-}
-
-function renderNotesTab() {
-  const withData = document.getElementById('notesWithData');
-  const empty    = document.getElementById('notesEmptyState');
-  const results  = document.getElementById('notesSearchResults');
-  if (!withData) return;
-
-  // Sessions that have been added to the notes list (even if fields are still blank)
-  const noted = state.allSessions.filter((s) => !!state.planner.sessionNotes?.[s.id]);
-
-  // Clear search results when re-rendering
-  if (results) { results.innerHTML = ''; results.classList.add('hidden'); }
-
-  empty?.classList.toggle('hidden', noted.length > 0);
-
-  if (noted.length === 0) {
-    withData.innerHTML = '';
-    return;
-  }
-
-  const groups = groupByDate(noted);
-  const sortedDates = Object.keys(groups).sort();
-
-  withData.innerHTML = sortedDates.map((date) => {
-    const dayLabel = fmtDate(`${date}T12:00:00`);
-    const cards = groups[date].map((session) => {
-      const note = state.planner.sessionNotes[session.id] || {
-        sessionId: session.id,
-        sessionTitle: session.title,
-        sessionStartTime: session.startTime,
-        attended: false,
-        rating: 0,
-        notes: '',
-      };
-      return noteCardHtml(session, note);
-    }).join('');
-    return `
-      <div class="mb-4">
-        <h3 class="text-xs font-semibold text-gray-600 uppercase tracking-widest mb-2 px-1">${esc(dayLabel)}</h3>
-        <div class="space-y-1">${cards}</div>
-      </div>`;
-  }).join('');
-}
-
-function handleNoteChange(sessionId, field, value) {
-  const session = state.allSessions.find((s) => s.id === sessionId);
-  if (!state.planner.sessionNotes[sessionId]) {
-    state.planner.sessionNotes[sessionId] = {
-      sessionId,
-      sessionTitle: session?.title || '',
-      sessionStartTime: session?.startTime || '',
-      attended: false,
-      rating: 0,
-      notes: '',
-    };
-  }
-  state.planner.sessionNotes[sessionId][field] = value;
-  scheduleAutoSave();
-}
-
 // ── Contacts tab ─────────────────────────────────────────────────────────────
-
-const CONTACT_TYPES = {
-  organiser: { label: 'Organiser', color: 'bg-violet-100 text-violet-700', border: 'border-l-violet-300' },
-  media:     { label: 'Media',     color: 'bg-teal-100 text-teal-700',     border: 'border-l-teal-300'   },
-  partner:   { label: 'Partner',   color: 'bg-amber-100 text-amber-700',   border: 'border-l-amber-300'  },
-  vip:       { label: 'VIP',       color: 'bg-rose-100 text-rose-700',     border: 'border-l-rose-300'   },
-};
-
-function contactCardHtml(contact) {
-  const headerText = [contact.name, contact.org].filter(Boolean).join(' · ') || 'New contact';
-  const meta       = [contact.email, contact.whereMet].filter(Boolean).join(' · ');
-  const typeInfo   = contact.type ? CONTACT_TYPES[contact.type] : null;
-  const borderCls  = typeInfo ? `border-l-2 ${typeInfo.border}` : '';
-  const typeBadge  = typeInfo
-    ? `<span class="text-[0.6rem] px-1.5 py-0.5 rounded-full ${typeInfo.color} font-semibold uppercase tracking-wide flex-shrink-0">${esc(typeInfo.label)}</span>`
-    : '';
-  const followUpBadge = contact.followUp
-    ? '<span class="text-[0.6rem] px-1.5 py-0.5 rounded-full bg-blue-100 text-blue-700 font-semibold uppercase tracking-wide flex-shrink-0">Follow up</span>'
-    : '';
-  const initial = (contact.name || contact.org || '?')[0].toUpperCase();
-  return `
-    <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-gray-200 bg-white group ${borderCls}" data-contact-id="${esc(contact.id)}">
-      <div class="planner-avatar flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold text-white select-none bg-gray-600">${esc(initial)}</div>
-      <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-800 truncate">${esc(headerText)}</p>
-        ${meta ? `<p class="text-xs text-gray-500 truncate mt-0.5">${esc(meta)}</p>` : ''}
-      </div>
-      ${typeBadge}${followUpBadge}
-      <button type="button" class="edit-contact-btn h-7 px-2.5 border border-gray-200 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-150" data-contact-id="${esc(contact.id)}" aria-label="Edit ${esc(contact.name || 'contact')}">
-        <i class="fas fa-pen-to-square mr-1 text-[0.65rem]"></i>Edit
-      </button>
-    </div>`;
-}
-
-function renderContactsTab() {
-  const list  = document.getElementById('contactsList');
-  const empty = document.getElementById('contactsEmptyState');
-  if (!list) return;
-  const contacts = state.planner.contacts;
-  empty?.classList.toggle('hidden', contacts.length > 0);
-
-  const key     = contacts.filter((c) => c.type && CONTACT_TYPES[c.type]);
-  const general = contacts.filter((c) => !c.type || !CONTACT_TYPES[c.type]);
-
-  if (!key.length) {
-    list.className = 'space-y-2';
-    list.innerHTML = general.map(contactCardHtml).join('');
-    return;
-  }
-
-  list.className = 'grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-2';
-  const colHtml = (title, items) => `
-    <div>
-      <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">${esc(title)}</p>
-      <div class="space-y-1.5">
-        ${items.length
-          ? items.map(contactCardHtml).join('')
-          : '<p class="text-xs text-gray-500 italic py-2 px-1">None yet</p>'}
-      </div>
-    </div>`;
-  list.innerHTML = colHtml('Key contacts', key) + colHtml('General', general);
-}
-
-let _contactModalId = null;
-
-function openContactModal(id) {
-  _contactModalId = id;
-  const contact = id ? state.planner.contacts.find((c) => c.id === id) : null;
-  document.getElementById('contactModalTitle').textContent = id ? 'Edit Contact' : 'Add Contact';
-  document.getElementById('contactName').value       = contact?.name     || '';
-  document.getElementById('contactOrg').value        = contact?.org      || '';
-  document.getElementById('contactEmail').value      = contact?.email    || '';
-  document.getElementById('contactLinkedin').value   = contact?.linkedin || '';
-  document.getElementById('contactType').value       = contact?.type     || '';
-  document.getElementById('contactWhereMet').value   = contact?.whereMet || '';
-  document.getElementById('contactNotes').value      = contact?.notes    || '';
-  document.getElementById('contactFollowUp').checked = contact?.followUp || false;
-  document.getElementById('contactModalDelete')?.classList.toggle('hidden', !id);
-  showModal('contactModal', 'contactName');
-}
-
-function saveContactModal() {
-  const isNew = !_contactModalId;
-  const id = _contactModalId || makeItemId('c');
-  const data = {
-    id,
-    name:     document.getElementById('contactName').value.trim(),
-    org:      document.getElementById('contactOrg').value.trim(),
-    email:    document.getElementById('contactEmail').value.trim(),
-    linkedin: document.getElementById('contactLinkedin').value.trim(),
-    type:     document.getElementById('contactType').value,
-    whereMet: document.getElementById('contactWhereMet').value.trim(),
-    notes:    document.getElementById('contactNotes').value.trim(),
-    followUp: document.getElementById('contactFollowUp').checked,
-  };
-  if (isNew) {
-    state.planner.contacts.unshift(data);
-  } else {
-    const idx = state.planner.contacts.findIndex((c) => c.id === id);
-    if (idx !== -1) state.planner.contacts[idx] = data;
-  }
-  closeContactModal();
-  renderContactsTab();
-  scheduleAutoSave();
-}
-
-function closeContactModal() {
-  hideModal('contactModal');
-  _contactModalId = null;
-}
-
-function deleteContact(id) {
-  const snapshot = state.planner.contacts.find((c) => c.id === id);
-  if (!snapshot) return;
-  state.planner.contacts = state.planner.contacts.filter((c) => c.id !== id);
-  renderContactsTab();
-  scheduleAutoSave();
-  showUndoToast(snapshot.name || snapshot.org || 'Contact', () => {
-    state.planner.contacts = [...state.planner.contacts, snapshot];
-    renderContactsTab();
-    scheduleAutoSave();
-  });
-}
+// Extracted to ./modules/plannerContacts.js (initContacts / renderContactsTab /
+// wireContactsPanel).
 
 // ── Tasks tab ────────────────────────────────────────────────────────────────
 
-function buildSessionOptions(selectedId) {
-  const none = `<option value="">— No linked session —</option>`;
-  const opts = state.allSessions.map((s) => {
-    const time = fmtTime(s.startTime);
-    const label = `${time} ${s.title}`.slice(0, 60);
-    return `<option value="${esc(s.id)}" ${s.id === selectedId ? 'selected' : ''}>${esc(label)}</option>`;
-  }).join('');
-  return none + opts;
-}
-
-const TASK_PRIORITY_ORDER = { urgent: 0, high: 1, normal: 2, low: 3 };
-const TASK_PRIORITY_BADGE = {
-  urgent: 'bg-red-100 text-red-600',
-  high:   'bg-orange-100 text-orange-700',
-  low:    'bg-gray-100 text-gray-600',
-};
-const TASK_STATUS_BADGE = {
-  'in-progress': 'bg-blue-100 text-blue-600',
-  'blocked':     'bg-amber-100 text-amber-700',
-};
-
-function taskRowHtml(task) {
-  const session = task.sessionId ? state.allSessions.find((s) => s.id === task.sessionId) : null;
-  const today   = localDateStr(new Date());
-  const overdue = !task.done && task.dueDate && task.dueDate < today;
-  const dueStr  = task.dueDate
-    ? new Date(task.dueDate + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
-    : '';
-
-  const priorityBadge = !task.done && task.priority && task.priority !== 'normal' && TASK_PRIORITY_BADGE[task.priority]
-    ? `<span class="text-[0.6rem] px-1.5 py-0.5 rounded font-medium flex-shrink-0 ${TASK_PRIORITY_BADGE[task.priority]}">${task.priority}</span>`
-    : '';
-  const statusBadge = !task.done && task.status && TASK_STATUS_BADGE[task.status]
-    ? `<span class="text-[0.6rem] px-1.5 py-0.5 rounded font-medium flex-shrink-0 ${TASK_STATUS_BADGE[task.status]}">${task.status}</span>`
-    : '';
-  const dueBadge = dueStr
-    ? `<span class="text-[0.6rem] px-1.5 py-0.5 rounded flex-shrink-0 ${overdue ? 'bg-red-100 text-red-600 font-medium' : 'bg-gray-100 text-gray-500'}"><i class="fas fa-calendar-day mr-0.5 text-[0.5rem]"></i>${dueStr}${overdue ? ' !' : ''}</span>`
-    : '';
-  const sessionBadge = session
-    ? `<span class="text-[0.6rem] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500 truncate max-w-[140px]" title="${esc(session.title)}">${esc(fmtTime(session.startTime))} ${esc(session.title.slice(0, 30))}${session.title.length > 30 ? '…' : ''}</span>`
-    : '';
-
-  return `
-    <div class="flex items-center gap-2.5 px-3 py-2 rounded-lg border ${overdue ? 'border-red-200' : 'border-gray-200'} bg-white group" data-task-id="${esc(task.id)}">
-      <input type="checkbox" class="h-4 w-4 rounded flex-shrink-0" data-task-id="${esc(task.id)}" data-task-field="done" ${task.done ? 'checked' : ''} aria-label="Mark task done">
-      <div class="flex-1 min-w-0">
-        <span class="text-sm ${task.done ? 'line-through text-gray-500' : 'text-gray-800'} truncate block">${esc(task.text || 'Untitled task')}</span>
-        ${priorityBadge || statusBadge || dueBadge || sessionBadge
-          ? `<div class="flex items-center gap-1.5 mt-0.5 flex-wrap">${priorityBadge}${statusBadge}${dueBadge}${sessionBadge}</div>`
-          : ''}
-      </div>
-      <button type="button" class="edit-task-btn h-6 w-6 flex items-center justify-center rounded border border-gray-200 text-gray-400 hover:text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-150" data-task-id="${esc(task.id)}" aria-label="Edit task">
-        <i class="fas fa-pen-to-square text-[0.6rem]"></i>
-      </button>
-      <button type="button" class="delete-task-btn h-6 w-6 flex items-center justify-center flex-shrink-0 text-gray-500 hover:text-red-600 transition-colors opacity-0 group-hover:opacity-100 transition-opacity duration-150" data-task-id="${esc(task.id)}" aria-label="Delete task">
-        <i class="fas fa-times text-xs"></i>
-      </button>
-    </div>`;
-}
-
-function renderTasksTab() {
-  const filter   = state.tasksFilter;
-  const filtered = state.planner.tasks.filter((t) => {
-    if (filter === 'open') return !t.done;
-    if (filter === 'done') return t.done;
-    return true;
-  });
-  const sortOpen = (a, b) => {
-    const pa = TASK_PRIORITY_ORDER[a.priority] ?? 2;
-    const pb = TASK_PRIORITY_ORDER[b.priority] ?? 2;
-    if (pa !== pb) return pa - pb;
-    if (a.dueDate && b.dueDate) return a.dueDate.localeCompare(b.dueDate);
-    if (a.dueDate) return -1;
-    if (b.dueDate) return 1;
-    return 0;
-  };
-  const open = filtered.filter((t) => !t.done).sort(sortOpen);
-  const done = filtered.filter((t) =>  t.done);
-  renderListPanel('tasksList', 'tasksEmptyState', [...open, ...done], taskRowHtml);
-}
-
-let _taskModalId = null;
-
-function openTaskModal(id) {
-  _taskModalId = id;
-  const task = id ? state.planner.tasks.find((t) => t.id === id) : null;
-  const isConference = state.planner?.isConference !== false;
-
-  document.getElementById('taskModalTitle').textContent = id ? 'Edit Task' : 'Add Task';
-  document.getElementById('taskModalText').value        = task?.text    || '';
-  document.getElementById('taskModalDueDate').value     = task?.dueDate || '';
-
-  const statusEl = document.getElementById('taskModalStatus');
-  if (statusEl) statusEl.value = task?.status || 'open';
-  const priorityEl = document.getElementById('taskModalPriority');
-  if (priorityEl) priorityEl.value = task?.priority || 'normal';
-
-  const sessionRowEl = document.getElementById('taskModalSessionRow');
-  if (sessionRowEl) sessionRowEl.classList.toggle('hidden', !isConference);
-  const sessionEl = document.getElementById('taskModalSession');
-  if (sessionEl) sessionEl.innerHTML = buildSessionOptions(isConference ? (task?.sessionId || '') : '');
-
-  document.getElementById('taskModalDelete')?.classList.toggle('hidden', !id);
-  showModal('taskModal', 'taskModalText');
-}
-
-function saveTaskModal() {
-  const isNew      = !_taskModalId;
-  const id         = _taskModalId || makeItemId('t');
-  const text       = document.getElementById('taskModalText').value.trim();
-  const isConference = state.planner?.isConference !== false;
-  const sessionId  = isConference ? (document.getElementById('taskModalSession').value || null) : null;
-  const status     = document.getElementById('taskModalStatus')?.value   || 'open';
-  const priority   = document.getElementById('taskModalPriority')?.value || 'normal';
-  const dueDate    = document.getElementById('taskModalDueDate')?.value  || '';
-  if (isNew) {
-    state.planner.tasks.unshift({ id, text, done: false, sessionId, status, priority, dueDate });
-  } else {
-    const task = state.planner.tasks.find((t) => t.id === id);
-    if (task) { task.text = text; task.sessionId = sessionId; task.status = status; task.priority = priority; task.dueDate = dueDate; }
-  }
-  closeTaskModal();
-  renderTasksTab();
-  scheduleAutoSave();
-}
-
-function closeTaskModal() {
-  hideModal('taskModal');
-  _taskModalId = null;
-}
-
-function addTask() {
-  openTaskModal(null);
-}
-
-function deleteTask(id) {
-  const snapshot = state.planner.tasks.find((t) => t.id === id);
-  if (!snapshot) return;
-  state.planner.tasks = state.planner.tasks.filter((t) => t.id !== id);
-  renderTasksTab();
-  scheduleAutoSave();
-  showUndoToast(snapshot.title || 'Task', () => {
-    state.planner.tasks = [...state.planner.tasks, snapshot];
-    renderTasksTab();
-    scheduleAutoSave();
-  });
-}
-
-function handleTaskChange(id, field, value) {
-  const task = state.planner.tasks.find((t) => t.id === id);
-  if (!task) return;
-  task[field] = field === 'done' ? Boolean(value) : (value || null);
-  if (field === 'done') renderTasksTab();
-  scheduleAutoSave();
-}
-
-// ── Org tab ──────────────────────────────────────────────────────────────────
-
-const TRAVEL_MODES = {
-  flight:    { label: '✈ Flight',    icon: 'fas fa-plane-departure', returnIcon: 'fas fa-plane-arrival' },
-  train:     { label: '🚂 Train',    icon: 'fas fa-train' },
-  bus:       { label: '🚌 Bus',      icon: 'fas fa-bus' },
-  ferry:     { label: '⛴ Ferry',    icon: 'fas fa-ship' },
-  car:       { label: '🚗 Transfer', icon: 'fas fa-car' },
-  taxi:      { label: '🚕 Taxi',     icon: 'fas fa-taxi' },
-  rideshare: { label: '📱 Rideshare', icon: 'fas fa-car-side' },
-  other:     { label: '↔ Other',    icon: 'fas fa-route' },
-};
-
-const TRAVEL_STATUSES = [
-  { value: '',              label: '— No status —' },
-  { value: 'needs-booking', label: 'Needs Booking' },
-  { value: 'shortlisted',   label: 'Shortlisted' },
-  { value: 'booked',        label: 'Booked' },
-  { value: 'confirmed',     label: 'Confirmed' },
-  { value: 'cancelled',     label: 'Cancelled' },
-];
-
-const TRAVEL_STATUS_CLASSES = {
-  'needs-booking': 'bg-red-100 text-red-700',
-  'shortlisted':   'bg-yellow-100 text-yellow-700',
-  'booked':        'bg-blue-100 text-blue-700',
-  'confirmed':     'bg-emerald-100 text-emerald-700',
-  'cancelled':     'bg-gray-100 text-gray-400',
-};
-
-function travelStatusBadge(status) {
-  if (!status) return '';
-  const entry = TRAVEL_STATUSES.find((s) => s.value === status);
-  if (!entry || !entry.value) return '';
-  const cls = TRAVEL_STATUS_CLASSES[status] || 'bg-gray-100 text-gray-500';
-  return `<span class="text-[0.6rem] px-1.5 py-px rounded-full font-medium flex-shrink-0 ${cls}">${esc(entry.label)}</span>`;
-}
-
-function travelIcon(mode, isReturn) {
-  const m = TRAVEL_MODES[mode] || TRAVEL_MODES.other;
-  return isReturn && m.returnIcon ? m.returnIcon : m.icon;
-}
-
-function sortLegs(legs) {
-  return [...legs].sort((a, b) => {
-    const ka = `${a.date || '9999-99-99'}${a.departTime || ''}`;
-    const kb = `${b.date || '9999-99-99'}${b.departTime || ''}`;
-    return ka.localeCompare(kb);
-  });
-}
-
-function makeLeg() {
-  return { id: makeItemId('leg'), mode: 'flight', status: '', date: '', arriveDate: '', ref: '', from: '', to: '', departTime: '', arriveTime: '', departTz: '', arriveTz: '', confirmation: '', notes: '', filePath: '', fileLabel: '', receiptId: '' };
-}
-
-function legCardHtml(leg, direction) {
-  const modeOptions = Object.entries(TRAVEL_MODES)
-    .map(([val, { label }]) => `<option value="${val}"${leg.mode === val ? ' selected' : ''}>${label}</option>`)
-    .join('');
-  const statusOptions = buildSelectOptions(TRAVEL_STATUSES, leg.status || '');
-  const d = direction;
-  const li = esc(leg.id);
-  const f = (field, type = 'text', placeholder = '') =>
-    `<input type="${type}" data-leg-id="${li}" data-direction="${d}" data-leg-field="${field}" value="${esc(leg[field] || '')}" placeholder="${placeholder}" class="h-8 w-full rounded border-gray-300 text-xs bg-white px-2 drupal-blue-focus">`;
-  return `
-    <div class="rounded-lg border border-gray-200 bg-gray-50 p-3 space-y-2" data-leg-id="${li}" data-direction="${d}">
-      <div class="flex items-center gap-2 flex-wrap">
-        <select data-leg-id="${li}" data-direction="${d}" data-leg-field="mode"
-          class="h-8 rounded border-gray-300 text-xs bg-white px-2 drupal-blue-focus flex-shrink-0">
-          ${modeOptions}
-        </select>
-        <select data-leg-id="${li}" data-direction="${d}" data-leg-field="status"
-          class="h-8 rounded border-gray-300 text-xs bg-white px-2 drupal-blue-focus flex-shrink-0">
-          ${statusOptions}
-        </select>
-        <div class="flex-1 min-w-0 grid grid-cols-[1fr_auto_1fr] items-center gap-1">
-          ${f('from', 'text', 'From')}
-          <span class="text-gray-400 text-xs px-0.5">→</span>
-          ${f('to', 'text', 'To')}
-        </div>
-        ${f('date', 'date')}
-        <button type="button" class="remove-leg-btn flex-shrink-0 text-gray-500 hover:text-red-600 transition-colors"
-          data-leg-id="${li}" data-direction="${d}" aria-label="Remove leg">
-          <i class="fas fa-times text-xs"></i>
-        </button>
-      </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-        ${f('ref', 'text', 'Ref / number')}
-        ${f('confirmation', 'text', 'Confirmation #')}
-        <div></div>
-        <div class="relative">
-          <span class="absolute left-2 top-1/2 -translate-y-1/2 text-[0.6rem] text-gray-500 pointer-events-none">Dep</span>
-          <input type="time" data-leg-id="${li}" data-direction="${d}" data-leg-field="departTime" value="${esc(leg.departTime || '')}" class="h-8 w-full rounded border-gray-300 text-xs bg-white pl-7 pr-2 drupal-blue-focus">
-        </div>
-        <div class="relative">
-          <span class="absolute left-2 top-1/2 -translate-y-1/2 text-[0.6rem] text-gray-500 pointer-events-none">Arr</span>
-          <input type="time" data-leg-id="${li}" data-direction="${d}" data-leg-field="arriveTime" value="${esc(leg.arriveTime || '')}" class="h-8 w-full rounded border-gray-300 text-xs bg-white pl-7 pr-2 drupal-blue-focus">
-        </div>
-        <input type="date" data-leg-id="${li}" data-direction="${d}" data-leg-field="arriveDate" value="${esc(leg.arriveDate || '')}" class="h-8 w-full rounded border-gray-300 text-xs bg-white px-2 drupal-blue-focus" title="Arrival date (auto-filled if arrive time wraps past midnight)">
-      </div>
-      <div class="flex items-center gap-2 pt-2 border-t border-gray-100">
-        <span class="text-[0.7rem] font-medium text-gray-600 uppercase tracking-wide flex-shrink-0">Receipt</span>
-        ${leg.filePath
-          ? `<a href="${esc(leg.filePath)}" target="_blank" class="text-xs text-blue-600 hover:underline truncate flex-1">${esc(fileDisplayName(leg.filePath, leg.fileLabel))}</a>`
-          : '<span class="text-xs text-gray-500 flex-1 italic">No file attached</span>'
-        }
-        <button type="button" class="leg-attach-btn h-7 px-2 border border-gray-300 rounded text-xs text-gray-600 hover:bg-gray-50 flex-shrink-0"
-          data-leg-id="${li}" data-direction="${d}" aria-label="Attach receipt file for this leg">
-          <i class="fas fa-paperclip mr-1 text-[0.65rem]" aria-hidden="true"></i>${leg.filePath ? 'Replace' : 'Attach'}
-        </button>
-      </div>
-    </div>`;
-}
-
-function personalLegRowHtml(leg, direction) {
-  const icon   = travelIcon(leg.mode || 'flight', direction === 'return');
-  const from   = leg.from || '';
-  const to     = leg.to   || '';
-  const fmtDate = (d) => new Date(d + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
-  const date = leg.date
-    ? (leg.arriveDate && leg.arriveDate !== leg.date
-        ? `${fmtDate(leg.date)} → ${fmtDate(leg.arriveDate)}`
-        : fmtDate(leg.date))
-    : '';
-  const ref    = leg.ref || '';
-  const route  = (from || to) ? `${esc(from)} → ${esc(to)}` : '';
-  const meta   = [date, ref].filter(Boolean).join(' · ');
-  const summary = [route, meta].filter(Boolean).join(' · ');
-  const li = esc(leg.id);
-  return `
-    <div class="flex items-center gap-2 p-2.5 rounded-lg border border-gray-200 bg-white" data-personal-leg-id="${li}" data-personal-leg-dir="${direction}">
-      <i class="${icon} text-gray-500 flex-shrink-0 w-4 text-center text-xs"></i>
-      <span class="flex-1 min-w-0 text-xs text-gray-700 truncate">${summary || 'New leg — click Edit to add details'}</span>
-      ${travelStatusBadge(leg.status)}
-      <button type="button" class="personal-leg-edit-btn h-7 px-2.5 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0"
-        data-personal-leg-id="${li}" data-personal-leg-dir="${direction}" aria-label="Edit ${direction} leg${from || to ? ': ' + from + (from && to ? ' to ' + to : '') : ''}">
-        <i class="fas fa-pen-to-square mr-1 text-[0.65rem]" aria-hidden="true"></i>Edit
-      </button>
-      <button type="button" class="personal-leg-remove-btn flex-shrink-0 text-gray-500 hover:text-red-600 transition-colors"
-        data-personal-leg-id="${li}" data-personal-leg-dir="${direction}" aria-label="Remove ${direction} leg${from || to ? ': ' + from + (from && to ? ' to ' + to : '') : ''}">
-        <i class="fas fa-times text-xs" aria-hidden="true"></i>
-      </button>
-    </div>`;
-}
-
-function renderAssignmentLegsInModal(assignment) {
-  const empty = '<p class="text-xs text-gray-500 italic py-1">No legs yet. Click Add leg to start.</p>';
-  const outEl = document.getElementById('assignmentOutboundLegs');
-  const retEl = document.getElementById('assignmentReturnLegs');
-  const sortedOut = sortLegs(assignment.outboundLegs || []);
-  const sortedRet = sortLegs(assignment.returnLegs   || []);
-  if (outEl) outEl.innerHTML = sortedOut.length ? sortedOut.map((l) => legCardHtml(l, 'outbound')).join('') : empty;
-  if (retEl) retEl.innerHTML = sortedRet.length ? sortedRet.map((l) => legCardHtml(l, 'return')).join('') : empty;
-}
-
-const TIMELINE_COLORS = [
-  { bg: '#bfdbfe', border: '#60a5fa', text: '#1d4ed8' },
-  { bg: '#a7f3d0', border: '#34d399', text: '#065f46' },
-  { bg: '#ddd6fe', border: '#a78bfa', text: '#5b21b6' },
-  { bg: '#fed7aa', border: '#fb923c', text: '#9a3412' },
-  { bg: '#fbcfe8', border: '#f472b6', text: '#9d174d' },
-];
-
-function assignmentCardHtml(assignment) {
-  const member = state.global?.teamMembers.find((m) => m.id === assignment.memberId);
-  if (!member) return '';
-  const accomNames = (state.planner.org.accommodations || [])
-    .filter((acc) => acc.assignments?.some((a) => a.memberId === assignment.memberId && (a.checkIn || a.checkOut)))
-    .map((acc) => acc.name || 'Unnamed').join(', ');
-  const outLegs = assignment.outboundLegs || [];
-  const retLegs = assignment.returnLegs  || [];
-  const firstOut = outLegs.find((l) => l.date);
-  const firstRet = retLegs.find((l) => l.date);
-  const badges = [
-    firstOut && `<span class="inline-flex items-center text-[0.65rem] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500" title="Outbound from ${esc(firstOut.from || '?')}, ${outLegs.length} leg${outLegs.length !== 1 ? 's' : ''}"><i class="fas fa-plane-departure text-[0.55rem] mr-0.5"></i>${outLegs.length > 1 ? `×${outLegs.length}` : ''}</span>`,
-    firstRet && `<span class="inline-flex items-center text-[0.65rem] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500" title="Return from ${esc(firstRet.from || '?')}, ${retLegs.length} leg${retLegs.length !== 1 ? 's' : ''}"><i class="fas fa-plane-arrival text-[0.55rem] mr-0.5"></i>${retLegs.length > 1 ? `×${retLegs.length}` : ''}</span>`,
-    (assignment.budget || assignment.budgetActual) && `<span class="inline-flex items-center text-[0.65rem] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500"><i class="fas fa-wallet text-[0.55rem] mr-0.5"></i>${assignment.budget ? esc(assignment.budget) : ''}${assignment.budgetActual ? ` / ${esc(assignment.budgetActual)}` : ''}${assignment.currency ? ` ${esc(assignment.currency)}` : ''}</span>`,
-    accomNames        && `<span class="text-[0.65rem] text-gray-500">${esc(accomNames)}</span>`,
-  ].filter(Boolean).join('');
-  return `
-    <div class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 bg-white group" data-assignment-id="${esc(assignment.memberId)}">
-      <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-800">${esc(member.name || 'Unnamed')}</p>
-        <div class="flex items-center gap-2 mt-0.5 flex-wrap">
-          ${member.role ? `<span class="text-xs text-gray-500">${esc(member.role)}</span>` : ''}
-          ${badges}
-        </div>
-      </div>
-      <button type="button" class="edit-assignment-btn h-8 px-3 border border-gray-200 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-150" data-member-id="${esc(assignment.memberId)}" aria-label="Edit assignment for ${esc(member.name || 'member')}">
-        <i class="fas fa-pen-to-square mr-1.5 text-[0.65rem]" aria-hidden="true"></i>Edit
-      </button>
-      <button type="button" class="remove-assignment-btn flex-shrink-0 text-gray-500 hover:text-red-600 transition-colors opacity-0 group-hover:opacity-100 transition-opacity duration-150" data-member-id="${esc(assignment.memberId)}" aria-label="Remove ${esc(member.name || 'member')} from event">
-        <i class="fas fa-times text-xs" aria-hidden="true"></i>
-      </button>
-    </div>`;
-}
-
-function accomTypeIcon(type) {
-  return type === 'waypoints' ? 'fas fa-ship' : 'fas fa-bed';
-}
-
-function makeWaypointStop() {
-  return { id: makeItemId('cl'), location: '', coords: '', date: '', time: '', notes: '' };
-}
-
-function waypointStopRowHtml(leg) {
-  return `<div class="flex items-start gap-2 p-2 rounded-md border border-gray-200 bg-gray-50 group" draggable="true" data-stop-id="${esc(leg.id)}">
-    <i class="fas fa-grip-vertical waypoint-stop-drag-handle text-gray-400 text-xs flex-shrink-0 cursor-grab active:cursor-grabbing mt-2.5" title="Drag to reorder"></i>
-    <div class="flex-1 min-w-0">
-      <input type="text"
-        class="w-full h-8 px-2 rounded border border-transparent hover:border-gray-200 focus:border-gray-300 focus:ring-0 bg-transparent text-sm font-medium placeholder-gray-300 drupal-blue-focus"
-        placeholder="Waypoint name" data-stop-field="location" value="${esc(leg.location || '')}">
-    </div>
-    <div class="flex items-center gap-1 flex-shrink-0 mt-0.5">
-      <input type="date" class="h-8 rounded border border-gray-200 text-xs bg-white px-1.5 w-32"
-        data-stop-field="date" value="${esc(leg.date || '')}">
-      <input type="time" class="h-8 rounded border border-gray-200 text-xs bg-white px-1.5 w-20"
-        data-stop-field="time" value="${esc(leg.time || '')}">
-    </div>
-    <div class="flex flex-col gap-0.5 flex-shrink-0 mt-1">
-      <button type="button" class="move-waypoint-stop-up-btn w-6 h-4 flex items-center justify-center rounded text-gray-300 hover:text-gray-600 hover:bg-gray-100 transition-colors" data-stop-id="${esc(leg.id)}" aria-label="Move up">
-        <i class="fas fa-chevron-up text-[0.5rem]"></i>
-      </button>
-      <button type="button" class="move-waypoint-stop-down-btn w-6 h-4 flex items-center justify-center rounded text-gray-300 hover:text-gray-600 hover:bg-gray-100 transition-colors" data-stop-id="${esc(leg.id)}" aria-label="Move down">
-        <i class="fas fa-chevron-down text-[0.5rem]"></i>
-      </button>
-    </div>
-    <button type="button" class="remove-waypoint-stop-btn flex-shrink-0 text-gray-500 hover:text-red-600 transition-colors opacity-0 group-hover:opacity-100 transition-opacity duration-150 mt-1" aria-label="Remove waypoint">
-      <i class="fas fa-times text-xs"></i>
-    </button>
-    <div class="waypoint-coords-wrapper flex items-center gap-1.5 px-2 py-1 rounded bg-white border border-gray-200 focus-within:border-gray-400 transition-colors">
-      <i class="fas fa-magnifying-glass-location text-gray-500 text-[0.6rem] flex-shrink-0"></i>
-      <input type="text"
-        class="flex-1 h-4 border-0 bg-transparent text-[0.7rem] text-gray-500 placeholder-gray-300 focus:outline-none focus:text-gray-700"
-        placeholder="LOCODE, lat,lon, airport code, or place name…" data-stop-field="coords" value="${esc(leg.coords || '')}">
-    </div>
-  </div>`;
-}
-
-function renderWaypointStops(legs, listId, emptyId) {
-  const list  = document.getElementById(listId);
-  const empty = document.getElementById(emptyId);
-  if (!list) return;
-  list.innerHTML = (legs || []).map(waypointStopRowHtml).join('');
-  if (empty) empty.classList.toggle('hidden', (legs || []).length > 0);
-}
-
-function toggleWaypointStopsSection(isWaypoints, sectionId) {
-  document.getElementById(sectionId)?.classList.toggle('hidden', !isWaypoints);
-}
-
-function wireWaypointStopsDragDrop(listId, emptyId, getAccFn) {
-  const list = document.getElementById(listId);
-  if (!list) return;
-  let _dragged = null;
-
-  list.addEventListener('dragstart', (e) => {
-    if (!e.target.closest('.waypoint-stop-drag-handle')) { e.preventDefault(); return; }
-    const row = e.target.closest('[data-stop-id]');
-    if (!row) return;
-    _dragged = row.dataset.stopId;
-    row.classList.add('tab-drag-source');
-    e.dataTransfer.effectAllowed = 'move';
-  });
-
-  list.addEventListener('dragend', () => {
-    _dragged = null;
-    list.querySelectorAll('.tab-drag-source, .settings-drop-before, .settings-drop-after')
-      .forEach((el) => el.classList.remove('tab-drag-source', 'settings-drop-before', 'settings-drop-after'));
-  }, { passive: true });
-
-  list.addEventListener('dragover', (e) => {
-    if (!_dragged) return;
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
-    const target = e.target.closest('[data-stop-id]');
-    list.querySelectorAll('.settings-drop-before, .settings-drop-after')
-      .forEach((el) => el.classList.remove('settings-drop-before', 'settings-drop-after'));
-    if (target && target.dataset.stopId !== _dragged) {
-      const rect   = target.getBoundingClientRect();
-      const before = e.clientY < rect.top + rect.height / 2;
-      target.classList.add(before ? 'settings-drop-before' : 'settings-drop-after');
-    }
-  });
-
-  list.addEventListener('drop', (e) => {
-    e.preventDefault();
-    if (!_dragged) return;
-    const target = e.target.closest('[data-stop-id]');
-    if (!target || target.dataset.stopId === _dragged) return;
-    const acc = getAccFn();
-    if (!acc) return;
-    const legs = acc.stops || [];
-    const from = legs.findIndex((l) => l.id === _dragged);
-    const to   = legs.findIndex((l) => l.id === target.dataset.stopId);
-    if (from === -1 || to === -1) return;
-    const rect     = target.getBoundingClientRect();
-    const before   = e.clientY < rect.top + rect.height / 2;
-    const newLegs  = [...legs];
-    const [moved]  = newLegs.splice(from, 1);
-    const insertAt = before ? to - (from < to ? 1 : 0) : to + (from > to ? 1 : 0);
-    newLegs.splice(Math.max(0, insertAt), 0, moved);
-    acc.stops = newLegs;
-    renderWaypointStops(acc.stops, listId, emptyId);
-    scheduleAutoSave();
-  });
-
-  list.addEventListener('click', (e) => {
-    const upBtn   = e.target.closest('.move-waypoint-stop-up-btn');
-    const downBtn = e.target.closest('.move-waypoint-stop-down-btn');
-    if (!upBtn && !downBtn) return;
-    const legId = (upBtn || downBtn).dataset.stopId;
-    const acc   = getAccFn();
-    if (!acc) return;
-    const legs = acc.stops || [];
-    const idx  = legs.findIndex((l) => l.id === legId);
-    if (idx === -1) return;
-    const newLegs = [...legs];
-    if (upBtn && idx > 0) {
-      [newLegs[idx - 1], newLegs[idx]] = [newLegs[idx], newLegs[idx - 1]];
-    } else if (downBtn && idx < newLegs.length - 1) {
-      [newLegs[idx], newLegs[idx + 1]] = [newLegs[idx + 1], newLegs[idx]];
-    } else {
-      return;
-    }
-    acc.stops = newLegs;
-    renderWaypointStops(acc.stops, listId, emptyId);
-    scheduleAutoSave();
-  });
-}
-
-function accommodationCardHtml(acc, colorIdx) {
-  const col = TIMELINE_COLORS[colorIdx % TIMELINE_COLORS.length];
-  const stayNames = (acc.assignments || [])
-    .filter((a) => a.checkIn || a.checkOut)
-    .map((a) => {
-      const m = state.global?.teamMembers.find((tm) => tm.id === a.memberId);
-      return m?.name || null;
-    }).filter(Boolean);
-  return `
-    <div class="flex items-center gap-3 p-3 rounded-lg border bg-white group" style="border-color:${col.border}" data-accom-id="${esc(acc.id)}">
-      <i class="${accomTypeIcon(acc.type)} flex-shrink-0 text-sm" style="color:${col.border}"></i>
-      <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-800">${esc(acc.name || (acc.type === 'waypoints' ? 'New Waypoint' : 'New Accommodation'))}</p>
-        <div class="flex items-center gap-2 mt-0.5">
-          ${acc.address ? `<span class="text-xs text-gray-500 truncate">${esc(acc.address)}</span>` : ''}
-          ${stayNames.length ? `<span class="text-[0.65rem] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500"><i class="fas fa-person text-[0.55rem] mr-1"></i>${esc(stayNames.join(', '))}</span>` : ''}
-          ${(acc.budget || acc.budgetActual) ? `<span class="text-[0.65rem] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500"><i class="fas fa-wallet text-[0.55rem] mr-0.5"></i>${acc.budget ? esc(acc.budget) : ''}${acc.budgetActual ? ` / ${esc(acc.budgetActual)}` : ''}${acc.currency ? ` ${esc(acc.currency)}` : ''}</span>` : ''}
-        </div>
-      </div>
-      <button type="button" class="edit-accommodation-btn h-8 px-3 border border-gray-200 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-150" data-accom-id="${esc(acc.id)}" aria-label="Edit ${esc(acc.name || 'accommodation')}">
-        <i class="fas fa-pen-to-square mr-1.5 text-[0.65rem]" aria-hidden="true"></i>Edit
-      </button>
-      <button type="button" class="delete-accommodation-btn flex-shrink-0 text-gray-500 hover:text-red-600 transition-colors opacity-0 group-hover:opacity-100 transition-opacity duration-150" data-accom-id="${esc(acc.id)}" aria-label="Remove ${esc(acc.name || 'accommodation')}">
-        <i class="fas fa-times text-xs" aria-hidden="true"></i>
-      </button>
-    </div>`;
-}
-
-function renderTimeline() {
-  const container = document.getElementById('orgTimeline');
-  if (!container) return;
-
-  const { teamAssignments = [], accommodations = [], timeline = {} } = state.planner.org;
-
-  if (!teamAssignments.length) {
-    container.innerHTML = '<p class="text-xs text-gray-600 py-2">Assign team members to this event to see the timeline.</p>';
-    return;
-  }
-
-  // Determine date range — use stored or derive from event + flight dates
-  let startStr = timeline.startDate;
-  let endStr   = timeline.endDate;
-
-  if (!startStr || !endStr) {
-    const eventDates   = state.allSessions.map((s) => s.startTime.slice(0, 10)).sort();
-    const flightDates  = teamAssignments.flatMap((a) => [
-      ...(a.outboundLegs || []).map((l) => l.date),
-      ...(a.returnLegs   || []).map((l) => l.date),
-      // legacy compat
-      a.flightOut?.date, a.flightReturn?.date,
-    ]).filter(Boolean).sort();
-    const all          = [...eventDates, ...flightDates].filter(Boolean).sort();
-    if (!all.length) {
-      container.innerHTML = '<p class="text-xs text-gray-600 py-2">Set a date range above or add flight dates to see the timeline.</p>';
-      return;
-    }
-    const first = new Date(all[0]        + 'T00:00:00'); first.setDate(first.getDate() - 1);
-    const last  = new Date(all[all.length - 1] + 'T00:00:00'); last.setDate(last.getDate() + 1);
-    startStr = startStr || localDateStr(first);
-    endStr   = endStr   || localDateStr(last);
-  }
-
-  // Build day list
-  const days = [];
-  let cur = new Date(startStr + 'T00:00:00');
-  const end = new Date(endStr + 'T00:00:00');
-  if (cur > end || (end - cur) / 86400000 > 90) {
-    container.innerHTML = '<p class="text-xs text-gray-600 py-2">Date range is invalid or exceeds 90 days.</p>';
-    return;
-  }
-  while (cur <= end) { days.push(localDateStr(cur)); cur.setDate(cur.getDate() + 1); }
-
-  // Populate inputs if derived
-  const si = document.getElementById('timelineStartDate');
-  const ei = document.getElementById('timelineEndDate');
-  if (si && !si.value) si.value = startStr;
-  if (ei && !ei.value) ei.value = endStr;
-
-  const eventDaySet = new Set(state.allSessions.map((s) =>
-    new Date(s.startTime).toLocaleDateString('en-CA', { timeZone: getTimezone() })
-  ));
-  const todayStr = localDateStr(new Date());
-  const colorMap = Object.fromEntries(accommodations.map((a, i) => [a.id, TIMELINE_COLORS[i % TIMELINE_COLORS.length]]));
-
-  function dayAccomMap(memberId) {
-    const primary  = {};  // main stay (checkIn through day before checkOut)
-    const checkouts = {}; // accommodation being checked out of on that day
-
-    accommodations.forEach((acc) => {
-      const ma = acc.assignments?.find((a) => a.memberId === memberId);
-      if (!ma?.checkIn || !ma?.checkOut) return;
-      // Mark the checkout day separately
-      checkouts[ma.checkOut] = acc;
-      // Fill primary from checkIn up to (but not including) checkOut day
-      let d = new Date(ma.checkIn + 'T00:00:00');
-      const e = new Date(ma.checkOut + 'T00:00:00');
-      e.setDate(e.getDate() - 1);
-      while (d <= e) { primary[localDateStr(d)] = acc; d.setDate(d.getDate() + 1); }
-    });
-
-    // Merge: a checkout day that also has a primary (new checkin) → split cell
-    const map = {};
-    const allDays = new Set([...Object.keys(primary), ...Object.keys(checkouts)]);
-    allDays.forEach((day) => {
-      const inAccom  = primary[day];
-      const outAccom = checkouts[day];
-      if (inAccom && outAccom && inAccom.id !== outAccom.id) {
-        map[day] = { accom: inAccom, splitAccom: outAccom }; // left=checkout, right=checkin
-      } else {
-        map[day] = { accom: inAccom || outAccom, splitAccom: null };
-      }
-    });
-    return map;
-  }
-
-  const headerCells = days.map((day) => {
-    const isEvent = eventDaySet.has(day);
-    const isToday = day === todayStr;
-    const label   = new Date(day + 'T00:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
-    const cls     = isToday ? 'tl-head-today' : isEvent ? 'tl-head-event' : 'tl-head-normal';
-    return `<th style="min-width:68px" class="${cls} text-center text-[0.65rem] px-1 py-2 whitespace-nowrap border-l border-gray-100">${label}${isToday ? '<br><i class="fas fa-circle" style="font-size:0.45rem;color:inherit"></i>' : ''}</th>`;
-  }).join('');
-
-  const rows = teamAssignments.map((assignment) => {
-    const member = state.global?.teamMembers.find((m) => m.id === assignment.memberId);
-    if (!member) return '';
-    const dam = dayAccomMap(assignment.memberId);
-
-    // Build day→legs arrays (all legs, sorted chronologically by departure time)
-    const outDayLegs = {};
-    const retDayLegs = {};
-    (assignment.outboundLegs || []).filter((l) => l.date).forEach((l) => {
-      (outDayLegs[l.date] ??= []).push({ mode: l.mode || 'other', time: l.departTime || '' });
-    });
-    (assignment.returnLegs || []).filter((l) => l.date).forEach((l) => {
-      (retDayLegs[l.date] ??= []).push({ mode: l.mode || 'other', time: l.departTime || '' });
-    });
-    // Legacy compat
-    if (assignment.flightOut?.date)
-      (outDayLegs[assignment.flightOut.date] ??= []).push({ mode: 'flight', time: '' });
-    if (assignment.flightReturn?.date)
-      (retDayLegs[assignment.flightReturn.date] ??= []).push({ mode: 'flight', time: '' });
-    Object.values(outDayLegs).forEach((legs) => legs.sort((a, b) => a.time.localeCompare(b.time)));
-    Object.values(retDayLegs).forEach((legs) => legs.sort((a, b) => a.time.localeCompare(b.time)));
-
-    const cells = days.map((day) => {
-      const dayInfo    = dam[day];
-      const accom      = dayInfo?.accom      || null;
-      const splitAccom = dayInfo?.splitAccom || null;
-      const outLegs = outDayLegs[day] || [];
-      const retLegs = retDayLegs[day] || [];
-      const isEvent = eventDaySet.has(day);
-      const isToday = day === todayStr;
-      const cellCls = (accom || splitAccom) ? '' : isToday ? 'tl-cell-today' : isEvent ? 'tl-cell-event' : '';
-      let bgStyle = '';
-      if (splitAccom && accom) {
-        const outCol = colorMap[splitAccom.id];
-        const inCol  = colorMap[accom.id];
-        bgStyle = `background:linear-gradient(to right,${outCol?.bg} 50%,${inCol?.bg} 50%);border-bottom:2px solid ${inCol?.border}`;
-      } else if (accom) {
-        const col = colorMap[accom.id];
-        bgStyle = `background:${col?.bg};border-bottom:2px solid ${col?.border}`;
-      }
-
-      let content = '';
-      if (outLegs.length || retLegs.length) {
-        const hasBoth = outLegs.length && retLegs.length;
-        const color   = hasBoth ? '#7c3aed' : outLegs.length ? '#2563eb' : '#059669';
-        const tip     = hasBoth ? `${esc(member.name)} outbound + return` : outLegs.length ? `${esc(member.name)} outbound` : `${esc(member.name)} return`;
-        const icons   = [
-          ...outLegs.map((l) => `<i class="${travelIcon(l.mode, false)}" style="color:${color};font-size:0.62rem"></i>`),
-          ...retLegs.map((l) => `<i class="${travelIcon(l.mode, true)}"  style="color:${color};font-size:0.62rem"></i>`),
-        ].join('');
-        content = `<span class="inline-flex flex-wrap justify-center gap-1" title="${tip}">${icons}</span>`;
-      }
-
-      return `<td style="${bgStyle}" class="${cellCls} text-center px-1 py-2 border-l border-gray-100">${content}</td>`;
-    }).join('');
-    return `<tr class="border-t border-gray-100"><td class="text-xs font-medium text-gray-700 pr-3 py-2 whitespace-nowrap border-r border-gray-200" style="min-width:90px">${esc(member.name || 'Unnamed')}</td>${cells}</tr>`;
-  }).filter(Boolean).join('');
-
-  const legend = accommodations.map((acc, i) => {
-    const c = TIMELINE_COLORS[i % TIMELINE_COLORS.length];
-    return `<span class="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full font-medium" style="background:${c.bg};color:${c.text};border:1px solid ${c.border}"><i class="${accomTypeIcon(acc.type)} text-[0.6rem]"></i>${esc(acc.name || 'Unnamed')}</span>`;
-  }).join('');
-
-  container.innerHTML = rows
-    ? `<div class="tl-scroll overflow-x-auto rounded-lg border border-gray-200"><table class="min-w-full text-sm" style="border-collapse:collapse"><thead class="bg-gray-50"><tr><th class="text-left text-xs font-semibold text-gray-500 pr-3 py-2 whitespace-nowrap border-r border-gray-200" style="min-width:90px">Member</th>${headerCells}</tr></thead><tbody>${rows}</tbody></table></div>${legend ? `<div class="flex flex-wrap gap-2 mt-3">${legend}</div>` : ''}`
-    : '<p class="text-xs text-gray-600 py-2">No valid team assignments to display.</p>';
-}
-
-function refreshAssignMemberSelect() {
-  const sel = document.getElementById('assignMemberSelect');
-  if (!sel) return;
-  const assignedIds = new Set((state.planner.org.teamAssignments || []).map((a) => a.memberId));
-  const available   = (state.global?.teamMembers || []).filter((m) => !assignedIds.has(m.id));
-  sel.innerHTML = `<option value="">＋ Assign team member…</option>` +
-    available.map((m) => `<option value="${esc(m.id)}">${esc(m.name || 'Unnamed')}${m.role ? ` — ${esc(m.role)}` : ''}</option>`).join('');
-  sel.parentElement?.classList.toggle('hidden', (state.global?.teamMembers || []).length === 0);
-}
-
-function renderOrgTab() {
-  const org = state.planner.org;
-
-  syncEventTitleField('plannerSponsorTitle', 'plannerSponsorTitleHint')
-
-  const boothInfo  = document.getElementById('orgBoothInfo');
-  const boothNotes = document.getElementById('orgBoothNotes');
-  if (boothInfo)  boothInfo.value  = org.boothInfo  || '';
-  if (boothNotes) boothNotes.value = org.boothNotes || '';
-
-  const sponsorBudgetEl   = document.getElementById('orgSponsorBudget')
-  const sponsorActualEl   = document.getElementById('orgSponsorActual')
-  const sponsorCurrencyEl = document.getElementById('orgSponsorCurrency')
-  if (sponsorBudgetEl)   sponsorBudgetEl.value      = org.sponsorBudget   || ''
-  if (sponsorActualEl)   sponsorActualEl.value       = org.sponsorActual   || ''
-  if (sponsorCurrencyEl) sponsorCurrencyEl.innerHTML = currencyOptions(org.sponsorCurrency || 'AUD')
-
-  const teamList  = document.getElementById('orgTeamList');
-  const teamEmpty = document.getElementById('orgTeamEmpty');
-  if (teamList) {
-    teamList.innerHTML = (org.teamAssignments || []).map(assignmentCardHtml).filter(Boolean).join('');
-    teamEmpty?.classList.toggle('hidden', (org.teamAssignments || []).length > 0);
-  }
-  refreshAssignMemberSelect();
-
-  const accomList  = document.getElementById('orgAccommodationsList');
-  const accomEmpty = document.getElementById('orgAccommodationsEmpty');
-  if (accomList) {
-    accomList.innerHTML = (org.accommodations || []).map((acc, i) => accommodationCardHtml(acc, i)).join('');
-    accomEmpty?.classList.toggle('hidden', (org.accommodations || []).length > 0);
-  }
-
-  const swagList  = document.getElementById('orgSwagList');
-  const swagEmpty = document.getElementById('orgSwagEmpty');
-  if (swagList) {
-    swagList.innerHTML = (org.swag || []).map((item) => swagCardHtml(item)).join('');
-    swagEmpty?.classList.toggle('hidden', (org.swag || []).length > 0);
-  }
-
-  const delivList  = document.getElementById('orgDeliverablesList');
-  const delivEmpty = document.getElementById('orgDeliverablesEmpty');
-  if (delivList) {
-    delivList.innerHTML = (org.deliverables || []).map((item) => checklistItemHtml(item, 'deliverables')).join('');
-    delivEmpty?.classList.toggle('hidden', (org.deliverables || []).length > 0);
-  }
-
-  renderTimeline();
-  renderOrgItinerary();
-  renderTrackedSessions('sponsor');
-  renderBudgetItems('sponsor');
-  renderSponsorBudgetBreakdown();
-}
+// ── Org tab + trip-render helpers ─────────────────────────────────────────────
+// Extracted to ./modules/plannerOrg.js (initOrg + renderOrgTab, leg/assignment/
+// accommodation/waypoint/timeline render helpers).
+
+// Shared travel/leg primitives (TRAVEL_MODES, sortLegs, travelIcon, etc.) +
+// TIMELINE_COLORS extracted to ./modules/plannerTravel.js.
 
 // ── Assignment modal ──────────────────────────────────────────────────────────
 
 function openAssignmentModal(memberId) {
-  const modal  = document.getElementById('assignmentModal');
+  const modal = document.getElementById('assignmentModal');
   const member = state.global?.teamMembers.find((m) => m.id === memberId);
   if (!modal || !member) return;
 
@@ -1751,12 +1010,30 @@ function openAssignmentModal(memberId) {
   if (assignment.flightOut !== undefined || assignment.flightReturn !== undefined) {
     if (!assignment.outboundLegs) {
       assignment.outboundLegs = assignment.flightOut?.date
-        ? [{ ...makeLeg(), date: assignment.flightOut.date, ref: assignment.flightOut.flightNo || '', from: assignment.flightOut.from || '', to: assignment.flightOut.to || '', confirmation: assignment.flightOut.confirmation || '' }]
+        ? [
+            {
+              ...makeLeg(),
+              date: assignment.flightOut.date,
+              ref: assignment.flightOut.flightNo || '',
+              from: assignment.flightOut.from || '',
+              to: assignment.flightOut.to || '',
+              confirmation: assignment.flightOut.confirmation || '',
+            },
+          ]
         : [];
     }
     if (!assignment.returnLegs) {
       assignment.returnLegs = assignment.flightReturn?.date
-        ? [{ ...makeLeg(), date: assignment.flightReturn.date, ref: assignment.flightReturn.flightNo || '', from: assignment.flightReturn.from || '', to: assignment.flightReturn.to || '', confirmation: assignment.flightReturn.confirmation || '' }]
+        ? [
+            {
+              ...makeLeg(),
+              date: assignment.flightReturn.date,
+              ref: assignment.flightReturn.flightNo || '',
+              from: assignment.flightReturn.from || '',
+              to: assignment.flightReturn.to || '',
+              confirmation: assignment.flightReturn.confirmation || '',
+            },
+          ]
         : [];
     }
     delete assignment.flightOut;
@@ -1766,8 +1043,9 @@ function openAssignmentModal(memberId) {
 
   // Ensure arrays exist
   assignment.outboundLegs = assignment.outboundLegs || [];
-  assignment.returnLegs   = assignment.returnLegs   || [];
+  assignment.returnLegs = assignment.returnLegs || [];
 
+  modal.dataset.ctx = 'org';
   modal.dataset.memberId = memberId;
   document.getElementById('assignmentModalSubtitle').textContent =
     `${member.name || 'Unnamed'}${member.role ? ` · ${member.role}` : ''}`;
@@ -1775,2396 +1053,85 @@ function openAssignmentModal(memberId) {
   renderAssignmentLegsInModal(assignment);
   _hideAssignmentModalImportButtons();
 
-  document.getElementById('assignmentBudget').value = assignment.budget       || '';
-  document.getElementById('assignmentActual').value = assignment.budgetActual || '';
-  document.getElementById('assignmentNotes').value  = assignment.notes        || '';
-  const currencyEl = document.getElementById('assignmentCurrency');
-  if (currencyEl) currencyEl.innerHTML = currencyOptions(assignment.currency || state.planner?.org?.sponsorCurrency || 'AUD');
+  // Org team-assignment cost lives on the linked receipt — the cost inputs are for
+  // personal/companion assignments only, so they stay blank/hidden here.
+  document.getElementById('assignmentNotes').value = assignment.notes || '';
 
+  renderAssignmentReceiptStatus();
   showModal('assignmentModal');
   if (!touchDevice()) modal.querySelector('input, select')?.focus();
 }
 
+// Resolve the team assignment the assignment modal is currently editing (org ctx).
+// Only org team assignments carry receipt-backed travel cost in the budget summary;
+// personal companion assignments are informational (not in plannerSummary).
+function _currentTeamAssignment() {
+  const modal = document.getElementById('assignmentModal');
+  const ctx = modal?.dataset.ctx || 'org';
+  if (ctx !== 'org') return null;
+  const memberId = modal?.dataset.memberId;
+  return (state.planner.org?.teamAssignments || []).find((a) => a.memberId === memberId) || null;
+}
+
+// Toggle the assignment modal's cost vs receipt sections by context. Org team
+// assignments move cost to a linked receipt (Receipt section shown, cost inputs
+// hidden); personal / local-companion assignments aren't receipt-backed, so they
+// keep their own cost inputs (cost shown, Receipt hidden).
+function renderAssignmentReceiptStatus() {
+  const section = document.getElementById('assignmentReceiptSection');
+  const costSection = document.getElementById('assignmentCostSection');
+  const assignment = _currentTeamAssignment(); // non-null only for org ctx
+  if (section) section.classList.toggle('hidden', !assignment);
+  if (costSection) costSection.classList.toggle('hidden', !!assignment);
+  if (!assignment) return;
+  renderEntityReceiptStatus(document.getElementById('assignmentReceiptStatus'), {
+    receipt: linkedReceipt(state.planner, assignment),
+    idPrefix: 'assignment',
+    canLink: true,
+  });
+}
+
+// Create a receipt for the team assignment and open it so cost/details are entered
+// on the receipt (the single home for money). Closes the modal to avoid stacking.
+function createReceiptForAssignment() {
+  const assignment = _currentTeamAssignment();
+  if (!assignment) return;
+  const member = state.global?.teamMembers?.find((m) => m.id === assignment.memberId);
+  const receipt = createReceiptForEntity(state.planner, assignment, {
+    name: member?.name ? `${member.name} — travel` : 'Team travel',
+    currency: state.planner?.org?.sponsorCurrency || 'AUD',
+    category: 'travel',
+  });
+  scheduleAutoSave();
+  renderReceiptsTab();
+  hideModal('assignmentModal');
+  document.getElementById('assignmentModal').dataset.ctx = '';
+  renderOrgTab();
+  openReceiptModal(receipt.id);
+}
 
 // ── Accommodation modal ───────────────────────────────────────────────────────
-
-function renderAccomMembersSection(acc) {
-  const allAssignments = state.planner.org.teamAssignments || [];
-  const noMembersEl    = document.getElementById('accomNoMembers');
-  const wrapper        = document.getElementById('accomMemberStaysWrapper');
-  const select         = document.getElementById('accomMemberSelect');
-
-  if (!allAssignments.length) {
-    noMembersEl?.classList.remove('hidden');
-    wrapper?.classList.add('hidden');
-    return;
-  }
-  noMembersEl?.classList.add('hidden');
-  wrapper?.classList.remove('hidden');
-
-  const prevValue   = select?.value || '';
-  const assignedIds = new Set((acc.assignments || []).map((s) => s.memberId));
-
-  if (select) {
-    select.innerHTML = `<option value="">— Select to view or add —</option>` +
-      allAssignments.map((a) => {
-        const m = state.global?.teamMembers.find((tm) => tm.id === a.memberId);
-        if (!m) return '';
-        return `<option value="${esc(m.id)}"${prevValue === m.id ? ' selected' : ''}>${esc(m.name || 'Unnamed')}${assignedIds.has(m.id) ? ' ✓' : ''}</option>`;
-      }).filter(Boolean).join('');
-  }
-
-  if (prevValue && select?.value === prevValue) {
-    loadMemberStayFields(acc, prevValue);
-  } else {
-    document.getElementById('accomMemberFields')?.classList.add('hidden');
-    const removeBtn = document.getElementById('accomRemoveMemberBtn');
-    if (removeBtn) removeBtn.classList.add('opacity-0', 'pointer-events-none');
-  }
-}
-
-function loadMemberStayFields(acc, memberId) {
-  const stay      = (acc.assignments || []).find((s) => s.memberId === memberId) || {};
-  const hasStay   = !!(acc.assignments || []).find((s) => s.memberId === memberId);
-  const fields    = document.getElementById('accomMemberFields');
-  const removeBtn = document.getElementById('accomRemoveMemberBtn');
-
-  fields?.classList.remove('hidden');
-  if (removeBtn) {
-    if (hasStay) removeBtn.classList.remove('opacity-0', 'pointer-events-none');
-    else         removeBtn.classList.add('opacity-0', 'pointer-events-none');
-  }
-
-  const isWaypoints = acc.type === 'waypoints';
-  document.getElementById('accomMemberCheckInRow')?.classList.toggle('hidden', isWaypoints);
-  document.getElementById('accomMemberCheckOutRow')?.classList.toggle('hidden', isWaypoints);
-
-  const checkIn  = document.getElementById('accomMemberCheckIn');
-  const checkOut = document.getElementById('accomMemberCheckOut');
-  const currency = document.getElementById('accomMemberCurrency');
-  const budget   = document.getElementById('accomMemberBudget');
-  const actual   = document.getElementById('accomMemberActual');
-  if (checkIn)  checkIn.value  = isWaypoints ? (acc.checkIn || '') : (stay.checkIn || '');
-  if (checkOut) checkOut.value = isWaypoints ? (acc.checkOut || '') : (stay.checkOut || '');
-  if (currency) currency.innerHTML = currencyOptions(stay.currency || state.planner?.org?.sponsorCurrency || 'AUD');
-  if (budget)   budget.value   = stay.budget       || '';
-  if (actual)   actual.value   = stay.budgetActual || '';
-}
-
-function openAccommodationModal(id) {
-  const modal = document.getElementById('accommodationModal');
-  if (!modal) return;
-  const acc = (state.planner.org.accommodations || []).find((a) => a.id === id);
-  if (!acc) return;
-
-  modal.dataset.accomId = id;
-  const accomType = acc.type || 'accommodation';
-  const typeEl = document.getElementById('accomType');
-  if (typeEl) typeEl.value = accomType;
-  document.getElementById('accommodationModalTitle').textContent = accomType === 'waypoints' ? 'Waypoint' : 'Accommodation';
-  document.getElementById('accomName').value         = acc.name         || '';
-  document.getElementById('accomAddress').value      = acc.address      || '';
-  document.getElementById('accomConfirmation').value = acc.confirmation || '';
-  document.getElementById('accomNotes').value        = acc.notes        || '';
-
-  toggleWaypointStopsSection(accomType === 'waypoints', 'accomWaypointStopsSection');
-  renderWaypointStops(acc.stops, 'accomWaypointStopsList', 'accomWaypointStopsEmpty');
-
-  renderAccomDocStatus(acc, 'accomDocStatus', 'accomAttachDocBtn');
-  renderAccomMembersSection(acc);
-
-  showModal('accommodationModal');
-  if (!touchDevice()) modal.querySelector('input')?.focus();
-}
-
-
-function checklistItemHtml(item, listType) {
-  const hasDate = listType === 'deliverables';
-  return `
-    <div class="flex items-center gap-2 p-2 rounded border border-gray-200 bg-white group" data-${listType}-id="${esc(item.id)}">
-      <input type="checkbox" class="h-4 w-4 rounded flex-shrink-0" data-${listType}-id="${esc(item.id)}" data-${listType}-field="done" ${item.done ? 'checked' : ''}>
-      <input type="text" data-${listType}-id="${esc(item.id)}" data-${listType}-field="label" value="${esc(item.label)}"
-        placeholder="Item…"
-        class="flex-1 h-8 border-0 border-b border-transparent hover:border-gray-200 focus:border-gray-300 focus:ring-0 bg-transparent text-sm ${item.done ? 'line-through text-gray-500' : 'text-gray-800'} px-1 transition-colors">
-      ${hasDate ? `<input type="date" data-${listType}-id="${esc(item.id)}" data-${listType}-field="dueDate" value="${esc(item.dueDate || '')}" class="h-8 rounded border-gray-200 text-xs bg-white px-2 text-gray-500 w-32">` : ''}
-      <button type="button" class="delete-${listType}-btn flex-shrink-0 text-gray-500 hover:text-red-600 transition-colors opacity-0 group-hover:opacity-100 transition-opacity duration-150" data-${listType}-id="${esc(item.id)}" aria-label="Remove ${esc(item.label || listType + ' item')}">
-        <i class="fas fa-times text-xs" aria-hidden="true"></i>
-      </button>
-    </div>`;
-}
-
-function swagCardHtml(item) {
-  const fmt = (n) => n ? parseFloat(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : null;
-  const budget = fmt(item.budget);
-  const actual = fmt(item.actual);
-  const cur    = item.currency ? `${item.currency} ` : '';
-  const qty      = parseInt(item.quantity, 10);
-  const returned = item.returned != null ? parseInt(item.returned, 10) : NaN;
-  const hasBudget = budget || actual;
-  const subtitle  = [budget ? `Budget: ${cur}${budget}` : '', actual ? `Actual: ${cur}${actual}` : ''].filter(Boolean).join(' · ');
-  const distributed = !isNaN(qty) && !isNaN(returned) ? qty - returned : NaN;
-  const qtyBadge = !isNaN(qty) && qty > 0
-    ? `<span class="text-[0.65rem] font-semibold bg-gray-100 text-gray-500 rounded-full px-2 py-0.5 flex-shrink-0">×${qty}</span>`
-    : '';
-  const retBadge = !isNaN(returned)
-    ? `<span class="text-[0.65rem] font-semibold bg-amber-50 text-amber-600 rounded-full px-2 py-0.5 flex-shrink-0" title="${!isNaN(distributed) ? `${distributed} distributed` : ''}">↩ ${returned}</span>`
-    : '';
-  return `<div class="flex items-center gap-2.5 py-2.5 px-3 rounded-lg border border-gray-200 bg-white" data-swag-id="${esc(item.id)}">
-    <input type="checkbox" class="h-4 w-4 rounded flex-shrink-0 swag-done-check" data-swag-id="${esc(item.id)}" ${item.done ? 'checked' : ''} aria-label="Mark ${esc(item.name || 'swag item')} as completed">
-    <div class="flex-1 min-w-0">
-      <p class="text-sm font-medium ${item.done ? 'line-through text-gray-500' : 'text-gray-800'} truncate">${esc(item.name || 'Untitled swag item')}</p>
-      ${hasBudget ? `<p class="text-xs text-gray-500 truncate mt-0.5">${esc(subtitle)}</p>` : ''}
-    </div>
-    ${qtyBadge}${retBadge}
-    <button type="button" class="edit-swag-btn flex-shrink-0 h-7 w-7 inline-flex items-center justify-center border border-gray-200 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors" data-swag-id="${esc(item.id)}" aria-label="Edit ${esc(item.name || 'swag item')}">
-      <i class="fas fa-pen-to-square text-[0.65rem]" aria-hidden="true"></i>
-    </button>
-  </div>`;
-}
+// Extracted to ./modules/plannerAccommodation.js (initAccommodation +
+// openAccommodationModal, checklistItemHtml, swagCardHtml, member/stay sections).
 
 // renderOrgTab is defined above in the Org tab section
 
 // ── Itinerary tab ────────────────────────────────────────────────────────────
-
-function makeItineraryItem(memberId, date) {
-  const currency = state.planner?.mode === 'sponsor'
-    ? (state.planner?.org?.sponsorCurrency || 'AUD')
-    : (state.planner?.personal?.currency || 'AUD')
-  return { id: makeItemId('it'), memberId, date, time: '', title: '', location: '', notes: '', budget: '', actual: '', currency, done: false }
-}
-
-function renderItineraryTab() {
-  const container = document.getElementById('itineraryGrid')
-  if (!container) return
-
-  const { teamAssignments = [], timeline = {} } = state.planner.org
-  const itinerary = state.planner.org.memberItinerary || []
-
-  if (!teamAssignments.length) {
-    container.innerHTML = '<p class="text-xs text-gray-600 py-2">Assign team members in the <strong>Org</strong> tab to see the itinerary grid.</p>'
-    return
-  }
-
-  // Derive date range from stored inputs, or event/leg/itinerary dates
-  const startInput = document.getElementById('itineraryStartDate')
-  const endInput   = document.getElementById('itineraryEndDate')
-  let startStr = startInput?.value || ''
-  let endStr   = endInput?.value   || ''
-
-  if (!startStr || !endStr) {
-    const eventDates  = state.allSessions.map((s) => s.startTime.slice(0, 10)).sort()
-    const legDates    = teamAssignments.flatMap((a) => [
-      ...(a.outboundLegs || []).map((l) => l.date),
-      ...(a.returnLegs   || []).map((l) => l.date),
-    ]).filter(Boolean).sort()
-    const itemDates   = itinerary.map((i) => i.date).filter(Boolean).sort()
-    const all         = [...eventDates, ...legDates, ...itemDates].filter(Boolean).sort()
-    if (all.length) {
-      const first = new Date(all[0] + 'T00:00:00'); first.setDate(first.getDate() - 1)
-      const last  = new Date(all[all.length - 1] + 'T00:00:00'); last.setDate(last.getDate() + 1)
-      startStr = startStr || localDateStr(first)
-      endStr   = endStr   || localDateStr(last)
-      if (startInput && !startInput.value) startInput.value = startStr
-      if (endInput   && !endInput.value)   endInput.value   = endStr
-    }
-  }
-
-  // Fallback: use org timeline dates if still unresolved
-  if (!startStr || !endStr) {
-    const orgTimeline = state.planner.org?.timeline || {}
-    if (!startStr && orgTimeline.startDate) { startStr = orgTimeline.startDate; if (startInput && !startInput.value) startInput.value = startStr }
-    if (!endStr   && orgTimeline.endDate)   { endStr   = orgTimeline.endDate;   if (endInput   && !endInput.value)   endInput.value   = endStr }
-  }
-
-  if (!startStr || !endStr) {
-    container.innerHTML = '<p class="text-xs text-gray-600 py-2">Set a date range above, or set one in the Org → Timeline section.</p>'
-    return
-  }
-
-  const days = []
-  let cur = new Date(startStr + 'T00:00:00')
-  const end = new Date(endStr + 'T00:00:00')
-  if (cur > end || (end - cur) / 86400000 > 90) {
-    container.innerHTML = '<p class="text-xs text-gray-600 py-2">Date range is invalid or exceeds 90 days.</p>'
-    return
-  }
-  while (cur <= end) { days.push(localDateStr(cur)); cur.setDate(cur.getDate() + 1) }
-
-  const todayStr = localDateStr(new Date())
-  const eventDaySet = new Set(state.allSessions.map((s) =>
-    new Date(s.startTime).toLocaleDateString('en-CA', { timeZone: getTimezone() })
-  ))
-
-  const headerCells = days.map((day) => {
-    const isToday = day === todayStr
-    const isEvent = eventDaySet.has(day)
-    const cls     = isToday ? 'tl-head-today' : isEvent ? 'tl-head-event' : 'tl-head-normal'
-    const label   = new Date(day + 'T00:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
-    return `<th style="min-width:80px" class="${cls} text-center text-[0.65rem] px-1 py-2 whitespace-nowrap border-l border-gray-100">${label}${isToday ? '<br><i class="fas fa-circle" style="font-size:0.45rem;color:inherit"></i>' : ''}</th>`
-  }).join('')
-
-  const rows = teamAssignments.map((assignment) => {
-    const member = state.global?.teamMembers.find((m) => m.id === assignment.memberId)
-    if (!member) return ''
-    const cells = days.map((day) => {
-      const items = itinerary.filter((i) => i.memberId === assignment.memberId && i.date === day)
-        .sort((a, b) => (a.time || '').localeCompare(b.time || ''))
-      const isToday = day === todayStr
-      const isEvent = eventDaySet.has(day)
-      const cellCls = isToday ? 'tl-cell-today' : isEvent ? 'tl-cell-event' : ''
-      const pills   = items.map((item) =>
-        `<span class="block text-[0.6rem] px-1 py-0.5 rounded ${item.done ? 'line-through text-gray-500 bg-gray-100' : 'bg-blue-50 text-blue-700'} truncate cursor-pointer itinerary-cell-item" data-item-id="${esc(item.id)}" title="${esc(item.title)}">${esc(item.title.slice(0, 15))}${item.title.length > 15 ? '…' : ''}</span>`
-      ).join('')
-      return `<td class="${cellCls} px-1 py-1 border-l border-gray-100 align-top cursor-pointer itinerary-cell" data-member-id="${esc(assignment.memberId)}" data-date="${esc(day)}" style="min-width:80px">${pills || '<span class="block text-[0.55rem] text-gray-400 text-center py-1">+</span>'}</td>`
-    }).join('')
-    return `<tr class="border-t border-gray-100"><td class="text-xs font-medium text-gray-700 pr-3 py-2 whitespace-nowrap border-r border-gray-200" style="min-width:90px">${esc(member.name || 'Unnamed')}</td>${cells}</tr>`
-  }).filter(Boolean).join('')
-
-  container.innerHTML = `<div class="overflow-x-auto rounded-lg border border-gray-200"><table class="w-full text-sm" style="border-collapse:collapse"><thead class="bg-gray-50"><tr><th class="text-left text-xs font-semibold text-gray-500 pr-3 py-2 whitespace-nowrap border-r border-gray-200" style="min-width:90px">Member</th>${headerCells}</tr></thead><tbody>${rows}</tbody></table></div>`
-}
-
-function renderItineraryDayItems(memberId, date) {
-  const container = document.getElementById('itineraryDayItems')
-  if (!container) return
-  const modal   = document.getElementById('itineraryDayModal')
-  const isPersonal = modal?.dataset.ctx === 'personal'
-  const pool    = isPersonal ? (state.planner.personal?.itinerary || []) : (state.planner.org.memberItinerary || [])
-  const items   = pool
-    .filter((i) => isPersonal ? i.date === date : i.memberId === memberId && i.date === date)
-    .sort((a, b) => (a.time || '').localeCompare(b.time || ''))
-
-  if (!items.length) {
-    container.innerHTML = '<p class="text-xs text-gray-500 italic py-1">No items yet. Click Add item to start.</p>'
-    return
-  }
-  const fmtAmt = (n, cur) => `${esc(cur || 'AUD')} ${parseBudget(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-  container.innerHTML = items.map((item) => {
-    const hasBudget = item.budget !== '' && item.budget !== undefined
-    const hasActual = item.actual !== '' && item.actual !== undefined
-    return `
-    <div class="flex items-start gap-2 p-2 rounded-md border border-gray-200 bg-white" data-itinerary-item-id="${esc(item.id)}">
-      <input type="checkbox" class="mt-0.5 h-4 w-4 rounded flex-shrink-0 itinerary-done-check" data-item-id="${esc(item.id)}" ${item.done ? 'checked' : ''} aria-label="Mark '${esc(item.title || 'item')}' as done">
-      <div class="flex-1 min-w-0">
-        <p class="text-sm ${item.done ? 'line-through text-gray-500' : 'text-gray-800'} font-medium">${esc(item.title)}</p>
-        <div class="flex items-center gap-2 mt-0.5 flex-wrap">
-          ${item.time ? `<span class="text-xs text-gray-500"><i class="fas fa-clock text-[0.6rem] mr-0.5"></i>${esc(item.time)}</span>` : ''}
-          ${item.location ? `<span class="text-xs text-gray-500"><i class="fas fa-location-dot text-[0.6rem] mr-0.5"></i>${esc(item.location)}</span>` : ''}
-          ${hasBudget ? `<span class="text-xs text-gray-400"><i class="fas fa-wallet text-[0.6rem] mr-0.5"></i>Budget: <span class="tabular-nums text-gray-600">${fmtAmt(item.budget, item.currency)}</span></span>` : ''}
-          ${hasActual ? `<span class="text-xs text-gray-400"><i class="fas fa-coins text-[0.6rem] mr-0.5"></i>Actual: <span class="tabular-nums ${parseBudget(item.actual) > parseBudget(item.budget) && hasBudget ? 'text-red-500' : 'text-gray-600'}">${fmtAmt(item.actual, item.currency)}</span></span>` : ''}
-          ${item.notes ? `<span class="text-xs text-gray-400 truncate">${esc(item.notes)}</span>` : ''}
-        </div>
-      </div>
-      <button type="button" class="itinerary-edit-btn flex-shrink-0 text-gray-400 hover:text-blue-500 transition-colors" data-item-id="${esc(item.id)}" aria-label="Edit '${esc(item.title || 'item')}'">
-        <i class="fas fa-pen-to-square text-xs" aria-hidden="true"></i>
-      </button>
-      <button type="button" class="itinerary-delete-btn flex-shrink-0 text-gray-500 hover:text-red-600 transition-colors" data-item-id="${esc(item.id)}" aria-label="Delete '${esc(item.title || 'item')}'">
-        <i class="fas fa-times text-xs" aria-hidden="true"></i>
-      </button>
-    </div>`
-  }).join('')
-}
-
-function openItineraryDayModal(memberId, date) {
-  const modal = document.getElementById('itineraryDayModal')
-  if (!modal) return
-  const isStandalone = !memberId || !date
-  modal.dataset.memberId = memberId || ''
-  modal.dataset.date     = date || ''
-
-  const titleEl    = document.getElementById('itineraryDayModalTitle')
-  const subtitleEl = document.getElementById('itineraryDayModalSubtitle')
-  const memberRow  = document.getElementById('itineraryFormMemberRow')
-  const addBtn     = document.getElementById('addItineraryItemBtn')
-  const form       = document.getElementById('itineraryAddForm')
-
-  if (isStandalone) {
-    if (titleEl)    titleEl.textContent    = 'Add Itinerary Item'
-    if (subtitleEl) subtitleEl.textContent = 'Select a team member and date below'
-    // Populate member select
-    const assignments = state.planner.org?.teamAssignments || []
-    const memberSelect = document.getElementById('itineraryFormMember')
-    if (memberSelect) {
-      memberSelect.innerHTML = assignments.map((a) => {
-        const m = state.global?.teamMembers.find((tm) => tm.id === a.memberId)
-        return m ? `<option value="${esc(m.id)}">${esc(m.name || 'Unnamed')}</option>` : ''
-      }).filter(Boolean).join('')
-    }
-    memberRow?.classList.remove('hidden')
-    addBtn?.classList.add('hidden')
-    if (form) form.classList.remove('hidden')
-    document.getElementById('itineraryDayItems').innerHTML = ''
-  } else {
-    const member = state.global?.teamMembers.find((m) => m.id === memberId)
-    if (titleEl)    titleEl.textContent    = 'Itinerary'
-    if (subtitleEl) subtitleEl.textContent = `${member?.name || 'Unnamed'} · ${new Date(date + 'T00:00:00').toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })}`
-    memberRow?.classList.add('hidden')
-    addBtn?.classList.remove('hidden')
-    if (form) form.classList.add('hidden')
-    renderItineraryDayItems(memberId, date)
-  }
-
-  _resetItineraryForm()
-  showModal('itineraryDayModal', isStandalone ? 'itineraryFormTitle' : '')
-}
-
-function closeItineraryDayModal() {
-  const modal   = document.getElementById('itineraryDayModal')
-  if (!modal) return
-  const ctx = modal.dataset.ctx
-  hideModal('itineraryDayModal')
-  modal.dataset.ctx = ''
-  if (ctx === 'personal') renderPersonalItinerary()
-  else if (ctx === 'org') renderOrgItinerary()
-  else renderItineraryTab()
-}
-
-function openPersonalDayModal(date) {
-  const modal = document.getElementById('itineraryDayModal')
-  if (!modal) return
-  modal.dataset.ctx      = 'personal'
-  modal.dataset.memberId = ''
-  modal.dataset.date     = date || ''
-
-  const titleEl    = document.getElementById('itineraryDayModalTitle')
-  const subtitleEl = document.getElementById('itineraryDayModalSubtitle')
-  if (titleEl)    titleEl.textContent    = 'Itinerary'
-  if (subtitleEl) subtitleEl.textContent = date
-    ? new Date(date + 'T00:00:00').toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })
-    : ''
-
-  document.getElementById('itineraryFormMemberRow')?.classList.add('hidden')
-  document.getElementById('itineraryOrgDateRow')?.classList.add('hidden')
-  const addBtn = document.getElementById('addItineraryItemBtn')
-  if (addBtn) addBtn.classList.remove('hidden')
-  const form = document.getElementById('itineraryAddForm')
-  if (form) form.classList.add('hidden')
-  _resetItineraryForm()
-
-  renderItineraryDayItems('', date)
-  showModal('itineraryDayModal')
-}
-
-function _resetItineraryForm() {
-  document.getElementById('itineraryFormTitle').value    = ''
-  document.getElementById('itineraryFormTime').value     = ''
-  document.getElementById('itineraryFormLocation').value = ''
-  document.getElementById('itineraryFormNotes').value    = ''
-  document.getElementById('itineraryFormBudget').value   = ''
-  document.getElementById('itineraryFormActual').value   = ''
-  document.getElementById('itineraryFormEditId').value   = ''
-  const currEl = document.getElementById('itineraryFormCurrency')
-  if (currEl) {
-    const defaultCurr = state.planner?.mode === 'sponsor'
-      ? (state.planner?.org?.sponsorCurrency || 'AUD')
-      : (state.planner?.personal?.currency || 'AUD')
-    currEl.innerHTML = currencyOptions(defaultCurr)
-  }
-}
-
-function openOrgEventModal(id = null) {
-  const modal = document.getElementById('itineraryDayModal')
-  if (!modal) return
-  modal.dataset.ctx      = 'org'
-  modal.dataset.memberId = ''
-  modal.dataset.date     = ''
-
-  const titleEl    = document.getElementById('itineraryDayModalTitle')
-  const subtitleEl = document.getElementById('itineraryDayModalSubtitle')
-  if (titleEl)    titleEl.textContent    = 'Team Event'
-  if (subtitleEl) subtitleEl.textContent = id ? 'Edit event' : 'Add an org-level itinerary item'
-
-  document.getElementById('itineraryFormMemberRow')?.classList.add('hidden')
-  document.getElementById('itineraryOrgDateRow')?.classList.remove('hidden')
-  document.getElementById('addItineraryItemBtn')?.classList.add('hidden')
-
-  const form = document.getElementById('itineraryAddForm')
-  if (form) form.classList.remove('hidden')
-  document.getElementById('itineraryDayItems').innerHTML = ''
-
-  _resetItineraryForm()
-
-  if (id) {
-    const item = (state.planner.org?.itinerary || []).find((i) => i.id === id)
-    if (item) {
-      document.getElementById('itineraryFormEditId').value   = id
-      document.getElementById('itineraryFormTitle').value    = item.title || ''
-      document.getElementById('itineraryFormTime').value     = item.time || ''
-      document.getElementById('itineraryFormLocation').value = item.location || ''
-      document.getElementById('itineraryFormNotes').value    = item.notes || ''
-      document.getElementById('itineraryOrgDate').value      = item.date || ''
-      document.getElementById('itineraryFormBudget').value   = item.budget || ''
-      document.getElementById('itineraryFormActual').value   = item.actual || ''
-      const currEl = document.getElementById('itineraryFormCurrency')
-      if (currEl) currEl.innerHTML = currencyOptions(item.currency || 'AUD')
-    }
-  }
-
-  showModal('itineraryDayModal', 'itineraryFormTitle')
-}
-
-function renderOrgItinerary() {
-  const list    = document.getElementById('orgEventsList')
-  const empty   = document.getElementById('orgEventsEmpty')
-  if (!list) return
-  const items = (state.planner.org?.itinerary || []).slice().sort((a, b) => {
-    if (a.date !== b.date) return (a.date || '').localeCompare(b.date || '')
-    return (a.time || '').localeCompare(b.time || '')
-  })
-  empty?.classList.toggle('hidden', items.length > 0)
-  if (!items.length) { list.innerHTML = ''; return }
-
-  const fmtAmt = (n, cur) => `${esc(cur || 'AUD')} ${parseBudget(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-  list.innerHTML = items.map((item) => {
-    const hasBudget = item.budget !== '' && item.budget !== undefined
-    const hasActual = item.actual !== '' && item.actual !== undefined
-    const dateLabel = item.date
-      ? new Date(item.date + 'T00:00:00').toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })
-      : ''
-    return `<div class="flex items-start gap-2 py-1.5 px-2.5 rounded-md border border-gray-200 bg-white">
-      <input type="checkbox" class="mt-0.5 h-4 w-4 rounded flex-shrink-0 org-event-done-check" data-event-id="${esc(item.id)}" ${item.done ? 'checked' : ''} aria-label="Mark '${esc(item.title || 'event')}' as done">
-      <div class="flex-1 min-w-0">
-        <div class="flex items-center gap-1.5 flex-wrap">
-          <span class="text-sm font-medium ${item.done ? 'line-through text-gray-500' : 'text-gray-700'} truncate">${esc(item.title || 'Team Event')}</span>
-        </div>
-        <div class="flex gap-3 text-xs mt-0.5 flex-wrap">
-          ${dateLabel ? `<span class="text-gray-500"><i class="fas fa-calendar-day text-[0.6rem] mr-0.5"></i>${esc(dateLabel)}${item.time ? ' · ' + esc(item.time) : ''}</span>` : ''}
-          ${item.location ? `<span class="text-gray-500"><i class="fas fa-location-dot text-[0.6rem] mr-0.5"></i>${esc(item.location)}</span>` : ''}
-          ${hasBudget ? `<span class="text-gray-500">Budget: <span class="tabular-nums text-gray-700">${fmtAmt(item.budget, item.currency)}</span></span>` : ''}
-          ${hasActual ? `<span class="text-gray-500">Actual: <span class="tabular-nums ${parseBudget(item.actual) > parseBudget(item.budget) && hasBudget ? 'text-red-600' : 'text-gray-700'}">${fmtAmt(item.actual, item.currency)}</span></span>` : ''}
-        </div>
-      </div>
-      <button type="button" class="edit-org-event-btn h-7 w-7 flex items-center justify-center rounded-md border border-gray-200 text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors flex-shrink-0" data-event-id="${esc(item.id)}" aria-label="Edit ${esc(item.title || 'event')}">
-        <i class="fas fa-pen-to-square text-[0.65rem]" aria-hidden="true"></i>
-      </button>
-      <button type="button" class="delete-org-event-btn h-7 w-7 flex items-center justify-center rounded-md border border-gray-200 text-gray-500 hover:text-red-600 hover:bg-red-50 transition-colors flex-shrink-0" data-event-id="${esc(item.id)}" aria-label="Delete ${esc(item.title || 'event')}">
-        <i class="fas fa-times text-xs" aria-hidden="true"></i>
-      </button>
-    </div>`
-  }).join('')
-}
-
-function wireItineraryPanel() {
-  // Modal wiring (shared by personal tab itinerary)
-  const modal = document.getElementById('itineraryDayModal')
-  if (!modal) return
-
-  function getModalCtx() {
-    return { memberId: modal.dataset.memberId, date: modal.dataset.date }
-  }
-
-  document.getElementById('addItineraryItemBtn')?.addEventListener('click', () => {
-    const form = document.getElementById('itineraryAddForm')
-    if (form) { form.classList.remove('hidden'); document.getElementById('itineraryFormTitle')?.focus() }
-    _resetItineraryForm()
-  })
-
-  document.getElementById('itineraryFormCancel')?.addEventListener('click', () => {
-    document.getElementById('itineraryAddForm')?.classList.add('hidden')
-  })
-
-  function _readItineraryBudgetFields() {
-    return {
-      budget:   document.getElementById('itineraryFormBudget')?.value  || '',
-      actual:   document.getElementById('itineraryFormActual')?.value  || '',
-      currency: document.getElementById('itineraryFormCurrency')?.value || 'AUD',
-    }
-  }
-
-  function _applyItineraryBudgetFields(item) {
-    const f = _readItineraryBudgetFields()
-    item.budget   = f.budget
-    item.actual   = f.actual
-    item.currency = f.currency
-  }
-
-  document.getElementById('itineraryFormSave')?.addEventListener('click', () => {
-    const titleEl = document.getElementById('itineraryFormTitle')
-    const title   = titleEl?.value.trim()
-    if (!title) { titleEl?.focus(); return }
-
-    const ctx = modal.dataset.ctx
-    const isPersonal   = ctx === 'personal'
-    const isOrg        = ctx === 'org'
-
-    // Determine member + date depending on mode
-    let memberId = '', date = ''
-    if (isOrg) {
-      date = document.getElementById('itineraryOrgDate')?.value || ''
-      if (!date) { document.getElementById('itineraryOrgDate')?.focus(); return }
-    } else {
-      const memberRow    = document.getElementById('itineraryFormMemberRow')
-      const isStandalone = !memberRow?.classList.contains('hidden')
-      if (isStandalone) {
-        memberId = document.getElementById('itineraryFormMember')?.value || ''
-        date     = document.getElementById('itineraryFormDate')?.value   || ''
-        if (!memberId) { document.getElementById('itineraryFormMember')?.focus(); return }
-        if (!date)     { document.getElementById('itineraryFormDate')?.focus();   return }
-      } else {
-        const c = getModalCtx()
-        memberId = c.memberId
-        date     = c.date
-      }
-    }
-
-    const targetArr = isPersonal
-      ? (state.planner.personal.itinerary ??= [])
-      : isOrg
-      ? (state.planner.org.itinerary ??= [])
-      : (state.planner.org.memberItinerary ??= [])
-
-    const editId = document.getElementById('itineraryFormEditId')?.value || ''
-    if (editId) {
-      const item = targetArr.find((i) => i.id === editId)
-      if (item) {
-        item.title    = title
-        item.time     = document.getElementById('itineraryFormTime').value
-        item.location = document.getElementById('itineraryFormLocation').value
-        item.notes    = document.getElementById('itineraryFormNotes').value
-        if (isOrg) item.date = date
-        _applyItineraryBudgetFields(item)
-      }
-    } else {
-      const item = makeItineraryItem(isPersonal || isOrg ? null : memberId, date)
-      item.title    = title
-      item.time     = document.getElementById('itineraryFormTime').value
-      item.location = document.getElementById('itineraryFormLocation').value
-      item.notes    = document.getElementById('itineraryFormNotes').value
-      _applyItineraryBudgetFields(item)
-      targetArr.push(item)
-    }
-    document.getElementById('itineraryAddForm')?.classList.add('hidden')
-    if (isOrg) {
-      closeItineraryDayModal()
-    } else if (!document.getElementById('itineraryFormMemberRow')?.classList.contains('hidden')) {
-      closeItineraryDayModal()
-    } else {
-      renderItineraryDayItems(isPersonal ? '' : memberId, date)
-    }
-    scheduleAutoSave()
-    if (state.activeTab === 'summary') renderSummaryTab()
-  })
-
-  // Item done / edit / delete
-  modal.addEventListener('change', (e) => {
-    if (e.target.classList.contains('itinerary-done-check')) {
-      const id      = e.target.dataset.itemId
-      const isPersonal = modal.dataset.ctx === 'personal'
-      const pool    = isPersonal ? (state.planner.personal?.itinerary || []) : (state.planner.org.memberItinerary || [])
-      const item    = pool.find((i) => i.id === id)
-      if (item) { item.done = e.target.checked; renderItineraryDayItems(isPersonal ? '' : modal.dataset.memberId, modal.dataset.date); scheduleAutoSave() }
-    }
-  })
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) { closeItineraryDayModal(); return }
-
-    const editBtn = e.target.closest('.itinerary-edit-btn')
-    if (editBtn) {
-      const id      = editBtn.dataset.itemId
-      const isPersonal = modal.dataset.ctx === 'personal'
-      const pool    = isPersonal ? (state.planner.personal?.itinerary || []) : (state.planner.org.memberItinerary || [])
-      const item    = pool.find((i) => i.id === id)
-      if (!item) return
-      const form = document.getElementById('itineraryAddForm')
-      if (form) form.classList.remove('hidden')
-      document.getElementById('itineraryFormEditId').value   = id
-      document.getElementById('itineraryFormTitle').value    = item.title || ''
-      document.getElementById('itineraryFormTime').value     = item.time || ''
-      document.getElementById('itineraryFormLocation').value = item.location || ''
-      document.getElementById('itineraryFormNotes').value    = item.notes || ''
-      document.getElementById('itineraryFormBudget').value   = item.budget || ''
-      document.getElementById('itineraryFormActual').value   = item.actual || ''
-      const currEl = document.getElementById('itineraryFormCurrency')
-      if (currEl) currEl.innerHTML = currencyOptions(item.currency || 'AUD')
-      document.getElementById('itineraryFormTitle')?.focus()
-      return
-    }
-
-    const delBtn = e.target.closest('.itinerary-delete-btn')
-    if (delBtn) {
-      const id      = delBtn.dataset.itemId
-      const isPersonal = modal.dataset.ctx === 'personal'
-      const list = isPersonal ? (state.planner.personal.itinerary || []) : (state.planner.org.memberItinerary || [])
-      const snapshot = list.find((i) => i.id === id)
-      if (isPersonal) {
-        state.planner.personal.itinerary = (state.planner.personal.itinerary || []).filter((i) => i.id !== id)
-      } else {
-        state.planner.org.memberItinerary = (state.planner.org.memberItinerary || []).filter((i) => i.id !== id)
-      }
-      renderItineraryDayItems(isPersonal ? '' : modal.dataset.memberId, modal.dataset.date)
-      scheduleAutoSave()
-      if (state.activeTab === 'summary') renderSummaryTab()
-      if (snapshot) showUndoToast(snapshot.title || 'Itinerary item', () => {
-        if (isPersonal) state.planner.personal.itinerary = [...(state.planner.personal.itinerary || []), snapshot]
-        else state.planner.org.memberItinerary = [...(state.planner.org.memberItinerary || []), snapshot]
-        renderItineraryDayItems(isPersonal ? '' : modal.dataset.memberId, modal.dataset.date)
-        scheduleAutoSave()
-      })
-      return
-    }
-  })
-
-  document.getElementById('itineraryDayModalClose')?.addEventListener('click', closeItineraryDayModal)
-  document.getElementById('itineraryDayModalDone')?.addEventListener('click',  closeItineraryDayModal)
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) closeItineraryDayModal()
-  })
-}
+// Extracted to ./modules/plannerItinerary.js (initItinerary / renderItineraryTab /
+// wireItineraryPanel / renderOrgItinerary / openOrgEventModal / personalAssigneeChips).
 
 // ── Receipts tab ─────────────────────────────────────────────────────────────
-
-function makeReceipt() {
-  const currency = state.planner?.mode === 'sponsor'
-    ? (state.planner?.org?.sponsorCurrency || 'AUD')
-    : (state.planner?.personal?.currency || 'AUD')
-  return { id: makeItemId('rc'), name: '', date: '', amount: '', currency, category: 'misc', budgetItemId: '', filePath: '', fileLabel: '', notes: '' }
-}
-
-function budgetItemDropdownOptions(selectedId) {
-  const personal = state.planner?.personal?.budgetItems || []
-  const org      = state.planner?.org?.budgetItems      || []
-  const opt = (i) => `<option value="${esc(i.id)}"${selectedId === i.id ? ' selected' : ''}>${esc(i.name || 'Budget item')}</option>`
-  return [
-    '<option value="">— No budget item —</option>',
-    personal.length ? `<optgroup label="Personal">${personal.map(opt).join('')}</optgroup>` : '',
-    org.length      ? `<optgroup label="Org / Sponsor">${org.map(opt).join('')}</optgroup>`  : '',
-  ].join('')
-}
-
-function receiptCardHtml(receipt) {
-  const catLabel = getActiveBudgetCategoryOptions().find((c) => c.value === receipt.category)?.label || receipt.category || ''
-  const meta = [
-    receipt.date,
-    receipt.amount ? `${receipt.amount}${receipt.currency ? ' ' + receipt.currency : ''}` : '',
-    catLabel,
-  ].filter(Boolean).join(' · ')
-  return `
-    <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-gray-200 bg-white group ${receipt.filePath ? 'border-l-2 border-l-emerald-400' : ''}" data-receipt-id="${esc(receipt.id)}">
-      <i class="${receipt.filePath ? 'fas fa-paperclip text-blue-500' : 'fas fa-receipt text-gray-500'} text-xs flex-shrink-0" aria-hidden="true"></i>
-      <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-800 truncate">${esc(receipt.name || 'New receipt')}</p>
-        ${meta ? `<p class="text-xs text-gray-500 truncate mt-0.5">${esc(meta)}</p>` : ''}
-      </div>
-      <button type="button" class="edit-receipt-btn h-7 px-2.5 border border-gray-200 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-150" data-receipt-id="${esc(receipt.id)}" aria-label="Edit receipt">
-        <i class="fas fa-pen-to-square mr-1 text-[0.65rem]"></i>Edit
-      </button>
-    </div>`
-}
-
-let _receiptModalId   = null
-let _receiptModalFilePath  = ''
-let _receiptModalFileLabel = ''
-
-function openReceiptModal(id) {
-  _receiptModalId = id
-  const receipt = id ? (state.planner.receipts || []).find((r) => r.id === id) : null
-  document.getElementById('receiptModalTitle').textContent = id ? 'Edit Receipt' : 'Add Receipt'
-  document.getElementById('receiptModalName').value     = receipt?.name     || ''
-  document.getElementById('receiptModalDate').value     = receipt?.date     || ''
-  document.getElementById('receiptModalAmount').value   = receipt?.amount   || ''
-  document.getElementById('receiptModalNotes').value    = receipt?.notes    || ''
-  document.getElementById('receiptModalCurrency').innerHTML = currencyOptions(receipt?.currency || getDefaultCurrency())
-  document.getElementById('receiptModalCategory').innerHTML = buildSelectOptions(getActiveBudgetCategoryOptions(), receipt?.category || '')
-  document.getElementById('receiptModalBudgetItem').innerHTML = budgetItemDropdownOptions(receipt?.budgetItemId || '')
-  _receiptModalFilePath  = receipt?.filePath  || ''
-  _receiptModalFileLabel = receipt?.fileLabel || ''
-  _syncModalFile(_receiptModalFilePath, _receiptModalFileLabel, 'receiptModalFileLabel', 'receiptModalRemoveFileBtn')
-  document.getElementById('receiptModalDelete')?.classList.toggle('hidden', !id)
-  showModal('receiptModal', 'receiptModalName')
-}
-
-function _syncModalFile(filePath, fileLabel, labelElId, removeBtnId) {
-  const labelEl   = document.getElementById(labelElId)
-  const removeBtn = document.getElementById(removeBtnId)
-  if (labelEl) {
-    if (filePath) {
-      labelEl.innerHTML = `<a href="${esc(filePath)}" target="_blank" class="drupal-blue-text hover:underline truncate">${esc(fileLabel || fileDisplayName(filePath, ''))}</a>`
-    } else {
-      labelEl.textContent = 'No file attached'
-    }
-  }
-  removeBtn?.classList.toggle('hidden', !filePath)
-}
-
-function saveReceiptModal() {
-  const isNew = !_receiptModalId
-  const id = _receiptModalId || makeItemId('rc')
-  const data = {
-    id,
-    name:         document.getElementById('receiptModalName').value.trim(),
-    date:         document.getElementById('receiptModalDate').value,
-    amount:       document.getElementById('receiptModalAmount').value.trim(),
-    currency:     document.getElementById('receiptModalCurrency').value,
-    category:     document.getElementById('receiptModalCategory').value,
-    budgetItemId: document.getElementById('receiptModalBudgetItem').value,
-    notes:        document.getElementById('receiptModalNotes').value.trim(),
-    filePath:     _receiptModalFilePath,
-    fileLabel:    _receiptModalFileLabel,
-  }
-  if (isNew) {
-    state.planner.receipts = [...(state.planner.receipts || []), data]
-  } else {
-    const idx = (state.planner.receipts || []).findIndex((r) => r.id === id)
-    if (idx !== -1) state.planner.receipts[idx] = data
-  }
-  closeReceiptModal()
-  renderReceiptsTab()
-  renderPersonalBudgetBreakdown(); renderSponsorBudgetBreakdown()
-  renderBudgetItems('personal'); renderBudgetItems('sponsor')
-  scheduleAutoSave()
-}
-
-function closeReceiptModal() {
-  hideModal('receiptModal')
-  _receiptModalId = null
-  _receiptModalFilePath = ''
-  _receiptModalFileLabel = ''
-}
-
-function renderReceiptsTab() {
-  renderListPanel('receiptsList', 'receiptsEmptyState', state.planner.receipts || [], receiptCardHtml)
-}
-
-function wireReceiptsPanel() {
-  document.getElementById('addReceiptBtn')?.addEventListener('click', () => openReceiptModal(null))
-
-  document.getElementById('plannerReceiptsPanel')?.addEventListener('click', (e) => {
-    const editBtn = e.target.closest('.edit-receipt-btn')
-    if (editBtn) { openReceiptModal(editBtn.dataset.receiptId); return }
-  })
-
-  // Receipt modal controls
-  document.getElementById('receiptModalClose')?.addEventListener('click', closeReceiptModal)
-  document.getElementById('receiptModalDone')?.addEventListener('click', saveReceiptModal)
-  document.getElementById('receiptModal')?.addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) closeReceiptModal()
-  })
-
-  document.getElementById('receiptModalDelete')?.addEventListener('click', () => {
-    if (!_receiptModalId) return
-    const id = _receiptModalId
-    const snapshot = (state.planner.receipts || []).find((r) => r.id === id)
-    if (!snapshot) return
-    state.planner.receipts = (state.planner.receipts || []).filter((r) => r.id !== id)
-    closeReceiptModal()
-    renderReceiptsTab()
-    renderPersonalBudgetBreakdown(); renderSponsorBudgetBreakdown()
-    scheduleAutoSave()
-    showUndoToast(snapshot.name || 'Receipt', () => {
-      state.planner.receipts = [...(state.planner.receipts || []), snapshot]
-      renderReceiptsTab()
-      renderPersonalBudgetBreakdown(); renderSponsorBudgetBreakdown()
-      scheduleAutoSave()
-    })
-  })
-
-  document.getElementById('receiptModalAttachBtn')?.addEventListener('click', () => {
-    const fi = document.getElementById('receiptFileInput')
-    if (fi) { fi.dataset.target = 'receiptModal'; fi.click() }
-  })
-
-  document.getElementById('receiptModalRemoveFileBtn')?.addEventListener('click', () => {
-    _receiptModalFilePath = ''
-    _receiptModalFileLabel = ''
-    _syncModalFile(_receiptModalFilePath, _receiptModalFileLabel, 'receiptModalFileLabel', 'receiptModalRemoveFileBtn')
-  })
-
-  document.getElementById('receiptFileInput')?.addEventListener('change', async (e) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-    const target = e.target.dataset.target
-
-    if (target === 'receiptModal') {
-      try {
-        const { path, label } = await uploadOrReadFile(file)
-        _receiptModalFilePath  = path
-        _receiptModalFileLabel = label
-        _syncModalFile(_receiptModalFilePath, _receiptModalFileLabel, 'receiptModalFileLabel', 'receiptModalRemoveFileBtn')
-      } catch (err) { window.alert(err.message) }
-    } else {
-      // Legacy path: file attach from outside modal (e.g. personal leg receipt creation)
-      const rid     = e.target.dataset.receiptId
-      const receipt = (state.planner.receipts || []).find((r) => r.id === rid)
-      if (receipt) {
-        try {
-          const { path, label } = await uploadOrReadFile(file)
-          receipt.filePath  = path
-          receipt.fileLabel = label
-          renderReceiptsTab()
-          renderDocumentsTab()
-          scheduleAutoSave()
-        } catch (err) { window.alert(err.message) }
-      }
-    }
-    e.target.value = ''
-  })
-}
-
+// Extracted to ./modules/plannerReceipts.js (initReceipts / makeReceipt /
+// renderReceiptsTab / wireReceiptsPanel).
 // ── Summary tab ───────────────────────────────────────────────────────────────
 
-let _charts = {}
-
-function destroyCharts(...keys) {
-  keys.forEach((k) => { if (_charts[k]) { _charts[k].destroy(); delete _charts[k] } })
-}
-
-function buildEventBudgetData(planner, filterMemberId = null, conv = null) {
-  const cvt = conv ?? ((n) => n)
-  const activeCats = getEventBudgetCategories('org')
-  const cats = Object.fromEntries(activeCats.map((c) => [c.id, { label: c.name, budget: 0, actual: 0, items: [], receipts: [] }]))
-  if (!cats.misc) cats.misc = { label: 'Misc', budget: 0, actual: 0, items: [], receipts: [] }
-  const org = planner.org || {}
-
-  // Team assignments → travel (actual only; budget comes from categoryBudgets)
-  ;(org.teamAssignments || []).forEach((a) => {
-    if (filterMemberId && a.memberId !== filterMemberId) return
-    const m = state.global?.teamMembers.find((tm) => tm.id === a.memberId)
-    const aCurr = a.currency || 'AUD'
-    const b = cvt(parseBudget(a.budget), aCurr)
-    const ac = cvt(parseBudget(a.budgetActual), aCurr)
-    const tCat = cats.travel || cats.misc
-    tCat.actual += ac
-    if (b || ac) tCat.items.push({ label: m?.name || 'Unnamed', budget: b, actual: ac })
-  })
-
-  // Accommodation stays → accommodation (actual only)
-  ;(org.accommodations || []).forEach((acc) => {
-    ;(acc.assignments || []).forEach((stay) => {
-      if (filterMemberId && stay.memberId !== filterMemberId) return
-      const m = state.global?.teamMembers.find((tm) => tm.id === stay.memberId)
-      const sCurr = stay.currency || 'AUD'
-      const b = cvt(parseBudget(stay.budget), sCurr)
-      const ac = cvt(parseBudget(stay.budgetActual), sCurr)
-      const aCat = cats.accommodation || cats.misc
-      aCat.actual += ac
-      if (b || ac) aCat.items.push({ label: `${m?.name || 'Unnamed'} @ ${acc.name || 'Accommodation'}`, budget: b, actual: ac })
-    })
-  })
-
-  // Org-level itinerary events (actual only)
-  if (!filterMemberId) {
-    ;(org.itinerary || []).forEach((item) => {
-      if (!item.budget && !item.actual) return
-      const iCurr = item.currency || 'AUD'
-      const b  = cvt(parseBudget(item.budget), iCurr)
-      const ac = cvt(parseBudget(item.actual), iCurr)
-      const tmCat = cats.team || cats.misc
-      tmCat.actual += ac
-      if (b || ac) tmCat.items.push({ label: item.title || 'Team event', budget: b, actual: ac, isManual: true })
-    })
-  }
-
-  // The following are org-wide, not member-specific
-  if (!filterMemberId) {
-    ;(org.swag || []).forEach((item) => {
-      const iCurr = item.currency || 'AUD'
-      const b = cvt(parseBudget(item.budget), iCurr)
-      const ac = cvt(parseBudget(item.actual), iCurr)
-      const swCat = cats.swag || cats.misc
-      swCat.actual += ac
-      if (b || ac) swCat.items.push({ label: item.name || 'Swag item', budget: b, actual: ac })
-    })
-
-    ;(org.tickets || []).forEach((t) => {
-      const tCurr = t.currency || 'AUD'
-      const qty  = parseBudget(t.quantity) || 1
-      const cost = cvt(parseBudget(t.unitPrice) * qty, tCurr)
-      if (!cost) return
-      const tkCat = cats.tickets || cats.misc
-      tkCat.actual += cost
-      tkCat.items.push({ label: t.name || 'Ticket', budget: 0, actual: cost })
-    })
-
-    ;(org.budgetItems || []).forEach((item) => {
-      const iCurr = item.currency || 'AUD'
-      const cat = item.category || 'misc'
-      const b = cvt(parseBudget(item.budget), iCurr)
-      const linked = (planner.receipts || []).filter((r) => r.budgetItemId === item.id)
-      const ac = linked.length
-        ? linked.reduce((s, r) => s + cvt(parseBudget(r.amount), r.currency || iCurr), 0)
-        : cvt(parseBudget(item.actual), iCurr)
-      const target = cats[cat === 'waypoints' ? 'accommodation' : cat] || cats.misc
-      target.actual += ac
-      if (b || ac) target.items.push({ label: item.name || 'Budget item', budget: b, actual: ac, isManual: true })
-    })
-
-    // Apply category-level budget targets (set in Budget tab, keyed by category ID)
-    const catBudgets = org.categoryBudgets || {}
-    const orgCurr = org.sponsorCurrency || 'AUD'
-    Object.entries(catBudgets).forEach(([catId, amt]) => {
-      const target = cats[catId] || cats.misc
-      target.budget = cvt(parseBudget(String(amt)), orgCurr)
-    })
-  }
-
-  // Budget items assigned to a specific member
-  if (filterMemberId) {
-    ;(org.budgetItems || []).filter((item) => item.memberId === filterMemberId).forEach((item) => {
-      const iCurr = item.currency || 'AUD'
-      const cat   = item.category || 'misc'
-      const b     = cvt(parseBudget(item.budget), iCurr)
-      const linked = (planner.receipts || []).filter((r) => r.budgetItemId === item.id)
-      const ac = linked.length
-        ? linked.reduce((s, r) => s + cvt(parseBudget(r.amount), r.currency || iCurr), 0)
-        : cvt(parseBudget(item.actual), iCurr)
-      const target = cats[cat === 'waypoints' ? 'accommodation' : cat] || cats.misc
-      target.actual += ac
-      if (b || ac) target.items.push({ label: item.name || 'Budget item', budget: b, actual: ac, isManual: true })
-    })
-  }
-
-  // Tickets associated to member (assigned or purchased by)
-  if (filterMemberId) {
-    const memberTickets = [
-      ...(org.tickets               || []),
-      ...(planner.personal?.tickets || []),
-    ].filter((t) => t.assignedTo === filterMemberId || t.purchasedBy === filterMemberId)
-    memberTickets.forEach((t) => {
-      const tCurr = t.currency || 'AUD'
-      const qty = parseBudget(t.quantity) || 1
-      const unit = parseBudget(t.unitPrice)
-      const cost = cvt(unit * qty, tCurr)
-      if (!cost) return
-      const tkCat = cats.tickets || cats.misc
-      tkCat.actual += cost
-      tkCat.items.push({ label: t.name || 'Ticket', budget: 0, actual: cost })
-    })
-  }
-
-  // Unlinked receipts go to category drilldown only; linked ones already count via their budget item.
-  ;(planner.receipts || []).forEach((r) => {
-    if (r.budgetItemId) return
-    const cat = r.category || 'misc'
-    const amt = parseBudget(r.amount)
-    const target = cats[cat === 'waypoints' ? 'accommodation' : cat] || cats.misc
-    if (amt) target.receipts.push({ label: r.name || 'Receipt', amount: amt, currency: r.currency || '', date: r.date || '' })
-  })
-
-  return cats
-}
-
-function buildPersonalBudgetData(planner, conv = null) {
-  const cvt = conv ?? ((n) => n)
-  const activeCats = getEventBudgetCategories('personal')
-  const cats = Object.fromEntries(activeCats.map((c) => [c.id, { label: c.name, budget: 0, actual: 0, items: [], receipts: [] }]))
-  if (!cats.misc) cats.misc = { label: 'Misc', budget: 0, actual: 0, items: [], receipts: [] }
-  const personal = planner.personal || {}
-  const pCurr = personal.currency || 'AUD'
-
-  const tb = cvt(parseBudget(personal.budget), pCurr)
-  const ta = cvt(parseBudget(personal.budgetActual), pCurr)
-  const tCat = cats.travel || cats.misc
-  tCat.budget += tb; tCat.actual += ta
-  if (tb || ta) tCat.items.push({ label: 'My travel', budget: tb, actual: ta })
-
-  ;(personal.accommodations || []).forEach((acc) => {
-    const aCurr = acc.currency || 'AUD'
-    const ab = cvt(parseBudget(acc.budget), aCurr)
-    const aa = cvt(parseBudget(acc.budgetActual), aCurr)
-    const aCat = cats.accommodation || cats.misc
-    aCat.budget += ab; aCat.actual += aa
-    if (ab || aa) aCat.items.push({ label: acc.name || 'Accommodation', budget: ab, actual: aa })
-  })
-
-  ;(personal.tickets || []).forEach((t) => {
-    const tCurr = t.currency || 'AUD'
-    const qty  = parseBudget(t.quantity) || 1
-    const cost = cvt(parseBudget(t.unitPrice) * qty, tCurr)
-    if (!cost) return
-    const tkCat = cats.tickets || cats.misc
-    tkCat.actual += cost
-    tkCat.items.push({ label: t.name || 'Ticket', budget: 0, actual: cost })
-  })
-
-  // Personal itinerary items with budget
-  ;(personal.itinerary || []).forEach((item) => {
-    if (!item.budget && !item.actual) return
-    const iCurr = item.currency || 'AUD'
-    const b  = cvt(parseBudget(item.budget), iCurr)
-    const ac = cvt(parseBudget(item.actual), iCurr)
-    cats.misc.budget += b; cats.misc.actual += ac
-    if (b || ac) cats.misc.items.push({ label: item.title || 'Itinerary item', budget: b, actual: ac, isManual: true })
-  })
-
-  // Manual budget items (personal)
-  ;(personal.budgetItems || []).forEach((item) => {
-    const iCurr = item.currency || 'AUD'
-    const cat = item.category || 'misc'
-    const b = cvt(parseBudget(item.budget), iCurr)
-    const linked = (planner.receipts || []).filter((r) => r.budgetItemId === item.id)
-    const ac = linked.length
-      ? linked.reduce((s, r) => s + cvt(parseBudget(r.amount), r.currency || iCurr), 0)
-      : cvt(parseBudget(item.actual), iCurr)
-    const target = cats[cat === 'waypoints' ? 'accommodation' : cat] || cats.misc
-    target.budget += b; target.actual += ac
-    if (b || ac) target.items.push({ label: item.name || 'Budget item', budget: b, actual: ac, isManual: true })
-  })
-
-  // Unlinked receipts go to category drilldown only; linked ones already count via their budget item.
-  ;(planner.receipts || []).forEach((r) => {
-    if (r.budgetItemId) return
-    const cat = r.category || 'misc'
-    const amt = parseBudget(r.amount)
-    const target = cats[cat === 'waypoints' ? 'accommodation' : cat] || cats.misc
-    if (amt) target.receipts.push({ label: r.name || 'Receipt', amount: amt, currency: r.currency || '', date: r.date || '' })
-  })
-
-  return cats
-}
-
-function renderSummaryTab() {
-  const activeToggle = document.getElementById('summaryThisEvent')?.classList.contains('hidden') ? 'all' : 'this'
-  if (activeToggle === 'all') {
-    renderSummaryAllEvents()
-  } else {
-    renderSummaryThisEvent()
-  }
-}
-
-function renderBudgetHealth(cats, totalBudget, totalActual, primaryCurr = '') {
-  const el = document.getElementById('summaryBudgetHealth')
-  if (!el) return
-
-  const activeCats = Object.entries(cats).filter(([, c]) => c.budget !== 0 || c.actual !== 0)
-  if (!activeCats.length) { el.innerHTML = ''; return }
-
-  const _convBH = _buildConvFn(_currentRenderDate)
-  const fmt = (n) => {
-    const s = n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-    if (_convBH && _summaryCurrency) return `≈${s} ${_summaryCurrency}`
-    return primaryCurr ? `${primaryCurr} ${s}` : s
-  }
-
-  // Sort worst-first so the most critical categories appear at the top
-  const sorted = activeCats.slice().sort(([, a], [, b]) => {
-    const pA = a.budget > 0 ? a.actual / a.budget : (a.actual !== 0 ? Infinity : 0)
-    const pB = b.budget > 0 ? b.actual / b.budget : (b.actual !== 0 ? Infinity : 0)
-    return pB - pA
-  })
-
-  let nOver = 0, nAtRisk = 0, nOk = 0
-  const catRows = sorted.map(([, c]) => {
-    const rawPct       = c.budget > 0 ? (c.actual / c.budget) * 100 : 0
-    const barPct       = Math.min(rawPct, 100)
-    const catOver      = c.actual > c.budget && c.budget > 0
-    const isUnbudgeted = c.budget === 0 && c.actual !== 0
-    const catColor     = catOver || isUnbudgeted ? '#dc2626' : rawPct >= 70 ? '#d97706' : '#059669'
-
-    if (catOver || isUnbudgeted) nOver++
-    else if (rawPct >= 70) nAtRisk++
-    else nOk++
-
-    const remaining = c.budget - c.actual
-    const remainLabel = catOver
-      ? `<span style="color:#dc2626" class="font-medium">${fmt(Math.abs(remaining))} over</span>`
-      : isUnbudgeted
-      ? `<span style="color:#b45309" class="font-medium">unbudgeted</span>`
-      : `<span class="text-gray-500">${fmt(remaining)} left</span>`
-    const pctBadge = c.budget > 0
-      ? `<span class="text-[0.6rem] px-1 py-px rounded font-semibold tabular-nums flex-shrink-0" style="background:${catColor}22;color:${catColor}">${rawPct.toFixed(0)}%</span>`
-      : ''
-
-    return `
-      <div class="flex items-center gap-2 text-xs">
-        <span class="w-24 text-gray-500 truncate flex-shrink-0">${esc(c.label)}</span>
-        <div class="flex-1 bg-gray-100 rounded-full h-1.5 overflow-hidden">
-          ${c.budget > 0 ? `<div style="width:${barPct.toFixed(1)}%;background:${catColor}" class="h-full rounded-full transition-all"></div>` : ''}
-        </div>
-        ${pctBadge}
-        <span class="w-28 text-right flex-shrink-0 tabular-nums">${remainLabel}</span>
-      </div>`
-  }).join('')
-
-  const overBudget = totalActual > totalBudget && totalBudget > 0
-  const remaining  = totalBudget - totalActual
-  const pct        = totalBudget > 0 ? Math.min((totalActual / totalBudget) * 100, 100) : 0
-  const barColor   = overBudget ? '#dc2626' : pct >= 70 ? '#d97706' : '#059669'
-
-  const totalLine = totalBudget !== 0
-    ? `Spent <span class="font-medium text-gray-700">${fmt(totalActual)}</span>
-       of <span class="font-medium text-gray-700">${fmt(totalBudget)}</span>
-       ${overBudget
-         ? `<span class="font-medium ml-1" style="color:#dc2626">(${fmt(Math.abs(remaining))} over)</span>`
-         : `<span class="text-gray-500 ml-1">(${fmt(remaining)} remaining)</span>`}`
-    : `Net: <span class="font-medium text-gray-700">${fmt(totalActual)}</span>`
-
-  const dot = (color, label) =>
-    `<span class="inline-flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:${color}"></span><span>${label}</span></span>`
-  const statusDots = [
-    nOver   ? dot('#dc2626', `${nOver} over`)      : '',
-    nAtRisk ? dot('#d97706', `${nAtRisk} at risk`) : '',
-    nOk     ? dot('#059669', `${nOk} on track`)    : '',
-  ].filter(Boolean).join('<span class="text-gray-400 mx-1">·</span>')
-
-  el.innerHTML = `
-    <div class="rounded-lg border border-gray-200 bg-white p-3 space-y-2">
-      <div class="flex items-center justify-between gap-3 flex-wrap">
-        <span class="text-xs font-semibold text-gray-500 uppercase tracking-widest">Budget Health</span>
-        <span class="text-[0.65rem] text-gray-500 flex items-center gap-1 flex-wrap">${statusDots}</span>
-      </div>
-      <span class="text-xs text-gray-500 block">${totalLine}</span>
-      ${totalBudget > 0 ? `
-      <div class="bg-gray-100 rounded-full h-2 overflow-hidden">
-        <div style="width:${pct.toFixed(1)}%;background:${barColor}" class="h-full rounded-full transition-all"></div>
-      </div>` : ''}
-      ${sorted.length ? `<div class="space-y-1.5 pt-2 border-t border-gray-100">${catRows}</div>` : ''}
-    </div>`
-}
-
-function renderSummaryThisEvent() {
-  const statsGrid = document.getElementById('summaryStatsGrid')
-  if (!statsGrid) return
-
-  // Determine the event date for historical FX rate lookup
-  _currentRenderDate = state.eventMeta?.startDate?.slice(0, 10) || ''
-
-  const mode        = state.planner?.mode || 'personal'
-  const isPersonal  = mode === 'personal'
-  const visibleTabs = getVisibleTabs(mode)
-
-  document.getElementById('summaryMemberChartSection')?.classList.toggle('hidden', isPersonal || !visibleTabs.has('team'))
-
-  const tasks    = visibleTabs.has('tasks')    ? (state.planner.tasks         || []) : []
-  const contacts = visibleTabs.has('contacts') ? (state.planner.contacts      || []) : []
-  const notes    = visibleTabs.has('notes')    ? (state.planner.sessionNotes  || {}) : {}
-  const receipts = visibleTabs.has('receipts') ? (state.planner.receipts      || []) : []
-
-  const tasksDone    = tasks.filter((t) => t.done).length
-  const tasksOpen    = tasks.filter((t) => !t.done).length
-  const contactCount = contacts.length
-  const notedCount   = Object.values(notes).filter((n) => n.notes || n.rating || n.attended).length
-  const receiptCount = receipts.length
-  const receiptTotal = receipts.reduce((s, r) => s + parseBudget(r.amount), 0)
-
-  function statCard(icon, label, value, sub) {
-    return `<div class="rounded-lg border border-gray-200 bg-gray-50 p-2.5">
-      <div class="flex items-center gap-1.5 mb-1">
-        <i class="${icon} text-gray-400 text-[0.6rem] flex-shrink-0"></i>
-        <p class="text-[0.6rem] text-gray-600 uppercase tracking-widest leading-none">${esc(label)}</p>
-      </div>
-      <p class="text-lg font-semibold text-gray-800 leading-tight">${esc(String(value))}</p>
-      ${sub ? `<p class="text-[0.6rem] text-gray-500 mt-0.5">${esc(sub)}</p>` : ''}
-    </div>`
-  }
-
-  function renderCategoryChart(cats) {
-    const conv = _buildConvFn(_currentRenderDate)
-    destroyCharts('category')
-    const catCanvas = document.getElementById('budgetCategoryChart')
-    const activeCats = Object.entries(cats).filter(([, c]) => c.budget > 0 || c.actual > 0)
-    if (catCanvas && activeCats.length) {
-      const fmtChartVal = (v) => {
-        const s = v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-        return conv && _summaryCurrency ? `≈${s} ${_summaryCurrency}` : _primaryDisplayCurrency ? `${_primaryDisplayCurrency} ${s}` : s
-      }
-      // Categories with spend but no budget target use a sentinel (110) so the bar renders
-      // just past the 100% reference line in amber, making unbudgeted spend visible.
-      const utilData  = activeCats.map(([, c]) => c.budget > 0 ? parseFloat(((c.actual / c.budget) * 100).toFixed(1)) : c.actual > 0 ? 110 : null)
-      const bgColors  = activeCats.map(([, c]) => { if (c.budget === 0 && c.actual > 0) return 'rgba(180,83,9,0.85)'; const p = c.budget > 0 ? c.actual / c.budget * 100 : 0; return p >= 100 ? 'rgba(220,38,38,0.8)' : p >= 70 ? 'rgba(180,83,9,0.85)' : 'rgba(5,150,105,0.8)' })
-      const bdrColors = activeCats.map(([, c]) => { if (c.budget === 0 && c.actual > 0) return '#b45309'; const p = c.budget > 0 ? c.actual / c.budget * 100 : 0; return p >= 100 ? '#dc2626' : p >= 70 ? '#b45309' : '#059669' })
-      const refLine = {
-        id: 'budgetLine',
-        afterDraw(chart) {
-          const { ctx, chartArea, scales } = chart
-          if (!scales.x) return
-          const x = scales.x.getPixelForValue(100)
-          if (x < chartArea.left || x > chartArea.right) return
-          ctx.save()
-          ctx.strokeStyle = 'rgba(107,114,128,0.45)'
-          ctx.lineWidth = 1.5
-          ctx.setLineDash([5, 4])
-          ctx.beginPath(); ctx.moveTo(x, chartArea.top); ctx.lineTo(x, chartArea.bottom); ctx.stroke()
-          ctx.restore()
-        },
-      }
-      _charts.category = new Chart(catCanvas, {
-        type: 'bar',
-        data: {
-          labels: activeCats.map(([, c]) => c.label),
-          datasets: [{ label: '% of budget used', data: utilData, backgroundColor: bgColors, borderColor: bdrColors, borderWidth: 1 }],
-        },
-        options: {
-          indexAxis: 'y',
-          responsive: true,
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              callbacks: {
-                title: (items) => activeCats[items[0].dataIndex][1].label,
-                label: (ctx) => {
-                  const [, c] = activeCats[ctx.dataIndex]
-                  if (c.budget === 0 && c.actual > 0) {
-                    return [`  Actual: ${fmtChartVal(c.actual)}`, `  No budget target set`, `  Click to drill down`]
-                  }
-                  const lines = [`  Actual: ${fmtChartVal(c.actual)}`]
-                  if (c.budget > 0) {
-                    lines.push(`  Budget: ${fmtChartVal(c.budget)}`)
-                    const rem = c.budget - c.actual
-                    lines.push(rem >= 0 ? `  Left:   ${fmtChartVal(rem)}` : `  Over:   ${fmtChartVal(Math.abs(rem))}`)
-                  }
-                  lines.push('  Click to drill down')
-                  return lines
-                },
-              },
-            },
-          },
-          aspectRatio: activeCats.length > 5 ? 1.8 : 2.5,
-          scales: { x: { min: 0, suggestedMax: 115, ticks: { callback: (v) => `${v}%` } } },
-          onClick(_, elements) {
-            if (!elements.length) return
-            const [key] = activeCats[elements[0].index]
-            openDrilldown(key, cats[key])
-          },
-        },
-        plugins: [refLine],
-      })
-    } else if (catCanvas) {
-      catCanvas.getContext('2d').clearRect(0, 0, catCanvas.width, catCanvas.height)
-    }
-  }
-
-  if (isPersonal) {
-    const personal = state.planner.personal || {}
-    const allLegs = [...(personal.outboundLegs || []), ...(personal.returnLegs || [])]
-    const totalLegs = allLegs.length
-    const unconfirmedLegs = allLegs.filter((l) => l.status !== 'confirmed' && l.status !== 'cancelled').length
-    let accomNights = 0
-    ;(personal.accommodations || []).forEach((acc) => {
-      if (acc.checkIn && acc.checkOut) {
-        const n = Math.round((new Date(acc.checkOut) - new Date(acc.checkIn)) / 86400000)
-        if (n > 0) accomNights += n
-      }
-    })
-    const personalItinerary = personal.itinerary || []
-    const itinDone = personalItinerary.filter((i) => i.done).length
-    const itinOpen = personalItinerary.filter((i) => !i.done).length
-    const tickets = personal.tickets || []
-    const ticketsPending = tickets.filter((t) => t.status !== 'cancelled' && t.status !== 'assigned').length
-
-    const conv = _buildConvFn(_currentRenderDate)
-    const cats = buildPersonalBudgetData(state.planner, conv)
-    let totalBudget = 0, totalActual = 0
-    Object.values(cats).forEach((c) => { totalBudget += c.budget; totalActual += c.actual })
-    const hasBudgetData = Object.values(cats).some((c) => c.budget !== 0 || c.actual !== 0)
-    const primaryCurr = personal.currency || 'AUD'
-    _primaryDisplayCurrency = primaryCurr
-    const fmtStat = (n) => conv && _summaryCurrency
-      ? `≈${n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${_summaryCurrency}`
-      : `${primaryCurr} ${n.toLocaleString(undefined, { maximumFractionDigits: 2 })}`
-    _showRateNotice(false, _summaryCurrency ? `${_summaryCurrency}:${_currentRenderDate || 'current'}` : '')
-
-    statsGrid.innerHTML = [
-      statCard('fas fa-plane',        'Travel legs',    totalLegs, unconfirmedLegs ? `${unconfirmedLegs} unconfirmed` : 'all confirmed'),
-      statCard('fas fa-bed',          'Nights',         accomNights),
-      visibleTabs.has('tickets')  ? statCard('fas fa-ticket',       'Tickets',        tickets.length, ticketsPending ? `${ticketsPending} pending` : tickets.length ? 'all done' : '') : '',
-      visibleTabs.has('tasks')    ? statCard('fas fa-list-check',   'Tasks',          tasksDone + ' / ' + (tasksDone + tasksOpen), `${tasksOpen} open`) : '',
-      statCard('fas fa-map-pin',      'Itinerary',      itinDone + ' / ' + (itinDone + itinOpen),    `${itinOpen} open`),
-      visibleTabs.has('contacts') ? statCard('fas fa-address-book', 'Contacts',       contactCount) : '',
-      visibleTabs.has('notes')    ? statCard('fas fa-file-lines',   'Sessions noted', notedCount) : '',
-      visibleTabs.has('receipts') ? statCard('fas fa-receipt',      'Receipts',       receiptCount, receiptTotal ? receiptTotal.toLocaleString() : '') : '',
-      visibleTabs.has('budget') && hasBudgetData ? statCard('fas fa-wallet', 'My budget', fmtStat(totalBudget)) : '',
-      visibleTabs.has('budget') && hasBudgetData ? statCard('fas fa-coins',  'My actual', fmtStat(totalActual)) : '',
-    ].filter(Boolean).join('')
-
-    renderBudgetHealth(visibleTabs.has('budget') ? cats : {}, visibleTabs.has('budget') ? totalBudget : 0, visibleTabs.has('budget') ? totalActual : 0, primaryCurr)
-    renderCategoryChart(visibleTabs.has('budget') ? cats : {})
-    destroyCharts('member')
-    return
-  }
-
-  // ── Sponsor mode ─────────────────────────────────────────────────────────────
-  const org          = state.planner.org
-  const assignments  = org.teamAssignments || []
-  const accommodations = org.accommodations || []
-
-  const memberCount  = assignments.length
-  const allOrgLegs   = assignments.flatMap((a) => [...(a.outboundLegs || []), ...(a.returnLegs || [])])
-  const totalLegs    = allOrgLegs.length
-  const unconfirmedLegs = allOrgLegs.filter((l) => l.status !== 'confirmed' && l.status !== 'cancelled').length
-  const totalNights  = accommodations.reduce((sum, acc) =>
-    sum + (acc.assignments || []).reduce((s2, a) => {
-      if (!a.checkIn || !a.checkOut) return s2
-      const n = Math.round((new Date(a.checkOut) - new Date(a.checkIn)) / 86400000)
-      return s2 + (n > 0 ? n : 0)
-    }, 0), 0)
-  const itinerary = state.planner.org.memberItinerary || []
-  const itinDone  = itinerary.filter((i) => i.done).length
-  const itinOpen  = itinerary.filter((i) => !i.done).length
-  const orgTickets = org.tickets || []
-  const orgTicketsPending = orgTickets.filter((t) => t.status !== 'cancelled' && t.status !== 'assigned').length
-
-  const conv = _buildConvFn(_currentRenderDate)
-  const cats = buildEventBudgetData(state.planner, null, conv)
-  let totalBudget = 0, totalActual = 0
-  Object.values(cats).forEach((c) => { totalBudget += c.budget; totalActual += c.actual })
-  const hasBudgetData = Object.values(cats).some((c) => c.budget !== 0 || c.actual !== 0)
-  const primaryCurr = org.sponsorCurrency || 'AUD'
-  _primaryDisplayCurrency = primaryCurr
-  const fmtStat = (n) => conv && _summaryCurrency
-    ? `≈${n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${_summaryCurrency}`
-    : `${primaryCurr} ${n.toLocaleString(undefined, { maximumFractionDigits: 2 })}`
-  _showRateNotice(false, _summaryCurrency ? `${_summaryCurrency}:${_currentRenderDate || 'current'}` : '')
-
-  statsGrid.innerHTML = [
-    visibleTabs.has('team')     ? statCard('fas fa-users',        'Members',        memberCount) : '',
-    statCard('fas fa-plane',        'Travel legs',    totalLegs, unconfirmedLegs ? `${unconfirmedLegs} unconfirmed` : totalLegs ? 'all confirmed' : ''),
-    statCard('fas fa-bed',          'Nights',         totalNights),
-    visibleTabs.has('tickets')  ? statCard('fas fa-ticket',       'Tickets',        orgTickets.length, orgTicketsPending ? `${orgTicketsPending} pending` : orgTickets.length ? 'all done' : '') : '',
-    visibleTabs.has('tasks')    ? statCard('fas fa-list-check',   'Tasks',          tasksDone + ' / ' + (tasksDone + tasksOpen), `${tasksOpen} open`) : '',
-    statCard('fas fa-map-pin',      'Itinerary',      itinDone + ' / ' + (itinDone + itinOpen),    `${itinOpen} open`),
-    visibleTabs.has('contacts') ? statCard('fas fa-address-book', 'Contacts',       contactCount) : '',
-    visibleTabs.has('notes')    ? statCard('fas fa-file-lines',   'Sessions noted', notedCount) : '',
-    visibleTabs.has('receipts') ? statCard('fas fa-receipt',      'Receipts',       receiptCount, receiptTotal ? receiptTotal.toLocaleString() : '') : '',
-    visibleTabs.has('budget') && hasBudgetData ? statCard('fas fa-wallet', 'Total budget', fmtStat(totalBudget)) : '',
-    visibleTabs.has('budget') && hasBudgetData ? statCard('fas fa-coins',  'Total actual', fmtStat(totalActual)) : '',
-  ].filter(Boolean).join('')
-
-  renderBudgetHealth(visibleTabs.has('budget') ? cats : {}, visibleTabs.has('budget') ? totalBudget : 0, visibleTabs.has('budget') ? totalActual : 0, primaryCurr)
-  renderCategoryChart(visibleTabs.has('budget') ? cats : {})
-
-  // ── Per-member chart ─────────────────────────────────────────────────────────
-  destroyCharts('member')
-  if (!visibleTabs.has('team')) return
-  const memberCanvas = document.getElementById('budgetMemberChart')
-  const memberData = assignments.map((a) => {
-    const m    = state.global?.teamMembers.find((tm) => tm.id === a.memberId)
-    const aCurr = a.currency || 'AUD'
-    const b    = (conv ?? ((n) => n))(parseBudget(a.budget), aCurr)
-    const ac   = (conv ?? ((n) => n))(parseBudget(a.budgetActual), aCurr)
-    let accomB = 0, accomAc = 0
-    ;(org.accommodations || []).forEach((acc) => {
-      const stay = (acc.assignments || []).find((s) => s.memberId === a.memberId)
-      if (stay) {
-        const sCurr = stay.currency || 'AUD'
-        accomB  += (conv ?? ((n) => n))(parseBudget(stay.budget), sCurr)
-        accomAc += (conv ?? ((n) => n))(parseBudget(stay.budgetActual), sCurr)
-      }
-    })
-    let ticketAc = 0
-    ;(org.tickets || []).forEach((t) => {
-      if (t.assignedTo !== a.memberId && t.purchasedBy !== a.memberId) return
-      const tCurr = t.currency || 'AUD'
-      const qty = parseBudget(t.quantity) || 1
-      ticketAc += (conv ?? ((n) => n))(parseBudget(t.unitPrice) * qty, tCurr)
-    })
-    let assignedAc = 0
-    ;(org.budgetItems || []).filter((item) => item.memberId === a.memberId).forEach((item) => {
-      const iCurr  = item.currency || 'AUD'
-      const linked = (state.planner.receipts || []).filter((r) => r.budgetItemId === item.id)
-      assignedAc += linked.length
-        ? linked.reduce((s, r) => s + (conv ?? ((n) => n))(parseBudget(r.amount), r.currency || iCurr), 0)
-        : (conv ?? ((n) => n))(parseBudget(item.actual), iCurr)
-    })
-    return { name: m?.name || 'Unnamed', budget: b + accomB, actual: ac + accomAc + ticketAc + assignedAc, memberId: a.memberId, memberBudget: b, memberActual: ac, accomBudget: accomB, accomActual: accomAc, ticketActual: ticketAc, assignedActual: assignedAc }
-  }).filter((d) => d.budget || d.actual)
-
-  if (memberCanvas && memberData.length) {
-    const fmtMemberVal = (v) => {
-      const s = v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-      return conv && _summaryCurrency ? `≈${s} ${_summaryCurrency}` : `${primaryCurr} ${s}`
-    }
-    const mUtilData  = memberData.map((d) => d.budget > 0 ? parseFloat(((d.actual / d.budget) * 100).toFixed(1)) : null)
-    const mBgColors  = memberData.map((d) => { const p = d.budget > 0 ? d.actual / d.budget * 100 : 0; return p >= 100 ? 'rgba(220,38,38,0.8)' : p >= 70 ? 'rgba(180,83,9,0.85)' : 'rgba(79,70,229,0.8)' })
-    const mBdrColors = memberData.map((d) => { const p = d.budget > 0 ? d.actual / d.budget * 100 : 0; return p >= 100 ? '#dc2626' : p >= 70 ? '#b45309' : '#4338ca' })
-    const memberRefLine = {
-      id: 'memberBudgetLine',
-      afterDraw(chart) {
-        const { ctx, chartArea, scales } = chart
-        if (!scales.x) return
-        const x = scales.x.getPixelForValue(100)
-        if (x < chartArea.left || x > chartArea.right) return
-        ctx.save()
-        ctx.strokeStyle = 'rgba(107,114,128,0.45)'
-        ctx.lineWidth = 1.5
-        ctx.setLineDash([5, 4])
-        ctx.beginPath(); ctx.moveTo(x, chartArea.top); ctx.lineTo(x, chartArea.bottom); ctx.stroke()
-        ctx.restore()
-      },
-    }
-    _charts.member = new Chart(memberCanvas, {
-      type: 'bar',
-      data: {
-        labels: memberData.map((d) => d.name),
-        datasets: [{ label: '% of budget used', data: mUtilData, backgroundColor: mBgColors, borderColor: mBdrColors, borderWidth: 1 }],
-      },
-      options: {
-        indexAxis: 'y',
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            callbacks: {
-              title: (items) => memberData[items[0].dataIndex].name,
-              label: (ctx) => {
-                const d = memberData[ctx.dataIndex]
-                const lines = [`  Actual: ${fmtMemberVal(d.actual)}`]
-                if (d.budget > 0) {
-                  lines.push(`  Budget: ${fmtMemberVal(d.budget)}`)
-                  const rem = d.budget - d.actual
-                  lines.push(rem >= 0 ? `  Left:   ${fmtMemberVal(rem)}` : `  Over:   ${fmtMemberVal(Math.abs(rem))}`)
-                }
-                lines.push('  Click to drill down')
-                return lines
-              },
-            },
-          },
-        },
-        aspectRatio: memberData.length > 5 ? 1.8 : 2.5,
-        scales: { x: { min: 0, suggestedMax: 115, ticks: { callback: (v) => `${v}%` } } },
-        onClick(_, elements) {
-          if (!elements.length) return
-          const d = memberData[elements[0].index]
-          openMemberDrilldown(d, state.planner)
-        },
-      },
-      plugins: [memberRefLine],
-    })
-  } else if (memberCanvas) {
-    memberCanvas.getContext('2d').clearRect(0, 0, memberCanvas.width, memberCanvas.height)
-  }
-}
-
-// ── Trip Dashboard ────────────────────────────────────────────────────────────
-
-function _tripFmtDate(iso) {
-  if (!iso) return ''
-  return new Date(iso + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
-}
-
-function _tripFmtRange(startIso, endIso) {
-  if (!startIso) return ''
-  const s = new Date(startIso + 'T12:00:00')
-  const e = endIso ? new Date(endIso + 'T12:00:00') : null
-  const sYear = s.getFullYear()
-  const sMonth = s.toLocaleDateString(undefined, { month: 'short' })
-  const sDay = s.getDate()
-  if (!e) return `${sMonth} ${sDay}, ${sYear}`
-  const eYear = e.getFullYear()
-  const eMonth = e.toLocaleDateString(undefined, { month: 'short' })
-  const eDay = e.getDate()
-  if (sYear === eYear && sMonth === eMonth) return `${sMonth} ${sDay}–${eDay}, ${sYear}`
-  return sYear === eYear
-    ? `${sMonth} ${sDay} – ${eMonth} ${eDay}, ${sYear}`
-    : `${sMonth} ${sDay}, ${sYear} – ${eMonth} ${eDay}, ${eYear}`
-}
-
-function _tripCountdown(dateStr) {
-  if (!dateStr) return ''
-  const d = new Date(dateStr + 'T12:00:00')
-  const today = new Date(); today.setHours(12, 0, 0, 0)
-  const diff = Math.round((d - today) / 86400000)
-  if (diff === 0) return 'Today'
-  if (diff === 1) return 'Tomorrow'
-  if (diff > 1) return `in ${diff} days`
-  return ''
-}
-
-function _tripCardHtml(trip) {
-  const modeLabel = trip.mode === 'sponsor' ? 'Sponsor' : 'Personal'
-  const modeCls   = trip.mode === 'sponsor' ? 'trip-mode-sponsor' : 'trip-mode-personal'
-  const confDates = _tripFmtRange(trip.evStart, trip.evEnd)
-  const countdown = _tripCountdown(trip.refDateStr)
-  const dotHtml   = trip.budgetDot
-    ? `<span class="trip-budget-dot trip-budget-dot--${esc(trip.budgetDot)}"></span>`
-    : ''
-
-  const rows = []
-  if (trip.outDate) {
-    const icon = (TRAVEL_MODES[trip.outLegMode] || TRAVEL_MODES.other).icon
-    rows.push(`<div class="trip-card-travel-row"><i class="${esc(icon)}"></i><span>${_tripFmtDate(trip.outDate)} outbound</span></div>`)
-  }
-  if (trip.checkIn && trip.checkOut) {
-    rows.push(`<div class="trip-card-travel-row"><i class="fas fa-building"></i><span>${_tripFmtDate(trip.checkIn)}–${_tripFmtDate(trip.checkOut)}</span></div>`)
-  }
-  if (trip.retDate) {
-    rows.push(`<div class="trip-card-travel-row"><i class="fas fa-plane-arrival"></i><span>${_tripFmtDate(trip.retDate)} return</span></div>`)
-  }
-
-  const missing = []
-  if (!trip.hasFlights) missing.push('No flights')
-  if (!trip.hasAccom)   missing.push('No hotel')
-  if (!trip.hasReturn)  missing.push('No return')
-
-  return `
-    <div class="trip-card-wrap">
-      <a href="planner.html?id=${encodeURIComponent(trip.slug)}" class="trip-card">
-        <div class="trip-card-header">
-          <span class="trip-mode-badge ${modeCls}">${modeLabel}</span>
-          ${dotHtml}
-          ${countdown ? `<span class="trip-countdown">${esc(countdown)}</span>` : ''}
-        </div>
-        <h3 class="trip-card-title">${esc(trip.name)}</h3>
-        ${confDates ? `<p class="trip-card-dates">${esc(confDates)}</p>` : '<p class="trip-card-dates trip-card-dates--unknown">No dates set</p>'}
-        ${rows.length ? `<div class="trip-card-travel">${rows.join('')}</div>` : ''}
-        ${missing.length ? `<div class="trip-card-missing">${missing.map((m) => `<span class="trip-missing-chip">${esc(m)}</span>`).join('')}</div>` : ''}
-      </a>
-      <button type="button" class="trip-card-cog"
-        data-slug="${esc(trip.slug)}"
-        data-name="${esc(trip.name)}"
-        data-event-file="${esc(trip.eventFile || '')}"
-        data-event-label="${esc(trip.eventLabel || '')}"
-        aria-label="Planner options">
-        <i class="fas fa-ellipsis-v"></i>
-      </button>
-    </div>`
-}
-
-function _buildTimelineHtml(trips) {
-  const allStarts = trips.map((t) => t.refDateStr).filter(Boolean).sort()
-  const allEnds   = trips.map((t) => t.endDateStr || t.refDateStr).filter(Boolean).sort()
-  if (allStarts.length < 2) return ''
-
-  const rangeStart = new Date(allStarts[0] + 'T12:00:00')
-  rangeStart.setDate(1)
-  const rangeEnd = new Date(allEnds[allEnds.length - 1] + 'T12:00:00')
-  rangeEnd.setDate(1); rangeEnd.setMonth(rangeEnd.getMonth() + 1)
-
-  const totalMs = rangeEnd - rangeStart
-  if (totalMs <= 0) return ''
-
-  const bars = trips.map((trip) => {
-    if (!trip.refDateStr) return ''
-    const s    = new Date(trip.refDateStr + 'T12:00:00')
-    const e    = new Date((trip.endDateStr || trip.refDateStr) + 'T12:00:00')
-    const left  = Math.max(0, (s - rangeStart) / totalMs * 100)
-    const right = Math.min(100, (e - rangeStart) / totalMs * 100)
-    const width = Math.max(right - left, 0.75)
-    const cls   = trip.mode === 'sponsor' ? 'trip-tl-bar--sponsor' : 'trip-tl-bar--personal'
-    return `<a href="planner.html?id=${encodeURIComponent(trip.slug)}"
-        class="trip-tl-bar ${cls}"
-        data-slug="${esc(trip.slug)}"
-        style="left:${left.toFixed(2)}%;width:${width.toFixed(2)}%"
-        title="${esc(trip.name)}"
-      ></a>`
-  }).filter(Boolean)
-
-  return `<div class="trip-timeline">
-    <div class="trip-tl-track">${bars.join('')}</div>
-  </div>`
-}
-
-function _buildDashboardHtml(upcoming, past, nextTrip, tlHtml) {
-  let bannerHtml = ''
-  if (nextTrip) {
-    const countdown = _tripCountdown(nextTrip.refDateStr)
-    bannerHtml = `<div class="trip-next-banner">
-      <div class="trip-next-content">
-        <p class="trip-next-label">Next trip</p>
-        <h2 class="trip-next-name">${esc(nextTrip.name)}</h2>
-        ${nextTrip.evStart ? `<p class="trip-next-dates">${_tripFmtRange(nextTrip.evStart, nextTrip.evEnd)}</p>` : ''}
-      </div>
-      <div class="trip-next-right">
-        ${countdown ? `<p class="trip-next-countdown">${esc(countdown)}</p>` : ''}
-        <a href="planner.html?id=${encodeURIComponent(nextTrip.slug)}" class="trip-next-open">Open planner</a>
-      </div>
-    </div>`
-  }
-
-  const upcomingHtml = upcoming.length
-    ? upcoming.map(_tripCardHtml).join('')
-    : emptyState('No upcoming trips. Create a new planner to get started.')
-
-  const pastHtml = past.length
-    ? `<details class="trip-past-section">
-        <summary class="trip-past-summary">Past trips (${past.length})</summary>
-        <div class="hl-card-grid trip-cards--past">${past.map(_tripCardHtml).join('')}</div>
-      </details>`
-    : ''
-
-  return homeRoot(`
-    ${bannerHtml}
-    ${tlHtml ? `<div class="trip-timeline-wrap">${tlHtml}</div>` : ''}
-    <div class="trip-dashboard-section">
-      ${sectionHeader({ title: 'Upcoming trips', primaryBtnId: 'newPlannerBtnNoEvent', primaryBtnLabel: 'New planner', primaryBtnIconClass: 'fas fa-plus text-xs', secondaryBtnId: 'dashboardSettingsBtn', secondaryBtnIconClass: 'fas fa-gear', secondaryBtnTitle: 'Settings' })}
-      ${cardGrid({ id: 'tripCardsGrid', innerHtml: upcomingHtml })}
-    </div>
-    ${pastHtml}
-  `)
-}
-
-async function renderTripDashboard() {
-  const container = document.getElementById('plannerNoEvent')
-  if (!container) return
-
-  // Gather all planners
-  const rawPlanners = []
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i)
-    if (!key?.startsWith(STORAGE_PREFIX) || key === `${STORAGE_PREFIX}global`) continue
-    try {
-      const slug = key.slice(STORAGE_PREFIX.length)
-      const data = JSON.parse(localStorage.getItem(key) || '{}')
-      if (!isPlannerEntry(slug, data)) continue
-      rawPlanners.push({ data, slug })
-    } catch { /* skip corrupt */ }
-  }
-
-  // Fetch event dates — skip only if cached with a real value; retry null (prior failure/miss)
-  await Promise.all(
-    rawPlanners
-      .filter((p) => p.data._eventFile && !_eventStartDateCache.get(p.data._eventFile))
-      .map((p) => {
-        _eventDateCache.delete(p.data._eventFile); // clear stale null so fetchEventWednesday retries
-        return fetchEventWednesday(p.data._eventFile);
-      })
-  )
-
-  const today = new Date(); today.setHours(0, 0, 0, 0)
-
-  const trips = rawPlanners.map(({ data, slug }) => {
-    const ef        = data._eventFile || null
-    const evStart   = ef ? (_eventStartDateCache.get(ef) || null) : null
-    const evEnd     = ef ? (_eventEndDateCache.get(ef)   || null) : null
-    const personal  = data.personal || {}
-    const outLegs   = sortLegs(personal.outboundLegs || [])
-    const retLegs   = sortLegs(personal.returnLegs   || [])
-    const accoms    = personal.accommodations || []
-
-    const outDate  = outLegs.find((l) => l.date)?.date || null
-    const retDate  = [...retLegs].reverse().find((l) => l.date)?.date || null
-    const checkIn  = accoms.reduce((e, a) => !a.checkIn ? e : (!e || a.checkIn < e ? a.checkIn : e), null)
-    const checkOut = accoms.reduce((l, a) => !a.checkOut ? l : (!l || a.checkOut > l ? a.checkOut : l), null)
-
-    const refDateStr = outDate || evStart
-    const endDateStr = retDate || evEnd
-    const refDate    = refDateStr ? new Date(refDateStr + 'T12:00:00') : null
-    const endDate    = endDateStr ? new Date(endDateStr + 'T12:00:00') : null
-    const isUpcoming = endDate ? endDate >= today : (refDate ? refDate >= today : true)
-
-    const mode      = data.mode === 'sponsor' ? 'sponsor' : 'personal'
-    const budget    = Number(mode === 'sponsor' ? (data.org?.sponsorBudget || 0) : (personal.budget || 0))
-    const actual    = Number(mode === 'sponsor' ? (data.org?.sponsorActual || 0) : (personal.budgetActual || 0))
-    const ratio     = budget > 0 ? actual / budget : -1
-
-    return {
-      slug,
-      name:        data._displayName || (ef || slug).replace('.json', ''),
-      eventFile:   ef || '',
-      eventLabel:  ef ? (ef.replace('.json', '').replace(/[-_]/g, ' ')) : '',
-      mode,
-      evStart, evEnd,
-      outDate, retDate, checkIn, checkOut,
-      refDateStr, endDateStr, refDate, endDate,
-      isUpcoming,
-      budgetDot:   ratio < 0 ? '' : ratio < 0.7 ? 'green' : ratio < 1 ? 'amber' : 'red',
-      hasFlights:  outLegs.length > 0,
-      hasReturn:   retLegs.length > 0,
-      hasAccom:    accoms.length > 0,
-      outLegMode:  outLegs[0]?.mode || 'flight',
-    }
-  })
-
-  const sortByDate = (a, b) => {
-    if (!a.refDate && !b.refDate) return a.name.localeCompare(b.name)
-    if (!a.refDate) return 1
-    if (!b.refDate) return -1
-    return a.refDate - b.refDate
-  }
-  const upcoming = trips.filter((t) => t.isUpcoming).sort(sortByDate)
-  const past     = trips.filter((t) => !t.isUpcoming).sort((a, b) => sortByDate(b, a))
-  const nextTrip = upcoming.find((t) => t.refDate)
-  const tlHtml   = _buildTimelineHtml(trips.filter((t) => t.refDateStr))
-
-  const pastWasOpen = container.querySelector('details.trip-past-section')?.open ?? false
-  container.innerHTML = _buildDashboardHtml(upcoming, past, nextTrip, tlHtml)
-  if (pastWasOpen) {
-    const details = container.querySelector('details.trip-past-section')
-    if (details) details.open = true
-  }
-}
-
-async function renderSummaryAllEvents() {
-  const container = document.getElementById('summaryAllEvents')
-  if (!container) return
-
-  // ── Step 1: Gather raw planner metadata from localStorage ───────────────────
-  const rawPlanners = []
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i)
-    if (!key?.startsWith(STORAGE_PREFIX) || key === `${STORAGE_PREFIX}global`) continue
-    try {
-      const slug = key.slice(STORAGE_PREFIX.length)
-      const data = JSON.parse(localStorage.getItem(key) || '{}')
-      if (!isPlannerEntry(slug, data)) continue
-      rawPlanners.push({ data, slug })
-    } catch { /* skip corrupt */ }
-  }
-
-  // ── Step 2: Pre-fetch event start dates for all planners with event files ───
-  await Promise.all(
-    rawPlanners
-      .filter((p) => p.data._eventFile && !_eventStartDateCache.has(p.data._eventFile))
-      .map((p) => fetchEventWednesday(p.data._eventFile))
-  )
-
-  // ── Step 3: Pre-fetch historical rates for each unique event date ────────────
-  if (_summaryCurrency) {
-    const uniqueDates = [...new Set(
-      rawPlanners
-        .map((p) => p.data._eventFile ? (_eventStartDateCache.get(p.data._eventFile) || '') : '')
-        .filter(Boolean)
-    )]
-    await Promise.all(
-      uniqueDates.map((d) => _fetchRates(_summaryCurrency, d).catch(() => null))
-    )
-    // Also load current rates as fallback for events without a known date
-    await _fetchRates(_summaryCurrency, '').catch(() => null)
-  }
-
-  // ── Step 4: Build per-event budget data using date-appropriate rates ─────────
-  const rawEvents = rawPlanners.map(({ data, slug }) => {
-    const label       = data._displayName || (data._eventFile || slug).replace('.json', '')
-    const plannerMode = data.mode === 'individual' ? 'personal' : (data.mode || 'personal')
-    const eventDate   = data._eventFile ? (_eventStartDateCache.get(data._eventFile) || '') : ''
-    const conv        = _buildConvFn(eventDate)
-
-    let budget = 0, actual = 0, catData = {}
-    if (plannerMode === 'sponsor') {
-      const cats = buildEventBudgetData(data, null, conv)
-      Object.values(cats).forEach((c) => { budget += c.budget; actual += c.actual })
-      catData = cats
-    } else {
-      const cats = buildPersonalBudgetData(data, conv)
-      Object.values(cats).forEach((c) => { budget += c.budget; actual += c.actual })
-      catData = cats
-    }
-
-    const yearMatch = (label + ' ' + (data._eventFile || slug)).match(/\b(20\d{2})\b/)
-    const eventYear = yearMatch ? parseInt(yearMatch[1], 10) : 0
-    return { label, slug, mode: plannerMode, budget, actual, catData, eventFile: data._eventFile || '', eventYear, rawPlanner: data, eventDate }
-  }).filter((e) => e.budget > 0 || e.actual > 0)
-
-  // Update rate notice — show historical note if any event used a dated rate
-  if (_summaryCurrency) {
-    const anyHistorical = rawEvents.some((e) => e.eventDate && _rateCache.has(`${_summaryCurrency}:${e.eventDate}`))
-    const anyLoaded     = [..._rateCache.keys()].some((k) => k.startsWith(`${_summaryCurrency}:`))
-    const notice = document.getElementById('summaryRateNotice')
-    const text   = document.getElementById('summaryRateNoticeText')
-    if (notice && text) {
-      notice.classList.remove('hidden')
-      if (!anyLoaded) {
-        text.textContent = `Exchange rates for ${_summaryCurrency} not loaded — values shown as entered.`
-      } else if (anyHistorical) {
-        text.textContent =
-          `Values shown as approximate ${_summaryCurrency} equivalents using historical ECB rates for each event's date. ` +
-          `Currencies outside ECB coverage are shown as-entered. Suitable for budgeting; use actual transaction rates for formal bookkeeping.`
-      } else {
-        const cur = _rateCache.get(`${_summaryCurrency}:current`)
-        text.textContent =
-          `Values shown as approximate ${_summaryCurrency} equivalents using ECB rates from ${cur?.rateDate || 'latest available'}. ` +
-          `Currencies outside ECB coverage are shown as-entered. Suitable for budgeting; use actual transaction rates for formal bookkeeping.`
-      }
-    }
-  } else {
-    document.getElementById('summaryRateNotice')?.classList.add('hidden')
-  }
-
-  // Sort chronologically by event year, then alphabetically within the same year
-  rawEvents.sort((a, b) => {
-    const ya = a.eventYear || 9999
-    const yb = b.eventYear || 9999
-    if (ya !== yb) return ya - yb
-    return a.label.localeCompare(b.label)
-  })
-
-  const { start, end, hidden, person } = _globalSummaryFilter
-  const startYear = start ? parseInt(start.slice(0, 4), 10) : null
-  const endYear   = end   ? parseInt(end.slice(0, 4),   10) : null
-
-  // 1. Date range filter
-  const dateFiltered = rawEvents.filter((e) => {
-    if (e.eventYear > 0) {
-      if (startYear !== null && e.eventYear < startYear) return false
-      if (endYear   !== null && e.eventYear > endYear)   return false
-    }
-    return true
-  })
-
-  // 2. Person filter — '' = everyone, 'me' = personal only, 'sponsor' = all sponsor, memberId = sponsor for that member
-  let allEvents
-  if (!person) {
-    allEvents = dateFiltered
-  } else if (person === 'me') {
-    allEvents = dateFiltered.filter((e) => e.mode === 'personal')
-  } else if (person === 'sponsor') {
-    allEvents = dateFiltered.filter((e) => e.mode === 'sponsor')
-  } else {
-    allEvents = dateFiltered
-      .filter((e) => {
-        if (e.mode !== 'sponsor') return false
-        const org = e.rawPlanner.org || {}
-        return (org.teamAssignments || []).some((a) => a.memberId === person)
-          || (org.accommodations || []).some((acc) => (acc.assignments || []).some((s) => s.memberId === person))
-      })
-      .map((e) => {
-        const eConv = _buildConvFn(e.eventDate || '')
-        const cats  = buildEventBudgetData(e.rawPlanner, person, eConv)
-        let b = 0, a = 0
-        Object.values(cats).forEach((c) => { b += c.budget; a += c.actual })
-        return { ...e, budget: b, actual: a, catData: cats }
-      })
-  }
-
-  // 3. Per-event visibility toggle (manual hide/show via chart pills)
-  const events = allEvents.filter((e) => !hidden.has(e.slug))
-
-  // Keep "View as" dropdown in sync with current state (team members may vary per render)
-  const personSelect = document.getElementById('globalPersonFilter')
-  if (personSelect) {
-    const teamMembers = state.global?.teamMembers || []
-    personSelect.innerHTML =
-      `<option value="">All planners</option>` +
-      `<option value="me"${person === 'me' ? ' selected' : ''}>Personal only</option>` +
-      `<option value="sponsor"${person === 'sponsor' ? ' selected' : ''}>Sponsor only</option>` +
-      (teamMembers.length ? `<optgroup label="Sponsor — by person">` +
-        teamMembers.map((m) =>
-          `<option value="${esc(m.id)}"${m.id === person ? ' selected' : ''}>${esc(m.name || 'Unnamed')}${m.role ? ` — ${esc(m.role)}` : ''}</option>`
-        ).join('') + `</optgroup>` : '')
-  }
-
-  // Render event toggle pills (drawn from date-filtered set so users can un-hide)
-  const filterEl = document.getElementById('globalChartEventFilter')
-  if (filterEl) {
-    if (allEvents.length > 1) {
-      filterEl.style.display = 'flex'
-      filterEl.innerHTML = allEvents.map((e) => {
-        const isHidden = hidden.has(e.slug)
-        return `<label class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full border cursor-pointer select-none transition-colors text-[0.65rem] ${isHidden ? 'border-gray-200 text-gray-300 bg-white' : 'border-gray-200 text-gray-600 bg-gray-50 hover:bg-gray-100'}">
-          <input type="checkbox" class="sr-only" ${isHidden ? '' : 'checked'} data-slug="${esc(e.slug)}">
-          <span class="w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:${isHidden ? '#d1d5db' : 'var(--color-primary, #3b82f6)'}"></span>
-          <span>${esc(e.label)}</span>
-        </label>`
-      }).join('')
-      filterEl.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
-        cb.addEventListener('change', (ev) => {
-          const slug = ev.target.dataset.slug
-          if (ev.target.checked) _globalSummaryFilter.hidden.delete(slug)
-          else _globalSummaryFilter.hidden.add(slug)
-          renderSummaryAllEvents()
-        })
-      })
-    } else {
-      filterEl.style.display = 'none'
-      filterEl.innerHTML = ''
-    }
-  }
-
-  const totalBudget = events.reduce((s, e) => s + e.budget, 0)
-  const totalActual = events.reduce((s, e) => s + e.actual, 0)
-  const variance    = totalBudget - totalActual
-  const over        = variance < 0
-
-  function statCard(icon, label, value, sub) {
-    return `<div class="rounded-lg border border-gray-200 bg-gray-50 p-3 min-w-[100px]">
-      <div class="flex items-center gap-1.5 mb-1">
-        <i class="${icon} text-gray-400 text-[0.6rem] flex-shrink-0"></i>
-        <p class="text-[0.65rem] text-gray-600 uppercase tracking-widest leading-none">${esc(label)}</p>
-      </div>
-      <p class="text-xl font-semibold text-gray-800 leading-tight">${esc(String(value))}</p>
-      ${sub ? `<p class="text-[0.6rem] text-gray-500 mt-0.5">${esc(sub)}</p>` : ''}
-    </div>`
-  }
-
-  // True if any rates are loaded for the target currency (at least one event will be converted)
-  const isConverting = !!(_summaryCurrency && [..._rateCache.keys()].some((k) => k.startsWith(_summaryCurrency + ':')))
-
-  const fmtN = (n) => {
-    if (!n) return '—'
-    const s = n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-    return isConverting ? `≈${s} ${_summaryCurrency}` : s
-  }
-  const asEnteredSub = isConverting ? null : 'as entered'
-
-  const statsRow = document.getElementById('globalSummaryStatsRow')
-  if (statsRow) {
-    statsRow.innerHTML = [
-      statCard('fas fa-calendar-check', 'Events tracked', events.length),
-      statCard('fas fa-wallet',  'Total budget', fmtN(totalBudget), asEnteredSub),
-      statCard('fas fa-coins',   'Total actual', fmtN(totalActual), asEnteredSub),
-      totalBudget
-        ? `<div class="rounded-lg border ${over ? 'border-red-200 bg-red-50' : 'border-emerald-200 bg-emerald-50'} p-3 text-center min-w-[100px]">
-            <p class="text-[0.65rem] ${over ? 'text-red-600' : 'text-emerald-700'} uppercase tracking-widest mb-1">${over ? 'Over budget' : 'Remaining'}</p>
-            <p class="text-xl font-semibold ${over ? 'text-red-600' : 'text-emerald-700'}">${fmtN(Math.abs(variance))}</p>
-            ${asEnteredSub ? `<p class="text-[0.6rem] text-gray-500">${asEnteredSub}</p>` : ''}
-            <i class="fas ${over ? 'fa-triangle-exclamation text-red-500' : 'fa-circle-check text-emerald-500'} text-xs mt-0.5 block"></i>
-          </div>`
-        : '',
-    ].filter(Boolean).join('')
-  }
-
-  // Per-event breakdown table — improved design
-  const tableEl = document.getElementById('globalEventTable')
-  if (tableEl) {
-    if (!rawEvents.length) {
-      tableEl.innerHTML = '<p class="text-sm text-gray-600 text-center py-4 italic">No planner data found.</p>'
-    } else if (!events.length) {
-      tableEl.innerHTML = '<p class="text-sm text-gray-600 text-center py-4 italic">No events match the current filters.</p>'
-    } else {
-      const pfx = isConverting ? '≈' : ''
-      const sfx = isConverting ? ` ${_summaryCurrency}` : ''
-      const fmt = (n) => n
-        ? `${pfx}${n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}${sfx}`
-        : '—'
-      const currLabel = isConverting ? ` (≈${_summaryCurrency})` : ' (as entered)'
-      tableEl.innerHTML = `
-        <table class="w-full text-sm border-collapse">
-          <thead>
-            <tr class="bg-gray-50" style="border-bottom:2px solid var(--color-primary,#3b82f6)">
-              <th class="text-left px-4 py-2.5 text-xs font-semibold uppercase tracking-widest text-gray-500">Event</th>
-              <th class="text-left px-3 py-2.5 text-xs font-semibold uppercase tracking-widest text-gray-500 hidden sm:table-cell">Mode</th>
-              <th class="text-right px-3 py-2.5 text-xs font-semibold uppercase tracking-widest text-gray-500">Budget${currLabel}</th>
-              <th class="text-right px-3 py-2.5 text-xs font-semibold uppercase tracking-widest text-gray-500">Actual${currLabel}</th>
-              <th class="text-right px-3 py-2.5 text-xs font-semibold uppercase tracking-widest text-gray-500 hidden md:table-cell">Variance${currLabel}</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${events.map((e, idx) => {
-              const v = e.budget - e.actual
-              const rowOver = v < 0 && e.budget
-              const isThis = e.slug === state.plannerKey
-              const rowBg = isThis
-                ? 'style="background:rgba(59,130,246,0.05)"'
-                : idx % 2 === 1 ? 'class="bg-gray-50/60"' : ''
-              return `<tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors" ${rowBg}>
-                <td class="px-4 py-2.5 text-gray-700">
-                  <div class="flex items-start gap-1.5">
-                    ${isThis ? `<i class="fas fa-circle mt-1 text-[0.4rem] flex-shrink-0" style="color:var(--color-primary,#3b82f6)"></i>` : ''}
-                    <div>
-                      <span class="${isThis ? 'font-medium' : ''}">${esc(e.label)}</span>
-                      <p class="text-[0.6rem] text-gray-500 mt-0.5">${e.eventFile ? esc(e.eventFile.replace('.json', '')) : '<i>no schedule</i>'}</p>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-3 py-2.5 hidden sm:table-cell">
-                  <span class="text-[0.6rem] font-medium px-2 py-0.5 rounded-full ${e.mode === 'sponsor' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-500'}">${esc(e.mode)}</span>
-                </td>
-                <td class="px-3 py-2.5 text-right tabular-nums text-gray-600">${fmt(e.budget)}</td>
-                <td class="px-3 py-2.5 text-right tabular-nums ${rowOver ? 'text-red-600 font-medium' : 'text-gray-600'}">${fmt(e.actual)}</td>
-                <td class="px-3 py-2.5 text-right hidden md:table-cell">
-                  ${e.budget || e.actual
-                    ? `<span class="inline-flex items-center gap-1 text-[0.7rem] px-2 py-0.5 rounded-full ${v < 0 ? 'bg-red-50 text-red-600' : v > 0 ? 'bg-emerald-50 text-emerald-700' : 'bg-gray-50 text-gray-500'}">
-                        ${v !== 0 ? `<i class="fas fa-arrow-${v < 0 ? 'up' : 'down'} text-[0.5rem]"></i>` : ''}
-                        ${fmt(Math.abs(v))}
-                      </span>`
-                    : '<span class="text-gray-400 text-xs">—</span>'}
-                </td>
-              </tr>`
-            }).join('')}
-          </tbody>
-          ${events.length > 1 ? `
-          <tfoot>
-            <tr class="bg-gray-50 border-t-2 border-gray-200">
-              <td class="px-4 py-2.5 font-semibold text-gray-700">Total</td>
-              <td class="hidden sm:table-cell"></td>
-              <td class="px-3 py-2.5 text-right tabular-nums font-semibold text-gray-700">${fmt(totalBudget)}</td>
-              <td class="px-3 py-2.5 text-right tabular-nums font-semibold ${totalActual > totalBudget && totalBudget ? 'text-red-600' : 'text-gray-700'}">${fmt(totalActual)}</td>
-              <td class="px-3 py-2.5 text-right hidden md:table-cell">
-                <span class="inline-flex items-center gap-1 text-[0.7rem] px-2 py-0.5 rounded-full font-medium ${over ? 'bg-red-50 text-red-600' : 'bg-emerald-50 text-emerald-700'}">
-                  <i class="fas fa-arrow-${over ? 'up' : 'down'} text-[0.5rem]"></i>
-                  ${fmt(Math.abs(variance))}
-                </span>
-              </td>
-            </tr>
-          </tfoot>` : ''}
-        </table>`
-    }
-  }
-
-  // Aggregated category totals
-  const catTotals = {}
-  events.forEach((e) => {
-    Object.entries(e.catData).forEach(([k, c]) => {
-      if (!catTotals[k]) catTotals[k] = { label: c.label, budget: 0, actual: 0 }
-      catTotals[k].budget += c.budget
-      catTotals[k].actual += c.actual
-    })
-  })
-  const activeCats = Object.entries(catTotals).filter(([, c]) => c.budget > 0 || c.actual > 0)
-  const catEl = document.getElementById('globalCategoryBreakdown')
-  if (catEl) {
-    if (activeCats.length) {
-      const catPfx = isConverting ? '≈' : ''
-      const catSfx = isConverting ? ` ${_summaryCurrency}` : ''
-      const catCurrLabel = isConverting ? ` (≈${_summaryCurrency})` : ' (as entered)'
-      const fmt = (n) => n ? `${catPfx}${n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}${catSfx}` : '—'
-      catEl.innerHTML = `
-        <div class="grid grid-cols-[1fr_auto_auto] gap-x-4 gap-y-1 text-sm">
-          <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-gray-600 pb-0.5">Category</span>
-          <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-gray-600 text-right pb-0.5">Budget${catCurrLabel}</span>
-          <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-gray-600 text-right pb-0.5">Actual${catCurrLabel}</span>
-          ${activeCats.map(([, c]) => `
-            <span class="text-gray-600 truncate">${esc(c.label)}</span>
-            <span class="tabular-nums text-right text-gray-500">${fmt(c.budget)}</span>
-            <span class="tabular-nums text-right ${c.actual > c.budget && c.budget ? 'text-red-500' : 'text-gray-700'}">${fmt(c.actual)}</span>
-          `).join('')}
-        </div>`
-    } else {
-      catEl.innerHTML = ''
-    }
-  }
-
-  // Chart — fetch real event dates, group by Wednesday of each event week
-  const chartEvents = events.filter((e) => e.budget > 0 || e.actual > 0)
-
-  // Fetch start dates in parallel (cached after first load, fast on repeat renders)
-  await Promise.all(
-    chartEvents
-      .filter((e) => e.eventFile && !_eventDateCache.has(e.eventFile))
-      .map((e) => fetchEventWednesday(e.eventFile))
-  )
-
-  // Group events that share the same event-week Wednesday into one data point
-  const dateGroups = new Map()
-  chartEvents.forEach((e) => {
-    const wed = e.eventFile ? (_eventDateCache.get(e.eventFile) ?? null) : null
-    // Fall back to mid-year Wednesday when no event file date is available
-    const key = wed ?? (e.eventYear ? toWednesdayOfWeek(`${e.eventYear}-07-01`) : 'unknown')
-    if (!dateGroups.has(key)) dateGroups.set(key, { wed: key, budget: 0, actual: 0, events: [] })
-    const g = dateGroups.get(key)
-    g.budget += e.budget
-    g.actual += e.actual
-    g.events.push(e)
-  })
-
-  const groups = [...dateGroups.values()].sort((a, b) => a.wed.localeCompare(b.wed))
-
-  const fmtWedLabel = (wedStr) => {
-    if (!wedStr || wedStr === 'unknown') return 'Unknown date'
-    const d = new Date(`${wedStr}T00:00:00Z`)
-    return d.toLocaleDateString('en', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
-  }
-
-  destroyCharts('global')
-  const canvas = document.getElementById('globalBudgetChart')
-  if (!canvas) return
-
-  if (groups.length) {
-    const globalCurrLabel = isConverting ? ` (≈${_summaryCurrency})` : ' (as entered)'
-    const fmt2 = (n) => {
-      if (!n) return '—'
-      const s = n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-      return isConverting ? `≈${s} ${_summaryCurrency}` : s
-    }
-    _charts.global = new Chart(canvas, {
-      type: 'line',
-      data: {
-        labels: groups.map((g) => fmtWedLabel(g.wed)),
-        datasets: [
-          { label: `Budget${globalCurrLabel}`, data: groups.map((g) => g.budget), borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)', tension: 0.3, fill: true, pointRadius: 5, pointHoverRadius: 7 },
-          { label: `Actual${globalCurrLabel}`, data: groups.map((g) => g.actual), borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.1)', tension: 0.3, fill: true, pointRadius: 5, pointHoverRadius: 7 },
-        ],
-      },
-      options: {
-        responsive: true,
-        aspectRatio: 4,
-        plugins: {
-          legend: { position: 'top' },
-          tooltip: {
-            callbacks: {
-              label: (ctx) => ` ${ctx.dataset.label?.split(' (')[0] ?? ''}: ${fmt2(ctx.parsed.y)}`,
-              afterBody: (items) => {
-                const g = groups[items[0]?.dataIndex]
-                if (!g || g.events.length <= 1) return []
-                const lines = ['', 'Events at this point:']
-                g.events.forEach((e) => {
-                  lines.push(`  ${e.label}`)
-                  lines.push(`    Budget: ${fmt2(e.budget)}  ·  Actual: ${fmt2(e.actual)}`)
-                })
-                return lines
-              },
-            },
-          },
-        },
-        scales: { y: { beginAtZero: true, ticks: { callback: (v) => fmt2(v) } } },
-      },
-    })
-  } else {
-    const ctx = canvas.getContext('2d')
-    if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height)
-  }
-}
-
-function openDrilldown(catKey, catData) {
-  const modal   = document.getElementById('summaryDrilldownModal')
-  const title   = document.getElementById('drilldownTitle')
-  const content = document.getElementById('drilldownContent')
-  if (!modal || !content) return
-
-  if (title) title.textContent = catData.label
-
-  const _convD   = _buildConvFn(_currentRenderDate)
-  const pfx      = _convD && _summaryCurrency ? '≈' : ''
-  const sfx      = _convD && _summaryCurrency ? ` ${_summaryCurrency}` : _primaryDisplayCurrency ? ` ${_primaryDisplayCurrency}` : ''
-  const currHdr  = _convD && _summaryCurrency ? ` (≈${_summaryCurrency})` : _primaryDisplayCurrency ? ` (${_primaryDisplayCurrency})` : ' (as entered)'
-  const fmt = (n) => n ? `${pfx}${n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}${sfx}` : '—'
-
-  let html = ''
-
-  // Line items
-  if (catData.items.length) {
-    html += `<div class="mb-4">
-      <p class="text-xs font-semibold text-gray-600 uppercase tracking-widest mb-2">Line Items</p>
-      <table class="w-full text-sm">
-        <thead><tr class="text-xs text-gray-400 border-b border-gray-100">
-          <th class="text-left py-1 pr-3 font-medium">Item</th>
-          <th class="text-right py-1 pr-3 font-medium">Budget${currHdr}</th>
-          <th class="text-right py-1 font-medium">Actual${currHdr}</th>
-        </tr></thead>
-        <tbody>${catData.items.map((item) => `
-          <tr class="border-b border-gray-50">
-            <td class="py-1.5 pr-3 text-gray-700">${esc(item.label)}</td>
-            <td class="py-1.5 pr-3 text-right text-gray-600">${fmt(item.budget)}</td>
-            <td class="py-1.5 text-right ${item.actual > item.budget && item.budget ? 'text-red-500' : 'text-gray-600'}">${fmt(item.actual)}</td>
-          </tr>`).join('')}
-        </tbody>
-        <tfoot><tr class="font-semibold text-gray-800 border-t border-gray-200">
-          <td class="pt-2 pr-3">Total</td>
-          <td class="pt-2 pr-3 text-right">${fmt(catData.budget)}</td>
-          <td class="pt-2 text-right ${catData.actual > catData.budget && catData.budget ? 'text-red-500' : ''}">${fmt(catData.actual)}</td>
-        </tr></tfoot>
-      </table>
-    </div>`
-  }
-
-  // Receipts (shown in original currency — not converted, as they are reference records)
-  if (catData.receipts.length) {
-    html += `<div>
-      <p class="text-xs font-semibold text-gray-600 uppercase tracking-widest mb-2">Receipts (as entered)</p>
-      <table class="w-full text-sm">
-        <thead><tr class="text-xs text-gray-400 border-b border-gray-100">
-          <th class="text-left py-1 pr-3 font-medium">Description</th>
-          <th class="text-left py-1 pr-3 font-medium">Date</th>
-          <th class="text-right py-1 font-medium">Amount</th>
-        </tr></thead>
-        <tbody>${catData.receipts.map((r) => `
-          <tr class="border-b border-gray-50">
-            <td class="py-1.5 pr-3 text-gray-700">${esc(r.label)}</td>
-            <td class="py-1.5 pr-3 text-gray-500 text-xs">${esc(r.date)}</td>
-            <td class="py-1.5 text-right text-gray-600">${r.amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${esc(r.currency)}</td>
-          </tr>`).join('')}
-        </tbody>
-        <tfoot><tr class="font-semibold text-gray-800 border-t border-gray-200">
-          <td class="pt-2 pr-3" colspan="2">Total receipts</td>
-          <td class="pt-2 text-right">${catData.receipts.reduce((s, r) => s + r.amount, 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-        </tr></tfoot>
-      </table>
-    </div>`
-  }
-
-  if (!html) html = '<p class="text-sm text-gray-600 italic">No data recorded for this category.</p>'
-
-  content.innerHTML = html
-  showModal('summaryDrilldownModal')
-}
-
-function openMemberDrilldown(memberData, planner) {
-  const modal   = document.getElementById('summaryDrilldownModal')
-  const title   = document.getElementById('drilldownTitle')
-  const content = document.getElementById('drilldownContent')
-  if (!modal || !content) return
-
-  if (title) title.textContent = memberData.name
-
-  const _convM  = _buildConvFn(_currentRenderDate)
-  const cvt     = _convM ?? ((n) => n)
-  const pfx     = _convM && _summaryCurrency ? '≈' : ''
-  const sfx     = _convM && _summaryCurrency ? ` ${_summaryCurrency}` : _primaryDisplayCurrency ? ` ${_primaryDisplayCurrency}` : ''
-  const currHdr = _convM && _summaryCurrency ? ` (≈${_summaryCurrency})` : _primaryDisplayCurrency ? ` (${_primaryDisplayCurrency})` : ' (as entered)'
-  const fmt = (n) => n ? `${pfx}${n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}${sfx}` : '—'
-
-  const org = planner.org || {}
-
-  // Accommodation stays for this member (apply conversion)
-  const stays = []
-  ;(org.accommodations || []).forEach((acc) => {
-    const stay = (acc.assignments || []).find((s) => s.memberId === memberData.memberId)
-    if (stay) {
-      const sCurr = stay.currency || 'AUD'
-      stays.push({
-        property: acc.name || 'Accommodation',
-        budget: cvt(parseBudget(stay.budget), sCurr),
-        actual: cvt(parseBudget(stay.budgetActual), sCurr),
-      })
-    }
-  })
-
-  const memberTicketRows = (org.tickets || [])
-    .filter((t) => t.assignedTo === memberData.memberId || t.purchasedBy === memberData.memberId)
-    .map((t) => {
-      const tCurr = t.currency || 'AUD'
-      const qty  = parseBudget(t.quantity) || 1
-      const cost = cvt(parseBudget(t.unitPrice) * qty, tCurr)
-      return { label: `Ticket: ${t.name || 'Ticket'}`, budget: 0, actual: cost }
-    })
-    .filter((r) => r.actual)
-
-  const assignedItemRows = (org.budgetItems || [])
-    .filter((item) => item.memberId === memberData.memberId)
-    .map((item) => {
-      const iCurr  = item.currency || 'AUD'
-      const b      = cvt(parseBudget(item.budget), iCurr)
-      const linked = (planner.receipts || []).filter((r) => r.budgetItemId === item.id)
-      const ac     = linked.length
-        ? linked.reduce((s, r) => s + cvt(parseBudget(r.amount), r.currency || iCurr), 0)
-        : cvt(parseBudget(item.actual), iCurr)
-      return { label: item.name || 'Budget item', budget: b, actual: ac }
-    })
-    .filter((r) => r.budget || r.actual)
-
-  const rows = [
-    { label: 'Travel allocation', budget: memberData.memberBudget, actual: memberData.memberActual },
-    ...stays.map((s) => ({ label: `Accommodation: ${s.property}`, budget: s.budget, actual: s.actual })),
-    ...memberTicketRows,
-    ...assignedItemRows,
-  ].filter((r) => r.budget || r.actual)
-
-  let html = `<table class="w-full text-sm">
-    <thead><tr class="text-xs text-gray-400 border-b border-gray-100">
-      <th class="text-left py-1 pr-3 font-medium">Category</th>
-      <th class="text-right py-1 pr-3 font-medium">Budget${currHdr}</th>
-      <th class="text-right py-1 font-medium">Actual${currHdr}</th>
-    </tr></thead>
-    <tbody>${rows.map((r) => `
-      <tr class="border-b border-gray-50">
-        <td class="py-1.5 pr-3 text-gray-700">${esc(r.label)}</td>
-        <td class="py-1.5 pr-3 text-right text-gray-600">${fmt(r.budget)}</td>
-        <td class="py-1.5 text-right ${r.actual > r.budget && r.budget ? 'text-red-500' : 'text-gray-600'}">${fmt(r.actual)}</td>
-      </tr>`).join('')}
-    </tbody>
-    <tfoot><tr class="font-semibold text-gray-800 border-t border-gray-200">
-      <td class="pt-2 pr-3">Total</td>
-      <td class="pt-2 pr-3 text-right">${fmt(memberData.budget)}</td>
-      <td class="pt-2 text-right ${memberData.actual > memberData.budget && memberData.budget ? 'text-red-600' : ''}">${fmt(memberData.actual)}</td>
-    </tr></tfoot>
-  </table>`
-
-  if (!rows.length) html = '<p class="text-sm text-gray-600 italic">No budget data for this member.</p>'
-
-  content.innerHTML = html
-  showModal('summaryDrilldownModal')
-}
+// Summary renders (buildEventBudgetData/buildPersonalBudgetData/renderSummaryTab/
+// renderSummaryThisEvent/renderSummaryAllEvents + drilldowns) extracted to
+// ./modules/plannerSummary.js.
 
 // ── Create Planner modal ──────────────────────────────────────────────────────
-
-let openCreatePlannerModal = () => {};
-
-function wireCreatePlannerModal() {
-  const modal    = document.getElementById('createPlannerModal');
-  const nameInput = document.getElementById('createPlannerName');
-  const createBtn = document.getElementById('createPlannerConfirmBtn');
-  const closeBtn  = document.getElementById('createPlannerModalClose');
-
-  openCreatePlannerModal = function() {
-    if (!modal) return;
-    if (nameInput) nameInput.value = '';
-    showModal('createPlannerModal', 'createPlannerName');
-  };
-
-  function closeCreateModal() {
-    hideModal('createPlannerModal');
-  }
-
-  document.getElementById('newPlannerBtnNoEvent')?.addEventListener('click', () => openCreatePlannerModal());
-  closeBtn?.addEventListener('click', closeCreateModal);
-  document.getElementById('createPlannerModalClose2')?.addEventListener('click', closeCreateModal);
-  modal?.addEventListener('click', (e) => { if (e.target === modal) closeCreateModal(); });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) closeCreateModal();
-  });
-
-  // ── Event search within create modal ────────────────────────────────────────
-  let _createSelectedEvent = null; // { file, label }
-  const eventInput   = document.getElementById('createPlannerEventInput');
-  const eventResults = document.getElementById('createPlannerEventResults');
-  const eventPill    = document.getElementById('createPlannerEventPill');
-  const eventPillLbl = document.getElementById('createPlannerEventPillLabel');
-  const eventClear   = document.getElementById('createPlannerEventClear');
-  const eventSearch  = document.getElementById('createPlannerEventSearch');
-
-  function setCreateEvent(ev) {
-    _createSelectedEvent = ev;
-    if (ev) {
-      if (eventPillLbl) eventPillLbl.textContent = ev.label;
-      eventPill?.classList.remove('hidden');
-      eventPill?.classList.add('flex');
-      eventSearch?.classList.add('hidden');
-      // Auto-fill name if blank
-      if (nameInput && !nameInput.value.trim()) nameInput.value = ev.label;
-    } else {
-      eventPill?.classList.add('hidden');
-      eventPill?.classList.remove('flex');
-      eventSearch?.classList.remove('hidden');
-      if (eventInput) eventInput.value = '';
-      if (eventResults) { eventResults.innerHTML = ''; eventResults.classList.add('hidden'); }
-    }
-  }
-
-  function renderCreateEventResults(events, q) {
-    if (!eventResults) return;
-    const filtered = q
-      ? events.filter((e) => e.label.toLowerCase().includes(q.toLowerCase()) || e.file.toLowerCase().includes(q.toLowerCase()))
-      : events;
-    if (!filtered.length) {
-      eventResults.innerHTML = `<p class="text-sm text-gray-400 px-3 py-4 text-center">${q ? 'No events match.' : 'No events found.'}</p>`;
-    } else {
-      eventResults.innerHTML = filtered.map((ev) =>
-        `<button type="button" class="create-event-pick-btn flex w-full items-center gap-2 px-3 py-2.5 text-sm text-gray-700 hover:bg-gray-50 text-left transition-colors"
-          data-file="${esc(ev.file)}" data-label="${esc(ev.label)}">
-          <i class="fas fa-calendar text-gray-400 text-xs w-4 text-center flex-shrink-0"></i>
-          <span class="flex-1 min-w-0 truncate">${esc(ev.label)}</span>
-        </button>`
-      ).join('');
-    }
-    eventResults.classList.remove('hidden');
-  }
-
-  let _createEventListCache = null;
-  async function loadCreateEventList() {
-    if (_createEventListCache) return _createEventListCache;
-    _createEventListCache = await _loadEventOptions();
-    return _createEventListCache;
-  }
-
-  eventInput?.addEventListener('focus', async () => {
-    const events = await loadCreateEventList();
-    renderCreateEventResults(events, eventInput.value.trim());
-  });
-  eventInput?.addEventListener('input', async () => {
-    const events = await loadCreateEventList();
-    renderCreateEventResults(events, eventInput.value.trim());
-  });
-  eventResults?.addEventListener('click', (e) => {
-    const btn = e.target.closest('.create-event-pick-btn');
-    if (!btn) return;
-    setCreateEvent({ file: btn.dataset.file, label: btn.dataset.label });
-  });
-  eventClear?.addEventListener('click', () => setCreateEvent(null));
-
-  // Reset event selection when modal opens
-  const origOpen = openCreatePlannerModal;
-  openCreatePlannerModal = function() {
-    setCreateEvent(null);
-    origOpen();
-  };
-
-  createBtn?.addEventListener('click', () => {
-    const name = nameInput?.value.trim();
-    if (!name) { nameInput?.focus(); return; }
-    const slug = `planner-${slugify(name)}`;
-    const newPlanner = loadPlanner(slug);
-    newPlanner._displayName = name;
-    newPlanner.mode = state.global?.defaultMode || 'personal';
-    if (_createSelectedEvent?.file) newPlanner._eventFile = _createSelectedEvent.file;
-    savePlanner(slug, newPlanner);
-    closeCreateModal();
-    location.href = `planner.html?id=${encodeURIComponent(slug)}`;
-  });
-
-  nameInput?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') createBtn?.click();
-  });
-}
+// Extracted to ./modules/plannerCreate.js (initCreatePlanner /
+// openCreatePlannerModal / wireCreatePlannerModal).
 
 // ── Load available event options (for create/edit modals on dashboard) ────────
 async function _loadEventOptions() {
@@ -4174,10 +1141,15 @@ async function _loadEventOptions() {
       const metas = await res.json();
       return metas
         .filter((m) => m.file)
-        .map((m) => ({ file: m.file, label: [m.designation, m.location, m.year].filter(Boolean).join(' ') }))
+        .map((m) => ({
+          file: m.file,
+          label: [m.designation, m.location, m.year].filter(Boolean).join(' '),
+        }))
         .sort((a, b) => b.label.localeCompare(a.label)); // newest first
     }
-  } catch { /* offline */ }
+  } catch {
+    /* offline */
+  }
   return _searchCatalog
     .filter((m) => m.file)
     .map((m) => ({ file: m.file, label: m.label }))
@@ -4185,249 +1157,11 @@ async function _loadEventOptions() {
 }
 
 // ── Trip card cog dropdown (dashboard) ────────────────────────────────────────
-let _cogTargetSlug = null;
-let _cogTargetName = null;
-let _cogTargetEventFile = null;
-let _cogTargetEventLabel = null;
-let _cogMenuWired        = false;
-
-function wireTripCogMenu() {
-  if (_cogMenuWired) return;
-  _cogMenuWired = true;
-  const menu      = document.getElementById('tripCogMenu');
-  const settingsA = document.getElementById('tripCogSettings');
-  const editBtn   = document.getElementById('tripCogEdit');
-  const deleteBtn = document.getElementById('tripCogDelete');
-  if (!menu) return;
-
-  function closeMenu() {
-    menu.classList.add('hidden');
-    _cogTargetSlug = null;
-  }
-
-  // Delegated click on any .trip-card-cog button
-  document.addEventListener('click', (e) => {
-    const cog = e.target.closest('.trip-card-cog');
-    if (cog) {
-      e.preventDefault();
-      e.stopPropagation();
-      _cogTargetSlug       = cog.dataset.slug;
-      _cogTargetName       = cog.dataset.name;
-      _cogTargetEventFile  = cog.dataset.eventFile || '';
-      _cogTargetEventLabel = cog.dataset.eventLabel || '';
-
-      if (settingsA) settingsA.href = `planner.html?id=${encodeURIComponent(_cogTargetSlug)}#settings`;
-
-      // Position menu near the button
-      const rect = cog.getBoundingClientRect();
-      menu.classList.remove('hidden');
-      const menuW = menu.offsetWidth || 180;
-      let left = rect.right - menuW;
-      if (left < 8) left = 8;
-      menu.style.top  = `${rect.bottom + 6}px`;
-      menu.style.left = `${left}px`;
-      return;
-    }
-    // Click outside → close
-    if (!menu.contains(e.target)) closeMenu();
-  });
-
-  editBtn?.addEventListener('click', () => {
-    const slug       = _cogTargetSlug;
-    const name       = _cogTargetName;
-    const eventFile  = _cogTargetEventFile;
-    const eventLabel = _cogTargetEventLabel;
-    closeMenu();
-    openDashboardPlannerEdit(slug, name, eventFile, eventLabel);
-  });
-
-  deleteBtn?.addEventListener('click', async () => {
-    const slug = _cogTargetSlug;
-    const name = _cogTargetName || slug;
-    closeMenu();
-    if (!slug) return;
-    if (!window.confirm(`Delete "${name}"? This cannot be undone.`)) return;
-    const { ok, error } = await deletePlannerBySlug(slug);
-    await renderTripDashboard();
-    if (!ok) alert(`Could not remove "${name}" from the server: ${error}`);
-  });
-}
+// Extracted to ./modules/plannerCogMenu.js (initCogMenu / wireTripCogMenu).
 
 // ── Dashboard planner edit modal ──────────────────────────────────────────────
-let _dashEditSlug      = null;
-let _dashEditEventFile = null; // current working value (may differ from saved)
-let _dashEditEventListCache = null;
-
-async function openDashboardPlannerEdit(slug, name, eventFile, eventLabel) {
-  _dashEditSlug      = slug;
-  _dashEditEventFile = eventFile || '';
-
-  const nameInput    = document.getElementById('dashboardEditName');
-  const slugInput    = document.getElementById('dashboardEditSlug');
-  const pill         = document.getElementById('dashboardEditEventPill');
-  const pillLabel    = document.getElementById('dashboardEditEventPillLabel');
-  const searchDiv    = document.getElementById('dashboardEditEventSearch');
-  const searchInput  = document.getElementById('dashboardEditEventInput');
-  const resultsDiv   = document.getElementById('dashboardEditEventResults');
-  const modal        = document.getElementById('dashboardPlannerEditModal');
-
-  if (nameInput) nameInput.value = name || '';
-  if (slugInput) slugInput.value = slug ? (slug.endsWith('.json') ? slug : `${slug}.json`) : '';
-
-  // Always reload the event list — ensures past events (enabled:false) are included
-  _dashEditEventListCache = null;
-  _loadEventOptions().then((list) => { _dashEditEventListCache = list; });
-
-  function showEventPill(file, label) {
-    _dashEditEventFile = file;
-    if (pillLabel) pillLabel.textContent = label || file;
-    pill?.classList.remove('hidden');
-    pill?.classList.add('flex');
-    searchDiv?.classList.add('hidden');
-    if (searchInput) searchInput.value = '';
-    if (resultsDiv) { resultsDiv.innerHTML = ''; resultsDiv.classList.add('hidden'); }
-  }
-
-  function showEventSearch() {
-    _dashEditEventFile = '';
-    pill?.classList.add('hidden');
-    pill?.classList.remove('flex');
-    searchDiv?.classList.remove('hidden');
-  }
-
-  // Store helpers on the modal element so wireDashboardPlannerEditModal can access them
-  if (modal) {
-    modal._showEventPill   = showEventPill;
-    modal._showEventSearch = showEventSearch;
-  }
-
-  if (eventFile) {
-    // Resolve a human-readable label from the event list
-    const list = _dashEditEventListCache || await _loadEventOptions();
-    _dashEditEventListCache = list;
-    const found = list.find((e) => e.file === eventFile);
-    showEventPill(eventFile, found?.label || eventLabel || eventFile);
-  } else {
-    showEventSearch();
-  }
-
-  showModal('dashboardPlannerEditModal', 'dashboardEditName');
-}
-
-let _dashEditModalWired = false;
-
-function wireDashboardPlannerEditModal() {
-  if (_dashEditModalWired) return;
-  _dashEditModalWired = true;
-  const modal       = document.getElementById('dashboardPlannerEditModal');
-  const nameInput   = document.getElementById('dashboardEditName');
-  const pill        = document.getElementById('dashboardEditEventPill');
-  const pillLabel   = document.getElementById('dashboardEditEventPillLabel');
-  const unlinkBtn   = document.getElementById('dashboardEditEventUnlink');
-  const searchDiv   = document.getElementById('dashboardEditEventSearch');
-  const searchInput = document.getElementById('dashboardEditEventInput');
-  const resultsDiv  = document.getElementById('dashboardEditEventResults');
-  const saveBtn     = document.getElementById('dashboardEditSave');
-  const cancelBtn   = document.getElementById('dashboardEditCancel');
-  const closeBtn    = document.getElementById('dashboardEditClose');
-  if (!modal) return;
-
-  function closeModal() { hideModal('dashboardPlannerEditModal'); }
-
-  function renderDashEditResults(events, q) {
-    if (!resultsDiv) return;
-    const filtered = q
-      ? events.filter((e) => e.label.toLowerCase().includes(q.toLowerCase()) || e.file.toLowerCase().includes(q.toLowerCase()))
-      : events;
-    if (!filtered.length) {
-      resultsDiv.innerHTML = `<p class="text-sm text-gray-400 px-3 py-4 text-center">${q ? 'No events match.' : 'No events found.'}</p>`;
-    } else {
-      resultsDiv.innerHTML = filtered.map((ev) =>
-        `<button type="button" class="dash-edit-event-pick flex w-full items-center gap-2 px-3 py-2.5 text-sm text-gray-700 hover:bg-gray-50 text-left transition-colors"
-          data-file="${esc(ev.file)}" data-label="${esc(ev.label)}">
-          <i class="fas fa-calendar text-gray-400 text-xs w-4 text-center flex-shrink-0"></i>
-          <span class="flex-1 min-w-0 truncate">${esc(ev.label)}</span>
-        </button>`
-      ).join('');
-    }
-    resultsDiv.classList.remove('hidden');
-  }
-
-  searchInput?.addEventListener('focus', async () => {
-    const events = _dashEditEventListCache || await _loadEventOptions();
-    _dashEditEventListCache = events;
-    renderDashEditResults(events, searchInput.value.trim());
-  });
-  searchInput?.addEventListener('input', async () => {
-    const events = _dashEditEventListCache || await _loadEventOptions();
-    _dashEditEventListCache = events;
-    renderDashEditResults(events, searchInput.value.trim());
-  });
-  resultsDiv?.addEventListener('click', (e) => {
-    const btn = e.target.closest('.dash-edit-event-pick');
-    if (!btn) return;
-    _dashEditEventFile = btn.dataset.file;
-    if (pillLabel) pillLabel.textContent = btn.dataset.label;
-    pill?.classList.remove('hidden');
-    pill?.classList.add('flex');
-    searchDiv?.classList.add('hidden');
-    if (searchInput) searchInput.value = '';
-    if (resultsDiv) { resultsDiv.innerHTML = ''; resultsDiv.classList.add('hidden'); }
-  });
-
-  unlinkBtn?.addEventListener('click', () => {
-    _dashEditEventFile = '';
-    pill?.classList.add('hidden');
-    pill?.classList.remove('flex');
-    searchDiv?.classList.remove('hidden');
-    if (searchInput) searchInput.value = '';
-    if (resultsDiv) { resultsDiv.innerHTML = ''; resultsDiv.classList.add('hidden'); }
-  });
-
-  saveBtn?.addEventListener('click', async () => {
-    const slug = _dashEditSlug;
-    if (!slug) { closeModal(); return; }
-    const name = nameInput?.value.trim();
-    const key  = `${STORAGE_PREFIX}${slug}`;
-    let data = {};
-    try { data = JSON.parse(localStorage.getItem(key) || '{}'); } catch { /* corrupt */ }
-    if (name) data._displayName = name;
-    data._eventFile = _dashEditEventFile || '';
-    data._lastModified = new Date().toISOString();
-    localStorage.setItem(key, JSON.stringify(data));
-    // Invalidate date cache so renderTripDashboard always re-fetches for the new association
-    if (_dashEditEventFile) {
-      _eventDateCache.delete(_dashEditEventFile);
-      _eventStartDateCache.delete(_dashEditEventFile);
-      _eventEndDateCache.delete(_dashEditEventFile);
-    }
-    // Persist to disk if API available
-    try {
-      const base = (localStorage.getItem('editorApiEndpoint') || '').replace(/\/$/, '');
-      if (base) {
-        const filename = slug.endsWith('.json') ? slug : `${slug}.json`;
-        await fetch(`${base}/api/planner/${filename}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
-      }
-    } catch { /* best effort */ }
-    closeModal();
-    await renderTripDashboard();
-  });
-
-  cancelBtn?.addEventListener('click', closeModal);
-  closeBtn?.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) closeModal();
-  });
-}
-
-// ── Event Association modal ───────────────────────────────────────────────────
-
-let _assocModalResults = [];
+// Extracted to ./modules/plannerDashEdit.js (initDashEdit /
+// openDashboardPlannerEdit / wireDashboardPlannerEditModal).
 
 // ── Timeline card hover interaction ──────────────────────────────────────────
 let _timelineHoverWired = false;
@@ -4436,1241 +1170,68 @@ function wireTimelineHover() {
   _timelineHoverWired = true;
   const container = document.getElementById('plannerNoEvent');
   if (!container) return;
-  container.addEventListener('mouseenter', (e) => {
-    const wrap = e.target.closest('.trip-card-wrap');
-    if (!wrap) return;
-    const slug = wrap.querySelector('.trip-card-cog')?.dataset.slug;
-    if (!slug) return;
-    container.querySelectorAll(`.trip-tl-bar[data-slug="${CSS.escape(slug)}"]`)
-      .forEach((bar) => bar.classList.add('is-active'));
-  }, true);
-  container.addEventListener('mouseleave', (e) => {
-    const wrap = e.target.closest('.trip-card-wrap');
-    if (!wrap) return;
-    container.querySelectorAll('.trip-tl-bar.is-active')
-      .forEach((bar) => bar.classList.remove('is-active'));
-  }, true);
+  container.addEventListener(
+    'mouseenter',
+    (e) => {
+      const wrap = e.target.closest('.trip-card-wrap');
+      if (!wrap) return;
+      const slug = wrap.querySelector('.trip-card-cog')?.dataset.slug;
+      if (!slug) return;
+      container
+        .querySelectorAll(`.trip-tl-bar[data-slug="${CSS.escape(slug)}"]`)
+        .forEach((bar) => bar.classList.add('is-active'));
+    },
+    true,
+  );
+  container.addEventListener(
+    'mouseleave',
+    (e) => {
+      const wrap = e.target.closest('.trip-card-wrap');
+      if (!wrap) return;
+      container
+        .querySelectorAll('.trip-tl-bar.is-active')
+        .forEach((bar) => bar.classList.remove('is-active'));
+    },
+    true,
+  );
 }
 
 // ── Global settings modal (dashboard) ────────────────────────────────────────
-let _globalSettingsWired = false;
-function wireGlobalSettingsModal() {
-  if (_globalSettingsWired) return;
-  _globalSettingsWired = true;
-
-  const modal      = document.getElementById('globalSettingsModal');
-  const closeBtn   = document.getElementById('globalSettingsClose');
-  const doneBtn    = document.getElementById('globalSettingsDone');
-  const currencyEl = document.getElementById('globalSettingsCurrency');
-  const modeEl     = document.getElementById('globalSettingsMode');
-  if (!modal) return;
-
-  function renderGlobalContactsList() {
-    const list = document.getElementById('globalSettingsContactsList');
-    if (!list) return;
-    const contacts = (state.global?.personalContacts || loadGlobal().personalContacts || []);
-    list.innerHTML = contacts.length
-      ? contacts.map((c) => `
-          <div class="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-100 bg-gray-50 text-sm">
-            <span class="flex-1 min-w-0 font-medium text-gray-800 truncate">${esc(c.name || 'Unnamed')}</span>
-            ${c.phone ? `<span class="text-xs text-gray-400 truncate">${esc(c.phone)}</span>` : ''}
-            <button type="button" class="global-contact-edit flex-shrink-0 h-6 w-6 flex items-center justify-center text-gray-400 hover:text-gray-600 rounded" data-id="${esc(c.id)}">
-              <i class="fas fa-pen text-xs"></i>
-            </button>
-          </div>`).join('')
-      : '<p class="text-xs text-gray-400 italic">No contacts yet.</p>';
-  }
-
-  function renderGlobalTeamList() {
-    const list = document.getElementById('globalSettingsTeamList');
-    if (!list) return;
-    const members = (state.global?.teamMembers || loadGlobal().teamMembers || []);
-    list.innerHTML = members.length
-      ? members.map((m) => `
-          <div class="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-100 bg-gray-50 text-sm ${m.enabled === false ? 'opacity-50' : ''}">
-            <span class="flex-1 min-w-0 font-medium text-gray-800 truncate">${esc(m.name || 'Unnamed')}</span>
-            ${m.role ? `<span class="text-xs text-gray-400 truncate">${esc(m.role)}</span>` : ''}
-            <button type="button" class="global-member-edit flex-shrink-0 h-6 w-6 flex items-center justify-center text-gray-400 hover:text-gray-600 rounded" data-id="${esc(m.id)}">
-              <i class="fas fa-pen text-xs"></i>
-            </button>
-          </div>`).join('')
-      : '<p class="text-xs text-gray-400 italic">No team members yet.</p>';
-  }
-
-  function openGlobalSettings() {
-    // Ensure state.global is loaded (needed by sub-modals)
-    if (!state.global) state.global = loadGlobal();
-    const g = state.global;
-    if (currencyEl) {
-      currencyEl.innerHTML = CURRENCIES.map((c) =>
-        `<option value="${c}"${c === (g.defaultCurrency || 'AUD') ? ' selected' : ''}>${c}</option>`
-      ).join('');
-    }
-    if (modeEl) modeEl.value = g.defaultMode || 'personal';
-    renderGlobalContactsList();
-    renderGlobalTeamList();
-    showModal('globalSettingsModal', undefined);
-  }
-
-  // Refresh lists whenever a sub-modal closes and we return to this modal
-  const subModalIds = ['personalContactModal', 'teamMemberModal'];
-  subModalIds.forEach((id) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    new MutationObserver(() => {
-      if (el.classList.contains('hidden') && !modal.classList.contains('hidden')) {
-        state.global = loadGlobal();
-        renderGlobalContactsList();
-        renderGlobalTeamList();
-      }
-    }).observe(el, { attributes: true, attributeFilter: ['class'] });
-  });
-
-  document.addEventListener('click', (e) => {
-    if (e.target.closest('#dashboardSettingsBtn')) { openGlobalSettings(); return; }
-    const cBtn = e.target.closest('.global-contact-edit');
-    if (cBtn) { openPersonalContactModal(cBtn.dataset.id); return; }
-    const mBtn = e.target.closest('.global-member-edit');
-    if (mBtn) { openTeamMemberModal(mBtn.dataset.id); return; }
-    if (e.target.closest('#globalSettingsAddContactBtn')) { openPersonalContactModal(null); return; }
-    if (e.target.closest('#globalSettingsAddMemberBtn'))  { openTeamMemberModal(null); return; }
-  });
-
-  currencyEl?.addEventListener('change', () => {
-    const g = loadGlobal();
-    g.defaultCurrency = currencyEl.value;
-    saveGlobal(g);
-    if (state.global) state.global.defaultCurrency = currencyEl.value;
-  });
-  modeEl?.addEventListener('change', () => {
-    const g = loadGlobal();
-    g.defaultMode = modeEl.value;
-    saveGlobal(g);
-    if (state.global) state.global.defaultMode = modeEl.value;
-  });
-
-  function closeModal() { hideModal('globalSettingsModal'); }
-  closeBtn?.addEventListener('click', closeModal);
-  doneBtn?.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) closeModal();
-  });
-}
-
-async function gatherAssocSources() {
-  const results = new Map(); // key → { label, eventFile, plannerKey, hasDiskFile, plannerData }
-  const apiEndpoint = localStorage.getItem('editorApiEndpoint') || '';
-  const currentSponsorId = state.planner?.org?.sponsorId || '';
-
-  // 1. Server schedule files — fall back to the already-built search catalog if server is unavailable
-  try {
-    const res = await fetch('./api/meta');
-    if (res.ok) {
-      const metas = await res.json();
-      metas.forEach((m) => {
-        if (!m.file || !m.enabled) return;
-        const label = [m.designation, m.location, m.year].filter(Boolean).join(' ');
-        results.set(m.file, { label, eventFile: m.file, plannerKey: null, hasDiskFile: false, plannerData: null, meta: m });
-      });
-    }
-  } catch { /* offline / no data dir */ }
-
-  if (results.size === 0) {
-    _searchCatalog.forEach((item) => {
-      if (!item.file || item.enabled === false) return;
-      results.set(item.file, { label: item.label, eventFile: item.file, plannerKey: null, hasDiskFile: false, plannerData: null, meta: item });
-    });
-  }
-
-  // 2. localStorage planners
-  for (let i = 0; i < localStorage.length; i++) {
-    const k = localStorage.key(i);
-    if (!k?.startsWith(STORAGE_PREFIX) || k === 'drupalconPlanner_global') continue;
-    const slug = k.slice(STORAGE_PREFIX.length);
-    try {
-      const data = JSON.parse(localStorage.getItem(k) || '{}');
-      if (!isPlannerEntry(slug, data)) continue;
-      const ef = data._eventFile || '';
-      const lbl = data._displayName || ef.replace('.json', '') || slug;
-      const existing = ef ? results.get(ef) : (results.get(slug) || null);
-      if (existing) {
-        existing.plannerKey = slug;
-        existing.plannerData = data;
-      } else {
-        results.set(slug, { label: lbl, eventFile: ef, plannerKey: slug, hasDiskFile: false, plannerData: data, meta: null });
-      }
-    } catch { /* corrupt */ }
-  }
-
-  // 3. Disk planner files — always try; listPlannerFiles('') resolves to /api/planner (same-origin)
-  try {
-    const diskFiles = await listPlannerFiles(apiEndpoint);
-    for (const f of diskFiles) {
-      const slug = f.endsWith('.json') ? f.slice(0, -5) : f;
-      if ([...results.values()].some((r) => r.plannerKey === slug)) continue;
-      results.set(slug, { label: slug, eventFile: '', plannerKey: slug, hasDiskFile: true, plannerData: null, meta: null });
-    }
-  } catch { /* offline */ }
-
-  // Compute sponsor match and sort: sponsor matches first, then alphabetical
-  const currentKey = state.plannerKey;
-  const arr = [...results.values()].filter((r) => {
-    // Keep if there's an event file to act on (associate/disassociate), or a different planner to switch to.
-    // This correctly shows the current event when plannerKey === eventFile (legacy URL case).
-    return r.eventFile || r.plannerKey !== currentKey;
-  });
-
-  arr.forEach((r) => {
-    const sid = r.plannerData?.org?.sponsorId || '';
-    r.sponsorMatch = currentSponsorId && sid && sid === currentSponsorId;
-    r.sponsorName  = r.sponsorMatch ? (r.plannerData?.org?.sponsorName || '') : '';
-  });
-  arr.sort((a, b) => {
-    if (a.sponsorMatch && !b.sponsorMatch) return -1;
-    if (!a.sponsorMatch && b.sponsorMatch)  return 1;
-    return a.label.localeCompare(b.label);
-  });
-
-  return arr;
-}
-
-let _assocActiveTab = 'planners';
-
-function renderAssocResults(items, query) {
-  const list = document.getElementById('assocModalResults');
-  if (!list) return;
-
-  const currentEventFile  = state.eventFile;
-  const currentPlannerKey = state.plannerKey;
-
-  function badge(label, colorClass) {
-    return `<span class="text-[0.6rem] px-1.5 py-px rounded font-medium ${colorClass}">${label}</span>`;
-  }
-  function modeBadge(r) {
-    if (r.plannerData?.mode === 'sponsor')  return badge('Sponsor',  'bg-blue-50 text-blue-600');
-    if (r.plannerData?.mode === 'personal') return badge('Personal', 'bg-gray-100 text-gray-500');
-    return '';
-  }
-  function sponsorBadge(r) {
-    return r.sponsorMatch ? badge('<i class="fas fa-handshake mr-0.5"></i>Sponsoring', 'bg-amber-50 text-amber-600') : '';
-  }
-
-  // ── My Planners tab ────────────────────────────────────────────────────────
-  if (_assocActiveTab === 'planners') {
-    const myItems = items.filter((r) => r.plannerData || r.hasDiskFile);
-    if (!myItems.length) {
-      list.innerHTML = '<p class="text-sm text-gray-400 px-5 py-8 text-center">No planners yet. Create one below.</p>';
-      return;
-    }
-    list.innerHTML = myItems.map((r) => {
-      const isCurrent = r.plannerKey === currentPlannerKey;
-      const hasEvent  = r.eventFile && r.eventFile === currentEventFile;
-      const lastMod   = r.plannerData?._lastModified
-        ? new Date(r.plannerData._lastModified).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })
-        : '';
-      const name = r.plannerData?._displayName || r.plannerKey || r.label;
-
-      const actions = [];
-      if (isCurrent && hasEvent) {
-        actions.push(`<button type="button" class="assoc-action-btn assoc-disassociate-btn border-red-200 text-red-600 hover:bg-red-50">
-          <i class="fas fa-unlink mr-1.5 text-[0.55rem]"></i>Unlink event
-        </button>`);
-      }
-      if (isCurrent && r.eventFile && !hasEvent) {
-        actions.push(`<button type="button" class="assoc-action-btn assoc-associate-btn border-blue-200 text-blue-600 hover:bg-blue-50"
-          data-event-file="${esc(r.eventFile)}" data-label="${esc(r.label)}">
-          <i class="fas fa-link mr-1.5 text-[0.55rem]"></i>Link event
-        </button>`);
-      }
-
-      const badges = [
-        isCurrent ? badge('Current', 'bg-blue-100 text-blue-600') : '',
-        modeBadge(r), sponsorBadge(r),
-      ].filter(Boolean).join('');
-
-      const inner = `
-        <div class="flex-1 min-w-0">
-          <div class="flex items-center flex-wrap gap-1.5 mb-0.5">
-            <span class="text-sm font-medium ${isCurrent ? 'text-blue-700' : 'text-gray-800'} truncate">${esc(name)}</span>
-            ${badges}
-          </div>
-          ${r.eventFile ? `<p class="text-xs text-gray-500 truncate mt-0.5"><i class="fas fa-calendar-alt mr-1 text-[0.5rem]"></i>${esc(r.label)}</p>` : ''}
-          ${lastMod ? `<p class="text-xs text-gray-400 mt-0.5">Edited ${esc(lastMod)}</p>` : ''}
-        </div>
-        ${actions.length ? `<div class="flex gap-2 flex-shrink-0">${actions.join('')}</div>` : ''}`;
-
-      if (!isCurrent && r.plannerKey) {
-        return `<a href="planner.html?id=${encodeURIComponent(r.plannerKey)}" class="assoc-row ${r.sponsorMatch ? 'bg-amber-50/30' : ''}">
-          ${inner}<i class="fas fa-chevron-right text-gray-300 text-xs flex-shrink-0 ml-1"></i>
-        </a>`;
-      }
-      return `<div class="assoc-row ${isCurrent ? 'bg-blue-50/30' : ''} ${r.sponsorMatch ? 'bg-amber-50/30' : ''}">${inner}</div>`;
-    }).join('');
-    return;
-  }
-
-  // ── Events tab ─────────────────────────────────────────────────────────────
-  const q = query.toLowerCase();
-  const eventItems = items.filter((r) => !r.plannerData && !r.hasDiskFile && r.eventFile);
-  const filtered = q
-    ? eventItems.filter((r) =>
-        r.label.toLowerCase().includes(q) ||
-        (r.eventFile || '').toLowerCase().includes(q)
-      )
-    : eventItems;
-
-  if (!filtered.length) {
-    list.innerHTML = `<p class="text-sm text-gray-400 px-5 py-8 text-center">${q ? 'No events match your search.' : 'No events found.'}</p>`;
-    return;
-  }
-  list.innerHTML = filtered.map((r) =>
-    `<a href="planner.html?event=${encodeURIComponent(r.eventFile)}" class="assoc-row hover:bg-gray-50">
-      <div class="flex-1 min-w-0">
-        <span class="text-sm font-medium text-gray-800 block truncate">${esc(r.label)}</span>
-        <p class="text-xs text-gray-400 mt-0.5">Create a new planner for this event</p>
-      </div>
-      <i class="fas fa-chevron-right text-gray-300 text-xs flex-shrink-0"></i>
-    </a>`
-  ).join('');
-}
+// Extracted to ./modules/plannerGlobalSettings.js (initGlobalSettings /
+// wireGlobalSettingsModal).
 
 function wireManageEventBtn() {
-  // Disassociate via the × inside the association badge (delegated — badge is re-rendered by updateHeader).
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('#plannerDisassocBtn')) return;
-    state.planner._eventFile = '';
-    state.eventFile = null;
-    state.eventMeta = {};
-    state.allSessions = [];
-    savePlanner(state.plannerKey, state.planner);
-    pushPlannerUrl(state.plannerKey);
-    updateHeader();
-    renderAll();
-  });
-}
-
-// ── Manage event modal — associate / disassociate the planner from any event (including custom ones) ──
-function wireEventAssocModal() {
-  const modal       = document.getElementById('eventAssocModal');
-  const searchInput = document.getElementById('assocSearchInput');
-  const searchWrap  = document.getElementById('assocSearchWrap');
-  const footer      = document.getElementById('assocModalFooter');
-  const closeBtn    = document.getElementById('eventAssocModalClose');
-
-  function setTab(tab) {
-    _assocActiveTab = tab;
-    document.querySelectorAll('.assoc-tab-btn').forEach((btn) => {
-      const active = btn.dataset.assocTab === tab;
-      btn.classList.toggle('is-active', active);
-      btn.setAttribute('aria-selected', String(active));
-    });
-    searchWrap?.classList.toggle('hidden', tab !== 'events');
-    if (searchInput) searchInput.value = '';
-    renderAssocResults(_assocModalResults, '');
-  }
-
-  function openModal(tab = 'planners') {
-    if (!modal) return;
-    _assocActiveTab = tab;
-    setTab(tab);
-    const list = document.getElementById('assocModalResults');
-    if (list) list.innerHTML = '<p class="text-sm text-gray-400 px-5 py-8 text-center"><i class="fas fa-spinner fa-spin mr-2"></i>Loading…</p>';
-    showModal('eventAssocModal', tab === 'events' ? 'assocSearchInput' : undefined);
-    gatherAssocSources().then((items) => {
-      _assocModalResults = items;
-      renderAssocResults(items, '');
-    });
-  }
-
-  function closeModal() {
-    hideModal('eventAssocModal');
-  }
-
-  closeBtn?.addEventListener('click', closeModal);
-  modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) closeModal();
-  });
-
-  // Tab switching
-  modal?.addEventListener('click', (e) => {
-    const tabBtn = e.target.closest('[data-assoc-tab]');
-    if (tabBtn) setTab(tabBtn.dataset.assocTab);
-  });
-
-  searchInput?.addEventListener('input', (e) => {
-    if (_assocActiveTab === 'events') renderAssocResults(_assocModalResults, e.target.value.trim());
-  });
-
-  modal?.addEventListener('click', async (e) => {
-    if (e.target === modal) return;
-    const disassocBtn = e.target.closest('.assoc-disassociate-btn');
-    if (!disassocBtn) return;
-    state.planner._eventFile = '';
-    state.eventFile = null;
-    state.eventMeta = {};
-    state.allSessions = [];
-    savePlanner(state.plannerKey, state.planner);
-    updateHeader();
-    renderAll();
-    closeModal();
-  });
-
-  document.getElementById('managePlannerNewBtn')?.addEventListener('click', () => {
-    closeModal();
-    openCreatePlannerModal();
-  });
-
-  async function deletePlannerConfirmed() {
-    await deletePlannerBySlug(state.plannerKey);
-    closeModal();
-    location.href = 'planner.html';
-  }
-
-  document.getElementById('managePlannerDeleteBtn')?.addEventListener('click', async () => {
-    const name = state.planner._displayName || state.plannerKey;
-    // Use native sheet on mobile, browser confirm on desktop
-    if (window.matchMedia('(max-width: 639px)').matches) {
-      const sheet = document.getElementById('plannerDeleteSheet');
-      const nameEl = document.getElementById('plannerDeleteSheetName');
-      if (nameEl) nameEl.textContent = name;
-      if (sheet) {
-        sheet.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-      }
-    } else {
-      if (!window.confirm(`Delete "${name}"? This cannot be undone.`)) return;
-      await deletePlannerConfirmed();
+    // Detach a single event via the × on its path-chip / settings row (delegated).
+    const remove = e.target.closest('[data-remove-event]');
+    if (remove) {
+      removeEventFromPlanner(remove.dataset.removeEvent);
+      return;
     }
+    // "Add conference" in the Settings pane opens the event search (its onSelect
+    // appends the chosen event to this planner — see configureEventSearch below).
+    if (e.target.closest('#settingsAddConferenceBtn')) openEventSearchModal();
   });
 }
 
-function _updateGlobalFilterClearBtn() {
-  const btn = document.getElementById('globalFilterClear')
-  if (!btn) return
-  const active = _globalSummaryFilter.start || _globalSummaryFilter.end || _globalSummaryFilter.person
-  btn.classList.toggle('hidden', !active)
-}
-
-function wireSummaryPanel() {
-  // This/All toggle
-  document.getElementById('summaryToggleThis')?.addEventListener('click', () => {
-    document.getElementById('summaryThisEvent')?.classList.remove('hidden')
-    document.getElementById('summaryAllEvents')?.classList.add('hidden')
-    document.getElementById('summaryToggleThis')?.classList.add('is-active')
-    document.getElementById('summaryToggleAll')?.classList.remove('is-active')
-    renderSummaryThisEvent()
-  })
-  document.getElementById('summaryToggleAll')?.addEventListener('click', () => {
-    document.getElementById('summaryAllEvents')?.classList.remove('hidden')
-    document.getElementById('summaryThisEvent')?.classList.add('hidden')
-    document.getElementById('summaryToggleAll')?.classList.add('is-active')
-    document.getElementById('summaryToggleThis')?.classList.remove('is-active')
-    if (!_globalSummaryFilter.person) {
-      const mode = state.planner?.mode || 'personal'
-      _globalSummaryFilter.person = mode === 'sponsor' ? 'sponsor' : 'me'
-      const p = document.getElementById('globalPersonFilter')
-      if (p) p.value = _globalSummaryFilter.person
-      _updateGlobalFilterClearBtn()
-    }
-    renderSummaryAllEvents()
-  })
-
-  // Date range filters
-  document.getElementById('globalFilterStart')?.addEventListener('input', (e) => {
-    _globalSummaryFilter.start = e.target.value
-    _updateGlobalFilterClearBtn()
-    renderSummaryAllEvents()
-  })
-  document.getElementById('globalFilterEnd')?.addEventListener('input', (e) => {
-    _globalSummaryFilter.end = e.target.value
-    _updateGlobalFilterClearBtn()
-    renderSummaryAllEvents()
-  })
-
-  // Currency selector — destroy all charts and fully re-render both sub-tabs on change
-  document.getElementById('summaryCurrencySelect')?.addEventListener('change', async (e) => {
-    _summaryCurrency = e.target.value
-    destroyCharts('category', 'member', 'global')
-
-    if (_summaryCurrency) {
-      const notice = document.getElementById('summaryRateNotice')
-      const text   = document.getElementById('summaryRateNoticeText')
-      if (notice && text) {
-        notice.classList.remove('hidden')
-        text.textContent = 'Fetching exchange rates…'
-      }
-      // Fetch rates for the current event's date first so This Event renders immediately;
-      // All Events will fetch its own per-event historical rates when it renders.
-      const eventDate = state.eventMeta?.startDate?.slice(0, 10) || ''
-      try {
-        await _fetchRates(_summaryCurrency, eventDate)
-      } catch {
-        _showRateNotice(true)
-      }
-    } else {
-      _showRateNotice(false)
-    }
-
-    renderSummaryThisEvent()
-    renderSummaryAllEvents()
-  })
-
-  // View-as person filter
-  document.getElementById('globalPersonFilter')?.addEventListener('change', (e) => {
-    _globalSummaryFilter.person = e.target.value
-    _updateGlobalFilterClearBtn()
-    renderSummaryAllEvents()
-  })
-
-  // Clear all active filters
-  document.getElementById('globalFilterClear')?.addEventListener('click', () => {
-    _globalSummaryFilter.start = ''
-    _globalSummaryFilter.end = ''
-    _globalSummaryFilter.person = ''
-    const s = document.getElementById('globalFilterStart')
-    const f = document.getElementById('globalFilterEnd')
-    const p = document.getElementById('globalPersonFilter')
-    if (s) s.value = ''
-    if (f) f.value = ''
-    if (p) p.value = ''
-    _updateGlobalFilterClearBtn()
-    renderSummaryAllEvents()
-  })
-
-  // Drilldown modal close
-  const drillModal = document.getElementById('summaryDrilldownModal')
-  document.getElementById('drilldownModalClose')?.addEventListener('click', closeDrilldown)
-  drillModal?.addEventListener('click', (e) => { if (e.target === drillModal) closeDrilldown() })
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && drillModal && !drillModal.classList.contains('hidden')) closeDrilldown()
-  })
-}
-
-function closeDrilldown() {
-  hideModal('summaryDrilldownModal')
-}
+// (summary panel wiring + drilldown modals moved to plannerSummary.js)
 
 // ── Export / Import ──────────────────────────────────────────────────────────
-
-function handleExport() {
-  exportPlannerJson(state.plannerKey, state.planner);
-}
-
-function mergeGlobalTeamMembers(plannerObj) {
-  if (!Array.isArray(plannerObj._globalTeamMembers) || !plannerObj._globalTeamMembers.length) return;
-  const existingIds = new Set((state.global.teamMembers || []).map((m) => m.id));
-  plannerObj._globalTeamMembers.forEach((m) => {
-    if (m?.id && !existingIds.has(m.id)) {
-      (state.global.teamMembers ??= []).push(m);
-      existingIds.add(m.id);
-    }
-  });
-  saveGlobal(state.global);
-  delete plannerObj._globalTeamMembers;
-}
-
-function handleImport(file) {
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    try {
-      const parsed = parsePlannerImport(e.target.result);
-      mergeGlobalTeamMembers(parsed);
-      state.planner = parsed;
-      // Preserve current plannerKey — imported data is merged into current slot
-      renderAll();
-      savePlanner(state.plannerKey, state.planner);
-      showToast();
-    } catch (err) {
-      window.alert(`Import failed: ${err.message}`);
-    }
-  };
-  reader.readAsText(file);
-}
-
-async function handleSaveToFile() {
-  const apiEndpoint = localStorage.getItem('editorApiEndpoint') || '';
-  if (!apiEndpoint) {
-    window.alert('No API server configured. Set one up in the editor first.');
-    return;
-  }
-  const btn = document.getElementById('plannerSaveFileBtn');
-  if (btn) btn.disabled = true;
-  try {
-    await savePlannerViaApi(apiEndpoint, state.plannerKey, state.planner);
-    showToast();
-  } catch (err) {
-    window.alert(`Save to file failed: ${err.message}`);
-  } finally {
-    if (btn) btn.disabled = false;
-  }
-}
+// Extracted to ./modules/plannerImportExport.js.
 
 // ── Tracked Sessions ─────────────────────────────────────────────────────────
-
-const TRACKED_REASONS = [
-  { value: 'presenting', label: 'Presenting / speaking', icon: 'fa-microphone' },
-  { value: 'followup',   label: 'Follow up',             icon: 'fa-bookmark' },
-  { value: 'other',      label: 'Other',                 icon: 'fa-tag' },
-];
-
-let _trackedSessionCtx = null; // 'sponsor' | 'personal'
-let _trackedSessionId  = null; // string ID when editing, null when adding
-
-function syncSponsoredSessions() {
-  const sponsorId = state.planner?.org?.sponsorId;
-  if (!sponsorId) return;
-  const tracked    = (state.planner.org.trackedSessions    ??= []);
-  const autoAdded  = (state.planner.org.autoAddedSponsoredSessions ??= []);
-  const trackedIds = new Set(tracked.map((t) => t.sessionId));
-  const autoSet    = new Set(autoAdded);
-  let changed = false;
-  for (const session of state.allSessions) {
-    if (!parseSponsorIds(session.sponsorIds).includes(sponsorId)) continue;
-    if (trackedIds.has(session.id)) continue;
-    if (autoSet.has(session.id)) continue; // user removed it — don't re-add
-    tracked.push({
-      id: makeItemId('ts'),
-      sessionId: session.id,
-      sessionTitle: session.title || '',
-      sessionTime: session.startTime || '',
-      reason: 'presenting',
-      customReason: '',
-      notes: '',
-    });
-    autoAdded.push(session.id);
-    trackedIds.add(session.id);
-    autoSet.add(session.id);
-    changed = true;
-  }
-  if (changed) {
-    scheduleAutoSave();
-    renderTrackedSessions('sponsor');
-  }
-}
-
-function getTrackedList(ctx) {
-  if (ctx === 'sponsor')    return (state.planner.org.trackedSessions    ??= []);
-  if (ctx === 'personal') return (state.planner.personal.trackedSessions ??= []);
-  return [];
-}
-
-function trackedSessionCardHtml(ts, ctx) {
-  const reasonObj   = TRACKED_REASONS.find((r) => r.value === ts.reason);
-  const reasonLabel = ts.reason === 'other' ? (ts.customReason || 'Other') : (reasonObj?.label || '');
-  const icon        = reasonObj?.icon || 'fa-tag';
-  const badgeClass  = ts.reason === 'presenting' ? 'bg-blue-50 text-blue-600'
-    : ts.reason === 'followup' ? 'bg-amber-50 text-amber-600'
-    : 'bg-gray-100 text-gray-500';
-  const subtitle = [
-    ts.sessionTime ? fmtTime(ts.sessionTime) : '',
-    ts.notes       ? ts.notes               : '',
-  ].filter(Boolean).join(' · ');
-  return `<div class="flex items-center gap-2 py-2 px-3 rounded-lg border border-gray-200 bg-white" data-ts-id="${esc(ts.id)}">
-    <div class="flex-1 min-w-0">
-      <div class="flex items-center gap-2 flex-wrap min-w-0">
-        <p class="text-sm font-medium text-gray-800 truncate">${esc(ts.sessionTitle || 'Untitled session')}</p>
-        ${reasonLabel ? `<span class="inline-flex items-center gap-1 px-1.5 py-px rounded text-[0.65rem] font-medium flex-shrink-0 ${badgeClass}"><i class="fas ${esc(icon)} text-[0.55rem]"></i>${esc(reasonLabel)}</span>` : ''}
-      </div>
-      ${subtitle ? `<p class="text-xs text-gray-500 truncate mt-0.5">${esc(subtitle)}</p>` : ''}
-    </div>
-    <button type="button" class="edit-tracked-session-btn flex-shrink-0 h-7 w-7 inline-flex items-center justify-center border border-gray-200 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors"
-      data-ts-ctx="${esc(ctx)}" data-ts-id="${esc(ts.id)}" aria-label="Edit tracked session: ${esc(ts.sessionTitle || 'session')}">
-      <i class="fas fa-pen-to-square text-[0.65rem]" aria-hidden="true"></i>
-    </button>
-  </div>`;
-}
-
-function renderTrackedSessions(ctx) {
-  const listId  = ctx === 'sponsor' ? 'sponsorTrackedSessionsList'  : 'personalTrackedSessionsList';
-  const emptyId = ctx === 'sponsor' ? 'sponsorTrackedSessionsEmpty' : 'personalTrackedSessionsEmpty';
-  const countId = ctx === 'sponsor' ? 'sponsorTrackedCount'         : 'personalTrackedCount';
-  const listEl  = document.getElementById(listId);
-  const emptyEl = document.getElementById(emptyId);
-  const countEl = document.getElementById(countId);
-  if (!listEl) return;
-  const list = getTrackedList(ctx);
-  listEl.innerHTML = list.map((ts) => trackedSessionCardHtml(ts, ctx)).join('');
-  emptyEl?.classList.toggle('hidden', list.length > 0);
-  if (countEl) { countEl.textContent = list.length; countEl.classList.toggle('hidden', list.length === 0); }
-}
-
-function openTrackedSessionModal(ctx, tsId, sessionOverride) {
-  _trackedSessionCtx = ctx;
-  _trackedSessionId  = tsId || null;
-
-  const modal = document.getElementById('trackedSessionModal');
-  if (!modal) return;
-
-  const list     = getTrackedList(ctx);
-  const existing = tsId ? list.find((ts) => ts.id === tsId) : null;
-  const session  = sessionOverride || (existing ? state.allSessions.find((s) => s.id === existing.sessionId) : null);
-
-  const infoTitleEl = document.getElementById('trackedSessionInfoTitle');
-  const infoTimeEl  = document.getElementById('trackedSessionInfoTime');
-  if (infoTitleEl) infoTitleEl.textContent = existing?.sessionTitle || session?.title || '';
-  if (infoTimeEl)  infoTimeEl.textContent  = existing?.sessionTime ? fmtTime(existing.sessionTime) : (session ? fmtTime(session.startTime) : '');
-
-  modal.dataset.sessionId    = existing?.sessionId    || session?.id    || '';
-  modal.dataset.sessionTitle = existing?.sessionTitle || session?.title || '';
-  modal.dataset.sessionTime  = existing?.sessionTime  || session?.startTime || '';
-
-  const reason = existing?.reason || 'followup';
-  modal.querySelectorAll('input[name="trackedSessionReason"]').forEach((r) => { r.checked = r.value === reason; });
-
-  const customEl = document.getElementById('trackedSessionCustomReason');
-  if (customEl) {
-    customEl.value = existing?.customReason || '';
-    customEl.classList.toggle('hidden', reason !== 'other');
-  }
-
-  const notesEl = document.getElementById('trackedSessionNotes');
-  if (notesEl) notesEl.value = existing?.notes || '';
-
-  const delBtn = document.getElementById('trackedSessionDeleteBtn');
-  if (delBtn) delBtn.classList.toggle('invisible', !existing);
-
-  showModal('trackedSessionModal');
-}
-
-function closeTrackedSessionModal() { _trackedModal.close(); }
-
-function saveTrackedSession() {
-  const ctx   = _trackedSessionCtx;
-  const tsId  = _trackedSessionId;
-  const modal = document.getElementById('trackedSessionModal');
-  if (!modal || !ctx) return;
-
-  const list         = getTrackedList(ctx);
-  const reason       = modal.querySelector('input[name="trackedSessionReason"]:checked')?.value || 'other';
-  const customReason = document.getElementById('trackedSessionCustomReason')?.value.trim() || '';
-  const notes        = document.getElementById('trackedSessionNotes')?.value.trim() || '';
-
-  if (tsId) {
-    const existing = list.find((ts) => ts.id === tsId);
-    if (existing) Object.assign(existing, { reason, customReason, notes });
-  } else {
-    list.push({
-      id:           makeItemId('ts'),
-      sessionId:    modal.dataset.sessionId,
-      sessionTitle: modal.dataset.sessionTitle,
-      sessionTime:  modal.dataset.sessionTime,
-      reason,
-      customReason,
-      notes,
-    });
-  }
-
-  renderTrackedSessions(ctx);
-  scheduleAutoSave();
-  closeTrackedSessionModal();
-}
-
-function wireTrackedSessionModal() {
-  const modal = document.getElementById('trackedSessionModal');
-  if (!modal) return;
-
-  _trackedModal.wire();
-
-  document.getElementById('trackedSessionSaveBtn')?.addEventListener('click', saveTrackedSession);
-
-  document.getElementById('trackedSessionDeleteBtn')?.addEventListener('click', () => {
-    const ctx  = _trackedSessionCtx;
-    const tsId = _trackedSessionId;
-    if (!ctx || !tsId) return;
-    const list = getTrackedList(ctx);
-    const idx  = list.findIndex((ts) => ts.id === tsId);
-    if (idx !== -1) list.splice(idx, 1);
-    renderTrackedSessions(ctx);
-    scheduleAutoSave();
-    closeTrackedSessionModal();
-  });
-
-  modal.addEventListener('change', (e) => {
-    if (e.target.name === 'trackedSessionReason') {
-      const customEl = document.getElementById('trackedSessionCustomReason');
-      if (customEl) customEl.classList.toggle('hidden', e.target.value !== 'other');
-    }
-  });
-}
-
-function wireTrackedSessionSearch(ctx) {
-  const searchInputId   = ctx === 'sponsor' ? 'sponsorSessionSearchInput'   : 'personalSessionSearchInput';
-  const searchResultsId = ctx === 'sponsor' ? 'sponsorSessionSearchResults' : 'personalSessionSearchResults';
-  const listId          = ctx === 'sponsor' ? 'sponsorTrackedSessionsList'  : 'personalTrackedSessionsList';
-
-  const searchInput   = document.getElementById(searchInputId);
-  const searchResults = document.getElementById(searchResultsId);
-  const listEl        = document.getElementById(listId);
-
-  searchInput?.addEventListener('input', (e) => {
-    const q = e.target.value.trim().toLowerCase();
-    if (!q || !searchResults) { searchResults?.classList.add('hidden'); return; }
-
-    const tracked = new Set(getTrackedList(ctx).map((ts) => ts.sessionId));
-    const matches = state.allSessions.filter((s) =>
-      s.title?.toLowerCase().includes(q) || s.location?.toLowerCase().includes(q)
-    ).slice(0, 25);
-
-    if (!matches.length) {
-      searchResults.innerHTML = '<p class="text-xs text-gray-600 px-3 py-2">No sessions found.</p>';
-    } else {
-      searchResults.innerHTML = matches.map((s) => {
-        const already = tracked.has(s.id);
-        return `<button type="button" class="tracked-session-result w-full text-left px-3 py-2 transition-colors text-sm ${already ? 'opacity-50 cursor-default' : 'hover:bg-gray-50'}" data-session-id="${esc(s.id)}" ${already ? 'disabled' : ''}>
-          <p class="text-gray-800 truncate">${esc(s.title)}</p>
-          <p class="text-xs text-gray-500">${esc(fmtTime(s.startTime))}${s.location ? ` · ${esc(s.location)}` : ''}${already ? ' · Already tracked' : ''}</p>
-        </button>`;
-      }).join('');
-    }
-    searchResults.classList.remove('hidden');
-  });
-
-  searchResults?.addEventListener('click', (e) => {
-    const btn = e.target.closest('.tracked-session-result');
-    if (!btn || btn.disabled) return;
-    const session = state.allSessions.find((s) => s.id === btn.dataset.sessionId);
-    if (!session) return;
-    searchResults.innerHTML = '';
-    searchResults.classList.add('hidden');
-    if (searchInput) searchInput.value = '';
-    openTrackedSessionModal(ctx, null, session);
-  });
-
-  listEl?.addEventListener('click', (e) => {
-    const btn = e.target.closest('.edit-tracked-session-btn');
-    if (btn) openTrackedSessionModal(btn.dataset.tsCtx, btn.dataset.tsId);
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest(`#${searchInputId}`) && !e.target.closest(`#${searchResultsId}`)) {
-      searchResults?.classList.add('hidden');
-    }
-  });
-}
+// Extracted to ./modules/plannerTrackedSessions.js (initTrackedSessions /
+// renderTrackedSessions / syncSponsoredSessions / wireTrackedSessionModal /
+// wireTrackedSessionSearch).
 
 // ── Personal tab ───────────────────────────────────────────────────────────
-
-function renderPersonalItinerary() {
-  renderPersonalTimeline()
-}
-
-function renderPersonalTimeline() {
-  const container = document.getElementById('personalTimeline')
-  if (!container) return
-  const personal = state.planner.personal
-  if (!personal) return
-
-  const outLegs = personal.outboundLegs  || []
-  const retLegs = personal.returnLegs    || []
-  const accoms  = personal.accommodations || []
-  const items   = personal.itinerary     || []
-
-  // Derive date range from inputs, falling back to leg/accom/event/item dates
-  const si = document.getElementById('personalTimelineStart')
-  const ei = document.getElementById('personalTimelineEnd')
-  let startStr = si?.value || ''
-  let endStr   = ei?.value || ''
-
-  if (!startStr || !endStr) {
-    const all = [
-      ...outLegs.map((l) => l.date), ...retLegs.map((l) => l.date),
-      ...accoms.flatMap((a) => {
-        if (a.type === 'waypoints') {
-          const legDates = (a.stops || []).map((cl) => cl.date).filter(Boolean)
-          return legDates.length ? legDates : [a.checkIn, a.checkOut]
-        }
-        return [a.checkIn, a.checkOut]
-      }),
-      ...state.allSessions.map((s) => s.startTime.slice(0, 10)),
-      ...items.map((i) => i.date),
-    ].filter(Boolean).sort()
-    if (!all.length) {
-      container.innerHTML = '<p class="text-xs text-gray-600 py-2">Add travel legs or accommodation dates to see the timeline.</p>'
-      return
-    }
-    const first = new Date(all[0] + 'T00:00:00'); first.setDate(first.getDate() - 1)
-    const last  = new Date(all[all.length - 1] + 'T00:00:00'); last.setDate(last.getDate() + 1)
-    if (!startStr) { startStr = localDateStr(first); if (si && !si.value) si.value = startStr }
-    if (!endStr)   { endStr   = localDateStr(last);  if (ei && !ei.value) ei.value = endStr }
-  }
-
-  const days = []
-  let cur = new Date(startStr + 'T00:00:00')
-  const end = new Date(endStr + 'T00:00:00')
-  if (cur > end || (end - cur) / 86400000 > 90) {
-    container.innerHTML = '<p class="text-xs text-gray-600 py-2">Date range is invalid or exceeds 90 days.</p>'
-    return
-  }
-  while (cur <= end) { days.push(localDateStr(cur)); cur.setDate(cur.getDate() + 1) }
-
-  // Append any itinerary item dates that fall outside the range
-  const daySet = new Set(days)
-  const extraDays = [...new Set(items.map((i) => i.date).filter(Boolean))].filter((d) => !daySet.has(d)).sort()
-  const allDays = [...days, ...extraDays]
-
-  const eventDaySet = new Set(state.allSessions.map((s) =>
-    new Date(s.startTime).toLocaleDateString('en-CA', { timeZone: getTimezone() })
-  ))
-  const todayStr = localDateStr(new Date())
-
-  // Day → legs arrays sorted chronologically by departure time
-  const outDayLegs = {}
-  const retDayLegs = {}
-  outLegs.filter((l) => l.date).forEach((l) => { (outDayLegs[l.date] ??= []).push({ mode: l.mode || 'other', time: l.departTime || '' }) })
-  retLegs.filter((l) => l.date).forEach((l) => { (retDayLegs[l.date] ??= []).push({ mode: l.mode || 'other', time: l.departTime || '' }) })
-  Object.values(outDayLegs).forEach((legs) => legs.sort((a, b) => a.time.localeCompare(b.time)))
-  Object.values(retDayLegs).forEach((legs) => legs.sort((a, b) => a.time.localeCompare(b.time)))
-
-  // Per-accommodation day maps for "Me" row: use __me__ stay records, fall back to top-level dates for old data
-  // For waypoints: fall back further to first/last leg date when embarkation/disembarkation not set
-  const accomPrimary      = {}  // day → { acc, color }
-  const accomCheckout     = {}  // day → { acc, color }
-  const waypointsByAccom = {}  // accId → Set<date> — used for port icons in all rows
-  accoms.forEach((acc, i) => {
-    const color  = TIMELINE_COLORS[i % TIMELINE_COLORS.length]
-    const meStay = (acc.assignments || []).find((s) => s.memberId === '__me__')
-    let checkIn  = meStay ? (meStay.checkIn  || acc.checkIn)  : acc.checkIn
-    let checkOut = meStay ? (meStay.checkOut || acc.checkOut) : acc.checkOut
-    if (acc.type === 'waypoints') {
-      const legDates = (acc.stops || []).map((cl) => cl.date).filter(Boolean).sort()
-      if (!checkIn  && legDates.length) checkIn  = legDates[0]
-      if (!checkOut && legDates.length) checkOut = legDates[legDates.length - 1]
-      waypointsByAccom[acc.id] = new Set(legDates)
-    }
-    if (!checkIn || !checkOut) return
-    accomCheckout[checkOut] = { acc, color }
-    let d = new Date(checkIn + 'T00:00:00')
-    const e = new Date(checkOut + 'T00:00:00')
-    e.setDate(e.getDate() - 1)
-    while (d <= e) { accomPrimary[localDateStr(d)] = { acc, color }; d.setDate(d.getDate() + 1) }
-  })
-
-  function accomForDay(day) {
-    const primary  = accomPrimary[day]
-    const checkout = accomCheckout[day]
-    if (primary && checkout && primary.acc.id !== checkout.acc.id) {
-      return { acc: primary.acc, color: primary.color, splitAcc: checkout.acc, splitColor: checkout.color }
-    }
-    return primary || checkout || null
-  }
-
-  // Itinerary items by date
-  const byDate = {}
-  items.forEach((item) => { (byDate[item.date] ??= []).push(item) })
-
-  const headerCells = allDays.map((day) => {
-    const isToday = day === todayStr
-    const isEvent = eventDaySet.has(day)
-    const cls     = isToday ? 'tl-head-today' : isEvent ? 'tl-head-event' : 'tl-head-normal'
-    const label   = new Date(day + 'T00:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
-    return `<th style="min-width:80px" class="${cls} text-center text-[0.65rem] px-1 py-2 whitespace-nowrap border-l border-gray-100">${label}${isToday ? '<br><i class="fas fa-circle" style="font-size:0.45rem;color:inherit"></i>' : ''}</th>`
-  }).join('')
-
-  // Row 1: travel + accommodation
-  const travelCells = allDays.map((day) => {
-    const match    = accomForDay(day)
-    const outLegs  = outDayLegs[day] || []
-    const retLegs  = retDayLegs[day] || []
-    const isToday  = day === todayStr
-    const isEvent  = eventDaySet.has(day)
-    const cellCls  = match ? '' : isToday ? 'tl-cell-today' : isEvent ? 'tl-cell-event' : ''
-    let bgStyle = ''
-    if (match?.splitAcc) {
-      bgStyle = `background:linear-gradient(to right,${match.splitColor.bg} 50%,${match.color.bg} 50%);border-bottom:2px solid ${match.color.border}`
-    } else if (match) {
-      bgStyle = `background:${match.color.bg};border-bottom:2px solid ${match.color.border}`
-    }
-    let content = ''
-    if (outLegs.length || retLegs.length) {
-      const hasBoth = outLegs.length && retLegs.length
-      const color   = hasBoth ? '#7c3aed' : outLegs.length ? '#2563eb' : '#059669'
-      const tip     = hasBoth ? 'Outbound + return' : outLegs.length ? 'Outbound' : 'Return'
-      const icons   = [
-        ...outLegs.map((l) => `<i class="${travelIcon(l.mode, false)}" style="color:${color};font-size:0.62rem"></i>`),
-        ...retLegs.map((l) => `<i class="${travelIcon(l.mode, true)}"  style="color:${color};font-size:0.62rem"></i>`),
-      ].join('')
-      content = `<span class="inline-flex flex-wrap justify-center gap-1" title="${tip}">${icons}</span>`
-    }
-    if (match?.acc.type === 'waypoints' && waypointsByAccom[match.acc.id]?.has(day)) {
-      const portLegs = (match.acc.stops || []).filter((cl) => cl.date === day)
-      const tip = portLegs.map((cl) => cl.location || 'Port').join(', ')
-      content += `<i class="fas fa-anchor" style="color:${match.color.border};font-size:0.65rem;vertical-align:middle" title="${esc(tip)}"></i>`
-    }
-    return `<td style="${bgStyle}" class="${cellCls} text-center px-1 py-1.5 border-l border-gray-100">${content}</td>`
-  }).join('')
-
-  // Row 2: itinerary items
-  const itinCells = allDays.map((day) => {
-    const dayItems = (byDate[day] || []).sort((a, b) => (a.time || '').localeCompare(b.time || ''))
-    const isToday  = day === todayStr
-    const isEvent  = eventDaySet.has(day)
-    const cellCls  = isToday ? 'tl-cell-today' : isEvent ? 'tl-cell-event' : ''
-    const pills    = dayItems.map((item) =>
-      `<span class="block text-[0.6rem] px-1 py-0.5 truncate cursor-pointer" style="${item.done ? 'background:#e2e8f0;color:#475569;text-decoration:line-through' : 'background:#1e293b;color:#cbd5e1'}" title="${esc(item.title)}">${esc(item.title.slice(0, 15))}${item.title.length > 15 ? '…' : ''}</span>`
-    ).join('')
-    return `<td class="${cellCls} px-1 py-1 border-l border-gray-100 align-top cursor-pointer personal-itinerary-cell" data-date="${esc(day)}" style="min-width:80px">${pills || '<span class="block text-[0.55rem] text-center py-1 text-gray-400">+</span>'}</td>`
-  }).join('')
-
-  const legend = accoms.length
-    ? `<div class="flex flex-wrap gap-2 mt-2">${accoms.map((acc, i) => {
-        const c = TIMELINE_COLORS[i % TIMELINE_COLORS.length]
-        return `<span class="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full font-medium" style="background:${c.bg};color:${c.text};border:1px solid ${c.border}"><i class="${accomTypeIcon(acc.type)} text-[0.6rem] mr-0.5"></i>${esc(acc.name || (acc.type === 'waypoints' ? 'Waypoint' : 'Accommodation'))}</span>`
-      }).join('')}</div>`
-    : ''
-
-  const meContactId = state.planner.personal?.meContactId || null;
-  const companions  = (state.planner.personal?.tripAssignments || []).filter((a) => a.memberId !== meContactId);
-  const contacts    = state.global?.personalContacts || [];
-
-  if (companions.length === 0) {
-    container.innerHTML = `<div class="tl-scroll overflow-x-auto rounded-lg border border-gray-200"><table class="min-w-full text-sm" style="border-collapse:collapse"><thead class="bg-gray-50"><tr>${headerCells}</tr></thead><tbody><tr class="border-t border-gray-200">${travelCells}</tr><tr class="border-t border-gray-100">${itinCells}</tr></tbody></table></div>${legend}`
-  } else {
-    const nameHeaderCell = `<th class="text-left text-xs font-semibold text-gray-500 pr-3 py-2 whitespace-nowrap border-r border-gray-200 bg-gray-50" style="min-width:90px">Person</th>`
-    const meLabel = `<td class="text-xs font-medium text-gray-700 pr-3 py-2 whitespace-nowrap border-r border-gray-200" style="min-width:90px">${esc(getMeLabel())}</td>`
-
-    const companionRows = companions.map((assignment) => {
-      const contact = contacts.find((c) => c.id === assignment.memberId);
-      if (!contact) return '';
-      const compAccomPrimary  = {};
-      const compAccomCheckout = {};
-      accoms.forEach((acc, i) => {
-        const stay = (acc.assignments || []).find((s) => s.memberId === assignment.memberId);
-        if (!stay) return;
-        let checkIn  = stay.checkIn  || acc.checkIn;
-        let checkOut = stay.checkOut || acc.checkOut;
-        if (acc.type === 'waypoints') {
-          const legDates = (acc.stops || []).map((cl) => cl.date).filter(Boolean).sort()
-          if (!checkIn  && legDates.length) checkIn  = legDates[0]
-          if (!checkOut && legDates.length) checkOut = legDates[legDates.length - 1]
-        }
-        const color = TIMELINE_COLORS[i % TIMELINE_COLORS.length];
-        if (checkOut) compAccomCheckout[checkOut] = { acc, color };
-        if (checkIn && checkOut) {
-          let d = new Date(checkIn + 'T00:00:00');
-          const e2 = new Date(checkOut + 'T00:00:00'); e2.setDate(e2.getDate() - 1);
-          while (d <= e2) { compAccomPrimary[localDateStr(d)] = { acc, color }; d.setDate(d.getDate() + 1); }
-        }
-      });
-
-      const cOutDayLegs = {};
-      const cRetDayLegs = {};
-      (assignment.outboundLegs || []).filter((l) => l.date).forEach((l) => { (cOutDayLegs[l.date] ??= []).push({ mode: l.mode || 'other', time: l.departTime || '' }); });
-      (assignment.returnLegs   || []).filter((l) => l.date).forEach((l) => { (cRetDayLegs[l.date] ??= []).push({ mode: l.mode || 'other', time: l.departTime || '' }); });
-      Object.values(cOutDayLegs).forEach((legs) => legs.sort((a, b) => a.time.localeCompare(b.time)));
-      Object.values(cRetDayLegs).forEach((legs) => legs.sort((a, b) => a.time.localeCompare(b.time)));
-
-      const cells = allDays.map((day) => {
-        const primary  = compAccomPrimary[day];
-        const checkout = compAccomCheckout[day];
-        const match = (primary && checkout && primary.acc.id !== checkout.acc.id)
-          ? { acc: primary.acc, color: primary.color, splitAcc: checkout.acc, splitColor: checkout.color }
-          : primary || checkout || null;
-        const outLegs = cOutDayLegs[day] || [];
-        const retLegs = cRetDayLegs[day] || [];
-        const isToday = day === todayStr;
-        const isEvent = eventDaySet.has(day);
-        const cellCls = match ? '' : isToday ? 'tl-cell-today' : isEvent ? 'tl-cell-event' : '';
-        let bgStyle = '';
-        if (match?.splitAcc) {
-          bgStyle = `background:linear-gradient(to right,${match.splitColor.bg} 50%,${match.color.bg} 50%);border-bottom:2px solid ${match.color.border}`;
-        } else if (match) {
-          bgStyle = `background:${match.color.bg};border-bottom:2px solid ${match.color.border}`;
-        }
-        let content = '';
-        if (outLegs.length || retLegs.length) {
-          const hasBoth = outLegs.length && retLegs.length;
-          const color   = hasBoth ? '#7c3aed' : outLegs.length ? '#2563eb' : '#059669';
-          const tip     = hasBoth ? `${esc(contact.name)} outbound + return` : outLegs.length ? `${esc(contact.name)} outbound` : `${esc(contact.name)} return`;
-          const icons   = [
-            ...outLegs.map((l) => `<i class="${travelIcon(l.mode, false)}" style="color:${color};font-size:0.62rem"></i>`),
-            ...retLegs.map((l) => `<i class="${travelIcon(l.mode, true)}"  style="color:${color};font-size:0.62rem"></i>`),
-          ].join('');
-          content = `<span class="inline-flex flex-wrap justify-center gap-1" title="${tip}">${icons}</span>`;
-        }
-        if (match?.acc.type === 'waypoints' && waypointsByAccom[match.acc.id]?.has(day)) {
-          const portLegs = (match.acc.stops || []).filter((cl) => cl.date === day);
-          const portTip  = portLegs.map((cl) => cl.location || 'Port').join(', ');
-          content += `<i class="fas fa-anchor" style="color:${match.color.border};font-size:0.55rem;opacity:0.85;vertical-align:middle" title="${esc(portTip)}"></i>`;
-        }
-        return `<td style="${bgStyle}" class="${cellCls} text-center px-1 py-1.5 border-l border-gray-100">${content}</td>`;
-      }).join('');
-      return `<tr class="border-t border-gray-100"><td class="text-xs font-medium text-gray-700 pr-3 py-2 whitespace-nowrap border-r border-gray-200" style="min-width:90px">${esc(contact.name || 'Unnamed')}</td>${cells}</tr>`;
-    }).filter(Boolean).join('');
-
-    // Local companion rows (trip-specific, only shown if they have flights or accommodation)
-    const localCompanions = (state.planner.personal?.localCompanions || []).filter((lc) => lc.id !== meContactId);
-    const localRows = localCompanions.map((lc) => {
-      const lcOutDayLegs = {};
-      const lcRetDayLegs = {};
-      (lc.outboundLegs || []).filter((l) => l.date).forEach((l) => { (lcOutDayLegs[l.date] ??= []).push({ mode: l.mode || 'other', time: l.departTime || '' }); });
-      (lc.returnLegs   || []).filter((l) => l.date).forEach((l) => { (lcRetDayLegs[l.date] ??= []).push({ mode: l.mode || 'other', time: l.departTime || '' }); });
-      if (!Object.keys(lcOutDayLegs).length && !Object.keys(lcRetDayLegs).length) return '';
-      const cells = allDays.map((day) => {
-        const outL = lcOutDayLegs[day] || [];
-        const retL = lcRetDayLegs[day] || [];
-        if (!outL.length && !retL.length) return `<td class="px-1 py-1.5 border-l border-gray-100"></td>`;
-        const hasBoth = outL.length && retL.length;
-        const c = hasBoth ? '#7c3aed' : outL.length ? '#2563eb' : '#059669';
-        const icons = [
-          ...outL.map((l) => `<i class="${travelIcon(l.mode, false)}" style="color:${c};font-size:0.62rem"></i>`),
-          ...retL.map((l) => `<i class="${travelIcon(l.mode, true)}" style="color:${c};font-size:0.62rem"></i>`),
-        ].join('');
-        return `<td class="text-center px-1 py-1.5 border-l border-gray-100"><span class="inline-flex flex-wrap justify-center gap-1">${icons}</span></td>`;
-      }).join('');
-      return `<tr class="border-t border-gray-100"><td class="text-xs font-medium text-gray-700 pr-3 py-2 whitespace-nowrap border-r border-gray-200" style="min-width:90px">${esc(lc.name || 'Unnamed')}<span class="ml-1 text-[0.55rem] text-blue-400">(trip)</span></td>${cells}</tr>`;
-    }).filter(Boolean).join('');
-
-    const itinLabelCell = `<td class="text-xs text-gray-400 pr-3 py-1 whitespace-nowrap border-r border-gray-200 italic" style="min-width:90px">Itinerary</td>`;
-
-    container.innerHTML = `<div class="tl-scroll overflow-x-auto rounded-lg border border-gray-200"><table class="min-w-full text-sm" style="border-collapse:collapse"><thead class="bg-gray-50"><tr>${nameHeaderCell}${headerCells}</tr></thead><tbody><tr class="border-t border-gray-200">${meLabel}${travelCells}</tr>${companionRows}${localRows}<tr class="border-t border-gray-100">${itinLabelCell}${itinCells}</tr></tbody></table></div>${legend}`
-  }
-}
-
-function personalAccomCardHtml(accom) {
-  const checkIn  = accom.checkIn  ? new Date(accom.checkIn  + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : '';
-  const checkOut = accom.checkOut ? new Date(accom.checkOut + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : '';
-  const dates = (checkIn && checkOut) ? `${checkIn} → ${checkOut}` : checkIn || checkOut || '';
-  const stays = accom.assignments || [];
-  const meStaying   = stays.some((s) => s.memberId === '__me__');
-  const meContactId = state.planner.personal?.meContactId || null;
-  const localCompanions = state.planner.personal?.localCompanions || [];
-  const companionNames = [
-    ...(meStaying ? [getMeLabel()] : []),
-    ...(state.planner.personal?.tripAssignments || [])
-      .filter((a) => a.memberId !== meContactId && stays.some((s) => s.memberId === a.memberId && s.memberId !== '__me__'))
-      .map((a) => (state.global?.personalContacts || []).find((c) => c.id === a.memberId)?.name)
-      .filter(Boolean),
-    ...localCompanions
-      .filter((lc) => lc.id !== meContactId && stays.some((s) => s.memberId === lc.id))
-      .map((lc) => lc.name || 'Unnamed'),
-  ];
-  const meta  = [dates, accom.confirmation ? `#${accom.confirmation}` : '', companionNames.length ? companionNames.join(', ') : ''].filter(Boolean).join(' · ');
-  const ai    = esc(accom.id);
-  return `<div class="flex items-center gap-2 p-2.5 rounded-lg border border-gray-200 bg-white group">
-    <i class="${accomTypeIcon(accom.type)} text-gray-500 flex-shrink-0 w-4 text-center text-xs"></i>
-    <div class="flex-1 min-w-0">
-      <p class="text-sm font-medium text-gray-800 truncate">${esc(accom.name || 'Unnamed accommodation')}</p>
-      ${meta ? `<p class="text-xs text-gray-500 mt-0.5 truncate">${esc(meta)}</p>` : ''}
-    </div>
-    <button type="button" class="personal-accom-edit-btn h-7 px-2.5 border border-gray-200 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-150" data-personal-accom-id="${ai}" aria-label="Edit ${esc(accom.name || 'accommodation')}">
-      <i class="fas fa-pen-to-square mr-1 text-[0.65rem]" aria-hidden="true"></i>Edit
-    </button>
-    <button type="button" class="personal-accom-remove-btn flex-shrink-0 text-gray-500 hover:text-red-600 transition-colors opacity-0 group-hover:opacity-100 transition-opacity duration-150" data-personal-accom-id="${ai}" aria-label="Remove ${esc(accom.name || 'accommodation')}">
-      <i class="fas fa-times text-xs" aria-hidden="true"></i>
-    </button>
-  </div>`;
-}
-
-function renderPersonalAccomList() {
-  renderListPanel('personalAccomList', 'personalAccomEmpty', state.planner?.personal?.accommodations || [], personalAccomCardHtml);
-}
-
-function renderBudgetBreakdownInto(containerId, cats, currency) {
-  const container  = document.getElementById(containerId)
-  if (!container) return
-  const activeCats = Object.entries(cats).filter(([, c]) => c.budget !== 0 || c.actual !== 0)
-  if (!activeCats.length) { container.classList.add('hidden'); return }
-
-  const totalB    = activeCats.reduce((s, [, c]) => s + c.budget, 0)
-  const totalA    = activeCats.reduce((s, [, c]) => s + c.actual, 0)
-  const remaining = totalB - totalA
-  const over      = remaining < 0
-  const fmt = (n) => n !== 0 ? n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '—'
-
-  // Flatten all items across active categories, tagging each with its category label
-  const allItems = activeCats.flatMap(([, c]) =>
-    (c.items || []).map((item) => ({ ...item, catLabel: c.label }))
-  )
-  const showTotal = allItems.length > 1
-
-  container.classList.remove('hidden')
-  container.innerHTML = `
-    <div class="grid grid-cols-[1fr_auto_auto] gap-x-4 gap-y-1">
-      <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-gray-600 pb-0.5">Item</span>
-      <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-gray-600 text-right pb-0.5">Budget</span>
-      <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-gray-600 text-right pb-0.5">Actual</span>
-      ${allItems.map((item) => `
-        <span class="text-gray-600 truncate">${esc(item.label)} <span class="text-gray-500">(${esc(item.catLabel)})</span></span>
-        <span class="text-gray-500 tabular-nums text-right">${fmt(item.budget)}</span>
-        <span class="tabular-nums text-right ${item.actual < 0 ? 'text-emerald-700' : item.actual > item.budget && item.budget > 0 ? 'text-red-600' : 'text-gray-600'}">${fmt(item.actual)}</span>
-      `).join('')}
-      ${showTotal ? `
-        <div class="col-span-3 h-px bg-gray-200 my-0.5"></div>
-        <span class="text-gray-700 font-medium">Total</span>
-        <span class="text-gray-500 font-medium tabular-nums text-right">${fmt(totalB)}</span>
-        <span class="text-gray-700 font-medium tabular-nums text-right">${fmt(totalA)}</span>
-      ` : ''}
-    </div>
-    ${totalB !== 0 ? `
-      <div class="flex items-center justify-between mt-2 pt-1.5 border-t border-gray-200 font-medium ${over ? 'text-red-500' : 'text-emerald-600'}">
-        <span>${over ? 'Over budget' : remaining < 0 ? 'Net credit' : 'Remaining'}</span>
-        <span class="tabular-nums">${currency} ${fmt(Math.abs(remaining))}</span>
-      </div>
-    ` : ''}
-  `
-}
-
-function renderPersonalBudgetBreakdown() {
-  const data     = buildPersonalBudgetData(state.planner)
-  const currency = state.planner?.personal?.currency || 'AUD'
-  renderBudgetBreakdownInto('personalBudgetBreakdown',    data, currency)
-  renderBudgetBreakdownInto('personalBudgetTabBreakdown', data, currency)
-}
-
-function renderSponsorBudgetBreakdown() {
-  renderBudgetBreakdownInto(
-    'sponsorBudgetBreakdown',
-    buildEventBudgetData(state.planner),
-    state.planner?.org?.sponsorCurrency || 'AUD'
-  )
-}
-
-function renderPersonalTab() {
-  const personal = state.planner.personal
-  if (!personal) return
-
-  syncEventTitleField('plannerPersonalTitle', 'plannerPersonalTitleHint')
-  renderPersonalConflicts()
-
-  // Budget fields
-  const budgetEl   = document.getElementById('personalBudget')
-  const actualEl   = document.getElementById('personalActual')
-  const currencyEl = document.getElementById('personalCurrency')
-  const notesEl    = document.getElementById('personalNotes')
-  if (budgetEl)   budgetEl.value       = personal.budget       || ''
-  if (actualEl)   actualEl.value       = personal.budgetActual || ''
-  if (currencyEl) currencyEl.innerHTML = currencyOptions(personal.currency || 'AUD')
-  if (notesEl)    notesEl.value        = personal.notes        || ''
-
-  // Legs
-  const outContainer = document.getElementById('personalOutboundLegs')
-  const retContainer = document.getElementById('personalReturnLegs')
-  const outEmpty     = document.getElementById('personalOutboundEmpty')
-  const retEmpty     = document.getElementById('personalReturnEmpty')
-
-  const outLegs = sortLegs(personal.outboundLegs || [])
-  const retLegs = sortLegs(personal.returnLegs   || [])
-
-  if (outContainer) outContainer.innerHTML = outLegs.map((l) => personalLegRowHtml(l, 'outbound')).join('')
-  if (retContainer) retContainer.innerHTML = retLegs.map((l) => personalLegRowHtml(l, 'return')).join('')
-  if (outEmpty) outEmpty.classList.toggle('hidden', outLegs.length > 0)
-  if (retEmpty) retEmpty.classList.toggle('hidden', retLegs.length > 0)
-
-  renderPersonalTimeline()
-  renderPersonalItinerary()
-  renderPersonalCompanionsSection()
-  renderTrackedSessions('personal')
-  renderPersonalAccomList()
-  renderBudgetItems('personal')
-  renderPersonalBudgetBreakdown()
-}
+// Extracted to ./modules/plannerPersonal.js (initPersonal + renderPersonalTab,
+// personal timeline/accom/notes + budget-breakdown renders).
 
 // ── Shared modal lifecycle helper ────────────────────────────────────────────
 
 function createModal(modalId, { onSave, onDone, onDelete, onClose } = {}) {
-  const getEl  = () => document.getElementById(modalId);
+  const getEl = () => document.getElementById(modalId);
   const isOpen = () => !getEl()?.classList.contains('hidden');
 
   function open(focusId) {
@@ -5680,7 +1241,11 @@ function createModal(modalId, { onSave, onDone, onDelete, onClose } = {}) {
     document.body.style.overflow = 'hidden';
     document.body.style.paddingRight = scrollbarWidth ? `${scrollbarWidth}px` : '';
     modal.classList.remove('hidden');
-    if (!touchDevice()) (focusId ? document.getElementById(focusId) : modal.querySelector('input:not([type=hidden]),select,textarea'))?.focus();
+    if (!touchDevice())
+      (focusId
+        ? document.getElementById(focusId)
+        : modal.querySelector('input:not([type=hidden]),select,textarea')
+      )?.focus();
   }
 
   function close() {
@@ -5696,477 +1261,66 @@ function createModal(modalId, { onSave, onDone, onDelete, onClose } = {}) {
     const modal = getEl();
     if (!modal) return;
     document.getElementById(`${modalId}Close`)?.addEventListener('click', close);
-    document.getElementById(`${modalId}Done`)?.addEventListener('click', () => { onDone?.(); close(); });
+    document.getElementById(`${modalId}Done`)?.addEventListener('click', () => {
+      onDone?.();
+      close();
+    });
     if (onDelete) {
-      document.getElementById(`${modalId}Delete`)?.addEventListener('click', () => { onDelete(); close(); });
+      document.getElementById(`${modalId}Delete`)?.addEventListener('click', () => {
+        onDelete();
+        close();
+      });
     }
     if (onSave) {
-      modal.addEventListener('input',  onSave);
+      modal.addEventListener('input', onSave);
       modal.addEventListener('change', onSave);
     }
-    modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isOpen()) close(); });
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) close();
+    });
   }
 
   return { open, close, wire };
 }
 
-const _trackedModal = createModal('trackedSessionModal', {
-  onClose: () => { _trackedSessionCtx = null; _trackedSessionId = null; },
-});
-
 // ── Personal leg modal ───────────────────────────────────────────────────────
-
-let _personalLeg = { direction: null, id: null };
-
-function savePersonalLeg() {
-  const { direction, id } = _personalLeg;
-  if (!direction || !id) return;
-  const personal = state.planner.personal;
-  if (!personal) return;
-  const legs = direction === 'outbound' ? (personal.outboundLegs || []) : (personal.returnLegs || []);
-  const leg  = legs.find((l) => l.id === id);
-  if (!leg) return;
-  leg.mode         = document.getElementById('personalLegModalMode')?.value         || 'flight';
-  leg.status       = document.getElementById('personalLegModalStatus')?.value       || '';
-  leg.date         = document.getElementById('personalLegModalDate')?.value         || '';
-  leg.arriveDate   = document.getElementById('personalLegModalArriveDate')?.value     || '';
-  leg.ref          = document.getElementById('personalLegModalRef')?.value          || '';
-  leg.from         = document.getElementById('personalLegModalFrom')?.value         || '';
-  leg.to           = document.getElementById('personalLegModalTo')?.value           || '';
-  leg.departTime   = document.getElementById('personalLegModalDepartTime')?.value   || '';
-  leg.arriveTime   = document.getElementById('personalLegModalArriveTime')?.value   || '';
-  leg.confirmation = document.getElementById('personalLegModalConfirmation')?.value || '';
-  scheduleAutoSave();
-}
-
-const _personalLegModal = createModal('personalLegModal', {
-  onSave: savePersonalLeg,
-  onDelete: () => {
-    const { direction, id } = _personalLeg;
-    if (!direction || !id) return;
-    const personal = state.planner.personal;
-    if (!personal) return;
-    if (direction === 'outbound') personal.outboundLegs = (personal.outboundLegs || []).filter((l) => l.id !== id);
-    else                          personal.returnLegs   = (personal.returnLegs   || []).filter((l) => l.id !== id);
-    scheduleAutoSave();
-  },
-  onClose: () => {
-    _personalLeg = { direction: null, id: null };
-    renderPersonalTab();
-  },
-});
-
-function openPersonalLegModal(direction, legId) {
-  const legs = direction === 'outbound'
-    ? (state.planner.personal?.outboundLegs || [])
-    : (state.planner.personal?.returnLegs   || []);
-  const leg = legs.find((l) => l.id === legId);
-  if (!leg) return;
-  _personalLeg = { direction, id: legId };
-  document.getElementById('personalLegModalTitle').textContent = direction === 'outbound' ? 'Outbound Leg' : 'Return Leg';
-  const modeSelect = document.getElementById('personalLegModalMode');
-  if (modeSelect) {
-    modeSelect.innerHTML = Object.entries(TRAVEL_MODES)
-      .map(([val, { label }]) => `<option value="${val}"${leg.mode === val ? ' selected' : ''}>${label}</option>`)
-      .join('');
-  }
-  const statusSelect = document.getElementById('personalLegModalStatus');
-  if (statusSelect) {
-    statusSelect.innerHTML = buildSelectOptions(TRAVEL_STATUSES, leg.status || '');
-  }
-  document.getElementById('personalLegModalDate').value         = leg.date         || '';
-  const arriveDateEl = document.getElementById('personalLegModalArriveDate');
-  if (arriveDateEl) arriveDateEl.value = leg.arriveDate || '';
-  document.getElementById('personalLegModalRef').value          = leg.ref          || '';
-  document.getElementById('personalLegModalFrom').value         = leg.from         || '';
-  document.getElementById('personalLegModalTo').value           = leg.to           || '';
-  document.getElementById('personalLegModalDepartTime').value   = leg.departTime   || '';
-  document.getElementById('personalLegModalArriveTime').value   = leg.arriveTime   || '';
-  document.getElementById('personalLegModalConfirmation').value = leg.confirmation || '';
-  renderPersonalLegReceiptStatus(leg);
-  _personalLegModal.open('personalLegModalFrom');
-}
-
-function renderPersonalLegReceiptStatus(leg) {
-  const container = document.getElementById('personalLegReceiptStatus');
-  if (!container) return;
-  const receipt = leg?.receiptId ? (state.planner.receipts || []).find((r) => r.id === leg.receiptId) : null;
-  if (receipt) {
-    container.innerHTML = `
-      <i class="fas fa-link text-[0.65rem] text-blue-400 flex-shrink-0" aria-hidden="true"></i>
-      <span class="text-xs text-gray-700 truncate flex-1">${esc(receipt.name || 'Receipt entry')}</span>
-      <button type="button" id="personalLegViewReceiptBtn"
-        class="h-8 px-3 border border-blue-200 rounded-md text-xs text-blue-600 hover:bg-blue-50 transition-colors flex-shrink-0">
-        <i class="fas fa-arrow-right mr-1 text-[0.65rem]" aria-hidden="true"></i>View in Receipts
-      </button>
-      <button type="button" id="personalLegUnlinkReceiptBtn"
-        class="h-8 px-2 border border-gray-300 rounded-md text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors flex-shrink-0"
-        aria-label="Unlink receipt">
-        <i class="fas fa-unlink text-[0.65rem]" aria-hidden="true"></i>
-      </button>`;
-  } else if (leg?.filePath) {
-    container.innerHTML = `
-      <i class="fas fa-paperclip text-[0.65rem] text-gray-500 flex-shrink-0" aria-hidden="true"></i>
-      <span class="text-xs text-gray-600 truncate flex-1">${esc(fileDisplayName(leg.filePath, leg.fileLabel))}</span>
-      <button type="button" id="personalLegAttachBtn"
-        class="h-8 px-3 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0">
-        <i class="fas fa-paperclip mr-1 text-[0.65rem]" aria-hidden="true"></i>Replace
-      </button>
-      <button type="button" id="personalLegCreateReceiptBtn"
-        class="h-8 px-3 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0">
-        <i class="fas fa-receipt mr-1 text-[0.65rem]" aria-hidden="true"></i>Create receipt
-      </button>`;
-  } else {
-    container.innerHTML = `
-      <span class="text-xs text-gray-500 flex-1 italic">No receipt attached</span>
-      <button type="button" id="personalLegAttachBtn"
-        class="h-8 px-3 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0">
-        <i class="fas fa-paperclip mr-1 text-[0.65rem]" aria-hidden="true"></i>Attach file
-      </button>
-      <button type="button" id="personalLegCreateReceiptBtn"
-        class="h-8 px-3 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0">
-        <i class="fas fa-receipt mr-1 text-[0.65rem]" aria-hidden="true"></i>Create receipt
-      </button>`;
-  }
-}
-
-function createReceiptForPersonalLeg() {
-  const { direction, id } = _personalLeg;
-  if (!direction || !id) return;
-  const legs = direction === 'outbound' ? state.planner.personal?.outboundLegs : state.planner.personal?.returnLegs;
-  const leg  = legs?.find((l) => l.id === id);
-  if (!leg) return;
-
-  const modeLabel = TRAVEL_MODES[leg.mode]?.label.replace(/^\S+\s/, '') || leg.mode;
-  const route     = [leg.from, leg.to].filter(Boolean).join(' → ');
-  const name      = [modeLabel, route].filter(Boolean).join(route ? ': ' : '') || 'Travel receipt';
-
-  const receipt    = makeReceipt();
-  receipt.name     = name;
-  receipt.date     = leg.date     || '';
-  receipt.category = 'travel';
-  if (leg.filePath) receipt.filePath = leg.filePath;
-
-  state.planner.receipts = [...(state.planner.receipts || []), receipt];
-  leg.receiptId = receipt.id;
-
-  scheduleAutoSave();
-  renderPersonalLegReceiptStatus(leg);
-  renderReceiptsTab();
-}
-
-function wirePersonalLegModal() {
-  _personalLegModal.wire();
-
-  const modal = document.getElementById('personalLegModal');
-  if (!modal) return;
-
-  modal.addEventListener('click', (e) => {
-    if (e.target.closest('#personalLegAttachBtn')) {
-      document.getElementById('personalLegFileInput')?.click();
-      return;
-    }
-    if (e.target.closest('#personalLegCreateReceiptBtn')) {
-      createReceiptForPersonalLeg();
-      return;
-    }
-    if (e.target.closest('#personalLegViewReceiptBtn')) {
-      const { direction, id } = _personalLeg;
-      if (!direction || !id) return;
-      const legs = direction === 'outbound' ? state.planner.personal?.outboundLegs : state.planner.personal?.returnLegs;
-      const leg  = legs?.find((l) => l.id === id);
-      _personalLegModal.close();
-      setActiveTab('receipts');
-      setTimeout(() => {
-        const el = leg?.receiptId ? document.querySelector(`details[data-receipt-id="${leg.receiptId}"]`) : null;
-        el?.setAttribute('open', '');
-        el?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 50);
-      return;
-    }
-    if (e.target.closest('#personalLegUnlinkReceiptBtn')) {
-      const { direction, id } = _personalLeg;
-      if (!direction || !id) return;
-      const legs = direction === 'outbound' ? state.planner.personal?.outboundLegs : state.planner.personal?.returnLegs;
-      const leg  = legs?.find((l) => l.id === id);
-      if (leg) { leg.receiptId = ''; scheduleAutoSave(); renderPersonalLegReceiptStatus(leg); }
-      return;
-    }
-  });
-
-  ['personalLegModalDate', 'personalLegModalDepartTime', 'personalLegModalArriveTime'].forEach((id) => {
-    document.getElementById(id)?.addEventListener('change', () => {
-      const departDate  = document.getElementById('personalLegModalDate')?.value        || '';
-      const departTime  = document.getElementById('personalLegModalDepartTime')?.value  || '';
-      const arriveTime  = document.getElementById('personalLegModalArriveTime')?.value  || '';
-      const arriveDateEl = document.getElementById('personalLegModalArriveDate');
-      if (arriveDateEl && !arriveDateEl.value) {
-        const computed = autoArriveDate(departDate, departTime, arriveTime);
-        if (computed) arriveDateEl.value = computed;
-      }
-      savePersonalLeg();
-    });
-  });
-
-  document.getElementById('personalLegFileInput')?.addEventListener('change', async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const { direction, id } = _personalLeg;
-    if (!direction || !id) return;
-    const legs = direction === 'outbound' ? state.planner.personal?.outboundLegs : state.planner.personal?.returnLegs;
-    const leg  = legs?.find((l) => l.id === id);
-    if (!leg) { e.target.value = ''; return; }
-
-    try {
-      const { path, label } = await uploadOrReadFile(file);
-      leg.filePath  = path;
-      leg.fileLabel = label;
-    } catch (err) { window.alert(err.message); e.target.value = ''; return; }
-
-    if (leg.receiptId) {
-      const receipt = (state.planner.receipts || []).find((r) => r.id === leg.receiptId);
-      if (receipt) { receipt.filePath = leg.filePath; renderReceiptsTab(); }
-    }
-
-    scheduleAutoSave();
-    renderPersonalLegReceiptStatus(leg);
-    renderDocumentsTab();
-    e.target.value = '';
-  });
-}
+// Extracted to ./modules/plannerPersonalLeg.js (initPersonalLeg /
+// openPersonalLegModal / wirePersonalLegModal).
 
 // ── Budget Items ─────────────────────────────────────────────────────────────
 
-let _budgetItemCtx = null  // 'personal' | 'sponsor'
-let _budgetItemId  = null
-
-function getBudgetItemList(ctx) {
-  if (ctx === 'personal') return (state.planner.personal.budgetItems ??= [])
-  return (state.planner.org.budgetItems ??= [])
-}
-
-function renderBudgetItems(ctx) {
-  const containerIds = ctx === 'personal'
-    ? ['personalBudgetItems', 'personalBudgetTabItems']
-    : ['sponsorBudgetItems']
-  const filterId  = ctx === 'personal' ? 'personalBudgetItemFilter' : 'sponsorBudgetItemFilter'
-  const container = document.getElementById(containerIds[0])
-  if (!container) return
-
-  const filterQ = (document.getElementById(filterId)?.value || '').trim().toLowerCase()
-  const allItems = getBudgetItemList(ctx)
-  const cats     = ctx === 'personal' ? BUDGET_ITEM_CATS_PERSONAL() : BUDGET_ITEM_CATS_SPONSOR()
-  const fmt      = (n) => parseBudget(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-
-  const resolveMember = (memberId) => memberId
-    ? (state.global?.teamMembers || []).find((m) => m.id === memberId)?.name || ''
-    : ''
-
-  const items = filterQ
-    ? allItems.filter((item) => {
-        const catLabel    = cats.find((c) => c.value === item.category)?.label || item.category || 'misc'
-        const memberName  = resolveMember(item.memberId)
-        return (item.name || '').toLowerCase().includes(filterQ)
-          || catLabel.toLowerCase().includes(filterQ)
-          || memberName.toLowerCase().includes(filterQ)
-      })
-    : allItems
-
-  const setHtml = (html) => containerIds.forEach((id) => { const el = document.getElementById(id); if (el) el.innerHTML = html; });
-
-  if (!allItems.length) {
-    setHtml('<p class="text-xs text-gray-500 italic py-1">No items added yet.</p>')
-    return
-  }
-
-  if (!items.length) {
-    setHtml('<p class="text-xs text-gray-500 italic py-1">No items match the filter.</p>')
-    return
-  }
-
-  setHtml(items.map((item) => {
-    const catLabel    = cats.find((c) => c.value === item.category)?.label || item.category || 'Misc'
-    const memberName  = resolveMember(item.memberId)
-    const b  = parseBudget(item.budget)
-    const cur = item.currency || 'AUD'
-    const linked = (state.planner.receipts || []).filter((r) => r.budgetItemId === item.id)
-    const receiptTotal = linked.reduce((s, r) => s + parseBudget(r.amount), 0)
-    const effectiveActual = linked.length ? receiptTotal : parseBudget(item.actual)
-    const over = b > 0 && effectiveActual > b
-    const bSet  = item.budget !== '' && item.budget != null
-    const acSet = !linked.length && item.actual !== '' && item.actual != null
-    return `<div class="flex items-center gap-2 py-1.5 px-2.5 rounded-md border border-gray-200 bg-white" data-bi-id="${esc(item.id)}">
-      <div class="flex-1 min-w-0">
-        <div class="flex items-center gap-1.5 flex-wrap">
-          <span class="text-sm font-medium text-gray-700 truncate">${esc(item.name || 'Budget item')}</span>
-          <span class="text-[0.6rem] px-1.5 py-px rounded bg-gray-100 text-gray-500 flex-shrink-0">${esc(catLabel)}</span>
-          ${memberName ? `<span class="text-[0.6rem] px-1.5 py-px rounded bg-blue-50 text-blue-700 flex-shrink-0"><i class="fas fa-user text-[0.5rem] mr-0.5"></i>${esc(memberName)}</span>` : ''}
-        </div>
-        <div class="flex gap-3 text-xs mt-0.5 flex-wrap">
-          ${bSet ? `<span class="text-gray-500">Budget: <span class="tabular-nums text-gray-700">${esc(cur)} ${fmt(b)}</span></span>` : ''}
-          ${linked.length
-            ? `<span class="text-gray-500"><i class="fas fa-receipt text-[0.55rem] mr-0.5"></i>Actual (${linked.length} receipt${linked.length !== 1 ? 's' : ''}): <span class="tabular-nums ${over ? 'text-red-600' : 'text-gray-700'}">${esc(cur)} ${fmt(receiptTotal)}</span></span>`
-            : acSet ? `<span class="text-gray-500">Actual: <span class="tabular-nums ${over ? 'text-red-600' : 'text-gray-700'}">${esc(cur)} ${fmt(effectiveActual)}</span></span>` : ''}
-          ${!bSet && !acSet && !linked.length ? `<span class="text-gray-400 italic">${esc(cur)} —</span>` : ''}
-        </div>
-      </div>
-      <button type="button" class="edit-budget-item-btn h-7 w-7 flex items-center justify-center rounded-md border border-gray-200 text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors flex-shrink-0"
-        data-bi-ctx="${esc(ctx)}" data-bi-id="${esc(item.id)}" aria-label="Edit ${esc(item.name || 'item')}">
-        <i class="fas fa-pen-to-square text-[0.65rem]" aria-hidden="true"></i>
-      </button>
-    </div>`
-  }).join(''))
-}
-
-function openBudgetItemModal(ctx, id = null) {
-  _budgetItemCtx = ctx
-  _budgetItemId  = id
-
-  const cats      = ctx === 'personal' ? BUDGET_ITEM_CATS_PERSONAL() : BUDGET_ITEM_CATS_SPONSOR()
-  const catSelect = document.getElementById('budgetItemCategory')
-  const item = id ? getBudgetItemList(ctx).find((i) => i.id === id) : null
-  if (catSelect) catSelect.innerHTML = buildSelectOptions(cats, item?.category || '')
-
-  const currencyEl = document.getElementById('budgetItemCurrency')
-  if (currencyEl) {
-    const defaultCurrency = ctx === 'personal'
-      ? (state.planner.personal?.currency || 'AUD')
-      : (state.planner.org?.sponsorCurrency || 'AUD')
-    currencyEl.innerHTML = currencyOptions(item?.currency || defaultCurrency)
-  }
-
-  // "Assigned to" — sponsor mode only, populated from event team assignments
-  const assignedRow = document.getElementById('budgetItemAssignedToRow')
-  const assignedEl  = document.getElementById('budgetItemAssignedTo')
-  const isSponsor   = ctx === 'sponsor'
-  if (assignedRow) assignedRow.classList.toggle('hidden', !isSponsor)
-  if (isSponsor && assignedEl) {
-    const assignedIds = new Set((state.planner.org?.teamAssignments || []).map((a) => a.memberId))
-    const members = (state.global?.teamMembers || []).filter((m) => m.enabled !== false && assignedIds.has(m.id))
-    assignedEl.innerHTML = `<option value="">— Unassigned —</option>` +
-      members.map((m) => `<option value="${esc(m.id)}"${m.id === (item?.memberId || '') ? ' selected' : ''}>${esc(m.name)}${m.role ? ` (${esc(m.role)})` : ''}</option>`).join('')
-  }
-
-  document.getElementById('budgetItemModalTitle').textContent = id ? 'Edit Budget Item' : 'Add Budget Item'
-  document.getElementById('budgetItemName').value   = item?.name   || ''
-  document.getElementById('budgetItemBudget').value = item?.budget || ''
-  document.getElementById('budgetItemActual').value = item?.actual || ''
-  document.getElementById('budgetItemNotes').value  = item?.notes  || ''
-
-  document.getElementById('budgetItemBudget')?.classList.remove('!border-red-400')
-  document.getElementById('budgetItemActual')?.classList.remove('!border-red-400')
-  document.getElementById('budgetItemModalDelete')?.classList.toggle('hidden', !id)
-  _budgetItemModal.open('budgetItemName')
-}
-
-function saveBudgetItem() {
-  if (!_budgetItemCtx) return
-  const list     = getBudgetItemList(_budgetItemCtx)
-  const name     = document.getElementById('budgetItemName')?.value.trim()   || ''
-  const category = document.getElementById('budgetItemCategory')?.value      || 'misc'
-  const currency = document.getElementById('budgetItemCurrency')?.value      || 'AUD'
-  const budget   = document.getElementById('budgetItemBudget')?.value        || ''
-  const actual   = document.getElementById('budgetItemActual')?.value        || ''
-  const notes    = document.getElementById('budgetItemNotes')?.value.trim()  || ''
-  const memberId = _budgetItemCtx === 'sponsor'
-    ? (document.getElementById('budgetItemAssignedTo')?.value || '')
-    : ''
-
-  if (_budgetItemId) {
-    const item = list.find((i) => i.id === _budgetItemId)
-    if (item) Object.assign(item, { name, category, currency, budget, actual, notes, memberId })
-  } else {
-    const newItem = { id: makeItemId('bi'), name, category, currency, budget, actual, notes, memberId }
-    list.push(newItem)
-    _budgetItemId = newItem.id
-  }
-  scheduleAutoSave()
-}
-
-function afterBudgetItemClose() {
-  const ctx = _budgetItemCtx
-  _budgetItemCtx = null
-  _budgetItemId  = null
-  if (!ctx) return
-  renderBudgetItems(ctx)
-  if (ctx === 'personal') renderPersonalBudgetBreakdown()
-  else renderSponsorBudgetBreakdown()
-  renderReceiptsTab()
-  if (state.activeTab === 'summary') renderSummaryTab()
-}
-
-const _budgetItemModal = createModal('budgetItemModal', {
-  onSave: saveBudgetItem,
-  onDelete: () => {
-    if (!_budgetItemCtx || !_budgetItemId) return
-    const list = getBudgetItemList(_budgetItemCtx)
-    const idx  = list.findIndex((i) => i.id === _budgetItemId)
-    if (idx !== -1) list.splice(idx, 1)
-    // Clear stale references so linked receipts aren't lost from accounting
-    ;(state.planner.receipts || []).forEach((r) => { if (r.budgetItemId === _budgetItemId) r.budgetItemId = '' })
-    scheduleAutoSave()
-  },
-  onClose: afterBudgetItemClose,
-})
-
-function wireBudgetItemsPanel() {
-  // Validate required fields before the modal's own Done handler fires
-  document.getElementById('budgetItemModalDone')?.addEventListener('click', (e) => {
-    const budgetEl = document.getElementById('budgetItemBudget')
-    const actualEl = document.getElementById('budgetItemActual')
-    if (budgetEl?.value === '') {
-      budgetEl.classList.add('!border-red-400')
-      budgetEl.focus()
-      e.stopImmediatePropagation()
-      return
-    }
-    if (actualEl?.value === '') {
-      actualEl.classList.add('!border-red-400')
-      actualEl.focus()
-      e.stopImmediatePropagation()
-      return
-    }
-  })
-
-  _budgetItemModal.wire()
-
-  document.getElementById('addPersonalBudgetItemBtn')?.addEventListener('click', () => openBudgetItemModal('personal'))
-  document.getElementById('addSponsorBudgetItemBtn')?.addEventListener('click',  () => openBudgetItemModal('sponsor'))
-
-  document.getElementById('personalBudgetItemFilter')?.addEventListener('input', () => renderBudgetItems('personal'))
-  document.getElementById('sponsorBudgetItemFilter')?.addEventListener('input',  () => renderBudgetItems('sponsor'))
-
-  // Edit delegation — personal budget items list
-  document.getElementById('personalBudgetItems')?.addEventListener('click', (e) => {
-    const btn = e.target.closest('.edit-budget-item-btn')
-    if (btn) openBudgetItemModal(btn.dataset.biCtx, btn.dataset.biId)
-  })
-
-  // Edit delegation — sponsor budget items list
-  document.getElementById('sponsorBudgetItems')?.addEventListener('click', (e) => {
-    const btn = e.target.closest('.edit-budget-item-btn')
-    if (btn) openBudgetItemModal(btn.dataset.biCtx, btn.dataset.biId)
-  })
-}
+// ── Budget Items -> extracted to ./modules/plannerBudget.js
 
 // ── Swag modal ────────────────────────────────────────────────────────────────
 
 let _swagId = null;
 
+// The swag modal's static fields, resolved once (see personalAccomEls).
+let _swagEls = null;
+function swagEls() {
+  return (_swagEls ??= {
+    name: document.getElementById('swagModalName'),
+    quantity: document.getElementById('swagModalQuantity'),
+    returned: document.getElementById('swagModalReturned'),
+    notes: document.getElementById('swagModalNotes'),
+    doneCheck: document.getElementById('swagModalDoneCheck'),
+  });
+}
+
 function saveSwag() {
   if (!_swagId) return;
   const item = (state.planner.org.swag || []).find((x) => x.id === _swagId);
   if (!item) return;
-  item.name     = document.getElementById('swagModalName')?.value     || '';
-  item.quantity = parseInt(document.getElementById('swagModalQuantity')?.value, 10) || 1;
-  const retVal  = document.getElementById('swagModalReturned')?.value;
+  const m = swagEls();
+  item.name = m.name?.value || '';
+  item.quantity = parseInt(m.quantity?.value, 10) || 1;
+  const retVal = m.returned?.value;
   item.returned = retVal !== '' && retVal != null ? parseInt(retVal, 10) : null;
-  item.budget   = document.getElementById('swagModalBudget')?.value   || '';
-  item.actual   = document.getElementById('swagModalActual')?.value   || '';
-  item.notes    = document.getElementById('swagModalNotes')?.value    || '';
-  item.currency = document.getElementById('swagModalCurrency')?.value || 'AUD';
-  item.done     = document.getElementById('swagModalDoneCheck')?.checked ?? false;
+  item.notes = m.notes?.value || '';
+  item.done = m.doneCheck?.checked ?? false;
   scheduleAutoSave();
 }
 
@@ -6187,38 +1341,296 @@ function openSwagModal(id) {
   const item = (state.planner.org.swag || []).find((x) => x.id === id);
   if (!item) return;
   _swagId = item.id;
-  document.getElementById('swagModalName').value        = item.name     || '';
-  document.getElementById('swagModalQuantity').value    = item.quantity ?? 1;
-  document.getElementById('swagModalReturned').value    = item.returned != null ? item.returned : '';
-  document.getElementById('swagModalBudget').value      = item.budget   || '';
-  document.getElementById('swagModalActual').value      = item.actual   || '';
-  document.getElementById('swagModalNotes').value       = item.notes    || '';
-  document.getElementById('swagModalDoneCheck').checked = !!item.done;
-  const currEl = document.getElementById('swagModalCurrency');
-  if (currEl) { currEl.innerHTML = currencyOptions(); currEl.value = item.currency || 'AUD'; }
+  const m = swagEls();
+  m.name.value = item.name || '';
+  m.quantity.value = item.quantity ?? 1;
+  m.returned.value = item.returned != null ? item.returned : '';
+  m.notes.value = item.notes || '';
+  m.doneCheck.checked = !!item.done;
+  renderSwagReceiptStatus(item);
   _swagModal.open('swagModalName');
 }
 
-function wireSwagModal() { _swagModal.wire(); }
+// The Receipt block in the swag modal — swag actual spend moves to a linked receipt
+// (see buildEventBudgetData). Swag items always exist before the modal opens, so
+// linking is always available (no unsaved-hint needed).
+function renderSwagReceiptStatus(item) {
+  renderEntityReceiptStatus(document.getElementById('swagReceiptStatus'), {
+    receipt: linkedReceipt(state.planner, item),
+    idPrefix: 'swag',
+    canLink: !!item,
+  });
+}
+
+// Create a receipt for the swag item and open it so cost/details are entered on the
+// receipt (the single home for money). Closes the swag modal to avoid stacking.
+function createReceiptForSwag() {
+  const item = (state.planner.org?.swag || []).find((x) => x.id === _swagId);
+  if (!item) return;
+  const m = swagEls();
+  const receipt = createReceiptForEntity(state.planner, item, {
+    name: m.name?.value.trim() || item.name || 'Swag',
+    currency: state.planner?.org?.sponsorCurrency || 'AUD',
+    category: 'swag',
+  });
+  scheduleAutoSave();
+  renderReceiptsTab();
+  _swagModal.close();
+  openReceiptModal(receipt.id);
+}
+
+function wireSwagModal() {
+  _swagModal.wire();
+  const modal = document.getElementById('swagModal');
+  modal?.addEventListener('click', (e) => {
+    if (e.target.closest('#swagCreateReceiptBtn')) {
+      createReceiptForSwag();
+      return;
+    }
+    if (e.target.closest('#swagViewReceiptBtn')) {
+      const item = (state.planner.org?.swag || []).find((x) => x.id === _swagId);
+      _swagModal.close();
+      setActiveTab('receipts');
+      setTimeout(() => {
+        const el = item?.receiptId
+          ? document.querySelector(`details[data-receipt-id="${item.receiptId}"]`)
+          : null;
+        el?.setAttribute('open', '');
+        el?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 50);
+      return;
+    }
+    if (e.target.closest('#swagUnlinkReceiptBtn')) {
+      const item = (state.planner.org?.swag || []).find((x) => x.id === _swagId);
+      if (item) {
+        unlinkEntityReceipt(item);
+        scheduleAutoSave();
+        renderSwagReceiptStatus(item);
+      }
+    }
+  });
+}
+
+// ── Trip note modal ──────────────────────────────────────────────────────────
+
+let _noteId = null;
+
+function saveNote() {
+  if (!_noteId) return;
+  const note = (state.planner.personal?.noteList || []).find((n) => n.id === _noteId);
+  if (!note) return;
+  note.title = document.getElementById('noteModalTitle')?.value || '';
+  note.body = document.getElementById('noteModalBody')?.value || '';
+  scheduleAutoSave();
+}
+
+const _noteModal = createModal('noteModal', {
+  onSave: saveNote,
+  onDelete: () => {
+    state.planner.personal.noteList = (state.planner.personal?.noteList || []).filter(
+      (n) => n.id !== _noteId,
+    );
+    scheduleAutoSave();
+  },
+  onClose: () => {
+    // Drop a note that was added but left completely empty.
+    const list = state.planner.personal?.noteList;
+    if (_noteId && list) {
+      const n = list.find((x) => x.id === _noteId);
+      if (n && !(n.title || '').trim() && !(n.body || '').trim() && !n.emoji) {
+        state.planner.personal.noteList = list.filter((x) => x.id !== _noteId);
+        scheduleAutoSave();
+      }
+    }
+    _noteId = null;
+    renderPersonalNotes();
+  },
+});
+
+// A broad curated emoji set for quick insertion into notes (no dependency), grouped
+// loosely by category so related glyphs cluster in the scrollable picker.
+// prettier-ignore
+const NOTE_EMOJIS = [
+  // Smileys & emotion
+  '😀','😃','😄','😁','😆','😅','😂','🤣','🥲','😊','😇','🙂','🙃','😉','😌','😍',
+  '🥰','😘','😋','😜','🤪','😝','🤗','🤭','🤫','🤔','😐','😑','😶','😏','😒','🙄',
+  '😬','😴','😪','🥱','🤯','😳','🥺','😢','😭','😤','😠','😡','🤬','😱','😨','😰',
+  '😥','😓','🥳','🤩','😎','🤠','🥵','🥶','😷','🤒','🤢','🤮','🤧','🤑','🤐',
+  '😈','👻','💀','☠️','👽','🤖','🎃','💩','🤡',
+  // Gestures & people
+  '👍','👎','👊','✊','🤛','🤜','👌','🤏','✌️','🤞','🤟','🤘','🤙','👈','👉','👆',
+  '👇','☝️','✋','🤚','🖐️','🖖','👋','🤝','🙏','💪','🙌','👏','🤲','✍️',
+  // Hearts & marks
+  '❤️','🧡','💛','💚','💙','💜','🖤','🤍','🤎','💔','❣️','💕','💞','💓','💗','💖',
+  '💘','💝','💯','✅','❌','⭕','❗','❓','‼️','⚠️','🚫','💤','⭐','🌟','✨','⚡',
+  '🔥','💥','💫','🎉','🎊','🎈','🎁','🏆','🥇','🥈','🥉','🎯','🔔','📢','💬','💭',
+  // Objects & work
+  '📝','📋','📌','📍','📎','🔖','📅','📆','⏰','⏳','⌛','🔑','🔒','🔓','🔍','💡',
+  '💰','💵','💳','💎','📱','💻','🖥️','⌨️','📷','🎥','🎧','🎵','🎶','🔦','🕯️','🔋',
+  '🧭','🗺️','📖','📚','🩺','💊','🧾','✂️','📐','🖊️','🖍️','🧩','🎮','🧸','🎫','🧳',
+  // Travel & places
+  '✈️','🛫','🚀','🚁','⛵','🚢','🚆','🚄','🚌','🚕','🚗','🚙','🚲','🛵','🏍️','🚏',
+  '⛽','🚦','🏨','🏠','🏰','🗼','🗽','🗿','🏖️','🏝️','🏜️','⛰️','🏔️','🌋','🏕️','⛺',
+  // Nature & weather
+  '☀️','🌤️','⛅','🌥️','☁️','🌧️','⛈️','🌩️','🌨️','❄️','☃️','⛄','🌬️','🌈','🌊','💧',
+  '🌍','🌎','🌏','🌙','🌸','🌺','🌻','🌹','🌷','🌼','🌱','🌲','🌳','🌴','🌵','🍀',
+  '🍁','🍂','🍄','🐶','🐱','🐰','🦊','🐻','🐼','🐨','🐯','🦁','🐵','🐧','🦋','🐝',
+  // Food & drink
+  '🍎','🍊','🍋','🍌','🍉','🍇','🍓','🍒','🍑','🥭','🍍','🥝','🍅','🥑','🌽','🥕',
+  '🍞','🧀','🥚','🍳','🥞','🥓','🍔','🍟','🍕','🌭','🥪','🌮','🌯','🥗','🍝','🍜',
+  '🍲','🍣','🍱','🍤','🍙','🍚','🍢','🍧','🍨','🍦','🍰','🎂','🧁','🍩','🍪','🍫',
+  '🍬','🍭','🍿','☕','🍵','🥤','🍺','🍻','🥂','🍷','🥃','🍸','🍹','🍾','🍽️',
+  // Flags — special + a broad spread of country flags
+  '🏁','🚩','🏳️','🏴','🏳️‍🌈','🏴‍☠️',
+  '🇦🇺','🇳🇿','🇺🇸','🇬🇧','🇨🇦','🇮🇪','🇳🇱','🇩🇪','🇫🇷','🇪🇸','🇵🇹','🇮🇹','🇧🇪','🇦🇹','🇨🇭','🇱🇺',
+  '🇸🇪','🇳🇴','🇩🇰','🇫🇮','🇮🇸','🇵🇱','🇨🇿','🇸🇰','🇭🇺','🇷🇴','🇧🇬','🇬🇷','🇭🇷','🇸🇮','🇷🇸','🇺🇦',
+  '🇪🇪','🇱🇻','🇱🇹','🇹🇷','🇷🇺','🇯🇵','🇰🇷','🇨🇳','🇭🇰','🇹🇼','🇮🇳','🇸🇬','🇲🇾','🇹🇭','🇮🇩','🇵🇭',
+  '🇻🇳','🇦🇪','🇸🇦','🇮🇱','🇿🇦','🇪🇬','🇰🇪','🇳🇬','🇧🇷','🇦🇷','🇨🇱','🇨🇴','🇵🇪','🇲🇽','🇪🇺',
+];
+
+// Wire the note emoji picker once: toggles a popover and inserts the chosen emoji at
+// the caret in the note body. Optional — the body is plain typing otherwise.
+// Build + wire an emoji popover: a toggle button and a grid; `onPick(emoji)` fires on
+// selection (empty string when the leading "default" cell is chosen). `prepend`
+// injects extra leading cells. Shared by the body-insert picker and the note-icon one.
+function attachEmojiPicker(btn, picker, onPick, { prepend = '' } = {}) {
+  if (!btn || !picker) return;
+  if (!picker.dataset.built) {
+    picker.innerHTML =
+      prepend +
+      NOTE_EMOJIS.map(
+        (e) => `<button type="button" class="note-emoji" tabindex="-1">${e}</button>`,
+      ).join('');
+    picker.dataset.built = '1';
+  }
+  const setOpen = (open) => {
+    picker.classList.toggle('hidden', !open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setOpen(picker.classList.contains('hidden'));
+  });
+  picker.addEventListener('click', (e) => {
+    const cell = e.target.closest('.note-emoji');
+    if (!cell) return;
+    onPick(cell.dataset.clear ? '' : cell.textContent);
+    setOpen(false);
+  });
+  document.addEventListener('click', (e) => {
+    if (
+      !picker.classList.contains('hidden') &&
+      !picker.contains(e.target) &&
+      !btn.contains(e.target)
+    ) {
+      setOpen(false);
+    }
+  });
+}
+
+// Reflect a note's icon emoji on the modal button (default sticky icon when empty).
+function updateNoteIconBtn(emoji) {
+  const btn = document.getElementById('noteIconBtn');
+  if (btn)
+    btn.innerHTML = emoji
+      ? `<span class="note-icon-emoji">${emoji}</span>`
+      : '<span class="note-icon-emoji note-icon-emoji--none">＋</span>';
+}
+
+// Set (or clear) the current note's icon emoji and persist.
+function setNoteEmoji(emoji) {
+  const note = (state.planner.personal?.noteList || []).find((n) => n.id === _noteId);
+  if (!note) return;
+  note.emoji = emoji || '';
+  updateNoteIconBtn(note.emoji);
+  scheduleAutoSave();
+}
+
+function wireNoteEmojiPicker() {
+  const body = document.getElementById('noteModalBody');
+  // Body picker — inserts the emoji at the caret in the note body.
+  attachEmojiPicker(
+    document.getElementById('noteEmojiBtn'),
+    document.getElementById('noteEmojiPicker'),
+    (emoji) => {
+      if (!body) return;
+      const start = body.selectionStart ?? body.value.length;
+      const end = body.selectionEnd ?? body.value.length;
+      body.value = body.value.slice(0, start) + emoji + body.value.slice(end);
+      const pos = start + emoji.length;
+      body.focus();
+      body.setSelectionRange(pos, pos);
+      body.dispatchEvent(new Event('input', { bubbles: true })); // trigger the modal auto-save
+    },
+  );
+  // Icon picker — sets the note's own icon; the leading cell resets to the default.
+  attachEmojiPicker(
+    document.getElementById('noteIconBtn'),
+    document.getElementById('noteIconPicker'),
+    (emoji) => setNoteEmoji(emoji),
+    {
+      prepend:
+        '<button type="button" class="note-emoji note-emoji-default" data-clear="1" title="No icon" tabindex="-1">&times;</button>',
+    },
+  );
+}
+
+function openNoteModal(id) {
+  const note = (state.planner.personal?.noteList || []).find((n) => n.id === id);
+  if (!note) return;
+  _noteId = id;
+  document.getElementById('noteModalTitle').value = note.title || '';
+  document.getElementById('noteModalBody').value = note.body || '';
+  updateNoteIconBtn(note.emoji || '');
+  document.getElementById('noteEmojiPicker')?.classList.add('hidden');
+  document.getElementById('noteIconPicker')?.classList.add('hidden');
+  document.getElementById('noteEmojiBtn')?.setAttribute('aria-expanded', 'false');
+  document.getElementById('noteIconBtn')?.setAttribute('aria-expanded', 'false');
+  _noteModal.open('noteModalTitle');
+}
+
+function wireNoteModal() {
+  _noteModal.wire();
+}
 
 // ── Personal accommodation modal ─────────────────────────────────────────────
 
 let _personalAccomId = null;
 
+// The personal-accommodation modal's static fields, resolved once (the markup is
+// fixed in planner.html). One cached map documents the modal's DOM contract and
+// replaces ~20 getElementById reads across open/save.
+let _personalAccomEls = null;
+function personalAccomEls() {
+  return (_personalAccomEls ??= {
+    type: document.getElementById('personalAccomModalType'),
+    name: document.getElementById('personalAccomModalName'),
+    address: document.getElementById('personalAccomModalAddress'),
+    coords: document.getElementById('personalAccomModalCoords'),
+    confirmation: document.getElementById('personalAccomModalConfirmation'),
+    status: document.getElementById('personalAccomModalStatus'),
+    checkIn: document.getElementById('personalAccomModalCheckIn'),
+    checkOut: document.getElementById('personalAccomModalCheckOut'),
+    notes: document.getElementById('personalAccomModalNotes'),
+  });
+}
+
 function savePersonalAccom() {
   if (!_personalAccomId) return;
-  const accom = (state.planner.personal?.accommodations || []).find((a) => a.id === _personalAccomId);
+  const accom = (state.planner.personal?.accommodations || []).find(
+    (a) => a.id === _personalAccomId,
+  );
   if (!accom) return;
-  accom.type         = document.getElementById('personalAccomModalType')?.value         || 'accommodation';
-  accom.name         = document.getElementById('personalAccomModalName')?.value         || '';
-  accom.address      = document.getElementById('personalAccomModalAddress')?.value      || '';
-  accom.confirmation = document.getElementById('personalAccomModalConfirmation')?.value || '';
-  accom.checkIn      = accom.type === 'waypoints' ? (document.getElementById('personalAccomModalCheckIn')?.value  || '') : '';
-  accom.checkOut     = accom.type === 'waypoints' ? (document.getElementById('personalAccomModalCheckOut')?.value || '') : '';
-  accom.notes        = document.getElementById('personalAccomModalNotes')?.value        || '';
-  accom.budget       = document.getElementById('personalAccomModalBudget')?.value       || '';
-  accom.budgetActual = document.getElementById('personalAccomModalActual')?.value       || '';
-  accom.currency     = document.getElementById('personalAccomModalCurrency')?.value     || 'AUD';
+  const m = personalAccomEls();
+  accom.type = m.type?.value || 'accommodation';
+  accom.name = m.name?.value || '';
+  accom.address = m.address?.value || '';
+  accom.coords = m.coords?.value || '';
+  accom.confirmation = m.confirmation?.value || '';
+  accom.status = m.status?.value || '';
+  accom.checkIn = accom.type === 'waypoints' ? m.checkIn?.value || '' : '';
+  accom.checkOut = accom.type === 'waypoints' ? m.checkOut?.value || '' : '';
+  accom.notes = m.notes?.value || '';
   scheduleAutoSave();
   renderPersonalTimeline();
   renderPersonalBudgetBreakdown();
@@ -6228,7 +1640,9 @@ const _personalAccomModal = createModal('personalAccomModal', {
   onSave: savePersonalAccom,
   onDelete: () => {
     const personal = state.planner.personal;
-    personal.accommodations = (personal.accommodations || []).filter((a) => a.id !== _personalAccomId);
+    personal.accommodations = (personal.accommodations || []).filter(
+      (a) => a.id !== _personalAccomId,
+    );
     scheduleAutoSave();
   },
   onClose: () => {
@@ -6243,60 +1657,154 @@ function _syncPersonalAccomModalType(type) {
   const iconEl = document.getElementById('personalAccomModalTitleIcon');
   const textEl = document.getElementById('personalAccomModalTitleText');
   const isWaypoints = type === 'waypoints';
-  if (iconEl) iconEl.className = `${accomTypeIcon(type)} mr-2 text-gray-500 text-sm`;
+  if (iconEl) iconEl.className = `${accomTypeIcon(type)} mr-2 pl-ink-2 text-sm`;
   if (textEl) textEl.textContent = isWaypoints ? 'Waypoint' : 'Accommodation';
   toggleWaypointStopsSection(isWaypoints, 'personalAccomWaypointStopsSection');
   document.getElementById('personalAccomModalCheckInRow')?.classList.toggle('hidden', !isWaypoints);
-  document.getElementById('personalAccomModalCheckOutRow')?.classList.toggle('hidden', !isWaypoints);
-  document.getElementById('personalAccomCompanionCheckInRow')?.classList.toggle('hidden', isWaypoints);
-  document.getElementById('personalAccomCompanionCheckOutRow')?.classList.toggle('hidden', isWaypoints);
+  document
+    .getElementById('personalAccomModalCheckOutRow')
+    ?.classList.toggle('hidden', !isWaypoints);
+  document
+    .getElementById('personalAccomCompanionCheckInRow')
+    ?.classList.toggle('hidden', isWaypoints);
+  document
+    .getElementById('personalAccomCompanionCheckOutRow')
+    ?.classList.toggle('hidden', isWaypoints);
 }
 
-function openPersonalAccomModal(id) {
+function openPersonalAccomModal(id, { selectMe = false } = {}) {
   const accom = (state.planner.personal?.accommodations || []).find((a) => a.id === id);
   if (!accom) return;
   _personalAccomId = id;
-  const pType = document.getElementById('personalAccomModalType');
-  if (pType) pType.value = accom.type || 'accommodation';
+  const m = personalAccomEls();
+  if (m.type) m.type.value = accom.type || 'accommodation';
   _syncPersonalAccomModalType(accom.type || 'accommodation');
-  renderWaypointStops(accom.stops, 'personalAccomWaypointStopsList', 'personalAccomWaypointStopsEmpty');
-  document.getElementById('personalAccomModalName').value         = accom.name         || '';
-  document.getElementById('personalAccomModalAddress').value      = accom.address      || '';
-  document.getElementById('personalAccomModalConfirmation').value = accom.confirmation || '';
-  document.getElementById('personalAccomModalCheckIn').value      = accom.checkIn      || '';
-  document.getElementById('personalAccomModalCheckOut').value     = accom.checkOut     || '';
-  document.getElementById('personalAccomModalNotes').value        = accom.notes        || '';
-  document.getElementById('personalAccomModalBudget').value       = accom.budget       || '';
-  document.getElementById('personalAccomModalActual').value       = accom.budgetActual || '';
-  const currEl = document.getElementById('personalAccomModalCurrency');
-  if (currEl) { currEl.innerHTML = currencyOptions(); currEl.value = accom.currency || state.planner?.personal?.currency || 'AUD'; }
-  renderAccomDocStatus(accom, 'personalAccomDocStatus', 'personalAccomAttachDocBtn');
+  renderWaypointStops(
+    accom.stops,
+    'personalAccomWaypointStopsList',
+    'personalAccomWaypointStopsEmpty',
+  );
+  m.name.value = accom.name || '';
+  m.address.value = accom.address || '';
+  if (m.coords) m.coords.value = accom.coords || '';
+  m.confirmation.value = accom.confirmation || '';
+  if (m.status) m.status.innerHTML = buildSelectOptions(TRAVEL_STATUSES, accom.status || '');
+  m.checkIn.value = accom.checkIn || '';
+  m.checkOut.value = accom.checkOut || '';
+  m.notes.value = accom.notes || '';
+  renderPersonalAccomReceiptStatus(accom);
   renderPersonalAccomMembersSection(accom);
+  // Pre-select the "Me" stay so seeded gap dates are visible/editable on open.
+  if (selectMe && (accom.assignments || []).some((s) => s.memberId === '__me__')) {
+    const sel = document.getElementById('personalAccomCompanionSelect');
+    if (sel) {
+      sel.value = '__me__';
+      loadPersonalCompanionStayFields(accom, '__me__');
+    }
+  }
   _personalAccomModal.open('personalAccomModalName');
 }
 
-function renderAccomDocStatus(accom, statusId, attachBtnId) {
-  const container = document.getElementById(statusId);
-  if (!container) return;
-  if (accom?.filePath) {
-    container.innerHTML = `
-      <i class="fas fa-paperclip text-[0.65rem] text-gray-500 flex-shrink-0" aria-hidden="true"></i>
-      <a href="${esc(accom.filePath)}" target="_blank"
-        class="text-xs text-blue-600 hover:underline truncate flex-1">
-        ${esc(fileDisplayName(accom.filePath, accom.fileLabel))}
-      </a>
-      <button type="button" id="${attachBtnId}"
-        class="h-8 px-3 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0">
-        <i class="fas fa-paperclip mr-1 text-[0.65rem]" aria-hidden="true"></i>Replace
-      </button>`;
-  } else {
-    container.innerHTML = `
-      <span class="text-xs text-gray-500 flex-1 italic">No document attached</span>
-      <button type="button" id="${attachBtnId}"
-        class="h-8 px-3 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0">
-        <i class="fas fa-paperclip mr-1 text-[0.65rem]" aria-hidden="true"></i>Attach
-      </button>`;
-  }
+// The Receipt block in the personal-accommodation modal — the accommodation-level
+// cost moves to a linked receipt (see buildPersonalBudgetData). Per-companion stay
+// costs are handled by their own stay receipts (migrated automatically).
+function renderPersonalAccomReceiptStatus(accom) {
+  renderEntityReceiptStatus(document.getElementById('personalAccomReceiptStatus'), {
+    receipt: linkedReceipt(state.planner, accom),
+    idPrefix: 'personalAccom',
+    canLink: !!accom,
+    showLink: true, // a stay's booking/confirmation lives on its linked receipt
+  });
+}
+
+// Create a receipt for the accommodation and open it so cost/details are entered on
+// the receipt (the single home for money). Closes the modal to avoid stacking.
+function createReceiptForPersonalAccom() {
+  const accom = (state.planner.personal?.accommodations || []).find(
+    (a) => a.id === _personalAccomId,
+  );
+  if (!accom) return;
+  const m = personalAccomEls();
+  const receipt = createReceiptForEntity(state.planner, accom, {
+    name: m.name?.value.trim() || accom.name || 'Accommodation',
+    currency: state.planner?.personal?.currency || 'AUD',
+    category: 'accommodation',
+  });
+  scheduleAutoSave();
+  renderReceiptsTab();
+  _personalAccomModal.close();
+  openReceiptModal(receipt.id);
+}
+
+// The accommodation-level receipt link (booking confirmation lives on the receipt).
+function renderOrgAccomReceiptStatus(accom) {
+  renderEntityReceiptStatus(document.getElementById('accomDocStatus'), {
+    receipt: linkedReceipt(state.planner, accom),
+    idPrefix: 'orgAccom',
+    canLink: !!accom,
+    showLink: true,
+  });
+}
+function createReceiptForOrgAccom() {
+  const acc = _currentOrgAccom();
+  if (!acc) return;
+  const receipt = createReceiptForEntity(state.planner, acc, {
+    name: acc.name || 'Accommodation',
+    currency: state.planner?.org?.sponsorCurrency || 'AUD',
+    category: 'accommodation',
+  });
+  scheduleAutoSave();
+  renderReceiptsTab();
+  hideModal('accommodationModal');
+  openReceiptModal(receipt.id);
+}
+
+// The current org accommodation the accommodation modal is editing.
+function _currentOrgAccom() {
+  const modal = document.getElementById('accommodationModal');
+  return (
+    (state.planner.org?.accommodations || []).find((a) => a.id === modal?.dataset.accomId) || null
+  );
+}
+
+// The org accommodation stay for the member currently selected in the modal.
+function _currentAccomStay() {
+  const acc = _currentOrgAccom();
+  const memberId = document.getElementById('accomMemberSelect')?.value;
+  if (!acc || !memberId) return null;
+  return (acc.assignments || []).find((s) => s.memberId === memberId) || null;
+}
+
+// The Receipt block for the selected member's stay — each org accommodation stay's
+// cost moves to its own linked receipt (see buildEventBudgetData accom stays).
+function renderAccomStayReceiptStatus(acc, memberId) {
+  const stay = (acc?.assignments || []).find((s) => s.memberId === memberId) || null;
+  renderEntityReceiptStatus(document.getElementById('accomMemberReceiptStatus'), {
+    receipt: linkedReceipt(state.planner, stay),
+    idPrefix: 'accomMember',
+    canLink: !!stay,
+    showLink: true,
+  });
+}
+
+// Create a receipt for the selected stay and open it so cost/details are entered on
+// the receipt (the single home for money). Closes the modal to avoid stacking.
+function createReceiptForAccomStay() {
+  const acc = _currentOrgAccom();
+  const stay = _currentAccomStay();
+  if (!acc || !stay) return;
+  const member = state.global?.teamMembers?.find((m) => m.id === stay.memberId);
+  const who = member?.name ? ` — ${member.name}` : '';
+  const receipt = createReceiptForEntity(state.planner, stay, {
+    name: `${acc.name || 'Accommodation'}${who}`,
+    currency: state.planner?.org?.sponsorCurrency || 'AUD',
+    category: 'accommodation',
+  });
+  scheduleAutoSave();
+  renderReceiptsTab();
+  hideModal('accommodationModal');
+  renderOrgTab();
+  openReceiptModal(receipt.id);
 }
 
 function wirePersonalAccomModal() {
@@ -6306,20 +1814,71 @@ function wirePersonalAccomModal() {
   if (!modal) return;
 
   modal.addEventListener('click', (e) => {
-    if (e.target.closest('#personalAccomAttachDocBtn')) {
-      document.getElementById('personalAccomFileInput')?.click();
+    if (e.target.closest('#personalAccomLinkReceiptBtn')) {
+      const accom = (state.planner.personal?.accommodations || []).find(
+        (a) => a.id === _personalAccomId,
+      );
+      if (!accom) return;
+      openReceiptPicker(state.planner, {
+        onPick: (rid) => {
+          linkEntityReceipt(accom, rid);
+          scheduleAutoSave();
+          renderPersonalAccomReceiptStatus(accom);
+          renderReceiptsTab();
+        },
+        onCreate: () => createReceiptForPersonalAccom(),
+      });
+      return;
+    }
+    if (e.target.closest('#personalAccomCreateReceiptBtn')) {
+      createReceiptForPersonalAccom();
+      return;
+    }
+    if (e.target.closest('#personalAccomViewReceiptBtn')) {
+      const accom = (state.planner.personal?.accommodations || []).find(
+        (a) => a.id === _personalAccomId,
+      );
+      _personalAccomModal.close();
+      setActiveTab('receipts');
+      setTimeout(() => {
+        const el = accom?.receiptId
+          ? document.querySelector(`details[data-receipt-id="${accom.receiptId}"]`)
+          : null;
+        el?.setAttribute('open', '');
+        el?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 50);
+      return;
+    }
+    if (e.target.closest('#personalAccomUnlinkReceiptBtn')) {
+      const accom = (state.planner.personal?.accommodations || []).find(
+        (a) => a.id === _personalAccomId,
+      );
+      if (accom) {
+        unlinkEntityReceipt(accom);
+        scheduleAutoSave();
+        renderPersonalAccomReceiptStatus(accom);
+      }
+      return;
     }
     if (e.target.closest('#personalAccomRemoveCompanionBtn')) {
-      const accom = (state.planner.personal?.accommodations || []).find((a) => a.id === _personalAccomId);
+      const accom = (state.planner.personal?.accommodations || []).find(
+        (a) => a.id === _personalAccomId,
+      );
       if (!accom) return;
-      const select    = document.getElementById('personalAccomCompanionSelect');
+      const select = document.getElementById('personalAccomCompanionSelect');
       const contactId = select?.value;
       if (!contactId) return;
       accom.assignments = (accom.assignments || []).filter((s) => s.memberId !== contactId);
       const opt = select.querySelector(`option[value="${CSS.escape(contactId)}"]`);
       if (opt) opt.textContent = opt.textContent.replace(' ✓', '');
-      ['personalAccomCompanionCheckIn','personalAccomCompanionCheckOut','personalAccomCompanionBudget','personalAccomCompanionActual'].forEach((id) => {
-        const el = document.getElementById(id); if (el) el.value = '';
+      [
+        'personalAccomCompanionCheckIn',
+        'personalAccomCompanionCheckOut',
+        'personalAccomCompanionBudget',
+        'personalAccomCompanionActual',
+      ].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
       });
       const currEl = document.getElementById('personalAccomCompanionCurrency');
       if (currEl) currEl.innerHTML = currencyOptions('AUD');
@@ -6330,23 +1889,36 @@ function wirePersonalAccomModal() {
   });
 
   const COMPANION_FIELD_MAP = {
-    personalAccomCompanionCheckIn:  'checkIn',
+    personalAccomCompanionCheckIn: 'checkIn',
     personalAccomCompanionCheckOut: 'checkOut',
     personalAccomCompanionCurrency: 'currency',
-    personalAccomCompanionBudget:   'budget',
-    personalAccomCompanionActual:   'budgetActual',
+    personalAccomCompanionBudget: 'budget',
+    personalAccomCompanionActual: 'budgetActual',
+    personalAccomCompanionPurchaseDate: 'purchaseDate',
   };
 
   modal.addEventListener('change', (e) => {
     if (e.target.id === 'personalAccomCompanionSelect') {
-      const accom = (state.planner.personal?.accommodations || []).find((a) => a.id === _personalAccomId);
+      const accom = (state.planner.personal?.accommodations || []).find(
+        (a) => a.id === _personalAccomId,
+      );
       if (!accom) return;
       const contactId = e.target.value;
       if (contactId) {
         accom.assignments = accom.assignments || [];
         if (!accom.assignments.find((s) => s.memberId === contactId)) {
-          accom.assignments.push({ memberId: contactId, checkIn: '', checkOut: '', budget: '', budgetActual: '', currency: state.planner?.personal?.currency || 'AUD' });
-          const opt = modal.querySelector(`#personalAccomCompanionSelect option[value="${CSS.escape(contactId)}"]`);
+          accom.assignments.push({
+            memberId: contactId,
+            checkIn: '',
+            checkOut: '',
+            budget: '',
+            budgetActual: '',
+            purchaseDate: '',
+            currency: state.planner?.personal?.currency || 'AUD',
+          });
+          const opt = modal.querySelector(
+            `#personalAccomCompanionSelect option[value="${CSS.escape(contactId)}"]`,
+          );
           if (opt && !opt.textContent.endsWith(' ✓')) opt.textContent += ' ✓';
           const removeBtn = document.getElementById('personalAccomRemoveCompanionBtn');
           if (removeBtn) removeBtn.classList.remove('opacity-0', 'pointer-events-none');
@@ -6361,16 +1933,28 @@ function wirePersonalAccomModal() {
       return;
     }
     if (COMPANION_FIELD_MAP[e.target.id]) {
-      const accom = (state.planner.personal?.accommodations || []).find((a) => a.id === _personalAccomId);
+      const accom = (state.planner.personal?.accommodations || []).find(
+        (a) => a.id === _personalAccomId,
+      );
       if (!accom) return;
       const contactId = document.getElementById('personalAccomCompanionSelect')?.value;
       if (!contactId) return;
       accom.assignments = accom.assignments || [];
       let stay = accom.assignments.find((s) => s.memberId === contactId);
       if (!stay) {
-        stay = { memberId: contactId, checkIn: '', checkOut: '', budget: '', budgetActual: '', currency: state.planner?.personal?.currency || 'AUD' };
+        stay = {
+          memberId: contactId,
+          checkIn: '',
+          checkOut: '',
+          budget: '',
+          budgetActual: '',
+          purchaseDate: '',
+          currency: state.planner?.personal?.currency || 'AUD',
+        };
         accom.assignments.push(stay);
-        const opt = modal.querySelector(`#personalAccomCompanionSelect option[value="${CSS.escape(contactId)}"]`);
+        const opt = modal.querySelector(
+          `#personalAccomCompanionSelect option[value="${CSS.escape(contactId)}"]`,
+        );
         if (opt && !opt.textContent.endsWith(' ✓')) opt.textContent += ' ✓';
         const removeBtn = document.getElementById('personalAccomRemoveCompanionBtn');
         if (removeBtn) removeBtn.classList.remove('opacity-0', 'pointer-events-none');
@@ -6380,28 +1964,17 @@ function wirePersonalAccomModal() {
     }
   });
 
-  document.getElementById('personalAccomFileInput')?.addEventListener('change', async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const accom = (state.planner.personal?.accommodations || []).find((a) => a.id === _personalAccomId);
-    if (!accom) { e.target.value = ''; return; }
-    try {
-      const { path, label } = await uploadOrReadFile(file);
-      accom.filePath  = path;
-      accom.fileLabel = label;
-    } catch (err) { window.alert(err.message); e.target.value = ''; return; }
-    scheduleAutoSave();
-    renderAccomDocStatus(accom, 'personalAccomDocStatus', 'personalAccomAttachDocBtn');
-    renderPersonalAccomList();
-    renderDocumentsTab();
-    e.target.value = '';
-  });
-
   document.getElementById('personalAccomAddWaypointStopBtn')?.addEventListener('click', () => {
-    const accom = (state.planner.personal?.accommodations || []).find((a) => a.id === _personalAccomId);
+    const accom = (state.planner.personal?.accommodations || []).find(
+      (a) => a.id === _personalAccomId,
+    );
     if (!accom) return;
     accom.stops = [...(accom.stops || []), makeWaypointStop()];
-    renderWaypointStops(accom.stops, 'personalAccomWaypointStopsList', 'personalAccomWaypointStopsEmpty');
+    renderWaypointStops(
+      accom.stops,
+      'personalAccomWaypointStopsList',
+      'personalAccomWaypointStopsEmpty',
+    );
     scheduleAutoSave();
   });
 
@@ -6410,56 +1983,124 @@ function wirePersonalAccomModal() {
     if (!field) return;
     const legId = e.target.closest('[data-stop-id]')?.dataset.stopId;
     if (!legId) return;
-    const accom = (state.planner.personal?.accommodations || []).find((a) => a.id === _personalAccomId);
+    const accom = (state.planner.personal?.accommodations || []).find(
+      (a) => a.id === _personalAccomId,
+    );
     if (!accom) return;
     const leg = (accom.stops || []).find((l) => l.id === legId);
-    if (leg) { leg[field] = e.target.value; scheduleAutoSave(); }
+    if (leg) {
+      leg[field] = e.target.value;
+      scheduleAutoSave();
+    }
   });
 
   document.getElementById('personalAccomWaypointStopsList')?.addEventListener('click', (e) => {
     if (!e.target.closest('.remove-waypoint-stop-btn')) return;
     const legId = e.target.closest('[data-stop-id]')?.dataset.stopId;
     if (!legId) return;
-    const accom = (state.planner.personal?.accommodations || []).find((a) => a.id === _personalAccomId);
+    const accom = (state.planner.personal?.accommodations || []).find(
+      (a) => a.id === _personalAccomId,
+    );
     if (!accom) return;
     accom.stops = (accom.stops || []).filter((l) => l.id !== legId);
-    renderWaypointStops(accom.stops, 'personalAccomWaypointStopsList', 'personalAccomWaypointStopsEmpty');
+    renderWaypointStops(
+      accom.stops,
+      'personalAccomWaypointStopsList',
+      'personalAccomWaypointStopsEmpty',
+    );
     scheduleAutoSave();
   });
 
-  wireWaypointStopsDragDrop('personalAccomWaypointStopsList', 'personalAccomWaypointStopsEmpty',
-    () => (state.planner.personal?.accommodations || []).find((a) => a.id === _personalAccomId));
+  wireWaypointStopsDragDrop(
+    'personalAccomWaypointStopsList',
+    'personalAccomWaypointStopsEmpty',
+    () => (state.planner.personal?.accommodations || []).find((a) => a.id === _personalAccomId),
+  );
 }
 
 function wirePersonalPanel() {
-  const panel = document.getElementById('plannerPersonalPanel')
-  if (!panel) return
+  const panel = document.getElementById('plannerPersonalPanel');
+  if (!panel) return;
 
   function ensurePersonal() {
-    if (!state.planner.personal) state.planner.personal = {
-      outboundLegs: [], returnLegs: [], accommodations: [],
-      budget: '', budgetActual: '', currency: getDefaultCurrency(), notes: ''
-    }
-    return state.planner.personal
+    if (!state.planner.personal)
+      state.planner.personal = {
+        outboundLegs: [],
+        returnLegs: [],
+        accommodations: [],
+        budget: '',
+        budgetActual: '',
+        currency: getDefaultCurrency(),
+        notes: '',
+        noteList: [],
+      };
+    if (!Array.isArray(state.planner.personal.noteList)) state.planner.personal.noteList = [];
+    return state.planner.personal;
   }
 
+  // Trip notes — add a new note and open it in the modal to fill in
+  document.getElementById('addPersonalNoteBtn')?.addEventListener('click', () => {
+    const personal = ensurePersonal();
+    const note = { id: makeItemId('note'), title: '', body: '', emoji: '' };
+    personal.noteList = [...personal.noteList, note];
+    renderPersonalNotes();
+    scheduleAutoSave();
+    openNoteModal(note.id);
+  });
+
+  // Trip notes — edit (open modal) and remove (with undo). Delegated on document
+  // because the trip-notes list now lives on the Notes tab, not the Personal panel.
+  document.addEventListener('click', (e) => {
+    const editBtn = e.target.closest('.personal-note-edit-btn');
+    if (editBtn) {
+      openNoteModal(editBtn.dataset.noteId);
+      return;
+    }
+
+    const removeBtn = e.target.closest('.personal-note-remove-btn');
+    if (!removeBtn) return;
+    const id = removeBtn.dataset.noteId;
+    const personal = ensurePersonal();
+    const idx = personal.noteList.findIndex((n) => n.id === id);
+    const snapshot = personal.noteList[idx];
+    personal.noteList = personal.noteList.filter((n) => n.id !== id);
+    renderPersonalNotes();
+    scheduleAutoSave();
+    if (snapshot)
+      showUndoToast(snapshot.title || 'Note', () => {
+        const p = ensurePersonal();
+        p.noteList.splice(Math.min(idx, p.noteList.length), 0, snapshot);
+        renderPersonalNotes();
+        scheduleAutoSave();
+      });
+  });
+
   document.getElementById('addPersonalOutboundLegBtn')?.addEventListener('click', () => {
-    const personal  = ensurePersonal()
-    const newLeg = makeLeg()
-    personal.outboundLegs = [...(personal.outboundLegs || []), newLeg]
-    renderPersonalTab()
-    scheduleAutoSave()
-    openPersonalLegModal('outbound', newLeg.id)
-  })
+    const personal = ensurePersonal();
+    const newLeg = makeLeg();
+    personal.outboundLegs = [...(personal.outboundLegs || []), newLeg];
+    renderPersonalTab();
+    scheduleAutoSave();
+    openPersonalLegModal('outbound', newLeg.id);
+  });
 
   document.getElementById('addPersonalReturnLegBtn')?.addEventListener('click', () => {
-    const personal  = ensurePersonal()
-    const newLeg = makeLeg()
-    personal.returnLegs = [...(personal.returnLegs || []), newLeg]
-    renderPersonalTab()
-    scheduleAutoSave()
-    openPersonalLegModal('return', newLeg.id)
-  })
+    const personal = ensurePersonal();
+    const newLeg = makeLeg();
+    personal.returnLegs = [...(personal.returnLegs || []), newLeg];
+    renderPersonalTab();
+    scheduleAutoSave();
+    openPersonalLegModal('return', newLeg.id);
+  });
+
+  document.getElementById('addPersonalLocalLegBtn')?.addEventListener('click', () => {
+    const personal = ensurePersonal();
+    const newLeg = makeLeg();
+    personal.localLegs = [...(personal.localLegs || []), newLeg];
+    renderPersonalTab();
+    scheduleAutoSave();
+    openPersonalLegModal('local', newLeg.id);
+  });
 
   // Personal accom type select — updates modal icon/title live and saves
   document.getElementById('personalAccomModalType')?.addEventListener('change', (e) => {
@@ -6467,181 +2108,171 @@ function wirePersonalPanel() {
     savePersonalAccom();
   });
 
+  // Create a new personal accommodation (optionally pre-seeded with stay dates,
+  // e.g. from a "gap night" CTA) and open it for editing. A regular stay's own
+  // dates live on the `__me__` assignment, so seeded dates go there.
+  function addPersonalAccommodation({ checkIn = '', checkOut = '' } = {}) {
+    const personal = ensurePersonal();
+    const currency = personal.currency || 'AUD';
+    const newAccom = {
+      id: makeItemId('ia'),
+      name: '',
+      address: '',
+      checkIn: '',
+      checkOut: '',
+      confirmation: '',
+      status: '',
+      budget: '',
+      budgetActual: '',
+      currency,
+      notes: '',
+      receiptId: '',
+    };
+    const seeded = !!(checkIn && checkOut);
+    if (seeded) {
+      newAccom.assignments = [
+        {
+          memberId: '__me__',
+          checkIn,
+          checkOut,
+          budget: '',
+          budgetActual: '',
+          purchaseDate: '',
+          currency,
+        },
+      ];
+    }
+    personal.accommodations = [...(personal.accommodations || []), newAccom];
+    scheduleAutoSave();
+    renderPersonalAccomList();
+    renderPersonalTimeline();
+    renderPersonalConflicts();
+    renderPersonalItineraryTab(); // refresh the agenda so the filled gap row clears
+    openPersonalAccomModal(newAccom.id, { selectMe: seeded });
+  }
+
   // Add accommodation
-  document.getElementById('addPersonalAccomBtn')?.addEventListener('click', () => {
-    const personal   = ensurePersonal()
-    const newAccom = { id: makeItemId('ia'), name: '', address: '', checkIn: '', checkOut: '', confirmation: '', budget: '', budgetActual: '', currency: personal.currency || 'AUD', notes: '' }
-    personal.accommodations = [...(personal.accommodations || []), newAccom]
-    scheduleAutoSave()
-    renderPersonalAccomList()
-    openPersonalAccomModal(newAccom.id)
-  })
+  document
+    .getElementById('addPersonalAccomBtn')
+    ?.addEventListener('click', () => addPersonalAccommodation());
+
+  // "Add stay" from an itinerary gap night — document-level so it fires from the
+  // agenda in both the Itinerary tab and the mobile overview. Seeds the gap dates.
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest?.('.agenda-add-accom');
+    if (!btn) return;
+    addPersonalAccommodation({
+      checkIn: btn.dataset.gapCheckin || '',
+      checkOut: btn.dataset.gapCheckout || '',
+    });
+  });
 
   // Budget + notes field delegation
-  panel.addEventListener('input',  handlePersonalField)
-  panel.addEventListener('change', handlePersonalField)
+  panel.addEventListener('input', handlePersonalField);
+  panel.addEventListener('change', handlePersonalField);
 
   // Timeline date range inputs — override the auto-derived range
-  document.getElementById('personalTimelineStart')?.addEventListener('change', () => { renderPersonalTimeline(); renderPersonalItinerary() })
-  document.getElementById('personalTimelineEnd')?.addEventListener('change',   () => { renderPersonalTimeline(); renderPersonalItinerary() })
+  document.getElementById('personalTimelineStart')?.addEventListener('change', () => {
+    renderPersonalTimeline();
+    renderPersonalItinerary();
+  });
+  document.getElementById('personalTimelineEnd')?.addEventListener('change', () => {
+    renderPersonalTimeline();
+    renderPersonalItinerary();
+  });
 
   function handlePersonalField(e) {
-    const personal = ensurePersonal()
+    const personal = ensurePersonal();
     // Event title (unassociated planners only)
     if (e.target.id === 'plannerPersonalTitle') {
-      state.planner._displayName = e.target.value
-      const other = document.getElementById('plannerSponsorTitle')
-      if (other && !other.disabled) other.value = e.target.value
-      scheduleAutoSave(); updateHeader(); return
+      state.planner._displayName = e.target.value;
+      const other = document.getElementById('plannerSponsorTitle');
+      if (other && !other.disabled) other.value = e.target.value;
+      scheduleAutoSave();
+      updateHeader();
+      return;
     }
-    // Budget / notes
-    if (e.target.id === 'personalBudget')   { personal.budget       = e.target.value; scheduleAutoSave(); renderPersonalBudgetBreakdown(); return }
-    if (e.target.id === 'personalActual')   { personal.budgetActual = e.target.value; scheduleAutoSave(); renderPersonalBudgetBreakdown(); return }
-    if (e.target.id === 'personalCurrency') { personal.currency     = e.target.value; scheduleAutoSave(); renderPersonalBudgetBreakdown(); return }
-    if (e.target.id === 'personalNotes')    { personal.notes        = e.target.value; scheduleAutoSave(); return }
-
     // Leg fields (data-leg-id / data-direction / data-leg-field)
-    const { legId, direction, legField } = e.target.dataset
+    const { legId, direction, legField } = e.target.dataset;
     if (legId && direction && legField) {
-      const legs = direction === 'outbound' ? personal.outboundLegs : personal.returnLegs
-      const leg  = (legs || []).find((l) => l.id === legId)
+      const legs = direction === 'outbound' ? personal.outboundLegs : personal.returnLegs;
+      const leg = (legs || []).find((l) => l.id === legId);
       if (leg) {
-        leg[legField] = e.target.value
+        leg[legField] = e.target.value;
         if (legField === 'date' || legField === 'departTime' || legField === 'arriveTime') {
-          const computed = autoArriveDate(leg.date, leg.departTime, leg.arriveTime)
+          const computed = autoArriveDate(leg.date, leg.departTime, leg.arriveTime);
           if (computed && !leg.arriveDate) {
-            leg.arriveDate = computed
-            const arriveDateInput = e.target.closest('[data-leg-id]')?.parentElement
-              ?.querySelector(`[data-leg-field="arriveDate"]`)
-            if (arriveDateInput) arriveDateInput.value = computed
+            leg.arriveDate = computed;
+            const arriveDateInput = e.target
+              .closest('[data-leg-id]')
+              ?.parentElement?.querySelector(`[data-leg-field="arriveDate"]`);
+            if (arriveDateInput) arriveDateInput.value = computed;
           }
         }
-        scheduleAutoSave()
-        if (legField === 'date' || legField === 'mode') { renderPersonalTimeline(); renderPersonalItinerary() }
+        scheduleAutoSave();
+        if (legField === 'date' || legField === 'mode') {
+          renderPersonalTimeline();
+          renderPersonalItinerary();
+        }
       }
     }
   }
 
-  panel.addEventListener('click', (e) => {
-    // Accommodation edit → open modal
-    const accomEditBtn = e.target.closest('.personal-accom-edit-btn')
-    if (accomEditBtn) { openPersonalAccomModal(accomEditBtn.dataset.personalAccomId); return }
-
-    // Accommodation remove (× button)
-    const accomRemoveBtn = e.target.closest('.personal-accom-remove-btn')
-    if (accomRemoveBtn) {
-      const personal = ensurePersonal()
-      const id = accomRemoveBtn.dataset.personalAccomId
-      const snapshot = (personal.accommodations || []).find((a) => a.id === id)
-      personal.accommodations = (personal.accommodations || []).filter((a) => a.id !== id)
-      scheduleAutoSave()
-      renderPersonalAccomList()
-      renderPersonalTimeline()
-      renderPersonalBudgetBreakdown()
-      if (snapshot) showUndoToast(snapshot.name || 'Accommodation', () => {
-        const p = ensurePersonal()
-        p.accommodations = [...(p.accommodations || []), snapshot]
-        renderPersonalAccomList(); renderPersonalTimeline(); renderPersonalBudgetBreakdown()
-        scheduleAutoSave()
-      })
-      return
-    }
-
-    // Edit travel leg → open modal
-    const editLegBtn = e.target.closest('.personal-leg-edit-btn')
-    if (editLegBtn) {
-      openPersonalLegModal(editLegBtn.dataset.personalLegDir, editLegBtn.dataset.personalLegId)
-      return
-    }
-    // Remove travel leg (compact row ×)
-    const removeLegBtn = e.target.closest('.personal-leg-remove-btn')
-    if (removeLegBtn) {
-      const personal = ensurePersonal()
-      const { personalLegId, personalLegDir } = removeLegBtn.dataset
-      const legList = personalLegDir === 'outbound' ? (personal.outboundLegs || []) : (personal.returnLegs || [])
-      const snapshot = legList.find((l) => l.id === personalLegId)
-      if (personalLegDir === 'outbound') personal.outboundLegs = legList.filter((l) => l.id !== personalLegId)
-      else                               personal.returnLegs   = legList.filter((l) => l.id !== personalLegId)
-      renderPersonalTab()
-      scheduleAutoSave()
-      if (snapshot) showUndoToast(snapshot.from ? `${snapshot.from}→${snapshot.to}` : (personalLegDir === 'outbound' ? 'Outbound leg' : 'Return leg'), () => {
-        const p = ensurePersonal()
-        if (personalLegDir === 'outbound') p.outboundLegs = [...(p.outboundLegs || []), snapshot]
-        else                               p.returnLegs   = [...(p.returnLegs   || []), snapshot]
-        renderPersonalTab(); scheduleAutoSave()
-      })
-      return
-    }
-
-    // Personal itinerary — cell click opens day modal
-    const personalCell = e.target.closest('.personal-itinerary-cell')
-    if (personalCell) { openPersonalDayModal(personalCell.dataset.date); return }
-  })
+  // Travel legs + accommodation rows are now full-width cards that open the shared
+  // read-only detail modal (Edit / Remove / Add-to-calendar live inside it — see
+  // plannerItinerary). Their old inline edit/remove/calendar row handlers were
+  // removed with the buttons.
 
   const personalPanel = document.getElementById('plannerPersonalPanel');
   if (personalPanel) {
     personalPanel.addEventListener('click', (e) => {
-      const editBtn   = e.target.closest('.edit-companion-btn');
-      if (editBtn) { openTripAssignmentModal(editBtn.dataset.companionId); return; }
+      const viewBtn = e.target.closest('.view-companion-btn');
+      if (viewBtn) {
+        openCompanionDetail(viewBtn.dataset.personId);
+        return;
+      }
+      const editBtn = e.target.closest('.edit-companion-btn');
+      if (editBtn) {
+        openTripAssignmentModal(editBtn.dataset.companionId);
+        return;
+      }
       const removeBtn = e.target.closest('.remove-companion-btn');
       if (removeBtn) {
         const contactId = removeBtn.dataset.companionId;
         if (!state.planner.personal) return;
-        const snapshot = (state.planner.personal.tripAssignments || []).find((a) => a.memberId === contactId);
-        const contact  = (state.planner.contacts || []).find((c) => c.id === contactId);
-        state.planner.personal.tripAssignments = (state.planner.personal.tripAssignments || []).filter((a) => a.memberId !== contactId);
+        const snapshot = (state.planner.personal.tripAssignments || []).find(
+          (a) => a.memberId === contactId,
+        );
+        const contact = (state.planner.contacts || []).find((c) => c.id === contactId);
+        state.planner.personal.tripAssignments = (
+          state.planner.personal.tripAssignments || []
+        ).filter((a) => a.memberId !== contactId);
         scheduleAutoSave();
         renderPersonalCompanionsSection();
         renderPersonalTimeline();
         renderSettingsPersonalContactsSection();
-        if (snapshot) showUndoToast(contact?.name || 'Companion', () => {
-          state.planner.personal.tripAssignments = [...(state.planner.personal.tripAssignments || []), snapshot];
-          renderPersonalCompanionsSection(); renderPersonalTimeline(); renderSettingsPersonalContactsSection();
-          scheduleAutoSave();
-        });
+        if (snapshot)
+          showUndoToast(contact?.name || 'Companion', () => {
+            state.planner.personal.tripAssignments = [
+              ...(state.planner.personal.tripAssignments || []),
+              snapshot,
+            ];
+            renderPersonalCompanionsSection();
+            renderPersonalTimeline();
+            renderSettingsPersonalContactsSection();
+            scheduleAutoSave();
+          });
         return;
       }
     });
   }
 
-  wireTrackedSessionSearch('personal')
+  wireTrackedSessionSearch('personal');
 }
 
 // ── Render all tabs ──────────────────────────────────────────────────────────
 
 // ── Tickets tab ──────────────────────────────────────────────────────────────
-
-const TICKET_STATUSES = [
-  { value: 'planned',          label: 'Planned' },
-  { value: 'pending-purchase', label: 'Pending Purchase' },
-  { value: 'purchased',        label: 'Purchased' },
-  { value: 'assigned',         label: 'Assigned' },
-  { value: 'cancelled',        label: 'Cancelled' },
-]
-
-const TICKET_STATUS_CLASSES = {
-  'planned':          'bg-gray-100 text-gray-600',
-  'pending-purchase': 'bg-yellow-100 text-yellow-700',
-  'purchased':        'bg-blue-100 text-blue-700',
-  'assigned':         'bg-emerald-100 text-emerald-700',
-  'cancelled':        'bg-red-100 text-red-700',
-}
-
-let _ticketCtx = null
-let _ticketId  = null
-
-function getTicketList(ctx) {
-  if (ctx === 'personal') return (state.planner.personal.tickets ??= [])
-  return (state.planner.org.tickets ??= [])
-}
-
-function ticketStatusBadge(status) {
-  if (!status) return ''
-  const entry = TICKET_STATUSES.find((s) => s.value === status)
-  if (!entry) return ''
-  const cls = TICKET_STATUS_CLASSES[status] || 'bg-gray-100 text-gray-600'
-  return `<span class="text-[0.6rem] px-1.5 py-px rounded-full font-medium flex-shrink-0 ${cls}">${esc(entry.label)}</span>`
-}
 
 function getMeLabel() {
   const meId = state.planner.personal?.meContactId;
@@ -6652,598 +2283,298 @@ function getMeLabel() {
   return lc ? `${lc.name || 'Unnamed'} (me)` : 'Me';
 }
 
-function _ticketPeopleForCtx(ctx) {
-  if (ctx === 'personal') {
-    const meContactId = state.planner.personal?.meContactId || null;
-    const contacts  = (state.global?.personalContacts || []).filter((c) => c.id !== meContactId);
-    const locals    = (state.planner.personal?.localCompanions || []).filter((lc) => lc.id !== meContactId);
-    return [
-      { id: '__me__', name: getMeLabel() },
-      ...contacts.map((c) => ({ id: c.id, name: c.name || 'Unnamed' })),
-      ...locals.map((lc) => ({ id: lc.id, name: `${lc.name || 'Unnamed'} (this trip)` })),
-    ];
-  }
-  return (state.global?.teamMembers || []).map((m) => ({ id: m.id, name: m.name || 'Unnamed' }));
-}
-
-function _resolvePerson(id, ctx) {
-  if (!id) return null;
-  if (id === '__me__' && ctx === 'personal') return { name: getMeLabel() };
-  if (ctx === 'personal') {
-    const c = (state.global?.personalContacts || []).find((x) => x.id === id);
-    if (c) return { name: c.name || 'Unnamed' };
-    const lc = (state.planner.personal?.localCompanions || []).find((x) => x.id === id);
-    return lc ? { name: lc.name || 'Unnamed' } : null;
-  }
-  const m = (state.global?.teamMembers || []).find((x) => x.id === id);
-  return m ? { name: m.name || 'Unnamed' } : null;
-}
-
-function renderTicketsTab() {
-  const mode = state.planner?.mode || 'personal'
-  const ctx  = mode === 'sponsor' ? 'org' : 'personal'
-  const container = document.getElementById('ticketsList')
-  const empty     = document.getElementById('ticketsEmptyState')
-  const addBtn    = document.getElementById('addTicketBtn')
-  if (!container) return
-
-  const tickets = getTicketList(ctx)
-
-  if (addBtn) {
-    addBtn.dataset.ticketCtx = ctx
-  }
-
-  if (!tickets.length) {
-    container.innerHTML = ''
-    empty?.classList.remove('hidden')
-    return
-  }
-  empty?.classList.add('hidden')
-
-  const fmt = (n) => parseBudget(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-
-  container.innerHTML = tickets.map((t) => {
-    const assignedMember  = _resolvePerson(t.assignedTo,  ctx)
-    const purchasedMember = _resolvePerson(t.purchasedBy, ctx)
-    const cur   = t.currency || 'AUD'
-    const unit  = parseBudget(t.unitPrice)
-    const qty   = t.quantity || 1
-    const total = unit * qty
-
-    return `<div class="flex items-start gap-3 py-2 px-3 rounded-lg border border-gray-200 bg-white" data-ticket-id="${esc(t.id)}">
-      <div class="flex-1 min-w-0 space-y-0.5">
-        <div class="flex items-center gap-2 flex-wrap">
-          <span class="text-sm font-medium text-gray-800">${esc(t.name || 'Unnamed ticket')}</span>
-          ${ticketStatusBadge(t.status || 'planned')}
-        </div>
-        <div class="flex gap-3 text-xs text-gray-500 flex-wrap">
-          ${qty > 1 ? `<span>${qty}× ${cur} ${fmt(unit)} = ${cur} ${fmt(total)}</span>` : `<span>${cur} ${fmt(unit)}</span>`}
-          ${assignedMember  ? `<span><i class="fas fa-user text-[0.55rem] mr-0.5"></i>${esc(assignedMember.name)}</span>` : ''}
-          ${purchasedMember ? `<span><i class="fas fa-credit-card text-[0.55rem] mr-0.5"></i>${esc(purchasedMember.name)}</span>` : ''}
-          ${t.notes ? `<span class="truncate max-w-[200px]">${esc(t.notes)}</span>` : ''}
-        </div>
-      </div>
-      <button type="button" class="edit-ticket-btn h-7 w-7 flex items-center justify-center rounded-md border border-gray-200 text-gray-400 hover:text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0"
-        data-ticket-id="${esc(t.id)}" data-ticket-ctx="${esc(ctx)}" aria-label="Edit ticket">
-        <i class="fas fa-pen-to-square text-[0.65rem]" aria-hidden="true"></i>
-      </button>
-    </div>`
-  }).join('')
-}
-
-function openTicketModal(ctx, id = null) {
-  _ticketCtx = ctx
-  _ticketId  = id
-  const ticket = id ? getTicketList(ctx).find((t) => t.id === id) : null
-  const people = _ticketPeopleForCtx(ctx)
-  const memberOptions = `<option value="">—</option>` + people.map((p) => `<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('')
-
-  document.getElementById('ticketModalTitle').textContent = id ? 'Edit Ticket' : 'Add Ticket'
-  document.getElementById('ticketName').value             = ticket?.name      || ''
-  document.getElementById('ticketQuantity').value         = ticket?.quantity  ?? 1
-  document.getElementById('ticketUnitPrice').value        = ticket?.unitPrice || ''
-  document.getElementById('ticketNotes').value            = ticket?.notes     || ''
-
-  const currEl = document.getElementById('ticketCurrency')
-  if (currEl) {
-    const defaultCurr = ctx === 'personal'
-      ? (state.planner.personal?.currency || 'AUD')
-      : (state.planner.org?.sponsorCurrency || 'AUD')
-    currEl.innerHTML = currencyOptions(ticket?.currency || defaultCurr)
-  }
-
-  const statusEl = document.getElementById('ticketStatus')
-  if (statusEl) {
-    statusEl.innerHTML = buildSelectOptions(TICKET_STATUSES, ticket?.status || 'planned')
-  }
-
-  const assignedEl = document.getElementById('ticketAssignedTo')
-  if (assignedEl) {
-    assignedEl.innerHTML = memberOptions
-    if (ticket?.assignedTo) assignedEl.value = ticket.assignedTo
-  }
-
-  const purchasedEl = document.getElementById('ticketPurchasedBy')
-  if (purchasedEl) {
-    purchasedEl.innerHTML = memberOptions
-    if (ticket?.purchasedBy) purchasedEl.value = ticket.purchasedBy
-  }
-
-  document.getElementById('ticketModalDelete')?.classList.toggle('hidden', !id)
-  showModal('ticketModal', 'ticketName')
-}
-
-function saveTicket() {
-  if (!_ticketCtx) return
-  const list     = getTicketList(_ticketCtx)
-  const name      = document.getElementById('ticketName')?.value.trim()     || ''
-  const quantity  = parseInt(document.getElementById('ticketQuantity')?.value, 10) || 1
-  const unitPrice = document.getElementById('ticketUnitPrice')?.value        || ''
-  const currency  = document.getElementById('ticketCurrency')?.value         || 'AUD'
-  const status    = document.getElementById('ticketStatus')?.value           || 'planned'
-  const assignedTo   = document.getElementById('ticketAssignedTo')?.value   || ''
-  const purchasedBy  = document.getElementById('ticketPurchasedBy')?.value  || ''
-  const notes     = document.getElementById('ticketNotes')?.value.trim()     || ''
-
-  if (_ticketId) {
-    const t = list.find((x) => x.id === _ticketId)
-    if (t) Object.assign(t, { name, quantity, unitPrice, currency, status, assignedTo, purchasedBy, notes })
-  } else {
-    const newTicket = { id: makeItemId('tk'), name, quantity, unitPrice, currency, status, assignedTo, purchasedBy, notes }
-    list.push(newTicket)
-    _ticketId = newTicket.id
-  }
-  scheduleAutoSave()
-}
-
-function closeTicketModal() {
-  const ctx = _ticketCtx
-  _ticketCtx = null
-  _ticketId  = null
-  hideModal('ticketModal')
-  if (ctx) renderTicketsTab()
-  if (state.activeTab === 'summary') renderSummaryTab()
-}
-
-function wireTicketsPanel() {
-  const panel = document.getElementById('plannerTicketsPanel')
-  if (!panel) return
-
-  document.getElementById('addTicketBtn')?.addEventListener('click', (e) => {
-    const ctx = e.currentTarget.dataset.ticketCtx || (state.planner?.mode === 'sponsor' ? 'org' : 'personal')
-    openTicketModal(ctx)
-  })
-
-  panel.addEventListener('click', (e) => {
-    const editBtn = e.target.closest('.edit-ticket-btn')
-    if (editBtn) { openTicketModal(editBtn.dataset.ticketCtx, editBtn.dataset.ticketId); return }
-  })
-
-  const modal = document.getElementById('ticketModal')
-  if (!modal) return
-
-  document.getElementById('ticketModalClose')?.addEventListener('click', closeTicketModal)
-  document.getElementById('ticketModalDone')?.addEventListener('click', () => { saveTicket(); closeTicketModal() })
-  document.getElementById('ticketModalDelete')?.addEventListener('click', () => {
-    if (!_ticketCtx || !_ticketId) return
-    const list = getTicketList(_ticketCtx)
-    const idx  = list.findIndex((t) => t.id === _ticketId)
-    if (idx !== -1) list.splice(idx, 1)
-    scheduleAutoSave()
-    closeTicketModal()
-  })
-  modal.addEventListener('click', (e) => { if (e.target === modal) closeTicketModal() })
-}
+// Tickets tab UI extracted to ./modules/plannerTickets.js (initTickets /
+// renderTicketsTab / wireTicketsPanel). getMeLabel stays here (shared helper).
 
 // ── Budget category management ────────────────────────────────────────────────
 
-function renderBudgetCategoryManager(mode) {
-  const containerId = mode === 'personal' ? 'personalBudgetCategoryList' : 'sponsorBudgetCategoryList'
-  const container   = document.getElementById(containerId)
-  if (!container) return
-  const cats = getEventBudgetCategories(mode)
-  container.innerHTML = cats.map((c) => `
-    <div class="flex items-center gap-2 py-1 px-2 rounded border border-gray-200 bg-white" data-cat-id="${esc(c.id)}" data-cat-mode="${mode}">
-      <span class="flex-1 text-xs text-gray-700">${esc(c.name)}</span>
-      <button type="button" class="remove-budget-cat-btn text-gray-500 hover:text-red-600 transition-colors" data-cat-id="${esc(c.id)}" data-cat-mode="${mode}" aria-label="Remove category">
-        <i class="fas fa-times text-[0.6rem]"></i>
-      </button>
-    </div>`).join('')
-}
-
-function addBudgetCategory(mode, name) {
-  if (!name.trim()) return
-  const id = name.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-')
-  const cats = getEventBudgetCategories(mode)
-  if (cats.find((c) => c.id === id)) return
-  const stored = mode === 'personal'
-    ? (state.planner.personal.budgetCategories ??= [])
-    : (state.planner.org.budgetCategories ??= [])
-  // If using defaults, copy them in first, then append
-  if (!stored.length) stored.push(..._defaultBudgetCategories.map((c) => ({ ...c })))
-  stored.push({ id, name: name.trim() })
-  scheduleAutoSave()
-  renderBudgetCategoryManager(mode)
-}
-
-function removeBudgetCategory(mode, catId) {
-  const stored = mode === 'personal'
-    ? (state.planner.personal.budgetCategories ??= [])
-    : (state.planner.org.budgetCategories ??= [])
-  if (!stored.length) stored.push(..._defaultBudgetCategories.map((c) => ({ ...c })))
-  const idx = stored.findIndex((c) => c.id === catId)
-  if (idx !== -1) stored.splice(idx, 1)
-  scheduleAutoSave()
-  renderBudgetCategoryManager(mode)
-}
+// ── Budget category management -> plannerBudget.js
 
 // ── Settings tab ─────────────────────────────────────────────────────────────
 
 // ── Budget tab (sponsor mode) ─────────────────────────────────────────────────
 
-function renderPersonalBudgetTab() {
-  const personal = state.planner.personal
-  const currency = personal.currency || 'AUD'
-
-  const budgetEl   = document.getElementById('personalBudgetTabBudget')
-  const actualEl   = document.getElementById('personalBudgetTabActual')
-  const currencyEl = document.getElementById('personalBudgetTabCurrency')
-  if (budgetEl)   budgetEl.value       = personal.budget       || ''
-  if (actualEl)   actualEl.value       = personal.budgetActual || ''
-  if (currencyEl) currencyEl.innerHTML = currencyOptions(currency)
-
-  const catsEl = document.getElementById('personalBudgetCategoryRows')
-  if (catsEl) {
-    const activeCats = getEventBudgetCategories('personal')
-    const catBudgets = personal.categoryBudgets || {}
-    const catActuals = buildPersonalBudgetData(state.planner)
-    const fmt = (n) => n ? n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '—'
-    catsEl.innerHTML = activeCats.map((c) => {
-      const budgetVal = catBudgets[c.id] || ''
-      const actual    = catActuals[c.id]?.actual || 0
-      const budgetNum = parseBudget(budgetVal)
-      const over      = budgetNum > 0 && actual > budgetNum
-      const remain    = budgetNum > 0 ? budgetNum - actual : null
-      return `<div class="grid grid-cols-[1fr_1fr_auto] items-center gap-3 py-2.5 border-b border-gray-100 last:border-0">
-        <span class="text-sm text-gray-700 font-medium">${esc(c.name)}</span>
-        <label class="flex items-center gap-1.5 min-w-0">
-          <span class="text-xs text-gray-500 flex-shrink-0">${esc(currency)}</span>
-          <input type="number" min="0" step="0.01" placeholder="0.00"
-            class="personal-budget-cat-input h-8 w-full rounded border-gray-300 text-sm bg-white px-2 drupal-blue-focus"
-            data-cat-id="${esc(c.id)}" value="${esc(budgetVal)}">
-        </label>
-        <div class="text-right min-w-[6rem]">
-          <span class="text-sm tabular-nums ${over ? 'text-red-500 font-medium' : 'text-gray-600'}">${fmt(actual)}</span>
-          ${remain !== null ? `<span class="ml-2 text-xs tabular-nums ${over ? 'text-red-600' : 'text-emerald-700'}">${over ? '↑' : '↓'} ${fmt(Math.abs(remain))}</span>` : ''}
-        </div>
-      </div>`
-    }).join('')
-  }
-
-  renderBudgetItems('personal')
-  renderPersonalBudgetBreakdown()
-}
-
-function renderBudgetTab() {
-  const mode = state.planner.mode || 'personal'
-  document.getElementById('budgetSponsorSection')?.classList.toggle('hidden', mode !== 'sponsor')
-  document.getElementById('budgetPersonalSection')?.classList.toggle('hidden', mode !== 'personal')
-  if (mode === 'personal') { renderPersonalBudgetTab(); return }
-
-  const org      = state.planner.org
-  const currency = org.sponsorCurrency || 'AUD'
-
-  // Overall budget header fields
-  const budgetEl   = document.getElementById('orgSponsorBudget')
-  const actualEl   = document.getElementById('orgSponsorActual')
-  const currencyEl = document.getElementById('orgSponsorCurrency')
-  if (budgetEl)   budgetEl.value      = org.sponsorBudget   || ''
-  if (actualEl)   actualEl.value      = org.sponsorActual   || ''
-  if (currencyEl) currencyEl.innerHTML = currencyOptions(currency)
-
-  // Per-category budget rows
-  const catsEl = document.getElementById('budgetCategoryRows')
-  if (catsEl) {
-    const activeCats  = getEventBudgetCategories('org')
-    const catBudgets  = org.categoryBudgets || {}
-    const catActuals  = buildEventBudgetData(state.planner) // actual-only (budgets come from categoryBudgets)
-    const fmt = (n) => n ? n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '—'
-    catsEl.innerHTML = activeCats.map((c) => {
-      const budgetVal = catBudgets[c.id] || ''
-      const actual    = catActuals[c.id]?.actual || 0
-      const budgetNum = parseBudget(budgetVal)
-      const over      = budgetNum > 0 && actual > budgetNum
-      const remain    = budgetNum > 0 ? budgetNum - actual : null
-      return `<div class="grid grid-cols-[1fr_1fr_auto] items-center gap-3 py-2.5 border-b border-gray-100 last:border-0">
-        <span class="text-sm text-gray-700 font-medium">${esc(c.name)}</span>
-        <label class="flex items-center gap-1.5 min-w-0">
-          <span class="text-xs text-gray-500 flex-shrink-0">${esc(currency)}</span>
-          <input type="number" min="0" step="0.01" placeholder="0.00"
-            class="budget-cat-input h-8 w-full rounded border-gray-300 text-sm bg-white px-2 drupal-blue-focus"
-            data-cat-id="${esc(c.id)}" value="${esc(budgetVal)}">
-        </label>
-        <div class="text-right min-w-[6rem]" data-cat-indicator="${esc(c.id)}">
-          <span class="text-sm tabular-nums ${over ? 'text-red-500 font-medium' : 'text-gray-600'}">${fmt(actual)}</span>
-          ${remain !== null ? `<span class="ml-2 text-xs tabular-nums ${over ? 'text-red-600' : 'text-emerald-700'}">${over ? '↑' : '↓'} ${fmt(Math.abs(remain))}</span>` : ''}
-        </div>
-      </div>`
-    }).join('')
-  }
-
-  // Budget line items
-  renderBudgetItems('sponsor')
-  renderSponsorBudgetBreakdown()
-}
-
-function _updateCatBudgetIndicator(catId, budgetVal) {
-  const el = document.querySelector(`[data-cat-indicator="${catId}"]`)
-  if (!el) return
-  const currency = state.planner.org?.sponsorCurrency || 'AUD'
-  const actual   = buildEventBudgetData(state.planner)[catId]?.actual || 0
-  const budgetNum = parseBudget(budgetVal)
-  const over    = budgetNum > 0 && actual > budgetNum
-  const remain  = budgetNum > 0 ? budgetNum - actual : null
-  const fmt = (n) => n ? n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '—'
-  el.innerHTML = `
-    <span class="text-sm tabular-nums ${over ? 'text-red-500 font-medium' : 'text-gray-600'}">${fmt(actual)}</span>
-    ${remain !== null ? `<span class="ml-2 text-xs tabular-nums ${over ? 'text-red-600' : 'text-emerald-700'}">${over ? '↑' : '↓'} ${fmt(Math.abs(remain))}</span>` : ''}`
-}
-
-function wireBudgetPanel() {
-  const panel = document.getElementById('plannerBudgetPanel')
-  if (!panel) return
-
-  panel.addEventListener('input', (e) => {
-    // Sponsor overall budget
-    if (e.target.id === 'orgSponsorBudget') { state.planner.org.sponsorBudget = e.target.value; scheduleAutoSave(); return }
-    if (e.target.id === 'orgSponsorActual') { state.planner.org.sponsorActual = e.target.value; scheduleAutoSave(); return }
-
-    // Sponsor category budget inputs
-    const catInput = e.target.closest('.budget-cat-input')
-    if (catInput) {
-      const catId = catInput.dataset.catId
-      ;(state.planner.org.categoryBudgets ??= {})[catId] = catInput.value
-      scheduleAutoSave()
-      _updateCatBudgetIndicator(catId, catInput.value)
-      if (state.activeTab === 'summary') renderSummaryTab()
-      return
-    }
-
-    // Personal overall budget
-    if (e.target.id === 'personalBudgetTabBudget') { state.planner.personal.budget = e.target.value; scheduleAutoSave(); renderPersonalTab(); return }
-    if (e.target.id === 'personalBudgetTabActual') { state.planner.personal.budgetActual = e.target.value; scheduleAutoSave(); renderPersonalTab(); return }
-
-    // Personal category budget inputs
-    const pCatInput = e.target.closest('.personal-budget-cat-input')
-    if (pCatInput) {
-      const catId = pCatInput.dataset.catId
-      ;(state.planner.personal.categoryBudgets ??= {})[catId] = pCatInput.value
-      scheduleAutoSave()
-      renderPersonalBudgetBreakdown()
-      if (state.activeTab === 'summary') renderSummaryTab()
-      return
-    }
-
-    // Personal budget item filter (budget tab)
-    if (e.target.id === 'personalBudgetTabFilter') { renderBudgetItems('personal'); return }
-  })
-
-  panel.addEventListener('change', (e) => {
-    if (e.target.id === 'orgSponsorCurrency') {
-      state.planner.org.sponsorCurrency = e.target.value
-      scheduleAutoSave()
-      renderBudgetTab()
-      renderSponsorBudgetBreakdown()
-      if (state.activeTab === 'summary') renderSummaryTab()
-      return
-    }
-    if (e.target.id === 'personalBudgetTabCurrency') {
-      state.planner.personal.currency = e.target.value
-      scheduleAutoSave()
-      renderPersonalBudgetTab()
-      renderPersonalTab()
-      if (state.activeTab === 'summary') renderSummaryTab()
-      return
-    }
-  })
-
-  // Personal budget tab: Add item button
-  panel.addEventListener('click', (e) => {
-    if (e.target.closest('#addPersonalBudgetTabItemBtn')) { openBudgetItemModal('personal'); return }
-    const editBtn = e.target.closest('.edit-budget-item-btn')
-    if (editBtn && editBtn.dataset.biCtx === 'personal') { openBudgetItemModal('personal', editBtn.dataset.biId); return }
-  })
-}
+// ── Budget tab -> plannerBudget.js
 
 function renderSettingsTeamSection() {
-  const el = document.getElementById('settingsTeamList')
-  if (!el) return
-  const members     = state.global?.teamMembers || []
-  const assignedIds = new Set((state.planner.org?.teamAssignments || []).map((a) => a.memberId))
+  const el = document.getElementById('settingsTeamList');
+  if (!el) return;
+  const members = state.global?.teamMembers || [];
+  const assignedIds = new Set((state.planner.org?.teamAssignments || []).map((a) => a.memberId));
 
   if (!members.length) {
-    el.innerHTML = '<p class="text-sm text-gray-600 italic">No team members yet. Add one below.</p>'
-    return
+    el.innerHTML = '<p class="text-sm pl-ink-1 italic">No team members yet. Add one below.</p>';
+    return;
   }
 
-  el.innerHTML = members.map((m) => {
-    const assigned = assignedIds.has(m.id)
-    const disabled = m.enabled === false
-    const meta = [m.role, m.department, m.company].filter(Boolean).join(' · ')
-    return `<div class="flex items-center gap-3 py-2 px-3 rounded-lg border border-gray-200 bg-white ${disabled ? 'opacity-50' : ''}">
+  el.innerHTML = members
+    .map((m) => {
+      const assigned = assignedIds.has(m.id);
+      const disabled = m.enabled === false;
+      const meta = [m.role, m.department, m.company].filter(Boolean).join(' · ');
+      return `<div class="flex items-center gap-3 py-2 px-3 pl-bordered pl-surface ${disabled ? 'opacity-50' : ''}">
       <label class="flex items-center gap-2 flex-shrink-0 cursor-pointer" title="${assigned ? 'Remove from this event' : 'Assign to this event'}">
-        <input type="checkbox" class="settings-team-assign h-4 w-4 rounded border-gray-300 text-blue-600 drupal-blue-focus"
+        <input type="checkbox" class="settings-team-assign h-4 w-4 rounded pl-rule pl-accent drupal-blue-focus"
           data-member-id="${esc(m.id)}" ${assigned ? 'checked' : ''}>
       </label>
       <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-800 truncate">${esc(m.name || 'Unnamed')}${disabled ? ' <span class="text-[0.6rem] font-semibold uppercase tracking-wider px-1 py-0.5 rounded bg-gray-100 text-gray-400 ml-1">Inactive</span>' : ''}</p>
-        ${meta ? `<p class="text-xs text-gray-400 truncate">${esc(meta)}</p>` : ''}
+        <p class="text-sm font-medium pl-ink-0 truncate">${esc(m.name || 'Unnamed')}${disabled ? ' <span class="text-[0.6rem] font-semibold uppercase tracking-wider px-1 py-0.5 rounded pl-surface-2 pl-ink-2 ml-1">Inactive</span>' : ''}</p>
+        ${meta ? `<p class="pl-hint truncate">${esc(meta)}</p>` : ''}
       </div>
-      <button type="button" class="view-team-member-btn flex-shrink-0 h-7 px-2 border border-gray-200 rounded text-xs text-gray-500 hover:bg-gray-50 transition-colors" data-member-id="${esc(m.id)}">
-        <i class="fas fa-eye text-[0.6rem]"></i>
-      </button>
-      <button type="button" class="edit-team-member-btn flex-shrink-0 h-7 px-2 border border-gray-200 rounded text-xs text-gray-500 hover:bg-gray-50 transition-colors" data-member-id="${esc(m.id)}">
-        <i class="fas fa-pen-to-square text-[0.6rem]"></i>
-      </button>
-    </div>`
-  }).join('')
+      <button type="button" class="view-team-member-btn pl-act" data-member-id="${esc(m.id)}" aria-label="View ${esc(m.name || 'member')}">Details</button>
+      <button type="button" class="edit-team-member-btn pl-act" data-member-id="${esc(m.id)}" aria-label="Edit ${esc(m.name || 'member')}">Edit</button>
+    </div>`;
+    })
+    .join('');
 }
 
 function renderSettingsTab() {
-  const mode = state.planner.mode || 'personal'
-  const isSponsor = mode === 'sponsor'
-  const isConference = state.planner?.isConference !== false
-  const base = isSponsor ? SPONSOR_TABS_BASE : PERSONAL_TABS_BASE
+  const mode = state.planner.mode || 'personal';
+  const isSponsor = mode === 'sponsor';
+  const isConference = state.planner?.isConference !== false;
+  const base = isSponsor ? SPONSOR_TABS_BASE : PERSONAL_TABS_BASE;
   const disabled = new Set(
     isSponsor
-      ? (state.planner?.org?.disabledTabs     || [])
-      : (state.planner?.personal?.disabledTabs || [])
-  )
+      ? state.planner?.org?.disabledTabs || []
+      : state.planner?.personal?.disabledTabs || [],
+  );
 
   // Mode radio buttons
-  const modePersonalRadio = document.getElementById('settingsModePersonal')
-  const modeSponsorRadio  = document.getElementById('settingsModeSponsor')
-  if (modePersonalRadio) modePersonalRadio.checked = !isSponsor
-  if (modeSponsorRadio)  modeSponsorRadio.checked  = isSponsor
+  const modePersonalRadio = document.getElementById('settingsModePersonal');
+  const modeSponsorRadio = document.getElementById('settingsModeSponsor');
+  if (modePersonalRadio) modePersonalRadio.checked = !isSponsor;
+  if (modeSponsorRadio) modeSponsorRadio.checked = isSponsor;
+
+  // Spec strip — a live, mono summary of this planner's key configuration.
+  const specEl = document.getElementById('settingsSpec');
+  if (specEl) {
+    const cur = plannerDisplayCurrency(state.planner);
+    const confN = (state.planner?._eventFiles || []).filter(Boolean).length;
+    const locked = !!state.planner?.locked;
+    // The live config strip. Each chip is one fact about this planner, so it
+    // is one word — the glyphs were a second, vaguer copy of the same fact.
+    const chip = (text, accent) =>
+      `<span class="set-chip${accent ? ' set-chip--on' : ''}">${esc(text)}</span>`;
+    specEl.innerHTML =
+      chip(isSponsor ? 'Sponsor' : 'Personal', true) +
+      chip(isConference ? 'Conference' : 'Trip') +
+      (confN ? chip(`${confN} schedule${confN !== 1 ? 's' : ''}`) : '') +
+      (cur ? chip(`Reports in ${cur}`) : '') +
+      chip(locked ? 'Locked' : 'Open', locked);
+  }
 
   // Conference toggle
-  const conferenceEl = document.getElementById('settingsIsConference')
-  if (conferenceEl) conferenceEl.checked = isConference
+  const conferenceEl = document.getElementById('settingsIsConference');
+  if (conferenceEl) conferenceEl.checked = isConference;
+
+  // Getting-around (local travel) toggle — off by default.
+  const localTravelEl = document.getElementById('settingsLocalTravel');
+  if (localTravelEl) localTravelEl.checked = !!state.planner?.personal?.showLocalTravel;
+
+  // Lock toggle — disabled (with a note) unless the server can verify a password.
+  const lockEl = document.getElementById('settingsLockPlanner');
+  if (lockEl) {
+    lockEl.checked = !!state.planner?.locked;
+    lockEnforceable().then((ok) => {
+      lockEl.disabled = !ok;
+      document.getElementById('settingsLockUnavailable')?.classList.toggle('hidden', ok);
+    });
+  }
 
   // Tab order + visibility list (all tabs in stored order, including disabled; conference-only tabs hidden when !isConference)
-  const tabsEl = document.getElementById('settingsTabList')
+  const tabsEl = document.getElementById('settingsTabList');
   if (tabsEl) {
     const stored = isSponsor
-      ? (state.planner?.org?.tabOrder     || [])
-      : (state.planner?.personal?.tabOrder || [])
-    const inBase = (t) => base.has(t) && (isConference || !CONFERENCE_TABS.has(t))
-    const allOrdered = stored.filter(inBase)
-    base.forEach((t) => { if (!allOrdered.includes(t) && inBase(t)) allOrdered.push(t) })
-    tabsEl.innerHTML = allOrdered.map((tab) => {
-      const label   = TAB_LABELS[tab] || tab
-      const icon    = TAB_ICONS[tab]  || 'fas fa-circle'
-      const checked = !disabled.has(tab)
-      return `<div class="settings-tab-row flex items-center gap-2.5 px-2.5 py-2 rounded-lg border border-gray-200 bg-white select-none"
-          draggable="true" data-tab="${esc(tab)}">
-        <span class="drag-handle cursor-grab active:cursor-grabbing text-gray-300 hover:text-gray-500 transition-colors flex-shrink-0 px-0.5" title="Drag to reorder">
-          <i class="fas fa-grip-vertical text-xs" aria-hidden="true"></i>
-        </span>
-        <input type="checkbox" class="settings-tab-toggle h-4 w-4 rounded border-gray-300 text-blue-600 drupal-blue-focus flex-shrink-0 cursor-pointer"
-          data-tab="${esc(tab)}" ${checked ? 'checked' : ''}>
-        <i class="${esc(icon)} text-gray-500 text-xs flex-shrink-0 w-4 text-center" aria-hidden="true"></i>
-        <span class="text-sm text-gray-700 flex-1 pointer-events-none">${esc(label)}</span>
-      </div>`
-    }).join('')
+      ? state.planner?.org?.tabOrder || []
+      : state.planner?.personal?.tabOrder || [];
+    const inBase = (t) => base.has(t) && (isConference || !CONFERENCE_TABS.has(t));
+    const allOrdered = stored.filter(inBase);
+    base.forEach((t) => {
+      if (!allOrdered.includes(t) && inBase(t)) allOrdered.push(t);
+    });
+    tabsEl.innerHTML = allOrdered
+      .map((tab) => {
+        const label = TAB_LABELS[tab] || tab;
+        const desc = TAB_DESCRIPTIONS[tab] || '';
+        const checked = !disabled.has(tab);
+        return `<div class="settings-tab-row set-card" draggable="true" data-tab="${esc(tab)}">
+        <span class="drag-handle set-drag" title="Drag to reorder" aria-hidden="true">::</span>
+        <div class="set-card-body pointer-events-none">
+          <p class="set-card-title">${esc(label)}</p>
+          ${desc ? `<p class="set-card-desc">${esc(desc)}</p>` : ''}
+        </div>
+        <input type="checkbox" class="settings-tab-toggle pl-toggle" data-tab="${esc(tab)}" ${checked ? 'checked' : ''}>
+      </div>`;
+      })
+      .join('');
   }
 
   // Sponsor-only sections
-  document.getElementById('settingsSponsorSection')?.classList.toggle('hidden', !isSponsor)
+  document.getElementById('settingsSponsorSection')?.classList.toggle('hidden', !isSponsor);
   if (isSponsor) {
-    renderSponsorLinked()
-    renderSettingsTeamSection()
+    renderSponsorLinked();
+    renderSettingsTeamSection();
   }
 
   // Personal-only sections
-  document.getElementById('settingsPersonalSection')?.classList.toggle('hidden', isSponsor)
+  document.getElementById('settingsPersonalSection')?.classList.toggle('hidden', isSponsor);
   if (!isSponsor) {
-    renderSettingsPersonalContactsSection()
+    renderSettingsPersonalContactsSection();
   }
+
+  // Associated conference schedules (multi-event): one row per linked event, the
+  // first flagged primary, each with an unlink ×. Add via the "Add conference" btn.
+  const confListEl = document.getElementById('settingsConferenceList');
+  if (confListEl) {
+    const files = state.planner?._eventFiles || [];
+    if (!files.length) {
+      confListEl.innerHTML =
+        '<p class="pl-hint">No conference linked. Use “Add conference” to pull in a schedule.</p>';
+    } else {
+      confListEl.innerHTML = files
+        .map((f, i) => {
+          const ev = state.events.find((e) => e.file === f);
+          const label = ev?.label || f.replace(/^events\//, '').replace(/\.json$/, '');
+          const primary =
+            i === 0 && files.length > 1 ? '<span class="set-chip set-chip--on">Primary</span>' : '';
+          // .set-card, like every other row on this page. This was the last
+          // pre-rebrand markup in Settings: rounded-md (6px) against a design
+          // that is radius 0 throughout, on a `pl-surface` that resolves to
+          // pure #fff in light mode — not a palette colour.
+          return `<div class="set-card">
+            <span class="set-card-body">
+              <span class="set-card-title">${escapeHtml(label)}</span>
+            </span>${primary}
+            <button type="button" class="pl-act pl-act--del" data-remove-event="${escapeHtml(f)}" aria-label="Unlink ${escapeHtml(label)}">Unlink</button>
+          </div>`;
+        })
+        .join('');
+    }
+  }
+
+  // API access — present on every render; it disables itself when the server
+  // cannot issue tokens rather than disappearing.
+  renderApiTokenSection();
 
   // Show only the relevant budget category section
-  document.getElementById('settingsBudgetSponsor')?.classList.toggle('hidden', !isSponsor)
-  document.getElementById('settingsBudgetPersonal')?.classList.toggle('hidden', isSponsor)
-  renderBudgetCategoryManager(isSponsor ? 'org' : 'personal')
+  document.getElementById('settingsBudgetSponsor')?.classList.toggle('hidden', !isSponsor);
+  document.getElementById('settingsBudgetPersonal')?.classList.toggle('hidden', isSponsor);
+  renderBudgetCategoryManager(isSponsor ? 'org' : 'personal');
+
+  // Per-planner roll-up (display) currency. Falls back to the trip currency when
+  // unset (older planners), so the selector always shows the effective target.
+  const displayCurrencyEl = document.getElementById('settingsDisplayCurrency');
+  if (displayCurrencyEl) {
+    const effective = plannerDisplayCurrency(state.planner);
+    displayCurrencyEl.innerHTML = CURRENCIES.map(
+      (c) => `<option value="${c}"${c === effective ? ' selected' : ''}>${c}</option>`,
+    ).join('');
+  }
 
   // Global defaults section
-  const defaultCurrencyEl = document.getElementById('settingsDefaultCurrency')
+  const defaultCurrencyEl = document.getElementById('settingsDefaultCurrency');
   if (defaultCurrencyEl) {
-    defaultCurrencyEl.innerHTML = CURRENCIES.map((c) =>
-      `<option value="${c}"${c === getDefaultCurrency() ? ' selected' : ''}>${c}</option>`
-    ).join('')
+    defaultCurrencyEl.innerHTML = CURRENCIES.map(
+      (c) => `<option value="${c}"${c === getDefaultCurrency() ? ' selected' : ''}>${c}</option>`,
+    ).join('');
   }
-  const defaultModeEl = document.getElementById('settingsDefaultMode')
-  if (defaultModeEl) defaultModeEl.value = state.global?.defaultMode || 'personal'
+  const defaultModeEl = document.getElementById('settingsDefaultMode');
+  if (defaultModeEl) defaultModeEl.value = state.global?.defaultMode || 'personal';
 }
 
 function wireSettingsTabOrder() {
-  const list = document.getElementById('settingsTabList')
-  if (!list) return
-  let _dragged = null
+  const list = document.getElementById('settingsTabList');
+  if (!list) return;
+  let _dragged = null;
 
-  list.addEventListener('dragstart', (e) => {
-    const row = e.target.closest('.settings-tab-row')
-    if (!row) return
-    _dragged = row.dataset.tab
-    row.classList.add('tab-drag-source')
-    e.dataTransfer.effectAllowed = 'move'
-  }, { passive: true })
+  list.addEventListener(
+    'dragstart',
+    (e) => {
+      const row = e.target.closest('.settings-tab-row');
+      if (!row) return;
+      _dragged = row.dataset.tab;
+      row.classList.add('tab-drag-source');
+      e.dataTransfer.effectAllowed = 'move';
+    },
+    { passive: true },
+  );
 
-  list.addEventListener('dragend', () => {
-    _dragged = null
-    list.querySelectorAll('.tab-drag-source, .settings-drop-before, .settings-drop-after')
-      .forEach((el) => el.classList.remove('tab-drag-source', 'settings-drop-before', 'settings-drop-after'))
-  }, { passive: true })
+  list.addEventListener(
+    'dragend',
+    () => {
+      _dragged = null;
+      list
+        .querySelectorAll('.tab-drag-source, .settings-drop-before, .settings-drop-after')
+        .forEach((el) =>
+          el.classList.remove('tab-drag-source', 'settings-drop-before', 'settings-drop-after'),
+        );
+    },
+    { passive: true },
+  );
 
   list.addEventListener('dragover', (e) => {
-    if (!_dragged) return
-    e.preventDefault()
-    e.dataTransfer.dropEffect = 'move'
-    const target = e.target.closest('.settings-tab-row')
-    list.querySelectorAll('.settings-drop-before, .settings-drop-after')
-      .forEach((el) => el.classList.remove('settings-drop-before', 'settings-drop-after'))
+    if (!_dragged) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    const target = e.target.closest('.settings-tab-row');
+    list
+      .querySelectorAll('.settings-drop-before, .settings-drop-after')
+      .forEach((el) => el.classList.remove('settings-drop-before', 'settings-drop-after'));
     if (target && target.dataset.tab !== _dragged) {
-      const rect   = target.getBoundingClientRect()
-      const before = e.clientY < rect.top + rect.height / 2
-      target.classList.add(before ? 'settings-drop-before' : 'settings-drop-after')
+      const rect = target.getBoundingClientRect();
+      const before = e.clientY < rect.top + rect.height / 2;
+      target.classList.add(before ? 'settings-drop-before' : 'settings-drop-after');
     }
-  })
+  });
 
   list.addEventListener('drop', (e) => {
-    e.preventDefault()
-    if (!_dragged) return
-    const target = e.target.closest('.settings-tab-row')
-    if (!target || target.dataset.tab === _dragged) return
+    e.preventDefault();
+    if (!_dragged) return;
+    const target = e.target.closest('.settings-tab-row');
+    if (!target || target.dataset.tab === _dragged) return;
 
-    const mode     = state.planner.mode || 'personal'
-    const isSponsor = mode === 'sponsor'
-    const base     = isSponsor ? SPONSOR_TABS_BASE : PERSONAL_TABS_BASE
-    const stored   = isSponsor
-      ? (state.planner?.org?.tabOrder     || [])
-      : (state.planner?.personal?.tabOrder || [])
-    const allOrdered = stored.filter((t) => base.has(t))
-    base.forEach((t) => { if (!allOrdered.includes(t)) allOrdered.push(t) })
+    const mode = state.planner.mode || 'personal';
+    const isSponsor = mode === 'sponsor';
+    const base = isSponsor ? SPONSOR_TABS_BASE : PERSONAL_TABS_BASE;
+    const stored = isSponsor
+      ? state.planner?.org?.tabOrder || []
+      : state.planner?.personal?.tabOrder || [];
+    const allOrdered = stored.filter((t) => base.has(t));
+    base.forEach((t) => {
+      if (!allOrdered.includes(t)) allOrdered.push(t);
+    });
 
-    const rect   = target.getBoundingClientRect()
-    const before = e.clientY < rect.top + rect.height / 2
-    const from   = allOrdered.indexOf(_dragged)
-    const to     = allOrdered.indexOf(target.dataset.tab)
-    if (from === -1 || to === -1) return
+    const rect = target.getBoundingClientRect();
+    const before = e.clientY < rect.top + rect.height / 2;
+    const from = allOrdered.indexOf(_dragged);
+    const to = allOrdered.indexOf(target.dataset.tab);
+    if (from === -1 || to === -1) return;
 
-    const newOrder = [...allOrdered]
-    newOrder.splice(from, 1)
-    const insertAt = before ? to - (from < to ? 1 : 0) : to + (from > to ? 1 : 0)
-    newOrder.splice(Math.max(0, insertAt), 0, _dragged)
+    const newOrder = [...allOrdered];
+    newOrder.splice(from, 1);
+    const insertAt = before ? to - (from < to ? 1 : 0) : to + (from > to ? 1 : 0);
+    newOrder.splice(Math.max(0, insertAt), 0, _dragged);
 
-    if (isSponsor) state.planner.org.tabOrder = newOrder
-    else state.planner.personal.tabOrder = newOrder
-    scheduleAutoSave()
-    renderTabBar()
-    renderSettingsTab()
-  })
+    if (isSponsor) state.planner.org.tabOrder = newOrder;
+    else state.planner.personal.tabOrder = newOrder;
+    scheduleAutoSave();
+    renderTabBar();
+    renderSettingsTab();
+  });
 }
 
 function wireSettingsPanel() {
-  const panel = document.getElementById('plannerSettingsPanel')
-  if (!panel) return
+  const panel = document.getElementById('plannerSettingsPanel');
+  if (!panel) return;
 
   panel.addEventListener('change', (e) => {
-    const mode = state.planner.mode || 'personal'
+    const mode = state.planner.mode || 'personal';
 
     // Planner mode radio
     if (e.target.name === 'settingsMode') {
-      applyMode(e.target.value)
-      renderSettingsTab()
-      return
+      applyMode(e.target.value);
+      renderSettingsTab();
+      return;
     }
 
     // Conference features toggle
@@ -7252,6 +2583,24 @@ function wireSettingsPanel() {
       scheduleAutoSave();
       applyConferenceMode();
       renderSettingsTab();
+      return;
+    }
+
+    // Getting-around (local travel) toggle — shows/hides the section + its
+    // itinerary/timeline/map entries.
+    if (e.target.id === 'settingsLocalTravel') {
+      (state.planner.personal ??= {}).showLocalTravel = e.target.checked;
+      scheduleAutoSave();
+      renderPersonalTab();
+      return;
+    }
+
+    // Per-planner lock. Enabling while you're already inside shouldn't lock you out —
+    // grant the 90-minute grace now; the lock engages on the next open (or after it).
+    if (e.target.id === 'settingsLockPlanner') {
+      state.planner.locked = e.target.checked;
+      if (e.target.checked) grantUnlockGrace(state.plannerKey);
+      scheduleAutoSave();
       return;
     }
 
@@ -7267,67 +2616,88 @@ function wireSettingsPanel() {
       return;
     }
 
+    // Per-planner roll-up (display) currency — re-render everything that shows a total
+    if (e.target.id === 'settingsDisplayCurrency') {
+      state.planner.displayCurrency = e.target.value;
+      scheduleAutoSave();
+      renderPersonalBudgetBreakdown();
+      renderSponsorBudgetBreakdown();
+      renderSummaryTab();
+      return;
+    }
+
     // Global default currency select
     if (e.target.id === 'settingsDefaultCurrency') {
-      state.global.defaultCurrency = e.target.value
-      saveGlobal(state.global)
-      return
+      state.global.defaultCurrency = e.target.value;
+      saveGlobal(state.global);
+      return;
     }
 
     // Global default mode select
     if (e.target.id === 'settingsDefaultMode') {
-      state.global.defaultMode = e.target.value
-      saveGlobal(state.global)
-      return
+      state.global.defaultMode = e.target.value;
+      saveGlobal(state.global);
+      return;
     }
 
     // Tab visibility toggle
-    const tabCb = e.target.closest('.settings-tab-toggle')
+    const tabCb = e.target.closest('.settings-tab-toggle');
     if (tabCb) {
-      const tab = tabCb.dataset.tab
-      const isSponsor = mode === 'sponsor'
+      const tab = tabCb.dataset.tab;
+      const isSponsor = mode === 'sponsor';
       const arr = isSponsor
-        ? (state.planner.org.disabledTabs     ??= [])
-        : (state.planner.personal.disabledTabs ??= [])
+        ? (state.planner.org.disabledTabs ??= [])
+        : (state.planner.personal.disabledTabs ??= []);
       if (tabCb.checked) {
-        const idx = arr.indexOf(tab)
-        if (idx !== -1) arr.splice(idx, 1)
+        const idx = arr.indexOf(tab);
+        if (idx !== -1) arr.splice(idx, 1);
       } else {
-        if (!arr.includes(tab)) arr.push(tab)
+        if (!arr.includes(tab)) arr.push(tab);
       }
-      scheduleAutoSave()
-      applyMode(mode)
-      return
+      scheduleAutoSave();
+      applyMode(mode);
+      return;
     }
 
     // Team event-assignment toggle
-    const assignCb = e.target.closest('.settings-team-assign')
+    const assignCb = e.target.closest('.settings-team-assign');
     if (assignCb) {
-      const memberId = assignCb.dataset.memberId
-      const assignments = (state.planner.org.teamAssignments ??= [])
+      const memberId = assignCb.dataset.memberId;
+      const assignments = (state.planner.org.teamAssignments ??= []);
       if (assignCb.checked) {
         if (!assignments.find((a) => a.memberId === memberId)) {
-          assignments.push({ memberId, budget: '', budgetActual: '', currency: state.planner.org.sponsorCurrency || 'AUD', notes: '', outboundLegs: [], returnLegs: [] })
-          refreshAssignMemberSelect()
-          renderOrgTab()
+          assignments.push({
+            memberId,
+            budget: '',
+            budgetActual: '',
+            currency: state.planner.org.sponsorCurrency || 'AUD',
+            notes: '',
+            outboundLegs: [],
+            returnLegs: [],
+          });
+          refreshAssignMemberSelect();
+          renderOrgTab();
         }
       } else {
-        const idx = assignments.findIndex((a) => a.memberId === memberId)
+        const idx = assignments.findIndex((a) => a.memberId === memberId);
         if (idx !== -1) {
-          const a = assignments[idx]
-          const hasData = a.budget || a.budgetActual || a.notes || a.outboundLegs?.length || a.returnLegs?.length
+          const a = assignments[idx];
+          const hasData =
+            a.budget || a.budgetActual || a.notes || a.outboundLegs?.length || a.returnLegs?.length;
           if (hasData) {
-            assignCb.checked = true // revert
-            alert('This member has travel or budget data on this event. Remove them from the Team tab instead.')
-            return
+            assignCb.checked = true; // revert
+            alert(
+              'This member has travel or budget data on this event. Remove them from the Team tab instead.',
+            );
+            return;
           }
-          assignments.splice(idx, 1)
-          refreshAssignMemberSelect()
-          renderOrgTab()
+          assignments.splice(idx, 1);
+          refreshAssignMemberSelect();
+          renderOrgTab();
         }
       }
-      scheduleAutoSave()
-      return
+      scheduleAutoSave();
+      return;
     }
 
     const pcAssignCheck = e.target.closest('.settings-personal-contact-assign');
@@ -7340,33 +2710,50 @@ function wireSettingsPanel() {
           state.planner.personal.tripAssignments.push(makeTripAssignment(contactId));
         }
       } else {
-        state.planner.personal.tripAssignments = state.planner.personal.tripAssignments.filter((a) => a.memberId !== contactId);
+        state.planner.personal.tripAssignments = state.planner.personal.tripAssignments.filter(
+          (a) => a.memberId !== contactId,
+        );
       }
       scheduleAutoSave();
       renderPersonalCompanionsSection();
       renderPersonalTimeline();
       return;
     }
-  })
+  });
 
   // Clicks: view/edit team member buttons, add-member, reset tab order, delete
   panel.addEventListener('click', async (e) => {
-    const viewBtn = e.target.closest('.view-team-member-btn')
-    if (viewBtn) { openTeamMemberDetailModal(viewBtn.dataset.memberId); return }
-    const editBtn = e.target.closest('.edit-team-member-btn')
-    if (editBtn) { openTeamMemberModal(editBtn.dataset.memberId); return }
-    if (e.target.closest('#settingsAddTeamMemberBtn')) { openTeamMemberModal(null); return }
-    if (e.target.closest('#settingsAddPersonalContactBtn')) { openPersonalContactModal(null); return; }
+    const viewBtn = e.target.closest('.view-team-member-btn');
+    if (viewBtn) {
+      openTeamMemberDetailModal(viewBtn.dataset.memberId);
+      return;
+    }
+    const editBtn = e.target.closest('.edit-team-member-btn');
+    if (editBtn) {
+      openTeamMemberModal(editBtn.dataset.memberId);
+      return;
+    }
+    if (e.target.closest('#settingsAddTeamMemberBtn')) {
+      openTeamMemberModal(null);
+      return;
+    }
+    if (e.target.closest('#settingsAddPersonalContactBtn')) {
+      openPersonalContactModal(null);
+      return;
+    }
     const editPersonalContact = e.target.closest('.edit-personal-contact-btn');
-    if (editPersonalContact) { openPersonalContactModal(editPersonalContact.dataset.contactId); return; }
+    if (editPersonalContact) {
+      openPersonalContactModal(editPersonalContact.dataset.contactId);
+      return;
+    }
     if (e.target.closest('#settingsResetTabOrderBtn')) {
-      const m = state.planner.mode || 'personal'
-      if (m === 'sponsor') state.planner.org.tabOrder = []
-      else state.planner.personal.tabOrder = []
-      scheduleAutoSave()
-      renderTabBar()
-      renderSettingsTab()
-      return
+      const m = state.planner.mode || 'personal';
+      if (m === 'sponsor') state.planner.org.tabOrder = [];
+      else state.planner.personal.tabOrder = [];
+      scheduleAutoSave();
+      renderTabBar();
+      renderSettingsTab();
+      return;
     }
 
     if (e.target.closest('#settingsDeletePlannerBtn')) {
@@ -7375,81 +2762,111 @@ function wireSettingsPanel() {
         const sheet = document.getElementById('plannerDeleteSheet');
         const nameEl = document.getElementById('plannerDeleteSheetName');
         if (nameEl) nameEl.textContent = name;
-        if (sheet) { sheet.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+        if (sheet) {
+          sheet.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        }
       } else {
         if (!window.confirm(`Delete "${name}"? This cannot be undone.`)) return;
         const { ok, error } = await deletePlannerBySlug(state.plannerKey);
-        if (!ok) { alert(`Delete failed: ${error}`); return; }
+        if (!ok) {
+          alert(`Delete failed: ${error}`);
+          return;
+        }
         location.href = 'planner.html';
       }
       return;
     }
-  })
+  });
 
-  wireSettingsTabOrder()
+  wireSettingsTabOrder();
 
   // Sponsor search
   document.getElementById('sponsorSearchInput')?.addEventListener('input', (e) => {
-    const query   = e.target.value.trim().toLowerCase()
-    const results = document.getElementById('sponsorSearchResults')
-    if (!results) return
-    if (!query) { results.classList.add('hidden'); results.innerHTML = ''; return }
-    const sponsors = state.eventMeta?.sponsors || []
-    const matches  = sponsors.filter((s) => s.title?.toLowerCase().includes(query))
-    if (!matches.length) {
-      results.innerHTML = '<li class="px-4 py-2 text-xs text-gray-600 italic">No sponsors found</li>'
-    } else {
-      results.innerHTML = matches.map((s) =>
-        `<li class="px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer flex items-center justify-between gap-2 sponsor-result-item" data-sponsor-id="${esc(s.id)}">
-          <span>${esc(s.title || '')}</span>
-          <span class="text-xs text-gray-400 flex-shrink-0">${esc(s.tier || '')}</span>
-        </li>`
-      ).join('')
+    const query = e.target.value.trim().toLowerCase();
+    const results = document.getElementById('sponsorSearchResults');
+    if (!results) return;
+    if (!query) {
+      results.classList.add('hidden');
+      results.innerHTML = '';
+      return;
     }
-    results.classList.remove('hidden')
-  })
+    const sponsors = state.eventMeta?.sponsors || [];
+    const matches = sponsors.filter((s) => s.title?.toLowerCase().includes(query));
+    if (!matches.length) {
+      results.innerHTML = '<li class="px-4 py-2 pl-hint italic">No sponsors found</li>';
+    } else {
+      results.innerHTML = matches
+        .map(
+          (s) =>
+            `<li class="px-4 py-2 text-sm pl-ink-1 cursor-pointer flex items-center justify-between gap-2 sponsor-result-item" data-sponsor-id="${esc(s.id)}">
+          <span>${esc(s.title || '')}</span>
+          <span class="pl-hint flex-shrink-0">${esc(s.tier || '')}</span>
+        </li>`,
+        )
+        .join('');
+    }
+    results.classList.remove('hidden');
+  });
 
   document.getElementById('sponsorSearchResults')?.addEventListener('click', (e) => {
-    const item = e.target.closest('.sponsor-result-item')
-    if (!item) return
-    state.planner.org.sponsorId = item.dataset.sponsorId
-    document.getElementById('sponsorSearchInput').value = ''
-    document.getElementById('sponsorSearchResults').classList.add('hidden')
-    renderSponsorLinked()
-    syncSponsoredSessions()
-    scheduleAutoSave()
-  })
+    const item = e.target.closest('.sponsor-result-item');
+    if (!item) return;
+    state.planner.org.sponsorId = item.dataset.sponsorId;
+    document.getElementById('sponsorSearchInput').value = '';
+    document.getElementById('sponsorSearchResults').classList.add('hidden');
+    renderSponsorLinked();
+    syncSponsoredSessions();
+    scheduleAutoSave();
+  });
 
   document.getElementById('unlinkSponsorBtn')?.addEventListener('click', () => {
-    state.planner.org.sponsorId = ''
-    renderSponsorLinked()
-    scheduleAutoSave()
-  })
+    state.planner.org.sponsorId = '';
+    renderSponsorLinked();
+    scheduleAutoSave();
+  });
 
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('#sponsorSearchRow') && !e.target.closest('#sponsorSearchResults')) {
-      document.getElementById('sponsorSearchResults')?.classList.add('hidden')
-    }
-  }, { capture: false })
+  document.addEventListener(
+    'click',
+    (e) => {
+      if (!e.target.closest('#sponsorSearchRow') && !e.target.closest('#sponsorSearchResults')) {
+        document.getElementById('sponsorSearchResults')?.classList.add('hidden');
+      }
+    },
+    { capture: false },
+  );
 }
 
 function wireBudgetCategoryManager() {
   ['personal', 'org'].forEach((mode) => {
-    const addInput  = document.getElementById(mode === 'personal' ? 'personalBudgetCategoryInput' : 'sponsorBudgetCategoryInput')
-    const addBtn    = document.getElementById(mode === 'personal' ? 'addPersonalBudgetCategoryBtn' : 'addSponsorBudgetCategoryBtn')
-    const container = document.getElementById(mode === 'personal' ? 'personalBudgetCategoryList' : 'sponsorBudgetCategoryList')
+    const addInput = document.getElementById(
+      mode === 'personal' ? 'personalBudgetCategoryInput' : 'sponsorBudgetCategoryInput',
+    );
+    const addBtn = document.getElementById(
+      mode === 'personal' ? 'addPersonalBudgetCategoryBtn' : 'addSponsorBudgetCategoryBtn',
+    );
+    const container = document.getElementById(
+      mode === 'personal' ? 'personalBudgetCategoryList' : 'sponsorBudgetCategoryList',
+    );
 
     addBtn?.addEventListener('click', () => {
-      if (addInput?.value) { addBudgetCategory(mode, addInput.value); addInput.value = '' }
-    })
+      if (addInput?.value) {
+        addBudgetCategory(mode, addInput.value);
+        addInput.value = '';
+      }
+    });
     addInput?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') { addBudgetCategory(mode, addInput.value); addInput.value = ''; e.preventDefault() }
-    })
+      if (e.key === 'Enter') {
+        addBudgetCategory(mode, addInput.value);
+        addInput.value = '';
+        e.preventDefault();
+      }
+    });
     container?.addEventListener('click', (e) => {
-      const btn = e.target.closest('.remove-budget-cat-btn')
-      if (btn) removeBudgetCategory(btn.dataset.catMode, btn.dataset.catId)
-    })
-  })
+      const btn = e.target.closest('.remove-budget-cat-btn');
+      if (btn) removeBudgetCategory(btn.dataset.catMode, btn.dataset.catId);
+    });
+  });
 }
 
 function renderAll() {
@@ -7457,6 +2874,9 @@ function renderAll() {
   applyScheduleGating();
   renderContactsTab();
   renderTasksTab();
+  renderChecklistsTab();
+  renderWeatherTab();
+  renderWeatherSummary();
   renderOrgTab();
   renderPersonalTab();
   renderTeamTab();
@@ -7464,249 +2884,44 @@ function renderAll() {
   renderReceiptsTab();
   renderTicketsTab();
   renderBudgetTab();
+  renderSplitTab();
   renderSummaryTab();
   renderSettingsTab();
 }
 
 // ── Event delegation ─────────────────────────────────────────────────────────
 
-function wireNotesPanel() {
-  const panel = document.getElementById('plannerNotesPanel');
-  if (!panel) return;
-
-  panel.addEventListener('change', (e) => {
-    const field = e.target.dataset.noteField;
-    const id    = e.target.dataset.noteId;
-    if (!field || !id) return;
-    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-    handleNoteChange(id, field, value);
-    // Update the attended badge in summary without full re-render
-    if (field === 'attended') {
-      const details = e.target.closest('details[data-session-id]');
-      const badge = details?.querySelector('summary .text-emerald-700');
-      if (e.target.checked && !badge) {
-        const badgeContainer = details?.querySelector('summary .flex.items-center.gap-2');
-        if (badgeContainer) {
-          const span = document.createElement('span');
-          span.className = 'text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-medium';
-          span.textContent = 'Attended';
-          badgeContainer.prepend(span);
-        }
-      } else if (!e.target.checked && badge) {
-        badge.closest('span')?.remove();
-      }
-    }
-  });
-
-  panel.addEventListener('input', (e) => {
-    const field = e.target.dataset.noteField;
-    const id    = e.target.dataset.noteId;
-    if (field === 'notes' && id) handleNoteChange(id, 'notes', e.target.value);
-  });
-
-  panel.addEventListener('click', (e) => {
-    // Star rating
-    const starBtn = e.target.closest('.star-btn');
-    if (starBtn) {
-      const id     = starBtn.dataset.noteId;
-      const rating = Number(starBtn.dataset.rating);
-      handleNoteChange(id, 'rating', rating);
-      // Re-render just this card's rating section
-      const details = starBtn.closest('details[data-session-id]');
-      if (details) {
-        const ratingGroup = details.querySelector('[role="group"]');
-        if (ratingGroup) {
-          const note = state.planner.sessionNotes[id] || { rating: 0 };
-          ratingGroup.innerHTML = `
-            <span class="text-sm text-gray-500 mr-1">Rating:</span>
-            ${starRatingHtml(id, note.rating)}
-            ${note.rating ? `<button type="button" class="clear-rating-btn appearance-none bg-transparent border-0 p-0 ml-1 cursor-pointer leading-none text-gray-500 hover:text-gray-700 transition-colors" data-note-id="${esc(id)}" title="Clear rating"><i class="fas fa-times text-[0.6rem]"></i></button>` : ''}`;
-        }
-      }
-      return;
-    }
-    // Clear rating
-    const clearBtn = e.target.closest('.clear-rating-btn');
-    if (clearBtn) {
-      const id = clearBtn.dataset.noteId;
-      handleNoteChange(id, 'rating', 0);
-      const details = clearBtn.closest('details[data-session-id]');
-      if (details) {
-        const ratingGroup = details.querySelector('[role="group"]');
-        if (ratingGroup) {
-          ratingGroup.innerHTML = `
-            <span class="text-sm text-gray-500 mr-1">Rating:</span>
-            ${starRatingHtml(id, 0)}`;
-        }
-      }
-    }
-  });
-
-  // Chevron rotation on details toggle
-  panel.addEventListener('toggle', (e) => {
-    const chevron = e.target.querySelector('.note-card-chevron');
-    if (chevron) chevron.classList.toggle('rotate-90', e.target.open);
-  }, true);
-
-  // Search input — filter sessions and show results
-  const searchInput   = document.getElementById('notesSearchInput');
-  const searchResults = document.getElementById('notesSearchResults');
-
-  searchInput?.addEventListener('input', (e) => {
-    const q = e.target.value.trim().toLowerCase();
-    if (!q) {
-      searchResults?.classList.add('hidden');
-      if (searchResults) searchResults.innerHTML = '';
-      return;
-    }
-    const matches = state.allSessions.filter((s) => {
-      const track = Array.isArray(s.track) ? s.track.join(' ') : (s.track || '');
-      return (
-        s.title?.toLowerCase().includes(q) ||
-        s.location?.toLowerCase().includes(q) ||
-        track.toLowerCase().includes(q)
-      );
-    }).slice(0, 30);
-
-    if (!searchResults) return;
-    if (!matches.length) {
-      searchResults.innerHTML = '<p class="text-xs text-gray-600 px-3 py-2">No sessions found.</p>';
-      searchResults.classList.remove('hidden');
-      return;
-    }
-    searchResults.innerHTML = matches.map((s) => {
-      const time  = fmtTime(s.startTime);
-      const track = Array.isArray(s.track) ? s.track.join(', ') : (s.track || '');
-      return `<button type="button" class="notes-search-result w-full text-left px-3 py-2 hover:bg-gray-50 transition-colors" data-session-id="${esc(s.id)}">
-        <p class="text-sm text-gray-800 truncate">${esc(s.title)}</p>
-        <p class="text-xs text-gray-500">${esc(time)}${s.location ? ` · ${esc(s.location)}` : ''}${track ? ` · ${esc(track)}` : ''}</p>
-      </button>`;
-    }).join('');
-    searchResults.classList.remove('hidden');
-  });
-
-  // Click on a search result row — add session note and re-render
-  searchResults?.addEventListener('click', (e) => {
-    const btn = e.target.closest('.notes-search-result');
-    if (!btn) return;
-    const sid = btn.dataset.sessionId;
-    const session = state.allSessions.find((s) => s.id === sid);
-    if (!session) return;
-    // Add stub note if not present
-    if (!state.planner.sessionNotes[sid]) {
-      state.planner.sessionNotes[sid] = {
-        sessionId: sid,
-        sessionTitle: session.title,
-        sessionStartTime: session.startTime,
-        attended: false,
-        rating: 0,
-        notes: '',
-      };
-    }
-    searchResults.innerHTML = '';
-    searchResults.classList.add('hidden');
-    if (searchInput) searchInput.value = '';
-    renderNotesTab();
-    scheduleAutoSave();
-    // Scroll to and open the newly added card
-    setTimeout(() => {
-      const el = document.querySelector(`[data-session-id="${sid}"]`);
-      if (el) { el.setAttribute('open', ''); el.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
-    }, 50);
-  });
-}
-
-function wireContactsPanel() {
-  const panel = document.getElementById('plannerContactsPanel');
-  if (!panel) return;
-
-  panel.addEventListener('click', (e) => {
-    const editBtn = e.target.closest('.edit-contact-btn');
-    if (editBtn) { openContactModal(editBtn.dataset.contactId); return; }
-  });
-
-  document.getElementById('addContactBtn')?.addEventListener('click', () => openContactModal(null));
-
-  // Contact modal wiring
-  document.getElementById('contactModalClose')?.addEventListener('click', closeContactModal);
-  document.getElementById('contactModalDone')?.addEventListener('click', saveContactModal);
-  document.getElementById('contactModalDelete')?.addEventListener('click', () => {
-    if (_contactModalId) { deleteContact(_contactModalId); closeContactModal(); }
-  });
-  document.getElementById('contactModal')?.addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) closeContactModal();
-  });
-  document.getElementById('contactModal')?.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeContactModal();
-  });
-}
-
-function wireTasksPanel() {
-  const panel = document.getElementById('plannerTasksPanel');
-  if (!panel) return;
-
-  panel.addEventListener('change', (e) => {
-    const id    = e.target.dataset.taskId;
-    const field = e.target.dataset.taskField;
-    if (id && field === 'done') handleTaskChange(id, 'done', e.target.checked);
-  });
-
-  panel.addEventListener('click', (e) => {
-    const editBtn = e.target.closest('.edit-task-btn');
-    if (editBtn) { openTaskModal(editBtn.dataset.taskId); return; }
-    const deleteBtn = e.target.closest('.delete-task-btn');
-    if (deleteBtn) { deleteTask(deleteBtn.dataset.taskId); return; }
-  });
-
-  document.getElementById('addTaskBtn')?.addEventListener('click', addTask);
-
-  document.getElementById('tasksFilterSelect')?.addEventListener('change', (e) => {
-    state.tasksFilter = e.target.value;
-    renderTasksTab();
-  });
-
-  // Task modal wiring
-  document.getElementById('taskModalClose')?.addEventListener('click', closeTaskModal);
-  document.getElementById('taskModalDone')?.addEventListener('click', saveTaskModal);
-  document.getElementById('taskModalDelete')?.addEventListener('click', () => {
-    if (_taskModalId) { deleteTask(_taskModalId); closeTaskModal(); }
-  });
-  document.getElementById('taskModal')?.addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) closeTaskModal();
-  });
-  document.getElementById('taskModal')?.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeTaskModal();
-  });
-}
-
-
 function renderSponsorLinked() {
-  const sponsorId  = state.planner.org.sponsorId || ''
-  const sponsors   = state.eventMeta?.sponsors   || []
-  const linked     = sponsors.find((s) => s.id === sponsorId)
-  const searchRow  = document.getElementById('sponsorSearchRow')
-  const resultsEl  = document.getElementById('sponsorSearchResults')
-  const linkedCard = document.getElementById('sponsorLinkedCard')
-  const unlinkBtn  = document.getElementById('unlinkSponsorBtn')
+  const sponsorId = state.planner.org.sponsorId || '';
+  const sponsors = state.eventMeta?.sponsors || [];
+  const linked = sponsors.find((s) => s.id === sponsorId);
+  const searchRow = document.getElementById('sponsorSearchRow');
+  const resultsEl = document.getElementById('sponsorSearchResults');
+  const linkedCard = document.getElementById('sponsorLinkedCard');
+  const unlinkBtn = document.getElementById('unlinkSponsorBtn');
 
   if (linked) {
-    searchRow?.classList.add('hidden')
-    resultsEl?.classList.add('hidden')
-    linkedCard?.classList.remove('hidden')
-    unlinkBtn?.classList.remove('hidden')
-    const nameEl = document.getElementById('sponsorLinkedName')
-    const tierEl = document.getElementById('sponsorLinkedTier')
-    const urlEl  = document.getElementById('sponsorLinkedUrl')
-    if (nameEl) nameEl.textContent = linked.title || ''
-    if (tierEl) tierEl.textContent = linked.tier  || ''
+    searchRow?.classList.add('hidden');
+    resultsEl?.classList.add('hidden');
+    linkedCard?.classList.remove('hidden');
+    unlinkBtn?.classList.remove('hidden');
+    const nameEl = document.getElementById('sponsorLinkedName');
+    const tierEl = document.getElementById('sponsorLinkedTier');
+    const urlEl = document.getElementById('sponsorLinkedUrl');
+    if (nameEl) nameEl.textContent = linked.title || '';
+    if (tierEl) tierEl.textContent = linked.tier || '';
     if (urlEl) {
-      if (linked.link) { urlEl.href = linked.link; urlEl.classList.remove('hidden') }
-      else             { urlEl.classList.add('hidden') }
+      if (linked.link) {
+        urlEl.href = linked.link;
+        urlEl.classList.remove('hidden');
+      } else {
+        urlEl.classList.add('hidden');
+      }
     }
   } else {
-    searchRow?.classList.remove('hidden')
-    linkedCard?.classList.add('hidden')
-    unlinkBtn?.classList.add('hidden')
+    searchRow?.classList.remove('hidden');
+    linkedCard?.classList.add('hidden');
+    unlinkBtn?.classList.add('hidden');
   }
 }
 
@@ -7717,26 +2932,53 @@ function wireAssignmentModal() {
   function getAssignment() {
     const ctx = assignModal.dataset.ctx || 'org';
     if (ctx === 'localCompanion') {
-      return (state.planner.personal?.localCompanions || []).find((lc) => lc.id === assignModal.dataset.memberId);
+      return (state.planner.personal?.localCompanions || []).find(
+        (lc) => lc.id === assignModal.dataset.memberId,
+      );
     }
-    const store = ctx === 'personal'
-      ? (state.planner.personal?.tripAssignments || [])
-      : (state.planner.org?.teamAssignments     || []);
+    const store =
+      ctx === 'personal'
+        ? state.planner.personal?.tripAssignments || []
+        : state.planner.org?.teamAssignments || [];
     return store.find((a) => a.memberId === assignModal.dataset.memberId);
   }
 
   function handleAssignField(e) {
     const assignment = getAssignment();
     if (!assignment) return;
-    if (e.target.id === 'assignmentBudget')   { assignment.budget       = e.target.value; scheduleAutoSave(); return; }
-    if (e.target.id === 'assignmentActual')   { assignment.budgetActual = e.target.value; scheduleAutoSave(); return; }
-    if (e.target.id === 'assignmentCurrency') { assignment.currency     = e.target.value; scheduleAutoSave(); return; }
-    if (e.target.id === 'assignmentNotes')    { assignment.notes        = e.target.value; scheduleAutoSave(); return; }
+    if (e.target.id === 'assignmentBudget') {
+      assignment.budget = e.target.value;
+      scheduleAutoSave();
+      return;
+    }
+    if (e.target.id === 'assignmentActual') {
+      assignment.budgetActual = e.target.value;
+      scheduleAutoSave();
+      return;
+    }
+    if (e.target.id === 'assignmentCurrency') {
+      assignment.currency = e.target.value;
+      scheduleAutoSave();
+      return;
+    }
+    if (e.target.id === 'assignmentPurchaseDate') {
+      assignment.purchaseDate = e.target.value;
+      scheduleAutoSave();
+      return;
+    }
+    if (e.target.id === 'assignmentNotes') {
+      assignment.notes = e.target.value;
+      scheduleAutoSave();
+      return;
+    }
     const { legId, direction, legField } = e.target.dataset;
     if (legId && direction && legField) {
       const legs = direction === 'outbound' ? assignment.outboundLegs : assignment.returnLegs;
-      const leg  = legs?.find((l) => l.id === legId);
-      if (leg) { leg[legField] = e.target.value; scheduleAutoSave(); }
+      const leg = legs?.find((l) => l.id === legId);
+      if (leg) {
+        leg[legField] = e.target.value;
+        scheduleAutoSave();
+      }
     }
   }
 
@@ -7760,9 +3002,8 @@ function wireAssignmentModal() {
     const assignment = getAssignment();
     if (!assignment) return;
     const personal = state.planner.personal;
-    const srcLegs = direction === 'outbound'
-      ? (personal?.outboundLegs || [])
-      : (personal?.returnLegs   || []);
+    const srcLegs =
+      direction === 'outbound' ? personal?.outboundLegs || [] : personal?.returnLegs || [];
     if (!srcLegs.length) return;
     const destLegs = direction === 'outbound' ? assignment.outboundLegs : assignment.returnLegs;
     if (destLegs.length > 0) {
@@ -7775,8 +3016,12 @@ function wireAssignmentModal() {
     scheduleAutoSave();
   }
 
-  document.getElementById('importOutboundFromMeBtn')?.addEventListener('click', () => importLegsFromMe('outbound'));
-  document.getElementById('importReturnFromMeBtn')?.addEventListener('click',   () => importLegsFromMe('return'));
+  document
+    .getElementById('importOutboundFromMeBtn')
+    ?.addEventListener('click', () => importLegsFromMe('outbound'));
+  document
+    .getElementById('importReturnFromMeBtn')
+    ?.addEventListener('click', () => importLegsFromMe('return'));
 
   assignModal.addEventListener('click', (e) => {
     const removeBtn = e.target.closest('.remove-leg-btn');
@@ -7784,49 +3029,84 @@ function wireAssignmentModal() {
       const { legId, direction } = removeBtn.dataset;
       const assignment = getAssignment();
       if (!assignment) return;
-      if (direction === 'outbound') assignment.outboundLegs = assignment.outboundLegs.filter((l) => l.id !== legId);
+      if (direction === 'outbound')
+        assignment.outboundLegs = assignment.outboundLegs.filter((l) => l.id !== legId);
       else assignment.returnLegs = assignment.returnLegs.filter((l) => l.id !== legId);
       renderAssignmentLegsInModal(assignment);
       scheduleAutoSave();
       return;
     }
-    const attachBtn = e.target.closest('.leg-attach-btn');
-    if (attachBtn) {
-      const legFileInput = document.getElementById('legFileInput');
-      if (!legFileInput) return;
-      legFileInput.dataset.legId  = attachBtn.dataset.legId;
-      legFileInput.dataset.legDir = attachBtn.dataset.direction;
-      legFileInput.dataset.legCtx = assignModal.dataset.ctx || 'org';
-      legFileInput.click();
+    const legRcBtn = e.target.closest(
+      '.leg-link-receipt-btn, .leg-create-receipt-btn, .leg-unlink-receipt-btn',
+    );
+    if (legRcBtn) {
+      const { legId, direction } = legRcBtn.dataset;
+      const assignment = getAssignment();
+      if (!assignment) return;
+      const legs =
+        direction === 'return' ? assignment.returnLegs || [] : assignment.outboundLegs || [];
+      const leg = legs.find((l) => l.id === legId);
+      if (!leg) return;
+      const rerender = () => {
+        renderAssignmentLegsInModal(assignment);
+        scheduleAutoSave();
+        renderReceiptsTab();
+      };
+      if (legRcBtn.classList.contains('leg-unlink-receipt-btn')) {
+        unlinkEntityReceipt(leg);
+        rerender();
+        return;
+      }
+      const createForLeg = () => {
+        const route = [leg.from, leg.to].filter(Boolean).join(' → ');
+        createReceiptForEntity(state.planner, leg, {
+          name: route ? `Travel: ${route}` : 'Travel receipt',
+          date: leg.date || '',
+          currency: state.planner?.org?.sponsorCurrency || 'AUD',
+          category: 'travel',
+        });
+        rerender();
+      };
+      if (legRcBtn.classList.contains('leg-create-receipt-btn')) {
+        createForLeg();
+        return;
+      }
+      openReceiptPicker(state.planner, {
+        onPick: (rid) => {
+          linkEntityReceipt(leg, rid);
+          rerender();
+        },
+        onCreate: createForLeg,
+      });
+      return;
     }
-  });
-
-  document.getElementById('legFileInput')?.addEventListener('change', async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const legId  = e.target.dataset.legId;
-    const legDir = e.target.dataset.legDir;
-    const legCtx = e.target.dataset.legCtx || 'org';
-    if (!legId) { e.target.value = ''; return; }
-    const assignments = legCtx === 'personal'
-      ? (state.planner.personal?.tripAssignments || [])
-      : (state.planner.org?.teamAssignments     || []);
-    let foundLeg = null;
-    let foundAssignment = null;
-    for (const a of assignments) {
-      const legs = legDir === 'outbound' ? a.outboundLegs : a.returnLegs;
-      const leg  = (legs || []).find((l) => l.id === legId);
-      if (leg) { foundLeg = leg; foundAssignment = a; break; }
+    if (e.target.closest('#assignmentCreateReceiptBtn')) {
+      createReceiptForAssignment();
+      return;
     }
-    if (!foundLeg) { e.target.value = ''; return; }
-    try {
-      const { path, label } = await uploadOrReadFile(file);
-      foundLeg.filePath  = path;
-      foundLeg.fileLabel = label;
-    } catch (err) { window.alert(err.message); e.target.value = ''; return; }
-    scheduleAutoSave();
-    if (foundAssignment) renderAssignmentLegsInModal(foundAssignment);
-    e.target.value = '';
+    if (e.target.closest('#assignmentViewReceiptBtn')) {
+      const assignment = _currentTeamAssignment();
+      hideModal('assignmentModal');
+      assignModal.dataset.ctx = '';
+      setActiveTab('receipts');
+      setTimeout(() => {
+        const el = assignment?.receiptId
+          ? document.querySelector(`details[data-receipt-id="${assignment.receiptId}"]`)
+          : null;
+        el?.setAttribute('open', '');
+        el?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 50);
+      return;
+    }
+    if (e.target.closest('#assignmentUnlinkReceiptBtn')) {
+      const assignment = _currentTeamAssignment();
+      if (assignment) {
+        unlinkEntityReceipt(assignment);
+        scheduleAutoSave();
+        renderAssignmentReceiptStatus();
+      }
+      return;
+    }
   });
 
   createModal('assignmentModal', {
@@ -7853,19 +3133,32 @@ function wireOrgPanel() {
   // ── Booth fields ────────────────────────────────────────────────────────────
   panel.addEventListener('input', (e) => {
     if (e.target.id === 'plannerSponsorTitle') {
-      state.planner._displayName = e.target.value
-      const other = document.getElementById('plannerPersonalTitle')
-      if (other && !other.disabled) other.value = e.target.value
-      scheduleAutoSave(); updateHeader(); return;
+      state.planner._displayName = e.target.value;
+      const other = document.getElementById('plannerPersonalTitle');
+      if (other && !other.disabled) other.value = e.target.value;
+      scheduleAutoSave();
+      updateHeader();
+      return;
     }
-    if (e.target.id === 'orgBoothInfo')  { state.planner.org.boothInfo  = e.target.value; scheduleAutoSave(); return; }
-    if (e.target.id === 'orgBoothNotes') { state.planner.org.boothNotes = e.target.value; scheduleAutoSave(); return; }
+    if (e.target.id === 'orgBoothInfo') {
+      state.planner.org.boothInfo = e.target.value;
+      scheduleAutoSave();
+      return;
+    }
+    if (e.target.id === 'orgBoothNotes') {
+      state.planner.org.boothNotes = e.target.value;
+      scheduleAutoSave();
+      return;
+    }
 
-    const delivId    = e.target.dataset.deliverablesId;
+    const delivId = e.target.dataset.deliverablesId;
     const delivField = e.target.dataset.deliverablesField;
     if (delivId && delivField && delivField !== 'done') {
       const item = state.planner.org.deliverables.find((x) => x.id === delivId);
-      if (item) { item[delivField] = e.target.value; scheduleAutoSave(); }
+      if (item) {
+        item[delivField] = e.target.value;
+        scheduleAutoSave();
+      }
     }
   });
 
@@ -7873,22 +3166,37 @@ function wireOrgPanel() {
     // Timeline date range
     if (e.target.id === 'timelineStartDate') {
       state.planner.org.timeline = { ...state.planner.org.timeline, startDate: e.target.value };
-      renderTimeline(); scheduleAutoSave(); return;
+      renderTimeline();
+      scheduleAutoSave();
+      return;
     }
     if (e.target.id === 'timelineEndDate') {
       state.planner.org.timeline = { ...state.planner.org.timeline, endDate: e.target.value };
-      renderTimeline(); scheduleAutoSave(); return;
+      renderTimeline();
+      scheduleAutoSave();
+      return;
     }
 
     // Assign team member select
     if (e.target.id === 'assignMemberSelect') {
       const memberId = e.target.value;
       if (!memberId) return;
-      const already = (state.planner.org.teamAssignments || []).some((a) => a.memberId === memberId);
+      const already = (state.planner.org.teamAssignments || []).some(
+        (a) => a.memberId === memberId,
+      );
       if (!already) {
         state.planner.org.teamAssignments = [
           ...(state.planner.org.teamAssignments || []),
-          { memberId, outboundLegs: [], returnLegs: [], budget: '', budgetActual: '', currency: state.planner?.org?.sponsorCurrency || getDefaultCurrency(), notes: '' },
+          {
+            memberId,
+            outboundLegs: [],
+            returnLegs: [],
+            budget: '',
+            budgetActual: '',
+            currency: state.planner?.org?.sponsorCurrency || getDefaultCurrency(),
+            notes: '',
+            receiptId: '',
+          },
         ];
         renderOrgTab();
         scheduleAutoSave();
@@ -7899,20 +3207,28 @@ function wireOrgPanel() {
     }
 
     if (e.target.classList.contains('swag-done-check')) {
-      const id   = e.target.dataset.swagId;
+      const id = e.target.dataset.swagId;
       const item = state.planner.org.swag.find((x) => x.id === id);
-      if (item) { item.done = e.target.checked; scheduleAutoSave(); renderOrgTab(); }
+      if (item) {
+        item.done = e.target.checked;
+        scheduleAutoSave();
+        renderOrgTab();
+      }
       return;
     }
-    const delivId    = e.target.dataset.deliverablesId;
+    const delivId = e.target.dataset.deliverablesId;
     const delivField = e.target.dataset.deliverablesField;
     if (delivId && delivField === 'done') {
       const item = state.planner.org.deliverables.find((x) => x.id === delivId);
       if (item) {
         item.done = e.target.checked;
         const row = e.target.closest(`[data-deliverables-id="${delivId}"]`);
-        row?.querySelector('[data-deliverables-field="label"]')?.classList.toggle('line-through', item.done);
-        row?.querySelector('[data-deliverables-field="label"]')?.classList.toggle('text-gray-400', item.done);
+        row
+          ?.querySelector('[data-deliverables-field="label"]')
+          ?.classList.toggle('line-through', item.done);
+        row
+          ?.querySelector('[data-deliverables-field="label"]')
+          ?.classList.toggle('text-gray-400', item.done);
         scheduleAutoSave();
       }
     }
@@ -7921,86 +3237,178 @@ function wireOrgPanel() {
   panel.addEventListener('click', (e) => {
     // Assignment edit / remove
     const editAssign = e.target.closest('.edit-assignment-btn');
-    if (editAssign) { openAssignmentModal(editAssign.dataset.memberId); return; }
+    if (editAssign) {
+      openAssignmentModal(editAssign.dataset.memberId);
+      return;
+    }
 
     const removeAssign = e.target.closest('.remove-assignment-btn');
     if (removeAssign) {
       const mid = removeAssign.dataset.memberId;
-      const snapAssign     = (state.planner.org.teamAssignments || []).find((a) => a.memberId === mid);
-      const snapAccomAssns = (state.planner.org.accommodations || []).map((acc) => ({ id: acc.id, a: [...(acc.assignments || [])] }));
-      state.planner.org.teamAssignments = (state.planner.org.teamAssignments || []).filter((a) => a.memberId !== mid);
-      (state.planner.org.accommodations || []).forEach((acc) => { acc.assignments = (acc.assignments || []).filter((a) => a.memberId !== mid); });
-      renderOrgTab(); scheduleAutoSave();
+      const snapAssign = (state.planner.org.teamAssignments || []).find((a) => a.memberId === mid);
+      const snapAccomAssns = (state.planner.org.accommodations || []).map((acc) => ({
+        id: acc.id,
+        a: [...(acc.assignments || [])],
+      }));
+      state.planner.org.teamAssignments = (state.planner.org.teamAssignments || []).filter(
+        (a) => a.memberId !== mid,
+      );
+      (state.planner.org.accommodations || []).forEach((acc) => {
+        acc.assignments = (acc.assignments || []).filter((a) => a.memberId !== mid);
+      });
+      renderOrgTab();
+      scheduleAutoSave();
       if (snapAssign) {
         const member = (state.global?.teamMembers || []).find((m) => m.id === mid);
         showUndoToast(member?.name || 'Team member', () => {
-          state.planner.org.teamAssignments = [...(state.planner.org.teamAssignments || []), snapAssign];
-          snapAccomAssns.forEach(({ id, a }) => { const acc = (state.planner.org.accommodations || []).find((x) => x.id === id); if (acc) acc.assignments = a; });
-          renderOrgTab(); scheduleAutoSave();
+          state.planner.org.teamAssignments = [
+            ...(state.planner.org.teamAssignments || []),
+            snapAssign,
+          ];
+          snapAccomAssns.forEach(({ id, a }) => {
+            const acc = (state.planner.org.accommodations || []).find((x) => x.id === id);
+            if (acc) acc.assignments = a;
+          });
+          renderOrgTab();
+          scheduleAutoSave();
         });
       }
       return;
     }
 
+    // Add accommodation stay to a calendar
+    const calAccom = e.target.closest('.accommodation-cal-btn');
+    if (calAccom) {
+      const acc = (state.planner.org.accommodations || []).find(
+        (a) => a.id === calAccom.dataset.accomId,
+      );
+      // Dates live on the accommodation itself (waypoints) or per-member in the
+      // assignments (a normal stay); take the full span across all members.
+      let checkIn = acc?.checkIn || '';
+      let checkOut = acc?.checkOut || '';
+      if (acc && acc.type !== 'waypoints') {
+        const ins = (acc.assignments || [])
+          .map((s) => s.checkIn)
+          .filter(Boolean)
+          .sort();
+        const outs = (acc.assignments || [])
+          .map((s) => s.checkOut)
+          .filter(Boolean)
+          .sort();
+        checkIn = ins[0] || '';
+        checkOut = outs[outs.length - 1] || '';
+      }
+      const calEvent = accommodationToCalEvent({
+        name: acc?.name,
+        checkIn,
+        checkOut,
+        location: acc?.address,
+      });
+      if (calEvent)
+        openCalendarMenu(calAccom, calEvent, { id: acc?.id, filenameBase: calEvent.title });
+      return;
+    }
     // Accommodation edit / delete
     const editAccom = e.target.closest('.edit-accommodation-btn');
-    if (editAccom) { openAccommodationModal(editAccom.dataset.accomId); return; }
+    if (editAccom) {
+      openAccommodationModal(editAccom.dataset.accomId);
+      return;
+    }
 
     const delAccom = e.target.closest('.delete-accommodation-btn');
     if (delAccom) {
       const id = delAccom.dataset.accomId;
       const snapshot = (state.planner.org.accommodations || []).find((a) => a.id === id);
-      state.planner.org.accommodations = (state.planner.org.accommodations || []).filter((a) => a.id !== id);
-      renderOrgTab(); scheduleAutoSave();
-      if (snapshot) showUndoToast(snapshot.name || 'Accommodation', () => {
-        state.planner.org.accommodations = [...(state.planner.org.accommodations || []), snapshot];
-        renderOrgTab(); scheduleAutoSave();
-      });
+      state.planner.org.accommodations = (state.planner.org.accommodations || []).filter(
+        (a) => a.id !== id,
+      );
+      renderOrgTab();
+      scheduleAutoSave();
+      if (snapshot)
+        showUndoToast(snapshot.name || 'Accommodation', () => {
+          state.planner.org.accommodations = [
+            ...(state.planner.org.accommodations || []),
+            snapshot,
+          ];
+          renderOrgTab();
+          scheduleAutoSave();
+        });
       return;
     }
 
     const editSwag = e.target.closest('.edit-swag-btn');
-    if (editSwag) { openSwagModal(editSwag.dataset.swagId); return; }
+    if (editSwag) {
+      openSwagModal(editSwag.dataset.swagId);
+      return;
+    }
     if (e.target.closest('.delete-deliverables-btn')) {
       const id = e.target.closest('.delete-deliverables-btn').dataset.deliverablesId;
       const snapshot = (state.planner.org.deliverables || []).find((x) => x.id === id);
       state.planner.org.deliverables = state.planner.org.deliverables.filter((x) => x.id !== id);
-      renderOrgTab(); scheduleAutoSave();
-      if (snapshot) showUndoToast(snapshot.name || 'Deliverable', () => {
-        state.planner.org.deliverables = [...(state.planner.org.deliverables || []), snapshot];
-        renderOrgTab(); scheduleAutoSave();
-      });
+      renderOrgTab();
+      scheduleAutoSave();
+      if (snapshot)
+        showUndoToast(snapshot.name || 'Deliverable', () => {
+          state.planner.org.deliverables = [...(state.planner.org.deliverables || []), snapshot];
+          renderOrgTab();
+          scheduleAutoSave();
+        });
     }
 
+    const calOrgEvent = e.target.closest('.org-event-cal-btn');
+    if (calOrgEvent) {
+      const id = calOrgEvent.dataset.eventId;
+      const item = (state.planner.org?.itinerary || []).find((i) => i.id === id);
+      const calEvent = itineraryItemToCalEvent(item, { timezone: getTimezone() });
+      if (calEvent) openCalendarMenu(calOrgEvent, calEvent, { id, filenameBase: calEvent.title });
+      return;
+    }
     const editOrgEvent = e.target.closest('.edit-org-event-btn');
-    if (editOrgEvent) { openOrgEventModal(editOrgEvent.dataset.eventId); return; }
+    if (editOrgEvent) {
+      openOrgEventModal(editOrgEvent.dataset.eventId);
+      return;
+    }
     const delOrgEvent = e.target.closest('.delete-org-event-btn');
     if (delOrgEvent) {
       const id = delOrgEvent.dataset.eventId;
       const snapshot = (state.planner.org.itinerary || []).find((i) => i.id === id);
       state.planner.org.itinerary = (state.planner.org.itinerary || []).filter((i) => i.id !== id);
-      renderOrgItinerary(); scheduleAutoSave();
+      renderOrgItinerary();
+      scheduleAutoSave();
       if (state.activeTab === 'summary') renderSummaryTab();
-      if (snapshot) showUndoToast(snapshot.title || 'Team event', () => {
-        state.planner.org.itinerary = [...(state.planner.org.itinerary || []), snapshot];
-        renderOrgItinerary(); scheduleAutoSave();
-        if (state.activeTab === 'summary') renderSummaryTab();
-      });
+      if (snapshot)
+        showUndoToast(snapshot.title || 'Team event', () => {
+          state.planner.org.itinerary = [...(state.planner.org.itinerary || []), snapshot];
+          renderOrgItinerary();
+          scheduleAutoSave();
+          if (state.activeTab === 'summary') renderSummaryTab();
+        });
     }
   });
 
   panel.addEventListener('change', (e) => {
     if (e.target.classList.contains('org-event-done-check')) {
-      const id   = e.target.dataset.eventId;
+      const id = e.target.dataset.eventId;
       const item = (state.planner.org?.itinerary || []).find((i) => i.id === id);
-      if (item) { item.done = e.target.checked; scheduleAutoSave(); }
+      if (item) {
+        item.done = e.target.checked;
+        scheduleAutoSave();
+      }
     }
   });
 
   document.getElementById('addOrgEventBtn')?.addEventListener('click', () => openOrgEventModal());
 
   document.getElementById('addAccommodationBtn')?.addEventListener('click', () => {
-    const acc = { id: makeItemId('acc'), name: '', address: '', confirmation: '', notes: '', assignments: [] };
+    const acc = {
+      id: makeItemId('acc'),
+      name: '',
+      address: '',
+      confirmation: '',
+      notes: '',
+      assignments: [],
+      receiptId: '',
+    };
     state.planner.org.accommodations = [...(state.planner.org.accommodations || []), acc];
     renderOrgTab();
     scheduleAutoSave();
@@ -8008,7 +3416,17 @@ function wireOrgPanel() {
   });
 
   document.getElementById('addSwagBtn')?.addEventListener('click', () => {
-    const item = { id: makeItemId('sw'), name: '', quantity: 1, budget: '', actual: '', currency: state.planner?.org?.sponsorCurrency || 'AUD', done: false, notes: '' };
+    const item = {
+      id: makeItemId('sw'),
+      name: '',
+      quantity: 1,
+      budget: '',
+      actual: '',
+      currency: state.planner?.org?.sponsorCurrency || 'AUD',
+      done: false,
+      notes: '',
+      receiptId: '',
+    };
     state.planner.org.swag.push(item);
     renderOrgTab();
     scheduleAutoSave();
@@ -8016,43 +3434,72 @@ function wireOrgPanel() {
   });
 
   document.getElementById('addDeliverableBtn')?.addEventListener('click', () => {
-    state.planner.org.deliverables.push({ id: makeItemId('dv'), label: '', done: false, dueDate: '' });
-    renderOrgTab(); scheduleAutoSave();
+    state.planner.org.deliverables.push({
+      id: makeItemId('dv'),
+      label: '',
+      done: false,
+      dueDate: '',
+    });
+    renderOrgTab();
+    scheduleAutoSave();
   });
 
   // ── Accommodation modal ─────────────────────────────────────────────────────
   const accomModal = document.getElementById('accommodationModal');
   if (accomModal) {
     function getAccom() {
-      return (state.planner.org.accommodations || []).find((a) => a.id === accomModal.dataset.accomId);
+      return (state.planner.org.accommodations || []).find(
+        (a) => a.id === accomModal.dataset.accomId,
+      );
     }
 
     const MEMBER_FIELD_MAP = {
-      accomMemberCheckIn:  'checkIn',
+      accomMemberCheckIn: 'checkIn',
       accomMemberCheckOut: 'checkOut',
-      accomMemberCurrency: 'currency',
-      accomMemberBudget:   'budget',
-      accomMemberActual:   'budgetActual',
     };
 
     function handleAccomField(e) {
       const acc = getAccom();
       if (!acc) return;
-      if      (e.target.id === 'accomType')         { acc.type = e.target.value; document.getElementById('accommodationModalTitle').textContent = e.target.value === 'waypoints' ? 'Waypoint' : 'Accommodation'; toggleWaypointStopsSection(e.target.value === 'waypoints', 'accomWaypointStopsSection'); renderWaypointStops(acc.stops, 'accomWaypointStopsList', 'accomWaypointStopsEmpty'); renderAccomMembersSection(acc); renderTimeline(); }
-      else if (e.target.id === 'accomName')         { acc.name         = e.target.value; }
-      else if (e.target.id === 'accomAddress')      { acc.address      = e.target.value; }
-      else if (e.target.id === 'accomConfirmation') { acc.confirmation = e.target.value; }
-      else if (e.target.id === 'accomNotes')        { acc.notes        = e.target.value; }
-      else if (MEMBER_FIELD_MAP[e.target.id]) {
+      if (e.target.id === 'accomType') {
+        acc.type = e.target.value;
+        document.getElementById('accommodationModalTitle').textContent =
+          e.target.value === 'waypoints' ? 'Waypoint' : 'Accommodation';
+        toggleWaypointStopsSection(e.target.value === 'waypoints', 'accomWaypointStopsSection');
+        renderWaypointStops(acc.stops, 'accomWaypointStopsList', 'accomWaypointStopsEmpty');
+        renderAccomMembersSection(acc);
+        renderTimeline();
+      } else if (e.target.id === 'accomName') {
+        acc.name = e.target.value;
+      } else if (e.target.id === 'accomAddress') {
+        acc.address = e.target.value;
+      } else if (e.target.id === 'accomCoords') {
+        acc.coords = e.target.value;
+      } else if (e.target.id === 'accomConfirmation') {
+        acc.confirmation = e.target.value;
+      } else if (e.target.id === 'accomNotes') {
+        acc.notes = e.target.value;
+      } else if (MEMBER_FIELD_MAP[e.target.id]) {
         const memberId = document.getElementById('accomMemberSelect')?.value;
         if (!memberId) return;
         acc.assignments = acc.assignments || [];
         let stay = acc.assignments.find((s) => s.memberId === memberId);
         if (!stay) {
-          stay = { memberId, checkIn: '', checkOut: '', budget: '', budgetActual: '', currency: state.planner?.org?.sponsorCurrency || 'AUD' };
+          stay = {
+            memberId,
+            checkIn: '',
+            checkOut: '',
+            budget: '',
+            budgetActual: '',
+            purchaseDate: '',
+            currency: state.planner?.org?.sponsorCurrency || 'AUD',
+            receiptId: '',
+          };
           acc.assignments.push(stay);
           // Mark option with ✓ and show remove button
-          const opt = accomModal.querySelector(`#accomMemberSelect option[value="${CSS.escape(memberId)}"]`);
+          const opt = accomModal.querySelector(
+            `#accomMemberSelect option[value="${CSS.escape(memberId)}"]`,
+          );
           if (opt && !opt.textContent.endsWith(' ✓')) opt.textContent += ' ✓';
           const removeBtn = document.getElementById('accomRemoveMemberBtn');
           if (removeBtn) removeBtn.classList.remove('opacity-0', 'pointer-events-none');
@@ -8066,33 +3513,98 @@ function wireOrgPanel() {
       onSave: handleAccomField,
       onDelete: () => {
         const id = accomModal.dataset.accomId;
-        state.planner.org.accommodations = (state.planner.org.accommodations || []).filter((a) => a.id !== id);
+        state.planner.org.accommodations = (state.planner.org.accommodations || []).filter(
+          (a) => a.id !== id,
+        );
         scheduleAutoSave();
       },
       onClose: () => renderOrgTab(),
     }).wire();
 
     accomModal.addEventListener('click', (e) => {
-      if (e.target.closest('#accomAttachDocBtn')) {
-        document.getElementById('accomFileInput')?.click();
+      if (e.target.closest('#orgAccomLinkReceiptBtn')) {
+        const acc = _currentOrgAccom();
+        if (!acc) return;
+        openReceiptPicker(state.planner, {
+          onPick: (rid) => {
+            linkEntityReceipt(acc, rid);
+            scheduleAutoSave();
+            renderOrgAccomReceiptStatus(acc);
+            renderReceiptsTab();
+          },
+          onCreate: () => createReceiptForOrgAccom(),
+        });
+        return;
       }
-    });
-
-    document.getElementById('accomFileInput')?.addEventListener('change', async (e) => {
-      const file = e.target.files?.[0];
-      if (!file) return;
-      const acc = getAccom();
-      if (!acc) { e.target.value = ''; return; }
-      try {
-        const { path, label } = await uploadOrReadFile(file);
-        acc.filePath  = path;
-        acc.fileLabel = label;
-      } catch (err) { window.alert(err.message); e.target.value = ''; return; }
-      scheduleAutoSave();
-      renderAccomDocStatus(acc, 'accomDocStatus', 'accomAttachDocBtn');
-      renderOrgTab();
-      renderDocumentsTab();
-      e.target.value = '';
+      if (e.target.closest('#orgAccomCreateReceiptBtn')) {
+        createReceiptForOrgAccom();
+        return;
+      }
+      if (e.target.closest('#orgAccomViewReceiptBtn')) {
+        const acc = _currentOrgAccom();
+        hideModal('accommodationModal');
+        renderOrgTab();
+        setActiveTab('receipts');
+        setTimeout(() => {
+          const el = acc?.receiptId
+            ? document.querySelector(`details[data-receipt-id="${acc.receiptId}"]`)
+            : null;
+          el?.setAttribute('open', '');
+          el?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 50);
+        return;
+      }
+      if (e.target.closest('#orgAccomUnlinkReceiptBtn')) {
+        const acc = _currentOrgAccom();
+        if (acc) {
+          unlinkEntityReceipt(acc);
+          scheduleAutoSave();
+          renderOrgAccomReceiptStatus(acc);
+        }
+        return;
+      }
+      if (e.target.closest('#accomMemberLinkReceiptBtn')) {
+        const stay = _currentAccomStay();
+        if (!stay) return;
+        openReceiptPicker(state.planner, {
+          onPick: (rid) => {
+            linkEntityReceipt(stay, rid);
+            scheduleAutoSave();
+            renderAccomStayReceiptStatus(_currentOrgAccom(), stay.memberId);
+            renderReceiptsTab();
+          },
+          onCreate: () => createReceiptForAccomStay(),
+        });
+        return;
+      }
+      if (e.target.closest('#accomMemberCreateReceiptBtn')) {
+        createReceiptForAccomStay();
+        return;
+      }
+      if (e.target.closest('#accomMemberViewReceiptBtn')) {
+        const stay = _currentAccomStay();
+        hideModal('accommodationModal');
+        renderOrgTab();
+        setActiveTab('receipts');
+        setTimeout(() => {
+          const el = stay?.receiptId
+            ? document.querySelector(`details[data-receipt-id="${stay.receiptId}"]`)
+            : null;
+          el?.setAttribute('open', '');
+          el?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 50);
+        return;
+      }
+      if (e.target.closest('#accomMemberUnlinkReceiptBtn')) {
+        const acc = _currentOrgAccom();
+        const stay = _currentAccomStay();
+        if (stay) {
+          unlinkEntityReceipt(stay);
+          scheduleAutoSave();
+          renderAccomStayReceiptStatus(acc, stay.memberId);
+        }
+        return;
+      }
     });
 
     document.getElementById('accomMemberSelect')?.addEventListener('change', (e) => {
@@ -8102,8 +3614,18 @@ function wireOrgPanel() {
       if (memberId) {
         acc.assignments = acc.assignments || [];
         if (!acc.assignments.find((s) => s.memberId === memberId)) {
-          acc.assignments.push({ memberId, checkIn: '', checkOut: '', budget: '', budgetActual: '', currency: state.planner?.org?.sponsorCurrency || 'AUD' });
-          const opt = accomModal.querySelector(`#accomMemberSelect option[value="${CSS.escape(memberId)}"]`);
+          acc.assignments.push({
+            memberId,
+            checkIn: '',
+            checkOut: '',
+            budget: '',
+            budgetActual: '',
+            currency: state.planner?.org?.sponsorCurrency || 'AUD',
+            receiptId: '',
+          });
+          const opt = accomModal.querySelector(
+            `#accomMemberSelect option[value="${CSS.escape(memberId)}"]`,
+          );
           if (opt && !opt.textContent.endsWith(' ✓')) opt.textContent += ' ✓';
           scheduleAutoSave();
         }
@@ -8116,9 +3638,9 @@ function wireOrgPanel() {
     });
 
     document.getElementById('accomRemoveMemberBtn')?.addEventListener('click', () => {
-      const acc      = getAccom();
+      const acc = getAccom();
       if (!acc) return;
-      const select   = document.getElementById('accomMemberSelect');
+      const select = document.getElementById('accomMemberSelect');
       const memberId = select?.value;
       if (!memberId) return;
       acc.assignments = (acc.assignments || []).filter((s) => s.memberId !== memberId);
@@ -8126,7 +3648,12 @@ function wireOrgPanel() {
       const opt = select.querySelector(`option[value="${CSS.escape(memberId)}"]`);
       if (opt) opt.textContent = opt.textContent.replace(' ✓', '');
       // Clear fields and hide remove button
-      ['accomMemberCheckIn','accomMemberCheckOut','accomMemberBudget','accomMemberActual'].forEach((id) => {
+      [
+        'accomMemberCheckIn',
+        'accomMemberCheckOut',
+        'accomMemberBudget',
+        'accomMemberActual',
+      ].forEach((id) => {
         const el = document.getElementById(id);
         if (el) el.value = '';
       });
@@ -8153,7 +3680,10 @@ function wireOrgPanel() {
       const acc = getAccom();
       if (!acc) return;
       const leg = (acc.stops || []).find((l) => l.id === legId);
-      if (leg) { leg[field] = e.target.value; scheduleAutoSave(); }
+      if (leg) {
+        leg[field] = e.target.value;
+        scheduleAutoSave();
+      }
     });
 
     document.getElementById('accomWaypointStopsList')?.addEventListener('click', (e) => {
@@ -8170,595 +3700,96 @@ function wireOrgPanel() {
     wireWaypointStopsDragDrop('accomWaypointStopsList', 'accomWaypointStopsEmpty', getAccom);
   }
 
-  wireTrackedSessionSearch('sponsor')
+  wireTrackedSessionSearch('sponsor');
 }
 
-// ── Personal contacts (global) ────────────────────────────────────────────────
-
-function makePersonalContact() {
-  return { id: makeItemId('pc'), name: '', phone: '', notes: '' };
-}
-
-function makeTripAssignment(contactId) {
-  return { id: makeItemId('ta'), memberId: contactId, outboundLegs: [], returnLegs: [],
-           budget: '', budgetActual: '', currency: getDefaultCurrency(), notes: '' };
-}
-
-function renderSettingsPersonalContactsSection() {
-  // Populate "Me" identity select
-  const meSelect = document.getElementById('settingsMeContactId');
-  if (meSelect) {
-    const contacts = state.global?.personalContacts || [];
-    const locals   = state.planner.personal?.localCompanions || [];
-    const currentMe = state.planner.personal?.meContactId || '';
-    meSelect.innerHTML = `<option value="">Me (default)</option>` +
-      contacts.map((c) => `<option value="${esc(c.id)}"${c.id === currentMe ? ' selected' : ''}>${esc(c.name || 'Unnamed')}</option>`).join('') +
-      locals.map((lc) => `<option value="${esc(lc.id)}"${lc.id === currentMe ? ' selected' : ''}>${esc(lc.name || 'Unnamed')} (this trip)</option>`).join('');
-  }
-
-  const el = document.getElementById('settingsPersonalContactsList');
-  if (!el) return;
-  const contacts     = state.global?.personalContacts || [];
-  const assignedIds  = new Set((state.planner.personal?.tripAssignments || []).map((a) => a.memberId));
-
-  if (!contacts.length) {
-    el.innerHTML = '<p class="text-sm text-gray-400 italic">No trip contacts yet. Add one below.</p>';
-    return;
-  }
-
-  el.innerHTML = contacts.map((c) => {
-    const assigned = assignedIds.has(c.id);
-    return `<div class="flex items-center gap-3 py-2 px-3 rounded-lg border border-gray-200 bg-white">
-      <label class="flex items-center gap-2 flex-shrink-0 cursor-pointer" title="${assigned ? 'Remove from this trip' : 'Add to this trip'}">
-        <input type="checkbox" class="settings-personal-contact-assign h-4 w-4 rounded border-gray-300 text-blue-600 drupal-blue-focus"
-          data-contact-id="${esc(c.id)}" ${assigned ? 'checked' : ''}>
-      </label>
-      <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-800 truncate">${esc(c.name || 'Unnamed')}</p>
-        ${c.notes ? `<p class="text-xs text-gray-400 truncate">${esc(c.notes)}</p>` : ''}
-      </div>
-      <button type="button" class="edit-personal-contact-btn flex-shrink-0 h-7 px-2 border border-gray-200 rounded text-xs text-gray-500 hover:bg-gray-50 transition-colors" data-contact-id="${esc(c.id)}">
-        <i class="fas fa-pen-to-square text-[0.6rem]"></i>
-      </button>
-    </div>`;
-  }).join('');
-}
-
-function openPersonalContactModal(id) {
-  const modal   = document.getElementById('personalContactModal');
-  if (!modal) return;
-  const contact = id ? (state.global?.personalContacts || []).find((c) => c.id === id) : null;
-  modal.dataset.contactId = id || '';
-  document.getElementById('pcName').value  = contact?.name  || '';
-  document.getElementById('pcPhone').value = contact?.phone || '';
-  document.getElementById('pcNotes').value = contact?.notes || '';
-  document.getElementById('personalContactModalDelete').classList.toggle('hidden', !id);
-  showModal('personalContactModal', 'pcName');
-}
-
-function wirePersonalContactModal() {
-  const modal = document.getElementById('personalContactModal');
-  if (!modal) return;
-
-  function readFields() {
-    return {
-      name:  document.getElementById('pcName').value.trim(),
-      phone: document.getElementById('pcPhone').value.trim(),
-      notes: document.getElementById('pcNotes').value.trim(),
-    };
-  }
-
-  createModal('personalContactModal', {
-    onDone: () => {
-      const id     = modal.dataset.contactId;
-      const fields = readFields();
-      state.global.personalContacts = state.global.personalContacts || [];
-      if (!id) {
-        state.global.personalContacts.push({ id: makeItemId('pc'), ...fields });
-      } else {
-        const c = state.global.personalContacts.find((x) => x.id === id);
-        if (c) Object.assign(c, fields);
-      }
-      saveGlobal(state.global);
-    },
-    onDelete: () => {
-      const id = modal.dataset.contactId;
-      if (!id) return;
-      state.global.personalContacts = (state.global.personalContacts || []).filter((c) => c.id !== id);
-      if (state.planner.personal) {
-        state.planner.personal.tripAssignments = (state.planner.personal.tripAssignments || []).filter((a) => a.memberId !== id);
-      }
-      saveGlobal(state.global);
-      scheduleAutoSave();
-    },
-    onClose: () => {
-      renderSettingsPersonalContactsSection();
-      renderPersonalCompanionsSection();
-    },
-  }).wire();
-}
-
-function companionCardHtml(assignment) {
-  const contact = (state.global?.personalContacts || []).find((c) => c.id === assignment.memberId);
-  if (!contact) return '';
-  const accomNames = (state.planner.personal?.accommodations || [])
-    .filter((acc) => (acc.assignments || []).some((a) => a.memberId === assignment.memberId && (a.checkIn || a.checkOut)))
-    .map((acc) => acc.name || 'Unnamed').join(', ');
-  const outLegs = assignment.outboundLegs || [];
-  const retLegs = assignment.returnLegs  || [];
-  const firstOut = outLegs.find((l) => l.date);
-  const firstRet = retLegs.find((l) => l.date);
-  const badges = [
-    firstOut && `<span class="inline-flex items-center text-[0.65rem] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500"><i class="fas fa-plane-departure text-[0.55rem] mr-0.5"></i>${outLegs.length > 1 ? `×${outLegs.length}` : ''}</span>`,
-    firstRet && `<span class="inline-flex items-center text-[0.65rem] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500"><i class="fas fa-plane-arrival text-[0.55rem] mr-0.5"></i>${retLegs.length > 1 ? `×${retLegs.length}` : ''}</span>`,
-    (assignment.budget || assignment.budgetActual) && `<span class="inline-flex items-center text-[0.65rem] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500"><i class="fas fa-wallet text-[0.55rem] mr-0.5"></i>${assignment.budget ? esc(assignment.budget) : ''}${assignment.budgetActual ? ` / ${esc(assignment.budgetActual)}` : ''}${assignment.currency ? ` ${esc(assignment.currency)}` : ''}</span>`,
-    accomNames && `<span class="text-[0.65rem] text-gray-500">${esc(accomNames)}</span>`,
-  ].filter(Boolean).join('');
-  const initial = (contact.name || '?')[0].toUpperCase();
-  return `
-    <div class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 bg-white group" data-companion-id="${esc(assignment.memberId)}">
-      <div class="planner-avatar flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold text-white select-none bg-gray-600">${esc(initial)}</div>
-      <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-gray-800">${esc(contact.name || 'Unnamed')}</p>
-        <div class="flex items-center gap-2 mt-0.5 flex-wrap">${badges}</div>
-      </div>
-      <button type="button" class="edit-companion-btn h-8 px-3 border border-gray-200 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-150" data-companion-id="${esc(assignment.memberId)}" aria-label="Edit travel for ${esc(contact.name || 'companion')}">
-        <i class="fas fa-plane mr-1.5 text-[0.65rem]"></i>Travel
-      </button>
-      <button type="button" class="remove-companion-btn flex-shrink-0 text-gray-500 hover:text-red-600 transition-colors opacity-0 group-hover:opacity-100 transition-opacity duration-150" data-companion-id="${esc(assignment.memberId)}" aria-label="Remove ${esc(contact.name || 'companion')}">
-        <i class="fas fa-times text-xs"></i>
-      </button>
-    </div>`;
-}
-
-function renderPersonalCompanionsSection() {
-  const section    = document.getElementById('personalCompanionsSection');
-  const listEl     = document.getElementById('personalCompanionsList');
-  const emptyEl    = document.getElementById('personalCompanionsEmpty');
-  const meContactId = state.planner.personal?.meContactId || null;
-  const assignments = (state.planner.personal?.tripAssignments || []).filter((a) => a.memberId !== meContactId);
-  const locals      = (state.planner.personal?.localCompanions || []).filter((lc) => lc.id !== meContactId);
-  if (!section) return;
-  section.classList.toggle('hidden', assignments.length === 0 && locals.length === 0);
-  if (!listEl) return;
-  listEl.innerHTML = assignments.map(companionCardHtml).filter(Boolean).join('') +
-    locals.map(localCompanionCardHtml).join('');
-  emptyEl?.classList.toggle('hidden', assignments.length > 0 || locals.length > 0);
-  if (state.activeTab === 'companions') renderCompanionsTab();
-}
-
-function _setAssignmentModalImportButtons() {
-  const personal = state.planner.personal;
-  const hasOut = (personal?.outboundLegs || []).length > 0;
-  const hasRet = (personal?.returnLegs   || []).length > 0;
-  document.getElementById('importOutboundFromMeBtn')?.classList.toggle('hidden', !hasOut);
-  document.getElementById('importReturnFromMeBtn')?.classList.toggle('hidden',   !hasRet);
-}
-
-function _hideAssignmentModalImportButtons() {
-  document.getElementById('importOutboundFromMeBtn')?.classList.add('hidden');
-  document.getElementById('importReturnFromMeBtn')?.classList.add('hidden');
-}
-
-function openTripAssignmentModal(contactId) {
-  const assignModal = document.getElementById('assignmentModal');
-  const contact     = (state.global?.personalContacts || []).find((c) => c.id === contactId);
-  if (!assignModal || !contact) return;
-
-  let assignment = (state.planner.personal?.tripAssignments || []).find((a) => a.memberId === contactId);
-  if (!assignment) return;
-
-  assignment.outboundLegs = assignment.outboundLegs || [];
-  assignment.returnLegs   = assignment.returnLegs   || [];
-
-  assignModal.dataset.ctx      = 'personal';
-  assignModal.dataset.memberId = contactId;
-
-  document.getElementById('assignmentModalSubtitle').textContent = contact.name || 'Unnamed';
-  renderAssignmentLegsInModal(assignment);
-  _setAssignmentModalImportButtons();
-
-  document.getElementById('assignmentBudget').value = assignment.budget       || '';
-  document.getElementById('assignmentActual').value = assignment.budgetActual || '';
-  document.getElementById('assignmentNotes').value  = assignment.notes        || '';
-  const currencyEl = document.getElementById('assignmentCurrency');
-  if (currencyEl) currencyEl.innerHTML = currencyOptions(assignment.currency || state.planner?.personal?.currency || 'AUD');
-
-  showModal('assignmentModal');
-  if (!touchDevice()) assignModal.querySelector('input, select')?.focus();
-}
-
-function openLocalCompanionAssignmentModal(lcId) {
-  const assignModal = document.getElementById('assignmentModal');
-  const lc = (state.planner.personal?.localCompanions || []).find((x) => x.id === lcId);
-  if (!assignModal || !lc) return;
-  lc.outboundLegs = lc.outboundLegs || [];
-  lc.returnLegs   = lc.returnLegs   || [];
-  assignModal.dataset.ctx      = 'localCompanion';
-  assignModal.dataset.memberId = lcId;
-  document.getElementById('assignmentModalSubtitle').textContent = `${lc.name || 'Unnamed'} (this trip)`;
-  renderAssignmentLegsInModal(lc);
-  _setAssignmentModalImportButtons();
-  document.getElementById('assignmentBudget').value = lc.budget       || '';
-  document.getElementById('assignmentActual').value = lc.budgetActual || '';
-  document.getElementById('assignmentNotes').value  = lc.notes        || '';
-  const currencyEl = document.getElementById('assignmentCurrency');
-  if (currencyEl) currencyEl.innerHTML = currencyOptions(lc.currency || state.planner?.personal?.currency || 'AUD');
-  showModal('assignmentModal');
-  if (!touchDevice()) assignModal.querySelector('input, select')?.focus();
-}
-
-function renderPersonalAccomMembersSection(acc) {
-  const tripAssignments = state.planner.personal?.tripAssignments || [];
-  const noCompanionsEl  = document.getElementById('personalAccomNoCompanions');
-  const wrapper         = document.getElementById('personalAccomCompanionStaysWrapper');
-  const select          = document.getElementById('personalAccomCompanionSelect');
-  const section         = document.getElementById('personalAccomCompanionSection');
-
-  if (!section) return;
-  section.classList.remove('hidden');
-  noCompanionsEl?.classList.add('hidden');
-  wrapper?.classList.remove('hidden');
-
-  const prevValue   = select?.value || '';
-  const assignedIds = new Set((acc.assignments || []).map((s) => s.memberId));
-  const contacts    = state.global?.personalContacts || [];
-
-  if (select) {
-    const meCheck = assignedIds.has('__me__') ? ' ✓' : '';
-    const localCompanions = state.planner.personal?.localCompanions || [];
-    const meContactId = state.planner.personal?.meContactId || null;
-    const companionOptions = tripAssignments.filter((a) => a.memberId !== meContactId).map((a) => {
-      const c = contacts.find((x) => x.id === a.memberId);
-      if (!c) return '';
-      return `<option value="${esc(c.id)}"${prevValue === c.id ? ' selected' : ''}>${esc(c.name || 'Unnamed')}${assignedIds.has(c.id) ? ' ✓' : ''}</option>`;
-    }).filter(Boolean).join('');
-    const localOptions = localCompanions.filter((lc) => lc.id !== meContactId).map((lc) =>
-      `<option value="${esc(lc.id)}"${prevValue === lc.id ? ' selected' : ''}>${esc(lc.name || 'Unnamed')} (this trip)${assignedIds.has(lc.id) ? ' ✓' : ''}</option>`
-    ).join('');
-    select.innerHTML = `<option value="">— Select to view or add —</option>` +
-      `<option value="__me__"${prevValue === '__me__' ? ' selected' : ''}>${esc(getMeLabel())}${meCheck}</option>` +
-      companionOptions + localOptions;
-  }
-
-  if (prevValue && select?.value === prevValue) {
-    loadPersonalCompanionStayFields(acc, prevValue);
-  } else {
-    document.getElementById('personalAccomCompanionFields')?.classList.add('hidden');
-    const removeBtn = document.getElementById('personalAccomRemoveCompanionBtn');
-    if (removeBtn) removeBtn.classList.add('opacity-0', 'pointer-events-none');
-  }
-}
-
-function loadPersonalCompanionStayFields(acc, contactId) {
-  const stay      = (acc.assignments || []).find((s) => s.memberId === contactId) || {};
-  const hasStay   = !!(acc.assignments || []).find((s) => s.memberId === contactId);
-  const fields    = document.getElementById('personalAccomCompanionFields');
-  const removeBtn = document.getElementById('personalAccomRemoveCompanionBtn');
-
-  fields?.classList.remove('hidden');
-  if (removeBtn) {
-    if (hasStay) removeBtn.classList.remove('opacity-0', 'pointer-events-none');
-    else         removeBtn.classList.add('opacity-0', 'pointer-events-none');
-  }
-
-  const isWaypoints = acc.type === 'waypoints';
-  document.getElementById('personalAccomCompanionCheckInRow')?.classList.toggle('hidden', isWaypoints);
-  document.getElementById('personalAccomCompanionCheckOutRow')?.classList.toggle('hidden', isWaypoints);
-
-  const checkIn  = document.getElementById('personalAccomCompanionCheckIn');
-  const checkOut = document.getElementById('personalAccomCompanionCheckOut');
-  const currency = document.getElementById('personalAccomCompanionCurrency');
-  const budget   = document.getElementById('personalAccomCompanionBudget');
-  const actual   = document.getElementById('personalAccomCompanionActual');
-  if (checkIn)  checkIn.value  = isWaypoints ? (acc.checkIn || '') : (stay.checkIn || acc.checkIn || '');
-  if (checkOut) checkOut.value = isWaypoints ? (acc.checkOut || '') : (stay.checkOut || acc.checkOut || '');
-  if (currency) currency.innerHTML = currencyOptions(stay.currency || state.planner?.personal?.currency || 'AUD');
-  if (budget)   budget.value   = stay.budget       || '';
-  if (actual)   actual.value   = stay.budgetActual || '';
-}
+// ── Personal contacts (global) + assignments ─────────────────────────────────
+// Extracted to ./modules/plannerAssignments.js (initAssignments + personal
+// contacts, trip-assignment/companion cards + modals, accommodation sections).
 
 // ── Team tab (global team members) ───────────────────────────────────────────
-
-function teamMemberCardHtml(member) {
-  const disabled = member.enabled === false;
-  const meta = [member.department, member.company].filter(Boolean).join(' · ');
-  const initial = (member.name || '?')[0].toUpperCase();
-  return `
-    <div class="flex items-center gap-3 p-3 rounded-lg border ${disabled ? 'border-gray-100 bg-gray-50 opacity-60' : 'border-gray-200 bg-white'} group" data-member-id="${esc(member.id)}">
-      <div class="planner-avatar flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold text-white select-none bg-gray-600">${esc(initial)}</div>
-      <div class="flex-1 min-w-0">
-        <div class="flex items-center gap-2">
-          <p class="text-sm font-medium text-gray-800">${esc(member.name || 'Unnamed')}</p>
-          ${disabled ? '<span class="text-[0.6rem] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-gray-100 text-gray-600">Inactive</span>' : ''}
-        </div>
-        <div class="flex items-center gap-3 mt-0.5 flex-wrap">
-          ${member.role  ? `<span class="text-xs text-gray-500">${esc(member.role)}</span>` : ''}
-          ${meta         ? `<span class="text-xs text-gray-500">${esc(meta)}</span>` : ''}
-          ${member.phone ? `<span class="text-xs text-gray-500"><i class="fas fa-phone text-[0.6rem] mr-1"></i>${esc(member.phone)}</span>` : ''}
-        </div>
-      </div>
-      <button type="button" class="view-team-member-btn h-8 px-3 border border-gray-200 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-150" data-member-id="${esc(member.id)}">
-        <i class="fas fa-eye mr-1.5 text-[0.65rem]"></i>View
-      </button>
-    </div>`;
-}
-
-function renderTeamTab() {
-  const assignedIds = new Set((state.planner?.org?.teamAssignments || []).map((a) => a.memberId));
-  const members = (state.global?.teamMembers || []).filter((m) => assignedIds.has(m.id));
-  renderListPanel('teamMembersList', 'teamMembersEmpty', members, teamMemberCardHtml);
-}
-
-function openTeamMemberModal(id) {
-  const modal  = document.getElementById('teamMemberModal');
-  if (!modal) return;
-  const member = id ? (state.global?.teamMembers || []).find((m) => m.id === id) : null;
-  modal.dataset.memberId = id || '';
-  document.getElementById('tmName').value       = member?.name       || '';
-  document.getElementById('tmRole').value       = member?.role       || '';
-  document.getElementById('tmCompany').value    = member?.company    || '';
-  document.getElementById('tmDepartment').value = member?.department || '';
-  document.getElementById('tmPhone').value      = member?.phone      || '';
-  document.getElementById('tmNotes').value         = member?.notes         || '';
-  document.getElementById('tmEnabled').checked     = member ? (member.enabled !== false) : true;
-  document.getElementById('tmSkipFinances').checked = member?.skipFinances === true;
-  document.getElementById('teamMemberModalDelete').classList.toggle('hidden', !id);
-  showModal('teamMemberModal', 'tmName');
-}
-
-
-function openTeamMemberDetailModal(memberId) {
-  const modal  = document.getElementById('teamMemberDetailModal');
-  if (!modal) return;
-  const member = (state.global?.teamMembers || []).find((m) => m.id === memberId);
-  if (!member) return;
-
-  const disabled = member.enabled === false;
-  document.getElementById('tmDetailName').textContent = member.name || 'Unnamed';
-  document.getElementById('tmDetailDisabledBadge')?.classList.toggle('hidden', !disabled);
-  document.getElementById('tmDetailSkipFinancesBadge')?.classList.toggle('hidden', !member.skipFinances);
-
-  const roleEl = document.getElementById('tmDetailRole');
-  roleEl.textContent = member.role || '';
-  roleEl.classList.toggle('hidden', !member.role);
-
-  const meta = [member.department, member.company].filter(Boolean).join(' · ');
-  const metaEl = document.getElementById('tmDetailMeta');
-  if (metaEl) { metaEl.textContent = meta; metaEl.classList.toggle('hidden', !meta); }
-
-  document.getElementById('tmDetailPhone').textContent = member.phone || '';
-  document.getElementById('tmDetailPhone').closest('.tm-detail-phone-row')?.classList.toggle('hidden', !member.phone);
-  document.getElementById('tmDetailNotes').textContent = member.notes || '';
-  document.getElementById('tmDetailNotes').closest('.tm-detail-notes-row')?.classList.toggle('hidden', !member.notes);
-
-  const travelEl = document.getElementById('tmDetailTravel');
-  if (travelEl) {
-    const assignments = (state.planner.org?.teamAssignments || []).filter((a) => a.memberId === memberId);
-    if (assignments.length) {
-      const legs = assignments.flatMap((a) => [
-        ...(a.outboundLegs || []).map((l) => ({ ...l, dir: 'outbound' })),
-        ...(a.returnLegs   || []).map((l) => ({ ...l, dir: 'return'   })),
-      ]);
-      travelEl.innerHTML = legs.length
-        ? legs.map((l) => {
-            const route = [l.from, l.to].filter(Boolean).join(' → ');
-            const date  = l.date ? new Date(l.date + 'T12:00:00').toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : '';
-            const icon  = travelIcon(l.mode, l.dir === 'return');
-            return `<div class="flex items-center gap-2 text-xs text-gray-600">
-              <i class="${icon} text-gray-400 w-4 text-center flex-shrink-0"></i>
-              <span>${route || 'No route'}</span>
-              ${date ? `<span class="text-gray-400">${date}</span>` : ''}
-              ${travelStatusBadge(l.status)}
-            </div>`
-          }).join('')
-        : '<p class="text-xs text-gray-400 italic">No travel legs recorded.</p>';
-    } else {
-      travelEl.innerHTML = '<p class="text-xs text-gray-400 italic">Not assigned to this event.</p>';
-    }
-  }
-
-  const ticketsEl = document.getElementById('tmDetailTickets');
-  if (ticketsEl) {
-    const allTickets = [
-      ...(state.planner.org?.tickets     || []),
-      ...(state.planner.personal?.tickets || []),
-    ].filter((t) => t.assignedTo === memberId || t.purchasedBy === memberId);
-    ticketsEl.innerHTML = allTickets.length
-      ? allTickets.map((t) => `<div class="flex items-center gap-2 text-xs text-gray-600">
-          ${ticketStatusBadge(t.status || 'planned')}
-          <span>${esc(t.name || 'Unnamed ticket')}</span>
-          ${t.assignedTo === memberId ? '<span class="text-gray-400">(assigned)</span>' : '<span class="text-gray-400">(purchased by)</span>'}
-        </div>`).join('')
-      : '<p class="text-xs text-gray-400 italic">No tickets associated.</p>';
-  }
-
-  const budgetEl = document.getElementById('tmDetailBudget');
-  if (budgetEl) {
-    if (member.skipFinances) {
-      budgetEl.innerHTML = '<p class="text-xs text-gray-400 italic">Finance tracking is disabled for this person.</p>';
-      budgetEl.closest('.tm-detail-budget-row')?.classList.remove('hidden');
-    } else {
-    const cats = buildEventBudgetData(state.planner, memberId)
-    const activeCats = Object.entries(cats).filter(([, c]) => c.budget !== 0 || c.actual !== 0 || c.items.length)
-    if (activeCats.length) {
-      const currency = state.planner?.org?.sponsorCurrency || 'AUD'
-      const fmt = (n) => n !== 0 ? n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '—'
-      const allItems = activeCats.flatMap(([, c]) => (c.items || []).map((item) => ({ ...item, catLabel: c.label })))
-      const totalB = activeCats.reduce((s, [, c]) => s + c.budget, 0)
-      const totalA = activeCats.reduce((s, [, c]) => s + c.actual, 0)
-      budgetEl.innerHTML = `
-        <div class="grid grid-cols-[1fr_auto_auto] gap-x-4 gap-y-1">
-          <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-gray-300 pb-0.5">Item</span>
-          <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-gray-300 text-right pb-0.5">Budget</span>
-          <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-gray-300 text-right pb-0.5">Actual</span>
-          ${allItems.map((item) => `
-            <span class="text-gray-500 truncate">${esc(item.label)} <span class="text-gray-400">(${esc(item.catLabel)})</span></span>
-            <span class="text-gray-400 tabular-nums text-right">${fmt(item.budget)}</span>
-            <span class="tabular-nums text-right ${item.actual > item.budget && item.budget > 0 ? 'text-red-500' : 'text-gray-600'}">${fmt(item.actual)}</span>
-          `).join('')}
-          ${allItems.length > 1 ? `
-            <div class="col-span-3 h-px bg-gray-200 my-0.5"></div>
-            <span class="text-gray-700 font-medium">Total</span>
-            <span class="text-gray-500 font-medium tabular-nums text-right">${fmt(totalB)}</span>
-            <span class="text-gray-700 font-medium tabular-nums text-right">${fmt(totalA)}</span>
-          ` : ''}
-        </div>
-        ${totalB !== 0 ? `<div class="flex items-center justify-between mt-2 pt-1.5 border-t border-gray-200 font-medium ${totalA > totalB ? 'text-red-500' : 'text-emerald-600'}">
-          <span>${totalA > totalB ? 'Over budget' : 'Remaining'}</span>
-          <span class="tabular-nums">${currency} ${fmt(Math.abs(totalB - totalA))}</span>
-        </div>` : ''}
-      `
-      budgetEl.closest('.tm-detail-budget-row')?.classList.remove('hidden')
-    } else {
-      budgetEl.innerHTML = '<p class="text-xs text-gray-400 italic">No budget data for this member.</p>'
-    }
-    } // end else (skipFinances)
-  }
-
-  showModal('teamMemberDetailModal');
-}
-
-function wireTeamPanel() {
-  const panel = document.getElementById('plannerTeamPanel');
-  if (!panel) return;
-
-  panel.addEventListener('click', (e) => {
-    const viewBtn = e.target.closest('.view-team-member-btn');
-    if (viewBtn) { openTeamMemberDetailModal(viewBtn.dataset.memberId); return; }
-    const editBtn = e.target.closest('.edit-team-member-btn');
-    if (editBtn) { openTeamMemberModal(editBtn.dataset.memberId); return; }
-  });
-
-  document.getElementById('addTeamMemberBtn')?.addEventListener('click', () => openTeamMemberModal(null));
-
-  const detailModal = document.getElementById('teamMemberDetailModal');
-  if (detailModal) {
-    const closeDetail = () => hideModal('teamMemberDetailModal');
-    document.getElementById('tmDetailClose')?.addEventListener('click', closeDetail);
-    document.getElementById('tmDetailClose2')?.addEventListener('click', closeDetail);
-    detailModal.addEventListener('click', (e) => { if (e.target === detailModal) closeDetail(); });
-  }
-
-  const modal = document.getElementById('teamMemberModal');
-  if (!modal) return;
-
-  function readModalFields() {
-    return {
-      name:         document.getElementById('tmName').value.trim(),
-      role:         document.getElementById('tmRole').value.trim(),
-      company:      document.getElementById('tmCompany').value.trim(),
-      department:   document.getElementById('tmDepartment').value.trim(),
-      phone:        document.getElementById('tmPhone').value.trim(),
-      notes:        document.getElementById('tmNotes').value.trim(),
-      enabled:      document.getElementById('tmEnabled').checked,
-      skipFinances: document.getElementById('tmSkipFinances').checked,
-    };
-  }
-
-  createModal('teamMemberModal', {
-    onSave: () => {
-      const id = modal.dataset.memberId;
-      if (!id) return;
-      const member = (state.global?.teamMembers || []).find((m) => m.id === id);
-      if (!member) return;
-      Object.assign(member, readModalFields());
-      saveGlobal(state.global);
-    },
-    onDone: () => {
-      const id     = modal.dataset.memberId;
-      const fields = readModalFields();
-      if (!id) {
-        state.global.teamMembers = [...(state.global?.teamMembers || []), { id: makeItemId('tm'), ...fields }];
-      } else {
-        const member = (state.global?.teamMembers || []).find((m) => m.id === id);
-        if (member) Object.assign(member, fields);
-      }
-      saveGlobal(state.global);
-    },
-    onDelete: () => {
-      const id = modal.dataset.memberId;
-      if (!id) return;
-      state.global.teamMembers = (state.global?.teamMembers || []).filter((m) => m.id !== id);
-      saveGlobal(state.global);
-    },
-    onClose: () => { renderTeamTab(); refreshAssignMemberSelect(); renderSettingsTeamSection(); },
-  }).wire();
-}
+// Extracted to ./modules/plannerTeam.js (initTeam / renderTeamTab /
+// openTeamMemberModal / wireTeamPanel).
 
 // ── Mode toggle (sponsor / personal) ─────────────────────────────────────────
 
-// Base tabs per mode (before per-event disable overrides). Settings always added below.
-const SPONSOR_TABS_BASE  = new Set(['contacts', 'tasks', 'sponsor', 'team', 'notes', 'documents', 'tickets', 'budget', 'map', 'summary']);
-const PERSONAL_TABS_BASE = new Set(['personal', 'companions', 'notes', 'contacts', 'tasks', 'receipts', 'documents', 'tickets', 'budget', 'map', 'itinerary', 'summary']);
-
-// Tabs that only appear when isConference is true on the planner.
-const CONFERENCE_TABS = new Set(['notes', 'contacts']);
-
 // Human-readable labels used by the settings UI
 const TAB_LABELS = {
-  sponsor:   'Sponsor',
-  team:      'Team',
+  sponsor: 'Planner',
+  team: 'Team',
   documents: 'Documents',
-  tasks:     'Tasks',
-  contacts:  'Contacts',
-  personal:  'Personal',
-  notes:     'Notes',
-  receipts:  'Receipts',
-  tickets:   'Tickets',
-  companions:'Companions',
-  budget:    'Budget',
-  map:       'Map',
+  tasks: 'Tasks',
+  checklists: 'Checklists',
+  contacts: 'Contacts',
+  personal: 'Planner',
+  notes: 'Notes',
+  receipts: 'Receipts',
+  tickets: 'Tickets',
+  companions: 'Companions',
+  budget: 'Budget',
+  split: 'Shared costs',
+  map: 'Map',
+  weather: 'Weather',
+  schedule: 'Conference Schedule',
   itinerary: 'Itinerary',
-  summary:   'Summary',
-  settings:  'Settings',
+  summary: 'Summary',
+  settings: 'Settings',
 };
 
-// Returns an ordered array of visible tab keys (excluding 'settings') for the tab bar.
+// One-line explanations shown under each tab's toggle in Settings, so it's clear
+// what turning a tab on/off actually adds to the planner.
+const TAB_DESCRIPTIONS = {
+  personal: 'Your trip at a glance — travel legs, accommodation & timeline.',
+  sponsor: 'Booth details, sponsorship info & sponsored sessions.',
+  team: 'Team members and who’s assigned to this event.',
+  companions: 'People travelling with you on this trip.',
+  notes: 'Free-form notes and takeaways for the event.',
+  contacts: 'Key people and their details, in one place.',
+  tasks: 'To-dos with due dates to keep prep on track.',
+  checklists: 'Reusable packing & prep lists you can tick off.',
+  receipts: 'Log expenses and attach receipt files.',
+  documents: 'Store tickets, PDFs and other trip files.',
+  tickets: 'Passes and entry tickets you’re holding.',
+  budget: 'Plan and track spend by category.',
+  split: 'Share and split costs with your companions.',
+  map: 'See travel, stays and venues on a map.',
+  weather: 'A forecast for your destination across the trip dates.',
+  schedule:
+    'Events you host during the conference — booth demos, meetings — pinned alongside programme slots.',
+  itinerary: 'A day-by-day schedule of everything planned.',
+  summary: 'An at-a-glance overview and spend report.',
+};
+
+// Thin wrappers binding the pure tab logic (plannerTabs.js) to live state.
 function getVisibleTabsOrdered(mode) {
-  const isConference = state.planner?.isConference !== false;
-  const base     = mode === 'sponsor' ? SPONSOR_TABS_BASE : PERSONAL_TABS_BASE;
-  const stored   = mode === 'sponsor'
-    ? (state.planner?.org?.tabOrder     || [])
-    : (state.planner?.personal?.tabOrder || []);
-  const disabled = new Set(
-    mode === 'sponsor'
-      ? (state.planner?.org?.disabledTabs     || [])
-      : (state.planner?.personal?.disabledTabs || [])
-  );
-  const visible = (t) => base.has(t) && !disabled.has(t) && (isConference || !CONFERENCE_TABS.has(t));
-  // Stored order first (filtered to base & enabled), then any tabs not yet in stored order
-  const ordered = stored.filter(visible);
-  base.forEach((t) => { if (!ordered.includes(t) && visible(t)) ordered.push(t); });
-  return ordered;
+  return visibleTabsOrdered(mode, state.planner);
 }
 
-// Returns a Set of all visible tabs including 'settings' (used for routing / settings panel).
 function getVisibleTabs(mode) {
-  return new Set([...getVisibleTabsOrdered(mode), 'settings']);
+  return visibleTabs(mode, state.planner);
 }
 
 let _draggedTab = null;
 let _tabMoreOpen = false;
 
 function renderTabBar() {
-  const mode    = state.planner?.mode || 'personal';
+  const mode = state.planner?.mode || 'personal';
   const ordered = getVisibleTabsOrdered(mode);
-  const mainEl  = document.getElementById('tabBarMain');
+  const mainEl = document.getElementById('tabBarMain');
   if (!mainEl) return;
 
   mainEl.innerHTML = '';
   ordered.forEach((tab) => {
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.id   = TAB_BTN_IDS[tab];
+    btn.id = TAB_BTN_IDS[tab];
     btn.dataset.tab = tab;
     btn.draggable = true;
     btn.setAttribute('role', 'tab');
     btn.setAttribute('aria-controls', PANEL_IDS[tab]);
     btn.setAttribute('aria-selected', state.activeTab === tab ? 'true' : 'false');
     btn.className = `editor-tab-button whitespace-nowrap flex-shrink-0${state.activeTab === tab ? ' is-active' : ''}`;
-    btn.innerHTML = `<i class="${TAB_ICONS[tab] || 'fas fa-circle'} mr-2 text-[0.72rem]" aria-hidden="true"></i>${TAB_LABELS[tab] || tab}`;
+    btn.textContent = TAB_LABELS[tab] || tab;
     mainEl.appendChild(btn);
   });
 
@@ -8767,17 +3798,22 @@ function renderTabBar() {
 }
 
 function updateTabOverflow() {
-  const mainEl   = document.getElementById('tabBarMain');
+  const mainEl = document.getElementById('tabBarMain');
   const moreWrap = document.getElementById('tabBarMoreWrap');
   const moreBtnEl = document.getElementById('tabMoreBtn');
   const dropdown = document.getElementById('tabMoreDropdown');
   if (!mainEl || !moreWrap || !dropdown) return;
 
   const allBtns = [...mainEl.querySelectorAll('[data-tab]')];
-  if (!allBtns.length) { moreWrap.classList.add('hidden'); return; }
+  if (!allBtns.length) {
+    moreWrap.classList.add('hidden');
+    return;
+  }
 
   // Reset state for measurement
-  allBtns.forEach((b) => { b.style.display = ''; });
+  allBtns.forEach((b) => {
+    b.style.display = '';
+  });
   moreWrap.classList.add('hidden');
 
   const containerWidth = mainEl.getBoundingClientRect().width;
@@ -8785,7 +3821,7 @@ function updateTabOverflow() {
 
   // Sum all button widths
   const widths = allBtns.map((b) => b.getBoundingClientRect().width + gap);
-  const total  = widths.reduce((s, w) => s + w, 0) - gap;
+  const total = widths.reduce((s, w) => s + w, 0) - gap;
 
   if (total <= containerWidth + 1) {
     // Everything fits, no More button needed
@@ -8832,26 +3868,38 @@ function updateTabOverflow() {
 }
 
 function wireDragDrop(mainEl, mode) {
-  mainEl.addEventListener('dragstart', (e) => {
-    const btn = e.target.closest('[data-tab]');
-    if (!btn) return;
-    _draggedTab = btn.dataset.tab;
-    btn.classList.add('tab-drag-source');
-    e.dataTransfer.effectAllowed = 'move';
-  }, { passive: true });
+  mainEl.addEventListener(
+    'dragstart',
+    (e) => {
+      const btn = e.target.closest('[data-tab]');
+      if (!btn) return;
+      _draggedTab = btn.dataset.tab;
+      btn.classList.add('tab-drag-source');
+      e.dataTransfer.effectAllowed = 'move';
+    },
+    { passive: true },
+  );
 
-  mainEl.addEventListener('dragend', () => {
-    _draggedTab = null;
-    mainEl.querySelectorAll('.tab-drag-source, .tab-drop-before, .tab-drop-after')
-      .forEach((el) => el.classList.remove('tab-drag-source', 'tab-drop-before', 'tab-drop-after'));
-  }, { passive: true });
+  mainEl.addEventListener(
+    'dragend',
+    () => {
+      _draggedTab = null;
+      mainEl
+        .querySelectorAll('.tab-drag-source, .tab-drop-before, .tab-drop-after')
+        .forEach((el) =>
+          el.classList.remove('tab-drag-source', 'tab-drop-before', 'tab-drop-after'),
+        );
+    },
+    { passive: true },
+  );
 
   mainEl.addEventListener('dragover', (e) => {
     if (!_draggedTab) return;
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
     const target = e.target.closest('[data-tab]');
-    mainEl.querySelectorAll('.tab-drop-before, .tab-drop-after')
+    mainEl
+      .querySelectorAll('.tab-drop-before, .tab-drop-after')
       .forEach((el) => el.classList.remove('tab-drop-before', 'tab-drop-after'));
     if (target && target.dataset.tab !== _draggedTab) {
       const rect = target.getBoundingClientRect();
@@ -8866,11 +3914,11 @@ function wireDragDrop(mainEl, mode) {
     const target = e.target.closest('[data-tab]');
     if (!target || target.dataset.tab === _draggedTab) return;
 
-    const rect   = target.getBoundingClientRect();
+    const rect = target.getBoundingClientRect();
     const before = e.clientX < rect.left + target.getBoundingClientRect().width / 2;
     const ordered = getVisibleTabsOrdered(mode);
-    const from  = ordered.indexOf(_draggedTab);
-    const to    = ordered.indexOf(target.dataset.tab);
+    const from = ordered.indexOf(_draggedTab);
+    const to = ordered.indexOf(target.dataset.tab);
     if (from === -1 || to === -1) return;
 
     const newOrder = [...ordered];
@@ -8882,10 +3930,13 @@ function wireDragDrop(mainEl, mode) {
     const fullBase = mode === 'sponsor' ? SPONSOR_TABS_BASE : PERSONAL_TABS_BASE;
     const disabled = new Set(
       mode === 'sponsor'
-        ? (state.planner?.org?.disabledTabs || [])
-        : (state.planner?.personal?.disabledTabs || [])
+        ? state.planner?.org?.disabledTabs || []
+        : state.planner?.personal?.disabledTabs || [],
     );
-    const finalOrder = [...newOrder, ...[...fullBase].filter((t) => disabled.has(t) && !newOrder.includes(t))];
+    const finalOrder = [
+      ...newOrder,
+      ...[...fullBase].filter((t) => disabled.has(t) && !newOrder.includes(t)),
+    ];
 
     if (mode === 'sponsor') state.planner.org.tabOrder = finalOrder;
     else state.planner.personal.tabOrder = finalOrder;
@@ -8902,7 +3953,9 @@ function applyConferenceMode() {
   renderTabBar();
   const mode = state.planner?.mode || 'personal';
   if (!getVisibleTabs(mode).has(state.activeTab)) {
-    setActiveTab(getVisibleTabsOrdered(mode)[0] || 'settings');
+    // A correction, not a navigation: the tab you were on stopped existing.
+    // Pushing here would put an unreachable state in the history.
+    setActiveTab(getVisibleTabsOrdered(mode)[0] || 'settings', { push: false });
   }
   renderMobileBottomBar();
 }
@@ -8911,7 +3964,7 @@ function applyMode(mode) {
   state.planner.mode = mode;
   savePlanner(state.plannerKey, state.planner);
 
-  const isSponsor   = mode === 'sponsor';
+  const isSponsor = mode === 'sponsor';
   const visibleTabs = getVisibleTabs(mode);
 
   renderTabBar();
@@ -8921,18 +3974,22 @@ function applyMode(mode) {
   const suffix = document.getElementById('plannerHeaderSuffix');
   if (suffix) suffix.textContent = isSponsor ? 'Sponsor' : 'Personal';
   const subtitle = document.getElementById('plannerModeSubtitle');
-  if (subtitle) subtitle.textContent = isSponsor ? 'Your sponsor notebook for this event.' : 'Your personal notebook for this event.';
+  if (subtitle)
+    subtitle.textContent = isSponsor
+      ? 'Your sponsor notebook for this event.'
+      : 'Your personal notebook for this event.';
 
   // Sync the settings panel mode radio buttons
   const modePersonalRadio = document.getElementById('settingsModePersonal');
-  const modeSponsorRadio  = document.getElementById('settingsModeSponsor');
+  const modeSponsorRadio = document.getElementById('settingsModeSponsor');
   if (modePersonalRadio) modePersonalRadio.checked = !isSponsor;
-  if (modeSponsorRadio)  modeSponsorRadio.checked  = isSponsor;
+  if (modeSponsorRadio) modeSponsorRadio.checked = isSponsor;
 
-  // Navigate away from the current tab if it isn't available in this mode
+  // Move off the current tab if it isn't available in this mode — again a
+  // correction rather than a navigation.
   const cur = state.activeTab;
   if (!visibleTabs.has(cur)) {
-    setActiveTab(isSponsor ? 'sponsor' : 'personal');
+    setActiveTab(isSponsor ? 'sponsor' : 'personal', { push: false });
   }
 
   // Re-render summary if it's visible (stats differ by mode)
@@ -8940,1086 +3997,36 @@ function applyMode(mode) {
   if (state.activeTab === 'settings') renderSettingsTab();
 }
 
-// ── Documents tab ─────────────────────────────────────────────────────────────
-
-function collectDocuments() {
-  const mode = state.planner.mode || 'personal';
-  const docs = [];
-
-  if (mode === 'personal') {
-    (state.planner.personal?.documents || []).forEach((d) => {
-      docs.push({ ...d, isDirect: true, sourceLabel: 'Personal document', sourceIcon: 'fas fa-file-alt' });
-    });
-
-    sortLegs(state.planner.personal?.outboundLegs || []).forEach((leg) => {
-      if (!leg.filePath) return;
-      const route = [leg.from, leg.to].filter(Boolean).join(' → ');
-      const modeInfo = TRAVEL_MODES[leg.mode] || TRAVEL_MODES.other;
-      docs.push({
-        id: `leg-out-${leg.id}`,
-        name: fileDisplayName(leg.filePath, leg.fileLabel),
-        filePath: leg.filePath,
-        isDirect: false,
-        sourceLabel: `Outbound travel${route ? ` · ${route}` : ''}`,
-        sourceIcon: modeInfo.icon || 'fas fa-route',
-      });
-    });
-
-    sortLegs(state.planner.personal?.returnLegs || []).forEach((leg) => {
-      if (!leg.filePath) return;
-      const route = [leg.from, leg.to].filter(Boolean).join(' → ');
-      const modeInfo = TRAVEL_MODES[leg.mode] || TRAVEL_MODES.other;
-      docs.push({
-        id: `leg-ret-${leg.id}`,
-        name: fileDisplayName(leg.filePath, leg.fileLabel),
-        filePath: leg.filePath,
-        isDirect: false,
-        sourceLabel: `Return travel${route ? ` · ${route}` : ''}`,
-        sourceIcon: modeInfo.returnIcon || modeInfo.icon || 'fas fa-route',
-      });
-    });
-
-    (state.planner.personal?.accommodations || []).forEach((accom) => {
-      if (!accom.filePath) return;
-      docs.push({
-        id: `paccom-${accom.id}`,
-        name: fileDisplayName(accom.filePath, accom.fileLabel),
-        filePath: accom.filePath,
-        isDirect: false,
-        sourceLabel: `Accommodation${accom.name ? ` · ${accom.name}` : ''}`,
-        sourceIcon: 'fas fa-bed',
-      });
-    });
-
-    (state.planner.receipts || []).forEach((r) => {
-      if (!r.filePath) return;
-      docs.push({
-        id: `receipt-${r.id}`,
-        name: fileDisplayName(r.filePath, r.fileLabel),
-        filePath: r.filePath,
-        isDirect: false,
-        docType: 'receipt',
-        date: r.date || '',
-        category: r.category || '',
-        sourceLabel: `Receipt${r.merchant ? ` · ${r.merchant}` : ''}`,
-        sourceIcon: 'fas fa-receipt',
-      });
-    });
-  } else {
-    (state.planner.org?.documents || []).forEach((d) => {
-      docs.push({ ...d, isDirect: true, sourceLabel: 'Document', sourceIcon: 'fas fa-file-alt' });
-    });
-
-    (state.planner.org?.teamAssignments || []).forEach((a) => {
-      const member = (state.global?.teamMembers || []).find((m) => m.id === a.memberId);
-      const memberName = member?.name || 'Team member';
-
-      sortLegs(a.outboundLegs || []).forEach((leg) => {
-        if (!leg.filePath) return;
-        const route = [leg.from, leg.to].filter(Boolean).join(' → ');
-        const modeInfo = TRAVEL_MODES[leg.mode] || TRAVEL_MODES.other;
-        docs.push({
-          id: `tleg-out-${leg.id}`,
-          name: fileDisplayName(leg.filePath, leg.fileLabel),
-          filePath: leg.filePath,
-          isDirect: false,
-          sourceLabel: `${memberName} · Outbound${route ? ` · ${route}` : ''}`,
-          sourceIcon: modeInfo.icon || 'fas fa-route',
-        });
-      });
-
-      sortLegs(a.returnLegs || []).forEach((leg) => {
-        if (!leg.filePath) return;
-        const route = [leg.from, leg.to].filter(Boolean).join(' → ');
-        const modeInfo = TRAVEL_MODES[leg.mode] || TRAVEL_MODES.other;
-        docs.push({
-          id: `tleg-ret-${leg.id}`,
-          name: fileDisplayName(leg.filePath, leg.fileLabel),
-          filePath: leg.filePath,
-          isDirect: false,
-          sourceLabel: `${memberName} · Return${route ? ` · ${route}` : ''}`,
-          sourceIcon: modeInfo.returnIcon || modeInfo.icon || 'fas fa-route',
-        });
-      });
-    });
-
-    (state.planner.org?.accommodations || []).forEach((accom) => {
-      if (!accom.filePath) return;
-      docs.push({
-        id: `oaccom-${accom.id}`,
-        name: fileDisplayName(accom.filePath, accom.fileLabel),
-        filePath: accom.filePath,
-        isDirect: false,
-        sourceLabel: `Team accommodation${accom.name ? ` · ${accom.name}` : ''}`,
-        sourceIcon: 'fas fa-building',
-      });
-    });
-  }
-
-  return docs;
-}
-
-function documentCardHtml(doc) {
-  if (doc.isDirect) {
-    const catLabel = getDocCategoryOptions().find((c) => c.value === doc.category)?.label || '';
-    const meta = [doc.description, catLabel].filter(Boolean).join(' · ');
-    return `
-      <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-gray-200 bg-white" data-doc-id="${esc(doc.id)}">
-        <i class="fas fa-file-alt text-gray-400 flex-shrink-0 text-sm" aria-hidden="true"></i>
-        <div class="flex-1 min-w-0">
-          <p class="text-sm font-medium text-gray-800 truncate">${esc(doc.name || 'Unnamed document')}</p>
-          ${meta ? `<p class="text-[0.7rem] text-gray-500 mt-0.5 truncate">${esc(meta)}</p>` : ''}
-        </div>
-        ${doc.filePath
-          ? `<a href="${esc(doc.filePath)}" target="_blank"
-               class="flex-shrink-0 h-7 px-2.5 border border-gray-300 rounded-md text-xs text-blue-600 hover:bg-blue-50 transition-colors inline-flex items-center"
-               aria-label="View ${esc(doc.name || 'document')}">
-               <i class="fas fa-external-link-alt mr-1 text-[0.65rem]" aria-hidden="true"></i>View
-             </a>`
-          : ''
-        }
-        <button type="button" class="edit-doc-btn h-7 px-2.5 border border-gray-300 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0"
-          data-doc-id="${esc(doc.id)}" aria-label="Edit ${esc(doc.name || 'document')}">
-          <i class="fas fa-pen-to-square mr-1 text-[0.65rem]" aria-hidden="true"></i>Edit
-        </button>
-      </div>`;
-  }
-
-  const receiptCatLabel = doc.docType === 'receipt' && doc.category
-    ? getActiveBudgetCategoryOptions().find((c) => c.value === doc.category)?.label || ''
-    : '';
-  const receiptMeta = [doc.date, receiptCatLabel].filter(Boolean).join(' · ');
-
-  return `
-    <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-gray-100 bg-gray-50">
-      <i class="${esc(doc.sourceIcon)} text-gray-500 flex-shrink-0 text-sm" aria-hidden="true"></i>
-      <div class="flex-1 min-w-0">
-        <p class="text-sm text-gray-800 truncate">${esc(doc.name || 'Attached file')}</p>
-        <div class="flex items-center gap-1.5 mt-0.5 flex-wrap">
-          <span class="planner-source-badge text-[0.6rem] font-semibold uppercase tracking-wide px-1.5 py-0.5 rounded bg-gray-200 text-gray-600">${esc(doc.sourceLabel)}</span>
-          ${receiptMeta ? `<span class="text-xs text-gray-500">${esc(receiptMeta)}</span>` : ''}
-        </div>
-      </div>
-      ${doc.filePath
-        ? `<a href="${esc(doc.filePath)}" target="_blank"
-             class="flex-shrink-0 h-7 px-2.5 border border-gray-200 rounded-md text-xs text-blue-600 hover:bg-blue-50 transition-colors inline-flex items-center"
-             aria-label="View ${esc(doc.name || 'document')}">
-             <i class="fas fa-arrow-up-right-from-square mr-1 text-[0.6rem]" aria-hidden="true"></i>View
-           </a>`
-        : ''
-      }
-    </div>`;
-}
-
-let _documentModalId       = null
-let _documentModalFilePath  = ''
-let _documentModalFileLabel = ''
-
-function openDocumentModal(id) {
-  _documentModalId = id
-  const mode = state.planner.mode || 'personal'
-  const arr  = mode === 'sponsor' ? (state.planner.org?.documents || []) : (state.planner.personal?.documents || [])
-  const doc  = id ? arr.find((d) => d.id === id) : null
-  document.getElementById('documentModalTitle').textContent = id ? 'Edit Document' : 'Add Document'
-  document.getElementById('documentModalName').value        = doc?.name        || ''
-  document.getElementById('documentModalDescription').value = doc?.description || ''
-  document.getElementById('documentModalCategory').innerHTML = buildSelectOptions(getDocCategoryOptions(), doc?.category || '')
-  _documentModalFilePath  = doc?.filePath  || ''
-  _documentModalFileLabel = doc?.fileLabel || ''
-  _syncModalFile(_documentModalFilePath, _documentModalFileLabel, 'documentModalFileLabel', 'documentModalRemoveFileBtn')
-  document.getElementById('documentModalDelete')?.classList.toggle('hidden', !id)
-  showModal('documentModal', 'documentModalName')
-}
-
-
-function saveDocumentModal() {
-  const isNew = !_documentModalId
-  const id    = _documentModalId || makeItemId('doc')
-  const data  = {
-    id,
-    name:        document.getElementById('documentModalName').value.trim(),
-    description: document.getElementById('documentModalDescription').value.trim(),
-    category:    document.getElementById('documentModalCategory').value,
-    filePath:    _documentModalFilePath,
-    fileLabel:   _documentModalFileLabel,
-    updatedAt:   new Date().toISOString(),
-  }
-  const mode = state.planner.mode || 'personal'
-  if (mode === 'sponsor') {
-    const arr = (state.planner.org.documents ??= [])
-    if (isNew) arr.push(data)
-    else { const i = arr.findIndex((d) => d.id === id); if (i !== -1) arr[i] = data }
-  } else {
-    if (!state.planner.personal) state.planner.personal = {}
-    const arr = (state.planner.personal.documents ??= [])
-    if (isNew) arr.push(data)
-    else { const i = arr.findIndex((d) => d.id === id); if (i !== -1) arr[i] = data }
-  }
-  closeDocumentModal()
-  renderDocumentsTab()
-  scheduleAutoSave()
-}
-
-function closeDocumentModal() {
-  hideModal('documentModal')
-  _documentModalId = null
-  _documentModalFilePath = ''
-  _documentModalFileLabel = ''
-}
-
-function renderDocumentsTab() {
-  renderListPanel('documentsList', 'documentsEmptyState', collectDocuments(), documentCardHtml);
-}
-
-function wireDocumentsPanel() {
-  // Upload button: pick file first, then open modal with file pre-filled
-  document.getElementById('uploadDocBtn')?.addEventListener('click', () => {
-    const fi = document.getElementById('docFileInput')
-    if (fi) { fi.dataset.target = 'documentModal'; fi.click() }
-  })
-
-  document.getElementById('docFileInput')?.addEventListener('change', async (e) => {
-    const file   = e.target.files?.[0]
-    const target = e.target.dataset.target
-    e.target.value = ''
-    if (!file) return
-
-    if (target === 'documentModal') {
-      // Upload → open new-document modal with file pre-populated
-      try {
-        const { path, label } = await uploadOrReadFile(file, 'documents')
-        _documentModalFilePath  = path
-        _documentModalFileLabel = label
-        _documentModalId = null
-        document.getElementById('documentModalTitle').textContent = 'Add Document'
-        document.getElementById('documentModalName').value        = label
-        document.getElementById('documentModalDescription').value = ''
-        document.getElementById('documentModalCategory').innerHTML = buildSelectOptions(getDocCategoryOptions())
-        _syncModalFile(_documentModalFilePath, _documentModalFileLabel, 'documentModalFileLabel', 'documentModalRemoveFileBtn')
-        document.getElementById('documentModalDelete')?.classList.add('hidden')
-        showModal('documentModal', 'documentModalName')
-      } catch (err) { window.alert(err.message) }
-    } else if (target === 'documentModalAttach') {
-      // Attach file while modal already open
-      try {
-        const { path, label } = await uploadOrReadFile(file, 'documents')
-        _documentModalFilePath  = path
-        _documentModalFileLabel = label
-        _syncModalFile(_documentModalFilePath, _documentModalFileLabel, 'documentModalFileLabel', 'documentModalRemoveFileBtn')
-      } catch (err) { window.alert(err.message) }
-    }
-  })
-
-  document.getElementById('plannerDocumentsPanel')?.addEventListener('click', (e) => {
-    const editBtn = e.target.closest('.edit-doc-btn')
-    if (editBtn) { openDocumentModal(editBtn.dataset.docId); return }
-  })
-
-  // Document modal controls
-  document.getElementById('documentModalClose')?.addEventListener('click', closeDocumentModal)
-  document.getElementById('documentModalDone')?.addEventListener('click', saveDocumentModal)
-  document.getElementById('documentModal')?.addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) closeDocumentModal()
-  })
-
-  document.getElementById('documentModalDelete')?.addEventListener('click', () => {
-    if (!_documentModalId) return
-    const id   = _documentModalId
-    const mode = state.planner.mode || 'personal'
-    const docList = mode === 'sponsor' ? (state.planner.org.documents || []) : (state.planner.personal.documents || [])
-    const snapshot = docList.find((d) => d.id === id)
-    if (!snapshot) return
-    if (mode === 'sponsor') {
-      state.planner.org.documents = (state.planner.org.documents || []).filter((d) => d.id !== id)
-    } else {
-      state.planner.personal.documents = (state.planner.personal.documents || []).filter((d) => d.id !== id)
-    }
-    closeDocumentModal()
-    renderDocumentsTab()
-    scheduleAutoSave()
-    showUndoToast(snapshot.name || 'Document', () => {
-      if (mode === 'sponsor') state.planner.org.documents = [...(state.planner.org.documents || []), snapshot]
-      else state.planner.personal.documents = [...(state.planner.personal.documents || []), snapshot]
-      renderDocumentsTab()
-      scheduleAutoSave()
-    })
-  })
-
-  document.getElementById('documentModalAttachBtn')?.addEventListener('click', () => {
-    const fi = document.getElementById('docFileInput')
-    if (fi) { fi.dataset.target = 'documentModalAttach'; fi.click() }
-  })
-
-  document.getElementById('documentModalRemoveFileBtn')?.addEventListener('click', () => {
-    _documentModalFilePath = ''
-    _documentModalFileLabel = ''
-    _syncModalFile(_documentModalFilePath, _documentModalFileLabel, 'documentModalFileLabel', 'documentModalRemoveFileBtn')
-  })
-}
+// ── Documents tab ────────────────────────────────────────────────────────────
+// Extracted to ./modules/plannerDocuments.js (initDocuments / renderDocumentsTab /
+// wireDocumentsPanel).
 
 // ── Companions tab ────────────────────────────────────────────────────────────
-
-function makeLocalCompanion() {
-  return { id: makeItemId('lc'), name: '', phone: '', notes: '',
-           outboundLegs: [], returnLegs: [], budget: '', budgetActual: '', currency: '' };
-}
-
-function localCompanionCardHtml(lc) {
-  const accomNames = (state.planner.personal?.accommodations || [])
-    .filter((acc) => (acc.assignments || []).some((a) => a.memberId === lc.id))
-    .map((acc) => acc.name || 'Unnamed').join(', ');
-  const initial = (lc.name || '?')[0].toUpperCase();
-  return `
-    <div class="flex items-center gap-3 p-3 rounded-lg border border-gray-200 bg-white group" data-local-companion-id="${esc(lc.id)}">
-      <div class="planner-avatar flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold text-white select-none bg-gray-600">${esc(initial)}</div>
-      <div class="flex-1 min-w-0">
-        <div class="flex items-center gap-2">
-          <p class="text-sm font-medium text-gray-800">${esc(lc.name || 'Unnamed')}</p>
-          <span class="text-[0.6rem] px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 font-medium">This trip</span>
-        </div>
-        <div class="flex items-center gap-2 mt-0.5 flex-wrap">
-          ${lc.phone ? `<span class="text-[0.65rem] text-gray-500"><i class="fas fa-phone text-[0.55rem] mr-0.5"></i>${esc(lc.phone)}</span>` : ''}
-          ${accomNames ? `<span class="text-[0.65rem] text-gray-500">${esc(accomNames)}</span>` : ''}
-        </div>
-      </div>
-      <button type="button" class="local-companion-flights-btn h-8 px-3 border border-gray-200 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-150"
-        data-local-companion-id="${esc(lc.id)}" aria-label="Travel for ${esc(lc.name || 'companion')}">
-        <i class="fas fa-plane mr-1.5 text-[0.65rem]"></i>Travel
-      </button>
-      <button type="button" class="edit-local-companion-btn h-8 px-3 border border-gray-200 rounded-md text-xs text-gray-600 hover:bg-gray-50 transition-colors flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-150"
-        data-local-companion-id="${esc(lc.id)}" aria-label="Edit ${esc(lc.name || 'companion')}">
-        <i class="fas fa-pen-to-square mr-1.5 text-[0.65rem]"></i>Details
-      </button>
-      <button type="button" class="delete-local-companion-btn flex-shrink-0 text-gray-500 hover:text-red-600 transition-colors opacity-0 group-hover:opacity-100 transition-opacity duration-150"
-        data-local-companion-id="${esc(lc.id)}" aria-label="Remove ${esc(lc.name || 'companion')}">
-        <i class="fas fa-times text-xs"></i>
-      </button>
-    </div>`;
-}
-
-function renderCompanionsTab() {
-  const listEl  = document.getElementById('companionsTabList');
-  const emptyEl = document.getElementById('companionsTabEmpty');
-  if (!listEl) return;
-
-  const meContactId     = state.planner.personal?.meContactId || null;
-  const assignments     = (state.planner.personal?.tripAssignments || []).filter((a) => a.memberId !== meContactId);
-  const localCompanions = (state.planner.personal?.localCompanions || []).filter((lc) => lc.id !== meContactId);
-
-  const globalHtml = assignments.map(companionCardHtml).filter(Boolean).join('');
-  const localHtml  = localCompanions.map(localCompanionCardHtml).join('');
-  const allHtml    = globalHtml + localHtml;
-
-  listEl.innerHTML = allHtml;
-  emptyEl?.classList.toggle('hidden', allHtml.length > 0);
-}
-
-let _localCompanionId = null;
-
-function openLocalCompanionModal(id) {
-  _localCompanionId = id;
-  const lc = id ? (state.planner.personal?.localCompanions || []).find((x) => x.id === id) : null;
-  document.getElementById('localCompanionModalTitle').textContent = id ? 'Edit Companion' : 'Add Companion';
-  document.getElementById('localCompanionName').value  = lc?.name  || '';
-  document.getElementById('localCompanionPhone').value = lc?.phone || '';
-  document.getElementById('localCompanionNotes').value = lc?.notes || '';
-  document.getElementById('localCompanionModalDelete')?.classList.toggle('hidden', !id);
-  showModal('localCompanionModal', 'localCompanionName');
-}
-
-function saveLocalCompanion() {
-  const personal = state.planner.personal;
-  if (!personal) return;
-  const name  = document.getElementById('localCompanionName')?.value.trim()  || '';
-  const phone = document.getElementById('localCompanionPhone')?.value.trim() || '';
-  const notes = document.getElementById('localCompanionNotes')?.value.trim() || '';
-  personal.localCompanions = personal.localCompanions || [];
-  if (_localCompanionId) {
-    const lc = personal.localCompanions.find((x) => x.id === _localCompanionId);
-    if (lc) Object.assign(lc, { name, phone, notes });
-  } else {
-    personal.localCompanions.push({ ...makeLocalCompanion(), name, phone, notes });
-  }
-  scheduleAutoSave();
-  hideModal('localCompanionModal');
-  _localCompanionId = null;
-  renderCompanionsTab();
-  renderPersonalAccomList();
-}
-
-function deleteLocalCompanion(id) {
-  const personal = state.planner.personal;
-  if (!personal) return;
-  const snapshot     = (personal.localCompanions || []).find((x) => x.id === id);
-  const snapAccomAssns = (personal.accommodations || []).map((acc) => ({ id: acc.id, a: [...(acc.assignments || [])] }));
-  personal.localCompanions = (personal.localCompanions || []).filter((x) => x.id !== id);
-  (personal.accommodations || []).forEach((acc) => { acc.assignments = (acc.assignments || []).filter((a) => a.memberId !== id); });
-  scheduleAutoSave();
-  hideModal('localCompanionModal');
-  _localCompanionId = null;
-  renderCompanionsTab();
-  renderPersonalAccomList();
-  if (snapshot) showUndoToast(snapshot.name || 'Companion', () => {
-    const p = state.planner.personal;
-    p.localCompanions = [...(p.localCompanions || []), snapshot];
-    snapAccomAssns.forEach(({ id: aId, a }) => { const acc = (p.accommodations || []).find((x) => x.id === aId); if (acc) acc.assignments = a; });
-    renderCompanionsTab(); renderPersonalAccomList(); scheduleAutoSave();
-  });
-}
-
-function wireCompanionsPanel() {
-  const panel = document.getElementById('plannerCompanionsPanel');
-  if (!panel) return;
-
-  document.getElementById('addLocalCompanionBtn')?.addEventListener('click', () => openLocalCompanionModal(null));
-
-  panel.addEventListener('click', (e) => {
-    const flightsBtn = e.target.closest('.local-companion-flights-btn');
-    if (flightsBtn) { openLocalCompanionAssignmentModal(flightsBtn.dataset.localCompanionId); return; }
-    const editBtn = e.target.closest('.edit-local-companion-btn');
-    if (editBtn) { openLocalCompanionModal(editBtn.dataset.localCompanionId); return; }
-    const delBtn = e.target.closest('.delete-local-companion-btn');
-    if (delBtn) { deleteLocalCompanion(delBtn.dataset.localCompanionId); return; }
-    // Global companion buttons also live here (reuse existing handlers via delegation)
-    const editComp = e.target.closest('.edit-companion-btn');
-    if (editComp) { openTripAssignmentModal(editComp.dataset.companionId); return; }
-    const removeComp = e.target.closest('.remove-companion-btn');
-    if (removeComp) {
-      const cid = removeComp.dataset.companionId;
-      state.planner.personal.tripAssignments = (state.planner.personal?.tripAssignments || []).filter((a) => a.memberId !== cid);
-      scheduleAutoSave();
-      renderCompanionsTab();
-      renderPersonalCompanionsSection();
-    }
-  });
-
-  // Local companion modal wiring
-  document.getElementById('localCompanionModalClose')?.addEventListener('click', () => { hideModal('localCompanionModal'); _localCompanionId = null; });
-  document.getElementById('localCompanionModalDone')?.addEventListener('click', saveLocalCompanion);
-  document.getElementById('localCompanionModalDelete')?.addEventListener('click', () => { if (_localCompanionId) deleteLocalCompanion(_localCompanionId); });
-  document.getElementById('localCompanionModal')?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); saveLocalCompanion(); }
-    if (e.key === 'Escape') { hideModal('localCompanionModal'); _localCompanionId = null; }
-  });
-}
+// Extracted to ./modules/plannerCompanions.js (initCompanions / renderCompanionsTab /
+// wireCompanionsPanel / localCompanionCardHtml / makeLocalCompanion).
 
 // ── Map tab ───────────────────────────────────────────────────────────────────
-
-// Top ~200 IATA airport codes → [lat, lon]
-const IATA_COORDS = {
-  // Australia / NZ
-  SYD:[-33.9461,151.1772], MEL:[-37.6690,144.8410], BNE:[-27.3842,153.1175],
-  PER:[-31.9403,115.9669], ADL:[-34.9450,138.5301], CBR:[-35.3069,149.1951],
-  HBA:[-42.8361,147.5078], OOL:[-28.1644,153.5044], CNS:[-16.8858,145.7452],
-  DRW:[-12.4147,130.8765], AKL:[-37.0082,174.7850], CHC:[-43.4894,172.5322],
-  WLG:[-41.3272,174.8052],
-  // USA
-  JFK:[40.6413,-73.7781], LAX:[33.9425,-118.4081], ORD:[41.9742,-87.9073],
-  ATL:[33.6407,-84.4277], DFW:[32.8998,-97.0403], DEN:[39.8561,-104.6737],
-  SFO:[37.6213,-122.3790], LAS:[36.0840,-115.1537], MIA:[25.7959,-80.2870],
-  PHX:[33.4373,-112.0078], SEA:[47.4502,-122.3088], IAH:[29.9902,-95.3368],
-  MSP:[44.8848,-93.2223], DTW:[42.2124,-83.3534], BOS:[42.3656,-71.0096],
-  FLL:[26.0726,-80.1527], MCO:[28.4312,-81.3081], EWR:[40.6895,-74.1745],
-  PDX:[45.5898,-122.5951], SLC:[40.7899,-111.9791], DCA:[38.8521,-77.0377],
-  IAD:[38.9531,-77.4565], CLT:[35.2140,-80.9431], PHL:[39.8744,-75.2424],
-  TPA:[27.9755,-82.5332], MDW:[41.7868,-87.7522], LGA:[40.7772,-73.8726],
-  SNA:[33.6757,-117.8676], OAK:[37.7213,-122.2208], BWI:[39.1754,-76.6683],
-  MKE:[42.9472,-87.8966], STL:[38.7487,-90.3700], BNA:[36.1245,-86.6782],
-  AUS:[30.1945,-97.6699], RDU:[35.8776,-78.7875], SMF:[38.6954,-121.5908],
-  SAN:[32.7338,-117.1933], MSY:[29.9934,-90.2580],
-  // Canada
-  YVR:[49.1947,-123.1792], YYZ:[43.6777,-79.6248], YUL:[45.4706,-73.7408],
-  YYC:[51.1215,-114.0132], YEG:[53.3097,-113.5797], YOW:[45.3225,-75.6692],
-  YHZ:[44.8808,-63.5086], YWG:[49.9100,-97.2398],
-  // UK / Ireland
-  LHR:[51.4775,-0.4614], LGW:[51.1537,-0.1821], MAN:[53.3537,-2.2750],
-  EDI:[55.9500,-3.3725], DUB:[53.4213,-6.2700], BHX:[52.4539,-1.7480],
-  GLA:[55.8642,-4.4330], STN:[51.8850,0.2350],
-  // Europe
-  CDG:[49.0097,2.5479], ORY:[48.7233,2.3794], AMS:[52.3086,4.7639],
-  FRA:[50.0379,8.5622], MUC:[48.3537,11.7750], TXL:[52.5597,13.2877],
-  BER:[52.3667,13.5033], ZRH:[47.4647,8.5492], VIE:[48.1103,16.5697],
-  BCN:[41.2971,2.0785], MAD:[40.4936,-3.5668], LIS:[38.7756,-9.1354],
-  FCO:[41.8003,12.2389], MXP:[45.6306,8.7281], ATH:[37.9364,23.9445],
-  CPH:[55.6180,12.6560], OSL:[60.1939,11.1004], ARN:[59.6519,17.9186],
-  HEL:[60.3172,24.9633], BRU:[50.9010,4.4844], DUS:[51.2895,6.7668],
-  HAM:[53.6303,10.0065], WAW:[52.1657,20.9671], PRG:[50.1008,14.2600],
-  BUD:[47.4298,19.2612], OTP:[44.5711,26.0858], SOF:[42.6967,23.4114],
-  HEL:[60.3172,24.9633], RIG:[56.9236,23.9711], TLL:[59.4133,24.8328],
-  VNO:[54.6341,25.2858], KBP:[50.3450,30.8947], SVO:[55.9726,37.4146],
-  DME:[55.4088,37.9063], LED:[59.8003,30.2625],
-  // Middle East
-  DXB:[25.2528,55.3644], DOH:[25.2609,51.6138], AUH:[24.4330,54.6511],
-  AMM:[31.7226,35.9932], BEY:[33.8209,35.4883], KWI:[29.2267,47.9689],
-  BAH:[26.2708,50.6336], MCT:[23.5931,58.2844],
-  // Asia
-  NRT:[35.7647,140.3864], HND:[35.5494,139.7798], KIX:[34.4347,135.2440],
-  NGO:[34.8583,136.8050], FUK:[33.5853,130.4511], CTS:[42.7752,141.6922],
-  ICN:[37.4692,126.4505], GMP:[37.5663,126.7914], PUS:[35.1795,128.9386],
-  PVG:[31.1434,121.8052], PEK:[40.0799,116.6031], PKX:[39.5098,116.4106],
-  CAN:[23.3924,113.2988], SZX:[22.6393,113.8107], SHA:[31.1979,121.3362],
-  CTU:[30.5785,103.9469], HKG:[22.3080,113.9185], MFM:[22.1496,113.5916],
-  TPE:[25.0777,121.2325], BKK:[13.6811,100.7475], DMK:[13.9126,100.6067],
-  SIN:[1.3644,103.9915], KUL:[2.7456,101.7099], CGK:[-6.1256,106.6559],
-  DPS:[-8.7482,115.1672], MNL:[14.5086,121.0195], HAN:[21.2187,105.8047],
-  SGN:[10.8188,106.6520], RGN:[16.9073,96.1332], BOM:[19.0887,72.8679],
-  DEL:[28.5562,77.1000], BLR:[13.1986,77.7066], MAA:[12.9900,80.1693],
-  HYD:[17.2403,78.4294], CCU:[22.6547,88.4467], CMB:[7.1800,79.8841],
-  KTM:[27.6966,85.3591], DAC:[23.8433,90.3979],
-  // Latin America
-  GRU:[-23.4356,-46.4731], GIG:[-22.8100,-43.2506], BSB:[-15.8711,-47.9186],
-  EZE:[-34.8222,-58.5358], AEP:[-34.5592,-58.4156], SCL:[-33.3930,-70.7858],
-  LIM:[-12.0219,-77.1143], BOG:[4.7016,-74.1469], MDE:[6.1645,-75.4231],
-  MEX:[19.4363,-99.0721], CUN:[21.0365,-86.8771], GDL:[20.5218,-103.3106],
-  PTY:[9.0714,-79.3835], SJO:[9.9939,-84.2088],
-  // Africa
-  JNB:[-26.1392,28.2460], CPT:[-33.9648,18.6017], NBO:[-1.3192,36.9275],
-  ADD:[8.9779,38.7993], LOS:[6.5774,3.3214], CAI:[30.1219,31.4056],
-  CMN:[33.3675,-7.5900], ACC:[5.6052,-0.1668], DAR:[-6.8780,39.2026],
-  // Pacific
-  HNL:[21.3187,-157.9224], GUM:[13.4834,144.7960], SYD:[-33.9461,151.1772],
-  NAN:[-17.7554,177.4434], PPT:[-17.5534,-149.6066],
-};
-
-
-const GEOCODE_CACHE_KEY = 'drupalconPlanner_geocache';
-
-function _loadGeocodeCache() {
-  try { return JSON.parse(localStorage.getItem(GEOCODE_CACHE_KEY) || '{}'); } catch { return {}; }
-}
-function _saveGeocodeCache(cache) {
-  try { localStorage.setItem(GEOCODE_CACHE_KEY, JSON.stringify(cache)); } catch {}
-}
-
-// Resolve a location string to [lat, lon] or null.
-// 1. IATA code match  2. localStorage cache  3. Nominatim API (queued, 1.1s apart)
-const _geocodeQueue  = [];
-let   _geocodeTimer  = null;
-
-function _drainGeocodeQueue() {
-  if (!_geocodeQueue.length) { _geocodeTimer = null; return; }
-  const { query, cacheKey, countrycodes, resolve } = _geocodeQueue.shift();
-  const key   = cacheKey || query;
-  const cache = _loadGeocodeCache();
-  if (cache[key]) { resolve(cache[key]); _geocodeTimer = setTimeout(_drainGeocodeQueue, 0); return; }
-  let url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1`;
-  if (countrycodes) url += `&countrycodes=${encodeURIComponent(countrycodes)}`;
-  fetch(url)
-    .then((r) => r.json())
-    .then((data) => {
-      if (data?.[0]) {
-        const pt = [parseFloat(data[0].lat), parseFloat(data[0].lon)];
-        const c = _loadGeocodeCache(); c[key] = pt; _saveGeocodeCache(c);
-        resolve(pt);
-      } else {
-        resolve(null);
-      }
-    })
-    .catch(() => resolve(null))
-    .finally(() => { _geocodeTimer = setTimeout(_drainGeocodeQueue, 1100); });
-}
-
-function geocodeLocation(query) {
-  if (!query) return Promise.resolve(null);
-  const q = query.trim();
-  // Direct lat,lon (e.g. "-17.73,168.32" pasted from Google Maps) — instant, no network
-  const coordMatch = q.match(/^(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)$/);
-  if (coordMatch) return Promise.resolve([parseFloat(coordMatch[1]), parseFloat(coordMatch[2])]);
-  // 3-letter IATA airport code — instant, no network
-  const iata = q.match(/\b([A-Z]{3})\b/)?.[1];
-  if (iata && IATA_COORDS[iata]) return Promise.resolve(IATA_COORDS[iata]);
-  if (IATA_COORDS[q.toUpperCase()]) return Promise.resolve(IATA_COORDS[q.toUpperCase()]);
-  // Check cache before queuing any network request
-  const cache = _loadGeocodeCache();
-  if (cache[q]) return Promise.resolve(cache[q]);
-  // UN/LOCODE (exactly 5 uppercase alphanums, e.g. VUVLI): use embedded country code to
-  // scope the Nominatim query so "VLI" resolves correctly even for obscure locations.
-  // The result is cached under the original LOCODE key, not the derived query string.
-  const locodeMatch = q.match(/^([A-Z]{2})([A-Z0-9]{3})$/);
-  if (locodeMatch) {
-    const [, cc, loc] = locodeMatch;
-    return new Promise((resolve) => {
-      _geocodeQueue.push({ query: loc, cacheKey: q, countrycodes: cc.toLowerCase(), resolve });
-      if (!_geocodeTimer) _geocodeTimer = setTimeout(_drainGeocodeQueue, 0);
-    });
-  }
-  // General free-text — queue Nominatim request
-  return new Promise((resolve) => {
-    _geocodeQueue.push({ query: q, resolve });
-    if (!_geocodeTimer) _geocodeTimer = setTimeout(_drainGeocodeQueue, 0);
-  });
-}
-
-// Parse a GPX file (File object) → { name, points: [[lat,lon],...] } or null
-function parseGpx(file) {
-  return new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const xml   = new DOMParser().parseFromString(e.target.result, 'application/xml');
-        const name  = xml.querySelector('name')?.textContent?.trim() || file.name.replace(/\.gpx$/i, '');
-        // Prefer track points, fall back to route points, then waypoints
-        const tags  = xml.querySelectorAll('trkpt').length
-          ? xml.querySelectorAll('trkpt')
-          : xml.querySelectorAll('rtept').length
-            ? xml.querySelectorAll('rtept')
-            : xml.querySelectorAll('wpt');
-        let pts = Array.from(tags).map((p) => [parseFloat(p.getAttribute('lat')), parseFloat(p.getAttribute('lon'))]).filter(([la, lo]) => !isNaN(la) && !isNaN(lo));
-        // Downsample to ≤ 800 points to keep localStorage lean
-        if (pts.length > 800) {
-          const step = pts.length / 800;
-          pts = pts.filter((_, i) => Math.round(i / step) * step === Math.round(i));
-        }
-        resolve(pts.length ? { name, points: pts } : null);
-      } catch { resolve(null); }
-    };
-    reader.readAsText(file);
-  });
-}
-
-// Leaflet lazy loader
-let _leafletReady = false;
-const _leafletCbs = [];
-function _loadLeaflet(cb) {
-  if (_leafletReady) { cb(); return; }
-  _leafletCbs.push(cb);
-  if (_leafletCbs.length > 1) return;
-  const link = Object.assign(document.createElement('link'), { rel: 'stylesheet', href: 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' });
-  document.head.appendChild(link);
-  const s = Object.assign(document.createElement('script'), { src: 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js' });
-  s.onload = () => { _leafletReady = true; _leafletCbs.splice(0).forEach((f) => f()); };
-  document.head.appendChild(s);
-}
-
-let _map          = null;
-let _mapLayers    = null;  // LayerGroup for route/marker layers
-let _mapTileLayer = null;  // Current base tile layer (swapped on theme change)
-const _gpxOnlyPersons = new Set();  // person IDs where auto-lines are hidden in favour of GPX track
-
-function _mapTileSlug() {
-  return document.body.classList.contains('theme-dark') ? 'dark_all' : 'light_all';
-}
-
-function _updateMapTheme() {
-  if (!_map || !_mapTileLayer) return;
-  _mapTileLayer.setUrl(`https://{s}.basemaps.cartocdn.com/${_mapTileSlug()}/{z}/{x}/{y}{r}.png`);
-  const bg = document.body.classList.contains('theme-dark') ? '#1a1a2e' : '#e8eef4';
-  const el = document.getElementById('plannerMap');
-  if (el) el.style.backgroundColor = bg;
-}
-
-function _initMap() {
-  const el = document.getElementById('plannerMap');
-  if (!el) return;
-  if (_map) {
-    _updateMapTheme();
-    setTimeout(() => _map.invalidateSize(), 50);
-    return;
-  }
-  _map = window.L.map('plannerMap', { zoomControl: true }).setView([20, 10], 2);
-  _mapTileLayer = window.L.tileLayer(
-    `https://{s}.basemaps.cartocdn.com/${_mapTileSlug()}/{z}/{x}/{y}{r}.png`,
-    {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: 19,
-    }
-  ).addTo(_map);
-  _mapLayers = window.L.layerGroup().addTo(_map);
-  // Swap tiles automatically when the app theme changes
-  new MutationObserver(_updateMapTheme).observe(document.body, { attributes: true, attributeFilter: ['class'] });
-}
-
-function _clearMapLayers() { _mapLayers?.clearLayers(); }
-
-// Render polylines and markers for one traveller's data
-async function _drawTraveller({ outboundLegs = [], returnLegs = [], accommodations = [], gpxTrack = null, color = '#2563eb', label = 'Me', hideAutoLines = false }) {
-  const L = window.L;
-  const allPts = [];
-  const skipLines = hideAutoLines && gpxTrack?.points?.length;
-
-  // Helper: resolve an ordered list of location strings to [lat,lon] pairs
-  async function resolveSeq(locs) {
-    const pts = await Promise.all(locs.map(geocodeLocation));
-    return pts.filter(Boolean);
-  }
-
-  // Build ordered waypoint sequences for outbound and return legs
-  const outboundLocs = [];
-  for (const leg of outboundLegs) {
-    if (!outboundLocs.length && leg.from) outboundLocs.push(leg.from);
-    if (leg.to) outboundLocs.push(leg.to);
-  }
-  const returnLocs = [];
-  for (const leg of returnLegs) {
-    if (!returnLocs.length && leg.from) returnLocs.push(leg.from);
-    if (leg.to) returnLocs.push(leg.to);
-  }
-  const [outboundPts, returnPts] = await Promise.all([resolveSeq(outboundLocs), resolveSeq(returnLocs)]);
-
-  // Shared popup card wrapper
-  function popupCard(title, subtitle, meta) {
-    return `<div style="font-family:system-ui,-apple-system,sans-serif;min-width:130px;line-height:1.45;padding:1px 0">
-      <div style="font-size:0.8rem;font-weight:600;color:#1f2937">${title}</div>
-      ${subtitle ? `<div style="font-size:0.7rem;color:#4b5563;margin-top:2px">${subtitle}</div>` : ''}
-      ${meta    ? `<div style="font-size:0.68rem;color:#4b5563;margin-top:1px">${meta}</div>`    : ''}
-    </div>`;
-  }
-
-  // Departure circle marker (white-stroked so it sits above the tile cleanly)
-  function departureMarker(pt, loc, role) {
-    return L.circleMarker(pt, { radius: 5, color: '#fff', fillColor: color, fillOpacity: 1, weight: 2 })
-      .bindPopup(popupCard(esc(label), esc(loc || ''), role));
-  }
-
-  if (!skipLines) {
-    // Outbound: solid, heaviest weight
-    if (outboundPts.length >= 2) {
-      L.polyline(outboundPts, { color, weight: 3, opacity: 0.85 })
-        .bindTooltip(`${esc(label)}: outbound`, { sticky: true })
-        .addTo(_mapLayers);
-      departureMarker(outboundPts[0], outboundLocs[0], 'Outbound departure').addTo(_mapLayers);
-    }
-    // Return: dashed, medium weight
-    if (returnPts.length >= 2) {
-      L.polyline(returnPts, { color, weight: 2.5, opacity: 0.7, dashArray: '8 5' })
-        .bindTooltip(`${esc(label)}: return`, { sticky: true })
-        .addTo(_mapLayers);
-      departureMarker(returnPts[0], returnLocs[0], 'Return departure').addTo(_mapLayers);
-    }
-  }
-  allPts.push(...outboundPts, ...returnPts);
-
-  // Draw accommodation markers; collect resolved points per accommodation for connectors
-  const accomSeqs = [];
-  for (const acc of accommodations) {
-    const entries = acc.type === 'waypoints'
-      ? (acc.stops || [])
-          .map((cl) => ({ name: cl.location || '', query: cl.coords || cl.location, date: cl.date || '' }))
-          .filter((e) => e.query)
-      : [{ name: acc.name || '', query: acc.address || acc.name }].filter((e) => e.query);
-    const resolved = await Promise.all(entries.map((e) => geocodeLocation(e.query)));
-    const validEntries = entries.map((e, i) => ({ ...e, pt: resolved[i] })).filter((e) => e.pt);
-    for (let i = 0; i < validEntries.length; i++) {
-      const { name, pt, date } = validEntries[i];
-      let icon;
-      if (acc.type === 'waypoints') {
-        // Numbered disc with drop shadow — order is information
-        icon = L.divIcon({
-          html: `<div style="width:24px;height:24px;border-radius:50%;background:${color};color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;font-family:system-ui,sans-serif;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.25)">${i + 1}</div>`,
-          className: '', iconAnchor: [12, 12],
-        });
-      } else {
-        // Teardrop pin: rotated square with icon centred — distinct from disc markers
-        icon = L.divIcon({
-          html: `<div style="position:relative;width:28px;height:34px">
-            <div style="position:absolute;top:0;left:0;width:28px;height:28px;background:${color};border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.25)"></div>
-            <i class="fas fa-bed" style="position:absolute;top:5px;left:6px;color:#fff;font-size:0.75rem"></i>
-          </div>`,
-          className: '', iconAnchor: [14, 34],
-        });
-      }
-      const popup = acc.type === 'waypoints'
-        ? popupCard(esc(name || `Stop ${i + 1}`), date || null, esc(acc.name || 'Waypoint'))
-        : popupCard(esc(acc.name || 'Accommodation'), esc(label), null);
-      L.marker(pt, { icon }).bindPopup(popup).addTo(_mapLayers);
-    }
-    const pts = validEntries.map((e) => e.pt);
-    if (!skipLines && acc.type === 'waypoints' && pts.length >= 2) {
-      // Dotted line — clearly distinct rhythm from the dashed return flight
-      L.polyline(pts, { color, weight: 3, opacity: 0.8, dashArray: '2 8' })
-        .bindTooltip(`${esc(label)}: ${esc(acc.name || 'Waypoint')}`, { sticky: true })
-        .addTo(_mapLayers);
-    }
-    if (pts.length) accomSeqs.push(pts);
-    allPts.push(...pts);
-  }
-
-  if (!skipLines) {
-    // Connector segments: thin ghost lines bridging flight endpoints to accommodation
-    let bridgePrev = outboundPts.length ? outboundPts[outboundPts.length - 1] : null;
-    for (const pts of accomSeqs) {
-      if (!pts.length) continue;
-      if (bridgePrev) {
-        L.polyline([bridgePrev, pts[0]], { color, weight: 1.5, opacity: 0.35, dashArray: '3 5' }).addTo(_mapLayers);
-      }
-      bridgePrev = pts[pts.length - 1];
-    }
-    if (bridgePrev && returnPts.length) {
-      L.polyline([bridgePrev, returnPts[0]], { color, weight: 1.5, opacity: 0.35, dashArray: '3 5' }).addTo(_mapLayers);
-    }
-  }
-
-  // GPX track
-  if (gpxTrack?.points?.length) {
-    L.polyline(gpxTrack.points, { color, weight: 3.5, opacity: 0.6 })
-      .bindTooltip(`${esc(label)} GPX: ${esc(gpxTrack.name)}`, { sticky: true })
-      .addTo(_mapLayers);
-    allPts.push(...gpxTrack.points);
-  }
-
-  return allPts;
-}
-
-async function _renderMapLayers() {
-  if (!_map || !_mapLayers) return;
-  _clearMapLayers();
-  const mode = state.planner.mode || 'personal';
-  const personal  = state.planner.personal;
-  const org       = state.planner.org;
-  const allPoints = [];
-
-  if (mode === 'personal') {
-    const meColor = '#2563eb';
-    const mePts = await _drawTraveller({
-      outboundLegs:   personal?.outboundLegs   || [],
-      returnLegs:     personal?.returnLegs     || [],
-      accommodations: personal?.accommodations || [],
-      gpxTrack:       personal?.gpxTrack       || null,
-      color: meColor, label: getMeLabel(),
-      hideAutoLines: _gpxOnlyPersons.has('__me__'),
-    });
-    allPoints.push(...mePts);
-
-    const contacts    = state.global?.personalContacts || [];
-    const meContactId = personal?.meContactId || null;
-    const assignments = personal?.tripAssignments || [];
-    for (let i = 0; i < assignments.length; i++) {
-      const a       = assignments[i];
-      if (a.memberId === meContactId) continue;  // already drawn as "Me"
-      const contact = contacts.find((c) => c.id === a.memberId);
-      if (!contact) continue;
-      const color = TIMELINE_COLORS[(i + 1) % TIMELINE_COLORS.length].border;
-      const compAccoms = (personal?.accommodations || []).filter((acc) =>
-        (acc.assignments || []).some((s) => s.memberId === a.memberId));
-      const pts = await _drawTraveller({
-        outboundLegs: a.outboundLegs || [],
-        returnLegs:   a.returnLegs   || [],
-        accommodations: compAccoms,
-        gpxTrack:     a.gpxTrack     || null,
-        color, label: contact.name || 'Unnamed',
-        hideAutoLines: _gpxOnlyPersons.has(a.memberId),
-      });
-      allPoints.push(...pts);
-    }
-    // Local companions with flights
-    const locals = personal?.localCompanions || [];
-    for (let i = 0; i < locals.length; i++) {
-      const lc = locals[i];
-      if (lc.id === meContactId) continue;
-      if (!(lc.outboundLegs?.length || lc.returnLegs?.length)) continue;
-      const color = TIMELINE_COLORS[(assignments.length + i + 1) % TIMELINE_COLORS.length].border;
-      const lcAccoms = (personal?.accommodations || []).filter((acc) =>
-        (acc.assignments || []).some((s) => s.memberId === lc.id));
-      const pts = await _drawTraveller({
-        outboundLegs: lc.outboundLegs || [],
-        returnLegs:   lc.returnLegs   || [],
-        accommodations: lcAccoms,
-        gpxTrack:     lc.gpxTrack     || null,
-        color, label: `${lc.name || 'Unnamed'} (this trip)`,
-        hideAutoLines: _gpxOnlyPersons.has(lc.id),
-      });
-      allPoints.push(...pts);
-    }
-  } else {
-    // Sponsor mode: each team assignment
-    const members = state.global?.teamMembers || [];
-    const assignments = org?.teamAssignments || [];
-    for (let i = 0; i < assignments.length; i++) {
-      const a      = assignments[i];
-      const member = members.find((m) => m.id === a.memberId);
-      if (!member) continue;
-      const color  = TIMELINE_COLORS[i % TIMELINE_COLORS.length].border;
-      const memberAccoms = (org?.accommodations || []).filter((acc) =>
-        (acc.assignments || []).some((s) => s.memberId === a.memberId));
-      const pts = await _drawTraveller({
-        outboundLegs: a.outboundLegs || [],
-        returnLegs:   a.returnLegs   || [],
-        accommodations: memberAccoms,
-        gpxTrack:     a.gpxTrack     || null,
-        color, label: member.name || 'Unnamed',
-        hideAutoLines: _gpxOnlyPersons.has(a.memberId),
-      });
-      allPoints.push(...pts);
-    }
-  }
-
-  // Conference venue marker when a schedule is associated
-  const meta = state.eventMeta || {};
-  const venueName = meta.venue || '';
-  const venueCity = meta.location || '';
-  if (venueName || venueCity) {
-    const geocodeQuery = venueName ? `${venueName}, ${venueCity}` : venueCity;
-    const venuePt = await geocodeLocation(geocodeQuery);
-    if (venuePt) {
-      const L = window.L;
-      const venueIcon = L.divIcon({
-        html: `<i class="fas fa-location-dot" style="color:#dc2626;font-size:1.5rem;text-shadow:0 1px 4px rgba(0,0,0,0.35)"></i>`,
-        className: '', iconAnchor: [8, 24],
-      });
-      const venueLabel = venueName ? `${venueName}${venueCity ? `, ${venueCity}` : ''}` : venueCity;
-      L.marker(venuePt, { icon: venueIcon })
-        .bindPopup(`<strong>${esc(venueLabel)}</strong><br><span style="color:#666;font-size:0.8em">Conference venue</span>`)
-        .addTo(_mapLayers);
-      allPoints.push(venuePt);
-    }
-  }
-
-  if (allPoints.length) {
-    try { _map.fitBounds(window.L.latLngBounds(allPoints), { padding: [40, 40], maxZoom: 14 }); } catch {}
-  }
-
-  // Show empty state when there's nothing to plot
-  document.getElementById('mapEmptyState')?.classList.toggle('hidden', allPoints.length > 0);
-}
-
-function _renderGpxList() {
-  const el = document.getElementById('mapGpxList');
-  if (!el) return;
-  const mode     = state.planner.mode || 'personal';
-  const personal = state.planner.personal;
-
-  const rows = [];
-
-  if (mode === 'personal') {
-    const meTrack = personal?.gpxTrack;
-    rows.push({ id: '__me__', label: getMeLabel(), color: '#2563eb', track: meTrack });
-    const contacts    = state.global?.personalContacts || [];
-    const meContactId = personal?.meContactId || null;
-    const assignments = personal?.tripAssignments || [];
-    assignments.forEach((a, i) => {
-      if (a.memberId === meContactId) return;  // already listed as "Me"
-      const c = contacts.find((x) => x.id === a.memberId);
-      if (!c) return;
-      rows.push({ id: a.memberId, label: c.name || 'Unnamed', color: TIMELINE_COLORS[(i + 1) % TIMELINE_COLORS.length].border, track: a.gpxTrack || null });
-    });
-    (personal?.localCompanions || []).forEach((lc, i) => {
-      if (lc.id === meContactId) return;
-      rows.push({ id: lc.id, label: `${lc.name || 'Unnamed'} (this trip)`, color: TIMELINE_COLORS[(assignments.length + i + 1) % TIMELINE_COLORS.length].border, track: lc.gpxTrack || null });
-    });
-  } else {
-    const members     = state.global?.teamMembers || [];
-    const assignments = state.planner.org?.teamAssignments || [];
-    assignments.forEach((a, i) => {
-      const m = members.find((x) => x.id === a.memberId);
-      if (!m) return;
-      rows.push({ id: a.memberId, label: m.name || 'Unnamed', color: TIMELINE_COLORS[i % TIMELINE_COLORS.length].border, track: a.gpxTrack || null });
-    });
-  }
-
-  if (!rows.length) {
-    el.innerHTML = '<p class="text-xs text-gray-400 italic">No travellers found. Add travel legs or team members first.</p>';
-    return;
-  }
-
-  el.innerHTML = rows.map((row) => {
-    const initial = (row.label || '?')[0].toUpperCase();
-    const gpxOnly = _gpxOnlyPersons.has(row.id);
-    return `<div class="flex items-center gap-2.5 px-3 py-2.5" data-gpx-person-id="${esc(row.id)}">
-      <div class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[0.6rem] font-bold text-white select-none" style="background:${esc(row.color)}">${esc(initial)}</div>
-      <div class="flex-1 min-w-0">
-        <div class="text-xs font-medium text-gray-700 truncate">${esc(row.label)}</div>
-        ${row.track
-          ? `<div class="text-[0.65rem] text-gray-600 truncate"><i class="fas fa-route mr-1 text-[0.5rem]"></i>${esc(row.track.name)} · ${row.track.points.length.toLocaleString()} pts</div>`
-          : `<div class="text-[0.65rem] text-gray-500 italic">No GPX track</div>`
-        }
-      </div>
-      ${row.track
-        ? `<button type="button" class="map-gpx-only-btn flex-shrink-0 w-7 h-7 rounded flex items-center justify-center border transition-colors ${gpxOnly ? 'border-blue-300 bg-blue-50 text-blue-600' : 'border-gray-200 text-gray-500 hover:text-gray-700 hover:bg-gray-50'}" data-gpx-person-id="${esc(row.id)}" title="${gpxOnly ? 'Show calculated route' : 'GPX track only'}"><i class="fas fa-route text-[0.6rem]"></i></button>
-         <button type="button" class="map-gpx-upload-btn flex-shrink-0 w-7 h-7 rounded flex items-center justify-center border border-gray-200 text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors" data-gpx-person-id="${esc(row.id)}" title="Replace GPX track"><i class="fas fa-arrow-up-from-bracket text-[0.6rem]"></i></button>
-         <button type="button" class="map-gpx-remove-btn flex-shrink-0 w-7 h-7 rounded flex items-center justify-center border border-gray-200 text-gray-500 hover:text-red-600 hover:border-red-200 hover:bg-red-50 transition-colors" data-gpx-person-id="${esc(row.id)}" title="Remove track"><i class="fas fa-times text-[0.6rem]"></i></button>`
-        : `<button type="button" class="map-gpx-upload-btn flex-shrink-0 w-7 h-7 rounded flex items-center justify-center border border-gray-200 text-gray-500 hover:text-blue-600 hover:border-blue-300 hover:bg-blue-50 transition-colors" data-gpx-person-id="${esc(row.id)}" title="Upload GPX track"><i class="fas fa-arrow-up-from-bracket text-[0.6rem]"></i></button>`
-      }
-    </div>`;
-  }).join('');
-}
-
-function renderMapTab() {
-  _loadLeaflet(() => {
-    _initMap();
-    _renderGpxList();
-    _renderMapLayers();
-  });
-}
-
-function wireMapPanel() {
-  const panel = document.getElementById('plannerMapPanel');
-  if (!panel) return;
-  const fileInput = document.getElementById('mapGpxFileInput');
-
-  panel.addEventListener('click', (e) => {
-    if (e.target.closest('#mapLegendToggle')) {
-      document.getElementById('mapLegendBody')?.classList.toggle('hidden');
-      document.getElementById('mapLegendChevron')?.classList.toggle('rotate-180');
-      return;
-    }
-    const uploadBtn = e.target.closest('.map-gpx-upload-btn');
-    if (uploadBtn && fileInput) {
-      fileInput.dataset.gpxPersonId = uploadBtn.dataset.gpxPersonId;
-      fileInput.value = '';
-      fileInput.click();
-      return;
-    }
-    const gpxOnlyBtn = e.target.closest('.map-gpx-only-btn');
-    if (gpxOnlyBtn) {
-      const personId = gpxOnlyBtn.dataset.gpxPersonId;
-      if (_gpxOnlyPersons.has(personId)) _gpxOnlyPersons.delete(personId);
-      else _gpxOnlyPersons.add(personId);
-      _renderGpxList();
-      _renderMapLayers();
-      return;
-    }
-    const removeBtn = e.target.closest('.map-gpx-remove-btn');
-    if (removeBtn) {
-      const personId = removeBtn.dataset.gpxPersonId;
-      _setGpxTrack(personId, null);
-      _gpxOnlyPersons.delete(personId);
-      _renderGpxList();
-      _renderMapLayers();
-    }
-  });
-
-  fileInput?.addEventListener('change', async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const personId = fileInput.dataset.gpxPersonId;
-    const track    = await parseGpx(file);
-    if (!track) { window.alert('Could not parse GPX file — no track points found.'); return; }
-    _setGpxTrack(personId, track);
-    scheduleAutoSave();
-    _renderGpxList();
-    _renderMapLayers();
-  });
-}
-
-function _setGpxTrack(personId, track) {
-  const mode = state.planner.mode || 'personal';
-  if (mode === 'personal') {
-    if (personId === '__me__') {
-      state.planner.personal.gpxTrack = track;
-    } else {
-      const a = (state.planner.personal?.tripAssignments || []).find((x) => x.memberId === personId);
-      if (a) { a.gpxTrack = track; return; }
-      const lc = (state.planner.personal?.localCompanions || []).find((x) => x.id === personId);
-      if (lc) lc.gpxTrack = track;
-    }
-  } else {
-    const a = (state.planner.org?.teamAssignments || []).find((x) => x.memberId === personId);
-    if (a) a.gpxTrack = track;
-  }
-}
+// Extracted to ./modules/plannerMap.js (initMap / renderMapTab / wireMapPanel).
 
 const TAB_EXTRA_RENDERS = {
-  sponsor:   () => renderSponsorBudgetBreakdown(),
-  personal:  () => renderPersonalBudgetBreakdown(),
-  notes:     () => renderNotesTab(),
-  tickets:   () => renderTicketsTab(),
+  checklists: () => renderChecklistsTab(),
+  sponsor: () => renderSponsorBudgetBreakdown(),
+  personal: () => renderPersonalBudgetBreakdown(),
+  notes: () => {
+    renderNotesTab();
+    renderPersonalNotes(); // trip notes now live on the Notes page alongside session notes
+  },
+  tickets: () => renderTicketsTab(),
   companions: () => renderCompanionsTab(),
-  budget:    () => renderBudgetTab(),
-  map:       () => renderMapTab(),
+  budget: () => renderBudgetTab(),
+  documents: () => renderDocumentsTab(),
+  split: () => renderSplitTab(),
+  map: () => renderMapTab(),
+  weather: () => renderWeatherTab(),
+  schedule: () => renderScheduleTab(),
   itinerary: () => renderPersonalItineraryTab(),
-  summary:   () => renderSummaryTab(),
-  settings:  () => renderSettingsTab(),
+  summary: () => renderSummaryTab(),
+  settings: () => renderSettingsTab(),
 };
 
 function wireToolbar() {
@@ -10060,16 +4067,41 @@ function wireToolbar() {
   // Export / import / save-to-file
   document.getElementById('plannerExportBtn')?.addEventListener('click', handleExport);
 
-  const importBtn   = document.getElementById('plannerImportBtn');
+  // Calendar export (whole-trip .ics) — button opens the include-toggles modal.
+  document
+    .getElementById('plannerCalExportBtn')
+    ?.addEventListener('click', openCalendarExportModal);
+  document.getElementById('calExportDownload')?.addEventListener('click', downloadTripIcs);
+  document.getElementById('calSubCreate')?.addEventListener('click', createFeedToken);
+  document.getElementById('calSubCopy')?.addEventListener('click', copyFeedUrl);
+  // Delegated: the revoke buttons are rebuilt every time the list renders.
+  document.getElementById('calSubList')?.addEventListener('click', (e) => {
+    const id = e.target.closest('[data-revoke-feed]')?.dataset.revokeFeed;
+    if (id) void revokeFeedToken(id);
+  });
+  // Read-only URL: focusing it selects the whole link so it's easy to copy by hand.
+  document.getElementById('calSubUrl')?.addEventListener('focus', (e) => e.target.select());
+  const calExportModal = document.getElementById('calendarExportModal');
+  document
+    .getElementById('calExportClose')
+    ?.addEventListener('click', () => hideModal('calendarExportModal'));
+  calExportModal?.addEventListener('click', (e) => {
+    if (e.target === calExportModal) hideModal('calendarExportModal');
+  });
+
+  const importBtn = document.getElementById('plannerImportBtn');
   const importInput = document.getElementById('plannerImportInput');
   importBtn?.addEventListener('click', () => importInput?.click());
   importInput?.addEventListener('change', (e) => {
     const file = e.target.files?.[0];
-    if (file) { handleImport(file); e.target.value = ''; }
+    if (file) {
+      handleImport(file);
+      e.target.value = '';
+    }
   });
 
   document.getElementById('plannerSaveFileBtn')?.addEventListener('click', handleSaveToFile);
-  // New planner / manage event wiring is in wireCreatePlannerModal / wireEventAssocModal
+  // New planner wiring is in wireCreatePlannerModal; disassociate is in wireManageEventBtn
 
   // Recalculate tab overflow whenever the tab bar container is resized
   const tabBarMain = document.getElementById('tabBarMain');
@@ -10081,17 +4113,35 @@ function wireToolbar() {
 // ── Sidebar navigation ────────────────────────────────────────────────────────
 
 const SIDEBAR_GROUPS = [
-  { label: 'Plan',      tabs: ['personal', 'itinerary', 'map'] },
-  { label: 'Org',       tabs: ['sponsor', 'team', 'companions'] },
-  { label: 'Admin',     tabs: ['tasks', 'contacts', 'budget', 'receipts', 'tickets', 'documents'] },
+  { label: 'Plan', tabs: ['personal', 'schedule', 'itinerary', 'map', 'weather'] },
+  { label: 'Org', tabs: ['sponsor', 'team', 'companions'] },
+  {
+    label: 'Admin',
+    tabs: [
+      'tasks',
+      'checklists',
+      'contacts',
+      'budget',
+      'split',
+      'receipts',
+      'tickets',
+      'documents',
+    ],
+  },
   { label: 'Reference', tabs: ['notes', 'summary'] },
-  { label: '',          tabs: ['settings'] },
+  { label: '', tabs: ['settings'] },
 ];
+
+function navMeta(tab) {
+  return {
+    label: TAB_LABELS[tab] || tab,
+  };
+}
 
 function renderSidebar() {
   const nav = document.getElementById('sidebarNav');
   if (!nav) return;
-  const mode    = state.planner?.mode || 'personal';
+  const mode = state.planner?.mode || 'personal';
   const visible = getVisibleTabs(mode);
 
   nav.innerHTML = SIDEBAR_GROUPS.map(({ label, tabs }) => {
@@ -10099,13 +4149,19 @@ function renderSidebar() {
     if (!rows.length) return '';
     return `<div class="sidebar-group">
       ${label ? `<span class="sidebar-group-label">${esc(label)}</span>` : ''}
-      ${rows.map((tab) => `
+      ${rows
+        .map(
+          (tab) => `
         <button type="button" data-tab="${esc(tab)}" class="sidebar-tab-btn">
-          <i class="${esc(TAB_ICONS[tab] || 'fas fa-circle')} fa-fw sidebar-item-icon" aria-hidden="true"></i>
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">${esc(TAB_CODES[tab] || '??')}</span>
           <span class="sidebar-label">${esc(TAB_LABELS[tab] || tab)}</span>
-        </button>`).join('')}
+        </button>`,
+        )
+        .join('')}
     </div>`;
-  }).filter(Boolean).join('');
+  })
+    .filter(Boolean)
+    .join('');
 
   // Sync active state on freshly rendered buttons
   nav.querySelectorAll('[data-tab]').forEach((btn) => {
@@ -10113,34 +4169,30 @@ function renderSidebar() {
   });
 }
 
-function renderSidebarBrand() {
-  const nameEl  = document.getElementById('sidebarEventName');
-  if (!nameEl) return;
-  const title = scheduleMetaTitle() || state.planner?._displayName || plannerDisplayName(state.planner, state.plannerKey) || 'Trip Notebook';
-  nameEl.textContent = title;
-}
-
 function _syncSidebarDirty(flag) {
-  const icon  = document.getElementById('sidebarDirtyIcon');
+  const icon = document.getElementById('sidebarDirtyIcon');
   const label = document.getElementById('sidebarDirtyText');
   if (!icon || !label) return;
-  icon.className = `fas fa-circle text-[0.45rem] ${flag ? 'text-amber-400' : 'text-emerald-400'}`;
+  // The dot is drawn in CSS; only its state changes here. Saved/unsaved is real
+  // state, so it is one of the few places colour is allowed to carry meaning.
+  icon.className = `sidebar-dirty-dot${flag ? ' is-dirty' : ''}`;
   label.textContent = flag ? 'Unsaved' : 'Saved';
 }
 
-let _sidebarCollapsed = localStorage.getItem('plannerSidebarCollapsed') === '1';
+let _sidebarCollapsed = readText(STORAGE_KEYS.sidebarCollapsed) === '1';
 
 function applySidebarCollapse() {
   const sidebar = document.getElementById('plannerSidebar');
   if (!sidebar) return;
   sidebar.classList.toggle('sidebar-collapsed', _sidebarCollapsed);
+  // A drawn chevron, not an icon-font glyph.
   const icon = document.getElementById('sidebarToggleIcon');
-  if (icon) icon.className = `fas ${_sidebarCollapsed ? 'fa-angles-right' : 'fa-angles-left'}`;
+  if (icon) icon.textContent = _sidebarCollapsed ? '\u00bb' : '\u00ab';
 }
 
 function toggleSidebar() {
   _sidebarCollapsed = !_sidebarCollapsed;
-  localStorage.setItem('plannerSidebarCollapsed', _sidebarCollapsed ? '1' : '0');
+  writeText(STORAGE_KEYS.sidebarCollapsed, _sidebarCollapsed ? '1' : '0');
   applySidebarCollapse();
 }
 
@@ -10165,110 +4217,65 @@ function wireSidebar() {
 // ── Mobile tab navigation ─────────────────────────────────────────────────────
 
 function renderMobileTabNav() {
-  const icon  = document.getElementById('mobileTabIcon');
   const label = document.getElementById('mobileTabLabel');
-  if (icon)  icon.className    = `${TAB_ICONS[state.activeTab] || 'fas fa-circle'} text-xs flex-shrink-0`;
   if (label) label.textContent = TAB_LABELS[state.activeTab] || state.activeTab;
   renderMobileBottomBar();
 }
-
-const BOTTOM_BAR_SIZE = 4;
 
 function renderMobileBottomBar() {
   const bar = document.getElementById('mobileBottomBar');
   if (!bar) return;
 
-  const mode    = state.planner?.mode || 'personal';
+  const mode = state.planner?.mode || 'personal';
   const allTabs = [...getVisibleTabsOrdered(mode), 'settings'];
-  const barTabs = allTabs.slice(0, BOTTOM_BAR_SIZE);
-  const hasMore = allTabs.length > BOTTOM_BAR_SIZE;
-  const activeInBar = barTabs.includes(state.activeTab);
+  const primary = bottomBarPrimary(mode, allTabs);
 
-  bar.innerHTML = [
-    ...barTabs.map((tab) => {
-      const active = tab === state.activeTab;
-      return `<button type="button" class="mobile-bottom-tab${active ? ' is-active' : ''}"
-        data-bottom-tab="${esc(tab)}" aria-label="${esc(TAB_LABELS[tab] || tab)}" aria-selected="${active}">
-        <i class="${TAB_ICONS[tab] || 'fas fa-circle'} mobile-bottom-tab-icon" aria-hidden="true"></i>
-        <span class="mobile-bottom-tab-label">${esc(TAB_LABELS[tab] || tab)}</span>
-      </button>`;
-    }),
-    hasMore
-      ? `<button type="button" class="mobile-bottom-tab${!activeInBar ? ' is-active' : ''}"
-           id="mobileBottomBarMore" aria-label="More">
-           <i class="fas fa-ellipsis mobile-bottom-tab-icon" aria-hidden="true"></i>
-           <span class="mobile-bottom-tab-label">More</span>
-         </button>`
-      : '',
-  ].join('');
+  bar.innerHTML = bottomBarHtml({ primary, activeTab: state.activeTab, meta: navMeta });
 
-  bar.querySelectorAll('[data-bottom-tab]').forEach((btn) => {
+  bar.querySelectorAll('[data-nav-tab]').forEach((btn) => {
     btn.addEventListener('click', () => {
-      const tab = btn.dataset.bottomTab;
+      const tab = btn.dataset.navTab;
       setActiveTab(tab);
       TAB_EXTRA_RENDERS[tab]?.();
     });
   });
-  document.getElementById('mobileBottomBarMore')?.addEventListener('click', openMobileTabSheet);
+  bar.querySelector('[data-nav-more]')?.addEventListener('click', openMobileTabSheet);
 }
 
 function openMobileTabSheet() {
   const sheet = document.getElementById('mobileTabSheet');
-  const list  = document.getElementById('mobileTabSheetList');
+  const list = document.getElementById('mobileTabSheetList');
   if (!sheet || !list) return;
 
   const mode = state.planner?.mode || 'personal';
-  const tabs = [...getVisibleTabsOrdered(mode), 'settings'];
+  const allTabs = [...getVisibleTabsOrdered(mode), 'settings'];
+  const primary = bottomBarPrimary(mode, allTabs);
+  const visible = new Set(allTabs);
+  const groups = SIDEBAR_GROUPS.map((g) => ({
+    label: g.label,
+    tabs: g.tabs.filter((t) => visible.has(t)),
+  }));
+  const footer = [
+    { href: './index.html', label: 'Schedule' },
+    ...(isLocalhost() ? [{ href: './editor.html', label: 'Dataset Editor' }] : []),
+  ];
 
-  const TAB_BADGE_COLORS = {
-    personal: '#007AFF', team: '#34C759', sponsor: '#007AFF',
-    tasks: '#FF9500', contacts: '#34C759', notes: '#FFD60A',
-    receipts: '#FF6B35', tickets: '#AF52DE', companions: '#32ADE6',
-    budget: '#34C759', map: '#32ADE6', itinerary: '#FF3B30',
-    documents: '#007AFF', summary: '#8E8E93', settings: '#8E8E93',
-  };
-
-  const tabRow = (tab) => {
-    const active = tab === state.activeTab;
-    const color  = TAB_BADGE_COLORS[tab] || '#8E8E93';
-    return `<button type="button" data-mobile-tab="${esc(tab)}"
-      class="planner-action-row${active ? ' bg-blue-50/60' : ''}">
-      <div class="tab-icon-badge flex-shrink-0" style="background:${color}">
-        <i class="${TAB_ICONS[tab] || 'fas fa-circle'} text-white text-[0.65rem]"></i>
-      </div>
-      <span class="flex-1 text-[0.9375rem] ${active ? 'text-blue-700' : 'text-gray-800'}">${esc(TAB_LABELS[tab] || tab)}</span>
-      ${active ? '<i class="fas fa-check text-blue-500 text-sm"></i>' : '<i class="fas fa-chevron-right text-gray-300 text-xs"></i>'}
-    </button>`;
-  };
-
-  const navRow = (href, icon, label, color) =>
-    `<a href="${href}" class="planner-action-row">
-      <div class="tab-icon-badge flex-shrink-0" style="background:${color}">
-        <i class="${icon} text-white text-[0.65rem]"></i>
-      </div>
-      <span class="flex-1 text-[0.9375rem] text-gray-800">${label}</span>
-      <i class="fas fa-arrow-up-right-from-square text-gray-300 text-xs"></i>
-    </a>`;
-
-  const rows = tabs.map((tab, i) =>
-    (i > 0 ? '<div class="planner-action-divider"></div>' : '') + tabRow(tab)
-  ).join('');
-
-  list.innerHTML = `<div class="border-t border-gray-100">${rows}</div>`
-  + `<div class="border-t border-gray-100 mt-2">
-      ${navRow('./index.html', 'fas fa-calendar-alt', 'Schedule', '#FF2D55')}
-      ${isLocalhost() ? '<div class="planner-action-divider"></div>' + navRow('./editor.html', 'fas fa-pen-ruler', 'Dataset Editor', '#5856D6') : ''}
-    </div>`;
+  list.innerHTML = moreSheetHtml({
+    groups,
+    primary,
+    activeTab: state.activeTab,
+    meta: navMeta,
+    footer,
+  });
+  // Row clicks are handled by the delegated listener in wireMobileTabNav().
 
   sheet.classList.remove('hidden');
-  document.getElementById('mobileTabMenuBtn')?.setAttribute('aria-expanded', 'true');
   document.body.style.overflow = 'hidden';
 }
 
 function closeMobileTabSheet() {
   const sheet = document.getElementById('mobileTabSheet');
   if (sheet) sheet.classList.add('hidden');
-  document.getElementById('mobileTabMenuBtn')?.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
 }
 
@@ -10290,11 +4297,24 @@ function wirePlannerActionsSheet() {
   }
 
   document.getElementById('plannerActionsBtn')?.addEventListener('click', open);
-  sheet.addEventListener('click', (e) => { if (e.target === sheet) close(); });
+  document.getElementById('plannerActionsSheetClose')?.addEventListener('click', close);
+  sheet.addEventListener('click', (e) => {
+    if (e.target === sheet) close();
+  });
 
   document.getElementById('plannerActionsNew')?.addEventListener('click', () => {
     close();
     openCreatePlannerModal();
+  });
+  // Each row forwards to the button that owns the behaviour, so the menu adds
+  // no second implementation of anything.
+  document.getElementById('plannerActionsSave')?.addEventListener('click', () => {
+    close();
+    document.getElementById('plannerSaveFileBtn')?.click();
+  });
+  document.getElementById('plannerActionsCalendar')?.addEventListener('click', () => {
+    close();
+    document.getElementById('plannerCalExportBtn')?.click();
   });
   document.getElementById('plannerActionsBackup')?.addEventListener('click', () => {
     close();
@@ -10308,7 +4328,7 @@ function wirePlannerActionsSheet() {
     close();
     // Show native delete confirmation sheet (bypasses window.confirm on mobile)
     const deleteSheet = document.getElementById('plannerDeleteSheet');
-    const nameEl      = document.getElementById('plannerDeleteSheetName');
+    const nameEl = document.getElementById('plannerDeleteSheetName');
     const name = state.planner?._displayName || state.plannerKey || 'this planner';
     if (nameEl) nameEl.textContent = name;
     if (deleteSheet) {
@@ -10324,7 +4344,10 @@ function wirePlannerActionsSheet() {
     document.body.style.overflow = '';
   });
   deleteSheet?.addEventListener('click', (e) => {
-    if (e.target === deleteSheet) { deleteSheet.classList.add('hidden'); document.body.style.overflow = ''; }
+    if (e.target === deleteSheet) {
+      deleteSheet.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
   });
   document.getElementById('plannerDeleteSheetConfirm')?.addEventListener('click', async () => {
     deleteSheet?.classList.add('hidden');
@@ -10339,45 +4362,48 @@ function wireMobileTabNav() {
   document.getElementById('mobileTabSheetClose')?.addEventListener('click', closeMobileTabSheet);
 
   document.getElementById('mobileTabSheet')?.addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) { closeMobileTabSheet(); return; }
-    const btn = e.target.closest('[data-mobile-tab]');
+    if (e.target === e.currentTarget) {
+      closeMobileTabSheet();
+      return;
+    }
+    const btn = e.target.closest('[data-nav-tab]');
     if (!btn) return;
-    const tab = btn.dataset.mobileTab;
+    const tab = btn.dataset.navTab;
     setActiveTab(tab);
-    const extra = TAB_EXTRA_RENDERS[tab];
-    if (extra) extra();
-    renderMobileTabNav();
+    TAB_EXTRA_RENDERS[tab]?.();
     closeMobileTabSheet();
   });
 }
 
 // ── Collapsible sections ─────────────────────────────────────────────────────
 
-const _COLLAPSE_KEY = 'plannerSectionCollapse';
+const _COLLAPSE_KEY = STORAGE_KEYS.sectionCollapse;
 
 function _getCollapseState() {
-  try { return JSON.parse(localStorage.getItem(_COLLAPSE_KEY) || '{}'); } catch { return {}; }
+  return readJson(_COLLAPSE_KEY, {});
 }
 
 function _saveCollapseState(state_) {
-  localStorage.setItem(_COLLAPSE_KEY, JSON.stringify(state_));
+  writeJson(_COLLAPSE_KEY, state_);
 }
 
 function initCollapsibleSections() {
   const collapsed = _getCollapseState();
   document.querySelectorAll('[data-collapse]').forEach((section) => {
-    const key  = section.dataset.collapse;
+    const key = section.dataset.collapse;
     const body = section.querySelector(`[data-collapse-body="${key}"]`);
-    const h3   = section.querySelector('h3');
+    const h3 = section.querySelector('h3');
     if (!body || !h3) return;
 
-    // Inject chevron before h3 text without removing other h3 children
-    const chevron = document.createElement('i');
-    chevron.className = 'fas fa-chevron-down section-chevron text-gray-400 text-[0.55rem] mr-1.5 flex-shrink-0 transition-transform duration-200';
+    // A drawn caret, prepended to the heading. It used to be an empty Font
+    // Awesome <i>: invisible, but still a flex sibling — which is why every
+    // collapsible heading sat pushed to the far end of its own rule.
+    const chevron = document.createElement('span');
+    chevron.className = 'section-chevron';
+    chevron.setAttribute('aria-hidden', 'true');
+    chevron.textContent = '\u25be';
     h3.prepend(chevron);
     h3.style.cursor = 'pointer';
-    h3.style.display = 'flex';
-    h3.style.alignItems = 'center';
     h3.title = 'Click to collapse';
 
     const apply = (isCollapsed) => {
@@ -10391,7 +4417,8 @@ function initCollapsibleSections() {
     h3.addEventListener('click', () => {
       const cs = _getCollapseState();
       const next = !cs[key];
-      if (next) cs[key] = true; else delete cs[key];
+      if (next) cs[key] = true;
+      else delete cs[key];
       _saveCollapseState(cs);
       apply(next);
     });
@@ -10400,160 +4427,475 @@ function initCollapsibleSections() {
 
 // ── Conflict detection ────────────────────────────────────────────────────────
 
-function detectPersonalConflicts() {
-  const personal = state.planner?.personal;
-  if (!personal) return [];
-  const conflicts = [];
-
-  const outLegs = [...(personal.outboundLegs || [])].filter((l) => l.date).sort((a, b) => (a.date > b.date ? 1 : -1));
-  const retLegs = [...(personal.returnLegs || [])].filter((l) => l.date).sort((a, b) => (a.date > b.date ? 1 : -1));
-
-  if (outLegs.length && retLegs.length) {
-    const lastOutDate  = outLegs[outLegs.length - 1].arriveDate || outLegs[outLegs.length - 1].date;
-    const firstRetDate = retLegs[0].date;
-    if (lastOutDate && firstRetDate && firstRetDate < lastOutDate) {
-      conflicts.push({ sev: 'error', msg: `Return travel (${firstRetDate}) is before outbound arrives (${lastOutDate})` });
-    }
-  }
-
-  const accomsRaw = (personal.accommodations || []);
-  const accomsResolved = accomsRaw.map((a) => {
-    const meStay = (a.assignments || []).find((s) => s.memberId === '__me__');
-    const checkIn  = (meStay?.checkIn  || a.checkIn)  || '';
-    const checkOut = (meStay?.checkOut || a.checkOut) || '';
-    return { a, checkIn, checkOut };
-  }).filter(({ checkIn, checkOut }) => checkIn && checkOut && checkIn < checkOut);
-
-  accomsResolved.forEach(({ a, checkIn, checkOut }) => {
-    if (checkIn >= checkOut) {
-      conflicts.push({ sev: 'error', msg: `"${a.name || 'Accommodation'}" check-out (${checkOut}) is not after check-in (${checkIn})` });
-    }
-  });
-
-  if (accomsResolved.length && outLegs.length && retLegs.length) {
-    const covered = new Set();
-    accomsResolved.forEach(({ checkIn, checkOut }) => {
-      let d = new Date(checkIn + 'T12:00:00');
-      const end = new Date(checkOut + 'T12:00:00');
-      while (d < end) { covered.add(localDateStr(d)); d.setDate(d.getDate() + 1); }
-    });
-    const firstArrival = outLegs[0].arriveDate || outLegs[0].date;
-    const lastDeparture = retLegs[retLegs.length - 1].date;
-    if (firstArrival && lastDeparture && firstArrival < lastDeparture) {
-      let d = new Date(firstArrival + 'T12:00:00');
-      const end = new Date(lastDeparture + 'T12:00:00');
-      const gaps = [];
-      while (d < end) { const ds = localDateStr(d); if (!covered.has(ds)) gaps.push(ds); d.setDate(d.getDate() + 1); }
-      if (gaps.length) {
-        const sample = gaps.slice(0, 2).join(', ') + (gaps.length > 2 ? ` +${gaps.length - 2} more` : '');
-        conflicts.push({ sev: 'warning', msg: `${gaps.length} night${gaps.length > 1 ? 's' : ''} without accommodation: ${sample}` });
-      }
-    }
-  }
-
-  return conflicts;
-}
-
 function renderPersonalConflicts() {
   const banner = document.getElementById('personalConflictBanner');
   if (!banner) return;
-  const conflicts = detectPersonalConflicts();
-  if (!conflicts.length) { banner.classList.add('hidden'); return; }
+  const personal = state.planner?.personal;
+  const conflicts = detectPersonalConflicts(personal);
+  if (!conflicts.length) {
+    banner.classList.add('hidden');
+    return;
+  }
+  const gaps = accommodationGaps(personal);
 
-  const icons = { error: 'fa-circle-exclamation text-red-500', warning: 'fa-triangle-exclamation text-amber-500' };
-  banner.innerHTML = conflicts.map((c) =>
-    `<div class="flex items-start gap-2 text-xs py-1">
+  const icons = {
+    error: 'fa-circle-exclamation text-red-500',
+    warning: 'fa-triangle-exclamation text-amber-500',
+  };
+  banner.innerHTML = conflicts
+    .map((c) => {
+      // The accommodation-gap warning gets an inline "Add accommodation" CTA that
+      // seeds a stay covering the first gap run (reuses the agenda gap handler).
+      const cta =
+        /without accommodation/.test(c.msg) && gaps.length
+          ? `<button type="button" class="agenda-add-accom ml-1 inline-flex items-center h-6 px-2 rounded border pl-rule-warn pl-warn text-[0.7rem] font-medium transition-colors align-middle"
+          data-gap-checkin="${esc(gaps[0].date)}" data-gap-checkout="${esc(gaps[0].checkOut)}">
+          Add accommodation</button>`
+          : '';
+      return `<div class="flex items-start gap-2 text-xs py-1">
       <i class="fas ${icons[c.sev]} flex-shrink-0 mt-0.5"></i>
-      <span class="${c.sev === 'error' ? 'text-red-700' : 'text-amber-700'}">${esc(c.msg)}</span>
-    </div>`
-  ).join('');
+      <span class="${c.sev === 'error' ? 'pl-req' : 'pl-warn'}">${esc(c.msg)}${cta}</span>
+    </div>`;
+    })
+    .join('');
   banner.classList.remove('hidden');
 }
 
 // ── Mobile itinerary tab ──────────────────────────────────────────────────────
 
-function buildDayItinerary() {
-  const personal = state.planner?.personal;
-  if (!personal) return [];
+// Day-by-day agenda, shared by the dedicated Itinerary tab and the mobile
+// Timeline slot in the Personal overview (the horizontal Gantt is desktop-only —
+// a sideways-scrolling grid is out of place on a phone). Pure string builder.
+function dayAgendaHtml(precomputed) {
+  const days =
+    precomputed ||
+    buildDayItinerary({
+      personal: state.planner?.personal,
+      allSessions: state.allSessions,
+      timezone: getTimezone(),
+      fmtTime,
+      eventMeta: state.eventMeta,
+      events: state.events,
+      isConference: state.planner?.isConference !== false,
+    });
 
-  const days = {};
-  const addDay = (date, event) => {
-    if (!date) return;
-    (days[date] ??= []).push(event);
-  };
+  if (!days.length) {
+    return `
+      <div class="jrn-empty">
+        <p class="jrn-empty-t">Your journey starts here</p>
+        <p class="jrn-empty-s">Add travel, a place to stay, or a plan of your own to build the day-by-day line.</p>
+        <button type="button" class="agenda-add-item jrn-empty-btn">
+          Add the first thing
+        </button>
+      </div>`;
+  }
 
-  // Travel legs
-  [...(personal.outboundLegs || []), ...(personal.returnLegs || [])].forEach((l) => {
-    const icon = TRAVEL_MODES[l.mode]?.icon || 'fas fa-route';
-    const dir  = (personal.outboundLegs || []).includes(l) ? 'Outbound' : 'Return';
-    if (l.date) addDay(l.date, { time: l.departTime || '', icon, label: `${dir}: ${l.from || '?'} → ${l.to || '?'}`, sub: l.confirmation ? `Ref: ${l.confirmation}` : (l.status || ''), type: 'travel' });
-    if (l.arriveDate && l.arriveDate !== l.date) addDay(l.arriveDate, { time: l.arriveTime || '', icon: 'fas fa-location-dot', label: `Arrives: ${l.to || '?'}`, sub: '', type: 'travel' });
-  });
+  const todayStr = localDateStr(new Date());
 
-  // Accommodation
-  (personal.accommodations || []).forEach((a) => {
-    const meStay  = (a.assignments || []).find((s) => s.memberId === '__me__');
-    const checkIn  = meStay?.checkIn  || a.checkIn;
-    const checkOut = meStay?.checkOut || a.checkOut;
-    if (checkIn)  addDay(checkIn,  { time: '', sortTime: '23:59', icon: 'fas fa-bed',              label: `Check-in: ${a.name || 'Accommodation'}`,  sub: a.address || '', type: 'accom' });
-    if (checkOut) addDay(checkOut, { time: '', sortTime: '00:00', icon: 'fas fa-suitcase-rolling', label: `Check-out: ${a.name || 'Accommodation'}`, sub: '',              type: 'accom' });
-  });
+  // Each day is a threaded timeline of moments — the thread is the point, and
+  // it survives the rebrand. What changed is what it is drawn WITH: a hairline
+  // spine and square nodes instead of a gradient rail and coloured discs.
+  //
+  // Nodes carry ONE distinction, because only one is worth carrying: a filled
+  // node is a moment you chose (an itinerary item, an event you host); a hollow
+  // node is scaffold the planner derived for you (a flight, a stay, a session
+  // you tracked). The five type-hues that used to sit on top of that said
+  // nothing the row's own text does not already say.
+  return days
+    .map((day) => {
+      const d = new Date(day.date + 'T00:00:00');
+      const validDate = !Number.isNaN(d.getTime());
+      const eyebrow = validDate ? d.toLocaleDateString(undefined, { weekday: 'short' }) : '';
+      const datePart = validDate
+        ? d.toLocaleDateString(undefined, { day: 'numeric', month: 'short' })
+        : day.label;
+      const isToday = day.date === todayStr;
+      const planCount = day.events.filter((ev) => ev.type === 'item').length;
 
-  // Tracked sessions
-  (state.planner.personal?.trackedSessions || []).forEach((ts) => {
-    const sess = state.allSessions.find((s) => s.id === ts.sessionId);
-    if (!sess?.startTime) return;
-    const date = new Date(sess.startTime).toLocaleDateString('en-CA', { timeZone: getTimezone() });
-    addDay(date, { time: fmtTime(sess.startTime), icon: 'fas fa-microphone-lines', label: sess.title, sub: sess.location || '', type: 'session' });
-  });
+      const body =
+        day.events.length === 0
+          ? `<button type="button" class="jrn-free agenda-day-add" data-agenda-day="${esc(day.date)}" aria-label="Plan something on ${esc(datePart)}">
+            <span class="jrn-free-dot" aria-hidden="true"></span>
+            <span class="min-w-0">
+              <span class="jrn-free-t block">Free day — plan something</span>
+              <span class="jrn-free-s block">A tour, a meal, or some well-earned downtime.</span>
+            </span>
+            <span class="jrn-free-go" aria-hidden="true">&rsaquo;</span>
+          </button>`
+          : `<div class="jrn-line">${day.events
+              .map((ev) => {
+                if (ev.type === 'gap') {
+                  return `
+          <div class="jrn-moment jrn-moment--gap">
+            <span class="jrn-time jrn-time--none">&mdash;</span>
+            <span class="jrn-node" aria-hidden="true"></span>
+            <div class="jrn-body">
+              <p class="jrn-title">No stay booked</p>
+              <p class="jrn-sub">Nowhere to sleep this night.</p>
+            </div>
+            <div class="jrn-acts">
+              <button type="button" class="agenda-add-accom jrn-act" data-gap-checkin="${esc(ev.checkIn)}" data-gap-checkout="${esc(ev.checkOut)}" aria-label="Add a stay this night">Add a stay</button>
+            </div>
+          </div>`;
+                }
+                const isItem = ev.type === 'item';
+                const isHosted = ev.type === 'hosted';
+                const avatars = isItem || isHosted ? personalAssigneeChips(ev.memberIds) : [];
+                const done = (isItem || isHosted) && ev.done;
+                // Every entry with a resolvable record is clickable → its read-only
+                // detail view. The data-view-* mapping is shared with the calendar
+                // view via viewAttrsFor (plannerCalendarView.js).
+                const clickable = isClickableEvent(ev);
+                const viewAttrs = viewAttrsFor(ev, day.date);
+                return `
+          <div class="jrn-moment jrn-moment--${esc(ev.type)}${done ? ' jrn-moment--done' : ''}${clickable ? ' jrn-moment--view' : ''}"${viewAttrs}>
+            <span class="jrn-time${ev.time ? '' : ' jrn-time--none'}">${ev.time ? esc(ev.time) : '·'}</span>
+            <span class="jrn-node jrn-node--${esc(ev.type)}" aria-hidden="true"></span>
+            <div class="jrn-body">
+              <p class="jrn-title">${esc(ev.label)}</p>
+              ${ev.sub ? `<p class="jrn-sub truncate">${esc(ev.sub)}</p>` : ''}
+              ${avatars.length ? `<div class="pl-avatars">${avatars.map((a) => `<span class="pl-avatar" title="${esc(a.name)}">${esc(a.initial)}</span>`).join('')}</div>` : ''}
+            </div>
+            ${
+              isItem
+                ? `<div class="jrn-acts">
+              <button type="button" class="agenda-item-cal-btn jrn-act" data-agenda-item-id="${esc(ev.id)}" aria-label="Add ${esc(ev.label)} to a calendar">Calendar</button>
+            </div>`
+                : ev.type === 'travel' && ev.legId
+                  ? `<div class="jrn-acts">
+              <button type="button" class="agenda-leg-cal-btn jrn-act" data-leg-id="${esc(ev.legId)}" data-leg-dir="${esc(ev.legDir)}" aria-label="Add ${esc(ev.label)} to a calendar">Calendar</button>
+            </div>`
+                  : ''
+            }
+          </div>`;
+              })
+              .join('')}</div>`;
 
-  // Personal itinerary items
-  (personal.itinerary || []).forEach((item) => {
-    if (!item.date) return;
-    addDay(item.date, { time: item.startTime || '', icon: 'fas fa-calendar-check', label: item.title || 'Event', sub: item.location || '', type: 'item' });
-  });
-
-  return Object.keys(days).sort().map((date) => ({
-    date,
-    label: new Date(date + 'T12:00:00').toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' }),
-    events: days[date].sort((a, b) => (a.sortTime || a.time || '99:99') < (b.sortTime || b.time || '99:99') ? -1 : 1),
-  }));
+      return `
+    <div class="itin-day jrn-day${isToday ? ' jrn-day--today' : ''}">
+      <div class="jrn-head">
+        <div class="jrn-head-l">
+          <span class="jrn-eyebrow">${esc(eyebrow)}</span>
+          <span class="jrn-date">${esc(datePart)}</span>
+          <span class="itin-wx" data-wx-day="${esc(day.date)}"></span>
+          ${planCount ? `<span class="jrn-count">${planCount} planned</span>` : ''}
+        </div>
+        <button type="button" class="agenda-day-add jrn-add" data-agenda-day="${esc(day.date)}" aria-label="Add itinerary item on ${esc(datePart)}">Add</button>
+      </div>
+      ${body}
+    </div>`;
+    })
+    .join('');
 }
 
 function renderPersonalItineraryTab() {
-  const panel = document.getElementById('itineraryDayList');
-  if (!panel) return;
-  const days = buildDayItinerary();
+  const days = buildDayItinerary({
+    personal: state.planner?.personal,
+    allSessions: state.allSessions,
+    timezone: getTimezone(),
+    fmtTime,
+    eventMeta: state.eventMeta,
+    events: state.events,
+    isConference: state.planner?.isConference !== false,
+  });
+  // The Journey Line self-renders its own empty state, so this surface always
+  // renders (hasItems defaults true). Weather chips only exist in list markup.
+  renderSurfaceView('itineraryDayList', 'itinerary', {
+    days,
+    listHtml: dayAgendaHtml(days),
+    calOpts: { todayStr: localDateStr(new Date()) },
+    onList: renderItineraryWeather,
+  });
+}
 
-  if (!days.length) {
-    panel.innerHTML = `
-      <div class="rounded-lg border border-dashed border-gray-200 bg-gray-50 px-4 py-12 text-center">
-        <i class="fas fa-calendar-days text-3xl text-gray-300 mb-3 block"></i>
-        <p class="text-sm font-medium text-gray-600">No itinerary yet</p>
-        <p class="text-xs text-gray-400 mt-1">Add travel legs and accommodation in the Personal tab to build your day-by-day view.</p>
-      </div>`;
+// ── Personal itinerary single-item editor ────────────────────────────────────
+// One focused modal per item (add or edit) with multi-person assignment — the
+// replacement for the old per-day list-manager. Wired in wireItineraryPanel().
+let _personalItinId = null;
+
+// The personal itinerary-item modal's static fields, resolved once (see personalAccomEls).
+let _personalItinEls = null;
+function personalItinEls() {
+  return (_personalItinEls ??= {
+    modal: document.getElementById('personalItineraryItemModal'),
+    modalTitle: document.getElementById('personalItinModalTitle'),
+    modalSubtitle: document.getElementById('personalItinModalSubtitle'),
+    title: document.getElementById('personalItinTitle'),
+    date: document.getElementById('personalItinDate'),
+    time: document.getElementById('personalItinTime'),
+    end: document.getElementById('personalItinEnd'),
+    tz: document.getElementById('personalItinTz'),
+    location: document.getElementById('personalItinLocation'),
+    coords: document.getElementById('personalItinCoords'),
+    notes: document.getElementById('personalItinNotes'),
+    done: document.getElementById('personalItinDone'),
+    delete: document.getElementById('personalItinDelete'),
+  });
+}
+
+// Fill the itinerary-item timezone picker: a "Trip timezone" default (inherits the
+// event's zone, or floating when none) plus the full IANA list. `selected` is the
+// item's stored override ('' = inherit).
+function populateItinTimezone(selected) {
+  const m = personalItinEls();
+  if (!m.tz) return;
+  const tripTz = getTimezone();
+  let zones = [];
+  try {
+    zones = Intl.supportedValuesOf('timeZone');
+  } catch {
+    zones = [];
+  }
+  if (!zones.length) {
+    // Minimal fallback for engines without supportedValuesOf.
+    zones = [tripTz, 'UTC', 'Europe/London', 'Europe/Amsterdam', 'America/New_York'].filter(
+      Boolean,
+    );
+  }
+  const defLabel = tripTz ? `Trip timezone (${tripTz})` : 'Trip timezone / floating';
+  m.tz.innerHTML =
+    `<option value="">${escapeHtml(defLabel)}</option>` +
+    zones.map((z) => `<option value="${escapeHtml(z)}">${escapeHtml(z)}</option>`).join('');
+  m.tz.value = selected || '';
+}
+
+function openPersonalItineraryItemModal(id = null, defaultDate = '') {
+  const m = personalItinEls();
+  if (!m.modal) return;
+  const personal = state.planner?.personal;
+  _personalItinId = id;
+  const item = id ? (personal?.itinerary || []).find((i) => i.id === id) : null;
+  const d = item?.date || defaultDate || '';
+
+  m.modalTitle.textContent = id ? 'Edit itinerary item' : 'Add itinerary item';
+  m.modalSubtitle.textContent = d
+    ? new Date(d + 'T00:00:00').toLocaleDateString(undefined, {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric',
+      })
+    : 'Pick a date below';
+
+  m.title.value = item?.title || '';
+  m.date.value = d;
+  m.time.value = item?.time || '';
+  if (m.end) m.end.value = item?.endTime || '';
+  populateItinTimezone(item?.timezone || '');
+  m.location.value = item?.location || '';
+  if (m.coords) m.coords.value = item?.coords || '';
+  m.notes.value = item?.notes || '';
+  m.done.checked = !!item?.done;
+
+  _renderPersonalItinAssignChips(item?.memberIds || []);
+  renderPersonalItinReceiptStatus(item);
+  m.delete.classList.toggle('hidden', !id);
+  showModal('personalItineraryItemModal', 'personalItinTitle');
+}
+
+// The Receipt block in the itinerary modal — uses the shared entity-receipt
+// mechanism. Cost moves to Receipts: when a receipt is linked, the item's actual
+// is taken from that receipt (see buildPersonalBudgetData). A brand-new (unsaved)
+// item must be saved first, so the receipt has an item to attach to.
+function renderPersonalItinReceiptStatus(item) {
+  renderEntityReceiptStatus(document.getElementById('personalItinReceiptStatus'), {
+    receipt: linkedReceipt(state.planner, item),
+    idPrefix: 'personalItin',
+    canLink: !!_personalItinId,
+    unsavedHint: 'Save this item first to move its cost to a receipt.',
+  });
+}
+
+// Create a receipt for the itinerary item and open it so cost is entered there (the
+// single home for money). Closes the itinerary modal to avoid modal stacking.
+function createReceiptForItinerary() {
+  const personal = state.planner?.personal;
+  const item = personal?.itinerary?.find((i) => i.id === _personalItinId);
+  if (!item) return;
+  const m = personalItinEls();
+  const receipt = createReceiptForEntity(state.planner, item, {
+    name: m.title.value.trim() || item.title || 'Itinerary item',
+    date: m.date.value || item.date || '',
+    currency: personal?.currency || 'AUD',
+    category: 'misc', // itinerary items land in Misc in the budget summary
+  });
+  scheduleAutoSave();
+  renderReceiptsTab();
+  renderPersonalBudgetBreakdown();
+  renderSummaryTab();
+  hideModal('personalItineraryItemModal');
+  openReceiptModal(receipt.id);
+}
+
+function _renderPersonalItinAssignChips(selectedIds) {
+  const wrap = document.getElementById('personalItinAssignChips');
+  if (!wrap) return;
+  const sel = new Set(selectedIds);
+  wrap.innerHTML = personalAssignablePeople()
+    .map((pp) => {
+      const initial = (pp.name.trim()[0] || '?').toUpperCase();
+      return `<button type="button" class="pl-chip" aria-pressed="${sel.has(pp.id)}" data-person-id="${esc(pp.id)}"><span class="pl-chip-av">${esc(initial)}</span>${esc(pp.name)}</button>`;
+    })
+    .join('');
+  _updatePersonalItinAssignHint();
+}
+
+function _updatePersonalItinAssignHint() {
+  const hint = document.getElementById('personalItinAssignHint');
+  if (!hint) return;
+  const n = document.querySelectorAll(
+    '#personalItinAssignChips .pl-chip[aria-pressed="true"]',
+  ).length;
+  hint.textContent = n ? '' : 'No one picked — shared with everyone';
+}
+
+function savePersonalItineraryItem() {
+  const personal = state.planner?.personal;
+  if (!personal) return;
+  const m = personalItinEls();
+  const title = m.title.value.trim();
+  if (!title) {
+    m.title.focus();
+    return;
+  }
+  const date = m.date.value || '';
+  if (!date) {
+    m.date.focus();
     return;
   }
 
-  panel.innerHTML = days.map((day) => `
-    <div class="itin-day rounded-lg border border-gray-200 bg-white overflow-hidden">
-      <div class="px-4 py-3 bg-gray-50 border-b border-gray-100">
-        <p class="text-xs font-semibold text-gray-600 uppercase tracking-widest">${esc(day.label)}</p>
-      </div>
-      <div class="divide-y divide-gray-50">
-        ${day.events.map((ev) => `
-          <div class="flex items-start gap-3 px-4 py-3">
-            <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${ev.type === 'travel' ? 'bg-blue-50' : ev.type === 'accom' ? 'bg-emerald-50' : ev.type === 'session' ? 'bg-purple-50' : 'bg-gray-100'}">
-              <i class="${esc(ev.icon)} text-xs ${ev.type === 'travel' ? 'text-blue-500' : ev.type === 'accom' ? 'text-emerald-600' : ev.type === 'session' ? 'text-purple-500' : 'text-gray-500'}"></i>
-            </div>
-            <div class="flex-1 min-w-0 pt-0.5">
-              <p class="text-sm font-medium text-gray-800 leading-snug">${esc(ev.label)}</p>
-              ${ev.sub ? `<p class="text-xs text-gray-500 mt-0.5 truncate">${esc(ev.sub)}</p>` : ''}
-            </div>
-            ${ev.time ? `<span class="flex-shrink-0 text-xs text-gray-500 font-medium pt-0.5 tabular-nums">${esc(ev.time)}</span>` : ''}
-          </div>`).join('')}
-      </div>
-    </div>`).join('');
+  const memberIds = [
+    ...document.querySelectorAll('#personalItinAssignChips .pl-chip[aria-pressed="true"]'),
+  ].map((c) => c.dataset.personId);
+  const fields = {
+    title,
+    date,
+    time: m.time.value || '',
+    endTime: m.end?.value || '',
+    timezone: m.tz?.value || '',
+    location: m.location.value || '',
+    coords: m.coords?.value || '',
+    notes: m.notes.value || '',
+    done: m.done.checked,
+    memberIds,
+  };
+
+  personal.itinerary = personal.itinerary || [];
+  let saved;
+  if (_personalItinId) {
+    saved = personal.itinerary.find((i) => i.id === _personalItinId);
+    if (saved) Object.assign(saved, fields);
+  } else {
+    saved = makeItineraryItem(null, date);
+    Object.assign(saved, fields);
+    personal.itinerary.push(saved);
+  }
+  // Keep the linked receipt's name in sync with the item, so the rename flows through
+  // to every financial view of that receipt (the item is descriptive; the receipt is
+  // the money). The budget/summary already read the item's title directly.
+  if (saved?.receiptId) {
+    const receipt = (state.planner.receipts || []).find((r) => r.id === saved.receiptId);
+    if (receipt) receipt.name = title;
+  }
+  hideModal('personalItineraryItemModal');
+  _personalItinId = null;
+  _refreshPersonalItineraryViews();
+  scheduleAutoSave();
+}
+
+function deletePersonalItineraryItem(id) {
+  const personal = state.planner?.personal;
+  if (!personal) return;
+  const snapshot = (personal.itinerary || []).find((i) => i.id === id);
+  personal.itinerary = (personal.itinerary || []).filter((i) => i.id !== id);
+  hideModal('personalItineraryItemModal');
+  _personalItinId = null;
+  _refreshPersonalItineraryViews();
+  scheduleAutoSave();
+  if (snapshot)
+    showUndoToast(snapshot.title || 'Itinerary item', () => {
+      personal.itinerary = [...(personal.itinerary || []), snapshot];
+      _refreshPersonalItineraryViews();
+      scheduleAutoSave();
+    });
+}
+
+function _refreshPersonalItineraryViews() {
+  renderPersonalTimeline(); // Gantt + mobile overview agenda
+  renderPersonalItineraryTab(); // Itinerary tab
+  renderPersonalBudgetBreakdown();
+  renderReceiptsTab(); // a renamed item keeps its linked receipt's name in sync
+  if (state.activeTab === 'summary') renderSummaryTab();
+}
+
+function wirePersonalItineraryItemModal() {
+  const modal = document.getElementById('personalItineraryItemModal');
+  if (!modal) return;
+  const dismiss = () => {
+    hideModal('personalItineraryItemModal');
+    _personalItinId = null;
+  };
+  document.getElementById('personalItinModalClose')?.addEventListener('click', dismiss);
+  document.getElementById('personalItinSave')?.addEventListener('click', savePersonalItineraryItem);
+  document.getElementById('personalItinDelete')?.addEventListener('click', () => {
+    if (_personalItinId) deletePersonalItineraryItem(_personalItinId);
+  });
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      dismiss();
+      return;
+    }
+    // Receipt integration (create / view / unlink) — mirrors the travel-leg modal.
+    if (e.target.closest('#personalItinCreateReceiptBtn')) {
+      createReceiptForItinerary();
+      return;
+    }
+    if (e.target.closest('#personalItinViewReceiptBtn')) {
+      const item = state.planner?.personal?.itinerary?.find((i) => i.id === _personalItinId);
+      const rid = item?.receiptId;
+      dismiss();
+      setActiveTab('receipts');
+      if (rid)
+        setTimeout(() => {
+          const el = document.querySelector(`[data-receipt-id="${rid}"]`);
+          el?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 50);
+      return;
+    }
+    if (e.target.closest('#personalItinUnlinkReceiptBtn')) {
+      const item = state.planner?.personal?.itinerary?.find((i) => i.id === _personalItinId);
+      if (item) {
+        unlinkEntityReceipt(item);
+        scheduleAutoSave();
+        renderPersonalItinReceiptStatus(item);
+        renderPersonalBudgetBreakdown();
+        renderSummaryTab();
+      }
+      return;
+    }
+  });
+  modal.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') dismiss();
+  });
+  document.getElementById('personalItinAssignChips')?.addEventListener('click', (e) => {
+    const chip = e.target.closest('.pl-chip');
+    if (!chip) return;
+    chip.setAttribute(
+      'aria-pressed',
+      chip.getAttribute('aria-pressed') === 'true' ? 'false' : 'true',
+    );
+    _updatePersonalItinAssignHint();
+  });
+  // Keep the subtitle in step when the date is changed inside the editor.
+  document.getElementById('personalItinDate')?.addEventListener('change', (e) => {
+    const d = e.target.value;
+    document.getElementById('personalItinModalSubtitle').textContent = d
+      ? new Date(d + 'T00:00:00').toLocaleDateString(undefined, {
+          weekday: 'long',
+          month: 'long',
+          day: 'numeric',
+        })
+      : 'Pick a date below';
+  });
 }
 
 // ── Init ─────────────────────────────────────────────────────────────────────
@@ -10563,57 +4905,78 @@ function revealPage() {
 }
 
 function updateHeader() {
-  const meta  = state.eventMeta || {};
+  const meta = state.eventMeta || {};
   // Only consider the schedule "loaded" if the metadata has meaningful content.
   // state.eventFile can be set via backward-compat even when the file is a planner
   // (not a data/schedule file), leaving eventMeta empty after a failed fetch.
-  const metaTitle   = scheduleMetaTitle()
+  const metaTitle = scheduleMetaTitle();
   const hasSchedule = !!state.eventFile && !!metaTitle;
 
   const kicker = hasSchedule
     ? [meta.designation, meta.location].filter(Boolean).join(' · ')
     : 'Conference Planner';
-  const title  = hasSchedule
+  const title = hasSchedule
     ? metaTitle
-    : (state.planner?._displayName || plannerDisplayName(state.planner, state.plannerKey) || 'Trip Notebook');
+    : state.planner?._displayName ||
+      plannerDisplayName(state.planner, state.plannerKey) ||
+      'Trip Notebook';
+
+  document.title = `${title} - Trip Planner`;
 
   const kickerEl = document.getElementById('plannerHeaderKicker');
-  const eventEl  = document.getElementById('plannerHeaderEvent');
-  const nameEl   = document.getElementById('plannerEventName');
+  const eventEl = document.getElementById('plannerHeaderEvent');
+  const nameEl = document.getElementById('plannerEventName');
   if (kickerEl) kickerEl.textContent = kicker;
-  if (eventEl)  eventEl.textContent  = title;
+  if (eventEl) eventEl.textContent = title;
 
   // Sync sidebar brand
   const sidebarName = document.getElementById('sidebarEventName');
   if (sidebarName) sidebarName.textContent = title;
-  if (nameEl)   nameEl.textContent   = title;
+  if (nameEl) nameEl.textContent = title;
 
-  // Association indicator badge — includes an inline × to disassociate
-  const assocBadge = document.getElementById('plannerAssocBadge');
-  if (assocBadge) {
-    if (state.eventFile) {
-      assocBadge.innerHTML = `${escapeHtml(state.eventFile.replace('.json', ''))}<button id="plannerDisassocBtn" class="ml-1 opacity-50 hover:opacity-100 transition-opacity leading-none" title="Remove schedule association" aria-label="Remove schedule association"><i class="fas fa-xmark text-[0.5rem]"></i></button>`;
-      assocBadge.classList.remove('hidden');
-    } else {
-      assocBadge.innerHTML = '';
-      assocBadge.classList.add('hidden');
-    }
+  // Show "Save to file" whenever a server is hosting the app (same origin) or a
+  // remote endpoint is configured — i.e. any time saving to disk is possible.
+  // Only a static file:// launch has no server to save to.
+  const apiEndpoint = readText(STORAGE_KEYS.editorApiEndpoint) || '';
+  if (apiEndpoint || window.location.protocol !== 'file:') {
+    document.getElementById('plannerSaveFileBtn')?.classList.remove('hidden');
+    // The menu row is the only visible way in, so it follows the same condition.
+    document.getElementById('plannerActionsSave')?.classList.remove('hidden');
   }
 
-  // Show "Save to file" button if API is configured
-  const apiEndpoint = localStorage.getItem('editorApiEndpoint') || '';
-  if (apiEndpoint) document.getElementById('plannerSaveFileBtn')?.classList.remove('hidden');
-
-  // Sync schedule JSON path chip
+  // The linked schedules, named the way a person names them.
+  //
+  // This used to print `data/events/…/foo.json` — a path that means something
+  // only to whoever maintains the datasets. The row's real job is the unlink ×,
+  // so the row stays and wears the event's label instead. The planner's own
+  // file path survives on localhost only, where writing it is the point.
   const pathChip = document.getElementById('plannerPathChip');
   if (pathChip) {
-    const pathText = pathChip.querySelector('.toolbar-path-text');
-    if (state.eventFile) {
-      if (pathText) pathText.textContent = `data/${state.eventFile}`;
-      pathChip.classList.remove('hidden');
-    } else {
-      pathChip.classList.add('hidden');
+    const rowsEl = document.getElementById('plannerScheduleRows');
+    const files = state.planner?._eventFiles || [];
+    if (rowsEl) {
+      rowsEl.innerHTML = files
+        .map((f, i) => {
+          const ev = state.events.find((e) => e.file === f);
+          const label = ev?.label || f.replace(/^.*\//, '').replace(/\.json$/, '');
+          const primary =
+            i === 0 && files.length > 1 ? ' <span class="toolbar-path-primary">primary</span>' : '';
+          return `<div class="toolbar-path-row" data-path-row="schedule" title="Linked conference schedule">
+            <span class="toolbar-path-text" data-path="schedule">${escapeHtml(label)}${primary}</span>
+            <button type="button" class="toolbar-path-unlink" data-remove-event="${escapeHtml(f)}" title="Remove this schedule" aria-label="Remove ${escapeHtml(label)}">&times;</button>
+          </div>`;
+        })
+        .join('');
     }
+
+    const plannerRow = pathChip.querySelector('[data-path-row="planner"]');
+    const plannerText = pathChip.querySelector('[data-path="planner"]');
+    const key = state.plannerKey || '';
+    const plannerFile = key && isLocalhost() ? `planner/${plannerFilename(key)}` : '';
+    if (plannerText) plannerText.textContent = plannerFile;
+    plannerRow?.classList.toggle('hidden', !plannerFile);
+
+    pathChip.classList.toggle('hidden', !plannerFile && !files.length);
   }
 }
 
@@ -10629,8 +4992,8 @@ function applyScheduleGating() {
       if (!notesGate) {
         notesGate = document.createElement('div');
         notesGate.id = 'scheduleGateNotes';
-        notesGate.className = 'rounded-md border border-dashed border-gray-200 bg-gray-50 px-4 py-8 text-center text-sm text-gray-400';
-        notesGate.innerHTML = `<i class="fas fa-calendar-xmark block text-2xl mb-2 text-gray-300"></i>${msg}`;
+        notesGate.className = 'pln-gate';
+        notesGate.textContent = msg;
         notesPanel.prepend(notesGate);
       }
     } else {
@@ -10643,44 +5006,308 @@ function applyScheduleGating() {
     const el = document.getElementById(id);
     if (!el) return;
     el.disabled = !hasSchedule;
-    el.placeholder = hasSchedule ? (id.includes('sponsor') ? 'Search sessions…' : 'Search sessions…') : msg;
+    el.placeholder = hasSchedule
+      ? id.includes('sponsor')
+        ? 'Search sessions…'
+        : 'Search sessions…'
+      : msg;
     el.title = hasSchedule ? '' : msg;
   });
 }
 
-async function loadSchedule(eventFile) {
-  try {
-    const res  = await fetch(`./data/${eventFile}`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    state.eventMeta   = data.event || {};
-    state.allSessions = (data.items || []).map((session) => ({
-      ...session,
-      id: `${session.startTime}-${session.location}-${session.title}`.replace(/[^a-zA-Z0-9-]/g, '-'),
-    }));
-    applyTheme();
-  } catch (err) {
-    console.warn('Could not load event data:', err);
-    state.eventMeta   = {};
-    state.allSessions = [];
+// A short human label for an event's metadata (e.g. "DrupalCon 2026"), used to tag
+// each merged session and to label its conference band.
+function eventShortLabel(meta) {
+  const em = meta || {};
+  return [em.designation, em.year].filter(Boolean).join(' ') || 'Event';
+}
+
+// Fetch one event dataset → { file, meta, label, sessions }. Sessions carry their
+// source `_eventFile`/`_eventLabel` so merged views can attribute them. The session
+// `id` derivation is unchanged (content-only) — see the merged-view note in the plan.
+async function loadOneSchedule(eventFile) {
+  const res = await fetch(`./data/${resolveEventFile(eventFile)}`);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const data = await res.json();
+  const meta = data.event || {};
+  const label = eventShortLabel(meta);
+  const sessions = (data.items || []).map((session) => ({
+    ...session,
+    _eventFile: eventFile,
+    _eventLabel: label,
+    id: `${session.startTime}-${session.location}-${session.title}`.replace(/[^a-zA-Z0-9-]/g, '-'),
+  }));
+  return { file: eventFile, meta, label, sessions };
+}
+
+// Load ALL of the planner's associated events (`_eventFiles`) into merged state.
+// The first (primary) event drives the single-value ambient context — its metadata
+// becomes `state.eventMeta` (timezone/theme/weather/header). Sessions from every
+// event are merged into `state.allSessions`. A failed fetch for one event is skipped
+// (logged) so the rest still load.
+async function loadPlannerSchedules() {
+  const files = (state.planner?._eventFiles || []).filter(Boolean);
+  const events = [];
+  for (const file of files) {
+    try {
+      events.push(await loadOneSchedule(file));
+    } catch (err) {
+      console.warn('Could not load event data:', file, err);
+    }
+  }
+  state.events = events;
+  state.eventFile = events[0]?.file || null;
+  state.eventMeta = events[0]?.meta || {};
+  state.allSessions = events.flatMap((e) => e.sessions);
+  applyTheme();
+}
+
+// Attach an event to the current planner (append to `_eventFiles`, dedup), persist,
+// reload merged schedules, and re-render. No-op if already attached.
+async function addEventToPlanner(file) {
+  if (!file || !state.planner) return;
+  const files = state.planner._eventFiles || [];
+  if (files.includes(file)) return;
+  state.planner._eventFiles = [...files, file];
+  normalizeEventFiles(state.planner);
+  savePlanner(state.plannerKey, state.planner);
+  await loadPlannerSchedules();
+  syncSponsoredSessions();
+  updateHeader();
+  renderAll();
+}
+
+// Detach one event from the current planner, persist, reload, re-render.
+async function removeEventFromPlanner(file) {
+  if (!file || !state.planner) return;
+  state.planner._eventFiles = (state.planner._eventFiles || []).filter((f) => f !== file);
+  normalizeEventFiles(state.planner);
+  savePlanner(state.plannerKey, state.planner);
+  await loadPlannerSchedules();
+  syncSponsoredSessions();
+  updateHeader();
+  renderAll();
+}
+
+// Each tab panel's static shell now lives beside the module that drives it;
+// inject them all before any init/render/wire queries their inner elements.
+function injectPanelShells() {
+  const shells = {
+    plannerTasksPanel: tasksPanelHtml,
+    plannerChecklistsPanel: checklistsPanelHtml,
+    plannerWeatherPanel: weatherPanelHtml,
+    plannerTeamPanel: teamPanelHtml,
+    plannerDocumentsPanel: documentsPanelHtml,
+    plannerReceiptsPanel: receiptsPanelHtml,
+    plannerTicketsPanel: ticketsPanelHtml,
+    plannerContactsPanel: contactsPanelHtml,
+    plannerNotesPanel: notesPanelHtml,
+    plannerCompanionsPanel: companionsPanelHtml,
+    plannerMapPanel: mapPanelHtml,
+    plannerSchedulePanel: schedulePanelHtml,
+    plannerItineraryPanel: itineraryPanelHtml,
+    plannerBudgetPanel: budgetPanelHtml,
+    plannerSplitPanel: splitPanelHtml,
+    plannerSummaryPanel: summaryPanelHtml,
+    plannerPersonalPanel: personalPanelHtml,
+    plannerSponsorPanel: sponsorPanelHtml,
+    plannerSettingsPanel: settingsPanelHtml,
+  };
+  for (const [id, html] of Object.entries(shells)) {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = html();
   }
 }
 
 async function init() {
+  injectPanelShells();
+
+  // Wire the extracted tab modules with their planner collaborators before any
+  // render runs (renderAll below calls into them). Must precede renderAll().
+  initTasks({
+    state,
+    localDateStr,
+    fmtTime,
+    renderListPanel,
+    buildSessionOptions: (selectedId) => sessionOptionsHtml(state.allSessions, selectedId, fmtTime),
+    scheduleAutoSave,
+  });
+  initNotes({ state, fmtTime, fmtDate, groupByDate, scheduleAutoSave });
+  initContacts({ state, scheduleAutoSave });
+  initPlannerFields({ state });
+  initReceipts({
+    state,
+    scheduleAutoSave,
+    renderListPanel,
+    getActiveBudgetCategoryOptions,
+    renderPersonalBudgetBreakdown,
+    renderSponsorBudgetBreakdown,
+    renderBudgetItems,
+    renderDocumentsTab,
+    uploadOrReadFile,
+    deleteUploadedFile,
+    syncReceipt: syncReceiptToApi,
+    renderBudgetTab,
+    renderSummaryTab,
+  });
+  initDocuments({
+    state,
+    scheduleAutoSave,
+    renderListPanel,
+    getActiveBudgetCategoryOptions,
+    uploadOrReadFile,
+    deleteUploadedFile,
+    resolveFileUrl,
+    openReceiptModal,
+    openPersonalLegModal,
+    openPersonalAccomModal,
+    openAccommodationModal,
+    openAssignmentModal,
+  });
+  initTickets({
+    state,
+    scheduleAutoSave,
+    renderSummaryTab,
+    renderReceiptsTab,
+    setActiveTab,
+    getMeLabel,
+    openReceiptModal,
+  });
+  initTrackedSessions({ state, scheduleAutoSave, fmtTime, createModal });
+  initMap({ state, scheduleAutoSave, reportError, getMeLabel });
+  initPersonalLeg({
+    state,
+    scheduleAutoSave,
+    createModal,
+    autoArriveDate,
+    uploadOrReadFile,
+    setActiveTab,
+  });
+  initAccommodation({ state, renderOrgAccomReceiptStatus, renderAccomStayReceiptStatus });
+  initCompanions({
+    state,
+    scheduleAutoSave,
+    companionCardHtml,
+    openLocalCompanionAssignmentModal,
+    openTripAssignmentModal,
+    renderPersonalCompanionsSection,
+  });
+  initAssignments({
+    state,
+    scheduleAutoSave,
+    createModal,
+    getMeLabel,
+    renderAssignmentReceiptStatus,
+  });
+  initSchedule({
+    state,
+    scheduleAutoSave,
+    fmtTime,
+    getTimezone,
+    renderPersonalItineraryTab,
+  });
+  initBudget({
+    state,
+    scheduleAutoSave,
+    createModal,
+    renderSummaryTab,
+    renderSponsorBudgetBreakdown,
+    renderPersonalBudgetBreakdown,
+    buildEventBudgetData,
+    buildPersonalBudgetData,
+    renderReceiptsTab,
+    renderPersonalTab,
+    openReceiptModal,
+    setActiveTab,
+  });
+  initSplit({
+    state,
+    scheduleAutoSave,
+    esc,
+    makeItemId,
+    getMeLabel,
+    getActiveBudgetCategoryOptions,
+  });
+  initChecklists({ state, scheduleAutoSave, esc, makeItemId });
+  initWeather({ state, scheduleAutoSave, esc });
+  initSummary({
+    state,
+    fetchEventDates,
+    getEventBudgetCategories,
+    getVisibleTabs,
+    isPlannerEntry,
+    toWednesdayOfWeek,
+    scheduleAutoSave,
+    _eventDates,
+  });
+  initImportExport({ state, renderAll, getTimezone });
+  initGlobalSettings({ state, openPersonalContactModal, openTeamMemberModal });
+  initCreatePlanner({ state, _loadEventOptions });
+  initDashEdit({ _loadEventOptions, _eventDates, renderTripDashboard });
+  initCogMenu({ deletePlannerBySlug, renderTripDashboard });
+  initDashboard({ isPlannerEntry, _eventDates, fetchEventDates });
+  initTeam({
+    state,
+    renderListPanel,
+    createModal,
+    buildEventBudgetData,
+    refreshAssignMemberSelect,
+    renderSettingsTeamSection,
+  });
+  initOrg({
+    state,
+    scheduleAutoSave,
+    getTimezone,
+    localDateStr,
+    checklistItemHtml,
+    renderBudgetItems,
+    renderSponsorBudgetBreakdown,
+    swagCardHtml,
+    syncEventTitleField,
+  });
+  initMapCoordPickers();
+  initPersonal({
+    state,
+    getMeLabel,
+    getTimezone,
+    localDateStr,
+    renderListPanel,
+    buildEventBudgetData,
+    buildPersonalBudgetData,
+    renderBudgetItems,
+    renderPersonalCompanionsSection,
+    renderPersonalConflicts,
+    syncEventTitleField,
+    renderItineraryWeather,
+  });
+  initItinerary({
+    state,
+    scheduleAutoSave,
+    openCalendarExportModal,
+    localDateStr,
+    renderSummaryTab,
+    getTimezone,
+    openPersonalItineraryItemModal,
+    openPersonalAccomModal,
+    openPersonalLegModal,
+    renderPersonalItinerary,
+    renderPersonalItineraryTab,
+    renderPersonalTab,
+    renderItineraryWeather,
+    setActiveTab,
+    renderReceiptsTab,
+    openReceiptModal,
+  });
+
   // Load themes and event catalog in parallel
-  const [, catalog] = await Promise.all([
-    loadThemes(),
-    loadEventCatalog().catch(() => []),
-  ]);
+  const [, catalog] = await Promise.all([loadThemes(), loadEventCatalog().catch(() => [])]);
   _eventCatalog = catalog;
   applyThemeClass(getCurrentThemeId());
 
-  // Resolve the planner key from URL params (new) or localStorage (legacy)
-  const params      = new URLSearchParams(location.search);
-  const eventParam  = params.get('event');   // e.g. drupalcon-us-2025.json (legacy)
-  const idParam     = params.get('id');       // e.g. planner-my-trip (new)
-
-  let plannerKey = eventParam || idParam || null;
+  // Which planner, and which tab — from the path when the app is served, from
+  // the query when it is opened as files. `plannerRoute.js` owns that decision.
+  const route = parsePlannerRoute(location);
+  const plannerKey = route.key;
 
   if (!plannerKey) {
     document.getElementById('plannerNoEvent')?.classList.remove('hidden');
@@ -10688,15 +5315,19 @@ async function init() {
 
     // Seed any disk planners not yet in localStorage (works same-origin without editorApiEndpoint)
     try {
-      const apiEndpoint = localStorage.getItem('editorApiEndpoint') || '';
+      const apiEndpoint = readText(STORAGE_KEYS.editorApiEndpoint) || '';
       const deleted = _getDeletedSlugs();
       const diskFiles = await listPlannerFiles(apiEndpoint);
-      await Promise.all(diskFiles.map((f) => {
-        const slug = f.endsWith('.json') ? f.slice(0, -5) : f;
-        if (deleted.has(slug)) return;
-        return seedFromDiskIfMissing(slug);
-      }));
-    } catch { /* offline or no server */ }
+      await Promise.all(
+        diskFiles.map((f) => {
+          const slug = f.endsWith('.json') ? f.slice(0, -5) : f;
+          if (deleted.has(slug)) return;
+          return seedFromDiskIfMissing(slug);
+        }),
+      );
+    } catch {
+      /* offline or no server */
+    }
 
     state.global = loadGlobal();
     await renderTripDashboard();
@@ -10715,34 +5346,40 @@ async function init() {
   const searchCatalogPromise = buildPlannerSearchCatalog(catalog);
 
   // Pre-warm exchange rate cache from localStorage (avoids a fetch on first summary open)
-  _loadRatesFromStorage();
+  loadRatesIntoCache();
 
   // Restore from disk if localStorage has no entry (cleared storage, new browser, etc.)
   await Promise.all([seedFromDiskIfMissing(plannerKey), seedGlobalFromDiskIfMissing()]);
 
-  // For ?event= param: the key IS the schedule file; pass it as defaultEventFile so
-  // freshly-created (empty) planners get the association set automatically.
-  const isScheduleParam = !!eventParam;
+  // A `.json` key IS a schedule file (the ?event= form); pass it as
+  // defaultEventFile so freshly-created (empty) planners get the association
+  // set automatically. This used to test the raw param — the key itself is the
+  // honest test, and it survives the path form too.
+  const isScheduleParam = plannerKey.endsWith('.json');
   state.planner = loadPlanner(plannerKey, isScheduleParam ? plannerKey : '');
 
   // Backward compat: old planners have _eventFile equal to the storage key
   if (!state.planner._eventFile && plannerKey.endsWith('.json')) {
     state.planner._eventFile = plannerKey;
   }
+  // Re-normalize after the back-compat tweak so `_eventFiles` reflects `_eventFile`.
+  normalizeEventFiles(state.planner);
   state.eventFile = state.planner._eventFile || null;
 
-  if (state.eventFile) {
-    await loadSchedule(state.eventFile);
+  if (state.planner._eventFiles.length) {
+    await loadPlannerSchedules();
   } else {
-    state.eventMeta   = {};
+    state.events = [];
+    state.eventMeta = {};
     state.allSessions = [];
-    const fallback = localStorage.getItem('scheduleCurrentThemeId') || getCurrentThemeId();
+    const fallback = readText(STORAGE_KEYS.currentThemeId) || getCurrentThemeId();
     applyThemeClass(fallback);
   }
 
-  state.global  = loadGlobal();
+  state.global = loadGlobal();
   // Use global budget categories as the default (sourced from planner/global.json via seed).
-  if (state.global.budgetCategories?.length) _defaultBudgetCategories = state.global.budgetCategories;
+  if (state.global.budgetCategories?.length)
+    setDefaultBudgetCategories(state.global.budgetCategories);
   // Merge any team members bundled in a seeded-from-disk planner file, then
   // re-save so the _globalTeamMembers field doesn't persist in localStorage.
   if (state.planner._globalTeamMembers) {
@@ -10750,14 +5387,18 @@ async function init() {
     savePlanner(state.plannerKey, state.planner);
   }
 
-  if (isLocalhost()) document.getElementById('editorNavLink')?.classList.remove('hidden');
+  if (isLocalhost()) {
+    document.getElementById('editorNavLink')?.classList.remove('hidden');
+    document.getElementById('plannerEditorNavLink')?.classList.remove('hidden');
+    document.getElementById('plannerCurationNavLink')?.classList.remove('hidden');
+  }
 
   const storageNotice = document.getElementById('storageNotice');
-  if (storageNotice && !localStorage.getItem('plannerStorageNoticeDismissed')) {
+  if (storageNotice && !readText(STORAGE_KEYS.storageNoticeDismissed)) {
     storageNotice.classList.remove('hidden');
     document.getElementById('storageNoticeDismiss')?.addEventListener('click', () => {
       storageNotice.classList.add('hidden');
-      localStorage.setItem('plannerStorageNoticeDismissed', '1');
+      writeText(STORAGE_KEYS.storageNoticeDismissed, '1');
     });
   }
 
@@ -10766,64 +5407,62 @@ async function init() {
 
   syncSponsoredSessions();
 
+  // Privacy lock: if this planner is locked (and outside its 90-min grace), cover it
+  // with the password prompt. NON-blocking on purpose — the planner still initialises
+  // and autosaves underneath the cover, so the lock can never break persistence.
+  guardPlannerLock({
+    planner: state.planner,
+    slug: state.plannerKey,
+    name: state.planner?.name,
+  });
+
   updateHeader();
   renderAll();
   applyMode(state.planner.mode || 'personal');
   applyConferenceMode();
 
-  // Restore tab from URL hash (after applyMode so visibility is correct)
-  const hashTab = location.hash.replace('#', '');
-  if (hashTab && TABS.includes(hashTab)) {
+  // Restore the tab the route asked for (falling back to a legacy #hash link),
+  // after applyMode so tab visibility for the mode is already correct. This is
+  // a restoration, not a navigation, so it must not push a history entry —
+  // otherwise Back on a freshly opened deep link goes nowhere.
+  const savedTab = route.tab || location.hash.replace('#', '');
+  if (savedTab && TABS.includes(savedTab)) {
     const mode = state.planner.mode || 'personal';
-    if (getVisibleTabs(mode).has(hashTab)) {
-      setActiveTab(hashTab);
-      if (hashTab === 'summary') renderSummaryTab();
-      if (hashTab === 'settings') renderSettingsTab();
+    if (getVisibleTabs(mode).has(savedTab)) {
+      setActiveTab(savedTab, { push: false });
+      TAB_EXTRA_RENDERS[savedTab]?.(); // populate lazy tabs (map, summary, settings…)
     }
   }
+  renderPlannerCrumbs();
+  wirePlannerHistory();
+  _routeReady = true;
 
   // Configure the shared event-search modal used by "Find event" / "Manage event"
   _searchCatalog = await searchCatalogPromise;
   configureEventSearch({
     getEvents: () => _searchCatalog,
+    // Selecting an event in the in-planner "Manage events" search ADDS it to this
+    // planner's associated events (a trip can span several co-located conferences).
+    // The planner's slug/URL is unaffected — `_eventFiles` is pure association data.
     onSelect: async (_category, file) => {
-      const existingKey = findPlannerKeyForEvent(file);
-      // If a different planner already owns this event, navigate to it
-      if (existingKey && existingKey !== state.plannerKey) {
-        location.href = `planner.html?event=${encodeURIComponent(file)}`;
-        return;
-      }
-      // If no planner exists for this event but the current planner is already
-      // linked to a different event, navigate to create a fresh planner rather
-      // than overwriting the current planner's event association
-      if (!existingKey && state.planner._eventFile && state.planner._eventFile !== file) {
-        location.href = `planner.html?event=${encodeURIComponent(file)}`;
-        return;
-      }
-      // Only reach here for first-time association (current planner has no _eventFile)
-      state.planner._eventFile = file;
-      state.eventFile = file;
-      savePlanner(state.plannerKey, state.planner);
-      pushPlannerUrl(state.plannerKey);
-      await loadSchedule(file);
-      applyTheme();
-      syncSponsoredSessions();
-      updateHeader();
-      renderAll();
+      await addEventToPlanner(file);
     },
   });
 
   wireToolbar();
   wireCreatePlannerModal();
   wireManageEventBtn();
-  wireEventAssocModal();
   wireContactsPanel();
   wireTasksPanel();
+  wireChecklistsPanel();
+  wireWeatherPanel();
   wireOrgPanel();
   wirePersonalPanel();
   wireTrackedSessionModal();
   wireBudgetItemsPanel();
   wireSwagModal();
+  wireNoteModal();
+  wireNoteEmojiPicker();
   wirePersonalLegModal();
   wirePersonalAccomModal();
   wireAssignmentModal();
@@ -10831,13 +5470,17 @@ async function init() {
   wireNotesPanel();
   wireTeamPanel();
   wireItineraryPanel();
+  wirePersonalItineraryItemModal();
   wireDocumentsPanel();
   wireReceiptsPanel();
   wireSummaryPanel();
   wireTicketsPanel();
   wireBudgetPanel();
+  wireSplitPanel();
   wireMapPanel();
   wireCompanionsPanel();
+  wireSchedulePanel();
+  wirePersonDetailModal();
   wireBudgetCategoryManager();
   wireSettingsPanel();
   wireSidebar();
@@ -10857,4 +5500,224 @@ async function init() {
   revealPage();
 }
 
-void init();
+// Last-resort error page: if startup fails, reveal the page (it begins at
+// opacity:0 to avoid FOUC) and show a useful message instead of a blank screen.
+function renderFatalError(err) {
+  reportError('planner init', err);
+  document.documentElement.style.opacity = '1';
+  const box = document.createElement('div');
+  box.setAttribute('role', 'alert');
+  box.style.cssText =
+    'position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:#f8fafc;font-family:system-ui,-apple-system,sans-serif;color:#1e293b';
+  box.innerHTML = `<div style="max-width:34rem;width:100%">
+    <h1 style="font-size:1.25rem;font-weight:600;margin:0 0 .5rem">Couldn't load the planner</h1>
+    <p style="margin:0 0 1rem;color:#475569">Something went wrong during startup. Your saved planners are still stored safely in this browser.</p>
+    <pre style="background:#f1f5f9;border:1px solid #cbd5e1;border-radius:.5rem;padding:.75rem;font-size:.8rem;white-space:pre-wrap;overflow:auto;margin:0 0 1rem">${escapeHtml(String(err?.stack || err?.message || err))}</pre>
+    <div style="display:flex;gap:.5rem">
+      <button type="button" id="fatalReload" style="height:2.25rem;padding:0 1rem;border:0;border-radius:.5rem;background:#334155;color:#fff;font-size:.85rem;cursor:pointer">Reload</button>
+      <a href="planner.html" style="height:2.25rem;padding:0 1rem;display:inline-flex;align-items:center;border:1px solid #cbd5e1;border-radius:.5rem;color:#334155;font-size:.85rem;text-decoration:none">All trips</a>
+    </div>
+  </div>`;
+  document.body.prepend(box);
+  document.getElementById('fatalReload')?.addEventListener('click', () => location.reload());
+}
+
+initThemePicker();
+init().catch(renderFatalError);
+
+// Static shell for the Settings tab — injected into #plannerSettingsPanel at boot (#7 co-location).
+function settingsPanelHtml() {
+  return `
+          <section>
+            <div class="pln-section__head">
+              <div>
+                <p class="pln-eyebrow">How this planner works</p>
+                <h2 class="pln-section__title">Settings</h2>
+              </div>
+            </div>
+            <div id="settingsSpec" class="set-spec"></div>
+
+            <!-- Planner mode -->
+            <div class="set-section" style="margin-top:1.4rem">
+              <div class="doc-divider"><span>Planner mode</span></div>
+              <p class="set-section-desc">Sponsor mode adds team, budget &amp; booth tracking; personal mode focuses on your own travel and expenses.</p>
+              <div class="set-cards set-cards--2">
+                <label class="set-card">
+                  <input type="radio" id="settingsModePersonal" name="settingsMode" value="personal" class="set-radio">
+                  <span class="set-card-body">
+                    <span class="set-card-title">Personal</span>
+                    <span class="set-card-desc">Travel, receipts, session notes, contacts</span>
+                  </span>
+                </label>
+                <label class="set-card">
+                  <input type="radio" id="settingsModeSponsor" name="settingsMode" value="sponsor" class="set-radio">
+                  <span class="set-card-body">
+                    <span class="set-card-title">Sponsor</span>
+                    <span class="set-card-desc">Team, booth, budget, deliverables</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Planner features -->
+            <div class="set-section">
+              <div class="doc-divider"><span>Planner features</span></div>
+              <p class="set-section-desc">Switch whole capabilities on or off for this planner.</p>
+              <div class="set-cards">
+                <label class="set-card">
+                  <span class="set-card-body">
+                    <span class="set-card-title">Conference features</span>
+                    <span class="set-card-desc">Adds Notes, Contacts &amp; the conference schedule for an event. Turn off for a plain trip.</span>
+                  </span>
+                  <input type="checkbox" id="settingsIsConference" class="pl-toggle">
+                </label>
+                <label class="set-card">
+                  <span class="set-card-body">
+                    <span class="set-card-title">Getting around</span>
+                    <span class="set-card-desc">Track local trips while you're there — trains, taxis, cable cars — on the itinerary, timeline &amp; map.</span>
+                  </span>
+                  <input type="checkbox" id="settingsLocalTravel" class="pl-toggle">
+                </label>
+                <label class="set-card">
+                  <span class="set-card-body">
+                    <span class="set-card-title">Lock this planner</span>
+                    <span class="set-card-desc">Require your account password to open it. Stays unlocked for 90 minutes, then re-locks.</span>
+                    <span id="settingsLockUnavailable" class="set-card-note hidden">Needs the server running with a password (session or multi-user auth).</span>
+                  </span>
+                  <input type="checkbox" id="settingsLockPlanner" class="pl-toggle">
+                </label>
+              </div>
+            </div>
+
+            <!-- Conference schedules -->
+            <div class="set-section">
+              <div class="doc-divider"><span>Conference schedules</span>
+                <button type="button" id="settingsAddConferenceBtn" class="set-btn" style="margin-left:auto">Add conference</button>
+              </div>
+              <p class="set-section-desc">Link one or more event schedules — sessions, dates &amp; conference bands from all of them show together. The first is the primary (drives timezone &amp; theme).</p>
+              <div id="settingsConferenceList" class="set-cards"></div>
+            </div>
+
+            <!-- Tab order & visibility -->
+            <div class="set-section">
+              <div class="doc-divider"><span>Tab order &amp; visibility</span>
+                <button type="button" id="settingsResetTabOrderBtn" class="set-btn" style="margin-left:auto">Reset order</button>
+              </div>
+              <p class="set-section-desc">Drag to reorder. Toggle to show or hide a tab. Settings cannot be disabled.</p>
+              <div id="settingsTabList" class="set-cards"></div>
+            </div>
+
+            <!-- Sponsor-only sections (linked sponsor + team) -->
+            <div id="settingsSponsorSection" class="hidden">
+
+              <!-- Linked sponsor -->
+              <div class="set-section">
+                <div class="doc-divider"><span>Linked sponsor</span>
+                  <button type="button" id="unlinkSponsorBtn" class="hidden set-btn" style="margin-left:auto">Unlink</button>
+                </div>
+                <p class="set-section-desc">Connect this planner to a sponsor entry from the event data to auto-track sponsored sessions.</p>
+                <div id="sponsorSearchRow" class="set-field">
+                  <input type="text" id="sponsorSearchInput" placeholder="Search sponsors by name…" class="set-input" autocomplete="off">
+                </div>
+                <ul id="sponsorSearchResults" class="hidden set-results text-sm"></ul>
+                <div id="sponsorLinkedCard" class="hidden set-linked" style="margin-top:0.5rem">
+                  <div class="flex-1 min-w-0">
+                    <p id="sponsorLinkedName" class="text-sm font-semibold pl-ink-0 truncate"></p>
+                    <p id="sponsorLinkedTier" class="pl-hint"></p>
+                  </div>
+                  <a id="sponsorLinkedUrl" href="#" target="_blank" rel="noopener" class="flex-shrink-0 text-xs hidden set-btn">
+                    Visit
+                  </a>
+                </div>
+              </div>
+
+              <!-- Team -->
+              <div class="set-section">
+                <div class="doc-divider"><span>Team</span>
+                  <button type="button" id="settingsAddTeamMemberBtn" class="set-btn" style="margin-left:auto">Add member</button>
+                </div>
+                <p class="set-section-desc">Global team members — check the box to assign them to this event.</p>
+                <div id="settingsTeamList" class="space-y-2"></div>
+              </div>
+
+            </div>
+
+            <!-- Personal contacts section (personal mode only) -->
+            <div id="settingsPersonalSection" class="hidden">
+
+              <!-- Me identity -->
+              <div class="set-section">
+                <div class="doc-divider"><span>"Me" identity</span></div>
+                <p class="set-section-desc">Optionally name yourself. When set, "Me" is replaced with this person's name throughout the planner.</p>
+                <select id="settingsMeContactId" class="set-input">
+                  <option value="">Me (default)</option>
+                </select>
+              </div>
+
+              <div class="set-section">
+                <div class="doc-divider"><span>Trip contacts</span>
+                  <button type="button" id="settingsAddPersonalContactBtn" class="set-btn" style="margin-left:auto">Add contact</button>
+                </div>
+                <p class="set-section-desc">Your global list of travel companions — check the box to add them to this trip.</p>
+                <div id="settingsPersonalContactsList" class="space-y-2"></div>
+              </div>
+            </div>
+
+            <!-- Roll-up (display) currency — applies to both modes -->
+            <div class="set-section">
+              <div class="doc-divider"><span>Report totals in</span></div>
+              <p class="set-section-desc">Budget and financial-summary totals roll up into this currency. Each line item is still entered in its own currency.</p>
+              <select id="settingsDisplayCurrency" class="set-input"></select>
+            </div>
+
+            <!-- Budget categories (sponsor mode) -->
+            <div id="settingsBudgetSponsor" class="hidden set-section">
+              <div class="doc-divider"><span>Budget categories</span></div>
+              <p class="set-section-desc">Customise categories for this event's sponsor budget. Removing one won't delete existing items — they fall back to Misc.</p>
+              <div id="sponsorBudgetCategoryList" class="space-y-1"></div>
+              <div class="flex gap-2" style="margin-top:0.6rem">
+                <input type="text" id="sponsorBudgetCategoryInput" placeholder="New category name" class="set-input flex-1">
+                <button type="button" id="addSponsorBudgetCategoryBtn" class="set-btn flex-shrink-0">Add</button>
+              </div>
+            </div>
+
+            <!-- Budget categories (personal mode) -->
+            <div id="settingsBudgetPersonal" class="hidden set-section">
+              <div class="doc-divider"><span>Budget categories</span></div>
+              <p class="set-section-desc">Customise categories for this event's personal budget. Removing one won't delete existing items — they fall back to Misc.</p>
+              <div id="personalBudgetCategoryList" class="space-y-1"></div>
+              <div class="flex gap-2" style="margin-top:0.6rem">
+                <input type="text" id="personalBudgetCategoryInput" placeholder="New category name" class="set-input flex-1">
+                <button type="button" id="addPersonalBudgetCategoryBtn" class="set-btn flex-shrink-0">Add</button>
+              </div>
+            </div>
+
+            <!-- API access -->
+            <div class="set-section">
+              <div class="doc-divider"><span>API access</span></div>
+              <p class="set-section-desc set-section-desc--wide">A bearer token lets another tool read and write through the API at <code>/api/v1</code>. Treat it like a password: whoever holds it acts as you.</p>
+              <div class="set-cards">
+                <div class="set-card">
+                  <span class="set-card-body">
+                    <span class="set-card-title">Personal access token</span>
+                    <span class="set-card-desc">Shown once when generated. The server keeps only a hash of it, so it cannot be read back.</span>
+                    <span id="settingsTokenState" class="set-card-note hidden"></span>
+                  </span>
+                  <button type="button" id="settingsTokenRevokeBtn" class="set-btn" disabled>Revoke</button>
+                  <button type="button" id="settingsTokenBtn" class="set-btn" disabled>Generate token</button>
+                </div>
+              </div>
+              <div id="settingsTokenResult" class="hidden"></div>
+            </div>
+
+            <!-- Danger zone -->
+            <div class="set-danger">
+              <p class="set-danger-title">Danger zone</p>
+              <p class="set-danger-desc">This cannot be undone. All planner data will be permanently removed.</p>
+              <button type="button" id="settingsDeletePlannerBtn" class="set-danger-btn">
+                Delete this planner
+              </button>
+            </div>
+          </section>
+        `;
+}

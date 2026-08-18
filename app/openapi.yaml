@@ -1,0 +1,215 @@
+openapi: 3.0.3
+info:
+  title: Conference Planner CRUD API
+  version: "1.0.0"
+  description: >
+    Versioned REST API for custom integrations. Additive and backward-compatible:
+    the legacy `/api/data/*` and `/api/planner/*` routes are unchanged.
+
+
+    Two document domains are exposed:
+
+    * **datasets** — event schedule files under `app/data/events/` (validated
+      against the strict event schema). Writes regenerate `catalog.json`.
+
+    * **planners** — per-user planner blobs (validated against the permissive
+      planner schema). Isolated per user in `multi` auth mode.
+
+
+    Each domain supports whole-document CRUD **and** nested-resource CRUD on its
+    id-addressable collections. A document path always ends in `.json`, which
+    separates it from any trailing `<collection>[/id]` segment.
+
+
+    Event **sessions** (`event.items`) are intentionally not exposed as a nested
+    collection: they have no stable id.
+servers:
+  - url: /api/v1
+tags:
+  - name: datasets
+  - name: planners
+  - name: validation
+paths:
+  /validate:
+    post:
+      tags: [validation]
+      summary: Validate a document against the schema without storing it
+      description: >
+        Checks a document the caller already holds. Nothing is read or written.
+        Intended for a data repository that lives outside this app: it holds the
+        files, this app holds the schema that defines a valid file, and this
+        endpoint is how the two meet without the data repo vendoring a copy of
+        the schema that silently goes stale.
+
+
+        Answers 200 whether or not the document is valid — the REQUEST succeeded
+        and the verdict is `valid` in the body. Only a malformed call (bad JSON,
+        unknown domain, empty body) is a 4xx, so CI can tell "your document is
+        wrong" from "your call is wrong". Writes still answer 422, because there
+        an invalid document genuinely is a failed request.
+
+
+        `schemaFingerprint` is a content hash of the schema actually enforced.
+        Record it: a schema change is a breaking change for every data repo at
+        once, and a changed fingerprint is how a repo notices before a wave of
+        mystery failures.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: domain
+          in: query
+          required: false
+          description: Which schema to validate against.
+          schema: { type: string, enum: [datasets, planners], default: datasets }
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object } } }
+      responses:
+        "200":
+          description: The verdict — valid or not.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valid: { type: boolean }
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        path: { type: string }
+                        message: { type: string }
+                        keyword: { type: string }
+                        params: { type: object }
+                  domain: { type: string }
+                  schemaFingerprint: { type: string, nullable: true }
+        "400": { description: Missing body, unparseable JSON, or unknown domain }
+  /datasets:
+    get:
+      tags: [datasets]
+      summary: List event dataset files
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200": { description: Array of dataset paths, content: { application/json: { schema: { type: array, items: { type: string } } } } }
+  /datasets/{path}:
+    parameters:
+      - { name: path, in: path, required: true, description: "Dataset path ending in .json (e.g. events/drupalcon/us/2025.json)", schema: { type: string } }
+    get:
+      tags: [datasets]
+      summary: Read a dataset
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200": { description: The dataset document }
+        "404": { description: Not found }
+    post:
+      tags: [datasets]
+      summary: Create a dataset (whole document)
+      security: [{ bearerAuth: [] }]
+      responses:
+        "201": { description: Created }
+        "422": { $ref: "#/components/responses/ValidationFailed" }
+    put:
+      tags: [datasets]
+      summary: Replace a dataset (whole document)
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200": { description: Replaced }
+        "422": { $ref: "#/components/responses/ValidationFailed" }
+    delete:
+      tags: [datasets]
+      summary: Delete a dataset
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200": { description: Deleted }
+        "404": { description: Not found }
+  /datasets/{path}/sponsors:
+    parameters:
+      - { name: path, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [datasets]
+      summary: List sponsors
+      security: [{ bearerAuth: [] }]
+      responses: { "200": { description: Array of sponsor objects } }
+    post:
+      tags: [datasets]
+      summary: Create a sponsor (id slugified from title if omitted)
+      security: [{ bearerAuth: [] }]
+      responses:
+        "201": { description: Created sponsor }
+        "422": { $ref: "#/components/responses/ValidationFailed" }
+  /datasets/{path}/sponsors/{id}:
+    parameters:
+      - { name: path, in: path, required: true, schema: { type: string } }
+      - { name: id, in: path, required: true, schema: { type: string } }
+    get:
+      tags: [datasets]
+      summary: Read a sponsor
+      security: [{ bearerAuth: [] }]
+      responses: { "200": { description: Sponsor }, "404": { description: Not found } }
+    put:
+      tags: [datasets]
+      summary: Replace a sponsor (id preserved)
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200": { description: Updated sponsor }
+        "422": { $ref: "#/components/responses/ValidationFailed" }
+    delete:
+      tags: [datasets]
+      summary: Delete a sponsor
+      security: [{ bearerAuth: [] }]
+      responses: { "200": { description: Deleted }, "404": { description: Not found } }
+  /planners:
+    get:
+      tags: [planners]
+      summary: List planner files (scoped to the caller in multi mode)
+      security: [{ bearerAuth: [] }]
+      responses: { "200": { description: Array of planner filenames } }
+  /planners/{file}:
+    parameters:
+      - { name: file, in: path, required: true, description: "Planner filename ending in .json", schema: { type: string } }
+    get: { tags: [planners], summary: Read a planner, security: [{ bearerAuth: [] }], responses: { "200": { description: The planner document }, "404": { description: Not found } } }
+    post: { tags: [planners], summary: Create a planner (whole document), security: [{ bearerAuth: [] }], responses: { "201": { description: Created }, "422": { $ref: "#/components/responses/ValidationFailed" } } }
+    put: { tags: [planners], summary: Replace a planner (whole document), security: [{ bearerAuth: [] }], responses: { "200": { description: Replaced }, "422": { $ref: "#/components/responses/ValidationFailed" } } }
+    delete: { tags: [planners], summary: Delete a planner, security: [{ bearerAuth: [] }], responses: { "200": { description: Deleted }, "404": { description: Not found } } }
+  /planners/{file}/{collection}:
+    parameters:
+      - { name: file, in: path, required: true, schema: { type: string } }
+      - { name: collection, in: path, required: true, description: "One of the registered planner collections (see the CRUD API guide), e.g. tasks, contacts, personal/outbound-legs, org/swag", schema: { type: string } }
+    get: { tags: [planners], summary: List elements in a collection, security: [{ bearerAuth: [] }], responses: { "200": { description: Array of elements } } }
+    post: { tags: [planners], summary: Create an element (id minted if omitted), security: [{ bearerAuth: [] }], responses: { "201": { description: Created element }, "422": { $ref: "#/components/responses/ValidationFailed" } } }
+  /planners/{file}/{collection}/{id}:
+    parameters:
+      - { name: file, in: path, required: true, schema: { type: string } }
+      - { name: collection, in: path, required: true, schema: { type: string } }
+      - { name: id, in: path, required: true, schema: { type: string } }
+    get: { tags: [planners], summary: Read an element, security: [{ bearerAuth: [] }], responses: { "200": { description: Element }, "404": { description: Not found } } }
+    put: { tags: [planners], summary: Replace an element (id preserved), security: [{ bearerAuth: [] }], responses: { "200": { description: Updated element }, "422": { $ref: "#/components/responses/ValidationFailed" } } }
+    delete: { tags: [planners], summary: Delete an element, security: [{ bearerAuth: [] }], responses: { "200": { description: Deleted }, "404": { description: Not found } } }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >
+        In `multi` auth mode, pass a per-user API token as `Authorization: Bearer
+        <token>` (generate via the admin Users panel). Reads need role `viewer`,
+        writes need `editor`. In `open` mode no auth is required.
+  responses:
+    ValidationFailed:
+      description: The resulting document failed schema validation; nothing was written.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error: { type: string, example: validation_failed }
+              message: { type: string }
+              errors:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    path: { type: string }
+                    message: { type: string }
+                    keyword: { type: string }
+                    params: { type: object }

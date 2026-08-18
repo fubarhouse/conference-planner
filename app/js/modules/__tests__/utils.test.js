@@ -1,7 +1,4 @@
-
-
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import state from '../state.js';
+import { describe, it, expect, vi } from 'vitest';
 import {
   escapeHtml,
   normalizeTracks,
@@ -18,16 +15,36 @@ import {
   slugify,
   parseSponsorIds,
   getLocalDate,
+  normalizeString,
 } from '../utils.js';
 
-beforeEach(() => {
-  state.eventMeta = { timezone: 'UTC' };
+describe('normalizeString', () => {
+  it('trims surrounding whitespace', () => {
+    expect(normalizeString('  hello  ')).toBe('hello');
+  });
+
+  it('coerces null/undefined to an empty string', () => {
+    expect(normalizeString(null)).toBe('');
+    expect(normalizeString(undefined)).toBe('');
+  });
+
+  it('returns the fallback when the value is empty or blank', () => {
+    expect(normalizeString('', 'auto')).toBe('auto');
+    expect(normalizeString('   ', 'auto')).toBe('auto');
+    expect(normalizeString(null, 'auto')).toBe('auto');
+  });
+
+  it('matches the String(x || "").trim() idiom it replaces', () => {
+    expect(normalizeString(0)).toBe('');
+    expect(normalizeString(false)).toBe('');
+    expect(normalizeString(42)).toBe('42');
+  });
 });
 
 describe('escapeHtml', () => {
   it('escapes all five special characters', () => {
     expect(escapeHtml('<script>&"\'test</script>')).toBe(
-      '&lt;script&gt;&amp;&quot;&#39;test&lt;/script&gt;'
+      '&lt;script&gt;&amp;&quot;&#39;test&lt;/script&gt;',
     );
   });
 
@@ -156,16 +173,14 @@ describe('parseSponsorIds', () => {
 });
 
 describe('getLocalDate', () => {
-  it('returns a YYYY-MM-DD string in the configured timezone', () => {
-    state.eventMeta = { timezone: 'Australia/Sydney' };
+  it('returns a YYYY-MM-DD string in the given timezone', () => {
     // 2025-01-01T00:00:00Z is Jan 1 in UTC, Jan 1 11:00 AEDT (+11)
-    expect(getLocalDate('2025-01-01T00:00:00Z')).toBe('2025-01-01');
+    expect(getLocalDate('2025-01-01T00:00:00Z', 'Australia/Sydney')).toBe('2025-01-01');
   });
 
   it('handles timezone boundary correctly', () => {
-    state.eventMeta = { timezone: 'America/New_York' };
     // 2025-07-10T03:00:00Z is July 9 in New York (EDT = UTC-4)
-    expect(getLocalDate('2025-07-10T03:00:00Z')).toBe('2025-07-09');
+    expect(getLocalDate('2025-07-10T03:00:00Z', 'America/New_York')).toBe('2025-07-09');
   });
 });
 
@@ -254,7 +269,9 @@ describe('debounce', () => {
     vi.useFakeTimers();
     const fn = vi.fn();
     const debounced = debounce(fn, 100);
-    debounced(); debounced(); debounced();
+    debounced();
+    debounced();
+    debounced();
     vi.advanceTimersByTime(100);
     expect(fn).toHaveBeenCalledTimes(1);
     vi.useRealTimers();
@@ -264,7 +281,8 @@ describe('debounce', () => {
     vi.useFakeTimers();
     const fn = vi.fn();
     const debounced = debounce(fn, 50);
-    debounced('first'); debounced('second');
+    debounced('first');
+    debounced('second');
     vi.advanceTimersByTime(50);
     expect(fn).toHaveBeenCalledWith('second');
     vi.useRealTimers();
@@ -314,18 +332,21 @@ describe('deriveOfficialWebsite', () => {
   });
 
   it('returns the website URL stripped of hash and query', () => {
-    expect(deriveOfficialWebsite({ website: 'https://example.com/about?utm=1#footer' }))
-      .toBe('https://example.com/about');
+    expect(deriveOfficialWebsite({ website: 'https://example.com/about?utm=1#footer' })).toBe(
+      'https://example.com/about',
+    );
   });
 
   it('strips a trailing /schedule path segment', () => {
-    expect(deriveOfficialWebsite({ website: 'https://example.com/schedule' }))
-      .toBe('https://example.com');
+    expect(deriveOfficialWebsite({ website: 'https://example.com/schedule' })).toBe(
+      'https://example.com',
+    );
   });
 
   it('strips a trailing /programme path segment', () => {
-    expect(deriveOfficialWebsite({ website: 'https://example.com/programme' }))
-      .toBe('https://example.com');
+    expect(deriveOfficialWebsite({ website: 'https://example.com/programme' })).toBe(
+      'https://example.com',
+    );
   });
 
   it('falls back to the first scheduleURL when website is absent', () => {
@@ -345,7 +366,9 @@ describe('once', () => {
   it('calls the wrapped function only once across multiple invocations', () => {
     const fn = vi.fn().mockResolvedValue('result');
     const wrapped = once(fn);
-    wrapped(); wrapped(); wrapped();
+    wrapped();
+    wrapped();
+    wrapped();
     expect(fn).toHaveBeenCalledTimes(1);
   });
 

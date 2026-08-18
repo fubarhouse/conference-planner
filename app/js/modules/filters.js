@@ -1,6 +1,13 @@
 import state, { getStorageKey } from './state.js';
-import { debounce, getLocalDate, announceStatus, normalizeTracks, deriveSummaryFromEvent } from './utils.js';
+import {
+  debounce,
+  getLocalDate,
+  announceStatus,
+  normalizeTracks,
+  deriveSummaryFromEvent,
+} from './utils.js';
 import { displayEvents } from './render.js';
+import { writeJson } from './plannerStorage.js';
 import { updateDownloadButton } from './calendar.js';
 
 let updateSelectionOverviewFn = () => {};
@@ -20,7 +27,10 @@ export function toggleClearButton() {
   }
 }
 
-export function filterEvents(events, { keyword = '', date = '', track = '', selectionMode = 'all' } = {}) {
+export function filterEvents(
+  events,
+  { keyword = '', date = '', track = '', selectionMode = 'all' } = {},
+) {
   const kw = keyword.toLowerCase();
   return events.filter((event) => {
     const titleText = String(event.title || '');
@@ -35,7 +45,7 @@ export function filterEvents(events, { keyword = '', date = '', track = '', sele
         ? event.speakers
         : '';
 
-    const matchesDate = !date || getLocalDate(event.startTime) === date;
+    const matchesDate = !date || getLocalDate(event.startTime, state.eventMeta?.timezone) === date;
     const matchesTrack = !track || eventTracks.includes(track);
     const matchesKeywords =
       !kw ||
@@ -54,20 +64,79 @@ export function filterEvents(events, { keyword = '', date = '', track = '', sele
   });
 }
 
+/**
+ * How many filters are narrowing the list right now.
+ *
+ * A collapsed accordion hides the reason a schedule looks short — on mobile it
+ * is shut by default, so you can be staring at a filtered programme with
+ * nothing on screen explaining why. Counting is the whole job; the empty string
+ * and 'all' are each control's "not filtering" value.
+ */
+export function activeFilterCount({ date, track, keyword, selectionMode } = {}) {
+  let n = 0;
+  if (date) n += 1;
+  if (track) n += 1;
+  if (String(keyword ?? '').trim()) n += 1;
+  if (selectionMode && selectionMode !== 'all') n += 1;
+  return n;
+}
+
+// Show the count in two places, because the two widths reveal different things:
+// the accordion toggle carries it on mobile (where the panel is shut), and the
+// reset button carries it everywhere (where the panel is open, it is the only
+// hint that there is anything to reset).
+function renderFilterCount(count) {
+  const toggle = document.getElementById('sessionFiltersToggle');
+  if (toggle) {
+    let badge = toggle.querySelector('.sch-filtercount');
+    if (!badge) {
+      badge = document.createElement('span');
+      badge.className = 'sch-filtercount';
+      toggle.append(badge);
+    }
+    badge.textContent = String(count);
+    badge.toggleAttribute('hidden', count === 0);
+    toggle.setAttribute('aria-label', count ? `Filters, ${count} active` : 'Filters');
+  }
+  const reset = document.getElementById('resetFilters');
+  if (reset) {
+    reset.textContent = count ? `Reset filters (${count})` : 'Reset filters';
+    reset.disabled = count === 0;
+  }
+}
+
+/**
+ * Paint the count from whatever the controls currently say. `applyFilters` runs
+ * only on interaction, so without this the page would load showing a stale
+ * "Reset filters" that looks clickable with nothing to reset.
+ */
+export function refreshFilterCount() {
+  if (typeof document === 'undefined') return;
+  if (!document.getElementById('keywordsFilter')) return;
+  renderFilterCount(activeFilterCount(readFilterState()));
+}
+
 function readFilterState() {
   return {
     date: document.getElementById('dateFilter').value,
     track: document.getElementById('trackFilter').value,
     keyword: document.getElementById('keywordsFilter').value,
-    selectionMode: document.getElementById('selectionFilter').value
+    selectionMode: document.getElementById('selectionFilter').value,
   };
 }
 
-export function applyFilters(events, triggerName = null, skipAnalytics = false, announceResultCount = true) {
+export function applyFilters(
+  events,
+  triggerName = null,
+  skipAnalytics = false,
+  announceResultCount = true,
+) {
   if (triggerName && !skipAnalytics) {
     window.sa_event?.(triggerName, { filter_value: document.getElementById(triggerName).value });
   }
-  const filteredEvents = filterEvents(events, readFilterState());
+  const filterState = readFilterState();
+  renderFilterCount(activeFilterCount(filterState));
+  const filteredEvents = filterEvents(events, filterState);
   state.displayedEvents = filteredEvents;
   displayEvents(filteredEvents);
   if (announceResultCount) {
@@ -117,10 +186,10 @@ export function selectAllDisplayed(events) {
 
   if (addedCount > 0) {
     window.sa_event?.('select_all_displayed', {
-      count: addedCount
+      count: addedCount,
     });
 
-    localStorage.setItem(getStorageKey(), JSON.stringify([...state.selectedEvents]));
+    writeJson(getStorageKey(), [...state.selectedEvents]);
 
     updateDownloadButton();
     try {
@@ -130,7 +199,7 @@ export function selectAllDisplayed(events) {
     }
     applyFilters(state.allEvents, null, true, false);
     announceStatus(
-      `${addedCount} ${addedCount === 1 ? 'session' : 'sessions'} added. ${state.selectedEvents.size} selected total.`
+      `${addedCount} ${addedCount === 1 ? 'session' : 'sessions'} added. ${state.selectedEvents.size} selected total.`,
     );
   } else {
     announceStatus('All displayed sessions are already selected.');
@@ -154,10 +223,10 @@ export function deselectAllDisplayed(events) {
 
   if (removedCount > 0) {
     window.sa_event?.('deselect_all_displayed', {
-      count: removedCount
+      count: removedCount,
     });
 
-    localStorage.setItem(getStorageKey(), JSON.stringify([...state.selectedEvents]));
+    writeJson(getStorageKey(), [...state.selectedEvents]);
 
     updateDownloadButton();
     try {
@@ -167,7 +236,7 @@ export function deselectAllDisplayed(events) {
     }
     applyFilters(state.allEvents, null, true, false);
     announceStatus(
-      `${removedCount} ${removedCount === 1 ? 'session' : 'sessions'} removed. ${state.selectedEvents.size} selected total.`
+      `${removedCount} ${removedCount === 1 ? 'session' : 'sessions'} removed. ${state.selectedEvents.size} selected total.`,
     );
   } else {
     announceStatus('No selected sessions found in the current displayed list.');

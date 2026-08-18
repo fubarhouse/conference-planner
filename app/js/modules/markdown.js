@@ -1,14 +1,14 @@
-import { escapeHtml, highlightKeywords } from './utils.js';
+import { escapeHtml, highlightKeywords, normalizeString } from './utils.js';
 
 export function applyInlineMarkdown(escapedText) {
   let out = String(escapedText || '');
   out = out.replace(
     /!\[([^\]]*)\]\(((?:https?:\/\/|\/|\.\/|\.\.\/)[^\s)]+)\)/g,
-    '<img src="$2" alt="$1" loading="lazy">'
+    '<img src="$2" alt="$1" loading="lazy">',
   );
   out = out.replace(
     /\[([^\]]+)\]\(((?:https?:\/\/|\/|\.\/|\.\.\/|mailto:)[^\s)]+)\)/g,
-    '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
+    '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>',
   );
   out = out.replace(/`([^`]+)`/g, '<code>$1</code>');
   out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
@@ -19,7 +19,7 @@ export function applyInlineMarkdown(escapedText) {
 }
 
 export function formatTextBlock(text, keywords = '') {
-  const input = String(text || '').trim();
+  const input = normalizeString(text);
   if (!input) return '';
 
   const lines = input.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
@@ -67,7 +67,7 @@ export function formatTextBlock(text, keywords = '') {
   };
 
   const escapeAndHighlight = (value) => {
-    const escaped = escapeHtml(String(value || '').trim());
+    const escaped = escapeHtml(normalizeString(value));
     if (!keywords) return applyInlineMarkdown(escaped);
     return highlightKeywords(escaped, keywords);
   };
@@ -87,7 +87,7 @@ export function formatTextBlock(text, keywords = '') {
     /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(String(rawLine || ''));
 
   const parseTableRow = (rawLine) => {
-    const line = String(rawLine || '').trim();
+    const line = normalizeString(rawLine);
     if (!line || !line.includes('|') || isTableDelimiter(line)) return null;
     let cells = line.split('|').map((cell) => cell.trim());
     if (cells.length > 0 && cells[0] === '') cells = cells.slice(1);
@@ -102,7 +102,10 @@ export function formatTextBlock(text, keywords = '') {
       .map((row) => {
         const padded = [...row];
         while (padded.length < columnCount) padded.push('');
-        const cells = padded.slice(0, columnCount).map((cell) => `<td>${escapeAndHighlight(cell)}</td>`).join('');
+        const cells = padded
+          .slice(0, columnCount)
+          .map((cell) => `<td>${escapeAndHighlight(cell)}</td>`)
+          .join('');
         return `<tr>${cells}</tr>`;
       })
       .join('');
@@ -142,7 +145,12 @@ export function formatTextBlock(text, keywords = '') {
       const parentItem = getCurrentListItem();
       if (parentItem) {
         const block = createListBlock(entry.type, parentItem.children);
-        listStack.push({ indent: entry.indent, type: entry.type, block, container: parentItem.children });
+        listStack.push({
+          indent: entry.indent,
+          type: entry.type,
+          block,
+          container: parentItem.children,
+        });
       } else {
         const block = createListBlock(entry.type, blocks);
         listStack.push({ indent: entry.indent, type: entry.type, block, container: blocks });
@@ -156,7 +164,12 @@ export function formatTextBlock(text, keywords = '') {
         const siblingContainer = listStack[listStack.length - 1].container;
         listStack.pop();
         const block = createListBlock(entry.type, siblingContainer);
-        listStack.push({ indent: entry.indent, type: entry.type, block, container: siblingContainer });
+        listStack.push({
+          indent: entry.indent,
+          type: entry.type,
+          block,
+          container: siblingContainer,
+        });
       } else {
         const container = listStack.length > 0 ? listStack[listStack.length - 1].container : blocks;
         const block = createListBlock(entry.type, container);

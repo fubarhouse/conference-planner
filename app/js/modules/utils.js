@@ -1,24 +1,10 @@
-import state from './state.js';
-
-export function formatDate(dateString) {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', {
-    weekday: 'short',
-    month: 'short',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-  });
-}
-
-export function getLocalDate(utcDateString) {
+export function getLocalDate(utcDateString, timezone) {
   const date = new Date(utcDateString);
-  const tz = state.eventMeta.timezone;
   return new Intl.DateTimeFormat('en-CA', {
-    timeZone: tz,
+    timeZone: timezone,
     year: 'numeric',
     month: '2-digit',
-    day: '2-digit'
+    day: '2-digit',
   }).format(date);
 }
 
@@ -75,6 +61,12 @@ export function escapeHtml(text) {
     .replace(/'/g, '&#39;');
 }
 
+// Trim a value to a clean string, falling back when it is empty/blank. Replaces
+// the ~120 hand-copied `String(x || '').trim()` (and `... || 'default'`) sites.
+export function normalizeString(value, fallback = '') {
+  return String(value || '').trim() || fallback;
+}
+
 export function normalizeTracks(trackValue) {
   const splitTrackValue = (value) =>
     String(value || '')
@@ -104,11 +96,10 @@ export function normalizeSummaryText(value) {
     .replace(/\r/g, '\n')
     .split('\n');
 
-  const isTableDelimiter = (line) =>
-    /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(line);
+  const isTableDelimiter = (line) => /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(line);
 
   const isTableRow = (line) => {
-    const trimmed = String(line || '').trim();
+    const trimmed = normalizeString(line);
     if (!trimmed || !trimmed.includes('|') || isTableDelimiter(trimmed)) return false;
     let cells = trimmed.split('|').map((cell) => cell.trim());
     if (cells.length > 0 && cells[0] === '') cells = cells.slice(1);
@@ -117,7 +108,7 @@ export function normalizeSummaryText(value) {
   };
 
   const filtered = lines.filter((rawLine) => {
-    const line = String(rawLine || '').trim();
+    const line = normalizeString(rawLine);
     if (!line) return false;
     if (/^\s*#{1,6}\s+/.test(line)) return false;
     if (/^\s*>\s?/.test(line)) return false;
@@ -125,10 +116,7 @@ export function normalizeSummaryText(value) {
     return true;
   });
 
-  return filtered
-    .join(' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+  return filtered.join(' ').replace(/\s+/g, ' ').trim();
 }
 
 export function buildSummaryFromText(value, maxLen = 128) {
@@ -145,12 +133,18 @@ export function deriveSummaryFromEvent(event, maxLen = 128) {
 
 export function isLocalhost() {
   const host = String(window.location.hostname || '').toLowerCase();
-  return host === 'localhost' || host === '127.0.0.1' || host === '::1' || host === '[::1]' || host.endsWith('.localhost');
+  return (
+    host === 'localhost' ||
+    host === '127.0.0.1' ||
+    host === '::1' ||
+    host === '[::1]' ||
+    host.endsWith('.localhost')
+  );
 }
 
 export function parseSponsorIds(value) {
   if (Array.isArray(value)) {
-    return value.map((item) => String(item || '').trim()).filter(Boolean);
+    return value.map((item) => normalizeString(item)).filter(Boolean);
   }
   return String(value || '')
     .split(/[\n,]+/)
@@ -165,9 +159,11 @@ export function getFocusableElements(container) {
     'input:not([disabled]):not([type="hidden"])',
     'select:not([disabled])',
     'textarea:not([disabled])',
-    '[tabindex]:not([tabindex="-1"])'
+    '[tabindex]:not([tabindex="-1"])',
   ];
-  return [...container.querySelectorAll(selectors.join(','))].filter((element) => !element.hasAttribute('disabled'));
+  return [...container.querySelectorAll(selectors.join(','))].filter(
+    (element) => !element.hasAttribute('disabled'),
+  );
 }
 
 export function formatHoursDuration(floatHours) {
@@ -179,8 +175,8 @@ export function formatHoursDuration(floatHours) {
 }
 
 export function deriveOfficialWebsite(eventMeta = null) {
-  const website = String(eventMeta?.website || '').trim();
-  const scheduleURL = String(eventMeta?.scheduleURLs?.[0] || '').trim();
+  const website = normalizeString(eventMeta?.website);
+  const scheduleURL = normalizeString(eventMeta?.scheduleURLs?.[0]);
   const candidate = website || scheduleURL;
   if (!candidate) return '';
   return normalizeEventWebsiteUrl(candidate);
@@ -192,13 +188,11 @@ function normalizeEventWebsiteUrl(urlString) {
     url.hash = '';
     url.search = '';
     url.pathname = url.pathname
-      .replace(
-        /\/(?:schedule|programme|program|sessions(?:\/accepted\.html)?)\/?$/i,
-        '/'
-      )
+      .replace(/\/(?:schedule|programme|program|sessions(?:\/accepted\.html)?)\/?$/i, '/')
       .replace(/\/+$/g, '/');
     return url.toString().replace(/\/$/, '');
   } catch {
+    // Not a parseable URL → return the original string unchanged.
     return urlString;
   }
 }

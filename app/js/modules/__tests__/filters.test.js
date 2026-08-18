@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 
 // filterEvents reads from state.selectedEvents and state.eventMeta, but
 // only via the filterEvents signature — we pass filter options directly.
@@ -27,9 +27,33 @@ function makeSession(overrides = {}) {
 }
 
 const sessions = [
-  makeSession({ id: 's1', title: 'Intro to Drupal', track: ['Frontend'], location: 'Hall 1', speakers: ['Alice'], startTime: '2025-07-10T09:00:00Z', full_description: 'Drupal basics.' }),
-  makeSession({ id: 's2', title: 'DevOps Pipelines', track: ['DevOps'], location: 'Room B', speakers: ['Bob'], startTime: '2025-07-10T14:00:00Z', full_description: 'CI/CD with Drupal.' }),
-  makeSession({ id: 's3', title: 'Accessibility Deep Dive', track: ['Frontend', 'UX'], location: 'Hall 1', speakers: ['Carol'], startTime: '2025-07-11T09:00:00Z', full_description: 'WCAG guidelines.' }),
+  makeSession({
+    id: 's1',
+    title: 'Intro to Drupal',
+    track: ['Frontend'],
+    location: 'Hall 1',
+    speakers: ['Alice'],
+    startTime: '2025-07-10T09:00:00Z',
+    full_description: 'Drupal basics.',
+  }),
+  makeSession({
+    id: 's2',
+    title: 'DevOps Pipelines',
+    track: ['DevOps'],
+    location: 'Room B',
+    speakers: ['Bob'],
+    startTime: '2025-07-10T14:00:00Z',
+    full_description: 'CI/CD with Drupal.',
+  }),
+  makeSession({
+    id: 's3',
+    title: 'Accessibility Deep Dive',
+    track: ['Frontend', 'UX'],
+    location: 'Hall 1',
+    speakers: ['Carol'],
+    startTime: '2025-07-11T09:00:00Z',
+    full_description: 'WCAG guidelines.',
+  }),
 ];
 
 beforeEach(() => {
@@ -78,7 +102,7 @@ describe('filterEvents — keyword', () => {
 
   it('is case-insensitive', () => {
     expect(filterEvents(sessions, { keyword: 'drupal' })).toHaveLength(
-      filterEvents(sessions, { keyword: 'Drupal' }).length
+      filterEvents(sessions, { keyword: 'Drupal' }).length,
     );
   });
 

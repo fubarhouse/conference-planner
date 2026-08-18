@@ -1,7 +1,21 @@
+import './modules/pwa.js'; // registers the service worker (PWA/offline)
 import { init, toggleEventSelectionPublic, wireStatsHandlers } from './modules/events.js';
-import { updateSelectionOverview, updateStageStats, setupStatsDelegation } from './modules/stats.js';
+import { initThemePicker } from './modules/themePicker.js';
+import { initScheduleSubscribe } from './modules/scheduleSubscribe.js';
+import { initAppMenu } from './modules/appMenu.js';
+import { refreshFilterCount } from './modules/filters.js';
+import {
+  updateSelectionOverview,
+  updateStageStats,
+  setupStatsDelegation,
+} from './modules/stats.js';
 import { setupEventsDelegation, setToggleSelectionFn } from './modules/render.js';
 import { initNowIndicator } from './modules/nowIndicator.js';
+import { initNowNext } from './modules/nowNext.js';
+import { initRail, closeRail } from './modules/rail.js';
+import { initSheetDismiss } from './modules/sheetDismiss.js';
+import { initSheetHistory } from './modules/sheetHistory.js';
+import { setupMobileAccordion } from './modules/accordion.js';
 
 wireStatsHandlers(updateSelectionOverview, updateStageStats);
 setToggleSelectionFn(toggleEventSelectionPublic);
@@ -12,54 +26,23 @@ function hideLoadingOverlay() {
   overlay.classList.add('is-hidden');
 }
 
-function setupMobileAccordion(toggleId, contentId) {
-  const toggle = document.getElementById(toggleId);
-  const content = document.getElementById(contentId);
-  if (!toggle || !content) return;
-
-  toggle.addEventListener('click', () => {
-    const expanded = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-    content.classList.toggle('hidden', expanded);
-  });
-}
-
-function setupHeaderMenu() {
-  const btn = document.getElementById('headerMenuBtn');
-  const menu = document.getElementById('headerMenu');
-  if (!btn || !menu) return;
-
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const open = menu.classList.toggle('hidden');
-    btn.setAttribute('aria-expanded', String(!open));
-  });
-
-  document.addEventListener('click', () => {
-    if (!menu.classList.contains('hidden')) {
-      menu.classList.add('hidden');
-      btn.setAttribute('aria-expanded', 'false');
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
-      menu.classList.add('hidden');
-      btn.setAttribute('aria-expanded', 'false');
-      btn.focus();
-    }
-  });
-}
-
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     setupEventsDelegation();
     setupStatsDelegation();
     await init();
+    refreshFilterCount();
     setupMobileAccordion('usageInstructionsToggle', 'usageInstructionsContent');
     setupMobileAccordion('sessionFiltersToggle', 'sessionFiltersContent');
     initNowIndicator();
-    setupHeaderMenu();
+    initNowNext();
+    initRail();
+    initSheetDismiss({ closeRail });
+    initSheetHistory({ closeRail });
+    initThemePicker();
+    initScheduleSubscribe();
+    // Runs last: it adopts the elements the calls above have finished wiring.
+    initAppMenu({ adopt: ['.app-nav', '.header-actions', '#filtersPanel .l-cluster'] });
   } finally {
     hideLoadingOverlay();
   }

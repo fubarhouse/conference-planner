@@ -2,11 +2,28 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { readFileSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { createContext, runInContext } from 'vm';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const SCHEMA = JSON.parse(
-  readFileSync(resolve(__dirname, '../../../schemas/event.schema.json'), 'utf-8')
+  readFileSync(resolve(__dirname, '../../../schemas/event.schema.json'), 'utf-8'),
 );
+
+// The editor loads Ajv as a plain <script>, so the browser's validator is whatever
+// app/vendor ships — not the copy in node_modules, which is a different major
+// version used by the server. Running the vendored bundle here means these tests
+// exercise the file that actually reaches the page.
+function vendoredAjv() {
+  const sandbox = {};
+  sandbox.window = sandbox;
+  sandbox.self = sandbox;
+  createContext(sandbox);
+  runInContext(
+    readFileSync(resolve(__dirname, '../../../vendor/ajv-6.12.6.min.js'), 'utf-8'),
+    sandbox,
+  );
+  return sandbox.Ajv;
+}
 
 // Minimal dataset that satisfies every required field in event.schema.json
 const VALID_DATASET = {
@@ -29,10 +46,10 @@ const VALID_DATASET = {
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
-function makeFetchStub(schema = SCHEMA) {
-  return vi.fn(() =>
-    Promise.resolve({ json: () => Promise.resolve(schema) })
-  );
+// `ok` included because the real thing has it, and the loader checks it: a 404
+// that returns an HTML error page used to surface as "Unexpected token '<'".
+function makeFetchStub(schema = SCHEMA, { ok = true, status = 200 } = {}) {
+  return vi.fn(() => Promise.resolve({ ok, status, json: () => Promise.resolve(schema) }));
 }
 
 async function freshValidator(fetchStub, AjvStub) {
@@ -41,6 +58,20 @@ async function freshValidator(fetchStub, AjvStub) {
   if (AjvStub !== undefined) vi.stubGlobal('Ajv', AjvStub);
   return import('../validator.js');
 }
+
+describe('loading the schema', () => {
+  it('reports the HTTP status when the schema cannot be fetched', async () => {
+    // A deep route used to answer this request with editor.html, so the JSON parse
+    // failed on "<!DOCTYPE" and the message said nothing useful. Fail on the status
+    // instead, before anything tries to parse a page as a schema.
+    const { validateDataset } = await freshValidator(
+      makeFetchStub(SCHEMA, { ok: false, status: 404 }),
+    );
+    const result = await validateDataset(structuredClone(VALID_DATASET));
+    expect(result.valid).toBe(false);
+    expect(result.errors[0].message).toContain('404');
+  });
+});
 
 // ── formatValidationErrors ────────────────────────────────────────────────────
 
@@ -59,12 +90,14 @@ describe('formatValidationErrors', () => {
   });
 
   it('annotates additionalProperties errors with the unexpected key', () => {
-    const errors = [{
-      instancePath: '/event',
-      message: 'must NOT have additional properties',
-      keyword: 'additionalProperties',
-      params: { additionalProperty: 'bogusField' },
-    }];
+    const errors = [
+      {
+        instancePath: '/event',
+        message: 'must NOT have additional properties',
+        keyword: 'additionalProperties',
+        params: { additionalProperty: 'bogusField' },
+      },
+    ];
     expect(formatValidationErrors(errors)).toContain('"bogusField"');
   });
 
@@ -94,8 +127,8 @@ describe('formatValidationErrors', () => {
 
 describe('validateDataset', () => {
   it('returns valid:true for a minimal schema-conformant dataset', async () => {
-    // Use real Ajv so the schema is actually evaluated
-    const Ajv = (await import('ajv')).default;
+    // Use the real, vendored Ajv so the schema is actually evaluated
+    const Ajv = vendoredAjv();
     const { validateDataset } = await freshValidator(makeFetchStub(), Ajv);
     const result = await validateDataset(structuredClone(VALID_DATASET));
     expect(result.valid).toBe(true);
@@ -103,7 +136,7 @@ describe('validateDataset', () => {
   });
 
   it('returns valid:false when a required event field is missing', async () => {
-    const Ajv = (await import('ajv')).default;
+    const Ajv = vendoredAjv();
     const { validateDataset } = await freshValidator(makeFetchStub(), Ajv);
     const bad = structuredClone(VALID_DATASET);
     delete bad.event.designation;
@@ -113,7 +146,7 @@ describe('validateDataset', () => {
   });
 
   it('returns valid:false for an additionalProperties violation', async () => {
-    const Ajv = (await import('ajv')).default;
+    const Ajv = vendoredAjv();
     const { validateDataset } = await freshValidator(makeFetchStub(), Ajv);
     const bad = structuredClone(VALID_DATASET);
     bad.event.unknownField = 'surprise';

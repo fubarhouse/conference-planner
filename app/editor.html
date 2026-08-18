@@ -1,116 +1,159 @@
 <!DOCTYPE html>
 <html lang="en" style="opacity:0">
 <head>
+  <!-- Self-hosted, latin subset. No third-party origin in the critical path.
+       Safe as static <link>s: on a deep route the server ships `<base href="/">`
+       ahead of them, so the preload scanner resolves them correctly. -->
+  <link rel="preload" href="./fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./fonts/newsreader-roman.woff2" as="font" type="font/woff2" crossorigin>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="icon" href="./img/app-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="theme-color" content="#1a2535">
-  <title>Dataset Editor - Drupal Event Schedule Builder</title>
+  <meta name="theme-color" content="#f4f5f0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#131614" media="(prefers-color-scheme: dark)">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png">
+  <title>Editor &mdash; Programme</title>
   <style>html{transition:opacity .15s ease}</style>
   <noscript><style>html{opacity:1}</style></noscript>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="./css/utilities.css">
-  <link rel="stylesheet" href="./css/app.css">
-  <link rel="stylesheet" href="./css/forms.css">
-  <link rel="stylesheet" href="./css/schedule.css">
-  <link rel="stylesheet" href="./css/editor.css">
-  <link rel="stylesheet" href="./css/components.css">
-  <link rel="stylesheet" href="./css/editor-design.css">
+
+  <!-- Layer order matches every other section. `legacy` sits after `reset` so
+       legacy utility classes still beat our element resets, but before our own
+       layers so `app-*`/`edt-*` always win. `overrides` is first because
+       !important reverses layer order. See brand/DECISIONS.md. -->
+  <style>
+    @layer overrides, reset, legacy, tokens, base, composition, section, utility;
+    @import url("./css/utilities.css") layer(legacy);
+    @import url("./css/schedule.css") layer(legacy);
+    @import url("./css/components.css") layer(legacy);
+  </style>
+  <link rel="stylesheet" href="./css/foundation.css">
+  <link rel="stylesheet" href="./css/section-chrome.css">
+  <link rel="stylesheet" href="./css/section-editor.css">
 </head>
-<body class="bg-gray-100 min-h-screen">
-  <header class="header-shell text-white">
-    <div class="px-4 py-2 flex items-center gap-3">
-      <div class="header-logo brand-drupalcon flex-shrink-0">
-        <i class="fas fa-pen-ruler" aria-hidden="true"></i>
+<body>
+
+  <a class="u-skip" href="#editorMain">Skip to the editor</a>
+
+  <!-- Shared masthead + section nav, the same as every other section. The
+       sidebar below is WITHIN-editor navigation; this is between sections. -->
+  <header class="app-masthead">
+    <div class="l-center">
+      <div class="app-masthead__bar">
+        <div class="app-lockup">
+          <span class="app-lockup__seal" aria-hidden="true"></span>
+          <div class="app-lockup__title">Editor</div>
+          <h1 class="app-lockup__place">
+            <span id="editorHeaderEvent">Datasets</span>
+          </h1>
+        </div>
       </div>
-      <h1 class="header-title min-w-0 flex-1">
-        <span class="header-event">Dataset Editor</span>
-        <span class="header-suffix">MVP</span>
-      </h1>
+      <nav class="app-nav" aria-label="Site navigation">
+        <a href="./home.html" class="app-nav__link">Home</a>
+        <a href="./index.html" class="app-nav__link">Schedule</a>
+        <a href="./planner.html" class="app-nav__link">Planner</a>
+        <a href="./archive.html" class="app-nav__link">Archive</a>
+        <a href="./curation.html" class="app-nav__link">Curation</a>
+        <a href="./editor.html" class="app-nav__link" aria-current="page">Editor</a>
+      </nav>
+
+      <!-- The route, rendered. Filled by renderEditorCrumbs() in editor.js. -->
+      <nav id="editorCrumbs" class="app-crumbs" aria-label="Breadcrumb"></nav>
     </div>
   </header>
 
   <aside id="editorSidebar" aria-label="Editor navigation">
     <div class="sidebar-brand">
-      <div class="sidebar-app-icon">
-        <i class="fas fa-pen-ruler" style="color:white;font-size:0.75rem" aria-hidden="true"></i>
-      </div>
+      <div class="sidebar-app-icon" aria-hidden="true"></div>
       <div class="sidebar-brand-text">
-        <span class="sidebar-event-name">Dataset Editor</span>
+        <span class="sidebar-event-name">Editor</span>
       </div>
       <button id="editorSidebarToggleBtn" type="button" class="sidebar-toggle-btn ml-auto" aria-label="Toggle sidebar">
-        <i id="editorSidebarToggleIcon" class="fas fa-angles-left" aria-hidden="true"></i>
+        <span id="editorSidebarToggleIcon" aria-hidden="true">&laquo;</span>
       </button>
     </div>
 
     <nav id="editorSidebarNav" aria-label="Editor sections">
       <button type="button" id="editorHomeBtn" class="sidebar-home-btn">
-        <i class="fas fa-chevron-left" aria-hidden="true"></i>
-        <span class="sidebar-label">All events</span>
+        <span class="sidebar-label">&larr; All events</span>
       </button>
       <div class="sidebar-group">
         <span class="sidebar-group-label">Content</span>
         <button type="button" class="sidebar-tab-btn is-active" data-editor-tab="sessions">
-          <i class="fas fa-calendar-day fa-fw sidebar-item-icon" aria-hidden="true"></i>
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">SE</span>
           <span class="sidebar-label">Sessions</span>
         </button>
+        <button type="button" class="sidebar-tab-btn" data-editor-tab="people">
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">PE</span>
+          <span class="sidebar-label">People</span>
+        </button>
         <button type="button" class="sidebar-tab-btn" data-editor-tab="sponsors">
-          <i class="fas fa-handshake fa-fw sidebar-item-icon" aria-hidden="true"></i>
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">SP</span>
           <span class="sidebar-label">Sponsors</span>
+        </button>
+        <button type="button" class="sidebar-tab-btn" data-editor-tab="related">
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">RE</span>
+          <span class="sidebar-label">Related events</span>
         </button>
       </div>
       <div class="sidebar-group">
         <span class="sidebar-group-label">Event</span>
         <button type="button" class="sidebar-tab-btn" data-editor-tab="event">
-          <i class="fas fa-circle-info fa-fw sidebar-item-icon" aria-hidden="true"></i>
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">EV</span>
           <span class="sidebar-label">Event</span>
         </button>
         <button type="button" class="sidebar-tab-btn" data-editor-tab="logo">
-          <i class="fas fa-image fa-fw sidebar-item-icon" aria-hidden="true"></i>
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">LG</span>
           <span class="sidebar-label">Logo</span>
         </button>
         <button type="button" class="sidebar-tab-btn" data-editor-tab="flickr">
-          <i class="fas fa-images fa-fw sidebar-item-icon" aria-hidden="true"></i>
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">PH</span>
           <span class="sidebar-label">Photos</span>
         </button>
         <button type="button" class="sidebar-tab-btn" data-editor-tab="appearance">
-          <i class="fas fa-palette fa-fw sidebar-item-icon" aria-hidden="true"></i>
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">AP</span>
           <span class="sidebar-label">Appearance</span>
         </button>
       </div>
       <div class="sidebar-group">
         <span class="sidebar-group-label">Reference</span>
         <button type="button" class="sidebar-tab-btn" data-editor-tab="sitemap">
-          <i class="fas fa-link fa-fw sidebar-item-icon" aria-hidden="true"></i>
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">SR</span>
           <span class="sidebar-label">Sources</span>
         </button>
       </div>
     </nav>
 
     <div id="editorSidebarFooter">
+      <a href="./curation.html" class="sidebar-tab-btn">
+        <span class="sidebar-item-icon pln-code" aria-hidden="true">CU</span>
+        <span class="sidebar-label">Curation</span>
+      </a>
+      <a href="./archive.html" id="editorObservatoryBtn" class="sidebar-tab-btn">
+        <span class="sidebar-item-icon pln-code" aria-hidden="true">AR</span>
+        <span class="sidebar-label">Archive</span>
+      </a>
       <a href="./index.html" class="sidebar-tab-btn">
-        <i class="fas fa-calendar-alt fa-fw sidebar-item-icon" aria-hidden="true"></i>
+        <span class="sidebar-item-icon pln-code" aria-hidden="true">SC</span>
         <span class="sidebar-label">Schedule</span>
       </a>
       <a href="./planner.html" class="sidebar-tab-btn">
-        <i class="fas fa-clipboard-list fa-fw sidebar-item-icon" aria-hidden="true"></i>
+        <span class="sidebar-item-icon pln-code" aria-hidden="true">PL</span>
         <span class="sidebar-label">My Planner</span>
       </a>
     </div>
   </aside>
 
-  <main id="editorMain" class="sm:w-[90%] sm:mx-auto px-4 py-4 sm:py-8 space-y-4">
-    <div id="editorBlocked" class="hidden bg-white rounded-lg shadow-md p-5 text-red-300 border border-red-900/50">
-      <h2 class="text-lg font-semibold mb-2"><i class="fas fa-lock mr-2"></i>Editor locked</h2>
-      <p>This endpoint is available only on <code>localhost</code>/<code>127.0.0.1</code>/<code>::1</code>.</p>
+  <main id="editorMain" class="px-4">
+    <div id="editorBlocked" class="hidden edt-locked">
+      <h2 class="edt-section__title">Editor locked</h2>
+      <p>This endpoint is available only on <code>localhost</code>, <code>127.0.0.1</code> or <code>::1</code>.</p>
     </div>
 
     <div id="recoveryBar" class="recovery-bar hidden" role="alert" aria-live="polite">
-      <i class="fas fa-rotate-left recovery-bar-icon"></i>
       <span id="recoveryBarText" class="recovery-bar-text"></span>
       <div class="recovery-bar-actions">
         <button id="recoveryRestore" type="button" class="recovery-bar-btn recovery-bar-btn--primary">Restore</button>
@@ -121,171 +164,136 @@
     <div id="editorHome" class="hidden"></div>
 
     <div id="editorApp" class="space-y-4">
-      <section id="editorToolbar" class="bg-white rounded-lg shadow-md p-4">
+      <section id="editorToolbar">
         <select id="datasetSelect" hidden aria-hidden="true"></select>
-        <div class="flex flex-wrap gap-2 items-center">
-          <button id="editorBackBtn" type="button" title="Back to all events" aria-label="Back to all events" class="toolbar-back-btn">
-            <i class="fas fa-arrow-left"></i>
+        <div class="edt-strip">
+          <button id="editorBackBtn" type="button" aria-label="Back to all events" class="edt-tbtn">&larr; All events</button>
+          <button id="editorSearchEvents" type="button" class="edt-tbtn">Find event
           </button>
-          <button id="editorSearchEvents" type="button" class="h-11 inline-flex items-center justify-center px-5 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed">
-            <i class="fas fa-search mr-2"></i>Find event
-          </button>
-          <button id="newDataset" type="button" class="h-11 inline-flex items-center justify-center pl-5 pr-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
-            <i class="fas fa-plus mr-2"></i>New
+          <button id="newDataset" type="button" class="edt-tbtn">New
           </button>
           <div class="editor-preview-split" id="saveDatasetGroup">
-            <button id="saveDataset" type="button" title="Save (Ctrl+S)" class="h-11 inline-flex items-center justify-center pl-5 pr-4 border border-r-0 border-gray-300 rounded-l-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap" disabled>
-              <i class="fas fa-floppy-disk mr-2"></i>Save
+            <button id="saveDataset" type="button" title="Save (Ctrl+S)" class="edt-tbtn" disabled>Save
             </button>
-            <button id="saveDatasetToggle" type="button" aria-label="Save options" aria-haspopup="true" aria-expanded="false" class="h-11 w-9 inline-flex items-center justify-center border border-gray-300 rounded-r-md text-gray-500 bg-white hover:bg-gray-50 transition-colors" disabled>
-              <i class="fas fa-chevron-down text-xs" aria-hidden="true"></i>
-            </button>
+            <button id="saveDatasetToggle" type="button" aria-label="Save options" aria-haspopup="true" aria-expanded="false" class="edt-tbtn edt-tbtn--more" disabled>&#9662;</button>
             <div id="saveDatasetDropdown" class="editor-preview-dropdown hidden" role="menu">
-              <button id="saveAsDataset" type="button" role="menuitem" class="editor-preview-dropdown-item">
-                <i class="fas fa-file-export" aria-hidden="true"></i>Save As
+              <button id="saveAsDataset" type="button" role="menuitem" class="editor-preview-dropdown-item">Save As
               </button>
             </div>
           </div>
           <div class="editor-preview-split" id="previewDatasetGroup">
-            <button id="previewDataset" type="button" class="h-11 inline-flex items-center justify-center pl-5 pr-4 border border-r-0 border-gray-300 rounded-l-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap" disabled>
-              <i class="fas fa-eye mr-2"></i>Preview
+            <button id="previewDataset" type="button" class="edt-tbtn" disabled>Preview
             </button>
-            <button id="previewDatasetToggle" type="button" aria-label="Preview options" aria-haspopup="true" aria-expanded="false" class="h-11 w-9 inline-flex items-center justify-center border border-gray-300 rounded-r-md text-gray-500 bg-white hover:bg-gray-50 transition-colors" disabled>
-              <i class="fas fa-chevron-down text-xs" aria-hidden="true"></i>
-            </button>
+            <button id="previewDatasetToggle" type="button" aria-label="Preview options" aria-haspopup="true" aria-expanded="false" class="edt-tbtn edt-tbtn--more" disabled>&#9662;</button>
             <div id="previewDatasetDropdown" class="editor-preview-dropdown hidden" role="menu">
-              <button type="button" role="menuitem" data-preview-mode="tab" class="editor-preview-dropdown-item">
-                <i class="fas fa-external-link-alt" aria-hidden="true"></i>Open in new tab
+              <button type="button" role="menuitem" data-preview-mode="tab" class="editor-preview-dropdown-item">Open in new tab
               </button>
-              <button type="button" role="menuitem" data-preview-mode="same" class="editor-preview-dropdown-item">
-                <i class="fas fa-arrow-right" aria-hidden="true"></i>Open in this tab
+              <button type="button" role="menuitem" data-preview-mode="same" class="editor-preview-dropdown-item">Open in this tab
               </button>
             </div>
           </div>
-          <button id="undoAction" type="button" title="Nothing to undo" class="h-11 inline-flex items-center justify-center pl-5 pr-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap disabled:opacity-40 disabled:cursor-not-allowed" disabled>
-            <i class="fas fa-rotate-left mr-2"></i>Undo
+          <button id="undoAction" type="button" title="Nothing to undo" class="edt-tbtn" disabled>Undo
           </button>
         </div>
-        <div class="flex flex-wrap gap-2 mt-2 items-center">
+        <div class="edt-strip edt-strip--file">
           <div id="editorPathChip" class="toolbar-path-chip flex-1 min-w-0" aria-label="Current file">
-            <i class="fas fa-file-code"></i>
             <span class="toolbar-path-text">No file open</span>
           </div>
-          <div id="dirtyState" class="h-11 inline-flex items-center px-4 rounded-md border border-gray-300 text-sm text-gray-300 flex-shrink-0">
-            <i class="fas fa-circle mr-2 text-xs"></i><span>No changes</span>
+          <div id="dirtyState" class="edt-badge"><span>No changes</span>
           </div>
-          <button id="revertDataset" type="button" class="h-11 inline-flex items-center justify-center pl-4 pr-3 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0" disabled>
-            <i class="fas fa-rotate-left mr-2"></i>Revert
+          <button id="revertDataset" type="button" class="h-11 inline-flex items-center justify-center pl-4 pr-3 border edt-rule rounded-md text-sm font-medium edt-ink-1 edt-surface transition-colors whitespace-nowrap disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0" disabled>Revert
           </button>
         </div>
       </section>
 
-      <section class="editor-meta-accordion rounded-lg shadow-md p-4 space-y-4">
+      <section class="editor-meta-accordion rounded-lg p-4 space-y-4">
         <div class="editor-tab-header flex items-center justify-between gap-3 flex-wrap">
           <div>
-            <h2 class="text-lg font-semibold text-gray-100">Editor Sections</h2>
-            <p class="text-sm text-gray-400">Switch between event metadata, assets, sessions, and sponsors.</p>
+            <h2 class="text-lg font-semibold edt-ink-0">Editor Sections</h2>
+            <p class="edt-muted">Switch between event metadata, assets, sessions, and sponsors.</p>
           </div>
           <div class="editor-tab-row" role="tablist" aria-label="Editor sections">
-            <button id="showEventTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="eventWorkspacePanel">
-              <i class="fas fa-circle-info mr-2 text-[0.72rem]"></i>Event
+            <button id="showEventTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="eventWorkspacePanel">Event
             </button>
-            <button id="showLogoTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="logoWorkspacePanel">
-              <i class="fas fa-image mr-2 text-[0.72rem]"></i>Logo
+            <button id="showLogoTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="logoWorkspacePanel">Logo
             </button>
-            <button id="showFlickrTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="flickrWorkspacePanel">
-              <i class="fas fa-images mr-2 text-[0.72rem]"></i>Photos
+            <button id="showFlickrTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="flickrWorkspacePanel">Photos
             </button>
-            <button id="showSessionsTab" type="button" class="editor-tab-button is-active" role="tab" aria-selected="true" aria-controls="sessionWorkspacePanel">
-              <i class="fas fa-calendar-day mr-2 text-[0.72rem]"></i>Sessions
+            <button id="showSessionsTab" type="button" class="editor-tab-button is-active" role="tab" aria-selected="true" aria-controls="sessionWorkspacePanel">Sessions
             </button>
-            <button id="showSponsorsTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="sponsorWorkspacePanel">
-              <i class="fas fa-handshake mr-2 text-[0.72rem]"></i>Sponsors
+            <button id="showSponsorsTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="sponsorWorkspacePanel">Sponsors
             </button>
-            <button id="showSitemapTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="sitemapWorkspacePanel">
-              <i class="fas fa-link mr-2 text-[0.72rem]"></i>Sources
+            <button id="showPeopleTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="peopleWorkspacePanel">People
             </button>
-            <button id="showAppearanceTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="appearanceWorkspacePanel">
-              <i class="fas fa-palette mr-2 text-[0.72rem]"></i>Appearance
+            <button id="showRelatedTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="relatedWorkspacePanel">Related events
             </button>
-            <button id="showUsersTab" type="button" class="editor-tab-button hidden" role="tab" aria-selected="false" aria-controls="usersWorkspacePanel">
-              <i class="fas fa-users mr-2 text-[0.72rem]"></i>Users
+            <button id="showSitemapTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="sitemapWorkspacePanel">Sources
+            </button>
+            <button id="showAppearanceTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="appearanceWorkspacePanel">Appearance
+            </button>
+            <button id="showUsersTab" type="button" class="editor-tab-button hidden" role="tab" aria-selected="false" aria-controls="usersWorkspacePanel">Users
             </button>
           </div>
         </div>
 
       <div id="eventWorkspacePanel">
-      <section class="bg-white rounded-lg shadow-md p-4">
-        <div class="flex items-center justify-between mb-3">
+      <section>
+        <div class="edt-section__head">
           <div>
-            <h2 class="text-lg font-semibold text-gray-100">Event Metadata</h2>
-            <p class="text-sm text-gray-400">Core event details used throughout the planner.</p>
+            <p class="edt-eyebrow">Dataset</p>
+            <h2 class="edt-section__title">Event metadata</h2>
           </div>
+          
         </div>
-        <div id="eventMetaForm" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3"></div>
+        <p class="edt-hint">Core event details used throughout the planner.</p>
+        <div id="eventMetaForm" class="edt-form edt-form--3"></div>
       </section>
       </div>
 
       <div id="sessionWorkspacePanel">
         <div class="editor-sub-tab-row" role="tablist" aria-label="Sessions sections">
-          <button id="showSessionDetailsSubTab" type="button" class="editor-sub-tab-button is-active" role="tab" aria-selected="true">
-            <i class="fas fa-list mr-1.5 text-[0.72rem]"></i>Details
+          <button id="showSessionDetailsSubTab" type="button" class="editor-sub-tab-button is-active" role="tab" aria-selected="true">Details
           </button>
-          <button id="showSessionTimelineSubTab" type="button" class="editor-sub-tab-button" role="tab" aria-selected="false">
-            <i class="fas fa-calendar-week mr-1.5 text-[0.72rem]"></i>Timeline
+          <button id="showSessionTimelineSubTab" type="button" class="editor-sub-tab-button" role="tab" aria-selected="false">Timeline
           </button>
         </div>
         <div id="sessionDetailsPanel">
-      <section id="sessionWorkspace" class="editor-session-workspace grid grid-cols-1 xl:grid-cols-[360px_1fr] gap-4">
-        <div id="sessionSidebarPanel" class="bg-white rounded-lg shadow-md p-4 h-[70vh] max-h-[820px] min-h-[420px] flex flex-col">
-          <div class="flex flex-col gap-2 mb-3">
-            <div class="flex items-center justify-between gap-2">
-              <h2 class="text-lg font-semibold text-gray-100">Sessions</h2>
-              <div class="flex items-center gap-2">
-                <button id="toggleQuickSessionEdit" type="button" class="editor-quick-edit-toggle hidden h-10 inline-flex items-center justify-center px-3 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap" disabled>
-                  <i id="toggleQuickSessionEditIcon" class="fas fa-pen-to-square mr-1.5 text-[0.72rem]"></i><span id="toggleQuickSessionEditLabel">Quick edit</span>
-                </button>
-                <button id="toggleSessionWorkspace" type="button" class="h-10 inline-flex items-center justify-center px-3 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
-                  <i id="toggleSessionWorkspaceIcon" class="fas fa-expand-alt mr-1.5 text-[0.72rem]"></i><span id="toggleSessionWorkspaceLabel">Expand list</span>
-                </button>
-              </div>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
-              <button id="addSession" type="button" class="h-10 w-full inline-flex items-center justify-center px-2 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap" disabled>
-                <i class="fas fa-plus mr-1.5 text-[0.72rem]"></i>Add
-              </button>
-              <button id="deleteSession" type="button" class="h-10 w-full inline-flex items-center justify-center px-2 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap" disabled>
-                <i class="fas fa-trash mr-1.5 text-[0.72rem]"></i>Delete
-              </button>
+      <!-- List beside form. Sessions and Sponsors are the SAME component with
+           different records, so they share `edt-work*` rather than each having
+           a private copy of the same idea. -->
+      <section id="sessionWorkspace" class="edt-work">
+        <div id="sessionSidebarPanel" class="edt-work__list">
+          <div class="edt-work__head">
+            <h2 class="edt-work__title">Sessions</h2>
+            <div class="edt-work__acts">
+              <button id="toggleQuickSessionEdit" type="button" class="editor-quick-edit-toggle edt-act hidden" disabled><span id="toggleQuickSessionEditLabel">Quick edit</span></button>
+              <button id="toggleSessionWorkspace" type="button" class="edt-act"><span id="toggleSessionWorkspaceLabel">Expand list</span></button>
+              <button id="addSession" type="button" class="edt-act" disabled>Add</button>
+              <button id="deleteSession" type="button" class="edt-act edt-act--del" disabled>Delete</button>
             </div>
           </div>
-          <p class="text-xs text-gray-400 mb-2">Drag rows to reorder.</p>
-          <div class="relative mb-2">
-            <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xs"></i>
-            <input id="sessionSearchInput" type="text" placeholder="Search session titles..." class="w-full h-9 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white pl-8 pr-3">
-          </div>
-          <ul id="sessionList" class="space-y-2 overflow-y-auto pr-1 flex-1 min-h-0"></ul>
+          <input id="sessionSearchInput" type="text" placeholder="Search session titles&hellip;" class="edt-search">
+          <p class="edt-hint">Drag rows to reorder.</p>
+          <ul id="sessionList" class="edt-rows"></ul>
         </div>
 
-        <div id="sessionEditorPanel" class="bg-white rounded-lg shadow-md p-4 min-h-[500px]">
-          <div class="flex items-center justify-between mb-3">
-            <h2 class="text-lg font-semibold text-gray-100">Session Editor</h2>
-            <div class="flex items-center gap-2">
-              <span id="sessionIndexBadge" class="h-8 inline-flex items-center px-3 rounded-md border border-gray-600 text-xs text-gray-300">No session selected</span>
-              <span id="sessionDirtyState" class="h-8 inline-flex items-center px-3 rounded-md border border-gray-300 text-xs text-gray-300">
-                <i class="fas fa-circle mr-2 text-[0.55rem] text-emerald-300"></i><span>No changes</span>
-              </span>
+        <div id="sessionEditorPanel" class="edt-work__form">
+          <div class="edt-work__head">
+            <h2 class="edt-work__title">Session</h2>
+            <div class="edt-work__acts">
+              <span id="sessionIndexBadge" class="edt-badge">No session selected</span>
+              <span id="sessionDirtyState" class="edt-badge"><span>No changes</span></span>
             </div>
           </div>
-          <div id="sessionForm" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+          <div id="sessionForm" class="edt-form"></div>
         </div>
       </section>
         </div><!-- /sessionDetailsPanel -->
         <div id="timelineWorkspacePanel" class="hidden">
-          <section class="editor-meta-accordion rounded-lg shadow-md p-4">
+          <section class="editor-meta-accordion rounded-lg p-4">
             <div class="mb-3">
-              <h2 class="text-lg font-semibold text-gray-100">Timeline Editor</h2>
-              <p class="text-sm text-gray-400">Drag sessions to reschedule. Click an empty slot to add. Drag the bottom handle to resize.</p>
+              <h2 class="text-lg font-semibold edt-ink-0">Timeline Editor</h2>
+              <p class="edt-muted">Drag sessions to reschedule. Click an empty slot to add. Drag the bottom handle to resize.</p>
             </div>
             <div id="timelineCanvas"></div>
           </section>
@@ -293,90 +301,141 @@
       </div><!-- /sessionWorkspacePanel -->
 
       <div id="logoWorkspacePanel" class="hidden">
-      <section class="bg-white rounded-lg shadow-md p-4">
-        <div class="flex items-center justify-between mb-3">
+      <section>
+        <div class="edt-section__head">
           <div>
-            <h2 class="text-lg font-semibold text-gray-100">Event Logo</h2>
-            <p class="text-sm text-gray-400">Manage the logo shown in the public event header.</p>
+            <p class="edt-eyebrow">Dataset</p>
+            <h2 class="edt-section__title">Event logo</h2>
           </div>
+          
         </div>
-        <div id="logoForm" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+        <p class="edt-hint">Manage the logo shown in the public event header.</p>
+        <div id="logoForm" class="edt-form"></div>
       </section>
       </div>
 
       <div id="flickrWorkspacePanel" class="hidden">
-      <section class="bg-white rounded-lg shadow-md p-4">
-        <div class="flex items-center justify-between mb-3">
+      <section>
+        <div class="edt-section__head">
           <div>
-            <h2 class="text-lg font-semibold text-gray-100">Photos</h2>
-            <p class="text-sm text-gray-400">Optional photo-sharing callout shown at the bottom of the event page.</p>
+            <p class="edt-eyebrow">Dataset</p>
+            <h2 class="edt-section__title">Photos</h2>
           </div>
+          
         </div>
-        <div id="flickrForm" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+        <p class="edt-hint">Optional photo-sharing callout shown at the bottom of the event page.</p>
+        <div id="flickrForm" class="edt-form"></div>
       </section>
       </div>
 
       <div id="sponsorWorkspacePanel" class="hidden">
-      <section id="sponsorWorkspace" class="editor-session-workspace grid grid-cols-1 xl:grid-cols-[360px_1fr] gap-4">
-        <div id="sponsorSidebarPanel" class="bg-white rounded-lg shadow-md p-4 h-[60vh] max-h-[760px] min-h-[360px] flex flex-col">
-          <div class="flex flex-col gap-2 mb-3">
-            <div class="flex items-center justify-between gap-2">
-              <div>
-                <h2 class="text-lg font-semibold text-gray-100">Sponsors</h2>
-                <p class="text-sm text-gray-400">Manage sponsor assets, placement metadata, and session associations.</p>
-              </div>
-              <div class="flex items-center gap-2">
-                <button id="toggleQuickSponsorEdit" type="button" class="editor-quick-edit-toggle hidden h-10 inline-flex items-center justify-center px-3 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap" disabled>
-                  <i id="toggleQuickSponsorEditIcon" class="fas fa-pen-to-square mr-1.5 text-[0.72rem]"></i><span id="toggleQuickSponsorEditLabel">Quick edit</span>
-                </button>
-                <button id="toggleSponsorWorkspace" type="button" class="h-10 inline-flex items-center justify-center px-3 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
-                  <i id="toggleSponsorWorkspaceIcon" class="fas fa-expand-alt mr-1.5 text-[0.72rem]"></i><span id="toggleSponsorWorkspaceLabel">Expand list</span>
-                </button>
-              </div>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
-              <button id="addSponsor" type="button" class="h-10 w-full inline-flex items-center justify-center px-2 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap" disabled>
-                <i class="fas fa-plus mr-1.5 text-[0.72rem]"></i>Add
-              </button>
-              <button id="deleteSponsor" type="button" class="h-10 w-full inline-flex items-center justify-center px-2 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap" disabled>
-                <i class="fas fa-trash mr-1.5 text-[0.72rem]"></i>Delete
-              </button>
+      <section id="sponsorWorkspace" class="edt-work">
+        <div id="sponsorSidebarPanel" class="edt-work__list">
+          <div class="edt-work__head">
+            <h2 class="edt-work__title">Sponsors</h2>
+            <div class="edt-work__acts">
+              <button id="toggleQuickSponsorEdit" type="button" class="editor-quick-edit-toggle edt-act hidden" disabled><span id="toggleQuickSponsorEditLabel">Quick edit</span></button>
+              <button id="toggleSponsorWorkspace" type="button" class="edt-act"><span id="toggleSponsorWorkspaceLabel">Expand list</span></button>
+              <button id="addSponsor" type="button" class="edt-act" disabled>Add</button>
+              <button id="deleteSponsor" type="button" class="edt-act edt-act--del" disabled>Delete</button>
             </div>
           </div>
-          <p class="text-xs text-gray-400 mb-2">Drag rows to reorder.</p>
-          <ul id="sponsorList" class="space-y-2 overflow-y-auto pr-1 flex-1 min-h-0"></ul>
+          <p class="edt-hint">Sponsor assets, placement metadata and session associations. Drag rows to reorder.</p>
+          <label class="edt-breakglass">
+            <input id="sponsorLogosDisabledToggle" type="checkbox" class="ckl-check">
+            <span><strong>Hide sponsor logos</strong> — break-glass: show each sponsor&rsquo;s name instead of its logo on the public schedule. Off by default.</span>
+          </label>
+          <ul id="sponsorList" class="edt-rows"></ul>
         </div>
 
-        <div id="sponsorEditorPanel" class="bg-white rounded-lg shadow-md p-4 min-h-[420px]">
-          <div class="flex items-center justify-between mb-3">
-            <h2 class="text-lg font-semibold text-gray-100">Sponsor Editor</h2>
-            <div class="flex items-center gap-2">
-              <span id="sponsorIndexBadge" class="h-8 inline-flex items-center px-3 rounded-md border border-gray-600 text-xs text-gray-300">No sponsor selected</span>
-              <span id="sponsorDirtyState" class="h-8 inline-flex items-center px-3 rounded-md border border-gray-300 text-xs text-gray-300">
-                <i class="fas fa-circle mr-2 text-[0.55rem] text-emerald-300"></i><span>No changes</span>
-              </span>
+        <div id="sponsorEditorPanel" class="edt-work__form">
+          <div class="edt-work__head">
+            <h2 class="edt-work__title">Sponsor</h2>
+            <div class="edt-work__acts">
+              <span id="sponsorIndexBadge" class="edt-badge">No sponsor selected</span>
+              <span id="sponsorDirtyState" class="edt-badge"><span>No changes</span></span>
             </div>
           </div>
-          <div id="sponsorForm" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3"></div>
+          <div id="sponsorForm" class="edt-form edt-form--3"></div>
         </div>
       </section>
       </div>
 
-      <div id="sitemapWorkspacePanel" class="hidden">
-      <section class="editor-meta-accordion rounded-lg shadow-md p-4 mb-4">
-        <div class="mb-3">
-          <h2 class="text-lg font-semibold text-gray-100">Reference URLs</h2>
-          <p class="text-sm text-gray-400">Additional reference URLs for this event — documentation, archived pages, or related resources.</p>
-        </div>
-        <div id="otherUrlsEditorContent"></div>
-      </section>
-      <section class="bg-white rounded-lg shadow-md p-4">
-        <div class="flex items-center justify-between mb-4">
+      <div id="peopleWorkspacePanel" class="hidden">
+      <section>
+        <div class="edt-section__head">
           <div>
-            <h2 class="text-lg font-semibold text-gray-100">URL map</h2>
-            <p class="text-sm text-gray-400">Known URLs for this event's domain, derived from the dataset.</p>
+            <p class="edt-eyebrow">Dataset</p>
+            <h2 class="edt-section__title">People</h2>
+          </div>
+          <button id="addPersonBtn" type="button" class="edt-act">Add person</button>
+        </div>
+        <p class="edt-hint">Who ran the event and who spoke at it. Organisers and volunteers come from the event's drupal.org community page; speakers are read from the schedule and cannot be edited here.</p>
+
+        <div class="edt-form">
+          <label class="editor-form-field md:col-span-2">
+            <span class="editor-field-label">Community page</span>
+            <span class="editor-field-hint">The drupal.org community event page these credits came from.</span>
+            <input id="communityUrlInput" type="url" placeholder="https://www.drupal.org/community/events/…">
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Captured</span>
+            <span class="editor-field-hint">When the credits were last read from that page.</span>
+            <input id="communityCapturedInput" type="date">
+          </label>
+        </div>
+
+        <div id="peopleGroups"></div>
+      </section>
+      </div>
+
+      <div id="relatedWorkspacePanel" class="hidden">
+      <section>
+        <div class="edt-section__head">
+          <div>
+            <p class="edt-eyebrow">Dataset</p>
+            <h2 class="edt-section__title">Related events</h2>
+          </div>
+          <button id="addRelatedEvent" type="button" class="edt-act">Add related event</button>
+        </div>
+        <p class="edt-hint">Partners, linked conferences or co-located events — grouped by relationship, shown near the sponsors on the schedule.</p>
+        <div class="edt-form">
+          <label class="editor-form-field">
+            <span class="editor-field-label">Umbrella heading</span>
+            <span class="editor-field-hint">Optional — blank hides it.</span>
+            <input id="relatedEventsHeadingInput" type="text" placeholder="e.g. Related events">
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Placement</span>
+            <select id="relatedEventsPlacementSelect">
+              <option value="below">Below sponsors</option>
+              <option value="above">Above sponsors</option>
+            </select>
+          </label>
+        </div>
+        <ul id="relatedEventsList" class="rel-list edt-rows"></ul>
+      </section>
+      </div>
+
+      <div id="sitemapWorkspacePanel" class="hidden">
+      <section class="edt-stack">
+        <div class="edt-section__head">
+          <div>
+            <p class="edt-eyebrow">Dataset</p>
+            <h2 class="edt-section__title">Reference URLs</h2>
           </div>
         </div>
+        <p class="edt-hint">Additional reference URLs for this event — documentation, archived pages, or related resources.</p>
+        <div id="otherUrlsEditorContent"></div>
+      </section>
+      <section class="edt-stack">
+        <div class="edt-section__head">
+          <div>
+            <p class="edt-eyebrow">Derived</p>
+            <h2 class="edt-section__title">URL map</h2>
+          </div>
+        </div>
+        <p class="edt-hint">Known URLs for this event&rsquo;s domain, derived from the dataset.</p>
         <div id="sitemapContent"></div>
       </section>
       </div>
@@ -386,25 +445,28 @@
       </div>
 
       <div id="usersWorkspacePanel" class="hidden">
-        <section class="bg-white rounded-lg shadow-md p-4 space-y-5">
-          <div>
-            <h2 class="text-lg font-semibold text-gray-800">User Management</h2>
-            <p class="text-sm text-gray-500 mt-0.5">Admin only. Manage accounts, roles, and API tokens.</p>
+        <section>
+          <div class="edt-section__head">
+            <div>
+              <p class="edt-eyebrow">Access</p>
+              <h2 class="edt-section__title">Users</h2>
+            </div>
           </div>
+          <p class="edt-hint">Admin only. Manage accounts, roles and API tokens.</p>
 
           <!-- User list -->
           <div class="overflow-x-auto">
             <table class="w-full text-left text-sm">
               <thead>
-                <tr class="border-b border-gray-200">
-                  <th class="pb-2 pr-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Username</th>
-                  <th class="pb-2 pr-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Role</th>
-                  <th class="pb-2 pr-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Token</th>
-                  <th class="pb-2 text-xs font-semibold text-gray-500 uppercase tracking-wide text-right">Actions</th>
+                <tr class="border-b edt-rule">
+                  <th class="edt-eyebrow pb-2 pr-3">Username</th>
+                  <th class="edt-eyebrow pb-2 pr-3">Role</th>
+                  <th class="edt-eyebrow pb-2 pr-3">Token</th>
+                  <th class="pb-2 text-xs font-semibold edt-ink-2 uppercase tracking-wide text-right">Actions</th>
                 </tr>
               </thead>
               <tbody id="usersTableBody">
-                <tr><td colspan="4" class="py-4 text-sm text-gray-400 text-center">Loading…</td></tr>
+                <tr><td colspan="4" class="py-4 edt-muted text-center">Loading…</td></tr>
               </tbody>
             </table>
           </div>
@@ -413,22 +475,22 @@
           <div id="usersTokenResult"></div>
 
           <!-- Add user form -->
-          <div class="pt-4 border-t border-gray-100 space-y-3">
-            <h3 class="text-sm font-semibold text-gray-700">Add user</h3>
+          <div class="pt-4 border-t edt-rule space-y-3">
+            <h3 class="text-sm font-semibold edt-ink-1">Add user</h3>
             <form id="usersAddForm" class="grid grid-cols-1 sm:grid-cols-4 gap-2 items-end">
               <div>
-                <label class="block text-xs text-gray-500 mb-1">Username</label>
+                <label class="edt-eyebrow mb-1">Username</label>
                 <input name="username" type="text" required autocomplete="off"
-                  class="w-full h-9 rounded border-gray-300 text-sm bg-white px-2.5 drupal-blue-focus">
+                  class="edt-field">
               </div>
               <div>
-                <label class="block text-xs text-gray-500 mb-1">Password</label>
+                <label class="edt-eyebrow mb-1">Password</label>
                 <input name="password" type="password" required autocomplete="new-password"
-                  class="w-full h-9 rounded border-gray-300 text-sm bg-white px-2.5 drupal-blue-focus">
+                  class="edt-field">
               </div>
               <div>
-                <label class="block text-xs text-gray-500 mb-1">Role</label>
-                <select name="role" class="w-full h-9 rounded border-gray-300 text-sm bg-white px-2.5 drupal-blue-focus">
+                <label class="edt-eyebrow mb-1">Role</label>
+                <select name="role" class="edt-field">
                   <option value="viewer">Viewer</option>
                   <option value="editor">Editor</option>
                   <option value="admin">Admin</option>
@@ -436,11 +498,10 @@
               </div>
               <div>
                 <button type="submit"
-                  class="w-full h-9 px-3 rounded border border-gray-300 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">
-                  <i class="fas fa-user-plus mr-1.5"></i>Add
+                  class="w-full h-9 px-3 rounded border edt-rule text-sm font-medium edt-ink-1 edt-surface transition-colors">Add
                 </button>
               </div>
-              <p id="usersAddError" class="col-span-full text-xs text-red-600 hidden"></p>
+              <p id="usersAddError" class="col-span-full text-xs edt-bad hidden"></p>
             </form>
           </div>
         </section>
@@ -458,12 +519,9 @@
   <div id="sponsorSessionPickerModal" class="session-modal-overlay hidden" aria-hidden="true">
     <div class="session-modal-card" role="dialog" aria-modal="true" aria-labelledby="sponsorSessionPickerTitle">
       <div class="session-modal-header">
-        <button id="closeSponsorSessionPickerBack" type="button" class="session-modal-back">
-          <i class="fas fa-arrow-left"></i><span>Back to sponsor</span>
+        <button id="closeSponsorSessionPickerBack" type="button" class="session-modal-back"><span>Back to sponsor</span>
         </button>
-        <button id="closeSponsorSessionPicker" type="button" class="session-modal-close" aria-label="Close linked session picker">
-          <i class="fas fa-times"></i>
-        </button>
+        <button id="closeSponsorSessionPicker" type="button" class="session-modal-close" aria-label="Close linked session picker">&times;</button>
       </div>
       <div class="session-modal-body">
         <div class="speaker-modal-head">
@@ -482,12 +540,9 @@
   <div id="sessionSponsorPickerModal" class="session-modal-overlay hidden" aria-hidden="true">
     <div class="session-modal-card" role="dialog" aria-modal="true" aria-labelledby="sessionSponsorPickerTitle">
       <div class="session-modal-header">
-        <button id="closeSessionSponsorPickerBack" type="button" class="session-modal-back">
-          <i class="fas fa-arrow-left"></i><span>Back to session</span>
+        <button id="closeSessionSponsorPickerBack" type="button" class="session-modal-back"><span>Back to session</span>
         </button>
-        <button id="closeSessionSponsorPicker" type="button" class="session-modal-close" aria-label="Close sponsor picker">
-          <i class="fas fa-times"></i>
-        </button>
+        <button id="closeSessionSponsorPicker" type="button" class="session-modal-close" aria-label="Close sponsor picker">&times;</button>
       </div>
       <div class="session-modal-body">
         <div class="speaker-modal-head">
@@ -503,21 +558,18 @@
     </div>
   </div>
 
-  <div id="saveToast" class="save-toast"><i class="fas fa-check mr-2"></i>Saved successfully</div>
+  <div id="saveToast" class="save-toast">Saved successfully</div>
 
   <div id="unsavedChangesModal" class="editor-confirm-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="unsavedChangesTitle">
     <div class="editor-confirm-card">
       <div class="editor-confirm-icon" aria-hidden="true">
-        <i class="fas fa-triangle-exclamation"></i>
       </div>
       <h2 id="unsavedChangesTitle" class="editor-confirm-title">Unsaved changes</h2>
       <p class="editor-confirm-body">You have unsaved changes. What would you like to do before switching to <strong id="unsavedChangesTarget" class="editor-confirm-target">another file</strong>?</p>
       <div class="editor-confirm-actions">
-        <button id="unsavedModalSave" type="button" class="editor-confirm-btn editor-confirm-btn-save">
-          <i class="fas fa-floppy-disk"></i>Save &amp; continue
+        <button id="unsavedModalSave" type="button" class="editor-confirm-btn editor-confirm-btn-save">Save &amp; continue
         </button>
-        <button id="unsavedModalDiscard" type="button" class="editor-confirm-btn editor-confirm-btn-discard">
-          <i class="fas fa-trash"></i>Discard changes
+        <button id="unsavedModalDiscard" type="button" class="editor-confirm-btn editor-confirm-btn-discard">Discard changes
         </button>
         <button id="unsavedModalCancel" type="button" class="editor-confirm-btn editor-confirm-btn-cancel">
           Cancel
@@ -526,98 +578,108 @@
     </div>
   </div>
 
-  <!-- API Server Settings Modal -->
-  <div id="apiSettingsModal" class="session-modal-overlay hidden" aria-hidden="true">
-    <div class="session-modal-card" role="dialog" aria-modal="true" aria-labelledby="apiSettingsTitle" style="width: min(520px, 100%)">
-      <div class="session-modal-header">
-        <h2 id="apiSettingsTitle" class="session-modal-title">API Server</h2>
-        <button id="closeApiSettings" type="button" class="session-modal-close" aria-label="Close API settings">
-          <i class="fas fa-times"></i>
+  <!-- Stale-write (file changed on disk) confirmation -->
+  <div id="staleWriteModal" class="editor-confirm-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="staleWriteTitle">
+    <div class="editor-confirm-card">
+      <div class="editor-confirm-icon" aria-hidden="true">
+      </div>
+      <h2 id="staleWriteTitle" class="editor-confirm-title">This file changed on disk</h2>
+      <p class="editor-confirm-body">
+        <strong id="staleWriteTarget" class="editor-confirm-target">This dataset</strong>
+        was edited elsewhere since you opened it — in another tab, by the server, or by another
+        process. Saving now would overwrite those changes with your version.
+      </p>
+      <div class="editor-confirm-actions">
+        <button id="staleWriteReload" type="button" class="editor-confirm-btn editor-confirm-btn-save">Reload latest
+        </button>
+        <button id="staleWriteOverwrite" type="button" class="editor-confirm-btn editor-confirm-btn-discard">Overwrite anyway
+        </button>
+        <button id="staleWriteCancel" type="button" class="editor-confirm-btn editor-confirm-btn-cancel">
+          Cancel
         </button>
       </div>
-      <div class="session-modal-body space-y-4">
-        <p class="text-sm text-gray-500">Connect to a local API server for Firefox-compatible saving and image uploads. Start the server with <code class="text-xs bg-gray-100 px-1.5 py-0.5 rounded font-mono">npm start</code> or <code class="text-xs bg-gray-100 px-1.5 py-0.5 rounded font-mono">docker compose up</code>.</p>
-        <label class="block">
-          <span class="block text-sm font-medium text-gray-700 mb-1">Server endpoint URL</span>
-          <input id="apiEndpointInput" type="url" placeholder="http://localhost:8080" autocomplete="off"
-            class="w-full h-11 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3">
-        </label>
-        <div class="flex gap-2 flex-wrap items-center">
-          <button id="apiTestBtn" type="button" class="h-9 px-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">
-            <i class="fas fa-plug mr-1.5"></i>Test connection
-          </button>
-          <button id="apiSaveBtn" type="button" class="h-9 px-4 border border-blue-600 rounded-md text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors">
-            <i class="fas fa-check mr-1.5"></i>Save
-          </button>
-          <button id="apiClearBtn" type="button" class="h-9 px-4 border border-gray-300 rounded-md text-sm font-medium text-red-600 bg-white hover:bg-red-50 transition-colors">
-            <i class="fas fa-times mr-1.5"></i>Clear
-          </button>
-        </div>
-        <p id="apiTestResult" class="text-sm hidden"></p>
+    </div>
+  </div>
 
-        <div class="border-t border-gray-100 pt-4 space-y-3">
-          <div class="flex items-center justify-between gap-3">
-            <h3 class="text-sm font-semibold text-gray-700">Cloud backup</h3>
-            <span id="s3StatusChip" class="inline-flex items-center gap-1.5 text-xs font-medium text-gray-400">
-              <span class="inline-block w-1.5 h-1.5 rounded-full bg-gray-300"></span>Checking…
-            </span>
-          </div>
-          <div id="s3NotConfigured" class="hidden text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded px-3 py-2">
-            Cloud backup not configured — set <code class="font-mono bg-amber-100 px-1 rounded">S3_BUCKET</code> and <code class="font-mono bg-amber-100 px-1 rounded">S3_REGION</code> in the server environment.
-          </div>
-          <div id="s3ConfigDisplay" class="hidden text-xs text-gray-500 font-mono leading-5"></div>
-          <div class="flex gap-2">
-            <button type="button" id="s3SaveBtn" class="h-9 flex-1 inline-flex items-center justify-center gap-1.5 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
-              <i class="fas fa-cloud-arrow-up text-gray-500"></i>Save to cloud
-            </button>
-            <button type="button" id="s3GetBtn" class="h-9 flex-1 inline-flex items-center justify-center gap-1.5 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
-              <i class="fas fa-cloud-arrow-down text-gray-500"></i>Get updates
-            </button>
-          </div>
-          <div>
-            <button type="button" id="s3AdvancedToggle" class="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-gray-600 transition-colors">
-              <i id="s3AdvancedChevron" class="fas fa-chevron-down text-[0.6rem]"></i>More options
-            </button>
-            <div id="s3AdvancedPanel" class="hidden mt-2 space-y-2 pl-1 border-l-2 border-gray-100">
-              <div class="flex items-center justify-between gap-3 py-1">
-                <div>
-                  <p class="text-xs font-medium text-gray-600">Upload a planner file</p>
-                  <p class="text-xs text-gray-400">Import a planner from your computer</p>
-                </div>
-                <button type="button" id="s3ImportBtn" class="flex-shrink-0 h-7 px-2.5 border border-gray-300 rounded text-xs font-medium text-gray-600 bg-white hover:bg-gray-50 transition-colors">
-                  <i class="fas fa-file-arrow-up mr-1"></i>Choose file
-                </button>
-                <input type="file" id="s3UploadPlannerInput" accept=".json" class="hidden">
-              </div>
-              <div class="flex items-center justify-between gap-3 py-1">
-                <div>
-                  <p class="text-xs font-medium text-gray-600">Clear browser copies</p>
-                  <p class="text-xs text-gray-400">Remove locally cached planners from this browser</p>
-                </div>
-                <button type="button" id="s3ClearBtn" class="flex-shrink-0 h-7 px-2.5 border border-red-200 rounded text-xs font-medium text-red-600 bg-white hover:bg-red-50 transition-colors">
-                  <i class="fas fa-trash-can mr-1"></i>Clear
-                </button>
-              </div>
-            </div>
-          </div>
-          <div id="s3Progress" class="hidden pt-1">
-            <div class="s3-progress-track"><div class="s3-progress-bar"></div></div>
-            <p class="text-xs text-gray-400 mt-1">Working…</p>
-          </div>
-          <div id="s3Result" class="hidden text-xs rounded-md px-3 py-2.5"></div>
+  <!-- API Server Settings Modal -->
+  <div id="personModal" class="session-modal-overlay hidden" aria-hidden="true">
+    <div class="session-modal-card" role="dialog" aria-modal="true" aria-labelledby="personModalTitle" style="width: min(520px, 100%)">
+      <div class="session-modal-header">
+        <h2 id="personModalTitle" class="session-modal-title">Add person</h2>
+        <button id="personModalClose" type="button" class="session-modal-close" aria-label="Close">&times;</button>
+      </div>
+      <!-- Own layout classes, not the legacy `space-y-4`/`block` utilities: the
+           editor still imports components.css into layer(legacy), which lays
+           .session-modal-body out as a grid and put every label beside its own
+           input. -->
+      <div class="session-modal-body person-form">
+        <p class="person-form-lead">Organisers and volunteers only. Speakers come from the schedule and cannot be added here.</p>
+        <label class="person-field">
+          <span class="person-field-label">Username</span>
+          <input id="personUsernameInput" type="text" placeholder="jchin1968" autocomplete="off" class="edt-field">
+          <span class="person-field-hint">The <code>/u/&lt;slug&gt;</code> part of their drupal.org profile URL. Paste the whole URL if easier — the slug is taken from it.</span>
+        </label>
+        <label class="person-field">
+          <span class="person-field-label">Name</span>
+          <input id="personNameInput" type="text" placeholder="Optional — as the community page lists them" autocomplete="off" class="edt-field">
+          <span class="person-field-hint">Only stored when it differs from the username.</span>
+        </label>
+        <label class="person-field">
+          <span class="person-field-label">Role</span>
+          <select id="personRoleSelect" class="edt-field">
+            <option value="organiser">Organiser</option>
+            <option value="volunteer">Volunteer</option>
+          </select>
+        </label>
+        <p id="personModalError" class="person-form-error hidden" role="alert"></p>
+        <div class="person-form-actions">
+          <button id="personModalSave" type="button" class="edt-act edt-act--primary">Save</button>
+          <button id="personModalCancel" type="button" class="edt-act">Cancel</button>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/ajv@6.12.6/dist/ajv.min.js"></script>
+  <div id="apiSettingsModal" class="session-modal-overlay hidden" aria-hidden="true">
+    <div class="session-modal-card" role="dialog" aria-modal="true" aria-labelledby="apiSettingsTitle" style="width: min(520px, 100%)">
+      <div class="session-modal-header">
+        <h2 id="apiSettingsTitle" class="session-modal-title">API Server</h2>
+        <button id="closeApiSettings" type="button" class="session-modal-close" aria-label="Close API settings">&times;</button>
+      </div>
+      <div class="session-modal-body space-y-4">
+        <p class="text-sm edt-ink-2">Connect to a local API server for Firefox-compatible saving and image uploads. Start the server with <code class="text-xs edt-surface-2 px-1.5 py-0.5 rounded font-mono">npm start</code> or <code class="text-xs edt-surface-2 px-1.5 py-0.5 rounded font-mono">docker compose up</code>.</p>
+        <label class="block">
+          <span class="block text-sm font-medium edt-ink-1 mb-1">Server endpoint URL</span>
+          <input id="apiEndpointInput" type="url" placeholder="http://localhost:8080" autocomplete="off"
+            class="edt-field">
+        </label>
+        <div class="flex gap-2 flex-wrap items-center">
+          <button id="apiTestBtn" type="button" class="h-9 px-4 border edt-rule rounded-md text-sm font-medium edt-ink-1 edt-surface transition-colors">Test connection
+          </button>
+          <button id="apiSaveBtn" type="button" class="h-9 px-4 border edt-rule-accent rounded-md text-sm font-medium edt-on-ink edt-surface-accent hover:bg-blue-700 transition-colors">Save
+          </button>
+          <button id="apiClearBtn" type="button" class="h-9 px-4 border edt-rule rounded-md text-sm font-medium edt-bad edt-surface transition-colors">Clear
+          </button>
+        </div>
+        <p id="apiTestResult" class="text-sm hidden"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vendored, not loaded from a CDN: this page is auth-gated and writes to disk,
+       so a third party being able to change the script it runs is not a risk worth
+       carrying for a file that never changes. Update by replacing the file. -->
+  <script src="./vendor/ajv-6.12.6.min.js"></script>
   <script type="module" src="./js/editor.js"></script>
   <script type="module">
+    import { bottomBarHtml, moreSheetHtml } from './js/modules/mobileNav.js';
     // Editor sidebar: route clicks to existing tab buttons, sync active state.
     // Runs after editor.js (module scripts execute in source order).
     const TAB_BTN_IDS = {
       event: 'showEventTab', logo: 'showLogoTab', flickr: 'showFlickrTab',
       sessions: 'showSessionsTab', sponsors: 'showSponsorsTab',
+      people: 'showPeopleTab',
+      related: 'showRelatedTab',
       sitemap: 'showSitemapTab', appearance: 'showAppearanceTab',
       users: 'showUsersTab',
     };
@@ -649,7 +711,8 @@
     function applyEditorCollapse() {
       sidebar?.classList.toggle('sidebar-collapsed', collapsed);
       const icon = document.getElementById('editorSidebarToggleIcon');
-      if (icon) icon.className = `fas ${collapsed ? 'fa-angles-right' : 'fa-angles-left'}`;
+      // A drawn chevron, matching the planner's.
+      if (icon) icon.textContent = collapsed ? '\u00bb' : '\u00ab';
     }
     document.getElementById('editorSidebarToggleBtn')?.addEventListener('click', () => {
       collapsed = !collapsed;
@@ -659,136 +722,88 @@
     applyEditorCollapse();
     syncEditorSidebar();
 
-    // ── iOS bottom tab bar (mobile only) — see nav#editorMobileBottomBar below ──────────────────────────────────────
-    const editorBottomTabMap = {
-      sessions:   'showSessionsTab',
-      sponsors:   'showSponsorsTab',
-      event:      'showEventTab',
-      appearance: 'showAppearanceTab',
-      more:       null,
+    // ── iOS bottom tab bar + grouped "More" sheet (mobile) ──────────────────────
+    // Rendered via the shared mobileNav.js builders (same as the planner) so the
+    // two surfaces can't drift. Clicks route to the existing showXTab buttons.
+    const EDITOR_TAB_BTN = {
+      event: 'showEventTab', logo: 'showLogoTab', flickr: 'showFlickrTab',
+      sessions: 'showSessionsTab', sponsors: 'showSponsorsTab',
+      related: 'showRelatedTab',
+      sitemap: 'showSitemapTab', appearance: 'showAppearanceTab',
     };
-    const editorMoreTabs = ['showLogoTab', 'showFlickrTab', 'showSitemapTab'];
-    const editorMoreLabels = { showLogoTab: 'Logo', showFlickrTab: 'Photos', showSitemapTab: 'Sources' };
+    // `meta(tab)` returns `{label}` only — mobileNav.js dropped the icon and
+    // per-tab colour when the planner did, and the two surfaces share it.
+    const EDITOR_META = {
+      event:      { label: 'Event' },
+      logo:       { label: 'Logo' },
+      flickr:     { label: 'Photos' },
+      sessions:   { label: 'Sessions' },
+      sponsors:   { label: 'Sponsors' },
+      related:    { label: 'Related' },
+      sitemap:    { label: 'Sources' },
+      appearance: { label: 'Appearance' },
+    };
+    const editorMeta = (t) => EDITOR_META[t] || { label: t };
+    const EDITOR_PRIMARY = ['sessions', 'sponsors', 'event', 'appearance'];
+    const EDITOR_GROUPS  = [{ label: 'Assets', tabs: ['logo', 'flickr'] }, { label: '', tabs: ['related', 'sitemap'] }];
+    const EDITOR_FOOTER  = [
+      { href: './index.html',   label: 'Schedule' },
+      { href: './planner.html', label: 'My Planner' },
+    ];
 
-    function syncEditorBottomBar() {
+    const activeEditorTab = () =>
+      Object.keys(EDITOR_TAB_BTN).find((t) =>
+        document.getElementById(EDITOR_TAB_BTN[t])?.getAttribute('aria-selected') === 'true') || 'sessions';
+
+    const editorMoreSheet = document.getElementById('editorMoreSheet');
+
+    function renderEditorBottomBar() {
       const bar = document.getElementById('editorMobileBottomBar');
-      if (!bar) return;
-      const active = Object.keys(editorBottomTabMap).find((key) => {
-        const btnId = editorBottomTabMap[key];
-        return btnId && document.getElementById(btnId)?.getAttribute('aria-selected') === 'true';
-      });
-      const moreActive = editorMoreTabs.some((id) =>
-        document.getElementById(id)?.getAttribute('aria-selected') === 'true'
-      );
-      bar.querySelectorAll('.mobile-bottom-tab').forEach((btn) => {
-        const tab = btn.dataset.editorBottomTab;
-        btn.classList.toggle('is-active', tab === active || (tab === 'more' && moreActive));
-      });
+      if (bar) bar.innerHTML = bottomBarHtml({ primary: EDITOR_PRIMARY, activeTab: activeEditorTab(), meta: editorMeta });
+    }
+    function renderEditorMoreSheet() {
+      const list = document.getElementById('editorMoreSheetList');
+      if (list) list.innerHTML = moreSheetHtml({ groups: EDITOR_GROUPS, primary: EDITOR_PRIMARY, activeTab: activeEditorTab(), meta: editorMeta, footer: EDITOR_FOOTER });
     }
 
-    // More sheet (Logo / Photos / Sources)
-    const editorMoreSheet = document.getElementById('editorMoreSheet');
     document.getElementById('editorMobileBottomBar')?.addEventListener('click', (e) => {
-      const btn = e.target.closest('[data-editor-bottom-tab]');
+      if (e.target.closest('[data-nav-more]')) { renderEditorMoreSheet(); editorMoreSheet?.classList.remove('hidden'); return; }
+      const btn = e.target.closest('[data-nav-tab]');
       if (!btn) return;
-      const tab = btn.dataset.editorBottomTab;
-      if (tab === 'more') {
-        editorMoreSheet?.classList.toggle('hidden');
-        return;
-      }
       editorMoreSheet?.classList.add('hidden');
-      const targetId = editorBottomTabMap[tab];
-      if (targetId) {
-        document.getElementById(targetId)?.click();
-        syncEditorSidebar();
-        syncEditorBottomBar();
-      }
+      document.getElementById(EDITOR_TAB_BTN[btn.dataset.navTab])?.click();
     });
-    document.getElementById('editorMoreSheet')?.addEventListener('click', (e) => {
-      const btn = e.target.closest('[data-more-tab]');
-      if (!btn && e.target === e.currentTarget) { editorMoreSheet.classList.add('hidden'); return; }
-      if (!btn) return;
-      document.getElementById(btn.dataset.moreTab)?.click();
-      syncEditorSidebar();
-      syncEditorBottomBar();
+    editorMoreSheet?.addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) { editorMoreSheet.classList.add('hidden'); return; }
+      if (e.target.closest('#editorMoreSheetClose')) { editorMoreSheet.classList.add('hidden'); return; }
+      const btn = e.target.closest('[data-nav-tab]');
+      if (!btn) return; // footer links navigate normally
+      document.getElementById(EDITOR_TAB_BTN[btn.dataset.navTab])?.click();
       editorMoreSheet.classList.add('hidden');
     });
 
-    // Keep bottom bar in sync when tabs change via any mechanism
-    Object.values(TAB_BTN_IDS).forEach((id) => {
-      document.getElementById(id)?.addEventListener('click', syncEditorBottomBar);
-    });
-    syncEditorBottomBar();
+    // Re-render the bar (and its current-location "More" label) on every tab change.
+    document.addEventListener('editor-tab-changed', renderEditorBottomBar);
+    Object.values(EDITOR_TAB_BTN).forEach((id) =>
+      document.getElementById(id)?.addEventListener('click', renderEditorBottomBar));
+    renderEditorBottomBar();
   </script>
   <script type="module">
-    import { initS3Settings } from './js/modules/s3Settings.js';
     import { initUsersPanel } from './js/modules/usersPanel.js';
-    initS3Settings();
     initUsersPanel();
   </script>
 
-  <!-- iOS bottom tab bar (mobile only) -->
-  <nav id="editorMobileBottomBar" class="sm:hidden" aria-label="Editor sections">
-    <button type="button" class="mobile-bottom-tab is-active" data-editor-bottom-tab="sessions" aria-label="Sessions">
-      <i class="fas fa-calendar-day mobile-bottom-tab-icon" aria-hidden="true"></i>
-      <span class="mobile-bottom-tab-label">Sessions</span>
-    </button>
-    <button type="button" class="mobile-bottom-tab" data-editor-bottom-tab="sponsors" aria-label="Sponsors">
-      <i class="fas fa-handshake mobile-bottom-tab-icon" aria-hidden="true"></i>
-      <span class="mobile-bottom-tab-label">Sponsors</span>
-    </button>
-    <button type="button" class="mobile-bottom-tab" data-editor-bottom-tab="event" aria-label="Event">
-      <i class="fas fa-circle-info mobile-bottom-tab-icon" aria-hidden="true"></i>
-      <span class="mobile-bottom-tab-label">Event</span>
-    </button>
-    <button type="button" class="mobile-bottom-tab" data-editor-bottom-tab="appearance" aria-label="Appearance">
-      <i class="fas fa-palette mobile-bottom-tab-icon" aria-hidden="true"></i>
-      <span class="mobile-bottom-tab-label">Appearance</span>
-    </button>
-    <button type="button" class="mobile-bottom-tab" data-editor-bottom-tab="more" aria-label="More">
-      <i class="fas fa-ellipsis mobile-bottom-tab-icon" aria-hidden="true"></i>
-      <span class="mobile-bottom-tab-label">More</span>
-    </button>
-  </nav>
+  <!-- iOS bottom tab bar (mobile only) — populated by renderEditorBottomBar() -->
+  <nav id="editorMobileBottomBar" class="sm:hidden" aria-label="Editor sections"></nav>
 
-  <!-- "More" sheet: Logo / Photos / Sources -->
+  <!-- Grouped "More" sheet — populated by renderEditorMoreSheet() -->
   <div id="editorMoreSheet" class="sm:hidden hidden fixed inset-0 z-[200] flex flex-col justify-end" style="background:rgba(0,0,0,0.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)">
-    <div class="bg-white rounded-t-[14px] shadow-2xl">
-      <div class="flex justify-center pt-2.5 pb-1 flex-shrink-0" aria-hidden="true">
-        <div class="w-9 h-[5px] rounded-full bg-gray-300"></div>
+    <div class="edt-surface rounded-t-[14px] max-h-[80vh] flex flex-col">
+      <div class="relative flex justify-center pt-2.5 pb-1 flex-shrink-0">
+        <div class="w-9 h-[5px] rounded-full edt-surface-2" aria-hidden="true"></div>
+        <button type="button" id="editorMoreSheetClose" class="mobile-sheet-close" aria-label="Close menu">&times;</button>
       </div>
-      <div class="planner-sheet-font" style="padding-bottom:max(env(safe-area-inset-bottom,0px),16px)">
-        <button type="button" data-more-tab="showLogoTab" class="planner-action-row border-t border-gray-100">
-          <div class="tab-icon-badge" style="background:#AF52DE"><i class="fas fa-image text-white text-[0.65rem]"></i></div>
-          <span class="flex-1 text-[0.9375rem] text-gray-800">Logo</span>
-          <i class="fas fa-chevron-right text-gray-300 text-xs"></i>
-        </button>
-        <div class="planner-action-divider"></div>
-        <button type="button" data-more-tab="showFlickrTab" class="planner-action-row">
-          <div class="tab-icon-badge" style="background:#FF2D55"><i class="fas fa-images text-white text-[0.65rem]"></i></div>
-          <span class="flex-1 text-[0.9375rem] text-gray-800">Photos</span>
-          <i class="fas fa-chevron-right text-gray-300 text-xs"></i>
-        </button>
-        <div class="planner-action-divider"></div>
-        <button type="button" data-more-tab="showSitemapTab" class="planner-action-row">
-          <div class="tab-icon-badge" style="background:#5856D6"><i class="fas fa-link text-white text-[0.65rem]"></i></div>
-          <span class="flex-1 text-[0.9375rem] text-gray-800">Sources</span>
-          <i class="fas fa-chevron-right text-gray-300 text-xs"></i>
-        </button>
-        <div class="border-t border-gray-100 mt-2">
-          <a href="./index.html" class="planner-action-row">
-            <div class="tab-icon-badge" style="background:#32ADE6"><i class="fas fa-calendar-alt text-white text-[0.65rem]"></i></div>
-            <span class="flex-1 text-[0.9375rem] text-gray-800">Schedule</span>
-            <i class="fas fa-arrow-up-right-from-square text-gray-300 text-xs"></i>
-          </a>
-          <div class="planner-action-divider"></div>
-          <a href="./planner.html" class="planner-action-row">
-            <div class="tab-icon-badge" style="background:#34C759"><i class="fas fa-clipboard-list text-white text-[0.65rem]"></i></div>
-            <span class="flex-1 text-[0.9375rem] text-gray-800">My Planner</span>
-            <i class="fas fa-arrow-up-right-from-square text-gray-300 text-xs"></i>
-          </a>
-        </div>
-      </div>
+      <div id="editorMoreSheetList" class="planner-sheet-font overflow-y-auto overscroll-contain" style="padding-bottom:max(env(safe-area-inset-bottom,0px),16px)"></div>
     </div>
   </div>
 </body>

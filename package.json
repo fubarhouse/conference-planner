@@ -8,13 +8,40 @@
     "dev": "node --env-file-if-exists=.env --watch server.js",
     "test": "vitest run",
     "test:watch": "vitest",
-    "validate": "node scripts/validate-data.mjs",
+    "validate": "node --env-file-if-exists=.env scripts/validate-data.mjs",
+    "build:catalog": "node --env-file-if-exists=.env scripts/build-catalog.mjs",
+    "lint": "eslint app/js lib scripts server.js",
+    "typecheck": "tsc -p jsconfig.json",
+    "deadcode": "knip",
+    "format": "prettier --write \"app/js/**/*.js\" \"lib/**/*.js\" \"scripts/**/*.mjs\"",
+    "format:check": "prettier --check \"app/js/**/*.js\" \"lib/**/*.js\" \"scripts/**/*.mjs\"",
     "build:css": "unocss 'app/*.html' 'app/js/**/*.js' --out-file app/css/utilities.css",
-    "watch:css": "unocss 'app/*.html' 'app/js/**/*.js' --out-file app/css/utilities.css --watch"
+    "watch:css": "unocss 'app/*.html' 'app/js/**/*.js' --out-file app/css/utilities.css --watch",
+    "audit:archive": "node --env-file-if-exists=.env scripts/audit-archive.mjs",
+    "audit:regions": "node --env-file-if-exists=.env scripts/backfill-regions.mjs",
+    "backfill:regions": "node --env-file-if-exists=.env scripts/backfill-regions.mjs --write",
+    "geocode:events": "node --env-file-if-exists=.env scripts/geocode-events.mjs",
+    "lint:css": "node scripts/lint-css.mjs",
+    "audit:css": "node scripts/audit-orphan-css.mjs",
+    "audit:type": "node scripts/audit-type.mjs",
+    "audit:a11y": "node scripts/audit-a11y.mjs",
+    "build:fonts": "node scripts/subset-fonts.mjs",
+    "audit:routes": "node scripts/audit-routes.mjs",
+    "build:icons": "node scripts/build-icons.mjs",
+    "build:og": "node scripts/build-og-card.mjs",
+    "report:coverage": "node --env-file-if-exists=.env scripts/report-coverage.mjs",
+    "report:quality": "node --env-file-if-exists=.env scripts/report-quality.mjs",
+    "resolve:albums": "node --env-file-if-exists=.env scripts/resolve-album-thumbs.mjs"
   },
   "devDependencies": {
-    "ajv": "^6.12.6",
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.7.0",
+    "knip": "^6.26.0",
     "playwright": "^1.60.0",
+    "prettier": "^3.9.4",
+    "subset-font": "^2.5.0",
+    "typescript": "^7.0.2",
     "unocss": "^0.65.0",
     "vitest": "^2.0.0"
   },
@@ -22,9 +49,17 @@
     "@aws-sdk/client-dynamodb": "^3.1069.0",
     "@aws-sdk/client-s3": "^3.1069.0",
     "@aws-sdk/lib-dynamodb": "^3.1069.0",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
     "bcryptjs": "^3.0.3",
+    "compression": "^1.8.1",
     "express": "^4.21.2",
+    "express-rate-limit": "^8.6.2",
     "jose": "^6.2.3",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^2.2.0"
+  },
+  "packageManager": "pnpm@11.3.0",
+  "engines": {
+    "node": ">=22"
   }
 }

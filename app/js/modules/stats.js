@@ -37,16 +37,21 @@ export function updateSelectionOverview(events, updateStageStats) {
   updateStageStats(trackStats);
 
   const totalEvents = selectedEvents.length;
-  const totalDuration = selectedEvents.reduce((sum, event) => sum + parseDurationHours(event.duration), 0);
+  const totalDuration = selectedEvents.reduce(
+    (sum, event) => sum + parseDurationHours(event.duration),
+    0,
+  );
 
   document.getElementById('totalEvents').textContent = totalEvents;
+  const eventsLabel = document.getElementById('totalEventsLabel');
+  if (eventsLabel) eventsLabel.textContent = totalEvents === 1 ? 'session' : 'sessions';
   document.getElementById('totalDuration').textContent = `${totalDuration.toFixed(1)} hours`;
 }
 
 function computeDailyStats(selectedEvents) {
   const dailyStats = {};
   selectedEvents.forEach((event) => {
-    const date = getLocalDate(event.startTime);
+    const date = getLocalDate(event.startTime, state.eventMeta?.timezone);
     const trackValues = normalizeTracks(event.track);
     const durationHours = parseDurationHours(event.duration);
     if (!dailyStats[date]) {
@@ -69,7 +74,7 @@ function computeTrackStats(selectedEvents) {
   const trackStats = {};
   selectedEvents.forEach((event) => {
     const trackValues = normalizeTracks(event.track);
-    const date = getLocalDate(event.startTime);
+    const date = getLocalDate(event.startTime, state.eventMeta?.timezone);
     const durationHours = parseDurationHours(event.duration);
     trackValues.forEach((track) => {
       if (!trackStats[track]) {
@@ -95,22 +100,24 @@ function renderTrackSectionHtml(trackStats) {
       const dayBreakdown = Object.entries(stats.days)
         .sort((a, b) => a[0].localeCompare(b[0]))
         .map(([date, dayStats]) => {
-          const formattedDate = new Date(date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long' });
+          const formattedDate = new Date(date + 'T12:00:00').toLocaleDateString('en-US', {
+            weekday: 'long',
+          });
           return `
             <tr class="selection-stats-subrow">
-              <td class="selection-stats-cell selection-stats-subcell pr-3 pl-6">${formattedDate}</td>
-              <td class="selection-stats-cell selection-stats-value pr-3 font-mono text-right">${formatHoursDuration(dayStats.duration)}</td>
+              <td class="selection-stats-cell selection-stats-subcell">${formattedDate}</td>
+              <td class="selection-stats-cell selection-stats-value">${formatHoursDuration(dayStats.duration)}</td>
               <td class="selection-stats-cell">${dayStats.count} ${dayStats.count === 1 ? 'event' : 'events'}</td>
             </tr>`;
         })
         .join('');
       return `
-        <tr class="selection-stats-row cursor-pointer hover:bg-gray-700 hover:bg-opacity-30 transition-colors" data-track-id="track-${index}">
-          <td class="selection-stats-cell pr-3">
-            <i id="track-${index}-icon" class="fas fa-chevron-right mr-2 text-xs transition-transform"></i>
+        <tr class="selection-stats-row transition-colors" data-track-id="track-${index}">
+          <td class="selection-stats-cell">
+            <i id="track-${index}-icon" class="fas fa-chevron-right text-xs transition-transform"></i>
             ${track}
           </td>
-          <td class="selection-stats-cell selection-stats-value pr-3 font-mono text-right">${durationText}</td>
+          <td class="selection-stats-cell selection-stats-value">${durationText}</td>
           <td class="selection-stats-cell">${stats.count} ${stats.count === 1 ? 'event' : 'events'}</td>
         </tr>
         <tr id="track-${index}-details" class="selection-stats-detail hidden">
@@ -122,8 +129,8 @@ function renderTrackSectionHtml(trackStats) {
     .join('');
   return `
     <section class="selection-stats-section">
-      <h4 class="selection-stats-heading text-white font-medium mb-2">By Track</h4>
-      <table class="selection-stats-table text-sm text-white"><tbody>${rows}</tbody></table>
+      <h4 class="selection-stats-heading edt-on-ink font-medium">By Track</h4>
+      <table class="selection-stats-table text-sm edt-on-ink"><tbody>${rows}</tbody></table>
     </section>`;
 }
 
@@ -131,23 +138,27 @@ function renderDaySectionHtml(sortedDates, dailyStats) {
   const rows = sortedDates
     .map((date, index) => {
       const stats = dailyStats[date];
-      const formattedDate = new Date(date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long' });
+      const formattedDate = new Date(date + 'T12:00:00').toLocaleDateString('en-US', {
+        weekday: 'long',
+      });
       const trackBreakdown = Object.entries(stats.tracks)
         .sort((a, b) => b[1].count - a[1].count)
-        .map(([track, dayTrackStats]) => `
+        .map(
+          ([track, dayTrackStats]) => `
           <tr class="selection-stats-subrow">
-            <td class="selection-stats-cell selection-stats-subcell pr-3 pl-6">${track}</td>
-            <td class="selection-stats-cell selection-stats-value pr-3 font-mono text-right">${formatHoursDuration(dayTrackStats.duration)}</td>
+            <td class="selection-stats-cell selection-stats-subcell">${track}</td>
+            <td class="selection-stats-cell selection-stats-value">${formatHoursDuration(dayTrackStats.duration)}</td>
             <td class="selection-stats-cell">${dayTrackStats.count} ${dayTrackStats.count === 1 ? 'event' : 'events'}</td>
-          </tr>`)
+          </tr>`,
+        )
         .join('');
       return `
-        <tr class="selection-stats-row cursor-pointer hover:bg-gray-700 hover:bg-opacity-30 transition-colors" data-day-id="day-${index}">
-          <td class="selection-stats-cell pr-3">
-            <i id="day-${index}-icon" class="fas fa-chevron-right mr-2 text-xs transition-transform"></i>
+        <tr class="selection-stats-row transition-colors" data-day-id="day-${index}">
+          <td class="selection-stats-cell">
+            <i id="day-${index}-icon" class="fas fa-chevron-right text-xs transition-transform"></i>
             ${formattedDate}
           </td>
-          <td class="selection-stats-cell selection-stats-value pr-3 font-mono text-right">${formatHoursDuration(stats.duration)}</td>
+          <td class="selection-stats-cell selection-stats-value">${formatHoursDuration(stats.duration)}</td>
           <td class="selection-stats-cell">${stats.count} ${stats.count === 1 ? 'event' : 'events'}</td>
         </tr>
         <tr id="day-${index}-details" class="selection-stats-detail hidden">
@@ -158,9 +169,9 @@ function renderDaySectionHtml(sortedDates, dailyStats) {
     })
     .join('');
   return `
-    <section class="selection-stats-section border-t border-gray-700 pt-4">
-      <h4 class="selection-stats-heading text-white font-medium mb-2">By Day</h4>
-      <table class="selection-stats-table text-sm text-white"><tbody>${rows}</tbody></table>
+    <section class="selection-stats-section border-t edt-rule">
+      <h4 class="selection-stats-heading edt-on-ink font-medium">By Day</h4>
+      <table class="selection-stats-table text-sm edt-on-ink"><tbody>${rows}</tbody></table>
     </section>`;
 }
 
@@ -171,7 +182,7 @@ export function updateStageStats() {
   const trackStats = computeTrackStats(selectedEvents);
   const sortedDates = Object.keys(dailyStats).sort();
   stageStatsContainer.innerHTML = `
-    <div class="selection-stats space-y-4">
+    <div class="selection-stats">
       ${renderTrackSectionHtml(trackStats)}
       ${renderDaySectionHtml(sortedDates, dailyStats)}
     </div>`;
@@ -183,13 +194,16 @@ export function setupStatsDelegation() {
 
   container.addEventListener('click', (e) => {
     const trackRow = e.target.closest('[data-track-id]');
-    if (trackRow) { toggleTrackExpansion(trackRow.dataset.trackId); return; }
+    if (trackRow) {
+      toggleTrackExpansion(trackRow.dataset.trackId);
+      return;
+    }
     const dayRow = e.target.closest('[data-day-id]');
     if (dayRow) toggleDayExpansion(dayRow.dataset.dayId);
   });
 }
 
-export function toggleDayExpansion(dayId) {
+function toggleDayExpansion(dayId) {
   const detailsDiv = document.getElementById(`${dayId}-details`);
   const icon = document.getElementById(`${dayId}-icon`);
 
@@ -202,7 +216,7 @@ export function toggleDayExpansion(dayId) {
   }
 }
 
-export function toggleTrackExpansion(trackId) {
+function toggleTrackExpansion(trackId) {
   const detailsDiv = document.getElementById(`${trackId}-details`);
   const icon = document.getElementById(`${trackId}-icon`);
 

@@ -7,7 +7,10 @@ const state = {
   themeMode: 'dark',
   selectedEvents: new Set(),
   allEvents: [],
-  displayedEvents: []
+  displayedEvents: [],
+  // Set when a dataset fails to load, so the renderer can tell "could not load"
+  // from "no sessions yet" — they are different messages and only one retries.
+  datasetError: null,
 };
 
 // Experimental/private feature switch.

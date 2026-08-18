@@ -1,10 +1,78 @@
+import './modules/pwa.js'; // registers the service worker (PWA/offline)
 import { loadEventCatalog } from './modules/eventCatalog.js';
 import { formatTextBlock } from './modules/markdown.js';
-import { isLocalhost, slugify } from './modules/utils.js';
+import { slugify, escapeHtml, normalizeString } from './modules/utils.js';
+import { reportError } from './modules/notify.js';
+import {
+  STORAGE_KEYS,
+  readJson,
+  writeJson,
+  readText,
+  writeText,
+  removeKey,
+} from './modules/plannerStorage.js';
+import { SPONSOR_BG_STYLES, SPONSOR_ASPECTS } from './modules/sponsorStyles.js';
+import {
+  initEditorSponsors,
+  normalizeSponsorCollection,
+  closeSponsorSessionPicker,
+  closeSessionSponsorPicker,
+  renderSponsorList,
+  renderSponsorForm,
+  addSponsor,
+  deleteSponsor,
+  saveCurrentSponsor,
+} from './modules/editorSponsors.js';
+import {
+  initEditorRelatedEvents,
+  normalizeRelatedEventCollection,
+  renderRelatedList,
+  wireRelatedEventsPanel,
+} from './modules/editorRelatedEvents.js';
+import {
+  initEditorSessions,
+  renderSessionList,
+  renderSessionForm,
+  addSession,
+  deleteSession,
+  saveCurrentSession,
+} from './modules/editorSessions.js';
+import { initEditorS3, editorS3SectionHtml, wireEditorS3 } from './modules/editorS3.js';
+import { syncSessionDuration } from './modules/editorDuration.js';
+import {
+  normalizeUrlArray,
+  parseMultiValue,
+  stripSummaryFields,
+  normalizeFlickrObject,
+  normalizeLogoObject,
+} from './modules/editorNormalize.js';
+import { peopleGroupsHtml, CREDIT_ROLES } from './modules/editorPeople.js';
+import { editorPath, parseEditorPath } from './modules/editorRoute.js';
+import { utcIsoToLocalInput, localInputToUtcIso } from './modules/editorDateTime.js';
+import {
+  buildDatasetOptionLabel,
+  isEditorDatasetFile,
+  validateDatasetSchema,
+  buildDatasetGroupingRecord,
+  buildDatasetGroupingFallback,
+  mergeDateIntoIso,
+} from './modules/editorDataset.js';
+import { openMapPicker } from './modules/mapPicker.js';
 import { configureEventSearch, openEventSearchModal } from './modules/eventSearch.js';
 import { renderTimeline } from './modules/timeline.js';
 import { validateDataset, formatValidationErrors } from './modules/validator.js';
-import { homeRoot, heroPanel, ctaGrid, ctaCard, statusBar, sectionHeader, searchBar, cardGrid, loadingState } from './modules/homeLayout.js';
+import { showValidationErrorModal } from './modules/validationModal.js';
+import {
+  homeRoot,
+  heroPanel,
+  ctaGrid,
+  ctaCard,
+  statusBar,
+  sectionHeader,
+  searchBar,
+  cardGrid,
+  loadingState,
+} from './modules/homeLayout.js';
 import {
   loadThemes,
   getThemes,
@@ -16,6 +84,8 @@ import {
   applyThemeClass,
   applyEventColors,
 } from './modules/theme.js';
+import { initThemePicker } from './modules/themePicker.js';
+import { initAppMenu } from './modules/appMenu.js';
 
 const state = {
   dataset: null,
@@ -39,6 +109,10 @@ const state = {
   sessionDirty: false,
   sponsorDirty: false,
   persistedSnapshot: null,
+  // Fingerprint of the dataset file's on-disk content as we last loaded/saved it.
+  // Compared against the live file just before a save to catch external edits
+  // (another tab, the server, a script) so we never silently clobber them.
+  loadedDiskFingerprint: '',
   quickEditSessionChanges: new Set(),
   quickEditSponsorChanges: new Set(),
   sessionStructureDirty: false,
@@ -48,28 +122,32 @@ const state = {
   sessionSponsorPickerOpen: false,
   imageCacheBust: new Map(),
   sponsorEventCounts: null,
-  apiEndpoint: localStorage.getItem('editorApiEndpoint') || ''
+  apiEndpoint: readText(STORAGE_KEYS.editorApiEndpoint) || '',
 };
-
 
 const UNDO_STACK = [];
 const UNDO_LIMIT = 50;
-const RECOVERY_KEY = '__editor_recovery__';
-const PHOTOS_BACKUP_KEY = '__photos_prev__';
-const LOGO_BACKUP_KEY = '__logo_prev__';
+const RECOVERY_KEY = STORAGE_KEYS.editorRecovery;
+const PHOTOS_BACKUP_KEY = STORAGE_KEYS.photosBackup;
+const LOGO_BACKUP_KEY = STORAGE_KEYS.logoBackup;
 const RECOVERY_MAX_AGE_MS = 24 * 60 * 60 * 1000;
 
 const FILE_LINK_DB = 'dataset-editor-file-links';
 const FILE_LINK_STORE = 'links';
-const DIR_HANDLE_KEY = '__project_dir_handle__';
+const DIR_HANDLE_KEY = STORAGE_KEYS.projectDirHandle;
 const EVENT_META_FIELDS = [
   'id',
   'name',
   'designation',
+  'ecosystem',
   'year',
   'location',
   'region',
+  'country',
+  'regionCode',
   'venue',
+  'latitude',
+  'longitude',
   'website',
   'scheduleURLs',
   'other_urls',
@@ -80,143 +158,320 @@ const EVENT_META_FIELDS = [
   'timezone',
   'columns',
   'enabled',
-  'scheduleComplete'
+  'scheduleComplete',
+  'attendance',
 ];
 const EVENT_META_FIELD_CONFIG = {
+  attendance: {
+    label: 'Attendees',
+    description:
+      'The final attendee count as the ORGANISERS reported it, with where the number came from. Never an estimate of ours — an archive that guesses at attendance is worse than one that leaves it blank, because the guess gets quoted back. Leave it empty until there is a figure to record.',
+  },
   designation: {
     label: 'Event series',
-    description: 'The public event family name, such as DrupalSouth, DrupalCon, or DrupalGov.'
+    description: 'The public event family name, such as DrupalSouth, DrupalCon, or DrupalGov.',
+  },
+  ecosystem: {
+    label: 'Community',
+    description:
+      'Which software community this event belongs to. The app stays ecosystem-neutral in its own copy, so this records the fact as data instead of assuming it. Not shown on the public schedule.',
   },
   year: {
     label: 'Event year',
-    description: 'The calendar year used for sorting, grouping, and display.'
+    description: 'The calendar year used for sorting, grouping, and display.',
   },
   location: {
     label: 'Host city',
-    description: 'The city or primary location shown in the event picker.'
+    description: 'The city or primary location shown in the event picker.',
   },
   region: {
-    label: 'Country or region',
-    description: 'The broader region used for context and filtering, such as Australia or New Zealand.'
+    label: 'Region label',
+    description:
+      'Free-text region shown on the public event page, such as "Europe – Greece" or "New Zealand – Wellington".',
+  },
+  country: {
+    label: 'Country',
+    description:
+      'Canonical country name used by the Archive Observatory country filter, such as Greece or Australia. Leave blank for online/global events.',
+  },
+  regionCode: {
+    label: 'Macro-region',
+    description:
+      'Canonical macro-region used by the Archive Observatory filters: Europe, Middle East & Africa, Asia-Pacific, North America, or Latin America.',
   },
   venue: {
     label: 'Venue',
-    description: 'The main venue name shown in the event details.'
+    description: 'The main venue name shown in the event details.',
+  },
+  latitude: {
+    label: 'Venue latitude',
+    description:
+      'Optional. With longitude, pins the venue exactly on the planner map (skips geocoding). E.g. -41.2865.',
+  },
+  longitude: {
+    label: 'Venue longitude',
+    description: 'Optional. Used with latitude for the map pin. E.g. 174.7762.',
   },
   website: {
     label: 'Event website',
-    description: 'The official event website URL.'
+    description: 'The official event website URL.',
   },
   scheduleURLs: {
     label: 'Schedule URLs',
-    description: 'One or more source schedule URLs used when this dataset was created or checked.'
+    description: 'One or more source schedule URLs used when this dataset was created or checked.',
   },
   other_urls: {
     label: 'Other URLs',
-    description: 'Additional URLs associated with this event. These are only shown in the sitemap.'
+    description: 'Additional URLs associated with this event. These are only shown in the sitemap.',
   },
   logo: {
     label: 'Event logo',
-    description: 'Upload and store the exact logo used in the public schedule header for this event.'
+    description:
+      'Upload and store the exact logo used in the public schedule header for this event.',
   },
   timezone: {
     label: 'Event time zone',
-    description: 'The local time zone for session editing. Session times are saved as UTC.'
+    description: 'The local time zone for session editing. Session times are saved as UTC.',
   },
   columns: {
     label: 'Schedule columns',
-    description: 'The preferred number of columns for the public schedule layout.'
+    description: 'The preferred number of columns for the public schedule layout.',
   },
   startDate: {
     label: 'Conference start date',
-    description: 'First day of the event. Populates the timeline day tabs even when no sessions are scheduled yet.'
+    description:
+      'First day of the event. Populates the timeline day tabs even when no sessions are scheduled yet.',
   },
   endDate: {
     label: 'Conference end date',
-    description: 'Last day of the event. All dates between start and end appear as timeline days.'
+    description: 'Last day of the event. All dates between start and end appear as timeline days.',
   },
   enabled: {
     label: 'Show this event',
-    description: 'Controls whether this dataset is available in the public planner.'
+    description: 'Controls whether this dataset is available in the public planner.',
   },
   scheduleComplete: {
     label: 'Schedule complete',
-    description: 'Mark when the event has passed and its schedule is final — no further session changes are expected.'
-  }
+    description:
+      'Mark when the event has passed and its schedule is final — no further session changes are expected.',
+  },
 };
 const FLICKR_FIELD_CONFIG = {
   enabled: {
     label: 'Show photos block',
-    description: 'Displays the photo callout on the public event page when a URL is provided.'
+    description: 'Displays the photo callout on the public event page when a URL is provided.',
   },
   provider: {
     label: 'Photo provider',
-    description: 'Name of the photo platform shown in the callout (e.g. Flickr, Google Photos, SmugMug).'
+    description:
+      'Name of the photo platform shown in the callout (e.g. Flickr, Google Photos, SmugMug).',
   },
   groupUrl: {
     label: 'Photos URL',
-    description: 'The public link to the photo album, group, or gallery used by the call-to-action button.'
+    description:
+      'The public link to the photo album, group, or gallery used by the call-to-action button.',
   },
   image: {
     label: 'Promo image path',
-    description: 'A relative path to the square promo image shown beside the photos block text.'
+    description: 'A relative path to the square promo image shown beside the photos block text.',
   },
   imageAlt: {
     label: 'Image alternative text',
-    description: 'A short description of the promo image for screen readers.'
-  }
+    description: 'A short description of the promo image for screen readers.',
+  },
 };
 const LOGO_FIELD_CONFIG = {
   image: {
     label: 'Logo image path',
-    description: 'A relative path to the logo shown in the public schedule header.'
+    description: 'A relative path to the logo shown in the public schedule header.',
   },
   imageAlt: {
     label: 'Logo alternative text',
-    description: 'A short description of the logo for screen readers.'
+    description: 'A short description of the logo for screen readers.',
   },
   usePlate: {
     label: 'Use background plate',
-    description: 'Enable a soft white plate behind the logo for images without transparency.'
+    description: 'Enable a soft white plate behind the logo for images without transparency.',
   },
   logoDisabled: {
     label: 'Disable logo image',
-    description: 'When checked, the logo image is hidden on the schedule and a Font Awesome icon is shown instead.'
+    description:
+      'When checked, the logo image is hidden on the schedule and a Font Awesome icon is shown instead.',
   },
   faIcon: {
     label: 'Replacement icon',
-    description: 'Font Awesome icon classes shown when the logo is disabled (e.g. "fa-solid fa-calendar-days"). Defaults to fa-solid fa-calendar-days.'
-  }
+    description:
+      'Font Awesome icon classes shown when the logo is disabled (e.g. "fa-solid fa-calendar-days"). Defaults to fa-solid fa-calendar-days.',
+  },
 };
 const SPONSOR_FIELDS = [
-  { key: 'title', label: 'Sponsor title', description: 'Public sponsor name used in the editor and rendered placements.', type: 'text', span: 2 },
-  { key: 'subtitle', label: 'Subtitle text', description: 'Optional display name shown on the schedule instead of the company name. Falls back to the sponsor title if blank.', type: 'text', span: 2 },
-  { key: 'id', label: 'Sponsor ID', description: 'Stable identifier used by sessions to reference this sponsor.', type: 'text' },
-  { key: 'tier', label: 'Tier', description: 'Grouping label such as Platinum, Gold, Silver, or Partner.', type: 'text' },
-  { key: 'row', label: 'Display row', description: 'Which row this sponsor appears in. Lower numbers appear first.', type: 'number' },
-  { key: 'priority', label: 'Display order', description: 'Position within the row. Lower numbers appear earlier.', type: 'number' },
-  { key: 'link', label: 'Sponsor URL', description: 'Optional external link for the sponsor logo or card.', type: 'text', span: 2 },
-  { key: 'image', label: 'Image path', description: 'Relative path to the uploaded sponsor image asset.', type: 'text', span: 2 },
-  { key: 'imageAlt', label: 'Image alternative text', description: 'Short accessible description for the sponsor image.', type: 'text', span: 2 },
-  { key: 'bgStyle', label: 'Logo background', description: 'How the logo image background is treated. Use "light-plate" or "dark-plate" if the logo has no transparent background.', type: 'select', options: ['auto', 'transparent', 'light-plate', 'dark-plate', 'brand-fill'] },
-  { key: 'aspect', label: 'Image shape', description: 'The aspect ratio of the logo. Helps ensure it displays at the right size and proportions.', type: 'select', options: ['auto', 'square', 'landscape', 'banner'] },
-  { key: 'enabled', label: 'Show sponsor', description: 'Controls whether this sponsor is available for rendering and session association.', type: 'checkbox' }
+  {
+    key: 'title',
+    label: 'Sponsor title',
+    description: 'Public sponsor name used in the editor and rendered placements.',
+    type: 'text',
+    span: 2,
+  },
+  {
+    key: 'subtitle',
+    label: 'Subtitle text',
+    description:
+      'Optional display name shown on the schedule instead of the company name. Falls back to the sponsor title if blank.',
+    type: 'text',
+    span: 2,
+  },
+  {
+    key: 'id',
+    label: 'Sponsor ID',
+    description: 'Stable identifier used by sessions to reference this sponsor.',
+    type: 'text',
+  },
+  {
+    key: 'tier',
+    label: 'Tier',
+    description: 'Grouping label such as Platinum, Gold, Silver, or Partner.',
+    type: 'text',
+  },
+  {
+    key: 'row',
+    label: 'Display row',
+    description: 'Which row this sponsor appears in. Lower numbers appear first.',
+    type: 'number',
+  },
+  {
+    key: 'priority',
+    label: 'Display order',
+    description: 'Position within the row. Lower numbers appear earlier.',
+    type: 'number',
+  },
+  {
+    key: 'link',
+    label: 'Sponsor URL',
+    description: 'Optional external link for the sponsor logo or card.',
+    type: 'text',
+    span: 2,
+  },
+  {
+    key: 'image',
+    label: 'Image path',
+    description: 'Relative path to the uploaded sponsor image asset.',
+    type: 'text',
+    span: 2,
+  },
+  {
+    key: 'imageAlt',
+    label: 'Image alternative text',
+    description: 'Short accessible description for the sponsor image.',
+    type: 'text',
+    span: 2,
+  },
+  {
+    key: 'bgStyle',
+    label: 'Logo background',
+    description:
+      'How the logo image background is treated. Use "light-plate" or "dark-plate" if the logo has no transparent background.',
+    type: 'select',
+    options: SPONSOR_BG_STYLES,
+  },
+  {
+    key: 'aspect',
+    label: 'Image shape',
+    description:
+      'The aspect ratio of the logo. Helps ensure it displays at the right size and proportions.',
+    type: 'select',
+    options: SPONSOR_ASPECTS,
+  },
+  {
+    key: 'enabled',
+    label: 'Show sponsor',
+    description:
+      'Controls whether this sponsor is available for rendering and session association.',
+    type: 'checkbox',
+  },
 ];
 const SESSION_FIELDS = [
-  { key: 'title', label: 'Session title', description: 'The public title shown on schedule cards and detail views.', type: 'text', span: 2 },
-  { key: 'startTime', label: 'Start time', description: 'Enter the session start time in the event\'s local timezone.', type: 'datetime-local' },
-  { key: 'endTime', label: 'End time', description: 'Enter the session end time in the event\'s local timezone.', type: 'datetime-local' },
-  { key: 'location', label: 'Room or location', description: 'The room, stage, or location for this session.', type: 'text' },
-  { key: 'duration', label: 'Session duration', description: 'Calculated automatically from the start and end time.', type: 'text' },
-  { key: 'track', label: 'Track or topic', description: 'Use commas to separate multiple tracks or topics.', type: 'text' },
-  { key: 'speakers', label: 'Speaker names', description: 'Use commas or new lines to separate multiple speakers.', type: 'textarea', span: 2 },
-  { key: 'full_description', label: 'Session description', description: 'The full public description. Markdown formatting is supported.', type: 'textarea', span: 2 },
-  { key: 'sponsorIds', label: 'Sponsors', description: 'Sponsors associated with this session.', type: 'sponsors', span: 2 },
-  { key: 'link', label: 'Session page URL', description: 'The original or canonical web page for this session.', type: 'text', span: 2 },
-  { key: 'video_url', label: 'Video URL', description: 'Optional recording URL shown with the session details.', type: 'text', span: 2 }
+  {
+    key: 'title',
+    label: 'Session title',
+    description: 'The public title shown on schedule cards and detail views.',
+    type: 'text',
+    span: 2,
+  },
+  {
+    key: 'startTime',
+    label: 'Start time',
+    description: "Enter the session start time in the event's local timezone.",
+    type: 'datetime-local',
+  },
+  {
+    key: 'endTime',
+    label: 'End time',
+    description: "Enter the session end time in the event's local timezone.",
+    type: 'datetime-local',
+  },
+  {
+    key: 'location',
+    label: 'Room or location',
+    description: 'The room, stage, or location for this session.',
+    type: 'text',
+  },
+  {
+    key: 'duration',
+    label: 'Session duration',
+    description: 'Calculated automatically from the start and end time.',
+    type: 'text',
+  },
+  {
+    key: 'isAgendaItem',
+    label: 'Not a session',
+    description:
+      'Lunch, morning tea, registration. It still appears on the schedule and keeps its sponsors, room and times — the archive just stops counting it as a session.',
+    type: 'checkbox',
+    span: 2,
+  },
+  {
+    key: 'track',
+    label: 'Track or topic',
+    description: 'Use commas to separate multiple tracks or topics.',
+    type: 'text',
+  },
+  {
+    key: 'speakers',
+    label: 'Speaker names',
+    description: 'Use commas or new lines to separate multiple speakers.',
+    type: 'textarea',
+    span: 2,
+  },
+  {
+    key: 'full_description',
+    label: 'Session description',
+    description: 'The full public description. Markdown formatting is supported.',
+    type: 'textarea',
+    span: 2,
+  },
+  {
+    key: 'sponsorIds',
+    label: 'Sponsors',
+    description: 'Sponsors associated with this session.',
+    type: 'sponsors',
+    span: 2,
+  },
+  {
+    key: 'link',
+    label: 'Session page URL',
+    description: 'The original or canonical web page for this session.',
+    type: 'text',
+    span: 2,
+  },
+  {
+    key: 'video_url',
+    label: 'Video URL',
+    description: 'Optional recording URL shown with the session details.',
+    type: 'text',
+    span: 2,
+  },
 ];
 
-const dtfCache = new Map();
 let fileLinkDbPromise = null;
 let eventCatalog = [];
 let _homeMetaCache = null;
@@ -271,6 +526,14 @@ const els = {
   sponsorList: document.getElementById('sponsorList'),
   sponsorWorkspace: document.getElementById('sponsorWorkspace'),
   sponsorWorkspacePanel: document.getElementById('sponsorWorkspacePanel'),
+  peopleWorkspacePanel: document.getElementById('peopleWorkspacePanel'),
+  showPeopleTab: document.getElementById('showPeopleTab'),
+  peopleGroups: document.getElementById('peopleGroups'),
+  communityUrlInput: document.getElementById('communityUrlInput'),
+  communityCapturedInput: document.getElementById('communityCapturedInput'),
+  addPersonBtn: document.getElementById('addPersonBtn'),
+  relatedWorkspacePanel: document.getElementById('relatedWorkspacePanel'),
+  showRelatedTab: document.getElementById('showRelatedTab'),
   sponsorSidebarPanel: document.getElementById('sponsorSidebarPanel'),
   sponsorEditorPanel: document.getElementById('sponsorEditorPanel'),
   toggleSponsorWorkspace: document.getElementById('toggleSponsorWorkspace'),
@@ -286,6 +549,7 @@ const els = {
   saveSponsorLabel: document.getElementById('saveSponsorLabel'),
   addSponsor: document.getElementById('addSponsor'),
   deleteSponsor: document.getElementById('deleteSponsor'),
+  sponsorLogosDisabledToggle: document.getElementById('sponsorLogosDisabledToggle'),
   logoWorkspacePanel: document.getElementById('logoWorkspacePanel'),
   flickrWorkspacePanel: document.getElementById('flickrWorkspacePanel'),
   showEventTab: document.getElementById('showEventTab'),
@@ -312,7 +576,7 @@ const els = {
   sessionSponsorPickerList: document.getElementById('sessionSponsorPickerList'),
   sessionSponsorPickerCount: document.getElementById('sessionSponsorPickerCount'),
   closeSessionSponsorPicker: document.getElementById('closeSessionSponsorPicker'),
-  closeSessionSponsorPickerBack: document.getElementById('closeSessionSponsorPickerBack')
+  closeSessionSponsorPickerBack: document.getElementById('closeSessionSponsorPickerBack'),
 };
 
 // Ensure the search button is always enabled for quick event switching
@@ -330,16 +594,19 @@ if (els.editorSearchEvents) {
   observer.observe(els.editorSearchEvents, { attributes: true, attributeFilter: ['disabled'] });
 }
 
-
 function outputBasename(pathValue) {
-  const normalized = String(pathValue || '').replace(/\\/g, '/').trim();
+  const normalized = String(pathValue || '')
+    .replace(/\\/g, '/')
+    .trim();
   if (!normalized) return '';
   const segments = normalized.split('/').filter(Boolean);
   return segments.length ? segments[segments.length - 1] : '';
 }
 
 function normalizeOutputPath(value, fallback = 'data/new-event.json') {
-  const raw = String(value || '').replace(/\\/g, '/').trim();
+  const raw = String(value || '')
+    .replace(/\\/g, '/')
+    .trim();
   if (!raw) return fallback;
   const withExt = raw.toLowerCase().endsWith('.json') ? raw : `${raw}.json`;
   if (withExt.includes('/')) return withExt;
@@ -347,12 +614,14 @@ function normalizeOutputPath(value, fallback = 'data/new-event.json') {
 }
 
 function getFileLinkKey(pathValue) {
-  return normalizeOutputPath(pathValue || state.outputPath || `data/${state.file || 'new-event.json'}`);
+  return normalizeOutputPath(
+    pathValue || state.outputPath || `data/${state.file || 'new-event.json'}`,
+  );
 }
 
 function replaceOutputBasename(pathValue, filename) {
   const normalized = normalizeOutputPath(pathValue);
-  const base = String(filename || '').trim();
+  const base = normalizeString(filename);
   if (!base) return normalized;
   const dir = normalized.includes('/') ? normalized.slice(0, normalized.lastIndexOf('/')) : 'data';
   return `${dir}/${base}`;
@@ -385,10 +654,6 @@ async function getLinkedHandle(pathKey) {
   });
 }
 
-async function getStoredProjectDirHandle() {
-  return getLinkedHandle(DIR_HANDLE_KEY);
-}
-
 async function setStoredProjectDirHandle(handle) {
   await setLinkedHandle(DIR_HANDLE_KEY, handle);
 }
@@ -399,17 +664,6 @@ async function setLinkedHandle(pathKey, handle) {
     const tx = db.transaction(FILE_LINK_STORE, 'readwrite');
     const store = tx.objectStore(FILE_LINK_STORE);
     const req = store.put(handle, pathKey);
-    req.onsuccess = () => resolve();
-    req.onerror = () => reject(req.error);
-  });
-}
-
-async function clearLinkedHandle(pathKey) {
-  const db = await openFileLinkDb();
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction(FILE_LINK_STORE, 'readwrite');
-    const store = tx.objectStore(FILE_LINK_STORE);
-    const req = store.delete(pathKey);
     req.onsuccess = () => resolve();
     req.onerror = () => reject(req.error);
   });
@@ -433,6 +687,7 @@ async function restoreLinkedHandleForCurrentPath() {
     }
     state.fileHandle = handle;
   } catch {
+    // Permission query failed or handle is stale → drop it and re-prompt later.
     state.fileHandle = null;
   }
 }
@@ -462,9 +717,9 @@ async function connectProjectFolder() {
   syncWelcomePanel();
   await refreshEditorSearch();
 
-  const returnFile = localStorage.getItem('__editor_return_file__');
+  const returnFile = readText(STORAGE_KEYS.editorReturnFile);
   if (returnFile) {
-    localStorage.removeItem('__editor_return_file__');
+    removeKey(STORAGE_KEYS.editorReturnFile);
     const returnOption = Array.from(els.datasetSelect.options).find((o) => o.value === returnFile);
     if (returnOption) {
       closeWelcomeModal();
@@ -479,7 +734,7 @@ async function connectProjectFolder() {
     }
   }
 
-  const selectedFile = String(els.datasetSelect.value || '').trim();
+  const selectedFile = normalizeString(els.datasetSelect.value);
   if (selectedFile) {
     if (!state.dataset || (await confirmDiscardPendingChanges(`dataset ${selectedFile}`))) {
       try {
@@ -546,15 +801,15 @@ function disconnectProjectFolder() {
   setEditorButtonsEnabled(false);
   els.eventMetaForm.innerHTML = '';
   if (els.logoForm) {
-    els.logoForm.innerHTML = '<p class="text-sm text-gray-400">Open a project folder to get started.</p>';
+    els.logoForm.innerHTML = '<p class="edt-muted">Open a project folder to get started.</p>';
   }
   if (els.flickrForm) {
-    els.flickrForm.innerHTML = '<p class="text-sm text-gray-400">Open a project folder to get started.</p>';
+    els.flickrForm.innerHTML = '<p class="edt-muted">Open a project folder to get started.</p>';
   }
-  els.sessionList.innerHTML = '<li class="text-sm text-gray-400 px-3 py-2 border border-dashed border-gray-700 rounded-md">Open a project folder to get started.</li>';
-  els.sessionForm.innerHTML = '<p class="text-sm text-gray-400">Select a session on the left to edit it.</p>';
-  els.sponsorList.innerHTML = '<li class="text-sm text-gray-400 px-3 py-2 border border-dashed border-gray-700 rounded-md">Open a project folder to get started.</li>';
-  els.sponsorForm.innerHTML = '<p class="text-sm text-gray-400">Select a sponsor row to edit it.</p>';
+  els.sessionList.innerHTML = '<li class="edt-empty">Open a project folder to get started.</li>';
+  els.sessionForm.innerHTML = '<p class="edt-muted">Select a session on the left to edit it.</p>';
+  els.sponsorList.innerHTML = '<li class="edt-empty">Open a project folder to get started.</li>';
+  els.sponsorForm.innerHTML = '<p class="edt-muted">Select a sponsor row to edit it.</p>';
   if (els.sessionSearchInput) {
     els.sessionSearchInput.value = '';
   }
@@ -578,6 +833,14 @@ function setCurrentFilenameLabel() {
   }
 }
 
+function setEditorDocumentTitle() {
+  const ev = state.dataset?.event || {};
+  const name = [ev.designation, ev.location, ev.year].filter(Boolean).join(' ').trim();
+  document.title = name
+    ? `${name} - Dataset Editor`
+    : 'Dataset Editor - Drupal Event Schedule Builder';
+}
+
 function setEditorButtonsEnabled(enabled) {
   if (els.exportDataset) {
     els.exportDataset.disabled = !enabled;
@@ -586,7 +849,8 @@ function setEditorButtonsEnabled(enabled) {
   if (els.saveDatasetToggle) els.saveDatasetToggle.disabled = !enabled;
   if (els.previewDataset) els.previewDataset.disabled = !enabled;
   if (els.previewDatasetToggle) els.previewDatasetToggle.disabled = !enabled;
-  if (els.revertDataset) els.revertDataset.disabled = !enabled || !state.dirty || !state.persistedSnapshot;
+  if (els.revertDataset)
+    els.revertDataset.disabled = !enabled || !state.dirty || !state.persistedSnapshot;
   if (els.saveSession) els.saveSession.disabled = !enabled || state.selectedIndex < 0;
   els.addSession.disabled = !enabled;
   els.deleteSession.disabled = !enabled || state.selectedIndex < 0;
@@ -674,7 +938,8 @@ function isFolderPickerSupported() {
 }
 
 function setFolderConnectionButtonState() {
-  const unsupportedTitle = 'Folder access is not supported in this browser — use the API server instead';
+  const unsupportedTitle =
+    'Folder access is not supported in this browser — use the API server instead';
 
   if (isApiMode()) {
     if (els.folderConnectionToggle) els.folderConnectionToggle.classList.add('hidden');
@@ -686,13 +951,14 @@ function setFolderConnectionButtonState() {
     if (!isFolderPickerSupported()) {
       els.folderConnectionToggle.disabled = true;
       els.folderConnectionToggle.title = unsupportedTitle;
-      els.folderConnectionToggle.innerHTML = '<i class="fas fa-folder-open mr-2"></i>Connect Folder';
+      els.folderConnectionToggle.innerHTML = 'Connect Folder';
     } else {
       els.folderConnectionToggle.disabled = false;
       els.folderConnectionToggle.title = '';
-      els.folderConnectionToggle.innerHTML = state.folderConnectedInSession && state.projectDirHandle
-        ? '<i class="fas fa-unlink mr-2"></i>Disconnect folder'
-        : '<i class="fas fa-folder-open mr-2"></i>Open project folder';
+      els.folderConnectionToggle.innerHTML =
+        state.folderConnectedInSession && state.projectDirHandle
+          ? 'Disconnect folder'
+          : 'Open project folder';
     }
   }
 }
@@ -710,7 +976,7 @@ function capturePersistedSnapshot() {
   state.persistedSnapshot = {
     dataset: cloneJsonValue(state.dataset),
     file: state.file,
-    outputPath: state.outputPath
+    outputPath: state.outputPath,
   };
 }
 
@@ -742,36 +1008,26 @@ async function restorePersistedSnapshot() {
 
 function saveRecoverySnapshot() {
   if (!state.dataset) return;
-  try {
-    localStorage.setItem(RECOVERY_KEY, JSON.stringify({
-      dataset: state.dataset,
-      file: state.file,
-      outputPath: state.outputPath,
-      savedAt: Date.now(),
-    }));
-  } catch {
-    // localStorage full or unavailable
-  }
+  writeJson(RECOVERY_KEY, {
+    dataset: state.dataset,
+    file: state.file,
+    outputPath: state.outputPath,
+    savedAt: Date.now(),
+  });
 }
 
 function clearRecoverySnapshot() {
-  try { localStorage.removeItem(RECOVERY_KEY); } catch {}
+  removeKey(RECOVERY_KEY);
 }
 
 function loadRecoverySnapshot() {
-  try {
-    const raw = localStorage.getItem(RECOVERY_KEY);
-    if (!raw) return null;
-    const data = JSON.parse(raw);
-    if (!data?.dataset || !data?.file) return null;
-    if (data.savedAt && Date.now() - data.savedAt > RECOVERY_MAX_AGE_MS) {
-      clearRecoverySnapshot();
-      return null;
-    }
-    return data;
-  } catch {
+  const data = readJson(RECOVERY_KEY, null);
+  if (!data?.dataset || !data?.file) return null;
+  if (data.savedAt && Date.now() - data.savedAt > RECOVERY_MAX_AGE_MS) {
+    clearRecoverySnapshot();
     return null;
   }
+  return data;
 }
 
 function applyRecovery(recovery) {
@@ -798,6 +1054,7 @@ function applyRecovery(recovery) {
   syncSessionSaveButton();
   syncSponsorSaveButton();
   closeWelcomeModal();
+  restorePendingEditorTab(); // return to the workspace the URL asked for
 }
 
 function showRecoveryBar(recovery) {
@@ -839,9 +1096,10 @@ function undoClear() {
 function updateUndoButton() {
   if (els.undoAction) {
     els.undoAction.disabled = UNDO_STACK.length === 0;
-    els.undoAction.title = UNDO_STACK.length > 0
-      ? `Undo (${UNDO_STACK.length} step${UNDO_STACK.length === 1 ? '' : 's'}) — Ctrl+Z`
-      : 'Nothing to undo';
+    els.undoAction.title =
+      UNDO_STACK.length > 0
+        ? `Undo (${UNDO_STACK.length} step${UNDO_STACK.length === 1 ? '' : 's'}) — Ctrl+Z`
+        : 'Nothing to undo';
   }
 }
 
@@ -854,7 +1112,8 @@ async function performUndo() {
   state.quickEditSessionChanges = new Set();
   state.quickEditSponsorChanges = new Set();
   normalizeDatasetShape();
-  const matchesSaved = state.persistedSnapshot &&
+  const matchesSaved =
+    state.persistedSnapshot &&
     JSON.stringify(state.dataset) === JSON.stringify(state.persistedSnapshot.dataset);
   markDirty(!matchesSaved);
   markSessionDirty(false);
@@ -892,24 +1151,50 @@ function confirmDiscardPendingChanges(targetLabel = 'another file') {
       document.body.classList.remove('session-modal-open');
     };
 
-    document.getElementById('unsavedModalSave').addEventListener('click', async () => {
-      close();
-      try { await saveDataset(); resolve(true); } catch { resolve(false); }
-    }, { once: true });
+    document.getElementById('unsavedModalSave').addEventListener(
+      'click',
+      async () => {
+        close();
+        try {
+          await saveDataset();
+          resolve(true);
+        } catch (err) {
+          reportError('saveDataset (unsaved-changes prompt)', err);
+          resolve(false);
+        }
+      },
+      { once: true },
+    );
 
-    document.getElementById('unsavedModalDiscard').addEventListener('click', async () => {
-      close();
-      await restorePersistedSnapshot();
-      resolve(true);
-    }, { once: true });
+    document.getElementById('unsavedModalDiscard').addEventListener(
+      'click',
+      async () => {
+        close();
+        await restorePersistedSnapshot();
+        resolve(true);
+      },
+      { once: true },
+    );
 
-    document.getElementById('unsavedModalCancel').addEventListener('click', () => {
-      close(); resolve(false);
-    }, { once: true });
+    document.getElementById('unsavedModalCancel').addEventListener(
+      'click',
+      () => {
+        close();
+        resolve(false);
+      },
+      { once: true },
+    );
 
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) { close(); resolve(false); }
-    }, { once: true });
+    modal.addEventListener(
+      'click',
+      (e) => {
+        if (e.target === modal) {
+          close();
+          resolve(false);
+        }
+      },
+      { once: true },
+    );
   });
 }
 
@@ -917,7 +1202,7 @@ let _lastSavedAt = null;
 
 function markDirty(nextDirty = true) {
   state.dirty = nextDirty;
-  const color = nextDirty ? 'text-amber-300' : 'text-emerald-300';
+  const unsaved = nextDirty;
   let label;
   if (nextDirty) {
     label = 'Unsaved changes';
@@ -926,7 +1211,7 @@ function markDirty(nextDirty = true) {
   } else {
     label = 'No changes';
   }
-  els.dirtyState.innerHTML = `<i class="fas fa-circle mr-2 text-xs ${color}"></i><span>${label}</span>`;
+  els.dirtyState.innerHTML = `<span class="sidebar-dirty-dot${unsaved ? ' is-dirty' : ''}"></span><span>${label}</span>`;
   els.dirtyState.dataset.dirty = String(nextDirty);
   els.saveDataset.classList.toggle('is-dirty', nextDirty);
   els.saveDataset.title = nextDirty ? 'Save changes (Ctrl+S)' : 'No unsaved changes';
@@ -970,32 +1255,85 @@ function closeWelcomeModal() {
   document.getElementById('editorSidebarNav')?.classList.remove('hidden');
 }
 
+// Connect the editor to an API endpoint (shared by the API-settings modal and the
+// "Edit online (this server)" home card) and load its dataset list. Passing '' or
+// nothing disconnects.
+async function connectEditorApi(endpoint) {
+  endpoint = String(endpoint || '')
+    .trim()
+    .replace(/\/$/, '');
+  state.apiEndpoint = endpoint;
+  if (endpoint) writeText(STORAGE_KEYS.editorApiEndpoint, endpoint);
+  else removeKey(STORAGE_KEYS.editorApiEndpoint);
+  syncApiModeUI();
+  setFolderConnectionButtonState();
+  if (endpoint && !state.dataset) {
+    await renderDatasetOptionsFromConnectedFolder();
+    setDatasetLoadingEnabled(true);
+  }
+  _homeMetaCache = null;
+  syncWelcomePanel();
+  await refreshEditorSearch();
+}
+
 function renderEditorHomePhase1() {
   if (!els.home) return;
   const folderSupported = isFolderPickerSupported();
   const recentHtml = _buildRecentFilesHtml();
-  const settingsBtn = `<button type="button" class="hl-settings-btn" id="ehSettingsBtn" title="Settings" aria-label="Settings"><i class="fas fa-gear"></i><span class="hl-settings-btn-label">Settings</span></button>`;
+  const settingsBtn = `<button type="button" class="hl-settings-btn" id="ehSettingsBtn" title="Settings" aria-label="Settings"><span class="hl-settings-btn-label">Settings</span></button>`;
   els.home.innerHTML = homeRoot(`
-    ${heroPanel({ iconClass: 'fas fa-pen-ruler', title: 'Dataset Editor', lead: 'Build and edit Drupal event schedules. Connect your project folder or an API server to get started.', actionsHtml: settingsBtn })}
-    ${ctaGrid(
-      ctaCard({ id: 'ehConnectFolder', iconClass: 'fas fa-folder-open', title: 'Open Project Folder',
-        desc: folderSupported ? 'Grant access to your local project directory. Works in Chrome and Edge.' : 'Not available in this browser — use the API server instead.',
-        disabled: !folderSupported, disabledReason: 'Folder access not supported in this browser — use the API server instead' }) +
-      ctaCard({ id: 'ehConnectApi', iconClass: 'fas fa-server', iconMod: 'hl-cta-icon--api', title: 'Connect to API Server',
-        desc: 'Use a local server for Firefox-compatible saving and image uploads.' })
-    )}
+    ${heroPanel({ title: 'Dataset Editor', lead: 'Build and edit Drupal event schedules. Connect your project folder or an API server to get started.', actionsHtml: settingsBtn })}
+    ${(() => {
+      // "Edit online (this server)" uses the same-origin API — leading option when
+      // the editor is served from a hosted server, otherwise offered after the
+      // local choices.
+      const hosted = !['localhost', '127.0.0.1', '0.0.0.0', ''].includes(location.hostname);
+      const onlineCard = ctaCard({
+        id: 'ehEditOnline',
+        title: 'Edit online (this server)',
+        desc: hosted
+          ? 'Edit the datasets on this server directly. Requires an editor login.'
+          : 'Edit the datasets served by this local server — no separate connection.',
+      });
+      const folderCard = ctaCard({
+        id: 'ehConnectFolder',
+        title: 'Open Project Folder',
+        desc: folderSupported
+          ? 'Grant access to your local project directory. Works in Chrome and Edge.'
+          : 'Not available in this browser — use the API server instead.',
+        disabled: !folderSupported,
+        disabledReason: 'Folder access not supported in this browser — use the API server instead',
+      });
+      const apiCard = ctaCard({
+        id: 'ehConnectApi',
+        title: 'Connect to API Server',
+        desc: 'Use a different / local server for Firefox-compatible saving and image uploads.',
+      });
+      return ctaGrid(
+        hosted ? onlineCard + folderCard + apiCard : folderCard + apiCard + onlineCard,
+      );
+    })()}
     ${recentHtml}
   `);
 
   document.getElementById('ehSettingsBtn')?.addEventListener('click', openEditorSettings);
   document.getElementById('ehConnectFolder')?.addEventListener('click', connectProjectFolder);
+  document
+    .getElementById('ehEditOnline')
+    ?.addEventListener('click', () => connectEditorApi(window.location.origin));
   document.getElementById('ehConnectApi')?.addEventListener('click', () => {
     const modal = document.getElementById('apiSettingsModal');
     const input = document.getElementById('apiEndpointInput');
     const result = document.getElementById('apiTestResult');
     if (input) input.value = state.apiEndpoint;
-    if (result) { result.textContent = ''; result.className = 'text-sm hidden'; }
-    if (modal) { modal.classList.remove('hidden'); modal.setAttribute('aria-hidden', 'false'); }
+    if (result) {
+      result.textContent = '';
+      result.className = 'text-sm hidden';
+    }
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.setAttribute('aria-hidden', 'false');
+    }
   });
   els.home.querySelectorAll('[data-eh-recent]').forEach((btn) => {
     btn.addEventListener('click', () => _openRecentFile(btn.dataset.ehRecent));
@@ -1006,11 +1344,11 @@ async function renderEditorHomePhase2() {
   if (!els.home) return;
   const connectionLabel = isApiMode()
     ? state.apiEndpoint
-    : (state.projectDirHandle?.name || 'Project folder');
+    : state.projectDirHandle?.name || 'Project folder';
 
   els.home.innerHTML = homeRoot(`
     ${statusBar({ label: escapeHtml(connectionLabel), actionId: 'ehDisconnectBtn', actionText: isApiMode() ? 'Disconnect' : 'Disconnect folder' })}
-    ${sectionHeader({ title: 'Events', primaryBtnId: 'ehNewEvent', primaryBtnLabel: 'New event', primaryBtnIconClass: 'fas fa-file-circle-plus', secondaryBtnId: 'ehSettingsBtn', secondaryBtnIconClass: 'fas fa-gear', secondaryBtnTitle: 'Settings' })}
+    ${sectionHeader({ title: 'Events', primaryBtnId: 'ehNewEvent', primaryBtnLabel: 'New event', secondaryBtnId: 'ehSettingsBtn', secondaryBtnTitle: 'Settings' })}
     ${searchBar({ inputId: 'ehEventSearch', placeholder: 'Filter events…' })}
     ${cardGrid({ id: 'ehEventGrid', innerHtml: loadingState('Loading events…') })}
   `);
@@ -1018,7 +1356,7 @@ async function renderEditorHomePhase2() {
   document.getElementById('ehDisconnectBtn')?.addEventListener('click', () => {
     if (isApiMode()) {
       state.apiEndpoint = '';
-      localStorage.removeItem('editorApiEndpoint');
+      removeKey(STORAGE_KEYS.editorApiEndpoint);
       syncApiModeUI();
       setFolderConnectionButtonState();
       syncWelcomePanel();
@@ -1048,6 +1386,7 @@ async function renderEditorHomePhase2() {
       records = _homeMetaCache;
     }
   } catch {
+    // Folder not connected or unreadable → render an empty home grid.
     records = [];
   }
 
@@ -1055,7 +1394,9 @@ async function renderEditorHomePhase2() {
 
   const searchInput = document.getElementById('ehEventSearch');
   if (searchInput) {
-    searchInput.addEventListener('input', (e) => _filterEventCards(e.target.value.trim().toLowerCase()));
+    searchInput.addEventListener('input', (e) =>
+      _filterEventCards(e.target.value.trim().toLowerCase()),
+    );
     searchInput.focus();
   }
 }
@@ -1075,25 +1416,26 @@ function _renderEventCards(records) {
     return db - da;
   });
 
-  grid.innerHTML = sorted.map((r) => {
-    const isHidden = r.enabled === false;
-    const statusChip = isHidden
-      ? `<span class="eh-chip eh-chip--disabled"><i class="fas fa-eye-slash"></i> Hidden</span>`
-      : `<span class="eh-chip eh-chip--ok"><i class="fas fa-eye"></i> Enabled</span>`;
-    const dateRange = _fmtEventDateRange(r.startDate, r.endDate);
-    return `
+  grid.innerHTML = sorted
+    .map((r) => {
+      const isHidden = r.enabled === false;
+      const statusChip = isHidden
+        ? `<span class="eh-chip eh-chip--disabled">Hidden</span>`
+        : `<span class="eh-chip eh-chip--ok">Enabled</span>`;
+      const dateRange = _fmtEventDateRange(r.startDate, r.endDate);
+      return `
       <button type="button" class="eh-event-card" data-eh-file="${escapeAttr(r.file)}">
         <div class="eh-event-card-header">
           ${r.designation ? `<span class="eh-desig-badge">${escapeHtml(r.designation.toUpperCase())}</span>` : ''}
           <div class="eh-chip-row">${statusChip}</div>
         </div>
         <h3 class="eh-event-title">${escapeHtml(r.label)}</h3>
-        ${r.location ? `<p class="eh-event-meta"><i class="fas fa-location-dot"></i> ${escapeHtml(r.location)}</p>` : ''}
-        ${dateRange ? `<p class="eh-event-meta"><i class="fas fa-calendar"></i> ${escapeHtml(dateRange)}</p>` : ''}
+        ${r.location ? `<p class="eh-event-meta">${escapeHtml(r.location)}</p>` : ''}
+        ${dateRange ? `<p class="eh-event-meta">${escapeHtml(dateRange)}</p>` : ''}
         <div class="eh-event-file">${escapeHtml(r.file)}</div>
-        <i class="fas fa-chevron-right eh-event-arrow" aria-hidden="true"></i>
-      </button>`;
-  }).join('');
+        </button>`;
+    })
+    .join('');
 
   grid.querySelectorAll('[data-eh-file]').forEach((btn) => {
     btn.addEventListener('click', async () => {
@@ -1131,27 +1473,27 @@ function _fmtEventDateRange(startDate, endDate) {
       return `${sStr} – ${e.toLocaleDateString(undefined, opts)}`;
     }
     return `${s.toLocaleDateString(undefined, opts)} – ${e.toLocaleDateString(undefined, opts)}`;
-  } catch { return ''; }
+  } catch {
+    return ''; /* unparseable date range → render nothing */
+  }
 }
 
 function _buildRecentFilesHtml() {
-  let recent = [];
-  try {
-    const raw = localStorage.getItem('__editor_recent_files__');
-    if (raw) recent = JSON.parse(raw).slice(0, 5);
-  } catch { /* ignore */ }
+  const recent = (readJson(STORAGE_KEYS.editorRecentFiles, []) || []).slice(0, 5);
   if (!recent.length) return '';
   return `<div class="eh-recent">
     <h2 class="eh-recent-title">Recently opened</h2>
     <ul class="eh-recent-list">
-      ${recent.map((f) => `
+      ${recent
+        .map(
+          (f) => `
         <li>
           <button type="button" class="eh-recent-item" data-eh-recent="${escapeAttr(f)}">
-            <i class="fas fa-file-code eh-recent-icon"></i>
             <span class="eh-recent-label">${escapeHtml(f)}</span>
-            <i class="fas fa-arrow-right eh-recent-arrow"></i>
-          </button>
-        </li>`).join('')}
+            </button>
+        </li>`,
+        )
+        .join('')}
     </ul>
   </div>`;
 }
@@ -1177,16 +1519,19 @@ function markSessionDirty(nextDirty = true) {
   if (!els.sessionDirtyState) return;
   const quickCount = state.quickEditSessionChanges.size;
   const hasQuickChanges = quickCount > 0 || state.sessionStructureDirty;
-  const color = (state.sessionDirty || hasQuickChanges) ? 'text-amber-300' : 'text-emerald-300';
+  const unsaved = state.sessionDirty || hasQuickChanges;
   let label = 'No changes';
   if (isQuickSessionEditEnabled()) {
     if (hasQuickChanges) {
-      label = quickCount > 0 ? `${quickCount} item${quickCount === 1 ? '' : 's'} modified` : 'Unsaved quick edits';
+      label =
+        quickCount > 0
+          ? `${quickCount} item${quickCount === 1 ? '' : 's'} modified`
+          : 'Unsaved quick edits';
     }
   } else if (state.sessionDirty || hasQuickChanges) {
     label = 'Modified';
   }
-  els.sessionDirtyState.innerHTML = `<i class="fas fa-circle mr-2 text-[0.55rem] ${color}"></i><span>${label}</span>`;
+  els.sessionDirtyState.innerHTML = `<span class="sidebar-dirty-dot${unsaved ? ' is-dirty' : ''}"></span><span>${label}</span>`;
   syncSessionSaveButton();
 }
 
@@ -1195,16 +1540,19 @@ function markSponsorDirty(nextDirty = true) {
   if (!els.sponsorDirtyState) return;
   const quickCount = state.quickEditSponsorChanges.size;
   const hasQuickChanges = quickCount > 0 || state.sponsorStructureDirty;
-  const color = (state.sponsorDirty || hasQuickChanges) ? 'text-amber-300' : 'text-emerald-300';
+  const unsaved = state.sponsorDirty || hasQuickChanges;
   let label = 'No changes';
   if (isQuickSponsorEditEnabled()) {
     if (hasQuickChanges) {
-      label = quickCount > 0 ? `${quickCount} item${quickCount === 1 ? '' : 's'} modified` : 'Unsaved quick edits';
+      label =
+        quickCount > 0
+          ? `${quickCount} item${quickCount === 1 ? '' : 's'} modified`
+          : 'Unsaved quick edits';
     }
   } else if (state.sponsorDirty || hasQuickChanges) {
     label = 'Modified';
   }
-  els.sponsorDirtyState.innerHTML = `<i class="fas fa-circle mr-2 text-[0.55rem] ${color}"></i><span>${label}</span>`;
+  els.sponsorDirtyState.innerHTML = `<span class="sidebar-dirty-dot${unsaved ? ' is-dirty' : ''}"></span><span>${label}</span>`;
   syncSponsorSaveButton();
 }
 
@@ -1215,7 +1563,11 @@ function trackQuickSessionChange(index = state.selectedIndex, structural = false
   if (structural) {
     state.sessionStructureDirty = true;
   }
-  markSessionDirty(Boolean(state.sessionDirty || state.quickEditSessionChanges.size > 0 || state.sessionStructureDirty));
+  markSessionDirty(
+    Boolean(
+      state.sessionDirty || state.quickEditSessionChanges.size > 0 || state.sessionStructureDirty,
+    ),
+  );
 }
 
 function trackQuickSponsorChange(index = state.selectedSponsorIndex, structural = false) {
@@ -1225,7 +1577,11 @@ function trackQuickSponsorChange(index = state.selectedSponsorIndex, structural 
   if (structural) {
     state.sponsorStructureDirty = true;
   }
-  markSponsorDirty(Boolean(state.sponsorDirty || state.quickEditSponsorChanges.size > 0 || state.sponsorStructureDirty));
+  markSponsorDirty(
+    Boolean(
+      state.sponsorDirty || state.quickEditSponsorChanges.size > 0 || state.sponsorStructureDirty,
+    ),
+  );
 }
 
 function resetSessionQuickEditState() {
@@ -1275,7 +1631,9 @@ function syncSessionSaveButton() {
   if (els.saveSessionLabel) {
     els.saveSessionLabel.textContent = saveAll ? 'Save all' : 'Save';
   }
-  els.saveSession.disabled = saveAll ? !Boolean(state.dataset) || !hasQuickChanges : !canSaveSelection;
+  els.saveSession.disabled = saveAll
+    ? !Boolean(state.dataset) || !hasQuickChanges
+    : !canSaveSelection;
 }
 
 function syncSponsorSaveButton() {
@@ -1286,175 +1644,14 @@ function syncSponsorSaveButton() {
   if (els.saveSponsorLabel) {
     els.saveSponsorLabel.textContent = saveAll ? 'Save all' : 'Save';
   }
-  els.saveSponsor.disabled = saveAll ? !Boolean(state.dataset) || !hasQuickChanges : !canSaveSelection;
+  els.saveSponsor.disabled = saveAll
+    ? !Boolean(state.dataset) || !hasQuickChanges
+    : !canSaveSelection;
 }
 
 function toStringValue(value) {
   if (Array.isArray(value)) return value.join(', ');
   return value == null ? '' : String(value);
-}
-
-function normalizeUrlArray(value) {
-  if (Array.isArray(value)) return value.map((v) => String(v || '').trim());
-  const s = String(value || '').trim();
-  return s ? [s] : [];
-}
-
-function parseMultiValue(value) {
-  return String(value || '')
-    .split(/\n|,/)
-    .map((v) => v.trim())
-    .filter(Boolean);
-}
-
-function stripSummaryFields(dataset) {
-  if (!dataset || !Array.isArray(dataset.items)) return;
-  dataset.items.forEach((item) => {
-    if (!item || typeof item !== 'object') return;
-    if (Object.prototype.hasOwnProperty.call(item, 'summary')) delete item.summary;
-    if (Object.prototype.hasOwnProperty.call(item, 'description')) delete item.description;
-  });
-}
-
-
-function normalizeFlickrObject(raw = null) {
-  const input = raw && typeof raw === 'object' ? raw : {};
-  const enabled = !(input.enabled === false || String(input.enabled || '').toLowerCase() === 'false');
-  return {
-    enabled,
-    provider: String(input.provider || '').trim(),
-    groupUrl: String(input.groupUrl || '').trim(),
-    image: String(input.image || '').trim(),
-    imageAlt: String(input.imageAlt || '').trim()
-  };
-}
-
-function normalizeLogoObject(raw = null) {
-  const input = raw && typeof raw === 'object' ? raw : {};
-  return {
-    image: String(input.image || '').trim(),
-    imageAlt: String(input.imageAlt || '').trim(),
-    usePlate: input.usePlate === true || String(input.usePlate || '').toLowerCase() === 'true',
-    logoDisabled: input.logoDisabled === true || String(input.logoDisabled || '').toLowerCase() === 'true',
-    faIcon: String(input.faIcon || '').trim()
-  };
-}
-
-function normalizeSponsorId(value, fallback = '') {
-  const normalized = slugify(value || fallback || '');
-  return normalized || '';
-}
-
-function normalizeSponsorObject(raw = null, fallbackTitle = '') {
-  const input = raw && typeof raw === 'object' ? raw : {};
-  const title = String(input.title || fallbackTitle || '').trim();
-  const row = Number.parseInt(String(input.row ?? '').trim(), 10);
-  return {
-    id: normalizeSponsorId(input.id, title),
-    title,
-    tier: String(input.tier || '').trim(),
-    row: Number.isFinite(row) ? row : 1,
-    priority: Number.isFinite(Number(input.priority)) ? Number(input.priority) : 100,
-    image: String(input.image || '').trim(),
-    imageAlt: String(input.imageAlt || '').trim(),
-    link: String(input.link || '').trim(),
-    bgStyle: ['auto', 'transparent', 'light-plate', 'dark-plate', 'brand-fill'].includes(String(input.bgStyle || '').trim())
-      ? String(input.bgStyle || '').trim()
-      : 'auto',
-    aspect: ['auto', 'square', 'landscape', 'banner'].includes(String(input.aspect || '').trim())
-      ? String(input.aspect || '').trim()
-      : 'auto',
-    enabled: !(input.enabled === false || String(input.enabled || '').toLowerCase() === 'false')
-  };
-}
-
-function normalizeSponsorCollection(raw = null) {
-  if (!Array.isArray(raw)) return [];
-  return raw.map((item, index) => normalizeSponsorObject(item, `Sponsor ${index + 1}`));
-}
-
-function extractDurationMinutes(value) {
-  const input = String(value || '').trim();
-  if (!input) return null;
-
-  const directPm = input.match(/^p\s*(\d+)\s*m$/i);
-  if (directPm) return Number.parseInt(directPm[1], 10);
-
-  const isoLike = input.match(/^p?t?\s*(?:(\d+(?:\.\d+)?)\s*h)?\s*(?:(\d+(?:\.\d+)?)\s*m)?$/i);
-  if (isoLike && (isoLike[1] || isoLike[2])) {
-    const hours = isoLike[1] ? Number.parseFloat(isoLike[1]) : 0;
-    const minutes = isoLike[2] ? Number.parseFloat(isoLike[2]) : 0;
-    return Math.round(hours * 60 + minutes);
-  }
-
-  const compact = input.match(/^(\d+(?:\.\d+)?)h(\d+(?:\.\d+)?)m$/i);
-  if (compact) {
-    const hours = Number.parseFloat(compact[1]);
-    const minutes = Number.parseFloat(compact[2]);
-    return Math.round(hours * 60 + minutes);
-  }
-
-  const units = [...input.matchAll(/(\d+(?:\.\d+)?)\s*([hm])/gi)];
-  if (units.length > 0) {
-    let total = 0;
-    units.forEach((match) => {
-      const valueNum = Number.parseFloat(match[1]);
-      if (match[2].toLowerCase() === 'h') {
-        total += valueNum * 60;
-      } else {
-        total += valueNum;
-      }
-    });
-    return Math.round(total);
-  }
-
-  if (/^\d+(?:\.\d+)?$/.test(input)) {
-    return Math.round(Number.parseFloat(input));
-  }
-
-  return null;
-}
-
-function durationMinutesToHuman(minutes) {
-  if (!Number.isFinite(minutes) || minutes <= 0) return '';
-  const hours = Math.floor(minutes / 60);
-  const rem = minutes % 60;
-  if (hours > 0 && rem > 0) return `${hours}h${rem}m`;
-  if (hours > 0) return `${hours}h`;
-  return `${rem}m`;
-}
-
-function durationToEditorValue(value) {
-  const minutes = extractDurationMinutes(value);
-  if (minutes == null) return String(value || '');
-  return durationMinutesToHuman(minutes);
-}
-
-function durationToCanonical(value) {
-  const minutes = extractDurationMinutes(value);
-  if (minutes == null) return String(value || '').trim();
-  return `P${minutes}M`;
-}
-
-function deriveSessionDurationValue(startTime, endTime) {
-  if (!startTime || !endTime) return '';
-  const startMs = new Date(startTime).getTime();
-  const endMs = new Date(endTime).getTime();
-  if (!Number.isFinite(startMs) || !Number.isFinite(endMs)) return '';
-  const minutes = Math.round((endMs - startMs) / 60000);
-  if (!Number.isFinite(minutes) || minutes <= 0) return '';
-  return durationToCanonical(minutes);
-}
-
-const _DURATION_RE = /^P\d+M$/;
-function syncSessionDuration(item) {
-  if (!item || typeof item !== 'object') return 'P0M';
-  const derived = deriveSessionDurationValue(item.startTime, item.endTime);
-  const existing = item.duration;
-  item.duration = _DURATION_RE.test(derived) ? derived
-    : _DURATION_RE.test(existing) ? existing
-    : 'P0M';
-  return item.duration;
 }
 
 function syncAllSessionDurations() {
@@ -1465,7 +1662,7 @@ function syncAllSessionDurations() {
 }
 
 function markdownToHtml(text) {
-  return formatTextBlock(text) || '<p class="text-gray-500"><em>No description yet.</em></p>';
+  return formatTextBlock(text) || '<p class="edt-ink-2"><em>No description yet.</em></p>';
 }
 
 function isValidTimezone(value) {
@@ -1473,12 +1670,13 @@ function isValidTimezone(value) {
     new Intl.DateTimeFormat('en-US', { timeZone: value }).format(new Date());
     return true;
   } catch {
+    // Intl throws on unknown zones → treat as invalid.
     return false;
   }
 }
 
 function safeTimezone(value) {
-  const tz = String(value || '').trim();
+  const tz = normalizeString(value);
   if (tz && state.timezones.includes(tz)) return tz;
   if (tz && isValidTimezone(tz)) return tz;
   return 'UTC';
@@ -1490,6 +1688,7 @@ function buildTimezoneList() {
     try {
       values = Intl.supportedValuesOf('timeZone');
     } catch {
+      // Older engines may reject this key → fall back to an empty list.
       values = [];
     }
   }
@@ -1511,87 +1710,11 @@ function buildTimezoneList() {
       'America/Los_Angeles',
       'Europe/London',
       'Europe/Paris',
-      'Asia/Kolkata'
+      'Asia/Kolkata',
     ];
   }
   if (!values.includes('UTC')) values.unshift('UTC');
   state.timezones = [...new Set(values)].sort((a, b) => a.localeCompare(b));
-}
-
-function getFormatter(timeZone) {
-  const tz = safeTimezone(timeZone);
-  if (dtfCache.has(tz)) return dtfCache.get(tz);
-  const formatter = new Intl.DateTimeFormat('en-CA', {
-    timeZone: tz,
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hourCycle: 'h23'
-  });
-  dtfCache.set(tz, formatter);
-  return formatter;
-}
-
-function getLocalPartsFromUtcMs(utcMs, timeZone) {
-  const parts = getFormatter(timeZone).formatToParts(new Date(utcMs));
-  const mapped = {};
-  for (const part of parts) {
-    if (part.type !== 'literal') mapped[part.type] = part.value;
-  }
-  return {
-    year: Number(mapped.year || 0),
-    month: Number(mapped.month || 0),
-    day: Number(mapped.day || 0),
-    hour: Number(mapped.hour || 0),
-    minute: Number(mapped.minute || 0),
-    second: Number(mapped.second || 0)
-  };
-}
-
-function localPartsToWallMs(parts) {
-  return Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second || 0);
-}
-
-function utcIsoToLocalInput(iso, timeZone) {
-  if (!iso) return '';
-  const date = new Date(iso);
-  if (Number.isNaN(date.getTime())) return '';
-  const p = getLocalPartsFromUtcMs(date.getTime(), timeZone);
-  const pad = (n) => String(n).padStart(2, '0');
-  return `${String(p.year).padStart(4, '0')}-${pad(p.month)}-${pad(p.day)}T${pad(p.hour)}:${pad(p.minute)}`;
-}
-
-function parseLocalInput(value) {
-  const m = String(value || '').match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/);
-  if (!m) return null;
-  return {
-    year: Number(m[1]),
-    month: Number(m[2]),
-    day: Number(m[3]),
-    hour: Number(m[4]),
-    minute: Number(m[5]),
-    second: 0
-  };
-}
-
-function localInputToUtcIso(localValue, timeZone) {
-  const desired = parseLocalInput(localValue);
-  if (!desired) return '';
-  const desiredWallMs = localPartsToWallMs(desired);
-  let utcMs = desiredWallMs;
-
-  for (let i = 0; i < 4; i += 1) {
-    const actualLocal = getLocalPartsFromUtcMs(utcMs, timeZone);
-    const actualWallMs = localPartsToWallMs(actualLocal);
-    const diff = actualWallMs - desiredWallMs;
-    if (diff === 0) break;
-    utcMs -= diff;
-  }
-
-  return new Date(utcMs).toISOString().replace(/\.\d{3}Z$/, 'Z');
 }
 
 function getEventTimezone() {
@@ -1609,36 +1732,6 @@ function getManifestLabelByFile(file) {
   return found?.label || file;
 }
 
-function buildDatasetOptionLabel(file, eventMeta = null) {
-  const designation = String(eventMeta?.designation || '').trim();
-  const year = String(eventMeta?.year || '').trim();
-  const location = String(eventMeta?.location || '').trim();
-  const fromMeta = [designation, year, location].filter(Boolean).join(' ').trim();
-  return fromMeta || getManifestLabelByFile(file);
-}
-
-function getDatasetGroupName(eventMeta = null) {
-  const designation = String(eventMeta?.designation || '').trim();
-  return designation || 'Other';
-}
-
-function isEditorDatasetFile(name) {
-  const normalized = String(name || '').trim().toLowerCase();
-  return normalized.endsWith('.json') && normalized !== 'index.json';
-}
-
-function validateDatasetSchema(dataset, file = 'dataset') {
-  if (!dataset || typeof dataset !== 'object' || Array.isArray(dataset)) {
-    throw new Error(`${file} is not a dataset object.`);
-  }
-  if (!dataset.event || typeof dataset.event !== 'object' || Array.isArray(dataset.event)) {
-    throw new Error(`${file} is missing a valid "event" object.`);
-  }
-  if (!Array.isArray(dataset.items)) {
-    throw new Error(`${file} is missing a valid "items" array.`);
-  }
-}
-
 async function getDataDirectoryHandle(create = false) {
   if (!state.projectDirHandle) return null;
   return state.projectDirHandle.getDirectoryHandle('data', { create });
@@ -1649,7 +1742,6 @@ async function listDatasetFilesFromConnectedFolder() {
   if (!dataDir) return [];
   const files = [];
   async function scanDir(dirHandle, prefix) {
-    // eslint-disable-next-line no-restricted-syntax
     for await (const [name, handle] of dirHandle.entries()) {
       const rel = prefix ? `${prefix}/${name}` : name;
       if (handle.kind === 'directory') {
@@ -1663,84 +1755,46 @@ async function listDatasetFilesFromConnectedFolder() {
   return files.sort((a, b) => a.localeCompare(b));
 }
 
-async function loadDatasetMetaForGrouping(files) {
-  if (!state.projectDirHandle) return [];
-
+// Load grouping records for `files`, reading each dataset's JSON via the supplied
+// `read(file)` strategy (project-folder handle vs fetch), then sort by group+label.
+async function loadDatasetMetaWith(files, read) {
   const records = await Promise.all(
     files.map(async (file) => {
       try {
-        const handle = await resolveFileHandleFromProjectDir(`data/${file}`);
-        const blob = await handle.getFile();
-        const text = await blob.text();
-        const parsed = JSON.parse(text);
+        const parsed = await read(file);
         validateDatasetSchema(parsed, file);
         const eventMeta = parsed && typeof parsed === 'object' ? parsed.event || {} : {};
-        return {
-          file,
-          group: getDatasetGroupName(eventMeta),
-          label: buildDatasetOptionLabel(file, eventMeta),
-          enabled: eventMeta.enabled !== false,
-          designation: String(eventMeta.designation || '').trim(),
-          location: String(eventMeta.location || '').trim(),
-          startDate: eventMeta.startDate || '',
-          endDate: eventMeta.endDate || '',
-        };
+        return buildDatasetGroupingRecord(file, eventMeta, getManifestLabelByFile(file));
       } catch {
-        return {
-          file,
-          group: 'Other',
-          label: getManifestLabelByFile(file),
-          enabled: true,
-          designation: '',
-          location: '',
-          startDate: '',
-          endDate: '',
-        };
+        return buildDatasetGroupingFallback(file, getManifestLabelByFile(file));
       }
-    })
-  );
-
-  records.sort((a, b) => {
-    const groupCmp = a.group.localeCompare(b.group);
-    if (groupCmp !== 0) return groupCmp;
-    return a.label.localeCompare(b.label);
-  });
-  return records;
-}
-
-async function loadDatasetMetaForGroupingViaFetch(files) {
-  const records = await Promise.all(
-    files.map(async (file) => {
-      try {
-        const url = isApiMode() ? `${state.apiEndpoint}/api/data/${file.split('/').map(encodeURIComponent).join('/')}` : `./data/${file}`;
-        const res = await fetch(url);
-        if (!res.ok) throw new Error();
-        const parsed = await res.json();
-        validateDatasetSchema(parsed, file);
-        const m = parsed && typeof parsed === 'object' ? parsed.event || {} : {};
-        return {
-          file,
-          group: getDatasetGroupName(m),
-          label: buildDatasetOptionLabel(file, m),
-          enabled: m.enabled !== false,
-          designation: String(m.designation || '').trim(),
-          location: String(m.location || '').trim(),
-          year: String(m.year || '').trim(),
-          region: String(m.region || '').trim(),
-          venue: String(m.venue || '').trim(),
-          startDate: m.startDate || '',
-          endDate: m.endDate || '',
-        };
-      } catch {
-        return { file, group: 'Other', label: getManifestLabelByFile(file), enabled: true, designation: '', location: '', year: '', region: '', venue: '', startDate: '', endDate: '' };
-      }
-    })
+    }),
   );
   records.sort((a, b) => {
     const groupCmp = a.group.localeCompare(b.group);
     return groupCmp !== 0 ? groupCmp : a.label.localeCompare(b.label);
   });
   return records;
+}
+
+async function loadDatasetMetaForGrouping(files) {
+  if (!state.projectDirHandle) return [];
+  return loadDatasetMetaWith(files, async (file) => {
+    const handle = await resolveFileHandleFromProjectDir(`data/${file}`);
+    const blob = await handle.getFile();
+    return JSON.parse(await blob.text());
+  });
+}
+
+async function loadDatasetMetaForGroupingViaFetch(files) {
+  return loadDatasetMetaWith(files, async (file) => {
+    const url = isApiMode()
+      ? `${state.apiEndpoint}/api/data/${file.split('/').map(encodeURIComponent).join('/')}`
+      : `./data/${file}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error();
+    return res.json();
+  });
 }
 
 async function renderDatasetOptionsFromConnectedFolder(preferred = '') {
@@ -1751,7 +1805,10 @@ async function renderDatasetOptionsFromConnectedFolder(preferred = '') {
   }
 
   const files = isApiMode()
-    ? eventCatalog.map((e) => e.file).filter((f) => f && isEditorDatasetFile(f)).sort((a, b) => a.localeCompare(b))
+    ? eventCatalog
+        .map((e) => e.file)
+        .filter((f) => f && isEditorDatasetFile(f))
+        .sort((a, b) => a.localeCompare(b))
     : await listDatasetFilesFromConnectedFolder();
   if (files.length === 0) {
     els.datasetSelect.innerHTML = '<option value="">No JSON files found in data/</option>';
@@ -1771,7 +1828,10 @@ async function renderDatasetOptionsFromConnectedFolder(preferred = '') {
   els.datasetSelect.innerHTML = [...groups.entries()]
     .map(([groupName, records]) => {
       const options = records
-        .map((record) => `<option value="${escapeAttr(record.file)}" data-enabled="${record.enabled !== false}">${escapeHtml(record.label)}</option>`)
+        .map(
+          (record) =>
+            `<option value="${escapeAttr(record.file)}" data-enabled="${record.enabled !== false}">${escapeHtml(record.label)}</option>`,
+        )
         .join('');
       return `<optgroup label="${escapeAttr(groupName)}">${options}</optgroup>`;
     })
@@ -1791,12 +1851,29 @@ async function renderDatasetOptionsFromConnectedFolder(preferred = '') {
   els.datasetSelect.value = files[0];
 }
 
+// Bring a loaded dataset up to the current shape: ensure the base structure,
+// then run each independent migration/normalization step in order.
 function normalizeDatasetShape() {
+  ensureDatasetBaseShape();
+  const event = state.dataset.event;
+  migrateEventMedia(event);
+  applyEventDefaults(event);
+  migrateThemeFields(event);
+  syncAllSessionDurations();
+  normalizeItemSponsorIds();
+}
+
+function ensureDatasetBaseShape() {
   if (!state.dataset || typeof state.dataset !== 'object') state.dataset = {};
   if (!state.dataset.event || typeof state.dataset.event !== 'object') state.dataset.event = {};
   if (!Array.isArray(state.dataset.items)) state.dataset.items = [];
   stripSummaryFields(state.dataset);
-  const mediaPromo = state.dataset.event.mediaPromo;
+}
+
+// Fold the legacy mediaPromo block into the flickr object, then normalize the
+// flickr / logo / sponsor sub-objects and drop the obsolete mediaPromo field.
+function migrateEventMedia(event) {
+  const mediaPromo = event.mediaPromo;
   const flickrFromMediaPromo =
     mediaPromo && typeof mediaPromo === 'object'
       ? {
@@ -1807,41 +1884,57 @@ function normalizeDatasetShape() {
           title: mediaPromo.title,
           text: mediaPromo.text,
           buttonLabel: mediaPromo.buttonLabel,
-          mode: mediaPromo.mode
+          mode: mediaPromo.mode,
         }
       : null;
-  state.dataset.event.flickr = normalizeFlickrObject(state.dataset.event.flickr || flickrFromMediaPromo);
-  state.dataset.event.logo = normalizeLogoObject(state.dataset.event.logo);
-  state.dataset.event.sponsors = normalizeSponsorCollection(state.dataset.event.sponsors);
-  if (Object.prototype.hasOwnProperty.call(state.dataset.event, 'mediaPromo')) {
-    delete state.dataset.event.mediaPromo;
+  event.flickr = normalizeFlickrObject(event.flickr || flickrFromMediaPromo);
+  event.logo = normalizeLogoObject(event.logo);
+  event.sponsors = normalizeSponsorCollection(event.sponsors);
+  // Related events are optional — only coerce when the dataset already carries them,
+  // so untouched files don't gain an empty array on every save.
+  if (event.relatedEvents != null) {
+    event.relatedEvents = normalizeRelatedEventCollection(event.relatedEvents);
   }
-  if (!state.dataset.event.timezone) state.dataset.event.timezone = 'UTC';
-  if (state.dataset.event.columns == null || state.dataset.event.columns === '') state.dataset.event.columns = 3;
-  state.dataset.event.scheduleURLs = normalizeUrlArray(state.dataset.event.scheduleURLs);
-  state.dataset.event.other_urls = normalizeUrlArray(state.dataset.event.other_urls || []);
+  if (Object.prototype.hasOwnProperty.call(event, 'mediaPromo')) {
+    delete event.mediaPromo;
+  }
+}
+
+// Fill in defaults (timezone, columns) and normalize the URL arrays.
+function applyEventDefaults(event) {
+  if (!event.timezone) event.timezone = 'UTC';
+  if (event.columns == null || event.columns === '') event.columns = 3;
+  event.scheduleURLs = normalizeUrlArray(event.scheduleURLs);
+  event.other_urls = normalizeUrlArray(event.other_urls || []);
+}
+
+// Migrate a legacy string theme and top-level color fields into the theme
+// object, dropping any color that isn't a valid #rrggbb hex.
+function migrateThemeFields(event) {
   const hexPattern = /^#[0-9a-fA-F]{6}$/;
-  // Migrate legacy string theme and top-level color fields into the theme object
-  if (typeof state.dataset.event.theme === 'string') {
-    state.dataset.event.theme = { id: state.dataset.event.theme };
-  } else if (!state.dataset.event.theme || typeof state.dataset.event.theme !== 'object') {
-    state.dataset.event.theme = {};
+  if (typeof event.theme === 'string') {
+    event.theme = { id: event.theme };
+  } else if (!event.theme || typeof event.theme !== 'object') {
+    event.theme = {};
   }
   for (const colorField of ['primaryColor', 'secondaryColor', 'tertiaryColor']) {
-    const topLevel = state.dataset.event[colorField];
+    const topLevel = event[colorField];
     if (topLevel) {
-      if (!state.dataset.event.theme[colorField]) state.dataset.event.theme[colorField] = topLevel;
-      delete state.dataset.event[colorField];
+      if (!event.theme[colorField]) event.theme[colorField] = topLevel;
+      delete event[colorField];
     }
-    const v = state.dataset.event.theme[colorField];
-    if (v != null && !hexPattern.test(v)) delete state.dataset.event.theme[colorField];
+    const v = event.theme[colorField];
+    if (v != null && !hexPattern.test(v)) delete event.theme[colorField];
   }
-  if (Object.keys(state.dataset.event.theme).length === 0) delete state.dataset.event.theme;
-  syncAllSessionDurations();
+  if (Object.keys(event.theme).length === 0) delete event.theme;
+}
+
+// Collapse each item's sponsorIds to a single string when there are 0-1 ids.
+function normalizeItemSponsorIds() {
   state.dataset.items.forEach((item) => {
     if (!item || typeof item !== 'object') return;
     const sponsorIds = parseMultiValue(item.sponsorIds || '');
-    item.sponsorIds = sponsorIds.length <= 1 ? (sponsorIds[0] || '') : sponsorIds;
+    item.sponsorIds = sponsorIds.length <= 1 ? sponsorIds[0] || '' : sponsorIds;
   });
 }
 
@@ -1849,10 +1942,10 @@ async function loadDataset(file) {
   if (!isApiMode() && (!state.projectDirHandle || !state.folderConnectedInSession)) {
     throw new Error('Connect folder first.');
   }
-  if (localStorage.getItem(PHOTOS_BACKUP_KEY)) {
+  if (readText(PHOTOS_BACKUP_KEY)) {
     await revertPendingPhotoUpload();
   }
-  if (localStorage.getItem(LOGO_BACKUP_KEY)) {
+  if (readText(LOGO_BACKUP_KEY)) {
     await revertPendingLogoUpload();
   }
   if (!isEditorDatasetFile(file)) {
@@ -1861,16 +1954,25 @@ async function loadDataset(file) {
   const targetPath = normalizeOutputPath(`data/${file}`);
   let handle = null;
   let parsed;
+  let rawText = '';
   if (isApiMode()) {
-    const res = await fetch(`${state.apiEndpoint}/api/data/${file.split('/').map(encodeURIComponent).join('/')}`);
+    const res = await fetch(
+      `${state.apiEndpoint}/api/data/${file.split('/').map(encodeURIComponent).join('/')}`,
+      { cache: 'no-store' },
+    );
     if (!res.ok) throw new Error(`Failed to load ${file}: HTTP ${res.status}`);
-    parsed = await res.json();
+    rawText = await res.text();
+    parsed = JSON.parse(rawText);
   } else {
     handle = await resolveFileHandleFromProjectDir(targetPath);
     const fileBlob = await handle.getFile();
-    parsed = JSON.parse(await fileBlob.text());
+    rawText = await fileBlob.text();
+    parsed = JSON.parse(rawText);
   }
   validateDatasetSchema(parsed, file);
+  // Fingerprint the exact bytes we loaded (before normalization mutates the
+  // in-memory copy) — this is our reference for the concurrent-edit guard.
+  state.loadedDiskFingerprint = contentFingerprint(rawText);
   state.dataset = parsed;
   state.file = file;
   state.outputPath = targetPath;
@@ -1894,11 +1996,9 @@ async function loadDataset(file) {
       }
     }
   }
-  try {
-    const prev = JSON.parse(localStorage.getItem('__editor_recent_files__') || '[]');
-    const updated = [file, ...prev.filter((f) => f !== file)].slice(0, 10);
-    localStorage.setItem('__editor_recent_files__', JSON.stringify(updated));
-  } catch { /* ignore */ }
+  const prev = readJson(STORAGE_KEYS.editorRecentFiles, []);
+  const updated = [file, ...prev.filter((f) => f !== file)].slice(0, 10);
+  writeJson(STORAGE_KEYS.editorRecentFiles, updated);
   markDirty(false);
   markSessionDirty(false);
   markSponsorDirty(false);
@@ -1906,6 +2006,7 @@ async function loadDataset(file) {
   undoClear();
   clearRecoverySnapshot();
   setCurrentFilenameLabel();
+  setEditorDocumentTitle();
   const themeObj = state.dataset?.event?.theme;
   applyThemeClass(themeObj?.id ? normalizeThemeId(themeObj.id) : getCurrentThemeId());
   applyEventColors(themeObj?.primaryColor, themeObj?.secondaryColor, themeObj?.tertiaryColor);
@@ -1917,7 +2018,11 @@ async function loadDataset(file) {
   renderSessionForm();
   renderSponsorList();
   renderSponsorForm();
-  if (state.activeEditorTab === 'sitemap') { renderOtherUrlsEditor(); renderSitemap(); }
+  renderPeopleTab();
+  if (state.activeEditorTab === 'sitemap') {
+    renderOtherUrlsEditor();
+    renderSitemap();
+  }
   if (state.activeEditorTab === 'timeline' && els.timelineCanvas) {
     renderTimeline(els.timelineCanvas, state.dataset, {
       markDirty: () => markDirty(true),
@@ -1929,6 +2034,7 @@ async function loadDataset(file) {
     });
   }
   setEditorButtonsEnabled(true);
+  restorePendingEditorTab(); // return to the workspace the URL asked for
   if (els.datasetSelect.value !== file) {
     els.datasetSelect.value = file;
   }
@@ -1956,9 +2062,9 @@ function createDatasetScaffold(pathValue) {
       sponsors: [],
       timezone: 'UTC',
       columns: 3,
-      enabled: true
+      enabled: true,
     },
-    items: []
+    items: [],
   };
   state.outputPath = normalizeOutputPath(pathValue, 'data/new-event.json');
   state.file = outputBasename(state.outputPath) || 'new-event.json';
@@ -1980,26 +2086,44 @@ function createDatasetScaffold(pathValue) {
   renderSessionForm();
   renderSponsorList();
   renderSponsorForm();
-  if (state.activeEditorTab === 'sitemap') { renderOtherUrlsEditor(); renderSitemap(); }
+  if (state.activeEditorTab === 'sitemap') {
+    renderOtherUrlsEditor();
+    renderSitemap();
+  }
   setEditorButtonsEnabled(true);
 }
 
-function getFlickrImageTargetPath() {
+function getFlickrImageTargetPath(file) {
   const designation = slugify(state.dataset?.event?.designation || 'event');
   const year = slugify(state.dataset?.event?.year || '');
   const location = slugify(state.dataset?.event?.location || '');
-  const fallback = slugify(outputBasename(state.outputPath || state.file || 'event').replace(/\.json$/i, '')) || 'event';
+  const fallback =
+    slugify(outputBasename(state.outputPath || state.file || 'event').replace(/\.json$/i, '')) ||
+    'event';
   const baseName = [year, location].filter(Boolean).join('-') || fallback;
-  return `img/flickr/${designation || 'event'}/${baseName}.jpg`;
+  // Preserve the uploaded file's real extension (matching the logo/sponsor
+  // uploaders). Hardcoding .jpg mislabels PNG/SVG/WebP uploads — harmless for
+  // raster formats the browser sniffs, but an SVG saved as .jpg is served as
+  // image/jpeg under nosniff and fails to render on reload.
+  const originalName = String(file?.name || '')
+    .trim()
+    .toLowerCase();
+  const extMatch = originalName.match(/\.(svg|png|jpe?g|webp|gif)$/i);
+  const ext = extMatch ? extMatch[1].toLowerCase().replace('jpeg', 'jpg') : 'jpg';
+  return `img/flickr/${designation || 'event'}/${baseName}.${ext}`;
 }
 
 function getLogoImageTargetPath(file) {
   const designation = slugify(state.dataset?.event?.designation || 'event');
   const year = slugify(state.dataset?.event?.year || '');
   const location = slugify(state.dataset?.event?.location || '');
-  const fallback = slugify(outputBasename(state.outputPath || state.file || 'event').replace(/\.json$/i, '')) || 'event';
+  const fallback =
+    slugify(outputBasename(state.outputPath || state.file || 'event').replace(/\.json$/i, '')) ||
+    'event';
   const baseName = [year, location].filter(Boolean).join('-') || fallback;
-  const originalName = String(file?.name || '').trim().toLowerCase();
+  const originalName = String(file?.name || '')
+    .trim()
+    .toLowerCase();
   const extMatch = originalName.match(/\.(svg|png|jpe?g|webp|gif)$/i);
   const ext = extMatch ? extMatch[1].toLowerCase().replace('jpeg', 'jpg') : 'png';
   return `img/logos/${designation || 'event'}/${baseName}.${ext}`;
@@ -2009,8 +2133,11 @@ function getSponsorImageTargetPath(file, sponsor = null) {
   const designation = slugify(state.dataset?.event?.designation || 'event');
   const year = slugify(state.dataset?.event?.year || '');
   const location = slugify(state.dataset?.event?.location || '');
-  const sponsorSlug = slugify(sponsor?.id || sponsor?.title || file?.name || 'sponsor') || 'sponsor';
-  const originalName = String(file?.name || '').trim().toLowerCase();
+  const sponsorSlug =
+    slugify(sponsor?.id || sponsor?.title || file?.name || 'sponsor') || 'sponsor';
+  const originalName = String(file?.name || '')
+    .trim()
+    .toLowerCase();
   const extMatch = originalName.match(/\.(svg|png|jpe?g|webp|gif)$/i);
   const ext = extMatch ? extMatch[1].toLowerCase().replace('jpeg', 'jpg') : 'png';
   const eventSlug = [year, location].filter(Boolean).join('-') || 'event';
@@ -2043,28 +2170,30 @@ function dataUrlToBlob(dataUrl) {
 }
 
 async function backupCurrentPhotoForRevert() {
-  const currentPath = String(state.dataset?.event?.flickr?.image || '').trim().replace(/^\.\//, '');
+  const currentPath = String(state.dataset?.event?.flickr?.image || '')
+    .trim()
+    .replace(/^\.\//, '');
   if (!currentPath || !state.projectDirHandle) return;
   try {
     const handle = await resolveFileHandleFromProjectDir(currentPath);
     if (!handle) return;
     const file = await handle.getFile();
     const base64 = arrayBufferToBase64(await file.arrayBuffer());
-    localStorage.setItem(PHOTOS_BACKUP_KEY, JSON.stringify({
+    writeJson(PHOTOS_BACKUP_KEY, {
       path: currentPath,
-      data: `data:${file.type || 'image/jpeg'};base64,${base64}`
-    }));
+      data: `data:${file.type || 'image/jpeg'};base64,${base64}`,
+    });
   } catch {
     // No existing file to back up, or too large — skip silently
   }
 }
 
 async function revertPendingPhotoUpload() {
-  const raw = localStorage.getItem(PHOTOS_BACKUP_KEY);
-  localStorage.removeItem(PHOTOS_BACKUP_KEY);
-  if (!raw || !state.projectDirHandle) return;
+  const backup = readJson(PHOTOS_BACKUP_KEY, null);
+  removeKey(PHOTOS_BACKUP_KEY);
+  if (!backup || !state.projectDirHandle) return;
   try {
-    const { path, data } = JSON.parse(raw);
+    const { path, data } = backup;
     const segments = path.split('/').filter(Boolean);
     const fileName = segments.pop();
     const dir = await ensureDirectoryPath(state.projectDirHandle, segments);
@@ -2077,32 +2206,34 @@ async function revertPendingPhotoUpload() {
 }
 
 function clearPhotosBackup() {
-  localStorage.removeItem(PHOTOS_BACKUP_KEY);
+  removeKey(PHOTOS_BACKUP_KEY);
 }
 
 async function backupCurrentLogoForRevert() {
-  const currentPath = String(state.dataset?.event?.logo?.image || '').trim().replace(/^\.\//, '');
+  const currentPath = String(state.dataset?.event?.logo?.image || '')
+    .trim()
+    .replace(/^\.\//, '');
   if (!currentPath || !state.projectDirHandle) return;
   try {
     const handle = await resolveFileHandleFromProjectDir(currentPath);
     if (!handle) return;
     const file = await handle.getFile();
     const base64 = arrayBufferToBase64(await file.arrayBuffer());
-    localStorage.setItem(LOGO_BACKUP_KEY, JSON.stringify({
+    writeJson(LOGO_BACKUP_KEY, {
       path: currentPath,
-      data: `data:${file.type || 'image/png'};base64,${base64}`
-    }));
+      data: `data:${file.type || 'image/png'};base64,${base64}`,
+    });
   } catch {
     // No existing file to back up, or too large — skip silently
   }
 }
 
 async function revertPendingLogoUpload() {
-  const raw = localStorage.getItem(LOGO_BACKUP_KEY);
-  localStorage.removeItem(LOGO_BACKUP_KEY);
-  if (!raw || !state.projectDirHandle) return;
+  const backup = readJson(LOGO_BACKUP_KEY, null);
+  removeKey(LOGO_BACKUP_KEY);
+  if (!backup || !state.projectDirHandle) return;
   try {
-    const { path, data } = JSON.parse(raw);
+    const { path, data } = backup;
     const segments = path.split('/').filter(Boolean);
     const fileName = segments.pop();
     const dir = await ensureDirectoryPath(state.projectDirHandle, segments);
@@ -2115,7 +2246,7 @@ async function revertPendingLogoUpload() {
 }
 
 function clearLogoBackup() {
-  localStorage.removeItem(LOGO_BACKUP_KEY);
+  removeKey(LOGO_BACKUP_KEY);
 }
 
 async function uploadFlickrImageFromPicker() {
@@ -2136,7 +2267,7 @@ async function uploadFlickrImageFromPicker() {
   if (!file) return;
 
   await backupCurrentPhotoForRevert();
-  const relativePath = getFlickrImageTargetPath();
+  const relativePath = getFlickrImageTargetPath(file);
   if (isApiMode()) {
     await uploadViaApi(file, relativePath);
   } else {
@@ -2161,7 +2292,8 @@ async function uploadFlickrImageFromPicker() {
   renderFlickrForm();
   const blobUrl = URL.createObjectURL(file);
   const frame = document.querySelector('.event-promo-image-frame');
-  if (frame) frame.innerHTML = `<img id="flickrImagePreview" class="event-promo-image" src="${blobUrl}" alt="${escapeAttr(state.dataset?.event?.flickr?.imageAlt || '')}">`;
+  if (frame)
+    frame.innerHTML = `<img id="flickrImagePreview" class="event-promo-image" src="${blobUrl}" alt="${escapeAttr(state.dataset?.event?.flickr?.imageAlt || '')}">`;
 }
 
 async function uploadLogoImageFromPicker() {
@@ -2205,7 +2337,10 @@ async function uploadLogoImageFromPicker() {
   state.imageCacheBust.set(`./${relativePath}`, Date.now());
   renderLogoForm();
   const logoPreview = document.getElementById('logoImagePreview');
-  if (logoPreview) { logoPreview.src = URL.createObjectURL(file); logoPreview.classList.remove('hidden'); }
+  if (logoPreview) {
+    logoPreview.src = URL.createObjectURL(file);
+    logoPreview.classList.remove('hidden');
+  }
 }
 
 async function uploadSponsorImageFromPicker(index) {
@@ -2253,9 +2388,48 @@ async function uploadSponsorImageFromPicker(index) {
   renderSessionForm();
   const blobUrl = URL.createObjectURL(file);
   const surface = document.getElementById('sponsorPreviewSurface');
-  if (surface) surface.innerHTML = `<img id="sponsorImagePreview" src="${blobUrl}" alt="${escapeAttr(sponsor?.imageAlt || '')}" class="sponsor-logo-image">`;
+  if (surface)
+    surface.innerHTML = `<img id="sponsorImagePreview" src="${blobUrl}" alt="${escapeAttr(sponsor?.imageAlt || '')}" class="sponsor-logo-image">`;
   const inline = document.getElementById('sponsorInlinePreview');
-  if (inline) inline.innerHTML = `<img src="${blobUrl}" alt="${escapeAttr(sponsor?.imageAlt || '')}" class="sponsor-inline-image">`;
+  if (inline)
+    inline.innerHTML = `<img src="${blobUrl}" alt="${escapeAttr(sponsor?.imageAlt || '')}" class="sponsor-inline-image">`;
+}
+
+function getRelatedImageTargetPath(file, name) {
+  const designation = slugify(state.dataset?.event?.designation || 'event');
+  const year = slugify(state.dataset?.event?.year || '');
+  const location = slugify(state.dataset?.event?.location || '');
+  const slug = slugify(name || file?.name || 'related') || 'related';
+  const originalName = String(file?.name || '')
+    .trim()
+    .toLowerCase();
+  const extMatch = originalName.match(/\.(svg|png|jpe?g|webp|gif)$/i);
+  const ext = extMatch ? extMatch[1].toLowerCase().replace('jpeg', 'jpg') : 'png';
+  const eventSlug = [year, location].filter(Boolean).join('-') || 'event';
+  return `img/related/${designation || 'event'}/${eventSlug}/${slug}.${ext}`;
+}
+
+// Injected into the related-events editor: uploads a logo (API or connected folder,
+// same branch as sponsor logos) and returns the './'-relative path, or null.
+async function uploadRelatedImage(file, name) {
+  if (!isApiMode() && (!state.projectDirHandle || !state.folderConnectedInSession)) {
+    window.alert('Connect a folder or configure an API server to upload images.');
+    return null;
+  }
+  const relativePath = getRelatedImageTargetPath(file, name);
+  if (isApiMode()) {
+    await uploadViaApi(file, relativePath);
+  } else {
+    const segments = relativePath.split('/').filter(Boolean);
+    const fileName = segments.pop();
+    const dir = await ensureDirectoryPath(state.projectDirHandle, segments);
+    const handle = await dir.getFileHandle(fileName, { create: true });
+    const writable = await handle.createWritable();
+    await writable.write(file);
+    await writable.close();
+  }
+  state.imageCacheBust.set(`./${relativePath}`, Date.now());
+  return `./${relativePath}`;
 }
 
 function fieldDescriptionId(scope, key) {
@@ -2263,7 +2437,7 @@ function fieldDescriptionId(scope, key) {
 }
 
 function renderFieldIntro(scope, key, config) {
-  const description = String(config.description || '').trim();
+  const description = normalizeString(config.description);
   return `
     <span class="editor-field-label">${escapeHtml(config.label || key)}</span>
     ${
@@ -2275,12 +2449,14 @@ function renderFieldIntro(scope, key, config) {
 }
 
 function fieldDescriptionAttr(scope, key, config) {
-  return config.description ? ` aria-describedby="${escapeAttr(fieldDescriptionId(scope, key))}"` : '';
+  return config.description
+    ? ` aria-describedby="${escapeAttr(fieldDescriptionId(scope, key))}"`
+    : '';
 }
 
 function inferFlickrMode(eventMeta = null, items = []) {
   const now = new Date();
-  const endDate = String(eventMeta?.endDate || '').trim();
+  const endDate = normalizeString(eventMeta?.endDate);
   if (endDate) {
     const parsed = new Date(endDate);
     if (!Number.isNaN(parsed.getTime())) return parsed <= now ? 'archive' : 'cta';
@@ -2296,13 +2472,18 @@ function inferFlickrMode(eventMeta = null, items = []) {
 }
 
 function getFlickrEventLabel(eventMeta = null) {
-  return [eventMeta?.designation, eventMeta?.year, eventMeta?.location].filter(Boolean).join(' ').trim() || 'Event';
+  return (
+    [eventMeta?.designation, eventMeta?.year, eventMeta?.location]
+      .filter(Boolean)
+      .join(' ')
+      .trim() || 'Event'
+  );
 }
 
 function getAutomatedFlickrCopy(eventMeta = null, items = [], provider = '') {
   const mode = inferFlickrMode(eventMeta, items);
   const eventLabel = getFlickrEventLabel(eventMeta);
-  const p = String(provider || '').trim() || 'Flickr';
+  const p = normalizeString(provider) || 'Flickr';
   return {
     mode,
     heading: mode === 'archive' ? `${eventLabel} Photo Archive` : `Share Your ${eventLabel} Photos`,
@@ -2310,21 +2491,16 @@ function getAutomatedFlickrCopy(eventMeta = null, items = [], provider = '') {
       mode === 'archive'
         ? `Browse the official ${p} page for photos from ${eventLabel}.`
         : `Upload and share your photos on ${p} before, during, and after the event.`,
-    buttonText: mode === 'archive' ? 'View Photo Archive' : `Open on ${p}`
+    buttonText: mode === 'archive' ? 'View Photo Archive' : `Open on ${p}`,
   };
 }
 
-function renderFlickrCopyPreviewContent(automated) {
-  return `
-    <div><span class="block text-xs font-semibold text-gray-700 uppercase tracking-wide mb-0.5">Mode</span><span class="text-gray-800">${escapeHtml(automated.mode === 'archive' ? 'Photo archive' : 'Share photos')}</span></div>
-    <div><span class="block text-xs font-semibold text-gray-700 uppercase tracking-wide mb-0.5">Button</span><span class="text-gray-800">${escapeHtml(automated.buttonText)}</span></div>
-    <div class="col-span-2"><span class="block text-xs font-semibold text-gray-700 uppercase tracking-wide mb-0.5">Heading</span><span class="text-gray-800">${escapeHtml(automated.heading)}</span></div>
-    <div class="col-span-2"><span class="block text-xs font-semibold text-gray-700 uppercase tracking-wide mb-0.5">Description</span><span class="text-gray-800">${escapeHtml(automated.description)}</span></div>
-  `;
-}
-
 function renderFlickrBlock(flickr) {
-  const automated = getAutomatedFlickrCopy(state.dataset?.event, state.dataset?.items, flickr.provider);
+  const automated = getAutomatedFlickrCopy(
+    state.dataset?.event,
+    state.dataset?.items,
+    flickr.provider,
+  );
   const imageSrc = (flickr.image || '').trim();
   const providerLabel = (flickr.provider || 'Photos').toUpperCase();
   return `
@@ -2332,35 +2508,35 @@ function renderFlickrBlock(flickr) {
       <div class="flex-1 min-w-0 grid grid-cols-1 md:grid-cols-2 gap-3">
         <label class="editor-form-field md:col-span-2">
           ${renderFieldIntro('flickr', 'provider', FLICKR_FIELD_CONFIG.provider)}
-          <input data-flickr-field="provider" type="text" value="${escapeAttr(flickr.provider)}" class="w-full h-11 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3" placeholder="Flickr"${fieldDescriptionAttr('flickr', 'provider', FLICKR_FIELD_CONFIG.provider)}>
+          <input data-flickr-field="provider" type="text" value="${escapeAttr(flickr.provider)}" class="edt-field" placeholder="Flickr"${fieldDescriptionAttr('flickr', 'provider', FLICKR_FIELD_CONFIG.provider)}>
         </label>
         <label class="editor-form-field md:col-span-2">
           ${renderFieldIntro('flickr', 'groupUrl', FLICKR_FIELD_CONFIG.groupUrl)}
-          <input data-flickr-field="groupUrl" type="text" value="${escapeAttr(flickr.groupUrl)}" class="w-full h-11 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3" placeholder="https://flic.kr/g/..."${fieldDescriptionAttr('flickr', 'groupUrl', FLICKR_FIELD_CONFIG.groupUrl)}>
+          <input data-flickr-field="groupUrl" type="text" value="${escapeAttr(flickr.groupUrl)}" class="edt-field" placeholder="https://flic.kr/g/..."${fieldDescriptionAttr('flickr', 'groupUrl', FLICKR_FIELD_CONFIG.groupUrl)}>
         </label>
         <label class="editor-form-field md:col-span-2">
           ${renderFieldIntro('flickr', 'image', FLICKR_FIELD_CONFIG.image)}
-          <input data-flickr-field="image" type="text" value="${escapeAttr(flickr.image)}" class="w-full h-11 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3" placeholder="./img/flickr/.../image.jpg"${fieldDescriptionAttr('flickr', 'image', FLICKR_FIELD_CONFIG.image)}>
+          <input data-flickr-field="image" type="text" value="${escapeAttr(flickr.image)}" class="edt-field" placeholder="./img/flickr/.../image.jpg"${fieldDescriptionAttr('flickr', 'image', FLICKR_FIELD_CONFIG.image)}>
         </label>
         <label class="editor-form-field md:col-span-2">
           ${renderFieldIntro('flickr', 'imageAlt', FLICKR_FIELD_CONFIG.imageAlt)}
-          <input data-flickr-field="imageAlt" type="text" value="${escapeAttr(flickr.imageAlt)}" class="w-full h-11 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"${fieldDescriptionAttr('flickr', 'imageAlt', FLICKR_FIELD_CONFIG.imageAlt)}>
+          <input data-flickr-field="imageAlt" type="text" value="${escapeAttr(flickr.imageAlt)}" class="edt-field"${fieldDescriptionAttr('flickr', 'imageAlt', FLICKR_FIELD_CONFIG.imageAlt)}>
         </label>
         <div class="editor-form-field md:col-span-2">
           <span class="editor-field-label">Promo image upload</span>
           <span class="editor-field-description">Uploads to <code>img/flickr/${escapeHtml(
-            slugify(state.dataset?.event?.designation || 'event') || 'event'
+            slugify(state.dataset?.event?.designation || 'event') || 'event',
           )}</code> and stores a relative path.</span>
           <div class="flex items-center gap-2 flex-wrap">
-            <label class="h-9 inline-flex items-center gap-2.5 rounded-md border border-gray-300 px-3 bg-white cursor-pointer select-none">
+            <label class="edt-btn select-none">
               <input data-flickr-field="enabled" type="checkbox" class="h-4 w-4" ${flickr.enabled ? 'checked' : ''}${fieldDescriptionAttr('flickr', 'enabled', FLICKR_FIELD_CONFIG.enabled)}>
-              <span class="text-sm text-gray-700">Enabled</span>
+              <span class="edt-body">Enabled</span>
             </label>
-            <button id="flickrImageUpload" type="button" class="h-9 inline-flex items-center justify-center px-3 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
-              <i class="fas fa-upload mr-1.5 text-[0.72rem]"></i>Upload image
+            <button id="flickrImageUpload" type="button" class="h-9 inline-flex items-center justify-center px-3 border edt-rule rounded-md text-sm font-medium edt-ink-1 edt-surface transition-colors whitespace-nowrap">
+              Upload image
             </button>
-            <button id="flickrImageClear" type="button" class="h-9 inline-flex items-center justify-center px-3 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-red-50 hover:border-red-300 hover:text-red-600 transition-colors whitespace-nowrap"${!imageSrc ? ' disabled' : ''}>
-              <i class="fas fa-trash mr-1.5 text-[0.72rem]"></i>Delete image
+            <button id="flickrImageClear" type="button" class="h-9 inline-flex items-center justify-center px-3 border edt-rule rounded-md text-sm font-medium edt-ink-1 edt-surface hover:edt-rule-bad hover:edt-bad transition-colors whitespace-nowrap"${!imageSrc ? ' disabled' : ''}>
+              Delete image
             </button>
           </div>
         </div>
@@ -2368,16 +2544,18 @@ function renderFlickrBlock(flickr) {
 
       <aside class="flickr-editor-sidebar">
         <div class="flickr-preview-stage">
-          <div id="flickrPreviewCard" class="event-promo-card rounded-lg border border-gray-200 bg-white p-3${flickr.enabled ? '' : ' opacity-50'}">
+          <div id="flickrPreviewCard" class="event-promo-card rounded-lg border edt-rule edt-surface p-3${flickr.enabled ? '' : ' opacity-50'}">
             <div class="event-promo-image-frame">
-              ${imageSrc
-                ? `<img id="flickrImagePreview" class="event-promo-image" src="${escapeAttr(bustSrc(imageSrc))}" alt="${escapeAttr(flickr.imageAlt || '')}">`
-                : `<div class="flickr-preview-placeholder"><i class="fas fa-image"></i></div>`}
+              ${
+                imageSrc
+                  ? `<img id="flickrImagePreview" class="event-promo-image" src="${escapeAttr(bustSrc(imageSrc))}" alt="${escapeAttr(flickr.imageAlt || '')}">`
+                  : `<div class="flickr-preview-placeholder"></div>`
+              }
             </div>
             <div class="event-promo-body min-w-0">
-              <div class="flickr-preview-provider text-xs font-semibold tracking-wide text-gray-500 uppercase mb-0.5">${escapeHtml(providerLabel)}</div>
-              <div class="flickr-preview-heading text-sm font-semibold text-gray-900 leading-snug">${escapeHtml(automated.heading)}</div>
-              <p class="flickr-preview-desc text-xs text-gray-600 mt-1 leading-snug">${escapeHtml(automated.description)}</p>
+              <div class="flickr-preview-provider text-xs font-semibold tracking-wide edt-ink-2 uppercase mb-0.5">${escapeHtml(providerLabel)}</div>
+              <div class="flickr-preview-heading text-sm font-semibold edt-ink-0 leading-snug">${escapeHtml(automated.heading)}</div>
+              <p class="flickr-preview-desc text-xs edt-ink-1 mt-1 leading-snug">${escapeHtml(automated.description)}</p>
               <span class="event-promo-action flickr-preview-btn mt-2">${escapeHtml(automated.buttonText)}</span>
             </div>
           </div>
@@ -2390,55 +2568,67 @@ function renderFlickrBlock(flickr) {
 
 const LOGO_FA_DEFAULT = 'fa-solid fa-calendar-days';
 
+// Trademark caution: any "drupalcon" event forcibly hides its logo image on the
+// public schedule (see updateHeaderBranding in events.js). The editor mirrors that
+// by locking the "Disable image" checkbox on + disabled.
+function eventSlugForcesLogoOff() {
+  const e = state.dataset?.event || {};
+  const slug = slugify([e.designation, e.year, e.location].filter(Boolean).join(' '));
+  return slug.includes('drupalcon');
+}
+
 function renderLogoBlock(logo) {
   const imageSrc = (logo.image || '').trim();
   const plateClass = logo.usePlate ? ' header-logo-use-plate' : '';
   const faIcon = (logo.faIcon || '').trim() || LOGO_FA_DEFAULT;
-  const showFaIcon = logo.logoDisabled;
+  const forcedOff = eventSlugForcesLogoOff();
+  const logoDisabledChecked = logo.logoDisabled || forcedOff;
+  const showFaIcon = logoDisabledChecked;
   return `
     <div class="col-span-full flex gap-5 items-start">
       <div class="flex-1 min-w-0 grid grid-cols-1 md:grid-cols-2 gap-3">
         <label class="editor-form-field md:col-span-2">
           ${renderFieldIntro('logo', 'image', LOGO_FIELD_CONFIG.image)}
-          <input data-logo-field="image" type="text" value="${escapeAttr(logo.image)}" class="w-full h-11 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3" placeholder="./img/logos/.../logo.png"${fieldDescriptionAttr('logo', 'image', LOGO_FIELD_CONFIG.image)}>
+          <input data-logo-field="image" type="text" value="${escapeAttr(logo.image)}" class="edt-field" placeholder="./img/logos/.../logo.png"${fieldDescriptionAttr('logo', 'image', LOGO_FIELD_CONFIG.image)}>
         </label>
         <label class="editor-form-field md:col-span-2">
           ${renderFieldIntro('logo', 'imageAlt', LOGO_FIELD_CONFIG.imageAlt)}
-          <input data-logo-field="imageAlt" type="text" value="${escapeAttr(logo.imageAlt)}" class="w-full h-11 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"${fieldDescriptionAttr('logo', 'imageAlt', LOGO_FIELD_CONFIG.imageAlt)}>
+          <input data-logo-field="imageAlt" type="text" value="${escapeAttr(logo.imageAlt)}" class="edt-field"${fieldDescriptionAttr('logo', 'imageAlt', LOGO_FIELD_CONFIG.imageAlt)}>
         </label>
         <div class="editor-form-field md:col-span-2">
           <span class="editor-field-label">Logo upload</span>
           <span class="editor-field-description">Uploads to <code>img/logos/${escapeHtml(
-            slugify(state.dataset?.event?.designation || 'event') || 'event'
+            slugify(state.dataset?.event?.designation || 'event') || 'event',
           )}</code> and stores a relative path.</span>
           <div class="flex items-center gap-2 flex-wrap">
-            <label class="h-9 inline-flex items-center gap-2.5 rounded-md border border-gray-300 px-3 bg-white cursor-pointer select-none">
+            <label class="edt-btn select-none">
               <input data-logo-field="usePlate" type="checkbox" class="h-4 w-4" ${logo.usePlate ? 'checked' : ''}${fieldDescriptionAttr('logo', 'usePlate', LOGO_FIELD_CONFIG.usePlate)}>
-              <span class="text-sm text-gray-700">Background plate</span>
+              <span class="edt-body">Background plate</span>
             </label>
-            <label class="h-9 inline-flex items-center gap-2.5 rounded-md border border-gray-300 px-3 bg-white cursor-pointer select-none">
-              <input data-logo-field="logoDisabled" type="checkbox" class="h-4 w-4" ${logo.logoDisabled ? 'checked' : ''}${fieldDescriptionAttr('logo', 'logoDisabled', LOGO_FIELD_CONFIG.logoDisabled)}>
-              <span class="text-sm text-gray-700">Disable image</span>
+            <label class="h-9 inline-flex items-center gap-2.5 rounded-md border edt-rule px-3 edt-surface select-none ${forcedOff ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'}"${forcedOff ? ' title="Forced off for DrupalCon events"' : ''}>
+              <input data-logo-field="logoDisabled" type="checkbox" class="h-4 w-4" ${logoDisabledChecked ? 'checked' : ''}${forcedOff ? ' disabled' : ''}${fieldDescriptionAttr('logo', 'logoDisabled', LOGO_FIELD_CONFIG.logoDisabled)}>
+              <span class="edt-body">Disable image${forcedOff ? ' <span class="edt-warn font-medium">(forced)</span>' : ''}</span>
             </label>
-            <button id="logoImageUpload" type="button" class="h-9 inline-flex items-center justify-center px-3 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
-              <i class="fas fa-upload mr-1.5 text-[0.72rem]"></i>Upload logo
+            <button id="logoImageUpload" type="button" class="h-9 inline-flex items-center justify-center px-3 border edt-rule rounded-md text-sm font-medium edt-ink-1 edt-surface transition-colors whitespace-nowrap">
+              Upload logo
             </button>
-            <button id="logoImageClear" type="button" class="h-9 inline-flex items-center justify-center px-3 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-red-50 hover:border-red-300 hover:text-red-600 transition-colors whitespace-nowrap"${!imageSrc ? ' disabled' : ''}>
-              <i class="fas fa-trash mr-1.5 text-[0.72rem]"></i>Delete logo
+            <button id="logoImageClear" type="button" class="h-9 inline-flex items-center justify-center px-3 border edt-rule rounded-md text-sm font-medium edt-ink-1 edt-surface hover:edt-rule-bad hover:edt-bad transition-colors whitespace-nowrap"${!imageSrc ? ' disabled' : ''}>
+              Delete logo
             </button>
           </div>
+          ${forcedOff ? '<p class="text-xs edt-warn mt-2">Logo image is forced off for DrupalCon events — the fallback icon is shown on the public schedule regardless of this setting.</p>' : ''}
         </div>
         <label class="editor-form-field md:col-span-2">
           ${renderFieldIntro('logo', 'faIcon', LOGO_FIELD_CONFIG.faIcon)}
-          <input data-logo-field="faIcon" type="text" value="${escapeAttr(logo.faIcon)}" class="w-full h-11 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3" placeholder="${escapeAttr(LOGO_FA_DEFAULT)}"${fieldDescriptionAttr('logo', 'faIcon', LOGO_FIELD_CONFIG.faIcon)}>
+          <input data-logo-field="faIcon" type="text" value="${escapeAttr(logo.faIcon)}" class="edt-field" placeholder="${escapeAttr(LOGO_FA_DEFAULT)}"${fieldDescriptionAttr('logo', 'faIcon', LOGO_FIELD_CONFIG.faIcon)}>
         </label>
       </div>
 
       <aside class="logo-editor-sidebar">
         <div class="logo-preview-stage">
           <div id="logoPreviewContainer" class="header-logo${escapeAttr(plateClass)}">
-            <i id="logoIconPreview" class="${escapeAttr(showFaIcon ? faIcon : 'fas fa-image')}${(!showFaIcon && imageSrc) ? ' hidden' : ''}"></i>
-            <img id="logoImagePreview" class="header-logo-image${(imageSrc && !showFaIcon) ? '' : ' hidden'}"
+            <span id="logoIconPreview" class="edt-logo-none${!showFaIcon && imageSrc ? ' hidden' : ''}">${escapeHtml(showFaIcon ? faIcon : 'No image')}</span>
+            <img id="logoImagePreview" class="header-logo-image${imageSrc && !showFaIcon ? '' : ' hidden'}"
               src="${escapeAttr(bustSrc(imageSrc))}" alt="${escapeAttr(logo.imageAlt || '')}">
           </div>
         </div>
@@ -2470,7 +2660,11 @@ function bindFlickrFormEvents(container) {
 
       if (key === 'provider' || key === 'groupUrl') {
         const flickrNow = normalizeFlickrObject(state.dataset.event.flickr);
-        const auto = getAutomatedFlickrCopy(state.dataset?.event, state.dataset?.items, flickrNow.provider);
+        const auto = getAutomatedFlickrCopy(
+          state.dataset?.event,
+          state.dataset?.items,
+          flickrNow.provider,
+        );
         const providerEl = container.querySelector('.flickr-preview-provider');
         const headingEl = container.querySelector('.flickr-preview-heading');
         const descEl = container.querySelector('.flickr-preview-desc');
@@ -2488,7 +2682,7 @@ function bindFlickrFormEvents(container) {
         if (frame) {
           frame.innerHTML = newSrc
             ? `<img id="flickrImagePreview" class="event-promo-image" src="${escapeAttr(newSrc)}" alt="${escapeAttr(eventFlickr.imageAlt || '')}">`
-            : `<div class="flickr-preview-placeholder"><i class="fas fa-image"></i></div>`;
+            : `<div class="flickr-preview-placeholder"></div>`;
         }
         if (clearBtn) clearBtn.disabled = !newSrc;
       }
@@ -2550,7 +2744,10 @@ function bindLogoFormEvents(container) {
 
       if (key === 'image') {
         const newSrc = input.value.trim();
-        if (img) { img.src = newSrc; img.classList.toggle('hidden', !newSrc || disabled); }
+        if (img) {
+          img.src = newSrc;
+          img.classList.toggle('hidden', !newSrc || disabled);
+        }
         if (clearBtn) clearBtn.disabled = !newSrc;
       }
       if (key === 'imageAlt') {
@@ -2562,7 +2759,11 @@ function bindLogoFormEvents(container) {
       }
       if (key === 'logoDisabled' || key === 'faIcon') {
         if (iconEl) {
-          iconEl.className = disabled ? resolvedIcon : (hasSrc ? 'fas fa-image hidden' : 'fas fa-image');
+          iconEl.className = disabled
+            ? resolvedIcon
+            : hasSrc
+              ? 'edt-logo-none hidden'
+              : 'edt-logo-none';
         }
         if (img) img.classList.toggle('hidden', disabled || !hasSrc);
       }
@@ -2597,7 +2798,7 @@ function bindLogoFormEvents(container) {
 function renderLogoForm() {
   if (!els.logoForm) return;
   if (!state.dataset) {
-    els.logoForm.innerHTML = '<p class="text-sm text-gray-400">Load a dataset to edit the event logo.</p>';
+    els.logoForm.innerHTML = '<p class="edt-muted">Load a dataset to edit the event logo.</p>';
     return;
   }
   const logo = normalizeLogoObject(state.dataset?.event?.logo);
@@ -2608,7 +2809,7 @@ function renderLogoForm() {
 function renderFlickrForm() {
   if (!els.flickrForm) return;
   if (!state.dataset) {
-    els.flickrForm.innerHTML = '<p class="text-sm text-gray-400">Load a dataset to edit the photos block.</p>';
+    els.flickrForm.innerHTML = '<p class="edt-muted">Load a dataset to edit the photos block.</p>';
     return;
   }
   const flickr = normalizeFlickrObject(state.dataset?.event?.flickr);
@@ -2618,7 +2819,9 @@ function renderFlickrForm() {
 
 function renderUrlMultifieldHtml(scope, field, config, urls) {
   const spanClass = 'md:col-span-2 xl:col-span-3';
-  const rows = urls.map((url, i) => `
+  const rows = urls
+    .map(
+      (url, i) => `
     <div class="url-multifield-row">
       <input type="text"
         class="url-multifield-input"
@@ -2632,10 +2835,11 @@ function renderUrlMultifieldHtml(scope, field, config, urls) {
         data-url-remove="${escapeAttr(field)}"
         data-url-index="${i}"
         aria-label="Remove URL">
-        <i class="fas fa-times"></i>
-      </button>
+        </button>
     </div>
-  `).join('');
+  `,
+    )
+    .join('');
 
   return `
     <div class="editor-form-field ${spanClass}">
@@ -2644,7 +2848,7 @@ function renderUrlMultifieldHtml(scope, field, config, urls) {
         ${rows || '<p class="url-multifield-empty">No URLs configured.</p>'}
       </div>
       <button type="button" class="url-multifield-add" data-url-add="${escapeAttr(field)}">
-        <i class="fas fa-plus"></i> Add URL
+        Add URL
       </button>
     </div>
   `;
@@ -2652,12 +2856,21 @@ function renderUrlMultifieldHtml(scope, field, config, urls) {
 
 function setEventColor(field, value) {
   if (!state.dataset?.event) return;
-  if (!state.dataset.event.theme || typeof state.dataset.event.theme !== 'object') state.dataset.event.theme = {};
+  if (!state.dataset.event.theme || typeof state.dataset.event.theme !== 'object')
+    state.dataset.event.theme = {};
   state.dataset.event.theme[field] = value;
   markDirty(true);
-  const resetIds = { primaryColor: 'clearPrimaryColor', secondaryColor: 'clearSecondaryColor', tertiaryColor: 'clearTertiaryColor' };
+  const resetIds = {
+    primaryColor: 'clearPrimaryColor',
+    secondaryColor: 'clearSecondaryColor',
+    tertiaryColor: 'clearTertiaryColor',
+  };
   document.getElementById(resetIds[field])?.classList.remove('hidden');
-  applyEventColors(state.dataset.event.theme.primaryColor, state.dataset.event.theme.secondaryColor, state.dataset.event.theme.tertiaryColor);
+  applyEventColors(
+    state.dataset.event.theme.primaryColor,
+    state.dataset.event.theme.secondaryColor,
+    state.dataset.event.theme.tertiaryColor,
+  );
 }
 
 function clearEventColor(field, picker, hex, clearBtn, defaultColor) {
@@ -2668,7 +2881,11 @@ function clearEventColor(field, picker, hex, clearBtn, defaultColor) {
   hex.value = '';
   hex.placeholder = defaultColor;
   clearBtn.classList.add('hidden');
-  applyEventColors(state.dataset.event.theme?.primaryColor, state.dataset.event.theme?.secondaryColor, state.dataset.event.theme?.tertiaryColor);
+  applyEventColors(
+    state.dataset.event.theme?.primaryColor,
+    state.dataset.event.theme?.secondaryColor,
+    state.dataset.event.theme?.tertiaryColor,
+  );
 }
 
 let _editingThemeId = null;
@@ -2676,17 +2893,20 @@ let _editingThemeSnapshot = null;
 let _preEditThemeId = null;
 
 const _THEME_EDIT_FIELDS = [
-  { key: 'bg',        label: 'Background', def: '#010810' },
-  { key: 'primary',   label: 'Primary',    def: '#00cfff' },
-  { key: 'secondary', label: 'Secondary',  def: '#4a90d9' },
-  { key: 'tertiary',  label: 'Tertiary',   def: '#7c3aed' },
-  { key: 'text',      label: 'Text',       def: '#eaf2fc' },
-  { key: 'border',    label: 'Border',     def: '#162c4c' },
+  { key: 'bg', label: 'Background', def: '#010810' },
+  { key: 'primary', label: 'Primary', def: '#00cfff' },
+  { key: 'secondary', label: 'Secondary', def: '#4a90d9' },
+  { key: 'tertiary', label: 'Tertiary', def: '#7c3aed' },
+  { key: 'text', label: 'Text', def: '#eaf2fc' },
+  { key: 'border', label: 'Border', def: '#162c4c' },
 ];
 
 function _blendHex(hex, toward, amount) {
   if (!/^#[0-9a-fA-F]{6}$/.test(hex) || !/^#[0-9a-fA-F]{6}$/.test(toward)) return hex;
-  const lerp = (a, b) => Math.round(a + (b - a) * amount).toString(16).padStart(2, '0');
+  const lerp = (a, b) =>
+    Math.round(a + (b - a) * amount)
+      .toString(16)
+      .padStart(2, '0');
   const r = lerp(parseInt(hex.slice(1, 3), 16), parseInt(toward.slice(1, 3), 16));
   const g = lerp(parseInt(hex.slice(3, 5), 16), parseInt(toward.slice(3, 5), 16));
   const b = lerp(parseInt(hex.slice(5, 7), 16), parseInt(toward.slice(5, 7), 16));
@@ -2755,11 +2975,14 @@ function renderAppearanceForm() {
   const colorDisabledAttr = disabled ? ' disabled' : '';
   const savedThemeId = state.persistedSnapshot?.dataset?.event?.theme?.id || '';
 
-  const eventThemeCards = themes.map((t) => _themeCardHtml(t, eventThemeId || '__none__', 'eventTheme', _editingThemeId, savedThemeId)).join('');
+  const eventThemeCards = themes
+    .map((t) =>
+      _themeCardHtml(t, eventThemeId || '__none__', 'eventTheme', _editingThemeId, savedThemeId),
+    )
+    .join('');
   const pickerPrimary = primaryColor || themeColors.primary || '#00cfff';
   const pickerSecondary = secondaryColor || themeColors.secondary || '#4a90d9';
   const pickerTertiary = tertiaryColor || themeColors.tertiary || '#7c3aed';
-
 
   els.appearanceForm.innerHTML = `
     <section class="appearance-panel-section">
@@ -2838,7 +3061,8 @@ function renderAppearanceForm() {
     radio.addEventListener('change', () => {
       if (!radio.checked || !state.dataset?.event) return;
       const val = radio.value;
-      if (!state.dataset.event.theme || typeof state.dataset.event.theme !== 'object') state.dataset.event.theme = {};
+      if (!state.dataset.event.theme || typeof state.dataset.event.theme !== 'object')
+        state.dataset.event.theme = {};
       if (val) {
         state.dataset.event.theme.id = val;
       } else {
@@ -2847,7 +3071,11 @@ function renderAppearanceForm() {
       markDirty(true);
       const newEffective = val || getCurrentThemeId();
       applyThemeClass(newEffective);
-      applyEventColors(state.dataset.event.theme.primaryColor, state.dataset.event.theme.secondaryColor, state.dataset.event.theme.tertiaryColor);
+      applyEventColors(
+        state.dataset.event.theme.primaryColor,
+        state.dataset.event.theme.secondaryColor,
+        state.dataset.event.theme.tertiaryColor,
+      );
       renderAppearanceForm();
     });
   });
@@ -2867,11 +3095,20 @@ function renderAppearanceForm() {
     });
     primaryHex?.addEventListener('input', () => {
       const v = primaryHex.value.trim();
-      if (/^#[0-9a-fA-F]{6}$/.test(v)) { primaryPicker.value = v; setEventColor('primaryColor', v); }
+      if (/^#[0-9a-fA-F]{6}$/.test(v)) {
+        primaryPicker.value = v;
+        setEventColor('primaryColor', v);
+      }
     });
     clearPrimary?.addEventListener('click', () => {
       const c = getThemeById(effectiveThemeId)?.colors || {};
-      clearEventColor('primaryColor', primaryPicker, primaryHex, clearPrimary, c.primary || '#00cfff');
+      clearEventColor(
+        'primaryColor',
+        primaryPicker,
+        primaryHex,
+        clearPrimary,
+        c.primary || '#00cfff',
+      );
     });
     secondaryPicker?.addEventListener('input', () => {
       secondaryHex.value = secondaryPicker.value.toUpperCase();
@@ -2879,11 +3116,20 @@ function renderAppearanceForm() {
     });
     secondaryHex?.addEventListener('input', () => {
       const v = secondaryHex.value.trim();
-      if (/^#[0-9a-fA-F]{6}$/.test(v)) { secondaryPicker.value = v; setEventColor('secondaryColor', v); }
+      if (/^#[0-9a-fA-F]{6}$/.test(v)) {
+        secondaryPicker.value = v;
+        setEventColor('secondaryColor', v);
+      }
     });
     clearSecondary?.addEventListener('click', () => {
       const c = getThemeById(effectiveThemeId)?.colors || {};
-      clearEventColor('secondaryColor', secondaryPicker, secondaryHex, clearSecondary, c.secondary || '#4a90d9');
+      clearEventColor(
+        'secondaryColor',
+        secondaryPicker,
+        secondaryHex,
+        clearSecondary,
+        c.secondary || '#4a90d9',
+      );
     });
     const tertiaryPicker = document.getElementById('tertiaryColorPicker');
     const tertiaryHex = document.getElementById('tertiaryColorHex');
@@ -2894,30 +3140,42 @@ function renderAppearanceForm() {
     });
     tertiaryHex?.addEventListener('input', () => {
       const v = tertiaryHex.value.trim();
-      if (/^#[0-9a-fA-F]{6}$/.test(v)) { tertiaryPicker.value = v; setEventColor('tertiaryColor', v); }
+      if (/^#[0-9a-fA-F]{6}$/.test(v)) {
+        tertiaryPicker.value = v;
+        setEventColor('tertiaryColor', v);
+      }
     });
     clearTertiary?.addEventListener('click', () => {
       const c = getThemeById(effectiveThemeId)?.colors || {};
-      clearEventColor('tertiaryColor', tertiaryPicker, tertiaryHex, clearTertiary, c.tertiary || '#7c3aed');
+      clearEventColor(
+        'tertiaryColor',
+        tertiaryPicker,
+        tertiaryHex,
+        clearTertiary,
+        c.tertiary || '#7c3aed',
+      );
     });
   }
 }
 
 function _buildThemeLibraryHtml(themes) {
-  const items = themes.map((t) => {
-    const c = t.colors || {};
-    if (_editingThemeId === t.id) {
-      const colorPairs = _THEME_EDIT_FIELDS.map((f) => {
-        const v = c[f.key] || f.def;
-        return `<div class="appearance-add-field">
+  const items = themes
+    .map((t) => {
+      const c = t.colors || {};
+      if (_editingThemeId === t.id) {
+        const colorPairs = _THEME_EDIT_FIELDS
+          .map((f) => {
+            const v = c[f.key] || f.def;
+            return `<div class="appearance-add-field">
           <span>${f.label}</span>
           <div class="appearance-color-pair">
             <input type="color" id="editColor-${f.key}" value="${escapeAttr(v)}">
             <input type="text" id="editColorHex-${f.key}" value="${escapeAttr(v)}" maxlength="7" class="appearance-hex-input" placeholder="${escapeAttr(f.def)}">
           </div>
         </div>`;
-      }).join('');
-      return `<div class="appearance-library-item appearance-library-item--editing">
+          })
+          .join('');
+        return `<div class="appearance-library-item appearance-library-item--editing">
         <div style="width:100%">
           <p class="theme-edit-live-note"><span class="theme-edit-live-dot"></span>Previewing live — changes apply instantly</p>
           <div class="appearance-add-theme-fields">
@@ -2937,8 +3195,8 @@ function _buildThemeLibraryHtml(themes) {
           </div>
         </div>
       </div>`;
-    }
-    return `<div class="appearance-library-item" data-theme-id="${escapeAttr(t.id)}">
+      }
+      return `<div class="appearance-library-item" data-theme-id="${escapeAttr(t.id)}">
       <div class="theme-card-swatch-row">
         <span class="theme-swatch-chip" style="background:${c.bg || '#000'}"></span>
         <span class="theme-swatch-chip" style="background:${c.primary || '#00cfff'}"></span>
@@ -2947,13 +3205,12 @@ function _buildThemeLibraryHtml(themes) {
       </div>
       <span class="appearance-library-label">${escapeHtml(t.label)}</span>
       <button type="button" class="appearance-library-edit" data-edit-theme="${escapeAttr(t.id)}" title="Edit theme">
-        <i class="fas fa-pen text-[0.72rem]"></i>
-      </button>
+        </button>
       <button type="button" class="appearance-library-delete" data-delete-theme="${escapeAttr(t.id)}" title="Delete theme">
-        <i class="fas fa-trash text-[0.72rem]"></i>
-      </button>
+        </button>
     </div>`;
-  }).join('');
+    })
+    .join('');
 
   return `
     <div id="themeLibraryList" class="appearance-library-list">${items}</div>
@@ -3009,8 +3266,8 @@ function _buildThemeLibraryHtml(themes) {
       </div>
     </div>
     <div class="flex gap-2 mt-3">
-      <button type="button" id="showAddThemeForm" class="appearance-btn-secondary"><i class="fas fa-plus mr-1.5 text-[0.72rem]"></i>Add theme</button>
-      <button type="button" id="saveThemesBtn" class="appearance-btn-primary"><i class="fas fa-floppy-disk mr-1.5 text-[0.72rem]"></i>Save themes</button>
+      <button type="button" id="showAddThemeForm" class="appearance-btn-secondary">Add theme</button>
+      <button type="button" id="saveThemesBtn" class="appearance-btn-primary">Save themes</button>
     </div>`;
 }
 
@@ -3018,10 +3275,16 @@ function _wireThemeLibraryControls(container, rerender, fallbackThemeId) {
   container.querySelectorAll('[data-delete-theme]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const id = btn.dataset.deleteTheme;
-      if (getThemes().length <= 1) { window.alert('Cannot delete the last theme.'); return; }
+      if (getThemes().length <= 1) {
+        window.alert('Cannot delete the last theme.');
+        return;
+      }
       if (!window.confirm(`Delete theme "${id}"?`)) return;
       setThemes(getThemes().filter((t) => t.id !== id));
-      if (_editingThemeId === id) { _editingThemeId = null; _editingThemeSnapshot = null; }
+      if (_editingThemeId === id) {
+        _editingThemeId = null;
+        _editingThemeSnapshot = null;
+      }
       rerender();
     });
   });
@@ -3037,17 +3300,21 @@ function _wireThemeLibraryControls(container, rerender, fallbackThemeId) {
 
   document.getElementById('doneEditTheme')?.addEventListener('click', () => {
     const restoreId = _preEditThemeId || fallbackThemeId;
-    _editingThemeId = null; _editingThemeSnapshot = null; _preEditThemeId = null;
+    _editingThemeId = null;
+    _editingThemeSnapshot = null;
+    _preEditThemeId = null;
     applyThemeClass(restoreId);
     rerender();
   });
 
   document.getElementById('cancelEditTheme')?.addEventListener('click', () => {
     if (_editingThemeSnapshot) {
-      setThemes(getThemes().map((t) => t.id === _editingThemeId ? _editingThemeSnapshot : t));
+      setThemes(getThemes().map((t) => (t.id === _editingThemeId ? _editingThemeSnapshot : t)));
     }
     const restoreId = _preEditThemeId || fallbackThemeId;
-    _editingThemeId = null; _editingThemeSnapshot = null; _preEditThemeId = null;
+    _editingThemeId = null;
+    _editingThemeSnapshot = null;
+    _preEditThemeId = null;
     applyThemeClass(restoreId);
     rerender();
   });
@@ -3062,7 +3329,10 @@ function _wireThemeLibraryControls(container, rerender, fallbackThemeId) {
     });
     hexInp?.addEventListener('input', () => {
       const v = hexInp.value.trim();
-      if (/^#[0-9a-fA-F]{6}$/.test(v)) { picker.value = v; _applyLiveEditColor(key, v); }
+      if (/^#[0-9a-fA-F]{6}$/.test(v)) {
+        picker.value = v;
+        _applyLiveEditColor(key, v);
+      }
     });
   });
 
@@ -3079,7 +3349,9 @@ function _wireThemeLibraryControls(container, rerender, fallbackThemeId) {
     const picker = document.getElementById(pickerId);
     const hexInp = document.getElementById(hexId);
     if (!picker || !hexInp) return;
-    picker.addEventListener('input', () => { hexInp.value = picker.value.toUpperCase(); });
+    picker.addEventListener('input', () => {
+      hexInp.value = picker.value.toUpperCase();
+    });
     hexInp.addEventListener('input', () => {
       const v = hexInp.value.trim();
       if (/^#[0-9a-fA-F]{6}$/.test(v)) picker.value = v;
@@ -3096,7 +3368,9 @@ function _wireThemeLibraryControls(container, rerender, fallbackThemeId) {
     const textHex = document.getElementById('newThemeTextHex');
     if (!textPicker || !textHex) return;
     const defaultText = isDark ? '#eaf2fc' : '#0f172a';
-    textPicker.value = defaultText; textHex.value = defaultText; textHex.placeholder = defaultText;
+    textPicker.value = defaultText;
+    textHex.value = defaultText;
+    textHex.placeholder = defaultText;
   });
   document.getElementById('cancelAddTheme')?.addEventListener('click', () => {
     document.getElementById('addThemeFormWrap')?.classList.add('hidden');
@@ -3104,8 +3378,14 @@ function _wireThemeLibraryControls(container, rerender, fallbackThemeId) {
   });
   document.getElementById('confirmAddTheme')?.addEventListener('click', () => {
     const label = document.getElementById('newThemeLabel')?.value.trim();
-    if (!label) { window.alert('Please enter a theme name.'); return; }
-    const id = label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    if (!label) {
+      window.alert('Please enter a theme name.');
+      return;
+    }
+    const id = label
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
     if (getThemes().some((t) => t.id === id)) {
       window.alert(`A theme named "${id}" already exists.`);
       return;
@@ -3117,11 +3397,35 @@ function _wireThemeLibraryControls(container, rerender, fallbackThemeId) {
     const tertiary = document.getElementById('newThemeTertiary')?.value || secondary;
     const textPicked = document.getElementById('newThemeText')?.value || '';
     const baseDefaults = dark
-      ? { surface: 'rgba(3,10,22,0.93)', surfaceAlt: 'rgba(7,18,36,0.96)', surfaceDeep: 'rgba(12,28,52,0.84)', text: textPicked || '#eaf2fc', textAlt: '#cdd9ee', textMuted: '#8eaacc', textFaint: '#6a8cb0' }
-      : { surface: 'rgba(255,255,255,0.97)', surfaceAlt: 'rgba(248,250,252,0.99)', surfaceDeep: 'rgba(241,245,249,0.95)', text: textPicked || '#0f172a', textAlt: '#1e293b', textMuted: '#475569', textFaint: '#64748b' };
+      ? {
+          surface: 'rgba(3,10,22,0.93)',
+          surfaceAlt: 'rgba(7,18,36,0.96)',
+          surfaceDeep: 'rgba(12,28,52,0.84)',
+          text: textPicked || '#eaf2fc',
+          textAlt: '#cdd9ee',
+          textMuted: '#8eaacc',
+          textFaint: '#6a8cb0',
+        }
+      : {
+          surface: 'rgba(255,255,255,0.97)',
+          surfaceAlt: 'rgba(248,250,252,0.99)',
+          surfaceDeep: 'rgba(241,245,249,0.95)',
+          text: textPicked || '#0f172a',
+          textAlt: '#1e293b',
+          textMuted: '#475569',
+          textFaint: '#64748b',
+        };
     const bgAlt = _blendHex(bg, dark ? '#ffffff' : '#000000', 0.06);
     const border = dark ? _blendHex(bg, '#ffffff', 0.12) : _blendHex(bg, '#000000', 0.18);
-    setThemes([...getThemes(), { id, label, dark, colors: { bg, bgAlt, primary, secondary, tertiary, border, ...baseDefaults } }]);
+    setThemes([
+      ...getThemes(),
+      {
+        id,
+        label,
+        dark,
+        colors: { bg, bgAlt, primary, secondary, tertiary, border, ...baseDefaults },
+      },
+    ]);
     rerender();
   });
 
@@ -3151,7 +3455,9 @@ function openEditorSettings() {
 function closeEditorSettings() {
   const modal = document.getElementById('editorSettingsModal');
   if (!modal) return;
-  _editingThemeId = null; _editingThemeSnapshot = null; _preEditThemeId = null;
+  _editingThemeId = null;
+  _editingThemeSnapshot = null;
+  _preEditThemeId = null;
   modal.classList.add('hidden');
   modal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('session-modal-open');
@@ -3162,14 +3468,15 @@ function renderEditorSettings() {
   if (!card) return;
   const themes = getThemes();
   const globalThemeId = getCurrentThemeId();
-  const globalThemeCards = themes.map((t) => _themeCardHtml(t, globalThemeId, 'globalTheme', _editingThemeId, globalThemeId)).join('');
+  const globalThemeCards = themes
+    .map((t) => _themeCardHtml(t, globalThemeId, 'globalTheme', _editingThemeId, globalThemeId))
+    .join('');
 
   card.innerHTML = `
     <div class="es-header">
-      <h2 id="editorSettingsTitle" class="es-title"><i class="fas fa-gear es-title-icon" aria-hidden="true"></i>Settings</h2>
+      <h2 id="editorSettingsTitle" class="es-title">Settings</h2>
       <button type="button" class="es-close-btn" id="esCloseBtn" aria-label="Close settings">
-        <i class="fas fa-xmark"></i>
-      </button>
+        </button>
     </div>
     <div class="es-body">
       <section class="es-section">
@@ -3184,6 +3491,7 @@ function renderEditorSettings() {
         <p class="es-section-desc">Add or remove themes available to all events. Changes are saved to <code>data/themes.json</code>.</p>
         ${_buildThemeLibraryHtml(themes)}
       </section>
+      ${editorS3SectionHtml()}
     </div>
     <div class="es-footer">
       <button type="button" class="es-done-btn" id="esDoneBtn">Done</button>
@@ -3191,9 +3499,14 @@ function renderEditorSettings() {
 
   document.getElementById('esCloseBtn')?.addEventListener('click', closeEditorSettings);
   document.getElementById('esDoneBtn')?.addEventListener('click', closeEditorSettings);
-  document.getElementById('editorSettingsModal')?.addEventListener('click', (e) => {
-    if (e.target === document.getElementById('editorSettingsModal')) closeEditorSettings();
-  }, { once: true });
+  wireEditorS3();
+  document.getElementById('editorSettingsModal')?.addEventListener(
+    'click',
+    (e) => {
+      if (e.target === document.getElementById('editorSettingsModal')) closeEditorSettings();
+    },
+    { once: true },
+  );
 
   card.querySelectorAll('input[name="globalTheme"]').forEach((radio) => {
     radio.addEventListener('change', () => {
@@ -3201,7 +3514,11 @@ function renderEditorSettings() {
       setCurrentThemeId(radio.value);
       applyThemeClass(radio.value);
       if (state.dataset?.event && !state.dataset.event.theme?.id) {
-        applyEventColors(state.dataset.event.theme?.primaryColor, state.dataset.event.theme?.secondaryColor, state.dataset.event.theme?.tertiaryColor);
+        applyEventColors(
+          state.dataset.event.theme?.primaryColor,
+          state.dataset.event.theme?.secondaryColor,
+          state.dataset.event.theme?.tertiaryColor,
+        );
       }
       renderEditorSettings();
     });
@@ -3237,111 +3554,234 @@ function _applyLiveEditMeta() {
 
 function renderEventMetaForm() {
   const event = state.dataset?.event || {};
-  const visibleFields = EVENT_META_FIELDS.filter((field) => !['id', 'name', 'logo', 'flickr'].includes(field));
+  const visibleFields = EVENT_META_FIELDS.filter(
+    (field) => !['id', 'name', 'logo', 'flickr'].includes(field),
+  );
 
-  const html = visibleFields.map((field) => {
-    const config = EVENT_META_FIELD_CONFIG[field] || { label: field, description: '' };
-    const isWide = field === 'website' || field === 'scheduleURLs' || field === 'other_urls';
-    const spanClass = isWide ? 'md:col-span-2 xl:col-span-3' : '';
+  const html = visibleFields
+    .map((field) => {
+      const config = EVENT_META_FIELD_CONFIG[field] || { label: field, description: '' };
+      const isWide = field === 'website' || field === 'scheduleURLs' || field === 'other_urls';
+      const spanClass = isWide ? 'md:col-span-2 xl:col-span-3' : '';
 
-    if (field === 'scheduleURLs' || field === 'other_urls') {
-      const urls = normalizeUrlArray(event[field]);
-      return renderUrlMultifieldHtml('event', field, config, urls);
-    }
+      if (field === 'attendance') {
+        const a = event.attendance || {};
+        return `
+        <div class="editor-form-field md:col-span-2 xl:col-span-3">
+          ${renderFieldIntro('event', field, config)}
+          <div class="edt-attendance">
+            <label class="edt-attendance__count">
+              <span class="edt-sublabel">Final count</span>
+              <input data-event-field="attendance.count" type="number" min="0" step="1"
+                     value="${escapeAttr(a.count ?? '')}" placeholder="e.g. 412" class="edt-field">
+            </label>
+            <label class="edt-attendance__source">
+              <span class="edt-sublabel">Source</span>
+              <input data-event-field="attendance.source" type="text"
+                     value="${escapeAttr(a.source || '')}" placeholder="Report URL, or who supplied it" class="edt-field">
+            </label>
+            <label class="edt-attendance__note">
+              <span class="edt-sublabel">Note</span>
+              <input data-event-field="attendance.note" type="text"
+                     value="${escapeAttr(a.note || '')}" placeholder="e.g. in person only" class="edt-field">
+            </label>
+          </div>
+        </div>`;
+      }
 
-    if (field === 'timezone') {
-      const current = safeTimezone(event[field] || 'UTC');
-      const timezoneValues = state.timezones.includes(current) ? state.timezones : [current, ...state.timezones];
-      const options = timezoneValues
-        .map((tz) => `<option value="${escapeAttr(tz)}" ${tz === current ? 'selected' : ''}>${escapeHtml(tz)}</option>`)
-        .join('');
-      return `
+      if (field === 'scheduleURLs' || field === 'other_urls') {
+        const urls = normalizeUrlArray(event[field]);
+        return renderUrlMultifieldHtml('event', field, config, urls);
+      }
+
+      if (field === 'timezone') {
+        const current = safeTimezone(event[field] || 'UTC');
+        const timezoneValues = state.timezones.includes(current)
+          ? state.timezones
+          : [current, ...state.timezones];
+        const options = timezoneValues
+          .map(
+            (tz) =>
+              `<option value="${escapeAttr(tz)}" ${tz === current ? 'selected' : ''}>${escapeHtml(tz)}</option>`,
+          )
+          .join('');
+        return `
         <label class="editor-form-field ${spanClass}">
           ${renderFieldIntro('event', field, config)}
-          <select data-event-field="timezone" class="w-full h-11 pr-10 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-base font-medium bg-white px-3"${fieldDescriptionAttr(
+          <select data-event-field="timezone" class="edt-field pr-10"${fieldDescriptionAttr(
             'event',
             field,
-            config
+            config,
           )}>${options}</select>
         </label>
       `;
-    }
+      }
 
-    if (field === 'enabled') {
-      const checked = event.enabled === true || String(event.enabled).toLowerCase() === 'true';
-      return `
+      if (field === 'ecosystem') {
+        // Values mirror the schema enum. Extend both together — the schema is
+        // authoritative and a value it rejects cannot be saved.
+        const current = event[field] || '';
+        const options = ['', 'drupal', 'wordpress', 'symfony', 'php', 'javascript', 'other']
+          .map(
+            (v) =>
+              `<option value="${escapeAttr(v)}" ${v === current ? 'selected' : ''}>${
+                v ? escapeHtml(v[0].toUpperCase() + v.slice(1)) : '— not set —'
+              }</option>`,
+          )
+          .join('');
+        return `
         <label class="editor-form-field ${spanClass}">
           ${renderFieldIntro('event', field, config)}
-          <span class="h-11 inline-flex items-center gap-3 rounded-md border border-gray-300 px-3 bg-white">
+          <select data-event-field="ecosystem" class="edt-field pr-10"${fieldDescriptionAttr(
+            'event',
+            field,
+            config,
+          )}>${options}</select>
+        </label>
+      `;
+      }
+
+      if (field === 'enabled') {
+        const checked = event.enabled === true || String(event.enabled).toLowerCase() === 'true';
+        return `
+        <label class="editor-form-field ${spanClass}">
+          ${renderFieldIntro('event', field, config)}
+          <span class="edt-btn">
             <input data-event-field="${field}" type="checkbox" class="h-4 w-4" ${checked ? 'checked' : ''}${fieldDescriptionAttr(
               'event',
               field,
-              config
+              config,
             )}>
-            <span class="text-sm text-gray-200">Show this event in planner</span>
+            <span class="text-sm edt-ink-1">Show this event in planner</span>
           </span>
         </label>
       `;
-    }
+      }
 
-    if (field === 'scheduleComplete') {
-      const checked = event.scheduleComplete === true || String(event.scheduleComplete).toLowerCase() === 'true';
-      return `
+      if (field === 'scheduleComplete') {
+        const checked =
+          event.scheduleComplete === true ||
+          String(event.scheduleComplete).toLowerCase() === 'true';
+        return `
         <label class="editor-form-field ${spanClass}">
           ${renderFieldIntro('event', field, config)}
-          <span class="h-11 inline-flex items-center gap-3 rounded-md border border-gray-300 px-3 bg-white">
+          <span class="edt-btn">
             <input data-event-field="${field}" type="checkbox" class="h-4 w-4" ${checked ? 'checked' : ''}${fieldDescriptionAttr(
               'event',
               field,
-              config
+              config,
             )}>
-            <span class="text-sm text-gray-200">Event has passed, schedule is final</span>
+            <span class="text-sm edt-ink-1">Event has passed, schedule is final</span>
           </span>
         </label>
       `;
-    }
+      }
 
-    if (field === 'startDate' || field === 'endDate') {
-      const raw = toStringValue(event[field]);
-      const dateValue = raw ? raw.split('T')[0] : '';
-      return `
+      if (field === 'startDate' || field === 'endDate') {
+        const raw = toStringValue(event[field]);
+        const dateValue = raw ? raw.split('T')[0] : '';
+        return `
         <label class="editor-form-field ${spanClass}">
           ${renderFieldIntro('event', field, config)}
-          <input data-event-field="${field}" type="date" value="${escapeAttr(dateValue)}" class="w-full h-11 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-base font-medium bg-white px-3"${fieldDescriptionAttr(
+          <input data-event-field="${field}" type="date" value="${escapeAttr(dateValue)}" class="edt-field"${fieldDescriptionAttr(
             'event',
             field,
-            config
+            config,
           )}>
         </label>
       `;
-    }
+      }
 
-    if (field === 'columns') {
-      const value = Number.isFinite(Number(event[field])) ? Number(event[field]) : 3;
-      return `
+      if (field === 'columns') {
+        const value = Number.isFinite(Number(event[field])) ? Number(event[field]) : 3;
+        return `
         <label class="editor-form-field ${spanClass}">
           ${renderFieldIntro('event', field, config)}
-          <input data-event-field="columns" type="number" min="1" max="8" step="1" value="${value}" class="w-full h-11 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-base font-medium bg-white px-3"${fieldDescriptionAttr(
+          <input data-event-field="columns" type="number" min="1" max="8" step="1" value="${value}" class="edt-field"${fieldDescriptionAttr(
             'event',
             field,
-            config
+            config,
           )}>
         </label>
       `;
-    }
+      }
 
-    const value = toStringValue(event[field]);
-    return `
+      if (field === 'regionCode') {
+        const current = toStringValue(event[field]).toUpperCase();
+        const REGION_LABELS = {
+          EUR: 'Europe',
+          MEA: 'Middle East & Africa',
+          APAC: 'Asia-Pacific',
+          AMER: 'North America',
+          LATAM: 'Latin America',
+        };
+        const options = ['', 'EUR', 'MEA', 'APAC', 'AMER', 'LATAM']
+          .map(
+            (code) =>
+              `<option value="${code}" ${code === current ? 'selected' : ''}>${code ? `${code} — ${REGION_LABELS[code]}` : '— none —'}</option>`,
+          )
+          .join('');
+        return `
+        <label class="editor-form-field ${spanClass}">
+          ${renderFieldIntro('event', field, config)}
+          <select data-event-field="regionCode" class="edt-field pr-10"${fieldDescriptionAttr(
+            'event',
+            field,
+            config,
+          )}>${options}</select>
+        </label>
+      `;
+      }
+
+      // Longitude is rendered together with latitude (below), so skip it here.
+      if (field === 'longitude') return '';
+
+      if (field === 'latitude') {
+        // Render latitude + longitude side by side on one row, with the map picker
+        // beneath them.
+        const numInput = (f) => {
+          const cfg = EVENT_META_FIELD_CONFIG[f] || { label: f, description: '' };
+          const val =
+            event[f] === '' || event[f] == null || !Number.isFinite(Number(event[f]))
+              ? ''
+              : String(event[f]);
+          const range = f === 'latitude' ? 'min="-90" max="90"' : 'min="-180" max="180"';
+          const ph = f === 'latitude' ? '-41.2865' : '174.7762';
+          return `<label class="editor-form-field">
+            ${renderFieldIntro('event', f, cfg)}
+            <input data-event-field="${f}" type="number" step="any" ${range} value="${escapeAttr(val)}" placeholder="${ph}" class="edt-field"${fieldDescriptionAttr(
+              'event',
+              f,
+              cfg,
+            )}>
+          </label>`;
+        };
+        return `
+        <div class="md:col-span-2 xl:col-span-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            ${numInput('latitude')}
+            ${numInput('longitude')}
+          </div>
+          <div class="mt-2">
+            <button type="button" id="pickVenueLocationBtn" class="h-9 px-3 border edt-rule rounded-md text-sm font-medium edt-ink-1 edt-surface transition-colors inline-flex items-center">Pick location on map</button>
+          </div>
+        </div>
+      `;
+      }
+
+      const value = toStringValue(event[field]);
+      return `
       <label class="editor-form-field ${spanClass}">
         ${renderFieldIntro('event', field, config)}
-        <input data-event-field="${field}" type="text" value="${escapeAttr(value)}" class="w-full h-11 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-base font-medium bg-white px-3"${fieldDescriptionAttr(
+        <input data-event-field="${field}" type="text" value="${escapeAttr(value)}" class="edt-field"${fieldDescriptionAttr(
           'event',
           field,
-          config
+          config,
         )}>
       </label>
     `;
-  }).join('');
+    })
+    .join('');
 
   els.eventMetaForm.innerHTML = html;
 
@@ -3349,7 +3789,26 @@ function renderEventMetaForm() {
     input.addEventListener('focus', undoPush);
     input.addEventListener('input', () => {
       const field = input.dataset.eventField;
-      if (field === 'columns') {
+      if (field.startsWith('attendance.')) {
+        // One nested block, three inputs. The count is what makes the block worth
+        // keeping, so clearing it removes the whole thing rather than leaving a
+        // source pointing at a number that is no longer there.
+        const key = field.slice('attendance.'.length);
+        const next = { ...(state.dataset.event.attendance || {}) };
+        const raw = input.value.trim();
+        if (key === 'count') {
+          const n = Number.parseInt(raw, 10);
+          if (raw === '' || !Number.isFinite(n) || n < 0) delete next.count;
+          else next.count = n;
+        } else if (raw === '') delete next[key];
+        else next[key] = raw;
+        if (next.count === undefined) delete state.dataset.event.attendance;
+        else {
+          // Stamp when the figure was recorded, the same way community credits do.
+          next.capturedAt = next.capturedAt || new Date().toISOString().slice(0, 10);
+          state.dataset.event.attendance = next;
+        }
+      } else if (field === 'columns') {
         const parsed = Number.parseInt(input.value || '3', 10);
         state.dataset.event.columns = Number.isFinite(parsed) ? parsed : 3;
       } else if (field === 'timezone') {
@@ -3359,6 +3818,26 @@ function renderEventMetaForm() {
         renderFlickrForm();
       } else if (field === 'enabled' || field === 'scheduleComplete') {
         state.dataset.event[field] = Boolean(input.checked);
+      } else if (field === 'startDate' || field === 'endDate') {
+        // The <input type="date"> yields a bare "YYYY-MM-DD"; the schema requires a
+        // full date-time, so merge in the previous time-of-day (UTC midnight if none).
+        state.dataset.event[field] = mergeDateIntoIso(
+          input.value,
+          toStringValue(state.dataset.event[field]),
+        );
+      } else if (field === 'latitude' || field === 'longitude') {
+        // Schema requires a number — store one, or drop the field when cleared.
+        const raw = input.value.trim();
+        const n = Number(raw);
+        if (raw === '' || !Number.isFinite(n)) delete state.dataset.event[field];
+        else state.dataset.event[field] = n;
+      } else if (field === 'regionCode' || field === 'country' || field === 'ecosystem') {
+        // Canonical facet fields — drop them entirely when blank (their enums have
+        // no empty option), rather than storing an empty string. The "— not set —"
+        // option exists to CLEAR the field; storing "" would fail validation on save.
+        const raw = input.value.trim();
+        if (raw === '') delete state.dataset.event[field];
+        else state.dataset.event[field] = field === 'regionCode' ? raw.toUpperCase() : raw;
       } else {
         state.dataset.event[field] = input.value;
       }
@@ -3367,7 +3846,11 @@ function renderEventMetaForm() {
         renderLogoForm();
         renderFlickrForm();
       }
-      if ((field === 'startDate' || field === 'endDate') && state.activeEditorTab === 'timeline' && els.timelineCanvas) {
+      if (
+        (field === 'startDate' || field === 'endDate') &&
+        state.activeEditorTab === 'timeline' &&
+        els.timelineCanvas
+      ) {
         renderTimeline(els.timelineCanvas, state.dataset, {
           markDirty: () => markDirty(true),
           trackQuickSessionChange,
@@ -3379,6 +3862,27 @@ function renderEventMetaForm() {
       }
     });
   });
+
+  document.getElementById('pickVenueLocationBtn')?.addEventListener('click', () => {
+    const ev = state.dataset?.event || {};
+    const lat = Number(ev.latitude);
+    const lon = Number(ev.longitude);
+    openMapPicker({
+      title: 'Pick venue location',
+      searchPlaceholder: 'Search a venue, address or city…',
+      lat: Number.isFinite(lat) && ev.latitude !== '' ? lat : null,
+      lon: Number.isFinite(lon) && ev.longitude !== '' ? lon : null,
+      query: [ev.venue, ev.location, ev.region].filter(Boolean).join(', '),
+      onConfirm: (la, lo) => {
+        undoPush();
+        state.dataset.event.latitude = la;
+        state.dataset.event.longitude = lo;
+        markDirty(true);
+        renderEventMetaForm();
+      },
+    });
+  });
+
   els.eventMetaForm.querySelectorAll('[data-url-field]').forEach((input) => {
     input.addEventListener('input', () => {
       const field = input.dataset.urlField;
@@ -3448,7 +3952,10 @@ function setSessionWorkspaceExpanded(expanded) {
   }
   if (!els.sessionWorkspace || !els.sessionSidebarPanel || !els.sessionEditorPanel) return;
 
-  els.sessionWorkspace.classList.toggle('editor-session-workspace-expanded', state.sessionListExpanded);
+  els.sessionWorkspace.classList.toggle(
+    'editor-session-workspace-expanded',
+    state.sessionListExpanded,
+  );
   els.sessionSidebarPanel.classList.toggle('xl:col-span-2', state.sessionListExpanded);
   els.sessionEditorPanel.classList.toggle('xl:col-span-2', state.sessionListExpanded);
 
@@ -3457,7 +3964,9 @@ function setSessionWorkspaceExpanded(expanded) {
     els.toggleSessionWorkspaceIcon.classList.toggle('fa-compress-alt', state.sessionListExpanded);
   }
   if (els.toggleSessionWorkspaceLabel) {
-    els.toggleSessionWorkspaceLabel.textContent = state.sessionListExpanded ? 'Collapse list' : 'Expand list';
+    els.toggleSessionWorkspaceLabel.textContent = state.sessionListExpanded
+      ? 'Collapse list'
+      : 'Expand list';
   }
   syncSessionEditorPanelVisibility();
   syncQuickSessionEditToggle();
@@ -3479,7 +3988,10 @@ function setSponsorWorkspaceExpanded(expanded) {
   }
   if (!els.sponsorWorkspace || !els.sponsorSidebarPanel || !els.sponsorEditorPanel) return;
 
-  els.sponsorWorkspace.classList.toggle('editor-session-workspace-expanded', state.sponsorListExpanded);
+  els.sponsorWorkspace.classList.toggle(
+    'editor-session-workspace-expanded',
+    state.sponsorListExpanded,
+  );
   els.sponsorSidebarPanel.classList.toggle('xl:col-span-2', state.sponsorListExpanded);
   els.sponsorEditorPanel.classList.toggle('xl:col-span-2', state.sponsorListExpanded);
 
@@ -3488,16 +4000,315 @@ function setSponsorWorkspaceExpanded(expanded) {
     els.toggleSponsorWorkspaceIcon.classList.toggle('fa-compress-alt', state.sponsorListExpanded);
   }
   if (els.toggleSponsorWorkspaceLabel) {
-    els.toggleSponsorWorkspaceLabel.textContent = state.sponsorListExpanded ? 'Collapse list' : 'Expand list';
+    els.toggleSponsorWorkspaceLabel.textContent = state.sponsorListExpanded
+      ? 'Collapse list'
+      : 'Expand list';
   }
   syncSponsorEditorPanelVisibility();
   syncQuickSponsorEditToggle();
   markSponsorDirty(state.sponsorDirty);
 }
 
+const EDITOR_TABS = [
+  'event',
+  'people',
+  'logo',
+  'flickr',
+  'sessions',
+  'timeline',
+  'sponsors',
+  'related',
+  'sitemap',
+  'appearance',
+];
+
+// The dataset and the workspace both live in the path — /editor/<dataset>/<tab>,
+// see editorRoute.js. Captured at init() before the default 'event' tab
+// overwrites it, then applied by restorePendingEditorTab() after a dataset loads.
+let _initialEditorTab = null;
+/** Dataset named by the URL at boot, opened once the editor can read files. */
+let _initialDatasetFile = '';
+
+// Writes the CURRENT dataset + tab into the address bar. replaceState, not push:
+// switching workspace is not a page you should have to press Back through, and
+// the dataset you are editing is the same record either way.
+function writeEditorUrl(tab) {
+  try {
+    // Don't blank a deep link before it has had its chance: init() sets the
+    // default 'event' tab BEFORE the requested dataset is open, and writing then
+    // would replace /editor/<dataset>/<tab> with a bare /editor and lose the very
+    // thing we are about to load.
+    if (!state.file && _initialDatasetFile) return;
+    const path = editorPath(state.file || '', tab || state.activeEditorTab, EDITOR_TABS);
+    history.replaceState(null, '', path);
+  } catch {
+    /* history API blocked (e.g. sandboxed) → ignore */
+  }
+}
+
+function restorePendingEditorTab() {
+  const tab = _initialEditorTab;
+  _initialEditorTab = null;
+  if (tab && tab !== 'event' && EDITOR_TABS.includes(tab)) setActiveEditorTab(tab);
+  // Whatever tab we landed on, the address bar must now name the dataset that is
+  // actually open — including when a dataset was picked from the welcome grid,
+  // where nothing else would have written the URL.
+  else writeEditorUrl();
+}
+
+// The route, rendered: Home → Editor → <dataset> → <workspace>. Same contract
+// as the planner's and the archive's, so the three sections read alike. The
+// dataset's own home IS its first workspace, so that one is not a step of its
+// own in the trail.
+const EDITOR_TAB_LABELS = {
+  event: 'Event',
+  logo: 'Logo',
+  flickr: 'Photos',
+  sessions: 'Sessions',
+  timeline: 'Timeline',
+  sponsors: 'Sponsors',
+  people: 'People',
+  related: 'Related events',
+  sitemap: 'Sources',
+  appearance: 'Appearance',
+};
+
+// ── People tab ───────────────────────────────────────────────────────────────
+// Organisers and volunteers are editable; speakers are a read-only projection of
+// the schedule (see modules/editorPeople.js for why).
+
+/** The credits container, created on demand so an older dataset can gain one. */
+function ensureCommunity() {
+  const ev = state.dataset.event;
+  if (!ev.community || typeof ev.community !== 'object') {
+    ev.community = { url: '', people: [] };
+  }
+  if (!Array.isArray(ev.community.people)) ev.community.people = [];
+  return ev.community;
+}
+
+/**
+ * Drop the container when it holds nothing worth keeping. The schema requires
+ * `url` and `people`, so a half-empty object written by an idle visit to this
+ * tab would fail validation on save — better to have no block than an invalid one.
+ */
+function pruneCommunity() {
+  const c = state.dataset?.event?.community;
+  if (!c) return;
+  const hasPeople = Array.isArray(c.people) && c.people.length > 0;
+  const hasUrl = typeof c.url === 'string' && c.url.trim() !== '';
+  if (!hasPeople && !hasUrl) delete state.dataset.event.community;
+  else if (!c.url) c.url = '';
+}
+
+function renderPeopleTab() {
+  if (!els.peopleGroups) return;
+  if (!state.dataset) {
+    els.peopleGroups.innerHTML = '';
+    return;
+  }
+  const c = state.dataset.event?.community || {};
+  if (els.communityUrlInput) els.communityUrlInput.value = c.url || '';
+  if (els.communityCapturedInput) els.communityCapturedInput.value = c.capturedAt || '';
+  els.peopleGroups.innerHTML = peopleGroupsHtml(state.dataset);
+}
+
+// The add/edit dialog. Uses the editor's existing modal shell (the same
+// `session-modal-overlay` / `session-modal-card` markup as the API settings and
+// sponsor pickers) rather than window.prompt: three chained prompts could not
+// validate as a set, could not offer the role as a CHOICE, and gave no way back
+// once you had started.
+const personModal = {
+  /** @type {null | ((p: object|null) => void)} resolver for the open dialog */
+  _resolve: null,
+  _index: -1,
+};
+
+function personModalEls() {
+  return {
+    overlay: document.getElementById('personModal'),
+    title: document.getElementById('personModalTitle'),
+    username: document.getElementById('personUsernameInput'),
+    name: document.getElementById('personNameInput'),
+    role: document.getElementById('personRoleSelect'),
+    error: document.getElementById('personModalError'),
+    save: document.getElementById('personModalSave'),
+    cancel: document.getElementById('personModalCancel'),
+    close: document.getElementById('personModalClose'),
+  };
+}
+
+function closePersonModal(result) {
+  const { overlay } = personModalEls();
+  overlay?.classList.add('hidden');
+  overlay?.setAttribute('aria-hidden', 'true');
+  const resolve = personModal._resolve;
+  personModal._resolve = null;
+  personModal._index = -1;
+  if (resolve) resolve(result ?? null);
+}
+
+/**
+ * Open the dialog. Resolves with the person, or null if dismissed.
+ * @param {object|null} existing
+ * @returns {Promise<object|null>}
+ */
+function openPersonModal(existing) {
+  const el = personModalEls();
+  if (!el.overlay) return Promise.resolve(null);
+  el.title.textContent = existing ? 'Edit person' : 'Add person';
+  el.username.value = existing?.username || '';
+  el.name.value = existing?.name || '';
+  el.role.value = existing?.role || 'organiser';
+  el.error.classList.add('hidden');
+  el.overlay.classList.remove('hidden');
+  el.overlay.setAttribute('aria-hidden', 'false');
+  el.username.focus();
+  return new Promise((resolve) => {
+    personModal._resolve = resolve;
+  });
+}
+
+/** Read the form, or return null and show why. */
+function readPersonForm() {
+  const el = personModalEls();
+  // Accept a pasted profile URL as well as a bare slug — the URL is what is on
+  // the clipboard when you are looking at someone's profile.
+  const username = el.username.value
+    .trim()
+    .replace(/^.*\/u\//, '')
+    .replace(/[/?#].*$/, '');
+  if (!username) {
+    el.error.textContent = 'A username is required — it is how the person is identified.';
+    el.error.classList.remove('hidden');
+    el.username.focus();
+    return null;
+  }
+  const role = el.role.value;
+  if (!CREDIT_ROLES.includes(role)) {
+    el.error.textContent = `Role must be one of: ${CREDIT_ROLES.join(', ')}`;
+    el.error.classList.remove('hidden');
+    return null;
+  }
+  const name = el.name.value.trim();
+  const person = { username, role };
+  if (name && name !== username) person.name = name;
+  return person;
+}
+
+function wirePersonModal() {
+  const el = personModalEls();
+  if (!el.overlay) return;
+  el.close?.addEventListener('click', () => closePersonModal(null));
+  el.cancel?.addEventListener('click', () => closePersonModal(null));
+  el.overlay.addEventListener('click', (e) => {
+    if (e.target === el.overlay) closePersonModal(null);
+  });
+  el.overlay.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closePersonModal(null);
+    if (e.key === 'Enter' && e.target !== el.role) {
+      e.preventDefault();
+      const person = readPersonForm();
+      if (person) closePersonModal(person);
+    }
+  });
+  el.save?.addEventListener('click', () => {
+    const person = readPersonForm();
+    if (person) closePersonModal(person);
+  });
+}
+
+function wirePeopleTab() {
+  els.communityUrlInput?.addEventListener('input', () => {
+    ensureCommunity().url = els.communityUrlInput.value.trim();
+    pruneCommunity();
+    markDirty(true);
+  });
+  els.communityCapturedInput?.addEventListener('input', () => {
+    const v = els.communityCapturedInput.value;
+    const c = ensureCommunity();
+    if (v) c.capturedAt = v;
+    else delete c.capturedAt;
+    pruneCommunity();
+    markDirty(true);
+  });
+
+  els.addPersonBtn?.addEventListener('click', async () => {
+    if (!state.dataset) return;
+    const person = await openPersonModal(null);
+    if (!person) return;
+    undoPush();
+    ensureCommunity().people.push(person);
+    markDirty(true);
+    renderPeopleTab();
+  });
+
+  // Delegated: the rows are rebuilt on every render.
+  els.peopleGroups?.addEventListener('click', async (e) => {
+    const editBtn = e.target.closest('[data-person-edit]');
+    const removeBtn = e.target.closest('[data-person-remove]');
+    if (!editBtn && !removeBtn) return;
+    const people = state.dataset?.event?.community?.people;
+    if (!Array.isArray(people)) return;
+    const index = Number(
+      (editBtn || removeBtn).getAttribute(editBtn ? 'data-person-edit' : 'data-person-remove'),
+    );
+    const current = people[index];
+    if (!current) return;
+
+    if (removeBtn) {
+      if (!window.confirm(`Remove ${current.name || current.username} from the credits?`)) return;
+      undoPush();
+      people.splice(index, 1);
+      pruneCommunity();
+    } else {
+      const updated = await openPersonModal(current);
+      if (!updated) return;
+      undoPush();
+      people[index] = updated;
+    }
+    markDirty(true);
+    renderPeopleTab();
+  });
+}
+
+function renderEditorCrumbs() {
+  const nav = document.getElementById('editorCrumbs');
+  if (!nav) return;
+  // The dataset's own name if it has one, else the file it came from.
+  const ev = state.dataset?.event || {};
+  const name = state.dataset
+    ? [ev.designation, ev.location, ev.year].filter(Boolean).join(' ').trim() || state.file || ''
+    : '';
+  const tab = state.activeEditorTab;
+  // The dataset crumb goes back to that dataset's first workspace, not to a bare
+  // editor — clicking the record you are editing should not close it. Only when
+  // this app is being SERVED, though: opened as plain files there is no /editor
+  // path to link to, and ./editor.html is still the way home.
+  const served = typeof location !== 'undefined' && location.pathname.startsWith('/editor');
+  const datasetHref = served ? editorPath(state.file, 'event', EDITOR_TABS) : './editor.html';
+  const trail = [{ label: 'Home', href: './home.html' }];
+  trail.push(name ? { label: 'Editor', href: './editor.html' } : { label: 'Editor' });
+  if (name) {
+    const showTab = tab && tab !== 'event';
+    trail.push(showTab ? { label: name, href: datasetHref } : { label: name });
+    if (showTab) trail.push({ label: EDITOR_TAB_LABELS[tab] || tab });
+  }
+  nav.innerHTML = trail
+    .map((c, i) =>
+      i === trail.length - 1
+        ? `<span aria-current="page">${escapeHtml(c.label)}</span>`
+        : `<a href="${escapeHtml(c.href)}">${escapeHtml(c.label)}</a>`,
+    )
+    .join('<span class="app-crumbs__sep" aria-hidden="true">&rarr;</span>');
+}
+
 function setActiveEditorTab(tab) {
-  const nextTab = ['event', 'logo', 'flickr', 'sessions', 'timeline', 'sponsors', 'sitemap', 'appearance'].includes(tab) ? tab : 'event';
+  const nextTab = EDITOR_TABS.includes(tab) ? tab : 'event';
   state.activeEditorTab = nextTab;
+  writeEditorUrl(nextTab);
+
+  renderEditorCrumbs();
 
   const inSessionsArea = nextTab === 'sessions' || nextTab === 'timeline';
 
@@ -3507,6 +4318,8 @@ function setActiveEditorTab(tab) {
   els.flickrWorkspacePanel?.classList.toggle('hidden', nextTab !== 'flickr');
   els.sessionWorkspacePanel?.classList.toggle('hidden', !inSessionsArea);
   els.sponsorWorkspacePanel?.classList.toggle('hidden', nextTab !== 'sponsors');
+  els.peopleWorkspacePanel?.classList.toggle('hidden', nextTab !== 'people');
+  els.relatedWorkspacePanel?.classList.toggle('hidden', nextTab !== 'related');
   els.sitemapWorkspacePanel?.classList.toggle('hidden', nextTab !== 'sitemap');
   els.appearanceWorkspacePanel?.classList.toggle('hidden', nextTab !== 'appearance');
 
@@ -3520,6 +4333,8 @@ function setActiveEditorTab(tab) {
     logo: els.showLogoTab,
     flickr: els.showFlickrTab,
     sponsors: els.showSponsorsTab,
+    people: els.showPeopleTab,
+    related: els.showRelatedTab,
     sitemap: els.showSitemapTab,
     appearance: els.showAppearanceTab,
   };
@@ -3550,7 +4365,14 @@ function setActiveEditorTab(tab) {
   document.dispatchEvent(new CustomEvent('editor-tab-changed'));
 
   // Side-effects on activation
-  if (nextTab === 'sitemap') { renderOtherUrlsEditor(); renderSitemap(); }
+  if (nextTab === 'sitemap') {
+    renderOtherUrlsEditor();
+    renderSitemap();
+  }
+  if (nextTab === 'related') renderRelatedList();
+  if (nextTab === 'sponsors' && els.sponsorLogosDisabledToggle) {
+    els.sponsorLogosDisabledToggle.checked = state.dataset?.event?.sponsorLogosDisabled === true;
+  }
   if (nextTab === 'appearance') renderAppearanceForm();
   if (nextTab === 'timeline' && state.dataset && els.timelineCanvas) {
     renderTimeline(els.timelineCanvas, state.dataset, {
@@ -3565,7 +4387,7 @@ function setActiveEditorTab(tab) {
 }
 
 function switchEditorTab(tab) {
-  const nextTab = ['event', 'logo', 'flickr', 'sessions', 'timeline', 'sponsors', 'sitemap', 'appearance'].includes(tab) ? tab : 'event';
+  const nextTab = EDITOR_TABS.includes(tab) ? tab : 'event';
   if (nextTab === state.activeEditorTab) return;
   setActiveEditorTab(nextTab);
 }
@@ -3608,12 +4430,6 @@ function selectSponsorForm(index, options = {}) {
   return true;
 }
 
-function getSessionLabel(item, index) {
-  const title = item?.title ? String(item.title) : '(Untitled session)';
-  const when = item?.startTime ? formatSessionTimeForList(item.startTime) : '';
-  return `${index + 1}. ${title}${when ? ` - ${when}` : ''}`;
-}
-
 function getSessionTimingSummary(item) {
   const start = item?.startTime ? formatSessionTimeForList(item.startTime) : '';
   const end = item?.endTime ? formatSessionTimeForList(item.endTime) : '';
@@ -3625,1352 +4441,132 @@ function formatDateHeading(dateKey) {
   const utcNoon = localInputToUtcIso(dateKey + 'T12:00', getEventTimezone());
   if (!utcNoon) return dateKey;
   return new Intl.DateTimeFormat('en', {
-    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
-    timeZone: getEventTimezone()
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: getEventTimezone(),
   }).format(new Date(utcNoon));
 }
 
 function scrollToSessionRow(index) {
-  els.sessionList.querySelector(`[data-session-index="${index}"]`)?.scrollIntoView({ block: 'nearest' });
+  els.sessionList
+    .querySelector(`[data-session-index="${index}"]`)
+    ?.scrollIntoView({ block: 'nearest' });
 }
 
 function scrollToSponsorRow(index) {
-  els.sponsorList.querySelector(`[data-sponsor-index="${index}"]`)?.scrollIntoView({ block: 'nearest' });
-}
-
-function renderSessionList() {
-  const items = state.dataset?.items || [];
-  if (items.length === 0) {
-    els.sessionList.innerHTML = '<li class="text-sm text-gray-400 px-3 py-2 border border-dashed border-gray-700 rounded-md">No sessions yet.</li>';
-    return;
-  }
-
-  const query = String(state.sessionSearchQuery || '').trim().toLowerCase();
-  const visibleItems = query
-    ? items
-      .map((item, index) => ({ item, index }))
-      .filter(({ item }) => String(item?.title || '').toLowerCase().includes(query))
-    : items.map((item, index) => ({ item, index }));
-
-  if (visibleItems.length === 0) {
-    els.sessionList.innerHTML = '<li class="text-sm text-gray-400 px-3 py-2 border border-dashed border-gray-700 rounded-md">No sessions match this search.</li>';
-    return;
-  }
-
-  const groups = new Map();
-  for (const entry of visibleItems) {
-    const local = utcIsoToLocalInput(entry.item?.startTime, getEventTimezone());
-    const dateKey = local ? local.slice(0, 10) : '';
-    if (!groups.has(dateKey)) groups.set(dateKey, []);
-    groups.get(dateKey).push(entry);
-  }
-
-  const sortedKeys = [...groups.keys()].sort((a, b) => {
-    if (!a) return 1;
-    if (!b) return -1;
-    return a.localeCompare(b);
-  });
-
-  els.sessionList.innerHTML = sortedKeys.map((dateKey) => {
-    const label = dateKey ? formatDateHeading(dateKey) : 'Unscheduled';
-    const header = `<li class="session-date-header px-2 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wide border-b border-white mt-2 first:mt-0">${escapeHtml(label)}</li>`;
-    const rows = groups.get(dateKey).map(({ item: rowItem, index: rowIndex }) => {
-      const active = rowIndex === state.selectedIndex ? 'border-blue-400 bg-blue-500/20' : 'border-gray-700 bg-gray-900/30';
-      if (isQuickSessionEditEnabled()) {
-        const startValue = utcIsoToLocalInput(rowItem?.startTime, getEventTimezone());
-        const endValue = utcIsoToLocalInput(rowItem?.endTime, getEventTimezone());
-        return `
-          <li draggable="true" data-session-index="${rowIndex}" class="session-row session-row-expanded cursor-move px-3 py-3 border rounded-md ${active}">
-            <div class="session-row-expanded-grid">
-              <div class="session-row-handle text-gray-500">
-                <i class="fas fa-grip-vertical"></i>
-              </div>
-              <div class="min-w-0">
-                <label class="session-inline-field">
-                  <span class="session-inline-label">Title</span>
-                  <input
-                    data-inline-session-field="title"
-                    data-session-index="${rowIndex}"
-                    type="text"
-                    value="${escapeAttr(toStringValue(rowItem?.title))}"
-                    class="w-full h-10 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"
-                  >
-                </label>
-              </div>
-              <div>
-                <label class="session-inline-field">
-                  <span class="session-inline-label">Start time</span>
-                  <input
-                    data-inline-session-field="startTime"
-                    data-session-index="${rowIndex}"
-                    type="datetime-local"
-                    value="${escapeAttr(startValue)}"
-                    class="w-full h-10 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"
-                  >
-                </label>
-              </div>
-              <div>
-                <label class="session-inline-field">
-                  <span class="session-inline-label">End time</span>
-                  <input
-                    data-inline-session-field="endTime"
-                    data-session-index="${rowIndex}"
-                    type="datetime-local"
-                    value="${escapeAttr(endValue)}"
-                    class="w-full h-10 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"
-                  >
-                </label>
-              </div>
-              <div class="flex items-center gap-1 shrink-0">
-                <button
-                  type="button"
-                  data-open-session-form="${rowIndex}"
-                  class="editor-inline-open h-10 inline-flex items-center justify-center px-3 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap"
-                >
-                  <i class="fas fa-up-right-from-square mr-1.5 text-[0.72rem]"></i><span>Open</span>
-                </button>
-                <button type="button" data-duplicate-session="${rowIndex}" title="Duplicate session"
-                  class="h-10 inline-flex items-center justify-center px-3 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
-                  <i class="fas fa-copy mr-1.5 text-[0.72rem]"></i><span>Duplicate</span>
-                </button>
-                ${state.sessionListExpanded ? `
-                <button type="button" data-move-top="${rowIndex}" title="Send to top"
-                  class="h-10 inline-flex items-center justify-center px-2 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">↑↑</button>
-                <button type="button" data-move-bottom="${rowIndex}" title="Send to bottom"
-                  class="h-10 inline-flex items-center justify-center px-2 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">↓↓</button>
-                <button type="button" data-move-to="${rowIndex}" title="Send to position…"
-                  class="h-10 inline-flex items-center justify-center px-2 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">#</button>
-                ` : ''}
-              </div>
-            </div>
-          </li>
-        `;
-      }
-      return `
-        <li draggable="true" data-session-index="${rowIndex}" class="session-row cursor-move select-none px-3 py-2 border rounded-md ${active}">
-          <div class="flex items-start justify-between gap-2">
-            <div class="min-w-0">
-              <div class="text-sm font-medium text-gray-100 truncate">${escapeHtml(`${rowIndex + 1}. ${rowItem?.title ? String(rowItem.title) : '(Untitled session)'}`)}</div>
-              <div class="text-xs text-gray-400 truncate">${escapeHtml([getSessionTimingSummary(rowItem), rowItem?.location || ''].filter(Boolean).join(' | '))}</div>
-            </div>
-            <div class="flex items-center gap-0.5 shrink-0">
-              <button type="button" data-duplicate-session="${rowIndex}" title="Duplicate session"
-                class="text-xs px-1 py-0.5 rounded text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 bg-gray-900/50">
-                <i class="fas fa-copy"></i>
-              </button>
-              ${state.sessionListExpanded ? `
-              <button type="button" data-move-top="${rowIndex}" title="Send to top"
-                class="text-xs px-1 py-0.5 rounded text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 bg-gray-900/50">↑↑</button>
-              <button type="button" data-move-bottom="${rowIndex}" title="Send to bottom"
-                class="text-xs px-1 py-0.5 rounded text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 bg-gray-900/50">↓↓</button>
-              <button type="button" data-move-to="${rowIndex}" title="Send to position…"
-                class="text-xs px-1 py-0.5 rounded text-gray-400 hover:text-white border border-gray-700 hover:border-gray-500 bg-gray-900/50">#</button>
-              ` : ''}
-              <i class="fas fa-grip-vertical text-gray-500 ml-1"></i>
-            </div>
-          </div>
-        </li>
-      `;
-    }).join('');
-    return header + rows;
-  }).join('');
-
-  function moveSessionTo(from, to) {
-    const items = state.dataset.items;
-    const clampedTo = Math.max(0, Math.min(to, items.length - 1));
-    if (from === clampedTo) return;
-    undoPush();
-    const moved = items.splice(from, 1)[0];
-    items.splice(clampedTo, 0, moved);
-    moveTrackedIndex(state.quickEditSessionChanges, from, clampedTo);
-    state.selectedIndex = clampedTo;
-    markDirty(true);
-    trackQuickSessionChange(clampedTo, true);
-    renderSessionList();
-    renderSessionForm();
-  }
-
-  els.sessionList.querySelectorAll('.session-row').forEach((row) => {
-    const index = Number.parseInt(row.dataset.sessionIndex || '-1', 10);
-
-    row.addEventListener('click', async () => {
-      if (index === state.selectedIndex) return;
-      selectSessionForm(index, { collapseWorkspace: state.sessionListExpanded });
-    });
-
-    row.addEventListener('dragstart', (event) => {
-      state.draggingIndex = index;
-      row.classList.add('opacity-50');
-      event.dataTransfer.effectAllowed = 'move';
-    });
-
-    row.addEventListener('dragend', () => {
-      state.draggingIndex = -1;
-      row.classList.remove('opacity-50');
-      els.sessionList.querySelectorAll('.session-row').forEach((r) => r.classList.remove('ring-2', 'ring-blue-400'));
-    });
-
-    row.addEventListener('dragover', (event) => {
-      event.preventDefault();
-      row.classList.add('ring-2', 'ring-blue-400');
-    });
-
-    row.addEventListener('dragleave', () => {
-      row.classList.remove('ring-2', 'ring-blue-400');
-    });
-
-    row.addEventListener('drop', (event) => {
-      event.preventDefault();
-      row.classList.remove('ring-2', 'ring-blue-400');
-      const from = state.draggingIndex;
-      const to = index;
-      if (from < 0 || to < 0 || from === to) return;
-      undoPush();
-      const moved = state.dataset.items.splice(from, 1)[0];
-      state.dataset.items.splice(to, 0, moved);
-      moveTrackedIndex(state.quickEditSessionChanges, from, to);
-      state.selectedIndex = to;
-      markDirty(true);
-      trackQuickSessionChange(to, true);
-      renderSessionList();
-      renderSessionForm();
-    });
-
-    row.querySelector('[data-move-top]')?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      moveSessionTo(index, 0);
-    });
-
-    row.querySelector('[data-move-bottom]')?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      moveSessionTo(index, state.dataset.items.length - 1);
-    });
-
-    row.querySelector('[data-move-to]')?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const total = state.dataset.items.length;
-      const input = prompt(`Move to position (1–${total}):`, String(index + 1));
-      if (input === null) return;
-      const n = parseInt(input, 10);
-      if (!isNaN(n)) moveSessionTo(index, n - 1);
-    });
-
-    row.querySelector('[data-duplicate-session]')?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      duplicateSession(index);
-    });
-  });
-
-  const syncExpandedSelectionState = () => {
-    els.sessionList.querySelectorAll('.session-row').forEach((row) => {
-      const rowIndex = Number.parseInt(row.dataset.sessionIndex || '-1', 10);
-      const isActive = rowIndex === state.selectedIndex;
-      row.classList.toggle('border-blue-400', isActive);
-      row.classList.toggle('bg-blue-500/20', isActive);
-      row.classList.toggle('border-gray-700', !isActive);
-      row.classList.toggle('bg-gray-900/30', !isActive);
-    });
-  };
-
-  els.sessionList.querySelectorAll('[data-inline-session-field]').forEach((input) => {
-    const rowIndex = Number.parseInt(input.dataset.sessionIndex || '-1', 10);
-    const key = input.dataset.inlineSessionField;
-
-    const selectRow = () => {
-      if (rowIndex === state.selectedIndex) return;
-      selectSessionForm(rowIndex);
-      syncExpandedSelectionState();
-    };
-
-    input.addEventListener('click', (event) => {
-      event.stopPropagation();
-    });
-
-    input.addEventListener('pointerdown', (event) => {
-      event.stopPropagation();
-    });
-
-    input.addEventListener('focus', async (event) => {
-      event.stopPropagation();
-      if (isQuickSessionEditEnabled()) {
-        undoPush();
-        return;
-      }
-      await selectRow();
-    });
-
-    input.addEventListener('input', (event) => {
-      event.stopPropagation();
-      const item = state.dataset?.items?.[rowIndex];
-      if (!item) return;
-      const raw = input.value;
-
-      if (key === 'startTime' || key === 'endTime') {
-        item[key] = localInputToUtcIso(raw, getEventTimezone());
-      } else {
-        item[key] = raw;
-      }
-
-      markDirty(true);
-      trackQuickSessionChange(rowIndex);
-
-      if (rowIndex === state.selectedIndex) {
-        renderSessionForm();
-      }
-    });
-
-    input.addEventListener('change', (event) => {
-      event.stopPropagation();
-      if (key === 'startTime' || key === 'endTime') {
-        renderSessionList();
-      }
-    });
-  });
-
-  els.sessionList.querySelectorAll('[data-open-session-form]').forEach((button) => {
-    button.addEventListener('click', async (event) => {
-      event.stopPropagation();
-      const rowIndex = Number.parseInt(button.dataset.openSessionForm || '-1', 10);
-      if (rowIndex < 0) return;
-      selectSessionForm(rowIndex, { collapseWorkspace: true });
-    });
-  });
-}
-
-function renderSessionField(field, item) {
-  const spanClass = field.span === 2 ? 'md:col-span-2' : '';
-  const describedBy = fieldDescriptionAttr('session', field.key, field);
-
-  if (field.key === 'sponsorIds') {
-    const linkedIds = parseMultiValue(item[field.key] || '');
-    const sponsors = state.dataset?.event?.sponsors || [];
-    const linkedSponsors = linkedIds.map((id) => sponsors.find((s) => s.id === id)).filter(Boolean);
-    const linkedHtml = linkedSponsors.length
-      ? `<div class="space-y-2">${linkedSponsors.map((sponsor) => `
-          <div class="editor-linked-item">
-            <div class="editor-linked-item-copy">
-              <div class="editor-linked-item-title">${escapeHtml(sponsor.title || sponsor.id)}</div>
-              <div class="editor-linked-item-meta">${escapeHtml(sponsor.id)}</div>
-            </div>
-            <button type="button" class="editor-linked-item-action" data-remove-session-sponsor="${escapeAttr(sponsor.id)}" aria-label="Remove ${escapeAttr(sponsor.title || sponsor.id)}">
-              <i class="fas fa-trash"></i><span>Remove</span>
-            </button>
-          </div>
-        `).join('')}</div>`
-      : '';
-    return `
-      <div class="${spanClass}">
-        <div class="rounded-md border border-gray-700 bg-gray-900/30 px-3 py-3 text-sm text-gray-200 space-y-3">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <span class="text-xs text-gray-400">${linkedSponsors.length ? `${linkedSponsors.length} linked sponsor${linkedSponsors.length === 1 ? '' : 's'}` : 'No sponsors linked yet.'}</span>
-            <button id="addLinkedSessionSponsor" type="button" class="h-9 inline-flex items-center justify-center px-3 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
-              <i class="fas fa-plus mr-1.5 text-[0.72rem]"></i>Add sponsor
-            </button>
-          </div>
-          ${linkedHtml}
-        </div>
-        ${field.description ? `<span id="${escapeAttr(fieldDescriptionId('session', field.key))}" class="editor-field-description">${escapeHtml(field.description)}</span>` : ''}
-      </div>
-    `;
-  }
-
-  if (field.type === 'textarea') {
-    const value = toStringValue(item[field.key]);
-    const markdownPreview =
-      field.key === 'full_description'
-        ? `<div class="mt-2 p-3 rounded-md border border-gray-700 bg-gray-900/30">
-            <div class="text-xs font-semibold text-gray-400 mb-2">Markdown Preview</div>
-            <div data-md-preview="full_description" class="session-description-preview text-sm text-gray-200">${markdownToHtml(value)}</div>
-          </div>`
-        : '';
-    return `
-      <label class="editor-form-field ${spanClass}">
-        ${renderFieldIntro('session', field.key, field)}
-          <textarea data-session-field="${field.key}" rows="${field.key.includes('description') ? 7 : 3}" class="w-full rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3 py-2"${describedBy}>${escapeHtml(
-          value
-        )}</textarea>
-        ${markdownPreview}
-      </label>
-    `;
-  }
-
-  if (field.type === 'datetime-local') {
-    const localValue = utcIsoToLocalInput(item[field.key], getEventTimezone());
-    const tzHint = field.key === 'startTime'
-      ? `<span class="editor-tz-note"><i class="fas fa-clock mr-1"></i>Times are shown in <strong>${escapeHtml(getEventTimezone())}</strong></span>`
-      : '';
-    return `
-      <label class="editor-form-field ${spanClass}">
-        ${renderFieldIntro('session', field.key, field)}
-        ${tzHint}
-        <input data-session-field="${field.key}" type="datetime-local" value="${escapeAttr(localValue)}" class="w-full h-11 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"${describedBy}>
-      </label>
-    `;
-  }
-
-  const value = field.key === 'duration' ? durationToEditorValue(syncSessionDuration(item)) : toStringValue(item[field.key]);
-  if (field.key === 'duration') {
-    return `
-      <label class="editor-form-field ${spanClass}">
-        ${renderFieldIntro('session', field.key, field)}
-        <input data-session-derived-field="${field.key}" type="text" value="${escapeAttr(value)}" class="w-full h-11 rounded-md border-gray-300 shadow-sm text-sm bg-gray-100 text-gray-600 px-3 cursor-not-allowed" readonly tabindex="-1"${describedBy}>
-      </label>
-    `;
-  }
-  if (field.key === 'location') {
-    const rooms = [...new Set(
-      (state.dataset?.items || [])
-        .map((s) => String(s.location || '').trim())
-        .filter(Boolean)
-    )].sort();
-    const datalistHtml = rooms.length
-      ? `<datalist id="roomSuggestions">${rooms.map((r) => `<option value="${escapeAttr(r)}">`).join('')}</datalist>`
-      : '';
-    return `
-      <label class="editor-form-field ${spanClass}">
-        ${renderFieldIntro('session', field.key, field)}
-        <input data-session-field="${field.key}" type="text" value="${escapeAttr(value)}"${rooms.length ? ' list="roomSuggestions"' : ''} class="w-full h-11 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"${describedBy}>
-        ${datalistHtml}
-      </label>
-    `;
-  }
-
-  return `
-    <label class="editor-form-field ${spanClass}">
-      ${renderFieldIntro('session', field.key, field)}
-      <input data-session-field="${field.key}" type="text" value="${escapeAttr(value)}" class="w-full h-11 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"${describedBy}>
-    </label>
-  `;
-}
-
-function renderSessionForm() {
-  const item = state.dataset?.items?.[state.selectedIndex] || null;
-  syncSessionEditorPanelVisibility();
-  if (!item) {
-    els.sessionIndexBadge.textContent = 'No session selected';
-    els.sessionForm.innerHTML = '<p class="text-sm text-gray-400">Select a session on the left to edit it.</p>';
-    markSessionDirty(false);
-    syncSessionSaveButton();
-    return;
-  }
-
-  if (isQuickSessionEditEnabled()) {
-    els.sessionIndexBadge.textContent = `Session ${state.selectedIndex + 1} of ${state.dataset.items.length}`;
-    els.sessionForm.innerHTML = `
-      <div class="editor-quick-open-state md:col-span-2">
-        <div class="editor-quick-open-card">
-          <div class="text-sm font-semibold text-gray-100 mb-2">${escapeHtml(item?.title || '(Untitled session)')}</div>
-          <p class="text-sm text-gray-400 mb-4">This row is selected in quick edit. Open it to switch back to the full form.</p>
-          <button type="button" id="openSelectedSessionForm" class="h-10 inline-flex items-center justify-center px-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
-            <i class="fas fa-up-right-from-square mr-2 text-[0.72rem]"></i>Open session
-          </button>
-        </div>
-      </div>
-    `;
-    const openButton = document.getElementById('openSelectedSessionForm');
-    if (openButton) {
-      openButton.addEventListener('click', () => {
-        selectSessionForm(state.selectedIndex, { collapseWorkspace: true });
-      });
-    }
-    markSessionDirty(state.sessionDirty);
-    syncSessionSaveButton();
-    return;
-  }
-
-  els.sessionIndexBadge.textContent = `Session ${state.selectedIndex + 1} of ${state.dataset.items.length}`;
-  syncSessionSaveButton();
-  els.sessionForm.innerHTML = SESSION_FIELDS.map((field) => renderSessionField(field, item)).join('');
-
-  els.sessionForm.querySelectorAll('[data-session-field]').forEach((input) => {
-    input.addEventListener('focus', undoPush);
-    input.addEventListener('input', () => {
-      const key = input.dataset.sessionField;
-      const raw = input.value;
-
-      if (key === 'track' || key === 'speakers') {
-        const values = parseMultiValue(raw);
-        item[key] = values.length <= 1 ? (values[0] || '') : values;
-      } else if (key === 'startTime' || key === 'endTime') {
-        const utcIso = localInputToUtcIso(raw, getEventTimezone());
-        item[key] = utcIso;
-        syncSessionDuration(item);
-        const durationField = els.sessionForm.querySelector('[data-session-derived-field="duration"]');
-        if (durationField) durationField.value = durationToEditorValue(item.duration);
-      } else {
-        item[key] = raw;
-        if (key === 'full_description') {
-          const markdownPreview = els.sessionForm.querySelector('[data-md-preview="full_description"]');
-          if (markdownPreview) markdownPreview.innerHTML = markdownToHtml(raw);
-        }
-      }
-
-      markDirty(true);
-      markSessionDirty(true);
-      trackQuickSessionChange(state.selectedIndex);
-      renderSessionList();
-    });
-  });
-
-  const addLinkedSponsorButton = els.sessionForm.querySelector('#addLinkedSessionSponsor');
-  if (addLinkedSponsorButton) {
-    addLinkedSponsorButton.addEventListener('click', () => openSessionSponsorPicker());
-  }
-
-  els.sessionForm.querySelectorAll('[data-remove-session-sponsor]').forEach((button) => {
-    button.addEventListener('click', () => {
-      removeSponsorFromSession(button.dataset.removeSessionSponsor);
-    });
-  });
-}
-
-async function addSession() {
-  if (!state.dataset) return;
-  undoPush();
-  const seed = state.dataset.items[state.selectedIndex] || {};
-  const newItem = {
-    title: 'New session',
-    startTime: seed.startTime || '',
-    endTime: seed.endTime || '',
-    location: seed.location || '',
-    duration: '',
-    track: seed.track || [],
-    speakers: [],
-    full_description: '',
-    sponsorIds: '',
-    link: '',
-    video_url: ''
-  };
-  syncSessionDuration(newItem);
-
-  const insertAt = state.selectedIndex >= 0 ? state.selectedIndex + 1 : state.dataset.items.length;
-  state.dataset.items.splice(insertAt, 0, newItem);
-  state.selectedIndex = insertAt;
-  markDirty(true);
-  trackQuickSessionChange(state.selectedIndex, true);
-  renderSessionList();
-  scrollToSessionRow(state.selectedIndex);
-  renderSessionForm();
-  renderSponsorForm();
-  syncSessionSaveButton();
-  els.deleteSession.disabled = false;
-  await saveDataset();
-}
-
-function getSponsorListLabel(sponsor, index) {
-  const title = String(sponsor?.title || '').trim() || '(Untitled sponsor)';
-  const row = Number.isFinite(Number(sponsor?.row)) ? `Row ${Number(sponsor.row)}` : '';
-  const tier = String(sponsor?.tier || '').trim();
-  return `${index + 1}. ${title}${tier || row ? ` - ${[tier, row].filter(Boolean).join(' / ')}` : ''}`;
-}
-
-function renderSponsorList() {
-  const sponsors = state.dataset?.event?.sponsors || [];
-  if (!sponsors.length) {
-    els.sponsorList.innerHTML = '<li class="text-sm text-gray-400 px-3 py-2 border border-dashed border-gray-700 rounded-md">No sponsors yet.</li>';
-    return;
-  }
-
-  els.sponsorList.innerHTML = sponsors
-    .map((sponsor, index) => {
-      const active = index === state.selectedSponsorIndex ? 'border-blue-400 bg-blue-500/20' : 'border-gray-700 bg-gray-900/30';
-      if (isQuickSponsorEditEnabled()) {
-        return `
-          <li draggable="true" data-sponsor-index="${index}" class="sponsor-row session-row-expanded cursor-move px-3 py-3 border rounded-md ${active}">
-            <div class="sponsor-row-grid">
-              <div class="session-row-handle text-gray-500">
-                <i class="fas fa-grip-vertical"></i>
-              </div>
-              <div class="min-w-0">
-                <label class="session-inline-field">
-                  <span class="session-inline-label">Title</span>
-                  <input
-                    data-inline-sponsor-field="title"
-                    data-sponsor-index="${index}"
-                    type="text"
-                    value="${escapeAttr(toStringValue(sponsor?.title))}"
-                    class="w-full h-10 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"
-                  >
-                </label>
-              </div>
-              <div>
-                <label class="session-inline-field">
-                  <span class="session-inline-label">Tier</span>
-                  <input
-                    data-inline-sponsor-field="tier"
-                    data-sponsor-index="${index}"
-                    type="text"
-                    value="${escapeAttr(toStringValue(sponsor?.tier))}"
-                    class="w-full h-10 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"
-                  >
-                </label>
-              </div>
-              <div>
-                <label class="session-inline-field">
-                  <span class="session-inline-label">Row</span>
-                  <input
-                    data-inline-sponsor-field="row"
-                    data-sponsor-index="${index}"
-                    type="number"
-                    min="1"
-                    step="1"
-                    value="${escapeAttr(toStringValue(sponsor?.row))}"
-                    class="w-full h-10 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"
-                  >
-                </label>
-              </div>
-              <div>
-                <label class="session-inline-field">
-                  <span class="session-inline-label">Priority</span>
-                  <input
-                    data-inline-sponsor-field="priority"
-                    data-sponsor-index="${index}"
-                    type="number"
-                    value="${escapeAttr(toStringValue(sponsor?.priority))}"
-                    class="w-full h-10 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"
-                  >
-                </label>
-              </div>
-              <button
-                type="button"
-                data-open-sponsor-form="${index}"
-                class="editor-inline-open h-10 inline-flex items-center justify-center px-3 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap"
-              >
-                <i class="fas fa-up-right-from-square mr-1.5 text-[0.72rem]"></i><span>Open</span>
-              </button>
-            </div>
-          </li>
-        `;
-      }
-      return `
-        <li draggable="true" data-sponsor-index="${index}" class="sponsor-row cursor-move select-none px-3 py-2 border rounded-md ${active}">
-          <div class="flex items-start justify-between gap-2">
-            <div class="min-w-0">
-              <div class="text-sm font-medium text-gray-100 truncate">${escapeHtml(getSponsorListLabel(sponsor, index))}</div>
-              <div class="text-xs text-gray-400 truncate">${escapeHtml([sponsor?.id || '', sponsor?.link || ''].filter(Boolean).join(' | '))}</div>
-            </div>
-            <i class="fas fa-grip-vertical text-gray-500 mt-1"></i>
-          </div>
-        </li>
-      `;
-    })
-    .join('');
-
-  els.sponsorList.querySelectorAll('.sponsor-row').forEach((row) => {
-    const index = Number.parseInt(row.dataset.sponsorIndex || '-1', 10);
-
-    row.addEventListener('click', async () => {
-      if (index === state.selectedSponsorIndex) return;
-      selectSponsorForm(index, { collapseWorkspace: state.sponsorListExpanded });
-    });
-
-    row.addEventListener('dragstart', (event) => {
-      state.draggingSponsorIndex = index;
-      row.classList.add('opacity-50');
-      event.dataTransfer.effectAllowed = 'move';
-    });
-
-    row.addEventListener('dragend', () => {
-      state.draggingSponsorIndex = -1;
-      row.classList.remove('opacity-50');
-      els.sponsorList.querySelectorAll('.sponsor-row').forEach((r) => r.classList.remove('ring-2', 'ring-blue-400'));
-    });
-
-    row.addEventListener('dragover', (event) => {
-      event.preventDefault();
-      row.classList.add('ring-2', 'ring-blue-400');
-    });
-
-    row.addEventListener('dragleave', () => {
-      row.classList.remove('ring-2', 'ring-blue-400');
-    });
-
-    row.addEventListener('drop', (event) => {
-      event.preventDefault();
-      row.classList.remove('ring-2', 'ring-blue-400');
-      const from = state.draggingSponsorIndex;
-      const to = index;
-      if (from < 0 || to < 0 || from === to) return;
-
-      const moved = state.dataset.event.sponsors.splice(from, 1)[0];
-      state.dataset.event.sponsors.splice(to, 0, moved);
-      moveTrackedIndex(state.quickEditSponsorChanges, from, to);
-      state.selectedSponsorIndex = to;
-      markDirty(true);
-      trackQuickSponsorChange(to, true);
-      renderSponsorList();
-      renderSponsorForm();
-    });
-  });
-
-  const syncSponsorSelectionState = () => {
-    els.sponsorList.querySelectorAll('.sponsor-row').forEach((row) => {
-      const rowIndex = Number.parseInt(row.dataset.sponsorIndex || '-1', 10);
-      const isActive = rowIndex === state.selectedSponsorIndex;
-      row.classList.toggle('border-blue-400', isActive);
-      row.classList.toggle('bg-blue-500/20', isActive);
-      row.classList.toggle('border-gray-700', !isActive);
-      row.classList.toggle('bg-gray-900/30', !isActive);
-    });
-  };
-
-  els.sponsorList.querySelectorAll('[data-inline-sponsor-field]').forEach((input) => {
-    const rowIndex = Number.parseInt(input.dataset.sponsorIndex || '-1', 10);
-    const key = input.dataset.inlineSponsorField;
-
-    const selectRow = () => {
-      if (rowIndex === state.selectedSponsorIndex) return;
-      selectSponsorForm(rowIndex);
-      syncSponsorSelectionState();
-    };
-
-    input.addEventListener('click', (event) => {
-      event.stopPropagation();
-    });
-
-    input.addEventListener('pointerdown', (event) => {
-      event.stopPropagation();
-    });
-
-    input.addEventListener('focus', async (event) => {
-      event.stopPropagation();
-      if (isQuickSponsorEditEnabled()) return;
-      await selectRow();
-    });
-
-    input.addEventListener('input', (event) => {
-      event.stopPropagation();
-      const sponsor = state.dataset?.event?.sponsors?.[rowIndex];
-      if (!sponsor) return;
-      if (key === 'priority') {
-        sponsor[key] = Number.parseInt(input.value || '100', 10) || 100;
-      } else if (key === 'row') {
-        sponsor[key] = Number.parseInt(input.value || '1', 10) || 1;
-      } else {
-        sponsor[key] = input.value;
-      }
-      if (key === 'title' && !String(sponsor.id || '').trim()) {
-        sponsor.id = normalizeSponsorId(input.value);
-      }
-      markDirty(true);
-      trackQuickSponsorChange(rowIndex);
-      if (rowIndex === state.selectedSponsorIndex) {
-        renderSponsorForm();
-      }
-    });
-  });
-
-  els.sponsorList.querySelectorAll('[data-open-sponsor-form]').forEach((button) => {
-    button.addEventListener('click', async (event) => {
-      event.stopPropagation();
-      const rowIndex = Number.parseInt(button.dataset.openSponsorForm || '-1', 10);
-      if (rowIndex < 0) return;
-      selectSponsorForm(rowIndex, { collapseWorkspace: true });
-    });
-  });
-}
-
-function renderSponsorField(field, sponsor) {
-  const spanClass = field.span === 2 ? 'md:col-span-2' : field.span === 3 ? 'md:col-span-2 xl:col-span-3' : '';
-  const describedBy = fieldDescriptionAttr('sponsor', field.key, field);
-
-  if (field.type === 'checkbox') {
-    return `
-      <label class="editor-form-field ${spanClass}">
-        ${renderFieldIntro('sponsor', field.key, field)}
-        <span class="h-11 inline-flex items-center gap-3 rounded-md border border-gray-300 px-3 bg-white">
-          <input data-sponsor-field="${field.key}" type="checkbox" class="h-4 w-4" ${sponsor[field.key] ? 'checked' : ''}${describedBy}>
-          <span class="text-sm text-gray-200">Enabled</span>
-        </span>
-      </label>
-    `;
-  }
-
-  if (field.type === 'select') {
-    const options = field.options
-      .map((option) => `<option value="${escapeAttr(option)}" ${sponsor[field.key] === option ? 'selected' : ''}>${escapeHtml(option)}</option>`)
-      .join('');
-    return `
-      <label class="editor-form-field ${spanClass}">
-        ${renderFieldIntro('sponsor', field.key, field)}
-        <select data-sponsor-field="${field.key}" class="w-full h-11 pr-10 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"${describedBy}>${options}</select>
-      </label>
-    `;
-  }
-
-  const type = field.type === 'number' ? 'number' : 'text';
-  const numericAttrs = field.type === 'number'
-    ? `${field.key === 'row' ? ' min="1" step="1"' : ''}`
-    : '';
-  return `
-    <label class="editor-form-field ${spanClass}">
-      ${renderFieldIntro('sponsor', field.key, field)}
-      <input data-sponsor-field="${field.key}" type="${type}"${numericAttrs} value="${escapeAttr(toStringValue(sponsor[field.key]))}" class="w-full h-11 rounded-md border-gray-300 shadow-sm drupal-blue-focus text-sm bg-white px-3"${describedBy}>
-    </label>
-  `;
-}
-
-function renderSponsorForm() {
-  const sponsor = state.dataset?.event?.sponsors?.[state.selectedSponsorIndex] || null;
-  syncSponsorEditorPanelVisibility();
-  if (!sponsor) {
-    els.sponsorIndexBadge.textContent = 'No sponsor selected';
-    els.sponsorForm.innerHTML = '<p class="text-sm text-gray-400">Select a sponsor row to edit it.</p>';
-    markSponsorDirty(false);
-    syncSponsorSaveButton();
-    els.deleteSponsor.disabled = true;
-    return;
-  }
-
-  if (isQuickSponsorEditEnabled()) {
-    els.sponsorIndexBadge.textContent = `Sponsor ${state.selectedSponsorIndex + 1} of ${state.dataset.event.sponsors.length}`;
-    els.sponsorForm.innerHTML = `
-      <div class="editor-quick-open-state md:col-span-2 xl:col-span-3">
-        <div class="editor-quick-open-card">
-          <div class="text-sm font-semibold text-gray-100 mb-2">${escapeHtml(getSponsorListLabel(sponsor, state.selectedSponsorIndex))}</div>
-          <p class="text-sm text-gray-400 mb-4">This row is selected in quick edit. Open it to switch back to the full sponsor form.</p>
-          <button type="button" id="openSelectedSponsorForm" class="h-10 inline-flex items-center justify-center px-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
-            <i class="fas fa-up-right-from-square mr-2 text-[0.72rem]"></i>Open sponsor
-          </button>
-        </div>
-      </div>
-    `;
-    const openButton = document.getElementById('openSelectedSponsorForm');
-    if (openButton) {
-      openButton.addEventListener('click', async () => {
-        selectSponsorForm(state.selectedSponsorIndex, { collapseWorkspace: true });
-      });
-    }
-    markSponsorDirty(state.sponsorDirty);
-    syncSponsorSaveButton();
-    return;
-  }
-
-  const linkedSessions = (state.dataset?.items || [])
-    .map((item, index) => ({ item, index }))
-    .filter(({ item }) => parseMultiValue(item?.sponsorIds || '').includes(sponsor.id));
-
-  els.sponsorIndexBadge.textContent = `Sponsor ${state.selectedSponsorIndex + 1} of ${state.dataset.event.sponsors.length}`;
-  syncSponsorSaveButton();
-  els.deleteSponsor.disabled = false;
-
-  if (!state.sponsorEventCounts) {
-    const selectedAtLoad = state.selectedSponsorIndex;
-    buildSponsorEventCounts()
-      .catch(() => { state.sponsorEventCounts = new Map(); })
-      .then(() => { if (state.selectedSponsorIndex === selectedAtLoad) renderSponsorForm(); });
-  }
-
-  const imageSrc = (sponsor.image || '').trim();
-  const bgStyle = sponsor.bgStyle || 'auto';
-  const aspect = sponsor.aspect || 'auto';
-  const eventCount = getSponsorEventCount(sponsor.title);
-  const eventCountDisplay = eventCount === null ? '—' : String(eventCount);
-
-  els.sponsorForm.innerHTML = `
-    <div class="col-span-full flex gap-5 items-start">
-      <div class="flex-1 min-w-0 grid grid-cols-1 md:grid-cols-2 gap-3">
-        ${SPONSOR_FIELDS.filter((f) => f.key !== 'enabled').map((field) => renderSponsorField(field, sponsor)).join('')}
-        <div class="editor-form-field md:col-span-2">
-          <span class="editor-field-label">Sponsor image</span>
-          <span class="editor-field-description">Uploads to <code>img/sponsors/${escapeHtml(
-            slugify(state.dataset?.event?.designation || 'event') || 'event'
-          )}</code> and stores a relative path.</span>
-          <div class="flex items-center gap-2 flex-wrap">
-            <label class="h-9 inline-flex items-center gap-2.5 rounded-md border border-gray-300 px-3 bg-white cursor-pointer select-none">
-              <input data-sponsor-field="enabled" type="checkbox" class="h-4 w-4" ${sponsor.enabled ? 'checked' : ''}>
-              <span class="text-sm text-gray-700">Enabled</span>
-            </label>
-            <button id="sponsorImageUpload" type="button" class="h-9 inline-flex items-center justify-center px-3 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
-              <i class="fas fa-upload mr-1.5 text-[0.72rem]"></i>Upload image
-            </button>
-            <button id="sponsorImageClear" type="button" class="h-9 inline-flex items-center justify-center px-3 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-red-50 hover:border-red-300 hover:text-red-600 transition-colors whitespace-nowrap"${!imageSrc ? ' disabled' : ''}>
-              <i class="fas fa-trash mr-1.5 text-[0.72rem]"></i>Delete image
-            </button>
-            <div id="sponsorInlinePreview" class="sponsor-inline-preview sponsor-bg-${escapeAttr(bgStyle)} sponsor-aspect-${escapeAttr(aspect)} ml-auto">
-              ${imageSrc
-                ? `<img src="${escapeAttr(bustSrc(imageSrc))}" alt="${escapeAttr(sponsor.imageAlt || '')}" class="sponsor-inline-image">`
-                : `<i class="fas fa-image sponsor-preview-empty-icon"></i>`}
-            </div>
-          </div>
-        </div>
-        <div class="editor-form-field md:col-span-2">
-          <span class="editor-field-label">Linked sessions</span>
-          <span class="editor-field-description">Manage sessions currently referencing <code>${escapeHtml(sponsor.id || '(missing id)')}</code>.</span>
-          <div class="rounded-md border border-gray-700 bg-gray-900/30 px-3 py-3 text-sm text-gray-200 space-y-3">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <span class="text-xs text-gray-400">${linkedSessions.length ? `${linkedSessions.length} linked session${linkedSessions.length === 1 ? '' : 's'}` : 'No sessions linked yet.'}</span>
-              <button id="addLinkedSponsorSession" type="button" class="h-9 inline-flex items-center justify-center px-3 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors whitespace-nowrap">
-                <i class="fas fa-plus mr-1.5 text-[0.72rem]"></i>Add session
-              </button>
-            </div>
-            <div class="space-y-2">
-              ${linkedSessions.length
-                ? linkedSessions.map(({ item, index }) => `
-                    <div class="editor-linked-item">
-                      <div class="editor-linked-item-copy">
-                        <div class="editor-linked-item-title">${escapeHtml(item?.title || '(Untitled session)')}</div>
-                        <div class="editor-linked-item-meta">${escapeHtml(formatSponsorLinkedSessionMeta(item, index))}</div>
-                      </div>
-                      <button type="button" class="editor-linked-item-action" data-remove-linked-session="${index}" aria-label="Remove linked session ${escapeAttr(item?.title || '(Untitled session)')}">
-                        <i class="fas fa-trash"></i><span>Remove</span>
-                      </button>
-                    </div>
-                  `).join('')
-                : ''}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <aside class="sponsor-editor-sidebar">
-        <div id="sponsorPreviewSurface" class="sponsor-preview-surface sponsor-bg-${escapeAttr(bgStyle)} sponsor-aspect-${escapeAttr(aspect)}">
-          ${imageSrc
-            ? `<img id="sponsorImagePreview" src="${escapeAttr(bustSrc(imageSrc))}" alt="${escapeAttr(sponsor.imageAlt || '')}" class="sponsor-logo-image">`
-            : `<div id="sponsorImagePreview" class="sponsor-preview-empty">
-                 <i class="fas fa-image text-2xl"></i>
-                 <span>No image set</span>
-               </div>`}
-        </div>
-        <div class="sponsor-event-stat">
-          <i class="fas fa-trophy sponsor-event-stat-icon"></i>
-          <span class="sponsor-event-stat-count">${escapeHtml(eventCountDisplay)}</span>
-          <span class="sponsor-event-stat-label">Events Sponsored</span>
-        </div>
-      </aside>
-    </div>
-  `;
-
-  els.sponsorForm.querySelectorAll('[data-sponsor-field]').forEach((input) => {
-    input.addEventListener('input', () => {
-      const key = input.dataset.sponsorField;
-      if (key === 'enabled') {
-        sponsor[key] = Boolean(input.checked);
-      } else if (key === 'priority') {
-        sponsor[key] = Number.parseInt(input.value || '100', 10) || 100;
-      } else if (key === 'row') {
-        sponsor[key] = Number.parseInt(input.value || '1', 10) || 1;
-      } else if (key === 'id') {
-        const previousId = sponsor.id;
-        sponsor.id = normalizeSponsorId(input.value, sponsor.title);
-        if (previousId && previousId !== sponsor.id) {
-          (state.dataset?.items || []).forEach((item) => {
-            const ids = parseMultiValue(item?.sponsorIds || '');
-            if (!ids.includes(previousId)) return;
-            const nextIds = ids.map((id) => (id === previousId ? sponsor.id : id)).filter(Boolean);
-            item.sponsorIds = nextIds.length <= 1 ? (nextIds[0] || '') : nextIds;
-          });
-          renderSessionForm();
-        }
-      } else if (key === 'title') {
-        sponsor[key] = input.value;
-        const countEl = els.sponsorForm.querySelector('.sponsor-event-stat-count');
-        if (countEl) {
-          const c = getSponsorEventCount(input.value);
-          countEl.textContent = c === null ? '—' : String(c);
-        }
-      } else {
-        sponsor[key] = input.value;
-      }
-      if (key === 'image') {
-        const surface = els.sponsorForm.querySelector('#sponsorPreviewSurface');
-        const inline = els.sponsorForm.querySelector('#sponsorInlinePreview');
-        const newSrc = input.value.trim();
-        if (surface) {
-          surface.innerHTML = newSrc
-            ? `<img id="sponsorImagePreview" src="${escapeAttr(newSrc)}" alt="${escapeAttr(sponsor.imageAlt || '')}" class="sponsor-logo-image">`
-            : `<div id="sponsorImagePreview" class="sponsor-preview-empty"><i class="fas fa-image text-2xl"></i><span>No image set</span></div>`;
-        }
-        if (inline) {
-          inline.innerHTML = newSrc
-            ? `<img src="${escapeAttr(newSrc)}" alt="${escapeAttr(sponsor.imageAlt || '')}" class="sponsor-inline-image">`
-            : `<i class="fas fa-image sponsor-preview-empty-icon"></i>`;
-        }
-        const clearBtn = els.sponsorForm.querySelector('#sponsorImageClear');
-        if (clearBtn) clearBtn.disabled = !newSrc;
-      }
-      if (key === 'imageAlt') {
-        els.sponsorForm.querySelectorAll('#sponsorImagePreview, #sponsorInlinePreview img').forEach((el) => { el.alt = input.value; });
-      }
-      if (key === 'bgStyle') {
-        const val = input.value || 'auto';
-        els.sponsorForm.querySelectorAll('#sponsorPreviewSurface, #sponsorInlinePreview').forEach((el) => {
-          el.className = el.className.replace(/\bsponsor-bg-\S+/g, `sponsor-bg-${val}`);
-        });
-      }
-      if (key === 'aspect') {
-        const val = input.value || 'auto';
-        els.sponsorForm.querySelectorAll('#sponsorPreviewSurface, #sponsorInlinePreview').forEach((el) => {
-          el.className = el.className.replace(/\bsponsor-aspect-\S+/g, `sponsor-aspect-${val}`);
-        });
-      }
-      markDirty(true);
-      markSponsorDirty(true);
-      trackQuickSponsorChange(state.selectedSponsorIndex);
-      renderSponsorList();
-    });
-    input.addEventListener('change', () => {
-      const key = input.dataset.sponsorField;
-      if (key === 'enabled') {
-        sponsor[key] = Boolean(input.checked);
-        markDirty(true);
-        markSponsorDirty(true);
-        trackQuickSponsorChange(state.selectedSponsorIndex);
-        renderSponsorList();
-      }
-    });
-  });
-
-  const uploadButton = els.sponsorForm.querySelector('#sponsorImageUpload');
-  if (uploadButton) {
-    uploadButton.addEventListener('click', async () => {
-      try {
-        await uploadSponsorImageFromPicker(state.selectedSponsorIndex);
-      } catch (error) {
-        window.alert(`Sponsor image upload failed: ${error.message}`);
-      }
-    });
-  }
-
-  const clearButton = els.sponsorForm.querySelector('#sponsorImageClear');
-  if (clearButton) {
-    clearButton.addEventListener('click', () => {
-      sponsor.image = '';
-      sponsor.imageAlt = '';
-      markDirty(true);
-      markSponsorDirty(true);
-      trackQuickSponsorChange(state.selectedSponsorIndex);
-      renderSponsorList();
-      renderSponsorForm();
-    });
-  }
-
-  const addLinkedSessionButton = els.sponsorForm.querySelector('#addLinkedSponsorSession');
-  if (addLinkedSessionButton) {
-    addLinkedSessionButton.addEventListener('click', () => {
-      openSponsorSessionPicker();
-    });
-  }
-
-  els.sponsorForm.querySelectorAll('[data-remove-linked-session]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const itemIndex = Number.parseInt(button.dataset.removeLinkedSession || '-1', 10);
-      removeLinkedSessionFromSponsor(itemIndex);
-    });
-  });
-}
-
-function formatSponsorLinkedSessionMeta(item, index) {
-  const bits = [];
-  if (item?.startTime) {
-    bits.push(utcIsoToLocalInput(item.startTime, getEventTimezone()));
-  }
-  if (item?.location) {
-    bits.push(String(item.location));
-  }
-  bits.push(`Session ${index + 1}`);
-  return bits.filter(Boolean).join(' | ');
-}
-
-function getSelectedSponsor() {
-  return state.dataset?.event?.sponsors?.[state.selectedSponsorIndex] || null;
-}
-
-function getAvailableSessionsForSponsor(sponsor) {
-  if (!sponsor) return [];
-  return (state.dataset?.items || [])
-    .map((item, index) => ({ item, index }))
-    .filter(({ item }) => !parseMultiValue(item?.sponsorIds || '').includes(sponsor.id));
-}
-
-function closeSponsorSessionPicker() {
-  if (!els.sponsorSessionPickerModal) return;
-  state.sponsorSessionPickerOpen = false;
-  els.sponsorSessionPickerModal.classList.add('hidden');
-  els.sponsorSessionPickerModal.setAttribute('aria-hidden', 'true');
-  document.body.classList.remove('session-modal-open');
-}
-
-function openSponsorSessionPicker() {
-  const sponsor = getSelectedSponsor();
-  if (!sponsor || !els.sponsorSessionPickerModal || !els.sponsorSessionPickerList) return;
-
-  const availableSessions = getAvailableSessionsForSponsor(sponsor);
-  state.sponsorSessionPickerOpen = true;
-  els.sponsorSessionPickerModal.classList.remove('hidden');
-  els.sponsorSessionPickerModal.setAttribute('aria-hidden', 'false');
-  document.body.classList.add('session-modal-open');
-  const titleEl = document.getElementById('sponsorSessionPickerTitle');
-  if (titleEl) {
-    titleEl.textContent = `Add session to ${sponsor.title || 'sponsor'}`;
-  }
-  if (els.sponsorSessionPickerCount) {
-    els.sponsorSessionPickerCount.textContent = `${availableSessions.length} available`;
-  }
-  els.sponsorSessionPickerList.innerHTML = availableSessions.length
-    ? availableSessions
-      .map(({ item, index }) => `
-        <article class="speaker-session-card">
-          <div>
-            <h3 class="speaker-session-title">${escapeHtml(item?.title || '(Untitled session)')}</h3>
-            <p class="speaker-session-meta">${escapeHtml(formatSponsorLinkedSessionMeta(item, index))}</p>
-          </div>
-          <div class="session-modal-links">
-            <button type="button" class="session-modal-link" data-add-linked-session="${index}">
-              <i class="fas fa-plus"></i><span>Add session</span>
-            </button>
-          </div>
-        </article>
-      `)
-      .join('')
-    : '<p class="speaker-session-summary">All sessions in this event are already linked to this sponsor.</p>';
-
-  els.sponsorSessionPickerList.querySelectorAll('[data-add-linked-session]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const itemIndex = Number.parseInt(button.dataset.addLinkedSession || '-1', 10);
-      addLinkedSessionToSponsor(itemIndex);
-    });
-  });
-}
-
-function addLinkedSessionToSponsor(itemIndex) {
-  const sponsor = getSelectedSponsor();
-  const item = state.dataset?.items?.[itemIndex];
-  if (!sponsor || !item) return;
-  const ids = parseMultiValue(item?.sponsorIds || '');
-  if (!ids.includes(sponsor.id)) {
-    const nextIds = [...ids, sponsor.id].filter(Boolean);
-    item.sponsorIds = nextIds.length <= 1 ? (nextIds[0] || '') : nextIds;
-    markDirty(true);
-    markSessionDirty(true);
-    markSponsorDirty(true);
-    trackQuickSessionChange(itemIndex);
-    trackQuickSponsorChange(state.selectedSponsorIndex);
-  }
-  closeSponsorSessionPicker();
-  renderSponsorForm();
-  renderSessionForm();
-}
-
-function removeLinkedSessionFromSponsor(itemIndex) {
-  const sponsor = getSelectedSponsor();
-  const item = state.dataset?.items?.[itemIndex];
-  if (!sponsor || !item) return;
-  const ids = parseMultiValue(item?.sponsorIds || '').filter((id) => id !== sponsor.id);
-  item.sponsorIds = ids.length <= 1 ? (ids[0] || '') : ids;
-  markDirty(true);
-  markSessionDirty(true);
-  markSponsorDirty(true);
-  trackQuickSessionChange(itemIndex);
-  trackQuickSponsorChange(state.selectedSponsorIndex);
-  renderSponsorForm();
-  renderSessionForm();
-}
-
-function getAvailableSponsorsForSession(item) {
-  const linkedIds = parseMultiValue(item?.sponsorIds || '');
-  return (state.dataset?.event?.sponsors || [])
-    .map((sponsor, index) => ({ sponsor, index }))
-    .filter(({ sponsor }) => sponsor.id && !linkedIds.includes(sponsor.id));
-}
-
-function openSessionSponsorPicker() {
-  const item = state.dataset?.items?.[state.selectedIndex];
-  if (!item || !els.sessionSponsorPickerModal || !els.sessionSponsorPickerList) return;
-  const availableSponsors = getAvailableSponsorsForSession(item);
-  state.sessionSponsorPickerOpen = true;
-  els.sessionSponsorPickerModal.classList.remove('hidden');
-  els.sessionSponsorPickerModal.setAttribute('aria-hidden', 'false');
-  document.body.classList.add('session-modal-open');
-  if (els.sessionSponsorPickerCount) {
-    els.sessionSponsorPickerCount.textContent = `${availableSponsors.length} available`;
-  }
-  els.sessionSponsorPickerList.innerHTML = availableSponsors.length
-    ? availableSponsors.map(({ sponsor, index }) => `
-        <article class="speaker-session-card">
-          <div>
-            <h3 class="speaker-session-title">${escapeHtml(sponsor.title || sponsor.id || '(Untitled sponsor)')}</h3>
-            <p class="speaker-session-meta">${escapeHtml(sponsor.id || '')}</p>
-          </div>
-          <div class="session-modal-links">
-            <button type="button" class="session-modal-link" data-add-session-sponsor="${index}">
-              <i class="fas fa-plus"></i><span>Add sponsor</span>
-            </button>
-          </div>
-        </article>
-      `).join('')
-    : '<p class="speaker-session-summary">All sponsors are already linked to this session.</p>';
-  els.sessionSponsorPickerList.querySelectorAll('[data-add-session-sponsor]').forEach((button) => {
-    button.addEventListener('click', () => {
-      addSponsorToSession(Number.parseInt(button.dataset.addSessionSponsor || '-1', 10));
-    });
-  });
-}
-
-function closeSessionSponsorPicker() {
-  if (!els.sessionSponsorPickerModal) return;
-  state.sessionSponsorPickerOpen = false;
-  els.sessionSponsorPickerModal.classList.add('hidden');
-  els.sessionSponsorPickerModal.setAttribute('aria-hidden', 'true');
-  document.body.classList.remove('session-modal-open');
-}
-
-function addSponsorToSession(sponsorIndex) {
-  const item = state.dataset?.items?.[state.selectedIndex];
-  const sponsor = state.dataset?.event?.sponsors?.[sponsorIndex];
-  if (!item || !sponsor?.id) return;
-  const ids = parseMultiValue(item?.sponsorIds || '');
-  if (!ids.includes(sponsor.id)) {
-    undoPush();
-    const nextIds = [...ids, sponsor.id].filter(Boolean);
-    item.sponsorIds = nextIds.length <= 1 ? (nextIds[0] || '') : nextIds;
-    markDirty(true);
-    markSessionDirty(true);
-    markSponsorDirty(true);
-    trackQuickSessionChange(state.selectedIndex);
-    trackQuickSponsorChange(state.selectedSponsorIndex);
-  }
-  closeSessionSponsorPicker();
-  renderSessionForm();
-  renderSponsorForm();
-}
-
-function removeSponsorFromSession(sponsorId) {
-  const item = state.dataset?.items?.[state.selectedIndex];
-  if (!item || !sponsorId) return;
-  undoPush();
-  const ids = parseMultiValue(item?.sponsorIds || '');
-  const nextIds = ids.filter((id) => id !== sponsorId);
-  item.sponsorIds = nextIds.length <= 1 ? (nextIds[0] || '') : nextIds;
-  markDirty(true);
-  markSessionDirty(true);
-  markSponsorDirty(true);
-  trackQuickSessionChange(state.selectedIndex);
-  renderSessionForm();
-  renderSponsorForm();
-}
-
-async function addSponsor() {
-  if (!state.dataset) return;
-  undoPush();
-  const sponsors = state.dataset.event.sponsors || (state.dataset.event.sponsors = []);
-  const seed = sponsors[state.selectedSponsorIndex] || {};
-  const nextNumber = sponsors.length + 1;
-  const sponsor = normalizeSponsorObject({
-    title: `Sponsor ${nextNumber}`,
-    tier: seed.tier || '',
-    row: seed.row ?? 1,
-    priority: nextNumber * 10,
-    bgStyle: 'auto',
-    aspect: 'auto',
-    enabled: true
-  });
-  if (!sponsor.id) sponsor.id = `sponsor-${nextNumber}`;
-  const insertAt = state.selectedSponsorIndex >= 0 ? state.selectedSponsorIndex + 1 : sponsors.length;
-  sponsors.splice(insertAt, 0, sponsor);
-  state.selectedSponsorIndex = insertAt;
-  markDirty(true);
-  trackQuickSponsorChange(state.selectedSponsorIndex, true);
-  renderSponsorList();
-  scrollToSponsorRow(state.selectedSponsorIndex);
-  renderSponsorForm();
-  renderSessionForm();
-  syncSponsorSaveButton();
-  els.deleteSponsor.disabled = false;
-  await saveDataset();
-}
-
-async function deleteSponsor() {
-  const sponsors = state.dataset?.event?.sponsors || [];
-  if (state.selectedSponsorIndex < 0 || state.selectedSponsorIndex >= sponsors.length) return;
-  const sponsor = sponsors[state.selectedSponsorIndex];
-  const okay = window.confirm(`Delete sponsor "${sponsor?.title || 'Untitled'}"?`);
-  if (!okay) return;
-  undoPush();
-  const [removed] = sponsors.splice(state.selectedSponsorIndex, 1);
-  removeTrackedIndex(state.quickEditSponsorChanges, state.selectedSponsorIndex);
-  if (removed?.id) {
-    (state.dataset?.items || []).forEach((item) => {
-      const ids = parseMultiValue(item?.sponsorIds || '').filter((id) => id !== removed.id);
-      item.sponsorIds = ids.length <= 1 ? (ids[0] || '') : ids;
-    });
-  }
-  if (sponsors.length === 0) {
-    state.selectedSponsorIndex = -1;
-  } else if (state.selectedSponsorIndex >= sponsors.length) {
-    state.selectedSponsorIndex = sponsors.length - 1;
-  }
-  markDirty(true);
-  trackQuickSponsorChange(state.selectedSponsorIndex, true);
-  trackQuickSessionChange(-1, true);
-  renderSponsorList();
-  scrollToSponsorRow(state.selectedSponsorIndex);
-  renderSponsorForm();
-  renderSessionForm();
-  syncSponsorSaveButton();
-  els.deleteSponsor.disabled = state.selectedSponsorIndex < 0;
-  await saveDataset();
-}
-
-async function saveCurrentSponsor() {
-  if (!state.dataset) {
-    window.alert('No dataset loaded.');
-    return;
-  }
-  if (!isQuickSponsorEditEnabled() && state.selectedSponsorIndex < 0) {
-    window.alert('No sponsor selected.');
-    return;
-  }
-  await saveDataset();
-}
-
-async function deleteSession() {
-  if (!state.dataset || state.selectedIndex < 0) return;
-  const item = state.dataset.items[state.selectedIndex];
-  const okay = window.confirm(`Delete session "${item?.title || 'Untitled'}"?`);
-  if (!okay) return;
-  undoPush();
-  state.dataset.items.splice(state.selectedIndex, 1);
-  removeTrackedIndex(state.quickEditSessionChanges, state.selectedIndex);
-  if (state.dataset.items.length === 0) {
-    state.selectedIndex = -1;
-  } else if (state.selectedIndex >= state.dataset.items.length) {
-    state.selectedIndex = state.dataset.items.length - 1;
-  }
-
-  markDirty(true);
-  trackQuickSessionChange(state.selectedIndex, true);
-  trackQuickSponsorChange(-1, true);
-  renderSessionList();
-  scrollToSessionRow(state.selectedIndex);
-  renderSessionForm();
-  renderSponsorForm();
-  syncSessionSaveButton();
-  els.deleteSession.disabled = state.selectedIndex < 0;
-  await saveDataset();
-}
-
-function duplicateSession(index) {
-  if (!state.dataset || index < 0 || index >= state.dataset.items.length) return;
-  undoPush();
-  const copy = cloneJsonValue(state.dataset.items[index]);
-  copy.title = `${copy.title || 'Untitled'} (copy)`;
-  state.dataset.items.splice(index + 1, 0, copy);
-  state.selectedIndex = index + 1;
-  markDirty(true);
-  trackQuickSessionChange(index + 1, true);
-  renderSessionList();
-  scrollToSessionRow(state.selectedIndex);
-  renderSessionForm();
-  renderSponsorForm();
-  syncSessionSaveButton();
-  els.deleteSession.disabled = false;
+  els.sponsorList
+    .querySelector(`[data-sponsor-index="${index}"]`)
+    ?.scrollIntoView({ block: 'nearest' });
 }
 
 function datasetJsonText() {
   stripSummaryFields(state.dataset);
   syncAllSessionDurations();
   return `${JSON.stringify(state.dataset, null, 2)}\n`;
+}
+
+// FNV-1a 32-bit — a fast, dependency-free content hash. Used only to detect that
+// a dataset file changed on disk since we loaded it (not for security).
+function contentFingerprint(text) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < text.length; i += 1) {
+    h ^= text.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return (h >>> 0).toString(16);
+}
+
+// The current on-disk text for the loaded dataset (API or folder mode), or null
+// when it can't be read — in which case the caller treats it as "can't verify"
+// and allows the save rather than blocking on a transient hiccup.
+async function readCurrentDiskText() {
+  try {
+    if (isApiMode()) {
+      if (!state.file) return null;
+      const res = await fetch(
+        `${state.apiEndpoint}/api/data/${state.file.split('/').map(encodeURIComponent).join('/')}`,
+        { cache: 'no-store' },
+      );
+      if (!res.ok) return null;
+      return await res.text();
+    }
+    if (state.fileHandle) {
+      const fileBlob = await state.fileHandle.getFile();
+      return await fileBlob.text();
+    }
+  } catch {
+    /* ignore — treat as unverifiable */
+  }
+  return null;
+}
+
+// The stale-write modal — resolves to 'reload', 'overwrite', or 'cancel'. Falls
+// back to window.confirm if the modal markup is unavailable.
+function promptStaleWrite() {
+  return new Promise((resolve) => {
+    const modal = document.getElementById('staleWriteModal');
+    if (!modal) {
+      resolve(
+        window.confirm('This dataset changed on disk. Overwrite it with your version?')
+          ? 'overwrite'
+          : 'cancel',
+      );
+      return;
+    }
+    const targetEl = document.getElementById('staleWriteTarget');
+    if (targetEl)
+      targetEl.textContent = outputBasename(state.outputPath) || state.file || 'This dataset';
+    modal.classList.remove('hidden');
+    document.body.classList.add('session-modal-open');
+
+    const done = (result) => {
+      modal.classList.add('hidden');
+      document.body.classList.remove('session-modal-open');
+      resolve(result);
+    };
+    const wire = (id, result) =>
+      document.getElementById(id)?.addEventListener('click', () => done(result), { once: true });
+    wire('staleWriteReload', 'reload');
+    wire('staleWriteOverwrite', 'overwrite');
+    wire('staleWriteCancel', 'cancel');
+    modal.addEventListener(
+      'click',
+      (e) => {
+        if (e.target === modal) done('cancel');
+      },
+      { once: true },
+    );
+  });
+}
+
+// Guard against silently overwriting external edits. Re-reads the file and, if it
+// changed since we loaded/last saved it, asks the user what to do. Returns true to
+// proceed with the save; false to abort (Cancel keeps your edits, Reload latest
+// discards them and loads the on-disk version).
+async function confirmNoStaleOverwrite() {
+  if (!state.loadedDiskFingerprint) return true; // nothing to compare (new file / Save As)
+  const current = await readCurrentDiskText();
+  if (current == null) return true; // couldn't verify — don't block on a hiccup
+  if (contentFingerprint(current) === state.loadedDiskFingerprint) return true;
+  const choice = await promptStaleWrite();
+  if (choice === 'overwrite') return true;
+  if (choice === 'reload') {
+    try {
+      await loadDataset(state.file);
+    } catch (err) {
+      reportError('reload after stale-write', err);
+    }
+  }
+  return false; // 'reload' and 'cancel' both abort the current save
+}
+
+// Record that the current in-memory dataset now matches disk (call right after a
+// successful write — the server and folder writer both persist datasetJsonText()
+// verbatim, so it is the authoritative on-disk content).
+function markDiskFingerprintSaved() {
+  state.loadedDiskFingerprint = contentFingerprint(datasetJsonText());
 }
 
 function exportDataset() {
@@ -5000,11 +4596,17 @@ async function saveAsDataset() {
     const suggested = outputBasename(state.outputPath) || state.file || 'new-event.json';
     const raw = window.prompt('Save As — enter filename (in data/):', suggested);
     if (!raw) return;
-    const cleanName = String(raw).trim().toLowerCase().replace(/\.json$/i, '').replace(/[^a-z0-9-]/g, '-') + '.json';
+    const cleanName =
+      String(raw)
+        .trim()
+        .toLowerCase()
+        .replace(/\.json$/i, '')
+        .replace(/[^a-z0-9-]/g, '-') + '.json';
     state.outputPath = `data/${cleanName}`;
     state.file = cleanName;
     setCurrentFilenameLabel();
     await saveViaApi();
+    markDiskFingerprintSaved();
     clearPhotosBackup();
     clearLogoBackup();
     markDirty(false);
@@ -5034,15 +4636,16 @@ async function saveAsDataset() {
     types: [
       {
         description: 'JSON files',
-        accept: { 'application/json': ['.json'] }
-      }
-    ]
+        accept: { 'application/json': ['.json'] },
+      },
+    ],
   });
 
   await writeFileHandle(handle);
   state.fileHandle = handle;
   state.file = handle.name || state.file;
   state.outputPath = replaceOutputBasename(state.outputPath || `data/${state.file}`, state.file);
+  markDiskFingerprintSaved();
   await setLinkedHandle(getFileLinkKey(), handle);
   setCurrentFilenameLabel();
   markDirty(false);
@@ -5060,16 +4663,19 @@ async function saveDataset() {
   const { valid, errors } = await validateDataset(state.dataset);
   if (!valid) {
     console.error('Validation errors:', errors);
-    const errorDetails = formatValidationErrors(errors, state.dataset);
-    console.error('Formatted errors:', errorDetails);
-    window.alert(
-      `Cannot save: dataset has ${errors.length} schema error${errors.length === 1 ? '' : 's'}.\n\n${errorDetails}`
-    );
+    console.error('Formatted errors:', formatValidationErrors(errors, state.dataset));
+    showValidationErrorModal({
+      title: "Couldn't save this dataset",
+      intro: `It has ${errors.length} schema issue${errors.length === 1 ? '' : 's'} to fix before saving:`,
+      errors,
+    });
     return;
   }
   console.log('Dataset validation passed, saving...');
   if (isApiMode()) {
+    if (!(await confirmNoStaleOverwrite())) return;
     await saveViaApi();
+    markDiskFingerprintSaved();
     clearPhotosBackup();
     clearLogoBackup();
     markDirty(false);
@@ -5097,7 +4703,9 @@ async function saveDataset() {
     }
   }
   if (!state.fileHandle) {
-    window.alert('No save file linked yet. Use "Open project folder" to connect your folder, or use Save As to choose a file.');
+    window.alert(
+      'No save file linked yet. Use "Open project folder" to connect your folder, or use Save As to choose a file.',
+    );
     return;
   }
   if (typeof state.fileHandle.queryPermission === 'function') {
@@ -5107,7 +4715,9 @@ async function saveDataset() {
       return;
     }
   }
+  if (!(await confirmNoStaleOverwrite())) return;
   await writeFileHandle(state.fileHandle);
+  markDiskFingerprintSaved();
   clearPhotosBackup();
   clearLogoBackup();
   markDirty(false);
@@ -5119,18 +4729,6 @@ async function saveDataset() {
   clearRecoverySnapshot();
   showSaveToast();
   renderAppearanceForm();
-}
-
-async function saveCurrentSession() {
-  if (!state.dataset) {
-    window.alert('No dataset loaded.');
-    return;
-  }
-  if (!isQuickSessionEditEnabled() && state.selectedIndex < 0) {
-    window.alert('No session selected.');
-    return;
-  }
-  await saveDataset();
 }
 
 function promptForNewFilename() {
@@ -5145,18 +4743,18 @@ async function buildSponsorEventCounts() {
     .filter((f) => f && f.endsWith('.json') && f !== 'sponsors.json');
   const results = await Promise.allSettled(
     files.map((f) => {
-      const url = isApiMode() ? `${state.apiEndpoint}/api/data/${f.split('/').map(encodeURIComponent).join('/')}` : `./data/${f}`;
+      const url = isApiMode()
+        ? `${state.apiEndpoint}/api/data/${f.split('/').map(encodeURIComponent).join('/')}`
+        : `./data/${f}`;
       return fetch(url).then((r) => r.json());
-    })
+    }),
   );
   const counts = new Map();
   for (const result of results) {
     if (result.status !== 'fulfilled') continue;
     const sponsors = result.value?.event?.sponsors;
     if (!Array.isArray(sponsors)) continue;
-    const seen = new Set(
-      sponsors.map((s) => (s.title || '').toLowerCase().trim()).filter(Boolean)
-    );
+    const seen = new Set(sponsors.map((s) => (s.title || '').toLowerCase().trim()).filter(Boolean));
     for (const t of seen) counts.set(t, (counts.get(t) || 0) + 1);
   }
   state.sponsorEventCounts = counts;
@@ -5201,7 +4799,7 @@ function isApiMode() {
 async function saveViaApi() {
   const relativePath = state.outputPath
     ? state.outputPath.replace(/^data\//, '')
-    : (outputBasename(state.outputPath) || state.file);
+    : outputBasename(state.outputPath) || state.file;
   if (!relativePath) throw new Error('No output filename configured.');
   const apiPath = relativePath.split('/').map(encodeURIComponent).join('/');
   const res = await fetch(`${state.apiEndpoint}/api/data/${apiPath}`, {
@@ -5236,15 +4834,6 @@ function syncApiModeUI() {
   }
 }
 
-function escapeHtml(value) {
-  return String(value || '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
-
 function escapeAttr(value) {
   return escapeHtml(value).replace(/\n/g, '&#10;');
 }
@@ -5256,15 +4845,19 @@ function renderSitemap() {
   const meta = state.dataset?.event || {};
   const items = state.dataset?.items || [];
 
-  const rawUrl = String(meta.website || meta.scheduleURLs?.[0] || '').trim();
+  const rawUrl = normalizeString(meta.website || meta.scheduleURLs?.[0]);
   if (!rawUrl) {
-    container.innerHTML = '<p class="text-sm text-gray-400 py-4">No event website URL is configured. Set the <strong>Website</strong> field in the Event tab.</p>';
+    container.innerHTML =
+      '<p class="edt-empty">No event website URL is configured. Set the <strong>Website</strong> field in the Event tab.</p>';
     return;
   }
 
   let parsedBase;
-  try { parsedBase = new URL(rawUrl); } catch {
-    container.innerHTML = `<p class="text-sm text-gray-400 py-4">Could not parse event URL: ${escapeHtml(rawUrl)}</p>`;
+  try {
+    parsedBase = new URL(rawUrl);
+  } catch {
+    // Malformed event URL → show an inline message instead of building the panel.
+    container.innerHTML = `<p class="edt-empty">Could not parse event URL: ${escapeHtml(rawUrl)}</p>`;
     return;
   }
   const domain = parsedBase.hostname;
@@ -5278,32 +4871,44 @@ function renderSitemap() {
   const sessionEntries = [];
   const seen = new Set(eventUrls);
   items.forEach((item) => {
-    const link = String(item?.link || '').trim();
+    const link = normalizeString(item?.link);
     if (!link || seen.has(link)) return;
     try {
       if (new URL(link).hostname === domain) {
         seen.add(link);
-        sessionEntries.push({ title: String(item?.title || '').trim() || '(Untitled)', url: link });
+        sessionEntries.push({ title: normalizeString(item?.title) || '(Untitled)', url: link });
       }
-    } catch {}
+    } catch {
+      /* skip session links that aren't valid URLs */
+    }
   });
 
   const sponsorEntries = [];
   (meta.sponsors || []).forEach((sponsor) => {
-    const link = String(sponsor?.link || '').trim();
+    const link = normalizeString(sponsor?.link);
     if (!link || seen.has(link)) return;
     try {
       if (new URL(link).hostname === domain) {
         seen.add(link);
-        sponsorEntries.push({ title: String(sponsor?.title || '').trim() || '(Untitled sponsor)', url: link });
+        sponsorEntries.push({
+          title: normalizeString(sponsor?.title) || '(Untitled sponsor)',
+          url: link,
+        });
       }
-    } catch {}
+    } catch {
+      /* skip sponsor links that aren't valid URLs */
+    }
   });
 
   const otherUrls = normalizeUrlArray(meta.other_urls).filter(Boolean);
 
   const total = eventUrls.length + sessionEntries.length + sponsorEntries.length + otherUrls.length;
-  const allUrls = [...eventUrls, ...sessionEntries.map(e => e.url), ...sponsorEntries.map(e => e.url), ...otherUrls].join('\n');
+  const allUrls = [
+    ...eventUrls,
+    ...sessionEntries.map((e) => e.url),
+    ...sponsorEntries.map((e) => e.url),
+    ...otherUrls,
+  ].join('\n');
 
   function urlRow(url, label = '') {
     const display = url.replace(/^https?:\/\//, '');
@@ -5315,39 +4920,60 @@ function renderSitemap() {
 
   container.innerHTML = `
     <div class="sitemap-toolbar">
-      <span class="sitemap-domain"><i class="fas fa-globe mr-1.5"></i>${escapeHtml(domain)}</span>
+      <span class="sitemap-domain">${escapeHtml(domain)}</span>
       <span class="sitemap-total">${total} URL${total !== 1 ? 's' : ''}</span>
       <button id="sitemapCopyAll" type="button" class="sitemap-copy-btn">
-        <i class="fas fa-copy mr-1.5 text-[0.72rem]"></i>Copy all
+        Copy all
       </button>
     </div>
-    ${eventUrls.length ? `
+    ${
+      eventUrls.length
+        ? `
       <section class="sitemap-section">
         <h3 class="sitemap-section-heading">Event pages <span class="sitemap-count-badge">${eventUrls.length}</span></h3>
-        <ul class="sitemap-url-list">${eventUrls.map(u => urlRow(u)).join('')}</ul>
-      </section>` : ''}
-    ${sessionEntries.length ? `
+        <ul class="sitemap-url-list">${eventUrls.map((u) => urlRow(u)).join('')}</ul>
+      </section>`
+        : ''
+    }
+    ${
+      sessionEntries.length
+        ? `
       <section class="sitemap-section">
         <h3 class="sitemap-section-heading">Sessions <span class="sitemap-count-badge">${sessionEntries.length}</span></h3>
-        <ul class="sitemap-url-list">${sessionEntries.map(e => urlRow(e.url, e.title)).join('')}</ul>
-      </section>` : ''}
-    ${sponsorEntries.length ? `
+        <ul class="sitemap-url-list">${sessionEntries.map((e) => urlRow(e.url, e.title)).join('')}</ul>
+      </section>`
+        : ''
+    }
+    ${
+      sponsorEntries.length
+        ? `
       <section class="sitemap-section">
         <h3 class="sitemap-section-heading">Sponsors <span class="sitemap-count-badge">${sponsorEntries.length}</span></h3>
-        <ul class="sitemap-url-list">${sponsorEntries.map(e => urlRow(e.url, e.title)).join('')}</ul>
-      </section>` : ''}
-    ${otherUrls.length ? `
+        <ul class="sitemap-url-list">${sponsorEntries.map((e) => urlRow(e.url, e.title)).join('')}</ul>
+      </section>`
+        : ''
+    }
+    ${
+      otherUrls.length
+        ? `
       <section class="sitemap-section">
         <h3 class="sitemap-section-heading">Other URLs <span class="sitemap-count-badge">${otherUrls.length}</span></h3>
-        <ul class="sitemap-url-list">${otherUrls.map(u => urlRow(u)).join('')}</ul>
-      </section>` : ''}
-    ${total === 0 ? '<p class="text-sm text-gray-400 py-4">No URLs found for this domain in the dataset.</p>' : ''}
+        <ul class="sitemap-url-list">${otherUrls.map((u) => urlRow(u)).join('')}</ul>
+      </section>`
+        : ''
+    }
+    ${total === 0 ? '<p class="edt-empty">No URLs found for this domain in the dataset.</p>' : ''}
   `;
 
   document.getElementById('sitemapCopyAll')?.addEventListener('click', () => {
     navigator.clipboard.writeText(allUrls).then(() => {
       const btn = document.getElementById('sitemapCopyAll');
-      if (btn) { btn.textContent = 'Copied!'; setTimeout(() => { btn.innerHTML = '<i class="fas fa-copy mr-1.5 text-[0.72rem]"></i>Copy all'; }, 1800); }
+      if (btn) {
+        btn.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.innerHTML = 'Copy all';
+        }, 1800);
+      }
     });
   });
 }
@@ -5358,7 +4984,9 @@ function renderOtherUrlsEditor() {
 
   const urls = normalizeUrlArray(state.dataset?.event?.other_urls);
 
-  const rows = urls.map((url, i) => `
+  const rows = urls
+    .map(
+      (url, i) => `
     <div class="url-multifield-row">
       <input type="text"
         class="url-multifield-input"
@@ -5369,17 +4997,18 @@ function renderOtherUrlsEditor() {
         class="url-multifield-remove"
         data-other-url-remove="${i}"
         aria-label="Remove URL">
-        <i class="fas fa-times"></i>
-      </button>
+        </button>
     </div>
-  `).join('');
+  `,
+    )
+    .join('');
 
   container.innerHTML = `
     <div class="url-multifield-list">
       ${rows || '<p class="url-multifield-empty">No reference URLs added yet.</p>'}
     </div>
     <button type="button" class="url-multifield-add" id="addOtherUrl">
-      <i class="fas fa-plus"></i> Add URL
+      Add URL
     </button>
   `;
 
@@ -5414,22 +5043,32 @@ function renderOtherUrlsEditor() {
 
 function doPreview(mode = 'tab') {
   if (!state.dataset) return;
-  try {
-    localStorage.setItem('__preview__', JSON.stringify(bustDatasetForPreview(state.dataset)));
-    if (mode === 'same') {
-      if (state.file) localStorage.setItem('__editor_return_file__', state.file);
-      window.location.assign('./index.html?preview=1');
-    } else {
-      window.open('./index.html?preview=1', '_blank');
-    }
-  } catch (e) {
-    window.alert('Could not open preview: ' + e.message);
+  if (!writeJson(STORAGE_KEYS.preview, bustDatasetForPreview(state.dataset))) {
+    window.alert('Could not open preview: browser storage is full or unavailable.');
+    return;
+  }
+  if (mode === 'same') {
+    if (state.file) writeText(STORAGE_KEYS.editorReturnFile, state.file);
+    window.location.assign('./index.html?preview=1');
+  } else {
+    window.open('./index.html?preview=1', '_blank');
   }
 }
 
 function bindEvents() {
+  bindDatasetToolbar();
+  bindApiSettings();
+  bindPreviewAndSave();
+  bindSessionSponsorActions();
+  bindWorkspaceToggles();
+  bindEditorTabs();
+  bindPickerModals();
+  bindHistoryAndGlobalKeys();
+}
+
+function bindDatasetToolbar() {
   els.datasetSelect.addEventListener('change', async () => {
-    const nextFile = String(els.datasetSelect.value || '').trim();
+    const nextFile = normalizeString(els.datasetSelect.value);
     const previousValue = state.lastDatasetSelectValue || '';
 
     if (!nextFile) {
@@ -5460,18 +5099,11 @@ function bindEvents() {
     createDatasetScaffold(pathValue);
   });
 
-  async function handleConnectFolder() {
-    try {
-      await connectProjectFolder();
-    } catch (error) {
-      if (error && error.name === 'AbortError') return;
-      window.alert(`Could not open folder: ${error.message}`);
-    }
-  }
-
   document.getElementById('editorHomeBtn')?.addEventListener('click', closeCurrentDataset);
   document.getElementById('editorBackBtn')?.addEventListener('click', closeCurrentDataset);
+}
 
+function bindApiSettings() {
   const apiSettingsModal = document.getElementById('apiSettingsModal');
   const closeApiSettingsBtn = document.getElementById('closeApiSettings');
   const apiEndpointInput = document.getElementById('apiEndpointInput');
@@ -5487,7 +5119,9 @@ function bindEvents() {
     };
 
     if (closeApiSettingsBtn) closeApiSettingsBtn.addEventListener('click', closeApiModal);
-    apiSettingsModal.addEventListener('click', (e) => { if (e.target === apiSettingsModal) closeApiModal(); });
+    apiSettingsModal.addEventListener('click', (e) => {
+      if (e.target === apiSettingsModal) closeApiModal();
+    });
 
     async function checkApiCompatibility(endpoint, resultEl) {
       resultEl.classList.remove('hidden');
@@ -5502,7 +5136,8 @@ function bindEvents() {
             resultEl.className = 'text-sm text-green-600';
             return true;
           }
-          resultEl.textContent = 'Server responded but does not appear to be a compatible API. Check the endpoint URL.';
+          resultEl.textContent =
+            'Server responded but does not appear to be a compatible API. Check the endpoint URL.';
           resultEl.className = 'text-sm text-yellow-600';
           return false;
         }
@@ -5539,22 +5174,8 @@ function bindEvents() {
           apiSaveBtn.disabled = false;
           if (!ok) return;
         }
-        state.apiEndpoint = endpoint;
-        if (endpoint) {
-          localStorage.setItem('editorApiEndpoint', endpoint);
-        } else {
-          localStorage.removeItem('editorApiEndpoint');
-        }
-        syncApiModeUI();
-        setFolderConnectionButtonState();
         closeApiModal();
-        if (endpoint && !state.dataset) {
-          await renderDatasetOptionsFromConnectedFolder();
-          setDatasetLoadingEnabled(true);
-        }
-        _homeMetaCache = null;
-        syncWelcomePanel();
-        await refreshEditorSearch();
+        await connectEditorApi(endpoint);
       });
     }
 
@@ -5562,7 +5183,7 @@ function bindEvents() {
       apiClearBtn.addEventListener('click', () => {
         if (apiEndpointInput) apiEndpointInput.value = '';
         state.apiEndpoint = '';
-        localStorage.removeItem('editorApiEndpoint');
+        removeKey(STORAGE_KEYS.editorApiEndpoint);
         syncApiModeUI();
         setFolderConnectionButtonState();
         closeApiModal();
@@ -5575,7 +5196,9 @@ function bindEvents() {
       });
     }
   }
+}
 
+function bindPreviewAndSave() {
   if (els.previewDataset) {
     els.previewDataset.addEventListener('click', () => doPreview('tab'));
   }
@@ -5638,18 +5261,28 @@ function bindEvents() {
       }
     });
   }
+}
 
+function bindSessionSponsorActions() {
   if (els.exportDataset) {
     els.exportDataset.addEventListener('click', exportDataset);
   }
   if (els.saveSession) {
     els.saveSession.addEventListener('click', async () => {
-      try { await saveCurrentSession(); } catch (error) { window.alert(`Save failed: ${error.message}`); }
+      try {
+        await saveCurrentSession();
+      } catch (error) {
+        window.alert(`Save failed: ${error.message}`);
+      }
     });
   }
   if (els.saveSponsor) {
     els.saveSponsor.addEventListener('click', async () => {
-      try { await saveCurrentSponsor(); } catch (error) { window.alert(`Save failed: ${error.message}`); }
+      try {
+        await saveCurrentSponsor();
+      } catch (error) {
+        window.alert(`Save failed: ${error.message}`);
+      }
     });
   }
   els.addSession.addEventListener('click', async () => {
@@ -5686,7 +5319,9 @@ function bindEvents() {
       renderSessionList();
     });
   }
+}
 
+function bindWorkspaceToggles() {
   if (els.toggleEventMeta && els.eventMetaBody) {
     els.toggleEventMeta.addEventListener('click', () => {
       const isCollapsed = els.eventMetaBody.classList.contains('hidden');
@@ -5729,7 +5364,9 @@ function bindEvents() {
       renderSponsorList();
     });
   }
+}
 
+function bindEditorTabs() {
   if (els.showEventTab) {
     els.showEventTab.addEventListener('click', async () => {
       switchEditorTab('event');
@@ -5760,6 +5397,26 @@ function bindEvents() {
     });
   }
 
+  if (els.showPeopleTab) {
+    els.showPeopleTab.addEventListener('click', () => {
+      switchEditorTab('people');
+    });
+  }
+
+  if (els.showRelatedTab) {
+    els.showRelatedTab.addEventListener('click', () => {
+      switchEditorTab('related');
+    });
+  }
+
+  if (els.sponsorLogosDisabledToggle) {
+    els.sponsorLogosDisabledToggle.addEventListener('change', () => {
+      if (!state.dataset?.event) return;
+      state.dataset.event.sponsorLogosDisabled = els.sponsorLogosDisabledToggle.checked;
+      markDirty(true);
+    });
+  }
+
   if (els.showSitemapTab) {
     els.showSitemapTab.addEventListener('click', async () => {
       switchEditorTab('sitemap');
@@ -5779,7 +5436,9 @@ function bindEvents() {
       switchEditorTab('appearance');
     });
   }
+}
 
+function bindPickerModals() {
   if (els.closeSponsorSessionPicker) {
     els.closeSponsorSessionPicker.addEventListener('click', closeSponsorSessionPicker);
   }
@@ -5821,7 +5480,9 @@ function bindEvents() {
       }
     });
   }
+}
 
+function bindHistoryAndGlobalKeys() {
   if (els.undoAction) {
     els.undoAction.addEventListener('click', async () => {
       await performUndo();
@@ -5840,7 +5501,11 @@ function bindEvents() {
   document.addEventListener('keydown', async (event) => {
     if ((event.ctrlKey || event.metaKey) && event.key === 's') {
       event.preventDefault();
-      try { await saveDataset(); } catch (e) { window.alert(e?.message || String(e)); }
+      try {
+        await saveDataset();
+      } catch (e) {
+        window.alert(e?.message || String(e));
+      }
       return;
     }
     if ((event.ctrlKey || event.metaKey) && event.key === 'z' && !event.shiftKey) {
@@ -5899,7 +5564,7 @@ async function buildApiSearchCatalog() {
           year: m.year,
           region: m.region,
           venue: m.venue,
-          label: buildDatasetOptionLabel(m.file, m),
+          label: buildDatasetOptionLabel(m.file, m, getManifestLabelByFile(m.file)),
           enabled: m.enabled,
         }))
         .sort((a, b) => {
@@ -5910,18 +5575,20 @@ async function buildApiSearchCatalog() {
         });
     }
 
-    // Non-API mode (no folder connected): fetch index and individual metadata via static URLs.
+    // Non-API mode (no folder connected): fetch the consolidated catalog and
+    // individual metadata via static URLs.
     // (handles the case where loadEventCatalog() failed or was memoized before the server was reachable)
-    const res = await fetch('./data/index.json');
+    const res = await fetch('./data/catalog.json');
     if (!res.ok) return [];
     const payload = await res.json();
-    const files = (Array.isArray(payload?.files) ? payload.files : [])
+    const files = (Array.isArray(payload?.events) ? payload.events : [])
       .map((e) => (typeof e === 'string' ? e : e?.file))
       .filter((f) => f && isEditorDatasetFile(f));
     if (files.length === 0) return [];
     const records = await loadDatasetMetaForGroupingViaFetch(files);
     return _mapApiSearchRecords(records);
   } catch {
+    // API unreachable or bad payload → empty search catalog.
     return [];
   }
 }
@@ -5939,9 +5606,9 @@ async function buildConnectedFolderSearchCatalog() {
         const text = await blob.text();
         const parsed = JSON.parse(text);
         const meta = parsed?.event || {};
-        const designation = String(meta.designation || '').trim();
-        const year = String(meta.year || '').trim();
-        const location = String(meta.location || '').trim();
+        const designation = normalizeString(meta.designation);
+        const year = normalizeString(meta.year);
+        const location = normalizeString(meta.location);
         const label =
           designation && year && location
             ? `${designation} ${year}: ${location}`
@@ -5953,25 +5620,24 @@ async function buildConnectedFolderSearchCatalog() {
           designation,
           location,
           year,
-          region: String(meta.region || '').trim(),
-          venue: String(meta.venue || '').trim(),
+          region: normalizeString(meta.region),
+          venue: normalizeString(meta.venue),
           label,
           enabled: meta.enabled !== false,
         };
       } catch {
+        // Skip a dataset file that can't be read or parsed.
         return null;
       }
-    })
+    }),
   );
 
-  return entries
-    .filter(Boolean)
-    .sort((a, b) => {
-      const ya = Number.parseInt(a.year, 10);
-      const yb = Number.parseInt(b.year, 10);
-      if (Number.isFinite(ya) && Number.isFinite(yb) && ya !== yb) return yb - ya;
-      return a.label.localeCompare(b.label);
-    });
+  return entries.filter(Boolean).sort((a, b) => {
+    const ya = Number.parseInt(a.year, 10);
+    const yb = Number.parseInt(b.year, 10);
+    if (Number.isFinite(ya) && Number.isFinite(yb) && ya !== yb) return yb - ya;
+    return a.label.localeCompare(b.label);
+  });
 }
 
 async function refreshEditorSearch() {
@@ -6010,6 +5676,73 @@ function revealPage() {
 }
 
 async function init() {
+  // Capture what the URL asked for before the default 'event' tab overwrites it.
+  // `?tab=` is still read, so links minted before the path form keep working.
+  const route = parseEditorPath(location.pathname, EDITOR_TABS);
+  _initialDatasetFile = route.file;
+  _initialEditorTab = route.tab || new URLSearchParams(location.search).get('tab');
+  initEditorS3({ apiBase: () => state.apiEndpoint });
+  initEditorRelatedEvents({ state, markDirty, uploadImage: uploadRelatedImage });
+  wireRelatedEventsPanel();
+  wirePeopleTab();
+  wirePersonModal();
+  initEditorSponsors({
+    state,
+    els,
+    SPONSOR_FIELDS,
+    getEventTimezone,
+    markDirty,
+    markSessionDirty,
+    markSponsorDirty,
+    trackQuickSessionChange,
+    trackQuickSponsorChange,
+    undoPush,
+    renderSessionForm,
+    selectSponsorForm,
+    isQuickSponsorEditEnabled,
+    syncSponsorSaveButton,
+    syncSponsorEditorPanelVisibility,
+    buildSponsorEventCounts,
+    getSponsorEventCount,
+    uploadSponsorImageFromPicker,
+    bustSrc,
+    escapeAttr,
+    toStringValue,
+    fieldDescriptionAttr,
+    renderFieldIntro,
+    moveTrackedIndex,
+    removeTrackedIndex,
+    scrollToSponsorRow,
+    saveDataset,
+  });
+  initEditorSessions({
+    state,
+    els,
+    SESSION_FIELDS,
+    getEventTimezone,
+    formatDateHeading,
+    isQuickSessionEditEnabled,
+    escapeAttr,
+    toStringValue,
+    getSessionTimingSummary,
+    selectSessionForm,
+    undoPush,
+    moveTrackedIndex,
+    markDirty,
+    markSessionDirty,
+    trackQuickSessionChange,
+    syncSessionEditorPanelVisibility,
+    syncSessionSaveButton,
+    renderFieldIntro,
+    fieldDescriptionAttr,
+    fieldDescriptionId,
+    markdownToHtml,
+    scrollToSessionRow,
+    saveDataset,
+    removeTrackedIndex,
+    trackQuickSponsorChange,
+    cloneJsonValue,
+  });
   await loadThemes();
   applyThemeClass(getCurrentThemeId());
 
@@ -6038,13 +5771,37 @@ async function init() {
   setActiveEditorTab('event');
   setFolderConnectionButtonState();
   if (els.logoForm) {
-    els.logoForm.innerHTML = '<p class="text-sm text-gray-400">Open a project folder to get started.</p>';
+    els.logoForm.innerHTML = '<p class="edt-muted">Open a project folder to get started.</p>';
   }
   if (els.flickrForm) {
-    els.flickrForm.innerHTML = '<p class="text-sm text-gray-400">Open a project folder to get started.</p>';
+    els.flickrForm.innerHTML = '<p class="edt-muted">Open a project folder to get started.</p>';
   }
-  els.sponsorList.innerHTML = '<li class="text-sm text-gray-400 px-3 py-2 border border-dashed border-gray-700 rounded-md">Open a project folder to get started.</li>';
-  els.sponsorForm.innerHTML = '<p class="text-sm text-gray-400">Select a sponsor row to edit it.</p>';
+  els.sponsorList.innerHTML = '<li class="edt-empty">Open a project folder to get started.</li>';
+  els.sponsorForm.innerHTML = '<p class="edt-muted">Select a sponsor row to edit it.</p>';
+
+  // A URL that names a dataset opens it. Only in API mode: the filesystem mode
+  // has no read permission until someone picks a folder in this session, so the
+  // link cannot honour itself and the welcome panel asks for the folder instead —
+  // the request is not lost, it is waiting on a gesture the browser requires.
+  if (_initialDatasetFile && isApiMode()) {
+    const wanted = _initialDatasetFile;
+    _initialDatasetFile = ''; // the request has been made; the URL is ours again
+    try {
+      els.datasetSelect.value = wanted;
+      state.lastDatasetSelectValue = wanted;
+      await loadDataset(wanted);
+    } catch (e) {
+      // A stale or renamed link must not strand you on a dead editor: say so,
+      // leave the welcome panel up, and put the URL back to a plain /editor.
+      reportError('editor route', e, {
+        toast: true,
+        message: `Could not open ${wanted} — pick an event to get started.`,
+      });
+      els.datasetSelect.value = '';
+      state.lastDatasetSelectValue = '';
+      writeEditorUrl();
+    }
+  }
 
   const pendingRecovery = loadRecoverySnapshot();
   if (pendingRecovery) showRecoveryBar(pendingRecovery);
@@ -6054,7 +5811,20 @@ async function init() {
   }, 30_000);
 
   syncWelcomePanel();
-  revealPage();
 }
 
-void init();
+// The page starts at `opacity: 0` so it can fade in once built. That means a
+// throw anywhere in `init()` used to leave a permanently BLANK page with
+// nothing in the console but the original error — which is exactly what a stale
+// module import produced. Revealing in a `finally` turns a silent blank into a
+// visible, reportable failure.
+initThemePicker();
+initAppMenu({ adopt: ['.app-nav'] });
+void init()
+  .catch((err) =>
+    reportError('editor init', err, {
+      toast: true,
+      message: 'The editor failed to start. Check the console for details.',
+    }),
+  )
+  .finally(revealPage);

@@ -5,7 +5,16 @@ async function getValidator() {
   if (_validate) return _validate;
   if (_validatorError) throw _validatorError;
   try {
-    const schema = await fetch('./schemas/event.schema.json').then((r) => r.json());
+    // MODULE-relative, not document-relative. `./schemas/…` resolved against the
+    // page, so on a deep editor route (/editor/<series>/<event>/<tab>) it asked for
+    // /editor/<series>/<event>/schemas/… — which the /editor/* route answered with
+    // editor.html, and the JSON parse died on "<!DOCTYPE". Resolving against this
+    // file's own URL is true in every deployment: served, deep-routed, or opened
+    // from disk.
+    const url = new URL('../../schemas/event.schema.json', import.meta.url);
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`schema fetch failed: HTTP ${res.status}`);
+    const schema = await res.json();
     const ajv = new globalThis.Ajv({ allErrors: true });
     _validate = ajv.compile(schema);
     return _validate;
@@ -29,45 +38,47 @@ export async function validateDataset(data) {
 }
 
 export function formatValidationErrors(errors, dataset = null) {
-  const lines = errors
-    .slice(0, 15)
-    .map((e) => {
-      const path = e.dataPath || e.instancePath || '(root)';
-      let msg = `  ${path}: ${e.message}`;
+  const lines = errors.slice(0, 15).map((e) => {
+    const path = e.dataPath || e.instancePath || '(root)';
+    let msg = `  ${path}: ${e.message}`;
 
-      if (e.keyword === 'additionalProperties' && e.params?.additionalProperty) {
-        msg += `\n    Unexpected property: "${e.params.additionalProperty}"`;
-      }
+    if (e.keyword === 'additionalProperties' && e.params?.additionalProperty) {
+      msg += `\n    Unexpected property: "${e.params.additionalProperty}"`;
+    }
 
-      if (dataset && path && path.startsWith('/')) {
-        try {
-          const parts = path.slice(1).split('/');
-          const failingData = parts.reduce((obj, key) => {
+    if (dataset && path && path.startsWith('/')) {
+      try {
+        const parts = path.slice(1).split('/');
+        const failingData = parts.reduce((obj, key) => {
+          if (obj == null) return undefined;
+          return obj[isNaN(key) ? key : Number(key)];
+        }, dataset);
+
+        if (failingData && typeof failingData === 'object') {
+          const context = failingData.title
+            ? `"${failingData.title}"`
+            : failingData.designation
+              ? `"${failingData.designation}"`
+              : failingData.id
+                ? `id: ${failingData.id}`
+                : '';
+          if (context) msg += ` [${context}]`;
+
+          const lastKey = parts[parts.length - 1];
+          const parent = parts.slice(0, -1).reduce((obj, key) => {
             if (obj == null) return undefined;
             return obj[isNaN(key) ? key : Number(key)];
           }, dataset);
-
-          if (failingData && typeof failingData === 'object') {
-            const context = failingData.title ? `"${failingData.title}"` :
-                           failingData.designation ? `"${failingData.designation}"` :
-                           failingData.id ? `id: ${failingData.id}` : '';
-            if (context) msg += ` [${context}]`;
-
-            const lastKey = parts[parts.length - 1];
-            const parent = parts.slice(0, -1).reduce((obj, key) => {
-              if (obj == null) return undefined;
-              return obj[isNaN(key) ? key : Number(key)];
-            }, dataset);
-            if (parent != null && lastKey in Object(parent)) {
-              msg += `\n    Value: ${JSON.stringify(parent[isNaN(lastKey) ? lastKey : Number(lastKey)])}`;
-            }
+          if (parent != null && lastKey in Object(parent)) {
+            msg += `\n    Value: ${JSON.stringify(parent[isNaN(lastKey) ? lastKey : Number(lastKey)])}`;
           }
-        } catch {
-          // ignore — best-effort context only
         }
+      } catch {
+        // ignore — best-effort context only
       }
-      return msg;
-    });
+    }
+    return msg;
+  });
   if (errors.length > 15) lines.push(`  … and ${errors.length - 15} more`);
   return lines.join('\n');
 }

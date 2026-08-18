@@ -1,0 +1,153 @@
+/* ============================================================================
+   SECTION — HOME
+   The front of the programme. It has one job: say what the three sections are
+   and let you pick one. It is also the reference build — no legacy sheet, no
+   `overrides` layer, nothing to prune later.
+   ========================================================================= */
+
+@layer section {
+  #homeMain {
+    padding-block: var(--sp-2xl);
+  }
+
+  /* The hero is a sentence, not a slogan on a gradient. The italics carry the
+     three words the whole product is organised around. */
+  .hm-hero {
+    max-inline-size: 20ch;
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: var(--display-track);
+    color: var(--ink-0);
+    text-wrap: balance;
+  }
+
+  .hm-hero em {
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .hm-lede {
+    max-inline-size: var(--measure);
+    margin-block-start: var(--sp-m);
+    font-size: var(--step-0);
+    color: var(--ink-1);
+  }
+
+  /* --- THE THREE SECTIONS -------------------------------------------------
+     A numbered list, because these genuinely are a sequence: you read a
+     schedule, then you plan around it, and only afterwards is it an archive.
+     The numbers earn their place — they are not decoration.
+     --------------------------------------------------------------------- */
+  .hm-sections {
+    list-style: none;
+    margin: var(--sp-2xl) 0 0;
+    padding: 0;
+    border-block-start: 1px solid var(--ink-1);
+  }
+
+  .hm-section {
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .hm-section__link {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-m);
+    padding-block: var(--sp-l);
+    /* The row is pulled into the page gutter and padded back by the same
+       amount. The hover wash and its leading rule therefore live in the margin,
+       while the number stays on the page's one left edge — the same line as the
+       wordmark, the hero and every hairline. Without this the row had no left
+       padding at all, so the 3px rule was drawn straight through the "01".
+       1rem, not --sp-m, because the gutter is exactly 1rem at phone widths and
+       a deeper pull would push the row off the side of the screen. */
+    margin-inline-start: -1rem;
+    padding-inline-start: 1rem;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .hm-section__link:hover {
+    background: var(--paper-2);
+    box-shadow: inset 3px 0 0 var(--brand-1-ink);
+  }
+
+  .hm-section__n {
+    flex: none;
+    inline-size: 2.5rem;
+    font-family: var(--font-data);
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--ink-2);
+  }
+
+  .hm-section__link:hover .hm-section__n {
+    color: var(--brand-1-ink);
+  }
+
+  .hm-section__body {
+    flex: 1;
+    min-inline-size: 0;
+  }
+
+  .hm-section__title {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 600;
+    letter-spacing: var(--display-track);
+    color: var(--ink-0);
+  }
+
+  .hm-section__link:hover .hm-section__title {
+    text-decoration: underline;
+    text-underline-offset: 0.12em;
+  }
+
+  .hm-section__desc {
+    display: block;
+    max-inline-size: var(--measure);
+    margin-block-start: var(--sp-2xs);
+    font-size: var(--step--1);
+    color: var(--ink-1);
+  }
+
+  .hm-section__go {
+    flex: none;
+    align-self: center;
+    font-size: var(--step-1);
+    color: var(--ink-2);
+  }
+
+  .hm-section__link:hover .hm-section__go {
+    color: var(--ink-0);
+  }
+
+  .hm-foot {
+    max-inline-size: var(--measure);
+    margin-block-start: var(--sp-xl);
+    font-size: var(--step--1);
+    font-style: italic;
+    color: var(--ink-2);
+  }
+
+  /* The provenance notice sits directly under the foot line here, so it takes
+     that line's measure rather than the full column it gets in the schedule
+     footer. Scoped to the adjacency, so it says what it means: match the
+     message you are next to. */
+  .hm-foot + .app-provenance {
+    max-inline-size: var(--measure);
+  }
+
+  @media (max-width: 40rem) {
+    .hm-section__link {
+      gap: var(--sp-s);
+    }
+
+    .hm-section__n {
+      inline-size: 2rem;
+    }
+  }
+}

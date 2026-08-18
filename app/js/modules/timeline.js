@@ -4,11 +4,11 @@
 
 import { escapeHtml } from './utils.js';
 
-const SLOT_MINS = 15;                              // display granularity
-const SNAP_MINS = 5;                               // drag/add snap granularity
-const ROW_H = 64;                                  // px per SLOT_MINS (4×64=256px/hr)
-const SNAP_H = (SNAP_MINS / SLOT_MINS) * ROW_H;   // px per snap step (≈21px)
-const MIN_SESSION_PX = 14;                         // minimum rendered session height (1 text line)
+const SLOT_MINS = 15; // display granularity
+const SNAP_MINS = 5; // drag/add snap granularity
+const ROW_H = 64; // px per SLOT_MINS (4×64=256px/hr)
+const SNAP_H = (SNAP_MINS / SLOT_MINS) * ROW_H; // px per snap step (≈21px)
+const MIN_SESSION_PX = 14; // minimum rendered session height (1 text line)
 
 let _el = null;
 let _dataset = null;
@@ -27,9 +27,15 @@ export function renderTimeline(container, dataset, callbacks) {
 
 // ── Time helpers ───────────────────────────────────────────────────────────
 
-function _tz() { return _cbs.getEventTimezone(); }
-function _localStr(isoUtc) { return _cbs.utcIsoToLocalInput(isoUtc, _tz()) || ''; }
-function _toUtc(localStr) { return _cbs.localInputToUtcIso(localStr, _tz()) || ''; }
+function _tz() {
+  return _cbs.getEventTimezone();
+}
+function _localStr(isoUtc) {
+  return _cbs.utcIsoToLocalInput(isoUtc, _tz()) || '';
+}
+function _toUtc(localStr) {
+  return _cbs.localInputToUtcIso(localStr, _tz()) || '';
+}
 
 function _localDate(isoUtc) {
   const s = _localStr(isoUtc);
@@ -86,9 +92,9 @@ function extractDays(dataset) {
 function _getRooms() {
   const rooms = _dataset.event?.rooms;
   if (!rooms) return _deriveRoomsForDay();
-  if (Array.isArray(rooms)) return rooms.filter(r => r !== '');
+  if (Array.isArray(rooms)) return rooms.filter((r) => r !== '');
   const dayRooms = rooms[_activeDay];
-  return Array.isArray(dayRooms) ? dayRooms.filter(r => r !== '') : _deriveRoomsForDay();
+  return Array.isArray(dayRooms) ? dayRooms.filter((r) => r !== '') : _deriveRoomsForDay();
 }
 
 function _deriveRoomsForDay() {
@@ -106,7 +112,7 @@ function _ensureEventRooms() {
   if (Array.isArray(rooms)) {
     const days = extractDays(_dataset);
     const perDay = {};
-    for (const day of days) perDay[day] = rooms.filter(r => r !== '');
+    for (const day of days) perDay[day] = rooms.filter((r) => r !== '');
     _dataset.event.rooms = perDay;
   } else if (!rooms || typeof rooms !== 'object') {
     _dataset.event.rooms = {};
@@ -154,10 +160,15 @@ function _deleteRoom(idx) {
   const dayRooms = _dataset.event.rooms[_activeDay];
   const room = dayRooms[idx];
   const affected = (_dataset.items || []).filter(
-    item => (item.location ?? '') === room && _localDate(item.startTime) === _activeDay
+    (item) => (item.location ?? '') === room && _localDate(item.startTime) === _activeDay,
   );
   if (affected.length > 0) {
-    if (!window.confirm(`Remove "${room}" from ${fmtDayLabel(_activeDay)}? ${affected.length} session(s) on this day will have their location cleared.`)) return;
+    if (
+      !window.confirm(
+        `Remove "${room}" from ${fmtDayLabel(_activeDay)}? ${affected.length} session(s) on this day will have their location cleared.`,
+      )
+    )
+      return;
     for (const item of affected) item.location = '';
   }
   _cbs.undoPush();
@@ -211,7 +222,7 @@ function getTimeRange(dayItems) {
 }
 
 function sessionTop(startMins, minMins) {
-  return Math.max(0, (startMins - minMins) / SLOT_MINS * ROW_H);
+  return Math.max(0, ((startMins - minMins) / SLOT_MINS) * ROW_H);
 }
 
 function sessionHeight(durMins) {
@@ -220,24 +231,32 @@ function sessionHeight(durMins) {
 
 function getPrimaryTrack(item) {
   if (Array.isArray(item.track)) return item.track[0] || '';
-  return String(item.track || '').split(',')[0].trim();
+  return String(item.track || '')
+    .split(',')[0]
+    .trim();
 }
 
 // ── HTML builders ──────────────────────────────────────────────────────────
 
 function buildDayTabs(days) {
   return `<div class="tl-day-tabs" role="tablist" aria-label="Conference days">
-    ${days.map(d => `
+    ${days
+      .map(
+        (d) => `
       <button class="tl-day-tab${d === _activeDay ? ' is-active' : ''}"
               data-day="${d}" type="button" role="tab"
               aria-selected="${d === _activeDay ? 'true' : 'false'}">
         ${esc(fmtDayLabel(d))}
-      </button>`).join('')}
+      </button>`,
+      )
+      .join('')}
   </div>`;
 }
 
 function buildRoomBar(rooms) {
-  const chips = rooms.map((r, idx) => `
+  const chips = rooms
+    .map(
+      (r, idx) => `
     <div class="tl-room-chip" data-room-idx="${idx}" draggable="true">
       <span class="tl-room-chip-grip" aria-hidden="true"><i class="fas fa-grip-vertical"></i></span>
       <span class="tl-room-chip-label">${esc(r)}</span>
@@ -247,7 +266,9 @@ function buildRoomBar(rooms) {
       <button class="tl-room-chip-delete" data-room-idx="${idx}" type="button" title="Remove room from this day">
         <i class="fas fa-times" aria-hidden="true"></i>
       </button>
-    </div>`).join('');
+    </div>`,
+    )
+    .join('');
 
   return `<div class="tl-room-bar">
     <div class="tl-room-chips">${chips || '<span class="tl-room-bar-hint">No rooms — add one to begin.</span>'}</div>
@@ -272,8 +293,9 @@ function buildTimeAxis(minMins, totalSlots) {
 }
 
 function buildCollisionLayout(roomItems) {
-  const sorted = [...roomItems].sort((a, b) =>
-    _localMins(a.item.startTime) - _localMins(b.item.startTime));
+  const sorted = [...roomItems].sort(
+    (a, b) => _localMins(a.item.startTime) - _localMins(b.item.startTime),
+  );
 
   const laneEnds = [];
   const layout = new Map(); // index → { lane, startMins, endMins }
@@ -281,14 +303,16 @@ function buildCollisionLayout(roomItems) {
   for (const { item, index } of sorted) {
     const startMins = _localMins(item.startTime);
     const endMins = item.endTime ? _localMins(item.endTime) : startMins + 60;
-    let lane = laneEnds.findIndex(end => end <= startMins);
-    if (lane === -1) { lane = laneEnds.length; laneEnds.push(endMins); }
-    else laneEnds[lane] = endMins;
+    let lane = laneEnds.findIndex((end) => end <= startMins);
+    if (lane === -1) {
+      lane = laneEnds.length;
+      laneEnds.push(endMins);
+    } else laneEnds[lane] = endMins;
     layout.set(index, { lane, startMins, endMins });
   }
 
   // Second pass: compute total overlapping entries for each entry
-  for (const [index, info] of layout) {
+  for (const [, info] of layout) {
     let total = 0;
     for (const [, other] of layout) {
       if (other.startMins < info.endMins && other.endMins > info.startMins) total++;
@@ -319,13 +343,14 @@ function buildRoomColumn(room, dayItems, minMins, totalSlots) {
     const top = sessionTop(startMins, minMins);
     const height = sessionHeight(durMins);
     const track = getPrimaryTrack(item);
-    const spk = Array.isArray(item.speakers) ? item.speakers.join(', ') : (item.speakers || '');
+    const spk = Array.isArray(item.speakers) ? item.speakers.join(', ') : item.speakers || '';
     const compact = height < ROW_H ? ' is-compact' : '';
 
     const { lane, total } = layout.get(index);
-    const posStyle = total > 1
-      ? `;left:${lane === 0 ? '4px' : `calc(${(lane / total) * 100}% + 2px)`};right:${lane === total - 1 ? '4px' : `calc(${((total - lane - 1) / total) * 100}% + 2px)`}`
-      : '';
+    const posStyle =
+      total > 1
+        ? `;left:${lane === 0 ? '4px' : `calc(${(lane / total) * 100}% + 2px)`};right:${lane === total - 1 ? '4px' : `calc(${((total - lane - 1) / total) * 100}% + 2px)`}`
+        : '';
 
     blocks += `
       <div class="tl-session${compact}" data-index="${index}" data-room="${esc(room)}"
@@ -361,7 +386,7 @@ function buildSpanningSession(item, index, minMins) {
   const top = sessionTop(startMins, minMins);
   const height = sessionHeight(durMins);
   const track = getPrimaryTrack(item);
-  const spk = Array.isArray(item.speakers) ? item.speakers.join(', ') : (item.speakers || '');
+  const spk = Array.isArray(item.speakers) ? item.speakers.join(', ') : item.speakers || '';
   const compact = height < ROW_H ? ' is-compact' : '';
 
   return `
@@ -395,7 +420,8 @@ function _redraw() {
 
   const days = extractDays(_dataset);
   if (!days.length) {
-    _el.innerHTML = '<p class="tl-empty">No conference dates found. Set Start Date and End Date on the Event tab, or add sessions with start times.</p>';
+    _el.innerHTML =
+      '<p class="tl-empty">No conference dates found. Set Start Date and End Date on the Event tab, or add sessions with start times.</p>';
     return;
   }
 
@@ -422,7 +448,9 @@ function _redraw() {
   const colsTemplate = `repeat(${rooms.length}, minmax(180px, 1fr))`;
   const roomedItems = dayItems.filter(({ item }) => item.location);
   const spanningItems = dayItems.filter(({ item }) => !item.location);
-  const spanningHtml = spanningItems.map(({ item, index }) => buildSpanningSession(item, index, minMins)).join('');
+  const spanningHtml = spanningItems
+    .map(({ item, index }) => buildSpanningSession(item, index, minMins))
+    .join('');
 
   _el.innerHTML = `<div class="tl-root">
     ${buildDayTabs(days)}
@@ -432,10 +460,10 @@ function _redraw() {
         ${buildTimeAxis(minMins, totalSlots)}
         <div class="tl-rooms-wrap">
           <div class="tl-rooms-header" style="grid-template-columns:${colsTemplate}">
-            ${rooms.map(r => `<div class="tl-room-header">${esc(r)}</div>`).join('')}
+            ${rooms.map((r) => `<div class="tl-room-header">${esc(r)}</div>`).join('')}
           </div>
           <div class="tl-rooms-body" style="grid-template-columns:${colsTemplate};height:${totalSlots * ROW_H}px">
-            ${rooms.map(r => buildRoomColumn(r, roomedItems, minMins, totalSlots)).join('')}
+            ${rooms.map((r) => buildRoomColumn(r, roomedItems, minMins, totalSlots)).join('')}
             ${spanningHtml ? `<div class="tl-spanning-layer">${spanningHtml}</div>` : ''}
           </div>
         </div>
@@ -452,21 +480,29 @@ function _redraw() {
 // ── Bind handlers ──────────────────────────────────────────────────────────
 
 function _bindAll() {
-  _el.querySelectorAll('.tl-day-tab').forEach(btn =>
-    btn.addEventListener('click', () => { _activeDay = btn.dataset.day; _redraw(); }));
+  _el.querySelectorAll('.tl-day-tab').forEach((btn) =>
+    btn.addEventListener('click', () => {
+      _activeDay = btn.dataset.day;
+      _redraw();
+    }),
+  );
 
   _bindRoomBar();
 
-  _el.querySelectorAll('.tl-session').forEach(block =>
-    block.addEventListener('mousedown', _onMoveStart));
-  _el.querySelectorAll('.tl-resize-handle').forEach(h =>
-    h.addEventListener('mousedown', _onResizeStart));
-  _el.querySelectorAll('.tl-session-delete').forEach(btn =>
-    btn.addEventListener('click', _onDelete));
-  _el.querySelectorAll('.tl-session-span-toggle').forEach(btn =>
-    btn.addEventListener('click', _onSpanToggle));
+  _el
+    .querySelectorAll('.tl-session')
+    .forEach((block) => block.addEventListener('mousedown', _onMoveStart));
+  _el
+    .querySelectorAll('.tl-resize-handle')
+    .forEach((h) => h.addEventListener('mousedown', _onResizeStart));
+  _el
+    .querySelectorAll('.tl-session-delete')
+    .forEach((btn) => btn.addEventListener('click', _onDelete));
+  _el
+    .querySelectorAll('.tl-session-span-toggle')
+    .forEach((btn) => btn.addEventListener('click', _onSpanToggle));
 
-  _el.querySelectorAll('.tl-room-col').forEach(col => {
+  _el.querySelectorAll('.tl-room-col').forEach((col) => {
     col.addEventListener('click', _onColClick);
     col.addEventListener('mousemove', _onColHover);
     col.addEventListener('mouseleave', _onColLeave);
@@ -474,13 +510,17 @@ function _bindAll() {
 
   const scrollWrap = _el.querySelector('.tl-scroll-wrap');
   if (scrollWrap) {
-    scrollWrap.addEventListener('wheel', (e) => {
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        e.preventDefault();
-        const scroller = document.getElementById('editorMain') ?? document.scrollingElement;
-        scroller?.scrollBy({ top: e.deltaY, behavior: 'instant' });
-      }
-    }, { passive: false });
+    scrollWrap.addEventListener(
+      'wheel',
+      (e) => {
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+          e.preventDefault();
+          const scroller = document.getElementById('editorMain') ?? document.scrollingElement;
+          scroller?.scrollBy({ top: e.deltaY, behavior: 'instant' });
+        }
+      },
+      { passive: false },
+    );
   }
 }
 
@@ -492,33 +532,34 @@ function _bindRoomBar() {
 
   bar.querySelector('.tl-add-room-btn')?.addEventListener('click', _addRoom);
 
-  bar.querySelectorAll('.tl-room-chip').forEach(chip => {
+  bar.querySelectorAll('.tl-room-chip').forEach((chip) => {
     const idx = parseInt(chip.dataset.roomIdx, 10);
 
-    chip.querySelector('.tl-room-chip-rename')?.addEventListener('click', () =>
-      _startRenameRoom(chip, idx));
-    chip.querySelector('.tl-room-chip-delete')?.addEventListener('click', () =>
-      _deleteRoom(idx));
+    chip
+      .querySelector('.tl-room-chip-rename')
+      ?.addEventListener('click', () => _startRenameRoom(chip, idx));
+    chip.querySelector('.tl-room-chip-delete')?.addEventListener('click', () => _deleteRoom(idx));
 
-    chip.addEventListener('dragstart', e => {
+    chip.addEventListener('dragstart', (e) => {
       _roomDragIdx = idx;
       chip.classList.add('is-room-dragging');
       e.dataTransfer.effectAllowed = 'move';
     });
     chip.addEventListener('dragend', () => {
       _roomDragIdx = null;
-      bar.querySelectorAll('.tl-room-chip').forEach(c =>
-        c.classList.remove('is-room-dragging', 'is-room-drag-over'));
+      bar
+        .querySelectorAll('.tl-room-chip')
+        .forEach((c) => c.classList.remove('is-room-dragging', 'is-room-drag-over'));
     });
-    chip.addEventListener('dragover', e => {
+    chip.addEventListener('dragover', (e) => {
       if (_roomDragIdx === null || _roomDragIdx === idx) return;
       e.preventDefault();
       e.dataTransfer.dropEffect = 'move';
-      bar.querySelectorAll('.tl-room-chip').forEach(c => c.classList.remove('is-room-drag-over'));
+      bar.querySelectorAll('.tl-room-chip').forEach((c) => c.classList.remove('is-room-drag-over'));
       chip.classList.add('is-room-drag-over');
     });
     chip.addEventListener('dragleave', () => chip.classList.remove('is-room-drag-over'));
-    chip.addEventListener('drop', e => {
+    chip.addEventListener('drop', (e) => {
       e.preventDefault();
       if (_roomDragIdx === null || _roomDragIdx === idx) return;
       _reorderRoom(_roomDragIdx, idx);
@@ -554,16 +595,27 @@ function _startRenameRoom(chip, idx) {
   };
 
   input.addEventListener('blur', commit);
-  input.addEventListener('keydown', e => {
-    if (e.key === 'Enter') { e.preventDefault(); commit(); }
-    if (e.key === 'Escape') { input.value = currentName; commit(); }
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      commit();
+    }
+    if (e.key === 'Escape') {
+      input.value = currentName;
+      commit();
+    }
   });
 }
 
 // ── Move drag ──────────────────────────────────────────────────────────────
 
 function _onMoveStart(e) {
-  if (e.target.closest('.tl-session-delete') || e.target.closest('.tl-resize-handle') || e.target.closest('.tl-session-span-toggle')) return;
+  if (
+    e.target.closest('.tl-session-delete') ||
+    e.target.closest('.tl-resize-handle') ||
+    e.target.closest('.tl-session-span-toggle')
+  )
+    return;
   e.preventDefault();
 
   const block = e.currentTarget;
@@ -595,7 +647,7 @@ function _onMoveMove(e) {
 
   const snappedSlotDelta = Math.round((e.clientY - _drag.startY) / SNAP_H);
   const newStartMins = Math.max(_drag.minMins, _drag.origStartMins + snappedSlotDelta * SNAP_MINS);
-  const deltaY = (newStartMins - _drag.origStartMins) / SLOT_MINS * ROW_H;
+  const deltaY = ((newStartMins - _drag.origStartMins) / SLOT_MINS) * ROW_H;
   const deltaX = _drag.isSpanning ? 0 : e.clientX - _drag.startX;
   _drag.block.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
 
@@ -605,14 +657,18 @@ function _onMoveMove(e) {
     const newRoom = col?.dataset.room ?? _drag.targetRoom;
     if (newRoom !== _drag.targetRoom) {
       _drag.targetRoom = newRoom;
-      _el.querySelectorAll('.tl-room-col').forEach(c =>
-        c.classList.toggle('is-drop-target', c.dataset.room === newRoom));
+      _el
+        .querySelectorAll('.tl-room-col')
+        .forEach((c) => c.classList.toggle('is-drop-target', c.dataset.room === newRoom));
     }
   }
 }
 
 function _onMoveUp(e) {
-  if (!_drag || _drag.type !== 'move') { _cleanDrag(); return; }
+  if (!_drag || _drag.type !== 'move') {
+    _cleanDrag();
+    return;
+  }
 
   const snappedSlotDelta = Math.round((e.clientY - _drag.startY) / SNAP_H);
   const durMins = _drag.origEndMins - _drag.origStartMins;
@@ -663,12 +719,15 @@ function _onResizeMove(e) {
 }
 
 function _onResizeUp(e) {
-  if (!_drag || _drag.type !== 'resize') { _cleanDrag(); return; }
+  if (!_drag || _drag.type !== 'resize') {
+    _cleanDrag();
+    return;
+  }
 
   const snappedSlotDelta = Math.round((e.clientY - _drag.startY) / SNAP_H);
   const newEndMins = Math.max(
     _drag.origStartMins + SNAP_MINS,
-    _drag.origEndMins + snappedSlotDelta * SNAP_MINS
+    _drag.origEndMins + snappedSlotDelta * SNAP_MINS,
   );
 
   const item = _dataset.items[_drag.index];
@@ -753,7 +812,9 @@ function _onColHover(e) {
 }
 
 function _onColLeave() {
-  _el.querySelectorAll('.tl-add-indicator').forEach(el => { el.style.display = 'none'; });
+  _el.querySelectorAll('.tl-add-indicator').forEach((el) => {
+    el.style.display = 'none';
+  });
 }
 
 // ── Cleanup ────────────────────────────────────────────────────────────────
@@ -764,7 +825,7 @@ function _cleanDrag() {
     _drag.block.style.transform = '';
     _drag.block.style.pointerEvents = '';
   }
-  _el?.querySelectorAll('.tl-room-col').forEach(c => c.classList.remove('is-drop-target'));
+  _el?.querySelectorAll('.tl-room-col').forEach((c) => c.classList.remove('is-drop-target'));
   document.removeEventListener('mousemove', _onMoveMove);
   document.removeEventListener('mousemove', _onResizeMove);
   document.removeEventListener('mouseup', _onMoveUp);

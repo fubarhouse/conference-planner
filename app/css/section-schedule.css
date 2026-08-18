@@ -1,0 +1,2302 @@
+/* ============================================================================
+   SECTION — SCHEDULE
+   Loads on top of foundation.css. Owns the schedule's blocks only:
+   masthead, nav, breadcrumb, toolbar, day bands, session entries, dock.
+
+   Direction: "Programme" — the printed conference programme. Time sits in the
+   margin; concurrent sessions read across; type and hairlines do the work,
+   not cards and shadows. See brand/DECISIONS.md.
+   ========================================================================= */
+
+@layer section {
+  /* --- TOOLBAR — fields are ruled lines, not boxes ------------------------ */
+  .sch-toolbar {
+    padding: var(--sp-s) 0 var(--sp-m);
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  /* --- INFORMATION HEADER -------------------------------------------------
+     A printed programme opens with the event's particulars and its plates.
+     Neither is a card: hairlines and type carry the structure.
+     --------------------------------------------------------------------- */
+  .sch-infohead {
+    display: grid;
+    gap: var(--sp-l);
+    padding-block: var(--sp-s) var(--sp-l);
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  @media (min-width: 56rem) {
+    .sch-infohead {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+      gap: var(--sp-xl);
+    }
+  }
+
+  /* Particulars lead; the plate follows. DOM order is promo-then-info, so the
+     columns are swapped here rather than in JS. */
+  .sch-colophon {
+    order: 1;
+  }
+
+  .sch-plate {
+    order: 2;
+  }
+
+  /* Both columns open with the same ruled small-caps header, so the spread
+     reads as one object rather than two unrelated blocks. */
+  .sch-colophon__title,
+  .sch-plate__eyebrow {
+    display: block;
+    padding-block-end: var(--sp-xs);
+    margin-block-end: var(--sp-2xs);
+    border-block-end: 1px solid var(--ink-1);
+  }
+
+  .sch-colophon__title {
+    padding-block-end: var(--sp-xs);
+    border-block-end: 1px solid var(--ink-1);
+  }
+
+  .sch-colophon__list {
+    display: grid;
+    grid-template-columns: minmax(6rem, auto) 1fr;
+  }
+
+  .sch-colophon__label {
+    grid-column: 1;
+    padding-block: var(--sp-xs);
+    padding-inline-end: var(--sp-s);
+    border-block-end: 1px solid var(--rule-0);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .sch-colophon__value {
+    grid-column: 2;
+    margin: 0;
+    padding-block: var(--sp-xs);
+    border-block-end: 1px solid var(--rule-0);
+    font-size: var(--step--1);
+    color: var(--ink-0);
+  }
+
+  /* A URL is a machine token — mono, and allowed to break. */
+  .sch-colophon__value--url {
+    font-family: var(--font-data);
+    overflow-wrap: anywhere;
+  }
+
+  .sch-colophon__link {
+    color: var(--brand-1-ink);
+    text-underline-offset: 3px;
+  }
+
+  /* Plate — an image with its caption, as a printed plate would be set. */
+  .sch-plate {
+    display: grid;
+    gap: var(--sp-s);
+    grid-template-columns: minmax(0, 9rem) 1fr;
+    grid-template-areas:
+      'eyebrow eyebrow'
+      'frame   body';
+    align-items: start;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .sch-plate__eyebrow {
+    grid-area: eyebrow;
+  }
+
+  .sch-plate__frame {
+    grid-area: frame;
+    border: 1px solid var(--rule-1);
+    background: var(--paper-2);
+    min-block-size: 5rem;
+  }
+
+  .sch-plate__image {
+    inline-size: 100%;
+    block-size: auto;
+  }
+
+  .sch-plate__body {
+    grid-area: body;
+    min-inline-size: 0;
+  }
+
+  .sch-plate__title {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    line-height: 1.2;
+    margin-block-start: var(--sp-3xs);
+  }
+
+  .sch-plate__copy {
+    font-size: var(--step--1);
+    color: var(--ink-1);
+    margin-block-start: var(--sp-2xs);
+  }
+
+  .sch-plate__action {
+    display: inline-block;
+    margin-block-start: var(--sp-xs);
+    font-size: var(--step--1);
+    font-weight: 500;
+    color: var(--brand-1-ink);
+    text-underline-offset: 3px;
+  }
+
+  /* --- USAGE NOTE --------------------------------------------------------- */
+  .sch-usage {
+    padding-block: var(--sp-s);
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  /* Help text, not a headline — it was competing with the colophon. */
+  .sch-usage__title {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin-block-end: var(--sp-2xs);
+  }
+
+  .sch-usage__list {
+    padding-inline-start: var(--sp-m);
+    font-size: var(--step--1);
+    color: var(--ink-2);
+    max-inline-size: var(--measure);
+  }
+
+  .sch-usage__list > li + li {
+    margin-block-start: var(--sp-3xs);
+  }
+
+  /* --- SPONSORS -----------------------------------------------------------
+     A programme's sponsor pages: tier as a ruled small-caps heading, marks
+     laid out in rows. Logo surfaces keep their own backgrounds — a sponsor
+     mark IS the brand, so it is never recoloured to suit our palette.
+     --------------------------------------------------------------------- */
+  .sch-sponsors,
+  .sch-related {
+    padding-block: var(--sp-l);
+    border-block-start: 1px solid var(--rule-0);
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .sch-sponsors__head {
+    margin-block-end: var(--sp-m);
+  }
+
+  .sch-sponsors__title,
+  .sch-related__title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 600;
+    letter-spacing: var(--display-track);
+  }
+
+  .sch-sponsors .sponsor-tier-section + .sponsor-tier-section {
+    margin-block-start: var(--sp-l);
+  }
+
+  .sch-sponsors .sponsor-tier-heading {
+    padding-block-end: var(--sp-2xs);
+    margin-block-end: var(--sp-s);
+    border-block-end: 1px solid var(--rule-0);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+    background: none;
+  }
+
+  .sch-sponsors .sponsor-logo-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-m);
+    justify-content: flex-start;
+  }
+
+  .sch-sponsors .sponsor-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2xs);
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .sch-sponsors .sponsor-logo-surface {
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    box-shadow: none;
+    cursor: pointer;
+  }
+
+  .sch-sponsors .sponsor-logo-surface:hover {
+    border-color: var(--ink-1);
+  }
+
+  .sch-sponsors .sponsor-card-title,
+  .sch-sponsors .sponsor-logo-name {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-1);
+    background: none;
+    border: 0;
+    cursor: pointer;
+    text-align: start;
+  }
+
+  .sch-sponsors .sponsor-card-title:hover {
+    color: var(--ink-0);
+  }
+
+  /* A sponsor's name opens its detail, so it is a control and owes the same
+     44px as every other one. */
+  .sch-sponsors .sponsor-card-title,
+  .sch-sponsors .sponsor-logo-name {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--tap);
+  }
+
+  .sch-sponsors .sponsor-logo-subtitle {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+
+  /* --- RELATED / PARTNER EVENTS ------------------------------------------
+     Same language as sponsors: ruled small-caps group heading, marks in a row,
+     names in small caps. Partner logos keep their own backgrounds.
+     --------------------------------------------------------------------- */
+  .sch-related .related-group + .related-group {
+    margin-block-start: var(--sp-l);
+  }
+
+  .sch-related .related-group-heading {
+    padding-block-end: var(--sp-2xs);
+    margin-block-end: var(--sp-s);
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .sch-related .related-card-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-m);
+  }
+
+  .sch-related .related-card {
+    display: flex;
+    gap: var(--sp-s);
+    align-items: center;
+  }
+
+  .sch-related .related-logo {
+    border: 1px solid var(--rule-0);
+  }
+
+  .sch-related .related-card-name {
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-1);
+  }
+
+  .sch-related .related-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-s);
+    margin-block-start: var(--sp-2xs);
+  }
+
+  .sch-related .related-cta {
+    font-size: var(--step--1);
+    font-weight: 500;
+    color: var(--brand-1-ink);
+    text-decoration: none;
+    text-underline-offset: 3px;
+  }
+
+  .sch-related .related-cta:hover {
+    text-decoration: underline;
+  }
+
+  .sch-related .related-cta-ghost {
+    color: var(--ink-1);
+  }
+
+  /* --- CREDITS ------------------------------------------------------------ */
+  .sch-credits {
+    padding-block: var(--sp-l) var(--sp-2xl);
+    border-block-start: 1px solid var(--rule-0);
+    font-size: var(--step--1);
+    color: var(--ink-2);
+    text-align: center;
+  }
+
+  .sch-credits > p + p {
+    margin-block-start: var(--sp-2xs);
+  }
+
+  .sch-credits__link {
+    color: var(--brand-1-ink);
+    text-underline-offset: 3px;
+  }
+
+  /* The header's Subscribe and mode buttons still carry legacy chrome built for
+     a permanently dark page (white text on a translucent white border), which
+     is invisible in light mode. Same treatment as every other secondary
+     button, so they follow the tokens. */
+  .header-actions .theme-picker-btn,
+  .sub-pop-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    background: transparent;
+    color: var(--ink-0);
+    border: 1px solid var(--ink-1);
+    border-radius: 0;
+    font-size: var(--step--1);
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .header-actions .theme-picker-btn:hover,
+  .sub-pop-copy:hover {
+    background: var(--paper-2);
+    border-color: var(--ink-0);
+  }
+
+  .theme-picker-menu {
+    background: var(--paper-1);
+    border: 1px solid var(--rule-1);
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .theme-picker-item {
+    display: flex;
+    align-items: center;
+    inline-size: 100%;
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    background: transparent;
+    border: 0;
+    color: var(--ink-1);
+    font-size: var(--step--1);
+    text-align: start;
+    cursor: pointer;
+  }
+
+  .theme-picker-item:hover {
+    background: var(--paper-2);
+    color: var(--ink-0);
+  }
+
+  /* Active is a filled leading bar plus full ink — a border reads as a
+     framework default and does not survive alongside the menu's own border. */
+  .theme-picker-item.is-active {
+    color: var(--ink-0);
+    font-weight: 600;
+    background: var(--paper-2);
+    box-shadow: inset 3px 0 0 var(--brand-1-ink);
+  }
+
+  .theme-picker-item.is-active::after {
+    content: '✓';
+    margin-inline-start: auto;
+    color: var(--brand-1-ink);
+  }
+
+  /* --- DAY — a chapter opener -------------------------------------------- */
+  .sch-chapter {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--sp-s);
+    padding-block: var(--sp-l) var(--sp-s);
+    border-block-end: 1px solid var(--ink-0);
+  }
+
+  .sch-chapter__title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 600;
+    letter-spacing: var(--display-track);
+  }
+
+  /* --- BAND — time in the margin, concurrency across ----------------------
+     The grid wraps rather than using fixed room columns: only 22% of events
+     have a consistent room set, and one has 17 concurrent rooms.
+     --------------------------------------------------------------------- */
+  .sch-band {
+    display: grid;
+    grid-template-columns: var(--time-w, 7rem) 1fr;
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .sch-band__time {
+    padding: var(--sp-m) var(--sp-s) var(--sp-m) 0;
+    text-align: end;
+    border-inline-end: 1px solid var(--rule-0);
+  }
+
+  .sch-band__hh {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums lining-nums;
+    line-height: 1;
+    letter-spacing: var(--display-track);
+  }
+
+  .sch-band__dur {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    margin-block-start: var(--sp-3xs);
+  }
+
+  .sch-band__events {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--slot-min, 15rem), 100%), 1fr));
+    gap: var(--sp-s);
+    padding: var(--sp-m) 0 var(--sp-m) var(--sp-s);
+    align-items: start;
+  }
+
+  /* --- ENTRY --------------------------------------------------------------
+     No card. Type and rules do the work.
+     Three independent states, three separate channels:
+       selected → tinted paper      (neutral; the checkbox carries the accent)
+       hover    → underlined title  (affordance only)
+       focus    → the global focus ring
+     --------------------------------------------------------------------- */
+  .sch-entry {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--sp-xs);
+    align-items: start;
+    padding: var(--sp-2xs) var(--sp-xs);
+    cursor: pointer;
+  }
+
+  .sch-entry:hover .sch-entry__title {
+    text-decoration: underline;
+    text-decoration-color: var(--rule-1);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+
+  .sch-entry:has(:checked) {
+    background: var(--paper-2);
+  }
+
+  .sch-entry__pick {
+    inline-size: 1.05rem;
+    block-size: 1.05rem;
+    accent-color: var(--brand-1-ink);
+    margin-block-start: 0.3rem;
+    cursor: pointer;
+  }
+
+  /* Label wraps the checkbox so the delegation guard (a, label, input) stops
+     a tick from also opening the session. */
+  .sch-entry__picker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-block-size: var(--tap);
+    min-inline-size: var(--tap);
+    margin: calc(var(--sp-xs) * -1) 0 calc(var(--sp-xs) * -1) calc(var(--sp-xs) * -1);
+  }
+
+  .sch-entry__track {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--brand-1-ink);
+  }
+
+  .sch-entry__room {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .sch-entry__title {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: var(--display-track);
+    margin-block-start: var(--sp-3xs);
+    text-wrap: balance;
+  }
+
+  .sch-entry__by {
+    display: block;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-0);
+    color: var(--ink-1);
+    margin-block-start: var(--sp-3xs);
+  }
+
+  .sch-entry__summary {
+    display: block;
+    font-size: var(--step--1);
+    color: var(--ink-1);
+    margin-block-start: var(--sp-2xs);
+  }
+
+  .sch-entry__flags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-xs);
+    margin-block-start: var(--sp-2xs);
+  }
+
+  .sch-flag {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 500;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* Search matches. The highlighter emits <span class="keyword-highlight">,
+     not <mark>. Legacy paints it as an orange rounded chip (app.css:207);
+     here it is a weight-and-colour shift, so a matched programme still reads
+     as a programme. */
+  .sch-entry .keyword-highlight,
+  .sch-entry mark {
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    color: var(--brand-1-ink);
+    font-weight: 600;
+  }
+
+  /* --- SESSION DETAIL — one markup, two presentations ---------------------
+     Mobile : the entry expands in place, neighbours stay on screen.
+     Desktop: the same content renders into a permanent right margin.
+     Zero JS — <details name> gives mutual exclusivity, position:fixed lifts
+     the open detail into the margin, :has() swaps the empty state.
+     The checkbox is a SIBLING of <summary>, never a child: nested, a click
+     toggles the disclosure instead of the checkbox in several engines.
+     --------------------------------------------------------------------- */
+  .sch-entry__disclosure {
+    min-inline-size: 0;
+  }
+
+  .sch-entry__summary {
+    display: block;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .sch-entry__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .sch-entry__summary:focus-visible {
+    outline: var(--focus-width) solid var(--brand-1-ink);
+    outline-offset: 4px;
+  }
+
+  /* The entry whose detail is showing. Distinct from selected (tinted paper)
+     and hover (underlined title) — three states, three channels. */
+  .sch-entry:has(details[open]) {
+    box-shadow: -0.7rem 0 0 -0.55rem var(--brand-1-ink);
+  }
+
+  .sch-entry__detail {
+    padding-block-start: var(--sp-s);
+  }
+
+  /* Expanded in place, the preview and the full abstract say the same thing
+     twice. Hidden while open — but only below the rail breakpoint, where the
+     detail sits directly beneath. On desktop the detail moves to the margin,
+     so the preview still earns its place in the programme. */
+  .sch-entry__disclosure[open] .sch-entry__summary-text {
+    display: none;
+  }
+
+  /* Restated title/speaker. Hidden only where the entry itself is still
+     on screen beside the detail (inline expansion, which no longer happens
+     at any width — both the rail and the mobile panel replace the context). */
+  /* The head reserves the corner the close button sits in, so the title wraps
+     before it reaches the button rather than running underneath it. */
+  .sch-entry__detail-head {
+    position: relative;
+    display: block;
+    /* The close button is absolutely positioned, so it adds nothing to this
+       block's height. With a one-line title the head measured exactly the
+       button's own 44px, which put the button's bottom border precisely on the
+       closing rule — the two read as one crossed-out line. The minimum keeps a
+       full gap beneath the button no matter how short the title is; a title
+       that runs to several lines already clears it. */
+    min-block-size: calc(var(--tap) + var(--sp-s));
+    padding-block-end: var(--sp-s);
+    padding-inline-end: 5.5rem;
+    border-block-end: 1px solid var(--ink-1);
+    margin-block-end: var(--sp-m);
+  }
+
+  .sch-entry__close--top {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+  }
+
+  /* The facts read first now — when, where, which track — and the abstract
+     follows. Someone scanning a programme wants the slot before the pitch. */
+  .sch-entry__facts + .sch-entry__abstract {
+    margin-block-start: var(--sp-m);
+    padding-block-start: var(--sp-m);
+    border-block-start: 1px solid var(--rule-0);
+  }
+
+  .sch-entry__detail-title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: var(--display-track);
+    text-wrap: balance;
+  }
+
+  .sch-entry__detail-by {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-1);
+    color: var(--ink-1);
+    margin-block-start: var(--sp-2xs);
+  }
+
+  .sch-entry__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-s);
+    margin-block-start: var(--sp-s);
+  }
+
+  .sch-entry__close > summary {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    border: 1px solid var(--rule-1);
+    background: var(--paper-1);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-1);
+  }
+
+  .sch-entry__close > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .sch-entry__close > summary:hover {
+    color: var(--ink-0);
+    border-color: var(--ink-1);
+  }
+
+  .sch-entry__abstract {
+    font-size: var(--step--1);
+    line-height: 1.62;
+    color: var(--ink-1);
+    max-inline-size: var(--measure);
+  }
+
+  .sch-entry__facts {
+    margin-block-start: var(--sp-m);
+    border-block-start: 1px solid var(--rule-0);
+  }
+
+  .sch-entry__fact {
+    display: grid;
+    grid-template-columns: minmax(5rem, auto) 1fr;
+    gap: var(--sp-xs);
+    padding-block: var(--sp-2xs);
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .sch-entry__fact dt {
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+    padding-block-start: 0.2rem;
+  }
+
+  .sch-entry__fact dd {
+    margin: 0;
+    font-size: var(--step--1);
+  }
+
+  .sch-entry__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-m);
+    margin-block-start: var(--sp-s);
+  }
+
+  /* 208 of these on one conference, and every one of them was under the 44px
+     touch minimum — a dense list of small targets is a list you tap twice. The
+     type is unchanged; only the hit area grows, and the negative inline margin
+     keeps the text on the same left edge as the line above it so the entry's
+     rhythm is untouched. */
+  .sch-entry__link {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-2xs);
+    margin-inline-start: calc(var(--sp-2xs) * -1);
+    font-size: var(--step--1);
+    font-weight: 500;
+    color: var(--brand-1-ink);
+    text-underline-offset: 3px;
+  }
+
+  /* The row of links closes up, since each link now carries its own height. */
+  .sch-entry__links {
+    gap: var(--sp-s);
+    margin-block-start: var(--sp-2xs);
+  }
+
+  /* Bound to the entry's own checkbox with `for`, so selection state stays in
+     sync with no script. CSS swaps the label text off :has(:checked). */
+  .sch-entry__toggle {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    border: 1px solid var(--ink-1);
+    font-size: var(--step--1);
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .sch-entry__toggle:hover {
+    background: var(--paper-2);
+    border-color: var(--ink-0);
+  }
+
+  .sch-entry__toggle-remove {
+    display: none;
+  }
+
+  .sch-entry:has(:checked) .sch-entry__toggle-add {
+    display: none;
+  }
+
+  .sch-entry:has(:checked) .sch-entry__toggle-remove {
+    display: inline;
+  }
+
+  /* --- MOBILE: a full-viewport sheet, not an inline expansion -------------
+     Expanding in place means scrolling down to read and back up to close —
+     the wrong trade in a corridor between talks. The detail becomes a sheet
+     that slides in over the programme, with its own scroll, and closes in
+     one tap from where the thumb already is.
+
+     Still zero JS. `@starting-style` animates the sheet on appearance, which
+     a keyframe would also do — but this way the resting state is the normal
+     rule and the animation is the exception, so nothing is left mid-transform
+     if the animation is skipped. Page scroll behind the sheet is locked with
+     :has(), and reduced-motion is honoured by the foundation reset.
+     --------------------------------------------------------------------- */
+  @media (max-width: 85.99rem) {
+    /* Panel geometry lives on the unqualified selector, not on [open], so it
+       survives the closing transition — otherwise the sheet loses `fixed` the
+       instant the attribute goes and jumps back into the page mid-slide. */
+    .sch-entry__disclosure > .sch-entry__detail {
+      position: fixed;
+      inset: 0;
+      z-index: 200; /* above #scheduleBottomBar (100) and the dock (20) */
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      background: var(--paper-0);
+      padding:
+        calc(var(--sp-xl) + env(safe-area-inset-top)) var(--sp-m)
+        calc(var(--sp-2xl) + env(safe-area-inset-bottom));
+      transform: translateX(100%);
+      transition: transform 180ms cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    .sch-entry__disclosure[open] > .sch-entry__detail {
+      transform: none;
+    }
+
+    /* Entry animation. `@starting-style` gives the sheet a from-state on
+       first render; without it there is nothing to transition from. */
+    @starting-style {
+      .sch-entry__disclosure[open] > .sch-entry__detail {
+        transform: translateX(100%);
+      }
+    }
+
+    /* Exit animation. A closed <details> stops rendering its content
+       immediately, which would cut the slide-out off before it starts;
+       `allow-discrete` keeps the content alive for the transition's duration.
+       Progressive: where ::details-content is unsupported the sheet simply
+       closes instantly, which is not a regression. */
+    .sch-entry__disclosure::details-content {
+      transition:
+        content-visibility 180ms allow-discrete,
+        overlay 180ms allow-discrete;
+    }
+
+    /* The sheet owns the viewport — stop the programme scrolling behind it. */
+    body:has(.sch-entry__disclosure[open]) {
+      overflow: hidden;
+    }
+
+  }
+
+  /* --- NOW INDICATOR ------------------------------------------------------
+     Legacy paints this in a fixed cyan. It marks a moment on the programme, so
+     it takes the event accent (the -ink derivation, since it is a UI indicator
+     and must clear 3:1 in both modes) and the same hairline language.
+     --------------------------------------------------------------------- */
+  .now-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-xs);
+    margin-block: var(--sp-xs);
+  }
+
+  .now-indicator-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    flex: none;
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--brand-1-ink);
+    background: none;
+  }
+
+  .now-indicator-dot {
+    inline-size: 0.4rem;
+    block-size: 0.4rem;
+    border-radius: 50%;
+    background: var(--brand-1-ink);
+  }
+
+  .now-indicator-line {
+    flex: 1;
+    block-size: 1px;
+    background: var(--brand-1-ink);
+    border: 0;
+  }
+
+  /* --- DOCK -------------------------------------------------------------- */
+  /* Fixed, not sticky. The element sits mid-document, so `sticky` leaves it in
+     flow where it overlays the entries and swallows their clicks. `fixed` also
+     preserves the existing show/hide, which slides it with .translate-y-full. */
+  .sch-dock {
+    position: fixed;
+    inset-inline: 0;
+    inset-block-end: 0;
+    z-index: 20;
+    background: var(--paper-2);
+    border-block-start: 1px solid var(--ink-1);
+    padding-block: var(--sp-xs);
+    transition: transform 0.3s ease;
+  }
+
+  .sch-dock.translate-y-full {
+    transform: translateY(100%);
+  }
+
+  /* The dock must stop at the rail, not run under it. */
+  @media (min-width: 86rem) {
+    .sch-dock {
+      inset-inline-end: var(--rail-w);
+    }
+  }
+
+  .sch-dock__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-s);
+  }
+
+  .sch-dock__toggle {
+    display: flex;
+    inline-size: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-s);
+    padding: var(--sp-xs) 0;
+    background: none;
+    border: 0;
+    color: var(--ink-1);
+    font-size: var(--step--1);
+    text-align: start;
+    cursor: pointer;
+  }
+
+  .sch-dock__toggle:hover {
+    color: var(--ink-0);
+  }
+
+  .sch-dock__caret {
+    flex: none;
+    transition: transform 150ms ease;
+  }
+
+  .sch-dock__toggle[aria-expanded='true'] .sch-dock__caret {
+    transform: rotate(180deg);
+  }
+
+  .sch-dock__count {
+    color: var(--ink-1);
+  }
+
+  /* Only the live figures are mono — they change as sessions are ticked, and
+     tabular figures stop the digits jittering. */
+  .sch-dock__count b {
+    font-family: var(--font-data);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-0);
+  }
+
+  /* --- HAPPENING NOW ------------------------------------------------------
+     The live companion during an event. It is the one surface that is glanced
+     at rather than read, so it is a compact ruled list: time in the margin,
+     title, room — the same grammar as a band, at a smaller scale.
+     --------------------------------------------------------------------- */
+  .now-next-panel {
+    padding-block: var(--sp-m);
+    border-block: 1px solid var(--rule-0);
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .now-next-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-s);
+    padding-block-end: var(--sp-xs);
+    border-block-end: 1px solid var(--ink-1);
+  }
+
+  .now-next-eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--brand-1-ink);
+  }
+
+  .now-next-clock {
+    font-family: var(--font-data);
+    font-size: var(--step--1);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-2);
+  }
+
+  .now-next-section {
+    margin-block-start: var(--sp-m);
+  }
+
+  .now-next-section-head {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin-block-end: var(--sp-2xs);
+  }
+
+  .now-next-dot {
+    inline-size: 0.4rem;
+    block-size: 0.4rem;
+    border-radius: 50%;
+    background: var(--ink-2);
+    flex: none;
+  }
+
+  .now-next-section-head .now-next-dot-live {
+    background: var(--brand-1-ink);
+  }
+
+  .now-next-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--sp-s);
+    align-items: baseline;
+    inline-size: 100%;
+    padding: var(--sp-2xs) 0;
+    border: 0;
+    border-block-end: 1px solid var(--rule-0);
+    background: none;
+    text-align: start;
+    cursor: pointer;
+    color: inherit;
+  }
+
+  .now-next-card:hover .now-next-card-title {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .now-next-card-time {
+    font-family: var(--font-data);
+    font-size: var(--step--1);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-2);
+  }
+
+  .now-next-card-title {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--step-0);
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  /* Flex with a gap: the room and the relative time used to be separated by an
+     icon's whitespace, so removing the icon ran them together. */
+  .now-next-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2xs) var(--sp-s);
+    font-size: var(--label-size);
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin-block-start: var(--sp-3xs);
+  }
+
+  .now-next-card-rel {
+    color: var(--brand-1-ink);
+    font-weight: 600;
+  }
+
+  .now-next-card-go {
+    color: var(--ink-2);
+  }
+
+  .now-next-more {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+    margin-block-start: var(--sp-2xs);
+  }
+
+  /* --- SELECTION BREAKDOWN (the dock, expanded) ---------------------------
+     A ledger of what you have picked. Figures are mono and tabular so the
+     columns line up and do not jitter as sessions are ticked.
+     --------------------------------------------------------------------- */
+  .selection-overview-details {
+    border-block-start: 1px solid var(--rule-1);
+    margin-block-start: var(--sp-xs);
+    padding-block: var(--sp-s);
+  }
+
+  .selection-stats-heading {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+    padding-block: var(--sp-xs) var(--sp-2xs);
+  }
+
+  .selection-stats table {
+    inline-size: 100%;
+    border-collapse: collapse;
+  }
+
+  .selection-stats-row > .selection-stats-cell {
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .selection-stats-cell {
+    padding-block: var(--sp-2xs);
+    font-size: var(--step--1);
+    color: var(--ink-0);
+    vertical-align: baseline;
+  }
+
+  /* The columns used to be spaced by a `pr-3` utility; with that gone the
+     duration and the count collided ("9h1 event"). */
+  .selection-stats-cell + .selection-stats-cell {
+    padding-inline-start: var(--sp-m);
+  }
+
+  .selection-stats-subcell {
+    padding-inline-start: var(--sp-m);
+  }
+
+  .selection-stats-subcell {
+    color: var(--ink-1);
+  }
+
+  .selection-stats-value {
+    font-family: var(--font-data);
+    font-variant-numeric: tabular-nums;
+    text-align: end;
+    white-space: nowrap;
+  }
+
+  /* --- MODAL SHELL --------------------------------------------------------
+     Shared by the sponsor, speaker and share dialogs. Flat panel, hairline
+     border, no radius — the same object language as the rail.
+     --------------------------------------------------------------------- */
+  .session-modal-overlay {
+    background: color-mix(in srgb, var(--paper-0) 82%, transparent);
+    backdrop-filter: blur(2px);
+  }
+
+  .session-modal-card {
+    background: var(--paper-1);
+    border: 1px solid var(--rule-1);
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .session-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-s);
+    padding: var(--sp-s) var(--sp-m);
+    border-block-end: 1px solid var(--rule-0);
+    background: none;
+  }
+
+  .session-modal-back,
+  .session-modal-close {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    background: transparent;
+    border: 1px solid var(--rule-1);
+    border-radius: 0;
+    color: var(--ink-1);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .session-modal-back:hover,
+  .session-modal-close:hover {
+    color: var(--ink-0);
+    border-color: var(--ink-1);
+  }
+
+  .session-modal-body {
+    padding: var(--sp-m);
+  }
+
+  .session-modal-title,
+  .speaker-modal-title,
+  .share-modal-title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 600;
+    letter-spacing: var(--display-track);
+  }
+
+  .share-modal-eyebrow,
+  .session-sponsor-block-title {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* --- SUBSCRIBE POPOVER --------------------------------------------------
+     A small panel hung off the header button. Same object as the rail: flat,
+     hairline border, no radius.
+     --------------------------------------------------------------------- */
+  .sub-pop {
+    background: var(--paper-1);
+    border: 1px solid var(--rule-1);
+    border-radius: 0;
+    box-shadow: none;
+    padding: var(--sp-m);
+  }
+
+  .sub-pop-title {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+  }
+
+  .sub-pop-desc,
+  .sub-pop-note {
+    font-size: var(--step--1);
+    color: var(--ink-1);
+    margin-block-start: var(--sp-2xs);
+  }
+
+  .sub-pop-note {
+    color: var(--ink-2);
+  }
+
+  .sub-pop-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-block-size: var(--tap);
+    margin-block-start: var(--sp-s);
+    padding-inline: var(--sp-s);
+    background: var(--ink-0);
+    color: var(--paper-0);
+    border: 1px solid var(--ink-0);
+    border-radius: 0;
+    font-size: var(--step--1);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .sub-pop-row {
+    display: flex;
+    gap: var(--sp-2xs);
+    margin-block-start: var(--sp-s);
+  }
+
+  .sub-pop-url {
+    flex: 1;
+    min-inline-size: 0;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+  }
+
+  /* --- DAY QUICK-NAV --  /* --- DAY QUICK-NAV ----------------------------------------------------- */
+  /* Sticky, so it stops being only a jump menu and starts being the answer to
+     "which day am I in" — the programme's own day headings scroll away. */
+  .sch-daynav {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 20;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2xs);
+    padding-block: var(--sp-xs);
+    background: var(--paper-0);
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .sch-daynav__chip {
+    font-family: var(--font-data);
+    font-weight: 400;
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    background: transparent;
+    border: 1px solid var(--rule-1);
+    color: var(--ink-1);
+    font-size: var(--step--1);
+    cursor: pointer;
+  }
+
+  .sch-daynav__chip:hover {
+    border-color: var(--ink-1);
+    color: var(--ink-0);
+  }
+
+  /* The clock readout. A machine reading of position, so it wears the data
+     face and stays quiet — it reports, it does not invite a tap. */
+  .sch-daynav__time {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    padding-inline-end: var(--sp-xs);
+    font-family: var(--font-data);
+    font-size: var(--step--1);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+
+  .sch-daynav__time[hidden] {
+    display: none;
+  }
+
+  /* "Now" is an action, not a place — it reads in brand ink so it is never
+     mistaken for the day you are currently in. Only present while the event is
+     actually running, so it costs nothing the rest of the year. */
+  .sch-daynav__now {
+    margin-inline-start: auto;
+    border-color: var(--brand-1-ink);
+    color: var(--brand-1-ink);
+    font-weight: 500;
+  }
+
+  /* In the scrolling bar `margin-inline-start: auto` pushes it past the right
+     edge, where it cannot be seen or tapped. Pin it there instead and let the
+     day chips pass underneath — it is the one control that must never be more
+     than a tap away while the event is running. */
+  @media (max-width: 52rem) {
+    .sch-daynav__now {
+      position: sticky;
+      inset-inline-end: 0;
+      margin-inline-start: 0;
+      background: var(--paper-0);
+      box-shadow: -8px 0 8px -6px var(--paper-0);
+    }
+
+    /* Pinned at the other end for the same reason — the position readout is
+       useless if it is the first thing to scroll out of the bar. */
+    .sch-daynav__time {
+      position: sticky;
+      inset-inline-start: 0;
+      z-index: 1;
+      background: var(--paper-0);
+      box-shadow: 8px 0 8px -6px var(--paper-0);
+    }
+  }
+
+  /* The day you are reading, in the page's selection grammar. */
+  .sch-daynav__chip[aria-current='true'] {
+    box-shadow: inset 3px 0 0 var(--brand-1-ink);
+    border-color: var(--ink-0);
+    color: var(--ink-0);
+    font-weight: 500;
+  }
+
+  /* --- MOBILE -------------------------------------------------------------
+     The band collapses to a single flow: time stops being a margin column and
+     becomes a heading above its sessions.
+     --------------------------------------------------------------------- */
+  @media (max-width: 52rem) {
+    .sch-band {
+      display: block;
+    }
+
+    /* One scrolling row, not three wrapped lines — the bar is sticky now, so
+       every line it takes is a line of programme it covers. */
+    .sch-daynav {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      overscroll-behavior-inline: contain;
+    }
+
+    .sch-daynav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .sch-daynav__chip {
+      flex: 0 0 auto;
+    }
+
+    .sch-band__time {
+      display: flex;
+      align-items: baseline;
+      gap: var(--sp-xs);
+      text-align: start;
+      padding: var(--sp-s) 0 var(--sp-2xs);
+      border-inline-end: 0;
+    }
+
+    .sch-band__dur {
+      margin-block-start: 0;
+    }
+
+    .sch-band__events {
+      padding: 0 0 var(--sp-s);
+      gap: var(--sp-m);
+    }
+  }
+}
+
+/* ============================================================================
+   LEGACY NEUTRALISERS
+   These override chrome from the unconverted legacy sheets on elements the
+   schedule has already converted. They live in the `section` layer so they win
+   without !important, and they are deleted wholesale when the legacy sheets
+   are pruned — not unpicked one by one.
+   ========================================================================= */
+@layer section {
+  .sch-chapter__title.schedule-day-heading {
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    color: var(--ink-0);
+  }
+
+  .schedule-day {
+    margin: 0;
+  }
+
+  /* The legacy sheet gave this a floating pill bar (shadow, blur, radius). It
+     keeps its own sticky positioning — that is load-bearing now, not chrome. */
+  .sch-daynav.day-nav {
+    background: var(--paper-0);
+    border: 0;
+    border-block-end: 1px solid var(--rule-0);
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .sch-daynav__chip.day-nav-chip {
+    background: transparent;
+    border: 1px solid var(--rule-1);
+    border-radius: 0;
+    color: var(--ink-1);
+    box-shadow: none;
+  }
+
+  .sch-daynav__chip.day-nav-chip:hover {
+    border-color: var(--ink-1);
+    color: var(--ink-0);
+  }
+
+  .sch-daynav__chip.day-nav-chip[aria-current='true'] {
+    box-shadow: inset 3px 0 0 var(--brand-1-ink);
+    border-color: var(--ink-0);
+    color: var(--ink-0);
+    font-weight: 500;
+  }
+  /* --- ONE MEASURE FOR THE PAGE -------------------------------------------
+     The masthead and the programme were sized by different rules: the masthead
+     by `.l-center` (80rem), the content by a legacy `#scheduleMain` override
+     (90% of 1400px, its own 1rem gutter). Two columns, two left edges, and a
+     wordmark that did not sit over the thing it titles.
+
+     The programme genuinely wants the wider measure — it is a grid, not prose —
+     so the WIDTH wins and the rule that carries it becomes `.l-center` for the
+     whole page. One token, one column, one edge.
+     --------------------------------------------------------------------- */
+  body:has(#scheduleMain) {
+    --center-max: 1400px;
+  }
+
+  /* Restated so the legacy override in schedule.css stops setting its own
+     width and gutter — this lands in `section`, which outranks `legacy`. */
+  #scheduleMain {
+    inline-size: min(100% - 2rem, var(--center-max));
+    max-inline-size: var(--center-max);
+    margin-inline: auto;
+    padding-inline: 0;
+  }
+
+  /* --- THE LAST OFF-SCALE SIZES -------------------------------------------
+     `schedule.css` sizes the sponsor block at 0.96rem and 0.84rem — 15.36px and
+     13.44px, close enough to the scale to look intentional and far enough off
+     to unsettle it. A sponsor's name is a name and its tier is a label; both
+     are on the scale now. Restated here so it goes with that sheet.
+     --------------------------------------------------------------------- */
+  .session-sponsor-name {
+    font-size: var(--step-0);
+    font-weight: 600;
+  }
+
+  .session-sponsor-tier {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+}
+
+/* ============================================================================
+   OVERRIDES LAYER  —  declared BEFORE `legacy`, deliberately.
+
+   The legacy sheets use `!important` (schedule.css 24x, components.css 12x).
+   For IMPORTANT declarations the cascade REVERSES layer order, and unlayered
+   styles count as the last layer — which makes an unlayered `!important` the
+   WEAKEST important declaration, not the strongest. So these rules cannot sit
+   outside the layer system; they must sit in a layer declared before `legacy`,
+   which reversal then promotes above it. Layer order is set in index.html:
+
+     @layer overrides, reset, legacy, tokens, base, composition, section, utility;
+
+   Every rule here is `!important` by necessity, purely to outrank a legacy
+   `!important`. Scope is limited to elements the schedule has already
+   converted, and the whole block is deleted with the legacy sheets.
+
+   This also cancels a live brief violation: schedule.css:2373 paints the filter
+   panels with radial + linear gradients, and gradients are ruled out entirely.
+   ========================================================================= */
+
+@layer overrides {
+  /* The dock carried a heavy drop shadow and the primary action a cyan glow;
+     neither belongs in a flat, ruled interface. */
+  .sch-dock,
+  .sch-dock .selection-overview-action,
+  .sch-dock .selection-overview-actions,
+  .sch-dock .selection-overview-summary {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+  }
+
+  .sch-dock .selection-overview-actions,
+  .sch-dock .selection-overview-summary,
+  .sch-dock .selection-overview-inner {
+    border-color: var(--rule-1) !important;
+    background: none !important;
+  }
+
+  /* Menus: no residual framework border, and no rounding. */
+  .theme-picker-menu,
+  .theme-picker-item {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .theme-picker-item {
+    border: 0 !important;
+  }
+
+  .theme-picker-item.is-active {
+    box-shadow: inset 3px 0 0 var(--brand-1-ink) !important;
+    background: var(--paper-2) !important;
+  }
+
+  /* Sponsor/speaker history: legacy pills and a cyan "current" row. Same
+     language as the rest — a small-caps label and a brand rule, not a chip. */
+  :is(.session-modal-card, .app-panel) :is(.speaker-modal-count-badge, .speaker-session-current-badge) {
+    background: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    color: var(--ink-2) !important;
+    font-family: var(--font-body) !important;
+    font-size: var(--label-size) !important;
+    font-weight: 600 !important;
+    letter-spacing: var(--label-track) !important;
+    text-transform: uppercase !important;
+  }
+
+  :is(.session-modal-card, .app-panel) .speaker-session-current-badge {
+    color: var(--brand-1-ink) !important;
+  }
+
+  :is(.session-modal-card, .app-panel) :is(.speaker-session-card, .sponsor-history-head) {
+    background: none !important;
+    border: 0 !important;
+    border-block-end: 1px solid var(--rule-0) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  :is(.session-modal-card, .app-panel) .speaker-session-card-current {
+    box-shadow: inset 3px 0 0 var(--brand-1-ink) !important;
+  }
+
+  /* Legacy colours inside modals were written for a dark panel; on the token
+     surface they are near-invisible. Descendants inherit the card's ink rather
+     than being enumerated one by one. */
+  :is(.session-modal-card, .app-panel) {
+    color: var(--ink-0) !important;
+  }
+
+  :is(.session-modal-card, .app-panel) :is(h1, h2, h3, h4, p, span, label, li, strong, em, td, th, dt, dd) {
+    color: inherit !important;
+  }
+
+  :is(.session-modal-card, .app-panel) a {
+    color: var(--brand-1-ink) !important;
+  }
+
+  :is(.session-modal-card, .app-panel) button {
+    color: var(--ink-0) !important;
+    background: transparent !important;
+    border-color: var(--ink-1) !important;
+    border-radius: 0 !important;
+  }
+
+  :is(.session-modal-card, .app-panel) :is(input, textarea) {
+    color: var(--ink-0) !important;
+    background: var(--paper-2) !important;
+    border: 1px solid var(--rule-1) !important;
+    border-radius: 0 !important;
+  }
+
+  /* Modal bodies keep a legacy dark fill and inset panels, which fight the
+     shell now that the shell follows the tokens. */
+  .session-modal-body,
+  .share-modal-body,
+  .share-modal-section,
+  .share-modal-option,
+  .speaker-modal-body {
+    background: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    color: var(--ink-0) !important;
+  }
+
+  .share-modal-section,
+  .share-modal-option {
+    border: 1px solid var(--rule-0) !important;
+  }
+
+  /* Legacy fills the expanded breakdown with a dark navy panel, which is
+     unreadable inside a light dock. It is a ledger, not a card. */
+  .selection-overview-details,
+  .selection-overview-details-inner,
+  .selection-stats,
+  .selection-stats table,
+  .selection-stats-row,
+  .selection-stats-subrow {
+    background: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    color: inherit !important;
+  }
+
+  .selection-overview-details-inner {
+    border: 0 !important;
+    padding: 0 !important;
+  }
+
+  .selection-overview-details {
+    border: 0 !important;
+    border-block-start: 1px solid var(--rule-1) !important;
+  }
+
+  .selection-stats {
+    border: 0 !important;
+  }
+
+  .selection-stats-row,
+  .selection-stats-subrow,
+  .selection-stats-cell {
+    color: var(--ink-0) !important;
+    border-color: var(--rule-0) !important;
+  }
+
+  .selection-stats-subcell {
+    color: var(--ink-1) !important;
+  }
+
+  /* Legacy frames this panel in a fixed cyan and fills it. */
+  .now-next-panel {
+    background: none !important;
+    border-inline: 0 !important;
+    border-block-color: var(--rule-0) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Legacy stretches the dock actions to full width in the expanded state. */
+  .sch-dock .selection-overview-actions-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-end !important;
+    gap: var(--sp-xs) !important;
+  }
+
+  .sch-dock .selection-overview-action {
+    flex: 0 0 auto !important;
+    inline-size: auto !important;
+  }
+
+  /* Logo plates were near-white linear-gradients (schedule.css:790+). Flattened
+     to tokens; the plate itself stays because third-party marks need a
+     predictable surface. */
+  .sch-sponsors .sponsor-bg-light-plate,
+  .sch-sponsors .sponsor-bg-auto,
+  .sch-related .sponsor-bg-light-plate,
+  .sch-related .sponsor-bg-auto {
+    background-image: none !important;
+    background-color: var(--plate-light) !important;
+  }
+
+  .sch-sponsors .sponsor-bg-dark-plate,
+  .sch-related .sponsor-bg-dark-plate {
+    background-image: none !important;
+    background-color: var(--plate-dark) !important;
+  }
+
+  .sch-sponsors .sponsor-bg-transparent,
+  .sch-related .sponsor-bg-transparent {
+    background-image: none !important;
+  }
+
+  /* Partner/related block: the legacy `.related-*` chrome is pill CTAs, a cyan
+     accent bar and a gradient panel on featured entries — another gradient
+     violation. Flattened to the programme language. */
+  .sch-related .related-group-heading,
+  .sch-related .related-card,
+  .sch-related .related-card--featured,
+  .sch-related .related-cta,
+  .sch-related .related-cta-ghost,
+  .sch-related .related-card-actions {
+    background: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    text-align: start !important;
+    padding: 0 !important;
+    min-block-size: 0 !important;
+  }
+
+  .sch-related,
+  .sch-related .related-shell,
+  .sch-related .related-content,
+  .sch-related .related-group {
+    text-align: start !important;
+  }
+
+  .sch-related .related-group-heading {
+    display: block !important;
+    padding-block-end: var(--sp-2xs) !important;
+    border-block-end: 1px solid var(--rule-0) !important;
+  }
+
+  .sch-related .related-card--featured .related-card-name {
+    color: var(--ink-1) !important;
+  }
+
+  .sch-related .related-logo {
+    border: 1px solid var(--rule-0) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* The flag is force-shown on mobile by components.css:1171. When the dataset
+     supplies no flag the <img> has an empty src, so that rule renders an empty
+     bordered box in the masthead. Show it only when it points at something. */
+  .app-lockup .header-flag:not([src]),
+  .app-lockup .header-flag[src=''] {
+    display: none !important;
+  }
+
+  .app-lockup__mark {
+    /* Legacy positions this absolutely inside .header-logo; that wrapper is
+       display:contents here, so the img resolved against a different
+       containing block and floated to the page's left edge. */
+    position: static !important;
+    background: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    block-size: 2rem !important;
+    inline-size: auto !important;
+    object-fit: contain !important;
+  }
+
+
+
+  #filtersPanel.sch-toolbar,
+  #sessionFiltersPanel.sch-toolbar,
+  .sch-colophon,
+  .sch-plate,
+  .sch-usage,
+  .sch-sponsors,
+  .sch-related,
+  .sch-sponsors .sponsor-card,
+  .sch-sponsors .sponsor-tier-heading {
+    background: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .sch-sponsors,
+  .sch-related {
+    border-block-start: 1px solid var(--rule-0) !important;
+  }
+
+  .sch-sponsors .sponsor-tier-heading {
+    border-block-end: 1px solid var(--rule-0) !important;
+  }
+
+  .app-control,
+  #filtersPanel.sch-toolbar input,
+  #filtersPanel.sch-toolbar select,
+  #sessionFiltersPanel.sch-toolbar input,
+  #sessionFiltersPanel.sch-toolbar select {
+    background: transparent !important;
+    border: 0 !important;
+    border-block-end: 1px solid var(--rule-1) !important;
+    border-radius: 0 !important;
+    padding-inline: 0 var(--sp-l) !important;
+    color: var(--ink-0) !important;
+  }
+
+  .app-control:focus-visible {
+    border-block-end-color: var(--brand-1-ink) !important;
+    border-block-end-width: 2px !important;
+  }
+
+  .sch-sponsors,
+  .sch-sponsors__head,
+  .sch-sponsors .sponsor-tier-heading,
+  .sch-sponsors .sponsors-shell,
+  .sch-sponsors .sponsor-logo-row {
+    text-align: start !important;
+    justify-content: flex-start !important;
+  }
+
+  .sch-sponsors .sponsor-logo-surface {
+    border: 1px solid var(--rule-0) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* ========================================================================
+     THE LAST OF app.css — SCHEDULE SURFACES
+     ===================================================================== */
+
+  /* The tick on a session card. `accent-color` is the whole of it. */
+  .schedule-select-checkbox {
+    accent-color: var(--brand-1-ink);
+  }
+
+  .schedule-select-label {
+    inline-size: 1.75rem;
+    block-size: 1.75rem;
+    border-radius: 0;
+  }
+
+  .schedule-select-label:focus-within {
+    outline: 2px solid var(--brand-1-ink);
+    outline-offset: 2px;
+  }
+
+  .mobile-accordion-content {
+    margin-block-start: var(--sp-2xs);
+  }
+
+  @media (min-width: 40rem) {
+    .mobile-accordion-content {
+      display: block;
+      margin-block-start: 0;
+    }
+  }
+
+  /* The secondary nav row under the masthead on the schedule. The masthead's
+     own `app-nav` is the primary; this one only appears where that is absent. */
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    margin-block-start: var(--sp-2xs);
+    padding-block: var(--sp-3xs);
+    border-block-start: 1px solid var(--rule-0);
+  }
+
+  .site-nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    padding: var(--sp-3xs) var(--sp-2xs);
+    border-radius: 0;
+    font-size: var(--step--1);
+    color: var(--ink-1);
+    text-decoration: none;
+  }
+
+  .site-nav-link:hover {
+    color: var(--ink-0);
+  }
+
+  .site-nav-link.is-active {
+    color: var(--brand-1-ink);
+    box-shadow: inset 0 -2px 0 var(--brand-1-ink);
+  }
+
+  /* An event series' plate. These were three linear-gradients — the one rule
+     the brief forbids outright — doing a job a flat tint does better: they
+     stand behind a logo, so they must not compete with it. */
+  .brand-drupalsouth,
+  .brand-community,
+  .brand-primary {
+    background: var(--paper-2);
+    border: 1px solid var(--rule-0);
+  }
+
+}
+
+/* =========================================================================
+   ACTIVE-FILTER COUNT
+   The filter panel is an accordion on mobile and shut by default, so a
+   narrowed programme looked identical to a short one. The count says which.
+   ========================================================================= */
+@layer section {
+  .sch-filtercount {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: 1.5rem;
+    min-block-size: 1.5rem;
+    margin-inline-start: var(--sp-xs);
+    padding-inline: 0.375rem;
+    background: var(--brand-1-ink);
+    color: var(--paper-0);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .sch-filtercount[hidden] {
+    display: none;
+  }
+
+  /* Nothing to reset is a state worth showing, not a click worth taking. */
+  #resetFilters:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+}
+
+/* =========================================================================
+   MOBILE DISCLOSURES
+   Three panels collapse at phone width — usage notes, filters, the colophon.
+   They had drifted into three different objects: `2px outset` (the UA default
+   you get from a border-width with no style) at radius 0, 9.92px and 100px,
+   two of them still on -apple-system at an off-scale 15px. None of that was
+   chosen. One rule makes them one component, in the page's own language: a
+   ruled full-width bar with the label at the start and its state at the end.
+   ========================================================================= */
+@layer section {
+  .mobile-accordion-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-s);
+    inline-size: 100%;
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    background: transparent;
+    border: 1px solid var(--ink-0);
+    border-radius: 0;
+    color: var(--ink-0);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    text-align: start;
+    cursor: pointer;
+  }
+
+  /* A centred label with no marker does not read as something you can open.
+     The sign says which way it goes. */
+  .mobile-accordion-toggle::after {
+    content: '+';
+    font-family: var(--font-data);
+    font-size: var(--step-0);
+    font-weight: 400;
+    line-height: 1;
+    color: var(--ink-2);
+  }
+
+  .mobile-accordion-toggle[aria-expanded='true']::after {
+    content: '\2212'; /* minus, not a hyphen — it has to balance the plus */
+  }
+
+  .mobile-accordion-toggle:hover::after {
+    color: var(--ink-0);
+  }
+
+  /* The colophon's own heading IS the toggle at this width — without this the
+     label reads twice, once as an eyebrow and once as the button. */
+  @media (max-width: 52rem) {
+    .sch-colophon .sch-colophon__title {
+      display: none;
+    }
+  }
+}
+
+/* =========================================================================
+   MOBILE — CLOSING THE GAP ABOVE THE PROGRAMME
+   Between the masthead and the first disclosure sat ~90px of stacked padding
+   plus a 45px breadcrumb, all of it inherited from the desktop spread where
+   the colophon shares two columns with the plate. On a phone the trail is
+   already covered twice over — the menu carries Home and Schedules, the bottom
+   bar carries Schedule — so it earns none of that room.
+   ========================================================================= */
+@layer section {
+  @media (max-width: 52rem) {
+    body:has(#scheduleMain) #scheduleCrumbs {
+      display: none;
+    }
+
+    #filtersPanel {
+      padding-block: 0 var(--sp-s);
+    }
+
+    #eventMediaPromo {
+      margin-block-start: 0;
+    }
+
+    .sch-infohead {
+      padding-block: var(--sp-xs) var(--sp-s);
+      gap: var(--sp-s);
+    }
+  }
+}
+
+/* =========================================================================
+   MOBILE — SPONSOR MARKS RUN FULL WIDTH
+   The cards are sized for a multi-column row. At 390px two of them (190 + gap
+   + 190 = 396) will not fit, so they stacked one per row at half width and
+   left the right half of every screen empty — the marks small AND the section
+   twice as long as it needed to be. One per row, full width, like the partner
+   events below them.
+   ========================================================================= */
+@layer section {
+  @media (max-width: 52rem) {
+    .sch-sponsors .sponsor-logo-row {
+      gap: var(--sp-s);
+    }
+
+    /* Legacy schedule.css pins these to `calc(50% - 0.35rem)` on all three of
+       flex, width and max-width, so all three have to be answered. */
+    .sch-sponsors .sponsor-card {
+      flex: 1 1 100%;
+      inline-size: 100%;
+      max-inline-size: 100%;
+    }
+
+    /* Full width without this makes every tile a screen-tall empty box: the
+       auto/landscape aspect is 16/10, which at 390px is 244px of mostly
+       nothing. A sponsor mark is a wide object — give it a band. */
+    .sch-sponsors .sponsor-logo-surface {
+      inline-size: 100%;
+      aspect-ratio: 2.6 / 1;
+    }
+
+    /* The mark itself is capped at 148x68 for the multi-column row. At full
+       width that leaves it stranded in the middle of the band. */
+    .sch-sponsors .sponsor-logo-image {
+      max-inline-size: 15rem;
+      max-block-size: 5rem;
+    }
+  }
+}
+
+/* =========================================================================
+   THE COLOPHON ON A PHONE
+   The particulars are a two-column table: a label column and a value column.
+   At 390px the value column is ~230px, which is not enough for "Tue, Oct 14,
+   2025 - Fri, Oct 17, 2025" or a URL — both wrapped to two and three lines
+   against a mostly-empty label column. The pairing is the good part and it
+   survives stacking, so on a phone each label sits directly above its value
+   and both get the full measure.
+   ========================================================================= */
+@layer section {
+  /* Square, and pushed clear of the disclosure above it. */
+  .sch-colophon__map {
+    aspect-ratio: 1 / 1;
+    inline-size: 100%;
+    /* Capped: in the desktop spread the column is ~470px, and a 470px square
+       is a feature, not the aside this is meant to be — it pushed the first
+       session 500px down a page whose job is the programme. */
+    max-inline-size: 20rem;
+    margin-block: var(--sp-m) var(--sp-m);
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+  }
+
+  .sch-colophon__map[hidden] {
+    display: none;
+  }
+
+  /* Leaflet paints its own panes; keep them inside the frame. */
+  .sch-colophon__map .leaflet-container {
+    background: var(--paper-2);
+  }
+
+
+  @media (max-width: 52rem) {
+    .sch-colophon__list {
+      display: block;
+    }
+
+    .sch-colophon__label {
+      display: block;
+      padding-block: var(--sp-xs) 0;
+      padding-inline-end: 0;
+      border-block-end: 0;
+    }
+
+    .sch-colophon__value {
+      display: block;
+      padding-block: var(--sp-3xs) var(--sp-xs);
+      border-block-end: 1px solid var(--rule-0);
+    }
+
+    /* A URL had nowhere to break in a 230px column and split mid-word; with the
+       full measure it can break where a URL should. */
+    .sch-colophon__value--url {
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+
+    /* The map is the widest thing in a narrow column — cap it so it stays a
+       glance rather than a screen. */
+    .sch-colophon__map {
+      margin-inline: auto;
+    }
+  }
+}
+
+/* =========================================================================
+   THE PIN'S LABEL — DELIBERATELY UNLAYERED
+   Leaflet's stylesheet is injected at runtime as a plain <link>, so it is
+   UNLAYERED, and unlayered CSS outranks every layer no matter how late the
+   layer is declared. A `@layer section` rule therefore lost to
+   `.leaflet-tooltip` and the label kept Leaflet's white box, its shadow and
+   its rounded corner — a different design language from every other surface
+   on this page, and unreadable in dark mode.
+
+   The alternatives were `!important` (the count is meant to reach zero, not
+   grow) or importing Leaflet into a layer inside leafletLoader.js, which would
+   change how the planner, archive and editor maps cascade too — a bigger
+   change than a tooltip earns. Unlayered against unlayered is decided on
+   specificity, and `.sch-colophon__map .sch-venue-tip` (0,2,0) beats
+   `.leaflet-tooltip` (0,1,0) regardless of load order.
+   ========================================================================= */
+/* The pin's label. Leaflet ships a white box with a drop shadow and a rounded
+   corner, which is a different design language from every other surface on
+   this page — restated as a ruled plate in the page's own tokens, so it works
+   in both colour modes rather than only over a light basemap. */
+.sch-colophon__map .sch-venue-tip {
+  padding: 0.2rem var(--sp-2xs);
+  background: var(--paper-0);
+  border: 1px solid var(--ink-0);
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--ink-0);
+  font-family: var(--font-body);
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* The tail. Leaflet gives one triangle, which filled with ink read as a dark
+   blob detached from the plate rather than as the plate's own point. Two
+   triangles make it a tail: `::before` is Leaflet's, recoloured to the border,
+   and `::after` is a paper triangle 1px inside it, so the tail is the box —
+   outlined on its edges, paper in its middle — the whole way down. */
+.sch-colophon__map .sch-venue-tip::before {
+  border-top-color: var(--ink-0);
+}
+
+.sch-colophon__map .sch-venue-tip::after {
+  content: '';
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-start: 50%;
+  margin-inline-start: -5px;
+  margin-block-end: -10px;
+  border: 5px solid transparent;
+  border-block-start-color: var(--paper-0);
+}
+
+/* =========================================================================
+   NOTHING MATCHED
+   Previously this state rendered an empty container: a blank page below the
+   filters, with no statement of what happened and no way back. It reads as the
+   page having broken. Set as a quiet notice on the page's own rules — no
+   illustration, no apology, and the way out is a control.
+   ========================================================================= */
+@layer section {
+  .sch-empty {
+    padding-block: var(--sp-xl);
+    border-block-start: 1px solid var(--rule-0);
+    max-inline-size: var(--measure);
+  }
+
+  .sch-empty__lead {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    color: var(--ink-0);
+  }
+
+  .sch-empty__hint {
+    margin-block: var(--sp-2xs) var(--sp-m);
+    font-size: var(--step--1);
+    color: var(--ink-1);
+  }
+
+  /* A failure is a state, and state is the one thing colour is allowed to
+     encode here — a leading rule in the bad-status ink, nothing more. */
+  .sch-empty--error {
+    padding-inline-start: var(--sp-m);
+    border-block-start: 0;
+    box-shadow: inset 3px 0 0 var(--status-bad);
+  }
+}

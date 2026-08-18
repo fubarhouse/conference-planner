@@ -1,0 +1,20 @@
+{
+  // Lightweight type-checking for plain JS — no build step, no emit.
+  // Checking is opt-in per file via a `// @ts-check` comment at the top, so
+  // annotated modules get validated (typos, wrong argument counts, bad property
+  // access) without flooding errors from the untyped DOM-heavy code. Run with
+  // `pnpm run typecheck`. Grow coverage by adding `// @ts-check` + JSDoc to a file.
+  "compilerOptions": {
+    "target": "ES2023",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "allowJs": true,
+    "checkJs": false,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "types": []
+  },
+  "include": ["app/js/**/*.js", "lib/**/*.js"],
+  "exclude": ["node_modules", "app/js/**/__tests__/**", "lib/**/__tests__/**"]
+}

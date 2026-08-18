@@ -4,7 +4,10 @@
   "description": "A conference event dataset containing metadata, sponsors, and session schedule.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["event", "items"],
+  "required": [
+    "event",
+    "items"
+  ],
   "properties": {
     "result": {
       "type": "string",
@@ -55,6 +58,21 @@
           "type": "string",
           "description": "Human-readable geographic region (e.g. \"New Zealand – Wellington\")."
         },
+        "regionCode": {
+          "type": "string",
+          "enum": [
+            "EUR",
+            "MEA",
+            "APAC",
+            "AMER",
+            "LATAM"
+          ],
+          "description": "Canonical macro-region (EUR/MEA/APAC/AMER/LATAM) for the Archive Observatory facets. Added by `npm run backfill:regions`."
+        },
+        "country": {
+          "type": "string",
+          "description": "Canonical country name for the Archive Observatory country facet. Added by `npm run backfill:regions`."
+        },
         "timezone": {
           "type": "string",
           "description": "IANA timezone identifier for the event location."
@@ -73,8 +91,17 @@
         },
         "eventVisibility": {
           "type": "string",
-          "enum": ["hidden", "private", "off", "disabled"],
+          "enum": [
+            "hidden",
+            "private",
+            "off",
+            "disabled"
+          ],
           "description": "Fine-grained visibility override."
+        },
+        "default": {
+          "type": "boolean",
+          "description": "Marks this event as the default shown when none is selected. At most one event should set this."
         },
         "columns": {
           "type": "integer",
@@ -93,17 +120,29 @@
         },
         "scheduleURLs": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Source schedule URLs used when this dataset was created or last checked."
         },
         "other_urls": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Additional reference URLs for this event (documentation, archives, related resources)."
         },
         "venue": {
           "type": "string",
           "description": "Physical venue name."
+        },
+        "latitude": {
+          "type": "number",
+          "description": "Optional venue latitude. When set with longitude, the planner map pins the venue directly instead of geocoding."
+        },
+        "longitude": {
+          "type": "number",
+          "description": "Optional venue longitude. See latitude."
         },
         "sourceCache": {
           "type": "string",
@@ -154,7 +193,11 @@
         "logo": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["image", "imageAlt", "usePlate"],
+          "required": [
+            "image",
+            "imageAlt",
+            "usePlate"
+          ],
           "properties": {
             "image": {
               "type": "string",
@@ -181,7 +224,12 @@
         "flickr": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["enabled", "groupUrl", "image", "imageAlt"],
+          "required": [
+            "enabled",
+            "groupUrl",
+            "image",
+            "imageAlt"
+          ],
           "properties": {
             "enabled": {
               "type": "boolean",
@@ -266,18 +314,200 @@
               },
               "bgStyle": {
                 "type": "string",
-                "enum": ["auto", "light-plate", "dark-plate", "brand-fill", "transparent"],
+                "enum": [
+                  "auto",
+                  "light-plate",
+                  "dark-plate",
+                  "brand-fill",
+                  "transparent"
+                ],
                 "description": "Background style applied behind the sponsor logo."
               },
               "aspect": {
                 "type": "string",
-                "enum": ["auto", "square", "landscape", "banner"],
+                "enum": [
+                  "auto",
+                  "square",
+                  "landscape",
+                  "banner"
+                ],
                 "description": "Aspect ratio treatment for the logo image."
               },
               "enabled": {
                 "type": "boolean",
                 "description": "Whether this sponsor entry is visible."
               }
+            }
+          }
+        },
+        "relatedEvents": {
+          "type": "array",
+          "description": "Other events linked to this one (partners, co-located or linked conferences), grouped by relationship on the schedule page.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "name",
+              "relationship",
+              "enabled"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique related-event identifier within this event."
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Name of the linked event or partner."
+              },
+              "relationship": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Relationship label used to group entries (e.g. \"Partner\", \"Linked Conference\", \"Co-located\")."
+              },
+              "scheduleId": {
+                "type": "string",
+                "description": "Catalog event id to link to its schedule (./index.html?id=<id>). Takes precedence over website."
+              },
+              "website": {
+                "type": "string",
+                "description": "External website URL, used when no scheduleId is set."
+              },
+              "image": {
+                "type": "string",
+                "description": "Path to the related event's logo image."
+              },
+              "imageAlt": {
+                "type": "string",
+                "description": "Accessible alt text for the logo."
+              },
+              "description": {
+                "type": "string",
+                "description": "Optional description. Stored and editable; not rendered on the schedule page yet."
+              },
+              "priority": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Sort order within its relationship group (lower = earlier)."
+              },
+              "featured": {
+                "type": "boolean",
+                "description": "When true, the entry renders as a full-width promotion card ahead of the rest of its group."
+              },
+              "enabled": {
+                "type": "boolean",
+                "description": "Whether this related event is visible."
+              }
+            }
+          }
+        },
+        "relatedEventsHeading": {
+          "type": "string",
+          "description": "Optional umbrella heading shown above the related-events groups. Blank/absent hides the wrapper heading."
+        },
+        "relatedEventsPlacement": {
+          "type": "string",
+          "enum": [
+            "above",
+            "below"
+          ],
+          "description": "Whether the related-events block renders above or below the sponsor grid. Defaults to below."
+        },
+        "sponsorLogosDisabled": {
+          "type": "boolean",
+          "description": "Break-glass: when true, sponsor logo images are suppressed for this event and each sponsor's name is shown in place of its logo. Off by default."
+        },
+        "ecosystem": {
+          "type": "string",
+          "enum": [
+            "drupal",
+            "wordpress",
+            "symfony",
+            "php",
+            "javascript",
+            "other"
+          ],
+          "description": "Which software community this event belongs to. The app is deliberately ecosystem-neutral in its UI and copy, so the fact that (today) every dataset here is a Drupal event lives in DATA rather than in an assumption. Editor-only: not rendered on the public schedule."
+        },
+        "attendance": {
+          "type": "object",
+          "required": [
+            "count"
+          ],
+          "additionalProperties": false,
+          "description": "How many people attended, as finally reported by the organisers. One number per event, recorded after the fact — not a target, not a registration count, and never estimated by this project. `source` is what makes it checkable years later; without it the figure is folklore.",
+          "properties": {
+            "count": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Final attendee count reported by the organisers."
+            },
+            "source": {
+              "type": "string",
+              "description": "Where the number came from — a URL, a post-event report, or the person who supplied it."
+            },
+            "capturedAt": {
+              "type": "string",
+              "format": "date",
+              "description": "Date this figure was recorded (YYYY-MM-DD)."
+            },
+            "note": {
+              "type": "string",
+              "description": "Anything that qualifies the number: 'in person only', 'includes contribution day', 'organiser estimate'."
+            }
+          }
+        },
+        "community": {
+          "type": "object",
+          "required": [
+            "url",
+            "people"
+          ],
+          "additionalProperties": false,
+          "description": "Credits captured from the event's drupal.org community page — the canonical record of who ran the event. NEVER rendered on the schedule; this exists for the archive (organiser/volunteer stats and profiles). Community pages are maintained by one person and are often stale, so `capturedAt` records when this snapshot was taken.",
+          "properties": {
+            "url": {
+              "type": "string",
+              "format": "uri",
+              "description": "The drupal.org community event page this was captured from."
+            },
+            "capturedAt": {
+              "type": "string",
+              "format": "date",
+              "description": "Date this snapshot was taken (YYYY-MM-DD). The source page keeps changing after the event; this says how old the credits are."
+            },
+            "people": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "username",
+                  "role"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "The drupal.org profile SLUG, taken from the /u/<slug> href — not the link text. They disagree often (\"kim.pepper\" links to /u/kimpepper, \"Archita Arora\" to /u/archita-arora), and only the slug resolves to a profile."
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Display text exactly as the community page listed it. Present only when it differs from `username`; fall back to `username` when absent."
+                  },
+                  "role": {
+                    "type": "string",
+                    "enum": [
+                      "organiser",
+                      "volunteer"
+                    ],
+                    "description": "Extend this enum deliberately if a community page lists a role worth keeping (mentors, track chairs). A closed list keeps the taxonomy honest rather than accumulating typos."
+                  }
+                }
+              },
+              "description": "One entry per person per role. Somebody who both organised and volunteered appears twice, which is true and keeps per-role stats correct."
             }
           }
         }
@@ -329,17 +559,59 @@
           },
           "track": {
             "type": "array",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "description": "Topic tracks this session belongs to."
           },
           "speakers": {
             "type": "array",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "description": "Display names of the session speakers."
           },
           "full_description": {
             "type": "string",
             "description": "Full session description. Supports Markdown."
+          },
+          "venue": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false,
+            "description": "Set ONLY when this session happens somewhere other than the event venue \u2014 an awards ceremony in a theatre, a sprint in a sponsor's office, a social at a bar. Its presence means \"not at the main venue\": calendar feeds use this place instead of the event's, so a subscriber's map takes them to the right door. `location` remains the room WITHIN this venue.",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "The venue's name, as an attendee would look for it."
+              },
+              "address": {
+                "type": "string",
+                "description": "Street address, when the name alone would not find it."
+              },
+              "latitude": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90,
+                "description": "Without coordinates a feed carries the name but NO map pin \u2014 deliberately, because inheriting the event's pin would send people to the wrong place with apparent precision."
+              },
+              "longitude": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "url": {
+                "type": "string",
+                "description": "The venue's own page, or a map link."
+              },
+              "note": {
+                "type": "string",
+                "description": "What an attendee needs to know about getting there: ticketed separately, 15 minutes by tram, invitation only."
+              }
+            }
           },
           "video_url": {
             "type": "string",
@@ -352,6 +624,10 @@
           "sponsorIds": {
             "type": "string",
             "description": "Space-separated IDs of sponsors associated with this session."
+          },
+          "isAgendaItem": {
+            "type": "boolean",
+            "description": "True when this item is agenda/logistics — lunch, morning tea, registration — rather than a programme session. It still renders on the schedule and keeps its sponsors, room and times; it is simply not counted as a session by the archive (stats, topics, search). Optional: when absent the archive falls back to judging the title, which is how every dataset written before this field behaves."
           }
         }
       }

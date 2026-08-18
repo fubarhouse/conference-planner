@@ -8,13 +8,20 @@ export function homeRoot(innerHtml) {
   return `<div class="hl-root">${innerHtml}</div>`;
 }
 
-export function heroPanel({ iconClass, title, lead = '', actionsHtml = '' }) {
+// `iconClass` is gone from every builder here, the same way it went from
+// `sectionHeader`: a title names the thing better than a glyph of it, and there
+// is no icon font any more. Callers that still pass it are simply not read.
+// The hero's title is an h2, not an h1. Every page already carries one h1 — the
+// masthead lockup (`#pageTitle`) — so a hero h1 made a second one, and on the
+// browse screen the two even said the same words. It also left the outline
+// jumping h1 -> h3 straight to the event cards. h2 restores a real hierarchy
+// and looks identical; `.hl-hero-title` carries the size, not the tag.
+export function heroPanel({ title, lead = '', actionsHtml = '' }) {
   return `<div class="hl-hero">
     <div class="hl-hero-top">
-      <div class="hl-hero-icon" aria-hidden="true"><i class="${iconClass}"></i></div>
       ${actionsHtml}
     </div>
-    <h1 class="hl-hero-title">${title}</h1>
+    <h2 class="hl-hero-title">${title}</h2>
     ${lead ? `<p class="hl-hero-lead">${lead}</p>` : ''}
   </div>`;
 }
@@ -23,15 +30,13 @@ export function ctaGrid(cardsHtml) {
   return `<div class="hl-cta-grid">${cardsHtml}</div>`;
 }
 
-export function ctaCard({ id, iconClass, iconMod = '', title, desc, disabled = false, disabledReason = '' }) {
+export function ctaCard({ id, title, desc, disabled = false, disabledReason = '' }) {
   const disabledAttrs = disabled ? ` disabled title="${disabledReason}"` : '';
   return `<button type="button" class="hl-cta-card${disabled ? ' hl-cta-card--disabled' : ''}" id="${id}"${disabledAttrs}>
-    <div class="hl-cta-icon${iconMod ? ` ${iconMod}` : ''}"><i class="${iconClass}"></i></div>
     <div class="hl-cta-body">
       <span class="hl-cta-title">${title}</span>
       <span class="hl-cta-desc">${desc}</span>
     </div>
-    <i class="fas fa-chevron-right hl-cta-arrow" aria-hidden="true"></i>
   </button>`;
 }
 
@@ -43,23 +48,35 @@ export function statusBar({ label, actionId, actionText }) {
   </div>`;
 }
 
-export function sectionHeader({ title, primaryBtnId, primaryBtnLabel, primaryBtnIconClass = '', secondaryBtnId = null, secondaryBtnIconClass = null, secondaryBtnTitle = '' }) {
-  const icon = primaryBtnIconClass ? `<i class="${primaryBtnIconClass}" style="margin-right:0.35rem"></i>` : '';
+export function sectionHeader({
+  title,
+  primaryBtnId,
+  primaryBtnLabel,
+  secondaryBtnId = null,
+  secondaryBtnTitle = '',
+}) {
+  // The secondary control wears its title as a visible label. It used to take
+  // an icon class; both icon parameters are gone rather than left accepted and
+  // ignored, so a caller cannot pass something that silently does nothing.
   const secondary = secondaryBtnId
-    ? `<button type="button" class="hl-settings-btn" id="${secondaryBtnId}" title="${secondaryBtnTitle}" aria-label="${secondaryBtnTitle}"><i class="${secondaryBtnIconClass}"></i></button>`
+    ? `<button type="button" class="hl-settings-btn" id="${secondaryBtnId}" aria-label="${secondaryBtnTitle}">${secondaryBtnTitle}</button>`
     : '';
   return `<div class="hl-section-header">
     <h2 class="hl-section-title">${title}</h2>
     <div class="hl-section-actions">
-      <button type="button" class="hl-primary-btn" id="${primaryBtnId}">${icon}${primaryBtnLabel}</button>
+      <button type="button" class="hl-primary-btn" id="${primaryBtnId}">${primaryBtnLabel}</button>
       ${secondary}
     </div>
   </div>`;
 }
 
-export function searchBar({ inputId, placeholder = 'Filter…' }) {
+export function searchBar({ inputId, placeholder = 'Filter…', label = '' }) {
+  // A placeholder is not a label: it is announced inconsistently and vanishes
+  // the moment there is a value. `label` defaults to the placeholder text so
+  // every caller gets a name without having to pass one.
+  const name = label || placeholder.replace(/[…:]\s*$/, '');
   return `<div class="hl-search-wrap">
-    <i class="fas fa-search hl-search-icon" aria-hidden="true"></i>
+    <label class="sr-only" for="${inputId}">${name}</label>
     <input id="${inputId}" type="search" placeholder="${placeholder}" class="hl-search-input" autocomplete="off">
   </div>`;
 }
@@ -69,7 +86,7 @@ export function cardGrid({ id, innerHtml = '' }) {
 }
 
 export function loadingState(text = 'Loading…') {
-  return `<div class="hl-loading"><i class="fas fa-circle-notch fa-spin"></i> ${text}</div>`;
+  return `<div class="hl-loading"> ${text}</div>`;
 }
 
 export function emptyState(text) {

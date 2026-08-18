@@ -1,0 +1,860 @@
+/* ============================================================================
+   SECTION — CURATION
+   The identity desk: near-duplicate speaker and sponsor spellings, walked one
+   case at a time. It was a full-screen overlay inside the editor; it is a page
+   now, for the same reason the archive became one — it is a place you go and
+   work, not a mode the editor drops into.
+
+   These rules came across with the editor.css port already translated to the
+   Programme tokens. What changes here is only the frame: the studio stops being
+   a fixed overlay and becomes the page.
+   ========================================================================= */
+
+@layer section {
+
+  /* The page, not an overlay: normal flow beneath the shared masthead. */
+  .cur-studio {
+    display: flex;
+    flex-direction: column;
+    min-block-size: calc(100dvh - 9rem);
+    background: none;
+    color: var(--ink-0);
+    font-family: var(--font-body);
+  }
+  .cur-studio.hidden {
+    display: none;
+  }
+  /* Header */
+  /* The section head, same grammar as every other: eyebrow, display title,
+     figures on the right, over a rule. */
+  .cur-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--sp-m);
+    padding: var(--sp-m) 0 var(--sp-2xs);
+    border-block-end: 1px solid var(--ink-1);
+  }
+  .cur-head-l {
+    flex: 1;
+    min-width: 0;
+  }
+  .cur-eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .cur-title {
+    margin: var(--sp-3xs) 0 0;
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 600;
+    letter-spacing: var(--display-track);
+    color: var(--ink-0);
+  }
+  .cur-stats {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .cur-stat {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.05rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 0;
+    background: var(--paper-2);
+    border: 1px solid var(--paper-2);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .cur-stat b {
+    font-family: var(--font-data);
+    font-size: var(--step-1);
+    font-weight: 600;
+    color: var(--ink-0);
+    letter-spacing: 0;
+  }
+  .cur-stat--warn b {
+    color: var(--status-warn);
+  }
+  .cur-stat--gold {
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    border-color: var(--brand-1-ink);
+  }
+  .cur-stat--gold b {
+    color: var(--brand-1-ink);
+  }
+  /* Toolbar: Speakers|Sponsors segmented + progress rail */
+  .cur-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 0.9rem;
+  }
+  .cur-seg {
+    display: inline-flex;
+    padding: 0.25rem;
+    border-radius: 0;
+    background: var(--paper-2);
+    border: 1px solid var(--paper-2);
+  }
+  .cur-seg-btn {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--ink-2);
+    padding: 0.45rem 1.1rem;
+    border-radius: 0;
+    font-size: var(--step--1);
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition:
+      background 0.15s,
+      color 0.15s;
+  }
+  .cur-seg-btn.is-active {
+    background: var(--brand-1-ink);
+    color: var(--paper-1);
+  }
+  .cur-seg-n {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    padding: 0.05rem 0.4rem;
+    border-radius: 0;
+    background: var(--paper-2);
+  }
+  .cur-seg-btn.is-active .cur-seg-n {
+    background: color-mix(in srgb, var(--paper-1) 24%, transparent);
+    color: var(--paper-1);
+  }
+  .cur-progress {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    min-width: 0;
+  }
+  .cur-progress-label {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .cur-progress-label b {
+    color: var(--ink-0);
+  }
+  .cur-progress-rail {
+    width: 12rem;
+    max-width: 26vw;
+    height: 5px;
+    border-radius: 0;
+    background: var(--paper-2);
+    overflow: hidden;
+  }
+  .cur-progress-rail i {
+    display: block;
+    height: 100%;
+    border-radius: 0;
+    background: var(--brand-1-ink);
+    transition: width 0.4s ease;
+  }
+  /* Stage + case card */
+  .cur-stage {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    padding-block: 1.4rem 2rem;
+  }
+  .cur-case {
+    width: 100%;
+    max-width: 60rem;
+    align-self: flex-start;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-1);
+    overflow: hidden;
+  }
+  .cur-case-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.15rem 1.4rem;
+    border-bottom: 1px solid var(--rule-0);
+  }
+  .cur-case-q {
+    font-size: var(--step-1);
+    font-weight: 600;
+    color: var(--ink-0);
+  }
+  .cur-case-key {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+  /* Candidate rows */
+  .cur-cands {
+    display: flex;
+    flex-direction: column;
+    padding: var(--sp-2xs) 1.4rem var(--sp-s);
+  }
+  .cur-cand {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.9rem;
+    width: 100%;
+    text-align: left;
+    appearance: none;
+    cursor: pointer;
+    padding: 0.85rem 1rem;
+    border-radius: 0;
+    border: 0;
+    border-block-end: 1px solid var(--rule-0);
+    background: none;
+    color: inherit;
+    transition:
+      background 0.15s,
+      box-shadow 0.15s;
+  }
+  .cur-cand:last-child {
+    border-block-end: 0;
+  }
+  .cur-cand:hover {
+    background: var(--paper-2);
+  }
+  .cur-cand.is-canonical {
+    background: color-mix(in srgb, var(--brand-1-ink) 8%, transparent);
+    box-shadow: inset 3px 0 0 var(--brand-1-ink);
+  }
+  .cur-cand-crown {
+    display: grid;
+    place-items: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    color: var(--ink-2);
+    font-size: var(--step--2);
+  }
+  .cur-cand.is-canonical .cur-cand-crown {
+    border-color: var(--brand-1-ink);
+    background: var(--brand-1-ink);
+    color: var(--paper-1);
+  }
+  .cur-cand-main {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .cur-cand-name {
+    font-family: var(--font-data);
+    font-size: var(--step-0);
+    font-weight: 400;
+    color: var(--ink-0);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cur-cand.is-canonical .cur-cand-name {
+    color: var(--brand-1-ink);
+  }
+  .cur-cand-meta {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+  .cur-cand-talk {
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    color: var(--ink-2);
+    font-style: italic;
+  }
+  /* Signature: the 19-year appearance timeline */
+  .cur-tl {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 2rem;
+  }
+  .cur-tl i {
+    width: 5px;
+    height: 40%;
+    border-radius: 0;
+    background: var(--paper-2);
+    transition:
+      background 0.15s,
+      height 0.15s;
+  }
+  .cur-tl i.on {
+    height: 100%;
+    background: var(--brand-1-ink);
+  }
+  .cur-cand:not(.is-canonical) .cur-tl i.on {
+    background: var(--brand-1-ink);
+  }
+  .cur-tl-years {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    margin-top: 0.2rem;
+  }
+  /* Sponsor candidate logo */
+  .cur-cand-logo {
+    width: 3rem;
+    height: 2rem;
+    object-fit: contain;
+    border-radius: 0;
+    background: var(--ink-0);
+    padding: 0.15rem;
+  }
+  .cur-tier {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--brand-1-ink);
+  }
+  /* Canonical picker + actions */
+  .cur-canonical {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 1.4rem 1.1rem;
+  }
+  .cur-canonical-label {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .cur-canonical-input {
+    flex: 1;
+    min-width: 0;
+    height: 2.5rem;
+    padding: 0 0.85rem;
+    border-radius: 0;
+    border: 1px solid var(--brand-1-ink);
+    background: var(--paper-2);
+    color: var(--ink-0);
+    font-family: var(--font-data);
+    font-size: var(--step-0);
+  }
+  .cur-canonical-input:focus {
+    outline: none;
+    border-color: var(--brand-1-ink);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+  }
+  .cur-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1.1rem 1.4rem;
+    border-top: 1px solid var(--rule-0);
+    background: var(--paper-2);
+  }
+  .cur-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 2.7rem;
+    padding: 0 1.2rem;
+    border-radius: 0;
+    font-size: var(--step--1);
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition:
+      filter 0.15s,
+      background 0.15s,
+      border-color 0.15s;
+  }
+  .cur-btn--gold {
+    margin-left: auto;
+    background: var(--brand-1-ink);
+    color: var(--paper-1);
+    font-weight: 600;
+  }
+  .cur-btn--gold:hover {
+    filter: brightness(1.05);
+  }
+  .cur-btn--gold i {
+    color: var(--paper-1);
+  }
+  .cur-btn--ghost {
+    background: transparent;
+    border-color: var(--status-bad);
+    color: var(--status-bad);
+  }
+  .cur-btn--ghost:hover {
+    background: color-mix(in srgb, var(--status-bad) 12%, transparent);
+    border-color: var(--status-bad);
+  }
+  .cur-btn--skip {
+    background: transparent;
+    border-color: var(--rule-0);
+    color: var(--ink-2);
+  }
+  .cur-btn--skip:hover {
+    background: var(--paper-2);
+  }
+  /* Preview panel (dry-run diff) */
+  .cur-preview {
+    padding: 0 1.4rem 1.2rem;
+  }
+  .cur-preview-head {
+    font-size: var(--step--1);
+    color: var(--ink-0);
+    margin: 0 0 0.55rem;
+  }
+  .cur-preview-head b {
+    color: var(--brand-1-ink);
+  }
+  .cur-preview-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .cur-preview-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    padding: 0.4rem 0.7rem;
+    border-radius: 0;
+    background: var(--paper-2);
+    color: var(--ink-2);
+  }
+  .cur-preview-row b {
+    color: var(--brand-1-ink);
+  }
+  /* Footer keyboard hints + empty/done state */
+  .cur-foot {
+    margin-block-start: auto;
+    padding-block: var(--sp-s);
+    border-block-start: 1px solid var(--rule-0);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    text-align: center;
+  }
+  .cur-foot kbd {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    padding: 0.1rem 0.4rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+    color: var(--ink-1);
+    margin: 0 0.15rem;
+  }
+  .cur-done {
+    text-align: center;
+    padding-block: 4rem;
+    color: var(--ink-2);
+  }
+  .cur-done-badge {
+    font-size: var(--step-3);
+    color: var(--brand-1-ink);
+    margin-bottom: 0.6rem;
+  }
+  /* Curation Studio — Overview + decisions log */
+  .cur-view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-left: auto;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-1);
+    color: var(--ink-1);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    cursor: pointer;
+  }
+  .cur-view-btn:hover {
+    border-color: var(--brand-1-ink);
+    color: var(--ink-0);
+  }
+  .cur-view-btn.is-active {
+    background: var(--brand-1-ink);
+    border-color: transparent;
+    color: var(--paper-1);
+  }
+  .cur-ov {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 1.6rem;
+    align-items: start;
+  }
+  .cur-ov-h {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 0.8rem;
+    font-size: var(--step--2);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .cur-ov-n {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    padding: 0.1rem 0.45rem;
+    border-radius: 0;
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    color: var(--brand-1-ink);
+    letter-spacing: 0;
+  }
+  .cur-ov-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr));
+    gap: 0.55rem;
+    max-height: 62vh;
+    overflow-y: auto;
+    padding-right: 0.2rem;
+  }
+  .cur-ov-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.7rem 0.8rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+    text-align: left;
+    cursor: pointer;
+    transition:
+      border-color 0.13s,
+      background 0.13s;
+  }
+  .cur-ov-card:hover {
+    border-color: var(--brand-1-ink);
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+  }
+  .cur-ov-card-key {
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--ink-0);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .cur-ov-card-meta {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+  .cur-ov-empty {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 2.4rem 1rem;
+    justify-content: center;
+    color: var(--ink-2);
+    font-size: var(--step-0);
+  }
+  .cur-ov-empty i {
+    color: var(--brand-1-ink);
+  }
+  .cur-ov-empty--sm {
+    padding: 1.2rem 0.6rem;
+    font-size: var(--step--1);
+    text-align: center;
+  }
+  .cur-log {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    max-height: 62vh;
+    overflow-y: auto;
+  }
+  .cur-log-row {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.5rem 0.65rem;
+    border-radius: 0;
+    border: 1px solid var(--paper-2);
+    background: var(--paper-2);
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+  .cur-log-i {
+    flex: none;
+    font-size: var(--step--1);
+  }
+  .cur-log-i--merge {
+    color: var(--brand-1-ink);
+  }
+  .cur-log-i--distinct {
+    color: var(--brand-1-ink);
+  }
+  .cur-log-txt {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .cur-log-txt b {
+    color: var(--ink-0);
+    font-weight: 600;
+  }
+  .cur-log-tag {
+    flex: none;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    padding: 0.12rem 0.4rem;
+    border-radius: 0;
+    background: var(--paper-2);
+  }
+  .cur-log-undo {
+    flex: none;
+    padding: 0.22rem 0.6rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: transparent;
+    color: var(--ink-2);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    cursor: pointer;
+  }
+  .cur-log-undo:hover {
+    border-color: var(--brand-1-ink);
+    color: var(--brand-1-ink);
+  }
+
+  /* A row is now a record, not a sentence: what was decided, and what it covers.
+     The counts are the reason undo can be trusted — they say what is about to
+     come apart — so they sit under the mapping in the data face, not beside it. */
+  .cur-log-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .cur-log-row {
+    align-items: flex-start;
+  }
+  .cur-log-row.is-open {
+    border-color: var(--brand-1-ink);
+  }
+  .cur-log-impact {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .cur-log-filter {
+    width: 100%;
+    margin: 0 0 0.5rem;
+    padding: 0.42rem 0.6rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-1);
+    color: var(--ink-0);
+    font: inherit;
+    font-size: var(--step--1);
+  }
+  .cur-log-filter:focus {
+    outline: none;
+    border-color: var(--brand-1-ink);
+  }
+  .cur-log-remap {
+    display: flex;
+    gap: 0.35rem;
+    margin-top: 0.4rem;
+  }
+  .cur-log-remap-input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.28rem 0.5rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-1);
+    color: var(--ink-0);
+    font: inherit;
+    font-size: var(--step--1);
+  }
+  .cur-log-remap-input:focus {
+    outline: none;
+    border-color: var(--brand-1-ink);
+  }
+
+  @media (max-width: 800px) {
+    .cur-ov {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+/* =========================================================================
+   MOBILE — THE TOOLBAR WRAPS
+   The view button is pushed to the end with `margin-left: auto` on a nowrap
+   row; at 390px that put it 23px past the viewport edge, scrolling the page
+   sideways. It wraps onto its own line instead.
+   ========================================================================= */
+@layer section {
+  @media (max-width: 52rem) {
+    .cur-toolbar {
+      flex-wrap: wrap;
+      row-gap: var(--sp-xs);
+    }
+  }
+
+  /* --- Coverage worklist ---------------------------------------------------
+     Grouped by event, because that is how the work happens: you open one
+     dataset and fix several things at once. Each gap carries its own two
+     buttons, so "never going to have recordings" can be true of an event
+     without silencing everything else about it. */
+  .cur-cov {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-m);
+  }
+
+  .cur-cov-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-xs) var(--sp-m);
+    align-items: baseline;
+  }
+
+  .cur-cov-sub {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: var(--step--1);
+  }
+
+  .cur-cov-filters {
+    margin-inline-start: auto;
+    display: inline-flex;
+    gap: var(--sp-2xs);
+  }
+
+  .cur-cov-ev {
+    border: 1px solid var(--rule-0);
+    padding: var(--sp-s) var(--sp-m);
+  }
+
+  .cur-cov-evh {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--sp-xs) var(--sp-s);
+  }
+
+  .cur-cov-evh h3 {
+    margin: 0;
+    font-size: var(--step-0);
+  }
+
+  .cur-cov-file {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+
+  .cur-cov-score {
+    margin-inline-start: auto;
+    font-family: var(--font-data);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-2);
+  }
+
+  .cur-cov-list {
+    list-style: none;
+    margin: var(--sp-xs) 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .cur-cov-gap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-xs);
+    align-items: center;
+    padding-block: 0.2rem;
+    border-block-start: 1px solid var(--rule-0);
+    font-size: var(--step--1);
+  }
+
+  /* What the check is for, under its counts — the case view has room to explain
+     itself where the old list did not. */
+  .cur-cov-detail {
+    display: block;
+    color: var(--ink-2);
+    font-size: var(--step--2);
+  }
+
+  .cur-cov-what {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .cur-cov-pending {
+    margin: 0 0 var(--sp-xs);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+
+  .cur-cov-acts {
+    margin-inline-start: auto;
+    display: inline-flex;
+    gap: var(--sp-2xs);
+  }
+
+  .cur-mini {
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-xs);
+    border: 1px solid var(--rule-1);
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink-2);
+    font-family: inherit;
+    font-size: var(--step--2);
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .cur-mini:hover {
+    color: var(--ink-0);
+    border-color: var(--ink-1);
+  }
+}

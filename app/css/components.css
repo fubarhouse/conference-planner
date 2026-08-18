@@ -61,7 +61,7 @@
     width: 28px;
     height: 28px;
     border-radius: 6px;
-    background: #007AFF;
+    background: var(--gold, #b06f12);
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -108,11 +108,13 @@
 
   .sidebar-group-label {
     display: block;
-    font-size: 0.6875rem;
+    font-family: var(--font-data, monospace);
+    font-size: 0.625rem;
     font-weight: 600;
-    letter-spacing: 0.01em;
-    color: rgba(0, 0, 0, 0.35);
-    padding: 0.5rem 0.625rem 0.15rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold, rgba(0, 0, 0, 0.35));
+    padding: 0.6rem 0.625rem 0.2rem;
     white-space: nowrap;
     overflow: hidden;
   }
@@ -140,10 +142,12 @@
   }
   .sidebar-tab-btn:hover:not(.is-active) { background: rgba(0, 0, 0, 0.04); }
   .sidebar-tab-btn.is-active {
-    background: rgba(0, 122, 255, 0.12);
-    color: #007AFF;
+    background: var(--gold-soft, rgba(176, 111, 18, 0.12));
+    color: var(--gold, #b06f12);
+    font-weight: 600;
+    box-shadow: inset 2px 0 0 var(--gold, #b06f12);
   }
-  .sidebar-tab-btn.is-active .sidebar-item-icon { color: #007AFF; }
+  .sidebar-tab-btn.is-active .sidebar-item-icon { color: var(--gold, #b06f12); }
 
   .sidebar-item-icon {
     font-size: 0.8125rem;
@@ -182,10 +186,11 @@
   .theme-dark .sidebar-tab-btn      { color: rgba(255, 255, 255, 0.82); }
   .theme-dark .sidebar-tab-btn:hover:not(.is-active) { background: rgba(255, 255, 255, 0.05); }
   .theme-dark .sidebar-tab-btn.is-active {
-    background: rgba(10, 132, 255, 0.2);
-    color: #0a84ff;
+    background: rgba(226, 172, 87, 0.16);
+    color: #e2ac57;
+    box-shadow: inset 2px 0 0 #e2ac57;
   }
-  .theme-dark .sidebar-tab-btn.is-active .sidebar-item-icon { color: #0a84ff; }
+  .theme-dark .sidebar-tab-btn.is-active .sidebar-item-icon { color: #e2ac57; }
   .theme-dark .sidebar-item-icon    { color: rgba(255, 255, 255, 0.42); }
   .theme-dark .sidebar-group-label  { color: rgba(255, 255, 255, 0.25); }
 }
@@ -251,9 +256,9 @@
 @media (min-width: 640px) {
 
   [role="dialog"] {
-    background: rgba(0, 0, 0, 0.28);
-    backdrop-filter: blur(12px) saturate(150%);
-    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    background: rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
   }
 
   [role="dialog"] > div {
@@ -444,7 +449,14 @@
   #eventAssocModal > div { background: #ffffff; border-radius: 0; max-height: 100dvh; }
   .theme-dark #eventAssocModal > div { background: #1c1c1e; }
 
-  /* Header and footer: white surface contrasting the grouped body */
+  /* Header and footer: white surface contrasting the grouped body. Match the
+     body's 16px iOS inset (HTML ships px-6/24px) so the title and footer buttons
+     line up with the fields instead of sitting 8px further in. */
+  [role="dialog"]:not(.session-modal-card) > div > .border-b,
+  [role="dialog"]:not(.session-modal-card) > div > .border-t {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
   [role="dialog"]:not(.session-modal-card) > div > .border-b { background: #ffffff; }
   [role="dialog"]:not(.session-modal-card) > div > .border-t { background: #ffffff; }
   .theme-dark [role="dialog"]:not(.session-modal-card) > div > .border-b { background: #2c2c2e; }
@@ -637,9 +649,11 @@
     border-color: rgba(255, 255, 255, 0.09);
   }
 
-  /* Drag handle: remove from layout on touch (drag events don't fire) */
+  /* The anchor marker doubles as the desktop drag handle, but it's also the
+     visual "route station" — keep it visible on touch (reordering there uses the
+     mobile-only arrows) and drop the grab cursor since drag events don't fire. */
   :is(#accomWaypointStopsList, #personalAccomWaypointStopsList) .waypoint-stop-drag-handle {
-    display: none;
+    cursor: default;
   }
 
   /* Text column: grows to fill first line; gives location + coords stacked */
@@ -985,7 +999,7 @@
   -webkit-tap-highlight-color: transparent;
   transition: color 80ms;
 }
-.mobile-bottom-tab.is-active { color: #007AFF; }
+.mobile-bottom-tab.is-active { color: var(--gold, #b06f12); }
 .mobile-bottom-tab:active:not(.is-active) { color: rgba(0, 0, 0, 0.6); }
 
 .mobile-bottom-tab-icon {
@@ -1006,7 +1020,119 @@
   border-top-color: rgba(255, 255, 255, 0.10);
 }
 .theme-dark .mobile-bottom-tab { color: rgba(255, 255, 255, 0.38); }
-.theme-dark .mobile-bottom-tab.is-active { color: #0a84ff; }
+.theme-dark .mobile-bottom-tab.is-active { color: #e2ac57; }
+
+/* ── Shared sheet / action-row primitives (planner + editor) ──────────────────
+   Moved here from planner.css so the editor — which doesn't load planner.css —
+   gets them too (that gap was why its "More" sheet rendered broken). */
+.planner-sheet-font {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+}
+.tab-icon-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.planner-action-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 11px 20px;
+  min-height: 50px;
+  text-align: left;
+  color: #1c1c1e;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background 80ms;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  text-decoration: none;
+}
+.planner-action-row:active { background: rgba(0, 0, 0, 0.06); }
+.planner-action-row.is-current { background: rgba(0, 122, 255, 0.08); }
+.planner-action-divider {
+  height: 0.5px;
+  background: rgba(0, 0, 0, 0.1);
+  margin-left: 62px;
+}
+
+/* Grouped "More" sheet: section labels (mirror the desktop sidebar groups) and a
+   divided footer block for cross-app links. */
+.nav-sheet-group-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #8e8e93;
+  padding: 14px 20px 4px;
+}
+.nav-sheet-foot { border-top: 6px solid rgba(0, 0, 0, 0.04); margin-top: 6px; }
+
+/* Explicit sheet dismiss — a tap target that always works, even when the sheet
+   content is tall enough to leave no backdrop to tap. */
+.mobile-sheet-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(120, 120, 128, 0.16);
+  color: rgba(60, 60, 67, 0.6);
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 80ms;
+}
+.mobile-sheet-close:active { background: rgba(120, 120, 128, 0.28); }
+body.theme-dark .mobile-sheet-close { background: rgba(120, 120, 128, 0.32); color: rgba(255, 255, 255, 0.6); }
+
+/* Bottom-sheet slide-up + dark surfaces (shared across every sheet). */
+#mobileTabSheet > div,
+#editorMoreSheet > div,
+#plannerActionsSheet > div,
+#plannerDeleteSheet > div {
+  animation: sheet-slide-up 0.25s cubic-bezier(0.32, 0.72, 0, 1);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+}
+@keyframes sheet-slide-up {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+.mobile-sheet-row { min-height: 52px; }
+
+body.theme-dark #mobileTabSheet > div,
+body.theme-dark #editorMoreSheet > div,
+body.theme-dark #plannerActionsSheet > div,
+body.theme-dark #plannerDeleteSheet > div {
+  background: #2c2c2e;
+}
+body.theme-dark .planner-action-row { color: rgba(255, 255, 255, 0.88); }
+body.theme-dark .planner-action-row:active { background: rgba(255, 255, 255, 0.07); }
+body.theme-dark .planner-action-row.is-current { background: rgba(10, 132, 255, 0.16); }
+body.theme-dark .planner-action-divider { background: rgba(255, 255, 255, 0.1); }
+body.theme-dark .nav-sheet-foot { border-top-color: rgba(255, 255, 255, 0.06); }
+body.theme-dark #mobileTabSheet .bg-gray-300,
+body.theme-dark #editorMoreSheet .bg-gray-300,
+body.theme-dark #plannerActionsSheet .bg-gray-300 {
+  background: rgba(255, 255, 255, 0.25);
+}
+body.theme-dark #plannerActionsSheetTitle { color: rgba(255, 255, 255, 0.4); }
+body.theme-dark #mobileTabSheet .border-t,
+body.theme-dark #editorMoreSheet .border-t,
+body.theme-dark #plannerActionsSheet .border-t,
+body.theme-dark #plannerDeleteSheet .border-t,
+body.theme-dark #plannerDeleteSheet .border-b { border-color: rgba(255, 255, 255, 0.1); }
 
 /* ══════════════════════════════════════════════════════════════════════════
    Schedule page — mobile compact header (aurora gradient preserved)
@@ -1160,10 +1286,14 @@
     backdrop-filter: none;
   }
 
-  /* ── Edge-to-edge schedule grid ──────────────────────────────────────────── */
+  /* ── Schedule grid ───────────────────────────────────────────────────────
+     This used to pull the container edge-to-edge (`margin: 0 -1rem`) so the old
+     card chrome could bleed off both sides. The programme has no card chrome —
+     its rows carry no inner gutter of their own — so the bleed just pushed the
+     day headings and slot times hard against the viewport edge. The container
+     now keeps the page gutter, like every other section.
+     ---------------------------------------------------------------------- */
   body:has(#scheduleMain) #eventsContainer {
-    margin-left: -1rem;
-    margin-right: -1rem;
     border-radius: 0;
     border-left: none;
     border-right: none;
@@ -1245,6 +1375,52 @@
 }
 .toolbar-path-chip i { flex-shrink: 0; font-size: 0.7rem; }
 .toolbar-path-text { overflow: hidden; text-overflow: ellipsis; }
+
+/* Stacked variant: two labelled path rows (schedule + planner file) that fit the
+   toolbar's row height. */
+.toolbar-path-chip--stack {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.15rem;
+  padding: 0.25rem 0.75rem;
+  line-height: 1.25;
+  max-width: 300px;
+}
+.toolbar-path-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+}
+.toolbar-path-row i { flex-shrink: 0; font-size: 0.65rem; opacity: 0.65; }
+.toolbar-path-row .toolbar-path-text { min-width: 0; white-space: nowrap; }
+/* Inline "unlink schedule" control on the schedule row. */
+.toolbar-path-unlink {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.15rem;
+  font-size: 0.6rem;
+  line-height: 1;
+  opacity: 0.45;
+  transition: opacity 0.15s ease;
+}
+.toolbar-path-unlink:hover {
+  opacity: 1;
+}
+/* "primary" marker on the first of several associated conference schedules. */
+.toolbar-path-primary {
+  margin-left: 0.35rem;
+  padding: 0 0.3rem;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-radius: 0.25rem;
+  background: var(--accent, #0078bf);
+  color: #fff;
+  opacity: 0.85;
+}
 
 .theme-dark .toolbar-back-btn {
   background: var(--surface-1);
@@ -1448,6 +1624,103 @@
 .hl-loading { grid-column: 1 / -1; text-align: center; color: #9eb2c8; font-size: 0.875rem; padding: 2rem; }
 .hl-empty   { grid-column: 1 / -1; color: #9eb2c8; font-size: 0.875rem; padding: 2.5rem 0; text-align: center; }
 
+/* ── Schedule "Browse" home ─────────────────────────────────────────────────
+   When active, the home replaces the schedule content (siblings hidden). The
+   header logo becomes a clickable way back to Browse. */
+#scheduleMain.home-active > :not(#eventHomeView) { display: none !important; }
+#headerLogo { cursor: pointer; }
+/* The schedule Browse home fills the schedule width (matching the header) rather
+   than the narrower 860px cap the planner/editor homes use. */
+#eventHomeView .hl-root { max-width: none; }
+/* Fixed, equal-width columns (1 / 2 / 4) instead of the shared auto-fill grid, so
+   the list reads as a clean 4-up on desktop rather than a variable, busy pack. */
+#eventHomeGrid { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px) { #eventHomeGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { #eventHomeGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+.hl-event-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  text-align: left;
+  padding: 0.9rem 1rem;
+  border: 1px solid #e2eaf3;
+  border-radius: 0.75rem;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.12s, box-shadow 0.12s, transform 0.12s;
+}
+.hl-event-card:hover { border-color: #34526f; box-shadow: 0 2px 12px rgba(52, 82, 111, 0.12); transform: translateY(-1px); }
+.hl-event-card-top { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+.hl-event-badge {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #34526f;
+  background: rgba(52, 82, 111, 0.1);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+.hl-event-flags { display: inline-flex; align-items: center; gap: 0.35rem; flex-shrink: 0; }
+.hl-event-default {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: #b06f12;
+  background: rgba(176, 111, 18, 0.12);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.hl-event-hidden {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: #6b7280;
+  background: rgba(107, 114, 128, 0.14);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+/* Owner view (?showHidden=1): unpublished events read as muted but openable. */
+.hl-event-card.is-hidden { opacity: 0.62; border-style: dashed; }
+.hl-event-card.is-hidden:hover { opacity: 1; }
+/* Public "Show all": unpublished schedules are visible but locked (not openable). */
+.hl-event-card.is-locked { cursor: not-allowed; opacity: 0.55; }
+.hl-event-card.is-locked:hover { border-color: #e2eaf3; box-shadow: none; transform: none; }
+.theme-dark .hl-event-hidden { color: var(--text-2); background: rgba(255, 255, 255, 0.08); }
+.theme-dark .hl-event-card.is-locked:hover { border-color: var(--line-0); }
+/* "Show all schedules" toggle on the Browse home. */
+.hl-showall-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.85rem;
+  font-size: 0.8125rem;
+  color: #6b7280;
+  cursor: pointer;
+  user-select: none;
+}
+.hl-showall-toggle input { cursor: pointer; }
+.hl-showall-count {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #6b7280;
+  background: rgba(107, 114, 128, 0.14);
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+}
+.theme-dark .hl-showall-toggle { color: var(--text-2); }
+.theme-dark .hl-showall-count { color: var(--text-2); background: rgba(255, 255, 255, 0.08); }
+.hl-event-title { font-size: 1rem; font-weight: 700; color: #1f2937; margin: 0; line-height: 1.25; }
+.hl-event-meta { display: flex; flex-wrap: wrap; gap: 0.25rem 0.85rem; font-size: 0.8125rem; color: #6b7280; }
+.hl-event-meta span { display: inline-flex; align-items: center; gap: 0.35rem; }
+
+.theme-dark .hl-event-card { background: var(--surface-1); border-color: var(--line-0); }
+.theme-dark .hl-event-card:hover { border-color: #7aaccc; }
+.theme-dark .hl-event-title { color: var(--text-0); }
+.theme-dark .hl-event-meta { color: var(--text-2); }
+.theme-dark .hl-event-badge { color: #9cc4e4; background: rgba(122, 172, 204, 0.16); }
+
 /* Dark mode */
 .theme-dark .hl-hero { background: linear-gradient(135deg, #0f2238 0%, #1c3652 100%); }
 .theme-dark .hl-cta-card { background: var(--surface-1); border-color: var(--line-0); }
@@ -1478,7 +1751,7 @@
 .s3-progress-bar {
   height: 100%;
   width: 40%;
-  background: #3b82f6;
+  background: var(--gold, #b06f12);
   border-radius: 2px;
   animation: s3-sweep 1.4s ease-in-out infinite;
 }
@@ -1486,3 +1759,326 @@
   0%   { transform: translateX(-150%); }
   100% { transform: translateX(350%); }
 }
+
+/* ── Map picker modal (shared: editor venue, planner accommodation/waypoints) ── */
+.vmap-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+}
+.vmap-overlay.hidden {
+  display: none;
+}
+.vmap-card {
+  width: min(760px, 100%);
+  max-height: min(92vh, 780px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--surface-0, #fff);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: vmap-in 0.22s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+.theme-dark .vmap-card {
+  background: #2c2c2e;
+}
+@keyframes vmap-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.985); }
+  to   { opacity: 1; transform: none; }
+}
+.vmap-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line-0);
+}
+.vmap-badge {
+  flex-shrink: 0;
+  width: 44px; height: 44px;
+  border-radius: 13px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 1.1rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  box-shadow: 0 8px 20px -6px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+.vmap-heading { flex: 1; min-width: 0; padding-top: 1px; }
+.vmap-title { margin: 0; font-size: 1.1rem; font-weight: 700; color: var(--text-0); letter-spacing: -0.015em; }
+.vmap-sub { margin: 3px 0 0; font-size: var(--fs-xs, 0.75rem); color: var(--text-2); line-height: 1.45; }
+.vmap-close {
+  flex-shrink: 0;
+  width: 32px; height: 32px; border-radius: 9px;
+  border: none; background: transparent; color: var(--text-3);
+  cursor: pointer; transition: background 0.15s, color 0.15s;
+  display: flex; align-items: center; justify-content: center;
+}
+.vmap-close:hover { background: var(--surface-1); color: var(--text-1); }
+.vmap-body { padding: 16px 20px; display: flex; flex-direction: column; gap: 12px; }
+.vmap-search { position: relative; display: flex; align-items: center; }
+.vmap-search-icon { position: absolute; left: 15px; color: var(--text-3); font-size: 0.85rem; pointer-events: none; }
+.vmap-search-input {
+  flex: 1; height: 48px;
+  padding: 0 118px 0 40px;
+  border-radius: 13px;
+  border: 1px solid var(--line-0);
+  background: var(--surface-1);
+  color: var(--text-0);
+  font-size: var(--fs-md, 0.875rem);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.vmap-search-input::placeholder { color: var(--text-3); }
+.vmap-search-input:focus {
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.vmap-search-btn {
+  position: absolute; right: 6px;
+  height: 36px; padding: 0 15px;
+  border: none; border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #fff; font-size: var(--fs-sm, 0.8125rem); font-weight: 600;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 7px;
+  transition: filter 0.15s, opacity 0.15s;
+}
+.vmap-search-btn:hover { filter: brightness(1.07); }
+.vmap-search-btn:disabled { opacity: 0.7; cursor: default; }
+.vmap-search-btn .fa-spinner { animation: vmap-spin 0.7s linear infinite; }
+@keyframes vmap-spin { to { transform: rotate(360deg); } }
+.vmap-status {
+  display: flex; align-items: center; gap: 9px;
+  padding: 10px 13px; border-radius: 11px;
+  font-size: var(--fs-sm, 0.8125rem); font-weight: 500;
+  animation: vmap-status-in 0.2s ease;
+  background: color-mix(in srgb, #f59e0b 15%, var(--surface-0));
+  color: #b45309;
+  border: 1px solid color-mix(in srgb, #f59e0b 42%, transparent);
+}
+.vmap-status[hidden] { display: none; }
+.vmap-status .fa-triangle-exclamation { color: #f59e0b; }
+.theme-dark .vmap-status { color: #fcd34d; }
+@keyframes vmap-status-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.vmap-canvas-wrap {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid var(--line-0);
+}
+.vmap-canvas { height: 430px; width: 100%; background: #e8eef4; }
+.theme-dark .vmap-canvas { background: #1a1a2e; }
+.vmap-readout {
+  position: absolute; left: 12px; bottom: 12px; z-index: 500;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 13px; border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-0) 84%, transparent);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid var(--line-0);
+  color: var(--text-1); font-family: var(--font-data, monospace); font-size: var(--fs-xs, 0.75rem); font-weight: 500;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+  max-width: calc(100% - 24px);
+}
+.vmap-readout .fa-location-crosshairs { color: var(--accent); }
+.vmap-footer {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 20px; border-top: 1px solid var(--line-0);
+  background: var(--surface-1);
+}
+.vmap-hint { font-size: var(--fs-xs, 0.75rem); color: var(--text-3); display: inline-flex; align-items: center; gap: 6px; }
+.vmap-actions { display: flex; gap: 8px; }
+.vmap-btn {
+  height: 41px; padding: 0 18px; border-radius: 11px;
+  font-size: var(--fs-sm, 0.8125rem); font-weight: 600; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 7px;
+  transition: filter 0.15s, background 0.15s, opacity 0.15s, transform 0.1s;
+}
+.vmap-btn:active { transform: translateY(1px); }
+.vmap-btn-ghost { background: transparent; border: 1px solid var(--line-0); color: var(--text-1); }
+.vmap-btn-ghost:hover { background: var(--surface-2); }
+.vmap-btn-primary {
+  border: none; color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  box-shadow: 0 8px 20px -8px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+.vmap-btn-primary:hover { filter: brightness(1.07); }
+.vmap-btn-primary:disabled { opacity: 0.45; cursor: not-allowed; filter: none; box-shadow: none; }
+.vmap-pin-wrap { background: transparent; border: none; }
+.vmap-pin {
+  position: relative;
+  width: 26px; height: 26px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  border: 2.5px solid #fff;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+}
+.vmap-pin-dot {
+  position: absolute; top: 50%; left: 50%;
+  width: 8px; height: 8px; margin: -4px 0 0 -4px;
+  background: #fff; border-radius: 50%;
+}
+/* Reference (conference venue) pin — gold, with a star so it reads as a landmark
+   distinct from the accent pin the user is placing. */
+.vmap-pin--conf {
+  background: linear-gradient(135deg, var(--gold, #d4a017), #b8860b);
+}
+.vmap-pin-glyph {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  color: #fff; font-size: 11px;
+}
+/* Off-screen indicator: a chip clamped to the canvas edge pointing at the
+   reference when it's outside the current view. */
+.vmap-offscreen {
+  position: absolute; z-index: 600;
+  transform: translate(-50%, -50%);
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 6px 11px 6px 9px; border-radius: 999px;
+  background: color-mix(in srgb, var(--gold, #d4a017) 88%, #000);
+  color: #fff; font-size: var(--fs-xs, 0.75rem); font-weight: 600;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  cursor: pointer; white-space: nowrap; max-width: 60%;
+  transition: filter 0.15s;
+}
+.vmap-offscreen:hover { filter: brightness(1.08); }
+.vmap-offscreen-arrow {
+  /* FA location-arrow points to the upper-right (−45°) by default; correct for
+     that so the CSS var equals the true direction to the reference. */
+  transform: rotate(calc(var(--vmap-arrow-rot, 0deg) + 45deg));
+  font-size: 0.85em;
+}
+.vmap-offscreen-label {
+  overflow: hidden; text-overflow: ellipsis;
+}
+
+/* ── Planner privacy lock overlay ────────────────────────────────────────────
+   Full-screen opaque gate shown when a locked planner is opened (see
+   plannerLock.js). Covers all content until the account password is entered. */
+.planner-lock-open { overflow: hidden; }
+.planner-lock-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: #0f172a;
+  background: radial-gradient(120% 120% at 50% 0%, #1e293b 0%, #0f172a 70%);
+}
+.planner-lock-card {
+  width: min(400px, 100%);
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem 1.75rem 1.5rem;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+  text-align: center;
+}
+.planner-lock-icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #fef3c7;
+  color: #b45309;
+  font-size: 1.25rem;
+}
+.planner-lock-title { font-size: 1.15rem; font-weight: 700; color: #111827; margin: 0 0 0.35rem; }
+.planner-lock-sub { font-size: 0.875rem; color: #4b5563; line-height: 1.5; margin: 0 0 1.25rem; }
+.planner-lock-sub strong { color: #111827; }
+.planner-lock-form { display: flex; flex-direction: column; gap: 0.6rem; }
+.planner-lock-input {
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 0.9rem;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: #111827;
+  background: #fff;
+}
+.planner-lock-input:focus {
+  outline: none;
+  border-color: #d97706;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.22);
+}
+.planner-lock-error { color: #dc2626; font-size: 0.8rem; margin: 0; text-align: left; }
+.planner-lock-btn {
+  height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 0;
+  border-radius: 10px;
+  background: #d97706;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.12s;
+}
+.planner-lock-btn:hover { filter: brightness(1.06); }
+.planner-lock-btn:disabled { opacity: 0.6; cursor: default; }
+.planner-lock-back {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: #6b7280;
+  text-decoration: none;
+}
+.planner-lock-back:hover { color: #374151; text-decoration: underline; }
+
+/* Dark theme: the card/h2/inputs are themed by the shared [role="dialog"] rules
+   above; keep our custom sub-text, error, and escape link legible on the dark card. */
+.theme-dark .planner-lock-sub { color: rgba(255, 255, 255, 0.72); }
+.theme-dark .planner-lock-sub strong { color: #fff; }
+.theme-dark .planner-lock-error { color: #f87171; }
+.theme-dark .planner-lock-back { color: rgba(255, 255, 255, 0.5); }
+.theme-dark .planner-lock-back:hover { color: rgba(255, 255, 255, 0.82); }
+
+/* Add-to-calendar popover (planner itinerary/legs/stays → Google Calendar / .ics) */
+.cal-menu {
+  min-width: 180px;
+  padding: 4px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
+}
+.cal-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  font-size: 0.85rem;
+  color: #374151;
+  text-align: left;
+  cursor: pointer;
+}
+.cal-menu-item:hover,
+.cal-menu-item:focus-visible {
+  outline: none;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+.cal-menu-item i { width: 1rem; text-align: center; color: #6b7280; }
+.cal-menu-item:hover i { color: #1d4ed8; }
+.theme-dark .cal-menu { background: #0f2233; border-color: rgba(255, 255, 255, 0.14); }
+.theme-dark .cal-menu-item { color: #e5eefb; }
+.theme-dark .cal-menu-item:hover { background: rgba(59, 130, 246, 0.18); color: #fff; }

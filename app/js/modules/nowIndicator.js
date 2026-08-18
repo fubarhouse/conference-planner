@@ -5,7 +5,9 @@ const JUMP_BTN_ID = 'jumpToNow';
 
 let rafPending = false;
 
-function getNow() {
+// Exported so the Now/Next companion (nowNext.js) shares one clock — including
+// the ?debugNow= override, which lets both be tested against a fixed "now".
+export function getNow() {
   const param = new URLSearchParams(location.search).get('debugNow');
   if (param) {
     const ms = new Date(param).getTime();
@@ -23,7 +25,7 @@ function schedulePlacement() {
   });
 }
 
-function getTimezone() {
+export function getTimezone() {
   return state.eventMeta?.timezone || undefined;
 }
 
@@ -46,7 +48,9 @@ function getRowStartMs(row) {
 function buildNowLine() {
   const tz = getTimezone();
   const timeStr = new Date(getNow()).toLocaleTimeString(undefined, {
-    hour: '2-digit', minute: '2-digit', timeZone: tz,
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: tz,
   });
   const el = document.createElement('div');
   el.id = NOW_LINE_ID;
@@ -54,7 +58,7 @@ function buildNowLine() {
   el.setAttribute('aria-hidden', 'true');
   el.innerHTML = `
     <div class="now-indicator-label">
-      <i class="fas fa-circle now-indicator-dot" aria-hidden="true"></i>
+      <span class="now-indicator-dot" aria-hidden="true"></span>
       Now &bull; ${timeStr}
     </div>
     <div class="now-indicator-line"></div>
@@ -67,7 +71,7 @@ function setJumpButtonVisible(visible) {
   if (btn) btn.classList.toggle('hidden', !visible);
 }
 
-export function placeNowIndicator() {
+function placeNowIndicator() {
   document.getElementById(NOW_LINE_ID)?.remove();
 
   if (!state.allEvents?.length || !state.eventMeta) {
@@ -79,7 +83,9 @@ export function placeNowIndicator() {
   const now = getNow();
 
   // Check today is actually one of the event's scheduled days.
-  const hasToday = state.allEvents.some((ev) => toEventDate(new Date(ev.startTime).getTime()) === today);
+  const hasToday = state.allEvents.some(
+    (ev) => toEventDate(new Date(ev.startTime).getTime()) === today,
+  );
   if (!hasToday) {
     setJumpButtonVisible(false);
     return;
@@ -87,7 +93,10 @@ export function placeNowIndicator() {
 
   // Find today's .schedule-day element and its .timeline-row children.
   const container = document.getElementById('eventsContainer');
-  if (!container) { setJumpButtonVisible(false); return; }
+  if (!container) {
+    setJumpButtonVisible(false);
+    return;
+  }
 
   let todayDayEl = null;
   let todayRows = [];
@@ -138,7 +147,7 @@ export function placeNowIndicator() {
   setJumpButtonVisible(true);
 }
 
-export function scrollToNow() {
+function scrollToNow() {
   document.getElementById(NOW_LINE_ID)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 

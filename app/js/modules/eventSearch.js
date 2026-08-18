@@ -1,4 +1,5 @@
 import { escapeHtml } from './utils.js';
+import { buildModalOverlay, dismissOnBackdrop } from './modalScaffold.js';
 
 const SEARCH_MODAL_ID = 'eventSearchModal';
 
@@ -32,8 +33,7 @@ function renderResults(query, container) {
       });
 
   if (filtered.length === 0) {
-    container.innerHTML =
-      '<p class="event-search-empty">No events found matching your search.</p>';
+    container.innerHTML = '<p class="event-search-empty">No events found matching your search.</p>';
     return;
   }
 
@@ -43,11 +43,11 @@ function renderResults(query, container) {
     <button type="button" class="event-search-result" data-file="${escapeHtml(evt.file)}" data-category="${escapeHtml(evt.category)}">
       <span class="event-search-result-title">
         ${escapeHtml(evt.label)}
-        ${evt.enabled === false ? '<span class="event-search-result-hidden"><i class="fas fa-eye-slash" aria-hidden="true"></i> Hidden</span>' : ''}
+        ${evt.enabled === false ? '<span class="event-search-result-hidden"> Hidden</span>' : ''}
       </span>
-      ${evt.region ? `<span class="event-search-result-meta"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> ${escapeHtml(evt.region)}</span>` : ''}
-      ${evt.venue ? `<span class="event-search-result-meta"><i class="fas fa-building" aria-hidden="true"></i> ${escapeHtml(evt.venue)}</span>` : ''}
-    </button>`
+      ${evt.region ? `<span class="event-search-result-meta"> ${escapeHtml(evt.region)}</span>` : ''}
+      ${evt.venue ? `<span class="event-search-result-meta"> ${escapeHtml(evt.venue)}</span>` : ''}
+    </button>`,
     )
     .join('');
 }
@@ -56,23 +56,18 @@ function ensureEventSearchModal() {
   let modal = document.getElementById(SEARCH_MODAL_ID);
   if (modal) return modal;
 
-  modal = document.createElement('div');
-  modal.id = SEARCH_MODAL_ID;
-  modal.className = 'session-modal-overlay hidden';
-
-  modal.innerHTML = `
+  modal = buildModalOverlay({
+    id: SEARCH_MODAL_ID,
+    innerHTML: `
     <div class="session-modal-card event-search-card" role="dialog" aria-modal="true" aria-labelledby="eventSearchTitle">
       <div class="session-modal-header event-search-header">
-        <h2 id="eventSearchTitle" class="event-search-title">
-          <i class="fas fa-search" aria-hidden="true"></i> Find an event
+        <h2 id="eventSearchTitle" class="event-search-title"> Find an event
         </h2>
         <button id="eventSearchClose" type="button" class="session-modal-close" aria-label="Close event search">
-          <i class="fas fa-times" aria-hidden="true"></i>
         </button>
       </div>
       <div class="event-search-input-wrap">
         <div class="event-search-input-inner">
-          <i class="fas fa-search event-search-input-icon" aria-hidden="true"></i>
           <input
             id="eventSearchInput"
             type="search"
@@ -84,7 +79,6 @@ function ensureEventSearchModal() {
             aria-autocomplete="list"
           >
           <button id="eventSearchClear" type="button" class="event-search-clear hidden" aria-label="Clear search">
-            <i class="fas fa-times" aria-hidden="true"></i>
           </button>
         </div>
       </div>
@@ -92,12 +86,10 @@ function ensureEventSearchModal() {
         <div id="eventSearchResults" class="event-search-results" role="listbox" aria-label="Event search results"></div>
       </div>
     </div>
-  `;
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeEventSearchModal();
+  `,
   });
 
+  dismissOnBackdrop(modal, closeEventSearchModal);
   modal.querySelector('#eventSearchClose').addEventListener('click', closeEventSearchModal);
 
   const input = modal.querySelector('#eventSearchInput');
@@ -149,7 +141,6 @@ function ensureEventSearchModal() {
     }
   });
 
-  document.body.appendChild(modal);
   return modal;
 }
 

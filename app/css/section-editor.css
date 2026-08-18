@@ -1,0 +1,3371 @@
+/* ============================================================================
+   SECTION — EDITOR
+   Shell first, exactly as the planner was done: masthead, sidebar, toolbar and
+   panel. Each workspace converts after.
+
+   The editor and the planner are the SAME SHAPE — sidebar beside a scrolling
+   panel — so everything structural about that shape lives in
+   `section-chrome.css` and both sheets inherit it. This file holds only what is
+   the editor's own.
+
+   Prefix: `edt-*`. `editor-*` belongs to the legacy `editor.css` /
+   `editor-design.css`, which are pruned once every workspace is converted.
+   ========================================================================= */
+
+@layer section {
+  /* --- PANEL --------------------------------------------------------------
+     The editor's panel is a workspace rather than a document, so it takes the
+     full width the shell gives it — no reading measure. What it edits is a
+     table of records, not prose.
+     --------------------------------------------------------------------- */
+  #editorMain {
+    background: none;
+    padding-block: var(--sp-m) var(--sp-2xl);
+  }
+
+  #editorMain > * {
+    inline-size: 100%;
+    max-inline-size: none;
+    margin-inline: 0;
+  }
+
+  /* --- CONTROL STRIP ------------------------------------------------------
+     Same grammar as the planner's: what you are editing on the left, the state
+     of it on the right, and the verbs kept together rather than spread across
+     the bar.
+     --------------------------------------------------------------------- */
+  #editorToolbar {
+    padding-block: var(--sp-s);
+    background: none;
+    border: 0;
+    border-block-end: 1px solid var(--rule-0);
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .edt-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-2xs) var(--sp-s);
+    font-size: var(--step--1);
+  }
+
+  /* Toolbar verbs. Save is the one that commits, so it is the only filled one;
+     the rest are outlined, and the split-button carets are the same control a
+     step narrower. */
+  .edt-tbtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    background: transparent;
+    border: 1px solid var(--ink-1);
+    border-radius: 0;
+    color: var(--ink-0);
+    font-size: var(--step--1);
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .edt-tbtn:hover:not(:disabled) {
+    background: var(--paper-2);
+    border-color: var(--ink-0);
+  }
+
+  .edt-tbtn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  #saveDataset {
+    background: var(--ink-0);
+    border-color: var(--ink-0);
+    color: var(--paper-0);
+    font-weight: 600;
+  }
+
+  #saveDataset:hover:not(:disabled) {
+    background: var(--ink-1);
+    border-color: var(--ink-1);
+  }
+
+  /* The split-button pair reads as one control: no seam between them. */
+  .editor-preview-split {
+    display: inline-flex;
+    position: relative;
+  }
+
+  .editor-preview-split .edt-tbtn + .edt-tbtn {
+    border-inline-start: 0;
+  }
+
+  .edt-tbtn--more {
+    padding-inline: var(--sp-2xs);
+  }
+
+  .editor-preview-dropdown {
+    position: absolute;
+    inset-block-start: 100%;
+    inset-inline-end: 0;
+    z-index: 20;
+    min-inline-size: 12rem;
+    background: var(--paper-1);
+    border: 1px solid var(--ink-0);
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .editor-preview-dropdown-item {
+    display: block;
+    inline-size: 100%;
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    background: none;
+    border: 0;
+    color: var(--ink-0);
+    font-size: var(--step--1);
+    text-align: start;
+    cursor: pointer;
+  }
+
+  .editor-preview-dropdown-item:hover {
+    background: var(--paper-2);
+  }
+
+  .edt-strip--file {
+    margin-block-start: var(--sp-2xs);
+  }
+
+  /* The open file's path — a machine token, and the one place the editor shows
+     one on purpose. */
+  #editorPathChip {
+    flex: 1;
+    min-inline-size: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+
+  /* Sub-tabs (Details / Timeline) — the schedule's tab grammar. */
+  .editor-sub-tab-row {
+    display: flex;
+    gap: var(--sp-m);
+    padding: 0;
+    background: none;
+    border: 0;
+    border-block-end: 1px solid var(--rule-0);
+    border-radius: 0;
+    margin-block-end: var(--sp-m);
+  }
+
+  .editor-sub-tab-button {
+    min-block-size: var(--tap);
+    padding: 0;
+    background: none;
+    border: 0;
+    border-block-end: 2px solid transparent;
+    border-radius: 0;
+    color: var(--ink-1);
+    font-size: var(--step--1);
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .editor-sub-tab-button:hover {
+    color: var(--ink-0);
+    border-block-end-color: var(--rule-1);
+  }
+
+  .editor-sub-tab-button.is-active {
+    color: var(--ink-0);
+    font-weight: 600;
+    border-block-end-color: var(--brand-1-ink);
+  }
+
+  .edt-eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* --- SECTION HEADS ------------------------------------------------------ */
+  .edt-section__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-s);
+    padding-block-end: var(--sp-xs);
+    border-block-end: 1px solid var(--ink-1);
+    margin-block-end: var(--sp-m);
+  }
+
+  .edt-section__title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 600;
+    letter-spacing: var(--display-track);
+  }
+
+  /* The logo panel's "no image yet" stand-in. It used to be an icon-font
+     picture-frame glyph; it is a word, because that is what it is saying. */
+  .edt-logo-none {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* --- THE WORKSPACE ------------------------------------------------------
+     A list of records beside the form for the selected one. Sessions and
+     Sponsors are the same component with different records, so they share it —
+     `edt-work*` rather than two private copies of the same idea.
+
+     Both halves are regions of the page, ruled off, not floating cards. The
+     list scrolls; the form does not.
+     --------------------------------------------------------------------- */
+  .edt-work {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-l);
+  }
+
+  @media (min-width: 75rem) {
+    .edt-work {
+      grid-template-columns: 24rem minmax(0, 1fr);
+      gap: var(--sp-xl);
+    }
+  }
+
+  .edt-work__list,
+  .edt-work__form {
+    display: flex;
+    flex-direction: column;
+    min-inline-size: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .edt-work__list {
+    max-block-size: 70dvh;
+  }
+
+  /* The list's own rule separates it from the form on narrow viewports, where
+     the two stack. */
+  @media (min-width: 75rem) {
+    .edt-work__list {
+      border-inline-end: 1px solid var(--rule-0);
+      padding-inline-end: var(--sp-l);
+    }
+  }
+
+  .edt-work__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-s);
+    padding-block-end: var(--sp-2xs);
+    border-block-end: 1px solid var(--ink-1);
+    margin-block-end: var(--sp-xs);
+  }
+
+  .edt-work__title {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    letter-spacing: var(--display-track);
+    color: var(--ink-0);
+  }
+
+  .edt-work__acts {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-s);
+  }
+
+  /* Verbs are words in the label style — the same control the planner's rows
+     and the archive's rail use. */
+  .edt-act {
+    min-block-size: var(--tap);
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    color: var(--ink-2);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .edt-act:hover:not(:disabled) {
+    background: none;
+    color: var(--ink-0);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  /* The one act in a dialog that commits. .edt-act is a quiet text button —
+     right in a row of rows, too faint as the primary control in a modal. */
+  .edt-act--primary {
+    padding-inline: var(--sp-s);
+    background: var(--ink-0);
+    color: var(--paper-0);
+    border: 1px solid var(--ink-0);
+    font-weight: 600;
+  }
+
+  .edt-act--primary:hover:not(:disabled) {
+    background: var(--ink-1);
+    border-color: var(--ink-1);
+    color: var(--paper-0);
+  }
+
+  .edt-act--del:hover:not(:disabled) {
+    color: var(--status-bad);
+  }
+
+  .edt-act:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .edt-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .edt-search {
+    inline-size: 100%;
+    min-block-size: 2.4rem;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-block-end: 1px solid var(--rule-1);
+    border-radius: 0;
+    color: var(--ink-0);
+    font-size: var(--step--1);
+  }
+
+  .edt-search:focus {
+    outline: 0;
+    border-block-end-color: var(--brand-1-ink);
+    border-block-end-width: 2px;
+  }
+
+  .edt-hint {
+    margin-block: var(--sp-2xs);
+    font-size: var(--step--2);
+    font-style: italic;
+    color: var(--ink-2);
+  }
+
+  /* Break-glass: a warning you must read before you act, so it keeps the alert
+     colour — as a rule down the leading edge, never a filled panel. */
+  .edt-breakglass {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-xs);
+    margin-block: var(--sp-2xs) var(--sp-s);
+    padding: var(--sp-2xs) 0 var(--sp-2xs) var(--sp-xs);
+    background: none;
+    border: 0;
+    border-inline-start: 2px solid var(--status-warn);
+    border-radius: 0;
+    font-size: var(--step--2);
+    color: var(--ink-1);
+    cursor: pointer;
+  }
+
+  .edt-breakglass strong {
+    color: var(--ink-0);
+  }
+
+  /* --- THE RECORD LIST ----------------------------------------------------- */
+  .edt-rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    flex: 1;
+    min-block-size: 0;
+  }
+
+  .edt-rows__day {
+    padding: var(--sp-s) 0 var(--sp-3xs);
+    border-block-end: 1px solid var(--ink-1);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* The add/edit person dialog. Declares its own layout because the legacy
+     sheets the editor still imports style .session-modal-body as a grid. */
+  .person-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-s);
+    padding: var(--sp-m);
+    background: var(--paper-0);
+  }
+
+  .person-form-lead {
+    font-size: var(--step--1);
+    color: var(--ink-1);
+  }
+
+  .person-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3xs);
+  }
+
+  .person-field-label {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-1);
+  }
+
+  .person-field-hint {
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+
+  .person-field-hint code {
+    font-family: var(--font-data);
+  }
+
+  .person-form-error {
+    font-size: var(--step--1);
+    color: var(--status-bad);
+  }
+
+  .person-form-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-s);
+    margin-block-start: var(--sp-2xs);
+  }
+
+  /* --- PEOPLE TAB ---------------------------------------------------------
+     Organisers/volunteers (editable) and speakers (read-only, projected from
+     the schedule). Lives here, not in section-planner.css: the editor does not
+     load that sheet — the same trap that left the group headings unstyled the
+     first time. */
+  .people-group {
+    margin-block-start: var(--sp-l);
+  }
+
+  .people-group-head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-s);
+    padding-block-end: var(--sp-2xs);
+    border-block-end: 1px solid var(--ink-1);
+  }
+
+  .people-group-title {
+    font-family: var(--font-display);
+    font-size: var(--step-0);
+    font-weight: 600;
+    color: var(--ink-0);
+  }
+
+  .people-group-count {
+    margin-inline-start: auto;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-2);
+  }
+
+  .people-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-s);
+    cursor: default;
+    user-select: auto;
+  }
+
+  .people-row-main {
+    flex: 1;
+    min-inline-size: 0;
+  }
+
+  .people-row-name {
+    font-weight: 600;
+    color: var(--ink-0);
+  }
+
+  /* The slug, shown only when the page's display text disagrees with it. */
+  .people-row-slug {
+    margin-inline-start: var(--sp-2xs);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+
+  .people-row-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-s);
+    flex: none;
+  }
+
+  .people-row-count {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+
+  /* A speaker's sessions — the reason this listing is worth reading. */
+  .people-talks {
+    margin-block-start: var(--sp-3xs);
+    /* The em-dash below is the marker; the UA bullet made it two. */
+    list-style: none;
+  }
+
+  .people-talk {
+    font-size: var(--step--1);
+    color: var(--ink-1);
+    line-height: 1.5;
+  }
+
+  .people-talk::before {
+    content: '—';
+    margin-inline-end: var(--sp-2xs);
+    color: var(--ink-2);
+  }
+
+  .edt-row {
+    padding: var(--sp-xs) 0;
+    background: none;
+    border: 0;
+    border-block-end: 1px solid var(--rule-0);
+    border-radius: 0;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .edt-row:hover {
+    background: var(--paper-2);
+  }
+
+  /* Selected, and drop target: the one mark this product uses for "this one". */
+  .edt-row.is-selected {
+    padding-inline-start: var(--sp-xs);
+    box-shadow: inset 3px 0 0 var(--brand-1-ink);
+  }
+
+  .edt-row.is-droptarget {
+    box-shadow: inset 0 2px 0 var(--brand-1-ink);
+  }
+
+  .edt-row__body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--sp-xs);
+  }
+
+  .edt-row__title {
+    font-size: var(--step--1);
+    color: var(--ink-0);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .edt-row.is-selected .edt-row__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+
+  .edt-row__meta {
+    margin-block-start: var(--sp-3xs);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .edt-row__acts {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-xs);
+    flex: none;
+    opacity: 0;
+  }
+
+  .edt-row:hover .edt-row__acts,
+  .edt-row:focus-within .edt-row__acts {
+    opacity: 1;
+  }
+
+  @media (hover: none) {
+    .edt-row__acts {
+      opacity: 1;
+    }
+  }
+
+  .edt-rowact {
+    min-block-size: var(--tap);
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    color: var(--ink-2);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    cursor: pointer;
+  }
+
+  .edt-rowact:hover {
+    background: none;
+    color: var(--ink-0);
+  }
+
+  /* Sections stack down the page with air between them, not boxes around them. */
+  .edt-stack + .edt-stack {
+    margin-block-start: var(--sp-xl);
+  }
+
+  /* The localhost gate. A statement of fact with the alert colour as a rule —
+     the same shape as the planner's schedule gate and the break-glass toggle. */
+  .edt-locked {
+    padding: var(--sp-s) 0 var(--sp-s) var(--sp-s);
+    background: none;
+    border: 0;
+    border-inline-start: 2px solid var(--status-bad);
+    border-radius: 0;
+    color: var(--ink-1);
+    font-size: var(--step--1);
+  }
+
+  .edt-locked code {
+    font-family: var(--font-data);
+    color: var(--ink-0);
+  }
+
+  /* --- FIELDS -------------------------------------------------------------
+     Label, hint, then a ruled line. The same geometry as the modals and the
+     schedule's filter bar — there is one field in this product, not three.
+     --------------------------------------------------------------------- */
+  #editorMain .editor-field-label {
+    display: block;
+    margin-block-end: var(--sp-3xs);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  #editorMain .editor-field-hint {
+    display: block;
+    margin-block-end: var(--sp-3xs);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+
+  #editorMain input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']),
+  #editorMain select,
+  #editorMain textarea {
+    inline-size: 100%;
+    min-block-size: 2.4rem;
+    padding: var(--sp-3xs) 0;
+    background: transparent;
+    color: var(--ink-0);
+    border: 0;
+    border-block-end: 1px solid var(--rule-1);
+    border-radius: 0;
+    box-shadow: none;
+    appearance: none;
+    font-family: inherit;
+    font-size: var(--step-0);
+  }
+
+  /* Dates, times and durations are machine tokens wherever they appear. */
+  #editorMain input[type='date'],
+  #editorMain input[type='time'],
+  #editorMain input[type='datetime-local'],
+  #editorMain input[type='number'] {
+    font-family: var(--font-data);
+    font-variant-numeric: tabular-nums;
+  }
+
+  #editorMain textarea {
+    padding-block: var(--sp-2xs);
+    resize: vertical;
+  }
+
+  #editorMain :is(input, select, textarea):hover {
+    border-block-end-color: var(--ink-1);
+  }
+
+  #editorMain :is(input, select, textarea):focus,
+  #editorMain :is(input, select, textarea):focus-visible {
+    outline: 0;
+    border-block-end-color: var(--brand-1-ink);
+    border-block-end-width: 2px;
+  }
+
+  #editorMain ::placeholder {
+    color: var(--ink-2);
+  }
+
+  /* The drawn caret, as everywhere else — never the OS chevron. */
+  #editorMain select {
+    padding-inline-end: var(--sp-l);
+    background-image:
+      linear-gradient(45deg, transparent 50%, currentColor 50%),
+      linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position:
+      right 0.6rem center,
+      right 0.25rem center;
+    background-size:
+      0.35rem 0.35rem,
+      0.35rem 0.35rem;
+    background-repeat: no-repeat;
+  }
+
+  /* The sponsor editor's aside: the logo as it will appear, and the one number
+     worth knowing about this sponsor. A stat tile, like the summary's. */
+  .sponsor-event-stat {
+    padding: var(--sp-s) 0;
+    background: none;
+    border: 0;
+    border-block-start: 1px solid var(--rule-0);
+    border-radius: 0;
+    text-align: start;
+    align-items: flex-start;
+  }
+
+  .sponsor-event-stat-num {
+    font-family: var(--font-data);
+    font-size: var(--step-2);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-0);
+    line-height: 1.1;
+  }
+
+  .sponsor-event-stat-label {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* --- APPEARANCE ---------------------------------------------------------
+     The one workspace where raw organiser colour belongs on screen: these
+     swatches ARE the brand being chosen, which is exactly the `--brand-N` (not
+     `-ink`) case in the accent rules. Everything AROUND them is ink on paper.
+     --------------------------------------------------------------------- */
+  .appearance-panel-section {
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .appearance-panel-section + .appearance-panel-section {
+    margin-block-start: var(--sp-xl);
+  }
+
+  .appearance-panel-header {
+    padding-block-end: var(--sp-2xs);
+    border-block-end: 1px solid var(--ink-1);
+    margin-block-end: var(--sp-s);
+  }
+
+  .appearance-panel-title {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    letter-spacing: var(--display-track);
+    color: var(--ink-0);
+  }
+
+  .appearance-panel-desc,
+  .appearance-hint {
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+
+  .appearance-section-label {
+    margin-block: var(--sp-m) var(--sp-2xs);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .appearance-section--disabled {
+    opacity: 0.5;
+  }
+
+  .appearance-theme-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    gap: 0;
+  }
+
+  .appearance-theme-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2xs);
+    padding: var(--sp-s);
+    background: none;
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    box-shadow: none;
+    cursor: pointer;
+  }
+
+  .appearance-theme-card + .appearance-theme-card {
+    border-inline-start: 0;
+  }
+
+  .appearance-theme-card:hover {
+    background: var(--paper-2);
+    border-color: var(--ink-1);
+  }
+
+  /* Selected is the leading rule, as everywhere. Saved and Unsaved are state,
+     so they keep the status ramp. */
+  .appearance-theme-card.is-selected {
+    background: none;
+    border-color: var(--ink-1);
+    box-shadow: inset 3px 0 0 var(--brand-1-ink);
+  }
+
+  .theme-card-swatch-row {
+    display: flex;
+    gap: var(--sp-3xs);
+  }
+
+  .theme-swatch-chip {
+    inline-size: 1.1rem;
+    block-size: 1.1rem;
+    border-radius: 0;
+    border: 0;
+  }
+
+  .theme-card-label {
+    font-size: var(--step--1);
+    color: var(--ink-0);
+  }
+
+  .appearance-theme-card.is-selected .theme-card-label {
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+
+  .theme-card-live-badge,
+  .theme-card-saved-badge,
+  .theme-card-dirty-badge {
+    align-self: flex-start;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+  }
+
+  .theme-card-saved-badge {
+    color: var(--status-ok);
+  }
+
+  .theme-card-dirty-badge {
+    color: var(--status-warn);
+  }
+
+  .theme-card-live-badge {
+    color: var(--brand-1-ink);
+  }
+
+  .appearance-color-fields {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .appearance-color-row {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-s);
+    padding-block: var(--sp-2xs);
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .appearance-color-label {
+    inline-size: 6rem;
+    flex: none;
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .appearance-color-pair {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-xs);
+  }
+
+  /* Scoped with `#editorMain` so they outrank the generic field rule above —
+     which is an id selector, and would otherwise stretch a colour swatch to
+     100% and hide the hex field behind it. */
+  #editorMain .appearance-color-pair input[type='color'] {
+    inline-size: 2.4rem;
+    block-size: 2.4rem;
+    min-block-size: 0;
+    padding: 0;
+    background: none;
+    border: 1px solid var(--rule-1);
+    border-radius: 0;
+    cursor: pointer;
+  }
+
+  #editorMain .appearance-color-pair input[type='text'] {
+    inline-size: 7rem;
+    font-family: var(--font-data);
+  }
+
+  .appearance-color-reset {
+    min-block-size: var(--tap);
+    padding: 0;
+    background: none;
+    border: 0;
+    color: var(--ink-2);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .appearance-color-reset:hover {
+    color: var(--ink-0);
+  }
+
+  .appearance-preview {
+    padding-block: var(--sp-s);
+    border-block-start: 1px solid var(--rule-0);
+  }
+
+  .appearance-preview-label {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .appearance-preview-swatches {
+    display: flex;
+    gap: var(--sp-2xs);
+    margin-block-start: var(--sp-2xs);
+  }
+
+  .appearance-preview-swatch {
+    inline-size: 3rem;
+    block-size: 2rem;
+    border-radius: 0;
+    border: 0;
+  }
+
+  /* --- RELATED EVENTS ------------------------------------------------------
+     A register again. Relationship and "featured" are identity and state
+     respectively, so one is a word in ink and the other takes the accent.
+     --------------------------------------------------------------------- */
+  .rel-row {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-s);
+    padding: var(--sp-xs) 0;
+    background: none;
+    border: 0;
+    border-block-end: 1px solid var(--rule-0);
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .rel-row:hover {
+    background: var(--paper-2);
+  }
+
+  .rel-row-main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--sp-2xs) var(--sp-s);
+    flex: 1;
+    min-inline-size: 0;
+  }
+
+  .rel-row-name {
+    font-family: var(--font-display);
+    font-size: var(--step-0);
+    font-weight: 600;
+    color: var(--ink-0);
+  }
+
+  .rel-row-badge,
+  .rel-row-feature,
+  .rel-row-off {
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .rel-row-feature {
+    color: var(--brand-1-ink);
+  }
+
+  .rel-row-off {
+    color: var(--status-warn);
+  }
+
+  .rel-row-link {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .rel-row-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-xs);
+    flex: none;
+  }
+
+  .rel-edit,
+  .rel-delete {
+    min-block-size: var(--tap);
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    color: var(--ink-2);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .rel-edit:hover {
+    background: none;
+    color: var(--ink-0);
+  }
+
+  .rel-delete:hover {
+    background: none;
+    color: var(--status-bad);
+  }
+
+  /* --- THE FORM ------------------------------------------------------------ */
+  .edt-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-s) var(--sp-m);
+  }
+
+  @media (min-width: 48rem) {
+    .edt-form {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .edt-form--3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  /* Records, counts and file paths are machine tokens. */
+  .edt-figure {
+    font-family: var(--font-data);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Text tokens for markup that was written for the dark editor. `text-gray-100`
+     and `-200` are the two grey steps app.css never remapped for dark mode, so
+     they resolved to near-white on both surfaces and simply vanished on paper. */
+  .edt-ink-0 {
+    color: var(--ink-0);
+  }
+
+  .edt-ink-1 {
+    color: var(--ink-1);
+  }
+
+  .edt-ink-2 {
+    color: var(--ink-2);
+  }
+
+  .edt-on-ink {
+    color: var(--paper-1);
+  }
+
+  .edt-accent {
+    color: var(--brand-1-ink);
+  }
+
+  .edt-bad {
+    color: var(--status-bad);
+  }
+
+  .edt-warn {
+    color: var(--status-warn);
+  }
+
+  .edt-ok {
+    color: var(--status-ok);
+  }
+
+  .edt-surface {
+    background: var(--paper-1);
+  }
+
+  .edt-surface-2 {
+    background: var(--paper-2);
+  }
+
+  .edt-surface-ink {
+    background: var(--ink-0);
+    color: var(--paper-1);
+  }
+
+  .edt-surface-accent {
+    background: var(--brand-1-ink);
+    color: var(--paper-1);
+  }
+
+  /* Colour only — the `border`/`border-t` utility beside it still owns width. */
+  .edt-rule {
+    border-color: var(--rule-0);
+  }
+
+  .edt-rule-bad {
+    border-color: color-mix(in srgb, var(--status-bad) 40%, var(--rule-0));
+  }
+
+  .edt-rule-warn {
+    border-color: color-mix(in srgb, var(--status-warn) 45%, var(--rule-0));
+  }
+
+  .edt-rule-accent {
+    border-color: var(--brand-1-ink);
+  }
+
+  .hover\:edt-rule-bad:hover {
+    border-color: var(--status-bad);
+  }
+
+  .hover\:edt-bad:hover {
+    color: var(--status-bad);
+  }
+
+  .edt-body {
+    font-size: var(--step--1);
+    color: var(--ink-1);
+  }
+
+  .edt-muted {
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+
+  /* The editor's form control: ruled, not boxed, like every other input in the
+     product. Height comes from the tap target rather than an `h-9`/`h-10`/`h-11`
+     utility, so the three sizes the markup had collapse into one. */
+  .edt-field,
+  .edt-textarea {
+    inline-size: 100%;
+    min-block-size: var(--tap);
+    padding: 0;
+    appearance: none;
+    border: 0;
+    border-block-end: 1px solid var(--rule-1);
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    font-size: var(--step--1);
+    color: var(--ink-0);
+  }
+
+  .edt-textarea {
+    min-block-size: 4.5rem;
+    padding-block: var(--sp-2xs);
+    resize: vertical;
+  }
+
+  .edt-field:focus,
+  .edt-textarea:focus {
+    outline: none;
+    border-block-end-color: var(--brand-1-ink);
+  }
+
+  .edt-field::placeholder,
+  .edt-textarea::placeholder {
+    color: var(--ink-2);
+  }
+
+  select.edt-field {
+    padding-inline-end: var(--sp-l);
+    background-image:
+      linear-gradient(45deg, transparent 50%, currentColor 50%),
+      linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position:
+      right 0.6rem center,
+      right 0.25rem center;
+    background-size:
+      0.35rem 0.35rem,
+      0.35rem 0.35rem;
+    background-repeat: no-repeat;
+  }
+
+  .edt-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-2xs);
+    block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    appearance: none;
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--ink-1);
+    cursor: pointer;
+  }
+
+  .edt-btn:hover {
+    border-color: var(--ink-1);
+    color: var(--ink-0);
+  }
+
+  /* Nothing here yet — a dashed frame says "this is where it will go". */
+  .edt-empty {
+    padding: var(--sp-xs) var(--sp-s);
+    border: 1px dashed var(--rule-1);
+    font-size: var(--step--1);
+    font-style: italic;
+    color: var(--ink-2);
+  }
+
+  /* A quiet note block inside a form — was a dark card with a 900/30 wash. */
+  .edt-note {
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+  }
+
+
+  /* ========================================================================
+     THE EDITOR'S MODALS AND BANNERS
+     The last of `editor.css`. All of it lives behind a click — a modal, a
+     picker, a banner that only appears after a crash — which is why it
+     outlasted every surface a screenshot pass walks over.
+     ===================================================================== */
+
+  /* The card every editor modal is built on. It was styled only by
+     `editor-design.css`, which no page links, so the card had NO surface — you
+     read the form through a blurred copy of the page behind it. It appears in
+     `components.css` only inside `:not(.session-modal-card)` guards, which is
+     an exclusion, not a style; `npm run audit:css` now discounts those. */
+  .session-modal-card {
+    inline-size: min(640px, 100%);
+    max-block-size: 88dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--ink-1);
+    border-radius: 0;
+    background: var(--paper-1);
+  }
+
+  .session-modal-header {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-s);
+    padding: var(--sp-s) var(--sp-m);
+    border-block-end: 1px solid var(--ink-1);
+  }
+
+  .session-modal-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    color: var(--ink-0);
+  }
+
+  /* --- RELATED-EVENT EDITOR ----------------------------------------------- */
+  .rel-modal-card {
+    inline-size: min(640px, 100%);
+  }
+
+  .rel-modal-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-s) var(--sp-m);
+    padding: var(--sp-m);
+    overflow-y: auto;
+  }
+
+  .rel-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3xs);
+    min-inline-size: 0;
+  }
+
+  .rel-field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .rel-field > span {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .rel-field em {
+    font-style: normal;
+    font-weight: 400;
+    color: var(--ink-2);
+  }
+
+  /* Inputs are ruled, not boxed — the same line the rest of the editor uses. */
+  .rel-input {
+    inline-size: 100%;
+    padding: var(--sp-3xs) 0;
+    border: 0;
+    border-block-end: 1px solid var(--rule-1);
+    border-radius: 0;
+    background: none;
+    font-size: var(--step--1);
+    color: var(--ink-0);
+  }
+
+  .rel-input:focus {
+    outline: none;
+    border-block-end-color: var(--brand-1-ink);
+    box-shadow: none;
+  }
+
+  textarea.rel-input {
+    min-block-size: 3.5rem;
+    resize: vertical;
+  }
+
+  /* Typeahead picker for linking an existing schedule. */
+  .rel-combo {
+    position: relative;
+  }
+
+  .rel-combo-input {
+    padding-inline-end: 2.2rem;
+  }
+
+  .rel-combo-clear {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    inline-size: 2.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    appearance: none;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+
+  .rel-combo-clear:hover {
+    color: var(--ink-0);
+  }
+
+  .rel-combo-results {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: calc(100% + 2px);
+    z-index: 30;
+    max-block-size: 240px;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    list-style: none;
+    background: var(--paper-1);
+    border: 1px solid var(--ink-1);
+  }
+
+  .rel-combo-item {
+    padding: var(--sp-2xs) var(--sp-s);
+    border-block-end: 1px solid var(--rule-0);
+    font-size: var(--step--1);
+    line-height: 1.3;
+    color: var(--ink-0);
+    cursor: pointer;
+  }
+
+  .rel-combo-item:hover,
+  .rel-combo-item.is-active {
+    background: var(--paper-2);
+    box-shadow: inset 3px 0 0 var(--brand-1-ink);
+  }
+
+  .rel-combo-empty {
+    padding: var(--sp-2xs) var(--sp-s);
+    font-size: var(--step--1);
+    font-style: italic;
+    color: var(--ink-2);
+  }
+
+  /* Logo manager: the tile is a frame around someone else's artwork, so it
+     stays neutral — no tint, no gradient. */
+  .rel-logo-manage {
+    display: flex;
+    align-items: stretch;
+    gap: var(--sp-s);
+  }
+
+  .rel-logo-preview {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    inline-size: 96px;
+    block-size: 96px;
+    overflow: hidden;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+  }
+
+  .rel-logo-preview.rel-logo-empty {
+    font-size: var(--step-1);
+    color: var(--ink-2);
+  }
+
+  .rel-logo-img {
+    max-inline-size: 100%;
+    max-block-size: 100%;
+    object-fit: contain;
+  }
+
+  .rel-logo-side {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--sp-2xs);
+    min-inline-size: 0;
+  }
+
+  .rel-logo-actions {
+    display: flex;
+    gap: var(--sp-2xs);
+  }
+
+  .rel-checks {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2xs);
+  }
+
+  .rel-check {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-2xs);
+    font-size: var(--step--1);
+    line-height: 1.35;
+    color: var(--ink-1);
+  }
+
+  .rel-check input {
+    margin-block-start: 0.15rem;
+    accent-color: var(--brand-1-ink);
+  }
+
+  /* "Feature this one" is the choice with consequences, so it is the only
+     checkbox row the panel marks. */
+  .rel-check-feature {
+    padding: var(--sp-2xs) var(--sp-s);
+    border-inline-start: 2px solid var(--brand-1-ink);
+    background: var(--paper-2);
+  }
+
+  .rel-check-feature strong {
+    color: var(--ink-0);
+  }
+
+  .rel-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--sp-2xs);
+    padding: var(--sp-s) var(--sp-m);
+    border-block-start: 1px solid var(--rule-0);
+  }
+
+  .rel-btn,
+  .rel-btn-ghost,
+  .rel-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-3xs);
+    block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    appearance: none;
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--ink-1);
+    cursor: pointer;
+  }
+
+  .rel-btn:hover,
+  .rel-btn-ghost:hover {
+    border-color: var(--ink-1);
+    color: var(--ink-0);
+  }
+
+  .rel-btn-primary {
+    background: var(--ink-0);
+    border-color: var(--ink-0);
+    color: var(--paper-1);
+  }
+
+  .rel-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* --- THE SETTINGS MODAL -------------------------------------------------- */
+  .es-modal {
+    display: flex;
+    flex-direction: column;
+    inline-size: min(560px, 100%);
+    max-block-size: 88dvh;
+    overflow: hidden;
+    border: 1px solid var(--ink-1);
+    border-radius: 0;
+    background: var(--paper-1);
+  }
+
+  .es-header {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--sp-s) var(--sp-m);
+    border-block-end: 1px solid var(--ink-1);
+  }
+
+  .es-title {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    color: var(--ink-0);
+  }
+
+  .es-close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 2rem;
+    block-size: 2rem;
+    appearance: none;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+
+  .es-close-btn:hover {
+    color: var(--ink-0);
+  }
+
+  .es-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--sp-m);
+  }
+
+  .es-section + .es-section {
+    margin-block-start: var(--sp-m);
+    padding-block-start: var(--sp-m);
+    border-block-start: 1px solid var(--rule-0);
+  }
+
+  .es-section-title {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .es-section-desc {
+    margin-block-start: var(--sp-3xs);
+    font-size: var(--step--1);
+    color: var(--ink-1);
+  }
+
+  .es-footer {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--sp-2xs);
+    padding: var(--sp-s) var(--sp-m);
+    border-block-start: 1px solid var(--rule-0);
+  }
+
+  .es-done-btn {
+    display: inline-flex;
+    align-items: center;
+    block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    appearance: none;
+    border: 1px solid var(--ink-0);
+    border-radius: 0;
+    background: var(--ink-0);
+    font: inherit;
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--paper-1);
+    cursor: pointer;
+  }
+
+  /* --- APPEARANCE / THEME EDITOR ------------------------------------------ */
+  .appearance-library-list {
+    display: flex;
+    flex-direction: column;
+    max-block-size: 22rem;
+    overflow-y: auto;
+  }
+
+  .appearance-library-item {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    padding: var(--sp-2xs) 0;
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .appearance-library-item--editing {
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--sp-2xs) var(--sp-2xs) var(--sp-s);
+    box-shadow: inset 3px 0 0 var(--brand-1-ink);
+  }
+
+  .appearance-library-label {
+    flex: 1;
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--ink-1);
+  }
+
+  .appearance-library-edit,
+  .appearance-library-delete {
+    padding: var(--sp-3xs) var(--sp-2xs);
+    appearance: none;
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    font-size: var(--step--2);
+    line-height: 1;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+
+  .appearance-library-edit:hover {
+    border-color: var(--brand-1-ink);
+    color: var(--brand-1-ink);
+  }
+
+  .appearance-library-delete:hover {
+    border-color: var(--status-bad);
+    color: var(--status-bad);
+  }
+
+  .appearance-add-theme-form {
+    margin-block-start: var(--sp-s);
+    padding-block-start: var(--sp-s);
+    border-block-start: 1px solid var(--rule-0);
+  }
+
+  .appearance-add-theme-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr));
+    gap: var(--sp-2xs) var(--sp-s);
+  }
+
+  .appearance-add-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3xs);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .appearance-add-field--check {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--sp-2xs);
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: var(--step--1);
+    font-weight: 400;
+    color: var(--ink-1);
+  }
+
+  /* A hex value is data — mono, and wide enough for `#rrggbb`. */
+  .appearance-hex-input {
+    inline-size: 100%;
+    padding: var(--sp-3xs) 0;
+    border: 0;
+    border-block-end: 1px solid var(--rule-1);
+    border-radius: 0;
+    background: none;
+    font-family: var(--font-data);
+    font-size: var(--step--1);
+    color: var(--ink-0);
+  }
+
+  .appearance-hex-input:focus {
+    outline: none;
+    border-block-end-color: var(--brand-1-ink);
+  }
+
+  .appearance-preview-chip {
+    display: inline-block;
+    inline-size: 1.1rem;
+    block-size: 1.1rem;
+    flex: none;
+    border: 1px solid var(--rule-0);
+  }
+
+  .appearance-btn-primary,
+  .appearance-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    appearance: none;
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--ink-1);
+    cursor: pointer;
+  }
+
+  .appearance-btn-primary {
+    background: var(--ink-0);
+    border-color: var(--ink-0);
+    color: var(--paper-1);
+  }
+
+  .appearance-btn-secondary:hover {
+    border-color: var(--ink-1);
+    color: var(--ink-0);
+  }
+
+  .theme-edit-live-dot {
+    display: inline-block;
+    inline-size: 0.45rem;
+    block-size: 0.45rem;
+    background: var(--status-ok);
+  }
+
+  .theme-edit-live-note {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+
+  /* --- BANNERS ------------------------------------------------------------ */
+  /* Unsaved work was found after a crash. Warning-coloured, but a rule rather
+     than a wash — it sits above the whole workspace. */
+  .recovery-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    margin-block-end: var(--sp-2xs);
+    padding: var(--sp-2xs) var(--sp-s);
+    border-inline-start: 3px solid var(--status-warn);
+    background: var(--paper-2);
+    font-size: var(--step--1);
+    color: var(--ink-1);
+  }
+
+  .recovery-bar-text {
+    flex: 1;
+    min-inline-size: 0;
+  }
+
+  .recovery-bar-actions {
+    display: flex;
+    flex-shrink: 0;
+    gap: var(--sp-2xs);
+    margin-inline-start: auto;
+  }
+
+  .recovery-bar-btn {
+    block-size: 2rem;
+    padding-inline: var(--sp-2xs);
+    appearance: none;
+    border: 1px solid var(--rule-1);
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    font-size: var(--step--2);
+    font-weight: 600;
+    color: var(--ink-1);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .recovery-bar-btn--primary {
+    border-color: var(--ink-0);
+    background: var(--ink-0);
+    color: var(--paper-1);
+  }
+
+  /* --- PREVIEW PANES (logo, Flickr, sponsor) ------------------------------ */
+  .logo-editor-sidebar,
+  .flickr-editor-sidebar,
+  .sponsor-editor-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-s);
+    min-inline-size: 0;
+  }
+
+  .logo-preview-stage,
+  .flickr-preview-stage,
+  .sponsor-preview-surface {
+    display: grid;
+    place-items: center;
+    min-block-size: 10rem;
+    padding: var(--sp-s);
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+  }
+
+  .logo-preview-caption,
+  .flickr-preview-caption,
+  .sponsor-preview-text {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+
+  .flickr-preview-placeholder {
+    font-size: var(--step--1);
+    font-style: italic;
+    color: var(--ink-2);
+  }
+
+  .sponsor-inline-preview {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    min-inline-size: 0;
+  }
+
+  .sponsor-inline-image {
+    max-inline-size: 6rem;
+    max-block-size: 3rem;
+    object-fit: contain;
+  }
+
+  .sponsor-event-stat-count {
+    font-family: var(--font-data);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-0);
+  }
+
+  /* --- SMALL LEFTOVERS ----------------------------------------------------- */
+  .editor-linked-item {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-2xs);
+    padding-block: var(--sp-3xs);
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .editor-linked-item-title {
+    flex: 1;
+    min-inline-size: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: var(--step--1);
+    color: var(--ink-0);
+  }
+
+  .editor-linked-item-meta {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+
+  .editor-linked-item-action,
+  .editor-linked-item-copy {
+    appearance: none;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+
+  .editor-linked-item-action:hover,
+  .editor-linked-item-copy:hover {
+    color: var(--brand-1-ink);
+  }
+
+  .editor-tz-note {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+
+  /* --- THE DATASET LIST --------------------------------------------------
+     The first screen the editor shows. The cards were centring every line
+     because nothing styled them, so a card had no reading order at all: the
+     series, the title, the place, the dates and the file path all looked
+     equally important.
+     --------------------------------------------------------------------- */
+  .eh-event-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3xs);
+    inline-size: 100%;
+    padding: var(--sp-s);
+    appearance: none;
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+  }
+
+  .eh-event-card:hover {
+    border-color: var(--ink-1);
+    box-shadow: inset 3px 0 0 var(--brand-1-ink);
+  }
+
+  .eh-event-card-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-2xs);
+  }
+
+  /* The series is the eyebrow above the event's own name. */
+  .eh-desig-badge {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+
+  .eh-event-title {
+    font-family: var(--font-display);
+    font-size: var(--step-0);
+    font-weight: 600;
+    color: var(--ink-0);
+  }
+
+  .eh-event-meta {
+    font-size: var(--step--1);
+    color: var(--ink-1);
+  }
+
+  .eh-event-file {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    overflow-wrap: anywhere;
+  }
+
+  .eh-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3xs);
+  }
+
+  /* Hidden / enabled is a state, so it is set in mono and only coloured when
+     something is actually off. */
+  .eh-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-3xs);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .eh-chip--ok {
+    color: var(--status-ok);
+  }
+
+  .eh-chip--disabled {
+    color: var(--status-warn);
+  }
+
+  .eh-recent {
+    padding: var(--sp-s) 0;
+    border-block-start: 1px solid var(--rule-0);
+    background: none;
+    border-radius: 0;
+  }
+
+  .eh-recent-title {
+    margin: 0 0 var(--sp-2xs);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .eh-recent-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .eh-recent-item {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    inline-size: 100%;
+    padding: var(--sp-3xs) 0;
+    appearance: none;
+    border: 0;
+    border-block-end: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+  }
+
+  .eh-recent-item:hover {
+    background: var(--paper-2);
+  }
+
+  .eh-recent-label {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-1);
+  }
+
+  /* --- THE SITEMAP READER -------------------------------------------------- */
+  .sitemap-toolbar {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    padding: var(--sp-2xs) 0;
+    border-block-end: 1px solid var(--ink-1);
+  }
+
+  .sitemap-domain {
+    flex: 1;
+    font-weight: 600;
+    color: var(--ink-0);
+  }
+
+  .sitemap-total,
+  .sitemap-count-badge {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+
+  .sitemap-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    block-size: 1.85rem;
+    padding-inline: var(--sp-2xs);
+    appearance: none;
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    font-size: var(--step--2);
+    color: var(--ink-1);
+    cursor: pointer;
+  }
+
+  .sitemap-copy-btn:hover {
+    border-color: var(--ink-1);
+    color: var(--ink-0);
+  }
+
+  .sitemap-section {
+    margin-block-end: var(--sp-m);
+  }
+
+  .sitemap-section-heading {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .sitemap-url-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sitemap-url-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3xs);
+    padding: var(--sp-3xs) 0;
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .sitemap-url-item:hover {
+    background: var(--paper-2);
+  }
+
+  .sitemap-item-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: var(--step--2);
+    line-height: 1.3;
+    color: var(--ink-2);
+  }
+
+  /* A URL is machine text. */
+  .sitemap-item-url {
+    overflow-wrap: anywhere;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--brand-1-ink);
+    text-decoration: none;
+  }
+
+  .sitemap-item-url:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  /* --- URL MULTIFIELD ------------------------------------------------------ */
+  .url-multifield-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3xs);
+    margin-block-start: auto;
+  }
+
+  .url-multifield-row {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3xs);
+  }
+
+  .url-multifield-input {
+    flex: 1;
+    block-size: var(--tap);
+    padding: 0;
+    border: 0;
+    border-block-end: 1px solid var(--rule-1);
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    font-size: var(--step--1);
+    color: var(--ink-0);
+  }
+
+  .url-multifield-input:focus {
+    outline: none;
+    border-block-end-color: var(--brand-1-ink);
+    box-shadow: none;
+  }
+
+  .url-multifield-remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    inline-size: var(--tap);
+    block-size: var(--tap);
+    appearance: none;
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: none;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+
+  .url-multifield-remove:hover {
+    border-color: var(--status-bad);
+    color: var(--status-bad);
+  }
+
+  .url-multifield-add {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-3xs);
+    margin-block-start: var(--sp-3xs);
+    block-size: 2.2rem;
+    padding-inline: var(--sp-2xs);
+    appearance: none;
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    font-size: var(--step--2);
+    color: var(--ink-1);
+    cursor: pointer;
+  }
+
+  .url-multifield-add:hover {
+    border-color: var(--brand-1-ink);
+    color: var(--brand-1-ink);
+  }
+
+  .url-multifield-empty {
+    margin-block: var(--sp-3xs);
+    font-size: var(--step--2);
+    font-style: italic;
+    color: var(--ink-2);
+  }
+
+  .session-inline-field {
+    display: block;
+  }
+
+  .session-inline-label {
+    display: block;
+    margin-block-end: var(--sp-3xs);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .session-row-expanded-grid {
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1.5fr) minmax(170px, 1fr) minmax(170px, 1fr) auto;
+    gap: var(--sp-s);
+    align-items: end;
+  }
+
+  .sponsor-row-grid {
+    display: grid;
+    grid-template-columns:
+      20px minmax(0, 2fr) minmax(120px, 0.9fr) minmax(120px, 0.9fr)
+      minmax(120px, 0.7fr) auto;
+    gap: var(--sp-s);
+    align-items: end;
+  }
+
+  @media (max-width: 60rem) {
+    .session-row-expanded-grid,
+    .sponsor-row-grid {
+      grid-template-columns: 20px minmax(0, 1fr);
+    }
+  }
+
+  .session-row-handle {
+    align-self: center;
+    justify-self: center;
+    color: var(--ink-2);
+    cursor: grab;
+  }
+
+  /* --- QUICK EDIT ---------------------------------------------------------- */
+  .editor-inline-open {
+    grid-column: 1 / -1;
+    justify-self: end;
+    align-self: center;
+  }
+
+  .editor-quick-open-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-block-size: 320px;
+  }
+
+  .editor-quick-open-card {
+    inline-size: min(100%, 520px);
+    padding: var(--sp-m);
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: none;
+  }
+
+  .editor-session-workspace-expanded {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* ========================================================================
+     THE SESSION GRID
+     The editor's timeline builder: rooms across, time down, sessions placed
+     absolutely by the JS (inline `top`/`height`, and a `grid-template-columns`
+     set per room count — so the geometry here has to match what the module
+     expects, not be re-invented).
+
+     It was the last thing in the product still wearing the old dark editor
+     chrome — a near-black grid with #2ea3ff accents. Same geometry, Programme
+     surfaces: the grid is paper, the rules are hairlines, and the accent is
+     the organiser's own colour on the leading edge of a session block.
+     ===================================================================== */
+  .tl-root {
+    display: flex;
+    flex-direction: column;
+    min-block-size: 500px;
+    overflow: hidden;
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: var(--paper-1);
+  }
+
+  /* --- DAY TABS ----------------------------------------------------------- */
+  .tl-day-tabs {
+    display: flex;
+    flex-shrink: 0;
+    gap: var(--sp-s);
+    padding-inline: var(--sp-s);
+    overflow-x: auto;
+    background: none;
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .tl-day-tab {
+    padding: var(--sp-2xs) 0;
+    appearance: none;
+    border: 0;
+    border-block-end: 2px solid transparent;
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--ink-2);
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .tl-day-tab:hover {
+    color: var(--ink-0);
+  }
+
+  .tl-day-tab.is-active {
+    border-block-end-color: var(--brand-1-ink);
+    color: var(--brand-1-ink);
+  }
+
+  /* --- ROOM BAR ----------------------------------------------------------- */
+  .tl-room-bar {
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-2xs);
+    padding: var(--sp-2xs) var(--sp-s);
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .tl-room-chips {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-3xs);
+    min-block-size: 28px;
+  }
+
+  .tl-room-bar-hint {
+    font-size: var(--step--2);
+    font-style: italic;
+    color: var(--ink-2);
+  }
+
+  .tl-room-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-3xs);
+    padding: var(--sp-3xs) var(--sp-3xs) var(--sp-3xs) var(--sp-2xs);
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: none;
+    font-size: var(--step--2);
+    color: var(--ink-1);
+  }
+
+  .tl-room-chip:hover {
+    border-color: var(--ink-1);
+  }
+
+  /* Dragging a room reorders the columns, so the chip being moved fades and
+     the one it would land before takes the brand rule. */
+  .tl-room-chip.is-room-dragging {
+    opacity: 0.35;
+  }
+
+  .tl-room-chip.is-room-drag-over {
+    box-shadow: inset 2px 0 0 var(--brand-1-ink);
+  }
+
+  .tl-room-chip-grip {
+    color: var(--ink-2);
+    cursor: grab;
+  }
+
+  .tl-room-chip-label,
+  .tl-room-chip-input {
+    font: inherit;
+    color: inherit;
+  }
+
+  .tl-room-chip-input {
+    inline-size: 8rem;
+    padding: 0;
+    border: 0;
+    border-block-end: 1px solid var(--brand-1-ink);
+    background: none;
+    outline: none;
+  }
+
+  .tl-room-chip-rename,
+  .tl-room-chip-delete,
+  .tl-add-room-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--sp-3xs);
+    appearance: none;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+
+  .tl-room-chip-rename:hover {
+    color: var(--brand-1-ink);
+  }
+
+  .tl-room-chip-delete:hover {
+    color: var(--status-bad);
+  }
+
+  .tl-add-room-btn {
+    padding: var(--sp-3xs) var(--sp-2xs);
+    border: 1px solid var(--rule-0);
+    color: var(--ink-1);
+  }
+
+  .tl-add-room-btn:hover {
+    border-color: var(--brand-1-ink);
+    color: var(--brand-1-ink);
+  }
+
+  /* --- THE GRID ----------------------------------------------------------- */
+  .tl-scroll-wrap {
+    flex: 1;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--rule-1) transparent;
+  }
+
+  .tl-layout {
+    display: flex;
+    align-items: flex-start;
+    min-inline-size: max-content;
+  }
+
+  /* The time axis stays put while the rooms scroll sideways. */
+  .tl-time-axis {
+    position: sticky;
+    inset-inline-start: 0;
+    z-index: 10;
+    inline-size: 60px;
+    flex-shrink: 0;
+    background: var(--paper-1);
+    border-inline-end: 1px solid var(--rule-0);
+  }
+
+  .tl-time-axis-header {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 11;
+    block-size: 40px;
+    background: var(--paper-1);
+    border-block-end: 1px solid var(--ink-1);
+  }
+
+  .tl-time-label {
+    position: absolute;
+    inset-inline: 0 4px;
+    transform: translateY(-0.55em);
+    text-align: end;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-2);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .tl-rooms-wrap {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .tl-rooms-header {
+    display: grid;
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 9;
+    block-size: 40px;
+    background: var(--paper-1);
+    border-block-end: 1px solid var(--ink-1);
+  }
+
+  .tl-room-header {
+    display: flex;
+    align-items: center;
+    padding-inline: var(--sp-2xs);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-inline-end: 1px solid var(--rule-0);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .tl-rooms-body {
+    display: grid;
+    position: relative;
+  }
+
+  .tl-room-col {
+    position: relative;
+    border-inline-end: 1px solid var(--rule-0);
+    cursor: crosshair;
+  }
+
+  /* Half-hours are fainter than hours: the grid should read as a ruler, not a
+     table. */
+  .tl-slot-bg {
+    position: absolute;
+    inset-inline: 0;
+    border-block-end: 1px solid transparent;
+    pointer-events: none;
+  }
+
+  .tl-slot-bg.is-hour {
+    border-block-end-color: var(--rule-0);
+  }
+
+  .tl-slot-bg.is-half {
+    border-block-end-color: color-mix(in srgb, var(--rule-0) 45%, transparent);
+  }
+
+  /* --- SESSION BLOCKS ----------------------------------------------------- */
+  .tl-session {
+    position: absolute;
+    inset-inline: 4px;
+    z-index: 2;
+    overflow: hidden;
+    border: 1px solid var(--rule-0);
+    border-inline-start: 3px solid var(--brand-1-ink);
+    border-radius: 0;
+    background: var(--paper-1);
+    cursor: grab;
+    user-select: none;
+  }
+
+  .tl-session:hover {
+    z-index: 3;
+    border-color: var(--ink-1);
+    border-inline-start-color: var(--brand-1-ink);
+  }
+
+  .tl-session.is-dragging {
+    z-index: 100;
+    opacity: 0.88;
+    cursor: grabbing;
+  }
+
+  .tl-session-inner {
+    padding: 3px 22px 16px 5px;
+    overflow: hidden;
+  }
+
+  .tl-session.is-compact .tl-session-inner {
+    padding-block-end: 3px;
+  }
+
+  .tl-session.is-compact .tl-session-speakers,
+  .tl-session.is-compact .tl-session-time {
+    display: none;
+  }
+
+  .tl-session.is-compact .tl-session-title {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .tl-session.is-compact .tl-resize-handle {
+    block-size: 4px;
+  }
+
+  .tl-session-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: var(--step--2);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ink-0);
+  }
+
+  .tl-session-speakers {
+    margin-block-start: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+
+  .tl-session-time {
+    margin-block-start: 2px;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    font-variant-numeric: tabular-nums;
+    color: var(--brand-1-ink);
+  }
+
+  .tl-session-actions {
+    position: absolute;
+    inset-block-start: 3px;
+    inset-inline-end: 3px;
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    opacity: 0;
+    transition: opacity 0.12s;
+  }
+
+  .tl-session:hover .tl-session-actions,
+  .tl-session:focus-within .tl-session-actions {
+    opacity: 1;
+  }
+
+  .tl-session-delete,
+  .tl-session-span-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 18px;
+    block-size: 18px;
+    appearance: none;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+
+  .tl-session-delete:hover {
+    color: var(--status-bad);
+  }
+
+  .tl-session-span-toggle:hover {
+    color: var(--brand-1-ink);
+  }
+
+  /* Drag the bottom edge to change a session's length. */
+  .tl-resize-handle {
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    block-size: 8px;
+    cursor: ns-resize;
+  }
+
+  .tl-resize-handle::after {
+    content: "";
+    display: block;
+    inline-size: 20px;
+    block-size: 2px;
+    background: var(--rule-1);
+  }
+
+  .tl-resize-handle:hover::after {
+    background: var(--brand-1-ink);
+  }
+
+  /* A session that runs across every room (a keynote, lunch) floats over the
+     columns rather than sitting in one. */
+  .tl-spanning-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .tl-session-spanning {
+    inset-inline: 4px;
+    pointer-events: auto;
+    background: var(--paper-2);
+    border-inline-start-color: var(--ink-1);
+  }
+
+  /* Where a dragged session would land. */
+  .tl-room-col.is-drop-target {
+    background: color-mix(in srgb, var(--brand-1-ink) 5%, transparent);
+  }
+
+  .tl-room-col.is-drop-target::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border: 1px dashed var(--brand-1-ink);
+    pointer-events: none;
+  }
+
+  .tl-add-indicator {
+    position: absolute;
+    inset-inline: 4px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    block-size: 24px;
+    border: 1px dashed var(--brand-1-ink);
+    background: color-mix(in srgb, var(--brand-1-ink) 6%, transparent);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--brand-1-ink);
+    pointer-events: none;
+  }
+
+  .tl-empty {
+    padding: var(--sp-m);
+    font-size: var(--step--1);
+    font-style: italic;
+    color: var(--ink-2);
+  }
+
+  .tl-drag-handle {
+    color: var(--ink-2);
+    cursor: grab;
+  }
+
+  /* The confirm dialog's own frame (its contents are below). */
+  .editor-confirm-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 10vh var(--sp-s) var(--sp-s);
+    background: color-mix(in srgb, var(--ink-0) 55%, transparent);
+  }
+
+  .editor-confirm-card {
+    inline-size: min(420px, 100%);
+    padding: var(--sp-m);
+    border: 1px solid var(--ink-1);
+    border-radius: 0;
+    background: var(--paper-1);
+  }
+
+  .editor-confirm-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-3xs);
+    block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    appearance: none;
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--ink-1);
+    cursor: pointer;
+  }
+
+  /* Hidden on small screens by the mobile bottom bar, which takes over this
+     navigation entirely. */
+  .editor-tab-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-s);
+  }
+
+  @media (max-width: 40rem) {
+    .editor-tab-header {
+      display: none;
+    }
+  }
+
+  /* --- THE CONFIRM DIALOG ------------------------------------------------- */
+  .editor-confirm-icon {
+    color: var(--status-warn);
+  }
+
+  .editor-confirm-title {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    color: var(--ink-0);
+  }
+
+  .editor-confirm-body {
+    margin-block-start: var(--sp-2xs);
+    font-size: var(--step--1);
+    color: var(--ink-1);
+  }
+
+  .editor-confirm-target {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+
+  .editor-confirm-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--sp-2xs);
+    margin-block-start: var(--sp-m);
+  }
+
+  .editor-confirm-btn-cancel,
+  .editor-confirm-btn-discard,
+  .editor-confirm-btn-save {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-3xs);
+    block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    appearance: none;
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--ink-1);
+    cursor: pointer;
+  }
+
+  .editor-confirm-btn-cancel:hover {
+    border-color: var(--ink-1);
+    color: var(--ink-0);
+  }
+
+  .editor-confirm-btn-discard {
+    color: var(--status-bad);
+  }
+
+  .editor-confirm-btn-discard:hover {
+    border-color: var(--status-bad);
+  }
+
+  .editor-confirm-btn-save {
+    background: var(--ink-0);
+    border-color: var(--ink-0);
+    color: var(--paper-1);
+  }
+}
+
+@layer overrides {
+  /* ==========================================================================
+     LEGACY NEUTRALISERS — deleted with editor.css / editor-design.css.
+     `overrides` is declared FIRST because !important reverses layer order.
+     ====================================================================== */
+
+  /* The editor's dark studio. Same bridge the planner uses: re-point the legacy
+     surface variables at the Programme tokens once, so every unconverted
+     workspace changes colour in one move and the per-workspace work is about
+     structure rather than repainting. Deleted with the legacy sheets. */
+  body:has(#editorMain) {
+    --bg-0: var(--paper-0) !important;
+    --bg-1: var(--paper-0) !important;
+    --surface-0: var(--paper-1) !important;
+    --surface-1: var(--paper-1) !important;
+    --surface-2: var(--paper-2) !important;
+    --text-0: var(--ink-0) !important;
+    --text-1: var(--ink-1) !important;
+    --text-2: var(--ink-2) !important;
+    --text-3: var(--ink-2) !important;
+    --line-0: var(--rule-0) !important;
+    --gold: var(--brand-1-ink) !important;
+    --gold-soft: color-mix(in srgb, var(--brand-1-ink) 10%, transparent) !important;
+    --pl-line: var(--rule-0) !important;
+    --pl-r: 2px !important;
+    --pl-r-sm: 2px !important;
+    --fs-nano: var(--step--2) !important;
+    --fs-micro: var(--step--2) !important;
+    --fs-xs: var(--step--2) !important;
+    --fs-sm: var(--step--1) !important;
+    --fs-md: var(--step--1) !important;
+    --fs-lg: var(--step-1) !important;
+  }
+
+  body {
+    background: var(--paper-0) !important;
+  }
+
+  /* The panel surface is the mode axis's, not a literal. */
+  .theme-dark #editorMain,
+  #editorMain {
+    background: none !important;
+  }
+
+  .edt-tbtn,
+  .editor-preview-dropdown,
+  .editor-preview-dropdown-item,
+  .editor-sub-tab-row,
+  .editor-sub-tab-button,
+  #editorPathChip {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .edt-tbtn:not(#saveDataset) {
+    background: transparent !important;
+  }
+
+  #saveDataset {
+    background: var(--ink-0) !important;
+    color: var(--paper-0) !important;
+  }
+
+  .editor-sub-tab-row,
+  .editor-sub-tab-button,
+  #editorPathChip {
+    background: none !important;
+  }
+
+  /* Tailwind's field chrome inside the workspaces. NOT `background-image` on
+     selects — the drawn caret IS a background image, and clearing it blanket
+     is what removed the carets on the schedule. */
+  #editorMain input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']),
+  #editorMain select,
+  #editorMain textarea {
+    background-color: transparent !important;
+    border: 0 !important;
+    border-block-end: 1px solid var(--rule-1) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    color: var(--ink-0) !important;
+  }
+
+  #editorMain :is(input, select, textarea):focus,
+  #editorMain :is(input, select, textarea):focus-visible {
+    border-block-end-color: var(--brand-1-ink) !important;
+  }
+
+  /* The accordion shell and any remaining panel cards: the workspace is a
+     region of the page, not a stack of boxes. */
+  .editor-meta-accordion,
+  #editorMain [id$='WorkspacePanel'] > section {
+    padding: 0 !important;
+    background: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .sponsor-event-stat {
+    background: none !important;
+    background-image: none !important;
+    border: 0 !important;
+    border-block-start: 1px solid var(--rule-0) !important;
+    border-radius: 0 !important;
+  }
+
+  .sponsor-event-stat-num,
+  .sponsor-event-stat-label {
+    color: var(--ink-0) !important;
+  }
+
+  .sponsor-event-stat-label {
+    color: var(--ink-2) !important;
+  }
+
+  .appearance-panel-section,
+  .appearance-theme-card,
+  .appearance-panel-header,
+  .theme-swatch-chip,
+  .theme-card-saved-badge,
+  .theme-card-dirty-badge,
+  .theme-card-live-badge,
+  .appearance-color-row,
+  .appearance-color-pair input[type='color'],
+  .appearance-color-reset,
+  .appearance-preview,
+  .appearance-preview-swatch {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .appearance-panel-section,
+  .appearance-theme-card,
+  .theme-card-saved-badge,
+  .theme-card-dirty-badge,
+  .theme-card-live-badge,
+  .appearance-color-reset,
+  .appearance-preview {
+    background: none !important;
+  }
+
+  .appearance-panel-section,
+  .appearance-preview {
+    border: 0 !important;
+  }
+
+  .appearance-preview-swatch,
+  .theme-swatch-chip {
+    border-radius: 0 !important;
+  }
+
+  .appearance-preview {
+    border-block-start: 1px solid var(--rule-0) !important;
+  }
+
+  #editorMain .appearance-color-pair input[type='color'] {
+    inline-size: 2.4rem !important;
+    block-size: 2.4rem !important;
+  }
+
+  .appearance-theme-card.is-selected {
+    box-shadow: inset 3px 0 0 var(--brand-1-ink) !important;
+  }
+
+  /* Colour inputs must keep their swatch — this is the one control whose
+     background IS the value. */
+  .appearance-color-pair input[type='color'] {
+    background: none !important;
+    border: 1px solid var(--rule-1) !important;
+    padding: 0 !important;
+  }
+
+  .rel-row,
+  .rel-row-badge,
+  .rel-row-feature,
+  .rel-row-off,
+  .rel-edit,
+  .rel-delete {
+    background: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .rel-row {
+    border: 0 !important;
+    border-block-end: 1px solid var(--rule-0) !important;
+  }
+
+  .rel-row:hover {
+    background: var(--paper-2) !important;
+  }
+
+  /* Workspace card chrome from editor.css / editor-design.css. */
+  .edt-work__list,
+  .edt-work__form,
+  .edt-row,
+  /* :not() rather than another !important — the primary act in a dialog needs a
+     fill, and this quarantined block would otherwise strip it. An exclusion,
+     not a style; the block still dies with the legacy sheets. */
+  .edt-act:not(.edt-act--primary),
+  .edt-badge,
+  .edt-search,
+  .edt-breakglass,
+  .edt-rowact {
+    background: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .edt-row {
+    border: 0 !important;
+    border-block-end: 1px solid var(--rule-0) !important;
+  }
+
+  .edt-row.is-selected {
+    box-shadow: inset 3px 0 0 var(--brand-1-ink) !important;
+  }
+
+  .edt-row:hover,
+  .session-row:hover:not(.border-blue-400),
+  .sponsor-row:hover:not(.border-blue-400) {
+    background-color: var(--paper-2) !important;
+    border-color: var(--rule-0) !important;
+  }
+
+  .edt-search {
+    background-color: transparent !important;
+    border: 0 !important;
+    border-block-end: 1px solid var(--rule-1) !important;
+  }
+
+  .edt-work__list,
+  .edt-work__form {
+    border: 0 !important;
+  }
+
+  #editorToolbar {
+    background: none !important;
+    border: 0 !important;
+    border-block-end: 1px solid var(--rule-0) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+}
+
+/* =========================================================================
+   A BOOLEAN SESSION FIELD
+   The session form is otherwise all text — this is the first checkbox in it.
+   Set as a ruled row so it reads as a field like the others rather than a
+   stray control, with the box first because that is what is being answered.
+   ========================================================================= */
+@layer section {
+  .editor-check-row {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-xs);
+    min-block-size: var(--tap);
+    cursor: pointer;
+  }
+
+  .editor-check {
+    inline-size: 1.1rem;
+    block-size: 1.1rem;
+    flex: none;
+    accent-color: var(--brand-1-ink);
+    cursor: pointer;
+  }
+
+  .editor-check-label {
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--ink-0);
+  }
+
+  /* Attendance: one figure and the two things that make it checkable years later.
+     Laid out as count | source | note so the number reads first — it is the fact;
+     the rest is provenance. */
+  .edt-attendance {
+    display: grid;
+    grid-template-columns: minmax(7rem, 10rem) minmax(12rem, 2fr) minmax(10rem, 1fr);
+    gap: var(--sp-s);
+  }
+
+  .edt-attendance .edt-sublabel {
+    display: block;
+    font-size: var(--step--2);
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin-block-end: 0.2rem;
+  }
+
+  @media (max-width: 48rem) {
+    .edt-attendance {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* "Held somewhere else" — the session venue override. Framed as a panel rather
+     than another input row: nearly every session is at the event venue, and the
+     exceptions deserve to look like exceptions. */
+  .edt-venue {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-s);
+    align-items: flex-end;
+    padding: var(--sp-s) var(--sp-m);
+    border: 1px solid var(--rule-0);
+  }
+
+  .edt-venue-head {
+    flex: 1 1 16rem;
+  }
+
+  .edt-venue-head .edt-muted {
+    margin: 0.2rem 0 0;
+    font-size: var(--step--2);
+  }
+
+  .edt-venue-set {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    font-size: var(--step--1);
+  }
+
+  .edt-venue-pin,
+  .edt-venue-none {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    margin: 0;
+  }
+
+  .edt-venue-acts {
+    display: inline-flex;
+    gap: var(--sp-2xs);
+    margin-inline-start: auto;
+  }
+}

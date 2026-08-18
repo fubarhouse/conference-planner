@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="icon" href="./img/app-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+    <meta name="theme-color" content="#f4f5f0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#131614" media="(prefers-color-scheme: dark)">
+    <!-- Every drill-down lives at a deeper path (/archive/speaker/<slug>),
+         where a relative "./css/…" resolves against that path and 404s — the
+         page would load with no styles and no script. A base makes every
+         relative URL on the page, including the @import list below, resolve
+         from the app root. -->
+    <base href="/">
+    <title>Archive — Conference Planner</title>
+  <meta name="description" content="Twenty years of community events in one place. Follow a speaker across a decade, see which topics rose and fell, and search every session ever given.">
+  <!-- og:url and og:image are injected per request by ogTags() in server.js,
+       from the Host the browser actually asked for. They are NOT written here
+       on purpose: anyone can host this, and a domain compiled into the markup
+       would point every share on their deployment at somebody else's site.
+       Served as plain static files there is no server to inject them, so those
+       deployments ship without the absolute pair — which is correct, and better
+       than a confidently wrong URL. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Programme">
+  <meta property="og:title" content="Archive">
+  <meta property="og:description" content="Twenty years of community events in one place. Follow a speaker across a decade, see which topics rose and fell, and search every session ever given.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Archive">
+  <meta name="twitter:description" content="Twenty years of community events in one place. Follow a speaker across a decade, see which topics rose and fell, and search every session ever given.">
+
+    <link rel="preload" href="./fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./fonts/newsreader-roman.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Same layer order as the schedule: `overrides` first (important reverses
+         layer order), `legacy` after `reset` so legacy utility classes still
+         beat our element resets, ours last. See brand/DECISIONS.md. -->
+    <style>
+      @layer overrides, reset, legacy, tokens, base, composition, section, utility;
+      @import url("./css/utilities.css") layer(legacy);
+      @import url("./css/components.css") layer(legacy);
+    </style>
+    <link rel="stylesheet" href="./css/foundation.css">
+    <link rel="stylesheet" href="./css/section-chrome.css">
+    <link rel="stylesheet" href="./css/section-archive.css">
+</head>
+<body>
+    <a class="u-skip" href="#obsBody">Skip to the archive</a>
+
+    <header class="app-masthead">
+        <div class="l-center">
+            <div class="app-masthead__bar">
+                <div class="app-lockup">
+                    <span class="app-lockup__seal" aria-hidden="true"></span>
+                    <div class="app-lockup__title">Archive</div>
+                    <h1 id="archiveSubtitle" class="app-lockup__place">The whole community, year by year</h1>
+                </div>
+            </div>
+            <nav class="app-nav" aria-label="Site navigation">
+                <a href="./home.html" class="app-nav__link">Home</a>
+                <a href="./index.html" class="app-nav__link">Schedule</a>
+                <a href="./planner.html" class="app-nav__link">Planner</a>
+                <a href="./archive.html" class="app-nav__link" aria-current="page">Archive</a>
+                <a href="./curation.html" class="app-nav__link">Curation</a>
+                <a href="./editor.html" class="app-nav__link">Editor</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="l-center">
+        <nav id="scheduleCrumbs" class="app-crumbs" aria-label="Breadcrumb">
+            <a href="./home.html">Home</a><span class="app-crumbs__sep" aria-hidden="true">→</span><span aria-current="page">Archive</span>
+        </nav>
+    </div>
+
+    <!-- Container IDs match the editor's overlay so archiveDashboard.js can
+         render here unchanged. -->
+    <main id="archiveObservatory" class="obs-studio">
+        <div class="obs-inner l-center">
+            <div id="obsBody"></div>
+        </div>
+    </main>
+
+    <!-- Deliberately OUTSIDE #obsBody: archiveDashboard.js replaces that
+         container wholesale for every view, so a notice placed inside it would
+         survive the overview and vanish the moment you searched sessions or
+         drilled into a speaker — the views where the provenance of the data
+         matters most. Out here it is part of the page shell and shows on all
+         of them. -->
+    <!-- `obs-inner`, not `l-center`: the archive's own column carries side
+         padding, and a plain l-center footer ran 64px wider than every row it
+         sat beneath. -->
+    <footer class="obs-inner l-center">
+      <!--provenance-->
+    </footer>
+
+    <aside class="app-rail" aria-hidden="true">
+      <p class="app-rail__hint">Keywords you pin appear here, and on every visit.</p>
+    </aside>
+    <div id="railPanel" class="app-panel" hidden aria-live="polite"></div>
+
+    <script type="module" src="./js/archive.js"></script>
+</body>
+</html>

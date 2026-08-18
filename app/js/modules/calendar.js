@@ -1,18 +1,29 @@
 import state, { getStorageKey } from './state.js';
-import { formatDateForICS, escapeHtml, announceStatus, normalizeTracks } from './utils.js';
+import { escapeHtml, announceStatus, normalizeTracks, normalizeString } from './utils.js';
+import { writeJson } from './plannerStorage.js';
+import {
+  buildIcsCalendar,
+  scheduleSessionsToCalEvents,
+  googleCalendarUrl,
+} from './plannerCalendar.js';
 
-function getCalendarDescriptionText(event) {
-  return event.full_description || '';
-}
-
-function escapeIcsText(text) {
-  return String(text || '')
-    .replace(/\\/g, '\\\\')
-    .replace(/\r\n/g, '\n')
-    .replace(/\r/g, '\n')
-    .replace(/\n/g, '\\n')
-    .replace(/,/g, '\\,')
-    .replace(/;/g, '\\;');
+// The event's map coordinates for the calendar pin: the dataset's own lat/lon, else
+// the geocode cache (statically served) — mirrors how the server resolves them, so a
+// downloaded .ics gets the SAME map pin as the subscription feed.
+let _geocache = null;
+async function resolveEventCoords(meta) {
+  if (Number.isFinite(meta?.latitude) && Number.isFinite(meta?.longitude))
+    return { lat: meta.latitude, lon: meta.longitude };
+  if (_geocache === null) {
+    try {
+      const r = await fetch('./data/geocache.json', { cache: 'no-cache' });
+      _geocache = r.ok ? await r.json() : {};
+    } catch {
+      _geocache = {};
+    }
+  }
+  const g = _geocache[String(meta?.location || '').trim()];
+  return g && Number.isFinite(g.lat) ? { lat: g.lat, lon: g.lon } : null;
 }
 
 export function updateDownloadButton() {
@@ -24,48 +35,49 @@ export function updateDownloadButton() {
   googleButton.disabled = !hasSelections;
 }
 
-export function generateIcsContent(events) {
-  const selectedEvents = events.filter((event) => state.selectedEvents.has(event.id));
-  const icsEvents = selectedEvents
-    .map((event) => {
-      const start = formatDateForICS(event.startTime);
-      const end = formatDateForICS(event.endTime);
-      const uid = `${event.id}@${state.currentEventFile.replace('.json', '')}`;
-      const urlPart = event.link ? `${event.link}\n\n` : '';
-      const description = escapeIcsText(urlPart + getCalendarDescriptionText(event));
+// How long before a session the calendar reminder fires. A VALARM inside each
+// VEVENT means the attendee's *own* calendar app raises the nudge — so the
+// "reminder before your session" retention hook needs no push server at all.
+const DEFAULT_ALARM_MINUTES = 10;
 
-      return `BEGIN:VEVENT
-UID:${uid}
-DTSTART:${start}
-DTEND:${end}
-SUMMARY:${event.title}
-LOCATION:${event.location}
-DESCRIPTION:${description}
-END:VEVENT`;
-    })
-    .join('\n');
-
-  const eventDisplayName = `${state.eventMeta.designation} ${state.eventMeta.location} ${state.eventMeta.year}`;
-  return `BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//${eventDisplayName}//EN
-X-WR-CALNAME:${eventDisplayName}
-X-WR-TIMEZONE:${state.eventMeta.timezone}
-${icsEvents}
-END:VCALENDAR`;
+// The whole-event "place" string (venue, city) for the LOCATION line + map label.
+function eventPlace(meta) {
+  return [meta?.venue, meta?.location].filter((x) => x && String(x).trim()).join(', ');
 }
 
-export function triggerIcsDownload(events, filename, eventName) {
+// Build the .ics for the selected sessions using the SAME shared builders as the
+// subscription feed, so a downloaded item is just as rich (room, link, description,
+// map pin) — plus a local VALARM reminder that the feed omits.
+async function generateIcsContent(events) {
+  const meta = state.eventMeta || {};
+  const selected = events.filter((event) => state.selectedEvents.has(event.id));
+  const coords = await resolveEventCoords(meta);
+  const calEvents = scheduleSessionsToCalEvents(selected, {
+    timezone: meta.timezone,
+    place: eventPlace(meta),
+    coords,
+    uidBase: state.currentEventFile,
+  });
+  const calName =
+    [meta.designation, meta.location, meta.year].filter(Boolean).join(' ') || 'Schedule';
+  return buildIcsCalendar(calEvents, {
+    calName,
+    uidFor: (ev) => ev.uid,
+    alarmMinutes: DEFAULT_ALARM_MINUTES,
+  });
+}
+
+async function triggerIcsDownload(events, filename, eventName) {
   const metadata = {
     total_events: events.length,
     total_duration: events.reduce(
       (sum, event) => sum + parseInt(event.duration.replace('PT', '').replace('H', ''), 10),
-      0
-    )
+      0,
+    ),
   };
   window.sa_event?.(eventName, metadata);
 
-  const icsContent = generateIcsContent(events);
+  const icsContent = await generateIcsContent(events);
   const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
@@ -79,21 +91,16 @@ export function triggerIcsDownload(events, filename, eventName) {
 
 export function downloadSelectedEvents(events) {
   const filename = state.currentEventFile.replace('.json', '') + '-selected-events.ics';
-  triggerIcsDownload(events, filename, 'download_ics');
+  return triggerIcsDownload(events, filename, 'download_ics');
 }
 
-export function buildGoogleCalendarEventUrl(event) {
-  const start = formatDateForICS(event.startTime);
-  const end = formatDateForICS(event.endTime);
-  const details = [getCalendarDescriptionText(event), event.link || ''].filter(Boolean).join('\n\n');
-  const params = new URLSearchParams({
-    action: 'TEMPLATE',
-    text: event.title || 'Session',
-    dates: `${start}/${end}`,
-    details,
-    location: event.location || ''
+function buildGoogleCalendarEventUrl(event) {
+  const meta = state.eventMeta || {};
+  const [calEvent] = scheduleSessionsToCalEvents([event], {
+    timezone: meta.timezone,
+    place: eventPlace(meta),
   });
-  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+  return calEvent ? googleCalendarUrl(calEvent) : '#';
 }
 
 export function addSelectedEventsToGoogleCalendar(events) {
@@ -113,13 +120,16 @@ export function addSelectedEventsToGoogleCalendar(events) {
 
   window.sa_event?.('google_calendar_multi_event', { count: selectedEvents.length });
 
-  const eventDisplayName = [state.eventMeta?.designation, state.eventMeta?.location, state.eventMeta?.year]
-    .filter(Boolean)
-    .join(' ')
-    .trim() || 'Selected Sessions';
-  const rawLogoUrl = String(state.eventMeta?.logo?.image || '').trim();
+  const eventDisplayName =
+    [state.eventMeta?.designation, state.eventMeta?.location, state.eventMeta?.year]
+      .filter(Boolean)
+      .join(' ')
+      .trim() || 'Selected Sessions';
+  const rawLogoUrl = normalizeString(state.eventMeta?.logo?.image);
   const logoUrl = rawLogoUrl ? new URL(rawLogoUrl, window.location.href).toString() : '';
-  const logoAlt = escapeHtml(String(state.eventMeta?.logo?.imageAlt || `${eventDisplayName} logo`).trim());
+  const logoAlt = escapeHtml(
+    String(state.eventMeta?.logo?.imageAlt || `${eventDisplayName} logo`).trim(),
+  );
 
   const linkRows = selectedEvents
     .map(
@@ -134,7 +144,7 @@ export function addSelectedEventsToGoogleCalendar(events) {
                         <span class="session-action">Add to calendar</span>
                     </a>
                 </li>
-            `
+            `,
     )
     .join('');
 
@@ -365,8 +375,10 @@ export function toggleEventSelection(eventId, applyFilterFn, updateSelectionOver
     announceStatus(`Selected: ${event.title}. ${state.selectedEvents.size} selected.`);
   }
 
-  localStorage.setItem(getStorageKey(), JSON.stringify([...state.selectedEvents]));
+  writeJson(getStorageKey(), [...state.selectedEvents]);
   updateDownloadButton();
   updateSelectionOverviewFn(state.allEvents);
   applyFilterFn(state.allEvents, null, true, false);
+  // Let the Now/Next companion re-personalise to the updated selection at once.
+  document.dispatchEvent(new CustomEvent('schedule-selection-changed'));
 }

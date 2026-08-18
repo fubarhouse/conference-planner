@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="icon" href="./img/app-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+  <meta name="theme-color" content="#f4f5f0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#131614" media="(prefers-color-scheme: dark)">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png">
+  <title>Programme &mdash; conference schedules, planned and archived</title>
+  <meta name="description" content="Conference schedules, planned and archived. Read what is on, plan how you will get there and what it costs, and search two decades of what has already happened.">
+  <!-- og:url and og:image are injected per request by ogTags() in server.js,
+       from the Host the browser actually asked for. They are NOT written here
+       on purpose: anyone can host this, and a domain compiled into the markup
+       would point every share on their deployment at somebody else's site.
+       Served as plain static files there is no server to inject them, so those
+       deployments ship without the absolute pair — which is correct, and better
+       than a confidently wrong URL. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Programme">
+  <meta property="og:title" content="Programme">
+  <meta property="og:description" content="Conference schedules, planned and archived. Read what is on, plan how you will get there and what it costs, and search two decades of what has already happened.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Programme">
+  <meta name="twitter:description" content="Conference schedules, planned and archived. Read what is on, plan how you will get there and what it costs, and search two decades of what has already happened.">
+
+  <!-- Self-hosted, latin subset. No third-party origin in the critical path. -->
+  <link rel="preload" href="./fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./fonts/newsreader-roman.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- The one page in the product that needs NO legacy sheet: it was written
+       after the rebrand, so it carries the foundation and the shared chrome and
+       nothing else. It is what every other page is converging on. -->
+  <style>
+    @layer overrides, reset, legacy, tokens, base, composition, section, utility;
+  </style>
+  <link rel="stylesheet" href="./css/foundation.css">
+  <link rel="stylesheet" href="./css/section-chrome.css">
+  <link rel="stylesheet" href="./css/section-home.css">
+</head>
+<body>
+
+  <a class="u-skip" href="#homeMain">Skip to the sections</a>
+
+  <header class="app-masthead">
+    <div class="l-center">
+      <div class="app-masthead__bar">
+        <div class="app-lockup">
+          <span class="app-lockup__seal" aria-hidden="true"></span>
+          <div class="app-lockup__title">Programme</div>
+          <p class="app-lockup__place">Conference schedules, planned and archived</p>
+        </div>
+      </div>
+      <nav class="app-nav" aria-label="Site navigation">
+        <a href="./home.html" class="app-nav__link" aria-current="page">Home</a>
+        <a href="./index.html" class="app-nav__link">Schedule</a>
+        <a href="./planner.html" class="app-nav__link">Planner</a>
+        <a href="./archive.html" class="app-nav__link">Archive</a>
+        <a id="homeCurationLink" href="./curation.html" class="app-nav__link hidden">Curation</a>
+        <a id="homeEditorLink" href="./editor.html" class="app-nav__link hidden">Editor</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="homeMain" class="l-center">
+    <h1 class="hm-hero">
+      A conference is a <em>programme</em>, a <em>trip</em>,<br>
+      and eventually a <em>record</em>.
+    </h1>
+    <p class="hm-lede">
+      Three views of the same thing. Read what is on, plan how you will get
+      there and what it costs, and search two decades of what has already
+      happened.
+    </p>
+
+    <!-- Numbered because these ARE a sequence: you read a schedule, then you
+         plan around it, and only afterwards is it an archive. -->
+    <ol class="hm-sections">
+      <li class="hm-section">
+        <a class="hm-section__link" href="./index.html">
+          <span class="hm-section__n" aria-hidden="true">01</span>
+          <span class="hm-section__body">
+            <span class="hm-section__title">Schedule</span>
+            <span class="hm-section__desc">Every session for an event, filterable by day, track and room. Open one to read it in the margin; tick the ones you want and take them with you.</span>
+          </span>
+          <span class="hm-section__go" aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+      <li class="hm-section">
+        <a class="hm-section__link" href="./planner.html">
+          <span class="hm-section__n" aria-hidden="true">02</span>
+          <span class="hm-section__body">
+            <span class="hm-section__title">Planner</span>
+            <span class="hm-section__desc">The trip around the conference — flights, stays, the itinerary they add up to, what it all cost and who owes whom. Yours, in this browser.</span>
+          </span>
+          <span class="hm-section__go" aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+      <li class="hm-section">
+        <a class="hm-section__link" href="./archive.html">
+          <span class="hm-section__n" aria-hidden="true">03</span>
+          <span class="hm-section__body">
+            <span class="hm-section__title">Archive</span>
+            <span class="hm-section__desc">Twenty years of events, in one place. Follow a speaker across a decade, see which topics rose and fell, and search every session ever given.</span>
+          </span>
+          <span class="hm-section__go" aria-hidden="true">&rarr;</span>
+        </a>
+      </li>
+    </ol>
+
+    <p class="hm-foot">
+      Datasets are plain JSON and the planner never leaves your browser unless
+      you ask it to.
+    </p>
+    <!--provenance-->
+  </main>
+
+  <script type="module">
+    // Mode is the reader's choice and applies everywhere. Home carried no theme
+    // module at all, so it ignored a saved Light/Dark pick and simply followed
+    // the OS — the one page in the product that could not be switched.
+    import { applyMode } from './js/modules/theme.js';
+    import { initThemePicker } from './js/modules/themePicker.js';
+    applyMode();
+    initThemePicker();
+
+    // The editor is a local tool, so it is offered only where it can run.
+    import { isLocalhost } from './js/modules/utils.js';
+    if (isLocalhost()) {
+      document.getElementById('homeEditorLink')?.classList.remove('hidden');
+      document.getElementById('homeCurationLink')?.classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>

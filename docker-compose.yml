@@ -1,9 +1,33 @@
 services:
   web:
     build: .
+    # `format: raw` disables Compose's variable interpolation for this file, and it
+    # is load-bearing. A bcrypt hash contains `$` — with the default format Compose
+    # read `$nmUZE4y…` (the SALT) as an unset variable, substituted empty, and
+    # handed the app a 33-character stub of a 60-character hash. The app then
+    # rejects every password, with nothing in the logs to say why.
+    env_file:
+      - path: .env
+        format: raw
     ports:
       - "8080:8080"
     volumes:
       - ./app/:/app
+      # The archive and this installation's state, mounted from outside the repo.
+      # Both are writable on purpose: the editor saves datasets and images into the
+      # public tree, and the server rebuilds catalog.json there on boot. Add `:ro`
+      # to the public mount for a viewer-only deployment — the catalog build fails
+      # soft, so it degrades rather than breaks.
+      - ../conference-planner-data/public:/srv/data/public
+      - ../conference-planner-data/private:/srv/data/private
+    expose:
+      - 8080
     environment:
       PORT: "8080"
+      # These MUST be set here, not left to .env. Compose's `environment` wins over
+      # `env_file`, and .env holds host-relative paths (`../conference-planner-data/…`)
+      # that mean nothing inside the container — they would resolve against `/` and
+      # silently serve an empty tree.
+      DATA_ROOT: /srv/data/public
+      IMG_ROOT: /srv/data/public/img
+      PRIVATE_ROOT: /srv/data/private

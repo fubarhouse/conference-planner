@@ -1,4 +1,4 @@
-import { once } from './utils.js';
+import { once, normalizeString } from './utils.js';
 
 function normalizeCatalogEntry(entry, defaultFile = '') {
   if (typeof entry === 'string') {
@@ -7,19 +7,26 @@ function normalizeCatalogEntry(entry, defaultFile = '') {
   if (!entry || typeof entry !== 'object' || !entry.file) {
     return null;
   }
+  // Keep only the list shape (file + default); metadata is hydrated elsewhere.
   return {
-    ...entry,
-    default: Boolean(entry.default) || entry.file === defaultFile
+    file: entry.file,
+    default: Boolean(entry.default) || entry.file === defaultFile,
   };
 }
 
 export const loadEventCatalog = once(async () => {
-  const response = await fetch('./data/index.json');
+  // Module-relative: see validator.js — a deep route made document-relative
+  // fetches resolve under the route and return HTML.
+  const response = await fetch(new URL('../../data/catalog.json', import.meta.url), {
+    cache: 'no-cache',
+  });
   if (!response.ok) {
     throw new Error('Failed to load dataset catalog.');
   }
   const payload = await response.json();
-  const defaultFile = String(payload?.defaultFile || '').trim();
-  const files = Array.isArray(payload?.files) ? payload.files : [];
-  return files.map((entry) => normalizeCatalogEntry(entry, defaultFile)).filter(Boolean);
+  const defaultFile = normalizeString(payload?.defaultFile);
+  // catalog.json lists events as { file, event }; the file list is all we need
+  // here — metadata is hydrated separately in events.js.
+  const entries = Array.isArray(payload?.events) ? payload.events : [];
+  return entries.map((entry) => normalizeCatalogEntry(entry, defaultFile)).filter(Boolean);
 });

@@ -6,3 +6,7 @@ cache
 .docker-compose.yml
 .env
 .env*
+
+# This installation's private state (PRIVATE_ROOT) — planners, uploads and the
+# curation ledger. Never baked into an image; mounted or S3-backed at runtime.
+private/*

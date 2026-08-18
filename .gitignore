@@ -1,15 +1,60 @@
-.*/*
-app/documents/*
-app/planner/*
-app/receipts/*
-cache/*
-.codegraph/*
-.idea/*
-node_modules/*
-scripts/*
-!scripts/validate-data.mjs
-.s3-manifest.json
-.env
-.env.local
-package.json
-package-lock.json
+# Blanket rules
+/*
+
+# Directories
+#
+# Note the shape: the blanket rule above hides everything at the root, so a
+# directory has to be re-included (`!/lib/`) BEFORE its contents can be — a
+# negation cannot reach inside a directory git has already excluded. Files added
+# to directories that only have a `/*` entry stay invisible, which is how a batch
+# of new modules once failed to reach a deploy.
+!/.github/
+!/.github/*
+!/app/
+!/app/vendor/
+!/app/vendor/**
+!/lib/
+!/lib/*
+!/lib/__tests__/
+!/lib/__tests__/*
+!/app/content/*
+!/app/css/*
+!/app/data/events/*
+!/app/img/*
+!/app/js/*
+!/app/schemas/*
+!/docs/*
+!/lib/*
+!/scripts/install-git-hooks.mjs
+!/scripts/validate-data.mjs
+
+# Files
+!/app/editor.html
+!/app/embed.js
+!/app/index.html
+!/app/manifest.webmanifest
+!/app/openapi.yaml
+!/app/planner.html
+!/app/styleguide.html
+!/app/data/catalog.json
+!/app/data/album-thumbs.json
+!/app/data/geocache.json
+!/app/data/sponsors.json
+!/app/data/themes.json
+!/.dockerignore
+!/.env.example
+!/.gitignore
+!/.prettierignore
+!/.prettierrc
+!/docker-compose.yml
+!/Dockerfile
+!/eslint.config.js
+!/jsconfig.json
+!/knip.json
+!/LICENSE
+!/package.json
+!/pnpm-lock.yaml
+!/pnpm-workspace.yaml
+!/README.md
+!/server.js
+!/uno.config.js
