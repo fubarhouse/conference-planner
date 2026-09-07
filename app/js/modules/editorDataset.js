@@ -49,6 +49,36 @@ export function getDatasetGroupName(eventMeta = null) {
   return designation || 'Other';
 }
 
+/**
+ * A dataset's path relative to the DATA ROOT, as the server's routes want it.
+ *
+ * `state.file` is not one thing. Opened through the API it is the catalog's own
+ * form and already carries `events/`; opened from a local folder, or freshly
+ * created and never saved, it is a bare filename. Anything talking to a server
+ * route has to say which it has, and prefixing unconditionally produces
+ * `events/events/…`, which is a 404 that reads like a missing dataset rather
+ * than like a bug in the caller.
+ *
+ * Returns '' for a file that is not in the archive yet, so a caller can say so
+ * rather than send a path that cannot resolve.
+ *
+ * @param {*} file
+ * @returns {string}
+ */
+export function datasetDocPath(file) {
+  const normalized = String(file || '')
+    .trim()
+    .replace(/^\/+/, '');
+  // Tested on the BASENAME: `isEditorDatasetFile` excludes the index manifest
+  // by comparing the whole string, which only catches a bare `index.json` and
+  // lets `events/index.json` through.
+  if (!isEditorDatasetFile(normalized.split('/').pop())) return '';
+  if (normalized.startsWith('events/')) return normalized;
+  // A path with directories but no `events/` root is a local-folder checkout of
+  // the same tree; a bare filename has never been filed anywhere.
+  return normalized.includes('/') ? `events/${normalized}` : '';
+}
+
 // True for a loadable dataset file (a .json that isn't the index manifest).
 /**
  * @param {*} name

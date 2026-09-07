@@ -1,0 +1,1 @@
+["<section>the notice</section>\n","in passing -->\n<section>x</section>\n","<section>no comments at all</section>\n","<section>x</section>","<!-- never closed <section>x</section>",""]

@@ -13,6 +13,17 @@ import {
 } from './modules/plannerStorage.js';
 import { SPONSOR_BG_STYLES, SPONSOR_ASPECTS } from './modules/sponsorStyles.js';
 import {
+  initSources,
+  renderSourcesEditor,
+  renderSponsorSourceField,
+} from './modules/editorSources.js';
+import {
+  initFeedModal,
+  showFeedDiff,
+  showFeedImported,
+  showFeedMessage,
+} from './modules/feedModal.js';
+import {
   initEditorSponsors,
   normalizeSponsorCollection,
   closeSponsorSessionPicker,
@@ -51,6 +62,7 @@ import { editorPath, parseEditorPath } from './modules/editorRoute.js';
 import { utcIsoToLocalInput, localInputToUtcIso } from './modules/editorDateTime.js';
 import {
   buildDatasetOptionLabel,
+  datasetDocPath,
   isEditorDatasetFile,
   validateDatasetSchema,
   buildDatasetGroupingRecord,
@@ -90,6 +102,11 @@ import { initAppMenu } from './modules/appMenu.js';
 const state = {
   dataset: null,
   file: '',
+  // Event file → the series it belongs to, from the curation ledger. Null until
+  // fetched; `{}` once fetched and empty. NOT part of the dataset, so it is
+  // deliberately outside the dirty/undo machinery.
+  seriesMap: null,
+  seriesOptions: [],
   outputPath: '',
   fileHandle: null,
   projectDirHandle: null,
@@ -150,7 +167,6 @@ const EVENT_META_FIELDS = [
   'longitude',
   'website',
   'scheduleURLs',
-  'other_urls',
   'startDate',
   'endDate',
   'logo',
@@ -219,10 +235,6 @@ const EVENT_META_FIELD_CONFIG = {
   scheduleURLs: {
     label: 'Schedule URLs',
     description: 'One or more source schedule URLs used when this dataset was created or checked.',
-  },
-  other_urls: {
-    label: 'Other URLs',
-    description: 'Additional URLs associated with this event. These are only shown in the sitemap.',
   },
   logo: {
     label: 'Event logo',
@@ -422,10 +434,27 @@ const SESSION_FIELDS = [
     type: 'text',
   },
   {
-    key: 'isAgendaItem',
-    label: 'Not a session',
+    key: 'kind',
+    label: 'Kind',
     description:
-      'Lunch, morning tea, registration. It still appears on the schedule and keeps its sponsors, room and times — the archive just stops counting it as a session.',
+      'What this item IS, as distinct from what it is about (that is Track). Sessions and ' +
+      'workshops count toward the archive\u2019s session totals; social events and agenda ' +
+      'items appear on the schedule with their room, times and sponsors, but are not counted.',
+    type: 'select',
+    options: [
+      { value: 'session', label: 'Session — a talk, keynote, panel or BOF' },
+      { value: 'workshop', label: 'Workshop — sprint, summit, training, hands-on' },
+      { value: 'social', label: 'Social — trivia, dinner, apéro, tour, awards' },
+      { value: 'agenda', label: 'Agenda — lunch, break, registration' },
+    ],
+    span: 2,
+  },
+  {
+    key: 'cancelled',
+    label: 'Cancelled',
+    description:
+      'The item was called off. It stays in the dataset as evidence but is hidden from the ' +
+      'schedule and never counted — the archive should not show a talk that did not happen.',
     type: 'checkbox',
     span: 2,
   },
@@ -1942,6 +1971,9 @@ async function loadDataset(file) {
   if (!isApiMode() && (!state.projectDirHandle || !state.folderConnectedInSession)) {
     throw new Error('Connect folder first.');
   }
+  // The lineage map is archive-wide, so it is fetched once and reused across
+  // every dataset opened this session.
+  await loadSeriesMap();
   if (readText(PHOTOS_BACKUP_KEY)) {
     await revertPendingPhotoUpload();
   }
@@ -2020,7 +2052,8 @@ async function loadDataset(file) {
   renderSponsorForm();
   renderPeopleTab();
   if (state.activeEditorTab === 'sitemap') {
-    renderOtherUrlsEditor();
+    renderSourcesEditor();
+    renderSponsorSourceField();
     renderSitemap();
   }
   if (state.activeEditorTab === 'timeline' && els.timelineCanvas) {
@@ -2087,7 +2120,8 @@ function createDatasetScaffold(pathValue) {
   renderSponsorList();
   renderSponsorForm();
   if (state.activeEditorTab === 'sitemap') {
-    renderOtherUrlsEditor();
+    renderSourcesEditor();
+    renderSponsorSourceField();
     renderSitemap();
   }
   setEditorButtonsEnabled(true);
@@ -3552,6 +3586,90 @@ function _applyLiveEditMeta() {
   applyThemeClass(_editingThemeId);
 }
 
+// ── "Part of series" — lineage, not a dataset field ──────────────────────────
+//
+// What an event was CALLED and what it BELONGED TO are different facts, and the
+// dataset only has a field for the first (`designation`). DrupalSouth 2011 and
+// 2012 were marketed as Drupal Down Under (2011.drupaldownunder.org); DrupalGov
+// 2020 ran on drupalsouth.org while 2013–2017 stood alone; DrupalCamp Australia
+// 2008 is DrupalSouth prehistory.
+//
+// This is stored in the private curation ledger, NOT in the dataset — same
+// contract as the speaker/sponsor mappings, so datasets stay byte-identical and
+// the archive's own record of what an event called itself is never overwritten.
+// It is therefore saved on its own, immediately, and takes no part in the
+// dirty/undo machinery that the dataset fields share.
+function partOfSeriesFieldHtml() {
+  const current = state.seriesMap?.[state.file] || '';
+  const known = [...new Set([...(state.seriesOptions || []), current].filter(Boolean))].sort(
+    (a, b) => a.localeCompare(b),
+  );
+  const opts = known.map((n) => `<option value="${escapeAttr(n)}"></option>`).join('');
+  const disabled = !isApiMode() || !state.file;
+  return `
+    <label class="editor-form-field" id="partOfSeriesField">
+      <span class="edt-label">Part of series</span>
+      <span class="edt-hint">The series this event BELONGS to, when that differs from what it
+      was called — Drupal Down Under 2011 was a DrupalSouth event. Leave blank for the usual
+      case. Saved to the curation ledger, so the dataset is not changed.</span>
+      <input id="partOfSeriesInput" list="partOfSeriesList" type="text" class="edt-field"
+             value="${escapeAttr(current)}" placeholder="e.g. DrupalSouth"
+             autocomplete="off" spellcheck="false" ${disabled ? 'disabled' : ''}>
+      <datalist id="partOfSeriesList">${opts}</datalist>
+      <span class="edt-hint" id="partOfSeriesStatus" aria-live="polite">${
+        disabled ? 'Available when a dataset is open on the server.' : ''
+      }</span>
+    </label>`;
+}
+
+function wirePartOfSeriesField() {
+  const input = document.getElementById('partOfSeriesInput');
+  if (!input || input.disabled) return;
+  const status = document.getElementById('partOfSeriesStatus');
+  const say = (msg) => {
+    if (status) status.textContent = msg;
+  };
+  // 'change', not 'input': this writes straight through to the ledger, and
+  // saving on every keystroke would file a mapping for every prefix typed.
+  input.addEventListener('change', async () => {
+    const series = input.value.trim();
+    try {
+      const res = await fetch('/api/curation/series', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ file: state.file, series }),
+      });
+      const body = await res.json().catch(() => null);
+      if (!res.ok) return say(body?.error || 'Could not save that.');
+      state.seriesMap = body.series || {};
+      say(series ? `Saved — grouped under ${series}.` : 'Cleared — grouped under its own name.');
+    } catch {
+      say('Offline — nothing saved.');
+    }
+  });
+}
+
+/** The lineage map, loaded once per editor session. */
+async function loadSeriesMap() {
+  if (!isApiMode() || state.seriesMap) return;
+  try {
+    const res = await fetch('/api/curation/series');
+    state.seriesMap = res.ok ? ((await res.json()).series ?? {}) : {};
+  } catch {
+    state.seriesMap = {};
+  }
+  // Offer the series the archive already knows, so a lineage is picked rather
+  // than retyped — a typo here silently creates a one-event series.
+  try {
+    const res = await fetch('./data/catalog.json');
+    const cat = res.ok ? await res.json() : null;
+    const names = (cat?.events || []).map((e) => e.event?.designation).filter(Boolean);
+    state.seriesOptions = [...new Set([...names, ...Object.values(state.seriesMap)])];
+  } catch {
+    state.seriesOptions = [...new Set(Object.values(state.seriesMap))];
+  }
+}
+
 function renderEventMetaForm() {
   const event = state.dataset?.event || {};
   const visibleFields = EVENT_META_FIELDS.filter(
@@ -3561,7 +3679,7 @@ function renderEventMetaForm() {
   const html = visibleFields
     .map((field) => {
       const config = EVENT_META_FIELD_CONFIG[field] || { label: field, description: '' };
-      const isWide = field === 'website' || field === 'scheduleURLs' || field === 'other_urls';
+      const isWide = field === 'website' || field === 'scheduleURLs';
       const spanClass = isWide ? 'md:col-span-2 xl:col-span-3' : '';
 
       if (field === 'attendance') {
@@ -3589,7 +3707,7 @@ function renderEventMetaForm() {
         </div>`;
       }
 
-      if (field === 'scheduleURLs' || field === 'other_urls') {
+      if (field === 'scheduleURLs') {
         const urls = normalizeUrlArray(event[field]);
         return renderUrlMultifieldHtml('event', field, config, urls);
       }
@@ -3709,13 +3827,12 @@ function renderEventMetaForm() {
       if (field === 'regionCode') {
         const current = toStringValue(event[field]).toUpperCase();
         const REGION_LABELS = {
-          EUR: 'Europe',
-          MEA: 'Middle East & Africa',
+          EMEA: 'Europe, Middle East & Africa',
           APAC: 'Asia-Pacific',
           AMER: 'North America',
           LATAM: 'Latin America',
         };
-        const options = ['', 'EUR', 'MEA', 'APAC', 'AMER', 'LATAM']
+        const options = ['', 'EMEA', 'APAC', 'AMER', 'LATAM']
           .map(
             (code) =>
               `<option value="${code}" ${code === current ? 'selected' : ''}>${code ? `${code} — ${REGION_LABELS[code]}` : '— none —'}</option>`,
@@ -3783,7 +3900,8 @@ function renderEventMetaForm() {
     })
     .join('');
 
-  els.eventMetaForm.innerHTML = html;
+  els.eventMetaForm.innerHTML = html + partOfSeriesFieldHtml();
+  wirePartOfSeriesField();
 
   els.eventMetaForm.querySelectorAll('[data-event-field]').forEach((input) => {
     input.addEventListener('focus', undoPush);
@@ -4282,11 +4400,11 @@ function renderEditorCrumbs() {
     : '';
   const tab = state.activeEditorTab;
   // The dataset crumb goes back to that dataset's first workspace, not to a bare
-  // editor — clicking the record you are editing should not close it. Only when
-  // this app is being SERVED, though: opened as plain files there is no /editor
-  // path to link to, and ./editor.html is still the way home.
-  const served = typeof location !== 'undefined' && location.pathname.startsWith('/editor');
-  const datasetHref = served ? editorPath(state.file, 'event', EDITOR_TABS) : './editor.html';
+  // editor — clicking the record you are editing should not close it. editorPath
+  // now picks the form itself, so this no longer needs its own served check: as
+  // plain files it returns ./editor.html?file=… , which is a real address there
+  // rather than the /editor path a static host cannot serve.
+  const datasetHref = editorPath(state.file, 'event', EDITOR_TABS);
   const trail = [{ label: 'Home', href: './home.html' }];
   trail.push(name ? { label: 'Editor', href: './editor.html' } : { label: 'Editor' });
   if (name) {
@@ -4366,7 +4484,8 @@ function setActiveEditorTab(tab) {
 
   // Side-effects on activation
   if (nextTab === 'sitemap') {
-    renderOtherUrlsEditor();
+    renderSourcesEditor();
+    renderSponsorSourceField();
     renderSitemap();
   }
   if (nextTab === 'related') renderRelatedList();
@@ -4792,6 +4911,92 @@ function bustDatasetForPreview(dataset) {
   return clone;
 }
 
+// ── Calendar feed: check, and import ────────────────────────────────────────
+//
+// Both go to the server, which runs the same Go reconciliation the weekly cron
+// job runs. Nothing about the comparison happens here — this is the trigger, the
+// modal, and putting the dataset back on screen afterwards.
+
+/** POST to one of the feed routes. */
+async function callFeed(route, body) {
+  const res = await fetch(`${state.apiEndpoint}/api/feed/${route}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(body),
+  });
+  let payload = null;
+  try {
+    payload = await res.json();
+  } catch {
+    /* a non-JSON body is handled by the status check below */
+  }
+  if (!res.ok) {
+    throw new Error(payload?.error || payload?.message || `Feed ${route} failed (${res.status})`);
+  }
+  return payload;
+}
+
+async function checkCalendarFeed() {
+  if (!isApiMode()) {
+    showFeedMessage(
+      'The backend is not connected',
+      'Checking a feed fetches it from upstream, which the browser cannot do on its own. Connect to the API to use this.',
+      'hold',
+    );
+    return;
+  }
+  const docPath = datasetDocPath(state.file);
+  if (!docPath) {
+    showFeedMessage(
+      'Save this dataset first',
+      'The feed is compared against the file in the archive, and this one has not been saved there yet.',
+      'hold',
+    );
+    return;
+  }
+
+  showFeedMessage('Reading the feed…', 'Fetching the published schedule and comparing it.');
+  try {
+    const result = await callFeed('check', { file: docPath });
+    showFeedDiff(result, {
+      file: state.file,
+      // The editor always offers the whole programme. A partial import would
+      // leave the dataset in a state neither side chose, and no later run could
+      // tell "we rejected that" from "that is not imported yet".
+      mirror: true,
+      onImport: () => importCalendarFeed(),
+    });
+  } catch (error) {
+    showFeedMessage('Could not read the feed', error.message, 'bad');
+  }
+}
+
+async function importCalendarFeed() {
+  try {
+    const result = await callFeed('import', { file: datasetDocPath(state.file), mirror: true });
+    if (!result.written) {
+      showFeedMessage(
+        'Nothing was written',
+        result.note || 'The comparison found nothing to apply.',
+        'hold',
+      );
+      return;
+    }
+    // The server has rewritten the file. Anything held in memory now describes
+    // a dataset that no longer exists, so it is reloaded rather than patched —
+    // and reloading is also what proves the import produced something readable.
+    state.dirty = false;
+    await loadDataset(state.file);
+    // Shown AFTER the reload, in the frame the diff was in: the numbers land
+    // where they were just read as predictions, and the panel behind them is
+    // already showing the imported data.
+    showFeedImported(result, { mirror: true });
+  } catch (error) {
+    showFeedMessage('The import failed', `${error.message} Nothing was written.`, 'bad');
+  }
+}
+
 function isApiMode() {
   return Boolean(state.apiEndpoint);
 }
@@ -4900,13 +5105,36 @@ function renderSitemap() {
     }
   });
 
-  const otherUrls = normalizeUrlArray(meta.other_urls).filter(Boolean);
+  // The registered sources on this domain that no other section already lists.
+  // `other_urls` used to fill this slot; it is now drained into the registry, so
+  // the map reads from the register rather than from the grab bag it replaced.
+  const sourceEntries = [];
+  for (const source of meta.sources ?? []) {
+    const url = normalizeString(source?.url);
+    if (!url || seen.has(url)) continue;
+    try {
+      if (new URL(url).hostname !== domain) continue;
+    } catch {
+      continue;
+    }
+    seen.add(url);
+    sourceEntries.push({ title: source.kind ?? 'source', url });
+  }
+  // Anything still sitting in the legacy field, so a half-filed dataset does not
+  // silently drop URLs out of the map.
+  const otherUrls = normalizeUrlArray(meta.other_urls).filter((u) => u && !seen.has(u));
 
-  const total = eventUrls.length + sessionEntries.length + sponsorEntries.length + otherUrls.length;
+  const total =
+    eventUrls.length +
+    sessionEntries.length +
+    sponsorEntries.length +
+    sourceEntries.length +
+    otherUrls.length;
   const allUrls = [
     ...eventUrls,
     ...sessionEntries.map((e) => e.url),
     ...sponsorEntries.map((e) => e.url),
+    ...sourceEntries.map((e) => e.url),
     ...otherUrls,
   ].join('\n');
 
@@ -4954,10 +5182,19 @@ function renderSitemap() {
         : ''
     }
     ${
+      sourceEntries.length
+        ? `
+      <section class="sitemap-section">
+        <h3 class="sitemap-section-heading">Sources <span class="sitemap-count-badge">${sourceEntries.length}</span></h3>
+        <ul class="sitemap-url-list">${sourceEntries.map((e) => urlRow(e.url, e.title)).join('')}</ul>
+      </section>`
+        : ''
+    }
+    ${
       otherUrls.length
         ? `
       <section class="sitemap-section">
-        <h3 class="sitemap-section-heading">Other URLs <span class="sitemap-count-badge">${otherUrls.length}</span></h3>
+        <h3 class="sitemap-section-heading">Not yet filed <span class="sitemap-count-badge">${otherUrls.length}</span></h3>
         <ul class="sitemap-url-list">${otherUrls.map((u) => urlRow(u)).join('')}</ul>
       </section>`
         : ''
@@ -4975,69 +5212,6 @@ function renderSitemap() {
         }, 1800);
       }
     });
-  });
-}
-
-function renderOtherUrlsEditor() {
-  const container = document.getElementById('otherUrlsEditorContent');
-  if (!container) return;
-
-  const urls = normalizeUrlArray(state.dataset?.event?.other_urls);
-
-  const rows = urls
-    .map(
-      (url, i) => `
-    <div class="url-multifield-row">
-      <input type="text"
-        class="url-multifield-input"
-        data-other-url-index="${i}"
-        value="${escapeAttr(url)}"
-        placeholder="https://">
-      <button type="button"
-        class="url-multifield-remove"
-        data-other-url-remove="${i}"
-        aria-label="Remove URL">
-        </button>
-    </div>
-  `,
-    )
-    .join('');
-
-  container.innerHTML = `
-    <div class="url-multifield-list">
-      ${rows || '<p class="url-multifield-empty">No reference URLs added yet.</p>'}
-    </div>
-    <button type="button" class="url-multifield-add" id="addOtherUrl">
-      Add URL
-    </button>
-  `;
-
-  container.querySelectorAll('[data-other-url-index]').forEach((input) => {
-    input.addEventListener('input', () => {
-      const index = Number(input.dataset.otherUrlIndex);
-      if (!Array.isArray(state.dataset.event.other_urls)) state.dataset.event.other_urls = [];
-      state.dataset.event.other_urls[index] = input.value;
-      markDirty(true);
-      renderSitemap();
-    });
-  });
-
-  container.querySelectorAll('[data-other-url-remove]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const index = Number(btn.dataset.otherUrlRemove);
-      if (!Array.isArray(state.dataset.event.other_urls)) return;
-      state.dataset.event.other_urls.splice(index, 1);
-      markDirty(true);
-      renderOtherUrlsEditor();
-      renderSitemap();
-    });
-  });
-
-  document.getElementById('addOtherUrl')?.addEventListener('click', () => {
-    if (!Array.isArray(state.dataset.event.other_urls)) state.dataset.event.other_urls = [];
-    state.dataset.event.other_urls.push('');
-    markDirty(true);
-    renderOtherUrlsEditor();
   });
 }
 
@@ -5678,7 +5852,7 @@ function revealPage() {
 async function init() {
   // Capture what the URL asked for before the default 'event' tab overwrites it.
   // `?tab=` is still read, so links minted before the path form keep working.
-  const route = parseEditorPath(location.pathname, EDITOR_TABS);
+  const route = parseEditorPath(location.pathname, EDITOR_TABS, location.search);
   _initialDatasetFile = route.file;
   _initialEditorTab = route.tab || new URLSearchParams(location.search).get('tab');
   initEditorS3({ apiBase: () => state.apiEndpoint });
@@ -5686,6 +5860,26 @@ async function init() {
   wireRelatedEventsPanel();
   wirePeopleTab();
   wirePersonModal();
+  // Filing a stray URL moves it out of an event field, so the meta form and the
+  // URL map both stop being true the moment it happens.
+  initSources({
+    state,
+    markDirty,
+    escapeHtml,
+    escapeAttr,
+    onChange: () => {
+      renderSitemap();
+      renderSponsorSourceField();
+    },
+    onCheckFeed: checkCalendarFeed,
+  });
+  initFeedModal({
+    escapeHtml,
+    escapeAttr,
+    // The modal warns before an import when there are edits open, because the
+    // server writes the file underneath them.
+    isDirty: () => Boolean(state.dirty),
+  });
   initEditorSponsors({
     state,
     els,

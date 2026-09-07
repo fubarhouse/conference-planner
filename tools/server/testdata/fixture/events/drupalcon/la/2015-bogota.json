@@ -1,0 +1,1749 @@
+{
+ "event": {
+  "regionCode": "LATAM",
+  "country": "Colombia",
+  "designation": "DrupalCon",
+  "ecosystem": "drupal",
+  "location": "Bogotá",
+  "year": "2015",
+  "website": "https://latinamerica2015.drupal.org/",
+  "region": "Latin America",
+  "venue": "Centro de Convenciones Gonzalo Jimenez de Quesada",
+  "timezone": "America/Bogota",
+  "startDate": "2015-02-09T13:00:00Z",
+  "endDate": "2015-02-12T23:00:00Z",
+  "flickr": {
+   "enabled": false,
+   "provider": "",
+   "groupUrl": "",
+   "image": "",
+   "imageAlt": ""
+  },
+  "columns": 3,
+  "enabled": false,
+  "logo": {
+   "image": "./img/logos/drupalcon-logo.svg",
+   "imageAlt": "DrupalCon logo",
+   "usePlate": false,
+   "logoDisabled": true,
+   "faIcon": "fa-solid fa-droplet"
+  },
+  "scheduleURLs": [
+   "https://latinamerica2015.drupal.org/schedule.html"
+  ],
+  "sponsors": [
+   {
+    "id": "acquia",
+    "title": "Acquia",
+    "tier": "Platinum",
+    "row": 1,
+    "priority": 10,
+    "image": "./img/sponsors/drupalcon/2015-bogota/acquia.png",
+    "imageAlt": "Acquia logo",
+    "link": "http://www.acquia.com",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "just-digital",
+    "title": "Just Digital",
+    "tier": "Platinum",
+    "row": 1,
+    "priority": 20,
+    "image": "./img/sponsors/drupalcon/2015-bogota/just-digital.png",
+    "imageAlt": "Just Digital logo",
+    "link": "http://www.justdigital.com.br/",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "softlite",
+    "title": "Softlite",
+    "tier": "Gold",
+    "row": 2,
+    "priority": 10,
+    "image": "./img/sponsors/drupalcon/2015-bogota/softlite.png",
+    "imageAlt": "Softlite logo",
+    "link": "https://softlite.mx/",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "mailchimp",
+    "title": "MailChimp",
+    "tier": "Gold",
+    "row": 2,
+    "priority": 20,
+    "image": "./img/sponsors/drupalcon/2015-bogota/mailchimp.png",
+    "imageAlt": "MailChimp logo",
+    "link": "http://mailchimp.com/",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "seed",
+    "title": "SeeD",
+    "tier": "Gold",
+    "row": 2,
+    "priority": 30,
+    "image": "./img/sponsors/drupalcon/2015-bogota/seed.png",
+    "imageAlt": "SeeD logo",
+    "link": "http://www.seed.com.co",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "pantheon",
+    "title": "Pantheon",
+    "tier": "Gold",
+    "row": 2,
+    "priority": 40,
+    "image": "./img/sponsors/drupalcon/2015-bogota/pantheon.png",
+    "imageAlt": "Pantheon logo",
+    "link": "https://www.getpantheon.com/",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "auxesis-infotech",
+    "title": "Auxesis Infotech",
+    "tier": "Silver",
+    "row": 3,
+    "priority": 10,
+    "image": "./img/sponsors/drupalcon/2015-bogota/auxesis-infotech.png",
+    "imageAlt": "Auxesis Infotech logo",
+    "link": "http://auxesisinfotech.com/",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "df-group",
+    "title": "DF Group",
+    "tier": "Silver",
+    "row": 3,
+    "priority": 20,
+    "image": "./img/sponsors/drupalcon/2015-bogota/df-group.png",
+    "imageAlt": "DF Group logo",
+    "link": "http://df.pe/",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "mysql",
+    "title": "MySQL",
+    "tier": "Silver",
+    "row": 3,
+    "priority": 30,
+    "image": "./img/sponsors/drupalcon/2015-bogota/mysql.png",
+    "imageAlt": "MySQL logo",
+    "link": "http://www.mysql.com",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "rootstack",
+    "title": "Rootstack",
+    "tier": "Silver",
+    "row": 3,
+    "priority": 40,
+    "image": "./img/sponsors/drupalcon/2015-bogota/rootstack.png",
+    "imageAlt": "Rootstack logo",
+    "link": "http://rootstack.com/",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "velaio",
+    "title": "Velaio",
+    "tier": "Bronze",
+    "row": 4,
+    "priority": 10,
+    "image": "./img/sponsors/drupalcon/2015-bogota/velaio.png",
+    "imageAlt": "Velaio logo",
+    "link": "http://www.velaio.com/",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "ubuntu",
+    "title": "Ubuntu",
+    "tier": "Bronze",
+    "row": 4,
+    "priority": 20,
+    "image": "./img/sponsors/drupalcon/2015-bogota/ubuntu.png",
+    "imageAlt": "Ubuntu logo",
+    "link": "http://www.ubuntu.com/",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "invest-in-bogota",
+    "title": "Invest in Bogota",
+    "tier": "Bronze",
+    "row": 4,
+    "priority": 30,
+    "image": "./img/sponsors/drupalcon/2015-bogota/invest-in-bogota.png",
+    "imageAlt": "Invest in Bogota logo",
+    "link": "http://en.investinbogota.org/",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "esinergia",
+    "title": "esinergia",
+    "tier": "Bronze",
+    "row": 4,
+    "priority": 40,
+    "image": "./img/sponsors/drupalcon/2015-bogota/esinergia.png",
+    "imageAlt": "esinergia logo",
+    "link": "http://esinergia.co/",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "taller",
+    "title": "Taller",
+    "tier": "Bronze",
+    "row": 4,
+    "priority": 50,
+    "image": "./img/sponsors/drupalcon/2015-bogota/taller.png",
+    "imageAlt": "Taller logo",
+    "link": "http://taller.net.br/",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "itelios",
+    "title": "Itelios",
+    "tier": "Bronze",
+    "row": 4,
+    "priority": 60,
+    "image": "./img/sponsors/drupalcon/2015-bogota/itelios.png",
+    "imageAlt": "Itelios logo",
+    "link": "http://www.itelios.com.br",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "four-kitchens",
+    "title": "Four Kitchens",
+    "subtitle": "Lunch Sponsor",
+    "tier": "Module",
+    "row": 5,
+    "priority": 10,
+    "image": "./img/sponsors/drupalcon/2015-bogota/four-kitchens.png",
+    "imageAlt": "Four Kitchens logo",
+    "link": "https://fourkitchens.com/",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "drupalize-me",
+    "title": "Drupalize.Me",
+    "subtitle": "Tote Bags",
+    "tier": "Module",
+    "row": 5,
+    "priority": 20,
+    "image": "./img/sponsors/drupalcon/2015-bogota/drupalize-me.png",
+    "imageAlt": "Drupalize.Me logo",
+    "link": "https://drupalize.me/",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "cellar-door-media",
+    "title": "Cellar Door Media",
+    "subtitle": "Coffee Sponsor",
+    "tier": "Module",
+    "row": 5,
+    "priority": 30,
+    "image": "./img/sponsors/drupalcon/2015-bogota/cellar-door-media.png",
+    "imageAlt": "Cellar Door Media logo",
+    "link": "http://www.cellardoormediagroup.com/",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "commerce-guys",
+    "title": "Commerce Guys",
+    "subtitle": "Attendee Tote Bag Item",
+    "tier": "Module",
+    "row": 5,
+    "priority": 40,
+    "image": "./img/sponsors/drupalcon/2015-bogota/commerce-guys.png",
+    "imageAlt": "Commerce Guys logo",
+    "link": "http://www.commerceguys.com",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "payu",
+    "title": "PayU",
+    "subtitle": "Developer Contest",
+    "tier": "Module",
+    "row": 5,
+    "priority": 50,
+    "image": "./img/sponsors/drupalcon/2015-bogota/payu.png",
+    "imageAlt": "PayU logo",
+    "link": "http://www.payulatam.com/",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "ubuntu-module",
+    "title": "Ubuntu",
+    "subtitle": "Sprint Sponsor",
+    "tier": "Module",
+    "row": 5,
+    "priority": 60,
+    "image": "./img/sponsors/drupalcon/2015-bogota/ubuntu-module.png",
+    "imageAlt": "Ubuntu logo",
+    "link": "http://www.ubuntu.com/",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "bluehost",
+    "title": "Bluehost",
+    "subtitle": "Sprint Sponsor",
+    "tier": "Module",
+    "row": 5,
+    "priority": 70,
+    "image": "./img/sponsors/drupalcon/2015-bogota/bluehost.png",
+    "imageAlt": "Bluehost logo",
+    "link": "http://www.bluehost.com/",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   },
+   {
+    "id": "anexus-it",
+    "title": "Anexus IT",
+    "subtitle": "Keynote Street Team Sponsor",
+    "tier": "Module",
+    "row": 5,
+    "priority": 80,
+    "image": "./img/sponsors/drupalcon/2015-bogota/anexus-it.png",
+    "imageAlt": "Anexus IT logo",
+    "link": "http://www.anexusit.com",
+    "bgStyle": "auto",
+    "aspect": "auto",
+    "enabled": true,
+    "sourceIds": [
+     "latinamerica2015-sponsors"
+    ]
+   }
+  ],
+  "other_urls": [
+   "https://www.drupal.org/association/drupalcon/locations",
+   "https://latinamerica2015.drupal.org/sponsors.html"
+  ],
+  "attendance": {
+   "count": 263,
+   "source": "https://www.drupal.org/association/drupalcon/locations",
+   "capturedAt": "2026-08-17",
+   "sourceIds": [
+    "drupal-locations"
+   ]
+  },
+  "videoPlaylist": "https://www.youtube.com/playlist?list=PLpeDXSh4nHjQUcahLMrBws9OAaNrJf07z",
+  "sources": [
+   {
+    "id": "latinamerica2015-drupal-schedule-html",
+    "kind": "schedule",
+    "url": "https://latinamerica2015.drupal.org/schedule.html",
+    "verifiedAt": "2026-08-23",
+    "verifiedBy": "policy"
+   },
+   {
+    "id": "latinamerica2015-drupal",
+    "kind": "other",
+    "url": "https://latinamerica2015.drupal.org/",
+    "verifiedAt": "2026-08-23",
+    "verifiedBy": "policy"
+   },
+   {
+    "id": "drupal-locations",
+    "kind": "community",
+    "url": "https://www.drupal.org/association/drupalcon/locations",
+    "retrievedAt": "2026-08-17"
+   },
+   {
+    "id": "latinamerica2015-registration",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/registration.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-developer-contest-payu",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/developer-contest-payu.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-keynote-dries-buytaert",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/keynote-dries-buytaert.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-coffee-break-sponsored-cellar-door-media",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/coffee-break-sponsored-cellar-door-media.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-drupal-8-cmi-managed-workflow",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/drupal-8-cmi-managed-workflow.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-understanding-drupal",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/understanding-drupal.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-art-start-how-build-drupalshop-no-money-lots-desire",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/art-start-how-build-drupalshop-no-money-lots-desire.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-devops-por-donde-comenzar",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/devops-por-donde-comenzar.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-lunch-sponsored-four-kitchens",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/lunch-sponsored-four-kitchens.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-getting-content-phone-less-1000ms",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/getting-content-phone-less-1000ms.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-drupal-8-console-scaffolding-module-generator",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/drupal-8-console-scaffolding-module-generator.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-contribuyendo-al-core-en-tiempos-de-drupal-8",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/contribuyendo-al-core-en-tiempos-de-drupal-8.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-drupalorg-2015-whats-coming-next",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/drupalorg-2015-whats-coming-next.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-best-practices-continuous-deployment-drupal",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/best-practices-continuous-deployment-drupal.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-civicrm-overview-and-case-studies",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/civicrm-overview-and-case-studies.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-design-systems-and-drupal",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/design-systems-and-drupal.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-capture-d8-flag",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/capture-d8-flag.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-headless-drupal-now-thing",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/headless-drupal-now-thing.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-buenos-aires-ciudad-abierta-por-default",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/buenos-aires-ciudad-abierta-por-default.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-what-measure-and-why-obtain-best-customer-satisfaction-drupal-support",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/what-measure-and-why-obtain-best-customer-satisfaction-drupal-support.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-el-proceso-del-theming-ui-ux-junto-al-cliente",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/el-proceso-del-theming-ui-ux-junto-al-cliente.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-i-want-it-all-and-i-want-it-now-configuration-management-and-ci",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/i-want-it-all-and-i-want-it-now-configuration-management-and-ci.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-un-mejor-css-planeando-hoy-para-no-sufrir-en-el-futuro",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/un-mejor-css-planeando-hoy-para-no-sufrir-en-el-futuro.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-drupal-post-php-renaissance-world",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/drupal-post-php-renaissance-world.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-drupal-mysql-colombia-beyond-real-life-examples-site-builds",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/drupal-mysql-colombia-beyond-real-life-examples-site-builds.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-keynote-larry-garfield",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/keynote-larry-garfield.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-coffee-break-sponsored-cellar-door-media-0",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/coffee-break-sponsored-cellar-door-media-0.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-d8rules-web-automation-rules-drupal-8",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/d8rules-web-automation-rules-drupal-8.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-drupal-8-multilingual-hands",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/drupal-8-multilingual-hands.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-selling-open-source-philosophy",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/selling-open-source-philosophy.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-designing-drupal-8",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/designing-drupal-8.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-lunch-sponsored-four-kitchens-0",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/lunch-sponsored-four-kitchens-0.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-overview-drupal-8-plugin-system",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/overview-drupal-8-plugin-system.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-persiguiendo-el-unicornio-por-m-s-mujeres-en-tecnolog-a",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/persiguiendo-el-unicornio-por-m%C3%A1s-mujeres-en-tecnolog%C3%ADa.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-choosing-right-frontend-style-guide-workflow-your-project",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/choosing-right-frontend-style-guide-workflow-your-project.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-growing-drupal-based-product-business",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/growing-drupal-based-product-business.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-angularjs-drupal-un-d-o-superher-ico",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/angularjs-drupal-un-d%C3%BAo-superher%C3%B3ico.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-migrating-drupal-8",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/migrating-drupal-8.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-conversion-rate-optimization",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/conversion-rate-optimization.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-setting-reusable-and-durable-drupal-lean-process-factory",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/setting-reusable-and-durable-drupal-lean-process-factory.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-future-commerce-drupal-8-and-beyond",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/future-commerce-drupal-8-and-beyond.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-creating-culture-empowerment",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/creating-culture-empowerment.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-drupal-non-profits-case-study-ojo-al-voto-costa-rica",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/drupal-non-profits-case-study-ojo-al-voto-costa-rica.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-session-seo-drupal",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/session/seo-drupal.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-closing-session",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/closing-session.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-first-time-sprinter-workshop",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/first-time-sprinter-workshop.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-mentored-core-sprint-0",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/mentored-core-sprint-0.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-contribution-sprints",
+    "kind": "sessions",
+    "url": "https://latinamerica2015.drupal.org/contribution-sprints.html",
+    "retrievedAt": "2026-08-25"
+   },
+   {
+    "id": "latinamerica2015-sponsors",
+    "kind": "sponsors",
+    "url": "https://latinamerica2015.drupal.org/sponsors.html",
+    "retrievedAt": "2026-08-25",
+    "notes": "Five tiers (Platinum/Gold/Silver/Bronze/Module); within Module each sponsor also carries what it sponsored (Lunch, Tote Bags, Coffee…), kept as the entry’s subtitle. Every logo <img alt> on the page is empty, so the names were read off the logo images themselves. Ubuntu appears twice, as Bronze and as a Module sprint sponsor — two entries, as placed."
+   }
+  ],
+  "sourceIds": [
+   "latinamerica2015-drupal-schedule-html",
+   "latinamerica2015-drupal"
+  ]
+ },
+ "items": [
+  {
+   "startTime": "2015-02-09T15:00:00Z",
+   "endTime": "2015-02-09T21:00:00Z",
+   "duration": "P360M",
+   "title": "Registration",
+   "location": "Ground Floor 1 - RoyalPark Metrotel Convention Center Hotel",
+   "link": "https://latinamerica2015.drupal.org/registration.html",
+   "track": [],
+   "speakers": [],
+   "full_description": "Registration for the conference will be held in Ground Floor 1 - RoyalPark Metrotel Convention Center Hotel, from 10am-4pm.",
+   "video_url": "",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-registration"
+   ]
+  },
+  {
+   "startTime": "2015-02-09T13:00:00Z",
+   "endTime": "2015-02-09T23:00:00Z",
+   "duration": "P600M",
+   "title": "Developer Contest by PayU",
+   "location": "Royal Park Metrotel Calle 74 # 13-27  Bogotá, Colombia",
+   "link": "https://latinamerica2015.drupal.org/developer-contest-payu.html",
+   "track": [],
+   "speakers": [],
+   "full_description": "Don't miss the Developer Contest by PayU\n\nPayU, the leading online payment platform in Colombia will be hosting a developer contest. Prizes will go to the group of 3 that completes the challenge successfully in the shortest amount of time. Think you've got what it takes to win?\n\nGather up in groups of 3 and register for the contest here [https://docs.google.com/a/payulatam.com/forms/d/1vpKfI8eQqXa3Sb8nCZ4ycmg...](https://docs.google.com/a/payulatam.com/forms/d/1vpKfI8eQqXa3Sb8nCZ4ycmgQ18W4qkWBtIvS8o9jzwU/viewform)\n\nInstructions will be provided on the day of the event.\n\n[](http://www.payulatam.com/)\n\n                     __________________________________________________________\n\nSi eres uno de los asistentes al DrupalCon 2015, te gusta programar y tienes espíritu competitivo, participa en el Developer Contest by PayU.\n\nInscríbete con dos amigos más y participa en grupos de tres desarrolladores por un premio de 800 USD.\n\n[https://docs.google.com/a/payulatam.com/forms/d/1vpKfI8eQqXa3Sb8nCZ4ycmg...](https://docs.google.com/a/payulatam.com/forms/d/1vpKfI8eQqXa3Sb8nCZ4ycmgQ18W4qkWBtIvS8o9jzwU/viewform)\n\n¡Son cupos limitados!\n\nNota: El día del evento te contaremos cuál es el tema del concurso\n\n[](http://www.payulatam.com/)",
+   "video_url": "",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-developer-contest-payu"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T14:00:00Z",
+   "endTime": "2015-02-10T15:15:00Z",
+   "duration": "P75M",
+   "title": "Keynote by Dries Buytaert",
+   "location": "Salon Auditorium - Just Digital",
+   "link": "https://latinamerica2015.drupal.org/session/keynote-dries-buytaert.html",
+   "track": [
+    "Core Conversations"
+   ],
+   "speakers": [
+    "Dries"
+   ],
+   "full_description": "Dries presents his keynote at DrupalCon Latin America!",
+   "video_url": "https://youtu.be/UcSEjzgEBU8",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-keynote-dries-buytaert"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T15:15:00Z",
+   "endTime": "2015-02-10T15:45:00Z",
+   "duration": "P30M",
+   "title": "Coffee Break sponsored by Cellar Door Media",
+   "location": "Exhibit Hall",
+   "link": "https://latinamerica2015.drupal.org/coffee-break-sponsored-cellar-door-media.html",
+   "track": [],
+   "speakers": [],
+   "full_description": "",
+   "video_url": "",
+   "sponsorIds": "",
+   "isAgendaItem": true,
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-coffee-break-sponsored-cellar-door-media"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T15:45:00Z",
+   "endTime": "2015-02-10T16:45:00Z",
+   "duration": "P60M",
+   "title": "Drupal 8 CMI on Managed Workflow",
+   "location": "Salon Auditorium - Just Digital",
+   "link": "https://latinamerica2015.drupal.org/session/drupal-8-cmi-managed-workflow.html",
+   "track": [
+    "Coding and Development"
+   ],
+   "speakers": [
+    "populist",
+    "mbyrnes"
+   ],
+   "full_description": "The Drupal 8 Configuration Management Initiative (CMI) is a straight up game changer for Drupal development and deployment. As much as we all love [doing it live](https://www.youtube.com/watch?v=O_HyZ5aW76c&feature=kp), no longer will this kind of human powered configuration replay in production be necessary. Instead, developers will be able to natively export their configuration to code and deploy that configuration to production using the CMI tools.\n\nThis session will feature both a basic overview for how CMI will work in Drupal 8 and an advanced overview of how to use CMI with version control as part of a managed development -> testing -> production workflow. Forget [the pain that was drush fe and drush fu-all](https://drupal.org/node/960926). Come join Matt Cheney from Pantheon and Molly Byrnes from Phase 2 in embracing modern configuration management in all its glory.",
+   "video_url": "https://youtu.be/RIPN-d58yrg",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-drupal-8-cmi-managed-workflow"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T15:45:00Z",
+   "endTime": "2015-02-10T16:45:00Z",
+   "duration": "P60M",
+   "title": "Understanding Drupal",
+   "location": "Salon Arrayan - SeeD",
+   "link": "https://latinamerica2015.drupal.org/session/understanding-drupal.html",
+   "track": [
+    "Site Building"
+   ],
+   "speakers": [
+    "tucho"
+   ],
+   "full_description": "Drupal is an extremely flexible system. To achieve this, various layers of abstractions are built into it. Many concepts were create to explain these abstractions. Unfortunately, they are not always intuitive for someone just starting with drupal. For example, the ubiquitous word 'node' does not represent a point in a network nor a server side programming language.\n\nHave you ever asked yourself any of these questions?\n\n* How is content entered and administered?\n\n* What is a node?\n\n* What are entities?\n\n* What is the difference between bundles and content types?\n\n* What is a block and what can I do with it?\n\n* How are users and permissions managed?\n\n* What is a module and its purpose?\n\n* What is a theme and how can it change the look and feel of my website?\n\n* How can I create the navigation of my website?\n\n* I'm not a fisherman. Why do I need hooks?\n\n* Why a kitten passes away every time I make a quick fix in the downloaded code? How can I prevent that?\n\nA new version of drupal is soon to be released. It will ship with lots of cool new features and, as you might imagine, it will bring new concepts and more questions for beginners. For example:\n\n* What is the difference between content and configuration entities?\n\n* What is the difference between state and configuration?\n\nThe drupal community don't want new adopters and prospect contributors go away for not understanding our parlance. Come to this session and figure out what is drupal. Don't worry, it won't be a theoretical, boring talk. It will be a joyful conversation with lots of examples to help you understand drupal and why it is so powerful.\n\nSee you there! :D\n\nThis session was inspired by Lullabot's documentary [Understanding Drupal](https://drupalize.me/videos/understanding-drupal).\n\nP.D.: The concepts that will be explained are not bound to a specific drupal version. When talking about drupal 8 specific features a note will be given.",
+   "video_url": "https://youtu.be/eCe9omfW9bU",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-understanding-drupal"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T15:45:00Z",
+   "endTime": "2015-02-10T16:45:00Z",
+   "duration": "P60M",
+   "title": "The Art of Start - How to build a DrupalShop with no money but with a lots of desire.",
+   "location": "Salon Ceiba - Acquia",
+   "link": "https://latinamerica2015.drupal.org/session/art-start-how-build-drupalshop-no-money-lots-desire.html",
+   "track": [
+    "Drupal Business"
+   ],
+   "speakers": [
+    "Fred Ferrer",
+    "rafaelcaceres"
+   ],
+   "full_description": "Start a business is tricky. Start from nothing is a big challenge but with a culture of innovation, continuous improvement and respecting people anyone can do it.\n\nMotivate and inspire people who intend to start or who is already on the road for some time, this is the main goal.\n\nWe want  to share a bit of experience in creating a Drupal Shop without any financial investment, what were the strategies, crucial decisions, tense moments and great achievements.\n\nHere goes the topics we are going to cover in this session:\n\nLean Startups\n\nBusiness Model Canvas\n\nLean and Agile Culture\n\nManagement 3.0\n\nValidation Board\n\nCafé Kaizen\n\nInnovation\n\nDigital Marketing\n\nContent Marketing\n\nMotivation\n\nInspiration",
+   "video_url": "https://youtu.be/HsH0Ib8sEo4",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-art-start-how-build-drupalshop-no-money-lots-desire"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T15:45:00Z",
+   "endTime": "2015-02-10T16:45:00Z",
+   "duration": "P60M",
+   "title": "DevOps, por donde comenzar?",
+   "location": "Salon Clavelles - Softlite Solutions",
+   "link": "https://latinamerica2015.drupal.org/session/devops-por-donde-comenzar.html",
+   "track": [
+    "DevOps"
+   ],
+   "speakers": [
+    "sebas5384"
+   ],
+   "full_description": "The principles of Devops culture are based in the Lean thinking, the art of identify and know how to find waste, so now a days, in order to delivery high quality software Devops is a must, and needs to grow into your organization increasing performance. And thanks to Gene Kim study ( [video](http://www.agilealliance.org/resources/learning-center/keynote-why-everyone-needs-devops-now-fourteen-year-study-high-performing-it-organizations) ), that’s a fact.\n\nNot just thinking about software here, we need to consider the human brains making that are doing the same thing, again, and this time, … hopefully right.\n\nWe need disciplines and tools to automate processes like testing, deploying and why not, providing your entire local and remote infrastructure, to ensure quality.\n\nBut!, finding the right ones to start with, can hinder your journey to implement them. Because they aren’t for all the cases, like, for example, maybe Jenkins (can be some other CI or CD tool) isn't fit for your organization's yet, … or not, you’ll see.\n\nSo if you are getting started in this Devops world, don’t worry about the many big tools, focus in the culture, and I’ll be showing you how to install and use some easy tools to start get out going right away, like we did.\n\n**Some of those tools are:**\n\n- Services with deploy workflows, like Pantheon, BeanstalkApp, etc..\n\n- Hipchat, Slack or/and IRC clients.\n\n- **[Ubuntu Juju](https://juju.ubuntu.com)**, using the [Drupal charm.](https://github.com/sebas5384/charm-drupal) ( [see this](https://twitter.com/sebas5384/status/460950362891907072) )\n\n- Vagrant and Ansible.\n\n- Linux containers.\n\nAlso I’ll talk about my vision of a future, where having a top notch environment with great performance for a Drupal project, is not only achieved through specialized hosting services. We can just share, and contribute, using all our knowledge and make open source tools that help us deliver easy and fast reliable working software to our clients.\n\nJust a preview!",
+   "video_url": "https://youtu.be/qSELC0t_dLA",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-devops-por-donde-comenzar"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T16:45:00Z",
+   "endTime": "2015-02-10T18:00:00Z",
+   "duration": "P75M",
+   "title": "Lunch sponsored by Four Kitchens",
+   "location": "Exhibit Hall",
+   "link": "https://latinamerica2015.drupal.org/lunch-sponsored-four-kitchens.html",
+   "track": [],
+   "speakers": [],
+   "full_description": "",
+   "video_url": "",
+   "sponsorIds": "",
+   "isAgendaItem": true,
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-lunch-sponsored-four-kitchens"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T18:00:00Z",
+   "endTime": "2015-02-10T19:00:00Z",
+   "duration": "P60M",
+   "title": "Getting Content to a Phone in less than 1000ms",
+   "location": "Salon Arrayan - SeeD",
+   "link": "https://latinamerica2015.drupal.org/session/getting-content-phone-less-1000ms.html",
+   "track": [
+    "Frontend"
+   ],
+   "speakers": [
+    "iamcarrico"
+   ],
+   "full_description": "We must get the content to the user, and we must do it fast. In a world constantly moving, getting a site loaded in under 1000ms is key to keeping users on your site, and engaged with your content. This is not a new idea, and the 1000ms barrier has been written about, presented, talked about in web circles for a while now--- but how do we actually do it?\n\nWorking on a Drupal site, how can we decrease bloat on a page, to get our site delivered to the user quickly and efficiently. What steps can we take to decrease that first hit, so a page is available as soon as possible, especially for a mobile user.\n\nThis talk will go over the tech, and the basics of the TCP protocol so you understand where the lag is in presenting a web page. It will describe the modules any frontend developer can use to help in presenting their content, and frontend techniques that can be applied by advanced themes to make your site the fastest on the net.",
+   "video_url": "https://youtu.be/8YQpe7n4p7U",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-getting-content-phone-less-1000ms"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T18:00:00Z",
+   "endTime": "2015-02-10T19:00:00Z",
+   "duration": "P60M",
+   "title": "Drupal 8 Console (scaffolding module generator)",
+   "location": "Salon Auditorium - Just Digital",
+   "link": "https://latinamerica2015.drupal.org/session/drupal-8-console-scaffolding-module-generator.html",
+   "track": [
+    "Coding and Development"
+   ],
+   "speakers": [
+    "jmolivas",
+    "dmouse"
+   ],
+   "full_description": "Every modern framework nowadays provides a scaffolding tool code generator for speeding up the process of starting a new project and avoid early repetitive tasks.\n\nThe purpose of this project is to leverage the Symfony Console Component to provide a CLI tool to automate the creation of drupal 8 modules by generating the directory structure for a module, routing, controllers, forms, services, plugins and required configuration files.\n\nIt supports adding services using Dependency Injection on class generation.\n\nWhat is out of the box?\n\nGenerates module and info files.\n\nGenerates PSR-4 compliant directory structure for a module.\n\nRegister routes on YML files and map to PHP Classes (controller, form, service).\n\nCreate classes adding namespaces, uses and also the extend and implements keywords when required.\n\nSupport adding services using Dependency Injection on class generation.\n\nDuring this session you will learn about the concepts and components introduced on Drupal 8 and by the end you will have the basic knowledge required for writing a Drupal 8 module.\n\nSome topics that will be mentioned on this session\n\nHTTP Request/Response\n\nComposer\n\nAnnotations\n\nNamespaces\n\nServices\n\nService Container\n\nDependency Injection\n\nRouting\n\nController\n\nThis session will include a demo of [https://drupal.org/project/console](https://drupal.org/project/console) (scaffolding module generator)\n\nWho will benefit of using an automatic code module generator ?\n\nModule Maintainers & Developers\n\nCreate & Migrate contributed modules to Drupal 8.\n\nDrupal Trainers & Consultors\n\nTrain developers on Drupal 8.\n\nDrupal Shops\n\nReduce module development time for Drupal 8.",
+   "video_url": "https://youtu.be/PZZ3M9D7oeQ",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-drupal-8-console-scaffolding-module-generator"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T18:00:00Z",
+   "endTime": "2015-02-10T19:00:00Z",
+   "duration": "P60M",
+   "title": "Contribuyendo al core en tiempos de Drupal 8",
+   "location": "Salon Clavelles - Softlite Solutions",
+   "link": "https://latinamerica2015.drupal.org/session/contribuyendo-al-core-en-tiempos-de-drupal-8.html",
+   "track": [
+    "Core Conversations"
+   ],
+   "speakers": [
+    "develCuy"
+   ],
+   "full_description": "([english below](contribuyendo-al-core-en-tiempos-de-drupal-8.html#english))\n\nDe lo más sublime, loable y gratificante, es contribuir al core de Drupal. Aunque, siendo bueno el propósito, es siempre una causa en cuya lucha muy pocos han podido militar.\n\n\"Es culpa del tiempo\" - dicen algunos - \"cruento, pasa y no me deja contribuir\". ¿No será que culpar al tiempo es solo una forma de engañarnos?\n\nCreo mas bien, que los \"Latinos Drupaleros\" no nos hemos dado cuenta aún, que estamos en la misma orquesta, tratando de tocar una misma canción que solo pocos conocen, aunque bien han tratado de enseñarnos los pocos entendidos.\n\n\"¡Y acaso no hemos tocado la canción de los Meetups, Camps, Summits y hasta Drupalcon!\" - dicen las voces de los mentores de la comunidad - ¡Claro que sí! ¡Mas acaso no hace falta que aportemos nuestras lineas al core de Drupal! \"Sí... pero el tiempo, cruento, pasa y no me deja contribuir...\" - repite un murmullo con voz quebradiza, como canción triste que todos saben y nadie quiere cantar.\n\n¡Pues cambiemos la música!\n\n\"Es hora de contribuir, Es hora de contribuir, ...\" - dice el coro\n\nAhora sí ¿te unes a la fiesta? ¡Pues ven a esta charla y vamos todos a codear!\n\n-- En honor a el Gabo y su libro \"El amor en los tiempos del cólera\".\n\nENGLISH\n\nContributing to core in times of Drupal 8\n\nIt is sublime, praiseworthy and rewarding to contribute to Drupal core. Although, being a good purpose, it is always a cause that not everyone is fighting.\n\n...(to be translated)...\n\nSo let's change the song!\n\n\"It's time to contribute, it's time to contribute, ...\" - chorus says\n\nWould you like to join the party? ¡So come to this session and let's code together!",
+   "video_url": "https://youtu.be/C5EX36vzvNU",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-contribuyendo-al-core-en-tiempos-de-drupal-8"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T18:00:00Z",
+   "endTime": "2015-02-10T19:00:00Z",
+   "duration": "P60M",
+   "title": "Drupal.org in 2015: What's coming next?",
+   "location": "Salon Ceiba - Acquia",
+   "link": "https://latinamerica2015.drupal.org/session/drupalorg-2015-whats-coming-next.html",
+   "track": [
+    "Core Conversations"
+   ],
+   "speakers": [
+    "Mixologic"
+   ],
+   "full_description": "Over the past few months the Drupal Association's Tech team has been working closely with the Drupal.org Content, Software and Infrastructure Working Groups to come up with a list of priorities for Drupal.org for next year. Come and find out what is coming up for the website in 2015.",
+   "video_url": "https://youtu.be/EQePbVvBtHo",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-drupalorg-2015-whats-coming-next"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T19:15:00Z",
+   "endTime": "2015-02-10T20:15:00Z",
+   "duration": "P60M",
+   "title": "Best practices for Continuous Deployment with Drupal.",
+   "location": "Salon Arrayan - SeeD",
+   "link": "https://latinamerica2015.drupal.org/session/best-practices-continuous-deployment-drupal.html",
+   "track": [
+    "DevOps"
+   ],
+   "speakers": [
+    "revagomes"
+   ],
+   "full_description": "Drupal has many things that make our day-to-day much easier and allows us to focus our efforts in innovation and in what is valuable to the customer. Nevertheless before these features are on line to the public we need to do something that still scares many Drupalers. The Deployment process.\n\nAs we know many of the settings are stored in the database, the replication process of these settings to other environments becomes an adventure for many people that doesn’t have a well structured deployment work flow.\n\nThis session aims to present good practices and some of the most used modules and techniques for the implementation of the continuous deployment with Drupal.\n\nHere is the topics that will be addressed in this session:\n\n- Continuous Deployment\n\n- Continuous Integration-\n\n- Git,\n\n- Code Driven Development\n\n- Deployment related modules\n\n- Community initiatives to solve the common problems related to Deploy.\n\n[https://docs.google.com/a/taller.net.br/presentation/d/1tL_3qevNT8kEmVBn...](https://docs.google.com/a/taller.net.br/presentation/d/1tL_3qevNT8kEmVBn0JwVF_ynsIfLgjWbmZcQtkjRAv0/edit?usp=sharing)",
+   "video_url": "https://youtu.be/xIV-ZzkHLTc",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-best-practices-continuous-deployment-drupal"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T19:15:00Z",
+   "endTime": "2015-02-10T20:15:00Z",
+   "duration": "P60M",
+   "title": "CiviCRM Overview and Case Studies",
+   "location": "Salon Clavelles - Softlite Solutions",
+   "link": "https://latinamerica2015.drupal.org/session/civicrm-overview-and-case-studies.html",
+   "track": [
+    "Case Studies"
+   ],
+   "speakers": [
+    "Slovak"
+   ],
+   "full_description": "Need a solution for a professional society, membership-driven association, or a non-profit organization that handles contact management, membership renewals, bulk email, event registration, and more?\n\nCiviCRM is a web-based, open source, Constituent Relationship Management (CRM) software for non-profit and other civic-sector organizations. CiviCRM integrates easily with Drupal and together they provide a robust feature set within one integrated solution for contact management, fundraising, event management, member management, mass e-mail marketing, peer-to-peer campaigns, case management, and much more.\n\nLearn about the core modules, functionality, extensibility, and out-of-the-box configuration. Focus is on getting the most functionality without lots of investment.",
+   "video_url": "https://youtu.be/dVMafpVMBXg",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-civicrm-overview-and-case-studies"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T19:15:00Z",
+   "endTime": "2015-02-10T20:15:00Z",
+   "duration": "P60M",
+   "title": "Design Systems and Drupal",
+   "location": "Salon Auditorium - Just Digital",
+   "link": "https://latinamerica2015.drupal.org/session/design-systems-and-drupal.html",
+   "track": [
+    "Frontend"
+   ],
+   "speakers": [
+    "Crell"
+   ],
+   "full_description": "Modern Web design demands visual systems that ensure content is delivered to our myriad devices, from smartphones to tablets to desktop displays and beyond, in usable ways. It requires thinking in terms of content that gets presented, often in a variety of different ways, rather than simply presentation.\n\nDrupal has for years handled content independent of a particular design, in a sort of platonic content ideal.  That makes designing for a Drupal development project is a perfect fit  for design systems-thinking and results in greater efficiency and better quality. Using a smart design systems approach paired with good content strategy results in a project that fits amazingly well with Drupal's own design and capabilities... if we can recognize how to unify them.\n\nIn this session, Larry Garfield, Palantir's Senior Architect and Community Lead, will provide practical examples for how modern, modular design systems and practices can map directly to Drupal’s Views module, view modes, image styles, panels and other common site building tools. You’ll walk away with information that will help you leverage Drupal’s strengths through leading edge Web design, to see design systems, content strategy, and Drupal as a unified worldview that results in better sites, faster, and with more consistency.\n\nSlides are available here: [http://www.palantir.net/presentations/dcbogota2015-design-systems/](http://www.palantir.net/presentations/dcbogota2015-design-systems/)",
+   "video_url": "https://youtu.be/7-BZTvFXETg",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-design-systems-and-drupal"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T19:15:00Z",
+   "endTime": "2015-02-10T20:15:00Z",
+   "duration": "P60M",
+   "title": "Capture the (D8) Flag",
+   "location": "Salon Ceiba - Acquia",
+   "link": "https://latinamerica2015.drupal.org/session/capture-d8-flag.html",
+   "track": [
+    "Coding and Development"
+   ],
+   "speakers": [
+    "socketwench"
+   ],
+   "full_description": "We've all heard about the big changes coming in Drupal 8. And if you maintain a module, you're wondering just how complicated it's going to be to update. Is now even the right time to update? Example modules like Pants can help, but what does a \"real\" module look like on Drupal 8?\n\nIn this session, we'll discuss the tasks, challenges, and choices that you'll encounter when porting your module to Drupal 8. You'll get a broad understanding of the porting process as we touch many of Drupal 8's new and updated APIs. You'll see how Flag module was rebuilt and redesigned to work using 8's updated Entity system, use of plugins to provide for further expandability, and other tips and tricks you can use!\n\nThis session will be technical and assumes you are familiar with Drupal 7 development concepts and have a high level understanding of object oriented programming.",
+   "video_url": "https://youtu.be/i529o9LQu_I",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-capture-d8-flag"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T20:45:00Z",
+   "endTime": "2015-02-10T21:45:00Z",
+   "duration": "P60M",
+   "title": "Headless Drupal is now \"a thing\"",
+   "location": "Salon Auditorium - Just Digital",
+   "link": "https://latinamerica2015.drupal.org/session/headless-drupal-now-thing.html",
+   "track": [
+    "Coding and Development"
+   ],
+   "speakers": [
+    "omers"
+   ],
+   "full_description": "Actualmente el poder de Drupal en el mercado esta creciendo para aplicaciones robustas, debido al gran poder de escalabilidad que nos ofrece la herramienta.\n\nLos sistemas hoy en día, cada vez son mas complejos, las herramientas que existen cada vez son mas, la evolución de Drupal ha llegado a formar parte de grandes proyectos, donde viene a convertirse en la pieza mas importante del motor en nuestras aplicaciones.\n\nPor otro lado tenemos, estas nuevas herrmientas front-end sexy's que cada vez toman mas importancia en el día a día de los desarrolladores, por el gran poder de escalabilidad y simplicidad que tienen, ademas que no necesariamente necesitamos Drupal para saber usar todas estas herramientas y podemos usar la que mas nos guste.\n\nEstos puntos anteriores dan origen al tema que esta de moda en estos dias llamado \"Headless Drupal\", tema del cual discutiremos en esta charla, le herramienta que elegiremos en este caso es AngularJS y estos son los puntos a discutir:\n\n- La Actualidad Drupal\n\n- Tendencias\n\n- Lo de Hoy (Sexy Front-end Tools)\n\n- Headless Drupal\n\n- Angular\n\n- Drupal 7\n\n- Drupal 8\n\nEn esta charla aprenderemos el tipo de integraciones de las que Drupal es capaz de realizar en soluciones complejas, con un gran equipo atacando el mismo problema, ademas de como puede ayudar en la agilidad al realizar nuestros proyectos y las ventajas que nos ofrece en cuanto al ahorro de recursos en nuestros negocios, veremos como preparar Drupal para trabajar de esta forma, e inclusive hacer un pequeño modulo con Drupal 8 para trabajar nuestro headless.\n\nLinks\n\n[https://prague2013.drupal.org/bof/decoupling-drupals-frontend](https://prague2013.drupal.org/bof/decoupling-drupals-frontend)\n\n[http://dublin2013.drupaldays.org/program/sessions/decoupling-drupal-and-...](http://dublin2013.drupaldays.org/program/sessions/decoupling-drupal-and-consuming-symfony2-javascript-or-unicorns)\n\n[https://www.getpantheon.com/blog/headless-websites-headless-drupal-options](https://www.getpantheon.com/blog/headless-websites-headless-drupal-options)\n\n[https://www.getpantheon.com/blog/headless-websites-whats-big-deal](https://www.getpantheon.com/blog/headless-websites-whats-big-deal)\n\n[https://groups.drupal.org/headless-drupal](https://groups.drupal.org/headless-drupal)",
+   "video_url": "https://youtu.be/RtjgXu_D_90",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-headless-drupal-now-thing"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T20:45:00Z",
+   "endTime": "2015-02-10T21:45:00Z",
+   "duration": "P60M",
+   "title": "Buenos Aires - Ciudad abierta por default",
+   "location": "Salon Clavelles - Softlite Solutions",
+   "link": "https://latinamerica2015.drupal.org/session/buenos-aires-ciudad-abierta-por-default.html",
+   "track": [
+    "Case Studies"
+   ],
+   "speakers": [
+    "daniel.abadie"
+   ],
+   "full_description": "Buenos Aires es un caso de éxito en la region implementando Drupal como su principal plataforma de gobierno digital\n\nEn esta sesión vamos a repasar diferentes productos y servicios creados por equipos internos de gobierno\n\n- Arquitectura de servicios\n\n- Estrategia de Migración y Contenidos\n\n- Portal de Gobierno [www.buenosaires.gob.ar](http://www.buenosaires.gob.ar)\n\n- Portal de Turismo [www.buenosaires.gob.ar/turismo](http://www.buenosaires.gob.ar/turismo)\n\n- Portal de Empleo creado en Drupal trabajo.buenosaires.gob.ar\n\n- ID Digital del Ciudadano y Dashboard Ciudadano\n\n- Distro Drupal de Gobierno y para Gobiernos",
+   "video_url": "https://youtu.be/XiAfo0U9gYw",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-buenos-aires-ciudad-abierta-por-default"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T20:45:00Z",
+   "endTime": "2015-02-10T21:45:00Z",
+   "duration": "P60M",
+   "title": "What to measure and why to obtain the best customer satisfaction in Drupal support",
+   "location": "Salon Ceiba - Acquia",
+   "link": "https://latinamerica2015.drupal.org/session/what-measure-and-why-obtain-best-customer-satisfaction-drupal-support.html",
+   "track": [
+    "Drupal Business"
+   ],
+   "speakers": [
+    "akucharski"
+   ],
+   "full_description": "Not everything that can be counted counts, and not everything that counts can be counted. - Albert Einstein, Physicist\n\nThis is a business session that will reflect on our drive towards understanding what should be measured and why as a tool to improving our financial performance and client satisfaction. We start at looking at many different ways to measure project progress, support SLAs developer performance, team performance, company performance and client satisfaction. We will discuss the many different metrics, how they are used and what are their outcomes. No measures will be spared, progress, efficiency, effectiveness, response time, resolution, costs, productivity, utilization, workload, employee satisfaction, customer satisfaction.  We will examine the many possibilities of measurement and the measures we find valuable.\n\nWhat you will learn:\n\n - different ways to measure company performance\n\n - different ways to measure support & operations\n\n - ways to measure customer satisfaction\n\nWho should attend:\n\n - managers\n\n - project managers\n\n - team leads\n\n - developers",
+   "video_url": "https://youtu.be/JYsjPlvt794",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-what-measure-and-why-obtain-best-customer-satisfaction-drupal-support"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T20:45:00Z",
+   "endTime": "2015-02-10T21:45:00Z",
+   "duration": "P60M",
+   "title": "El proceso del theming, UI & UX junto al cliente.",
+   "location": "Salon Arrayan - SeeD",
+   "link": "https://latinamerica2015.drupal.org/session/el-proceso-del-theming-ui-ux-junto-al-cliente.html",
+   "track": [
+    "Frontend"
+   ],
+   "speakers": [
+    "betoquiroga"
+   ],
+   "full_description": "Cuando iniciamos un proyecto de pequeño o gran tamaño lo que más nos puede dificultar el proceso es una buena relación con el cliente.\n\nY a la hora de empezar a estructurar el aspecto visual de nuestro proyecto (theming para nosotros) cómo podemos de una manera correcta incluir al cliente como nuestro mejor aliado a la hora de procesar sus ideas? Que exactamente está pensando el cliente?\n\nSerá que los diseñadores, maquetadores, themers están realmente tan locos que no pueden contentar al cliente? Un wireframe, un mockup,  el diseño, el theming.  Que esta no sea una charla normal,  veamos casos particulares de como hacer que el cliente se involucre en el equipo de desarrollo cómo el mejor aliado y no como alguien que quisieramos evitar.\n\nCuántos no dijimos la frase \"Ni el cliente sabe lo que quiere, menos lo voy a saber yo\". Veamos como llevar esa frase a un proceso fluido, ameno y que dé como resultado un producto bello en todo aspecto. Drupal nos ofrece todo para poder contentar a cualquier tipo de clientes con un UI y UX de primera, así que analicemos casos de éxito en este aspecto.",
+   "video_url": "https://youtu.be/fHC7FTz4qAo",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-el-proceso-del-theming-ui-ux-junto-al-cliente"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T22:00:00Z",
+   "endTime": "2015-02-10T23:00:00Z",
+   "duration": "P60M",
+   "title": "I Want it All and I Want it Now: Configuration Management and CI",
+   "location": "Salon Arrayan - SeeD",
+   "link": "https://latinamerica2015.drupal.org/session/i-want-it-all-and-i-want-it-now-configuration-management-and-ci.html",
+   "track": [
+    "DevOps"
+   ],
+   "speakers": [
+    "dobrzyns"
+   ],
+   "full_description": "How fast can you get all the changes to production? Theoretically, in only the time necessary to deploy the code. How often though do pushes turn into nail biting, hair pulling, obscenity screaming, hours-long events? How often does one hear, “But it works on my machine!” Nail biting, hair pulling, hour-long pushes, be gone! Let the excuse “it worked on my machine” ring no more!\n\nIt takes time to develop the tools for configuration management and CI. Switching midstream, especially for a busy development shop is hard. Let Promet (through their Build Manager) share their experiences, the tools they use, and the open source tools they have developed -- all to make development and deployments easier for you!\n\nThis session will cover:\n\n- Why configuration management and CI matter (and make your life easier)\n\n- Automated testing\n\n- How to get the process for change rolling\n\n- Tools for configuration management and CI\n\nIntended Audience:\n\n- Managers\n\n- Developers\n\n- DevOpsers",
+   "video_url": "https://youtu.be/s6JVUA3tatc",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-i-want-it-all-and-i-want-it-now-configuration-management-and-ci"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T22:00:00Z",
+   "endTime": "2015-02-10T23:00:00Z",
+   "duration": "P60M",
+   "title": "Un mejor CSS, planeando hoy para no sufrir en el futuro.",
+   "location": "Salon Ceiba - Acquia",
+   "link": "https://latinamerica2015.drupal.org/session/un-mejor-css-planeando-hoy-para-no-sufrir-en-el-futuro.html",
+   "track": [
+    "Frontend"
+   ],
+   "speakers": [
+    "jleiva"
+   ],
+   "full_description": "No importa el tamaño del proyecto en el que estemos trabajando, desgraciadamente siempre es posible terminar con CSS poco mantenible, difícil de debuggear y en el que repetimos una y otra vez las mismas reglas.\n\nEl objetivo de esta charla es, que nuestro “yo” del futuro no nos odie ;)\n\nLa sesión incluye temas como:\n\n- Como organizar nuestro CSS/Sass\n\n- La idea de componentes en CSS\n\n- CSS naming conventions\n\n- Crear layouts y componentes reutilizables con Views y Display Suite.\n\n- Extra tips, Grunt JS para que nuestros Sass sea más limpio\n\nSlides: [http://www.slideshare.net/leivajd/planeand](http://www.slideshare.net/leivajd/planeand)\n\nEgo title\n\nJose Leiva, Front-End Developer en [Backcountry.com](http://www.backcountry.com/). He hablado en diferentes conferencias sobre CSS, Sass y Drupal Theming. Durante 4 años he trabajado para diferentes Drupal Shop en Costa Rica como Drupal Themer.",
+   "video_url": "https://youtu.be/VTCUnGmijDQ",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-un-mejor-css-planeando-hoy-para-no-sufrir-en-el-futuro"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T22:00:00Z",
+   "endTime": "2015-02-10T23:00:00Z",
+   "duration": "P60M",
+   "title": "Drupal in the Post-PHP-Renaissance World",
+   "location": "Salon Clavelles - Softlite Solutions",
+   "link": "https://latinamerica2015.drupal.org/session/drupal-post-php-renaissance-world.html",
+   "track": [
+    "Core Conversations"
+   ],
+   "speakers": [
+    "EclipseGc"
+   ],
+   "full_description": "As the PHP renaissance continues to change how developers work with PHP, Drupal has made significant strides toward adopting PHP’s new best practices in both code and interoperability. New groups focussed on the interoperability of disparate PHP projects have begun to get traction producing such standards as PSR-0 and PSR-4 while others work to model a reusable request/response layer. The interoperability awareness of PHP projects and frameworks has never been higher, and projects working to adopt and contribute to that interoperable future have an opportunity to contribute to the future standards of PHP in an unprecedented way.\n\nDrupal carries with it a significant existing install base, and componentization could lead to use in non-Drupal installs. Formally componentizing Drupal’s existing code base further and making individual components available to the non-Drupal world will spread our influence far and wide. In this talk I’ll elaborate on:\n\n- Building PHP Components\n\n- Componentizing Drupal\n\n- The future of modules\n\n- Component Interoperability\n\n- Stack PHP & PHP FIG\n\n- Expanding Drupal’s reach into the 82% of the web that is run by PHP",
+   "video_url": "https://youtu.be/ParWErP0hSI",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-drupal-post-php-renaissance-world"
+   ]
+  },
+  {
+   "startTime": "2015-02-10T22:00:00Z",
+   "endTime": "2015-02-10T23:00:00Z",
+   "duration": "P60M",
+   "title": "Drupal + MySQL in Colombia & beyond: real life examples of Site Builds",
+   "location": "Salon Auditorium - Just Digital",
+   "link": "https://latinamerica2015.drupal.org/session/drupal-mysql-colombia-beyond-real-life-examples-site-builds.html",
+   "track": [
+    "Site Building"
+   ],
+   "speakers": [
+    "monito"
+   ],
+   "full_description": "We all know that many of the highest traffic websites around the world are powered by Drupal + MySQL.  Latin America is not the exception - there are a variety of success stories of high traffic websites using both technologies. In this session we will review real life examples of architectures and best practices behind these sites, which are able to process thousands of requests per second - in Colombia and beyond.",
+   "video_url": "https://youtu.be/BVPrQ9YWHYA",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-drupal-mysql-colombia-beyond-real-life-examples-site-builds"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T14:00:00Z",
+   "endTime": "2015-02-11T15:15:00Z",
+   "duration": "P75M",
+   "title": "Keynote by Larry Garfield",
+   "location": "Salon Auditorium - Just Digital",
+   "link": "https://latinamerica2015.drupal.org/session/keynote-larry-garfield.html",
+   "track": [
+    "Core Conversations"
+   ],
+   "speakers": [
+    "Crell"
+   ],
+   "full_description": "",
+   "video_url": "https://youtu.be/-lLILaIZr44",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-keynote-larry-garfield"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T15:15:00Z",
+   "endTime": "2015-02-11T15:45:00Z",
+   "duration": "P30M",
+   "title": "Coffee Break sponsored by Cellar Door Media",
+   "location": "Exhibit Hall",
+   "link": "https://latinamerica2015.drupal.org/coffee-break-sponsored-cellar-door-media-0.html",
+   "track": [],
+   "speakers": [],
+   "full_description": "",
+   "video_url": "",
+   "sponsorIds": "",
+   "isAgendaItem": true,
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-coffee-break-sponsored-cellar-door-media-0"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T15:45:00Z",
+   "endTime": "2015-02-11T16:45:00Z",
+   "duration": "P60M",
+   "title": "#d8rules - Web-automation with Rules in Drupal 8",
+   "location": "Salon Auditorium - Just Digital",
+   "link": "https://latinamerica2015.drupal.org/session/d8rules-web-automation-rules-drupal-8.html",
+   "track": [
+    "Coding and Development"
+   ],
+   "speakers": [
+    "dasjo"
+   ],
+   "full_description": "The #d8rules initiative works on porting the Rules module to Drupal 8. In this session we will learn how to upgrade our Drupal 7 modules that integrate with Rules to Drupal 8.\n\n* Applying new architectural patterns in Drupal 8\n\n* Understanding the Core Plug-in & Context systems\n\n* CMI: Configuration entities and YAML files\n\n* Rules API Changes\n\n* Typed data & Entity API changes\n\n* Using Rules Action, Condition & Event APIs\n\n* Embedding reusable components: Use rules conditions in the Blocks UI\n\n* Contributing to Rules in Drupal 8\n\nThe session will be a great case study for people familiar with basic Drupal development concepts eager to jump into developing for Drupal 8. As Rules tries to leverage best-practices as much as possible, it is a great starting point to learn all the new things.\n\nSlides:\n[http://dasjo.at/d8rules-presentation-february-2015](http://dasjo.at/d8rules-presentation-february-2015)",
+   "video_url": "https://youtu.be/P3Jq7NUWv8I",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-d8rules-web-automation-rules-drupal-8"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T15:45:00Z",
+   "endTime": "2015-02-11T16:45:00Z",
+   "duration": "P60M",
+   "title": "Drupal 8 multilingual hands-on",
+   "location": "Salon Ceiba - Acquia",
+   "link": "https://latinamerica2015.drupal.org/session/drupal-8-multilingual-hands.html",
+   "track": [
+    "Site Building"
+   ],
+   "speakers": [
+    "YesCT"
+   ],
+   "full_description": "[Slides (google presentation)](https://docs.google.com/presentation/d/1rHtwt3O_QWvd0d1kETp7vULDm7P8ksjh4dCJwuY0c4A/edit#slide=id.g43698103a_35)\n\n[handout (google doc)](https://bit.ly/d8mi-lab-handout) or [handout (pdf)](http://yesct.net/sites/default/files/d8mi-lab.pdf)\n\nOver a thousand people participated in the issues around improving multilingual features and APIs in Drupal 8 for the past three years. There are around a thousand issues, most of which are resolved in this initiative as of this submission making Drupal 8 a truly outstanding release for everybody looking to create even single language non-English sites but especially those making multilingual sites. Although there will surely be contributed modules useful to round out multilingual sites in Drupal 8, there is support for way more than there was in Drupal 7 core and even if you add in all available contributed modules - and with less code and more unified approaches.\n\nThis lab aims to provide a hands-on way showing you around all the great improvements and gives tips as to how to best utilize the new solutions. We will also talk about where contributed modules will still be needed.\n\nThe ideal attendee at this session has some experience in Drupal 6 or 7 foreign language and/or multilingual site building, however those who have no experience in foreign/multilingual site building will also get a lot out of it.\n\nWe will continue in the big exhibit hall room at 2:15, near the mentor table.",
+   "video_url": "https://youtu.be/yHDQJ-ENv6M",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-drupal-8-multilingual-hands"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T15:45:00Z",
+   "endTime": "2015-02-11T16:45:00Z",
+   "duration": "P60M",
+   "title": "Selling the open-source philosophy",
+   "location": "Salon Arrayan - SeeD",
+   "link": "https://latinamerica2015.drupal.org/session/selling-open-source-philosophy.html",
+   "track": [
+    "Drupal Business"
+   ],
+   "speakers": [
+    "handrus",
+    "larruda"
+   ],
+   "full_description": "This talk consolidates positive experiences in the inclusion of the open source philosophy (not only the open code) in proposals to big companies.\n\nWe will highlight topics about the open source philosophy using the drupal community as our example and talk about some common questions that clients bring about open-source and some answers that worked well for us.\n\nWe will show how companies can benefit in security and ROI by adopting open-source code, and by contributing back with code.\n\nWe will try to make this talk very participative, so bring your questions, experiences (good or bad) and let's share!",
+   "video_url": "https://youtu.be/RRcqztoXo3A",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-selling-open-source-philosophy"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T15:45:00Z",
+   "endTime": "2015-02-11T16:45:00Z",
+   "duration": "P60M",
+   "title": "Designing Drupal 8",
+   "location": "Salon Clavelles - Softlite Solutions",
+   "link": "https://latinamerica2015.drupal.org/session/designing-drupal-8.html",
+   "track": [
+    "Core Conversations"
+   ],
+   "speakers": [
+    "LewisNyman"
+   ],
+   "full_description": "Drupal 8 includes some major changes to the administrative interface. This session explores the purpose and details behind many of the main UI overhauls in Drupal 8.\n\nThis session is presented by Lewis Nyman (maintainer of the Seven theme) and Bojhan Somers (UX maintainer).\n\nThe presentation covers:\n\nThe toolbar; building a responsive menu\n\nThe content creation page; overhauling Drupal's bland look\n\nThe style guide; improving the visual design of Seven\n\nMuch more; module page, inline editing, making Drupal responsive, integrating views into core.\n\nDesigning in the community is hard, we take a closer look at a few of these initiatives to show the process from exploration, proposal, to implementation that takes place in the community.\n\nWe're also going to look towards the future, to expand the Seven style guide beyond core to better serve the needs of contrib developers and create a more seemless experience for site builders.",
+   "video_url": "https://youtu.be/e5MAptNlJzo",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-designing-drupal-8"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T16:45:00Z",
+   "endTime": "2015-02-11T18:00:00Z",
+   "duration": "P75M",
+   "title": "Lunch sponsored by Four Kitchens",
+   "location": "Exhibit Hall",
+   "link": "https://latinamerica2015.drupal.org/lunch-sponsored-four-kitchens-0.html",
+   "track": [],
+   "speakers": [],
+   "full_description": "",
+   "video_url": "",
+   "sponsorIds": "",
+   "isAgendaItem": true,
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-lunch-sponsored-four-kitchens-0"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T18:00:00Z",
+   "endTime": "2015-02-11T19:00:00Z",
+   "duration": "P60M",
+   "title": "An Overview of the Drupal 8 Plugin System",
+   "location": "Salon Auditorium - Just Digital",
+   "link": "https://latinamerica2015.drupal.org/session/overview-drupal-8-plugin-system.html",
+   "track": [
+    "Coding and Development"
+   ],
+   "speakers": [
+    "eojthebrave"
+   ],
+   "full_description": "Goodbye hook_block_info(), hello Block Plugins.\n\nThe Drupal 8 plugin system provides a set of guidelines and reusable code components that allow developers to expose pluggable functionality within their code and (as needed) support managing these components through the user interface. Understanding the ins and outs of the plugin system will be critical for anyone developing modules for Drupal 8. Blocks, field types, widgets, and views displays are just some of the places you’ll encounter plugins in D8.\n\nIn this presentation Joe will draw on [his experience working with Drupal 8 plugins](https://drupalize.me/blog/201409/unravelling-drupal-8-plugin-system) in order to write about and helping document the plugin system,  and walk through:\n\n- What are plugins and why, when, where are they used?\n\n- How Drupal discovers plugins.\n\n- Annotations and how they relate to plugins.\n\n- Defining a plugin.\n\n- Using plugin derivatives to allow for many instances of a single plugin.\n\n- Defining new plugin types in your own module.\n\nThis presentation will be useful for anyone who will be writing new Drupal 8 modules or porting existing code from Drupal 7 to Drupal 8. It will help developers to better understand where plugins fit in the architecture of a Drupal module, and help to map your Drupal 7 knowledge about info hooks and callback functions to Drupal 8 plugins.",
+   "video_url": "https://youtu.be/9pVg2-5dcVg",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-overview-drupal-8-plugin-system"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T18:00:00Z",
+   "endTime": "2015-02-11T19:00:00Z",
+   "duration": "P60M",
+   "title": "Persiguiendo el unicornio: Por más mujeres en tecnología",
+   "location": "Salon Clavelles - Softlite Solutions",
+   "link": "https://latinamerica2015.drupal.org/session/persiguiendo-el-unicornio-por-más-mujeres-en-tecnología.html",
+   "track": [
+    "Case Studies"
+   ],
+   "speakers": [
+    "kandra",
+    "frecaze"
+   ],
+   "full_description": "Persiguiendo el unicornio: Por más mujeres en tecnología\n\nAunque Drupal sea una de las comunidades Open Source con mayor representación femenina (17%) aún nos queda mucho trabajo por delante. La escasez de mujeres se ve en la asistencia a los eventos, en los equipos de trabajo, en los ponentes...\n\nCompartiremos el trabajo que estamos haciendo en [Women In Technology Perú](https://latinamerica2015.drupal.org/session/www.witperu.org), inspirando a más mujeres a mostrarse como líderes en nuestra industria. Buscamos integrar a más mujeres en las comunidades de tecnología. Contaremos un poco sobre qué es lo que nos ha dado resultado y qué es lo que no, así como los puntos que tenemos en cuenta para seguir la labor.\n\nNuestro objetivo es que los asistentes salgan con un entendimiento de:\n\n- Por qué la escasez de mujeres es detrimento para la comunidad\n\n- Por qué es importante \"alzar la voz\" y no quedarnos calladas\n\n- Por qué es importante que los hombres se involucren en el problema\n\n- Qué puede hacer uno para ayudar a cambiarlo\n\n---\n\nChasing the Unicorn: For more women in technology\n\nAlthough Drupal is one of the Open Source communities with greater representation of women (17%) we still have much work ahead. The scarcity of women is seen in attendance at events, working on computers, in the speakers...\n\nWe will share the work we are doing in [Women In Technology](https://latinamerica2015.drupal.org/session/www.witperu.org) Peru, inspiring more women to appear as leaders in our industry. We seek to integrate more women into technology communities. We'll share a little about what it is that have given us positive result and what not, and the points that we need to consider on the future.\n\nOur goal is that attendees leave with an understanding of:\n\n- Why the lack of women is detrimental to the community\n\n- Why is it important to \"speak out\" and not remain silent\n\n- Why is it important for men to be involved in the problem\n\n- What can you do to help change it",
+   "video_url": "https://youtu.be/E6ZgEmIXOvg",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-persiguiendo-el-unicornio-por-m-s-mujeres-en-tecnolog-a"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T18:00:00Z",
+   "endTime": "2015-02-11T19:00:00Z",
+   "duration": "P60M",
+   "title": "Choosing the right frontend style guide workflow for your project",
+   "location": "Salon Ceiba - Acquia",
+   "link": "https://latinamerica2015.drupal.org/session/choosing-right-frontend-style-guide-workflow-your-project.html",
+   "track": [
+    "Frontend"
+   ],
+   "speakers": [
+    "Aaron Stanush"
+   ],
+   "full_description": "[View the slides for this talk](https://speakerdeck.com/astanush/choosing-the-right-frontend-style-guide-workflow)\n\nFrontend style guides (or pattern libraries) have exploded onto to the scene of web development. You can now publicly view the inner workings CSS and documentation of popular websites and web apps such as Starbucks, Github, Yelp, Disqus, and the BBC.\n\nHow were these guides built? Who uses them? And most importantly, how did they choose which approach to take?\n\nFinding your workflow\n\nNext, I’ll talk about how you can adapt these approaches to fit your team’s desired workflow. There are three broad workflows (Manual, Generated, and Hybrid) we’ll look at, discussing the pros and cons of each, as well as what tools are out there to use.\n\nWhat you’ll learn\n\n- Introduction to and advantages of living style guides\n\n- Approaches for creating and maintaining a style guide\n\n- Tools for automating your style guide documentation\n\n- How to adapt these approaches and tools to fit your workflow\n\n- How the process fits with the roles your team members\n\n- Best practices and resources",
+   "video_url": "https://youtu.be/QDjezhlKJDk",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-choosing-right-frontend-style-guide-workflow-your-project"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T18:00:00Z",
+   "endTime": "2015-02-11T19:00:00Z",
+   "duration": "P60M",
+   "title": "Growing a Drupal Based Product Business",
+   "location": "Salon Arrayan - SeeD",
+   "link": "https://latinamerica2015.drupal.org/session/growing-drupal-based-product-business.html",
+   "track": [
+    "Drupal Business"
+   ],
+   "speakers": [
+    "rszrama"
+   ],
+   "full_description": "Building a complex Drupal website is hard, but growing a Drupal based product business is even harder. It's not because we don't have good tools to prototype, build, and even sell Software-as-a-Service. Drupal allows us to do all that and more! However, the bigger challenge can be actually deciding *what* to build and then keeping it *simple* enough to succeed.\n\nCommerce Guys is now over five years old, and we've learned some good and some hard lessons along the way. In this session, I'll share those lessons along with some of the product development principles behind the lean startup movement and the sales principles described in Predictable Revenue that will help your next business succeed.\n\nWe'd all love to \"make money in our sleep,\" but the first step is actually building something people will want to use while we do.",
+   "video_url": "https://youtu.be/ZKUJdbNaUKY",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-growing-drupal-based-product-business"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T19:15:00Z",
+   "endTime": "2015-02-11T20:15:00Z",
+   "duration": "P60M",
+   "title": "AngularJS + Drupal =  Un Dúo Superheróico!",
+   "location": "Salon Arrayan - SeeD",
+   "link": "https://latinamerica2015.drupal.org/session/angularjs-drupal-un-dúo-superheróico.html",
+   "track": [
+    "Frontend"
+   ],
+   "speakers": [
+    "Brolag",
+    "argosbass"
+   ],
+   "full_description": "Headless Drupal es un término que se ha estado mencionando mucho entre la comunidad de Drupal. ¿Qué significa? ¿Qué beneficios tiene?\n\nEn esta charla aprenderemos el concepto además de ver ejemplos técnicos de como implementar un Headless Drupal utilizando Drupal y AngularJS.\n\nEl objetivo es irnos preparando con miras hacia el futuro y saber como podemos aprovechar las nuevas tecnologías front end junto con la flexibilidad y el poder de Drupal.\n\nLos temas que tocaremos serán:\n\n1) Headless Drupal. ¿Qué es?\n\n2) Beneficios de desacoplar el frond end del back end.\n\n3) Frameworks MVC para front end.\n\n4) Introducción y buenas prácticas para AngularJS.\n\n5) REST Services con Drupal.\n\n6) Combinando Drupal y AngularJS.\n\nEsta charla se dará en idioma español.",
+   "video_url": "https://youtu.be/OZgoFB-cI7U",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-angularjs-drupal-un-d-o-superher-ico"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T19:15:00Z",
+   "endTime": "2015-02-11T20:15:00Z",
+   "duration": "P60M",
+   "title": "Migrating into Drupal 8",
+   "location": "Salon Auditorium - Just Digital",
+   "link": "https://latinamerica2015.drupal.org/session/migrating-drupal-8.html",
+   "track": [
+    "Coding and Development"
+   ],
+   "speakers": [
+    "Ryan Weal",
+    "italiatina"
+   ],
+   "full_description": "The migrate module is now part of core! This means that migrate is no longer a secondary option when upgrading your sites to Drupal 8, but is in fact the preferred route for upgrading. The previous in-place “upgrade” path has been removed from the system.\n\nFind out what this means for your team and learn how to migrate Drupal 6 (and Drupal 7) sites directly into Drupal 8 using Drush. Learn what the plans are for the user interface. Know what differences to expect from the old version of migrate. Get up-to-date on the migration initiative progress at recent DrupalCon sprints in Austin and Amsterdam.\n\nAt the end of this session you will have the tools you need to help test the migration system and begin using your own data in Drupal 8.",
+   "video_url": "https://youtu.be/sxNCSrDSI6g",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-migrating-drupal-8"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T19:15:00Z",
+   "endTime": "2015-02-11T20:15:00Z",
+   "duration": "P60M",
+   "title": "Conversion Rate Optimization",
+   "location": "Salon Ceiba - Acquia",
+   "link": "https://latinamerica2015.drupal.org/session/conversion-rate-optimization.html",
+   "track": [
+    "Site Building"
+   ],
+   "speakers": [
+    "joshmiller"
+   ],
+   "full_description": "Learn about the best-practices for increasing sales by using simple and effective changes to the user experience. We go from simple untargeted optimizations to advanced intelligent optimizations and everything in-between.\n\nOverview\n\nWe all have anonymous users that we want to do something. This is fundamental to the internet and nearly all websites. Often, we’re just talking about a visitor trying to find a piece of information and every once in awhile at Commerce Guys we get to participate and lead discussions on best-practices for increasing sales by using simple and effective changes to the customer experience. As we move from the assembled web phase into the experience web phase, we will need to leverage simple and powerful ways to convert those users that end up on our sites.\n\nTalking Points\n\nThe presentation is broken up into two halves: Un-targeted optimizations, and intelligent optimizations. Attendees should walk away with valuable insights that could be implemented on almost any site. Some time will be given to specifically talking about Drupal Commerce and checkout workflow. This presentation isn’t Drupal version specific, but any screenshots and module suggestions will be for Drupal 7. For Drupal 8 fans, we will take a look at some new possibilities planned for Commerce 8.x-2.x.\n\nWe'll also spend some time talking about industry-standard tools and how they integrate into any Drupal site to help us create intelligent optimizations that are intended to lead specific kinds of users to the desired outcome.\n\nWho will benefit from this talk\n\nAnyone who wants their users to \"convert\" faster and easier.\n\nSlides\n\n[https://drive.google.com/open?id=19CcZZEMv7zbtvPzpSFZf4-3XlFsKktcDe8pHum...](https://drive.google.com/open?id=19CcZZEMv7zbtvPzpSFZf4-3XlFsKktcDe8pHumNlDOc&authuser=0)",
+   "video_url": "https://youtu.be/-VsixHO1OXQ",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-conversion-rate-optimization"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T19:15:00Z",
+   "endTime": "2015-02-11T20:15:00Z",
+   "duration": "P60M",
+   "title": "Setting up a Reusable and Durable Drupal Lean Process Factory",
+   "location": "Salon Clavelles - Softlite Solutions",
+   "link": "https://latinamerica2015.drupal.org/session/setting-reusable-and-durable-drupal-lean-process-factory.html",
+   "track": [
+    "DevOps"
+   ],
+   "speakers": [
+    "victorkane"
+   ],
+   "full_description": "Resource links\n\nSlides (English): [http://awebfactory.com/drupalcon2015lean/#/](http://awebfactory.com/drupalcon2015lean/#/)\n\nPresentation video on YouTube (Main Presentation, Spanish): [https://www.youtube.com/watch?v=bNbkBvtQ8Z0](https://www.youtube.com/watch?v=bNbkBvtQ8Z0)\n\nDesgrabación completa, corregida y ampliado de la presentación: [http://awebfactory.com/node/533](http://awebfactory.com/node/533)\n\nDemo Video (Ansible Playbook/Vagrant Drupal Installation Demo, Spanish): [https://www.youtube.com/watch?v=ZVSGrID3g_s](https://www.youtube.com/watch?v=ZVSGrID3g_s)\n\nDemo Video (Everything in code Demo, Spanish): Minuto 14:35 de [https://www.youtube.com/watch?v=ZVSGrID3g_s](https://www.youtube.com/watch?v=ZVSGrID3g_s)\n\nPresentation page on DrupalCon Latin America website: [https://latinamerica2015.drupal.org/session/setting-reusable-and-durable...](setting-reusable-and-durable-drupal-lean-process-factory.html)\n\nAnd here is the reveal.js repo for the slides [https://github.com/DurableDrupal/slides-durable-drupal-lean-drupalcon2015](https://github.com/DurableDrupal/slides-durable-drupal-lean-drupalcon2015) (I've made use of an external markdown file for the actual slides themselves, see the slides.md file referenced from index.html. Gruntfile.js is also edited so that when running locally grunt watches for changes in the external markdown file and changes are seen instantly in the preview browser running locally).\n\nTítulo en español:\n\nPoner en pie una fábrica de Drupal Durable en base de un proceso Lean reutilizable\n\nShort description in English\n\nWe need to set up our own factory for producing web apps that will truly meet people's needs. In doing so we acquire and install reusable industry-wide best practices that are simple and straightforward to use. And that acquire our experience as we grow.\n\nBy attending this presentation you will learn how an agile, lean Drupal friendly process can be actually tooled up and customized to create the best context for your team to work in parallel, acquire experience, deliver, and then repeat the experience with confidence and increased productivity.\n\nScroll down for complete description in English\n\nBreve descripción en español\n\nNecesitamos poner en pie nuestra propia fábrica para producir aplicaciones web que realmente satisfacen las necesidades de la gente. Al hacer esto nosotros adquirimos las mejoras prácticas de nuestra industria que son, a la vez, sencillas y prácticas para utilizar. Y que crecen a medida que vamos adquiriendo experiencia.\n\nAl asistir a la presentanción se aprenderá como un proceso ágil y lean, orientado a Drupal, puede ser puesto en pie a nivel práctico, y customizado para crear el mejor entorno para que todo el equipo trabaje en paralelo, crezca en experiencia, acostumbrarse a las distintas formas de entrega y para que también pueda repetir la experiencia con confianza y mayor productividad.\n\nWe will learn how to:\n\n- Set up a LAMP stack with development, staging and production instances, in a virtual machine on a laptop, on a VPS (from scratch) and even see how to install drush and all the tools we need on a shared hosting account.\n\n- Create and maintain our own in house Drupal distro with all the modules and themes we can use over and over again, and evolve it as we gain experience and make decisions about what we prefer to use in our architecture\n\n- Use the \"everything in code\" paradigm, and develop a workflow using version control and other tools to develop on the development instance, deploy to staging and test there, and how to push to live\n\n- Create value hypotheses (lean process templates, tools and processes) together with our clients and agree on a Minimum Viable Product for testing those hypotheses, and what this means in a Drupal context\n\n- Create and implement a structured content strategy and content creation workflow together with the client based on Drupal's power as a flexible CMS framework\n\n- Use the migrate module in different ways in order to grab legacy content (very few of the web apps we are called upon to build will be new or from scratch)\n\n- Arrive at our candidate architecture in a Drupal friendly fashion. How to persist this as an installation profile as part of our on-going in house distro maintenance\n\n- Iterate agilely over a series of functional prototypes built to test project value hypotheses together with the client and how to build the workflow necessary for this with maximum client participation.\n\n- See the final product as a Minimum Viable Product iteration itself and into the future.\n\n- Go team go; test team test; deploy team deploy\n\nA word on experience level\n\nStrictly speaking this is a session aimed at intermediate web app builders with some experience in sysadmin, agile and lean process, and Drupal site building and theming. However, if you are an eager beginner and understand that you will be building web apps and not websites and need to learn all of this anyway, you will be able to follow along and finish up with a clear and straightforward work plan needed to acquire all these skills.\n\nResources\n\nThis is not a workshop; however all materials necessary for actually working through these challenging items will be made available in the slides, my blog and publicly available repos, so that attendees will be able to make practical use of everything covered in the session.\n\nDistro repo: [https://github.com/victorkane/durable-drupal-distro](https://github.com/victorkane/durable-drupal-distro)",
+   "video_url": "https://youtu.be/bNbkBvtQ8Z0",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-setting-reusable-and-durable-drupal-lean-process-factory"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T20:45:00Z",
+   "endTime": "2015-02-11T21:45:00Z",
+   "duration": "P60M",
+   "title": "The Future of Commerce on Drupal 8 (and beyond)",
+   "location": "Salon Ceiba - Acquia",
+   "link": "https://latinamerica2015.drupal.org/session/future-commerce-drupal-8-and-beyond.html",
+   "track": [
+    "Coding and Development"
+   ],
+   "speakers": [
+    "rszrama"
+   ],
+   "full_description": "Drupal Commerce was developed from the ground up on Drupal 7, both benefiting from and contributing to the development of the Entity API, Views, and Rules modules. It redefined what Drupal can do in the eCommerce space, empowering businesses to sell physical products, event registrations, reservations, and digital products. Its ecosystem of contributed modules supports recurring billing with all of its complexities in addition to complex tax, multilingual, multi-currency, and omnichannel configurations.\n\nMoving forward to Drupal 8, we're reevaluating our feature set and architecture to make Commerce easier to use and to develop for. Starting with sprints at DrupalCon Austin and in Paris during the Summer of 2014, we began developing a generic set of libraries solving price and address management to share with the rest of the PHP community. These libraries are then used by our Drupal 8 modules along with a fresh implementation of the various entity types and subsystems that make up the Drupal Commerce framework.\n\nIn this session, you will learn about:\n\n- The generic PHP libraries we are developing for handling prices, taxes, discounts, and addresses and our efforts to see them adopted by other PHP based eCommerce projects\n- The key features of Drupal 8 we’re taking advantage of\n- How changes to our architecture and user interfaces address the most common frustrations developers and merchants have with\n- Drupal Commerce 1.x frustrations, and how we’ve addressed them\n- What Commerce 2.x is capable of today and how our roadmap compares to the Drupal 8 release schedule\n\nLet’s talk architecture, look at a demo, get excited, and start bidding on our first eCommerce projects powered by Drupal 8.",
+   "video_url": "https://youtu.be/YdBHpbOs1ZU",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-future-commerce-drupal-8-and-beyond"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T20:45:00Z",
+   "endTime": "2015-02-11T21:45:00Z",
+   "duration": "P60M",
+   "title": "Creating a Culture of Empowerment",
+   "location": "Salon Auditorium - Just Digital",
+   "link": "https://latinamerica2015.drupal.org/session/creating-culture-empowerment.html",
+   "track": [
+    "Drupal Business"
+   ],
+   "speakers": [
+    "Todd Nienkerk"
+   ],
+   "full_description": "*En esta charla, Todd Nienkerk platicará acerca de los principos que ha seguido en la creación de Four Kitchens y como tú puedes seguir los mismos principios para crear tu propia compañía.*\n\nDrawing on more than 15 years of leadership at Four Kitchens and other creative organizations, Todd Nienkerk will discuss why empowerment is the foundation of all successful teams.\n\nWhat is empowerment? Why does it matter? How can an organization create a culture of empowerment?\n\nThe guiding principles of empowerment:\n\n- Build a company you would want to work for\n\n- Give people control over their destiny\n\n- Make trust the center of your culture\n\nHow to cultivate empowerment:\n\n- Personal brands. You shouldn't be afraid that people will leave. If you’re afraid people will become \"too good,\" then you’re not offering something they want — and you know it.\n\n- Go virtual. Allow your team the flexibility to work from home — or anywhere in the world.\n\n- Adopt agile methodologies. Allow teams to self-organize around projects and problems.\n\n- And much, much more...\n\nThis session will build off a similar one from Twin Cities DrupalCamp 2014. [Slides and a detailed outline are available](http://4ktch.in/1pYkaao).\n\nAbout the speaker\n\n[Todd Nienkerk](http://fourkitchens.com/team/todd-ross-nienkerk/) is a Digital Strategist and Partner at [Four Kitchens](http://fourkitchens.com/). He and the other Web Chefs spend their days making big websites. Todd often serves as a mentor for other companies within the web industry, especially within the world of open source. In the last five years, Todd has spoken more than 40 events across North America and Europe, including dozens of DrupalCamps, most DrupalCons, and SXSW Interactive two years in a row.",
+   "video_url": "https://youtu.be/EJlm58wZCUM",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-creating-culture-empowerment"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T20:45:00Z",
+   "endTime": "2015-02-11T21:45:00Z",
+   "duration": "P60M",
+   "title": "Drupal for Non-Profits: Case Study of Ojo al Voto in Costa Rica",
+   "location": "Salon Clavelles - Softlite Solutions",
+   "link": "https://latinamerica2015.drupal.org/session/drupal-non-profits-case-study-ojo-al-voto-costa-rica.html",
+   "track": [
+    "Case Studies"
+   ],
+   "speakers": [
+    "betovarg"
+   ],
+   "full_description": "[Ojo al Voto](http://www.ojoalvoto.com) is a citizens initiative in Costa Rica, intended to inform and monitor political and electoral processes. [Ojo al Voto](http://www.ojoalvoto.com) is literally translated as \"Watch the Vote\".\n\nThe first phase of the project covered the recent 2014 presidential elections in Costa Rica, where 51% of the registered voters were young people from 18 to 28 years old. That public, disenchanted with politics, were in charge of deciding the election.\n\n**Drupal**\n\nOjo al Voto used Drupal as its primary content manager, and built other tools around it in order to appeal to that public. The site served as a webservice for some tools and it contained a very large source of information of candidates, both presidential and parlamentary, profiles and opinion from bloggers for each: the good the bad and the ugly of every candidate.\n\nIts success comes from the interdisciplinary approach of the project: journalists, developers, designers and citizens interested in transparency gave it the push it needed.\n\nIn this talk, we'll go over the benefits of Drupal for these kind of projects with information architecture and as a service. We'll review our discoveries and results, on how to use the platform to reach your goal.\n\nWe used several key modules to create our needed features, which include\n\n- Opinion blogs, with author profiles\n\n- OAuth integration\n\n- User generated content\n\n- Web services\n\n- Custom front pages for first and second round of presidential elections\n\n- Deep relations of actors (candidates, political figures, institutions) and content. Large use of entity relations throughout the entire site\n\n- Political proposal comparison app\n\n- \"Who thinks like you\" app, to find affinity of visitors with political parties and proposals\n\n- [Data visualization for national statistics and congressional candidates](http://www.ojoalvoto.com/mapas)\n\n**What's next?**\n\nBeing the first part a success, we are currently working in the next iteration of our service to Costa Rican voters: a platform to make the government more transparent and for us, as citizens, to gain more political control over the people we selected.\n\nThese services include:\n\n- Obtain information directly from congress in order to minimize human error completely, currently under way and walking!\n\n- An API for any citizen or media outlet to compare and visualize information from our database.\n\n- Monitoring nominal over votes inside congress: Costa Rica does not manage votes nominally, only totals per law.\n\n**Is this session for you?**\n\nIT IS!\n\nMore If you work for a non-profit or as a service provider for such organizations.\n\nAlso if:\n\n- You run a similar initiative in your country, or intend to\n\n- You want learn how drupal can empower you with complex entity relationships to deliver content\n\n- You want to learn about statistics and results of initiatives that come directly from citizens\n\n- You want to serve different products, using drupal creatively to fulfil your objectives\n\n- You want to know simple technical solutions for complex human content problems\n\n**Who am I?**\n\nIm a partner at [Manatí](http://www.estudiomanati.com/), where we have built complex information structures with Drupal, that can be easily accessed. We want to share our discoveries and how we accomplish goals through the great contributions of the Drupal community and others.\n\nOur company was part of the citizens and institutions donating time and work for the initiative, [among others](http://www.ojoalvoto.com/ojo-al-voto).",
+   "video_url": "https://youtu.be/_LnJzni3XPI",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-drupal-non-profits-case-study-ojo-al-voto-costa-rica"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T20:45:00Z",
+   "endTime": "2015-02-11T21:45:00Z",
+   "duration": "P60M",
+   "title": "SEO for Drupal",
+   "location": "Salon Arrayan - SeeD",
+   "link": "https://latinamerica2015.drupal.org/session/seo-drupal.html",
+   "track": [
+    "Site Building"
+   ],
+   "speakers": [
+    "dagmita"
+   ],
+   "full_description": "SEO is tremendously important in the Internet attention competition. Not all websites use their potential to appear amongst the top search results. SEO needs to be considered from the very beginning of the project. There are some architectural principles to follow. Furthermore many optimizations should be done along the way. Last year we have founded our sister company Amazee Metrics which focuses on SEO, SEM, Web Analytics and Online Marketing. We are working together hand in hand to increase our client's reach and conversions. I will give hands on tipps for Drupal as well as practical advice for those who manage stakeholders.",
+   "video_url": "https://youtu.be/sQMn5US6KP0",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-session-seo-drupal"
+   ]
+  },
+  {
+   "startTime": "2015-02-11T22:00:00Z",
+   "endTime": "2015-02-11T23:00:00Z",
+   "duration": "P60M",
+   "title": "Closing Session",
+   "location": "Salon Auditorium - Just Digital",
+   "link": "https://latinamerica2015.drupal.org/closing-session.html",
+   "track": [],
+   "speakers": [],
+   "full_description": "",
+   "video_url": "",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-closing-session"
+   ]
+  },
+  {
+   "startTime": "2015-02-12T14:00:00Z",
+   "endTime": "2015-02-12T16:00:00Z",
+   "duration": "P120M",
+   "title": "First-Time Sprinter Workshop",
+   "location": "Salon Olmo",
+   "link": "https://latinamerica2015.drupal.org/first-time-sprinter-workshop.html",
+   "track": [],
+   "speakers": [],
+   "full_description": "Join this free workshop if you are familiar with Drupal but new to Drupal contribution. This hands-on workshop will cover the basics of contribution essentials like the Drupal.org issue queues and IRC, and optionally git and setting up Drupal 8 on your laptop.",
+   "video_url": "",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-first-time-sprinter-workshop"
+   ],
+   "kind": "workshop"
+  },
+  {
+   "startTime": "2015-02-12T14:00:00Z",
+   "endTime": "2015-02-12T23:00:00Z",
+   "duration": "P540M",
+   "title": "Mentored Core Sprint",
+   "location": "Salon Olmo",
+   "link": "https://latinamerica2015.drupal.org/mentored-core-sprint-0.html",
+   "track": [],
+   "speakers": [],
+   "full_description": "Join the mentored sprint in this room if would like to work with a mentor to contribute to Drupal core, and would like help finding an issue to work on, or if you are not sure where to start contributing.\n\nCome help with core! Plenty of mentors will be available to help you get started. If you're not sure where to start contributing, or not even sure about the whole sprint thing, this is for you! One of our many [sprints](sprints.html), this sprint mentored sprint also includes an optional workshop to help you set up tools like IRC, git, and a Drupal 8 development environment.",
+   "video_url": "",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-mentored-core-sprint-0"
+   ],
+   "kind": "workshop"
+  },
+  {
+   "startTime": "2015-02-12T14:00:00Z",
+   "endTime": "2015-02-12T23:00:00Z",
+   "duration": "P540M",
+   "title": "Contribution Sprints",
+   "location": "Salon Olmo",
+   "link": "https://latinamerica2015.drupal.org/contribution-sprints.html",
+   "track": [],
+   "speakers": [],
+   "full_description": "Everyone can get involved in contributing to Drupal through many aspects, including documentation, UX, design, testing, and development. Join many topics: Multilingual, Front-end, Migrate, Drupal 8 Core criticals, Drupal.org and more. There will be a First-Time Sprinter Workshop, Mentored Core Sprint, and other Sprints. All are suitable for programmers and non-programmers alike.\n\n[](http://www.bluehost.com/)\n\n[](http://www.ubuntu.com/)",
+   "video_url": "",
+   "sponsorIds": "",
+   "sourceIds": [
+    "latinamerica2015-drupal-schedule-html",
+    "latinamerica2015-contribution-sprints"
+   ],
+   "kind": "workshop"
+  }
+ ],
+ "result": "success",
+ "url": "https://latinamerica2015.drupal.org/schedule.html"
+}

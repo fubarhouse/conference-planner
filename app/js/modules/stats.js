@@ -48,9 +48,13 @@ export function updateSelectionOverview(events, updateStageStats) {
   document.getElementById('totalDuration').textContent = `${totalDuration.toFixed(1)} hours`;
 }
 
+// A session with no time belongs to no day, so it contributes to the totals but
+// not to the per-day breakdown. It must be dropped BEFORE getLocalDate, which
+// throws on an absent startTime and would take the whole summary down with it.
 function computeDailyStats(selectedEvents) {
   const dailyStats = {};
   selectedEvents.forEach((event) => {
+    if (event.unscheduled) return;
     const date = getLocalDate(event.startTime, state.eventMeta?.timezone);
     const trackValues = normalizeTracks(event.track);
     const durationHours = parseDurationHours(event.duration);
@@ -74,7 +78,10 @@ function computeTrackStats(selectedEvents) {
   const trackStats = {};
   selectedEvents.forEach((event) => {
     const trackValues = normalizeTracks(event.track);
-    const date = getLocalDate(event.startTime, state.eventMeta?.timezone);
+    // Counted under its track, but not under any day.
+    const date = event.unscheduled
+      ? null
+      : getLocalDate(event.startTime, state.eventMeta?.timezone);
     const durationHours = parseDurationHours(event.duration);
     trackValues.forEach((track) => {
       if (!trackStats[track]) {
@@ -82,6 +89,7 @@ function computeTrackStats(selectedEvents) {
       }
       trackStats[track].count++;
       trackStats[track].duration += durationHours;
+      if (date === null) return;
       if (!trackStats[track].days[date]) {
         trackStats[track].days[date] = { count: 0, duration: 0 };
       }

@@ -1,0 +1,10 @@
+{
+  "status": 200,
+  "headers": {
+    "Cache-Control": "private, no-store",
+    "Content-Type": "application/json; charset=utf-8",
+    "X-Cache": "",
+    "X-Curation-Version": ""
+  },
+  "body": "eyJuYW1lIjoiTm9ib2R5IEF0IEFsbCIsInNlc3Npb25zIjowLCJwYXJ0bmVycyI6W119"
+}

@@ -3,10 +3,18 @@ cache
 .codex
 .idea
 .git
-.docker-compose.yml
-.env
 .env*
-
-# This installation's private state (PRIVATE_ROOT) — planners, uploads and the
-# curation ledger. Never baked into an image; mounted or S3-backed at runtime.
+docker-compose.yml
+docker-compose.override.yml
+# The local bind-mount default. Never bake content into the image.
+.local-content
 private/*
+# Go build output — the image builds its own from source in tools/.
+#
+# `tools/*/<name>`, NOT `tools/**/<name>`: Docker's `**` matches zero segments
+# too, so the double-star form also matched the MODULE DIRECTORY
+# `tools/drupalcon-sync` and kept the whole tool out of the build context. The
+# image built without it, the cronjob calling it failed with "not found", and
+# nothing about the build said so.
+tools/*/drupalcon-sync
+tools/*/server

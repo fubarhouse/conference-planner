@@ -1,0 +1,1228 @@
+{
+  "event": {
+    "regionCode": "EMEA",
+    "country": "Switzerland",
+    "designation": "Drupal Mountain Camp",
+    "ecosystem": "drupal",
+    "location": "Davos",
+    "year": "2017",
+    "website": "https://drupalmountaincamp.ch",
+    "region": "Switzerland",
+    "startDate": "2017-02-16T09:00:00Z",
+    "endDate": "2017-02-18T16:30:00Z",
+    "venue": "Davos Congress, 7270 Davos",
+    "timezone": "Europe/Zurich",
+    "enabled": true,
+    "flickr": {
+      "enabled": false,
+      "groupUrl": "",
+      "image": "",
+      "imageAlt": ""
+    },
+    "logo": {
+      "image": "",
+      "imageAlt": "Drupal Mountain Camp 2017 logo",
+      "usePlate": false
+    },
+    "sponsors": [
+      {
+        "title": "A Test Sponsor",
+        "tier": "Gold",
+        "note": "with a comma, a \"quote\" and <html>",
+        "id": "sponsor-1"
+      },
+      {
+        "id": "sponsor-2",
+        "title": "Amazee Labs",
+        "tier": "Gold",
+        "row": 1,
+        "priority": 2,
+        "image": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-2.png",
+        "imageAlt": "Amazee Labs logo",
+        "link": "http://www.amazeelabs.com/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "dmc17-sponsors"
+        ]
+      },
+      {
+        "id": "sponsor-3",
+        "title": "Somedia",
+        "tier": "Gold",
+        "row": 1,
+        "priority": 3,
+        "image": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-3.png",
+        "imageAlt": "Somedia logo",
+        "link": "http://www.somedia-production.ch/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "dmc17-sponsors"
+        ]
+      },
+      {
+        "id": "sponsor-4",
+        "title": "Wondrous",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 1,
+        "image": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-4.png",
+        "imageAlt": "Wondrous logo",
+        "link": "https://www.wearewondrous.com",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "dmc17-sponsors"
+        ]
+      },
+      {
+        "id": "sponsor-5",
+        "title": "Softescu",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 2,
+        "image": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-5.png",
+        "imageAlt": "Softescu logo",
+        "link": "http://softescu.com/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "dmc17-sponsors"
+        ]
+      },
+      {
+        "id": "sponsor-6",
+        "title": "Acquia",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 3,
+        "image": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-6.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://www.acquia.com/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "dmc17-sponsors"
+        ]
+      },
+      {
+        "id": "sponsor-7",
+        "title": "Unic",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 4,
+        "image": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-7.png",
+        "imageAlt": "Unic logo",
+        "link": "http://www.unic.com",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "dmc17-sponsors"
+        ]
+      },
+      {
+        "id": "sponsor-8",
+        "title": "Hostpoint",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 5,
+        "image": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-8.jpg",
+        "imageAlt": "Hostpoint logo",
+        "link": "https://www.hostpoint.ch/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "dmc17-sponsors"
+        ]
+      },
+      {
+        "id": "sponsor-9",
+        "title": "Previon plus",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 6,
+        "image": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-9.png",
+        "imageAlt": "Previon plus logo",
+        "link": "http://previon.ch/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "dmc17-sponsors"
+        ]
+      },
+      {
+        "id": "sponsor-10",
+        "title": "IWF Web Solutions",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 7,
+        "image": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-10.png",
+        "imageAlt": "IWF Web Solutions logo",
+        "link": "http://www.iwf.ch/web-solutions/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "dmc17-sponsors"
+        ]
+      },
+      {
+        "id": "sponsor-11",
+        "title": "Liip",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 8,
+        "image": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-11.png",
+        "imageAlt": "Liip logo",
+        "link": "https://www.liip.ch/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "dmc17-sponsors"
+        ]
+      },
+      {
+        "id": "sponsor-12",
+        "title": "Gridonic",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 9,
+        "image": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-12.png",
+        "imageAlt": "Gridonic logo",
+        "link": "https://gridonic.ch/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "dmc17-sponsors"
+        ]
+      },
+      {
+        "id": "sponsor-13",
+        "title": "netnode",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 10,
+        "image": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-13.png",
+        "imageAlt": "netnode logo",
+        "link": "https://www.netnode.ch/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "dmc17-sponsors"
+        ]
+      },
+      {
+        "id": "sponsor-14",
+        "title": "getunik",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 11,
+        "image": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-14.png",
+        "imageAlt": "getunik logo",
+        "link": "http://www.getunik.com/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "dmc17-sponsors"
+        ]
+      },
+      {
+        "id": "sponsor-15",
+        "title": "MD Systems",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 12,
+        "image": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-15.png",
+        "imageAlt": "MD Systems logo",
+        "link": "http://www.md-systems.ch/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "dmc17-sponsors"
+        ]
+      },
+      {
+        "id": "sponsor-16",
+        "title": "Soul Media",
+        "tier": "Social Event Sponsor",
+        "row": 3,
+        "priority": 1,
+        "image": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-16.png",
+        "imageAlt": "Soul Media logo",
+        "link": "https://www.soul.media",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "dmc17-sponsors"
+        ]
+      },
+      {
+        "id": "sponsor-17",
+        "title": "JetBrains",
+        "tier": "Contribution Sponsor",
+        "row": 4,
+        "priority": 1,
+        "image": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-17.png",
+        "imageAlt": "JetBrains logo",
+        "link": "https://www.jetbrains.com/",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "dmc17-sponsors"
+        ]
+      }
+    ],
+    "columns": 3,
+    "scheduleURLs": [
+      "https://drupalmountaincamp.ch/schedule"
+    ],
+    "other_urls": [
+      "https://drupalmountaincamp.ch/sponsors",
+      "https://drupalmountaincamp.ch/davos",
+      "https://drupalmountaincamp.ch/sessions"
+    ],
+    "sources": [
+      {
+        "id": "dmc17-schedule",
+        "kind": "schedule",
+        "url": "https://drupalmountaincamp.ch/schedule",
+        "retrievedAt": "2026-08-26",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20180903160957",
+          "captureUrl": "https://web.archive.org/web/20180903160957/https://drupalmountaincamp.ch/schedule"
+        },
+        "notes": "Captured 2018-09-03 but titled \"Drupal Mountain Camp 2017\" — the site left /schedule on the 2017 programme for eighteen months. Later editions live at /schedule/2019, /schedule/2022 and then a Pretalx instance at event.drupalmountaincamp.ch. A Views listing: one .view-grouping per day, each holding .item-list blocks whose <h3> carries two <time class=\"datetime\"> elements, and whose <li> rows give the title as a link followed by loose text \"- Speaker(s) (Room: X)\". Dates confirmed against a session node that states \"Sat, 02/18/2017 - 11:00\"."
+      },
+      {
+        "id": "dmc17-initiatives",
+        "kind": "sessions",
+        "url": "https://drupalmountaincamp.ch/sessions/drupal-8-initiatives",
+        "retrievedAt": "2026-08-26",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20180918093431",
+          "captureUrl": "https://web.archive.org/web/20180918093431/https://drupalmountaincamp.ch/sessions/drupal-8-initiatives"
+        },
+        "notes": "⚠️ The ONLY session page that survives with 2017 content. Of the 40 sessions, just 9 slugs were ever captured, and this is the only capture predating the next edition. The site reuses /sessions/<slug> across years, so later captures render a LATER edition under the same URL: /sessions/docker-101 captured 2025-03 is titled \"Drupal Mountain Camp 2025\" and /sessions/api-first-drupal-and-future-cms captured 2021-05 renders as 2022. Never take a session page for this edition without checking its masthead year."
+      },
+      {
+        "id": "dmc17-sponsors",
+        "kind": "sponsors",
+        "url": "https://drupalmountaincamp.ch/sponsors",
+        "retrievedAt": "2026-08-26",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20180903175423",
+          "captureUrl": "https://web.archive.org/web/20180903175423/https://drupalmountaincamp.ch/sponsors"
+        },
+        "notes": "Seventeen sponsors in five tiers (Gold, Silver, Social Event, Contribution, Individual — the last named nobody). Every logo recovered. Sponsor cards also appear inline on the schedule page, but only this page carries the tier headings. Logo src attributes are ROOT-RELATIVE (\"/sites/default/files/…\"), so they must be prefixed with the host before requesting them from Wayback."
+      },
+      {
+        "id": "dmc17-venue",
+        "kind": "venue",
+        "url": "https://drupalmountaincamp.ch/davos",
+        "retrievedAt": "2026-08-26",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20180903150523",
+          "captureUrl": "https://web.archive.org/web/20180903150523/https://drupalmountaincamp.ch/davos"
+        },
+        "notes": "Davos Congress (Kongresszentrum), 7270 Davos; entrance \"Haus Wing B - Eingang Nord\"."
+      },
+      {
+        "id": "dmc17-home",
+        "kind": "other",
+        "url": "https://drupalmountaincamp.ch/",
+        "retrievedAt": "2026-08-26",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20161029192104",
+          "captureUrl": "https://web.archive.org/web/20161029192104/https://drupalmountaincamp.ch/"
+        },
+        "notes": "Announcement capture: \"16 - 19 February 2017, Davos, Switzerland … the first Drupal Mountain Camp\". It also names a predecessor the checklist does not have — \"Drupal Camp Switzerland 2011 in Lucerne\"."
+      },
+      {
+        "id": "dmc17-logo-unconfirmed",
+        "kind": "other",
+        "url": "https://drupalmountaincamp.ch/themes/beaker/logo.svg",
+        "retrievedAt": "2026-08-26",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20180903160957",
+          "captureUrl": "https://web.archive.org/web/20180903160957/https://drupalmountaincamp.ch/themes/beaker/logo.svg"
+        },
+        "notes": "Recorded but NOT used as the event logo. The site rendered this file as its masthead (alt=\"Home\"), but it sits at /themes/beaker/logo.svg and its own <title> reads \"Beaker Logo\" — Beaker being the Drupal theme. It may be the camp's mark or the theme's default that was never replaced, and the capture gives no way to tell, so event.logo is left empty rather than asserting it."
+      }
+    ],
+    "sourceIds": [
+      "dmc17-schedule",
+      "dmc17-venue",
+      "dmc17-home"
+    ]
+  },
+  "items": [
+    {
+      "startTime": "2017-02-16T09:00:00Z",
+      "endTime": "2017-02-16T12:00:00Z",
+      "duration": "P180M",
+      "title": "First-Time Sprinter Workshop",
+      "location": "Jakobshorn",
+      "link": "https://drupalmountaincamp.ch/sessions/first-time-sprinter-workshop",
+      "track": [
+        "Sprint"
+      ],
+      "speakers": [
+        "Milos Bovan"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2017-02-16T13:00:00Z",
+      "endTime": "2017-02-16T17:00:00Z",
+      "duration": "P240M",
+      "title": "Getting up to speed with testing on Drupal 8",
+      "location": "Parsenn",
+      "link": "https://drupalmountaincamp.ch/sessions/getting-speed-testing-drupal-8",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Pieter Frenssen"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-16T13:00:00Z",
+      "endTime": "2017-02-16T17:00:00Z",
+      "duration": "P240M",
+      "title": "Docker 101",
+      "location": "Pischa",
+      "link": "https://drupalmountaincamp.ch/sessions/docker-101",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Michael"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-17T08:00:00Z",
+      "endTime": "2017-02-17T09:00:00Z",
+      "duration": "P60M",
+      "title": "Making your voice heard: Open Source Needs You",
+      "location": "Parsenn",
+      "link": "https://drupalmountaincamp.ch/sessions/making-your-voice-heard-open-source-needs-you",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Laura Gaetano"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-17T10:00:00Z",
+      "endTime": "2017-02-17T11:00:00Z",
+      "duration": "P60M",
+      "title": "Translation Management Tool - current status and its future",
+      "location": "Jakobshorn",
+      "link": "https://drupalmountaincamp.ch/sessions/translation-management-tool-current-status-and-its-future",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Saša Nikolič"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-17T10:00:00Z",
+      "endTime": "2017-02-17T11:00:00Z",
+      "duration": "P60M",
+      "title": "Responsive Images under control",
+      "location": "Parsenn",
+      "link": "https://drupalmountaincamp.ch/sessions/responsive-images-under-control",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Cristina Chumillas"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-17T10:00:00Z",
+      "endTime": "2017-02-17T11:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal 8 and Symfony",
+      "location": "Pischa",
+      "link": "https://drupalmountaincamp.ch/sessions/drupal-8-and-symfony",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Dan Lemon"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-17T11:00:00Z",
+      "endTime": "2017-02-17T12:00:00Z",
+      "duration": "P60M",
+      "title": "Guiding new users through baby steps (15 min)",
+      "location": "Jakobshorn",
+      "link": "https://drupalmountaincamp.ch/sessions/guiding-new-users-through-baby-steps-15-min",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Martin Quested"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-17T11:00:00Z",
+      "endTime": "2017-02-17T12:00:00Z",
+      "duration": "P60M",
+      "title": "Starting Open Source: How To Make Your First Contribution (15 min)",
+      "location": "Jakobshorn",
+      "link": "https://drupalmountaincamp.ch/sessions/starting-open-source-how-make-your-first-contribution-15-min",
+      "track": [
+        "Sprint"
+      ],
+      "speakers": [
+        "Michelle Sanver"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2017-02-17T11:00:00Z",
+      "endTime": "2017-02-17T12:00:00Z",
+      "duration": "P60M",
+      "title": "Women in Tech/Drupal (15 min)",
+      "location": "Jakobshorn",
+      "link": "https://drupalmountaincamp.ch/sessions/women-techdrupal-15-min",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Ashish Jain"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-17T11:00:00Z",
+      "endTime": "2017-02-17T12:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal 8 Component Based Theming",
+      "location": "Parsenn",
+      "link": "https://drupalmountaincamp.ch/sessions/drupal-8-component-based-theming",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Lauri Eskola"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-17T11:00:00Z",
+      "endTime": "2017-02-17T12:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal 8's Multilingual APIs: Building for the Entire World",
+      "location": "Pischa",
+      "link": "https://drupalmountaincamp.ch/sessions/drupal-8s-multilingual-apis-building-entire-world",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Christian López Espínola"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-17T13:00:00Z",
+      "endTime": "2017-02-17T14:00:00Z",
+      "duration": "P60M",
+      "title": "In the bag: how Drupal and Drupal Commerce are taking Freitag to the next level of online branding and customer engagement",
+      "location": "Jakobshorn",
+      "link": "https://drupalmountaincamp.ch/sessions/bag-how-drupal-and-drupal-commerce-are-taking-freitag-next-level-online-branding-and",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Andrew Melck",
+        "Tonio Zemp",
+        "Benjamin Caviezel"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-17T13:00:00Z",
+      "endTime": "2017-02-17T14:00:00Z",
+      "duration": "P60M",
+      "title": "On Internationalization and Localization",
+      "location": "Parsenn",
+      "link": "https://drupalmountaincamp.ch/sessions/internationalization-and-localization",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Pascal Birchler"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-17T13:00:00Z",
+      "endTime": "2017-02-17T14:00:00Z",
+      "duration": "P60M",
+      "title": "Search and beyond with Elasticsearch",
+      "location": "Pischa",
+      "link": "https://drupalmountaincamp.ch/sessions/search-and-beyond-elasticsearch",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Florian Loretan"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-17T14:00:00Z",
+      "endTime": "2017-02-17T15:00:00Z",
+      "duration": "P60M",
+      "title": "Making clients happy in moving target projects",
+      "location": "Jakobshorn",
+      "link": "https://drupalmountaincamp.ch/sessions/making-clients-happy-moving-target-projects",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Stefanie Hetjens"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-17T14:00:00Z",
+      "endTime": "2017-02-17T15:00:00Z",
+      "duration": "P60M",
+      "title": "Ansible Your Toaster",
+      "location": "Parsenn",
+      "link": "https://drupalmountaincamp.ch/sessions/ansible-your-toaster",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Christopher Torgalson"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-17T14:00:00Z",
+      "endTime": "2017-02-17T15:00:00Z",
+      "duration": "P60M",
+      "title": "Configuration Management without problems",
+      "location": "Pischa",
+      "link": "https://drupalmountaincamp.ch/sessions/configuration-management-without-problems",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Fabian Bircher"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-17T15:30:00Z",
+      "endTime": "2017-02-17T16:30:00Z",
+      "duration": "P60M",
+      "title": "Drupal isn't enough anymore",
+      "location": "Jakobshorn",
+      "link": "https://drupalmountaincamp.ch/sessions/drupal-isnt-enough-anymore",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Jeffrey A. \"jam\" McGuire"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-17T15:30:00Z",
+      "endTime": "2017-02-17T16:30:00Z",
+      "duration": "P60M",
+      "title": "Foster impact and growth with data-driven campaigning",
+      "location": "Parsenn",
+      "link": "https://drupalmountaincamp.ch/sessions/foster-impact-and-growth-data-driven-campaigning",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Adrian Mahlstein"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-17T15:30:00Z",
+      "endTime": "2017-02-17T16:30:00Z",
+      "duration": "P60M",
+      "title": "What we've learned about (not) using Migrate",
+      "location": "Pischa",
+      "link": "https://drupalmountaincamp.ch/sessions/what-weve-learned-about-not-using-migrate",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Stefan Borchert"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T08:30:00Z",
+      "endTime": "2017-02-18T09:30:00Z",
+      "duration": "P60M",
+      "title": "API-first Drupal and the future of the CMS",
+      "location": "Parsenn",
+      "link": "https://drupalmountaincamp.ch/sessions/api-first-drupal-and-future-cms",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Preston So"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T10:00:00Z",
+      "endTime": "2017-02-18T12:00:00Z",
+      "duration": "P120M",
+      "title": "Turning Drupal into a GraphQL API",
+      "location": "Ducan",
+      "link": "https://drupalmountaincamp.ch/sessions/turning-drupal-graphql-api",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Sebastian Siemssen"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T10:00:00Z",
+      "endTime": "2017-02-18T11:00:00Z",
+      "duration": "P60M",
+      "title": "Relaunch heks.ch: With great power comes great responsibility",
+      "location": "Jakobshorn",
+      "link": "https://drupalmountaincamp.ch/sessions/relaunch-heksch-great-power-comes-great-responsibility",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Samuel Berner",
+        "Stefanie Hetjens"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T10:00:00Z",
+      "endTime": "2017-02-18T11:00:00Z",
+      "duration": "P60M",
+      "title": "Exploring base theme and modern frontend dev workflows",
+      "location": "Parsenn",
+      "link": "https://drupalmountaincamp.ch/sessions/exploring-base-theme-and-modern-frontend-dev-workflows",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Puljic Ivica"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T10:00:00Z",
+      "endTime": "2017-02-18T11:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal 8 Initiatives",
+      "location": "Pischa",
+      "link": "https://drupalmountaincamp.ch/sessions/drupal-8-initiatives",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Josef Dabernig"
+      ],
+      "full_description": "What drives the development of Drupal 8 core and contributed modules? It's thousands of contributors all over the world. Many work in their free time, many work paid by their employees - all together driving the Drupal project forward via open source contribution. With Drupal 8, so called initiatives were founded to focus development of Drupal in areas such as Configuration Management (CMI) , Layouts (SCOTCH) , Multilingual (D8MI) , Migrate or Views in Drupal Core (VDC) . Recently, new initiatives have been formed around topics like Content Workflow , API-first or creating a new core theme . Curious about what's going on in Drupal 8 initiatives? Join me to",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule",
+        "dmc17-initiatives"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T11:00:00Z",
+      "endTime": "2017-02-18T12:00:00Z",
+      "duration": "P60M",
+      "title": "NP8 a Drupal 8 Project from alpha to final release",
+      "location": "Jakobshorn",
+      "link": "https://drupalmountaincamp.ch/sessions/np8-drupal-8-project-alpha-final-release",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Tom Schneider"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T11:00:00Z",
+      "endTime": "2017-02-18T12:00:00Z",
+      "duration": "P60M",
+      "title": "Behat for the lazy developer (15min)",
+      "location": "Parsenn",
+      "link": "https://drupalmountaincamp.ch/sessions/behat-lazy-developer-15min",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Fabian Bircher"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T11:00:00Z",
+      "endTime": "2017-02-18T12:00:00Z",
+      "duration": "P60M",
+      "title": "Personal knowledge management with Drupal (15min)",
+      "location": "Parsenn",
+      "link": "https://drupalmountaincamp.ch/sessions/personal-knowledge-management-drupal-15min",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Simon Buechi"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T11:00:00Z",
+      "endTime": "2017-02-18T12:00:00Z",
+      "duration": "P60M",
+      "title": "A year of gaming on drupal.stackexchange.com: More than a fun passtime? (15min)",
+      "location": "Parsenn",
+      "link": "https://drupalmountaincamp.ch/sessions/year-gaming-drupalstackexchangecom-more-fun-passtime-15min",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Stefanos Petrakis"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T11:00:00Z",
+      "endTime": "2017-02-18T12:00:00Z",
+      "duration": "P60M",
+      "title": "Deploying Drupal: Patterns and Antipatterns",
+      "location": "Pischa",
+      "link": "https://drupalmountaincamp.ch/sessions/deploying-drupal-patterns-and-antipatterns",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Branislav Bujisic"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T13:00:00Z",
+      "endTime": "2017-02-18T14:00:00Z",
+      "duration": "P60M",
+      "title": "The curse of big open source initiatives - how to finance big improvements in Drupal and make them sustainable in the long run",
+      "location": "Jakobshorn",
+      "link": "https://drupalmountaincamp.ch/sessions/curse-big-open-source-initiatives-how-finance-big-improvements-drupal-and-make-them",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Janez Urevc"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T13:00:00Z",
+      "endTime": "2017-02-18T14:00:00Z",
+      "duration": "P60M",
+      "title": "A Cautionary Tale for Defensive Programmers",
+      "location": "Parsenn",
+      "link": "https://drupalmountaincamp.ch/sessions/cautionary-tale-defensive-programmers",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Bart Feenstra"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T13:00:00Z",
+      "endTime": "2017-02-18T14:00:00Z",
+      "duration": "P60M",
+      "title": "Graph databases and PHP",
+      "location": "Pischa",
+      "link": "https://drupalmountaincamp.ch/sessions/graph-databases-and-php",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Michelle Sanver"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T14:00:00Z",
+      "endTime": "2017-02-18T15:00:00Z",
+      "duration": "P60M",
+      "title": "Distributed team management: pitfalls, challenges and advantages",
+      "location": "Jakobshorn",
+      "link": "https://drupalmountaincamp.ch/sessions/distributed-team-management-pitfalls-challenges-and-advantages",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Eugenio Minardi"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T14:00:00Z",
+      "endTime": "2017-02-18T15:00:00Z",
+      "duration": "P60M",
+      "title": "Systems then and now - A reflection on how we rethink infrastructure",
+      "location": "Parsenn",
+      "link": "https://drupalmountaincamp.ch/sessions/systems-then-and-now-reflection-how-we-rethink-infrastructure",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Bastian Widmer"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T14:00:00Z",
+      "endTime": "2017-02-18T15:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal 8 Caching overview",
+      "location": "Pischa",
+      "link": "https://drupalmountaincamp.ch/sessions/drupal-8-caching-overview",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Sascha Grossenbacher"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T15:30:00Z",
+      "endTime": "2017-02-18T16:30:00Z",
+      "duration": "P60M",
+      "title": "Content Experience with Paragraphs",
+      "location": "Jakobshorn",
+      "link": "https://drupalmountaincamp.ch/sessions/content-experience-paragraphs",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Miro Dietiker",
+        "Nemanja Drobnjak"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T15:30:00Z",
+      "endTime": "2017-02-18T16:30:00Z",
+      "duration": "P60M",
+      "title": "Entity Browser and getting off the local storage",
+      "location": "Parsenn",
+      "link": "https://drupalmountaincamp.ch/sessions/entity-browser-and-getting-local-storage",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Primoz Hmeljak",
+        "Janez Urevc"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    },
+    {
+      "startTime": "2017-02-18T15:30:00Z",
+      "endTime": "2017-02-18T16:30:00Z",
+      "duration": "P60M",
+      "title": "Migration is hard, but it works",
+      "location": "Pischa",
+      "link": "https://drupalmountaincamp.ch/sessions/migration-hard-it-works",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Christophe Galli"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dmc17-schedule"
+      ],
+      "kind": "session"
+    }
+  ]
+}

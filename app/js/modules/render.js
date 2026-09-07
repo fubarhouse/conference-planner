@@ -13,6 +13,7 @@ import { formatTextBlock } from './markdown.js';
 import { sponsorBgClass, sponsorAspectClass } from './sponsorStyles.js';
 import { normalizeSponsors } from './sponsors.js';
 import { trackDayNav } from './scheduleDayNav.js';
+import { itemKind, isCancelled } from './sessionKind.js';
 import { buildModalOverlay, dismissOnBackdrop, trapFocus } from './modalScaffold.js';
 import {
   getSpeakersInfo,
@@ -353,7 +354,10 @@ function renderEventCard(event, { keywordsFilter }) {
     timeZone: state.eventMeta.timezone,
   });
 
-  const timelineTime = `${startTimeItem} - ${endTimeItem}`;
+  // An unscheduled session has no times to format, and `new Date(undefined)`
+  // would print "Invalid Date" into both the flag and the When fact. Empty is
+  // correct: the flag is dropped and When says what is actually known.
+  const timelineTime = event.unscheduled ? '' : `${startTimeItem} - ${endTimeItem}`;
   const highlightedSummary = highlightKeywords(event.title, keywordsFilter);
   const speakerEntries = getSpeakerEntries(event);
   const speakersInfo = getSpeakersInfo(speakerEntries.map((entry) => entry.name));
@@ -386,9 +390,16 @@ function renderEventCard(event, { keywordsFilter }) {
   // Flags are words, not icon glyphs — no icon font, no third-party origin.
   // The entry's own time range is kept because sessions sharing a start time
   // do not necessarily share an end time.
+  // A sprint, a summit and the pub quiz all sit in the programme, but a reader
+  // scanning for talks needs to see at a glance which is which. Only the two
+  // kinds that are neither a plain session nor plain logistics get a word.
+  const kind = itemKind(event);
+  const kindFlag = kind === 'workshop' ? 'Workshop' : kind === 'social' ? 'Social' : '';
+
   const flags = [
     timelineTime ? `<span class="sch-flag">${escapeHtml(timelineTime)}</span>` : '',
     durationText ? `<span class="sch-flag">${escapeHtml(durationText)}</span>` : '',
+    kindFlag ? `<span class="sch-flag sch-flag--${kind}">${kindFlag}</span>` : '',
     event.video_url ? '<span class="sch-flag">Recorded</span>' : '',
     event.link ? '<span class="sch-flag">Session page</span>' : '',
   ]
@@ -427,15 +438,29 @@ function renderEventCard(event, { keywordsFilter }) {
 
   const selectId = `sel-${event.id}`;
 
-  return `
-    <article class="sch-entry" data-primary-track="${escapeHtml(primaryTrack)}" data-event-id="${event.id}">
+  // Selecting a session builds a calendar entry from it. One with no time can
+  // never produce a VEVENT, so the checkbox is not rendered at all rather than
+  // shown disabled — a disabled control still says "this ought to work".
+  const picker = event.unscheduled
+    ? ''
+    : `
       <label class="sch-entry__picker schedule-select-label" title="Add or remove from selection">
         <input type="checkbox" id="${escapeHtml(selectId)}" class="sch-entry__pick schedule-select-checkbox" ${isSelected ? 'checked' : ''}
           aria-label="${isSelected ? 'Remove session from selection' : 'Add session to selection'}: ${escapeHtml(event.title || 'Session')}" />
-      </label>
+      </label>`;
+
+  return `
+    <article class="sch-entry${event.unscheduled ? ' sch-entry--nopick' : ''}" data-primary-track="${escapeHtml(primaryTrack)}" data-event-id="${event.id}">
+      ${picker}
       <details class="sch-entry__disclosure" name="session">
         <summary class="sch-entry__summary">
-          ${highlightedTrack}${event.location ? `<span class="sch-entry__room"> · ${highlightedLocation}</span>` : ''}
+          ${highlightedTrack}${
+            event.location
+              ? // The separator belongs to the pair, not to the room. Without a
+                // track in front of it the card opened with a stray "· ".
+                `<span class="sch-entry__room">${trackLabels.length ? ' · ' : ''}${highlightedLocation}</span>`
+              : ''
+          }
           <span class="sch-entry__title">${highlightedSummary}</span>
           ${speakersInfo.text ? `<span class="sch-entry__by">${highlightedSpeakers}</span>` : ''}
           ${summaryText ? `<span class="sch-entry__summary-text session-description-preview">${highlightedSummaryText}</span>` : ''}
@@ -450,7 +475,11 @@ function renderEventCard(event, { keywordsFilter }) {
             ${speakersInfo.text ? `<p class="sch-entry__detail-by">${speakersMarkup}</p>` : ''}
           </div>
           <dl class="sch-entry__facts">
-            ${fact('When', `${escapeHtml(dayDate)}, ${escapeHtml(timelineTime)}`)}
+            ${
+              event.unscheduled
+                ? fact('When', 'Offered, never placed in a slot')
+                : fact('When', `${escapeHtml(dayDate)}, ${escapeHtml(timelineTime)}`)
+            }
             ${fact('Location', escapeHtml(event.location || ''))}
             ${fact('Track', escapeHtml(trackText))}
             ${fact('Duration', escapeHtml(durationText || ''))}
@@ -508,8 +537,41 @@ function buildNoResults(keyword) {
   return el;
 }
 
-function displayListView(events, container) {
-  const groupedEvents = groupEventsByDate(events);
+// The sessions a barcamp offered but never placed. Rendered after the timed
+// days, under a heading that says why there are no times — a reader who finds
+// sessions with no slot and no explanation will assume the data is broken, and
+// the whole point of this record is that it is not.
+function buildSessionPool(pool, keywordsFilter) {
+  const section = document.createElement('div');
+  section.className = 'schedule-day sch-pool';
+  section.id = 'session-pool';
+  const cards = [...pool]
+    .sort((a, b) => String(a.title || '').localeCompare(String(b.title || '')))
+    .map((event) => renderEventCard(event, { keywordsFilter }))
+    .join('');
+  section.innerHTML = `
+    <div class="sch-chapter">
+      <h2 class="sch-chapter__title">Sessions without a time</h2>
+    </div>
+    <div class="sch-pool__grid">${cards}</div>`;
+  return section;
+}
+
+function displayListView(allEvents, container) {
+  // A cancelled item is kept in the dataset as evidence but must never appear
+  // in the programme — showing it would assert that something happened which
+  // did not. Dropped here, before grouping, so day headings and slot counts
+  // never include it either.
+  const events = allEvents.filter((event) => !isCancelled(event));
+
+  // A barcamp offers sessions it never places. Those carry `unscheduled: true`
+  // and no times at all, so they cannot be grouped by day or slot — grouping
+  // them would put every one under an Invalid Date heading. They are held back
+  // here and rendered as a pool after the timed days, which is the only honest
+  // position for them: inside the event, outside the timetable.
+  const scheduled = events.filter((event) => !event.unscheduled);
+  const pool = events.filter((event) => event.unscheduled);
+  const groupedEvents = groupEventsByDate(scheduled);
 
   // Selecting a session re-renders the whole list, which would otherwise close
   // whatever the reader has open — you tick a talk and lose your place. Remember
@@ -618,6 +680,8 @@ function displayListView(events, container) {
     dateSection.innerHTML = dateHtml;
     container.appendChild(dateSection);
   });
+
+  if (pool.length) container.appendChild(buildSessionPool(pool, keywordsFilter));
 
   if (openEventId) {
     const reopened = container.querySelector(

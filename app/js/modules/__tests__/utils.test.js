@@ -63,8 +63,29 @@ describe('normalizeTracks', () => {
     expect(normalizeTracks('DevOps, Frontend, Backend')).toEqual(['DevOps', 'Frontend', 'Backend']);
   });
 
-  it('flattens and deduplicates an array of values', () => {
-    expect(normalizeTracks(['DevOps', 'Frontend, DevOps'])).toEqual(['DevOps', 'Frontend']);
+  it('treats an array element as ONE track, comma and all', () => {
+    // An array has already made the separation explicit, so a comma inside an
+    // element belongs to the name. 35 datasets carry names like these, and
+    // splitting them produced a phantom "Accessibility" track alongside a
+    // truncated "Frontend & UX Design".
+    expect(normalizeTracks(['Frontend (HTML, CSS, JS)'])).toEqual(['Frontend (HTML, CSS, JS)']);
+    expect(normalizeTracks(['Accessibility, Frontend & UX Design'])).toEqual([
+      'Accessibility, Frontend & UX Design',
+    ]);
+  });
+
+  it('still splits the " , " scrape artefact inside an array', () => {
+    // A multi-value field flattened with spaces around the separator. The space
+    // BEFORE the comma is what distinguishes it from a name.
+    expect(normalizeTracks(['Back-end , Case study , Data'])).toEqual([
+      'Back-end',
+      'Case study',
+      'Data',
+    ]);
+  });
+
+  it('deduplicates across array elements', () => {
+    expect(normalizeTracks(['DevOps', 'Frontend , DevOps'])).toEqual(['DevOps', 'Frontend']);
   });
 
   it('returns empty array for empty input', () => {

@@ -1,0 +1,532 @@
+{
+  "event": {
+    "regionCode": "APAC",
+    "country": "India",
+    "designation": "Drupal Camp Delhi",
+    "ecosystem": "drupal",
+    "location": "New Delhi",
+    "year": "2026",
+    "website": "https://drupalcampdelhi.com",
+    "region": "India",
+    "startDate": "2026-03-14T02:30:00Z",
+    "endDate": "2026-03-15T11:30:00Z",
+    "venue": "Jawaharlal Nehru University, New Delhi",
+    "timezone": "Asia/Kolkata",
+    "enabled": true,
+    "flickr": {
+      "enabled": false,
+      "provider": "",
+      "groupUrl": "",
+      "image": "",
+      "imageAlt": ""
+    },
+    "logo": {
+      "image": "",
+      "imageAlt": "Drupal Camp Delhi logo",
+      "usePlate": false,
+      "logoDisabled": false,
+      "faIcon": ""
+    },
+    "sponsors": [
+      {
+        "title": "A Test Sponsor",
+        "tier": "Gold",
+        "note": "with a comma, a \"quote\" and <html>",
+        "id": "sponsor-1"
+      },
+      {
+        "id": "sponsor-2",
+        "title": "OpenSense Labs",
+        "tier": "Lanyard Sponsor",
+        "row": 2,
+        "priority": 1,
+        "image": "./img/sponsors/drupalcamp/2026-delhi/sponsor-2.svg",
+        "imageAlt": "OpenSense Labs logo",
+        "link": "https://opensenselabs.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-3",
+        "title": "Specbee",
+        "tier": "Contribution Room Sponsor",
+        "row": 3,
+        "priority": 1,
+        "image": "./img/sponsors/drupalcamp/2026-delhi/sponsor-3.png",
+        "imageAlt": "Specbee logo",
+        "link": "https://www.specbee.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      },
+      {
+        "id": "sponsor-4",
+        "title": "The Drop Times",
+        "tier": "Media Sponsor",
+        "row": 4,
+        "priority": 1,
+        "image": "./img/sponsors/drupalcamp/2026-delhi/sponsor-4.png",
+        "imageAlt": "The Drop Times logo",
+        "link": "https://www.thedroptimes.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "columns": 3,
+    "scheduleURLs": [
+      "https://drupalcampdelhi.com/"
+    ],
+    "other_urls": [
+      "https://drupalcampdelhi.com/event-schedule",
+      "https://drupalcampdelhi.com/our-sponsors",
+      "https://drupalcampdelhi.com/session-tracks",
+      "https://drupalcampdelhi.com/drupal-day"
+    ],
+    "sources": [
+      {
+        "id": "dcd26-home",
+        "kind": "schedule",
+        "url": "https://drupalcampdelhi.com/",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20260413165231",
+          "captureUrl": "https://web.archive.org/web/20260413165231/https://drupalcampdelhi.com/"
+        },
+        "notes": "The entire Day 1 programme lives in a CKEditor body field on the HOMEPAGE, not on /event-schedule — which has a single capture, taken after the domain had already lapsed to a parking page. The schedule is a hand-built flexbox layout with inline styles: each row is a display:flex div whose three direct div children are Hall 1, Hall 2 and Auditorium in that order, and each CELL carries its own time (the two halls often disagree on formatting — \"09:15\" vs \"9:15\"). Four plenary blocks (Event Start, the two keynotes, Closing Ceremony) and the three meal/break markers sit OUTSIDE the flex grid and have no hall. A regex that splits on display:flex mis-assigns halls; walking direct div children is required. An identical capture exists at 20260517233804."
+      },
+      {
+        "id": "dcd26-sponsors",
+        "kind": "sponsors",
+        "url": "https://drupalcampdelhi.com/our-sponsors",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20260307030228",
+          "captureUrl": "https://web.archive.org/web/20260307030228/https://drupalcampdelhi.com/our-sponsors"
+        },
+        "notes": "Four sponsors, one per tier. No logo was ever captured — the only surviving files under /sites/default/files are three CSS responses fetched in August 2026, after the domain died — and the page carries no outbound links, so the names come from image alt text alone. \"Amazee.io\" is given in full. \"osl\" (osl_logo.png) is read as OpenSense Labs and \"tdt\" as The Drop Times, both corroborated by the same abbreviations and logo filenames in DrupalCamp Pune 2024. \"spec\" is read as Specbee on the abbreviation alone — its file is a screenshot with no identifying name, and that expansion is UNCONFIRMED."
+      },
+      {
+        "id": "dcd26-tracks",
+        "kind": "other",
+        "url": "https://drupalcampdelhi.com/session-tracks",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20260307022413",
+          "captureUrl": "https://web.archive.org/web/20260307022413/https://drupalcampdelhi.com/session-tracks"
+        },
+        "notes": "Six proposed session tracks with ~30 topic taxonomy terms, published a week before the event. No session was ever filed against them, and the delivered programme on the homepage carries no track labels, so tracks here are derived from the item type rather than taken from the source."
+      },
+      {
+        "id": "dcd26-drupal-org",
+        "kind": "community",
+        "url": "https://www.drupal.org/community/events/drupal-camp-delhi-2026-2026-03-14",
+        "retrievedAt": "2026-08-25",
+        "notes": "Records the event as a single day (2026-03-14). The site itself says \"14-15 March, 2026\" and gives hours for both days, so the drupal.org entry understates it."
+      },
+      {
+        "id": "dcd26-logos-borrowed",
+        "kind": "sponsors",
+        "title": "Sponsor logos substituted from other events in the archive",
+        "via": {
+          "provider": "stated"
+        },
+        "retrievedAt": "2026-08-26",
+        "notes": "The DrupalCamp Delhi 2026 site's own image files were never archived, so these four logos are NOT from drupalcampdelhi.com. Each is the same sponsor's mark copied from another event already in this archive, chosen from 2026 wherever one existed: Amazee.io and Specbee from DrupalCon Chicago 2026; The Drop Times from Drupal Dev Days Athens 2026; OpenSense Labs from DrupalCon Atlanta 2025, its most recent (no 2026 capture of that logo exists in the archive). They are the correct marks for these companies but are not evidence of how this event rendered them. Note this compounds one uncertainty: the Specbee identification itself rests only on the alt text \"spec\" (see dcd26-sponsors), so if that reading is wrong, the logo is wrong with it. Each sponsor's `link` is taken from the same source dataset for the same reason — the Delhi page linked nowhere. Amazee.io's link was normalised to the company's own domain rather than carried over, because the source dataset held a DrupalCon-specific landing page."
+      }
+    ],
+    "sourceIds": [
+      "dcd26-home"
+    ]
+  },
+  "items": [
+    {
+      "startTime": "2026-03-14T02:30:00Z",
+      "endTime": "2026-03-14T03:30:00Z",
+      "duration": "P60M",
+      "title": "Registration & Welcome",
+      "location": "Hall 1",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    },
+    {
+      "startTime": "2026-03-14T03:45:00Z",
+      "endTime": "2026-03-14T05:30:00Z",
+      "duration": "P105M",
+      "title": "Workshop - Shifted to second half",
+      "location": "Auditorium",
+      "link": "",
+      "track": [
+        "Workshop"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2026-03-14T03:45:00Z",
+      "endTime": "2026-03-14T04:05:00Z",
+      "duration": "P20M",
+      "title": "Vulnerability Assessment & Penetration Testing (VAPT) in Drupal 11",
+      "location": "Hall 1",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    },
+    {
+      "startTime": "2026-03-14T03:45:00Z",
+      "endTime": "2026-03-14T04:05:00Z",
+      "duration": "P20M",
+      "title": "Breaking Free from Cron: Asynchronous AI Agent Processing in Drupal with Symfony Messenger",
+      "location": "Hall 2",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    },
+    {
+      "startTime": "2026-03-14T04:15:00Z",
+      "endTime": "2026-03-14T05:00:00Z",
+      "duration": "P45M",
+      "title": "Design to Deploy in Minutes: Mastering the Lovable AI + Drupal Canvas Workflow",
+      "location": "Hall 1",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    },
+    {
+      "startTime": "2026-03-14T04:15:00Z",
+      "endTime": "2026-03-14T05:00:00Z",
+      "duration": "P45M",
+      "title": "Building API-Driven Components with SDC & Canvas in Drupal CMS 2.0",
+      "location": "Hall 2",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    },
+    {
+      "startTime": "2026-03-14T05:30:00Z",
+      "endTime": "2026-03-14T05:45:00Z",
+      "duration": "P15M",
+      "title": "Breakfast",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    },
+    {
+      "startTime": "2026-03-14T05:45:00Z",
+      "endTime": "2026-03-14T06:15:00Z",
+      "duration": "P30M",
+      "title": "Event Start - Introduction to Drupal Camp Delhi",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    },
+    {
+      "startTime": "2026-03-14T06:15:00Z",
+      "endTime": "2026-03-14T07:00:00Z",
+      "duration": "P45M",
+      "title": "Fireside Chat with Jacob Singh – AI, Automation, and the Future of Work, What Changes (and What Doesn’t)",
+      "location": "",
+      "link": "",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Jacob Singh"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    },
+    {
+      "startTime": "2026-03-14T07:00:00Z",
+      "endTime": "2026-03-14T08:00:00Z",
+      "duration": "P60M",
+      "title": "Is There a Future in Drupal AI?",
+      "location": "",
+      "link": "",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "James Jackson Abrahams"
+      ],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    },
+    {
+      "startTime": "2026-03-14T08:00:00Z",
+      "endTime": "2026-03-14T09:00:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    },
+    {
+      "startTime": "2026-03-14T09:00:00Z",
+      "endTime": "2026-03-14T09:45:00Z",
+      "duration": "P45M",
+      "title": "Scaling Drupal to the Limit: Real-World Performance Optimization Strategies",
+      "location": "Auditorium",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    },
+    {
+      "startTime": "2026-03-14T09:00:00Z",
+      "endTime": "2026-03-14T09:45:00Z",
+      "duration": "P45M",
+      "title": "From Dockerfile to Live Drupal - Deploying Containers on Azure App Service",
+      "location": "Hall 1",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    },
+    {
+      "startTime": "2026-03-14T09:00:00Z",
+      "endTime": "2026-03-14T11:30:00Z",
+      "duration": "P150M",
+      "title": "Acquia Certification Exam",
+      "location": "Hall 2",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    },
+    {
+      "startTime": "2026-03-14T09:50:00Z",
+      "endTime": "2026-03-14T10:10:00Z",
+      "duration": "P20M",
+      "title": "Power of Participation: How Drupal community involvement became a catalyst to achieve a career milestone",
+      "location": "Auditorium",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    },
+    {
+      "startTime": "2026-03-14T09:50:00Z",
+      "endTime": "2026-03-14T10:10:00Z",
+      "duration": "P20M",
+      "title": "AI-Assisted Editorial Workflows in Drupal with ECA & Easy Email",
+      "location": "Hall 1",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    },
+    {
+      "startTime": "2026-03-14T10:15:00Z",
+      "endTime": "2026-03-14T10:35:00Z",
+      "duration": "P20M",
+      "title": "Design System Integration (Figma → SDC → Canvas)",
+      "location": "Auditorium",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    },
+    {
+      "startTime": "2026-03-14T10:15:00Z",
+      "endTime": "2026-03-14T11:00:00Z",
+      "duration": "P45M",
+      "title": "Level Up Your Accessibility: Migrating from WCAG 2.0 to 2.2",
+      "location": "Hall 1",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    },
+    {
+      "startTime": "2026-03-14T10:35:00Z",
+      "endTime": "2026-03-14T11:30:00Z",
+      "duration": "P55M",
+      "title": "Workshop",
+      "location": "Auditorium",
+      "link": "",
+      "track": [
+        "Workshop"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2026-03-14T11:30:00Z",
+      "endTime": "2026-03-14T12:00:00Z",
+      "duration": "P30M",
+      "title": "Coffee Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    },
+    {
+      "startTime": "2026-03-14T12:00:00Z",
+      "endTime": "2026-03-14T12:30:00Z",
+      "duration": "P30M",
+      "title": "Closing Ceremony",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd26-home"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "https://flickr.com/groups/x": {
+    "thumb": "https://live.staticflickr.com/1/2_b.jpg",
+    "at": 1700000000000
+  },
+  "https://photos.google.com/share/y": {
+    "thumb": "",
+    "at": 1700000001000
+  }
+}

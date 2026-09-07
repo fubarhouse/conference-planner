@@ -402,15 +402,80 @@ function createSponsorLogoSurface(sponsor) {
   return surface;
 }
 
+/**
+ * The one-line summary of what could be recovered.
+ *
+ * Pure and exported so it can be tested without a DOM — the tests here run in a
+ * node environment. It is worded as the record of a search rather than an
+ * apology: a reader needs to tell an event that had no sponsors from one whose
+ * sponsor page did not survive, and those look identical otherwise.
+ *
+ * @param {{state?: string}|null|undefined} record
+ * @param {number} shown how many sponsors are actually on the page
+ * @returns {string}
+ */
+export function sponsorRecordLead(record, shown = 0) {
+  switch (record?.state) {
+    case 'none':
+      return 'No sponsors could be recovered for this event.';
+    case 'partial':
+      return `Only ${shown === 1 ? 'one sponsor' : `${shown} sponsors`} could be recovered — the full list did not survive.`;
+    case 'logos-lost':
+      return 'The sponsors are recorded; their logos did not survive.';
+    default:
+      return 'The sponsor record for this event is incomplete.';
+  }
+}
+
+/**
+ * The record, as a paragraph for the sponsor section.
+ *
+ * @param {{state?: string, note?: string, checkedAt?: string}} record
+ * @param {number} shown
+ */
+function sponsorRecordNote(record, shown) {
+  const wrap = document.createElement('p');
+  wrap.className = 'sponsor-record';
+  const lead = document.createElement('span');
+  lead.className = 'sponsor-record__lead';
+  lead.textContent = sponsorRecordLead(record, shown);
+  wrap.appendChild(lead);
+  if (record.note) {
+    const note = document.createElement('span');
+    note.className = 'sponsor-record__note';
+    note.textContent = ` ${record.note}`;
+    wrap.appendChild(note);
+  }
+  if (record.checkedAt) {
+    const when = document.createElement('span');
+    when.className = 'sponsor-record__when';
+    when.textContent = ` Checked ${record.checkedAt}.`;
+    wrap.appendChild(when);
+  }
+  return wrap;
+}
+
 export function renderSponsors(eventMeta = null) {
   const container = document.getElementById('sponsorsContainer');
   const content = document.getElementById('sponsorsContent');
   if (!container || !content) return;
 
   const sponsors = normalizeSponsors(eventMeta);
+  const record = eventMeta?.sponsorRecord || null;
+
+  // An empty sponsor section used to just disappear, which is the one thing it
+  // must not do when the sponsors are LOST rather than absent: a silent gap
+  // reads as "this event had no sponsors", which is a claim we have not made
+  // and usually is not true. When the dataset says what was searched for and
+  // why it came up short, say so here instead of hiding.
   if (!sponsors.length) {
     content.innerHTML = '';
-    container.classList.add('hidden');
+    if (!record) {
+      container.classList.add('hidden');
+      return;
+    }
+    container.classList.remove('hidden');
+    content.appendChild(sponsorRecordNote(record, 0));
     return;
   }
 
@@ -471,6 +536,10 @@ export function renderSponsors(eventMeta = null) {
 
     content.appendChild(section);
   });
+
+  // A partial list needs the note too — otherwise three recovered sponsors read
+  // as the whole story.
+  if (record) content.appendChild(sponsorRecordNote(record, sponsors.length));
 
   container.classList.remove('hidden');
 }

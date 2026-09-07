@@ -23,6 +23,21 @@ import {
   showDrill,
   showSessionSearch,
 } from './modules/archiveDashboard.js';
+import {
+  listAnnotations,
+  getAnnotation,
+  saveAnnotation,
+  removeAnnotation,
+  toggleAnnotation,
+  yearRangeLabel,
+  annotationColor,
+  nextColor,
+  PALETTE_SIZE,
+  MAX_LABEL,
+  MAX_NOTE,
+  YEAR_MIN,
+  YEAR_MAX,
+} from './modules/archiveAnnotations.js';
 import { loadThemes, applyThemeClass, getCurrentThemeId } from './modules/theme.js';
 import { initThemePicker } from './modules/themePicker.js';
 import { initAppMenu } from './modules/appMenu.js';
@@ -32,16 +47,22 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadThemes();
   applyThemeClass(getCurrentThemeId());
   initThemePicker();
-  initAppMenu({ adopt: ['.app-nav'] });
+  // `.header-actions` goes with the nav, the way the schedule already sends its
+  // Subscribe control down. Left in the bar, the Annotations button squeezed the
+  // lockup to about 90px on a phone and wrapped "The whole community, year by
+  // year" over five lines — the masthead ends up mostly chrome, and the thing
+  // the page is named after is the part that gives way.
+  initAppMenu({ adopt: ['.app-nav', '.header-actions'] });
 
+  // No scroll-lock to undo any more: openObservatory() used to lock body scroll
+  // for the editor overlay it was written for, and this line put it back. The
+  // lock is gone at the source, along with the Escape-to-close that hid the
+  // page's own <main>.
   openObservatory();
-
-  // openObservatory() locks page scroll because in the editor it opens as an
-  // overlay over the workspace. Here it *is* the page.
-  document.body.style.overflow = '';
 
   initRail();
   wireKeywordRail();
+  wireAnnotationsButton();
   wireSubtitle();
   wireSearchBreakdown();
 
@@ -49,10 +70,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   // the archive has loaded. The dashboard renders asynchronously, so wait for
   // the body to fill rather than racing it.
   // A drill is /archive/<type>/<slug>; a view mode is just /archive/videos or
-  // /archive/albums. Both are addresses worth restoring, so the guard has to
-  // allow the slug-less form — it used to require the trailing segment, and the
-  // view modes silently fell through to the overview.
-  if (/\/archive\/([a-z]+\/|videos|albums)/i.test(location.pathname)) {
+  // /archive/sources. Both are addresses worth restoring.
+  //
+  // Deliberately ANY segment rather than a list of the modes that exist today.
+  // The list form had to be edited every time a view mode was added, and when
+  // `sources` was added and the list was not, refreshing /archive/sources
+  // silently dropped the reader on the overview. openDrillFromPath already
+  // decides what is routable; this guard only needs to know that something
+  // follows /archive/.
+  if (/\/archive\/[a-z]+/i.test(location.pathname)) {
     const body = document.getElementById('obsBody');
     const tryRoute = () => openDrillFromPath() && obs.disconnect();
     const obs = new MutationObserver(tryRoute);
@@ -110,6 +136,175 @@ function wireKeywordRail() {
 
   ensureTriggers();
   new MutationObserver(ensureTriggers).observe(body, { childList: true, subtree: true });
+}
+
+// ── Annotations ──────────────────────────────────────────────────────────────
+//
+// The reader's own layer over the time axis: "COVID, 2020–2021" written once and
+// drawn on every chart that plots years. See modules/archiveAnnotations.js for
+// why they are local and why they are global rather than per-series.
+//
+// A masthead control rather than a chart control, and that IS the argument: a
+// button on the topic chart would say these notes belong to that chart, when the
+// whole point is that one note explains a shape appearing in all of them.
+
+/** Which annotation the form is editing, or null when it is adding a new one. */
+let _annEdit = null;
+
+function wireAnnotationsButton() {
+  const btn = document.getElementById('archiveAnnotationsBtn');
+  btn?.addEventListener('click', () => {
+    _annEdit = null;
+    openAnnotationsRail();
+  });
+}
+
+const attr = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+
+// A real radio group, not buttons: eleven swatches ARE one choice among many, so
+// the browser's own roving focus, arrow keys and form serialisation are exactly
+// right and none of it has to be rebuilt. The label carries the slot number so
+// the control is not colour-alone for anyone who cannot see the difference.
+function annSwatchesHtml(a) {
+  const current = a ? a.color : nextColor();
+  const slots = Array.from({ length: PALETTE_SIZE }, (_, i) => {
+    const on = current === i;
+    return `<label class="obs-ann-sw${on ? ' is-on' : ''}" style="--ann-color:var(--viz-${i + 1})">
+      <input type="radio" name="color" value="${i}"${on ? ' checked' : ''}>
+      <span class="sr-only">Colour ${i + 1}</span>
+    </label>`;
+  }).join('');
+  return `
+    <span class="obs-ann-l" id="annColourL">Colour</span>
+    <p class="obs-kw-note">From the same eleven the charts plot with — a note takes the
+    first one nothing else is using.</p>
+    <div class="obs-ann-swatches" role="radiogroup" aria-labelledby="annColourL">${slots}</div>`;
+}
+
+function annFormHtml() {
+  const a = _annEdit ? getAnnotation(_annEdit) : null;
+  return `
+    <form class="obs-ann-form" data-ann-form>
+      <h3 class="obs-kw-h">${a ? 'Edit note' : 'Add a note'}</h3>
+      <p class="obs-kw-note">Something that happened <em>to</em> the community rather than
+      in it — a pandemic, a platform release, a year the event moved. One year, or a span.</p>
+      <input type="hidden" name="id" value="${attr(a?.id || '')}">
+      <label class="obs-ann-l" for="annLabel">What happened</label>
+      <input id="annLabel" name="label" class="obs-kw-input" type="text" required
+             maxlength="${MAX_LABEL}" autocomplete="off" placeholder="e.g. COVID-19"
+             value="${attr(a?.label || '')}">
+      <div class="obs-ann-years">
+        <div>
+          <label class="obs-ann-l" for="annFrom">From year</label>
+          <input id="annFrom" name="from" class="obs-kw-input" type="number" required
+                 inputmode="numeric" min="${YEAR_MIN}" max="${YEAR_MAX}" step="1" placeholder="2020"
+                 value="${attr(a ? a.from : '')}">
+        </div>
+        <div>
+          <label class="obs-ann-l" for="annTo">To year</label>
+          <input id="annTo" name="to" class="obs-kw-input" type="number"
+                 inputmode="numeric" min="${YEAR_MIN}" max="${YEAR_MAX}" step="1" placeholder="same year"
+                 value="${a && a.to !== a.from ? attr(a.to) : ''}">
+        </div>
+      </div>
+      ${annSwatchesHtml(a)}
+      <label class="obs-ann-l" for="annNote">Detail <span class="obs-kw-note">(optional)</span></label>
+      <textarea id="annNote" name="note" class="obs-kw-input obs-ann-text" rows="3"
+                maxlength="${MAX_NOTE}" placeholder="Shown on hover, and in the rail.">${attr(a?.note || '')}</textarea>
+      <p class="obs-ann-err" data-ann-err hidden></p>
+      <div class="obs-ann-actions">
+        <button type="submit" class="app-btn">${a ? 'Save changes' : 'Add note'}</button>
+        ${a ? '<button type="button" class="app-btn" data-ann-cancel>Cancel</button>' : ''}
+      </div>
+    </form>`;
+}
+
+function annListHtml() {
+  const rows = listAnnotations();
+  if (!rows.length)
+    return `<p class="obs-kw-note">No notes yet. The first one most archives need is the
+      two years the conferences stopped.</p>`;
+  return `<ul class="obs-kw-list">${rows
+    .map(
+      (
+        a,
+      ) => `<li class="obs-ann-row${a.hidden ? ' is-off' : ''}" style="--ann-color:${annotationColor(a)}"${_annEdit === a.id ? ' data-ann-editing' : ''}>
+        <button type="button" class="obs-ann-eye" data-ann-toggle="${attr(a.id)}"
+                aria-pressed="${!a.hidden}">
+          <span class="obs-ann-chip" aria-hidden="true"></span>
+          <span class="sr-only">${a.hidden ? 'Show' : 'Hide'} ${attr(a.label)} on the charts</span>
+        </button>
+        <span class="obs-ann-years-l">${yearRangeLabel(a)}</span>
+        <span class="obs-ann-name">${attr(a.label)}</span>
+        ${a.note ? `<p class="obs-ann-detail">${attr(a.note)}</p>` : ''}
+        <span class="obs-ann-row-actions">
+          <button type="button" class="obs-kw-btn" data-ann-toggle="${attr(a.id)}" aria-pressed="${!a.hidden}">${a.hidden ? 'Hidden' : 'Shown'}</button>
+          <button type="button" class="obs-kw-btn" data-ann-edit="${attr(a.id)}">Edit</button>
+          <button type="button" class="obs-kw-btn" data-ann-del="${attr(a.id)}">Delete</button>
+        </span>
+      </li>`,
+    )
+    .join('')}</ul>`;
+}
+
+export function openAnnotationsRail() {
+  const body = openRail('Annotations');
+  if (!body) return;
+
+  body.innerHTML = `
+    ${panelHead('Annotations')}
+    <p class="obs-kw-note">Notes on the years themselves, drawn on every chart with a time
+    axis. Kept in this browser only — they are your reading of the archive, not part of it.</p>
+    ${annFormHtml()}
+    <h3 class="obs-kw-h">Your notes</h3>
+    ${annListHtml()}`;
+
+  body.addEventListener('click', (e) => {
+    // The chip and the word are one control in two places — the chip for anyone
+    // scanning the list of colours, the word for anyone reading it.
+    const tog = e.target.closest('[data-ann-toggle]');
+    if (tog) {
+      toggleAnnotation(tog.dataset.annToggle);
+      return openAnnotationsRail();
+    }
+    const del = e.target.closest('[data-ann-del]');
+    if (del) {
+      // The row carries its own label, so a confirm can name what it is about to
+      // destroy rather than asking about "this item".
+      const a = getAnnotation(del.dataset.annDel);
+      if (a && !confirm(`Delete “${a.label}” (${yearRangeLabel(a)})?`)) return;
+      removeAnnotation(del.dataset.annDel);
+      if (_annEdit === del.dataset.annDel) _annEdit = null;
+      return openAnnotationsRail();
+    }
+    const edit = e.target.closest('[data-ann-edit]');
+    if (edit) {
+      _annEdit = edit.dataset.annEdit;
+      openAnnotationsRail();
+      document.getElementById('annLabel')?.focus();
+      return;
+    }
+    if (e.target.closest('[data-ann-cancel]')) {
+      _annEdit = null;
+      openAnnotationsRail();
+    }
+  });
+
+  body.querySelector('[data-ann-form]')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    const err = body.querySelector('[data-ann-err]');
+    const saved = saveAnnotation(data);
+    if (!saved) {
+      // The store validates; the form only has to report. Duplicating the rules
+      // here is how the two drift apart.
+      err.textContent = `Needs a description and a year between ${YEAR_MIN} and ${YEAR_MAX}.`;
+      err.hidden = false;
+      return;
+    }
+    _annEdit = null;
+    openAnnotationsRail();
+  });
 }
 
 // The masthead used to hardcode "Nineteen years", which drifted the moment the

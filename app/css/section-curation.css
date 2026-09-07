@@ -858,3 +858,132 @@
     border-color: var(--ink-1);
   }
 }
+
+@layer section {
+  /* ── Reader suggestions ───────────────────────────────────────────────────
+     A queue, not a deck: read newest-first, act or dismiss, in any order. Built
+     from the studio's existing pieces — `cur-seg` for the filter, `cur-btn` for
+     the actions — so it reads as the same tool as the identity decks. */
+  .cur-tips {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .cur-tip {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-1);
+  }
+
+  /* Decided rows stay in the list — a dismissal is an answer, and hiding it
+     means the next reviewer reads the same dead lead again. They recede. */
+  .cur-tip.is-decided {
+    opacity: 0.62;
+  }
+
+  .cur-tip-main {
+    min-inline-size: 0;
+  }
+
+  .cur-tip-name {
+    margin: 0;
+    font-size: var(--step-0);
+  }
+
+  .cur-tip-url {
+    display: inline-block;
+    margin-block-start: 0.2rem;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--brand-1-ink);
+    overflow-wrap: anywhere;
+  }
+
+  .cur-tip-url--none {
+    color: var(--ink-2);
+  }
+
+  .cur-tip-notes {
+    margin: 0.45rem 0 0;
+    font-size: var(--step--1);
+    color: var(--ink-1);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .cur-tip-meta {
+    margin: 0.45rem 0 0;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    color: var(--ink-2);
+  }
+
+  .cur-tip-acts {
+    display: flex;
+    flex: none;
+    gap: 0.4rem;
+  }
+
+  .cur-tip-empty {
+    padding: 2rem 0;
+    text-align: center;
+    color: var(--ink-2);
+  }
+
+  /* Identity mappings share the queue with conference leads but are the only
+     rows whose approval changes what the archive says, so they carry the gold
+     edge the rest of the desk uses for "this one is a decision". */
+  .cur-tip--identity {
+    border-inline-start: 3px solid var(--brand-1);
+  }
+
+  .cur-tip-eyebrow {
+    margin: 0 0 0.25rem;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* from → to wraps as a unit on a narrow desk rather than stranding the arrow
+     at the end of a line. */
+  .cur-tip--identity .cur-tip-name {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem;
+  }
+
+  .cur-tip-from {
+    color: var(--ink-1);
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--ink-2);
+  }
+
+  .cur-tip-arrow {
+    color: var(--brand-1-ink);
+  }
+
+  .cur-tip-to {
+    font-weight: 600;
+  }
+
+  .cur-ov-n--gold {
+    color: var(--brand-1-ink);
+  }
+
+  @media (max-width: 40rem) {
+    .cur-tip {
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+  }
+}

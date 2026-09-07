@@ -39,7 +39,7 @@ export default [
 
   // Node back-end + scripts
   {
-    files: ['lib/**/*.js', 'scripts/**/*.mjs', 'server.js', '*.config.js', 'uno.config.js'],
+    files: ['scripts/**/*.js', 'scripts/**/*.mjs', '*.config.js', 'uno.config.js'],
     languageOptions: {
       ecmaVersion: 2023,
       sourceType: 'module',

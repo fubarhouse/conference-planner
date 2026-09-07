@@ -1,0 +1,242 @@
+{
+  "query": "layout builder",
+  "terms": [
+    "layout builder"
+  ],
+  "mode": "exact",
+  "facets": {
+    "series": "All",
+    "region": "All",
+    "country": "All",
+    "year": "All"
+  },
+  "total": 5,
+  "offset": 0,
+  "byYear": {
+    "2024": 1,
+    "2025": 1,
+    "2026": 3
+  },
+  "byTerm": {
+    "layout builder": {
+      "2024": 1,
+      "2025": 1,
+      "2026": 3
+    }
+  },
+  "breakdown": {
+    "series": [
+      {
+        "name": "DrupalCon",
+        "count": 3,
+        "total": 136
+      },
+      {
+        "name": "Drupal Dev Days",
+        "count": 1,
+        "total": 117
+      },
+      {
+        "name": "DrupalCamp",
+        "count": 1,
+        "total": 63
+      }
+    ],
+    "region": [
+      {
+        "name": "EMEA",
+        "count": 5,
+        "total": 278
+      }
+    ],
+    "country": [
+      {
+        "name": "Netherlands",
+        "count": 3,
+        "total": 107
+      },
+      {
+        "name": "Bulgaria",
+        "count": 1,
+        "total": 50
+      },
+      {
+        "name": "Italy",
+        "count": 1,
+        "total": 14
+      }
+    ],
+    "city": [
+      {
+        "name": "Rotterdam",
+        "count": 3,
+        "total": 98
+      },
+      {
+        "name": "Burgas",
+        "count": 1,
+        "total": 50
+      },
+      {
+        "name": "Rome",
+        "count": 1,
+        "total": 14
+      }
+    ],
+    "speakers": [
+      {
+        "name": "Andreas Rüther",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Emanuel Righetto",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Francesco Pesenti",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Francesco Quagliati",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Marco Molinari",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Merlin A. Rutz",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Pierre Dureau",
+        "count": 1,
+        "total": 2
+      },
+      {
+        "name": "vensires",
+        "count": 1,
+        "total": 1
+      }
+    ],
+    "events": 3,
+    "eventsTotal": 16,
+    "span": {
+      "min": 2024,
+      "max": 2026
+    }
+  },
+  "results": [
+    {
+      "matched": [
+        "layout builder"
+      ],
+      "title": "AI-Powered Site Building in Drupal: From Blank Site to Styled Pages in a Conversation",
+      "description": "Building a complete Drupal site demands expertise across content types, taxonomy, menus, block configuration, and styling. What if a non-technical user could describe what they need in plain language and get back fully structured, styled pages, then refine everything through conversation? This session presents a Drupal 11 architecture that turns page building into a conversational AI experience, empowering non-technical users to create and iterate on complete sites without writing code or navigating complex admin interfaces.\n\n**Prerequisite**\n\nFamiliarity with Drupal's editorial interface and content architecture (content types, blocks, menus, taxonomy). A general awareness of how LLM tool-calling works is helpful but not required: the session explains the relevant concepts as they arise.\n\n**Target Audience**\n\nA Drupal developer or technical architect who builds or maintains component-driven sites (Layout Builder, Drupal Canvas, or similar) and wants to understand how to layer AI-assisted authoring on top of existing page-building infrastructure.\n\n**Outline**\n\nThe session opens with a ten-minute live demo: building a complete site from a blank installation using natural-language prompts, homepage, about page, taxonomy-driven blog listing, navigation menu, styled footer, and AI-generated images, then refining it through contextual chat. The demo concludes by showing all changes staged inside a Workspaces Extra workspace for editorial review before publishing.\n\nThe tooling segment explains the discovery-first architecture: function-call tools that let the AI introspect component schemas, layouts, design tokens, and site structure, adapting automatically to any page-building approach without hardcoded lists.\n\nThe workflow segment covers creation and editing: AI-proposed structures validated against Drupal definitions, a self-correction loop for automatic error repair, context-aware editing of existing pages, asynchronous image generation, and persistent conversational memory across sessions.\n\nThe styling segment details the per-component CSS cascade across four levels (global tokens, component defaults, per-page overrides, and per-instance styles) and how design-system introspection keeps AI output on-brand.\n\nThe final segment discusses provider portability via the contrib AI module, editorial governance through Workspaces Extra, honest limitations around prompt sensitivity and generation cost, and where human editors still do better.\n\n**Learning Objectives**\n\nAttendees will leave with a concrete understanding of what AI-assisted site building can deliver in Drupal today, including: the architectural patterns behind a reliable conversational page-building system (validation, self-correction, discovery-first tooling); how to design a per-component styling cascade that keeps AI output within a site's design system; how Workspaces Extra provides editorial governance for AI-generated content; how the same approach adapts across page builders (Layout Builder, Drupal Canvas, and others); and a realistic assessment of when this approach adds value versus when traditional editing is the better choice.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Marco Molinari, Francesco Pesenti, Francesco Quagliati",
+      "track": "development, ai & agentic architecture",
+      "location": "Leeuwen Room I&II",
+      "startTime": "2026-09-30T14:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/ai-powered-site-building-drupal-blank-site-styled-pages-conversation",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "layout builder"
+      ],
+      "title": "Page Builder Deathmatch: Canvas vs Display Builder in a Real World Project",
+      "description": "Canvas or Display Builder? Which one is the right tool for your job? And what may explode i if you install both?\n\n**Prerequisite**\n\nThe session is suitable for all experience levels:  \n\n- No prior knowledge of Canvas or Display Builder required: I start from zero and pull no punches  \n\n- I also don't assume you know the difference between slots and props, but the explanation will be very short\n\nWhat helps maximize your takeaways:  \n\n- Basic familiarity with Drupal's content model  \n\n- Knowledge of Drupal's theming or layout system (SDCs, layout builder, paragraphs, or block layout)  \n\n- Experiences with other page builders\n\n**Target Audience**\n\nDrupal developers, site builders, and technical architects evaluating modern page-building approaches for real projects. Ideal for teams working with Layout Builder, Paragraphs, or SDCs who need to decide between Canvas and Display Builder. Especially valuable for those responsible for architecture decisions, editor experience, and long-term maintainability in complex Drupal implementations.\n\n**Outline**\n\nTwo contenders. One Drupal site. And the wrong choice for your task can cost you  days or weeks.\n\nCanvas and Display Builder are both approaching production maturity. And both promise to revolutionize how editors, site builders, and designers work with Drupal. But they are built on fundamentally different assumptions, and choosing between them is a critical architectural decision.\n\nIn this session we put them through their paces across three rounds:\n\nRound 1: Page Layout  \n\nCan they replace Drupals fragmented theming approach consisting of block layout, theme regions and templates? What does setup actually involve, and what trade-offs emerge?\n\nRound 2: Managing Displays  \n\nHow do they handle Drupal’s data model (entities, fields, formatters, widgets) and map to component \"slots and props\"?\n\nRound 3: Frontpage Gauntlet  \n\nFlexible landing pages like a Frontpage require editorial autonomy, multilingual content, media handling, and AI-assisted workflows. Which approach works out with that?\n\nEach round is fought in real projects' requirements. Gotchas, workarounds, and limitations are pointed out. The session closes with a practical decision framework so you leave the arena knowing which tool is suitable for the given requirements of your next project and how upcoming roadmap developments may influence that choice.\n\nLet's get ready to rumble.\n\n**Learning Objectives**\n\nAfter this session, you have:  \n\n- A clear understanding of the underlying assumptions of Canvas or Display Builder  \n\n- A checklist to guide your next project decision  \n\n- Awareness of real-world pitfalls before you hit them\n\n**Experience level**  \nAnyone",
+      "speakers": "Merlin A. Rutz, Andreas Rüther",
+      "track": "development, ai & agentic architecture",
+      "location": "Leeuwen Room I&II",
+      "startTime": "2026-09-30T11:40:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/page-builder-deathmatch-canvas-vs-display-builder-real-world-project",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "layout builder"
+      ],
+      "title": "The joy and power of SDC, finally for form inputs",
+      "description": "We can never get enough of SDC, the front-dev friendly API to implement and share UI components for Drupal. So, let’s rejoice together by discovering the biggest improvement since the introduction of the API: we will soon be able to implement form elements directly with SDC, only with UI logic and front technologies, without messing with backend APIs.\n\nPierre, one of the maintainers of SDC in Core, will show you all the cool stuff which can be done with this addition.\n\n**Prerequisite**\n\nKnowledge about SDC and components-based theming.  \n\nAnd/or about Drupal Admin UI, especially display building tasks (Block Layout, Layout Builder, Views...)\n\n**Target Audience**\n\nFront developers, design system owners, ambitious site builders\n\n**Outline**\n\nThe introduction of SDC to Core in 2023 had a significant impact on the Drupal ecosystem by starting a movement to embrace design system methodology, helping the front-designers to implement ambitious shareable designs, and bringing display building back to the forefront.\n\nHowever, the UI components related to form inputs can’t be implemented as SDC yet and are still managed the old way, with abstruse PHP classes.\n\nDate picker, interactive data table, file uploader, slider, toggle, draggable tree view… they often constitute around 20% of design system scopes and their absence is felt heavily by project teams and the contrib space.\n\nGood news! We will land support to form elements in SDC in 2026 and it will be a game changer. Full component libraries will be packageable as Drupal themes and shared between projects, and front devs will finally get the full ownership of design implementations.\n\nIt will also be the opportunity to clean large parts of the rendering pipeline by finalizing the split between UI logic and business logic.\n\nWe will explore together how we can use those new UI components programmatically in front and back development.  \n\nAnd we will discover exciting demos about their use from Admin UI, leveraging them as Field Widgets to build an Entity Form Display.\n\n**Learning Objectives**\n\nHow to build and share UI components for form inputs  \n\nHow to use them in projects, both programmatically and from Admin UI\n\n**Experience level**  \nIntermediate",
+      "speakers": "Pierre Dureau",
+      "track": "development, ai & agentic architecture",
+      "location": "Goudriaan Room I&II",
+      "startTime": "2026-09-29T11:30:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/joy-and-power-sdc-finally-form-inputs",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "layout builder"
+      ],
+      "title": "Drupal Canvas APIs: how to integrate and extend Canvas",
+      "description": "Drupal Canvas will revolutionize the way you enable your editors and marketers to create sites with Drupal. But this might not be enough and you'll want to provide guidelines, extend or improve your developers' experience. In this talk we'll explore: what is Drupal Canvas, how to migrate from Layout Builder to Canvas, using Paragraphs in Canvas, syncing Figma components with Canvas via AI, the backend and client data model, how to provide your own building blocks with ComponentSources, how to interact with the internal API and create UI extensions.",
+      "speakers": "Emanuel Righetto",
+      "track": "Session",
+      "location": "Sala B",
+      "startTime": "2025-11-14T16:00:00Z",
+      "year": 2025,
+      "event": "DrupalCamp Rome 2025",
+      "series": "DrupalCamp",
+      "region": "EMEA",
+      "country": "Italy",
+      "city": "Rome",
+      "file": "events/drupalcamp/italy/2025-rome.json",
+      "link": "",
+      "video": "",
+      "minutes": 60
+    },
+    {
+      "matched": [
+        "layout builder"
+      ],
+      "title": "Drupal's Alternate Realities",
+      "description": "In Drupal there is a philosophy of having only one module to fit most cases. Though this is mostly actually happening, there are still various ways of solving the same problem.\n\nIn this session, I am going to present some problems and the various ways someone may solve them using different core or contrib modules or technologies.\n\nWe are going to take a glimpse of the features each similar module has: starting from Panels / Context and Display Suite / Layout Builder reaching REST / JSON:API and more.\n\n**Experience level:** Intermediate",
+      "speakers": "vensires",
+      "track": "Backend development",
+      "location": "Room 218 (BoFs & Workshops)",
+      "startTime": "2024-06-27T12:20:00.000Z",
+      "year": 2024,
+      "event": "Drupal Dev Days Burgas 2024",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Bulgaria",
+      "city": "Burgas",
+      "file": "events/ddd/2024-burgas.json",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/drupals-alternate-realities",
+      "video": "",
+      "minutes": 30
+    }
+  ]
+}

@@ -15,8 +15,8 @@ const Y0 = 2007;
 const Y1 = 2026;
 
 const state = {
-  kind: 'speaker', // 'speaker' | 'sponsor' | 'coverage'
-  clusters: { speaker: [], sponsor: [], coverage: [] },
+  kind: 'speaker', // 'speaker' | 'sponsor' | 'coverage' | 'tips'
+  clusters: { speaker: [], sponsor: [], coverage: [], tips: [] },
   // The coverage worklist: what each event is missing. A third deck rather than a
   // separate page — it is the same job as the identity decks (walk a list, decide,
   // move on) and it writes to the same ledger.
@@ -24,7 +24,11 @@ const state = {
   coverageFilter: 'fixable', // 'fixable' | 'all'
 
   stats: null,
-  idx: { speaker: 0, sponsor: 0, coverage: 0 },
+  idx: { speaker: 0, sponsor: 0, coverage: 0, tips: 0 },
+  // Reader-submitted leads. A list, not a deck: they are read newest-first
+  // and triaged in any order, so there is no case to advance through.
+  tips: null,
+  tipFilter: 'new', // 'new' | 'all'
   canonical: '',
   previewed: false,
   busy: false,
@@ -363,6 +367,145 @@ function coverageHtml() {
   </div>`;
 }
 
+// ── Reader suggestions ───────────────────────────────────────────────────────
+//
+// "Tell us about a conference" lands here. A lead is a claim from a stranger, so
+// the deck metaphor does not fit: there is nothing to merge and no canonical to
+// pick. It is a queue — read it, act on it or dismiss it, and keep the record of
+// which either way.
+
+async function loadTips(force = false) {
+  if (state.tips && !force) return;
+  try {
+    const r = await fetch('/api/curation/suggestions');
+    state.tips = r.ok ? ((await r.json()).items ?? []) : [];
+  } catch {
+    state.tips = [];
+  }
+}
+
+/**
+ * Mark a lead actioned or dismissed.
+ *
+ * Neither removes it. "Dismissed" is an answer — it records that somebody looked
+ * — and deleting it means the next reviewer reads the same dead lead again.
+ */
+async function decideTip(id, status) {
+  if (state.busy) return;
+  state.busy = true;
+  try {
+    const r = await fetch('/api/curation/suggestions/decide', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ id, status }),
+    });
+    if (r.ok) {
+      const { item, version } = await r.json();
+      const row = (state.tips || []).find((t) => t.id === id);
+      if (row) Object.assign(row, item);
+      // Approving an identity mapping writes an alias, which answers a cluster
+      // and adds a row to the decisions log. The server says so by returning a
+      // new ledger version; without re-reading, the deck would keep offering the
+      // case that was just decided.
+      if (version) await loadClusters();
+    }
+  } catch {
+    /* leave the row as it was — the next load will tell the truth */
+  } finally {
+    state.busy = false;
+    render();
+  }
+}
+
+/** Rows written before identity suggestions existed are all conference leads. */
+const tipKind = (t) => (t?.kind === 'identity' ? 'identity' : 'event');
+
+/**
+ * One queue row.
+ *
+ * Two different claims share this queue and they ask different questions of a
+ * reviewer, so they read differently. A conference lead asks "is this event
+ * worth building?" and its verbs are Actioned/Dismiss — a note to yourself about
+ * work done elsewhere. An identity mapping asks "are these two names the same
+ * person?" and Approve WRITES the alias, so it is labelled as the decision it
+ * is, not as bookkeeping.
+ */
+function tipRowHtml(t) {
+  const when = String(t.at || '').slice(0, 10);
+  const decided = t.status !== 'new';
+  const identity = tipKind(t) === 'identity';
+  const meta = `<p class="cur-tip-meta">${esc(when)}${t.by ? ` · ${esc(t.by)}` : ''}${
+    decided ? ` · <b>${esc(t.status)}</b>${t.decidedBy ? ` by ${esc(t.decidedBy)}` : ''}` : ''
+  }</p>`;
+
+  const body = identity
+    ? `<p class="cur-tip-eyebrow">${esc(t.idType || 'identity')} mapping</p>
+       <h3 class="cur-tip-name">
+         <span class="cur-tip-from">${esc(t.name)}</span>
+         <span class="cur-tip-arrow" aria-hidden="true">→</span>
+         <span class="cur-tip-to">${esc(t.to || '')}</span>
+       </h3>
+       ${t.notes ? `<p class="cur-tip-notes">${esc(t.notes)}</p>` : ''}
+       ${meta}`
+    : `<h3 class="cur-tip-name">${esc(t.name)}</h3>
+       ${
+         t.url
+           ? `<a class="cur-tip-url" href="${esc(t.url)}" target="_blank" rel="noopener noreferrer nofollow">${esc(t.url)}</a>`
+           : '<span class="cur-tip-url cur-tip-url--none">no link given</span>'
+       }
+       ${t.notes ? `<p class="cur-tip-notes">${esc(t.notes)}</p>` : ''}
+       ${meta}`;
+
+  const acts = decided
+    ? `<button type="button" class="cur-btn cur-btn--ghost" data-tip-decide="new" data-tip-id="${esc(t.id)}">Reopen</button>`
+    : identity
+      ? `<button type="button" class="cur-btn cur-btn--gold" data-tip-decide="actioned" data-tip-id="${esc(t.id)}">Approve mapping</button>
+         <button type="button" class="cur-btn cur-btn--ghost" data-tip-decide="dismissed" data-tip-id="${esc(t.id)}">Not the same</button>`
+      : `<button type="button" class="cur-btn" data-tip-decide="actioned" data-tip-id="${esc(t.id)}">Actioned</button>
+         <button type="button" class="cur-btn cur-btn--ghost" data-tip-decide="dismissed" data-tip-id="${esc(t.id)}">Dismiss</button>`;
+
+  return `<article class="cur-tip${decided ? ' is-decided' : ''}${identity ? ' cur-tip--identity' : ''}">
+    <div class="cur-tip-main">${body}</div>
+    <div class="cur-tip-acts">${acts}</div>
+  </article>`;
+}
+
+function tipsHtml() {
+  const all = state.tips || [];
+  const onlyNew = state.tipFilter === 'new';
+  const rows = onlyNew ? all.filter((t) => t.status === 'new') : all;
+  const waiting = all.filter((t) => t.status === 'new').length;
+  // Mappings are called out separately: they are the only rows here whose
+  // approval changes what the archive says.
+  const pendingIds = all.filter((t) => t.status === 'new' && tipKind(t) === 'identity').length;
+  // ONE root element. `.cur-stage` is a centring flex row, so returning two
+  // siblings made the filter and the list into two columns — the filter stretched
+  // to the full height of the stage beside the leads.
+  return `<div class="cur-cov">
+    <div class="cur-cov-head">
+      <h2 class="cur-ov-h">Suggestions <span class="cur-ov-n">${waiting} waiting</span>${
+        pendingIds
+          ? `<span class="cur-ov-n cur-ov-n--gold">${pendingIds} mapping${pendingIds === 1 ? '' : 's'}</span>`
+          : ''
+      }</h2>
+      <p class="cur-cov-sub">Two kinds of claim. Readers telling us what the archive is <b>missing</b> — acting on one means building the event. And <b>identity mappings</b> proposed from the archive: approving one writes the alias, so the two names read as one person from then on.</p>
+      <div class="cur-cov-filters">
+        <button type="button" class="cur-seg-btn${onlyNew ? ' is-active' : ''}" data-tipfilter="new">Waiting</button>
+        <button type="button" class="cur-seg-btn${onlyNew ? '' : ' is-active'}" data-tipfilter="all">Everything</button>
+      </div>
+    </div>
+    ${
+      rows.length
+        ? `<div class="cur-tips">${rows.map(tipRowHtml).join('')}</div>`
+        : `<p class="cur-tip-empty">${
+            onlyNew
+              ? 'Nothing waiting. Readers can add one from the archive.'
+              : 'No suggestions yet. The prompt is at the foot of the archive overview.'
+          }</p>`
+    }
+  </div>`;
+}
+
 function render() {
   const s = state.stats || {};
   const spLeft = state.clusters.speaker.length - state.idx.speaker;
@@ -377,11 +520,14 @@ function render() {
   $('curSegSponsor').textContent = spoLeft;
   const covSeg = $('curSegCoverage');
   if (covSeg) covSeg.textContent = state.coverage ? state.coverage.totals.withGaps : '·';
+  const tipSeg = $('curSegTips');
+  if (tipSeg)
+    tipSeg.textContent = state.tips ? state.tips.filter((t) => t.status === 'new').length : '·';
   // Progress and the Overview toggle belong to the identity decks; the coverage
   // list is not a deck of cases you advance through.
   // Coverage is a deck like the others, so it keeps the progress rail; only the
   // Overview/Review toggle is meaningless there (its overview IS the report file).
-  $('curViewBtn')?.classList.toggle('hidden', state.kind === 'coverage');
+  $('curViewBtn')?.classList.toggle('hidden', state.kind === 'coverage' || state.kind === 'tips');
   document
     .querySelectorAll('.cur-seg-btn')
     .forEach((b) => b.classList.toggle('is-active', b.dataset.kind === state.kind));
@@ -399,7 +545,9 @@ function render() {
   if (viewBtn) viewBtn.classList.toggle('is-active', state.view === 'overview');
   if (viewLbl) viewLbl.textContent = state.view === 'overview' ? 'Review' : 'Overview';
 
-  if (state.kind === 'coverage') {
+  if (state.kind === 'tips') {
+    $('curStage').innerHTML = tipsHtml();
+  } else if (state.kind === 'coverage') {
     $('curStage').innerHTML = coverageHtml();
   } else if (state.view === 'overview') {
     $('curStage').innerHTML = overviewHtml();
@@ -637,6 +785,17 @@ export function openCurationStudio() {
   }
   opened = true;
   $('curStage')?.addEventListener('click', (e) => {
+    const tipFilter = e.target.closest('[data-tipfilter]');
+    if (tipFilter) {
+      state.tipFilter = tipFilter.dataset.tipfilter;
+      render();
+      return;
+    }
+    const tipBtn = e.target.closest('[data-tip-decide]');
+    if (tipBtn) {
+      decideTip(tipBtn.dataset.tipId, tipBtn.dataset.tipDecide);
+      return;
+    }
     const filter = e.target.closest('[data-covfilter]');
     if (filter) {
       state.coverageFilter = filter.dataset.covfilter;
@@ -684,6 +843,7 @@ export function openCurationStudio() {
       state.previewed = false;
       render();
       if (state.kind === 'coverage') loadCoverage();
+      if (state.kind === 'tips') loadTips().then(render);
     }),
   );
   $('curViewBtn')?.addEventListener('click', () => {

@@ -67,17 +67,37 @@ export function normalizeString(value, fallback = '') {
   return String(value || '').trim() || fallback;
 }
 
+// The two input shapes mean different things, and conflating them corrupted
+// track names across 35 datasets.
+//
+// A STRING is a list that has not been separated yet — "DevOps, Frontend,
+// Backend" — so every comma in it is a separator.
+//
+// An ARRAY has ALREADY been separated: each element is one track. A track name
+// may legitimately contain a comma, and many do — "Frontend (HTML, CSS, JS)",
+// "Accessibility, Frontend & UX Design", "leadership, management & business",
+// "Government, Nonprofit, and Education" are single tracks in their own events'
+// taxonomies. Re-splitting them invented a phantom "Accessibility" track and
+// truncated the real one.
+//
+// The one exception inside an array is the scrape artefact " , ": a multi-value
+// field flattened with spaces AROUND the separator ("Back-end , Case study ,
+// Data"). The space before the comma is the tell, and it is reliable — no genuine
+// track name in the archive puts one there.
+const TRACK_LIST = /\s*,\s*/;
+const TRACK_ARTEFACT = /\s+,\s*/;
+
 export function normalizeTracks(trackValue) {
-  const splitTrackValue = (value) =>
+  const split = (value, pattern) =>
     String(value || '')
-      .split(/\s*,\s*/)
+      .split(pattern)
       .map((track) => track.trim())
       .filter(Boolean);
 
   if (Array.isArray(trackValue)) {
-    return [...new Set(trackValue.flatMap((track) => splitTrackValue(track)))];
+    return [...new Set(trackValue.flatMap((track) => split(track, TRACK_ARTEFACT)))];
   }
-  return splitTrackValue(trackValue);
+  return split(trackValue, TRACK_LIST);
 }
 
 export function announceStatus(message) {

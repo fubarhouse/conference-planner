@@ -1,0 +1,462 @@
+{
+  "generatedAt": "2026-08-30T22:21:58.085Z",
+  "defaultFile": "events/ddd/2010-munich.json",
+  "events": [
+    {
+      "file": "events/ddd/2010-munich.json",
+      "event": {
+        "designation": "Drupal Dev Days",
+        "location": "Munich",
+        "year": "2010",
+        "region": "Germany",
+        "venue": "Hochschule München, Campus Lothstraße, Lothstraße 34, 80335 Munich",
+        "startDate": "2010-05-07T16:00:00.000Z",
+        "endDate": "2010-05-09T16:00:00.000Z",
+        "timezone": "Europe/Berlin",
+        "website": "http://www.drupal-dev-days.de",
+        "enabled": true
+      },
+      "sources": {
+        "count": 68,
+        "kinds": {
+          "schedule": 1,
+          "other": 1,
+          "venue": 1,
+          "sponsors": 1,
+          "sessions": 63,
+          "video": 1
+        },
+        "wayback": true,
+        "stated": 0,
+        "oldestCapture": "2010-03-05",
+        "retrievedFrom": "2026-08-25",
+        "retrievedTo": "2026-08-25"
+      }
+    },
+    {
+      "file": "events/ddd/2024-burgas.json",
+      "event": {
+        "designation": "Drupal Dev Days",
+        "location": "Burgas",
+        "year": "2024",
+        "region": "Bulgaria",
+        "venue": "Burgas Free University (BFU)",
+        "startDate": "2024-06-26T06:00:00.000Z",
+        "endDate": "2024-06-28T20:59:00.000Z",
+        "timezone": "Europe/Sofia",
+        "website": "https://ddd2024.drupalcamp.bg",
+        "enabled": true
+      },
+      "sources": {
+        "count": 7,
+        "kinds": {
+          "schedule": 3,
+          "venue": 1,
+          "sponsors": 1,
+          "other": 1,
+          "community": 1
+        },
+        "wayback": true,
+        "stated": 0,
+        "oldestCapture": "2024-04-18",
+        "retrievedFrom": "2026-08-24",
+        "retrievedTo": "2026-08-24"
+      }
+    },
+    {
+      "file": "events/drupalcamp/delhi/2011-april.json",
+      "event": {
+        "designation": "DrupalCamp New Delhi",
+        "location": "Gurgaon",
+        "year": "2011",
+        "region": "India",
+        "venue": "303, 3rd Floor, Solitaire Plaza, near Guru Dronacharya Metro Station, Gurgaon",
+        "startDate": "2011-04-16T04:30:00Z",
+        "endDate": "2011-04-16T11:15:00Z",
+        "timezone": "Asia/Kolkata",
+        "website": "http://drupalcampdelhi.in",
+        "enabled": true
+      },
+      "sources": {
+        "count": 11,
+        "kinds": {
+          "schedule": 2,
+          "venue": 1,
+          "sponsors": 1,
+          "sessions": 7
+        },
+        "wayback": true,
+        "stated": 0,
+        "oldestCapture": "2011-04-08",
+        "retrievedFrom": "2026-08-26",
+        "retrievedTo": "2026-08-26"
+      }
+    },
+    {
+      "file": "events/drupalcamp/delhi/2026.json",
+      "event": {
+        "designation": "Drupal Camp Delhi",
+        "location": "New Delhi",
+        "year": "2026",
+        "region": "India",
+        "venue": "Jawaharlal Nehru University, New Delhi",
+        "startDate": "2026-03-14T02:30:00Z",
+        "endDate": "2026-03-15T11:30:00Z",
+        "timezone": "Asia/Kolkata",
+        "website": "https://drupalcampdelhi.com",
+        "enabled": true
+      },
+      "sources": {
+        "count": 5,
+        "kinds": {
+          "schedule": 1,
+          "sponsors": 2,
+          "other": 1,
+          "community": 1
+        },
+        "wayback": true,
+        "stated": 1,
+        "oldestCapture": "2026-03-07",
+        "retrievedFrom": "2026-08-25",
+        "retrievedTo": "2026-08-26"
+      }
+    },
+    {
+      "file": "events/drupalcamp/den/2018-tokyo.json",
+      "event": {
+        "designation": "DrupalCamp",
+        "location": "Tokyo",
+        "year": "2018",
+        "region": "Japan",
+        "venue": "大田区産業プラザPio (Ota City Industrial Plaza PiO), 東京都大田区南蒲田1-20-20",
+        "startDate": "2018-11-17T01:10:00Z",
+        "endDate": "2018-11-17T07:50:00Z",
+        "timezone": "Asia/Tokyo",
+        "website": "https://drupal-camp2018.den-japan.org",
+        "enabled": false
+      },
+      "sources": {
+        "count": 3,
+        "kinds": {
+          "schedule": 2,
+          "venue": 1
+        },
+        "wayback": true,
+        "stated": 0,
+        "oldestCapture": "2019-07-19",
+        "retrievedFrom": "2026-08-25",
+        "retrievedTo": "2026-08-25"
+      }
+    },
+    {
+      "file": "events/drupalcamp/italy/2025-rome.json",
+      "event": {
+        "designation": "DrupalCamp",
+        "location": "Rome",
+        "year": "2025",
+        "region": "Italy",
+        "venue": "Università Sapienza, Via Salaria 113, 00198 Rome RM",
+        "startDate": "2025-11-14T07:45:00Z",
+        "endDate": "2025-11-14T17:30:00Z",
+        "timezone": "Europe/Rome",
+        "website": "https://www.drupalcampitaly.it/2025",
+        "enabled": false
+      },
+      "sources": {
+        "count": 4,
+        "kinds": {
+          "schedule": 1,
+          "stats": 1,
+          "community": 1,
+          "sponsors": 1
+        },
+        "wayback": false,
+        "stated": 0,
+        "oldestCapture": null,
+        "retrievedFrom": "2026-08-25",
+        "retrievedTo": "2026-08-25"
+      }
+    },
+    {
+      "file": "events/drupalcamp/singapore/2014.json",
+      "event": {
+        "designation": "DrupalCamp",
+        "location": "Singapore",
+        "year": "2014",
+        "region": "Singapore",
+        "venue": "Singapore Management University",
+        "startDate": "2014-06-14T00:30:00Z",
+        "endDate": "2014-06-14T09:45:00Z",
+        "timezone": "Asia/Singapore",
+        "website": "http://www.drupalcamp.sg",
+        "enabled": false
+      },
+      "sources": {
+        "count": 2,
+        "kinds": {
+          "schedule": 1,
+          "other": 1
+        },
+        "wayback": true,
+        "stated": 0,
+        "oldestCapture": "2014-05-22",
+        "retrievedFrom": "2026-08-25",
+        "retrievedTo": "2026-08-25"
+      }
+    },
+    {
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "event": {
+        "designation": "DrupalCon",
+        "location": "Rotterdam",
+        "year": "2026",
+        "region": "Europe",
+        "venue": "Postillion Hotel & Convention Centre WTC Rotterdam",
+        "startDate": "2026-09-28T07:00:00Z",
+        "endDate": "2026-10-01T16:00:00Z",
+        "timezone": "Europe/Amsterdam",
+        "website": "https://events.drupal.org/rotterdam2026",
+        "enabled": true
+      },
+      "sources": {
+        "count": 6,
+        "kinds": {
+          "schedule": 1,
+          "sponsors": 1,
+          "other": 1,
+          "community": 1,
+          "sessions": 2
+        },
+        "wayback": false,
+        "stated": 0,
+        "oldestCapture": null,
+        "retrievedFrom": "2026-08-26",
+        "retrievedTo": "2026-08-26"
+      }
+    },
+    {
+      "file": "events/drupalcon/la/2015-bogota.json",
+      "event": {
+        "designation": "DrupalCon",
+        "location": "Bogotá",
+        "year": "2015",
+        "region": "Latin America",
+        "venue": "Centro de Convenciones Gonzalo Jimenez de Quesada",
+        "startDate": "2015-02-09T13:00:00Z",
+        "endDate": "2015-02-12T23:00:00Z",
+        "timezone": "America/Bogota",
+        "website": "https://latinamerica2015.drupal.org/",
+        "enabled": false
+      },
+      "sources": {
+        "count": 52,
+        "kinds": {
+          "schedule": 1,
+          "other": 1,
+          "community": 1,
+          "sessions": 48,
+          "sponsors": 1
+        },
+        "wayback": false,
+        "stated": 0,
+        "oldestCapture": null,
+        "retrievedFrom": "2026-08-17",
+        "retrievedTo": "2026-08-25"
+      }
+    },
+    {
+      "file": "events/drupalgovau/2020-online.json",
+      "event": {
+        "designation": "DrupalGov",
+        "location": "Online",
+        "year": "2020",
+        "region": "Online",
+        "venue": "Online",
+        "startDate": "2020-11-04T21:55:00Z",
+        "endDate": "2020-11-05T06:00:00Z",
+        "timezone": "Australia/Sydney",
+        "website": "https://drupalsouth.org/events/drupalgov-2020/schedule",
+        "enabled": true
+      },
+      "sources": {
+        "count": 2,
+        "kinds": {
+          "schedule": 1,
+          "other": 1
+        },
+        "wayback": true,
+        "stated": 0,
+        "oldestCapture": "2019-08-24",
+        "retrievedFrom": "2026-08-25",
+        "retrievedTo": "2026-08-25"
+      }
+    },
+    {
+      "file": "events/drupaljam/2008-breda.json",
+      "event": {
+        "designation": "DrupalJam",
+        "location": "Breda",
+        "year": "2008",
+        "region": "Netherlands – Breda",
+        "venue": "Avans Hogeschool",
+        "startDate": "2008-10-31T09:00:00Z",
+        "endDate": "2008-10-31T20:00:00Z",
+        "timezone": "Europe/Amsterdam",
+        "website": "https://drupaljam.nl/",
+        "enabled": true
+      },
+      "sources": {
+        "count": 4,
+        "kinds": {
+          "schedule": 1,
+          "sponsors": 1,
+          "other": 1,
+          "photos": 1
+        },
+        "wayback": true,
+        "stated": 0,
+        "oldestCapture": "2009-04-14",
+        "retrievedFrom": "2026-08-20",
+        "retrievedTo": "2026-08-24"
+      }
+    },
+    {
+      "file": "events/drupaljam/2026-rotterdam.json",
+      "event": {
+        "designation": "DrupalJam",
+        "location": "Rotterdam",
+        "year": "2026",
+        "region": "Netherlands – Rotterdam",
+        "venue": "Postillion Hotel & Convention Centre WTC Rotterdam",
+        "startDate": "2026-10-01T07:00:00Z",
+        "endDate": "2026-10-01T16:00:00Z",
+        "timezone": "Europe/Amsterdam",
+        "website": "https://drupaljam.nl/",
+        "enabled": false
+      },
+      "sources": {
+        "count": 2,
+        "kinds": {
+          "schedule": 1,
+          "other": 1
+        },
+        "wayback": false,
+        "stated": 0,
+        "oldestCapture": null,
+        "retrievedFrom": null,
+        "retrievedTo": null
+      }
+    },
+    {
+      "file": "events/drupalmountaincamp/2017-davos.json",
+      "event": {
+        "designation": "Drupal Mountain Camp",
+        "location": "Davos",
+        "year": "2017",
+        "region": "Switzerland",
+        "venue": "Davos Congress, 7270 Davos",
+        "startDate": "2017-02-16T09:00:00Z",
+        "endDate": "2017-02-18T16:30:00Z",
+        "timezone": "Europe/Zurich",
+        "website": "https://drupalmountaincamp.ch",
+        "enabled": true
+      },
+      "sources": {
+        "count": 6,
+        "kinds": {
+          "schedule": 1,
+          "sessions": 1,
+          "sponsors": 1,
+          "venue": 1,
+          "other": 2
+        },
+        "wayback": true,
+        "stated": 0,
+        "oldestCapture": "2016-10-29",
+        "retrievedFrom": "2026-08-26",
+        "retrievedTo": "2026-08-26"
+      }
+    },
+    {
+      "file": "events/drupalsouth/2008-christchurch.json",
+      "event": {
+        "designation": "DrupalSouth",
+        "location": "Christchurch",
+        "year": "2008",
+        "region": "New Zealand – Christchurch",
+        "venue": "The Twisted Hop, Christchurch",
+        "startDate": "2008-10-31T20:00:00Z",
+        "endDate": "2008-11-02T05:15:00Z",
+        "timezone": "Pacific/Auckland",
+        "website": "http://christchurch2008.drupalsouth.net.nz",
+        "enabled": true
+      },
+      "sources": {
+        "count": 2,
+        "kinds": {
+          "schedule": 1,
+          "other": 1
+        },
+        "wayback": false,
+        "stated": 0,
+        "oldestCapture": null,
+        "retrievedFrom": null,
+        "retrievedTo": null
+      }
+    },
+    {
+      "file": "events/drupalsouth/2008-drupalcamp-sydney.json",
+      "event": {
+        "designation": "DrupalCamp",
+        "location": "Sydney",
+        "year": "2008",
+        "region": "Australia – Sydney",
+        "venue": "Faculty of Pharmacy, Pharmacy Building (A15), University of Sydney, Sydney NSW 2006, Australia",
+        "startDate": "2008-10-17T22:00:00Z",
+        "endDate": "2008-10-18T07:00:00Z",
+        "timezone": "Australia/Sydney",
+        "website": "https://groups.drupal.org/node/15171",
+        "enabled": true
+      },
+      "sources": {
+        "count": 2,
+        "kinds": {
+          "schedule": 1,
+          "other": 1
+        },
+        "wayback": false,
+        "stated": 0,
+        "oldestCapture": null,
+        "retrievedFrom": null,
+        "retrievedTo": null
+      }
+    },
+    {
+      "file": "events/drupalsouth/community-day/2023-canberra.json",
+      "event": {
+        "designation": "DrupalSouth Community Day",
+        "location": "Canberra",
+        "year": "2023",
+        "region": "Australia",
+        "venue": "Canberra Rex Hotel, Canberra",
+        "startDate": "2023-11-22T22:00:00Z",
+        "endDate": "2023-11-23T05:00:00Z",
+        "timezone": "Australia/Sydney",
+        "website": "https://drupalsouth.org/events/drupalsouth-community-day-2023",
+        "enabled": true
+      },
+      "sources": {
+        "count": 2,
+        "kinds": {
+          "schedule": 1,
+          "other": 1
+        },
+        "wayback": false,
+        "stated": 0,
+        "oldestCapture": null,
+        "retrievedFrom": null,
+        "retrievedTo": null
+      }
+    }
+  ]
+}

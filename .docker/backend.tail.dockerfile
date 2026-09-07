@@ -1,0 +1,53 @@
+
+# ── Backend ───────────────────────────────────────────────────────────────────
+# The Go server: pages, the JSON API, auth, uploads, /data and /img.
+#
+# It carries the frontend and the binary, and nothing else of the repository:
+# no node_modules, no scripts, no tools sources. The server reads `app/` (pages,
+# partials, schemas) and the content volume, and that is the whole of its
+# filesystem. That is ~250 MB less than shipping the repository.
+#
+# Node is still on the PATH, because the Lagoon base image provides it. Nothing
+# here uses it. A smaller base would drop it, at the cost of `fix-permissions`
+# and the entrypoint contract this platform expects — not a trade worth making
+# for an image that is already the smaller of the two.
+#
+# That is also why APP_ROOT is simply /app here. The frontend IS what lives at
+# /app, rather than being a subdirectory of a whole repository copied there; the
+# `/app/app` this used to need was the repository's own `app/` folder showing
+# through. The cli image, which does need the repository, still has it.
+FROM ${NODE_IMAGE} AS backend
+WORKDIR /app
+
+# 3000 is what Lagoon routes to.
+ENV NODE_ENV=production \
+    PORT=3000 \
+    CONTENT_PATH=/storage \
+    APP_ROOT=/app
+
+COPY app/ /app/
+# The server binary ONLY, not the whole of /out. The go-tools stage builds every
+# command in every module under tools/ — which is the property that lets a new
+# tool be added without touching the build — and the cost of that generosity is
+# that a `COPY /out/` here would put every admin tool on the PATH of the pod
+# facing the internet. `drupalcon-sync` and `set-calendar-feed` reach the network
+# and rewrite datasets; neither is something this image should be able to do, and
+# together they are ~14 MB it has no use for. They belong in the cli pod, which
+# takes the lot.
+COPY --from=go-tools /out/server /usr/local/bin/server
+
+# Lagoon runs containers as an arbitrary UID in the root group, so anything the
+# app must write has to be group-writable. fix-permissions (from the Lagoon
+# commons image) is what makes that true; without it the first dataset save
+# fails with EACCES on a cluster and works fine on a laptop.
+RUN mkdir -p /storage/public/img /storage/private \
+    && fix-permissions /app \
+    && fix-permissions /storage
+
+EXPOSE 3000
+# The CMD is a property of the IMAGE rather than a `command:` in
+# docker-compose. If the platform does not apply a compose command — and whether
+# it does is not something to discover after the route is live — the pod would
+# come up running the wrong process while traffic was already being sent to it.
+# Baked in, the only way to get the wrong process is to build the wrong file.
+CMD ["server", "serve", "-addr", ":3000"]

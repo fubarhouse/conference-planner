@@ -1,0 +1,406 @@
+/* ============================================================================
+   SHARED — VENUE MAP
+   The `vmap-*` surface: the map card, its search, pins, readout and off-screen
+   indicators. Shared because the editor picks a venue with it and the planner
+   shows one.
+
+   Ported out of the legacy components.css as each page was pruned. It lives here
+   rather than in both section sheets so there is one copy to change — the same
+   reason section-modal.css exists.
+
+   NOTE: the primary buttons and pins have no fill. Their backgrounds were built
+   on `var(--accent)` / `var(--accent-strong)`, which are used 132 times across
+   app/css and defined nowhere, so those declarations already computed to nothing
+   and were dropped rather than carried over. Deciding the colour is a design
+   call, not a prune.
+   ========================================================================= */
+
+@layer section {
+  .vmap-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+  }
+
+  .vmap-overlay.hidden {
+    display: none;
+  }
+
+  .vmap-card {
+    width: min(760px, 100%);
+    max-height: min(92vh, 780px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 2px;
+    background: var(--surface-0, #fff);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: vmap-in 0.22s cubic-bezier(0.2, 0.9, 0.3, 1);
+  }
+
+  .theme-dark .vmap-card {
+    background: #2c2c2e;
+  }
+
+  .vmap-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--line-0);
+  }
+
+  .vmap-badge {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: var(--step-1);
+  }
+
+  .vmap-heading {
+    flex: 1;
+    min-width: 0;
+    padding-top: 1px;
+  }
+
+  .vmap-title {
+    margin: 0;
+    font-size: var(--step-1);
+    font-weight: 700;
+    color: var(--text-0);
+    letter-spacing: -0.015em;
+  }
+
+  .vmap-sub {
+    margin: 3px 0 0;
+    font-size: var(--fs-xs, 0.75rem);
+    color: var(--text-2);
+    line-height: 1.45;
+  }
+
+  .vmap-close {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 2px;
+    border: none;
+    background: transparent;
+    color: var(--text-3);
+    cursor: pointer;
+    transition:
+      background 0.15s,
+      color 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vmap-close:hover {
+    background: var(--surface-1);
+    color: var(--text-1);
+  }
+
+  .vmap-body {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .vmap-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .vmap-search-icon {
+    position: absolute;
+    left: 15px;
+    color: var(--text-3);
+    font-size: var(--step--1);
+    pointer-events: none;
+  }
+
+  .vmap-search-input {
+    flex: 1;
+    height: 48px;
+    padding: 0 118px 0 40px;
+    border-radius: 2px;
+    border: 1px solid var(--line-0);
+    background: var(--surface-1);
+    color: var(--text-0);
+    font-size: var(--fs-md, 0.875rem);
+    transition:
+      border-color 0.15s,
+      box-shadow 0.15s;
+  }
+
+  .vmap-search-input::placeholder {
+    color: var(--text-3);
+  }
+
+  .vmap-search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .vmap-search-btn {
+    position: absolute;
+    right: 6px;
+    height: 36px;
+    padding: 0 15px;
+    border: none;
+    border-radius: 2px;
+
+    color: #fff;
+    font-size: var(--fs-sm, 0.8125rem);
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition:
+      filter 0.15s,
+      opacity 0.15s;
+  }
+
+  .vmap-search-btn:hover {
+    filter: brightness(1.07);
+  }
+
+  .vmap-search-btn:disabled {
+    opacity: 0.7;
+    cursor: default;
+  }
+
+  .vmap-search-btn .fa-spinner {
+    animation: vmap-spin 0.7s linear infinite;
+  }
+
+  .vmap-status {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 13px;
+    border-radius: 2px;
+    font-size: var(--fs-sm, 0.8125rem);
+    font-weight: 500;
+    animation: vmap-status-in 0.2s ease;
+    background: color-mix(in srgb, #f59e0b 15%, var(--surface-0));
+    color: #b45309;
+    border: 1px solid color-mix(in srgb, #f59e0b 42%, transparent);
+  }
+
+  .vmap-status[hidden] {
+    display: none;
+  }
+
+  .vmap-status .fa-triangle-exclamation {
+    color: #f59e0b;
+  }
+
+  .theme-dark .vmap-status {
+    color: #fcd34d;
+  }
+
+  .vmap-canvas-wrap {
+    position: relative;
+    border-radius: 2px;
+    overflow: hidden;
+    border: 1px solid var(--line-0);
+  }
+
+  .vmap-canvas {
+    height: 430px;
+    width: 100%;
+    background: #e8eef4;
+  }
+
+  .theme-dark .vmap-canvas {
+    background: #1a1a2e;
+  }
+
+  .vmap-readout {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    z-index: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 13px;
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--surface-0) 84%, transparent);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    border: 1px solid var(--line-0);
+    color: var(--text-1);
+    font-family: var(--font-data, monospace);
+    font-size: var(--fs-xs, 0.75rem);
+    font-weight: 500;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+    max-width: calc(100% - 24px);
+  }
+
+  .vmap-readout .fa-location-crosshairs {
+  }
+
+  .vmap-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 20px;
+    border-top: 1px solid var(--line-0);
+    background: var(--surface-1);
+  }
+
+  .vmap-hint {
+    font-size: var(--fs-xs, 0.75rem);
+    color: var(--text-3);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .vmap-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .vmap-btn {
+    height: 41px;
+    padding: 0 18px;
+    border-radius: 2px;
+    font-size: var(--fs-sm, 0.8125rem);
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition:
+      filter 0.15s,
+      background 0.15s,
+      opacity 0.15s,
+      transform 0.1s;
+  }
+
+  .vmap-btn:active {
+    transform: translateY(1px);
+  }
+
+  .vmap-btn-ghost {
+    background: transparent;
+    border: 1px solid var(--line-0);
+    color: var(--text-1);
+  }
+
+  .vmap-btn-ghost:hover {
+    background: var(--surface-2);
+  }
+
+  .vmap-btn-primary {
+    border: none;
+    color: #fff;
+  }
+
+  .vmap-btn-primary:hover {
+    filter: brightness(1.07);
+  }
+
+  .vmap-btn-primary:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    filter: none;
+    box-shadow: none;
+  }
+
+  .vmap-pin-wrap {
+    background: transparent;
+    border: none;
+  }
+
+  .vmap-pin {
+    position: relative;
+    width: 26px;
+    height: 26px;
+
+    border: 2.5px solid #fff;
+    border-radius: 2px;
+    transform: rotate(-45deg);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+  }
+
+  .vmap-pin-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    margin: -4px 0 0 -4px;
+    background: #fff;
+    border-radius: 2px;
+  }
+
+  .vmap-pin--conf {
+    background: var(--gold, #d4a017);
+  }
+
+  .vmap-pin-glyph {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    color: #fff;
+    font-size: var(--step--2);
+  }
+
+  .vmap-offscreen {
+    position: absolute;
+    z-index: 600;
+    transform: translate(-50%, -50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 11px 6px 9px;
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--gold, #d4a017) 88%, #000);
+    color: #fff;
+    font-size: var(--fs-xs, 0.75rem);
+    font-weight: 600;
+    border: 1.5px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    white-space: nowrap;
+    max-width: 60%;
+    transition: filter 0.15s;
+  }
+
+  .vmap-offscreen:hover {
+    filter: brightness(1.08);
+  }
+
+  .vmap-offscreen-arrow {
+    /* FA location-arrow points to the upper-right (−45°) by default; correct for
+    that so the CSS var equals the true direction to the reference. */
+    transform: rotate(calc(var(--vmap-arrow-rot, 0deg) + 45deg));
+    font-size: var(--step--1);
+  }
+
+  .vmap-offscreen-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

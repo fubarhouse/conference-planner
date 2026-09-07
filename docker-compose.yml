@@ -1,33 +1,36 @@
 services:
-  web:
-    build: .
-    # `format: raw` disables Compose's variable interpolation for this file, and it
-    # is load-bearing. A bcrypt hash contains `$` — with the default format Compose
-    # read `$nmUZE4y…` (the SALT) as an unset variable, substituted empty, and
-    # handed the app a 33-character stub of a 60-character hash. The app then
-    # rejects every password, with nothing in the logs to say why.
-    env_file:
-      - path: .env
-        format: raw
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./app/:/app
-      # The archive and this installation's state, mounted from outside the repo.
-      # Both are writable on purpose: the editor saves datasets and images into the
-      # public tree, and the server rebuilds catalog.json there on boot. Add `:ro`
-      # to the public mount for a viewer-only deployment — the catalog build fails
-      # soft, so it degrades rather than breaks.
-      - ../conference-planner-data/public:/srv/data/public
-      - ../conference-planner-data/private:/srv/data/private
-    expose:
-      - 8080
+  backend:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile.backend
+    labels:
+      lagoon.type: basic-persistent
+      lagoon.service.port: '3000'
+      lagoon.persistent: /storage
+      lagoon.persistent.name: backend
+      lagoon.persistent.size: 5Gi
+      lagoon.persistent.class: bulk
     environment:
-      PORT: "8080"
-      # These MUST be set here, not left to .env. Compose's `environment` wins over
-      # `env_file`, and .env holds host-relative paths (`../conference-planner-data/…`)
-      # that mean nothing inside the container — they would resolve against `/` and
-      # silently serve an empty tree.
-      DATA_ROOT: /srv/data/public
-      IMG_ROOT: /srv/data/public/img
-      PRIVATE_ROOT: /srv/data/private
+      # NODE_ENV is read by the GO server, which has no JavaScript in it: it is
+      # how `production` turns on the Secure flag on the session cookie. Kept
+      # under its old name because it is already set in every environment, and
+      # renaming a variable that controls a cookie flag is a way to ship an
+      # insecure cookie to somebody who did not read the changelog.
+      NODE_ENV: production
+      PORT: '3000'
+      CONTENT_PATH: /storage
+      # /app, not /app/app: the backend image carries the FRONTEND at /app and
+      # nothing else — no repository, no Node. See .docker/backend.tail.dockerfile.
+      APP_ROOT: /app
+
+  cli:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile.cli
+    labels:
+      lagoon.type: cli-persistent
+      lagoon.persistent: /storage
+      lagoon.persistent.name: backend
+    environment:
+      NODE_ENV: production
+      CONTENT_PATH: /storage

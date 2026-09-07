@@ -50,7 +50,12 @@ describe('videoThumb', () => {
 describe('albumRows', () => {
   const yearEvents = {
     2024: [
-      { label: 'DrupalCon Barcelona 2024', album: 'https://flickr.com/groups/bcn/', sessions: 201 },
+      {
+        label: 'DrupalCon Barcelona 2024',
+        album: 'https://flickr.com/groups/bcn/',
+        startDate: '2024-09-24T07:00:00Z',
+        sessions: 201,
+      },
       { label: 'DrupalCon Portland 2024', album: null, sessions: 136 },
     ],
     2026: [
@@ -58,6 +63,7 @@ describe('albumRows', () => {
         label: 'DrupalCamp Tokyo 2026',
         album: 'https://photos.app.goo.gl/abc',
         albumProvider: 'Google Photos',
+        startDate: '2026-06-27T00:00:00Z',
         sessions: 12,
       },
     ],
@@ -66,6 +72,48 @@ describe('albumRows', () => {
   it('lists only events that have an album, newest first', () => {
     const rows = albumRows(yearEvents);
     expect(rows.map((r) => r.label)).toEqual(['DrupalCamp Tokyo 2026', 'DrupalCon Barcelona 2024']);
+  });
+
+  it('orders events inside a year by date, not by name', () => {
+    // The defect this replaced: sorting on year and then the label put
+    // DrupalCon Dublin (September) above DrupalCon Mumbai (February).
+    const sameYear = {
+      2016: [
+        {
+          label: 'DrupalCon Dublin 2016',
+          album: 'https://flickr.com/groups/d/',
+          startDate: '2016-09-26T07:00:00Z',
+        },
+        {
+          label: 'DrupalCon Mumbai 2016',
+          album: 'https://flickr.com/groups/m/',
+          startDate: '2016-02-18T03:30:00Z',
+        },
+        {
+          label: 'DrupalCon New Orleans 2016',
+          album: 'https://flickr.com/groups/n/',
+          startDate: '2016-05-10T13:00:00Z',
+        },
+      ],
+    };
+    expect(albumRows(sameYear).map((r) => r.label)).toEqual([
+      'DrupalCon Dublin 2016',
+      'DrupalCon New Orleans 2016',
+      'DrupalCon Mumbai 2016',
+    ]);
+  });
+
+  it('falls back to year and label when an event records no start date', () => {
+    const undated = {
+      2016: [
+        { label: 'DrupalCon Zurich 2016', album: 'https://flickr.com/groups/z/' },
+        { label: 'DrupalCon Aarhus 2016', album: 'https://flickr.com/groups/a/' },
+      ],
+    };
+    expect(albumRows(undated).map((r) => r.label)).toEqual([
+      'DrupalCon Aarhus 2016',
+      'DrupalCon Zurich 2016',
+    ]);
   });
 
   it('names the provider from the URL when the dataset never recorded one', () => {

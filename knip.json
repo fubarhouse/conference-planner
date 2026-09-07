@@ -5,12 +5,14 @@
     "app/js/app.js",
     "app/js/planner.js",
     "app/js/editor.js",
+    "app/js/curation.js",
+    "app/js/archive.js",
     "scripts/*.mjs",
     "**/__tests__/**/*.test.js",
     "app/js/modules/s3Settings.js",
     "app/js/modules/usersPanel.js"
   ],
-  "project": ["app/js/**/*.js", "lib/**/*.js", "scripts/**/*.mjs"],
+  "project": ["app/js/**/*.js", "scripts/**/*.js", "scripts/**/*.mjs"],
   "ignoreDependencies": ["playwright"],
-  "ignoreBinaries": ["unocss"]
+  "ignoreBinaries": ["go", "unocss"]
 }

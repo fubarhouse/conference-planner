@@ -165,8 +165,12 @@ export function resetFilters(events) {
   applyFilters(events, null, true);
 }
 
-function getBulkTargetEvents(events) {
-  return Array.isArray(events) ? events : [];
+// A session with no time cannot become a calendar entry, so it has no checkbox
+// and "Select all" must not reach past that and add it anyway. Deselect uses the
+// same list, which is what clears one that a stale stored selection put there.
+// Exported for its own test — the callers touch the DOM, this does not.
+export function getBulkTargetEvents(events) {
+  return Array.isArray(events) ? events.filter((event) => !event.unscheduled) : [];
 }
 
 export function selectAllDisplayed(events) {

@@ -7,10 +7,15 @@ function normalizeCatalogEntry(entry, defaultFile = '') {
   if (!entry || typeof entry !== 'object' || !entry.file) {
     return null;
   }
-  // Keep only the list shape (file + default); metadata is hydrated elsewhere.
+  // Keep only the list shape; per-event metadata is hydrated elsewhere. `series`
+  // is the exception because it is NOT in the dataset — it is a curation
+  // decision resolved into the catalog at build time, so this is the only place
+  // the client can learn it. Absent in a static build with no ledger, which is
+  // why every reader falls back to `designation`.
   return {
     file: entry.file,
     default: Boolean(entry.default) || entry.file === defaultFile,
+    ...(entry.series ? { series: String(entry.series) } : {}),
   };
 }
 

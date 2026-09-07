@@ -3459,7 +3459,7 @@
   }
 
   .bdg-nums .bdg-remain::before {
-    content: "·";
+    content: '·';
     margin-inline-end: var(--sp-2xs);
     color: var(--ink-2);
   }
@@ -4812,7 +4812,7 @@
   /* Legend swatches are squares, like every other swatch in the product. */
   .smy-dot::before,
   .smy-leg::before {
-    content: "";
+    content: '';
     display: inline-block;
     flex: none;
     inline-size: 0.55rem;
@@ -6355,7 +6355,7 @@
   }
 
   .pl-wpstop::before {
-    content: "";
+    content: '';
     position: absolute;
     inset-block: 0.7rem 0;
     inset-inline-start: 0.24rem;
@@ -6757,8 +6757,8 @@
   }
 
   .set-radio,
-  .gs-switch input[type="checkbox"],
-  .gs-toggle input[type="checkbox"] {
+  .gs-switch input[type='checkbox'],
+  .gs-toggle input[type='checkbox'] {
     accent-color: var(--brand-1-ink);
   }
 
@@ -6787,7 +6787,7 @@
   }
 
   .ckl-check:checked::after {
-    content: "";
+    content: '';
     position: absolute;
     inset-inline-start: 0.36rem;
     inset-block-start: 0.14rem;
@@ -7068,7 +7068,6 @@
     font-size: var(--step-1);
   }
 
-
   /* --- GLOBAL SETTINGS (the full page) ------------------------------------ */
   .gs-page {
     background: var(--paper-0);
@@ -7278,7 +7277,7 @@
   }
 
   .s3-status-label::before {
-    content: "";
+    content: '';
     inline-size: 0.45rem;
     block-size: 0.45rem;
     background: currentColor;
@@ -7724,8 +7723,8 @@
 
   .note-emoji-btn:hover,
   .note-icon-btn:hover,
-  .note-emoji-btn[aria-expanded="true"],
-  .note-icon-btn[aria-expanded="true"] {
+  .note-emoji-btn[aria-expanded='true'],
+  .note-icon-btn[aria-expanded='true'] {
     border-color: var(--brand-1-ink);
   }
 
@@ -7986,7 +7985,7 @@
      planner-design.css sets it to IBM Plex Mono on :root, which would override
      the foundation's system stack on every page that loads both. */
   :root {
-    --font-data: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important;
+    --font-data: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   }
 
   /* --- THE PALETTE BRIDGE --------------------------------------------------
@@ -8003,27 +8002,27 @@
      same names for their own remaining legacy surfaces, are untouched.
      --------------------------------------------------------------------- */
   body:has(#plannerMain) {
-    --bg-0: var(--paper-0) !important;
-    --bg-1: var(--paper-0) !important;
-    --surface-0: var(--paper-1) !important;
-    --surface-1: var(--paper-1) !important;
-    --surface-2: var(--paper-2) !important;
-    --text-0: var(--ink-0) !important;
-    --text-1: var(--ink-1) !important;
-    --text-2: var(--ink-2) !important;
-    --text-3: var(--ink-2) !important;
-    --line-0: var(--rule-0) !important;
+    --bg-0: var(--paper-0);
+    --bg-1: var(--paper-0);
+    --surface-0: var(--paper-1);
+    --surface-1: var(--paper-1);
+    --surface-2: var(--paper-2);
+    --text-0: var(--ink-0);
+    --text-1: var(--ink-1);
+    --text-2: var(--ink-2);
+    --text-3: var(--ink-2);
+    --line-0: var(--rule-0);
 
     /* Gold was the travel record's accent. The Programme's accent is the
        organiser's own colour, contrast-corrected for text and UI. */
-    --gold: var(--brand-1-ink) !important;
-    --gold-soft: color-mix(in srgb, var(--brand-1-ink) 10%, transparent) !important;
-    --pl-line: var(--rule-0) !important;
+    --gold: var(--brand-1-ink);
+    --gold-soft: color-mix(in srgb, var(--brand-1-ink) 10%, transparent);
+    --pl-line: var(--rule-0);
 
     /* Square corners (DECISIONS rule #4). Two radius tokens feed most of the
        planner's chrome, so retiring them here covers most of the surface. */
-    --pl-r: 2px !important;
-    --pl-r-sm: 2px !important;
+    --pl-r: 2px;
+    --pl-r-sm: 2px;
   }
 
   /* Budget health is real state, so it keeps colour — but from the mode-aware
@@ -8044,12 +8043,12 @@
      tokens the planner uses most keeps sizes on `--step-*` while the legacy
      sheets survive — no literal font-size ever reaches the page. */
   body:has(#plannerMain) {
-    --fs-nano: var(--step--2) !important;
-    --fs-micro: var(--step--2) !important;
-    --fs-xs: var(--step--2) !important;
-    --fs-sm: var(--step--1) !important;
-    --fs-md: var(--step--1) !important;
-    --fs-lg: var(--step-1) !important;
+    --fs-nano: var(--step--2);
+    --fs-micro: var(--step--2);
+    --fs-xs: var(--step--2);
+    --fs-sm: var(--step--1);
+    --fs-md: var(--step--1);
+    --fs-lg: var(--step-1);
   }
 
   /* Budget health is real state, so it keeps colour — but from the mode-aware
@@ -8070,12 +8069,12 @@
      tokens the planner uses most keeps sizes on `--step-*` while the legacy
      sheets survive — no literal font-size ever reaches the page. */
   body:has(#plannerMain) {
-    --fs-nano: var(--step--2) !important;
-    --fs-micro: var(--step--2) !important;
-    --fs-xs: var(--step--2) !important;
-    --fs-sm: var(--step--1) !important;
-    --fs-md: var(--step--1) !important;
-    --fs-lg: var(--step-1) !important;
+    --fs-nano: var(--step--2);
+    --fs-micro: var(--step--2);
+    --fs-xs: var(--step--2);
+    --fs-sm: var(--step--1);
+    --fs-md: var(--step--1);
+    --fs-lg: var(--step-1);
   }
 
   /* Card chrome across the shell: fills, radii and shadows all go. */
@@ -8231,7 +8230,7 @@
 
   .sch-act:hover,
   .sch-act--del:hover {
-    background: none !important;
+    background: none;
   }
 
   .sch-act {
@@ -8305,7 +8304,7 @@
   }
 
   .jrn-day--today::after {
-    content: none !important;
+    content: none;
   }
 
   .jrn-head {
@@ -8430,7 +8429,7 @@
   }
 
   .wx-card--conf:hover {
-    box-shadow: inset 0 2px 0 var(--brand-1-ink) !important;
+    box-shadow: inset 0 2px 0 var(--brand-1-ink);
   }
 
   .wx-card-conf {
@@ -8901,7 +8900,6 @@
   }
 }
 
-
 /* =========================================================================
    CALENDAR SUBSCRIPTIONS
    Each device gets its own link. The plaintext token exists once, in the
@@ -8965,5 +8963,484 @@
     border-block-start: 1px solid var(--rule-0);
     font-size: var(--step--1);
     color: var(--ink-2);
+  }
+}
+
+@layer section {
+  /* --- PORTED FROM schedule.css ------------------------------------------------
+   The planner used 1.0% of schedule.css. Six classes were reachable from
+   planner.js's import closure (66 modules) and only these four are not already
+   styled by the planner's own sheets — the browse-events modal, which the
+   planner reaches through eventSearch.js / modalScaffold.js.
+
+   section-editor.css carries its own copy of these. That duplication is the
+   price of each page owning its styles instead of sharing a 78 KB sheet for a
+   few rules; the sheet is what we are trying to delete.
+   -------------------------------------------------------------------------- */
+
+  .session-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    background: transparent;
+  }
+
+  .theme-dark .session-modal-header {
+    background: transparent;
+    border-bottom-color: rgba(255, 255, 255, 0.07);
+    box-shadow: none;
+  }
+
+  @media (max-width: 640px) {
+    .session-modal-overlay {
+      padding: 0;
+      align-items: flex-start;
+      overflow-y: auto;
+    }
+
+    .session-modal-header {
+      padding-top: max(0.9rem, env(safe-area-inset-top, 0px));
+      padding-bottom: 0.75rem;
+      padding-left: max(1rem, env(safe-area-inset-left, 0px));
+      padding-right: max(1rem, env(safe-area-inset-right, 0px));
+      border-bottom: none;
+    }
+
+    .session-modal-close {
+      width: 2.75rem;
+      height: 2.75rem;
+    }
+  }
+}
+
+@layer section {
+  /* --- PORTED FROM components.css ----------------------------------------------
+   The last of the legacy sheets to leave planner.html. 33 classes: the lock
+   screen, waypoint controls, the calendar menu, S3 progress and mobile sheet
+   pieces. The venue map went to section-venue-map.css and the dialog chrome to
+   section-modal.css, because the editor needs those too.
+
+   Converted on the way, as with every other port: font sizes onto the --step-*
+   scale, radii to the 2px maximum, and the lock screen's radial gradient
+   dropped — it was declared over a solid #0f172a, which remains.
+   -------------------------------------------------------------------------- */
+
+  @media (min-width: 640px) {
+    .sidebar-tab-btn.is-active .sidebar-item-icon {
+      color: var(--gold, #b06f12);
+    }
+
+    .sidebar-item-icon {
+      font-size: var(--step--1);
+      flex-shrink: 0;
+      color: rgba(0, 0, 0, 0.45);
+      line-height: 1;
+    }
+
+    .theme-dark .sidebar-tab-btn.is-active .sidebar-item-icon {
+      color: #e2ac57;
+    }
+
+    .theme-dark .sidebar-item-icon {
+      color: rgba(255, 255, 255, 0.42);
+    }
+
+    button.bg-gray-50 {
+      background: rgba(0, 0, 0, 0.05);
+      color: #3c3c3e;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 2px;
+    }
+
+    button.bg-gray-50:hover {
+      background: rgba(0, 0, 0, 0.09);
+    }
+
+    .theme-dark button.bg-gray-50 {
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.82);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .theme-dark button.bg-gray-50:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  @media (max-width: 639px) {
+    [role='dialog'] .bg-gray-50.rounded-md {
+      background: #f2f2f7;
+      border-color: rgba(0, 0, 0, 0.08);
+    }
+
+    .theme-dark [role='dialog'] .bg-gray-50.rounded-md {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.07);
+    }
+
+    #personalAccomWaypointStopsList) .waypoint-stop-drag-handle {
+      cursor: default;
+    }
+
+    #personalAccomWaypointStopsList) .waypoint-coords-wrapper {
+      flex: 0 0 100%;
+      order: 4;
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 2px;
+      min-height: 36px;
+      align-items: center;
+    }
+
+    #personalAccomWaypointStopsList) .waypoint-coords-wrapper {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    #personalAccomWaypointStopsList) .move-waypoint-stop-up-btn,
+    #personalAccomWaypointStopsList) .move-waypoint-stop-down-btn {
+      min-width: 36px;
+      min-height: 44px;
+      width: auto;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #personalAccomWaypointStopsList) .remove-waypoint-stop-btn {
+      opacity: 1;
+      order: 2;
+      margin-top: 0;
+      min-width: 44px;
+      min-height: 44px;
+      align-self: flex-start;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button.bg-gray-50 {
+      background: rgba(0, 0, 0, 0.05);
+      color: #3c3c3e;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 2px;
+    }
+
+    button.bg-gray-50:hover {
+      background: rgba(0, 0, 0, 0.09);
+    }
+
+    .theme-dark button.bg-gray-50 {
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.82);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .theme-dark button.bg-gray-50:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    body.session-modal-open #scheduleEventFinderTab {
+      color: #007aff;
+    }
+
+    body.theme-dark.session-modal-open #scheduleEventFinderTab {
+      color: #0a84ff;
+    }
+  }
+
+  .mobile-bottom-tab-label {
+    font-size: var(--step--2);
+    font-weight: 500;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  .planner-sheet-font {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  }
+
+  .planner-action-divider {
+    height: 0.5px;
+    background: rgba(0, 0, 0, 0.1);
+    margin-left: 62px;
+  }
+
+  .nav-sheet-group-label {
+    font-size: var(--step--2);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #8e8e93;
+    padding: 14px 20px 4px;
+  }
+
+  .nav-sheet-foot {
+    border-top: 6px solid rgba(0, 0, 0, 0.04);
+    margin-top: 6px;
+  }
+
+  .mobile-sheet-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 2px;
+    background: rgba(120, 120, 128, 0.16);
+    color: rgba(60, 60, 67, 0.6);
+    font-size: var(--step-0);
+    line-height: 1;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 80ms;
+  }
+
+  .mobile-sheet-close:active {
+    background: rgba(120, 120, 128, 0.28);
+  }
+
+  body.theme-dark .mobile-sheet-close {
+    background: rgba(120, 120, 128, 0.32);
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  body.theme-dark .planner-action-divider {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  body.theme-dark .nav-sheet-foot {
+    border-top-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .toolbar-path-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .toolbar-path-row .toolbar-path-text {
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  .s3-progress-track {
+    height: 3px;
+    background: #e5e7eb;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .s3-progress-bar {
+    height: 100%;
+    width: 40%;
+    background: var(--gold, #b06f12);
+    border-radius: 2px;
+    animation: s3-sweep 1.4s ease-in-out infinite;
+  }
+
+  .planner-lock-open {
+    overflow: hidden;
+  }
+
+  .planner-lock-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: #0f172a;
+  }
+
+  .planner-lock-card {
+    width: min(400px, 100%);
+    background: #fff;
+    border-radius: 2px;
+    padding: 2rem 1.75rem 1.5rem;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+    text-align: center;
+  }
+
+  .planner-lock-icon {
+    width: 3.25rem;
+    height: 3.25rem;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    background: #fef3c7;
+    color: #b45309;
+    font-size: var(--step-1);
+  }
+
+  .planner-lock-title {
+    font-size: var(--step-1);
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 0.35rem;
+  }
+
+  .planner-lock-sub {
+    font-size: var(--step--1);
+    color: #4b5563;
+    line-height: 1.5;
+    margin: 0 0 1.25rem;
+  }
+
+  .planner-lock-sub strong {
+    color: #111827;
+  }
+
+  .planner-lock-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .planner-lock-input {
+    width: 100%;
+    height: 2.75rem;
+    padding: 0 0.9rem;
+    border: 1px solid #d1d5db;
+    border-radius: 2px;
+    font-size: var(--step-0);
+    color: #111827;
+    background: #fff;
+  }
+
+  .planner-lock-input:focus {
+    outline: none;
+    border-color: #d97706;
+    box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.22);
+  }
+
+  .planner-lock-error {
+    color: #dc2626;
+    font-size: var(--step--1);
+    margin: 0;
+    text-align: left;
+  }
+
+  .planner-lock-btn {
+    height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 0;
+    border-radius: 2px;
+    background: #d97706;
+    color: #fff;
+    font-size: var(--step-0);
+    font-weight: 600;
+    cursor: pointer;
+    transition: filter 0.12s;
+  }
+
+  .planner-lock-btn:hover {
+    filter: brightness(1.06);
+  }
+
+  .planner-lock-btn:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+
+  .planner-lock-back {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: var(--step--1);
+    color: #6b7280;
+    text-decoration: none;
+  }
+
+  .planner-lock-back:hover {
+    color: #374151;
+    text-decoration: underline;
+  }
+
+  .theme-dark .planner-lock-sub {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .theme-dark .planner-lock-sub strong {
+    color: #fff;
+  }
+
+  .theme-dark .planner-lock-error {
+    color: #f87171;
+  }
+
+  .theme-dark .planner-lock-back {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .theme-dark .planner-lock-back:hover {
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .cal-menu {
+    min-width: 180px;
+    padding: 4px;
+    border: 1px solid #e5e7eb;
+    border-radius: 2px;
+    background: #fff;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
+  }
+
+  .cal-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 8px 10px;
+    border: 0;
+    border-radius: 2px;
+    background: transparent;
+    font-size: var(--step--1);
+    color: #374151;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .cal-menu-item:hover,
+  .cal-menu-item:focus-visible {
+    outline: none;
+    background: #eff6ff;
+    color: #1d4ed8;
+  }
+
+  .cal-menu-item i {
+    width: 1rem;
+    text-align: center;
+    color: #6b7280;
+  }
+
+  .cal-menu-item:hover i {
+    color: #1d4ed8;
+  }
+
+  .theme-dark .cal-menu {
+    background: #0f2233;
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+
+  .theme-dark .cal-menu-item {
+    color: #e5eefb;
+  }
+
+  .theme-dark .cal-menu-item:hover {
+    background: rgba(59, 130, 246, 0.18);
+    color: #fff;
   }
 }

@@ -1,0 +1,12 @@
+{
+  "status": 404,
+  "headers": {
+    "Accept-Ranges": "",
+    "Cache-Control": "public, max-age=60, stale-while-revalidate=300",
+    "Content-Length": "10",
+    "Content-Range": "",
+    "Content-Type": "text/plain; charset=utf-8",
+    "ETag": "W/\"a-8RJARPvfYzJdDi+ZdXbdTOYnAfo\""
+  },
+  "body": "Tm90IGZvdW5kLg=="
+}

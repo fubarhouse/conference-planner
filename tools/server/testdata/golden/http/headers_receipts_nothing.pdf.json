@@ -1,0 +1,16 @@
+{
+  "status": 404,
+  "headers": {
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE, OPTIONS",
+    "Access-Control-Allow-Origin": "*",
+    "Cache-Control": "private, no-store",
+    "Content-Security-Policy": "",
+    "Location": "",
+    "Permissions-Policy": "geolocation=(), camera=(), microphone=()",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "SAMEORIGIN"
+  },
+  "body": "eyJlcnJvciI6Ik5vdCBmb3VuZCJ9"
+}

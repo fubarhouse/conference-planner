@@ -45,12 +45,11 @@
     <style>
       @layer overrides, reset, legacy, tokens, base, composition, section, utility;
       @import url("./css/utilities.css") layer(legacy);
-      @import url("./css/schedule.css") layer(legacy);
-      @import url("./css/components.css") layer(legacy);
       @import url("./css/embed.css") layer(legacy);
     </style>
     <link rel="stylesheet" href="./css/foundation.css">
     <link rel="stylesheet" href="./css/section-chrome.css">
+    <link rel="stylesheet" href="./css/section-session-detail.css">
     <link rel="stylesheet" href="./css/section-schedule.css">
 </head>
 <body>
@@ -297,7 +296,6 @@
          The closer is an empty <details> in the SAME name group — opening it
          closes whichever session was open, so "Close" needs no script. -->
     <aside class="app-rail" aria-hidden="true">
-      <p class="app-rail__hint">Select any session to read it here. The programme stays where it is.</p>
     </aside>
 
     <!-- Shared detail surface for content that cannot be pre-rendered into a

@@ -1,0 +1,94 @@
+{
+  "query": "café",
+  "terms": [
+    "café"
+  ],
+  "mode": "exact",
+  "facets": {
+    "series": "All",
+    "region": "All",
+    "country": "All",
+    "year": "All"
+  },
+  "total": 1,
+  "offset": 0,
+  "byYear": {
+    "2015": 1
+  },
+  "byTerm": {
+    "café": {
+      "2015": 1
+    }
+  },
+  "breakdown": {
+    "series": [
+      {
+        "name": "DrupalCon",
+        "count": 1,
+        "total": 136
+      }
+    ],
+    "region": [
+      {
+        "name": "LATAM",
+        "count": 1,
+        "total": 42
+      }
+    ],
+    "country": [
+      {
+        "name": "Colombia",
+        "count": 1,
+        "total": 42
+      }
+    ],
+    "city": [
+      {
+        "name": "Bogotá",
+        "count": 1,
+        "total": 42
+      }
+    ],
+    "speakers": [
+      {
+        "name": "Fred Ferrer",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "rafaelcaceres",
+        "count": 1,
+        "total": 1
+      }
+    ],
+    "events": 1,
+    "eventsTotal": 16,
+    "span": {
+      "min": 2015,
+      "max": 2015
+    }
+  },
+  "results": [
+    {
+      "matched": [
+        "café"
+      ],
+      "title": "The Art of Start - How to build a DrupalShop with no money but with a lots of desire.",
+      "description": "Start a business is tricky. Start from nothing is a big challenge but with a culture of innovation, continuous improvement and respecting people anyone can do it.\n\nMotivate and inspire people who intend to start or who is already on the road for some time, this is the main goal.\n\nWe want  to share a bit of experience in creating a Drupal Shop without any financial investment, what were the strategies, crucial decisions, tense moments and great achievements.\n\nHere goes the topics we are going to cover in this session:\n\nLean Startups\n\nBusiness Model Canvas\n\nLean and Agile Culture\n\nManagement 3.0\n\nValidation Board\n\nCafé Kaizen\n\nInnovation\n\nDigital Marketing\n\nContent Marketing\n\nMotivation\n\nInspiration",
+      "speakers": "Fred Ferrer, rafaelcaceres",
+      "track": "Drupal Business",
+      "location": "Salon Ceiba - Acquia",
+      "startTime": "2015-02-10T15:45:00Z",
+      "year": 2015,
+      "event": "DrupalCon Bogotá 2015",
+      "series": "DrupalCon",
+      "region": "LATAM",
+      "country": "Colombia",
+      "city": "Bogotá",
+      "file": "events/drupalcon/la/2015-bogota.json",
+      "link": "https://latinamerica2015.drupal.org/session/art-start-how-build-drupalshop-no-money-lots-desire.html",
+      "video": "https://youtu.be/HsH0Ib8sEo4",
+      "minutes": 60
+    }
+  ]
+}

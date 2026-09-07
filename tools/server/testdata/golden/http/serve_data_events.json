@@ -1,0 +1,12 @@
+{
+  "status": 301,
+  "headers": {
+    "Accept-Ranges": "",
+    "Cache-Control": "public, max-age=60, stale-while-revalidate=300",
+    "Content-Length": "161",
+    "Content-Range": "",
+    "Content-Type": "text/html; charset=UTF-8",
+    "ETag": ""
+  },
+  "body": "PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CjxtZXRhIGNoYXJzZXQ9InV0Zi04Ij4KPHRpdGxlPlJlZGlyZWN0aW5nPC90aXRsZT4KPC9oZWFkPgo8Ym9keT4KPHByZT5SZWRpcmVjdGluZyB0byAvZGF0YS9ldmVudHMvPC9wcmU+CjwvYm9keT4KPC9odG1sPgo="
+}

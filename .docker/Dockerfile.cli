@@ -1,0 +1,82 @@
+# GENERATED — do not edit.
+#
+# Built from .docker/common.dockerfile + .docker/<name>.tail.dockerfile by
+# scripts/build-dockerfiles.mjs. Edit those and run `pnpm run build:dockerfiles`.
+# ─────────────────────────────────────────────────────────────────────────────
+# SHARED BUILD — identical in Dockerfile.backend and Dockerfile.cli.
+#
+# This file is not built directly. It is the single copy of the stages both
+# images need, concatenated into each of them by `scripts/build-dockerfiles.mjs`
+# — because Docker has no include, and two hand-maintained copies of a build
+# drift the first time somebody edits one of them.
+#
+# Edit HERE, then run `pnpm run build:dockerfiles`. The generated files are
+# committed, so Lagoon and `docker build` see ordinary self-contained
+# Dockerfiles and need to know nothing about this.
+#
+# Content lives OUTSIDE both images. On Lagoon a persistent volume is mounted at
+# /storage and CONTENT_PATH points the roots at it; locally the same path is a
+# bind mount (see docker-compose.override.yml). The images carry the
+# application only — no datasets, no images, no planners, no receipts.
+# ─────────────────────────────────────────────────────────────────────────────
+
+ARG NODE_IMAGE=uselagoon/node-22
+ARG NODE_BUILDER_IMAGE=uselagoon/node-22-builder
+ARG GO_IMAGE=golang:1.26-alpine
+
+# ── Go tools ──────────────────────────────────────────────────────────────────
+# Every module under tools/ is built and its binaries land on the PATH. `./...`
+# picks up whatever commands a module defines, so a second Go tool needs no
+# change here.
+FROM ${GO_IMAGE} AS go-tools
+WORKDIR /src
+COPY tools/ ./
+RUN mkdir -p /out \
+    && for module in */; do \
+         if [ -f "${module}go.mod" ]; then \
+           echo "building ${module}"; \
+           (cd "${module}" && CGO_ENABLED=0 go build -trimpath -o /out/ ./...) || exit 1; \
+         fi; \
+       done \
+    && ls -la /out
+
+# ── CLI ───────────────────────────────────────────────────────────────────────
+# The whole repository, both runtimes, no server. Lagoon keeps this pod idle and
+# execs post-rollout tasks and cronjobs into it, which is why it mounts the same
+# volume as the backend service rather than one of its own.
+#
+# It carries Node and node_modules where the backend does not, because the
+# tooling under scripts/ is JavaScript and shares helpers in scripts/lib/. The
+# cronjobs run both: `server catalog` (Go) and `node scripts/…` (JavaScript).
+#
+# APP_ROOT is not set. Nothing here serves pages, and the scripts find the
+# frontend the way they always have — `scripts/lib/roots.js` derives it from the
+# repository root, which is this image's working directory.
+FROM ${NODE_BUILDER_IMAGE} AS deps
+WORKDIR /app
+# corepack pins pnpm to the version in package.json's `packageManager`, so the
+# image installs with the same one used locally and in CI. The prompt is
+# disabled because a build has no terminal to answer it.
+ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+RUN corepack enable
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+# --frozen-lockfile is the deploy-time contract: fail rather than quietly resolve
+# a dependency the lockfile did not sanction. Install scripts stay blocked unless
+# pnpm-workspace.yaml allows them by name.
+RUN pnpm install --frozen-lockfile --prod
+
+FROM ${NODE_IMAGE} AS cli
+WORKDIR /app
+
+ENV NODE_ENV=production \
+    CONTENT_PATH=/storage
+
+COPY . /app
+COPY --from=deps /app/node_modules /app/node_modules
+COPY --from=go-tools /out/ /usr/local/bin/
+
+RUN mkdir -p /storage/public/img /storage/private \
+    && fix-permissions /app \
+    && fix-permissions /storage
+
+CMD ["/bin/docker-sleep"]

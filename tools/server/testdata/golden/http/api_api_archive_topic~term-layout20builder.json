@@ -1,0 +1,10 @@
+{
+  "status": 200,
+  "headers": {
+    "Cache-Control": "public, no-cache",
+    "Content-Type": "application/json; charset=utf-8",
+    "X-Cache": "",
+    "X-Curation-Version": ""
+  },
+  "body": "eyJ0ZXJtIjoibGF5b3V0IGJ1aWxkZXIiLCJieVllYXIiOnsiMjAyNCI6MSwiMjAyNSI6MSwiMjAyNiI6M30sImJ5WWVhckRlc2NyaWJlZCI6eyIyMDI0IjoxLCIyMDI1IjoxLCIyMDI2IjozfSwic2Vzc2lvbnMiOlt7InllYXIiOjIwMjQsInRpdGxlIjoiRHJ1cGFsJ3MgQWx0ZXJuYXRlIFJlYWxpdGllcyJ9LHsieWVhciI6MjAyNSwidGl0bGUiOiJEcnVwYWwgQ2FudmFzIEFQSXM6IGhvdyB0byBpbnRlZ3JhdGUgYW5kIGV4dGVuZCBDYW52YXMifSx7InllYXIiOjIwMjYsInRpdGxlIjoiVGhlIGpveSBhbmQgcG93ZXIgb2YgU0RDLCBmaW5hbGx5IGZvciBmb3JtIGlucHV0cyJ9LHsieWVhciI6MjAyNiwidGl0bGUiOiJQYWdlIEJ1aWxkZXIgRGVhdGhtYXRjaDogQ2FudmFzIHZzIERpc3BsYXkgQnVpbGRlciBpbiBhIFJlYWwgV29ybGQgUHJvamVjdCJ9LHsieWVhciI6MjAyNiwidGl0bGUiOiJBSS1Qb3dlcmVkIFNpdGUgQnVpbGRpbmcgaW4gRHJ1cGFsOiBGcm9tIEJsYW5rIFNpdGUgdG8gU3R5bGVkIFBhZ2VzIGluIGEgQ29udmVyc2F0aW9uIn1dLCJ5ZWFyIjpudWxsfQ=="
+}

@@ -61,13 +61,12 @@
         "regionCode": {
           "type": "string",
           "enum": [
-            "EUR",
-            "MEA",
+            "EMEA",
             "APAC",
             "AMER",
             "LATAM"
           ],
-          "description": "Canonical macro-region (EUR/MEA/APAC/AMER/LATAM) for the Archive Observatory facets. Added by `npm run backfill:regions`."
+          "description": "Canonical macro-region (EMEA/APAC/AMER/LATAM) for the Archive Observatory facets. Added by `npm run backfill:regions`."
         },
         "country": {
           "type": "string",
@@ -147,6 +146,39 @@
         "sourceCache": {
           "type": "string",
           "description": "Path to the locally cached copy of the source schedule data."
+        },
+        "calendarFeed": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "The organisers' own machine-readable schedule feed, where one exists. Distinct from the app's OWN /schedule.ics output: this is an upstream address the dataset can be re-checked and refreshed against. DrupalCon publishes both forms at events.drupal.org/export/<slug>/drupalcon-schedule.{ics,json}. Only `ics` is polled — see docs/sources.md.",
+          "properties": {
+            "ics": {
+              "type": "string",
+              "description": "URL of the upstream .ics feed. The one field a scheduled job reads: it fetches this, compares it against the dataset, and reports or applies the difference."
+            },
+            "json": {
+              "type": "string",
+              "description": "URL of the equivalent JSON export, where the organisers publish one. Richer than the ICS for some fields and poorer for others, so it is recorded but never polled — an importer is a deliberate action, not a background job."
+            },
+            "autoUpdate": {
+              "type": "boolean",
+              "description": "Opt-in: whether a scheduled job may act on a difference rather than only report it. Absent means report only. Never defaulted to true — an archive that rewrites itself unattended cannot be trusted to have preserved anything."
+            },
+            "checkedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "When the feed was last fetched. Written by the job, not by hand."
+            },
+            "importedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "When a difference from the feed was last applied to this dataset. Written by the job, not by hand."
+            },
+            "note": {
+              "type": "string",
+              "description": "Free text for whoever has to look at this later — a quirk of the feed, why autoUpdate is off, what the last import changed."
+            }
+          }
         },
         "videoPlaylist": {
           "type": "string",
@@ -336,6 +368,14 @@
               "enabled": {
                 "type": "boolean",
                 "description": "Whether this sponsor entry is visible."
+              },
+              "sourceIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Ids of entries in event.sources that this record came from. See docs/sources.md."
               }
             }
           }
@@ -431,6 +471,42 @@
           ],
           "description": "Which software community this event belongs to. The app is deliberately ecosystem-neutral in its UI and copy, so the fact that (today) every dataset here is a Drupal event lives in DATA rather than in an assumption. Editor-only: not rendered on the public schedule."
         },
+        "sponsorRecord": {
+          "type": "object",
+          "required": [
+            "state"
+          ],
+          "additionalProperties": false,
+          "description": "What could be recovered about this event's sponsors, when that is less than the whole list. Absence of sponsors is ambiguous on its own — it reads identically whether the event had none, whether nobody has scraped them yet, or whether the record is genuinely lost. This says which, in the event's own words, and is rendered on the schedule so a reader is told rather than left guessing. Omit it entirely when the sponsor list is believed complete.",
+          "properties": {
+            "state": {
+              "type": "string",
+              "enum": [
+                "none",
+                "partial",
+                "logos-lost"
+              ],
+              "description": "`none` — no sponsor could be recovered at all. `partial` — some sponsors are recorded but the list is known to be incomplete. `logos-lost` — the sponsors are known, but their logo images did not survive."
+            },
+            "note": {
+              "type": "string",
+              "description": "What was looked at and what was found, in plain language. This is shown to readers, so write it for them: name the source that was checked and say why it fell short."
+            },
+            "checkedAt": {
+              "type": "string",
+              "format": "date",
+              "description": "When the search was made. A dead end is only true as of a date — a later capture or a rediscovered site can change the answer."
+            },
+            "sourceIds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": "Ids of entries in event.sources that were checked."
+            }
+          }
+        },
         "attendance": {
           "type": "object",
           "required": [
@@ -456,6 +532,14 @@
             "note": {
               "type": "string",
               "description": "Anything that qualifies the number: 'in person only', 'includes contribution day', 'organiser estimate'."
+            },
+            "sourceIds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": "Ids of entries in event.sources that this record came from. See docs/sources.md."
             }
           }
         },
@@ -504,12 +588,128 @@
                       "volunteer"
                     ],
                     "description": "Extend this enum deliberately if a community page lists a role worth keeping (mentors, track chairs). A closed list keeps the taxonomy honest rather than accumulating typos."
+                  },
+                  "sourceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "description": "Ids of entries in event.sources that this record came from. See docs/sources.md."
                   }
                 }
               },
               "description": "One entry per person per role. Somebody who both organised and volunteered appears twice, which is true and keeps per-role stats correct."
+            },
+            "sourceIds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": "Ids of entries in event.sources that this record came from. See docs/sources.md."
             }
           }
+        },
+        "sources": {
+          "type": "array",
+          "description": "Where this event's data came from. See docs/sources.md.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "kind"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Stable slug, unique within the dataset. Records cite it, so renaming one orphans them."
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "schedule",
+                  "sessions",
+                  "sponsors",
+                  "video",
+                  "photos",
+                  "community",
+                  "speaker",
+                  "venue",
+                  "stats",
+                  "other"
+                ],
+                "description": "What the source is."
+              },
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "description": "The ORIGINAL address, never an archive.org wrapper — that belongs in via.captureUrl."
+              },
+              "title": {
+                "type": "string",
+                "description": "Human label. Required for a stated source, where it IS the source."
+              },
+              "retrievedAt": {
+                "type": "string",
+                "description": "ISO date we fetched it. Optional: much of the archive predates provenance."
+              },
+              "via": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "provider"
+                ],
+                "description": "How it was obtained. Absent means fetched live from url.",
+                "properties": {
+                  "provider": {
+                    "type": "string",
+                    "enum": [
+                      "wayback",
+                      "stated"
+                    ]
+                  },
+                  "timestamp": {
+                    "type": "string",
+                    "pattern": "^\\d{4,14}$",
+                    "description": "Wayback capture stamp — when archive.org saw the page."
+                  },
+                  "captureUrl": {
+                    "type": "string",
+                    "format": "uri"
+                  }
+                }
+              },
+              "capture": {
+                "type": "string",
+                "description": "Repo-relative path to a local copy, when one was kept."
+              },
+              "verifiedAt": {
+                "type": "string"
+              },
+              "verifiedBy": {
+                "type": "string",
+                "enum": [
+                  "human",
+                  "policy"
+                ],
+                "description": "'policy' means nobody looked — it was accepted by rule. Never report it as verified."
+              },
+              "notes": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "sourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "Ids of entries in event.sources that this record came from. See docs/sources.md."
         }
       }
     },
@@ -581,7 +781,7 @@
               "name"
             ],
             "additionalProperties": false,
-            "description": "Set ONLY when this session happens somewhere other than the event venue \u2014 an awards ceremony in a theatre, a sprint in a sponsor's office, a social at a bar. Its presence means \"not at the main venue\": calendar feeds use this place instead of the event's, so a subscriber's map takes them to the right door. `location` remains the room WITHIN this venue.",
+            "description": "Set ONLY when this session happens somewhere other than the event venue — an awards ceremony in a theatre, a sprint in a sponsor's office, a social at a bar. Its presence means \"not at the main venue\": calendar feeds use this place instead of the event's, so a subscriber's map takes them to the right door. `location` remains the room WITHIN this venue.",
             "properties": {
               "name": {
                 "type": "string",
@@ -596,7 +796,7 @@
                 "type": "number",
                 "minimum": -90,
                 "maximum": 90,
-                "description": "Without coordinates a feed carries the name but NO map pin \u2014 deliberately, because inheriting the event's pin would send people to the wrong place with apparent precision."
+                "description": "Without coordinates a feed carries the name but NO map pin — deliberately, because inheriting the event's pin would send people to the wrong place with apparent precision."
               },
               "longitude": {
                 "type": "number",
@@ -628,6 +828,28 @@
           "isAgendaItem": {
             "type": "boolean",
             "description": "True when this item is agenda/logistics — lunch, morning tea, registration — rather than a programme session. It still renders on the schedule and keeps its sponsors, room and times; it is simply not counted as a session by the archive (stats, topics, search). Optional: when absent the archive falls back to judging the title, which is how every dataset written before this field behaves."
+          },
+          "sourceIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": "Ids of entries in event.sources that this record came from. See docs/sources.md."
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "session",
+              "workshop",
+              "social",
+              "agenda"
+            ],
+            "description": "What sort of item this is, as distinct from what it is ABOUT (that is `track`). \"session\" is a talk/keynote/panel and is the default; \"workshop\" is hands-on programme — sprints, summits, training; \"social\" is trivia, dinners, apéros, tours and awards; \"agenda\" is logistics — lunch, breaks, registration. session and workshop count toward session totals; social and agenda do not. Supersedes `isAgendaItem`, which remains the older spelling of kind:\"agenda\"."
+          },
+          "cancelled": {
+            "type": "boolean",
+            "description": "True when the item was called off. Cancelled items are recorded but never rendered and never counted — the archive says what happened, and a talk that did not happen must not sit in the programme looking like it did. The row is kept rather than deleted so the evidence survives."
           }
         }
       }

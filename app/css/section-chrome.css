@@ -1266,17 +1266,33 @@
       background: var(--paper-1);
       border-inline-start: 1px solid var(--rule-1);
       padding: var(--sp-xl) var(--sp-m) var(--sp-2xl);
+      /* It arrives from the edge it lives on. `@starting-style` is what makes
+         this animate at all: the panel goes from `hidden` to shown, so there is
+         no previous frame to interpolate from unless one is declared. */
+      translate: 0 0;
+      transition: translate 180ms ease;
     }
 
-    body[data-rail-open] .app-rail__hint {
-      display: none;
+    @starting-style {
+      .app-panel {
+        translate: 100% 0;
+      }
     }
+
   }
 
 
   /* --- the margin rail (desktop only) ------------------------------------ */
   .app-rail {
     display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .app-panel,
+    .sch-entry__disclosure[open] > .sch-entry__detail,
+    body:has(.app-rail) {
+      transition: none;
+    }
   }
 
   @media (min-width: 86rem) {
@@ -1287,13 +1303,28 @@
       --rail-w: clamp(23.7rem, 27vw, 29.7rem);
     }
 
-    /* Only a page that HAS a rail gives up the width for it. Reserving it on
-       every body charged the planner 432px for a margin it never uses. */
-    body:has(.app-rail) {
+    /* Only a page that HAS a rail gives up the width for it — and only while
+       something is actually IN it. Reserving it unconditionally charged every
+       reader ~430px of margin to display one line of hint text they had already
+       read, on a page whose whole job is a wide programme grid.
+       
+       Two things can occupy the margin, and they are independent: the scripted
+       panel (#railPanel, which sets data-rail-open) and the CSS-only session
+       disclosure that lifts its own detail into the margin. Either counts. */
+    body:has(.app-rail):is([data-rail-open], :has(.sch-entry__disclosure[open])) {
       padding-inline-end: var(--rail-w);
     }
 
-    .app-rail {
+    /* Reflowing 430px in one frame reads as the page breaking. Match the
+       panel's own entry so the content column yields as the rail arrives. */
+    body:has(.app-rail) {
+      transition: padding-inline-end 180ms ease;
+    }
+
+    /* The strip itself only exists to back the panel. With nothing in it there
+       is nothing to back, and its hint has no room to live in once the margin
+       is no longer reserved. */
+    body:is([data-rail-open], :has(.sch-entry__disclosure[open])) .app-rail {
       display: block;
       position: fixed;
       inset-block: 0;
@@ -1303,19 +1334,6 @@
       background: var(--paper-1);
       border-inline-start: 1px solid var(--rule-1);
       padding: var(--sp-xl) var(--sp-m);
-    }
-
-    .app-rail__hint {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: var(--step-1);
-      color: var(--ink-2);
-      max-inline-size: 24ch;
-      line-height: 1.4;
-    }
-
-    body:has(.sch-entry__disclosure[open]) .app-rail__hint {
-      display: none;
     }
 
     .sch-entry__disclosure[open] .sch-entry__summary-text {
@@ -1334,6 +1352,14 @@
       background: var(--paper-1);
       border-inline-start: 1px solid var(--rule-1);
       padding: var(--sp-xl) var(--sp-m) var(--sp-2xl);
+      translate: 0 0;
+      transition: translate 180ms ease;
+    }
+
+    @starting-style {
+      .sch-entry__disclosure[open] > .sch-entry__detail {
+        translate: 100% 0;
+      }
     }
 
 
@@ -1665,6 +1691,148 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
     gap: var(--sp-s);
+  }
+
+  /* --- BROWSE: counts, filters, and the upcoming/past split ----------------
+     `#eventHomeGrid` is the .hl-card-grid, and these turn it into a column of
+     sections instead — each section carries its own grid. The grid rules stay
+     where they are so nothing else that uses the kit changes.
+     --------------------------------------------------------------------- */
+  #eventHomeGrid {
+    display: block;
+  }
+
+  .hl-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-l);
+    padding-block: var(--sp-m);
+    border-block: 1px solid var(--rule-0);
+    margin-block-end: var(--sp-m);
+  }
+
+  .hl-stat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3xs);
+  }
+
+  .hl-stat-n {
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    font-weight: 600;
+    line-height: 1;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  .hl-stat-label {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* Search + filters as one strip. The search grows into whatever the selects
+     do not need; the selects keep their own width. Below the breakpoint the
+     search takes its own line, because three selects and an input on one row at
+     phone width is four unusable controls rather than one tidy strip. */
+  .hl-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: var(--sp-s);
+    margin-block-end: var(--sp-s);
+  }
+
+  .hl-controls .hl-search-wrap {
+    flex: 1 1 16rem;
+    margin-block-end: 0;
+  }
+
+  .hl-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: var(--sp-s);
+  }
+
+  @media (max-width: 44rem) {
+    .hl-controls .hl-search-wrap {
+      flex-basis: 100%;
+    }
+  }
+
+  .hl-filter {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3xs);
+  }
+
+  .hl-filter-label {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .hl-filter-select {
+    font: inherit;
+    font-size: var(--step--1);
+    color: var(--ink-0);
+    background: var(--paper-1);
+    border: 1px solid var(--rule-1);
+    border-radius: 2px;
+    padding: var(--sp-3xs) var(--sp-2xs);
+    min-inline-size: 9rem;
+  }
+
+  .hl-filter-reset {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-1);
+    background: transparent;
+    border: 1px solid var(--rule-1);
+    border-radius: 2px;
+    padding: var(--sp-2xs) var(--sp-xs);
+    cursor: pointer;
+  }
+
+  .hl-filter-reset:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+
+  .hl-filter-reset:not(:disabled):hover {
+    border-color: var(--ink-2);
+    color: var(--ink-0);
+  }
+
+  .hl-group + .hl-group {
+    margin-block-start: var(--sp-l);
+  }
+
+  .hl-group-title {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-2xs);
+    padding-block-end: var(--sp-2xs);
+    margin-block-end: var(--sp-s);
+    border-block-end: 1px solid var(--ink-0);
+  }
+
+  .hl-group-count {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    font-weight: 400;
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
   }
 
   .hl-loading,

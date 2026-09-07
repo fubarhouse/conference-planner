@@ -1,0 +1,1440 @@
+{
+  "event": {
+    "regionCode": "EMEA",
+    "country": "Bulgaria",
+    "designation": "Drupal Dev Days",
+    "ecosystem": "drupal",
+    "location": "Burgas",
+    "year": "2024",
+    "region": "Bulgaria",
+    "startDate": "2024-06-26T06:00:00.000Z",
+    "endDate": "2024-06-28T20:59:00.000Z",
+    "venue": "Burgas Free University (BFU)",
+    "timezone": "Europe/Sofia",
+    "columns": 4,
+    "website": "https://ddd2024.drupalcamp.bg",
+    "enabled": true,
+    "scheduleComplete": true,
+    "logo": {
+      "image": "",
+      "imageAlt": "Drupal Dev Days Burgas '24",
+      "usePlate": false,
+      "logoDisabled": false,
+      "faIcon": "fa-solid fa-calendar-days"
+    },
+    "scheduleURLs": [
+      "https://ddd2024.drupalcamp.bg/sessions/schedule/2024-06-26",
+      "https://ddd2024.drupalcamp.bg/sessions/schedule/2024-06-27",
+      "https://ddd2024.drupalcamp.bg/sessions/schedule/2024-06-28"
+    ],
+    "other_urls": [
+      "https://ddd2024.drupalcamp.bg/venue",
+      "https://ddd2024.drupalcamp.bg/our-sponsors",
+      "https://ddd2024.drupalcamp.bg/speakers",
+      "https://ddd2024.drupalcamp.bg/tracks",
+      "https://ddd2024.drupalcamp.bg/program-glance"
+    ],
+    "flickr": {
+      "enabled": false,
+      "groupUrl": "",
+      "image": "",
+      "imageAlt": "Drupal Dev Days Burgas 2024 photos"
+    },
+    "sponsors": [
+      {
+        "id": "ffw",
+        "title": "FFW",
+        "tier": "Platinum",
+        "row": 1,
+        "priority": 20,
+        "image": "",
+        "imageAlt": "FFW logo",
+        "link": "https://ffw.com/en-GB",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd24-sponsors"
+        ]
+      },
+      {
+        "id": "dropsolid",
+        "title": "dropsolid",
+        "tier": "Gold",
+        "row": 2,
+        "priority": 10,
+        "image": "",
+        "imageAlt": "dropsolid logo",
+        "link": "https://dropsolid.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd24-sponsors"
+        ]
+      },
+      {
+        "id": "drupal-austria",
+        "title": "Drupal Austria",
+        "tier": "Silver",
+        "row": 3,
+        "priority": 10,
+        "image": "",
+        "imageAlt": "Drupal Austria logo",
+        "link": "https://www.drupal-austria.at/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd24-sponsors"
+        ]
+      },
+      {
+        "id": "e-sepia-web-innovation",
+        "title": "E-Sepia Web Innovation",
+        "tier": "Silver",
+        "row": 3,
+        "priority": 20,
+        "image": "",
+        "imageAlt": "E-Sepia Web Innovation logo",
+        "link": "https://www.e-sepia.gr/en",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd24-sponsors"
+        ]
+      },
+      {
+        "id": "kraut-hosting",
+        "title": "Kraut Hosting",
+        "tier": "After-hours Drinks",
+        "row": 4,
+        "priority": 10,
+        "image": "",
+        "imageAlt": "Kraut Hosting logo",
+        "link": "https://kraut.hosting/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd24-sponsors"
+        ]
+      },
+      {
+        "id": "druid",
+        "title": "Druid",
+        "tier": "After-hours Drinks",
+        "row": 4,
+        "priority": 20,
+        "image": "",
+        "imageAlt": "Druid logo",
+        "link": "https://druid.fi/en/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd24-sponsors"
+        ]
+      },
+      {
+        "id": "amazee-labs",
+        "title": "Amazee Labs",
+        "tier": "After-hours Drinks",
+        "row": 4,
+        "priority": 30,
+        "image": "",
+        "imageAlt": "Amazee Labs logo",
+        "link": "https://www.amazeelabs.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd24-sponsors"
+        ]
+      },
+      {
+        "id": "hinto",
+        "title": "Hinto",
+        "tier": "Coffee / Tea",
+        "row": 5,
+        "priority": 10,
+        "image": "",
+        "imageAlt": "Hinto logo",
+        "link": "https://www.hinto.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd24-sponsors"
+        ]
+      },
+      {
+        "id": "weekly-drop",
+        "title": "Weekly Drop",
+        "tier": "Media",
+        "row": 6,
+        "priority": 10,
+        "image": "",
+        "imageAlt": "Weekly Drop logo",
+        "link": "https://www.theweeklydrop.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd24-sponsors"
+        ]
+      },
+      {
+        "id": "drop-times",
+        "title": "Drop Times",
+        "tier": "Media",
+        "row": 6,
+        "priority": 20,
+        "image": "",
+        "imageAlt": "Drop Times logo",
+        "link": "https://www.thedroptimes.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd24-sponsors"
+        ]
+      },
+      {
+        "id": "valuebound",
+        "title": "Valuebound",
+        "tier": "Media",
+        "row": 6,
+        "priority": 30,
+        "image": "",
+        "imageAlt": "Valuebound logo",
+        "link": "https://www.valuebound.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd24-sponsors"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "ddd24-schedule-2024-06-26",
+        "kind": "schedule",
+        "url": "https://ddd2024.drupalcamp.bg/sessions/schedule/2024-06-26",
+        "retrievedAt": "2026-08-24",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20240626110411",
+          "captureUrl": "https://web.archive.org/web/20240626110411/https://ddd2024.drupalcamp.bg/sessions/schedule/2024-06-26"
+        },
+        "notes": "The three per-day schedules carry every field inline — room, speakers, track, experience level and the full description. Unlike the 2023 site, the time is a text label (\"Wed 09:00-09:15\") rather than a `<time datetime>` with an offset, so the UTC conversion here is applied from the venue timezone (Europe/Sofia, EEST/UTC+3 in June) rather than read from the source."
+      },
+      {
+        "id": "ddd24-schedule-2024-06-27",
+        "kind": "schedule",
+        "url": "https://ddd2024.drupalcamp.bg/sessions/schedule/2024-06-27",
+        "retrievedAt": "2026-08-24",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20241113152027",
+          "captureUrl": "https://web.archive.org/web/20241113152027/https://ddd2024.drupalcamp.bg/sessions/schedule/2024-06-27"
+        }
+      },
+      {
+        "id": "ddd24-schedule-2024-06-28",
+        "kind": "schedule",
+        "url": "https://ddd2024.drupalcamp.bg/sessions/schedule/2024-06-28",
+        "retrievedAt": "2026-08-24",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20240628050816",
+          "captureUrl": "https://web.archive.org/web/20240628050816/https://ddd2024.drupalcamp.bg/sessions/schedule/2024-06-28"
+        }
+      },
+      {
+        "id": "ddd24-venue",
+        "kind": "venue",
+        "url": "https://ddd2024.drupalcamp.bg/venue",
+        "retrievedAt": "2026-08-24",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20240526015113",
+          "captureUrl": "https://web.archive.org/web/20240526015113/https://ddd2024.drupalcamp.bg/venue"
+        },
+        "notes": "Burgas Free University (BFU), Burgas — a 22,500 m² award-winning building, one of Bulgaria’s first non-state universities."
+      },
+      {
+        "id": "ddd24-sponsors",
+        "kind": "sponsors",
+        "url": "https://ddd2024.drupalcamp.bg/our-sponsors",
+        "retrievedAt": "2026-08-24",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20240418130858",
+          "captureUrl": "https://web.archive.org/web/20240418130858/https://ddd2024.drupalcamp.bg/our-sponsors"
+        },
+        "notes": "Six tiers in rendered order. The logo files were never archived — the site served them from /sites/default/files/inline-images/, which has no Wayback captures at any timestamp — so each sponsor carries its name and link but no image."
+      },
+      {
+        "id": "ddd24-home",
+        "kind": "other",
+        "url": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024",
+        "retrievedAt": "2026-08-24",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20240526020949",
+          "captureUrl": "https://web.archive.org/web/20240526020949/https://ddd2024.drupalcamp.bg/drupal-dev-days-2024"
+        },
+        "notes": "Dates: \"June 26-28, 2024\"."
+      },
+      {
+        "id": "drupal-org-ddd-burgas-2024",
+        "kind": "community",
+        "url": "https://www.drupal.org/community/events",
+        "retrievedAt": "2026-08-24",
+        "notes": "The drupal.org community listing holds this edition’s organiser and volunteer credits. Not fetched: drupal.org serves a CAPTCHA to automated requests and has no Wayback captures of those pages, so the exact event-page address and its credits are still to be read by hand."
+      }
+    ],
+    "sourceIds": [
+      "ddd24-home",
+      "ddd24-venue",
+      "drupal-org-ddd-burgas-2024"
+    ],
+    "videoPlaylist": "https://www.youtube.com/playlist?list=PLza5NTXQjgP-E9AtCOvFMVT4ir-vKWR-z"
+  },
+  "items": [
+    {
+      "startTime": "2024-06-26T06:00:00.000Z",
+      "endTime": "2024-06-26T06:15:00.000Z",
+      "duration": "P15M",
+      "title": "Welcome Session",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Open Web & Community"
+      ],
+      "speakers": [
+        "valthebald",
+        "marie77e",
+        "hchonov"
+      ],
+      "full_description": "Welcome to Burgas!\n\n**Experience level:** Beginner",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/welcome-session",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-26"
+      ]
+    },
+    {
+      "startTime": "2024-06-26T06:15:00.000Z",
+      "endTime": "2024-06-26T07:05:00.000Z",
+      "duration": "P50M",
+      "title": "Shaping Tomorrow: Drupal's Blueprint for Innovation",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Open Web & Community"
+      ],
+      "speakers": [
+        "Suzanne Dergacheva"
+      ],
+      "full_description": "There are more options than ever for creating your digital presence. Different technology stacks, CMSs and DXPs abound. Whether you’re creating an enterprise platform or a simple website, users are bombarded with options and the decision making process isn’t always based on the best technical fit. So what is Drupal’s secret sauce and how do we keep innovating? And how do we convince everyone else that the Open Web is a winning formula?\n\n**Experience level:** Beginner",
+      "video_url": "https://youtu.be/a1O7A9tGprY",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/shaping-tomorrow-drupals-blueprint-innovation",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-26"
+      ]
+    },
+    {
+      "startTime": "2024-06-26T07:20:00.000Z",
+      "endTime": "2024-06-26T08:10:00.000Z",
+      "duration": "P50M",
+      "title": "Drupal Starshot",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Innovation & The future"
+      ],
+      "speakers": [
+        "Lauri Timmanee"
+      ],
+      "full_description": "In May 2024, Dries announced Starshot, an initiative to build a new open source product built on Drupal core that enables site builders without Drupal experience to easily create a new Drupal site and extend it with pre-packaged recipes, all using only their browser.\n\n**Experience level:** Beginner",
+      "video_url": "https://youtu.be/Cmc3A6mqBfc",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/drupal-starshot",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-26"
+      ]
+    },
+    {
+      "startTime": "2024-06-26T08:25:00.000Z",
+      "endTime": "2024-06-26T08:55:00.000Z",
+      "duration": "P30M",
+      "title": "Navigation changes in Drupal’s Admin UI",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Innovation & The future"
+      ],
+      "speakers": [
+        "ckrina"
+      ],
+      "full_description": "One of the big strategic changes we’ll see on Drupal’s Admin UI in the next months is the new toolbar, that will bring several usability improvements beyond the main administration menu and involving several layout changes. In this session we’ll go over all of them, explaining the goals behind the enhancements and how this will impact Drupal sites. We’ll share the timelines we’re working with, integrations and future improvements that will help working with Drupal easier.\n\n**Experience level:** Beginner",
+      "video_url": "https://youtu.be/EyR-Vu_xt2w",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/navigation-changes-drupals-admin-ui",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-26"
+      ]
+    },
+    {
+      "startTime": "2024-06-26T08:25:00.000Z",
+      "endTime": "2024-06-26T08:55:00.000Z",
+      "duration": "P30M",
+      "title": "Unleashing the Potential of Semantic Search: Enhancing OpenSearch in Drupal with Machine Learning",
+      "location": "Room 208 (Jakala)",
+      "track": [
+        "Innovation & The future"
+      ],
+      "speakers": [
+        "alexandrdnlv"
+      ],
+      "full_description": "In this session, we will embark on a comprehensive exploration of semantic search and its integration with OpenSearch in Drupal. We'll start by defining OpenSearch and examining its utilization within the Drupal framework. From there, we'll unravel the distinctions between keyword and semantic search, diving deep into the principles of embedding, the application of machine learning algorithms, and a KNN (K-Nearest Neighbors) approach. Finally, we'll unveil the concept of hybrid search, blending the best of both worlds.\n\n**Experience level:** Intermediate",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/unleashing-potential-semantic-search-enhancing-opensearch-drupal",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-26"
+      ]
+    },
+    {
+      "startTime": "2024-06-26T09:15:00.000Z",
+      "endTime": "2024-06-26T11:05:00.000Z",
+      "duration": "P110M",
+      "title": "Lunch Break",
+      "location": "External",
+      "track": [
+        "Break"
+      ],
+      "speakers": [
+        "drupal"
+      ],
+      "full_description": "Lunch Break\n\n**Experience level:** Beginner",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/lunch-break",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-26"
+      ]
+    },
+    {
+      "startTime": "2024-06-26T11:15:00.000Z",
+      "endTime": "2024-06-26T12:05:00.000Z",
+      "duration": "P50M",
+      "title": "D7Security - Drupal 7 long term support",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Open Web & Community"
+      ],
+      "speakers": [
+        "klausi"
+      ],
+      "full_description": "In this session I will talk about D7Security, an unofficial open source project to implement Drupal 7 long term support now and in the future. With this initiative Drupal 7 site operators have more time to update or migrate their Drupal 7 projects while still receiving security support.\n\n**Experience level:** Beginner",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/d7security-drupal-7-long-term-support",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-26"
+      ]
+    },
+    {
+      "startTime": "2024-06-26T11:15:00.000Z",
+      "endTime": "2024-06-26T12:05:00.000Z",
+      "duration": "P50M",
+      "title": "Mautic for Developers",
+      "location": "Room 218 (BoFs & Workshops)",
+      "track": [
+        "Open Web & Community"
+      ],
+      "speakers": [
+        "domidc"
+      ],
+      "full_description": "Wat do you need to know about Mautic as a developer? What is the Mautic community, what is the Mautic product all about, how to contribute, and so on.\n\n**Experience level:** Beginner",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/mautic-developers",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-26"
+      ]
+    },
+    {
+      "startTime": "2024-06-26T11:15:00.000Z",
+      "endTime": "2024-06-26T12:05:00.000Z",
+      "duration": "P50M",
+      "title": "Microsites: Groups & Domain - LocalGov Drupal Microsites A Case Study",
+      "location": "Room 208 (Jakala)",
+      "track": [
+        "Backend development"
+      ],
+      "speakers": [
+        "ekes"
+      ],
+      "full_description": "[LocalGov Drupal Microsites](https://localgovdrupal.org/microsites-platform) provides a single platform - just *one* Drupal site - for Local Authorities to quickly deploy multiple websites on different domains with highly flexible design while maintaining control over other aspects such as accessibility, updates etc.\n\nThis is based around each website being a Group. The Microsites platform was originally built on an upgrade of the Domain Group module. It has since been rebuilt to use the Group module maintainer's own new module Group Sites.\n\n**Experience level:** Intermediate",
+      "video_url": "https://youtu.be/aM2g8JSuIrw",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/microsites-groups-domain-localgov-drupal-microsites-case-study",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-26"
+      ]
+    },
+    {
+      "startTime": "2024-06-26T12:20:00.000Z",
+      "endTime": "2024-06-26T13:10:00.000Z",
+      "duration": "P50M",
+      "title": "Revisiting: Is ChatGPT coming for your Job?:- The Unchanged Need for Developers in Enhancing ChatGPT with Drupal, RAG, & Chained Models",
+      "location": "Room 208 (Jakala)",
+      "track": [
+        "Innovation & The future"
+      ],
+      "speakers": [
+        "yautja_cetanu"
+      ],
+      "full_description": "GenAI and LLMs show no sign of stopping since last year. Whereas before most people thought it didn't matter much or were scared for the future. Now everyone seems to see the potential of LLMs. Last year we explored whether or not ChatGPT was coming for developer Jobs. We found it wasn't, and there are many areas where developers are critical for pushing ChatGPT to deliver complex solutions\n\nToday, we reflect on the progress made since the last Drupal Dev Days.\n\n**Experience level:** Expert",
+      "video_url": "https://youtu.be/lF3tbNhOTq8",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/revisiting-chatgpt-coming-your-job-unchanged-need-developers-enhancing",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-26"
+      ]
+    },
+    {
+      "startTime": "2024-06-26T12:20:00.000Z",
+      "endTime": "2024-06-26T13:10:00.000Z",
+      "duration": "P50M",
+      "title": "Splash Awards Germany & Austria: What to learn from 6 years hosting award ceremonies",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Project Management & Business"
+      ],
+      "speakers": [
+        "heroicnick"
+      ],
+      "full_description": "The Splash Awards Germany & Austria have been honouring the best Drupal projects in both countries every year since 2017 (2021 was cancelled due to the pandemic). In 6 years of organising the Splash Awards we have learned a lot about the German-speaking Drupal community, about transparency and about collaboration. In my session, I want to give an overview of the ups and downs of the Splash Awards in Germany and Austria and share ideas that can help the community.\n\n**Experience level:** Beginner",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/splash-awards-germany-austria-what-learn-6-years-hosting-award",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-26"
+      ]
+    },
+    {
+      "startTime": "2024-06-26T12:20:00.000Z",
+      "endTime": "2024-06-26T13:50:00.000Z",
+      "duration": "P90M",
+      "title": "Streamline local development with ddev",
+      "location": "Room 218 (BoFs & Workshops)",
+      "track": [
+        "DevOps & Quality Assurance"
+      ],
+      "speakers": [
+        "valthebald"
+      ],
+      "full_description": "With its strong development community, good documentation, support for major operating systems, extendable architecture and not locked to any hosting or development agency, [ddev](https://ddev.org/) is quickly becoming de-facto standard for the local development of Drupal (and not only Drupal) projects.\n\nIn this session, I'm going to to cover the following topic:\n\n**Experience level:** Intermediate",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/streamline-local-development-ddev",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-26"
+      ]
+    },
+    {
+      "startTime": "2024-06-26T13:25:00.000Z",
+      "endTime": "2024-06-26T13:55:00.000Z",
+      "duration": "P30M",
+      "title": "Enhanced content accessibility with CKEditor OpenAI",
+      "location": "Room 208 (Jakala)",
+      "track": [
+        "Innovation & The future"
+      ],
+      "speakers": [
+        "rafuel92"
+      ],
+      "full_description": "Discover the cutting-edge integration of CKEditor5 and OpenAI in Drupal 10, transforming content creation, validation, and analysis into an innovative and seamless process. This presentation will guide you through practical examples, showcasing how to harness the brand new APIs provided by the CKEditor submodule and OpenAI module.\n\nDuring this session, you will learn to:\n\n**Experience level:** Intermediate",
+      "video_url": "https://youtu.be/XwRSGzyoAX8",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/enhanced-content-accessibility-ckeditor-openai",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-26"
+      ]
+    },
+    {
+      "startTime": "2024-06-26T13:25:00.000Z",
+      "endTime": "2024-06-26T13:55:00.000Z",
+      "duration": "P30M",
+      "title": "Progressive Web Apps - what are they and should you be selling them?",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Project Management & Business"
+      ],
+      "speakers": [
+        "mkoh"
+      ],
+      "full_description": "Introduction to Progressive Web Applications (PWA) as a great alternative to native mobile applications. What they are, how they work and how PWAs can benefit your projects and customers.\n\nProgressive Web Applications are a way of creating installable web-based mobile applications. They are quick to install and address some of the weaknesses of traditional native mobile applications while allowing some advanced features such as push notifications and offline use.\n\n**Experience level:** Beginner",
+      "video_url": "https://youtu.be/e9r5Hu6wZ44",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/progressive-web-apps-what-are-they-and-should-you-be-selling-them",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-26"
+      ]
+    },
+    {
+      "startTime": "2024-06-26T14:10:00.000Z",
+      "endTime": "2024-06-26T14:40:00.000Z",
+      "duration": "P30M",
+      "title": "How to achieve 100% performance Google Lighthouse score with Drupal",
+      "location": "Room 208 (Jakala)",
+      "track": [
+        "Decoupled & Frontend Development"
+      ],
+      "speakers": [
+        "aldunchev"
+      ],
+      "full_description": "This presentation focuses on the front-end performance optimization of a Drupal site.\n\nI have worked on a campaign site for a client with landing pages, which had to be very fast, so I will share how I managed to get a 100% Google Lighthouse Score.\n\nKey points:\n\n**Experience level:** Intermediate",
+      "video_url": "https://youtu.be/e9gLOot04RM",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/how-achieve-100-performance-google-lighthouse-score-drupal",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-26"
+      ]
+    },
+    {
+      "startTime": "2024-06-26T14:10:00.000Z",
+      "endTime": "2024-06-26T14:40:00.000Z",
+      "duration": "P30M",
+      "title": "Stop making your own life difficult. Integrate your CI/CD Pipeline with these monitoring tools",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Clients & Industry Experiences"
+      ],
+      "speakers": [
+        "sindurig",
+        "jjchinquist"
+      ],
+      "full_description": "If you do not use a CI/CD pipeline, we highly recommend it. For the past several years our team has set up projects in a CI/CD pipeline using Jenkins or Github actions. The tools that we will present in this session have proven to be a good set of automated testing tools for several projects. Over time we have chosen to move away from previous solutions and to new testing frameworks. As part of our commitment to high standards of performance and quality, we are always on the lookout for the best tools available on the market.\n\n**Experience level:** Beginner",
+      "video_url": "https://youtu.be/H3zgaR6bYAA",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/stop-making-your-own-life-difficult-integrate-your-cicd-pipeline-these",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-26"
+      ]
+    },
+    {
+      "startTime": "2024-06-26T19:00:00.000Z",
+      "endTime": "2024-06-26T20:59:00.000Z",
+      "duration": "P119M",
+      "title": "Hashtag PAVILION",
+      "location": "Hashtag PAVILION",
+      "track": [
+        "Social Event"
+      ],
+      "speakers": [
+        "hchonov"
+      ],
+      "full_description": "DJ\nFree Drinks\n\n**Experience level:** Beginner\n\n**Listed as:** Wed From 22:00 — the programme gave no end time.",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/hashtag-pavilion",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-26"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T06:15:00.000Z",
+      "endTime": "2024-06-27T07:05:00.000Z",
+      "duration": "P50M",
+      "title": "AI and Drupal: Build smarter systems",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Innovation & The future"
+      ],
+      "speakers": [
+        "wouters_f"
+      ],
+      "full_description": "See some of the coolest AI modules that improve Drupal right now. I'll also be giving a simple explanation of the basics of retrieval augmented generation and how to it is applied on Drupal.\n\nWith this knowledge you'll understand how AI can help you free up time and resources in your organization, so it can focus on the things that really matter.\n\nImagine being able to automate routine tasks, or having a system that can give you intelligent insights and recommendations. That's the power of AI in Drupal.\n\nYou'll never look at AI in Drupal the same way again!\n\n**Experience level:** Beginner",
+      "video_url": "https://youtu.be/5-9Yp7ZaWzM",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/ai-and-drupal-build-smarter-systems",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T07:20:00.000Z",
+      "endTime": "2024-06-27T08:10:00.000Z",
+      "duration": "P50M",
+      "title": "An Introduction to Caches in Drupal",
+      "location": "Room 208 (Jakala)",
+      "track": [
+        "Backend development"
+      ],
+      "speakers": [
+        "lpeidro"
+      ],
+      "full_description": "High-level introduction to caches in Drupal, contextualizing and correlating the diverse caching systems that may come into play in a Drupal site, with the aim of providing a comprehensive and understandable overview of this topic.\n\nPrevious knowledge is not required, as we will start from the very basics, providing a definition of cache and some basic concepts, to gradually move on to more complex topics. However, it is necessary to have had direct contact with Drupal projects to have a context and be familiar with certain terminology.\n\n**Experience level:** Beginner",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/introduction-caches-drupal",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T07:20:00.000Z",
+      "endTime": "2024-06-27T08:10:00.000Z",
+      "duration": "P50M",
+      "title": "Drupal 11 deep dive: what's new, how to prepare",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Innovation & The future"
+      ],
+      "speakers": [
+        "Gábor Hojtsy"
+      ],
+      "full_description": "Come to this session to learn more about what's new in Drupal 11, what's changed and how to prepare. As of this submission, Drupal 11 is targeted for August 2024 with a fallback of December 2024, so by Drupal Dev Days Burgas 2024, we should have a really good idea about it.\n\n**Experience level:** Intermediate",
+      "video_url": "https://youtu.be/LCQkDD7zoJo",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/drupal-11-deep-dive-whats-new-how-prepare",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T07:20:00.000Z",
+      "endTime": "2024-06-27T08:50:00.000Z",
+      "duration": "P90M",
+      "title": "Drupal and Next: practical workshop",
+      "location": "Room 217 Workshops",
+      "track": [
+        "Decoupled & Frontend Development"
+      ],
+      "speakers": [
+        "MacMladen"
+      ],
+      "full_description": "See and try yourself how Drupal connects with Next.js and why it may (or may not) be your Next solution.\n\nYou will need a laptop capable of using DDEV (Linux or Win/Mac with Docker desktop) and a skill to follow the rapid setting up of the environment, pulling and building the required stack. I'll try to help novices to be able to set up and play. It should be fun.\n\nWe will set up the Drupal project, and configure it properly. Then we will set up Next.js. After connecting the two, we will be able to test and play with the combo with a few prepared demonstration use cases.\n\n**Experience level:** Intermediate",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/drupal-and-next-practical-workshop",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T07:20:00.000Z",
+      "endTime": "2024-06-27T08:50:00.000Z",
+      "duration": "P90M",
+      "title": "Open meeting of Drupal Bulgaria Association",
+      "location": "Room 218 (BoFs & Workshops)",
+      "track": [
+        "Open Web & Community"
+      ],
+      "speakers": [
+        "marie77e",
+        "valthebald",
+        "hchonov"
+      ],
+      "full_description": "Drupal Bulgaria Association is a new (created in 2024) non-profit that aims to promote Drupal and open source in Bulgaria.\n\nWe'd like to be as open as possible in our decisions.\n\nAt this meeting, we'd like to discuss with all interested sides the following topics:\n\n- Organizing structure\n- Different types of membership and member fees\n- Roadmap for 2024/2025\n\n**Experience level:** Beginner",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/open-meeting-drupal-bulgaria-association",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T08:25:00.000Z",
+      "endTime": "2024-06-27T09:15:00.000Z",
+      "duration": "P50M",
+      "title": "AI with Drupal - Using LLM technology is easy, but how do you actually build useful applications?",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Project Management & Business"
+      ],
+      "speakers": [
+        "breidert"
+      ],
+      "full_description": "Using AI applications such as ChatGPT from OpenAI is easy and many have already gained experience using it. Obvious applications like creating or re-writing text already have a nice integration with Drupal.\n\nHowever, the real value of “Large Language Models” (LLMs) lies in building custom applications for clients using their data and tailoring the applications to their business processes.\n\n**Experience level:** Beginner",
+      "video_url": "https://youtu.be/_yOjahh5wJM",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/ai-drupal-using-llm-technology-easy-how-do-you-actually-build-useful",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T08:25:00.000Z",
+      "endTime": "2024-06-27T09:15:00.000Z",
+      "duration": "P50M",
+      "title": "UI Patterns 2: Unleash SDC power, plug your components directly in Drupal UI.",
+      "location": "Room 208 (Jakala)",
+      "track": [
+        "Innovation & The future"
+      ],
+      "speakers": [
+        "pdureau"
+      ],
+      "full_description": "Since 2017, UI Patterns is a popular (5000+ installations in March 2024) modules ecosystem to manage UI components and use them in Drupal : with Blocks, Layouts, Entity fields, Views...\n\nStarting summer 2023, Drupal Core has now its own UI components API, SDC, which was met with well-deserved success. However, there is no solution yet to make the integration between the components and Drupal as easy and flexible as what UI Patterns is providing.\n\n**Experience level:** Intermediate",
+      "video_url": "https://youtu.be/2tkuMlzMT84",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/ui-patterns-2-unleash-sdc-power-plug-your-components-directly-drupal",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T09:15:00.000Z",
+      "endTime": "2024-06-27T11:15:00.000Z",
+      "duration": "P120M",
+      "title": "Lunch Break",
+      "location": "External",
+      "track": [
+        "Break"
+      ],
+      "speakers": [
+        "drupal"
+      ],
+      "full_description": "Lunch Break\n\n**Experience level:** Beginner",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/lunch-break-0",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T11:15:00.000Z",
+      "endTime": "2024-06-27T12:05:00.000Z",
+      "duration": "P50M",
+      "title": "Custom Elements UI: quicker changes to your decoupled Drupal site",
+      "location": "Room 218 (BoFs & Workshops)",
+      "track": [
+        "Decoupled & Frontend Development"
+      ],
+      "speakers": [
+        "roderik",
+        "alexandru"
+      ],
+      "full_description": "First (depending on audience) we'll do a quick intro to the [Custom Elements module](https://www.drupal.org/project/issues/custom_elements) and the current ecosystem of decoupled solutions (JSON APIs) built around it, for context.\n\nThen, a demo of\n\n**Experience level:** Intermediate",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/custom-elements-ui-quicker-changes-your-decoupled-drupal-site",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T11:15:00.000Z",
+      "endTime": "2024-06-27T12:05:00.000Z",
+      "duration": "P50M",
+      "title": "Fancy Frontend Features",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Decoupled & Frontend Development"
+      ],
+      "speakers": [
+        "textformer"
+      ],
+      "full_description": "Browsers are continuously adding useful CSS and JS features: The Parent Selector :has. Container Queries. CSS Nesting. Popover API. :focus-visible. New viewport units. View Transitions API. Etc. You can already use some of these in your projects – depending on which older browser versions you still have to consider. And new features keep coming.\n\nLast year at Drupal Dev Days Vienna I gave a broad overview of a lot of these new features. See the slides here: [textformer.de/ddd23](https://textformer.de/ddd23/)\n\n**Experience level:** Intermediate",
+      "video_url": "https://youtu.be/5pCKBM2FDdM",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/fancy-frontend-features",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T11:15:00.000Z",
+      "endTime": "2024-06-27T13:15:00.000Z",
+      "duration": "P120M",
+      "title": "Getting Started with Drupal: A Hands-On Workshop",
+      "location": "Room 217 Workshops",
+      "track": [
+        "Open Web & Community"
+      ],
+      "speakers": [
+        "marie77e"
+      ],
+      "full_description": "Are you new to Drupal? Or interested in conducting training? This workshop is designed just for you! Whether you're a student, a member of another community, or simply eager to learn, join this class for an exciting journey into the world of Drupal.\n\nDuring this hands-on workshop, we'll focus on site building and explore some of the basic core features of Drupal accessible via the admin panel. Get ready to dive right in as we create our first project together!\n\n**Experience level:** Beginner",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/getting-started-drupal-hands-workshop",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2024-06-27T11:15:00.000Z",
+      "endTime": "2024-06-27T12:05:00.000Z",
+      "duration": "P50M",
+      "title": "Keys and Voices: The Limits of automated Accessibility Testing Tools",
+      "location": "Room 208 (Jakala)",
+      "track": [
+        "Accessibility, User Experience & Marketing"
+      ],
+      "speakers": [
+        "tomrenner"
+      ],
+      "full_description": "Workshop Time: wave says OK! Is my website save?\nLet's find out where users with disabilities get trapped although you get 0 Errors from automated testing tools like wave, axe or lighthouse.\nWe will have a look at the vital role of simple keyboard navigation and some enhanced manual accessibility testing, including screen readers.\n\n**Experience level:** Intermediate",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/keys-and-voices-limits-automated-accessibility-testing-tools",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T12:20:00.000Z",
+      "endTime": "2024-06-27T13:10:00.000Z",
+      "duration": "P50M",
+      "title": "Crafting Tomorrow: Key Learnings from Building a free Drupal Academy",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Innovation & The future"
+      ],
+      "speakers": [
+        "kadiiski",
+        "Lyubomir-Filipov"
+      ],
+      "full_description": "****Prerequisite****\n\nTo maximize the session's value, participants should possess:- A foundational understanding of web technologies and Drupal. While advanced technical skills are not mandatory, familiarity with Drupal's core concepts will enhance the learning experience.\n- A vested interest in educational innovation within the tech sector, especially as it relates to Drupal training.\n\n**Experience level:** Intermediate",
+      "video_url": "https://youtu.be/L2v9uEK0_J4",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/crafting-tomorrow-key-learnings-building-free-drupal-academy",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T12:20:00.000Z",
+      "endTime": "2024-06-27T12:50:00.000Z",
+      "duration": "P30M",
+      "title": "Drupal's Alternate Realities",
+      "location": "Room 218 (BoFs & Workshops)",
+      "track": [
+        "Backend development"
+      ],
+      "speakers": [
+        "vensires"
+      ],
+      "full_description": "In Drupal there is a philosophy of having only one module to fit most cases. Though this is mostly actually happening, there are still various ways of solving the same problem.\n\nIn this session, I am going to present some problems and the various ways someone may solve them using different core or contrib modules or technologies.\n\nWe are going to take a glimpse of the features each similar module has: starting from Panels / Context and Display Suite / Layout Builder reaching REST / JSON:API and more.\n\n**Experience level:** Intermediate",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/drupals-alternate-realities",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T12:20:00.000Z",
+      "endTime": "2024-06-27T13:10:00.000Z",
+      "duration": "P50M",
+      "title": "Multisites made easy with Group Sites",
+      "location": "Room 208 (Jakala)",
+      "track": [
+        "Backend development"
+      ],
+      "speakers": [
+        "kristiaanvandeneynde"
+      ],
+      "full_description": "Building a single website that serves multiple sites has been possible for a while, but it's always been a hassle to set up. Whether you were using D7's multisite features, Spaces and Persistent URL, Domain (Access), ... they all had their limitations.\n\n**Experience level:** Intermediate",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/multisites-made-easy-group-sites",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T13:00:00.000Z",
+      "endTime": "2024-06-27T13:55:00.000Z",
+      "duration": "P55M",
+      "title": "AI Initiative",
+      "location": "Room 218 (BoFs & Workshops)",
+      "track": [
+        "Innovation & The future"
+      ],
+      "speakers": [
+        "yautja_cetanu",
+        "wouters_f",
+        "marcusjohansson"
+      ],
+      "full_description": "A place to discuss the AI initiative and the AI module. Come to learn how to use it and our plans for it or bring us ideas of what you’d like to see in it, how you’d like to contribute or build on top of it.\n\n**Experience level:** Beginner",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/ai-initiative",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T13:25:00.000Z",
+      "endTime": "2024-06-27T13:55:00.000Z",
+      "duration": "P30M",
+      "title": "Navigating complex B2B landscapes: The BikeAlert story through Drupal Commerce",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Clients & Industry Experiences"
+      ],
+      "speakers": [
+        "gandread"
+      ],
+      "full_description": "BikeAlert SA is a significant international brand dedicated to providing a wide range of parts and accessories for motorcycles.\n\nOur solution is a cutting-edge B2B platform, crafted using Drupal 10, that allows users to shop for motorcycle parts by specifying vehicle brands, model years, engine sizes, and models. This ensures that wholesale customers can easily find items that are compatible with their client’s motorcycles.\n\n**Experience level:** Intermediate",
+      "video_url": "https://youtu.be/HSe_E-iJ6yk",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/navigating-complex-b2b-landscapes-bikealert-story-through-drupal",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T13:25:00.000Z",
+      "endTime": "2024-06-27T13:55:00.000Z",
+      "duration": "P30M",
+      "title": "Next.js and Headless Drupal: Unleashing Advanced Web Solution Strategies",
+      "location": "Room 208 (Jakala)",
+      "track": [
+        "Decoupled & Frontend Development"
+      ],
+      "speakers": [
+        "kristiyan.velkov",
+        "nikola.bintev"
+      ],
+      "full_description": "Embark on a journey through Next.js and Headless Drupal, as we unveil web challenges and share advanced strategies for conquering them. Join us for a dive into innovative web solutions!\n\nA Drupal experience and a grasp of React/Next.js are essential for the session. Additionally, a fundamental understanding of decoupled architecture is recommended to fully engage and derive maximum value from this session.\n\n**Experience level:** Intermediate",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/nextjs-and-headless-drupal-unleashing-advanced-web-solution-strategies",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T14:00:00.000Z",
+      "endTime": "2024-06-27T14:30:00.000Z",
+      "duration": "P30M",
+      "title": "хоро (Horo) dance lesson",
+      "location": "Central foyer",
+      "track": [
+        "Social Event"
+      ],
+      "speakers": [
+        "hchonov"
+      ],
+      "full_description": "Join us for a special session on the traditional Bulgarian folk dance, хоро (Horo). We encourage attendees to wear their Drupal Dev Days t-shirts to add a touch of camaraderie.\n\n**Experience level:** Beginner",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/khoro-horo-dance-lesson",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-27T19:00:00.000Z",
+      "endTime": "2024-06-27T20:59:00.000Z",
+      "duration": "P119M",
+      "title": "Barabar",
+      "location": "Barabar",
+      "track": [
+        "Social Event"
+      ],
+      "speakers": [
+        "hchonov"
+      ],
+      "full_description": "**[**Location**](https://maps.app.goo.gl/ymcyRPHBwnoZkRTq8)**\n\n****Live Band**\n**Free Drinks****\n\n**Experience level:** Beginner\n\n**Listed as:** Thu From 22:00 — the programme gave no end time.",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/barabar",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-27"
+      ]
+    },
+    {
+      "startTime": "2024-06-28T06:15:00.000Z",
+      "endTime": "2024-06-28T07:05:00.000Z",
+      "duration": "P50M",
+      "title": "Open-Source Platform Alliance: Collaboration Across FOSS CMS",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Open Web & Community"
+      ],
+      "speakers": [
+        "Stanko Metodiev"
+      ],
+      "full_description": "In this session, we'll delve into the potential of community-driven cooperation, illustrating how collective efforts expand opportunities and capabilities within open-source content management systems. By coming together, we amplify our impact, fostering an environment where sharing research and development insights becomes commonplace. Together, we explore innovative solutions, pushing the boundaries of what these platforms can achieve.\n\n**Experience level:** Beginner",
+      "video_url": "https://youtu.be/bY0mo_iN7go",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/open-source-platform-alliance-collaboration-across-foss-cms",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-28"
+      ]
+    },
+    {
+      "startTime": "2024-06-28T07:20:00.000Z",
+      "endTime": "2024-06-28T08:10:00.000Z",
+      "duration": "P50M",
+      "title": "AI in Starshot",
+      "location": "Room 208 (Jakala)",
+      "track": [
+        "Innovation & The future"
+      ],
+      "speakers": [
+        "yautja_cetanu",
+        "wouters_f",
+        "marcusjohansson",
+        "Lauri Timmanee"
+      ],
+      "full_description": "What AI functionality would you love to see in Starshot? Want simple content editing tools? Summarise Translate? Or want to see something more advanced? Like create a whole Drupal site from a prompt or picture? Become THE Ai Orchestration platform? Come and explore with us.\n\n**Experience level:** Beginner",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/ai-starshot",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-28"
+      ]
+    },
+    {
+      "startTime": "2024-06-28T07:20:00.000Z",
+      "endTime": "2024-06-28T08:50:00.000Z",
+      "duration": "P90M",
+      "title": "First Time Contributor Workshop",
+      "location": "Room 218 (BoFs & Workshops)",
+      "track": [
+        "Backend development"
+      ],
+      "speakers": [
+        "lostcarpark"
+      ],
+      "full_description": "Drupal thrives on community contributions in the form of patches and documentation to both contributed modules and core. This helps the project move forward and stay relevant.\nNot everyone who works on open source projects is a senior developer. Smaller tasks help people increase confidence and gain experience, which, in turn, leads to more contributions. Code is very important, but so are all the other parts. Contributing back to Drupal helps folks to become better developers. A more polished Drupal leads to a better overall experience.\nBut how does one become a contributor?\n\n**Experience level:** Beginner",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/first-time-contributor-workshop",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-28"
+      ]
+    },
+    {
+      "startTime": "2024-06-28T07:20:00.000Z",
+      "endTime": "2024-06-28T08:10:00.000Z",
+      "duration": "P50M",
+      "title": "Not everything is a node! Create custom entity types the way YOU like them",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Backend development"
+      ],
+      "speakers": [
+        "tstoeckler"
+      ],
+      "full_description": "Despite great advances to make more and more functionality generic and available to all entity types, most Drupal sites still use the entity types provided by core, most prominently nodes. For many sites that's a great fit! But there's also a lot of sites where the constraints of the \"everything is a node\" mantra really show their rough edges and which could benefit from a more custom-tailored approach to the data model. In this session we will endeavor to break free from those constraints by creating a custom entity type via code.\n\n**Experience level:** Intermediate",
+      "video_url": "https://youtu.be/2kQl40EZVlU",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/not-everything-node-create-custom-entity-types-way-you-them",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-28"
+      ]
+    },
+    {
+      "startTime": "2024-06-28T08:25:00.000Z",
+      "endTime": "2024-06-28T09:15:00.000Z",
+      "duration": "P50M",
+      "title": "Choosing the right tool for the automated testing",
+      "location": "Room 208 (Jakala)",
+      "track": [
+        "DevOps & Quality Assurance"
+      ],
+      "speakers": [
+        "valthebald"
+      ],
+      "full_description": "The [automated testing](https://www.drupal.org/docs/develop/automated-testing) page of Drupal documentation is huge, but unfortunately, it leaves so many questions.\n\nThere are different *types* of automated testing - unit, kernel, functional. Do I need them all? Do I run them all? If there so many tests *in* the core, do I need to add my own? When to run the tests? Why are there tools that reside in the core, others must be installed separately (behat, cypress). How do I choose the right tool to write client-specific tests?\n\n**Experience level:** Beginner",
+      "video_url": "https://youtu.be/4Wrx6wCoFxg",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/choosing-right-tool-automated-testing",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-28"
+      ]
+    },
+    {
+      "startTime": "2024-06-28T08:25:00.000Z",
+      "endTime": "2024-06-28T09:15:00.000Z",
+      "duration": "P50M",
+      "title": "Index me baby!",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Backend development"
+      ],
+      "speakers": [
+        "Curried"
+      ],
+      "full_description": "You've always asked yourself about search engines? But you've never find the courage to look into it because it seems too complexe?\nI got you, welcome!\n\nLet's popularize search engines and scoring! We will go through some explanation and examples, and even some parallel with life\n\nWe will also see that configuring indexes is easy when we understand some principles !\n\n**Experience level:** Beginner",
+      "video_url": "https://youtu.be/_PE8l9t7YfA",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/index-me-baby",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-28"
+      ]
+    },
+    {
+      "startTime": "2024-06-28T09:15:00.000Z",
+      "endTime": "2024-06-28T11:15:00.000Z",
+      "duration": "P120M",
+      "title": "Lunch Break",
+      "location": "External",
+      "track": [
+        "Break"
+      ],
+      "speakers": [
+        "drupal"
+      ],
+      "full_description": "Lunch Break\n\n**Experience level:** Beginner",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/lunch-break-1",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-28"
+      ]
+    },
+    {
+      "startTime": "2024-06-28T11:15:00.000Z",
+      "endTime": "2024-06-28T12:05:00.000Z",
+      "duration": "P50M",
+      "title": "Let's try to understand Typed Data, finally...",
+      "location": "Room 208 (Jakala)",
+      "track": [
+        "Backend development"
+      ],
+      "speakers": [
+        "piotr_pakulski"
+      ],
+      "full_description": "Typed Data API still remains quite a mystery for many. We need to get familiar with it in order to really know how entity data is modeled. In this session I'm going to get to the bottom of it, so please fasten your seatbelts and be ready to understand it. Finally...\n\n**Experience level:** Expert",
+      "video_url": "https://youtu.be/0ngPpINX75A",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/lets-try-understand-typed-data-finally",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-28"
+      ]
+    },
+    {
+      "startTime": "2024-06-28T11:15:00.000Z",
+      "endTime": "2024-06-28T12:05:00.000Z",
+      "duration": "P50M",
+      "title": "The end of Drupal? A look at the future",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Open Web & Community"
+      ],
+      "speakers": [
+        "jcnventura"
+      ],
+      "full_description": "Drupal has been around for 23 years, and as community, we have built an amazing product that powers hundreds of thousands of websites, and especially in the top most visited sites.\n\nHowever, every single indicator indicates that Drupal's market share is decreasing, and the upcoming end-of-life of Drupal 7 will probably accelerate that decline.\n\n**Experience level:** Beginner",
+      "video_url": "https://youtu.be/ihPWrQPx3o8",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/end-drupal-look-future",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-28"
+      ]
+    },
+    {
+      "startTime": "2024-06-28T11:15:00.000Z",
+      "endTime": "2024-06-28T13:15:00.000Z",
+      "duration": "P120M",
+      "title": "WissKI - Virtual Research Environment and Linked Open Data Management System",
+      "location": "Room 218 (BoFs & Workshops)",
+      "track": [
+        "Clients & Industry Experiences"
+      ],
+      "speakers": [
+        "rnsrk"
+      ],
+      "full_description": "**What is WissKI? **\n\nWissKI (Scientific Communication Infrastructure/ Wissenschaftliche Kommunikationsinfrastruktur) is a set of modules to combine Drupal's content management features with linked open data and semantic web technologies to a scientific research environment.\n\n**Experience level:** Beginner",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/wisski-virtual-research-environment-and-linked-open-data-management-0",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-28"
+      ]
+    },
+    {
+      "startTime": "2024-06-28T12:20:00.000Z",
+      "endTime": "2024-06-28T13:10:00.000Z",
+      "duration": "P50M",
+      "title": "Retrofitting tests to an existing project",
+      "location": "Room 208 (Jakala)",
+      "track": [
+        "Backend development"
+      ],
+      "speakers": [
+        "erikerskine"
+      ],
+      "full_description": "Do you find yourself working on an existing site, but wishing you had written automated tests earlier? It's not too late.\n\nAutomated testing is universally seen as a good thing, but often doesn't happen. There's a lot of code out there that works, but that can't be verified.\n\n**Experience level:** Beginner",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/retrofitting-tests-existing-project",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-28"
+      ]
+    },
+    {
+      "startTime": "2024-06-28T12:20:00.000Z",
+      "endTime": "2024-06-28T13:10:00.000Z",
+      "duration": "P50M",
+      "title": "Running Drupal on AWS",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "DevOps & Quality Assurance"
+      ],
+      "speakers": [
+        "gease"
+      ],
+      "full_description": "Brief description of the session:\n\nIn recent years, cloud services become more and more popular as they constantly improve and broaden their offer. Amazon Web Services (AWS) has a wide selection of services allowing for hosting and running Drupal applications of any size and complexity, allowing for flexibility of control, scalability, and increasing complexity, and predictable costs.\n\n**Experience level:** Intermediate",
+      "video_url": "https://youtu.be/GNWXZ6G8qto",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/running-drupal-aws",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-28"
+      ]
+    },
+    {
+      "startTime": "2024-06-28T13:25:00.000Z",
+      "endTime": "2024-06-28T14:15:00.000Z",
+      "duration": "P50M",
+      "title": "AI Automation Pipelines using Drupal",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Innovation & The future"
+      ],
+      "speakers": [
+        "marcusjohansson"
+      ],
+      "full_description": "[AI Interpolator](https://www.drupal.org/project/ai_interpolator) is a no-code AI chaining tool working together with over 20 services to make Drupal a powerhouse for setting up workflows, where your imagination is the limit of what is possible to do. Examples of workflows can be found on [workflows-of-ai.com](https://workflows-of-ai.com/).\n\nIts built on a plugin system making it possible for developers to extend it with their custom logics in the workflows.\n\nThis presentation will go through the following topics:\n\n**Experience level:** Intermediate",
+      "video_url": "https://youtu.be/0KeRQHmd4YI",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/ai-automation-pipelines-using-drupal",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-28"
+      ]
+    },
+    {
+      "startTime": "2024-06-28T13:25:00.000Z",
+      "endTime": "2024-06-28T14:15:00.000Z",
+      "duration": "P50M",
+      "title": "Empowering content editors: managing content with ease in highly complex environments",
+      "location": "Room 208 (Jakala)",
+      "track": [
+        "Backend development"
+      ],
+      "speakers": [
+        "a.dmitriiev"
+      ],
+      "full_description": "Content management forms look complicated and are difficult to work with? You want to see your changes while doing them? Join my session and I will show you how to avoid stress and frustration, while empowering your content editor experience with realtime inline editing.\n\n**Experience level:** Intermediate",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/empowering-content-editors-managing-content-ease-highly-complex",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-28"
+      ]
+    },
+    {
+      "startTime": "2024-06-28T14:30:00.000Z",
+      "endTime": "2024-06-28T14:45:00.000Z",
+      "duration": "P15M",
+      "title": "Closing Session",
+      "location": "Room 207 (1xINTERNET)",
+      "track": [
+        "Open Web & Community"
+      ],
+      "speakers": [
+        "marie77e",
+        "valthebald",
+        "hchonov"
+      ],
+      "full_description": "End of Event!\n\n**Experience level:** Beginner",
+      "video_url": "https://youtu.be/D3XhxQpeVI4",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/closing-session",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-28"
+      ]
+    },
+    {
+      "startTime": "2024-06-28T19:00:00.000Z",
+      "endTime": "2024-06-28T20:59:00.000Z",
+      "duration": "P119M",
+      "title": "Beach Bar Caribe",
+      "location": "Beach Bar Caribe",
+      "track": [
+        "Social Event"
+      ],
+      "speakers": [
+        "hchonov"
+      ],
+      "full_description": "**[**Location**](https://maps.app.goo.gl/6yM8azjWNGe1Q46T7)**\n\n****DJ**\n**Free Drinks****\n\n**Experience level:** Beginner\n\n**Listed as:** Fri From 22:00 — the programme gave no end time.",
+      "video_url": "",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/beach-bar-caribe",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd24-schedule-2024-06-28"
+      ]
+    }
+  ],
+  "result": "manual",
+  "url": "https://ddd2024.drupalcamp.bg/sessions/schedule"
+}

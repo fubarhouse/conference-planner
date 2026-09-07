@@ -1,0 +1,1 @@
+{"pulled":["data/curation/decisions.json","data/events/b.json","img/logo.png","receipts/r1.pdf"],"skipped":[],"conflicts":[],"errors":[]}

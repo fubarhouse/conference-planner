@@ -1,0 +1,757 @@
+{
+  "event": {
+    "regionCode": "EMEA",
+    "country": "Italy",
+    "designation": "DrupalCamp",
+    "ecosystem": "drupal",
+    "name": "DrupalCamp Italy 2025",
+    "location": "Rome",
+    "year": "2025",
+    "website": "https://www.drupalcampitaly.it/2025",
+    "region": "Italy",
+    "startDate": "2025-11-14T07:45:00Z",
+    "endDate": "2025-11-14T17:30:00Z",
+    "venue": "Università Sapienza, Via Salaria 113, 00198 Rome RM",
+    "timezone": "Europe/Rome",
+    "columns": 2,
+    "enabled": false,
+    "scheduleComplete": true,
+    "attendance": {
+      "count": 121,
+      "source": "https://www.drupalcampitaly.it/2025 — the edition's own recap panel",
+      "note": "Reported by the organisers as \"121 Attendees\", alongside 2 Tracks and 12 Sessions."
+    },
+    "logo": {
+      "image": "",
+      "imageAlt": "",
+      "usePlate": false
+    },
+    "sponsors": [
+      {
+        "title": "A Test Sponsor",
+        "tier": "Gold",
+        "note": "with a comma, a \"quote\" and <html>",
+        "id": "present-s-p-a"
+      },
+      {
+        "id": "979",
+        "title": "979",
+        "tier": "Gold",
+        "row": 1,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcamp/2025-rome/979.svg",
+        "imageAlt": "979 logo",
+        "link": "https://979.it",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupalcampitaly-it-2025-sponsors"
+        ]
+      },
+      {
+        "id": "posdata",
+        "title": "Posdata",
+        "tier": "Gold",
+        "row": 1,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcamp/2025-rome/posdata.svg",
+        "imageAlt": "Posdata logo",
+        "link": "https://www.posdata.it/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupalcampitaly-it-2025-sponsors"
+        ]
+      },
+      {
+        "id": "elicos",
+        "title": "Elicos",
+        "tier": "Bronze",
+        "row": 2,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcamp/2025-rome/elicos.svg",
+        "imageAlt": "Elicos logo",
+        "link": "https://www.elicos.it/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupalcampitaly-it-2025-sponsors"
+        ]
+      },
+      {
+        "id": "immedia",
+        "title": "Immedia",
+        "tier": "Bronze",
+        "row": 2,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcamp/2025-rome/immedia.svg",
+        "imageAlt": "Immedia logo",
+        "link": "https://www.immedia.net/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupalcampitaly-it-2025-sponsors"
+        ]
+      },
+      {
+        "id": "centarro",
+        "title": "Centarro",
+        "tier": "Bronze",
+        "row": 2,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcamp/2025-rome/centarro.svg",
+        "imageAlt": "Centarro logo",
+        "link": "https://www.centarro.io/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupalcampitaly-it-2025-sponsors"
+        ]
+      },
+      {
+        "id": "sparkfabrik",
+        "title": "SparkFabrik",
+        "tier": "Organizer",
+        "row": 3,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcamp/2025-rome/sparkfabrik.svg",
+        "imageAlt": "SparkFabrik logo",
+        "link": "https://sparkfabrik.com",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupalcampitaly-it-2025-sponsors"
+        ]
+      },
+      {
+        "id": "bmeme",
+        "title": "bmeme",
+        "tier": "Organizer",
+        "row": 3,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcamp/2025-rome/bmeme.svg",
+        "imageAlt": "bmeme logo",
+        "link": "https://bmeme.com",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupalcampitaly-it-2025-sponsors"
+        ]
+      },
+      {
+        "id": "stripedcodex",
+        "title": "Stripedcodex",
+        "tier": "Organizer",
+        "row": 3,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcamp/2025-rome/stripedcodex.svg",
+        "imageAlt": "Stripedcodex logo",
+        "link": "https://www.linkedin.com/in/gambinovincenzo/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupalcampitaly-it-2025-sponsors"
+        ]
+      },
+      {
+        "id": "grusp",
+        "title": "GrUSP",
+        "tier": "Community & Media Partner",
+        "row": 4,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcamp/2025-rome/grusp.svg",
+        "imageAlt": "GrUSP logo",
+        "link": "https://grusp.org",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupalcampitaly-it-2025-sponsors"
+        ]
+      },
+      {
+        "id": "thedroptimes",
+        "title": "TheDropTimes",
+        "tier": "Community & Media Partner",
+        "row": 4,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcamp/2025-rome/thedroptimes.png",
+        "imageAlt": "TheDropTimes logo",
+        "link": "https://www.thedroptimes.com",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupalcampitaly-it-2025-sponsors"
+        ]
+      },
+      {
+        "id": "weeklydrop",
+        "title": "WeeklyDrop",
+        "tier": "Community & Media Partner",
+        "row": 4,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcamp/2025-rome/weeklydrop.png",
+        "imageAlt": "WeeklyDrop logo",
+        "link": "https://www.theweeklydrop.com",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupalcampitaly-it-2025-sponsors"
+        ]
+      },
+      {
+        "id": "drupalize-me",
+        "title": "Drupalize.me",
+        "tier": "Community & Media Partner",
+        "row": 4,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcamp/2025-rome/drupalize-me.svg",
+        "imageAlt": "Drupalize.me logo",
+        "link": "https://drupalize.me",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupalcampitaly-it-2025-sponsors"
+        ]
+      },
+      {
+        "id": "drupaleasy",
+        "title": "Drupaleasy",
+        "tier": "Community & Media Partner",
+        "row": 4,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcamp/2025-rome/drupaleasy.svg",
+        "imageAlt": "Drupaleasy logo",
+        "link": "https://drupaleasy.com",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupalcampitaly-it-2025-sponsors"
+        ]
+      },
+      {
+        "id": "italia-open-source",
+        "title": "Italia Open Source",
+        "tier": "Community & Media Partner",
+        "row": 4,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcamp/2025-rome/italia-open-source.svg",
+        "imageAlt": "Italia Open Source logo",
+        "link": "https://italiaopensource.com/it/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupalcampitaly-it-2025-sponsors"
+        ]
+      },
+      {
+        "id": "plug",
+        "title": "PLUG",
+        "tier": "Community & Media Partner",
+        "row": 4,
+        "priority": 70,
+        "image": "./img/sponsors/drupalcamp/2025-rome/plug.svg",
+        "imageAlt": "PLUG logo",
+        "link": "https://www.pignolalug.it/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupalcampitaly-it-2025-sponsors"
+        ]
+      },
+      {
+        "id": "come-to-code",
+        "title": "Come To Code",
+        "tier": "Community & Media Partner",
+        "row": 4,
+        "priority": 80,
+        "image": "./img/sponsors/drupalcamp/2025-rome/come-to-code.svg",
+        "imageAlt": "Come To Code logo",
+        "link": "https://www.cometocode.it/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupalcampitaly-it-2025-sponsors"
+        ]
+      },
+      {
+        "id": "the-red-code",
+        "title": "The Red Code",
+        "tier": "Community & Media Partner",
+        "row": 4,
+        "priority": 90,
+        "image": "./img/sponsors/drupalcamp/2025-rome/the-red-code.svg",
+        "imageAlt": "The Red Code logo",
+        "link": "https://theredcode.it/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupalcampitaly-it-2025-sponsors"
+        ]
+      },
+      {
+        "id": "coderful",
+        "title": "Coderful",
+        "tier": "Community & Media Partner",
+        "row": 4,
+        "priority": 100,
+        "image": "./img/sponsors/drupalcamp/2025-rome/coderful.svg",
+        "imageAlt": "Coderful logo",
+        "link": "https://coderful.io",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupalcampitaly-it-2025-sponsors"
+        ]
+      }
+    ],
+    "flickr": {
+      "enabled": false,
+      "provider": "",
+      "groupUrl": "",
+      "image": "",
+      "imageAlt": ""
+    },
+    "scheduleURLs": [
+      "https://www.drupalcampitaly.it/2025/agenda"
+    ],
+    "other_urls": [
+      "https://www.drupalcampitaly.it/2025",
+      "https://www.youtube.com/@DrupalCampItaly",
+      "https://www.drupalcampitaly.it/2025#sponsors"
+    ],
+    "sources": [
+      {
+        "id": "drupalcampitaly-it-2025-agenda",
+        "kind": "schedule",
+        "url": "https://www.drupalcampitaly.it/2025/agenda",
+        "retrievedAt": "2026-08-25",
+        "notes": "A React SPA that keeps every edition, so the 2025 agenda is still served — read from the LIVE JS bundle rather than from Wayback, which holds only the SPA shell and an entry chunk that predates the event and contains no agenda. The bundle carries both editions; the 2025 array is the one with exactly 12 talks, matching this edition’s own recap stat (\"2 Tracks, 12 Sessions, 121 Attendees\"), where the other array opens with id:\"registration-2026\". Titles and descriptions are published in Italian and English; English is used here to match the DrupalCamp Italy 2026 dataset. Sala A and Sala B are the two tracks; Sala C held an all-day contribution room."
+      },
+      {
+        "id": "drupalcampitaly-it-2025-recap",
+        "kind": "stats",
+        "url": "https://www.drupalcampitaly.it/2025",
+        "retrievedAt": "2026-08-25",
+        "notes": "Post-event recap panel: 2 Tracks, 12 Sessions, 121 Attendees, 1 Community, plus a recap video at https://www.youtube.com/embed/DrSBaRkmH5A. The attendance figure is the organisers’ own."
+      },
+      {
+        "id": "drupal-drupalcamp-italy-2025-2025-11-14",
+        "kind": "community",
+        "url": "https://www.drupal.org/community/events/drupalcamp-italy-2025-11-14",
+        "retrievedAt": "2026-08-25",
+        "notes": "drupal.org lists it as plain \"DrupalCamp Italy\" with no year. Gives the venue as Sapienza University of Rome, Via Salaria 113, and the date as 14 November 2025."
+      },
+      {
+        "id": "drupalcampitaly-it-2025-sponsors",
+        "kind": "sponsors",
+        "url": "https://www.drupalcampitaly.it/2025#sponsors",
+        "retrievedAt": "2026-08-25",
+        "notes": "Read from the live JS bundle, which holds BOTH editions' sponsor tiers under the same key names. They are told apart by position: the 2026 set matches the archived Bologna 2026 dataset name-for-name (Acquia platinum, 979 gold, Gruppo Maggioli + Engineering silver, Tag1 bronze, Drupal Association institutional), which leaves the other set as 2025. The three organisers — SparkFabrik, bmeme, Stripedcodex — are shared between editions and recorded as their own tier, matching how Bologna 2026 does it. 2025 has no platinum or silver tier."
+      }
+    ],
+    "sourceIds": [
+      "drupalcampitaly-it-2025-agenda",
+      "drupalcampitaly-it-2025-recap",
+      "drupal-drupalcamp-italy-2025-2025-11-14",
+      "drupalcampitaly-it-2025-sponsors"
+    ]
+  },
+  "items": [
+    {
+      "startTime": "2025-11-14T07:45:00Z",
+      "endTime": "2025-11-14T08:30:00Z",
+      "duration": "P45M",
+      "title": "Check-in & Welcome",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "video_url": "",
+      "full_description": "Welcome participants and registration",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ]
+    },
+    {
+      "startTime": "2025-11-14T08:30:00Z",
+      "endTime": "2025-11-14T08:50:00Z",
+      "duration": "P20M",
+      "title": "Opening Plenary",
+      "location": "Sala A",
+      "link": "",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [],
+      "video_url": "",
+      "full_description": "Official welcome to DrupalCamp Italy 2025 and program presentation",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ]
+    },
+    {
+      "startTime": "2025-11-14T08:50:00Z",
+      "endTime": "2025-11-14T09:50:00Z",
+      "duration": "P60M",
+      "title": "A che punto siamo con la AI initiative",
+      "location": "Sala A",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Luca Lusso"
+      ],
+      "video_url": "",
+      "full_description": "It's been just a few months since many Drupal AI module maintainers joined forces to develop the best artificial intelligence support for an open-source CMS. The AI initiative is moving fast, releasing new versions of the AI module and other ecosystem modules at a dizzying pace. What was new yesterday is probably already outdated today, and keeping up with all the various developments is practically impossible. In this talk we'll discuss what's new, what's there and what's coming, revealing the behind-the-scenes of what's happening in the initiative, told by someone who is part of the team actively working to bring AI to Drupal.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ]
+    },
+    {
+      "startTime": "2025-11-14T08:50:00Z",
+      "endTime": "2025-11-14T09:50:00Z",
+      "duration": "P60M",
+      "title": "Contribution Room (open all day)",
+      "location": "Sala C",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "video_url": "",
+      "full_description": "The Contribution Room is a dedicated space where developers of all levels can actively contribute to Drupal. Open from 09:50 to 18:00, you can join anytime to:\n\n• Work on Drupal Core or contrib module issues\n• Receive mentoring from experienced contributors\n• Learn the contribution workflow\n• Network with other Drupalistas\n\nBring your laptop and get ready to make your mark on the Drupal project!",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2025-11-14T08:50:00Z",
+      "endTime": "2025-11-14T09:50:00Z",
+      "duration": "P60M",
+      "title": "Freedom to Code | Reclaiming Time and Mental Health by Automating the 7 Biggest Burdens of Drupal DevOps",
+      "location": "Sala B",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Vincenzo Russo"
+      ],
+      "video_url": "",
+      "full_description": "Modern development isn't just about tools — it's about people. When teams move from traditional hosting to a fully automated, Git-driven workflow built on top of a complete PaaS, something profound happens: developers stop firefighting infrastructure and start collaborating. This talk explores how adopting a platform that integrates version control, automated environments, and built-in CI/CD pipelines transforms both productivity and team culture.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ]
+    },
+    {
+      "startTime": "2025-11-14T10:00:00Z",
+      "endTime": "2025-11-14T10:30:00Z",
+      "duration": "P30M",
+      "title": "Coffee Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "video_url": "",
+      "full_description": "Coffee break and networking",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ]
+    },
+    {
+      "startTime": "2025-11-14T10:30:00Z",
+      "endTime": "2025-11-14T11:30:00Z",
+      "duration": "P60M",
+      "title": "Geomapping in Drupal CMS: from Basics to Advanced with Geofield Stack",
+      "location": "Sala B",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Italo Mairo"
+      ],
+      "video_url": "",
+      "full_description": "The Geofield Stack, featuring modules like Geofield, Leaflet, and Geocoder, empowers Drupal to handle complex geographic data while delivering engaging visual representations to end users. This session will explore the full potential of Drupal Geomapping, from foundational Drupal CMS features to advanced real-world applications—such as geo-photographic storytelling. We'll also demonstrate how the emerging Drupal Recipes approach enhances these capabilities for more streamlined implementations.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ]
+    },
+    {
+      "startTime": "2025-11-14T10:30:00Z",
+      "endTime": "2025-11-14T11:30:00Z",
+      "duration": "P60M",
+      "title": "Unlocking New Capabilities in Drupal with OpenAI Integration",
+      "location": "Sala A",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Vincenzo Gambino",
+        "Rachael Censuales"
+      ],
+      "video_url": "",
+      "full_description": "In this session, I will demonstrate how to use the GPT model to generate and summarise content and complete tasks such as answering questions. The integration can be done using the Drupal AI and OpenAI API Provider modules. Additionally, I will show how to store our content as embedded objects in a vector database to provide a ChatGPT-like search experience for the user as an alternative to fine-tuning. This integration of Drupal and ChatGPT has the potential to revolutionise user interaction with websites and web applications by providing a more natural and intuitive experience.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ]
+    },
+    {
+      "startTime": "2025-11-14T11:30:00Z",
+      "endTime": "2025-11-14T12:30:00Z",
+      "duration": "P60M",
+      "title": "Agenti AI in Drupal: dall'idea all'implementazione",
+      "location": "Sala A",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Roberto Peruzzo"
+      ],
+      "video_url": "",
+      "full_description": "AI Agents represent an evolution over simple conversational interfaces: they are intelligent modules capable of planning actions, orchestrating external tools, and interacting autonomously. In the Drupal context, agents open scenarios for advanced automation, editorial support, and integration with external systems. In this presentation I will offer a complete overview of how to integrate AI agents in Drupal, with two modes: 1) Creation via Web UI - how to leverage modules and configurations to create agents without code. 2) Building via code - technical approach with custom plugins, services, and APIs for extensive customization.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ]
+    },
+    {
+      "startTime": "2025-11-14T11:30:00Z",
+      "endTime": "2025-11-14T12:30:00Z",
+      "duration": "P60M",
+      "title": "Mangias.com: Drupal come centro di comando per un ecosistema di minisiti React",
+      "location": "Sala B",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Giuseppe Piazza",
+        "Vincenzo Cucinella"
+      ],
+      "video_url": "",
+      "full_description": "In this case study we will explore how, starting from a single monolithic corporate site, we built a hybrid architecture that powers, through Drupal's native JSON:API, an ecosystem of React mini-sites dedicated to specific business areas.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ]
+    },
+    {
+      "startTime": "2025-11-14T12:30:00Z",
+      "endTime": "2025-11-14T13:30:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "video_url": "",
+      "full_description": "Lunch break and networking",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ]
+    },
+    {
+      "startTime": "2025-11-14T13:30:00Z",
+      "endTime": "2025-11-14T14:30:00Z",
+      "duration": "P60M",
+      "title": "Display Builder, the design system native visual builder by UI Suite",
+      "location": "Sala A",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Michaël Fanini",
+        "Pierre Dureau"
+      ],
+      "video_url": "",
+      "full_description": "It's been many years that the UI Suite initiative team has worked hard, with a lot of passion, to put display building in the spotlight. Goal being to help Drupal fill the gap on this topic with other technologies like Wordpress. Today UI Suite maintain core features (SDC, Icon API, Asset Libraries) and contrib modules (UI Patterns, UI Styles, UI Skins, UI Icons, UI Examples) to provide a full and consistent way to package and map Design systems with data in a no-code way through Drupal UI. But still, a strange feeling of unfinished business was out there… At the start of the year, we had a revelation !!! It was time to build the missing part of our puzzle: Display Builder.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ]
+    },
+    {
+      "startTime": "2025-11-14T13:30:00Z",
+      "endTime": "2025-11-14T14:30:00Z",
+      "duration": "P60M",
+      "title": "Evoluzione dell'ecosistema Drupal Sapienza",
+      "location": "Sala B",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Ramon Souviron"
+      ],
+      "video_url": "",
+      "full_description": "How Infosapienza tackled the migration from Drupal 7 to the latest versions. Topics: Infrastructure - migration from virtual machines to Kubernetes with CI/CD. How Sapienza migrated 200+ Drupal 10/11 sites following the CI/CD-based development paradigm with configuration as code and automating everything automatable. Code quality and cybersecurity - pipeline checks with PHPStan, Qualys and Trivy. Drupal 7 to Drupal 10/11 site migrations. Design and implementation of Opensearch-based search engine. New interfaces for Sapienza web with Opensearch backend.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ]
+    },
+    {
+      "startTime": "2025-11-14T14:30:00Z",
+      "endTime": "2025-11-14T15:30:00Z",
+      "duration": "P60M",
+      "title": "Behind Artificial Intelligence: How Machine/Deep Learning Works. The example of Large Language Model (LLM)",
+      "location": "Sala B",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Marco Raoul Marini"
+      ],
+      "video_url": "",
+      "full_description": "This talk explores the science of machine/deep learning, demystifying how algorithms learn from data to solve complex tasks. It introduces Large Language Models (LLMs), transformer-based systems trained on vast text, and explains their architecture, capabilities, and limitations. A focus is placed on Retrieval-Augmented Generation (RAG), a technique enabling LLMs to access dynamic external knowledge for accurate responses. The session surveys cutting-edge models in the LLM landscape, including multimodal variants capable of processing diverse data types like text, images, and audio. Finally, it demonstrates practical integration with DrupalAI, showcasing how RAG can enhance content management systems through AI-driven features such as personalized search, Q&A, or chatbots.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ]
+    },
+    {
+      "startTime": "2025-11-14T14:30:00Z",
+      "endTime": "2025-11-14T15:30:00Z",
+      "duration": "P60M",
+      "title": "Schema.org e GEO: strategie drupal per contenuti che parlano ai motori generativi",
+      "location": "Sala A",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Roberto Mariani"
+      ],
+      "video_url": "",
+      "full_description": "In the era of Artificial Intelligence, online visibility is redefined by Generative Engine Optimization (GEO). The goal is no longer just positioning, but being cited as a reliable source by generative engines like ChatGPT and Gemini. AIs semantically analyze content and select it for their responses. The Schema.org-first approach is the strategic response to this challenge. Using the universal Schema.org standard as a blueprint for content modeling, we ensure our content is machine-readable. The talk explores how the Schema.org Blueprints module enables building Drupal architectures that guarantee three crucial results: perfect data structures (Schema.org), high-quality APIs (JSON:API), and excellent SEO/GEO (JSON-LD).",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ]
+    },
+    {
+      "startTime": "2025-11-14T15:30:00Z",
+      "endTime": "2025-11-14T16:00:00Z",
+      "duration": "P30M",
+      "title": "Coffee Break",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "video_url": "",
+      "full_description": "Coffee break and networking",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ]
+    },
+    {
+      "startTime": "2025-11-14T16:00:00Z",
+      "endTime": "2025-11-14T17:00:00Z",
+      "duration": "P60M",
+      "title": "AI Content Migrate for Drupal - Automating Large-Scale Content Migrations with AI",
+      "location": "Sala A",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Raffaele Chiocca"
+      ],
+      "video_url": "",
+      "full_description": "Speed up website migrations and cut costs: discover how AI can automate content analysis, simplify workflows, and help you migrate your old Drupal website into a new one faster and smarter. The AI Content Migrate module helps you drastically reduce repetitive tasks, time and costs associated with migrations. By leveraging AI to automatically analyze the structure of an existing website, this module can suggest appropriate Drupal content types and fields.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ]
+    },
+    {
+      "startTime": "2025-11-14T16:00:00Z",
+      "endTime": "2025-11-14T17:00:00Z",
+      "duration": "P60M",
+      "title": "Drupal Canvas APIs: how to integrate and extend Canvas",
+      "location": "Sala B",
+      "link": "",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Emanuel Righetto"
+      ],
+      "video_url": "",
+      "full_description": "Drupal Canvas will revolutionize the way you enable your editors and marketers to create sites with Drupal. But this might not be enough and you'll want to provide guidelines, extend or improve your developers' experience. In this talk we'll explore: what is Drupal Canvas, how to migrate from Layout Builder to Canvas, using Paragraphs in Canvas, syncing Figma components with Canvas via AI, the backend and client data model, how to provide your own building blocks with ComponentSources, how to interact with the internal API and create UI extensions.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ]
+    },
+    {
+      "startTime": "2025-11-14T17:00:00Z",
+      "endTime": "2025-11-14T17:30:00Z",
+      "duration": "P30M",
+      "title": "Networking & Closing",
+      "location": "",
+      "link": "",
+      "track": [
+        "Other"
+      ],
+      "speakers": [],
+      "video_url": "",
+      "full_description": "Event closing and final greetings",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupalcampitaly-it-2025-agenda"
+      ]
+    }
+  ],
+  "result": "manual",
+  "url": "https://www.drupalcampitaly.it/2025/agenda"
+}

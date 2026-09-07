@@ -1,0 +1,1 @@
+[{"valid":true,"schema":null,"skipped":true},{"valid":true,"schema":null,"skipped":true},{"valid":true,"schema":null,"skipped":true},{"valid":false,"schema":"event.schema.json","skipped":false},{"valid":false,"schema":"event.schema.json","skipped":false},{"valid":false,"schema":"themes.schema.json","skipped":false},{"valid":false,"schema":"sponsors.schema.json","skipped":false}]

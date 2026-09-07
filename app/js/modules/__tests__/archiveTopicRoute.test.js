@@ -13,11 +13,14 @@ beforeAll(() => {
     querySelectorAll: () => [],
     addEventListener: () => {},
   };
+  // The archive now speaks two address forms and reads the live location to
+  // decide which — so a path-form expectation has to say it is on a path.
+  globalThis.location ??= { pathname: '/archive', search: '', origin: '' };
 });
 
 const { topicPath, termFromSlug } = await import('../archiveDashboard.js');
 
-describe('topicPath', () => {
+describe('topicPath, served at /archive', () => {
   it('addresses a keyword and a year', () => {
     expect(topicPath('layout builder', 2025)).toBe('/archive/topic/layout-builder/2025');
   });
@@ -28,6 +31,23 @@ describe('topicPath', () => {
 
   it('survives punctuation in a custom keyword', () => {
     expect(topicPath('c++', 2020)).toBe('/archive/topic/c/2020');
+  });
+});
+
+describe('topicPath, deployed as plain files', () => {
+  // The same view, addressed the way a static host can actually serve it. A
+  // host-absolute path here 404s on reload and points a GitHub Pages project
+  // site at the wrong origin entirely.
+  it('uses the query form and stays relative to the page', () => {
+    const was = globalThis.location.pathname;
+    globalThis.location.pathname = '/repo/archive.html';
+    try {
+      expect(topicPath('layout builder', 2025)).toBe(
+        './archive.html?topic=layout-builder&year=2025',
+      );
+    } finally {
+      globalThis.location.pathname = was;
+    }
   });
 });
 

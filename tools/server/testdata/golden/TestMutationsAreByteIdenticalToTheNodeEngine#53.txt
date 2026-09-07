@@ -1,0 +1,138 @@
+{
+  "defaultMode": "personal",
+  "defaultCurrency": "AUD",
+  "budgetCategories": [
+    {
+      "id": "travel",
+      "name": "Travel"
+    },
+    {
+      "id": "accommodation",
+      "name": "Accommodation"
+    },
+    {
+      "id": "food",
+      "name": "Food & Drink"
+    },
+    {
+      "id": "customer",
+      "name": "Customer"
+    },
+    {
+      "id": "team",
+      "name": "Team"
+    },
+    {
+      "id": "tickets",
+      "name": "Tickets"
+    },
+    {
+      "id": "swag",
+      "name": "Swag"
+    },
+    {
+      "id": "sponsor",
+      "name": "Sponsor"
+    },
+    {
+      "id": "marketing",
+      "name": "Marketing"
+    },
+    {
+      "id": "misc",
+      "name": "Misc"
+    }
+  ],
+  "teamMembers": [
+    {
+      "id": "tmb_alice123",
+      "name": "Alice Johnson",
+      "role": "Partnerships Lead",
+      "company": "Acme Digital",
+      "department": "Sales & Partnerships",
+      "phone": "+61 2 8765 4321",
+      "notes": "Primary sponsor rep. Handles all key account conversations at events.",
+      "enabled": true
+    },
+    {
+      "id": "tmb_bob456",
+      "name": "Bob Chen",
+      "role": "Senior Developer",
+      "company": "Acme Digital",
+      "department": "Engineering",
+      "phone": "+61 3 9876 5432",
+      "notes": "Runs the live demo station. Always bring two laptops.",
+      "enabled": true
+    },
+    {
+      "id": "tmb_carol789",
+      "name": "Carol Davis",
+      "role": "Marketing Manager",
+      "company": "Acme Digital",
+      "department": "Marketing",
+      "phone": "+61 7 3456 7890",
+      "notes": "Manages swag logistics and social media coverage during the event.",
+      "enabled": true
+    },
+    {
+      "id": "tmb_priya_r",
+      "name": "Priya Raman",
+      "role": "UX Lead",
+      "department": "Design",
+      "phone": "+43 1 234 5678",
+      "notes": "Runs the workshop track. Bring the sketching kit and spare markers.",
+      "company": "Acme Digital",
+      "enabled": true
+    },
+    {
+      "id": "tmb_emma_n",
+      "name": "Emma Novak",
+      "role": "Programme Coordinator",
+      "department": "Operations",
+      "phone": "+43 1 234 5679",
+      "notes": "Owns the team schedule and the booth rota. First point of contact on site.",
+      "company": "Acme Digital",
+      "enabled": true
+    },
+    {
+      "id": "tmb_marcus_w",
+      "name": "Marcus Weber",
+      "role": "Solutions Architect",
+      "department": "Engineering",
+      "phone": "+43 1 234 5680",
+      "notes": "Leads technical conversations at the booth. Handles scoping questions.",
+      "company": "Acme Digital",
+      "enabled": true
+    },
+    {
+      "id": "tmb_sarah_k",
+      "name": "Sarah Kim",
+      "role": "Content Lead",
+      "department": "Marketing",
+      "phone": "+43 1 234 5681",
+      "notes": "Live-blogs sessions and manages the demo rotation roster.",
+      "company": "Acme Digital",
+      "enabled": true
+    },
+    {
+      "id": "tmb_daniel_o",
+      "name": "Daniel Ortiz",
+      "role": "Managing Director",
+      "department": "Executive",
+      "phone": "+43 1 234 5682",
+      "notes": "Executive relationships. Available for client dinners and partner meetings.",
+      "company": "Acme Digital",
+      "enabled": true
+    }
+  ],
+  "personal": {
+    "outboundLegs": [
+      {
+        "title": "A Test Sponsor",
+        "tier": "Gold",
+        "note": "with a comma, a \"quote\" and <html>",
+        "id": "FIXED_ID"
+      }
+    ]
+  }
+}

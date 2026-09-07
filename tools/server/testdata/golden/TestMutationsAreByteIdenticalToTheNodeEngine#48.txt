@@ -1,0 +1,37 @@
+{
+  "GVA": [
+    46.2377125,
+    6.1079823
+  ],
+  "Rotterdam": [
+    51.9244424,
+    4.47775
+  ],
+  "Zurich": [
+    47.3744489,
+    8.5410422
+  ],
+  "Postillion Hotel & Convention Centre WTC Rotterdam, Rotterdam": [
+    51.9225,
+    4.47917
+  ],
+  "TBA": [
+    33.8119175,
+    -117.9228129
+  ],
+  "Lunch w/ Synetic, Rotterdam": [
+    51.9225,
+    4.47917
+  ],
+  "_lastModified": "2026-08-04T10:33:16.805Z",
+  "personal": {
+    "itinerary": [
+      {
+        "title": "A Test Sponsor",
+        "tier": "Gold",
+        "note": "with a comma, a \"quote\" and <html>",
+        "id": "FIXED_ID"
+      }
+    ]
+  }
+}

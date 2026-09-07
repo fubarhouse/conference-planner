@@ -12,6 +12,7 @@ import {
   normalizeString,
 } from './utils.js';
 import { renderSponsors } from './sponsors.js';
+import { loadJson, savedAgo } from './offlineData.js';
 import { renderRelatedEvents } from './relatedEvents.js';
 import {
   applyFilters,
@@ -230,9 +231,11 @@ async function hydrateManifestMetaForItem(item) {
 // Returns false when it's missing/invalid so the caller can fall back.
 async function hydrateManifestFromCatalog() {
   try {
-    const response = await fetch('./data/catalog.json', { cache: 'no-cache' });
-    if (!response.ok) return false;
-    const catalog = await response.json();
+    // Cached alongside the datasets, because it is the PREREQUISITE for them:
+    // without the catalog the app cannot resolve a URL to an event, so it never
+    // reaches the dataset it has saved. Caching the programme but not the index
+    // that finds it leaves the offline copy unreachable.
+    const { data: catalog } = await loadJson('./data/catalog.json');
     if (!catalog || !Array.isArray(catalog.events)) return false;
     const metaByFile = new Map(catalog.events.map((entry) => [entry.file, entry.event || {}]));
     for (const item of eventCatalog) {
@@ -286,6 +289,10 @@ function getSearchableEvents(includeHidden = false) {
         file: item.file,
         category: manifestCategoryByFile.get(item.file) || 'Other',
         designation: normalizeString(meta.designation),
+        // What it was MARKETED as vs what it BELONGS to. Drupal Camp Delhi is
+        // grouped under DrupalCamp and DrupalSouth Community Day under
+        // DrupalSouth, without either losing its own name on the card.
+        series: normalizeString(item.series) || normalizeString(meta.designation),
         location: normalizeString(meta.location),
         year: normalizeString(meta.year),
         region: normalizeString(meta.region),
@@ -1057,22 +1064,72 @@ async function fetchEvents(filename) {
     }
   }
   try {
-    const response = await fetch(`./data/${filename}`, { cache: 'no-cache' });
-    // A 404 that returns an HTML error page parses as JSON in some setups and
-    // throws in others — neither is "the event has no sessions". Check first.
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
+    // Falls back to the last saved copy when the network is gone, so the
+    // programme you were reading survives losing signal mid-conference. The
+    // status check stays inside loadJson: a 404 HTML error page parses as JSON in
+    // some setups and throws in others, and neither is "no sessions".
+    const { data, fromCache, savedAt } = await loadJson(`./data/${filename}`);
     state.eventMeta = data.event;
     state.datasetError = null;
+    state.datasetStale = fromCache ? { file: filename, savedAt } : null;
     return processEventItems(data.items);
   } catch (err) {
     // Returning [] alone made a failed load indistinguishable from an event
     // with no programme yet: the page rendered its full chrome around nothing
     // and said not one word about it. The renderer needs to know which it is.
     state.datasetError = { file: filename, message: String(err?.message || err) };
+    state.datasetStale = null;
     reportError(`fetchEvents(${filename})`, err);
     return [];
   }
+}
+
+/**
+ * Say which of the two happened, because they need different things from the
+ * reader: a stale copy is usable and wants its age; a failed load is not usable
+ * and wants a retry. Rendering the same chrome around nothing, silently, was the
+ * old behaviour — `state.datasetError` was set here and read by nobody.
+ */
+function renderDatasetNotice() {
+  const host = document.getElementById('filtersPanel');
+  if (!host) return;
+  const existing = document.getElementById('datasetNotice');
+  if (existing) existing.remove();
+
+  const stale = state.datasetStale;
+  const failed = state.datasetError;
+  if (!stale && !failed) return;
+
+  const box = document.createElement('div');
+  box.id = 'datasetNotice';
+  box.className = 'sch-plate mt-4';
+  box.setAttribute('role', 'status');
+
+  const body = document.createElement('div');
+  body.className = 'sch-plate__body';
+
+  const eyebrow = document.createElement('div');
+  eyebrow.className = 'sch-plate__eyebrow u-label';
+  eyebrow.textContent = stale ? 'OFFLINE COPY' : 'COULD NOT LOAD';
+  body.appendChild(eyebrow);
+
+  const text = document.createElement('p');
+  text.textContent = stale
+    ? `Showing the last copy of this programme, ${savedAgo(stale.savedAt)}. It may be out of date.`
+    : 'This programme could not be loaded. It may be a connection problem rather than an empty schedule.';
+  body.appendChild(text);
+
+  if (failed) {
+    const retry = document.createElement('button');
+    retry.type = 'button';
+    retry.className = 'app-btn';
+    retry.textContent = 'Try again';
+    retry.addEventListener('click', () => window.location.reload());
+    body.appendChild(retry);
+  }
+
+  box.appendChild(body);
+  host.appendChild(box);
 }
 
 function inferFlagFromMeta(meta = {}) {
@@ -1135,12 +1192,25 @@ async function loadEvent(filename) {
   document.getElementById('creditsEventLink').innerHTML =
     `This is a custom schedule builder for <a href="${websiteURL || '#'}" target="_blank" class="drupal-blue-text">${eventDisplayName}</a>. <strong>It is not affiliated with ${eventDisplayName}</strong>.`;
   await renderEventMediaPromo(meta, events);
+  renderDatasetNotice();
 
   events.forEach((event) => {
-    event.id = `${event.startTime}-${event.location}-${event.title}`.replace(/[^a-zA-Z0-9-]/g, '-');
+    // An unscheduled session has no startTime, and interpolating one would put
+    // the literal "undefined" at the head of every id in the pool — where the
+    // remaining title and location may not be enough to keep them apart.
+    const when = event.unscheduled ? 'unscheduled' : event.startTime;
+    event.id = `${when}-${event.location}-${event.title}`.replace(/[^a-zA-Z0-9-]/g, '-');
   });
+  // The day filter is built from the days that exist. Unscheduled sessions have
+  // no day to contribute — and `getLocalDate(undefined)` THROWS, taking the
+  // whole page down before anything renders, so they must be dropped here and
+  // not merely produce an empty option.
   const uniqueDates = [
-    ...new Set(events.map((event) => getLocalDate(event.startTime, state.eventMeta?.timezone))),
+    ...new Set(
+      events
+        .filter((event) => !event.unscheduled)
+        .map((event) => getLocalDate(event.startTime, state.eventMeta?.timezone)),
+    ),
   ];
   const uniqueTracks = [...new Set(events.flatMap((event) => normalizeTracks(event.track)))];
 

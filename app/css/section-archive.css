@@ -222,6 +222,43 @@
   .obs-ycol--empty .obs-ybar {
     background: var(--paper-2);
   }
+  /* "What survives" — three short rows sharing the year axis above. Each row is
+     scaled to its own maximum: 63 galleries against 9,904 sessions on one scale
+     would be a flat line. */
+  .obs-survival-row {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    align-items: end;
+    gap: 0.7rem;
+  }
+  .obs-survival-row + .obs-survival-row {
+    margin-top: 0.9rem;
+  }
+  .obs-survival-label {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    padding-bottom: 1.35rem;
+  }
+  .obs-years--short {
+    height: 5.5rem;
+  }
+  /* Colour separates the three readings; it is not carrying any other meaning. */
+  .obs-ybar--videos {
+    background: var(--brand-2-ink, var(--brand-1-ink));
+  }
+  .obs-ybar--albums {
+    background: var(--ink-2);
+  }
+  @media (max-width: 640px) {
+    .obs-survival-row {
+      grid-template-columns: 1fr;
+      gap: 0.2rem;
+    }
+    .obs-survival-label {
+      padding-bottom: 0;
+    }
+  }
   /* Horizontal bars (series, tiers) */
   .obs-hbars {
     display: flex;
@@ -530,9 +567,19 @@
     font-family: inherit;
   }
   .obs-result:hover,
-  .obs-result:focus-visible {
+  .obs-result:focus-visible,
+  /* Arrow-key selection. Focus stays in the input (this is a combobox), so the
+     highlight has to be painted rather than inherited from :focus. */
+  .obs-result.is-active {
     background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
     outline: none;
+  }
+  /* A 12% background tint alone is well under the 3:1 that WCAG 1.4.11 asks of
+     a focus indicator, and this rule cancels the global outline — so the bar
+     has to carry it. On both the keyboard highlight and real focus. */
+  .obs-result.is-active,
+  .obs-result:focus-visible {
+    box-shadow: inset 3px 0 0 var(--brand-1-ink);
   }
   .obs-result-badge {
     flex: none;
@@ -754,6 +801,12 @@
   }
   .obs-tc-dot:hover {
     r: 5;
+  }
+  /* A register year resting on a single event: same position, weaker claim. The
+     ring reads as "measured, but thinly" without pretending the value is wrong.
+     The inline style supplies the series colour as the stroke. */
+  .obs-tc-dot--thin {
+    stroke-width: 2;
   }
   .obs-topic-empty {
     padding: 3rem 1rem;
@@ -1065,7 +1118,9 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.9rem;
-    align-items: center;
+    /* Bottom-aligned, not centred: every control in this row is a label stacked
+       over a ruled line, and centring them made the rules disagree. */
+    align-items: end;
     margin: 0 0 1.6rem;
   }
   .obs-topbar .obs-search {
@@ -1238,53 +1293,110 @@
     margin: 0 0 1.4rem;
   }
   .obs-mapid-toggle {
-    display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.4rem 0.75rem; border-radius: 0; border: 1px dashed var(--brand-1-ink); background: transparent; color: var(--brand-1-ink); font-family: var(--font-data); font-size: var(--step--2); letter-spacing: 0.02em; cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 0;
+    border: 1px dashed var(--brand-1-ink);
+    background: transparent;
+    color: var(--brand-1-ink);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.02em;
+    cursor: pointer;
   }
   .obs-mapid-toggle:hover {
-    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent); border-color: var(--brand-1-ink);
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    border-color: var(--brand-1-ink);
   }
   .obs-mapid-form {
-    margin-top: 0.7rem; padding: 0.9rem 1rem; border-radius: 0; border: 1px solid var(--rule-0); background: var(--paper-2);
+    margin-top: 0.7rem;
+    padding: 0.9rem 1rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
   }
   .obs-mapid-lead {
-    display: block; font-size: var(--step--1); color: var(--ink-2); margin-bottom: 0.6rem;
+    display: block;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+    margin-bottom: 0.6rem;
   }
   .obs-mapid-lead b {
     color: var(--ink-0);
   }
   .obs-mapid-row {
-    display: flex; gap: 0.5rem; align-items: stretch;
+    display: flex;
+    gap: 0.5rem;
+    align-items: stretch;
   }
   .obs-mapid-input {
-    flex: 1; min-width: 0; height: 2.6rem; padding: 0 0.8rem; border-radius: 0; border: 1px solid var(--rule-0); background: var(--paper-2); color: var(--ink-0); font-size: var(--step--1); font-family: inherit;
+    flex: 1;
+    min-width: 0;
+    height: 2.6rem;
+    padding: 0 0.8rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+    color: var(--ink-0);
+    font-size: var(--step--1);
+    font-family: inherit;
   }
   .obs-mapid-input:focus {
-    outline: none; border-color: var(--brand-1-ink); box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    outline: none;
+    border-color: var(--brand-1-ink);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
   }
   .obs-mapid-go {
-    flex: none; height: 2.6rem; padding: 0 1.5rem; border-radius: 0; border: 0; background: var(--brand-1-ink); color: var(--paper-1); font-weight: 600; font-size: var(--step--1); letter-spacing: 0.01em; text-shadow: 0 1px 0 var(--ink-2); cursor: pointer; box-shadow: 0 6px 16px -8px var(--brand-1-ink);
+    flex: none;
+    height: 2.6rem;
+    padding: 0 1.5rem;
+    border-radius: 0;
+    border: 0;
+    background: var(--brand-1-ink);
+    color: var(--paper-1);
+    font-weight: 600;
+    font-size: var(--step--1);
+    letter-spacing: 0.01em;
+    text-shadow: 0 1px 0 var(--ink-2);
+    cursor: pointer;
+    box-shadow: 0 6px 16px -8px var(--brand-1-ink);
   }
   .obs-mapid-go:hover {
     filter: brightness(1.05);
   }
   .obs-mapid-note {
-    margin: 0.55rem 0 0; font-family: var(--font-data); font-size: var(--step--2); color: var(--ink-2);
+    margin: 0.55rem 0 0;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
   }
   /* Observatory — expandable event rows + full-width per-talk detail (speaker journey) */
   .obs-ev--exp {
-    cursor: pointer; align-items: center; gap: 0.9rem; transition: background 0.12s;
+    cursor: pointer;
+    align-items: center;
+    gap: 0.9rem;
+    transition: background 0.12s;
   }
   .obs-ev--exp:hover {
     background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
   }
   .obs-ev--exp:focus-visible {
-    outline: 2px solid var(--brand-1-ink); outline-offset: -2px;
+    outline: 2px solid var(--brand-1-ink);
+    outline-offset: -2px;
   }
   .obs-ev-caret {
-    flex: none; color: var(--ink-2); font-size: var(--step--2); transition: transform 0.18s, color 0.12s;
+    flex: none;
+    color: var(--ink-2);
+    font-size: var(--step--2);
+    transition:
+      transform 0.18s,
+      color 0.12s;
   }
   .obs-ev--exp.is-open .obs-ev-caret {
-    transform: rotate(180deg); color: var(--brand-1-ink);
+    transform: rotate(180deg);
+    color: var(--brand-1-ink);
   }
   .obs-ev--exp.is-open {
     background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
@@ -1292,56 +1404,108 @@
   /* Gate `display` on :not([hidden]) so the `hidden` attribute actually collapses the
      accordion (a bare `display:flex` would override [hidden]'s display:none). */
   .obs-ev-detail {
-    flex-direction: column; gap: 0.7rem; margin: 0.1rem 0 0.9rem 3rem; padding-left: 1rem; border-left: 2px solid color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    flex-direction: column;
+    gap: 0.7rem;
+    margin: 0.1rem 0 0.9rem 3rem;
+    padding-left: 1rem;
+    border-left: 2px solid color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
   }
   .obs-ev-detail:not([hidden]) {
     display: flex;
   }
   .obs-talk-load {
-    padding: 1.4rem; text-align: center; color: var(--ink-2);
+    padding: 1.4rem;
+    text-align: center;
+    color: var(--ink-2);
   }
   .obs-talk-none {
-    padding: 0.8rem; font-size: var(--step--1); color: var(--ink-2);
+    padding: 0.8rem;
+    font-size: var(--step--1);
+    color: var(--ink-2);
   }
   .obs-talk {
-    padding: 1rem 1.1rem; border-radius: 0; border: 1px solid var(--rule-0); background: var(--paper-2);
+    padding: 1rem 1.1rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
   }
   .obs-talk-title {
-    margin: 0 0 0.5rem; font-size: var(--step-0); font-weight: 600; color: var(--ink-0); line-height: 1.3;
+    margin: 0 0 0.5rem;
+    font-size: var(--step-0);
+    font-weight: 600;
+    color: var(--ink-0);
+    line-height: 1.3;
   }
   .obs-talk-metarow {
-    display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; margin-bottom: 0.6rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.1rem;
+    margin-bottom: 0.6rem;
   }
   .obs-talk-m {
-    display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-data); font-size: var(--step--2); color: var(--ink-2);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
   }
   .obs-talk-m i {
-    color: var(--brand-1-ink); font-size: var(--step--2);
+    color: var(--brand-1-ink);
+    font-size: var(--step--2);
   }
   .obs-talk-desc {
-    margin: 0; font-size: var(--step--1); line-height: 1.6; color: var(--ink-2); white-space: pre-wrap;
+    margin: 0;
+    font-size: var(--step--1);
+    line-height: 1.6;
+    color: var(--ink-2);
+    white-space: pre-wrap;
   }
   .obs-talk-links {
-    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
   }
   .obs-talk-link {
-    display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.7rem; border-radius: 0; border: 1px solid var(--brand-1-ink); background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent); color: var(--brand-1-ink); font-size: var(--step--1); font-weight: 600; text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 0;
+    border: 1px solid var(--brand-1-ink);
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    color: var(--brand-1-ink);
+    font-size: var(--step--1);
+    font-weight: 600;
+    text-decoration: none;
   }
   .obs-talk-link:hover {
-    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent); border-color: var(--brand-1-ink);
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    border-color: var(--brand-1-ink);
   }
   /* Observatory — "not on the map" disclosure under drill maps */
   .obs-map-unmapped {
     margin-top: 0.55rem;
   }
   .obs-map-unmapped summary {
-    cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem; font-family: var(--font-data); font-size: var(--step--2); letter-spacing: 0.02em; color: var(--ink-2); list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.02em;
+    color: var(--ink-2);
+    list-style: none;
   }
   .obs-map-unmapped summary::-webkit-details-marker {
     display: none;
   }
   .obs-map-unmapped summary::before {
-    content: '▸'; font-size: var(--step--2); transition: transform 0.15s;
+    content: '▸';
+    font-size: var(--step--2);
+    transition: transform 0.15s;
   }
   .obs-map-unmapped[open] summary::before {
     transform: rotate(90deg);
@@ -1350,17 +1514,25 @@
     color: var(--brand-1-ink);
   }
   .obs-map-unmapped ul {
-    margin: 0.5rem 0 0; padding: 0 0 0 1.1rem; display: flex; flex-direction: column; gap: 0.22rem;
+    margin: 0.5rem 0 0;
+    padding: 0 0 0 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.22rem;
   }
   .obs-map-unmapped li {
-    font-size: var(--step--1); color: var(--ink-2);
+    font-size: var(--step--1);
+    color: var(--ink-2);
   }
   .obs-map-unmapped li span {
     color: var(--ink-2);
   }
   /* Observatory — global footprint strip (world map + a "global reach" stats panel) */
   .obs-stripmap-wrap {
-    display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 0 0 1.6rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin: 0 0 1.6rem;
   }
   .obs-stripmap-wrap[hidden] {
     display: none;
@@ -1369,77 +1541,214 @@
      (a descendant selector wouldn't match), and its stylesheet loads AFTER ours, so we
      need the compound selector to outrank Leaflet's default var(--rule-0) gutter. */
   .obs-stripmap-map {
-    position: relative; flex: 1; min-width: 18rem;
+    position: relative;
+    flex: 1;
+    min-width: 18rem;
   }
   .obs-stripmap {
-    width: 100%; height: 15rem; border-radius: 0; overflow: hidden; border: 1px solid var(--paper-2); background: var(--paper-1); cursor: default;
+    width: 100%;
+    height: 15rem;
+    border-radius: 0;
+    overflow: hidden;
+    border: 1px solid var(--paper-2);
+    background: var(--paper-1);
+    cursor: default;
   }
   .obs-stripmap.leaflet-container {
     background: var(--paper-1);
   }
+  /* Loading state. The strip's height is fixed above, so this occupies exactly
+     the space the map will, and swapping one for the other shifts nothing. */
+  .obs-stripmap-loading {
+    display: grid;
+    place-items: center;
+  }
+
+  .obs-stripmap-skeleton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-xs);
+  }
+
+  .obs-stripmap-skeleton-bar {
+    inline-size: 9rem;
+    block-size: 2px;
+    background: linear-gradient(90deg, var(--paper-2), var(--ink-3), var(--paper-2));
+    background-size: 200% 100%;
+    animation: obs-strip-sweep 1.4s ease-in-out infinite;
+  }
+
+  .obs-stripmap-skeleton-text {
+    font-family: var(--font-data);
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+
+  @keyframes obs-strip-sweep {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  /* A sweeping bar is decoration; the text already says what is happening. */
+  @media (prefers-reduced-motion: reduce) {
+    .obs-stripmap-skeleton-bar {
+      animation: none;
+    }
+  }
+
   .obs-stripmap-empty {
-    display: flex; align-items: center; justify-content: center; text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
   .obs-stripmap-none {
-    display: flex; flex-direction: column; align-items: center; gap: 0.35rem; padding: 1rem; color: var(--ink-2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 1rem;
+    color: var(--ink-2);
   }
   .obs-stripmap-none i {
-    font-size: var(--step-2); color: var(--brand-1-ink); margin-bottom: 0.15rem;
+    font-size: var(--step-2);
+    color: var(--brand-1-ink);
+    margin-bottom: 0.15rem;
   }
   .obs-stripmap-none b {
-    font-family: var(--mono, var(--font-data)); font-size: var(--step--2); letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-2);
+    font-family: var(--mono, var(--font-data));
+    font-size: var(--step--2);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-2);
   }
   .obs-stripmap-none span {
-    font-size: var(--step--1); max-width: 20rem;
+    font-size: var(--step--1);
+    max-width: 20rem;
   }
   /* "Now viewing" card floating over the map's empty gutter */
   .obs-mapfilters {
-    position: absolute; top: 0.7rem; left: 0.7rem; z-index: 500; max-width: 14rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.4rem; padding: 0.7rem 0.8rem; border-radius: 0; border: 1px solid var(--rule-0); background: color-mix(in srgb, var(--paper-1) 92%, transparent); backdrop-filter: blur(3px);
+    position: absolute;
+    top: 0.7rem;
+    left: 0.7rem;
+    z-index: 500;
+    max-width: 14rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    padding: 0.7rem 0.8rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: color-mix(in srgb, var(--paper-1) 92%, transparent);
+    backdrop-filter: blur(3px);
   }
   .obs-mapfilter-eyebrow {
-    display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-data); font-size: var(--step--2); font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-2);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-2);
   }
   .obs-mapfilter-eyebrow i {
     color: var(--brand-1-ink);
   }
   .obs-mapfilter-all {
-    font-family: var(--font-data); font-size: var(--step--2); color: var(--ink-2);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
   }
   .obs-mapfilter-chip {
-    display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.26rem 0.55rem; border-radius: 0; border: 1px solid var(--brand-1-ink); background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent); color: var(--ink-2); font-size: var(--step--2); cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.26rem 0.55rem;
+    border-radius: 0;
+    border: 1px solid var(--brand-1-ink);
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    color: var(--ink-2);
+    font-size: var(--step--2);
+    cursor: pointer;
   }
   .obs-mapfilter-chip:hover {
-    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent); border-color: var(--brand-1-ink);
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    border-color: var(--brand-1-ink);
   }
   .obs-mapfilter-chip span {
-    font-family: var(--font-data); font-size: var(--step--2); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
   }
   .obs-mapfilter-chip b {
-    color: var(--ink-0); font-weight: 600;
+    color: var(--ink-0);
+    font-weight: 600;
   }
   .obs-mapfilter-chip i {
-    font-size: var(--step--2); color: var(--ink-2);
+    font-size: var(--step--2);
+    color: var(--ink-2);
   }
   .obs-mapfilter-chip:hover i {
     color: var(--brand-1-ink);
   }
   .obs-globe {
-    flex: none; width: 12.5rem; display: flex; flex-direction: column; justify-content: center; gap: 0.55rem; padding: 1.1rem 1.2rem; border-radius: 0; border: 1px solid var(--paper-2); background: var(--paper-2);
+    flex: none;
+    width: 12.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 1.1rem 1.2rem;
+    border-radius: 0;
+    border: 1px solid var(--paper-2);
+    background: var(--paper-2);
   }
   .obs-globe-eyebrow {
-    display: inline-flex; align-items: center; gap: 0.45rem; margin-bottom: 0.3rem; font-family: var(--font-body); font-size: var(--label-size); font-weight: 600; letter-spacing: var(--label-track); text-transform: uppercase; color: var(--brand-1-ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 0.3rem;
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--brand-1-ink);
   }
   .obs-globe-stat {
-    display: flex; align-items: baseline; gap: 0.5rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
   }
   .obs-globe-stat b {
-    font-family: var(--font-data); font-size: var(--step-2); font-weight: 600; line-height: 1; color: var(--ink-0);
+    font-family: var(--font-data);
+    font-size: var(--step-2);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--ink-0);
   }
   .obs-globe-stat span {
-    font-size: var(--step--2); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2);
+    font-size: var(--step--2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-2);
   }
   .obs-globe-foot {
-    margin-top: 0.35rem; font-family: var(--font-data); font-size: var(--step--2); letter-spacing: 0.04em; color: var(--ink-2);
+    margin-top: 0.35rem;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    color: var(--ink-2);
   }
   @media (max-width: 640px) {
     .obs-globe {
@@ -1461,14 +1770,30 @@
     flex-wrap: wrap;
     gap: var(--sp-s);
     align-items: end;
+  }
+
+  /* The rule belongs to the filter BLOCK, not to each row inside it. When the
+     scopes were the whole row the two were the same thing; now that search sits
+     above them, giving both a rule drew a second, shorter line that stopped
+     halfway across and read as a mistake. */
+  .obs-topbar {
     padding-block: var(--sp-m);
     border-block-end: 1px solid var(--rule-0);
   }
 
+  .obs-scopes {
+    padding-block-start: var(--sp-2xs);
+  }
+
+  /* Equal columns, not content-sized tiles. As a flex row the stations were
+     five different widths and the row's geometry depended on how long the
+     numbers happened to be — 7,891 sessions with a programme-mix sub-line was
+     enough to push Sponsors onto a second row. auto-fit keeps them evenly
+     spaced at any width and still reflows on a narrow screen. */
   .obs-hero {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-xl);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+    gap: var(--sp-l) var(--sp-m);
     padding-block: var(--sp-l);
     border-block-end: 1px solid var(--rule-0);
   }
@@ -1498,6 +1823,19 @@
     display: block;
     font-size: var(--step--1);
     color: var(--ink-1);
+  }
+
+  /* The programme mix, on its own line under the hours. Same reasoning as
+     .obs-people below: the hero is a flex row of content-sized tiles, so this
+     has to be prevented from setting the tile's width. */
+  .obs-tile-mix {
+    display: block;
+    color: var(--ink-2);
+  }
+
+  /* Segments of a stat sub-line. Breaking inside one strands its separator. */
+  .obs-nw {
+    white-space: nowrap;
   }
 
   /* The People tile's role split. FIXED width: the hero is a flex row of
@@ -1783,6 +2121,30 @@
     padding: var(--sp-s) 0 var(--sp-m) calc(3.5rem + var(--sp-s));
   }
 
+  /* On a phone that indent is a quarter of the screen spent saying "this
+     belongs to the row above", which the reader already knows because they
+     just tapped it. Give the width back: 70px of gutter turned a session
+     title, its time and its room into three wrapped lines each. The rule that
+     draws the connecting line keeps the relationship legible without it. */
+  @media (max-width: 40rem) {
+    /* The year column is sized for the widest year the archive will ever hold,
+       which is four digits — so let it be exactly that instead of 3.5rem. On a
+       294px column the reserved slot plus its gap was 70px, a quarter of the
+       width, spent on "2025". */
+    .obs-ev {
+      grid-template-columns: min-content 1fr auto;
+      column-gap: var(--sp-xs);
+    }
+
+    .obs-ev-detail {
+      /* Two indents stack here: a 3rem margin from the rule that draws the
+         connecting line, and this padding, which aligns the panel under the
+         title column. 48px + 70px is 40% of a 294px column. */
+      margin-inline-start: 0;
+      padding-inline-start: var(--sp-s);
+    }
+  }
+
   /* Matching sessions per year. Recessive axis, 2px line, dots only where there
      is data, and one direct label on the peak rather than a number on every
      point. */
@@ -1849,7 +2211,6 @@
     color: var(--ink-0);
   }
 
-
   /* Each matched term wears its own line's colour, so a result says which of
      your words it answered. The swatch carries the colour, not the text — a
      word tinted to match a chart line is a word you have to squint at. */
@@ -1864,7 +2225,7 @@
   }
 
   .obs-ev-term::before {
-    content: "";
+    content: '';
     align-self: center;
     inline-size: 0.5rem;
     block-size: 0.5rem;
@@ -2133,9 +2494,40 @@
 
   /* The left inset was reserving room for a search icon that no longer exists. */
   #obsSearch {
-    block-size: 2.75rem;
+    inline-size: 100%;
+    /* Same height and ruled underline as the four facets beside it, so all five
+       controls sit on ONE baseline. It used to be 2.75rem against their 2.4rem,
+       which dropped the search line below the row. */
+    block-size: 2.4rem;
     padding: 0 var(--sp-s) 0 0;
-    font-size: var(--step-1);
+    font-size: var(--step-0);
+    border: 0;
+    border-block-end: 1px solid var(--rule-1);
+    border-radius: 0;
+    background-color: transparent;
+  }
+
+  #obsSearch:hover {
+    border-block-end-color: var(--ink-1);
+  }
+
+  #obsSearch:focus,
+  #obsSearch:focus-visible {
+    border-block-end-color: var(--brand-1-ink);
+    border-block-end-width: 2px;
+    box-shadow: none;
+  }
+
+  /* Search is a filter like the rest of the row, so it is labelled like the rest
+     of the row. Given a label it also stops being a lone control floating beside
+     four captioned ones. */
+  .obs-topbar .obs-search {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    /* Long enough for the placeholder. At the old 14rem the four facets pushed
+       it down to a stub that truncated mid-word ("Search speakers, spo"). */
+    min-inline-size: 18rem;
   }
 
   /* A facet needs a name, not just a value — "All years" alone reads as a
@@ -2396,7 +2788,19 @@
   /* Gold gradients on bars, gauges and chips — gradients are ruled out, and
      magnitude is one hue anyway. Flattened to a single ink so height carries
      the value, not a sheen. */
-  .obs-studio :is(.obs-ybar, .obs-hbar-fill, .on, .obs-bar, .obs-bar-fill, .obs-rankbar, .obs-rankbar-fill, .obs-meter, .obs-meter-fill, .obs-spark) {
+  .obs-studio
+    :is(
+      .obs-ybar,
+      .obs-hbar-fill,
+      .on,
+      .obs-bar,
+      .obs-bar-fill,
+      .obs-rankbar,
+      .obs-rankbar-fill,
+      .obs-meter,
+      .obs-meter-fill,
+      .obs-spark
+    ) {
     background-image: none !important;
     background-color: var(--silver-0) !important;
     border-radius: 0 !important;
@@ -2439,7 +2843,11 @@
      The home view-mode tabs are excluded for the same reason: a tab strip marks
      its live tab with an underline, and a box round all three says nothing. */
   .obs-studio
-    :is(.obs-chip, .obs-toggle, .obs-seg, .obs-mapfilter-all, button):not(.obs-topic-tog, .obs-topic-pin, .obs-subtab) {
+    :is(.obs-chip, .obs-toggle, .obs-seg, .obs-mapfilter-all, button):not(
+      .obs-topic-tog,
+      .obs-topic-pin,
+      .obs-subtab
+    ) {
     background: transparent !important;
     color: var(--ink-0) !important;
     border: 1px solid var(--rule-1) !important;
@@ -2448,8 +2856,18 @@
     text-shadow: none !important;
   }
 
-  .obs-studio :is(.obs-chip, .obs-toggle, .obs-seg, button):not(.obs-topic-tog, .obs-topic-pin, .obs-subtab).is-active,
-  .obs-studio :is(.obs-chip, .obs-toggle, .obs-seg, button):not(.obs-topic-tog, .obs-topic-pin, .obs-subtab)[aria-pressed='true'] {
+  .obs-studio
+    :is(.obs-chip, .obs-toggle, .obs-seg, button):not(
+      .obs-topic-tog,
+      .obs-topic-pin,
+      .obs-subtab
+    ).is-active,
+  .obs-studio
+    :is(.obs-chip, .obs-toggle, .obs-seg, button):not(
+      .obs-topic-tog,
+      .obs-topic-pin,
+      .obs-subtab
+    )[aria-pressed='true'] {
     border-color: var(--ink-1) !important;
     box-shadow: inset 3px 0 0 var(--brand-1-ink) !important;
   }
@@ -2467,7 +2885,8 @@
   }
 
   /* Editor ink on our surfaces reads as invisible; descendants inherit. */
-  .obs-studio :is(h1, h2, h3, h4, p, span, li, td, th, dt, dd, label, small, strong, em, b, i, u, code, div) {
+  .obs-studio
+    :is(h1, h2, h3, h4, p, span, li, td, th, dt, dd, label, small, strong, em, b, i, u, code, div) {
     color: inherit !important;
     text-shadow: none !important;
   }
@@ -2477,6 +2896,22 @@
   }
 
   .obs-studio a {
+    color: var(--brand-1-ink) !important;
+  }
+
+  /* …except in the provenance lists, which are mostly links — seventy of them
+     on a busy event. Brand blue reads well for the two or three in an expanded
+     session row and as a wall in a bibliography, so these are set as text and
+     the ↗ plus the hover state carry the affordance. */
+  .obs-studio .obs-ev--link .obs-ev-t,
+  .obs-studio .obs-src-body a {
+    color: var(--ink-0) !important;
+  }
+
+  .obs-studio .obs-ev--link:hover .obs-ev-t,
+  .obs-studio .obs-ev--link:focus-visible .obs-ev-t,
+  .obs-studio .obs-src-body a:hover,
+  .obs-studio .obs-src-body a:focus-visible {
     color: var(--brand-1-ink) !important;
   }
 
@@ -2496,7 +2931,6 @@
   .obs-studio {
     padding-block: var(--sp-l) var(--sp-2xl);
   }
-
 }
 
 /* =========================================================================
@@ -2871,5 +3305,1145 @@
     flex-direction: column;
     gap: 0.3rem;
     padding: 0.8rem 1rem 0.9rem;
+  }
+}
+
+@layer section {
+  /* ── Sources (provenance) ──────────────────────────────────────────────────
+     A bibliography, so it reads as one: quiet type, hairline rules, and colour
+     only where it means something a reader should weigh. Two levels — an
+     overview that explains itself, and one page per event. */
+  /* Full width, like the note on the drill. This is the page's standing
+     explanation of itself, not a column of body copy. */
+  .obs-src-intro {
+    margin: 0.4rem 0 1.2rem;
+    padding: 0.7rem 0.9rem;
+    border-inline-start: 2px solid var(--gold);
+    background: var(--paper-2);
+    color: var(--ink-1);
+  }
+
+  .obs-src-intro p:last-child {
+    margin-block-end: 0;
+  }
+
+  /* Inside the intro the archive.org line is a second paragraph, not a second
+     panel — it must not draw its own border on top of the one around it. */
+  .obs-src-intro .obs-src-lede {
+    margin: 0.5rem 0 0;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+
+  .obs-src-intro p {
+    margin: 0 0 0.5rem;
+  }
+
+  /* Full width on purpose. It is a standing caveat about every link on the
+     page, not a paragraph of body copy, so it spans the column the links do. */
+  .obs-src-lede {
+    margin: 0.6rem 0 1.2rem;
+    padding: 0.7rem 0.9rem;
+    border-inline-start: 2px solid var(--gold);
+    background: var(--paper-2);
+    color: var(--ink-1);
+  }
+
+  .obs-src-lede a {
+    color: inherit;
+  }
+
+  .obs-src-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: 0.9rem;
+    margin: 1.2rem 0 1.6rem;
+  }
+
+  .obs-src-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.8rem 0 0;
+    border-block-start: 2px solid var(--rule-1);
+  }
+
+  .obs-src-stat-v {
+    font-family: var(--font-data);
+    font-size: var(--step-2);
+    line-height: 1;
+  }
+
+  .obs-src-stat-l {
+    font-size: var(--step--1);
+  }
+
+  .obs-src-stat-n {
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+
+  .obs-src-h {
+    margin: 1.4rem 0 0.5rem;
+    font-size: var(--step-0);
+  }
+
+  /* The line under a Sources heading that says what the chart beneath measures. */
+  .obs-src-note {
+    max-inline-size: 62ch;
+    margin: 0 0 0.9rem;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+
+  .obs-ev--muted {
+    opacity: 0.6;
+  }
+
+  /* The sentence that says what the percentages mean. Worth more than a chip. */
+  .obs-src-claim {
+    position: relative;
+    max-inline-size: 62ch;
+    margin: 1rem 0 0;
+    padding-inline-start: 0.9rem;
+    border-inline-start: 2px solid var(--gold);
+    color: var(--ink-1);
+  }
+
+  .obs-src-claim-pct {
+    font-family: var(--font-data);
+    color: var(--ink-2);
+  }
+
+  /* One group per kind: the label is said once, in the heading, instead of
+     repeating down the left margin. Five schedule pages are one thing with five
+     parts, and the old flat list made them read as five different things. */
+  .obs-src-group {
+    margin-block: 1rem 1.4rem;
+  }
+
+  .obs-src-group-h {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.6rem;
+    margin: 0 0 0.1rem;
+    font-size: var(--step--1);
+    font-weight: 600;
+  }
+
+  /* The count sits opposite its label, so a column of groups reads as a table
+     of contents rather than a run of headings with numbers trailing off them. */
+  .obs-src-group-n {
+    flex: 0 0 auto;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    font-weight: 400;
+    color: var(--ink-2);
+  }
+
+  .obs-src-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-block-start: 1px solid var(--rule-0);
+  }
+
+  .obs-src-line {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding-block: 0.35rem;
+    border-block-end: 1px solid var(--rule-0);
+    font-size: var(--step--1);
+  }
+
+  .obs-src-body {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+  }
+
+  .obs-src-body a {
+    color: inherit;
+    overflow-wrap: anywhere;
+  }
+
+  .obs-src-when {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .obs-src-when {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  /* A stated source is prose, not a broken link — so it is set as prose. */
+  .obs-src-stated {
+    font-style: italic;
+    color: var(--ink-1);
+  }
+
+  .obs-src-more {
+    margin: 0.4rem 0 0;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+
+  .obs-src-more a {
+    color: inherit;
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 40rem) {
+    /* The host is the first thing to go when there is no room: the title is
+       what a reader is scanning for, and the arrow already says "off-site".
+       The rule itself sits with `.obs-ev--link` at the foot of this file — see
+       the note there for why it cannot live in this block. */
+
+    .obs-src-line {
+      gap: 0.2rem;
+    }
+
+    .obs-src-kind {
+      min-inline-size: 0;
+    }
+  }
+}
+
+@layer section {
+  /* A long group folds away. Native <details>, so the keyboard and screen
+     readers get it for free and it still works with no JavaScript. */
+  .obs-src-details > summary {
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .obs-src-details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .obs-src-details > summary .obs-src-group-t::before {
+    content: '▸ ';
+    color: var(--ink-2);
+  }
+
+  .obs-src-details[open] > summary .obs-src-group-t::before {
+    content: '▾ ';
+  }
+
+  .obs-src-details > summary:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  /* Records' outbound links reuse the archive's own event row, so they read as
+     the same product as the session search rather than a second one. */
+  .obs-evlist--links {
+    margin-block-start: 0.5rem;
+  }
+
+  /* Inherits .obs-ev's three-column grid — host, title, marker — so these read
+     as the same rows the session search uses. Overriding `display` here is what
+     made them look like a different component. */
+  .obs-ev--link {
+    /* Same three columns as the session search, but the leading one holds a
+       hostname rather than a four-digit year — 3.5rem would clip every one. */
+    grid-template-columns: 9rem 1fr auto;
+    color: inherit;
+    text-decoration: none;
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .obs-ev--link:hover,
+  .obs-ev--link:focus-visible {
+    background: var(--paper-2);
+  }
+
+  .obs-ev--link:hover .obs-ev-t,
+  .obs-ev--link:focus-visible .obs-ev-t {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  /* The host, set small and quiet — it answers "where does this go" without
+     competing with the title. */
+  .obs-ev--link .obs-ev-y {
+    font-size: var(--step--2);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .obs-ev--link .obs-ev-caret {
+    transition: none;
+  }
+
+  /* Narrow screens: two columns, and the host goes.
+     This lives HERE, after `.obs-ev--link`, and not in the phone block a few
+     hundred lines up where it started. Both selectors are one class in the same
+     layer, so the later one wins at every width — the mobile rule was overruled
+     by the desktop rule it was written to override, and the symptom was not a
+     rule that did nothing. `.obs-ev-y` was still hidden, so the title slid into
+     the 9rem host track and the arrow inherited the 1fr: on a 390px phone that
+     is 144px of title wrapping to six lines beside 90px of empty space, in
+     every row of a 102-row list. */
+  @media (max-width: 40rem) {
+    .obs-ev--link {
+      grid-template-columns: 1fr auto;
+      column-gap: var(--sp-s);
+    }
+
+    .obs-ev--link .obs-ev-y {
+      display: none;
+    }
+  }
+}
+
+@layer section {
+  /* ── "Tell us about a conference" ─────────────────────────────────────────
+     The reader's suggestion box. Built from the archive's own vocabulary —
+     `obs-panel` surfaces, `obs-more` buttons, the mono eyebrow — because the
+     archive does not load planner.css and `.pl-modal-*` is not reachable here.
+     See the CSS split note in CLAUDE.md. */
+  .obs-tip-cta {
+    margin-block: 2rem 0;
+    padding: 1.3rem 1.4rem;
+    border: 1px solid var(--paper-2);
+    background: var(--paper-2);
+    text-align: center;
+  }
+
+  .obs-tip-cta-t {
+    margin: 0;
+    font-size: var(--step-1);
+    font-weight: 600;
+    color: var(--ink-0);
+  }
+
+  .obs-tip-cta-s {
+    margin: 0.25rem 0 0;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+
+  /* The button is full-width by default (it lives in a card elsewhere); here it
+     should be the size of its own words. */
+  .obs-tip-cta .obs-more {
+    width: auto;
+    margin-inline: auto;
+    padding-inline: 1.2rem;
+  }
+
+  /* A native <dialog>: focus trapping, Escape, the backdrop and `inert` on the
+     page behind all come from the browser, and each is a thing a hand-rolled
+     modal gets subtly wrong. */
+  .obs-tip {
+    width: min(30rem, calc(100vw - 2rem));
+    /* A modal <dialog> is centred by the UA with `inset: 0; margin: auto`. The
+       reset layer's `* { margin: 0 }` wins over the UA sheet and takes that
+       away, which pins the dialog to the top-left corner of the viewport — so
+       the centring has to be asked for again here. */
+    margin: auto;
+    /* A long note plus an error message can outgrow a short window; scroll the
+       dialog rather than letting it run off the screen with the buttons on it. */
+    max-height: min(90dvh, 44rem);
+    overscroll-behavior: contain;
+    padding: 0;
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: var(--paper-1);
+    color: var(--ink-0);
+  }
+
+  .obs-tip::backdrop {
+    background: color-mix(in srgb, var(--ink-0) 45%, transparent);
+  }
+
+  .obs-tip-form {
+    display: flex;
+    flex-direction: column;
+    padding: 1.4rem;
+  }
+
+  .obs-tip-head {
+    margin-block-end: 1rem;
+  }
+
+  .obs-tip-title {
+    margin: 0.2rem 0 0;
+    font-size: var(--step-2);
+  }
+
+  .obs-tip-lede {
+    margin: 0.4rem 0 0;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+
+  .obs-tip-l {
+    margin-block-start: 0.8rem;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .obs-tip-opt {
+    text-transform: none;
+    letter-spacing: 0;
+    opacity: 0.75;
+  }
+
+  .obs-tip-input {
+    margin-block-start: 0.25rem;
+    padding: 0.5rem 0.6rem;
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: var(--paper-0, var(--paper-1));
+    color: var(--ink-0);
+    font: inherit;
+    font-size: var(--step--1);
+  }
+
+  .obs-tip-input:focus-visible {
+    outline: 2px solid var(--brand-1-ink);
+    outline-offset: 1px;
+  }
+
+  .obs-tip-area {
+    resize: vertical;
+    min-height: 4.5rem;
+  }
+
+  .obs-tip-count {
+    margin-block-start: 0.3rem;
+    text-align: right;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+
+  /* Only speaks up near the limit — a counter that shouts from the first
+     keystroke is noise. */
+  .obs-tip-count.is-tight {
+    color: var(--brand-1-ink);
+  }
+
+  .obs-tip-msg {
+    margin: 0.6rem 0 0;
+    min-height: 1.2em;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+
+  .obs-tip-msg.is-bad {
+    color: var(--bad, #b3261e);
+  }
+
+  .obs-tip-msg.is-good {
+    color: var(--brand-1-ink);
+  }
+
+  .obs-tip-foot {
+    display: flex;
+    gap: 0.6rem;
+    margin-block-start: 1rem;
+  }
+
+  .obs-tip-foot .obs-more {
+    margin-top: 0;
+  }
+
+  .obs-more--go {
+    border-color: var(--brand-1-ink);
+    color: var(--ink-0);
+  }
+}
+
+@layer section {
+  /* A year the current scope has no events for. Hatched rather than filled: a
+     solid band reads as a value, and this is the absence of one. */
+  .obs-tc-gap {
+    fill: var(--ink-2);
+    opacity: 0.08;
+  }
+
+  .obs-tc-gaplab {
+    fill: var(--ink-2);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+  }
+}
+
+@layer section {
+  /* --- ANNOTATIONS --------------------------------------------------------
+     The reader's own notes on the time axis, drawn on every chart that plots
+     years. See app/js/modules/archiveAnnotations.js.
+
+     Each note takes a hue from the shared categorical scale (--viz-*), set
+     inline by annotationMarks() — so colour says WHICH note. What stays here is
+     the WEIGHT, which is the part that keeps a note behind the data: a wash for
+     the band, a dashed hairline for the edges.
+
+     Never brand gold. On these charts gold already means "the year you filtered
+     to" (.obs-tc-yearhi), and a second gold band would be read as a second
+     selection rather than as a note. */
+  .obs-ann-band {
+    /* Low enough that a plotted line stays legible straight through it, high
+       enough to read as a deliberate region rather than a rendering artefact.
+       The hue arrives inline; only the transparency is decided here. */
+    fill-opacity: 0.14;
+  }
+
+  .obs-ann-rule {
+    stroke-width: 1.5;
+    stroke-dasharray: 2 3;
+    stroke-opacity: 0.85;
+    vector-effect: non-scaling-stroke;
+  }
+
+  /* The note's words in the tooltip, under a rule — they are a different KIND
+     of statement from the rows above them: everything above is measured from
+     the archive, this is something the reader wrote down. */
+  .obs-tc-tip-ann {
+    margin-block-start: var(--sp-2xs);
+    padding-block-start: var(--sp-2xs);
+    border-block-start: 1px solid var(--rule-1);
+  }
+
+  /* The whole layer yields while a series is being emphasised — hovering a
+     legend chip greys every line but the one you asked for, and a note left at
+     full strength then out-shouts the only thing on the chart you wanted. */
+  [data-emph] .obs-ann-layer {
+    opacity: 0.4;
+  }
+
+  /* The year bars are flex columns, not SVG, so an annotated year is marked on
+     its own column: a wash behind the bar and a ruled label under it. */
+  .obs-ycol {
+    position: relative;
+  }
+
+  .obs-ymark {
+    position: absolute;
+    inset-block: 0;
+    inset-inline: -0.2rem;
+    /* Same wash as the SVG band, same hue, set inline from the note. */
+    background: var(--ann-color, var(--viz-overflow));
+    opacity: 0.14;
+    pointer-events: none;
+  }
+
+  /* The label's rule is the one place the note's own colour reaches full
+     strength on this chart — the wash alone is too faint to tell two adjacent
+     notes apart, and the bars themselves must not be recoloured (their colour
+     already means something else). */
+  .obs-ycol--ann .obs-ylabel {
+    color: var(--ink-1);
+    border-block-end: 2px solid var(--ann-color, var(--viz-overflow));
+  }
+
+  /* Room for that rule. The columns are `height: 100%` of a fixed 12rem box, so
+     a 2px border on the last child pushed the bottom of the label out of the
+     container and the rule was sliced in half. Reserved unconditionally rather
+     than only when a note exists — the bars must not shift by 2px the moment
+     you add one. */
+  .obs-years {
+    padding-block-end: 2px;
+  }
+
+  /* --- the annotations rail ----------------------------------------------- */
+  .obs-ann-form {
+    margin-block: var(--sp-s) var(--sp-l);
+  }
+
+  .obs-ann-l {
+    display: block;
+    margin-block-start: var(--sp-s);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* The two years are one thought, so they share a row — "from" above "to" read
+     as two unrelated questions. */
+  .obs-ann-years {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-s);
+  }
+
+  .obs-ann-text {
+    block-size: auto;
+    padding-block: var(--sp-2xs);
+    resize: vertical;
+    font-family: inherit;
+    line-height: 1.4;
+  }
+
+  .obs-ann-err {
+    margin-block-start: var(--sp-xs);
+    color: var(--bad, #b3261e);
+    font-size: var(--step--1);
+  }
+
+  .obs-ann-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-xs);
+    margin-block-start: var(--sp-m);
+  }
+
+  /* Eleven swatches wrap rather than scroll — a colour you have to scroll to
+     find is one you will never pick. */
+  .obs-ann-swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2xs);
+    margin-block: var(--sp-2xs) var(--sp-s);
+  }
+
+  .obs-ann-sw {
+    position: relative;
+    inline-size: 1.5rem;
+    /* Full tap target on a phone, where this is a sheet and the swatch is the
+       smallest thing on it. */
+    block-size: var(--tap);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  /* The colour itself is a chip inside the tap target, not the target — an
+     eleven-across row of 44px blocks of solid hue is a paint chart, not a
+     control. */
+  .obs-ann-sw::before {
+    content: '';
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    background: var(--ann-color);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+
+  .obs-ann-sw input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  /* Selection is a ring in the ink, not a change of the swatch's own colour —
+     the swatch has to keep showing the hue it stands for. */
+  .obs-ann-sw.is-on::before,
+  .obs-ann-sw:has(input:checked)::before {
+    outline-color: var(--ink-0);
+  }
+
+  .obs-ann-sw:has(input:focus-visible)::before {
+    outline-color: var(--brand-1-ink);
+  }
+
+  .obs-ann-row {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: var(--sp-2xs) var(--sp-s);
+    align-items: baseline;
+    padding-block: var(--sp-xs);
+  }
+
+  /* The colour chip IS the switch. It already stands for the note on every
+     chart, so making it the thing you press keeps one mark for one meaning
+     rather than adding an eye icon beside it. */
+  .obs-ann-eye {
+    position: relative;
+    display: block;
+    inline-size: 0.75rem;
+    block-size: 0.75rem;
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    align-self: center;
+  }
+
+  /* The tap target is an invisible overlay, not the button's own box. Sizing
+     the button to 44px would have widened the row's first grid column to 44px
+     and pushed every year and title across — the target has to be reachable
+     without being measurable. */
+  .obs-ann-eye::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    translate: -50% -50%;
+    inline-size: var(--tap);
+    block-size: var(--tap);
+  }
+
+  /* The same identity the chart draws, so the rail row and the band on the plot
+     are recognisably the same note. */
+  .obs-ann-chip {
+    /* `display: block` is load-bearing: the chip used to be a direct grid item
+       of the row and was blockified by that, but inside the toggle button it is
+       an ordinary inline span, where inline-size/block-size do not apply — it
+       collapsed to nothing. */
+    display: block;
+    inline-size: 0.75rem;
+    block-size: 0.75rem;
+    background: var(--ann-color);
+    align-self: center;
+  }
+
+  /* Switched off: the chip hollows out to an outline. The hue stays — it is
+     still which note this is — but an outline reads as "not currently drawn"
+     where a filled square reads as "on the chart". */
+  .obs-ann-row.is-off .obs-ann-chip {
+    background: none;
+    box-shadow: inset 0 0 0 2px var(--ann-color);
+  }
+
+  .obs-ann-row.is-off .obs-ann-name,
+  .obs-ann-row.is-off .obs-ann-years-l,
+  .obs-ann-row.is-off .obs-ann-detail {
+    color: var(--ink-2);
+  }
+
+  .obs-ann-eye:focus-visible .obs-ann-chip {
+    outline: var(--focus-width) solid var(--brand-1-ink);
+    outline-offset: 3px;
+  }
+
+  /* The one thing in the rail that is a number about time — set in the data
+     face, like every year on every chart it appears on. */
+  .obs-ann-years-l {
+    font-family: var(--font-data);
+    font-size: var(--step--1);
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+
+  .obs-ann-name {
+    font-weight: 600;
+  }
+
+  .obs-ann-detail,
+  .obs-ann-row-actions {
+    grid-column: 2 / -1;
+  }
+
+  .obs-ann-detail {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step--1);
+    color: var(--ink-1);
+  }
+
+  .obs-ann-row-actions {
+    display: flex;
+    gap: var(--sp-xs);
+    margin-inline-start: -0.4rem;
+  }
+
+  .obs-ann-row[data-ann-editing] {
+    box-shadow: -0.4rem 0 0 -0.25rem var(--brand-1-ink);
+  }
+
+  /* The masthead's controls pack to the right, whatever else gets appended to
+     the bar (the theme picker mounts itself there; so does the burger). Without
+     this, space-between spread three items across the width and the annotations
+     button landed in the middle of the masthead. */
+  .app-masthead__bar > .header-actions {
+    margin-inline-start: auto;
+  }
+}
+
+/* ── Stacked year trends (by country / by series) ──────────────────────────── */
+/* One bar per year, split by community. Colour is the encoding here — it is the
+   only thing telling one country from another — so this is the one place in the
+   archive that legitimately runs a full categorical palette rather than the
+   gold/mono identity. */
+/* ⚠ THE BASE .obs-panel RULE SETS NO POSITION, so the absolutely-positioned
+   maximise button would otherwise escape to the nearest positioned ancestor and
+   land in the wrong corner of the page — on every panel at once. This is what
+   makes the button sit in its own panel. */
+.obs-panel {
+  position: relative;
+}
+.obs-stk {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.obs-stk-grid {
+  stroke: var(--pl-line, rgb(0 0 0 / 0.12));
+  stroke-width: 1;
+}
+.obs-stk-ytick,
+.obs-stk-xtick {
+  fill: var(--ink-3, #6b7280);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.obs-stk-total {
+  fill: var(--ink-2, #374151);
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.obs-stk-seg {
+  cursor: pointer;
+  transition:
+    opacity 0.12s ease,
+    filter 0.12s ease;
+}
+.obs-stk-seg:hover,
+.obs-stk-seg:focus-visible {
+  filter: brightness(1.15);
+  outline: none;
+}
+/* Dimmed rather than hidden: the bar keeps its full height, so picking one
+   country out does not make the year look smaller than it was. */
+.obs-stk-seg.is-dim {
+  opacity: 0.18;
+}
+
+.obs-stk-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+  margin-top: 0.75rem;
+}
+.obs-stk-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.45rem;
+  border: 1px solid var(--pl-line, rgb(0 0 0 / 0.12));
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: var(--step--2, 0.78rem);
+  cursor: pointer;
+  line-height: 1.5;
+}
+.obs-stk-key:hover,
+.obs-stk-key:focus-visible {
+  border-color: var(--gold, #b8860b);
+}
+.obs-stk-key i {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 2px;
+  flex: none;
+}
+.obs-stk-key-n {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.65;
+}
+
+/* ── Maximise ──────────────────────────────────────────────────────────────── */
+.obs-max-btn {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: 1px solid var(--pl-line, rgb(0 0 0 / 0.12));
+  border-radius: 6px;
+  background: var(--surface-1, rgb(255 255 255 / 0.75));
+  color: var(--ink-3, #6b7280);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+/* Revealed on hover so it stays out of the way, but always reachable by keyboard
+   — and always visible once maximised, or there would be no way back out on a
+   touch device. */
+.obs-panel:hover > .obs-max-btn,
+.obs-max-btn:focus-visible,
+.obs-panel--max > .obs-max-btn {
+  opacity: 1;
+}
+.obs-max-btn svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+.obs-max-btn:hover {
+  color: var(--gold, #b8860b);
+  border-color: var(--gold, #b8860b);
+}
+
+/* The two archive maps are not `.obs-panel`s — they live in their own wrappers —
+   so they opt in with `.obs-maxable`. They need the same positioning context the
+   panel gives, and their button has to clear Leaflet's panes, which sit at
+   z-index 400–700 and would otherwise swallow a z-index:2 control entirely. */
+.obs-maxable {
+  position: relative;
+}
+.obs-maxable > .obs-max-btn {
+  z-index: 1000;
+}
+/* The reset control exists in the markup always and is shown only while the
+   wrapper is maximised — the inline strip keeps its clean edge, and the control
+   appears exactly when there is a view worth resetting. It sits left of the
+   maximise button so the two never overlap. */
+.obs-map-reset {
+  position: absolute;
+  top: 0.4rem;
+  right: 2.55rem;
+  z-index: 1000;
+  display: none;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: 1px solid var(--pl-line, rgb(0 0 0 / 0.12));
+  border-radius: 6px;
+  background: var(--surface-1, rgb(255 255 255 / 0.75));
+  color: inherit;
+  cursor: pointer;
+}
+.obs-panel--max > .obs-map-reset {
+  display: grid;
+}
+.obs-map-reset svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+.obs-map-reset:hover {
+  color: var(--gold, #b8860b);
+  border-color: var(--gold, #b8860b);
+}
+/* Leaflet's own zoom control is added only while maximised; keep it clear of
+   the two buttons in the opposite corner. */
+.obs-panel--max .leaflet-top.leaflet-left {
+  top: 0.3rem;
+  left: 0.3rem;
+}
+/* Inline, the strip is not draggable, so the grab cursor would be a lie. */
+.obs-panel--max .obs-stripmap {
+  cursor: grab;
+}
+.obs-panel--max .obs-stripmap:active {
+  cursor: grabbing;
+}
+.obs-maxable:hover > .obs-max-btn,
+.obs-maxable.obs-panel--max > .obs-max-btn {
+  opacity: 1;
+}
+/* A positioned box around the drill map alone, so maximising frames the map and
+   not the "unmapped events" list printed beneath it. */
+.obs-map-box {
+  position: relative;
+}
+/* Maximised, a map should use the whole frame: the height cap that keeps it a
+   band in the page is exactly what must not survive fullscreen. */
+.obs-panel--max.obs-maxable .obs-map,
+.obs-panel--max.obs-maxable .obs-stripmap,
+.obs-panel--max .obs-map-box .obs-map {
+  height: 100%;
+  max-height: none;
+}
+.obs-panel--max.obs-maxable {
+  padding: 0;
+}
+.obs-panel--max.obs-maxable .leaflet-container {
+  height: 100%;
+}
+
+/* The class does the filling, not the Fullscreen API — so the panel still fills
+   the viewport when the request is refused (an iframe without allow=fullscreen,
+   older iOS Safari). Fullscreen only removes the browser's own chrome on top. */
+.obs-panel--max {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  margin: 0;
+  border-radius: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 3rem);
+  background: var(--surface-0, #fff);
+}
+.obs-panel--max .obs-stk {
+  max-height: 78vh;
+}
+:root.obs-maxed {
+  overflow: hidden;
+}
+.obs-panel--max:fullscreen {
+  background: var(--surface-0, #fff);
+}
+
+@media (prefers-color-scheme: dark) {
+  .obs-panel--max,
+  .obs-panel--max:fullscreen {
+    background: var(--surface-0, #12141a);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .obs-stk-seg,
+  .obs-max-btn {
+    transition: none;
+  }
+}
+
+/* ── "Year still in progress" wash ─────────────────────────────────────────── */
+/* The newest year is always under-counted — events still to come, and speaker
+   assignments that land last. Marked on both chart idioms so the final column
+   is never read as a decline. */
+.obs-stk-prov,
+.obs-tc-prov {
+  fill: url(#obsStkHatch);
+  color: var(--ink-3, #6b7280);
+  pointer-events: none;
+}
+.obs-tc-prov {
+  fill: var(--ink-3, #6b7280);
+  opacity: 0.07;
+}
+.obs-stk-provl,
+.obs-tc-provl {
+  fill: var(--ink-3, #6b7280);
+  font-size: 10px;
+  font-style: italic;
+  pointer-events: none;
+}
+
+/* ── Grouped subject tabs ──────────────────────────────────────────────────── */
+/* Eight flat tabs do not scan. The split is real: the first group counts EVENTS
+   and works on a record with no programme at all; the second reads what was
+   INSIDE them. */
+.obs-mode-group-l {
+  font-size: var(--step--2, 0.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.55;
+  margin-right: 0.35rem;
+  align-self: center;
+  white-space: nowrap;
+}
+.obs-chart-bar .obs-topic-views {
+  flex-wrap: wrap;
+}
+@media (max-width: 700px) {
+  .obs-mode-group-l {
+    flex-basis: 100%;
+    margin: 0 0 0.15rem;
+  }
+}
+
+/* ── Mobile: the subject/view controls ─────────────────────────────────────── */
+/* ⚠ `.obs-topic-views` is an inline-flex segmented control with `overflow:
+   hidden`. That is right on a wide screen and wrong on a narrow one: the group
+   cannot shrink below its content, so the buttons past the edge were CLIPPED
+   rather than wrapped — with eight subjects in two groups, most of them were
+   simply unreachable on a phone.
+
+   Below 700px the segmented look is dropped for wrapped pills. Joinery that
+   depends on "the button before me is on the same row" cannot survive wrapping,
+   so it is replaced rather than patched. */
+@media (max-width: 700px) {
+  .obs-chart-bar {
+    justify-content: flex-start;
+  }
+  .obs-chart-bar .obs-topic-views,
+  .obs-chart-bar .obs-topic-units {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    border: 0;
+    overflow: visible;
+    width: 100%;
+  }
+  .obs-chart-bar .obs-topic-view,
+  .obs-chart-bar .obs-topic-unit {
+    border: 1px solid var(--rule-0);
+    border-radius: 999px;
+    /* ~40px tall: a real tap target, not a 24px desktop control. */
+    padding: 0.5rem 0.85rem;
+    line-height: 1.15;
+  }
+  /* The segmented separator is meaningless once the group wraps. */
+  .obs-chart-bar .obs-topic-view + .obs-topic-view,
+  .obs-chart-bar .obs-topic-unit + .obs-topic-unit {
+    border-left: 1px solid var(--rule-0);
+  }
+  .obs-mode-group-l {
+    flex-basis: 100%;
+    margin: 0.15rem 0 0.1rem;
+  }
+}
+
+/* ── Mobile: the charts themselves ─────────────────────────────────────────── */
+@media (max-width: 700px) {
+  /* ⚠ THE TWO CHART IDIOMS NEED OPPOSITE TREATMENT HERE.
+     The line chart already handles narrow screens in JS: chartGeom() returns a
+     SMALLER viewBox below 560px, sized so `font-size: var(--step--2)` is that
+     many real pixels. Forcing a min-width on it would stretch that drawing and
+     defeat the tuning — so it is left to size itself.
+     The stacked chart has no responsive variant: one fixed 1000×340 viewBox
+     whose 11px labels turn to mush at 360px. It gets a minimum width and the
+     panel scrolls. */
+  .obs-panel--stk {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .obs-stk {
+    min-width: 560px;
+  }
+  /* The stacked legend can run to 39 chips; cap it and let it scroll rather
+     than pushing the chart off the top of a phone screen. */
+  .obs-stk-legend {
+    max-height: 9.5rem;
+    overflow-y: auto;
+  }
+  .obs-max-btn {
+    /* Always visible on touch: there is no hover to reveal it with. */
+    opacity: 1;
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+}
+
+/* A maximised panel on a phone should use the whole screen, and the chart
+   inside it no longer needs the min-width crutch — that is the point of it. */
+@media (max-width: 700px) {
+  .obs-panel--max {
+    padding: 0.6rem;
+  }
+  .obs-panel--max .obs-stk {
+    min-width: 0;
+  }
+  .obs-panel--max .obs-stk-legend {
+    max-height: 40vh;
   }
 }

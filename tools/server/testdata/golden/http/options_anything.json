@@ -1,0 +1,7 @@
+{
+  "status": 204,
+  "headers": {
+    "m": "GET, PUT, POST, DELETE, OPTIONS"
+  },
+  "body": null
+}

@@ -39,7 +39,6 @@
     <style>
       @layer overrides, reset, legacy, tokens, base, composition, section, utility;
       @import url("./css/utilities.css") layer(legacy);
-      @import url("./css/components.css") layer(legacy);
     </style>
     <link rel="stylesheet" href="./css/foundation.css">
     <link rel="stylesheet" href="./css/section-chrome.css">
@@ -55,6 +54,15 @@
                     <span class="app-lockup__seal" aria-hidden="true"></span>
                     <div class="app-lockup__title">Archive</div>
                     <h1 id="archiveSubtitle" class="app-lockup__place">The whole community, year by year</h1>
+                </div>
+                <!-- Above the masthead's rule and clear of the view switches
+                     below it: annotations are not a filter on the archive,
+                     they are the reader's own layer over all of it. -->
+                <div class="header-actions l-cluster">
+                    <button id="archiveAnnotationsBtn" type="button" class="theme-picker-btn"
+                            title="Add notes to the years — the events around the events">
+                        <span class="theme-picker-btn-label">Annotations</span>
+                    </button>
                 </div>
             </div>
             <nav class="app-nav" aria-label="Site navigation">
@@ -96,7 +104,6 @@
     </footer>
 
     <aside class="app-rail" aria-hidden="true">
-      <p class="app-rail__hint">Keywords you pin appear here, and on every visit.</p>
     </aside>
     <div id="railPanel" class="app-panel" hidden aria-live="polite"></div>
 

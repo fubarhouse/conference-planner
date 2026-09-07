@@ -5,6 +5,7 @@
 // sponsors, so it imports the two sponsor-side pickers directly (one-way).
 
 import { escapeHtml, normalizeString } from './utils.js';
+import { itemKind } from './sessionKind.js';
 import { openMapPicker } from './mapPicker.js';
 import { utcIsoToLocalInput, localInputToUtcIso } from './editorDateTime.js';
 import { syncSessionDuration, durationToEditorValue } from './editorDuration.js';
@@ -432,6 +433,25 @@ function renderSessionField(field, item) {
     `;
   }
 
+  if (field.type === 'select') {
+    // `kind` is a judgement about the item, and the current value has to reflect
+    // the older `isAgendaItem` spelling too — otherwise editing a legacy record
+    // would silently reset it to "session".
+    const current = field.key === 'kind' ? itemKind(item) : toStringValue(item[field.key]);
+    const opts = (field.options || [])
+      .map(
+        (o) =>
+          `<option value="${escapeAttr(o.value)}"${o.value === current ? ' selected' : ''}>${escapeHtml(o.label)}</option>`,
+      )
+      .join('');
+    return `
+      <label class="editor-form-field ${spanClass}">
+        ${renderFieldIntro('session', field.key, field)}
+        <select data-session-field="${field.key}" class="w-full rounded-md edt-rule drupal-blue-focus text-sm edt-surface px-3 py-2"${describedBy}>${opts}</select>
+      </label>
+    `;
+  }
+
   if (field.type === 'checkbox') {
     const checked = item[field.key] === true ? ' checked' : '';
     return `
@@ -658,7 +678,12 @@ export function renderSessionForm() {
       const key = input.dataset.sessionField;
       const raw = input.value;
 
-      if (input.type === 'checkbox') {
+      if (key === 'kind') {
+        // "session" is the default; writing it into every item would add a key
+        // to thousands of records to say "normal".
+        if (raw && raw !== 'session') item.kind = raw;
+        else delete item.kind;
+      } else if (input.type === 'checkbox') {
         // Only store the flag when it is set. Writing `false` into every session
         // would add a key to thousands of records to say "normal", and the
         // archive already treats "absent" as "judge it by the title".

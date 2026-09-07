@@ -1,0 +1,127 @@
+{
+  "query": "hojtsy",
+  "terms": [
+    "hojtsy"
+  ],
+  "mode": "exact",
+  "facets": {
+    "series": "All",
+    "region": "All",
+    "country": "All",
+    "year": "All"
+  },
+  "total": 2,
+  "offset": 0,
+  "byYear": {
+    "2024": 1,
+    "2026": 1
+  },
+  "byTerm": {
+    "hojtsy": {
+      "2024": 1,
+      "2026": 1
+    }
+  },
+  "breakdown": {
+    "series": [
+      {
+        "name": "Drupal Dev Days",
+        "count": 1,
+        "total": 117
+      },
+      {
+        "name": "DrupalCon",
+        "count": 1,
+        "total": 136
+      }
+    ],
+    "region": [
+      {
+        "name": "EMEA",
+        "count": 2,
+        "total": 278
+      }
+    ],
+    "country": [
+      {
+        "name": "Bulgaria",
+        "count": 1,
+        "total": 50
+      },
+      {
+        "name": "Netherlands",
+        "count": 1,
+        "total": 107
+      }
+    ],
+    "city": [
+      {
+        "name": "Burgas",
+        "count": 1,
+        "total": 50
+      },
+      {
+        "name": "Rotterdam",
+        "count": 1,
+        "total": 98
+      }
+    ],
+    "speakers": [
+      {
+        "name": "Gábor Hojtsy",
+        "count": 2,
+        "total": 2
+      }
+    ],
+    "events": 2,
+    "eventsTotal": 16,
+    "span": {
+      "min": 2024,
+      "max": 2026
+    }
+  },
+  "results": [
+    {
+      "matched": [
+        "hojtsy"
+      ],
+      "title": "Drupal CMS spotlights",
+      "description": "Lightning talks from Drupal CMS leads\n\n**Prerequisite**\n\nRough idea of Drupal CMS\n\n**Target Audience**\n\nVaried depending on the lightning talk\n\n**Outline**\n\nLightning talks from Drupal CMS leads\n\n**Learning Objectives**\n\nShort deep-dives of specific areas of Drupal CMS\n\n**Experience level**  \nIntermediate",
+      "speakers": "Gábor Hojtsy",
+      "track": "drupal cms",
+      "location": "Van Oldenbarnevelt Room",
+      "startTime": "2026-09-29T13:45:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/drupal-cms-spotlights",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "hojtsy"
+      ],
+      "title": "Drupal 11 deep dive: what's new, how to prepare",
+      "description": "Come to this session to learn more about what's new in Drupal 11, what's changed and how to prepare. As of this submission, Drupal 11 is targeted for August 2024 with a fallback of December 2024, so by Drupal Dev Days Burgas 2024, we should have a really good idea about it.\n\n**Experience level:** Intermediate",
+      "speakers": "Gábor Hojtsy",
+      "track": "Innovation & The future",
+      "location": "Room 207 (1xINTERNET)",
+      "startTime": "2024-06-27T07:20:00.000Z",
+      "year": 2024,
+      "event": "Drupal Dev Days Burgas 2024",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Bulgaria",
+      "city": "Burgas",
+      "file": "events/ddd/2024-burgas.json",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/drupal-11-deep-dive-whats-new-how-prepare",
+      "video": "https://youtu.be/LCQkDD7zoJo",
+      "minutes": 50
+    }
+  ]
+}

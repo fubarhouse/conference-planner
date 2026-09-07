@@ -1,0 +1,90 @@
+{
+  "_lastModified": "2026-08-18T12:45:23.110Z",
+  "deleted": {
+    "drupalcon-asia-nara-2025.json": {
+      "at": "2026-08-18T12:45:23.110Z",
+      "reason": "duplicate collapsed in the 4c reconciliation",
+      "version": 4,
+      "lastModified": "2026-08-04T10:33:30.141Z",
+      "id": null
+    },
+    "drupalsouth-2026-wellington.json": {
+      "at": "2026-08-18T12:45:23.110Z",
+      "reason": "duplicate collapsed in the 4c reconciliation",
+      "version": 4,
+      "lastModified": "2026-08-04T10:33:18.976Z",
+      "id": null
+    },
+    "planner-drupalsouth-2026-wellington.json": {
+      "at": "2026-08-18T12:45:23.110Z",
+      "reason": "duplicate collapsed in the 4c reconciliation",
+      "version": 1,
+      "lastModified": "2026-08-04T10:33:29.009Z",
+      "id": null
+    },
+    "events/ddd/2026-athens.json": {
+      "at": "2026-08-18T12:45:23.110Z",
+      "reason": "empty path-keyed scaffold, never filled in",
+      "version": 3,
+      "lastModified": "2026-06-18T11:11:28.799Z",
+      "id": null
+    },
+    "events/drupalcamp/tokyo/2026.json": {
+      "at": "2026-08-18T12:45:23.110Z",
+      "reason": "empty path-keyed scaffold, never filled in",
+      "version": 3,
+      "lastModified": "2026-06-18T11:11:25.808Z",
+      "id": null
+    },
+    "events/drupalcon/asia/2024-singapore.json": {
+      "at": "2026-08-18T12:45:23.110Z",
+      "reason": "path-keyed duplicate; survivor planner-drupalcon-asia-singapore-2024.json is a superset",
+      "version": 3,
+      "lastModified": "2026-06-21T09:53:34.765Z",
+      "id": null
+    },
+    "events/drupalcon/eu/2014-amsterdam.json": {
+      "at": "2026-08-18T12:45:23.110Z",
+      "reason": "empty path-keyed scaffold, never filled in",
+      "version": 3,
+      "lastModified": "2026-06-18T11:11:35.388Z",
+      "id": null
+    },
+    "events/drupalcon/eu/2026-rotterdam.json": {
+      "at": "2026-08-18T12:45:23.110Z",
+      "reason": "empty path-keyed scaffold, never filled in",
+      "version": 3,
+      "lastModified": "2026-06-21T09:53:39.374Z",
+      "id": null
+    },
+    "events/drupalcon/us/2026-chicago.json": {
+      "at": "2026-08-18T12:45:23.110Z",
+      "reason": "empty path-keyed scaffold, never filled in",
+      "version": 3,
+      "lastModified": "2026-06-18T11:11:24.696Z",
+      "id": null
+    },
+    "events/drupalsouth/2025-melbourne.json": {
+      "at": "2026-08-18T12:45:23.110Z",
+      "reason": "empty path-keyed scaffold, never filled in",
+      "version": 3,
+      "lastModified": "2026-06-21T12:32:29.407Z",
+      "id": null
+    },
+    "events/drupalsouth/2026-wellington.json": {
+      "at": "2026-08-18T12:45:23.110Z",
+      "reason": "empty path-keyed scaffold, never filled in",
+      "version": 3,
+      "lastModified": "2026-06-18T11:11:26.797Z",
+      "id": null
+    }
+  },
+  "tasks": [
+    {
+      "title": "A Test Sponsor",
+      "tier": "Gold",
+      "note": "with a comma, a \"quote\" and <html>",
+      "id": "FIXED_ID"
+    }
+  ]
+}

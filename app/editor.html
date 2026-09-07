@@ -27,11 +27,12 @@
   <style>
     @layer overrides, reset, legacy, tokens, base, composition, section, utility;
     @import url("./css/utilities.css") layer(legacy);
-    @import url("./css/schedule.css") layer(legacy);
-    @import url("./css/components.css") layer(legacy);
   </style>
   <link rel="stylesheet" href="./css/foundation.css">
   <link rel="stylesheet" href="./css/section-chrome.css">
+  <link rel="stylesheet" href="./css/section-modal.css">
+  <link rel="stylesheet" href="./css/section-venue-map.css">
+  <link rel="stylesheet" href="./css/section-session-detail.css">
   <link rel="stylesheet" href="./css/section-editor.css">
 </head>
 <body>
@@ -341,6 +342,12 @@
             </div>
           </div>
           <p class="edt-hint">Sponsor assets, placement metadata and session associations. Drag rows to reorder.</p>
+          <label class="src-inline" for="sponsorSourceUrl">
+            <span class="src-inline__label">Sponsor listing page</span>
+            <input id="sponsorSourceUrl" type="text" class="url-multifield-input"
+              placeholder="https://… the page that listed these sponsors">
+          </label>
+          <p class="src-inline__note" id="sponsorSourceNote"></p>
           <label class="edt-breakglass">
             <input id="sponsorLogosDisabledToggle" type="checkbox" class="ckl-check">
             <span><strong>Hide sponsor logos</strong> — break-glass: show each sponsor&rsquo;s name instead of its logo on the public schedule. Off by default.</span>
@@ -421,12 +428,12 @@
       <section class="edt-stack">
         <div class="edt-section__head">
           <div>
-            <p class="edt-eyebrow">Dataset</p>
-            <h2 class="edt-section__title">Reference URLs</h2>
+            <p class="edt-eyebrow">Provenance</p>
+            <h2 class="edt-section__title">Sources</h2>
           </div>
         </div>
-        <p class="edt-hint">Additional reference URLs for this event — documentation, archived pages, or related resources.</p>
-        <div id="otherUrlsEditorContent"></div>
+        <p class="edt-hint">Every URL this event&rsquo;s data came from, in one register. Paste a URL and it is saved as a link &mdash; an archive.org capture is split into the original address plus its capture automatically. Anything that isn&rsquo;t a URL is saved as a stated source and shown to readers as that text. Recordings, session links and photo albums are not sources: they are what the dataset points at, and they stay on their own tabs.</p>
+        <div id="sourcesEditorContent"></div>
       </section>
       <section class="edt-stack">
         <div class="edt-section__head">
@@ -608,10 +615,12 @@
         <h2 id="personModalTitle" class="session-modal-title">Add person</h2>
         <button id="personModalClose" type="button" class="session-modal-close" aria-label="Close">&times;</button>
       </div>
-      <!-- Own layout classes, not the legacy `space-y-4`/`block` utilities: the
-           editor still imports components.css into layer(legacy), which lays
-           .session-modal-body out as a grid and put every label beside its own
-           input. -->
+      <!-- Own layout classes, not the legacy `space-y-4`/`block` utilities. This
+           guarded against a legacy sheet laying .session-modal-body out as a
+           grid, which put every label beside its own input. The editor imports
+           neither schedule.css nor components.css now, so nothing does that any
+           more — but .person-form still states its own layout, which is why the
+           prune did not disturb it. -->
       <div class="session-modal-body person-form">
         <p class="person-form-lead">Organisers and volunteers only. Speakers come from the schedule and cannot be added here.</p>
         <label class="person-field">

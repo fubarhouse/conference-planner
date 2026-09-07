@@ -1,0 +1,68 @@
+{
+  "Tokyo": {
+    "lat": 35.6768601,
+    "lon": 139.7638947,
+    "display": "東京都, 日本"
+  },
+  "Singapore": {
+    "lat": 1.357107,
+    "lon": 103.8194992,
+    "display": "Singapore"
+  },
+  "Sydney": {
+    "lat": -33.8698439,
+    "lon": 151.2082848,
+    "display": "Sydney, New South Wales, Australia"
+  },
+  "Rotterdam": {
+    "lat": 51.9244424,
+    "lon": 4.47775,
+    "display": "Rotterdam, Zuid-Holland, Nederland"
+  },
+  "Bogotá": {
+    "lat": 4.6533817,
+    "lon": -74.0836331,
+    "display": "Bogotá, Bogotá, Distrito Capital, RAP (Especial) Central, Colombia"
+  },
+  "Canberra": {
+    "lat": -35.2975906,
+    "lon": 149.1012676,
+    "display": "Canberra, District of Canberra Central, Australian Capital Territory, 2600, Australia"
+  },
+  "Online": null,
+  "Breda": {
+    "lat": 51.5887845,
+    "lon": 4.7760237,
+    "display": "Breda, Noord-Brabant, Nederland"
+  },
+  "Christchurch": {
+    "lat": -43.530955,
+    "lon": 172.6364343,
+    "display": "Christchurch, Christchurch City, Canterbury, New Zealand / Aotearoa"
+  },
+  "Burgas": {
+    "lat": 42.4936616,
+    "lon": 27.4721276,
+    "display": "Бургас, България"
+  },
+  "Gurgaon": {
+    "lat": 28.4646148,
+    "lon": 77.0299194,
+    "display": "Gurugram, Haryana, India"
+  },
+  "New Delhi": {
+    "lat": 28.6138954,
+    "lon": 77.2090057,
+    "display": "New Delhi, Delhi, India"
+  },
+  "Rome": {
+    "lat": 41.8933203,
+    "lon": 12.4829321,
+    "display": "Roma, Roma Capitale, Lazio, Italia"
+  },
+  "Davos": {
+    "lat": 46.796198,
+    "lon": 9.8236892,
+    "display": "Davos, Prättigau/Davos, Graubünden/Grischun/Grigioni, Schweiz/Suisse/Svizzera/Svizra"
+  }
+}

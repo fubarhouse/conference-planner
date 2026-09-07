@@ -1,0 +1,1000 @@
+{
+  "_version": 7,
+  "_id": "7d398331-d792-4458-958d-bdc4e1400afa",
+  "_plannerKey": "planner-drupalcon-europe-rotterdam-2026",
+  "_eventFile": "events/drupalcon/eu/2026-rotterdam.json",
+  "_eventFiles": [
+    "events/drupalcon/eu/2026-rotterdam.json",
+    "events/drupaljam/2026-rotterdam.json"
+  ],
+  "_displayName": "DrupalCon Europe Rotterdam 2026",
+  "_lastModified": "2026-08-04T10:37:11.866Z",
+  "mode": "personal",
+  "isConference": true,
+  "displayCurrency": "",
+  "sessionNotes": {},
+  "contacts": [
+    {
+      "id": "c_1785071879058_5pqit",
+      "name": "Matthew Smith",
+      "org": "amazee.io",
+      "email": "",
+      "linkedin": "",
+      "type": "vip",
+      "whereMet": "",
+      "notes": "",
+      "followUp": false
+    },
+    {
+      "id": "c_1785071856949_rcyap",
+      "name": "Henk Beld",
+      "org": "amazee.io",
+      "email": "henk.beld@amazee.io",
+      "linkedin": "",
+      "type": "vip",
+      "whereMet": "",
+      "notes": "",
+      "followUp": false
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t_1784988422606_z3rpd",
+      "text": "Finalise payments for Geneva accommodation",
+      "done": false,
+      "sessionId": null,
+      "status": "open",
+      "priority": "normal",
+      "dueDate": "2026-08-20"
+    },
+    {
+      "id": "t_1784988392370_w1edj",
+      "text": "Finalise payments for Amsterdam accommodation",
+      "done": false,
+      "sessionId": null,
+      "status": "open",
+      "priority": "normal",
+      "dueDate": "2026-07-31"
+    },
+    {
+      "title": "A Test Sponsor",
+      "tier": "Gold",
+      "note": "with a comma, a \"quote\" and <html>",
+      "id": "FIXED_ID"
+    }
+  ],
+  "org": {
+    "boothInfo": "",
+    "boothNotes": "",
+    "teamAssignments": [],
+    "accommodations": [],
+    "timeline": {
+      "startDate": "",
+      "endDate": ""
+    },
+    "swag": [],
+    "deliverables": [],
+    "sponsorBudget": "",
+    "sponsorActual": "",
+    "sponsorCurrency": "AUD",
+    "sponsorId": "",
+    "trackedSessions": [],
+    "autoAddedSponsoredSessions": [],
+    "documents": [],
+    "budgetItems": [],
+    "budgetCategories": [],
+    "categoryBudgets": {},
+    "tickets": [],
+    "disabledTabs": [
+      "weather"
+    ],
+    "tabOrder": [],
+    "itinerary": [],
+    "memberItinerary": [],
+    "checklists": []
+  },
+  "receipts": [
+    {
+      "id": "rc_1784873532798_qch5i",
+      "name": "Train: Munich → Zurich",
+      "date": "2026-10-04",
+      "amount": "71.99",
+      "currency": "EUR",
+      "category": "travel",
+      "budgetItemId": "",
+      "notes": "",
+      "filePath": "receipts/planner-drupalcon-europe-rotterdam-2026/train-munich-zurich.pdf",
+      "fileLabel": "train-munich-zurich.pdf"
+    },
+    {
+      "id": "rc_1784878162862_34ae1",
+      "name": "Swiss Alps Hike w/ Matt",
+      "date": "2026-10-05",
+      "amount": "1",
+      "currency": "CHF",
+      "category": "attractions",
+      "budgetItemId": "",
+      "notes": "",
+      "filePath": "",
+      "fileLabel": ""
+    },
+    {
+      "id": "rc_1784878162862_zz2m5",
+      "name": "Full-Day Dachau Concentration Camp Memorial Site Tour from Munich",
+      "date": "2026-10-04",
+      "amount": "38.25",
+      "currency": "EUR",
+      "category": "attractions",
+      "budgetItemId": "",
+      "notes": "",
+      "filePath": "receipts/planner-drupalcon-europe-rotterdam-2026/full-day-dachau-concentration-camp-memorial-site-tour-from-m.mhtml",
+      "fileLabel": "full-day-dachau-concentration-camp-memorial-site-tour-from-m.mhtml"
+    },
+    {
+      "id": "rc_1784878162862_ffxnq",
+      "name": "Berchtesgaden and Eagle's Nest Day Trip from Munich",
+      "date": "2026-07-23",
+      "amount": "65",
+      "currency": "EUR",
+      "category": "attractions",
+      "budgetItemId": "",
+      "notes": "",
+      "filePath": "receipts/planner-drupalcon-europe-rotterdam-2026/berchtesgaden-and-eagle-s-nest-day-trip-from-munich.mhtml",
+      "fileLabel": "berchtesgaden-and-eagle-s-nest-day-trip-from-munich.mhtml"
+    },
+    {
+      "id": "rc_1784878162862_s7y0m",
+      "name": "Postillion Hotel WTC Rotterdam",
+      "date": "2026-07-17",
+      "amount": "763.42",
+      "currency": "EUR",
+      "category": "accommodation",
+      "budgetItemId": "",
+      "notes": "",
+      "filePath": "receipts/planner-drupalcon-europe-rotterdam-2026/postillion-hotel-wtc-rotterdam.pdf",
+      "fileLabel": "postillion-hotel-wtc-rotterdam.pdf"
+    },
+    {
+      "id": "rc_1784898886549_9deun",
+      "name": "Flights",
+      "date": "2026-07-17",
+      "amount": "2726.51",
+      "currency": "AUD",
+      "category": "travel",
+      "budgetItemId": "bi_1784894587170_ufmik",
+      "notes": "",
+      "filePath": "receipts/planner-drupalcon-europe-rotterdam-2026/flights.pdf",
+      "fileLabel": "flights.pdf"
+    },
+    {
+      "id": "rc_1784900001064_x8acv",
+      "name": "Education Budget",
+      "date": "2026-07-17",
+      "amount": "-1290",
+      "currency": "AUD",
+      "category": "accommodation",
+      "budgetItemId": "bi_1784773053837_d1lo2",
+      "notes": "",
+      "filePath": "",
+      "fileLabel": ""
+    },
+    {
+      "id": "rc_1784900797276_rabt2",
+      "name": "Munich (AirBnB)",
+      "date": "2026-07-24",
+      "amount": "656.34",
+      "currency": "AUD",
+      "category": "accommodation",
+      "budgetItemId": "",
+      "notes": "",
+      "filePath": "receipts/planner-drupalcon-europe-rotterdam-2026/munich-airbnb.pdf",
+      "fileLabel": "munich-airbnb.pdf"
+    },
+    {
+      "id": "rc_1784988196513_mn0et",
+      "name": "Train: Rotterdam Central → Munich Hbf",
+      "date": "2026-07-26",
+      "amount": "145.49",
+      "currency": "EUR",
+      "category": "travel",
+      "budgetItemId": "",
+      "notes": "",
+      "filePath": "receipts/planner-drupalcon-europe-rotterdam-2026/train-rotterdam-central-munich-hbf.pdf",
+      "fileLabel": "train-rotterdam-central-munich-hbf.pdf"
+    },
+    {
+      "id": "rc_1785151695627_rpkni",
+      "name": "CERN w/ Dimitra",
+      "date": "2026-10-07",
+      "amount": "1",
+      "currency": "CHF",
+      "category": "attractions",
+      "budgetItemId": "",
+      "notes": "",
+      "filePath": "",
+      "fileLabel": ""
+    },
+    {
+      "id": "rc_1786445851901_ptq8j",
+      "name": "Orange Suit",
+      "date": "2026-08-11",
+      "amount": "79.95",
+      "currency": "EUR",
+      "category": "misc",
+      "budgetItemId": "bi_1786445793792_1x5hg",
+      "notes": "",
+      "filePath": "receipts/planner-drupalcon-europe-rotterdam-2026/orange-suit.pdf",
+      "fileLabel": "orange-suit.pdf"
+    },
+    {
+      "id": "rc_1786448618460_zn4kc",
+      "name": "Motel One Amsterdam",
+      "date": "2026-08-11",
+      "amount": "372.92",
+      "currency": "EUR",
+      "category": "accommodation",
+      "budgetItemId": "",
+      "notes": "",
+      "filePath": "",
+      "fileLabel": ""
+    }
+  ],
+  "personal": {
+    "outboundLegs": [
+      {
+        "id": "leg_1784669991317_frb8d",
+        "mode": "flight",
+        "status": "paid",
+        "date": "2026-09-22",
+        "arriveDate": "2026-09-22",
+        "ref": "QR 6306",
+        "from": "CBR",
+        "to": "MEL",
+        "departTime": "18:50",
+        "arriveTime": "20:05",
+        "departTz": "",
+        "arriveTz": "",
+        "confirmation": "",
+        "notes": "",
+        "filePath": "",
+        "fileLabel": "",
+        "receiptId": "rc_1784898886549_9deun"
+      },
+      {
+        "id": "leg_1784670059902_814pc",
+        "mode": "flight",
+        "status": "paid",
+        "date": "2026-09-22",
+        "arriveDate": "2026-09-23",
+        "ref": "QR905",
+        "from": "MEL",
+        "to": "DOH",
+        "departTime": "22:45",
+        "arriveTime": "05:50",
+        "departTz": "",
+        "arriveTz": "Asia/Qatar",
+        "confirmation": "",
+        "notes": "",
+        "filePath": "",
+        "fileLabel": "",
+        "receiptId": "rc_1784898886549_9deun"
+      },
+      {
+        "id": "leg_1784670140114_r5qkz",
+        "mode": "flight",
+        "status": "paid",
+        "date": "2026-09-23",
+        "arriveDate": "2026-09-23",
+        "ref": "QR273",
+        "from": "DOH",
+        "to": "AMS",
+        "departTime": "08:10",
+        "arriveTime": "13:55",
+        "departTz": "",
+        "arriveTz": "",
+        "confirmation": "",
+        "notes": "",
+        "filePath": "",
+        "fileLabel": "",
+        "receiptId": "rc_1784898886549_9deun"
+      }
+    ],
+    "returnLegs": [
+      {
+        "id": "leg_1784670255599_yb407",
+        "mode": "flight",
+        "status": "paid",
+        "date": "2026-10-08",
+        "arriveDate": "",
+        "ref": "QR100",
+        "from": "GVA",
+        "to": "DOH",
+        "departTime": "15:55",
+        "arriveTime": "22:55",
+        "departTz": "",
+        "arriveTz": "",
+        "confirmation": "",
+        "notes": "",
+        "filePath": "",
+        "fileLabel": "",
+        "receiptId": "rc_1784898886549_9deun"
+      },
+      {
+        "id": "leg_1784670342368_qepxl",
+        "mode": "flight",
+        "status": "paid",
+        "date": "2026-10-09",
+        "arriveDate": "2026-10-10",
+        "ref": "QR8401",
+        "from": "DOH",
+        "to": "SYD",
+        "departTime": "09:05",
+        "arriveTime": "07:10",
+        "departTz": "",
+        "arriveTz": "Australia/Sydney",
+        "confirmation": "",
+        "notes": "",
+        "filePath": "",
+        "fileLabel": "",
+        "receiptId": "rc_1784898886549_9deun"
+      },
+      {
+        "id": "leg_1784670501207_8zr7j",
+        "mode": "flight",
+        "status": "paid",
+        "date": "2026-10-10",
+        "arriveDate": "",
+        "ref": "QR6370",
+        "from": "SYD",
+        "to": "CBR",
+        "departTime": "10:35",
+        "arriveTime": "11:35",
+        "departTz": "",
+        "arriveTz": "",
+        "confirmation": "",
+        "notes": "",
+        "filePath": "",
+        "fileLabel": "",
+        "receiptId": "rc_1784898886549_9deun"
+      }
+    ],
+    "localLegs": [
+      {
+        "id": "leg_1784873492125_byrbl",
+        "mode": "train",
+        "status": "paid",
+        "date": "2026-10-04",
+        "arriveDate": "",
+        "ref": "",
+        "from": "Munich",
+        "to": "Zurich",
+        "departTime": "18:30",
+        "arriveTime": "22:00",
+        "departTz": "",
+        "arriveTz": "",
+        "confirmation": "",
+        "notes": "",
+        "filePath": "",
+        "fileLabel": "",
+        "receiptId": "rc_1784873532798_qch5i"
+      },
+      {
+        "id": "leg_1784988164534_lr1va",
+        "mode": "train",
+        "status": "paid",
+        "date": "2026-10-02",
+        "arriveDate": "",
+        "ref": "",
+        "from": "Rotterdam",
+        "to": "Munich",
+        "departTime": "12:05",
+        "arriveTime": "19:41",
+        "departTz": "",
+        "arriveTz": "",
+        "confirmation": "",
+        "notes": "",
+        "filePath": "",
+        "fileLabel": "",
+        "receiptId": "rc_1784988196513_mn0et"
+      },
+      {
+        "id": "leg_1785063163469_elgtr",
+        "mode": "train",
+        "status": "needs-booking",
+        "date": "2026-10-07",
+        "arriveDate": "",
+        "ref": "",
+        "from": "Zurich",
+        "to": "Geneva",
+        "departTime": "",
+        "arriveTime": "",
+        "departTz": "",
+        "arriveTz": "",
+        "confirmation": "",
+        "notes": "",
+        "filePath": "",
+        "fileLabel": "",
+        "receiptId": ""
+      },
+      {
+        "id": "leg_1785310140956_se43d",
+        "mode": "train",
+        "status": "needs-booking",
+        "date": "2026-09-27",
+        "arriveDate": "",
+        "ref": "",
+        "from": "Amsterdam",
+        "to": "Rotterdam",
+        "departTime": "",
+        "arriveTime": "",
+        "departTz": "",
+        "arriveTz": "",
+        "confirmation": "",
+        "notes": "",
+        "filePath": "",
+        "fileLabel": "",
+        "receiptId": ""
+      }
+    ],
+    "accommodations": [
+      {
+        "id": "ia_1784670641957_ady3y",
+        "name": "Henk's Place",
+        "address": "Oldenzaal, NL",
+        "checkIn": "",
+        "checkOut": "",
+        "confirmation": "",
+        "budget": "",
+        "budgetActual": "",
+        "currency": "AUD",
+        "notes": "",
+        "type": "accommodation",
+        "coords": "52.31333, 6.92917",
+        "assignments": [
+          {
+            "memberId": "__me__",
+            "checkIn": "2026-09-23",
+            "checkOut": "2026-09-25",
+            "budget": "",
+            "budgetActual": "",
+            "currency": "AUD"
+          }
+        ],
+        "purchaseDate": "",
+        "status": "confirmed"
+      },
+      {
+        "id": "ia_1784670694979_pmyzo",
+        "name": "Hotel Hortus",
+        "address": "Plantagaparklaan 8, Amsterdam City Centre, 1018 SR Amsterdam, Netherlands",
+        "checkIn": "",
+        "checkOut": "",
+        "confirmation": "",
+        "budget": "",
+        "budgetActual": "",
+        "currency": "AUD",
+        "notes": "",
+        "type": "accommodation",
+        "coords": "52.368696, 4.905493",
+        "assignments": [
+          {
+            "memberId": "__me__",
+            "checkIn": "2026-09-25",
+            "checkOut": "2026-09-27",
+            "budget": "297.89",
+            "budgetActual": "",
+            "currency": "EUR"
+          }
+        ],
+        "purchaseDate": ""
+      },
+      {
+        "id": "ia_1784670891277_5eian",
+        "name": "Postillion Hotel WTC Rotterdam",
+        "address": "Meent 110, Centrum, 2011 JS Rotterdam, Natherlands",
+        "checkIn": "",
+        "checkOut": "",
+        "confirmation": "",
+        "budget": "",
+        "budgetActual": "",
+        "currency": "AUD",
+        "notes": "",
+        "type": "accommodation",
+        "coords": "51.922498, 4.479171",
+        "assignments": [
+          {
+            "memberId": "__me__",
+            "checkIn": "2026-09-27",
+            "checkOut": "2026-10-02",
+            "receiptId": "rc_1784878162862_s7y0m"
+          }
+        ],
+        "receiptId": "rc_1784878162862_s7y0m"
+      },
+      {
+        "id": "ia_1784671062114_q95z0",
+        "name": "Munich (AirBnB)",
+        "address": "Kellerstraße 9, 81667 Munich, Germany",
+        "checkIn": "",
+        "checkOut": "",
+        "confirmation": "",
+        "budget": "",
+        "budgetActual": "",
+        "currency": "AUD",
+        "notes": "",
+        "type": "accommodation",
+        "coords": "48.149072, 11.567446",
+        "assignments": [
+          {
+            "memberId": "__me__",
+            "checkIn": "2026-10-02",
+            "checkOut": "2026-10-04",
+            "budget": "656.34",
+            "budgetActual": "656.34",
+            "currency": "AUD",
+            "purchaseDate": "2026-07-24"
+          }
+        ],
+        "receiptId": "rc_1784900797276_rabt2"
+      },
+      {
+        "id": "ia_1784671115837_wiz42",
+        "name": "Matt's Place",
+        "address": "Zurich",
+        "checkIn": "",
+        "checkOut": "",
+        "confirmation": "",
+        "budget": "",
+        "budgetActual": "",
+        "currency": "AUD",
+        "notes": "",
+        "type": "accommodation",
+        "coords": "47.36667, 8.55",
+        "assignments": [
+          {
+            "memberId": "__me__",
+            "checkIn": "2026-10-04",
+            "checkOut": "2026-10-07",
+            "budget": "",
+            "budgetActual": "",
+            "currency": "AUD"
+          }
+        ],
+        "status": "confirmed"
+      },
+      {
+        "id": "ia_1784671192262_z20ul",
+        "name": "Hotel Central",
+        "address": "Rue de la Rotisserie, 2 1204 Geneva, Switzerland",
+        "checkIn": "",
+        "checkOut": "",
+        "confirmation": "",
+        "budget": "",
+        "budgetActual": "",
+        "currency": "AUD",
+        "notes": "",
+        "type": "accommodation",
+        "coords": "46.201756, 6.146601",
+        "assignments": [
+          {
+            "memberId": "__me__",
+            "checkIn": "2026-10-07",
+            "checkOut": "2026-10-08",
+            "budget": "159",
+            "budgetActual": "0",
+            "currency": "CHF"
+          }
+        ],
+        "purchaseDate": ""
+      }
+    ],
+    "budget": "",
+    "budgetActual": "",
+    "currency": "AUD",
+    "notes": "",
+    "noteList": [
+      {
+        "id": "note_1785063581086_qo5bc",
+        "title": "Objectives: Oldenzaal",
+        "body": "- Meet up with Henk to get some orientation done;\n- Discuss requirements for clients\n- Discuss known prospective customers and expectations.",
+        "emoji": "🇳🇱"
+      },
+      {
+        "id": "note_1785063612833_sqdkl",
+        "title": "Objectives: Amsterdam",
+        "body": "- Henk meeting up with his daughter;\n- Ready myself for the conference;\n- Ensure jetlag conditions have subsided.",
+        "emoji": "🇳🇱"
+      },
+      {
+        "id": "note_1785063655068_f2ycx",
+        "title": "Objectives: Rotterdam",
+        "body": "- DrupalCon\n- DrupalJam\n- Splash Awards",
+        "emoji": "🇳🇱"
+      },
+      {
+        "id": "note_1785063684567_vap3o",
+        "title": "Objectives: Munich",
+        "body": "- Transitory destination between Rotterdam and Zurich;\n- Not much time, but planned downtime.",
+        "emoji": "🇩🇪"
+      },
+      {
+        "id": "note_1785063719391_6okz4",
+        "title": "Objectives: Zurich",
+        "body": "- Meet with as many colleagues as possible;\n- Matt will be guiding me around to achieve this.",
+        "emoji": "🇨🇭"
+      },
+      {
+        "id": "note_1785063750292_blnpa",
+        "title": "Objectives: Geneva",
+        "body": "- Meet up with Dimitra;\n- Departure from Europe.",
+        "emoji": "🇨🇭"
+      }
+    ],
+    "trackedSessions": [],
+    "hostedEvents": [],
+    "itinerary": [
+      {
+        "id": "it_1784758488928_gyhto",
+        "memberId": null,
+        "memberIds": [],
+        "date": "2026-10-05",
+        "time": "",
+        "title": "Hike w/ Matt",
+        "location": "Zurich",
+        "notes": "",
+        "done": false,
+        "coords": "",
+        "receiptId": "rc_1784878162862_34ae1"
+      },
+      {
+        "id": "it_1784794989574_ligt7",
+        "memberId": null,
+        "memberIds": [
+          "pc_1781352237546_qc1lr"
+        ],
+        "date": "2026-10-04",
+        "time": "09:45",
+        "title": "Full-Day Dachau Concentration Camp Memorial Site Tour from Munich",
+        "location": "Dachau",
+        "notes": "",
+        "done": false,
+        "coords": "48.26, 11.43402",
+        "receiptId": "rc_1784878162862_zz2m5"
+      },
+      {
+        "id": "it_1784795055294_nf73b",
+        "memberId": null,
+        "memberIds": [
+          "pc_1781352237546_qc1lr"
+        ],
+        "date": "2026-10-03",
+        "time": "08:30",
+        "title": "Berchtesgaden and Eagle's Nest Day Trip from Munich",
+        "location": "",
+        "notes": "",
+        "done": false,
+        "coords": "47.632724, 13.002543",
+        "receiptId": "rc_1784878162862_ffxnq"
+      },
+      {
+        "id": "it_1785137148301_u45ih",
+        "memberId": null,
+        "memberIds": [
+          "pc_1781352237546_qc1lr"
+        ],
+        "date": "2026-10-07",
+        "time": "",
+        "title": "CERN",
+        "location": "CERN, Geneva",
+        "coords": "46.231889, 6.054042",
+        "receiptId": "",
+        "notes": "",
+        "budget": "",
+        "actual": "",
+        "purchaseDate": "",
+        "currency": "AUD",
+        "done": false
+      },
+      {
+        "id": "it_1785396715495_y23w9",
+        "memberId": null,
+        "memberIds": [],
+        "date": "2026-09-24",
+        "time": "10:00",
+        "title": "Conference orientation",
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "notes": "",
+        "budget": "",
+        "actual": "",
+        "purchaseDate": "",
+        "currency": "AUD",
+        "done": false,
+        "endTime": "14:00"
+      },
+      {
+        "id": "it_1785397141559_q5k24",
+        "memberId": null,
+        "memberIds": [],
+        "date": "2026-09-25",
+        "time": "14:00",
+        "title": "Customer orientation",
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "notes": "",
+        "budget": "",
+        "actual": "",
+        "purchaseDate": "",
+        "currency": "AUD",
+        "done": false,
+        "endTime": ""
+      },
+      {
+        "id": "it_1785397236851_kd8qb",
+        "memberId": null,
+        "memberIds": [],
+        "date": "2026-09-26",
+        "time": "11:30",
+        "title": "Lunch w/ Synetic",
+        "location": "Rotterdam",
+        "coords": "51.9225, 4.47917",
+        "receiptId": "",
+        "notes": "",
+        "budget": "",
+        "actual": "",
+        "purchaseDate": "",
+        "currency": "AUD",
+        "done": false,
+        "endTime": "13:30",
+        "timezone": ""
+      },
+      {
+        "id": "it_1785397267448_ksa78",
+        "memberId": null,
+        "memberIds": [],
+        "date": "2026-09-27",
+        "time": "14:00",
+        "title": "Venue orientation",
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "notes": "",
+        "budget": "",
+        "actual": "",
+        "purchaseDate": "",
+        "currency": "AUD",
+        "done": false,
+        "endTime": "15:00"
+      }
+    ],
+    "documents": [],
+    "budgetItems": [
+      {
+        "id": "bi_1784773053837_d1lo2",
+        "name": "Education Budget",
+        "category": "accommodation",
+        "currency": "AUD",
+        "budget": "-1290",
+        "actual": "-763.42",
+        "purchaseDate": "2026-07-17",
+        "notes": "",
+        "memberId": ""
+      },
+      {
+        "id": "bi_1784894587170_ufmik",
+        "name": "Flights",
+        "category": "travel",
+        "currency": "AUD",
+        "budget": "2800",
+        "actual": "2800",
+        "purchaseDate": "2026-07-17",
+        "notes": "",
+        "memberId": ""
+      }
+    ],
+    "budgetCategories": [
+      {
+        "id": "travel",
+        "name": "Travel"
+      },
+      {
+        "id": "accommodation",
+        "name": "Accommodation"
+      },
+      {
+        "id": "food",
+        "name": "Food & Drink"
+      },
+      {
+        "id": "tickets",
+        "name": "Tickets"
+      },
+      {
+        "id": "misc",
+        "name": "Misc"
+      },
+      {
+        "id": "attractions",
+        "name": "Attractions"
+      }
+    ],
+    "categoryBudgets": {
+      "travel": "3200",
+      "accommodation": "1200",
+      "attractions": "200"
+    },
+    "tickets": [
+      {
+        "id": "tk_1784898731424_0rj66",
+        "name": "DrupalCon Rotterdam Sponsor Ticket",
+        "quantity": 1,
+        "status": "assigned",
+        "assignedTo": "__me__",
+        "purchasedBy": "",
+        "notes": "Part of the official Volunteer Photography team",
+        "days": [
+          "2026-09-28",
+          "2026-09-29",
+          "2026-09-30",
+          "2026-10-01"
+        ],
+        "showOnItinerary": false,
+        "receiptId": ""
+      },
+      {
+        "id": "tk_1785072704296_5xtcv",
+        "name": "DrupalJam 2026 Volunteer Ticket",
+        "quantity": 1,
+        "status": "assigned",
+        "assignedTo": "__me__",
+        "purchasedBy": "",
+        "notes": "",
+        "days": [
+          "2026-10-01"
+        ],
+        "showOnItinerary": false,
+        "receiptId": ""
+      }
+    ],
+    "disabledTabs": [],
+    "tabOrder": [],
+    "tripAssignments": [
+      {
+        "id": "ta_1784806045240_00wb3",
+        "memberId": "pc_1781352237546_qc1lr",
+        "outboundLegs": [],
+        "returnLegs": [],
+        "budget": "",
+        "budgetActual": "",
+        "purchaseDate": "",
+        "currency": "AUD",
+        "notes": ""
+      }
+    ],
+    "localCompanions": [],
+    "splitExpenses": [],
+    "checklists": [
+      {
+        "id": "cl_1785063112381_qlg8p",
+        "title": "Packing",
+        "items": [
+          {
+            "id": "cli_1785063112381_s92ib",
+            "text": "Passport / ID",
+            "done": false
+          },
+          {
+            "id": "cli_1785063112381_2th4a",
+            "text": "Phone + charger",
+            "done": false
+          },
+          {
+            "id": "cli_1785063112381_26b7b",
+            "text": "Laptop + charger",
+            "done": false
+          },
+          {
+            "id": "cli_1785063112381_32wdc",
+            "text": "Travel adapter",
+            "done": false
+          },
+          {
+            "id": "cli_1785063112381_mntpm",
+            "text": "Medications",
+            "done": false
+          },
+          {
+            "id": "cli_1785063112381_2vmu6",
+            "text": "Toiletries",
+            "done": false
+          },
+          {
+            "id": "cli_1785063112381_31vlh",
+            "text": "Reusable water bottle",
+            "done": false
+          },
+          {
+            "id": "cli_1785063124929_roszi",
+            "text": "Tuxedo",
+            "done": false
+          },
+          {
+            "id": "cli_1785063131948_t4o7c",
+            "text": "Formal Shoes",
+            "done": false
+          },
+          {
+            "id": "cli_1785063140281_72o8v",
+            "text": "Laptop",
+            "done": false
+          },
+          {
+            "id": "cli_1785063148006_0jl07",
+            "text": "Camera & Accessories",
+            "done": false
+          }
+        ]
+      }
+    ],
+    "gpxTrack": null,
+    "meContactId": "pc_1781352237546_qc1lr",
+    "showLocalTravel": true,
+    "travelPurchaseDate": "2026-07-17"
+  },
+  "weatherLocation": {
+    "name": "Rotterdam",
+    "lat": 51.9225,
+    "lon": 4.47917,
+    "label": "Rotterdam, South Holland, The Netherlands"
+  },
+  "_preMigrationFinancials": [
+    {
+      "kind": "itinerary",
+      "id": "it_1784758488928_gyhto",
+      "receiptId": "rc_1784878162862_34ae1",
+      "fields": {
+        "budget": "1",
+        "actual": "1",
+        "currency": "CHF",
+        "purchaseDate": ""
+      }
+    },
+    {
+      "kind": "itinerary",
+      "id": "it_1784794989574_ligt7",
+      "receiptId": "rc_1784878162862_zz2m5",
+      "fields": {
+        "budget": "38.25",
+        "actual": "38.25",
+        "currency": "EUR",
+        "purchaseDate": ""
+      }
+    },
+    {
+      "kind": "itinerary",
+      "id": "it_1784795055294_nf73b",
+      "receiptId": "rc_1784878162862_ffxnq",
+      "fields": {
+        "budget": "65",
+        "actual": "65",
+        "currency": "EUR",
+        "purchaseDate": "2026-07-23"
+      }
+    },
+    {
+      "kind": "accom-stay",
+      "id": "ia_1784670891277_5eian:__me__",
+      "receiptId": "rc_1784878162862_s7y0m",
+      "fields": {
+        "budget": "763.42",
+        "budgetActual": "763.42",
+        "currency": "EUR"
+      }
+    }
+  ],
+  "strictBudget": false,
+  "locked": true,
+  "_feeds": []
+}

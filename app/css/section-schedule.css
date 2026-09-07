@@ -218,6 +218,29 @@
     margin-block-start: var(--sp-l);
   }
 
+  /* The record of what could be recovered. Quiet by design — it is a footnote
+     about the archive, not a message about the event — but present, because a
+     sponsor section that simply vanishes reads as "this event had no sponsors". */
+  .sch-sponsors .sponsor-record {
+    margin-block-start: var(--sp-m);
+    padding-block-start: var(--sp-s);
+    border-block-start: 1px solid var(--rule-0);
+    font-size: var(--step--1);
+    line-height: 1.6;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+
+  .sch-sponsors .sponsor-record__lead {
+    font-weight: 600;
+    color: var(--ink-1);
+  }
+
+  .sch-sponsors .sponsor-record__when {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+  }
+
   .sch-sponsors .sponsor-tier-heading {
     padding-block-end: var(--sp-2xs);
     margin-block-end: var(--sp-s);
@@ -460,6 +483,24 @@
     letter-spacing: var(--display-track);
   }
 
+  /* --- POOL — sessions with no time --------------------------------------
+     The band's time column is what says "this happened at 10:00". These have
+     nothing to put there, so they run full width instead of sitting in a band
+     with an empty margin.
+     --------------------------------------------------------------------- */
+  /* The day quick-nav is sticky, so anything scrolled to lands under it. */
+  .sch-pool {
+    scroll-margin-block-start: 4.5rem;
+  }
+
+  .sch-pool__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+    gap: var(--sp-s);
+    padding-block: var(--sp-m);
+    align-items: start;
+  }
+
   /* --- BAND — time in the margin, concurrency across ----------------------
      The grid wraps rather than using fixed room columns: only 22% of events
      have a consistent room set, and one has 17 concurrent rooms.
@@ -516,6 +557,14 @@
     cursor: pointer;
   }
 
+  /* No checkbox, so no column for one. Without this the single remaining child
+     sits in the picker's column and the whole card is indented by a gap that
+     holds nothing. */
+  .sch-entry--nopick {
+    grid-template-columns: 1fr;
+    cursor: default;
+  }
+
   .sch-entry:hover .sch-entry__title {
     text-decoration: underline;
     text-decoration-color: var(--rule-1);
@@ -544,6 +593,16 @@
     min-block-size: var(--tap);
     min-inline-size: var(--tap);
     margin: calc(var(--sp-xs) * -1) 0 calc(var(--sp-xs) * -1) calc(var(--sp-xs) * -1);
+  }
+
+  /* One span per track, with nothing between them in the markup. A session with
+     a single track reads fine either way, which is why this went unnoticed —
+     but DrupalCamp Ruhr 2025 tags sessions with up to five, and they ran
+     together into "DRUPAL COMMUNITYAI". The separator is presentational, so it
+     belongs here rather than in the string the renderer builds. */
+  .sch-entry__track + .sch-entry__track::before {
+    content: ' · ';
+    color: var(--ink-2);
   }
 
   .sch-entry__track {
@@ -605,6 +664,19 @@
     letter-spacing: var(--label-track);
     text-transform: uppercase;
     color: var(--ink-2);
+  }
+
+  /* Kind flags. "Workshop" and "Social" say what a thing IS, which the reader
+     is scanning for — so they get the ink the other flags don't, and a hairline
+     to separate them from the time and duration they sit beside. No colour:
+     kind is a category, not a state, and the schedule reserves gold for the
+     reader's own selections. */
+  .sch-flag--workshop,
+  .sch-flag--social {
+    color: var(--ink-1);
+    padding-inline: 0.4em;
+    border: 1px solid var(--pl-line, var(--ink-3));
+    border-radius: 2px;
   }
 
   /* Search matches. The highlighter emits <span class="keyword-highlight">,
@@ -867,8 +939,7 @@
       overflow-y: auto;
       overscroll-behavior: contain;
       background: var(--paper-0);
-      padding:
-        calc(var(--sp-xl) + env(safe-area-inset-top)) var(--sp-m)
+      padding: calc(var(--sp-xl) + env(safe-area-inset-top)) var(--sp-m)
         calc(var(--sp-2xl) + env(safe-area-inset-bottom));
       transform: translateX(100%);
       transition: transform 180ms cubic-bezier(0.32, 0.72, 0, 1);
@@ -901,7 +972,6 @@
     body:has(.sch-entry__disclosure[open]) {
       overflow: hidden;
     }
-
   }
 
   /* --- NOW INDICATOR ------------------------------------------------------
@@ -963,9 +1033,13 @@
     transform: translateY(100%);
   }
 
-  /* The dock must stop at the rail, not run under it. */
+  /* The dock must stop at the rail, not run under it — but only while the rail
+     is actually there. The same two conditions that reserve the margin in
+     section-chrome.css govern this; insetting unconditionally pulled the dock
+     ~390px off the right edge on every wide screen, so it sat short of the
+     content column with nothing in the gap. */
   @media (min-width: 86rem) {
-    .sch-dock {
+    body:has(.app-rail):is([data-rail-open], :has(.sch-entry__disclosure[open])) .sch-dock {
       inset-inline-end: var(--rail-w);
     }
   }
@@ -1611,6 +1685,16 @@
     background: none !important;
   }
 
+  /* The actions carry `p-4 border-t` in the markup, from when they sat stacked
+     below the summary. They are inline with it now, so the rule and the padding
+     put a stray line down the middle of the dock. Removing the classes would be
+     the better fix, but index.html is a recorded page snapshot and the reference
+     server that regenerates it is gone — so it is undone here instead. */
+  .sch-dock .selection-overview-actions {
+    padding: 0 !important;
+    border-block-start: 0 !important;
+  }
+
   /* Menus: no residual framework border, and no rounding. */
   .theme-picker-menu,
   .theme-picker-item {
@@ -1629,7 +1713,8 @@
 
   /* Sponsor/speaker history: legacy pills and a cyan "current" row. Same
      language as the rest — a small-caps label and a brand rule, not a chip. */
-  :is(.session-modal-card, .app-panel) :is(.speaker-modal-count-badge, .speaker-session-current-badge) {
+  :is(.session-modal-card, .app-panel)
+    :is(.speaker-modal-count-badge, .speaker-session-current-badge) {
     background: none !important;
     border: 0 !important;
     border-radius: 0 !important;
@@ -1665,7 +1750,8 @@
     color: var(--ink-0) !important;
   }
 
-  :is(.session-modal-card, .app-panel) :is(h1, h2, h3, h4, p, span, label, li, strong, em, td, th, dt, dd) {
+  :is(.session-modal-card, .app-panel)
+    :is(h1, h2, h3, h4, p, span, label, li, strong, em, td, th, dt, dd) {
     color: inherit !important;
   }
 
@@ -1852,8 +1938,6 @@
     object-fit: contain !important;
   }
 
-
-
   #filtersPanel.sch-toolbar,
   #sessionFiltersPanel.sch-toolbar,
   .sch-colophon,
@@ -1982,7 +2066,6 @@
     background: var(--paper-2);
     border: 1px solid var(--rule-0);
   }
-
 }
 
 /* =========================================================================
@@ -2157,6 +2240,14 @@
 @layer section {
   /* Square, and pushed clear of the disclosure above it. */
   .sch-colophon__map {
+    /* Leaflet paints its panes at z-index 400 and its controls higher still,
+       which put the map over the selection dock (20) — the expanded dock is tall
+       enough to reach the map, and the summary line was unreadable behind a map
+       tile. `isolate` keeps those numbers inside this box instead of letting
+       them compete with the page. */
+    isolation: isolate;
+    position: relative;
+    z-index: 0;
     aspect-ratio: 1 / 1;
     inline-size: 100%;
     /* Capped: in the desktop spread the column is ~470px, and a 470px square
@@ -2176,7 +2267,6 @@
   .sch-colophon__map .leaflet-container {
     background: var(--paper-2);
   }
-
 
   @media (max-width: 52rem) {
     .sch-colophon__list {
@@ -2298,5 +2388,942 @@
     padding-inline-start: var(--sp-m);
     border-block-start: 0;
     box-shadow: inset 3px 0 0 var(--status-bad);
+  }
+}
+
+@layer section {
+  /* --- PORTED FROM components.css ----------------------------------------------
+   Seven classes: the mobile bottom-tab label, the Browse-home visibility switch,
+   the modal-open tab state and the mobile instructions panel. Extracted with the
+   browser's own CSS parser rather than a regex, so the @media nesting is the
+   real thing.
+
+   The Browse-home rule shed an `!important`: it was outranking the legacy
+   sheet's own display rules, and that sheet is no longer loaded here.
+   -------------------------------------------------------------------------- */
+
+  .mobile-bottom-tab-label {
+    font-size: var(--step--2);
+    font-weight: 500;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  #scheduleMain.home-active > :not(#eventHomeView) {
+    display: none;
+  }
+
+  @media (max-width: 639px) {
+    body.session-modal-open #scheduleEventFinderTab {
+      color: rgb(0, 122, 255);
+    }
+
+    body.theme-dark.session-modal-open #scheduleEventFinderTab {
+      color: rgb(10, 132, 255);
+    }
+
+    body:has(#scheduleMain) .mobile-instructions-panel {
+      background: transparent;
+      box-shadow: none;
+      border-width: medium medium 0.5px;
+      border-style: none none solid;
+      border-color: currentcolor currentcolor rgba(0, 0, 0, 0.12);
+      border-image: initial;
+      border-radius: 2px;
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    body.theme-dark:has(#scheduleMain) .mobile-instructions-panel {
+      border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+
+    body:has(#scheduleMain) .mobile-instructions-panel .mobile-accordion-toggle {
+      color: rgba(0, 0, 0, 0.75);
+      font-size: var(--step-0);
+      font-weight: 600;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+    }
+
+    body.theme-dark:has(#scheduleMain) .mobile-instructions-panel .mobile-accordion-toggle {
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    body:has(#scheduleMain) .mobile-instructions-panel {
+      padding-top: 0px;
+      padding-bottom: 0px;
+      background: transparent;
+      border-width: medium medium 0.5px;
+      border-style: none none solid;
+      border-color: currentcolor currentcolor rgba(0, 0, 0, 0.12);
+      border-image: initial;
+      border-radius: 2px;
+      box-shadow: none;
+    }
+
+    body.theme-dark:has(#scheduleMain) .mobile-instructions-panel {
+      border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+
+    body:has(#scheduleMain) .mobile-instructions-panel {
+      margin-bottom: 0px;
+    }
+  }
+}
+
+@layer section {
+  /* --- PORTED FROM schedule.css ------------------------------------------------
+   The last of it. 51 classes the schedule reaches but its own sheet did not yet
+   style: the selection overview and its stats tables, the share dialog, the
+   sponsor and speaker detail surfaces, the related-events strip, the timeline
+   and the now/next cards.
+
+   Extracted with the browser's CSS parser rather than a regex, so the @media
+   nesting is real. Converted on the way, as with every other port: font sizes
+   onto the --step-* scale, radii to the 2px maximum, gradients dropped.
+
+   The `!important` declarations did not come across. They existed to outrank
+   the legacy sheet, and index.html no longer loads it.
+   -------------------------------------------------------------------------- */
+
+  .instructions-dismiss {
+    display: none;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    align-items: center;
+    justify-content: center;
+    border-width: medium;
+    border-style: none;
+    border-color: currentcolor;
+    border-image: initial;
+    border-radius: 2px;
+    background: transparent;
+    color: rgb(156, 163, 175);
+    cursor: pointer;
+    transition:
+      color 0.12s,
+      background 0.12s;
+  }
+
+  .instructions-dismiss:hover {
+    color: rgb(75, 85, 99);
+    background: rgb(243, 244, 246);
+  }
+
+  #eventsContainer .timeline-time {
+    top: 100px;
+  }
+
+  .design-primary .timeline-row {
+    display: grid;
+    grid-template-columns: minmax(132px, 160px) minmax(0px, 1fr);
+    gap: 12px;
+    align-items: start;
+  }
+
+  .design-primary .timeline-time {
+    position: sticky;
+    top: 56px;
+    border-width: medium;
+    border-style: none;
+    border-color: currentcolor;
+    border-image: initial;
+    border-radius: 2px;
+    padding: 1rem 2px 2px 0px;
+    background: transparent;
+    text-align: right;
+  }
+
+  .design-primary .timeline-events {
+    align-items: stretch;
+  }
+
+  .design-primary .timeline-events .event-card {
+    height: 100%;
+  }
+
+  .design-primary .timeline-events .event-card > div {
+    height: 100%;
+  }
+
+  .design-primary .timeline-events .event-card > div.absolute {
+    height: auto;
+  }
+
+  .sponsors-content {
+    display: grid;
+    gap: 1.35rem;
+  }
+
+  .related-heading-wrap {
+    margin-bottom: 1.15rem;
+    text-align: center;
+  }
+
+  .related-heading {
+    margin: 0px;
+    color: var(--text-0);
+    font-size: var(--step-1);
+    font-weight: 750;
+    line-height: 1.2;
+  }
+
+  .related-logo-img {
+    width: 100%;
+    height: 100%;
+    max-width: 148px;
+    max-height: 68px;
+    object-fit: contain;
+    object-position: center center;
+  }
+
+  .related-logo-text {
+    flex-direction: column;
+  }
+
+  .related-logo-name {
+    color: rgb(18, 38, 60);
+    font-size: var(--step-0);
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .related-card-body {
+    display: grid;
+    gap: 0.15rem;
+    min-width: 0px;
+    flex: 1 1 auto;
+  }
+
+  .related-card--featured .related-logo-img {
+    max-width: 200px;
+    max-height: 92px;
+  }
+
+  /* `--surface-1` did not survive the rebrand, so this resolved to nothing and
+     the dock had been sitting transparent with the schedule showing through it.
+     The blur and the 40px shadow are from the same era and do not belong in a
+     flat, ruled interface. */
+  .selection-overview {
+    background: var(--paper-2);
+  }
+
+  /* Summary and actions on one line, details full width beneath. The dock's own
+     `.sch-dock__row` never applied here — this markup uses its own inner
+     wrapper — so the buttons had been dropping to a second row. */
+  .selection-overview-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-s);
+  }
+
+  .selection-overview-summary {
+    flex: 1 1 20rem;
+    order: 1;
+  }
+
+  .selection-overview-actions {
+    order: 2;
+    flex: 0 0 auto;
+  }
+
+  .selection-overview-details {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .selection-overview-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 3.25rem;
+    padding: 1rem 1rem 0.75rem;
+    border: 0px;
+    border-radius: 2px;
+    background: transparent;
+    box-shadow: none;
+    color: var(--text-0);
+  }
+
+  .selection-overview-toggle:hover {
+  }
+
+  .selection-overview-toggle:focus-visible {
+    outline-offset: 2px;
+  }
+
+  .selection-overview-toggle span,
+  .selection-overview-toggle i {
+    color: inherit;
+  }
+
+  .selection-stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent;
+  }
+
+  .selection-stats-detail {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .selection-stats-detail-cell {
+    padding: 0.2rem 0px 0.55rem;
+    background: transparent;
+  }
+
+  .selection-stats-subtable {
+    margin-top: 0.2rem;
+  }
+
+  .design-primary .selection-overview {
+  }
+
+  .session-speaker-link {
+    border: 0px;
+    background: transparent;
+
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    padding: 0px;
+    margin: 0px;
+    cursor: pointer;
+    font: inherit;
+  }
+
+  .session-speaker-link:hover {
+  }
+
+  .session-speaker-link:focus-visible {
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .sponsor-history-title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .speaker-session-accordion {
+    margin: 0.35rem 0px 0.25rem;
+  }
+
+  .speaker-session-accordion-toggle {
+    cursor: pointer;
+
+    font-size: var(--step--1);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .speaker-session-accordion-toggle:hover {
+  }
+
+  .speaker-session-accordion-toggle:focus-visible {
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .speaker-session-accordion-body {
+    margin-top: 0.35rem;
+    font-size: var(--step--1);
+    color: var(--text-1);
+    line-height: 1.45;
+  }
+
+  .speaker-session-accordion-body p {
+    margin: 0px 0px 0.35rem;
+  }
+
+  .speaker-session-accordion-body p:last-child {
+    margin-bottom: 0px;
+  }
+
+  .speaker-session-accordion-body ul,
+  .speaker-session-accordion-body ol {
+    margin: 0.2rem 0px 0.45rem 1.1rem;
+  }
+
+  .speaker-session-accordion-body ul {
+    list-style: disc;
+  }
+
+  .speaker-session-accordion-body ol {
+    list-style: decimal;
+  }
+
+  .speaker-session-accordion-body li {
+    margin: 0px 0px 0.2rem;
+  }
+
+  .session-sponsor-block {
+    margin-top: 1rem;
+    border: 1px solid var(--line-0);
+    border-radius: 2px;
+
+    padding: 0.9rem;
+  }
+
+  .session-sponsor-block-head {
+    margin-bottom: 0.7rem;
+  }
+
+  .session-sponsor-grid {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .session-sponsor-card {
+    display: grid;
+    grid-template-columns: 92px minmax(0px, 1fr);
+    gap: 0.8rem;
+    align-items: center;
+  }
+
+  .session-sponsor-logo {
+    width: 92px;
+    min-width: 92px;
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 0.6rem;
+    border: 1px solid var(--line-0);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .session-sponsor-copy {
+    min-width: 0px;
+  }
+
+  .session-sponsor-actions {
+    grid-column: 2;
+    margin-top: 0.15rem;
+  }
+
+  .sponsor-history-session-list {
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .sponsor-history-session-items {
+    margin: 0px;
+    padding-left: 1.15rem;
+    color: var(--text-1);
+    font-size: var(--step--1);
+    line-height: 1.45;
+  }
+
+  .sponsor-history-session-items li + li {
+    margin-top: 0.18rem;
+  }
+
+  .sponsor-history-session-link {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .sponsor-history-session-link:hover {
+  }
+
+  .sponsor-history-session-link:focus-visible {
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .speaker-session-accordion-body h1,
+  .speaker-session-accordion-body h2,
+  .speaker-session-accordion-body h3,
+  .speaker-session-accordion-body h4,
+  .speaker-session-accordion-body h5,
+  .speaker-session-accordion-body h6 {
+    margin: 0.7rem 0px 0.38rem;
+    line-height: 1.3;
+    font-weight: 700;
+    color: var(--text-0);
+  }
+
+  .speaker-session-accordion-body h1 {
+    font-size: var(--step-1);
+  }
+
+  .speaker-session-accordion-body h2 {
+    font-size: var(--step-1);
+  }
+
+  .speaker-session-accordion-body h3 {
+    font-size: var(--step-0);
+  }
+
+  .speaker-session-accordion-body h4 {
+    font-size: var(--step-0);
+  }
+
+  .speaker-session-accordion-body h5 {
+    font-size: var(--step--1);
+  }
+
+  .speaker-session-accordion-body h6 {
+    font-size: var(--step--1);
+  }
+
+  .speaker-session-accordion-body h1,
+  .speaker-session-accordion-body h2,
+  .speaker-session-accordion-body h3,
+  .speaker-session-accordion-body h4,
+  .speaker-session-accordion-body h5,
+  .speaker-session-accordion-body h6 {
+    border-left: 2px solid var(--line-0);
+    padding-left: 0.5rem;
+  }
+
+  .speaker-session-accordion-body a {
+    text-decoration: underline 1.4px;
+    text-underline-offset: 2px;
+    font-weight: 500;
+  }
+
+  .speaker-session-accordion-body a:hover {
+  }
+
+  .speaker-session-accordion-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0px 0.95rem;
+    border: 1px solid var(--line-0);
+    border-radius: 2px;
+    overflow: hidden;
+    font-size: var(--step--1);
+  }
+
+  .speaker-session-accordion-body th {
+    text-align: left;
+    background: var(--surface-2);
+    color: var(--text-0);
+    font-weight: 700;
+    padding: 0.45rem 0.55rem;
+    border-bottom: 1px solid var(--line-0);
+  }
+
+  .speaker-session-accordion-body td {
+    padding: 0.45rem 0.55rem;
+    border-bottom: 1px solid var(--line-0);
+    color: var(--text-1);
+    vertical-align: top;
+  }
+
+  .speaker-session-accordion-body tbody tr:last-child td {
+    border-bottom: 0px;
+  }
+
+  .speaker-session-accordion-body blockquote {
+    margin: 0.7rem 0px 0.9rem;
+    padding: 0.5rem 0.75rem;
+    border-left: 3px solid var(--line-0);
+    background: var(--surface-2);
+    border-radius: 2px;
+    color: var(--text-1);
+  }
+
+  .speaker-session-accordion-body blockquote p {
+    margin: 0px;
+  }
+
+  .speaker-session-accordion-body pre {
+    margin: 0.75rem 0px 0.95rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: 2px;
+    border: 1px solid var(--line-0);
+    background: var(--surface-2);
+    color: var(--text-0);
+    overflow-x: auto;
+    line-height: 1.45;
+    font-size: var(--step--1);
+  }
+
+  .speaker-session-accordion-body pre:last-child {
+    margin-bottom: 0px;
+  }
+
+  .speaker-session-accordion-body pre code {
+    display: block;
+    white-space: pre;
+    background: transparent;
+    border: 0px;
+    padding: 0px;
+    color: inherit;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  }
+
+  .speaker-session-accordion-body code {
+    background: var(--surface-2);
+    border: 1px solid var(--line-0);
+    border-radius: 2px;
+    padding: 0.08rem 0.28rem;
+    color: var(--text-0);
+    font-size: var(--step--1);
+  }
+
+  .sponsor-modal-identity {
+    padding: 1.5rem 1.5rem 1.25rem;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.07);
+  }
+
+  .sponsor-modal-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .sponsor-modal-loading {
+    padding: 1.5rem;
+    color: var(--text-2);
+    font-size: var(--step-0);
+  }
+
+  .share-modal-copy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 2.75rem;
+    margin-top: 0.8rem;
+    border: 1px solid var(--line-0);
+    border-radius: 2px;
+    background: var(--surface-1);
+    color: var(--text-0);
+    font-size: var(--step-0);
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      background-color 0.15s,
+      border-color 0.15s,
+      color 0.15s;
+  }
+
+  .share-modal-copy:hover,
+  .share-modal-copy:focus-visible {
+    background: var(--surface-2);
+
+    outline: none;
+  }
+
+  .share-modal-copy-primary {
+    color: rgb(255, 255, 255);
+  }
+
+  .share-modal-copy-primary:hover,
+  .share-modal-copy-primary:focus-visible {
+    color: rgb(255, 255, 255);
+  }
+
+  .share-modal-option-title {
+    margin: 0px;
+    font-size: var(--step-0);
+    line-height: 1.35;
+    font-weight: 700;
+    color: var(--text-0);
+  }
+
+  .share-modal-option-text {
+    margin: 0.4rem 0px 0px;
+    font-size: var(--step--1);
+    line-height: 1.5;
+    color: var(--text-2);
+  }
+
+  .share-embed-toggles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.1rem;
+    margin: 0.6rem 0px;
+  }
+
+  .share-embed-toggles label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--step--1);
+    color: var(--text-1);
+    cursor: pointer;
+  }
+
+  .share-embed-code {
+    width: 100%;
+    resize: vertical;
+    font-family: var(--font-data);
+    font-size: var(--step--1);
+    line-height: 1.5;
+    color: var(--text-1);
+    background: var(--surface-0);
+    border: 1px solid var(--line-0);
+    border-radius: 2px;
+    padding: 0.6rem 0.7rem;
+    margin-bottom: 0.75rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+    overflow: auto;
+  }
+
+  .share-modal-card {
+    width: min(460px, 100%);
+  }
+
+  .share-modal-header {
+    align-items: center;
+  }
+
+  .share-modal-option.share-embed {
+    margin-top: 1.35rem;
+    padding: 1rem 1.05rem 1.05rem;
+
+    border-radius: 2px;
+  }
+
+  .share-embed .share-modal-option-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .share-embed .share-modal-option-title i {
+    font-size: var(--step--1);
+  }
+
+  .share-embed .share-modal-copy {
+    margin-top: 0px;
+  }
+
+  .theme-dark .sponsor-modal-identity {
+    border-bottom-color: rgba(255, 255, 255, 0.07);
+  }
+
+  .now-jump-btn {
+    background: transparent;
+  }
+
+  .now-jump-btn:hover {
+  }
+
+  .now-next-dot.is-next {
+  }
+
+  .now-next-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+    gap: 0.5rem;
+  }
+
+  .now-next-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0px;
+    flex: 1 1 0%;
+  }
+
+  #scheduleSubscribeBtn.is-unavailable {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  #scheduleSubscribeBtn.is-unavailable:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .sub-pop-copy.is-copied {
+  }
+
+  @media (min-width: 640px) {
+    .instructions-dismiss {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .related-card-body {
+      text-align: center;
+      justify-items: center;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .design-primary .timeline-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .design-primary .timeline-time {
+      position: static;
+      text-align: left;
+      padding: 0px;
+      margin-bottom: 2px;
+    }
+
+    .session-sponsor-card {
+      grid-template-columns: 76px minmax(0px, 1fr);
+      align-items: start;
+    }
+
+    .session-sponsor-logo {
+      width: 76px;
+      min-width: 76px;
+      max-width: 76px;
+    }
+
+    .session-sponsor-actions {
+      grid-column: 2;
+    }
+  }
+
+  /* --- RESTORED STRUCTURE ----------------------------------------------------
+     Found by auditing the pruned page against the deleted sheet rather than by
+     waiting for someone to notice. Same cause as the sponsor tiles: the converted
+     sheet had these classes, but only their decoration - the legacy sheet held
+     the layout.
+
+     The costly one was the Subscribe popover: .sub-wrap lost `position: relative`
+     and .sub-pop lost `position: absolute` and its width, so the popover would
+     have rendered inline, in the page flow, instead of over the header.
+     ------------------------------------------------------------------------ */
+
+  .sponsors-shell {
+    max-width: 1480px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .related-content {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .selection-overview-summary,
+  .selection-overview-actions,
+  .selection-overview-details-inner {
+    position: relative;
+  }
+
+  .selection-overview-details-inner {
+    border-top-color: var(--line-0);
+  }
+
+  .selection-overview-actions-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .selection-overview-action {
+    width: 100%;
+    min-height: 2.75rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .sub-pop {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    right: 0;
+    z-index: 60;
+    width: 21rem;
+    max-width: 88vw;
+    padding: 0.9rem;
+    flex-direction: column;
+    gap: 0.55rem;
+    border: 1px solid var(--rule-0);
+    background: var(--surface-0, #fff);
+  }
+
+  .sub-pop-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    height: 2.3rem;
+    border: 1px solid var(--accent, #d97706);
+    background: var(--accent, #d97706);
+    color: #fff;
+    font-size: var(--step--1);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .sub-pop-url {
+    flex: 1;
+    min-width: 0;
+    height: 2.2rem;
+    padding: 0 0.55rem;
+    border: 1px solid var(--rule-0);
+    background: var(--surface-1, #f8fafc);
+    color: var(--text-2, #475569);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: var(--step--2);
+  }
+
+  .sub-pop-copy {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    height: 2.2rem;
+    padding: 0 0.75rem;
+    cursor: pointer;
+    border: 1px solid var(--rule-0);
+    background: var(--surface-0, #fff);
+    color: var(--text-1, #374151);
+    font-size: var(--step--1);
+    font-weight: 500;
+  }
+
+  /* Second pass of the same audit: .sub-wrap is the popover's containing
+     block, so without `position: relative` the absolutely-positioned .sub-pop
+     escapes to the viewport. */
+  .sub-wrap {
+    position: relative;
+    flex: none;
+  }
+
+  .related-shell {
+    max-width: 1480px;
+    margin: 0 auto;
+  }
+
+  .sub-pop-note {
+    display: flex;
+    gap: 0.4rem;
+    margin: 0.05rem 0 0;
+    font-size: var(--step--1);
+    line-height: 1.45;
+    color: var(--text-2, #6b7280);
+  }
+
+  .theme-picker-menu {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    right: 0;
+    z-index: 60;
+    min-width: 13rem;
+    padding: 0.35rem;
+    border: 1px solid var(--line-0, #e5e7eb);
+    background: var(--surface-0, #fff);
   }
 }

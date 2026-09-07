@@ -1,0 +1,933 @@
+{
+  "stats": {
+    "events": 16,
+    "avgCoverage": 85,
+    "brokenImages": 85,
+    "speakerClusters": 2,
+    "sponsorClusters": 4
+  },
+  "speakerClusters": [
+    {
+      "key": "hunt jonathan",
+      "kind": "speaker",
+      "canonical": "Jonathan Hunt",
+      "variants": [
+        {
+          "name": "Jonathan Hunt",
+          "count": 2,
+          "ids": [],
+          "events": [
+            {
+              "label": "DrupalGov Online 2020",
+              "year": "2020",
+              "file": "events/drupalgovau/2020-online.json",
+              "talks": [
+                "Archives Central: A next-generation records repository"
+              ]
+            },
+            {
+              "label": "DrupalSouth Christchurch 2008",
+              "year": "2008",
+              "file": "events/drupalsouth/2008-christchurch.json",
+              "talks": [
+                "NZ Government web standards and Drupal"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "jonathan.hunt",
+          "count": 2,
+          "ids": [],
+          "events": [
+            {
+              "label": "DrupalSouth Christchurch 2008",
+              "year": "2008",
+              "file": "events/drupalsouth/2008-christchurch.json",
+              "talks": [
+                "Welcome",
+                "Welcome"
+              ]
+            }
+          ]
+        }
+      ],
+      "eventCount": 2,
+      "total": 4
+    },
+    {
+      "key": "h jeff",
+      "kind": "speaker",
+      "canonical": "Jeff h",
+      "variants": [
+        {
+          "name": "Jeff h",
+          "count": 2,
+          "ids": [],
+          "events": [
+            {
+              "label": "DrupalCamp Sydney 2008",
+              "year": "2008",
+              "file": "events/drupalsouth/2008-drupalcamp-sydney.json",
+              "talks": [
+                "Theming with CSS Frameworks",
+                "Theme Modifications"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Jeff H",
+          "count": 1,
+          "ids": [],
+          "events": [
+            {
+              "label": "DrupalCamp Sydney 2008",
+              "year": "2008",
+              "file": "events/drupalsouth/2008-drupalcamp-sydney.json",
+              "talks": [
+                "Panels 2.x"
+              ]
+            }
+          ]
+        }
+      ],
+      "eventCount": 1,
+      "total": 3
+    }
+  ],
+  "sponsorClusters": [
+    {
+      "key": "dropsolid",
+      "kind": "sponsor",
+      "canonical": "Dropsolid",
+      "variants": [
+        {
+          "name": "Dropsolid",
+          "count": 2,
+          "ids": [
+            "dropsolid",
+            "dropsolid-summit"
+          ],
+          "events": [
+            {
+              "label": "DrupalCon Rotterdam 2026",
+              "year": "2026",
+              "file": "events/drupalcon/eu/2026-rotterdam.json",
+              "tier": "Diamond",
+              "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/dropsolid.jpg"
+            }
+          ]
+        },
+        {
+          "name": "dropsolid",
+          "count": 1,
+          "ids": [
+            "dropsolid"
+          ],
+          "events": [
+            {
+              "label": "Drupal Dev Days Burgas 2024",
+              "year": "2024",
+              "file": "events/ddd/2024-burgas.json",
+              "tier": "Gold",
+              "image": ""
+            }
+          ]
+        }
+      ],
+      "eventCount": 2,
+      "total": 3
+    },
+    {
+      "key": "amazee io",
+      "kind": "sponsor",
+      "canonical": "amazee.io",
+      "variants": [
+        {
+          "name": "amazee.io",
+          "count": 2,
+          "ids": [
+            "amazeeio",
+            "sponsor-3"
+          ],
+          "events": [
+            {
+              "label": "DrupalCon Rotterdam 2026",
+              "year": "2026",
+              "file": "events/drupalcon/eu/2026-rotterdam.json",
+              "tier": "Platinum",
+              "image": "./img/sponsors/drupalcon-europe/2026-rotterdam/amazeeio.png"
+            },
+            {
+              "label": "DrupalGov Online 2020",
+              "year": "2020",
+              "file": "events/drupalgovau/2020-online.json",
+              "tier": "Diamond",
+              "image": "./img/sponsors/drupalgov/2020-online/sponsor-3.png"
+            }
+          ]
+        },
+        {
+          "name": "Amazee.io",
+          "count": 1,
+          "ids": [
+            "sponsor-1"
+          ],
+          "events": [
+            {
+              "label": "Drupal Camp Delhi New Delhi 2026",
+              "year": "2026",
+              "file": "events/drupalcamp/delhi/2026.json",
+              "tier": "Hosting Sponsor",
+              "image": "./img/sponsors/drupalcamp/2026-delhi/sponsor-1.svg"
+            }
+          ]
+        }
+      ],
+      "eventCount": 3,
+      "total": 3
+    },
+    {
+      "key": "drupalize me",
+      "kind": "sponsor",
+      "canonical": "Drupalize.me",
+      "variants": [
+        {
+          "name": "Drupalize.me",
+          "count": 1,
+          "ids": [
+            "drupalize-me"
+          ],
+          "events": [
+            {
+              "label": "DrupalCamp Rome 2025",
+              "year": "2025",
+              "file": "events/drupalcamp/italy/2025-rome.json",
+              "tier": "Community & Media Partner",
+              "image": "./img/sponsors/drupalcamp/2025-rome/drupalize-me.svg"
+            }
+          ]
+        },
+        {
+          "name": "Drupalize.Me",
+          "count": 1,
+          "ids": [
+            "drupalize-me"
+          ],
+          "events": [
+            {
+              "label": "DrupalCon Bogotá 2015",
+              "year": "2015",
+              "file": "events/drupalcon/la/2015-bogota.json",
+              "tier": "Module",
+              "image": "./img/sponsors/drupalcon/2015-bogota/drupalize-me.png"
+            }
+          ]
+        }
+      ],
+      "eventCount": 2,
+      "total": 2
+    },
+    {
+      "key": "platform sh",
+      "kind": "sponsor",
+      "canonical": "platform.sh",
+      "variants": [
+        {
+          "name": "platform.sh",
+          "count": 1,
+          "ids": [
+            "sponsor-13"
+          ],
+          "events": [
+            {
+              "label": "DrupalGov Online 2020",
+              "year": "2020",
+              "file": "events/drupalgovau/2020-online.json",
+              "tier": "Gold",
+              "image": "./img/sponsors/drupalgov/2020-online/sponsor-13.png"
+            }
+          ]
+        },
+        {
+          "name": "Platform.sh",
+          "count": 1,
+          "ids": [
+            "sponsor-1"
+          ],
+          "events": [
+            {
+              "label": "Drupal Mountain Camp Davos 2017",
+              "year": "2017",
+              "file": "events/drupalmountaincamp/2017-davos.json",
+              "tier": "Gold",
+              "image": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-1.png"
+            }
+          ]
+        }
+      ],
+      "eventCount": 2,
+      "total": 2
+    }
+  ],
+  "brokenImages": [
+    {
+      "event": "Drupal Camp Delhi New Delhi 2026",
+      "kind": "sponsor",
+      "title": "Specbee",
+      "path": "./img/sponsors/drupalcamp/2026-delhi/sponsor-3.png"
+    },
+    {
+      "event": "DrupalCamp Tokyo 2018",
+      "kind": "sponsor",
+      "title": "株式会社メタ・インフォ (Meta Info)",
+      "path": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-4.png"
+    },
+    {
+      "event": "DrupalCamp Tokyo 2018",
+      "kind": "sponsor",
+      "title": "KS Solutions",
+      "path": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-7.png"
+    },
+    {
+      "event": "DrupalCamp Tokyo 2018",
+      "kind": "sponsor",
+      "title": "大井電気株式会社 (Ooi Electric)",
+      "path": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-11.png"
+    },
+    {
+      "event": "DrupalCamp Tokyo 2018",
+      "kind": "sponsor",
+      "title": "ARTS",
+      "path": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-14.png"
+    },
+    {
+      "event": "DrupalCamp Tokyo 2018",
+      "kind": "sponsor",
+      "title": "@IT",
+      "path": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-17.png"
+    },
+    {
+      "event": "DrupalCamp Rome 2025",
+      "kind": "sponsor",
+      "title": "979",
+      "path": "./img/sponsors/drupalcamp/2025-rome/979.svg"
+    },
+    {
+      "event": "DrupalCamp Rome 2025",
+      "kind": "sponsor",
+      "title": "Posdata",
+      "path": "./img/sponsors/drupalcamp/2025-rome/posdata.svg"
+    },
+    {
+      "event": "DrupalCamp Rome 2025",
+      "kind": "sponsor",
+      "title": "Immedia",
+      "path": "./img/sponsors/drupalcamp/2025-rome/immedia.svg"
+    },
+    {
+      "event": "DrupalCamp Rome 2025",
+      "kind": "sponsor",
+      "title": "Stripedcodex",
+      "path": "./img/sponsors/drupalcamp/2025-rome/stripedcodex.svg"
+    },
+    {
+      "event": "DrupalCamp Rome 2025",
+      "kind": "sponsor",
+      "title": "WeeklyDrop",
+      "path": "./img/sponsors/drupalcamp/2025-rome/weeklydrop.png"
+    },
+    {
+      "event": "DrupalCamp Rome 2025",
+      "kind": "sponsor",
+      "title": "Drupalize.me",
+      "path": "./img/sponsors/drupalcamp/2025-rome/drupalize-me.svg"
+    },
+    {
+      "event": "DrupalCamp Rome 2025",
+      "kind": "sponsor",
+      "title": "Drupaleasy",
+      "path": "./img/sponsors/drupalcamp/2025-rome/drupaleasy.svg"
+    },
+    {
+      "event": "DrupalCamp Rome 2025",
+      "kind": "sponsor",
+      "title": "Come To Code",
+      "path": "./img/sponsors/drupalcamp/2025-rome/come-to-code.svg"
+    },
+    {
+      "event": "DrupalCamp Rome 2025",
+      "kind": "sponsor",
+      "title": "The Red Code",
+      "path": "./img/sponsors/drupalcamp/2025-rome/the-red-code.svg"
+    },
+    {
+      "event": "DrupalCamp Rome 2025",
+      "kind": "sponsor",
+      "title": "Coderful",
+      "path": "./img/sponsors/drupalcamp/2025-rome/coderful.svg"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Acquia",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/acquia.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Dropsolid",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/dropsolid.jpg"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Pantheon",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/pantheon.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "1xinternet",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/1xinternet.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "amazee.io",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/amazeeio.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Hinto",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/hinto.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "iO Digital",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/io-digital.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "SWIS",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/swis.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Annertech",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/annertech.jpg"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Big Blue Door",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/big-blue-door.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "CKEditor",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/ckeditor.jpg"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Droptica",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/droptica.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Factorial.io",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/factorial-io.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Freelygive",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/freelygive.jpg"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Mittwald",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/mittwald.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Reading Room",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/reading-room.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Synetic",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/synetic.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Vardot",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/vardot.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Agiledrop",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/agiledrop.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Calibrate",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/calibrate.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Zoocha",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/zoocha.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "1xinternet",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/1xinternet.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Acquia",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/acquia.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "E-sepia",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/e-sepia.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Jakala",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/jakala.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "JetBrains",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/jetbrains.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Private Packagist",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/private-packagist.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Tag1 Consulting",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/tag1-consulting.jpg"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "1xinternet",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/1xinternet.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Acquia",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/acquia.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "amazee.ai",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/amazee-ai.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Big Blue Door",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/big-blue-door.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "CKEditor",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/ckeditor-summit.jpg"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Dropsolid",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/dropsolid.jpg"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Pantheon",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/pantheon.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Reading Room",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/reading-room.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Tag1 Consulting",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/tag1-consulting.jpg"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "ADMIN Magazine",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/admin-magazine.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Linux Magazine",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/linux-magazine.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "Drop Times",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/drop-times.png"
+    },
+    {
+      "event": "DrupalCon Rotterdam 2026",
+      "kind": "sponsor",
+      "title": "The Weekly Drop",
+      "path": "./img/sponsors/drupalcon-europe/2026-rotterdam/the-weekly-drop.png"
+    },
+    {
+      "event": "DrupalCon Bogotá 2015",
+      "kind": "sponsor",
+      "title": "Softlite",
+      "path": "./img/sponsors/drupalcon/2015-bogota/softlite.png"
+    },
+    {
+      "event": "DrupalCon Bogotá 2015",
+      "kind": "sponsor",
+      "title": "MailChimp",
+      "path": "./img/sponsors/drupalcon/2015-bogota/mailchimp.png"
+    },
+    {
+      "event": "DrupalCon Bogotá 2015",
+      "kind": "sponsor",
+      "title": "Ubuntu",
+      "path": "./img/sponsors/drupalcon/2015-bogota/ubuntu.png"
+    },
+    {
+      "event": "DrupalCon Bogotá 2015",
+      "kind": "sponsor",
+      "title": "Invest in Bogota",
+      "path": "./img/sponsors/drupalcon/2015-bogota/invest-in-bogota.png"
+    },
+    {
+      "event": "DrupalCon Bogotá 2015",
+      "kind": "sponsor",
+      "title": "Drupalize.Me",
+      "path": "./img/sponsors/drupalcon/2015-bogota/drupalize-me.png"
+    },
+    {
+      "event": "DrupalCon Bogotá 2015",
+      "kind": "sponsor",
+      "title": "Cellar Door Media",
+      "path": "./img/sponsors/drupalcon/2015-bogota/cellar-door-media.png"
+    },
+    {
+      "event": "DrupalCon Bogotá 2015",
+      "kind": "sponsor",
+      "title": "PayU",
+      "path": "./img/sponsors/drupalcon/2015-bogota/payu.png"
+    },
+    {
+      "event": "DrupalCon Bogotá 2015",
+      "kind": "sponsor",
+      "title": "Anexus IT",
+      "path": "./img/sponsors/drupalcon/2015-bogota/anexus-it.png"
+    },
+    {
+      "event": "DrupalGov Online 2020",
+      "kind": "logo",
+      "title": "DrupalGov Online 2020",
+      "path": "./img/logos/drupalgov-logo.png"
+    },
+    {
+      "event": "DrupalGov Online 2020",
+      "kind": "sponsor",
+      "title": "Pantheon",
+      "path": "./img/sponsors/drupalgov/2020-online/sponsor-2.png"
+    },
+    {
+      "event": "DrupalGov Online 2020",
+      "kind": "sponsor",
+      "title": "Morpht",
+      "path": "./img/sponsors/drupalgov/2020-online/sponsor-5.png"
+    },
+    {
+      "event": "DrupalGov Online 2020",
+      "kind": "sponsor",
+      "title": "District CMS",
+      "path": "./img/sponsors/drupalgov/2020-online/sponsor-8.jpg"
+    },
+    {
+      "event": "DrupalGov Online 2020",
+      "kind": "sponsor",
+      "title": "Bliss Digital",
+      "path": "./img/sponsors/drupalgov/2020-online/sponsor-10.png"
+    },
+    {
+      "event": "DrupalGov Online 2020",
+      "kind": "sponsor",
+      "title": "platform.sh",
+      "path": "./img/sponsors/drupalgov/2020-online/sponsor-13.png"
+    },
+    {
+      "event": "DrupalJam Rotterdam 2026",
+      "kind": "logo",
+      "title": "DrupalJam Rotterdam 2026",
+      "path": "./img/logos/drupaljam/2026-rotterdam.svg"
+    },
+    {
+      "event": "Drupal Mountain Camp Davos 2017",
+      "kind": "sponsor",
+      "title": "Amazee Labs",
+      "path": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-2.png"
+    },
+    {
+      "event": "Drupal Mountain Camp Davos 2017",
+      "kind": "sponsor",
+      "title": "Somedia",
+      "path": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-3.png"
+    },
+    {
+      "event": "Drupal Mountain Camp Davos 2017",
+      "kind": "sponsor",
+      "title": "Wondrous",
+      "path": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-4.png"
+    },
+    {
+      "event": "Drupal Mountain Camp Davos 2017",
+      "kind": "sponsor",
+      "title": "Acquia",
+      "path": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-6.png"
+    },
+    {
+      "event": "Drupal Mountain Camp Davos 2017",
+      "kind": "sponsor",
+      "title": "Previon plus",
+      "path": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-9.png"
+    },
+    {
+      "event": "Drupal Mountain Camp Davos 2017",
+      "kind": "sponsor",
+      "title": "IWF Web Solutions",
+      "path": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-10.png"
+    },
+    {
+      "event": "Drupal Mountain Camp Davos 2017",
+      "kind": "sponsor",
+      "title": "netnode",
+      "path": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-13.png"
+    },
+    {
+      "event": "Drupal Mountain Camp Davos 2017",
+      "kind": "sponsor",
+      "title": "Soul Media",
+      "path": "./img/sponsors/drupalmountaincamp/2017-davos/sponsor-16.png"
+    },
+    {
+      "event": "DrupalSouth Christchurch 2008",
+      "kind": "logo",
+      "title": "DrupalSouth Christchurch 2008",
+      "path": "./img/logos/drupalsouth/2008-christchurch.png"
+    },
+    {
+      "event": "DrupalSouth Christchurch 2008",
+      "kind": "sponsor",
+      "title": "Signify",
+      "path": "./img/sponsors/drupalsouth/2008-christchurch/sponsor-2.png"
+    },
+    {
+      "event": "DrupalSouth Christchurch 2008",
+      "kind": "sponsor",
+      "title": "Evolved Development",
+      "path": "./img/sponsors/drupalsouth/2008-christchurch/sponsor-6.png"
+    },
+    {
+      "event": "DrupalSouth Community Day Canberra 2023",
+      "kind": "sponsor",
+      "title": "Ironstar",
+      "path": "./img/sponsors/drupalsouth-community-day/2023-canberra/sponsor-3.png"
+    },
+    {
+      "event": "DrupalSouth Community Day Canberra 2023",
+      "kind": "sponsor",
+      "title": "PreviousNext",
+      "path": "./img/sponsors/drupalsouth-community-day/2023-canberra/sponsor-6.png"
+    }
+  ],
+  "events": [
+    {
+      "file": "events/drupaljam/2026-rotterdam.json",
+      "label": "DrupalJam Rotterdam 2026",
+      "year": "2026",
+      "sessions": 11,
+      "missingMeta": [],
+      "score": 66
+    },
+    {
+      "file": "events/drupalcamp/delhi/2026.json",
+      "label": "Drupal Camp Delhi New Delhi 2026",
+      "year": "2026",
+      "sessions": 21,
+      "missingMeta": [
+        "logo"
+      ],
+      "score": 71
+    },
+    {
+      "file": "events/drupaljam/2008-breda.json",
+      "label": "DrupalJam Breda 2008",
+      "year": "2008",
+      "sessions": 13,
+      "missingMeta": [],
+      "score": 73
+    },
+    {
+      "file": "events/drupalcamp/den/2018-tokyo.json",
+      "label": "DrupalCamp Tokyo 2018",
+      "year": "2018",
+      "sessions": 21,
+      "missingMeta": [
+        "logo"
+      ],
+      "score": 79
+    },
+    {
+      "file": "events/drupalcamp/singapore/2014.json",
+      "label": "DrupalCamp Singapore 2014",
+      "year": "2014",
+      "sessions": 21,
+      "missingMeta": [
+        "logo"
+      ],
+      "score": 79
+    },
+    {
+      "file": "events/drupalmountaincamp/2017-davos.json",
+      "label": "Drupal Mountain Camp Davos 2017",
+      "year": "2017",
+      "sessions": 40,
+      "missingMeta": [
+        "logo"
+      ],
+      "score": 81
+    },
+    {
+      "file": "events/drupalgovau/2020-online.json",
+      "label": "DrupalGov Online 2020",
+      "year": "2020",
+      "sessions": 56,
+      "missingMeta": [],
+      "score": 85
+    },
+    {
+      "file": "events/ddd/2010-munich.json",
+      "label": "Drupal Dev Days Munich 2010",
+      "year": "2010",
+      "sessions": 77,
+      "missingMeta": [],
+      "score": 86
+    },
+    {
+      "file": "events/drupalsouth/2008-drupalcamp-sydney.json",
+      "label": "DrupalCamp Sydney 2008",
+      "year": "2008",
+      "sessions": 17,
+      "missingMeta": [],
+      "score": 86
+    },
+    {
+      "file": "events/drupalcamp/italy/2025-rome.json",
+      "label": "DrupalCamp Rome 2025",
+      "year": "2025",
+      "sessions": 19,
+      "missingMeta": [
+        "logo"
+      ],
+      "score": 88
+    },
+    {
+      "file": "events/drupalsouth/2008-christchurch.json",
+      "label": "DrupalSouth Christchurch 2008",
+      "year": "2008",
+      "sessions": 24,
+      "missingMeta": [],
+      "score": 89
+    },
+    {
+      "file": "events/drupalcamp/delhi/2011-april.json",
+      "label": "DrupalCamp New Delhi Gurgaon 2011",
+      "year": "2011",
+      "sessions": 7,
+      "missingMeta": [
+        "logo"
+      ],
+      "score": 92
+    },
+    {
+      "file": "events/drupalcon/la/2015-bogota.json",
+      "label": "DrupalCon Bogotá 2015",
+      "year": "2015",
+      "sessions": 48,
+      "missingMeta": [],
+      "score": 94
+    },
+    {
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "label": "DrupalCon Rotterdam 2026",
+      "year": "2026",
+      "sessions": 113,
+      "missingMeta": [],
+      "score": 96
+    },
+    {
+      "file": "events/drupalsouth/community-day/2023-canberra.json",
+      "label": "DrupalSouth Community Day Canberra 2023",
+      "year": "2023",
+      "sessions": 9,
+      "missingMeta": [],
+      "score": 96
+    },
+    {
+      "file": "events/ddd/2024-burgas.json",
+      "label": "Drupal Dev Days Burgas 2024",
+      "year": "2024",
+      "sessions": 53,
+      "missingMeta": [],
+      "score": 100
+    }
+  ],
+  "decisions": {
+    "aliases": {},
+    "distinct": []
+  },
+  "impact": {}
+}

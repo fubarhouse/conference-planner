@@ -256,6 +256,12 @@ export function scheduleSessionsToCalEvents(
 ) {
   return (sessions || [])
     .map((s) => {
+      // A barcamp session that was never placed has no DTSTART, so it cannot be
+      // a calendar entry at all. Dropping it is not a limitation to apologise
+      // for — exporting one would mean inventing the time the organisers
+      // deliberately left to the room. The event itself, and every timed thing
+      // on its spine, still export normally.
+      if (s.unscheduled) return null;
       const ev = sessionToCalEvent(s, { timezone });
       if (!ev) return null;
       const room = ev.location;

@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
-import { DATA_ROOT } from '../lib/roots.js';
+import { DATA_ROOT } from './lib/roots.js';
 
 // Reaching into node_modules for a prebuilt bundle used to work by accident; ajv 8
 // ships no such file, and a strict node_modules layout would not let us look anyway.

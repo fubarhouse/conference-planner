@@ -1,46 +1,36 @@
-# Blanket rules
 /*
 
-# Directories
-#
-# Note the shape: the blanket rule above hides everything at the root, so a
-# directory has to be re-included (`!/lib/`) BEFORE its contents can be — a
-# negation cannot reach inside a directory git has already excluded. Files added
-# to directories that only have a `/*` entry stay invisible, which is how a batch
-# of new modules once failed to reach a deploy.
 !/.github/
-!/.github/*
+!/.github/**
+!/.githooks/
+!/.githooks/**
 !/app/
-!/app/vendor/
-!/app/vendor/**
-!/lib/
-!/lib/*
-!/lib/__tests__/
-!/lib/__tests__/*
-!/app/content/*
-!/app/css/*
-!/app/data/events/*
-!/app/img/*
-!/app/js/*
-!/app/schemas/*
-!/docs/*
-!/lib/*
-!/scripts/install-git-hooks.mjs
-!/scripts/validate-data.mjs
+!/app/**
+/app/data/
+!/docs/
+!/docs/**
+!/scripts/
+!/scripts/**
+/scripts/import-*
+/scripts/enrich-*
+/scripts/resume-*
+/scripts/update-*
+!/terraform/
+!/terraform/**
+# The Go backend, vendor directory included: the Docker build runs offline, so
+# the dependencies have to be in the tree rather than fetched at build time.
+!/tools/
+!/tools/**
+# …but not the compiled binaries, which are ~18 MB each and are named after
+# the cmd/ directory they are built from.
+/tools/*/server
+/tools/*/cmd/*/server
+/tools/*/drupalcon-sync
+# …nor the one `pnpm run backend:build` writes.
+/.bin/
 
-# Files
-!/app/editor.html
-!/app/embed.js
-!/app/index.html
-!/app/manifest.webmanifest
-!/app/openapi.yaml
-!/app/planner.html
-!/app/styleguide.html
-!/app/data/catalog.json
-!/app/data/album-thumbs.json
-!/app/data/geocache.json
-!/app/data/sponsors.json
-!/app/data/themes.json
+!/.docker/
+!/.docker/**
 !/.dockerignore
 !/.env.example
 !/.gitignore

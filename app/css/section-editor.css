@@ -435,8 +435,10 @@
     color: var(--ink-2);
   }
 
-  /* The add/edit person dialog. Declares its own layout because the legacy
-     sheets the editor still imports style .session-modal-body as a grid. */
+  /* The add/edit person dialog. Declares its own layout because a legacy sheet
+     used to style .session-modal-body as a grid. The editor imports neither
+     schedule.css nor components.css now, so nothing does — but saying it outright
+     is why the prune did not move this dialog. */
   .person-form {
     display: flex;
     flex-direction: column;
@@ -714,7 +716,8 @@
     color: var(--ink-2);
   }
 
-  #editorMain input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']),
+  #editorMain
+    input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']),
   #editorMain select,
   #editorMain textarea {
     inline-size: 100%;
@@ -1332,7 +1335,6 @@
     border: 1px solid var(--rule-0);
     background: var(--paper-2);
   }
-
 
   /* ========================================================================
      THE EDITOR'S MODALS AND BANNERS
@@ -2836,7 +2838,7 @@
   }
 
   .tl-resize-handle::after {
-    content: "";
+    content: '';
     display: block;
     inline-size: 20px;
     block-size: 2px;
@@ -2869,7 +2871,7 @@
   }
 
   .tl-room-col.is-drop-target::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     z-index: 1;
@@ -3038,27 +3040,27 @@
      workspace changes colour in one move and the per-workspace work is about
      structure rather than repainting. Deleted with the legacy sheets. */
   body:has(#editorMain) {
-    --bg-0: var(--paper-0) !important;
-    --bg-1: var(--paper-0) !important;
-    --surface-0: var(--paper-1) !important;
-    --surface-1: var(--paper-1) !important;
-    --surface-2: var(--paper-2) !important;
-    --text-0: var(--ink-0) !important;
-    --text-1: var(--ink-1) !important;
-    --text-2: var(--ink-2) !important;
-    --text-3: var(--ink-2) !important;
-    --line-0: var(--rule-0) !important;
-    --gold: var(--brand-1-ink) !important;
-    --gold-soft: color-mix(in srgb, var(--brand-1-ink) 10%, transparent) !important;
-    --pl-line: var(--rule-0) !important;
-    --pl-r: 2px !important;
-    --pl-r-sm: 2px !important;
-    --fs-nano: var(--step--2) !important;
-    --fs-micro: var(--step--2) !important;
-    --fs-xs: var(--step--2) !important;
-    --fs-sm: var(--step--1) !important;
-    --fs-md: var(--step--1) !important;
-    --fs-lg: var(--step-1) !important;
+    --bg-0: var(--paper-0);
+    --bg-1: var(--paper-0);
+    --surface-0: var(--paper-1);
+    --surface-1: var(--paper-1);
+    --surface-2: var(--paper-2);
+    --text-0: var(--ink-0);
+    --text-1: var(--ink-1);
+    --text-2: var(--ink-2);
+    --text-3: var(--ink-2);
+    --line-0: var(--rule-0);
+    --gold: var(--brand-1-ink);
+    --gold-soft: color-mix(in srgb, var(--brand-1-ink) 10%, transparent);
+    --pl-line: var(--rule-0);
+    --pl-r: 2px;
+    --pl-r-sm: 2px;
+    --fs-nano: var(--step--2);
+    --fs-micro: var(--step--2);
+    --fs-xs: var(--step--2);
+    --fs-sm: var(--step--1);
+    --fs-md: var(--step--1);
+    --fs-lg: var(--step-1);
   }
 
   body {
@@ -3099,7 +3101,8 @@
   /* Tailwind's field chrome inside the workspaces. NOT `background-image` on
      selects — the drawn caret IS a background image, and clearing it blanket
      is what removed the carets on the schedule. */
-  #editorMain input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']),
+  #editorMain
+    input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']),
   #editorMain select,
   #editorMain textarea {
     background-color: transparent !important;
@@ -3368,4 +3371,1239 @@
     gap: var(--sp-2xs);
     margin-inline-start: auto;
   }
+}
+
+@layer section {
+  /* --- PORTED FROM schedule.css ------------------------------------------------
+   The editor loaded all 78 KB of schedule.css to use 2% of it — 27 classes,
+   measured from editor.js's import closure, not guessed. They are here so that
+   import can go, which it has.
+
+   Kept as they were in behaviour, not in spelling: the font sizes arrived as
+   nineteen distinct literals between 0.72rem and 1.25rem — drift rather than
+   design — and are collapsed onto the --step-* scale. The promo image's loading
+   shimmer lost its gradient (brand/DECISIONS.md forbids them); a flat
+   translucent surface still reads as "not here yet".
+
+   These are session/speaker/sponsor preview surfaces the editor shares with the
+   schedule. If the schedule's own copies change, these do not follow — that is
+   the cost of the split, and it is cheaper than shipping the whole sheet.
+   -------------------------------------------------------------------------- */
+
+  .sponsor-logo-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 148px;
+    max-height: 68px;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .sponsor-logo-name {
+    color: #12263c;
+    font-size: var(--step-0);
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .sponsor-logo-subtitle {
+    color: #56697d;
+    font-size: var(--step--1);
+    font-weight: 500;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .event-promo-card {
+    display: grid;
+    grid-template-columns: 142px minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: start;
+    min-height: 106px;
+  }
+
+  .event-promo-body {
+    min-height: 106px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .event-promo-action {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.6rem;
+    padding: 0.45rem 0.8rem;
+    border-radius: 2px;
+    border: 1px solid rgba(129, 168, 205, 0.28);
+    background: rgba(255, 255, 255, 0.58);
+    color: #244563;
+    font-size: var(--step--1);
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    transition:
+      background-color 140ms ease,
+      border-color 140ms ease,
+      color 140ms ease;
+  }
+
+  .event-promo-action:hover,
+  .event-promo-action:focus-visible {
+    background: rgba(255, 255, 255, 0.78);
+    border-color: rgba(112, 157, 199, 0.42);
+    color: #173550;
+    outline: none;
+  }
+
+  .event-promo-image-frame {
+    position: relative;
+    width: 142px;
+    height: 106px;
+    min-width: 142px;
+    min-height: 106px;
+    overflow: hidden;
+    border-radius: 2px;
+    border: 1px solid rgba(209, 213, 219, 1);
+    background: rgba(255, 255, 255, 0.86);
+    flex-shrink: 0;
+  }
+
+  .event-promo-image {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 1;
+    transition: opacity 160ms ease;
+  }
+
+  .design-primary .event-promo-action:hover,
+  .session-modal-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.5rem;
+    font-size: var(--step--1);
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: var(--accent);
+    border-radius: 2px;
+  }
+
+  .session-modal-back:hover {
+    background: rgba(0, 120, 191, 0.08);
+  }
+
+  .speaker-modal-count-badge {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.22rem 0.52rem;
+    border-radius: 2px;
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line-0));
+    background: color-mix(in srgb, var(--accent) 14%, var(--surface-2));
+    color: var(--text-0);
+    font-size: var(--step--1);
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .session-modal-meta-label {
+    font-weight: 700;
+    color: var(--text-1);
+  }
+
+  .session-modal-meta-value {
+    min-width: 0;
+  }
+
+  .speaker-session-card {
+    border-top: 0.5px solid rgba(0, 0, 0, 0.07);
+    padding: 0.85rem 0.85rem;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .speaker-session-card:first-child {
+    border-top: none;
+  }
+
+  .session-description-preview h1,
+  .session-description-preview h2,
+  .session-description-preview h3,
+  .session-description-preview h4,
+  .session-description-preview h5,
+  .session-description-preview h1,
+  .session-description-preview h2,
+  .session-description-preview h3,
+  .session-description-preview h4,
+  .session-description-preview h5,
+  .sponsor-modal-body .speaker-session-card {
+    padding: 0.85rem 1.5rem;
+  }
+
+  .theme-dark .session-modal-back {
+    color: #0a84ff;
+  }
+
+  .theme-dark .session-modal-back:hover {
+    background: rgba(10, 132, 255, 0.12);
+  }
+
+  .theme-dark .speaker-session-card {
+    border-top-color: rgba(255, 255, 255, 0.07);
+  }
+
+  @media (max-width: 639px) {
+    .event-promo-card {
+      grid-template-columns: 142px minmax(0, 1fr);
+      gap: 0.75rem;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .event-promo-card {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+
+    .event-promo-image-frame {
+      width: 100%;
+      height: auto;
+      min-width: 0;
+      min-height: 0;
+      aspect-ratio: 142 / 106;
+    }
+
+    .event-promo-body {
+      min-height: 0;
+    }
+
+    .sponsor-logo-image {
+      max-width: 120px;
+      max-height: 56px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .session-modal-overlay {
+      padding: 0;
+      align-items: flex-start;
+      overflow-y: auto;
+    }
+
+    .session-modal-back {
+      min-height: 44px;
+    }
+
+    .session-modal-close {
+      width: 2.75rem;
+      height: 2.75rem;
+    }
+  }
+}
+
+@layer section {
+  /* --- PORTED FROM components.css ----------------------------------------------
+   The editor used 41 of components.css's 185 classes — mostly the venue map
+   (`vmap-*`) plus toolbar and sidebar pieces. Ported so that import could go,
+   which it has. Measured from editor.js's import closure, not guessed.
+
+   Twelve declarations were DROPPED rather than ported: they were built on
+   `var(--accent)` / `var(--accent-strong)`, which are used 132 times across
+   app/css and defined NOWHERE. They already computed to nothing — verified,
+   `.vmap-pin` resolved to `background: none` before this change — so dropping
+   them preserves behaviour. Giving them a live colour would be a redesign, and
+   this is a prune. The venue map's primary buttons and pins therefore have no
+   fill, as they already did; someone should decide what colour they want.
+   -------------------------------------------------------------------------- */
+
+  @media (min-width: 640px) {
+    .sidebar-tab-btn.is-active .sidebar-item-icon {
+      color: var(--gold, #b06f12);
+    }
+
+    .sidebar-item-icon {
+      font-size: var(--step--1);
+      flex-shrink: 0;
+      color: rgba(0, 0, 0, 0.45);
+      line-height: 1;
+    }
+
+    .theme-dark .sidebar-tab-btn.is-active .sidebar-item-icon {
+      color: #e2ac57;
+    }
+
+    .theme-dark .sidebar-item-icon {
+      color: rgba(255, 255, 255, 0.42);
+    }
+  }
+
+  .planner-sheet-font {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  }
+
+  .mobile-sheet-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 2px;
+    background: rgba(120, 120, 128, 0.16);
+    color: rgba(60, 60, 67, 0.6);
+    font-size: var(--step-0);
+    line-height: 1;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 80ms;
+  }
+
+  .mobile-sheet-close:active {
+    background: rgba(120, 120, 128, 0.28);
+  }
+
+  body.theme-dark .mobile-sheet-close {
+    background: rgba(120, 120, 128, 0.32);
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .toolbar-path-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 0.75rem;
+    height: 2.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 2px;
+    font-family: monospace;
+    font-size: var(--step--1);
+    color: #6b7280;
+    overflow: hidden;
+    white-space: nowrap;
+    min-width: 0;
+  }
+
+  .toolbar-path-chip i {
+    flex-shrink: 0;
+    font-size: var(--step--2);
+  }
+
+  .toolbar-path-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .toolbar-path-row .toolbar-path-text {
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  .theme-dark .toolbar-path-chip {
+    background: var(--surface-1);
+    border-color: var(--line-0);
+    color: var(--text-2);
+  }
+
+  @media (max-width: 639px) {
+    body.session-modal-open #scheduleEventFinderTab {
+      color: #007aff;
+    }
+
+    body.theme-dark.session-modal-open #scheduleEventFinderTab {
+      color: #0a84ff;
+    }
+  }
+}
+
+@layer section {
+  /* --- SOURCES (provenance) ------------------------------------------------
+     One type system for the whole tab, because the thing being read is a
+     register and a register that changes voice every three rows cannot be
+     skimmed:
+
+       .src-head   section titles          serif, sentence case
+       .src-tag    state and counts        mono, uppercase, boxed
+       .src-sub    quiet facts             mono, uppercase, no box
+       .src-url    addresses               mono, underline on HOVER only
+       .src-btn    anything you can press  mono, uppercase, boxed
+       .src-input
+       .src-select fields you type/choose  underlined (the editor's house style)
+
+     The rule that keeps it honest: boxed things are pressed, underlined things
+     are typed into, and nothing else is underlined. Colour appears only where
+     it encodes state somebody must act on. */
+
+  /* ── shared type ───────────────────────────────────────────────────────── */
+  .src-head {
+    margin: 0;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--ink-0);
+  }
+
+  .src-tag,
+  .src-sub,
+  .src-stat__label,
+  .src-field__label,
+  .src-check,
+  .src-group__head,
+  .src-toolbar__count {
+    font-family: var(--font-data);
+    font-size: var(--fs-nano);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .src-tag {
+    padding: 1px 6px;
+    border: 1px solid var(--rule-1);
+    border-radius: 2px;
+    color: var(--ink-1);
+    white-space: nowrap;
+  }
+
+  /* Gold is reserved for the one state that means a person signed off. */
+  .src-tag--verified {
+    border-color: var(--gold);
+    background: var(--gold);
+    color: var(--paper-0);
+  }
+
+  .src-tag--accepted {
+    border-color: var(--gold);
+  }
+
+  .src-tag--warn,
+  .src-tag--auto {
+    border-color: var(--gold);
+    color: var(--ink-0);
+  }
+
+  .src-tag--stated,
+  .src-tag--dash,
+  .src-tag--none {
+    border-style: dashed;
+    color: var(--ink-2);
+  }
+
+  .src-sub {
+    color: var(--ink-2);
+  }
+
+  /* An uncited source supports nothing. Dashed rather than red: usually a
+     record lost its reference, occasionally the source landed ahead of the data. */
+  .src-sub--flag {
+    padding: 1px 6px;
+    border: 1px dashed var(--rule-1);
+    border-radius: 2px;
+  }
+
+  .src-note {
+    margin-block: 4px var(--sp-2xs);
+    font-size: var(--fs-xs);
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+
+  .src-note--live {
+    min-block-size: 1.2em;
+    margin-block-end: 0;
+  }
+
+  /* A pasted archive.org URL rewrites itself into url + via. Announcing that
+     before it happens is the difference between a feature and a bug report. */
+  .src-note--wayback,
+  .src-note--stated {
+    color: var(--ink-1);
+  }
+
+  .src-empty {
+    padding-block: var(--sp-s);
+    font-size: var(--fs-sm);
+    color: var(--ink-2);
+    text-align: center;
+  }
+
+  .src-url {
+    font-family: var(--font-data);
+    font-size: var(--fs-sm);
+    color: var(--ink-0);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  a.src-url:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  /* A stated source IS its text, not an address — the one place a non-mono
+     face is right, because it is a sentence. */
+  .src-url--stated {
+    font-family: inherit;
+    font-style: italic;
+    color: var(--ink-1);
+  }
+
+  /* ── the one button ────────────────────────────────────────────────────── */
+  .src-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    min-block-size: 1.55rem;
+    padding: 2px 8px;
+    border: 1px solid var(--rule-1);
+    border-radius: 2px;
+    background: none;
+    font-family: var(--font-data);
+    font-size: var(--fs-nano);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    color: var(--ink-1);
+    cursor: pointer;
+  }
+
+  .src-btn:hover {
+    border-color: var(--gold);
+    color: var(--ink-0);
+  }
+
+  .src-btn--go {
+    border-color: var(--gold);
+    background: var(--gold);
+    color: var(--paper-0);
+  }
+
+  .src-btn--go:hover {
+    color: var(--paper-0);
+  }
+
+  .src-btn--on {
+    border-color: var(--gold);
+    background: var(--gold);
+    color: var(--paper-0);
+  }
+
+  .src-btn--quiet {
+    border-style: dashed;
+    color: var(--ink-2);
+  }
+
+  .src-btn--drop {
+    inline-size: 1.55rem;
+    padding: 0;
+    font-size: var(--fs-sm);
+    color: var(--ink-2);
+  }
+
+  .src-btn--drop:hover {
+    border-color: var(--status-bad);
+    color: var(--status-bad);
+  }
+
+  /* ── headline strip ────────────────────────────────────────────────────── */
+  .src-overview {
+    display: flex;
+    flex-wrap: wrap;
+    margin-block-end: var(--sp-s);
+    border: 1px solid var(--rule-0);
+    border-inline-start: 0;
+  }
+
+  .src-stat {
+    display: flex;
+    flex: 1 1 6rem;
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--sp-2xs) var(--sp-xs);
+    border-inline-start: 1px solid var(--rule-0);
+  }
+
+  .src-stat--span {
+    flex: 2 1 12rem;
+  }
+
+  .src-stat__value {
+    font-family: var(--font-data);
+    font-size: var(--fs-lg);
+    line-height: 1.1;
+    color: var(--ink-0);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .src-stat__value--date {
+    font-size: var(--fs-sm);
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .src-stat__none {
+    color: var(--ink-2);
+  }
+
+  .src-stat__label {
+    color: var(--ink-2);
+  }
+
+  .src-stat--good .src-stat__value {
+    color: var(--gold);
+  }
+
+  /* A rule down the tile rather than a highlight behind the figure: the number
+     is still the number, and the mark says "this one is owed". */
+  .src-stat--warn {
+    border-inline-start-color: var(--gold);
+    border-inline-start-width: 2px;
+  }
+
+  .src-stat--bad .src-stat__value {
+    color: var(--status-bad);
+  }
+
+  /* ── panels (calendar feed, unfiled URLs, add a source) ────────────────── */
+  .src-panel {
+    margin-block-end: var(--sp-s);
+    padding: var(--sp-xs) var(--sp-s) var(--sp-s);
+    border: 1px solid var(--rule-0);
+  }
+
+  /* The two panels that ask for an action get the accent edge; the feed is a
+     setting, not a job, so it does not. */
+  .src-panel--act {
+    border-inline-start: 3px solid var(--gold);
+  }
+
+  .src-panel__head {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    padding-block-end: var(--sp-3xs);
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .src-panel__head .src-btn {
+    margin-inline-start: auto;
+  }
+
+  /* ── fields ────────────────────────────────────────────────────────────── */
+  .src-fields {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--sp-s);
+    margin-block-start: var(--sp-2xs);
+  }
+
+  .src-field {
+    display: flex;
+    flex: 1 1 18rem;
+    flex-direction: column;
+    gap: 2px;
+    min-inline-size: 0;
+  }
+
+  .src-field--wide {
+    flex: 3 1 24rem;
+  }
+
+  .src-field__label {
+    color: var(--ink-2);
+  }
+
+  .src-field__note {
+    margin-inline-start: 4px;
+    color: var(--ink-2);
+    opacity: 0.7;
+  }
+
+  .src-check {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-block-end: var(--sp-3xs);
+    color: var(--ink-1);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .src-status {
+    margin-block: var(--sp-2xs) 0;
+    padding-inline-start: var(--sp-2xs);
+    border-inline-start: 2px solid var(--rule-1);
+    font-size: var(--fs-xs);
+    color: var(--ink-2);
+  }
+
+  /* The one state where a job may rewrite the dataset on its own says so in
+     the accent, because it is the only setting on this page with teeth. */
+  .src-status--auto {
+    border-inline-start-color: var(--gold);
+    color: var(--ink-0);
+  }
+
+  /* ── unfiled URLs ──────────────────────────────────────────────────────── */
+  .src-stray-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .src-stray {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    padding-block: var(--sp-3xs);
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .src-stray__main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 1px;
+    min-inline-size: 0;
+  }
+
+  /* ── toolbar ───────────────────────────────────────────────────────────── */
+  .src-toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-2xs);
+    margin-block: var(--sp-2xs) var(--sp-xs);
+  }
+
+  .src-toolbar__count {
+    margin-inline-start: auto;
+    padding-inline-start: var(--sp-2xs);
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+
+  /* ── the register ──────────────────────────────────────────────────────── */
+  .src-register {
+    margin-block-end: var(--sp-s);
+  }
+
+  /* ── accordions ────────────────────────────────────────────────────────── */
+  .src-group {
+    margin-block-end: var(--sp-2xs);
+    border: 1px solid var(--rule-0);
+  }
+
+  .src-group__head {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    inline-size: 100%;
+    padding: var(--sp-2xs) var(--sp-xs);
+    border: 0;
+    background: none;
+    color: var(--ink-1);
+    cursor: pointer;
+    text-align: start;
+  }
+
+  .src-group__head:hover {
+    background: var(--paper-1);
+    color: var(--ink-0);
+  }
+
+  .src-group.is-open .src-group__head {
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .src-group__caret {
+    inline-size: 0;
+    block-size: 0;
+    flex-shrink: 0;
+    border-block-start: 4px solid transparent;
+    border-block-end: 4px solid transparent;
+    border-inline-start: 5px solid currentcolor;
+    transition: transform 120ms ease;
+  }
+
+  .src-group.is-open .src-group__caret {
+    transform: rotate(90deg);
+  }
+
+  .src-group__title {
+    color: var(--ink-0);
+    letter-spacing: 0.06em;
+  }
+
+  .src-group__flags {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3xs);
+    margin-inline-start: auto;
+  }
+
+  .src-list {
+    display: flex;
+    flex-direction: column;
+    padding-inline: var(--sp-xs);
+  }
+
+  /* ── one row ───────────────────────────────────────────────────────────── */
+  .src-row {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-xs);
+    padding-block: var(--sp-2xs);
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .src-row:last-child {
+    border-block-end: 0;
+  }
+
+  .src-row--invalid {
+    box-shadow: inset 3px 0 0 var(--status-bad);
+    padding-inline-start: var(--sp-2xs);
+  }
+
+  .src-row__main {
+    min-inline-size: 0;
+    flex: 1;
+  }
+
+  .src-row__label {
+    overflow-wrap: anywhere;
+  }
+
+  .src-row__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--sp-3xs);
+    margin-block-start: 3px;
+  }
+
+  .src-problem {
+    margin-block-start: 3px;
+    font-size: var(--fs-xs);
+    color: var(--status-bad);
+  }
+
+  /* Recordings, for the pages a session was read off. Read-only: a recording
+     belongs to the session, and the Sessions tab is where a session is edited. */
+  .src-row__video {
+    display: flex;
+    justify-content: flex-end;
+    flex-shrink: 0;
+    min-inline-size: 5.5rem;
+  }
+
+  .src-row__used {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-shrink: 0;
+    gap: 1px;
+  }
+
+  .src-row__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3xs);
+    flex-shrink: 0;
+  }
+
+  /* ── add a source ──────────────────────────────────────────────────────── */
+  .src-add {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    margin-block-start: var(--sp-2xs);
+  }
+}
+
+@layer section {
+  /* The sponsor listing page — the one field that fixes the archive's weakest
+     attribution, so it sits with the sponsors rather than in the Sources tab. */
+  .src-inline {
+    display: block;
+    margin-block: var(--sp-2xs) 0;
+  }
+
+  .src-inline__label {
+    display: block;
+    font-family: var(--font-data);
+    font-size: var(--fs-nano);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-2);
+  }
+
+  .src-inline__note {
+    margin-block: 2px 0;
+    font-size: var(--fs-xs);
+    color: var(--ink-2);
+  }
+}
+
+@layer overrides {
+  /* The editor's house form style is one full-width underlined field per line.
+     Right for the meta form, wrong for a register: these controls sit several
+     to a row, dozens of rows deep. So the SIZE is overridden here and the
+     underline is not — the baseline rule carries `!important`, which no layer
+     or specificity can beat, and it is what makes a typed field legible as one.
+     `#editorMain` is carried only to out-specify that baseline; the class alone
+     always lost to it, which is why these selects used to render full-width. */
+  #editorMain .src-select,
+  #editorMain .src-input {
+    inline-size: auto;
+    min-block-size: 1.55rem;
+    padding: 2px 4px 1px;
+    background: none;
+    font-family: var(--font-data);
+    font-size: var(--fs-nano);
+    color: var(--ink-0);
+  }
+
+  /* A native dropdown paints its OPEN list from the control's own colours, and
+     `background: none` left that list transparent — white text on white in the
+     dark theme, which is unreadable and fails WCAG 1.4.3. The popup needs real
+     values, on both the select and its options, in both themes. */
+  #editorMain .src-select,
+  #editorMain .src-select option {
+    background-color: var(--paper-0);
+    color: var(--ink-0);
+  }
+
+  /* Wide enough for the longest label plus its "— check" suffix, so a kind is
+     never read half-cut. One line, never wrapped. */
+  #editorMain .src-select {
+    inline-size: 11.5rem;
+    max-inline-size: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  #editorMain .src-select--wide {
+    inline-size: 15rem;
+  }
+
+  /* Fills whatever holds it. NOT `flex: 1 1 <basis>` — inside `.src-field`,
+     which stacks its label above its control, that basis is a BLOCK size and
+     the field renders 14rem tall. Growing is granted only by the row
+     containers below, where the main axis really is horizontal. */
+  #editorMain .src-input {
+    inline-size: 100%;
+    min-inline-size: 0;
+    font-family: inherit;
+    font-size: var(--fs-sm);
+  }
+
+  #editorMain .src-toolbar .src-input,
+  #editorMain .src-add .src-input {
+    flex: 1 1 12rem;
+  }
+
+  /* An address reads as an address wherever it appears — the same mono face
+     the register uses for `.src-url`. A search box and the add-a-source box
+     are not addresses (one is a query, the other may be a sentence), so they
+     keep the body face. */
+  #editorMain .src-input[type='url'] {
+    font-family: var(--font-data);
+    font-size: var(--fs-sm);
+  }
+
+  #editorMain .src-input--date {
+    flex: 0 0 auto;
+    inline-size: 7.6rem;
+    min-block-size: 0;
+    font-family: var(--font-data);
+    font-size: var(--fs-sm);
+    text-align: end;
+  }
+
+  #editorMain .src-check input {
+    inline-size: auto;
+    min-block-size: 0;
+  }
+}
+
+@layer section {
+  /* --- CALENDAR FEED DIFF ---------------------------------------------------
+     What upstream publishes, against what the archive holds, shown before
+     anything is written. It borrows the register's type system wholesale —
+     `.src-tag`, `.src-btn`, `.src-url`, `.src-sub` — because it is the same
+     material: addresses, counts, state and things you press.
+
+     The one thing it adds is direction. A row that changes shows both values
+     with the old one struck through, because "the time moved" is not a fact you
+     can check without seeing what it moved FROM. */
+  .src-feed__act {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    margin-block-start: var(--sp-xs);
+    padding-block-start: var(--sp-2xs);
+    border-block-start: 1px solid var(--rule-0);
+  }
+
+  .fd-card {
+    display: flex;
+    flex-direction: column;
+    inline-size: min(60rem, 94vw);
+    max-block-size: 88vh;
+    background: var(--paper-0);
+    border: 1px solid var(--rule-1);
+    box-shadow: 0 24px 60px rgb(0 0 0 / 22%);
+  }
+
+  .fd-card--slim {
+    inline-size: min(34rem, 94vw);
+  }
+
+  .fd-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--sp-s);
+    padding: var(--sp-s);
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .fd-title {
+    margin: 2px 0 0;
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    color: var(--ink-0);
+  }
+
+  .fd-title--bad {
+    color: var(--status-bad);
+  }
+
+  .fd-detail {
+    margin: 4px 0 0;
+    font-size: var(--fs-sm);
+    color: var(--ink-2);
+  }
+
+  .fd-source {
+    margin: 0;
+    padding: var(--sp-2xs) var(--sp-s);
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .fd-source .src-sub {
+    margin-inline-end: var(--sp-3xs);
+  }
+
+  /* The diff itself scrolls; the header and the decision do not, so the count
+     you are agreeing to is never scrolled off the screen. */
+  .fd-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--sp-s);
+  }
+
+  .fd-section {
+    margin-block-end: var(--sp-m);
+    padding-inline-start: var(--sp-2xs);
+    border-inline-start: 2px solid var(--rule-1);
+  }
+
+  .fd-section:last-child {
+    margin-block-end: 0;
+  }
+
+  /* Only what an import ACTS on carries the accent. The held sections stay grey
+     so "we will change this" and "you must deal with this" never look alike. */
+  .fd-section--add,
+  .fd-section--change {
+    border-inline-start-color: var(--gold);
+  }
+
+  .fd-section--remove {
+    border-inline-start-color: var(--status-bad);
+  }
+
+  .fd-section__head {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+  }
+
+  .fd-section__title {
+    margin: 0;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--ink-0);
+  }
+
+  .fd-section__note {
+    margin: 2px 0 var(--sp-2xs);
+    font-size: var(--fs-xs);
+    color: var(--ink-2);
+  }
+
+  .fd-section__more {
+    margin: var(--sp-3xs) 0 0;
+    font-family: var(--font-data);
+    font-size: var(--fs-nano);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-2);
+  }
+
+  .fd-rows {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-block-start: 1px solid var(--rule-0);
+  }
+
+  .fd-row {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--sp-3xs) var(--sp-2xs);
+    padding-block: var(--sp-3xs);
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .fd-row__title {
+    flex: 1 1 18rem;
+    min-inline-size: 0;
+    font-size: var(--fs-sm);
+    color: var(--ink-0);
+  }
+
+  .fd-row__detail {
+    font-family: var(--font-data);
+    font-size: var(--fs-nano);
+    color: var(--ink-2);
+    overflow-wrap: anywhere;
+  }
+
+  .fd-move {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--sp-3xs);
+    font-family: var(--font-data);
+    font-size: var(--fs-xs);
+  }
+
+  .fd-was {
+    color: var(--ink-2);
+    text-decoration: line-through;
+  }
+
+  .fd-arrow {
+    color: var(--ink-2);
+  }
+
+  .fd-now {
+    color: var(--ink-0);
+  }
+
+  .fd-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-s);
+    padding: var(--sp-s);
+    border-block-start: 1px solid var(--rule-0);
+  }
+
+  .fd-foot--end {
+    justify-content: flex-end;
+  }
+
+  .fd-foot__say {
+    font-size: var(--fs-sm);
+    color: var(--ink-1);
+  }
+
+  .fd-foot__act {
+    display: flex;
+    gap: var(--sp-2xs);
+    flex-shrink: 0;
+  }
+
+  /* The receipt. A stamped record rather than a cheerful banner: the counts
+     reuse the register's own stat tiles, so the same figures that were read as
+     predictions a moment ago are read as facts in the same shape. */
+  .fd-card--done .fd-head {
+    border-block-end: 0;
+    padding-block-end: var(--sp-2xs);
+  }
+
+  .fd-receipt {
+    margin: 0 var(--sp-s) var(--sp-2xs);
+    border-inline-start: 1px solid var(--rule-0);
+  }
+
+  .fd-card--done .fd-source {
+    border-block-end: 0;
+    padding-block: 0 var(--sp-2xs);
+  }
+
+  .fd-foot--end {
+    gap: var(--sp-2xs);
+  }
+
+  /* The quiet half of the footer: it says the write already happened, so the
+     button beside it is an acknowledgement and not a commit. */
+  .fd-saved {
+    margin-inline-end: auto;
+  }
+
+  /* Escaped rather than literal: a stylesheet's encoding is not guaranteed to
+     be declared, and a raw glyph here renders as mojibake wherever it is not. */
+  .fd-saved::before {
+    content: '\2713';
+    margin-inline-end: 4px;
+    color: var(--gold);
+  }
+
+  /* Unsaved edits and an import are a data-loss pair. It is the one warning in
+     this dialog, so it is the only thing here that shouts. */
+  .fd-warn {
+    display: block;
+    margin-block-start: 4px;
+    font-size: var(--fs-xs);
+    color: var(--status-bad);
+  }
+}
+
+/* Deliberately OUTSIDE @layer. `components.css` carries an unlayered
+   `[role="dialog"] { background: <scrim> }`, written when a dialog element WAS
+   the backdrop; an unlayered rule beats every layered one whatever its
+   specificity, so a layered `.fd-card { background }` loses and the card paints
+   itself the colour of the dim. The role stays on the card, which is the
+   correct place for it — the dialog is the thing you read, not the shade behind
+   it — and this one declaration is what it costs to keep it there.
+
+   If the modal chrome is ever normalised, this block goes with it. */
+.fd-card {
+  background: var(--paper-0);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }

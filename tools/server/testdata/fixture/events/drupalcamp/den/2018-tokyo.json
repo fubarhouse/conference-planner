@@ -1,0 +1,766 @@
+{
+  "event": {
+    "regionCode": "APAC",
+    "country": "Japan",
+    "designation": "DrupalCamp",
+    "ecosystem": "drupal",
+    "name": "DrupalCamp DEN Japan 2018",
+    "location": "Tokyo",
+    "year": "2018",
+    "website": "https://drupal-camp2018.den-japan.org",
+    "region": "Japan",
+    "startDate": "2018-11-17T01:10:00Z",
+    "endDate": "2018-11-17T07:50:00Z",
+    "venue": "大田区産業プラザPio (Ota City Industrial Plaza PiO), 東京都大田区南蒲田1-20-20",
+    "timezone": "Asia/Tokyo",
+    "columns": 2,
+    "enabled": false,
+    "scheduleComplete": true,
+    "logo": {
+      "image": "",
+      "imageAlt": "",
+      "usePlate": false
+    },
+    "sponsors": [
+      {
+        "id": "sponsor-1",
+        "title": "Acquia",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 10,
+        "image": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-1.png",
+        "imageAlt": "Acquia logo",
+        "link": "https://www.acquia.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "den-japan-2018-sessions"
+        ]
+      },
+      {
+        "id": "sponsor-2",
+        "title": "ソリッドコミュニケーション株式会社 (Solid Communication)",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 20,
+        "image": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-2.png",
+        "imageAlt": "ソリッドコミュニケーション株式会社 (Solid Communication) logo",
+        "link": "http://www.solidcom.co.jp",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "den-japan-2018-sessions"
+        ]
+      },
+      {
+        "id": "sponsor-3",
+        "title": "ジェネロ株式会社 (Genero)",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 30,
+        "image": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-3.png",
+        "imageAlt": "ジェネロ株式会社 (Genero) logo",
+        "link": "https://genero.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "den-japan-2018-sessions"
+        ]
+      },
+      {
+        "id": "sponsor-4",
+        "title": "株式会社メタ・インフォ (Meta Info)",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 40,
+        "image": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-4.png",
+        "imageAlt": "株式会社メタ・インフォ (Meta Info) logo",
+        "link": "https://www.meta-info.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "den-japan-2018-sessions"
+        ]
+      },
+      {
+        "id": "sponsor-5",
+        "title": "デジタルサーカス株式会社 (Digital Circus)",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 50,
+        "image": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-5.png",
+        "imageAlt": "デジタルサーカス株式会社 (Digital Circus) logo",
+        "link": "https://www.dgcircus.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "den-japan-2018-sessions"
+        ]
+      },
+      {
+        "id": "sponsor-6",
+        "title": "W&M (Web & Marketing)",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 60,
+        "image": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-6.png",
+        "imageAlt": "W&M (Web & Marketing) logo",
+        "link": "http://www.wandmu.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "den-japan-2018-sessions"
+        ]
+      },
+      {
+        "id": "sponsor-7",
+        "title": "KS Solutions",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 70,
+        "image": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-7.png",
+        "imageAlt": "KS Solutions logo",
+        "link": "http://ks-sol.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "den-japan-2018-sessions"
+        ]
+      },
+      {
+        "id": "sponsor-8",
+        "title": "イッセイ株式会社 (Issei)",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 80,
+        "image": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-8.png",
+        "imageAlt": "イッセイ株式会社 (Issei) logo",
+        "link": "https://issei.cc/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "den-japan-2018-sessions"
+        ]
+      },
+      {
+        "id": "sponsor-9",
+        "title": "電通アイソバー株式会社 (Dentsu Isobar)",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 90,
+        "image": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-9.png",
+        "imageAlt": "電通アイソバー株式会社 (Dentsu Isobar) logo",
+        "link": "https://www.dentsuisobar.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "den-japan-2018-sessions"
+        ]
+      },
+      {
+        "id": "sponsor-10",
+        "title": "株式会社ハイフン (Hyphen)",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 100,
+        "image": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-10.png",
+        "imageAlt": "株式会社ハイフン (Hyphen) logo",
+        "link": "http://hi-fn.com/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "den-japan-2018-sessions"
+        ]
+      },
+      {
+        "id": "sponsor-11",
+        "title": "大井電気株式会社 (Ooi Electric)",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 110,
+        "image": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-11.png",
+        "imageAlt": "大井電気株式会社 (Ooi Electric) logo",
+        "link": "https://www.ooi.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "den-japan-2018-sessions"
+        ]
+      },
+      {
+        "id": "sponsor-12",
+        "title": "スタジオ・ウミ (Studio Umi)",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 120,
+        "image": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-12.png",
+        "imageAlt": "スタジオ・ウミ (Studio Umi) logo",
+        "link": "http://www.studio-umi.jp",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "den-japan-2018-sessions"
+        ]
+      },
+      {
+        "id": "sponsor-13",
+        "title": "株式会社オプト (Opt)",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 130,
+        "image": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-13.png",
+        "imageAlt": "株式会社オプト (Opt) logo",
+        "link": "https://www.opt.ne.jp/recruit/index.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "den-japan-2018-sessions"
+        ]
+      },
+      {
+        "id": "sponsor-14",
+        "title": "ARTS",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 140,
+        "image": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-14.png",
+        "imageAlt": "ARTS logo",
+        "link": "http://www.ar2.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "den-japan-2018-sessions"
+        ]
+      },
+      {
+        "id": "sponsor-15",
+        "title": "Faith Co., Ltd.",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 150,
+        "image": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-15.png",
+        "imageAlt": "Faith Co., Ltd. logo",
+        "link": "http://www.faith-up.com/site/jp/index.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "den-japan-2018-sessions"
+        ]
+      },
+      {
+        "id": "sponsor-16",
+        "title": "株式会社アウトソーシングテクノロジー (Outsourcing Technology)",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 160,
+        "image": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-16.png",
+        "imageAlt": "株式会社アウトソーシングテクノロジー (Outsourcing Technology) logo",
+        "link": "https://www.ostechnology.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "den-japan-2018-sessions"
+        ]
+      },
+      {
+        "id": "sponsor-17",
+        "title": "@IT",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 170,
+        "image": "./img/sponsors/drupalcamp/2018-tokyo/sponsor-17.png",
+        "imageAlt": "@IT logo",
+        "link": "http://www.atmarkit.co.jp/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "den-japan-2018-sessions"
+        ]
+      }
+    ],
+    "flickr": {
+      "enabled": false,
+      "provider": "",
+      "groupUrl": "",
+      "image": "",
+      "imageAlt": ""
+    },
+    "scheduleURLs": [
+      "https://drupal-camp2018.den-japan.org/sessions/"
+    ],
+    "other_urls": [
+      "https://drupal-camp2018.den-japan.org/",
+      "https://drupal-camp2018.den-japan.org/venue/",
+      "https://drupal-meetup-den.connpass.com/event/100818/"
+    ],
+    "sources": [
+      {
+        "id": "den-japan-2018-sessions",
+        "kind": "schedule",
+        "url": "https://drupal-camp2018.den-japan.org/sessions/",
+        "retrievedAt": "2026-08-25",
+        "notes": "A live Gatsby site: the programme is read from its own JSON at page-data/sessions/page-data.json rather than from markup, which is why every session has a start AND end time, a track and a recording. Track ids map 22→Track A, 23→Track B, 24→break — settled by the render order on /sessions (Track A = 1F A会議室, Track B = 1F B会議室) and by 22 and 23 always running in parallel. Sponsor names were read off the logos; most are corroborated by the speaker company strings in the programme itself. The page lists sponsors flat, with no tiers."
+      },
+      {
+        "id": "den-japan-2018-connpass",
+        "kind": "schedule",
+        "url": "https://drupal-meetup-den.connpass.com/event/100818/",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20190719232552",
+          "captureUrl": "https://web.archive.org/web/20190719232552/https://drupal-meetup-den.connpass.com/event/100818/"
+        },
+        "notes": "The organisers’ event page. It reproduces every session time, title and speaker in the site JSON, so it corroborates the programme rather than merely adding to it — and it carries two things the JSON omits: the KEYNOTE (10:10–11:00, \"The future of experiences and Drupal\", Preston So, in 2F biz BEACH CoWorking) and the room names. It also records a 懇親会 social from 17:00 to 19:00, which is not in the archive because it is not a session. connpass itself no longer answers a direct request, so this is read via the capture."
+      },
+      {
+        "id": "den-japan-2018-venue",
+        "kind": "venue",
+        "url": "https://drupal-camp2018.den-japan.org/venue/",
+        "retrievedAt": "2026-08-25",
+        "notes": "Venue and date: 2018年11月17日(土), 大田区産業プラザPio, 東京都大田区南蒲田1-20-20."
+      }
+    ],
+    "sourceIds": [
+      "den-japan-2018-sessions",
+      "den-japan-2018-connpass",
+      "den-japan-2018-venue"
+    ]
+  },
+  "items": [
+    {
+      "startTime": "2018-11-17T01:10:00Z",
+      "endTime": "2018-11-17T02:00:00Z",
+      "duration": "P50M",
+      "title": "The future of experiences and Drupal",
+      "location": "2F biz BEACH CoWorking",
+      "link": "https://drupal-camp2018.den-japan.org/",
+      "track": [
+        "Keynote"
+      ],
+      "speakers": [
+        "Preston So"
+      ],
+      "video_url": "",
+      "full_description": "Keynote by Preston So, Director at Acquia’s Office of the CTO. A web developer and designer since 2001, working professionally from 2004 and with Drupal since 2007; at Acquia he leads Acquia Labs and the company’s open-source and research initiatives.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-connpass",
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T02:10:00Z",
+      "endTime": "2018-11-17T02:30:00Z",
+      "duration": "P20M",
+      "title": "Drupal on Kubernates",
+      "location": "Track B — 1F B会議室",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "日本テラデータ株式会社 小薗井康志"
+      ],
+      "video_url": "https://youtu.be/moFkfXhKjl4",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T02:10:00Z",
+      "endTime": "2018-11-17T02:30:00Z",
+      "duration": "P20M",
+      "title": "Drupalの魅力 〜３クリックでインストール〜 （初心者向け）",
+      "location": "Track A — 1F A会議室",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "株式会社メタ・インフォ 井村邦博"
+      ],
+      "video_url": "https://youtu.be/8kZ2fp03Vtk",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T02:40:00Z",
+      "endTime": "2018-11-17T03:00:00Z",
+      "duration": "P20M",
+      "title": "Drupal 情報カタログ 2018（Drupal Info Catalog 2018）",
+      "location": "Track B — 1F B会議室",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "株式会社アウトソーシング テクノロジー 西尾正博"
+      ],
+      "video_url": "https://youtu.be/77h-jZeKVtg",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T02:40:00Z",
+      "endTime": "2018-11-17T03:00:00Z",
+      "duration": "P20M",
+      "title": "Open Socialの歴史とこれからの展望",
+      "location": "Track A — 1F A会議室",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "イッセイ株式会社 直江健介"
+      ],
+      "video_url": "https://youtu.be/hpN17R13kKY",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T03:00:00Z",
+      "endTime": "2018-11-17T04:00:00Z",
+      "duration": "P60M",
+      "title": "休憩",
+      "location": "",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [],
+      "speakers": [],
+      "video_url": "",
+      "full_description": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T04:00:00Z",
+      "endTime": "2018-11-17T04:20:00Z",
+      "duration": "P20M",
+      "title": "オープンソースコミュニティ運営手法",
+      "location": "Track B — 1F B会議室",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "楠目昌弘"
+      ],
+      "video_url": "https://youtu.be/3GfATRvWzIg",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T04:00:00Z",
+      "endTime": "2018-11-17T04:20:00Z",
+      "duration": "P20M",
+      "title": "はじめてのDrupal",
+      "location": "Track A — 1F A会議室",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "イッセイ株式会社 竹内一斉"
+      ],
+      "video_url": "https://youtu.be/R0ETZtGF2YA",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T04:30:00Z",
+      "endTime": "2018-11-17T04:50:00Z",
+      "duration": "P20M",
+      "title": "Invision Studioによるデザイン制作",
+      "location": "Track B — 1F B会議室",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "株式会社ハイフン 神明篤志"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=y77WthKsj38",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T04:30:00Z",
+      "endTime": "2018-11-17T04:50:00Z",
+      "duration": "P20M",
+      "title": "超高速！Gatsby + Decoupled Drupalで作る新しいサイトのカタチ",
+      "location": "Track A — 1F A会議室",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "ソリッドコミュニケーション株式会社 中山俊治"
+      ],
+      "video_url": "https://youtu.be/a5tngZ6qPF0",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T05:00:00Z",
+      "endTime": "2018-11-17T05:20:00Z",
+      "duration": "P20M",
+      "title": "エンタープライズ向けDrupalソリューションのAcquia全貌と最新事例",
+      "location": "Track B — 1F B会議室",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "アクイアジャパン合同会社 上田善行"
+      ],
+      "video_url": "https://youtu.be/YyEO1JJiaOY",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T05:00:00Z",
+      "endTime": "2018-11-17T05:20:00Z",
+      "duration": "P20M",
+      "title": "パラグラフモジュール",
+      "location": "Track A — 1F A会議室",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "ジェネロ株式会社 Messmer Matthew"
+      ],
+      "video_url": "https://youtu.be/IaMVRxAWk3g",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T05:30:00Z",
+      "endTime": "2018-11-17T06:00:00Z",
+      "duration": "P30M",
+      "title": "休憩",
+      "location": "",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [],
+      "speakers": [],
+      "video_url": "",
+      "full_description": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T06:00:00Z",
+      "endTime": "2018-11-17T06:20:00Z",
+      "duration": "P20M",
+      "title": "グローバルエージェンシーが求める構築パートナー",
+      "location": "Track B — 1F B会議室",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "電通アイソバー株式会社 岩崎仁"
+      ],
+      "video_url": "",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T06:00:00Z",
+      "endTime": "2018-11-17T06:20:00Z",
+      "duration": "P20M",
+      "title": "コンテンツタイプ・ビューズの設定手法",
+      "location": "Track A — 1F A会議室",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "ジェネロ株式会社 Aniket More"
+      ],
+      "video_url": "https://youtu.be/b5B3V6o9lxk",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T06:30:00Z",
+      "endTime": "2018-11-17T06:50:00Z",
+      "duration": "P20M",
+      "title": "Configuration Managementで始めるサイト設定の管理",
+      "location": "Track A — 1F A会議室",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "スタジオ・ウミ 小林 基樹"
+      ],
+      "video_url": "https://youtu.be/-b_pjPEaDxc",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T06:30:00Z",
+      "endTime": "2018-11-17T06:50:00Z",
+      "duration": "P20M",
+      "title": "グローバル企業のWEBガバナンス基盤としてのDrupal",
+      "location": "Track B — 1F B会議室",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "デジタルサーカス株式会社 田口健"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=C0TxnqTAIu4",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T07:00:00Z",
+      "endTime": "2018-11-17T07:20:00Z",
+      "duration": "P20M",
+      "title": "Drupal IoTの可能性～ハードウェアベンダーから見るDrupalの魅力～",
+      "location": "Track B — 1F B会議室",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "大井電気株式会社 加藤一夫"
+      ],
+      "video_url": "https://www.youtube.com/watch?v=l1yMAoVYoVY",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T07:00:00Z",
+      "endTime": "2018-11-17T07:20:00Z",
+      "duration": "P20M",
+      "title": "一歩進んだ Views の使い方",
+      "location": "Track A — 1F A会議室",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "スタジオ・ウミ 山中 麻千子"
+      ],
+      "video_url": "https://youtu.be/CRt95Lwfqo4",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T07:30:00Z",
+      "endTime": "2018-11-17T07:50:00Z",
+      "duration": "P20M",
+      "title": "agri Drupalの可能性 -農業支援の事例紹介と今後の展望",
+      "location": "Track A — 1F A会議室",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [
+        "Track A"
+      ],
+      "speakers": [
+        "株式会社NTTデータCCS 下城洋人"
+      ],
+      "video_url": "",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    },
+    {
+      "startTime": "2018-11-17T07:30:00Z",
+      "endTime": "2018-11-17T07:50:00Z",
+      "duration": "P20M",
+      "title": "Drupalのおいしいところ - UMAMIを引き出すチーム開発",
+      "location": "Track B — 1F B会議室",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "track": [
+        "Track B"
+      ],
+      "speakers": [
+        "ゼロベース株式会社 金子智嗣"
+      ],
+      "video_url": "https://youtu.be/Iu9adhu8EH0",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "den-japan-2018-sessions"
+      ]
+    }
+  ],
+  "result": "manual",
+  "url": "https://drupal-camp2018.den-japan.org/sessions/"
+}
