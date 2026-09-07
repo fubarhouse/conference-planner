@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="./img/app-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+    <title>Not found · Programme</title>
+    <style>
+      @layer overrides, reset, legacy, tokens, base, composition, section, utility;
+</style>
+    <link rel="stylesheet" href="/css/foundation.css" />
+    <link rel="stylesheet" href="/css/section-chrome.css" />
+    <style>
+
+      .err {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-block-size: 100dvh;
+        max-inline-size: 34rem;
+        margin-inline: auto;
+        padding: var(--sp-l) 1rem;
+      }
+      .err__code {
+        font-family: var(--font-data);
+        font-size: var(--step--1);
+        letter-spacing: var(--label-track);
+        text-transform: uppercase;
+        color: var(--ink-2);
+      }
+      .err__title {
+        font-family: var(--font-display);
+        font-size: var(--step-3);
+        line-height: 1.1;
+        letter-spacing: var(--display-track);
+        margin-block: var(--sp-xs) var(--sp-s);
+      }
+      .err__body {
+        font-size: var(--step-0);
+        color: var(--ink-1);
+        max-inline-size: var(--measure);
+      }
+      .err__rule {
+        border: 0;
+        border-block-start: 2px solid var(--ink-0);
+        margin-block: var(--sp-l) var(--sp-m);
+      }
+      .err__links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--sp-s);
+      }
+      .err__link {
+        display: inline-flex;
+        align-items: center;
+        min-block-size: var(--tap);
+        padding-inline: var(--sp-s);
+        border: 1px solid var(--ink-0);
+        color: var(--ink-0);
+        font-size: var(--step--1);
+        text-decoration: none;
+      }
+      .err__link:hover {
+        background: var(--paper-2);
+      }
+</style>
+    <script>
+      try {
+        var m = localStorage.getItem('scheduleColourMode');
+        if (m === 'light' || m === 'dark') document.documentElement.dataset.mode = m;
+      } catch (e) {}
+</script>
+  </head>
+  <body>
+    <main class="err">
+      <p class="err__code">Error 404</p>
+      <h1 class="err__title">There is nothing at this address.</h1>
+      <p class="err__body">
+        The page may have moved, or the link that brought you here may be out of date. The
+        schedules below are the way back in.
+      </p>
+      <hr class="err__rule" />
+      <div class="err__links">
+        <a class="err__link" href="/schedules">Browse schedules</a>
+        <a class="err__link" href="/">Home</a>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+{
+  "term": "performance",
+  "byYear": {
+    "2010": 2,
+    "2015": 2,
+    "2020": 1,
+    "2024": 2,
+    "2026": 12
+  },
+  "byYearDescribed": {
+    "2010": 2,
+    "2015": 2,
+    "2024": 2,
+    "2026": 11
+  },
+  "sessions": [
+    {
+      "year": 2024,
+      "title": "How to achieve 100% performance Google Lighthouse score with Drupal",
+      "description": "This presentation focuses on the front-end performance optimization of a Drupal site.\n\nI have worked on a campaign site for a client with landing pages, which had to be very fast, so I will share how I managed to get a 100% Google Lighthouse Score.\n\nKey points:\n\n**Experience level:** Intermediate",
+      "speakers": "aldunchev",
+      "location": "Room 208 (Jakala)",
+      "startTime": "2024-06-26T14:10:00.000Z",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/how-achieve-100-performance-google-lighthouse-score-drupal",
+      "video": "https://youtu.be/e9gLOot04RM",
+      "event": "Drupal Dev Days Burgas 2024",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Bulgaria",
+      "city": "Burgas",
+      "file": "events/ddd/2024-burgas.json",
+      "lat": 42.4936616,
+      "lon": 27.4721276
+    },
+    {
+      "year": 2024,
+      "title": "Stop making your own life difficult. Integrate your CI/CD Pipeline with these monitoring tools",
+      "description": "If you do not use a CI/CD pipeline, we highly recommend it. For the past several years our team has set up projects in a CI/CD pipeline using Jenkins or Github actions. The tools that we will present in this session have proven to be a good set of automated testing tools for several projects. Over time we have chosen to move away from previous solutions and to new testing frameworks. As part of our commitment to high standards of performance and quality, we are always on the lookout for the best tools available on the market.\n\n**Experience level:** Beginner",
+      "speakers": "sindurig, jjchinquist",
+      "location": "Room 207 (1xINTERNET)",
+      "startTime": "2024-06-26T14:10:00.000Z",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/stop-making-your-own-life-difficult-integrate-your-cicd-pipeline-these",
+      "video": "https://youtu.be/H3zgaR6bYAA",
+      "event": "Drupal Dev Days Burgas 2024",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Bulgaria",
+      "city": "Burgas",
+      "file": "events/ddd/2024-burgas.json",
+      "lat": 42.4936616,
+      "lon": 27.4721276
+    }
+  ],
+  "year": 2024
+}

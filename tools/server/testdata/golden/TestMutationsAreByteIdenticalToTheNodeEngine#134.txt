@@ -1,0 +1,953 @@
+{
+  "_version": 6,
+  "_plannerKey": "planner-vanuatu-cruise-2027",
+  "_eventFile": "",
+  "_eventFiles": [],
+  "_displayName": "Vanuatu Cruise 2027",
+  "_lastModified": "2026-08-04T10:33:31.343Z",
+  "mode": "personal",
+  "isConference": false,
+  "displayCurrency": "",
+  "sessionNotes": {},
+  "contacts": [],
+  "tasks": [],
+  "org": {
+    "boothInfo": "",
+    "boothNotes": "",
+    "teamAssignments": [],
+    "accommodations": [],
+    "timeline": {
+      "startDate": "",
+      "endDate": ""
+    },
+    "swag": [],
+    "deliverables": [],
+    "sponsorBudget": "",
+    "sponsorActual": "",
+    "sponsorCurrency": "AUD",
+    "sponsorId": "",
+    "trackedSessions": [],
+    "autoAddedSponsoredSessions": [],
+    "documents": [],
+    "budgetItems": [],
+    "budgetCategories": [],
+    "categoryBudgets": {},
+    "tickets": [],
+    "disabledTabs": [
+      "weather"
+    ],
+    "tabOrder": [],
+    "itinerary": [],
+    "memberItinerary": [],
+    "checklists": []
+  },
+  "receipts": [
+    {
+      "id": "rc_1785105230905_gvshj",
+      "name": "Quantum of the Seas",
+      "date": "",
+      "amount": "1225",
+      "currency": "AUD",
+      "category": "accommodation",
+      "budgetItemId": "",
+      "notes": "",
+      "filePath": "",
+      "fileLabel": ""
+    },
+    {
+      "id": "rc_1785105230905_wrceh",
+      "name": "Travel",
+      "date": "",
+      "amount": "524.52",
+      "currency": "AUD",
+      "category": "travel",
+      "budgetItemId": "bi_1785105230905_d7162",
+      "filePath": "",
+      "fileLabel": "",
+      "notes": ""
+    },
+    {
+      "id": "rc_1785116462566_3lall",
+      "name": "Glass Botton Boat and Snorkel Safari",
+      "date": "2027-01-27",
+      "amount": "282.80",
+      "currency": "AUD",
+      "category": "excursions",
+      "budgetItemId": "",
+      "notes": "",
+      "filePath": "",
+      "fileLabel": ""
+    },
+    {
+      "id": "rc_1785116497216_vyoic",
+      "name": "Ekasup Cultural Village",
+      "date": "2027-01-27",
+      "amount": "229.76",
+      "currency": "AUD",
+      "category": "excursions",
+      "budgetItemId": "",
+      "notes": "",
+      "filePath": "",
+      "fileLabel": ""
+    },
+    {
+      "id": "rc_1785117438837_ur6i4",
+      "name": "Private Beach Hut",
+      "date": "2027-01-25",
+      "amount": "298.00",
+      "currency": "AUD",
+      "category": "excursions",
+      "budgetItemId": "",
+      "notes": "",
+      "filePath": "",
+      "fileLabel": ""
+    }
+  ],
+  "personal": {
+    "outboundLegs": [
+      {
+        "title": "A Test Sponsor",
+        "tier": "Gold",
+        "note": "with a comma, a \"quote\" and <html>",
+        "id": "leg_1781352259452_hz808"
+      },
+      {
+        "id": "leg_1781353398991_b0bfy",
+        "mode": "taxi",
+        "status": "needs-booking",
+        "date": "2027-01-19",
+        "arriveDate": "",
+        "ref": "",
+        "from": "Casey, ACT",
+        "to": "CBR",
+        "departTime": "13:00",
+        "arriveTime": "13:30",
+        "departTz": "Australia/Sydney",
+        "arriveTz": "Australia/Sydney",
+        "confirmation": "",
+        "notes": "",
+        "filePath": "",
+        "fileLabel": "",
+        "receiptId": ""
+      }
+    ],
+    "returnLegs": [
+      {
+        "id": "leg_1781352340757_a3ab2",
+        "mode": "flight",
+        "status": "confirmed",
+        "date": "2027-01-29",
+        "ref": "",
+        "from": "BNE",
+        "to": "CBR",
+        "departTime": "11:20",
+        "arriveTime": "14:10",
+        "departTz": "Australia/Brisbane",
+        "arriveTz": "Australia/Sydney",
+        "confirmation": "",
+        "notes": "",
+        "filePath": "",
+        "fileLabel": "",
+        "receiptId": ""
+      },
+      {
+        "id": "leg_1781353511150_35doy",
+        "mode": "taxi",
+        "status": "needs-booking",
+        "date": "2027-01-29",
+        "arriveDate": "",
+        "ref": "",
+        "from": "CBR",
+        "to": "Casey, ACT",
+        "departTime": "14:45",
+        "arriveTime": "15:15",
+        "departTz": "Australia/Sydney",
+        "arriveTz": "Australia/Sydney",
+        "confirmation": "",
+        "notes": "",
+        "filePath": "",
+        "fileLabel": "",
+        "receiptId": ""
+      }
+    ],
+    "localLegs": [],
+    "accommodations": [
+      {
+        "id": "ia_1781352518167_yy2bd",
+        "name": "Quantum of the Seas",
+        "address": "",
+        "checkIn": "2027-01-22",
+        "checkOut": "2027-01-29",
+        "confirmation": "",
+        "notes": "",
+        "type": "waypoints",
+        "cruiseLegs": [
+          {
+            "id": "cl_1781352942195_thcib",
+            "location": "-27.380410930497693, 153.15479524665403",
+            "date": "2027-01-22",
+            "time": "",
+            "notes": ""
+          },
+          {
+            "id": "cl_1781352951830_54vll",
+            "location": "-20.248820721306295, 169.77180166199162",
+            "date": "2027-01-25",
+            "time": "",
+            "notes": ""
+          },
+          {
+            "id": "cl_1781357443833_pvo80",
+            "location": "VUVLI",
+            "date": "2027-01-26",
+            "time": "",
+            "notes": ""
+          },
+          {
+            "id": "cl_1781357485588_dd9yv",
+            "location": "-27.380410930497693, 153.15479524665403",
+            "date": "2027-01-29",
+            "time": "",
+            "notes": ""
+          }
+        ],
+        "assignments": [
+          {
+            "memberId": "pc_1781352237546_qc1lr",
+            "checkIn": "",
+            "checkOut": "",
+            "budget": "",
+            "budgetActual": "",
+            "currency": "AUD"
+          },
+          {
+            "memberId": "pc_1781352243670_1ark8",
+            "checkIn": "",
+            "checkOut": "",
+            "budget": "",
+            "budgetActual": "",
+            "currency": "AUD"
+          },
+          {
+            "memberId": "pc_1781352249574_jhhf4",
+            "checkIn": "",
+            "checkOut": "",
+            "budget": "",
+            "budgetActual": "",
+            "currency": "AUD"
+          },
+          {
+            "memberId": "pc_1781838135571_7ev9h",
+            "checkIn": "",
+            "checkOut": "",
+            "budget": "",
+            "budgetActual": "",
+            "currency": "AUD"
+          },
+          {
+            "memberId": "__me__",
+            "checkIn": "",
+            "checkOut": "",
+            "budget": "",
+            "budgetActual": "",
+            "currency": "AUD"
+          },
+          {
+            "memberId": "pc_1781838150057_ykx55",
+            "checkIn": "",
+            "checkOut": "",
+            "budget": "",
+            "budgetActual": "",
+            "currency": "AUD"
+          }
+        ],
+        "stops": [
+          {
+            "id": "cl_1781521718067_rust3",
+            "location": "Brisbane Cruise Terminal",
+            "coords": "-27.38040125774439, 153.15478448896158",
+            "date": "2027-01-22",
+            "time": "",
+            "notes": ""
+          },
+          {
+            "id": "cl_1781503885641_unvw3",
+            "location": "Mystery Island",
+            "coords": "-20.243265763230653, 169.77438579204394",
+            "date": "2027-01-25",
+            "time": "",
+            "notes": ""
+          },
+          {
+            "id": "cl_1781521719506_jip4f",
+            "location": "Port Villa",
+            "coords": "-17.756682115496854, 168.2996794846487",
+            "date": "2027-01-26",
+            "time": "",
+            "notes": ""
+          },
+          {
+            "id": "cl_1781521720540_s8i9u",
+            "location": "Brisbane Cruise Terminal",
+            "coords": "-27.38040125774439, 153.15478448896158",
+            "date": "2027-01-29",
+            "time": "",
+            "notes": ""
+          }
+        ],
+        "coords": "",
+        "receiptId": "rc_1785105230905_gvshj"
+      },
+      {
+        "id": "ia_1781352686032_ejmjn",
+        "name": "Oaks Brisbane Casino Tower Suites",
+        "address": "151 George St, Brisbane 4000",
+        "checkIn": "",
+        "checkOut": "",
+        "confirmation": "",
+        "budget": "915",
+        "budgetActual": "",
+        "currency": "AUD",
+        "notes": "",
+        "type": "accommodation",
+        "assignments": [
+          {
+            "memberId": "pc_1781352237546_qc1lr",
+            "checkIn": "2027-01-19",
+            "checkOut": "2027-01-22",
+            "budget": "",
+            "budgetActual": "",
+            "currency": "AUD"
+          },
+          {
+            "memberId": "pc_1781352243670_1ark8",
+            "checkIn": "2027-01-19",
+            "checkOut": "2027-01-22",
+            "budget": "",
+            "budgetActual": "",
+            "currency": "AUD"
+          },
+          {
+            "memberId": "pc_1781352249574_jhhf4",
+            "checkIn": "2027-01-19",
+            "checkOut": "2027-01-22",
+            "budget": "",
+            "budgetActual": "",
+            "currency": "AUD"
+          },
+          {
+            "memberId": "__me__",
+            "checkIn": "2027-01-19",
+            "checkOut": "2027-01-22",
+            "budget": "",
+            "budgetActual": "",
+            "currency": "AUD"
+          },
+          {
+            "memberId": "pc_1781838135571_7ev9h",
+            "checkIn": "2027-01-19",
+            "checkOut": "2027-01-22",
+            "budget": "",
+            "budgetActual": "",
+            "currency": "AUD"
+          },
+          {
+            "memberId": "pc_1781838150057_ykx55",
+            "checkIn": "2027-01-19",
+            "checkOut": "2027-01-22",
+            "budget": "",
+            "budgetActual": "",
+            "currency": "AUD"
+          }
+        ]
+      }
+    ],
+    "budget": "",
+    "budgetActual": "",
+    "currency": "AUD",
+    "notes": "",
+    "noteList": [],
+    "trackedSessions": [],
+    "hostedEvents": [],
+    "itinerary": [
+      {
+        "id": "it_1785116397959_4laro",
+        "memberId": null,
+        "memberIds": [
+          "pc_1781352237546_qc1lr",
+          "pc_1781352243670_1ark8",
+          "pc_1781352249574_jhhf4"
+        ],
+        "date": "2027-01-27",
+        "time": "08:45",
+        "title": "Glass Botton Boat and Snorkel Safari",
+        "location": "Vila, Vanuatu",
+        "coords": "-17.741497, 168.315016",
+        "receiptId": "rc_1785116462566_3lall",
+        "notes": "",
+        "budget": "",
+        "actual": "",
+        "purchaseDate": "",
+        "currency": "AUD",
+        "done": false
+      },
+      {
+        "id": "it_1785116457366_9l341",
+        "memberId": null,
+        "memberIds": [
+          "pc_1781352237546_qc1lr",
+          "pc_1781352243670_1ark8",
+          "pc_1781352249574_jhhf4"
+        ],
+        "date": "2027-01-27",
+        "time": "12:15",
+        "title": "Ekasup Cultural Village",
+        "location": "Vila, Vanuatu",
+        "coords": "-17.759455, 168.329046",
+        "receiptId": "rc_1785116497216_vyoic",
+        "notes": "",
+        "budget": "",
+        "actual": "",
+        "purchaseDate": "",
+        "currency": "AUD",
+        "done": false
+      },
+      {
+        "id": "it_1785117409167_446y5",
+        "memberId": null,
+        "memberIds": [
+          "pc_1781352237546_qc1lr",
+          "pc_1781352243670_1ark8"
+        ],
+        "date": "2027-01-25",
+        "time": "09:00",
+        "title": "Private Beach Hut",
+        "location": "Mystery Island",
+        "coords": "-20.249465, 169.770155",
+        "receiptId": "rc_1785117438837_ur6i4",
+        "notes": "",
+        "budget": "",
+        "actual": "",
+        "purchaseDate": "",
+        "currency": "AUD",
+        "done": false
+      }
+    ],
+    "documents": [],
+    "budgetItems": [
+      {
+        "id": "bi_1785105230905_d7162",
+        "name": "Travel",
+        "category": "travel",
+        "currency": "AUD",
+        "budget": "524.52",
+        "notes": "",
+        "memberId": ""
+      }
+    ],
+    "budgetCategories": [
+      {
+        "id": "travel",
+        "name": "Travel"
+      },
+      {
+        "id": "accommodation",
+        "name": "Accommodation"
+      },
+      {
+        "id": "food",
+        "name": "Food & Drink"
+      },
+      {
+        "id": "customer",
+        "name": "Customer"
+      },
+      {
+        "id": "team",
+        "name": "Team"
+      },
+      {
+        "id": "tickets",
+        "name": "Tickets"
+      },
+      {
+        "id": "swag",
+        "name": "Swag"
+      },
+      {
+        "id": "sponsor",
+        "name": "Sponsor"
+      },
+      {
+        "id": "misc",
+        "name": "Misc"
+      },
+      {
+        "id": "marketing",
+        "name": "Marketing"
+      },
+      {
+        "id": "excursions",
+        "name": "Excursions"
+      }
+    ],
+    "categoryBudgets": {
+      "accommodation": "915",
+      "cruise": "4500",
+      "travel": "524.52"
+    },
+    "tickets": [
+      {
+        "id": "tk_1783080847717_ku77y",
+        "name": "Cruise Ticket",
+        "quantity": 1,
+        "unitPrice": "",
+        "currency": "AUD",
+        "status": "assigned",
+        "assignedTo": "__me__",
+        "purchasedBy": "__me__",
+        "notes": ""
+      },
+      {
+        "id": "tk_1783080862948_srzeb",
+        "name": "Cruise Ticket",
+        "quantity": 1,
+        "unitPrice": "",
+        "currency": "AUD",
+        "status": "assigned",
+        "assignedTo": "pc_1781352243670_1ark8",
+        "purchasedBy": "__me__",
+        "notes": ""
+      },
+      {
+        "id": "tk_1783080880485_9bxbn",
+        "name": "Cruise Ticket",
+        "quantity": 1,
+        "unitPrice": "",
+        "currency": "AUD",
+        "status": "assigned",
+        "assignedTo": "pc_1781352249574_jhhf4",
+        "purchasedBy": "__me__",
+        "notes": ""
+      }
+    ],
+    "disabledTabs": [],
+    "tabOrder": [
+      "personal",
+      "companions",
+      "notes",
+      "contacts",
+      "tasks",
+      "checklists",
+      "documents",
+      "tickets",
+      "budget",
+      "split",
+      "map",
+      "receipts",
+      "weather",
+      "itinerary",
+      "summary"
+    ],
+    "tripAssignments": [
+      {
+        "id": "ta_1781352251418_adlzz",
+        "memberId": "pc_1781352237546_qc1lr",
+        "outboundLegs": [],
+        "returnLegs": [],
+        "budget": "",
+        "budgetActual": "",
+        "currency": "AUD",
+        "notes": ""
+      },
+      {
+        "id": "ta_1781352252733_kzf49",
+        "memberId": "pc_1781352243670_1ark8",
+        "outboundLegs": [
+          {
+            "id": "leg_1781396328492_9med7",
+            "mode": "flight",
+            "status": "confirmed",
+            "date": "2027-01-19",
+            "ref": "",
+            "from": "CBR",
+            "to": "BNE",
+            "departTime": "14:50",
+            "arriveTime": "15:35",
+            "departTz": "Australia/Sydney",
+            "arriveTz": "Australia/Brisbane",
+            "confirmation": "",
+            "notes": "",
+            "filePath": "",
+            "fileLabel": "",
+            "receiptId": ""
+          },
+          {
+            "id": "leg_1781396328492_mag74",
+            "mode": "taxi",
+            "status": "needs-booking",
+            "date": "2027-01-19",
+            "arriveDate": "",
+            "ref": "",
+            "from": "Casey, ACT",
+            "to": "CBR",
+            "departTime": "13:00",
+            "arriveTime": "13:30",
+            "departTz": "Australia/Sydney",
+            "arriveTz": "Australia/Sydney",
+            "confirmation": "",
+            "notes": "",
+            "filePath": "",
+            "fileLabel": "",
+            "receiptId": ""
+          }
+        ],
+        "returnLegs": [
+          {
+            "id": "leg_1781396330426_kskig",
+            "mode": "flight",
+            "status": "confirmed",
+            "date": "2027-01-29",
+            "ref": "",
+            "from": "BNE",
+            "to": "CBR",
+            "departTime": "11:20",
+            "arriveTime": "14:10",
+            "departTz": "Australia/Brisbane",
+            "arriveTz": "Australia/Sydney",
+            "confirmation": "",
+            "notes": "",
+            "filePath": "",
+            "fileLabel": "",
+            "receiptId": ""
+          },
+          {
+            "id": "leg_1781396330426_ljdux",
+            "mode": "taxi",
+            "status": "needs-booking",
+            "date": "2027-01-29",
+            "arriveDate": "",
+            "ref": "",
+            "from": "CBR",
+            "to": "Casey, ACT",
+            "departTime": "14:45",
+            "arriveTime": "15:15",
+            "departTz": "Australia/Sydney",
+            "arriveTz": "Australia/Sydney",
+            "confirmation": "",
+            "notes": "",
+            "filePath": "",
+            "fileLabel": "",
+            "receiptId": ""
+          }
+        ],
+        "budget": "",
+        "budgetActual": "",
+        "currency": "AUD",
+        "notes": ""
+      },
+      {
+        "id": "ta_1781352253594_y3zzb",
+        "memberId": "pc_1781352249574_jhhf4",
+        "outboundLegs": [
+          {
+            "id": "leg_1781396334427_zld3e",
+            "mode": "flight",
+            "status": "confirmed",
+            "date": "2027-01-19",
+            "ref": "",
+            "from": "CBR",
+            "to": "BNE",
+            "departTime": "14:50",
+            "arriveTime": "15:35",
+            "departTz": "Australia/Sydney",
+            "arriveTz": "Australia/Brisbane",
+            "confirmation": "",
+            "notes": "",
+            "filePath": "",
+            "fileLabel": "",
+            "receiptId": ""
+          },
+          {
+            "id": "leg_1781396334427_m1gjz",
+            "mode": "taxi",
+            "status": "needs-booking",
+            "date": "2027-01-19",
+            "arriveDate": "",
+            "ref": "",
+            "from": "Casey, ACT",
+            "to": "CBR",
+            "departTime": "13:00",
+            "arriveTime": "13:30",
+            "departTz": "Australia/Sydney",
+            "arriveTz": "Australia/Sydney",
+            "confirmation": "",
+            "notes": "",
+            "filePath": "",
+            "fileLabel": "",
+            "receiptId": ""
+          }
+        ],
+        "returnLegs": [
+          {
+            "id": "leg_1781396340365_l7no3",
+            "mode": "flight",
+            "status": "confirmed",
+            "date": "2027-01-29",
+            "ref": "",
+            "from": "BNE",
+            "to": "CBR",
+            "departTime": "11:20",
+            "arriveTime": "14:10",
+            "departTz": "Australia/Brisbane",
+            "arriveTz": "Australia/Sydney",
+            "confirmation": "",
+            "notes": "",
+            "filePath": "",
+            "fileLabel": "",
+            "receiptId": ""
+          },
+          {
+            "id": "leg_1781396340365_y6ryu",
+            "mode": "taxi",
+            "status": "needs-booking",
+            "date": "2027-01-29",
+            "arriveDate": "",
+            "ref": "",
+            "from": "CBR",
+            "to": "Casey, ACT",
+            "departTime": "14:45",
+            "arriveTime": "15:15",
+            "departTz": "Australia/Sydney",
+            "arriveTz": "Australia/Sydney",
+            "confirmation": "",
+            "notes": "",
+            "filePath": "",
+            "fileLabel": "",
+            "receiptId": ""
+          }
+        ],
+        "budget": "",
+        "budgetActual": "",
+        "currency": "AUD",
+        "notes": ""
+      },
+      {
+        "id": "ta_1781839410917_rbxh9",
+        "memberId": "pc_1781838118632_gnbs7",
+        "outboundLegs": [],
+        "returnLegs": [],
+        "budget": "",
+        "budgetActual": "",
+        "currency": "AUD",
+        "notes": ""
+      },
+      {
+        "id": "ta_1781839411747_63ang",
+        "memberId": "pc_1781838135571_7ev9h",
+        "outboundLegs": [
+          {
+            "id": "leg_1781860767144_rq46j",
+            "mode": "flight",
+            "status": "confirmed",
+            "date": "2027-01-19",
+            "ref": "",
+            "from": "CBR",
+            "to": "BNE",
+            "departTime": "14:50",
+            "arriveTime": "15:35",
+            "departTz": "Australia/Sydney",
+            "arriveTz": "Australia/Brisbane",
+            "confirmation": "",
+            "notes": "",
+            "filePath": "",
+            "fileLabel": "",
+            "receiptId": ""
+          },
+          {
+            "id": "leg_1781860767144_t4vy0",
+            "mode": "taxi",
+            "status": "needs-booking",
+            "date": "2027-01-19",
+            "arriveDate": "",
+            "ref": "",
+            "from": "Casey, ACT",
+            "to": "CBR",
+            "departTime": "13:00",
+            "arriveTime": "13:30",
+            "departTz": "Australia/Sydney",
+            "arriveTz": "Australia/Sydney",
+            "confirmation": "",
+            "notes": "",
+            "filePath": "",
+            "fileLabel": "",
+            "receiptId": ""
+          }
+        ],
+        "returnLegs": [
+          {
+            "id": "leg_1781860769711_vrqr1",
+            "mode": "flight",
+            "status": "confirmed",
+            "date": "2027-01-29",
+            "ref": "",
+            "from": "BNE",
+            "to": "CBR",
+            "departTime": "11:20",
+            "arriveTime": "14:10",
+            "departTz": "Australia/Brisbane",
+            "arriveTz": "Australia/Sydney",
+            "confirmation": "",
+            "notes": "",
+            "filePath": "",
+            "fileLabel": "",
+            "receiptId": ""
+          },
+          {
+            "id": "leg_1781860769711_ovdtm",
+            "mode": "taxi",
+            "status": "needs-booking",
+            "date": "2027-01-29",
+            "arriveDate": "",
+            "ref": "",
+            "from": "CBR",
+            "to": "Casey, ACT",
+            "departTime": "14:45",
+            "arriveTime": "15:15",
+            "departTz": "Australia/Sydney",
+            "arriveTz": "Australia/Sydney",
+            "confirmation": "",
+            "notes": "",
+            "filePath": "",
+            "fileLabel": "",
+            "receiptId": ""
+          }
+        ],
+        "budget": "",
+        "budgetActual": "",
+        "currency": "AUD",
+        "notes": ""
+      },
+      {
+        "id": "ta_1781839412531_sqa7w",
+        "memberId": "pc_1781838150057_ykx55",
+        "outboundLegs": [
+          {
+            "id": "leg_1781860814508_t4o4h",
+            "mode": "flight",
+            "status": "confirmed",
+            "date": "2027-01-19",
+            "ref": "",
+            "from": "CBR",
+            "to": "BNE",
+            "departTime": "14:50",
+            "arriveTime": "15:35",
+            "departTz": "Australia/Sydney",
+            "arriveTz": "Australia/Brisbane",
+            "confirmation": "",
+            "notes": "",
+            "filePath": "",
+            "fileLabel": "",
+            "receiptId": ""
+          },
+          {
+            "id": "leg_1781860814508_2uzi5",
+            "mode": "taxi",
+            "status": "needs-booking",
+            "date": "2027-01-19",
+            "arriveDate": "",
+            "ref": "",
+            "from": "Casey, ACT",
+            "to": "CBR",
+            "departTime": "13:00",
+            "arriveTime": "13:30",
+            "departTz": "Australia/Sydney",
+            "arriveTz": "Australia/Sydney",
+            "confirmation": "",
+            "notes": "",
+            "filePath": "",
+            "fileLabel": "",
+            "receiptId": ""
+          }
+        ],
+        "returnLegs": [
+          {
+            "id": "leg_1781860818225_z677n",
+            "mode": "flight",
+            "status": "confirmed",
+            "date": "2027-01-29",
+            "ref": "",
+            "from": "BNE",
+            "to": "CBR",
+            "departTime": "11:20",
+            "arriveTime": "14:10",
+            "departTz": "Australia/Brisbane",
+            "arriveTz": "Australia/Sydney",
+            "confirmation": "",
+            "notes": "",
+            "filePath": "",
+            "fileLabel": "",
+            "receiptId": ""
+          },
+          {
+            "id": "leg_1781860818225_t9zqk",
+            "mode": "taxi",
+            "status": "needs-booking",
+            "date": "2027-01-29",
+            "arriveDate": "",
+            "ref": "",
+            "from": "CBR",
+            "to": "Casey, ACT",
+            "departTime": "14:45",
+            "arriveTime": "15:15",
+            "departTz": "Australia/Sydney",
+            "arriveTz": "Australia/Sydney",
+            "confirmation": "",
+            "notes": "",
+            "filePath": "",
+            "fileLabel": "",
+            "receiptId": ""
+          }
+        ],
+        "budget": "",
+        "budgetActual": "",
+        "currency": "AUD",
+        "notes": ""
+      }
+    ],
+    "localCompanions": [],
+    "splitExpenses": [],
+    "checklists": [],
+    "gpxTrack": null,
+    "meContactId": "pc_1781352237546_qc1lr",
+    "showLocalTravel": false
+  },
+  "weatherLocation": {
+    "name": "BNE",
+    "lat": -27.46794,
+    "lon": 153.02809,
+    "label": "Brisbane, Queensland, Australia"
+  },
+  "_preMigrationFinancials": [
+    {
+      "kind": "accom",
+      "id": "ia_1781352518167_yy2bd",
+      "receiptId": "rc_1785105230905_gvshj",
+      "fields": {
+        "budget": "4500",
+        "budgetActual": "1075",
+        "currency": "AUD"
+      }
+    },
+    {
+      "kind": "my-travel-lump",
+      "id": "",
+      "budgetItemId": "bi_1785105230905_d7162",
+      "fields": {
+        "budget": "524.52",
+        "budgetActual": "524.52"
+      }
+    }
+  ],
+  "_id": "303cab8e-5696-4252-bae0-828db0565d31"
+}

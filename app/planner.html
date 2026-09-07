@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+<html lang="en" style="opacity:0">
+<head>
+  <link rel="preload" href="./fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./fonts/newsreader-roman.woff2" as="font" type="font/woff2" crossorigin>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+  <link rel="icon" href="./img/app-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#f4f5f0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#131614" media="(prefers-color-scheme: dark)">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png">
+  <title>Trip Planner - Drupal Event Schedule Builder</title>
+  <style>html { transition: opacity .15s ease }</style>
+  <noscript><style>html{opacity:1}</style></noscript>
+
+  <style>
+    @layer overrides, reset, legacy, tokens, base, composition, section, utility;
+    @import url("./css/utilities.css") layer(legacy);
+  </style>
+  <link rel="stylesheet" href="./css/foundation.css">
+  <link rel="stylesheet" href="./css/section-chrome.css">
+  <link rel="stylesheet" href="./css/section-modal.css">
+  <link rel="stylesheet" href="./css/section-venue-map.css">
+  <link rel="stylesheet" href="./css/section-planner.css">
+</head>
+<body>
+
+  <a class="u-skip" href="#plannerMain">Skip to the planner</a>
+
+  <header class="app-masthead">
+    <div class="l-center">
+      <div class="app-masthead__bar">
+        <div class="app-lockup">
+          <span class="app-lockup__seal" aria-hidden="true"></span>
+          <div id="plannerHeaderKicker" class="app-lockup__title">Planner</div>
+          <h1 class="app-lockup__place">
+            <span id="plannerHeaderEvent">Trip Notebook</span>
+            <span id="plannerHeaderSuffix" class="u-visually-hidden">Personal</span>
+          </h1>
+        </div>
+        <div class="l-cluster">
+          <button id="plannerActionsBtn" type="button" class="app-btn"
+            aria-label="Planner actions" aria-haspopup="true">Actions</button>
+        </div>
+      </div>
+      <nav class="app-nav" aria-label="Site navigation">
+        <a href="./home.html" class="app-nav__link">Home</a>
+        <a href="./index.html" class="app-nav__link">Schedule</a>
+        <a href="./planner.html" class="app-nav__link" aria-current="page">Planner</a>
+        <a href="./archive.html" class="app-nav__link">Archive</a>
+        <a id="plannerCurationNavLink" href="./curation.html" class="app-nav__link hidden">Curation</a>
+        <a id="plannerEditorNavLink" href="./editor.html" class="app-nav__link hidden">Editor</a>
+      </nav>
+
+      <nav id="plannerCrumbs" class="app-crumbs" aria-label="Breadcrumb"></nav>
+    </div>
+  </header>
+
+  <aside id="plannerSidebar" aria-label="Planner navigation">
+
+    <div class="sidebar-brand">
+      <div class="sidebar-app-icon flex-shrink-0 flex items-center justify-center">
+      </div>
+      <div class="sidebar-brand-text min-w-0 flex-1">
+        <div id="sidebarEventName" class="sidebar-event-name truncate">Trip Notebook</div>
+        <div class="sidebar-dirty-row">
+          <span id="sidebarDirtyIcon" class="sidebar-dirty-dot" aria-hidden="true"></span>
+          <span id="sidebarDirtyText" class="sidebar-dirty-label">Saved</span>
+        </div>
+      </div>
+      <button id="sidebarToggleBtn" type="button" class="sidebar-toggle-btn" aria-label="Toggle sidebar">
+        <span id="sidebarToggleIcon" aria-hidden="true">«</span>
+      </button>
+    </div>
+
+    <nav id="sidebarNav" aria-label="Planner tabs"></nav>
+
+    <div id="sidebarFooter">
+      <a id="sidebarEditorLink" href="./editor.html" class="sidebar-tab-btn hidden">
+        <span class="sidebar-label">Editor</span>
+      </a>
+    </div>
+
+  </aside>
+
+  <main id="plannerMain" class="sm:w-[90%] sm:mx-auto px-4 py-4 sm:py-8 space-y-4">
+
+    <div id="plannerNoEvent" class="hidden">
+      <div class="py-12 text-center pl-ink-2">
+        <p class="text-sm">Loading your trips…</p>
+      </div>
+    </div>
+
+    <div id="plannerApp" class="space-y-4">
+
+      <section id="plannerToolbar" aria-label="Planner status">
+        <div class="pln-strip">
+          <a href="planner.html" id="plannerHomeBtn" class="pln-strip__back">All trips</a>
+          <div id="plannerEventChip" class="pln-strip__event">
+            <span id="plannerEventName" class="truncate">Loading&hellip;</span>
+          </div>
+          <div id="plannerPathChip" class="pln-strip__paths hidden" aria-label="Linked files">
+            <div id="plannerScheduleRows"></div>
+            <div class="toolbar-path-row" data-path-row="planner" title="This planner's file — where Save writes">
+              <span class="toolbar-path-text" data-path="planner"></span>
+            </div>
+          </div>
+          <div id="plannerDirtyState" class="pln-strip__state">
+            <span class="sidebar-dirty-dot" aria-hidden="true"></span><span>Saved</span>
+          </div>
+        </div>
+        <div class="hidden">
+          <button id="plannerSaveFileBtn" type="button" class="hidden">Save</button>
+          <button id="plannerExportBtn" type="button">Back up</button>
+          <button id="plannerCalExportBtn" type="button">Add to calendar</button>
+          <button id="plannerImportBtn" type="button">Restore</button>
+        </div>
+      </section>
+
+      <div id="storageNotice" class="hidden flex items-start gap-3 rounded-lg border pl-rule-warn pl-surface-2 px-4 py-3 text-sm pl-warn">
+        <span>Your planner is saved in this browser only. Use <strong>Back up</strong> to keep a copy you can restore later or use on another device.</span>
+        <button id="storageNoticeDismiss" type="button" class="ml-auto shrink-0 pl-warn" aria-label="Dismiss">&times;</button>
+      </div>
+
+      <section class="editor-meta-accordion rounded-lg p-4 space-y-4">
+        <div id="accordionHeaderRow" class="flex items-center justify-between gap-3 flex-wrap">
+          <div class="planner-accordion-title">
+            <h2 class="text-lg font-semibold pl-ink-0">Planner</h2>
+            <p id="plannerModeSubtitle" class="text-sm pl-ink-2">Your personal notebook for this event.</p>
+          </div>
+
+          <button id="mobileTabMenuBtn" type="button" aria-haspopup="true" aria-expanded="false"
+            class="mobile-tab-nav-btn sm:hidden flex-1 flex items-center justify-between gap-2 h-10 px-3 rounded-md border pl-rule text-sm pl-ink-0 pl-surface/10 transition-colors">
+            <div class="flex items-center gap-2 min-w-0">
+              <span id="mobileTabLabel" class="truncate font-medium">Personal</span>
+            </div>
+          </button>
+
+          <div id="plannerTabBar" class="editor-tab-row planner-tab-row hidden" role="tablist" aria-label="Planner sections">
+            <div id="tabBarMain" class="flex items-center gap-0.5 flex-1 min-w-0"></div>
+            <div id="tabBarMoreWrap" class="relative hidden flex-shrink-0">
+              <button id="tabMoreBtn" type="button" class="editor-tab-button whitespace-nowrap" aria-haspopup="listbox" aria-expanded="false">
+                More
+              </button>
+              <div id="tabMoreDropdown" class="hidden absolute right-0 top-full mt-1 z-30 rounded-lg border py-1 min-w-[160px] tab-more-dropdown"></div>
+            </div>
+            <button id="showSettingsTab" type="button" class="editor-tab-button flex-shrink-0" role="tab" aria-selected="false" aria-controls="plannerSettingsPanel" data-tab="settings">Settings
+            </button>
+          </div>
+        </div>
+
+        <div id="plannerContactsPanel" class="hidden" role="tabpanel" aria-labelledby="showContactsTab"></div>
+
+        <div id="plannerTasksPanel" class="hidden" role="tabpanel" aria-labelledby="showTasksTab"></div>
+        <div id="plannerChecklistsPanel" class="hidden" role="tabpanel" aria-labelledby="showChecklistsTab"></div>
+
+        <div id="plannerSponsorPanel" class="hidden" role="tabpanel" aria-labelledby="showSponsorTab"></div>
+
+        <div id="plannerPersonalPanel" role="tabpanel" aria-labelledby="showPersonalTab"></div>
+
+        <div id="plannerNotesPanel" class="hidden" role="tabpanel" aria-labelledby="showNotesTab"></div>
+
+        <div id="plannerTeamPanel" class="hidden" role="tabpanel" aria-labelledby="showTeamTab"></div>
+
+        <div id="plannerDocumentsPanel" class="hidden" role="tabpanel" aria-labelledby="showDocumentsTab"></div>
+
+        <div id="plannerReceiptsPanel" class="hidden" role="tabpanel" aria-labelledby="showReceiptsTab"></div>
+
+        <div id="plannerTicketsPanel" class="hidden" role="tabpanel" aria-labelledby="showTicketsTab"></div>
+
+        <div id="plannerBudgetPanel" class="hidden" role="tabpanel" aria-labelledby="showBudgetTab"></div>
+        <div id="plannerSplitPanel" class="hidden" role="tabpanel" aria-labelledby="showSplitTab"></div>
+
+        <div id="plannerCompanionsPanel" class="hidden" role="tabpanel" aria-labelledby="showCompanionsTab"></div>
+
+        <div id="plannerMapPanel" class="hidden" role="tabpanel" aria-labelledby="showMapTab"></div>
+        <div id="plannerWeatherPanel" class="hidden" role="tabpanel" aria-labelledby="showWeatherTab"></div>
+
+        <div id="plannerSchedulePanel" class="hidden" role="tabpanel" aria-labelledby="showScheduleTab"></div>
+
+        <div id="plannerItineraryPanel" class="hidden" role="tabpanel" aria-labelledby="showItineraryTab"></div>
+
+        <div id="plannerSummaryPanel" class="hidden" role="tabpanel" aria-labelledby="showSummaryTab"></div>
+
+        <div id="plannerSettingsPanel" class="hidden" role="tabpanel" aria-labelledby="showSettingsTab"></div>
+
+      </section>
+    </div>
+
+    <input id="plannerImportInput" type="file" accept=".json" class="sr-only" aria-label="Choose a planner JSON file to import">
+
+  </main>
+
+  <div id="budgetItemModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="budgetItemModalTitle">
+    <div class="pl-modal-card max-w-md">
+      <div class="pl-modal-head">
+        <h2 id="budgetItemModalTitle" class="pl-modal-title">Budget Item</h2>
+        <button type="button" id="budgetItemModalClose" aria-label="Close"
+          class="pl-iconbtn">&times;</button>
+      </div>
+      <div class="px-6 py-5 space-y-4">
+        <label class="editor-form-field">
+          <span class="editor-field-label">Name / description</span>
+          <input type="text" id="budgetItemName" placeholder="e.g. Conference registration fee"
+            class="pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Category</span>
+          <select id="budgetItemCategory" class="pl-field"></select>
+        </label>
+        <label id="budgetItemAssignedToRow" class="editor-form-field hidden">
+          <span class="editor-field-label">Assigned to</span>
+          <select id="budgetItemAssignedTo" class="pl-field"></select>
+        </label>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <label class="editor-form-field">
+            <span class="editor-field-label">Currency</span>
+            <select id="budgetItemCurrency" class="pl-field"></select>
+          </label>
+          <label class="editor-form-field sm:col-span-2">
+            <span class="editor-field-label">Budget amount <span class="pl-req">*</span></span>
+            <input type="number" step="0.01" id="budgetItemBudget" placeholder="0.00"
+              class="pl-field">
+          </label>
+        </div>
+        <span class="text-[0.7rem] pl-ink-2 -mt-2 block">Planned amount for this line. Actual spend comes from linked receipts below.</span>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Notes</span>
+          <textarea id="budgetItemNotes" rows="2" placeholder="Optional notes…"
+            class="w-full rounded-md pl-rule drupal-blue-focus text-sm pl-surface p-3 mt-1 resize-none"></textarea>
+        </label>
+        <div class="pl-divide pt-4">
+          <p class="pl-label">Receipts</p>
+          <div id="budgetItemReceiptStatus" class="flex items-center gap-2 flex-wrap">
+          </div>
+        </div>
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="budgetItemModalDelete"
+          class="hidden pl-btn pl-btn--danger">Remove
+        </button>
+        <button type="button" id="budgetItemModalDone"
+          class="ml-auto pl-btn pl-btn--primary">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="createPlannerModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="createPlannerModalTitle">
+    <div class="pl-surface rounded-xl w-full max-w-lg flex flex-col" style="max-height:90dvh">
+      <div class="pl-modal-head flex-shrink-0">
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="pl-itin-badge flex-shrink-0">
+          </span>
+          <div class="min-w-0">
+            <h2 id="createPlannerModalTitle" class="pl-modal-title leading-tight">New Planner</h2>
+            <p class="pl-hint leading-tight mt-0.5">Name it, link an event, then choose what it tracks.</p>
+          </div>
+        </div>
+        <button type="button" id="createPlannerModalClose" aria-label="Close"
+          class="pl-iconbtn flex-shrink-0">&times;</button>
+      </div>
+      <div class="px-6 py-5 space-y-6 overflow-y-auto flex-1">
+        <label class="editor-form-field">
+          <span class="editor-field-label">Trip / planner name</span>
+          <input type="text" id="createPlannerName" placeholder="e.g. Singapore 2024 or DrupalCon Prague 2026"
+            class="pl-field">
+        </label>
+        <div class="space-y-2">
+          <p class="pl-label">Conference / Event <span class="pl-hint">(optional)</span></p>
+          <div id="createPlannerEventPill" class="hidden set-linked" style="padding:0.5rem 0.75rem">
+            <span id="createPlannerEventPillLabel" class="flex-1 min-w-0 truncate text-sm pl-ink-0"></span>
+            <button type="button" id="createPlannerEventClear" class="set-btn flex-shrink-0" style="height:1.6rem;padding:0 0.4rem" aria-label="Clear event">&times;</button>
+          </div>
+          <div id="createPlannerEventSearch">
+            <div class="relative">
+              <input type="text" id="createPlannerEventInput" placeholder="Search events…"
+                class="h-9 w-full rounded-md border pl-rule drupal-blue-focus text-sm pl-surface px-3 pr-8"
+                autocomplete="off">
+            </div>
+            <div id="createPlannerEventResults" class="hidden mt-1 max-h-44 overflow-y-auto rounded-lg border pl-rule pl-surface"></div>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <p class="pl-label">Planner mode</p>
+          <div class="set-cards set-cards--2">
+            <label class="set-card">
+              <input type="radio" id="createPlannerModePersonal" name="createPlannerMode" value="personal" class="set-radio">
+              <span class="set-icon"></span>
+              <span class="set-card-body">
+                <span class="set-card-title">Personal</span>
+                <span class="set-card-desc">Travel, receipts &amp; expenses</span>
+              </span>
+            </label>
+            <label class="set-card">
+              <input type="radio" id="createPlannerModeSponsor" name="createPlannerMode" value="sponsor" class="set-radio">
+              <span class="set-icon"></span>
+              <span class="set-card-body">
+                <span class="set-card-title">Sponsor</span>
+                <span class="set-card-desc">Team, booth &amp; deliverables</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label class="block pl-label" for="createPlannerCurrency">Report totals in</label>
+          <select id="createPlannerCurrency"
+            class="pl-field"></select>
+          <p class="pl-hint">Totals roll up into this currency. Each item is still entered in its own currency. Change it anytime in Settings.</p>
+        </div>
+
+        <div class="space-y-2">
+          <p class="pl-label">Features <span class="pl-hint">— you can change these anytime in Settings</span></p>
+          <div class="set-cards">
+            <label class="set-card">
+              <span class="set-icon"></span>
+              <span class="set-card-body">
+                <span class="set-card-title">Conference features</span>
+                <span class="set-card-desc">Adds Notes, Contacts &amp; the conference schedule for an event. Turn off for a plain trip.</span>
+              </span>
+              <input type="checkbox" id="createPlannerConference" class="pl-toggle">
+            </label>
+            <label class="set-card">
+              <span class="set-icon"></span>
+              <span class="set-card-body">
+                <span class="set-card-title">Getting around</span>
+                <span class="set-card-desc">Track local trips while you're there — trains, taxis, cable cars — on the itinerary, timeline &amp; map.</span>
+              </span>
+              <input type="checkbox" id="createPlannerLocalTravel" class="pl-toggle">
+            </label>
+            <label class="set-card">
+              <span class="set-icon"></span>
+              <span class="set-card-body">
+                <span class="set-card-title">Financial</span>
+                <span class="set-card-desc">Budget, receipts, shared-cost splitting &amp; a spend summary report. Turn off if you're not tracking money.</span>
+              </span>
+              <input type="checkbox" id="createPlannerFinancial" class="pl-toggle">
+            </label>
+            <label class="set-card">
+              <span class="set-icon"></span>
+              <span class="set-card-body">
+                <span class="set-card-title">Weather</span>
+                <span class="set-card-desc">A forecast for your destination across the trip dates, so you know what to pack.</span>
+              </span>
+              <input type="checkbox" id="createPlannerWeather" class="pl-toggle">
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 px-6 py-4 border-t pl-rule flex-shrink-0">
+        <button type="button" id="createPlannerModalClose2" class="iv-btn">Cancel</button>
+        <button type="button" id="createPlannerConfirmBtn" class="iv-btn iv-btn--gold">Create
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="dashboardPlannerEditModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="dashboardEditTitle">
+    <div class="pl-surface rounded-xl w-full max-w-sm flex flex-col" style="max-height:90dvh">
+      <div class="pl-modal-head flex-shrink-0">
+        <h2 id="dashboardEditTitle" class="pl-modal-title">Edit Planner</h2>
+        <button type="button" id="dashboardEditClose" aria-label="Close"
+          class="pl-iconbtn">&times;</button>
+      </div>
+      <div class="px-6 py-5 space-y-4 overflow-y-auto flex-1">
+        <label class="editor-form-field">
+          <span class="editor-field-label">Name</span>
+          <input type="text" id="dashboardEditName" placeholder="e.g. DrupalCon Prague 2026"
+            class="pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">File path</span>
+          <input type="text" id="dashboardEditSlug" disabled
+            class="h-10 w-full rounded-md pl-rule pl-surface-2 text-sm pl-ink-2 px-3 font-mono cursor-default select-all">
+        </label>
+        <div class="space-y-2">
+          <p class="pl-label">Conference / Event <span class="pl-hint">(optional)</span></p>
+          <div id="dashboardEditEventPill" class="hidden items-center gap-2 px-3 py-2 rounded-lg pl-surface-2 text-sm pl-accent">
+            <span id="dashboardEditEventPillLabel" class="flex-1 min-w-0 truncate"></span>
+            <button type="button" id="dashboardEditEventUnlink" class="pl-accent hover:pl-accent flex-shrink-0 h-5 w-5 flex items-center justify-center">&times;</button>
+          </div>
+          <div id="dashboardEditEventSearch">
+            <div class="relative">
+              <input type="text" id="dashboardEditEventInput" placeholder="Search events…"
+                class="h-9 w-full rounded-md border pl-rule drupal-blue-focus text-sm pl-surface px-3 pr-8"
+                autocomplete="off">
+            </div>
+            <div id="dashboardEditEventResults" class="hidden mt-1 max-h-40 overflow-y-auto rounded-lg border pl-rule pl-surface"></div>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 px-6 py-4 border-t pl-rule flex-shrink-0">
+        <button type="button" id="dashboardEditCancel"
+          class="h-9 px-4 rounded-md border pl-rule text-sm pl-ink-1 transition-colors">
+          Cancel
+        </button>
+        <button type="button" id="dashboardEditSave"
+          class="iv-btn iv-btn--gold">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="tripCogMenu" class="trip-cog-menu hidden">
+    <a id="tripCogSettings" href="#" class="trip-cog-item">Settings
+    </a>
+    <button type="button" id="tripCogEdit" class="trip-cog-item">Edit planner
+    </button>
+    <div class="trip-cog-divider"></div>
+    <button type="button" id="tripCogDelete" class="trip-cog-item trip-cog-item--danger">Delete
+    </button>
+  </div>
+
+  <div id="globalSettingsModal" class="hidden fixed inset-0 z-50 gs-page flex flex-col" role="dialog" aria-modal="true" aria-labelledby="globalSettingsTitle">
+
+    <div class="flex items-center justify-between px-5 sm:px-8 py-4 border-b pl-rule pl-surface flex-shrink-0">
+      <div class="rcpt-head" style="margin:0"><span class="rcpt-eyebrow" id="globalSettingsTitle">Settings</span></div>
+      <button type="button" id="globalSettingsClose" aria-label="Close" class="iv-close">&times;</button>
+    </div>
+
+    <div class="flex-1 overflow-y-auto">
+      <div class="max-w-5xl mx-auto px-5 sm:px-8 py-6 space-y-8">
+
+        <div class="gs-top">
+          <div>
+            <div class="doc-divider"><span>Defaults</span></div>
+            <p class="gs-desc">Applied to new planners you create.</p>
+            <div class="gs-fields">
+              <label class="gs-field">
+                <span class="gs-field-label">Report currency</span>
+                <select id="globalSettingsCurrency" class="set-input"></select>
+              </label>
+              <label class="gs-field">
+                <span class="gs-field-label">Default planner mode</span>
+                <select id="globalSettingsMode" class="set-input">
+                  <option value="personal">Personal</option>
+                  <option value="sponsor">Sponsor</option>
+                </select>
+              </label>
+            </div>
+            <div class="doc-divider" style="margin-top:1.4rem"><span>Sections</span></div>
+            <p class="gs-desc">Show or hide these columns on this page.</p>
+            <div class="gs-switches">
+              <label class="gs-switch">
+                <span class="gs-switch-label">Companions</span>
+                <input type="checkbox" id="gsShowCompanions" class="pl-toggle">
+              </label>
+              <label class="gs-switch">
+                <span class="gs-switch-label">Team members</span>
+                <input type="checkbox" id="gsShowTeam" class="pl-toggle">
+              </label>
+            </div>
+          </div>
+          <div>
+            <div class="doc-divider"><span>Companions</span></div>
+            <div id="gsCompanionsBody">
+              <div class="gs-subhead">
+                <p class="gs-desc" style="margin:0">Global companions you can assign to any personal trip.</p>
+                <button type="button" id="globalSettingsAddContactBtn" class="set-btn flex-shrink-0">Add</button>
+              </div>
+              <div id="globalSettingsContactsList" class="gs-people"></div>
+            </div>
+          </div>
+          <div>
+            <div class="doc-divider"><span>Team members</span></div>
+            <div id="gsTeamBody">
+              <div class="gs-subhead">
+                <p class="gs-desc" style="margin:0">Global team you can assign to sponsor trips.</p>
+                <button type="button" id="globalSettingsAddMemberBtn" class="set-btn flex-shrink-0">Add</button>
+              </div>
+              <div id="globalSettingsTeamList" class="gs-people"></div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="doc-divider"><span>Cloud backup</span></div>
+
+          <div id="s3StatusChip" class="s3-status s3-status--off">
+            <span class="s3-status-ic"></span>
+            <span class="s3-status-label">Checking…</span>
+          </div>
+          <p id="s3ConfigDisplay" class="s3-config hidden"></p>
+          <div id="s3NotConfigured" class="s3-notconf hidden">
+            <span>Cloud backup isn't configured. Set <code>S3_BUCKET</code> and <code>S3_REGION</code> in the server environment to enable it.</span>
+          </div>
+
+          <div class="s3-grid">
+            <div class="s3-actions">
+              <button type="button" id="s3SaveBtn" class="s3-act s3-act--primary" disabled>
+                <span class="s3-act-ic"></span>
+                <span class="s3-act-txt"><span class="s3-act-title">Save to cloud</span><span class="s3-act-sub">Push your planners up to S3</span></span>
+              </button>
+              <button type="button" id="s3GetBtn" class="s3-act" disabled>
+                <span class="s3-act-ic s3-act-ic--get"></span>
+                <span class="s3-act-txt"><span class="s3-act-title">Get updates</span><span class="s3-act-sub">Pull the latest copies down</span></span>
+              </button>
+              <button type="button" id="s3ImportBtn" class="s3-act">
+                <span class="s3-act-ic s3-act-ic--muted"></span>
+                <span class="s3-act-txt"><span class="s3-act-title">Upload a planner file</span><span class="s3-act-sub">Import a .json from your computer</span></span>
+              </button>
+              <input type="file" id="s3UploadPlannerInput" accept=".json" class="hidden">
+              <button type="button" id="s3MirrorBtn" class="s3-act s3-act--warn" disabled>
+                <span class="s3-act-ic s3-act-ic--warn"></span>
+                <span class="s3-act-txt"><span class="s3-act-title">Mirror to cloud</span><span class="s3-act-sub">Match cloud to local, incl. deletions</span></span>
+              </button>
+              <button type="button" id="s3ClearBtn" class="s3-act s3-act--danger">
+                <span class="s3-act-ic s3-act-ic--danger"></span>
+                <span class="s3-act-txt"><span class="s3-act-title">Clear browser copies</span><span class="s3-act-sub">Remove locally cached planners</span></span>
+              </button>
+            </div>
+
+            <div class="s3-logs-wrap">
+              <div class="s3-logs-head">
+                <span class="s3-logs-title">Activity log</span>
+                <button type="button" id="s3LogsClear" class="set-btn" style="height:1.7rem;padding:0 0.55rem">Clear</button>
+              </div>
+              <div id="s3Progress" class="hidden s3-progress">
+                <div class="s3-progress-track"><div class="s3-progress-bar"></div></div>
+                <p class="s3-progress-label">Working…</p>
+              </div>
+              <div id="s3Result" class="s3-logs"><p class="s3-logs-empty">No activity yet — Save or Get to sync with the cloud.</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="flex justify-end gap-2 px-5 sm:px-8 py-4 border-t pl-rule pl-surface flex-shrink-0">
+      <button type="button" id="globalSettingsDone" class="iv-btn iv-btn--gold">Done</button>
+    </div>
+
+  </div>
+
+  <div id="eventAssocModal" class="hidden fixed inset-0 z-50 flex justify-center" role="dialog" aria-modal="true" aria-labelledby="eventAssocModalTitle">
+    <div class="pl-surface w-full flex flex-col">
+
+      <div class="flex items-center justify-between px-5 py-4 border-b pl-rule flex-shrink-0">
+        <h2 id="eventAssocModalTitle" class="pl-modal-title">Manage Planner</h2>
+        <button type="button" id="eventAssocModalClose" aria-label="Close"
+          class="assoc-modal-close flex items-center justify-center rounded-full pl-ink-2 hover:pl-ink-1 transition-colors">&times;</button>
+      </div>
+
+      <div class="assoc-tabs-wrap border-b pl-rule flex-shrink-0">
+        <div class="flex" role="tablist">
+          <button type="button" role="tab" data-assoc-tab="planners" aria-selected="true"
+            class="assoc-tab-btn is-active flex-1 py-2.5 text-sm font-medium">
+            My Planners
+          </button>
+          <button type="button" role="tab" data-assoc-tab="events" aria-selected="false"
+            class="assoc-tab-btn flex-1 py-2.5 text-sm font-medium">
+            Events
+          </button>
+        </div>
+      </div>
+
+      <div id="assocSearchWrap" class="hidden px-4 py-2.5 border-b pl-rule flex-shrink-0">
+        <div class="relative">
+          <input type="text" id="assocSearchInput" placeholder="Search events…"
+            class="h-9 w-full rounded-lg pl-rule drupal-blue-focus text-sm pl-surface px-3 pr-8"
+            autocomplete="off">
+        </div>
+      </div>
+
+      <div id="assocModalResults" class="overflow-y-auto flex-1 min-h-0"></div>
+
+      <div id="assocModalFooter" class="flex items-center gap-2 px-4 py-3 border-t pl-rule flex-shrink-0">
+        <button type="button" id="managePlannerNewBtn"
+          class="h-10 flex-1 inline-flex items-center justify-center gap-2 rounded-lg border pl-rule text-sm font-medium pl-ink-1 pl-surface transition-colors">New planner
+        </button>
+        <button type="button" id="managePlannerDeleteBtn"
+          class="h-10 inline-flex items-center justify-center gap-1.5 px-4 rounded-lg border pl-rule-bad text-sm font-medium pl-req transition-colors whitespace-nowrap">Delete
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="teamMemberModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="teamMemberModalTitle">
+    <div class="pl-modal-card max-w-lg">
+      <div class="pl-modal-head">
+        <h2 id="teamMemberModalTitle" class="pl-modal-title">Team Member</h2>
+        <button type="button" id="teamMemberModalClose" aria-label="Close"
+          class="pl-iconbtn">&times;</button>
+      </div>
+      <div class="px-6 py-5 grid grid-cols-2 gap-3">
+        <label class="editor-form-field">
+          <span class="editor-field-label">Name</span>
+          <input type="text" id="tmName" placeholder="Full name" class="pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Role</span>
+          <input type="text" id="tmRole" placeholder="e.g. Sales Engineer" class="pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Company</span>
+          <input type="text" id="tmCompany" placeholder="e.g. Acme Corp" class="pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Department</span>
+          <input type="text" id="tmDepartment" placeholder="e.g. Engineering" class="pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Phone</span>
+          <input type="tel" id="tmPhone" placeholder="+1 555 000 0000" class="pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Notes</span>
+          <input type="text" id="tmNotes" placeholder="Any quick notes…" class="pl-field">
+        </label>
+        <label class="editor-form-field col-span-2 flex items-center gap-3 cursor-pointer">
+          <input type="checkbox" id="tmEnabled" class="pl-check">
+          <span class="editor-field-label !mb-0">Active (enabled)</span>
+        </label>
+        <label class="editor-form-field col-span-2 flex items-center gap-3 cursor-pointer">
+          <input type="checkbox" id="tmSkipFinances" class="pl-check">
+          <span class="editor-field-label !mb-0">Skip finance tracking for this person</span>
+        </label>
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="teamMemberModalDelete"
+          class="pl-btn pl-btn--danger">Remove
+        </button>
+        <button type="button" id="teamMemberModalDone"
+          class="pl-btn pl-btn--primary">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="personalContactModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="personalContactModalTitle">
+    <div class="pl-modal-card max-w-md">
+      <div class="pl-modal-head">
+        <h2 id="personalContactModalTitle" class="pl-modal-title">Trip Contact</h2>
+        <button type="button" id="personalContactModalClose" aria-label="Close"
+          class="pl-iconbtn">&times;</button>
+      </div>
+      <div class="px-6 py-5 grid grid-cols-2 gap-3">
+        <label class="editor-form-field col-span-2">
+          <span class="editor-field-label">Name</span>
+          <input type="text" id="pcName" placeholder="Full name" class="pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Phone</span>
+          <input type="tel" id="pcPhone" placeholder="+1 555 000 0000" class="pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Notes</span>
+          <input type="text" id="pcNotes" placeholder="e.g. travel buddy, partner…" class="pl-field">
+        </label>
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="personalContactModalDelete"
+          class="pl-btn pl-btn--danger">Remove
+        </button>
+        <button type="button" id="personalContactModalDone"
+          class="pl-btn pl-btn--primary">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="assignmentModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="assignmentModalTitle">
+    <div class="pl-modal-card max-w-2xl">
+      <div class="pl-modal-head">
+        <div class="flex items-center gap-3 min-w-0">
+          <span class="h-9 w-9 flex items-center justify-center rounded-lg pl-surface-2 pl-accent flex-shrink-0">
+          </span>
+          <div class="min-w-0">
+            <h2 id="assignmentModalTitle" class="pl-modal-title leading-tight">Travel &amp; Budget</h2>
+            <p id="assignmentModalSubtitle" class="pl-hint leading-tight mt-0.5"></p>
+          </div>
+        </div>
+        <button type="button" id="assignmentModalClose" aria-label="Close"
+          class="pl-iconbtn flex-shrink-0">&times;</button>
+      </div>
+      <div class="px-6 py-5 space-y-5 overflow-y-auto" style="max-height:72vh">
+
+        <section>
+          <div class="flex items-center justify-between mb-2">
+            <p class="pl-label">Outbound Journey</p>
+            <div class="flex items-center gap-1.5">
+              <button type="button" id="importOutboundFromMeBtn"
+                class="hidden h-7 inline-flex items-center px-2.5 rounded border pl-rule text-xs pl-accent transition-colors">Copy from me
+              </button>
+              <button type="button" id="addOutboundLegBtn"
+                class="h-7 inline-flex items-center px-2.5 rounded border pl-rule text-xs pl-ink-1 transition-colors">Add leg
+              </button>
+            </div>
+          </div>
+          <div id="assignmentOutboundLegs" class="space-y-2">
+            <p class="pl-hint italic py-1">No outbound legs yet.</p>
+          </div>
+        </section>
+
+        <section>
+          <div class="flex items-center justify-between mb-2">
+            <p class="pl-label">Return Journey</p>
+            <div class="flex items-center gap-1.5">
+              <button type="button" id="importReturnFromMeBtn"
+                class="hidden h-7 inline-flex items-center px-2.5 rounded border pl-rule text-xs pl-accent transition-colors">Copy from me
+              </button>
+              <button type="button" id="addReturnLegBtn"
+                class="h-7 inline-flex items-center px-2.5 rounded border pl-rule text-xs pl-ink-1 transition-colors">Add leg
+              </button>
+            </div>
+          </div>
+          <div id="assignmentReturnLegs" class="space-y-2">
+            <p class="pl-hint italic py-1">No return legs yet.</p>
+          </div>
+        </section>
+
+        <section class="space-y-3 pt-1 border-t pl-rule">
+          <div id="assignmentCostSection" class="space-y-3">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <label class="editor-form-field">
+                <span class="editor-field-label">Approved budget</span>
+                <input type="text" id="assignmentBudget" placeholder="e.g. 3500"
+                  class="pl-field">
+              </label>
+              <label class="editor-form-field">
+                <span class="editor-field-label">Actual spend</span>
+                <input type="text" id="assignmentActual" placeholder="e.g. 3120"
+                  class="pl-field">
+              </label>
+              <label class="editor-form-field">
+                <span class="editor-field-label">Currency</span>
+                <select id="assignmentCurrency"
+                  class="pl-field">
+                </select>
+              </label>
+            </div>
+            <label class="editor-form-field">
+              <span class="editor-field-label">Purchase date</span>
+              <input type="date" id="assignmentPurchaseDate"
+                class="pl-field"
+                title="For foreign currency, sets the exchange-rate day. Blank = event date.">
+            </label>
+          </div>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Event notes</span>
+            <input type="text" id="assignmentNotes" placeholder="Any specific notes for this event…"
+              class="pl-field">
+          </label>
+          <div id="assignmentReceiptSection" class="pl-divide pt-3">
+            <p class="pl-label">Receipt</p>
+            <div id="assignmentReceiptStatus" class="flex items-center gap-2 flex-wrap">
+            </div>
+          </div>
+        </section>
+
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="assignmentModalDone"
+          class="pl-btn pl-btn--primary">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="accommodationModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="accommodationModalTitle">
+    <div class="pl-modal-card max-w-2xl">
+      <div class="pl-modal-head">
+        <h2 id="accommodationModalTitle" class="pl-modal-title">Accommodation</h2>
+        <button type="button" id="accommodationModalClose" aria-label="Close"
+          class="pl-iconbtn">&times;</button>
+      </div>
+      <div class="px-6 py-5 space-y-5">
+        <section>
+          <p class="pl-label mb-3">Property</p>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="editor-form-field col-span-2">
+              <span class="editor-field-label">Type</span>
+              <select id="accomType" class="pl-field">
+                <option value="accommodation">Accommodation</option>
+                <option value="waypoints">Waypoint</option>
+              </select>
+            </label>
+            <label class="editor-form-field">
+              <span class="editor-field-label">Name</span>
+              <input type="text" id="accomName" placeholder="Hotel / ship name" class="pl-field">
+            </label>
+            <label class="editor-form-field">
+              <span class="editor-field-label">Confirmation #</span>
+              <input type="text" id="accomConfirmation" placeholder="ABC123" class="pl-field">
+            </label>
+            <label class="editor-form-field col-span-2">
+              <span class="editor-field-label">Address</span>
+              <input type="text" id="accomAddress" placeholder="Street address" class="pl-field">
+            </label>
+            <div class="editor-form-field col-span-2">
+              <span class="editor-field-label">Map location</span>
+              <div class="flex items-center gap-2 mt-1">
+                <input type="text" id="accomCoords" placeholder="lat, lon — optional, pins exactly on the map instead of the address" class="h-10 flex-1 min-w-0 rounded-md pl-rule drupal-blue-focus text-sm pl-surface px-3">
+                <button type="button" id="accomPickLocationBtn" class="h-10 px-3 border pl-rule rounded-md text-sm font-medium pl-ink-1 pl-surface transition-colors inline-flex items-center flex-shrink-0">Pick on map</button>
+              </div>
+            </div>
+            <label class="editor-form-field col-span-2">
+              <span class="editor-field-label">Notes</span>
+              <textarea id="accomNotes" rows="2" placeholder="Room type, late check-in instructions, parking…" class="pl-textarea mt-1"></textarea>
+            </label>
+          </div>
+        </section>
+        <section id="accomWaypointStopsSection" class="hidden pl-divide pt-4">
+          <div class="flex items-center justify-between mb-3">
+            <p class="pl-label">Waypoint Itinerary</p>
+            <button type="button" id="accomAddWaypointStopBtn"
+              class="h-7 px-3 inline-flex items-center gap-1.5 border pl-rule rounded-md text-xs pl-ink-1 transition-colors">Add waypoint
+            </button>
+          </div>
+          <p id="accomWaypointStopsEmpty" class="hidden pl-hint">No waypoints added yet.</p>
+          <div id="accomWaypointStopsList" class="space-y-1.5"></div>
+        </section>
+
+        <section class="pl-divide pt-4">
+          <p class="pl-label">Booking Receipt</p>
+          <div id="accomDocStatus" class="flex items-center gap-2"></div>
+        </section>
+
+        <section>
+          <p class="pl-label mb-3">Member Stays</p>
+          <p id="accomNoMembers" class="hidden pl-hint py-2">No team members assigned to this event yet. Add them in the <strong>Org</strong> tab first.</p>
+          <div id="accomMemberStaysWrapper" class="hidden space-y-3">
+            <div class="flex items-end gap-2">
+              <label class="editor-form-field flex-1 !mb-0">
+                <span class="editor-field-label">Team member</span>
+                <select id="accomMemberSelect" class="pl-field">
+                  <option value="">— Select to view or add —</option>
+                </select>
+              </label>
+              <button type="button" id="accomRemoveMemberBtn"
+                class="h-9 flex-shrink-0 inline-flex items-center px-3 rounded-md border pl-rule-bad text-xs pl-req transition-colors opacity-0 pointer-events-none"
+                title="Remove this member's stay">Remove
+              </button>
+            </div>
+            <div id="accomMemberFields" class="hidden grid grid-cols-2 gap-2 rounded-md border pl-rule pl-surface-2 p-3">
+              <label id="accomMemberCheckInRow" class="editor-form-field !mb-0">
+                <span class="editor-field-label">Check-in</span>
+                <input type="date" id="accomMemberCheckIn" class="pl-field">
+              </label>
+              <label id="accomMemberCheckOutRow" class="editor-form-field !mb-0">
+                <span class="editor-field-label">Check-out</span>
+                <input type="date" id="accomMemberCheckOut" class="pl-field">
+              </label>
+              <div class="col-span-2 border-t pl-rule pt-2 mt-1">
+                <p class="pl-label">Receipt</p>
+                <div id="accomMemberReceiptStatus" class="flex items-center gap-2 flex-wrap">
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="accommodationModalDelete"
+          class="pl-btn pl-btn--danger">Remove accommodation
+        </button>
+        <button type="button" id="accommodationModalDone"
+          class="pl-btn pl-btn--primary">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="itineraryDayModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="itineraryDayModalTitle">
+    <div class="pl-modal-card max-w-lg">
+      <div class="pl-modal-head">
+        <div>
+          <h2 id="itineraryDayModalTitle" class="pl-modal-title">Itinerary</h2>
+          <p id="itineraryDayModalSubtitle" class="pl-hint"></p>
+        </div>
+        <button type="button" id="itineraryDayModalClose" aria-label="Close"
+          class="pl-iconbtn">&times;</button>
+      </div>
+      <div class="px-6 py-5 space-y-4 overflow-y-auto" style="max-height:65vh">
+        <div id="itineraryDayItems" class="space-y-2"></div>
+        <button type="button" id="addItineraryItemBtn"
+          class="h-8 inline-flex items-center px-3 border pl-rule rounded-md text-xs pl-ink-1 transition-colors">Add item
+        </button>
+        <div id="itineraryAddForm" class="hidden rounded-lg border pl-rule pl-surface-2 p-4 space-y-3">
+          <div id="itineraryOrgDateRow" class="hidden">
+            <label class="editor-form-field">
+              <span class="editor-field-label">Date</span>
+              <input type="date" id="itineraryOrgDate" class="pl-field">
+            </label>
+          </div>
+          <div id="itineraryFormMemberRow" class="hidden grid grid-cols-2 gap-3">
+            <label class="editor-form-field">
+              <span class="editor-field-label">Team member</span>
+              <select id="itineraryFormMember" class="pl-field"></select>
+            </label>
+            <label class="editor-form-field">
+              <span class="editor-field-label">Date</span>
+              <input type="date" id="itineraryFormDate" class="pl-field">
+            </label>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="editor-form-field">
+              <span class="editor-field-label">Time (optional)</span>
+              <input type="time" id="itineraryFormTime" class="pl-field">
+            </label>
+            <label class="editor-form-field">
+              <span class="editor-field-label">Location (optional)</span>
+              <input type="text" id="itineraryFormLocation" placeholder="e.g. Hall B" class="pl-field">
+            </label>
+          </div>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Title <span class="pl-req">*</span></span>
+            <input type="text" id="itineraryFormTitle" placeholder="What's happening?" class="pl-field">
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Notes (optional)</span>
+            <textarea id="itineraryFormNotes" rows="2" class="pl-textarea" placeholder="Any extra details…"></textarea>
+          </label>
+          <div id="itineraryFormCostSection" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <label class="editor-form-field">
+              <span class="editor-field-label">Currency</span>
+              <select id="itineraryFormCurrency" class="pl-field"></select>
+            </label>
+            <label class="editor-form-field">
+              <span class="editor-field-label">Budget (optional)</span>
+              <input type="number" step="0.01" id="itineraryFormBudget" placeholder="0.00"
+                class="pl-field">
+            </label>
+            <label class="editor-form-field">
+              <span class="editor-field-label">Actual (optional)</span>
+              <input type="number" step="0.01" id="itineraryFormActual" placeholder="0.00"
+                class="pl-field">
+            </label>
+            <label class="editor-form-field">
+              <span class="editor-field-label">Purchase date</span>
+              <input type="date" id="itineraryFormPurchaseDate"
+                class="pl-field"
+                title="For foreign currency, sets the exchange-rate day. Blank = event date.">
+            </label>
+          </div>
+          <input type="hidden" id="itineraryFormEditId">
+          <div id="itineraryFormReceiptSection" class="hidden border-t pl-rule pt-3">
+            <p class="pl-label">Receipt</p>
+            <div id="itineraryFormReceiptStatus" class="flex items-center gap-2 flex-wrap">
+            </div>
+          </div>
+          <div class="flex gap-2 justify-end">
+            <button type="button" id="itineraryFormCancel" class="h-8 px-3 rounded-md border pl-rule text-xs pl-ink-1 transition-colors">Cancel</button>
+            <button type="button" id="itineraryFormSave" class="h-8 px-4 rounded-md pl-surface-ink text-xs pl-on-ink transition-colors">Save item</button>
+          </div>
+        </div>
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="itineraryDayModalDone"
+          class="pl-btn pl-btn--primary">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="personalItineraryItemModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="personalItinModalTitle">
+    <div class="pl-modal-card max-w-lg">
+      <div class="pl-modal-head">
+        <span class="pl-itin-badge flex-shrink-0"></span>
+        <div class="min-w-0 flex-1">
+          <h2 id="personalItinModalTitle" class="pl-modal-title">Itinerary item</h2>
+          <p id="personalItinModalSubtitle" class="pl-hint"></p>
+        </div>
+        <button type="button" id="personalItinModalClose" aria-label="Close"
+          class="pl-iconbtn flex-shrink-0">&times;</button>
+      </div>
+      <div class="px-6 py-5 space-y-4">
+        <label class="editor-form-field">
+          <span class="editor-field-label">What's happening? <span class="pl-req">*</span></span>
+          <input type="text" id="personalItinTitle" placeholder="e.g. Snorkel excursion"
+            class="jrn-hero-input pl-field">
+        </label>
+        <div class="grid grid-cols-3 gap-3">
+          <label class="editor-form-field">
+            <span class="editor-field-label">Date</span>
+            <input type="date" id="personalItinDate" class="jrn-mono-input pl-field">
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Start</span>
+            <input type="time" id="personalItinTime" class="jrn-mono-input pl-field">
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">End</span>
+            <input type="time" id="personalItinEnd" class="jrn-mono-input pl-field">
+          </label>
+        </div>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Timezone</span>
+          <select id="personalItinTz" class="jrn-mono-input pl-field">
+            <option value="">Trip timezone</option>
+          </select>
+          <span class="pl-hint">The event's local timezone, so it lands at the right moment in calendars. Defaults to the trip's — override it for a stop in another zone.</span>
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Location</span>
+          <input type="text" id="personalItinLocation" placeholder="e.g. Hall B, or a place / address"
+            class="pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Map coordinates</span>
+          <div class="flex gap-2">
+            <input type="text" id="personalItinCoords" placeholder="lat, lon — optional, pins exactly on the map"
+              class="h-10 flex-1 min-w-0 rounded-md pl-rule drupal-blue-focus text-sm pl-surface px-3">
+            <button type="button" id="personalItinPickLocationBtn" class="h-10 px-3 border pl-rule rounded-md text-sm font-medium pl-ink-1 pl-surface transition-colors inline-flex items-center flex-shrink-0">Pick on map</button>
+          </div>
+        </label>
+        <div class="editor-form-field">
+          <span class="editor-field-label">Who's going</span>
+          <div id="personalItinAssignChips" class="pl-chip-row"></div>
+          <p id="personalItinAssignHint" class="pl-chip-hint"></p>
+        </div>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Notes</span>
+          <textarea id="personalItinNotes" rows="2" placeholder="Any extra details…"
+            class="pl-textarea"></textarea>
+        </label>
+        <div class="pl-divide pt-4 mt-1">
+          <p class="pl-label">Receipt</p>
+          <div id="personalItinReceiptStatus" class="flex items-center gap-2 flex-wrap">
+          </div>
+        </div>
+        <label class="flex items-center justify-between gap-3 pt-1 cursor-pointer">
+          <span class="text-sm pl-ink-1 flex items-center gap-2">Mark as done</span>
+          <input type="checkbox" id="personalItinDone" class="pl-toggle">
+        </label>
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="personalItinDelete"
+          class="hidden pl-btn pl-btn--danger">Delete
+        </button>
+        <button type="button" id="personalItinSave"
+          class="jrn-save pl-btn pl-btn--primary ml-auto">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="hostedEventModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="hostedEventModalTitle">
+    <div class="pl-modal-card max-w-lg">
+      <div class="pl-modal-head">
+        <span class="pl-itin-badge flex-shrink-0"></span>
+        <div class="min-w-0 flex-1">
+          <h2 id="hostedEventModalTitle" class="pl-modal-title">Hosted event</h2>
+          <p id="hostedEventModalSubtitle" class="pl-hint">An event you're running during the conference</p>
+        </div>
+        <button type="button" id="hostedEventModalClose" aria-label="Close"
+          class="pl-iconbtn flex-shrink-0">&times;</button>
+      </div>
+      <div class="px-6 py-5 space-y-4">
+        <label class="editor-form-field">
+          <span class="editor-field-label">What are you hosting? <span class="pl-req">*</span></span>
+          <input type="text" id="heTitle" placeholder="e.g. In-booth demo, customer meeting"
+            class="jrn-hero-input pl-field">
+        </label>
+        <div class="editor-form-field">
+          <span class="editor-field-label">At the same time as</span>
+          <select id="heAnchorSelect" class="jrn-mono-input pl-field">
+            <option value="">Custom time (not tied to a session)</option>
+          </select>
+          <span id="heAnchorHint" class="pl-hint">Pin this to a programme slot, or set your own time below.</span>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <label class="editor-form-field">
+            <span class="editor-field-label">Date</span>
+            <input type="date" id="heDate" class="jrn-mono-input pl-field">
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Start</span>
+            <input type="time" id="heStart" class="jrn-mono-input pl-field">
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">End</span>
+            <input type="time" id="heEnd" class="jrn-mono-input pl-field">
+          </label>
+        </div>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Location</span>
+          <input type="text" id="heLocation" placeholder="e.g. Booth 12, Meeting room 3"
+            class="pl-field">
+        </label>
+        <div class="editor-form-field">
+          <span class="editor-field-label">Who's hosting / attending</span>
+          <div id="heAssignChips" class="pl-chip-row"></div>
+          <p id="heAssignHint" class="pl-chip-hint"></p>
+        </div>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Guests</span>
+          <input type="text" id="heGuests" placeholder="e.g. Customer X, CEO Y, Developer lead Z"
+            class="pl-field">
+          <span class="pl-hint">Free text — anyone joining who isn't in your companions.</span>
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Description</span>
+          <textarea id="heDescription" rows="2" placeholder="What's it about, who's it for…"
+            class="pl-textarea"></textarea>
+        </label>
+        <label class="flex items-center justify-between gap-3 pt-1 cursor-pointer">
+          <span class="text-sm pl-ink-1 flex items-center gap-2">Mark as done</span>
+          <input type="checkbox" id="heDone" class="pl-toggle">
+        </label>
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="hostedEventDelete"
+          class="hidden pl-btn pl-btn--danger">Delete
+        </button>
+        <button type="button" id="hostedEventSave"
+          class="jrn-save pl-btn pl-btn--primary ml-auto">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="itineraryViewModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="ivTitle">
+    <div class="pl-modal-card max-w-lg">
+      <div class="iv-head">
+        <span id="ivBadge" class="pl-itin-badge flex-shrink-0"></span>
+        <div class="min-w-0 flex-1">
+          <p id="ivEyebrow" class="iv-eyebrow"></p>
+          <h2 id="ivTitle" class="iv-title"></h2>
+        </div>
+        <button type="button" id="ivClose" aria-label="Close" class="iv-close">&times;</button>
+      </div>
+      <div class="iv-body">
+        <div id="ivDetails" class="iv-details"></div>
+        <div id="ivMapWrap" class="iv-map-wrap hidden"><div id="ivMap" class="iv-map"></div></div>
+        <div id="ivNotes" class="iv-notes hidden"></div>
+      </div>
+      <div class="iv-foot">
+        <button type="button" id="ivRemoveBtn" class="iv-btn iv-btn--danger hidden" style="margin-right:auto"><span id="ivRemoveLabel">Remove</span></button>
+        <button type="button" id="ivCalBtn" class="iv-btn hidden">Add to calendar</button>
+        <button type="button" id="ivEditBtn" class="iv-btn iv-btn--gold hidden"><span id="ivEditLabel">Edit</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="calendarExportModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="calExportTitle">
+    <div class="pl-surface rounded-xl w-full max-w-md flex flex-col">
+      <div class="iv-head">
+        <span class="pl-itin-badge flex-shrink-0"></span>
+        <div class="min-w-0 flex-1">
+          <p class="iv-eyebrow">Calendar</p>
+          <h2 id="calExportTitle" class="iv-title">Add trip to your calendar</h2>
+        </div>
+        <button type="button" id="calExportClose" aria-label="Close" class="iv-close">&times;</button>
+      </div>
+      <div class="iv-body">
+        <p class="gs-desc">Choose what to include, then download an <code>.ics</code> to import into Apple, Google, or Outlook.</p>
+        <div class="gs-switches">
+          <label class="gs-switch"><span class="gs-switch-label">Travel</span><input type="checkbox" id="calIncTravel" class="pl-toggle" checked></label>
+          <label class="gs-switch"><span class="gs-switch-label">Accommodation</span><input type="checkbox" id="calIncStays" class="pl-toggle" checked></label>
+          <label class="gs-switch"><span class="gs-switch-label">Itinerary items</span><input type="checkbox" id="calIncItems" class="pl-toggle" checked></label>
+          <label class="gs-switch"><span class="gs-switch-label">Hosted events</span><input type="checkbox" id="calIncHosted" class="pl-toggle" checked></label>
+          <label class="gs-switch"><span class="gs-switch-label">Tracked sessions</span><input type="checkbox" id="calIncSessions" class="pl-toggle" checked></label>
+        </div>
+
+        <div class="doc-divider" style="margin-top:1.3rem"><span>Subscribe</span></div>
+        <p class="gs-desc">
+          A live link your calendar refreshes as the trip changes. Each device gets its own link,
+          so you can retire one without disturbing the others. The link is shown once — it is a
+          password to this trip, and is not stored anywhere it could be read back.
+        </p>
+
+        <div id="calSubNew" class="cal-sub-new hidden">
+          <p class="cal-sub-new-label">Copy this now — it will not be shown again</p>
+          <div class="cal-sub-row">
+            <input type="text" id="calSubUrl" readonly class="set-input cal-sub-url-input" aria-label="Subscribe URL">
+            <button type="button" id="calSubCopy" class="set-btn flex-shrink-0">Copy</button>
+          </div>
+          <a id="calSubOpen" class="iv-btn cal-sub-primary" href="#">Add to calendar app</a>
+        </div>
+
+        <div class="cal-sub-row" style="margin-top:0.6rem">
+          <input type="text" id="calSubLabel" class="set-input" placeholder="Name this device — Phone, Laptop…" maxlength="60" aria-label="Name for this subscription">
+          <button type="button" id="calSubCreate" class="set-btn flex-shrink-0">Create link</button>
+        </div>
+
+        <ul id="calSubList" class="cal-sub-list" aria-live="polite"></ul>
+      </div>
+      <div class="iv-foot">
+        <button type="button" id="calExportDownload" class="iv-btn iv-btn--gold">Download .ics</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="summaryDrilldownModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="drilldownTitle">
+    <div class="pl-modal-card max-w-lg">
+      <div class="pl-modal-head">
+        <h2 id="drilldownTitle" class="pl-modal-title"></h2>
+        <button type="button" id="drilldownModalClose" aria-label="Close"
+          class="pl-iconbtn">&times;</button>
+      </div>
+      <div id="drilldownContent" class="px-6 py-5 overflow-y-auto" style="max-height:65vh"></div>
+    </div>
+  </div>
+
+  <div id="trackedSessionModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="trackedSessionModalTitle">
+    <div class="pl-modal-card max-w-lg">
+      <div class="pl-modal-head">
+        <h2 id="trackedSessionModalTitle" class="pl-modal-title">Track Session</h2>
+        <button type="button" id="trackedSessionModalClose" aria-label="Close"
+          class="pl-iconbtn">&times;</button>
+      </div>
+      <div class="px-6 py-5 space-y-5">
+        <div id="trackedSessionInfo" class="rounded-md border pl-rule pl-surface-2 px-4 py-3">
+          <p id="trackedSessionInfoTitle" class="text-sm font-semibold pl-ink-0"></p>
+          <p id="trackedSessionInfoTime" class="text-xs pl-ink-2 mt-0.5"></p>
+        </div>
+        <div>
+          <p class="text-xs font-semibold pl-ink-2 uppercase tracking-widest mb-3">Reason for tracking</p>
+          <div class="space-y-2.5">
+            <label class="flex items-center gap-3 cursor-pointer group">
+              <input type="radio" name="trackedSessionReason" value="presenting"
+                class="pl-check">
+              <span class="text-sm pl-ink-1">Employee is presenting / speaking
+              </span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer group">
+              <input type="radio" name="trackedSessionReason" value="followup"
+                class="pl-check">
+              <span class="text-sm pl-ink-1">Follow up / relevant to our work
+              </span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer group">
+              <input type="radio" name="trackedSessionReason" value="other"
+                class="pl-check">
+              <span class="text-sm pl-ink-1">Other reason
+              </span>
+            </label>
+          </div>
+          <input type="text" id="trackedSessionCustomReason" placeholder="Describe the reason…"
+            class="hidden mt-3 pl-field">
+        </div>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Notes</span>
+          <textarea id="trackedSessionNotes" rows="3" placeholder="Additional context, goals, talking points…"
+            class="pl-textarea mt-1"></textarea>
+        </label>
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="trackedSessionDeleteBtn"
+          class="invisible pl-btn pl-btn--danger">Remove
+        </button>
+        <button type="button" id="trackedSessionSaveBtn"
+          class="pl-btn pl-btn--primary">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="localCompanionModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="localCompanionModalTitle">
+    <div class="pl-modal-card max-w-md">
+      <div class="pl-modal-head">
+        <h2 id="localCompanionModalTitle" class="pl-modal-title">Add Companion</h2>
+        <button type="button" id="localCompanionModalClose" aria-label="Close"
+          class="pl-iconbtn">&times;</button>
+      </div>
+      <div class="px-6 py-5 space-y-4">
+        <label class="editor-form-field">
+          <span class="editor-field-label">Name</span>
+          <input type="text" id="localCompanionName" placeholder="Full name"
+            class="pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Phone / contact</span>
+          <input type="text" id="localCompanionPhone" placeholder="+1 555 000 0000"
+            class="pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Notes</span>
+          <textarea id="localCompanionNotes" rows="2" placeholder="Dietary needs, accessibility requirements…"
+            class="pl-textarea"></textarea>
+        </label>
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="localCompanionModalDelete"
+          class="hidden pl-btn pl-btn--danger">Remove
+        </button>
+        <button type="button" id="localCompanionModalDone"
+          class="ml-auto pl-btn pl-btn--primary">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="personalLegModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="personalLegModalTitle">
+    <div class="pl-modal-card max-w-lg">
+      <div class="pl-modal-head">
+        <h2 id="personalLegModalTitle" class="pl-modal-title">Travel Leg</h2>
+        <button type="button" id="personalLegModalClose" aria-label="Close"
+          class="pl-iconbtn">&times;</button>
+      </div>
+      <div class="px-6 py-5">
+        <div class="grid grid-cols-2 gap-3">
+          <label class="editor-form-field">
+            <span class="editor-field-label">Mode</span>
+            <select id="personalLegModalMode" class="pl-field"></select>
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Status</span>
+            <select id="personalLegModalStatus" class="pl-field"></select>
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Date</span>
+            <input type="date" id="personalLegModalDate" class="pl-field">
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Arrive date <span class="font-normal pl-ink-2">(if different)</span></span>
+            <input type="date" id="personalLegModalArriveDate" class="pl-field">
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">From</span>
+            <input type="text" id="personalLegModalFrom" placeholder="SYD" class="pl-field">
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label"><span class="pl-ink-2 mr-1">→</span> To</span>
+            <input type="text" id="personalLegModalTo" placeholder="BCN" class="pl-field">
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Depart time</span>
+            <input type="time" id="personalLegModalDepartTime" class="pl-field">
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Arrive time</span>
+            <input type="time" id="personalLegModalArriveTime" class="pl-field">
+          </label>
+          <label class="editor-form-field col-span-2">
+            <span class="editor-field-label">Arrival timezone <span class="font-normal pl-ink-2">(optional)</span></span>
+            <input type="text" id="personalLegModalArriveTz" list="tzList" placeholder="Destination timezone — e.g. Europe/Amsterdam" class="pl-field">
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Ref / flight #</span>
+            <input type="text" id="personalLegModalRef" placeholder="VA101" class="pl-field">
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Confirmation #</span>
+            <input type="text" id="personalLegModalConfirmation" placeholder="ABC123" class="pl-field">
+          </label>
+        </div>
+        <div class="pl-divide pt-4 mt-3">
+          <p class="pl-label">Receipt</p>
+          <div id="personalLegReceiptStatus" class="flex items-center gap-2 flex-wrap">
+          </div>
+        </div>
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="personalLegModalDelete"
+          class="pl-btn pl-btn--danger">Remove leg
+        </button>
+        <button type="button" id="personalLegModalDone"
+          class="pl-btn pl-btn--primary">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="personalAccomModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="personalAccomModalTitle">
+    <div class="pl-modal-card max-w-lg">
+      <div class="pl-modal-head">
+        <h2 id="personalAccomModalTitle" class="pl-modal-title"><span id="personalAccomModalTitleText">Accommodation</span></h2>
+        <button type="button" id="personalAccomModalClose" aria-label="Close"
+          class="pl-iconbtn">&times;</button>
+      </div>
+      <div class="px-6 py-5 space-y-3">
+        <div class="grid grid-cols-2 gap-3">
+          <label class="editor-form-field col-span-2">
+            <span class="editor-field-label">Type</span>
+            <select id="personalAccomModalType" class="pl-field">
+              <option value="accommodation">Accommodation</option>
+              <option value="waypoints">Waypoint</option>
+            </select>
+          </label>
+          <label class="editor-form-field col-span-2 sm:col-span-1">
+            <span class="editor-field-label">Name</span>
+            <input type="text" id="personalAccomModalName" placeholder="Hotel / Airbnb / ship…"
+              class="pl-field">
+          </label>
+          <label class="editor-form-field col-span-2 sm:col-span-1">
+            <span class="editor-field-label">Confirmation #</span>
+            <input type="text" id="personalAccomModalConfirmation" placeholder="ABC123"
+              class="pl-field">
+          </label>
+          <label class="editor-form-field col-span-2 sm:col-span-1">
+            <span class="editor-field-label">Status</span>
+            <select id="personalAccomModalStatus"
+              class="pl-field"></select>
+          </label>
+          <label class="editor-form-field col-span-2">
+            <span class="editor-field-label">Address</span>
+            <input type="text" id="personalAccomModalAddress" placeholder="Street address"
+              class="pl-field">
+          </label>
+          <div class="editor-form-field col-span-2">
+            <span class="editor-field-label">Map location</span>
+            <div class="flex items-center gap-2 mt-1">
+              <input type="text" id="personalAccomModalCoords" placeholder="lat, lon — optional, pins exactly on the map instead of the address"
+                class="h-9 flex-1 min-w-0 rounded-md pl-rule drupal-blue-focus text-sm pl-surface px-3">
+              <button type="button" id="personalAccomModalPickLocationBtn" class="h-9 px-3 border pl-rule rounded-md text-sm font-medium pl-ink-1 pl-surface transition-colors inline-flex items-center flex-shrink-0">Pick on map</button>
+            </div>
+          </div>
+          <label id="personalAccomModalCheckInRow" class="editor-form-field hidden">
+            <span class="editor-field-label">Embarkation date</span>
+            <input type="date" id="personalAccomModalCheckIn"
+              class="pl-field">
+          </label>
+          <label id="personalAccomModalCheckOutRow" class="editor-form-field hidden">
+            <span class="editor-field-label">Disembarkation date</span>
+            <input type="date" id="personalAccomModalCheckOut"
+              class="pl-field">
+          </label>
+        </div>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Notes</span>
+          <textarea id="personalAccomModalNotes" rows="2" placeholder="Room type, check-in instructions…"
+            class="pl-textarea"></textarea>
+        </label>
+        <div class="pl-divide pt-3">
+          <p class="pl-label">Receipt</p>
+          <div id="personalAccomReceiptStatus" class="flex items-center gap-2 flex-wrap">
+          </div>
+        </div>
+        <section id="personalAccomWaypointStopsSection" class="hidden pl-divide pt-3">
+          <div class="flex items-center justify-between mb-2">
+            <p class="pl-label">Waypoint Itinerary</p>
+            <button type="button" id="personalAccomAddWaypointStopBtn"
+              class="h-7 px-3 inline-flex items-center gap-1.5 border pl-rule rounded-md text-xs pl-ink-1 transition-colors">Add waypoint
+            </button>
+          </div>
+          <p id="personalAccomWaypointStopsEmpty" class="hidden pl-hint">No waypoints added yet.</p>
+          <div id="personalAccomWaypointStopsList" class="space-y-1.5"></div>
+        </section>
+
+        <section id="personalAccomCompanionSection" class="hidden pl-divide pt-3">
+          <p class="pl-label">Who's Staying</p>
+          <p id="personalAccomNoCompanions" class="hidden pl-hint">No companions on this trip yet — add them in Settings.</p>
+          <div id="personalAccomCompanionStaysWrapper" class="hidden space-y-3">
+            <div class="flex items-end gap-2">
+              <label class="editor-form-field flex-1 !mb-0">
+                <span class="editor-field-label">Traveller</span>
+                <select id="personalAccomCompanionSelect" class="pl-field">
+                  <option value="">— Select to view or add —</option>
+                </select>
+              </label>
+              <button type="button" id="personalAccomRemoveCompanionBtn"
+                class="h-9 flex-shrink-0 inline-flex items-center px-3 rounded-md border pl-rule-bad text-xs pl-req transition-colors opacity-0 pointer-events-none"
+                title="Remove this companion's stay">Remove
+              </button>
+            </div>
+            <div id="personalAccomCompanionFields" class="hidden grid grid-cols-2 gap-2 rounded-md border pl-rule pl-surface-2 p-3">
+              <label id="personalAccomCompanionCheckInRow" class="editor-form-field !mb-0">
+                <span class="editor-field-label">Check-in</span>
+                <input type="date" id="personalAccomCompanionCheckIn" class="pl-field">
+              </label>
+              <label id="personalAccomCompanionCheckOutRow" class="editor-form-field !mb-0">
+                <span class="editor-field-label">Check-out</span>
+                <input type="date" id="personalAccomCompanionCheckOut" class="pl-field">
+              </label>
+              <label class="editor-form-field !mb-0">
+                <span class="editor-field-label">Currency</span>
+                <select id="personalAccomCompanionCurrency" class="h-9 w-full rounded-md pl-rule drupal-blue-focus text-sm pl-surface px-2"></select>
+              </label>
+              <label class="editor-form-field !mb-0">
+                <span class="editor-field-label">Budget</span>
+                <input type="number" min="0" step="0.01" id="personalAccomCompanionBudget" placeholder="0.00" class="pl-field">
+              </label>
+              <label class="editor-form-field !mb-0">
+                <span class="editor-field-label">Actual spend</span>
+                <input type="number" min="0" step="0.01" id="personalAccomCompanionActual" placeholder="0.00" class="pl-field">
+              </label>
+              <label class="editor-form-field !mb-0">
+                <span class="editor-field-label">Purchase date</span>
+                <input type="date" id="personalAccomCompanionPurchaseDate" class="pl-field" title="For foreign currency, sets the exchange-rate day. Blank = event date.">
+              </label>
+            </div>
+          </div>
+        </section>
+
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="personalAccomModalDelete"
+          class="pl-btn pl-btn--danger">Remove
+        </button>
+        <button type="button" id="personalAccomModalDone"
+          class="pl-btn pl-btn--primary">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="noteModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="noteModalTitleHeading">
+    <div class="pl-modal-card max-w-md">
+      <div class="pl-modal-head">
+        <h2 id="noteModalTitleHeading" class="pl-modal-title">Note</h2>
+        <button type="button" id="noteModalClose" aria-label="Close"
+          class="pl-iconbtn">&times;</button>
+      </div>
+      <div class="px-6 py-5 space-y-3">
+        <div class="editor-form-field">
+          <span class="editor-field-label">Icon &amp; title</span>
+          <div class="flex items-center gap-2 relative">
+            <button type="button" id="noteIconBtn" class="note-icon-btn" aria-label="Set note icon" aria-expanded="false" title="Pick an icon for this note">
+            </button>
+            <input type="text" id="noteModalTitle" placeholder="What's this note about?"
+              class="h-9 flex-1 min-w-0 rounded-md pl-rule drupal-blue-focus text-sm pl-surface px-3">
+            <div id="noteIconPicker" class="note-emoji-picker note-icon-picker hidden" role="menu" aria-label="Note icon picker"></div>
+          </div>
+        </div>
+        <div class="editor-form-field relative">
+          <div class="flex items-center justify-between mb-1">
+            <span class="editor-field-label mb-0">Note</span>
+            <button type="button" id="noteEmojiBtn" class="note-emoji-btn" aria-label="Insert emoji" aria-expanded="false" title="Insert emoji">
+            </button>
+          </div>
+          <textarea id="noteModalBody" rows="5" placeholder="Write your note…"
+            class="w-full rounded-md pl-rule drupal-blue-focus text-sm pl-surface p-3 resize-y"></textarea>
+          <p class="text-[0.7rem] pl-ink-2 mt-1">Markdown &amp; emoji supported</p>
+          <div id="noteEmojiPicker" class="note-emoji-picker hidden" role="menu" aria-label="Emoji picker"></div>
+        </div>
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="noteModalDelete"
+          class="pl-btn pl-btn--danger">Remove
+        </button>
+        <button type="button" id="noteModalDone"
+          class="pl-btn pl-btn--primary">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="swagModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="swagModalTitle">
+    <div class="pl-modal-card max-w-md">
+      <div class="pl-modal-head">
+        <h2 id="swagModalTitle" class="pl-modal-title">Swag Item</h2>
+        <button type="button" id="swagModalClose" aria-label="Close"
+          class="pl-iconbtn">&times;</button>
+      </div>
+      <div class="px-6 py-5 space-y-3">
+        <label class="editor-form-field">
+          <span class="editor-field-label">Name</span>
+          <input type="text" id="swagModalName" placeholder="T-shirt, sticker, tote bag…"
+            class="pl-field">
+        </label>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="editor-form-field">
+            <span class="editor-field-label">Quantity sent</span>
+            <input type="number" min="1" step="1" id="swagModalQuantity" placeholder="1"
+              class="pl-field">
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Returned</span>
+            <input type="number" min="0" step="1" id="swagModalReturned" placeholder="0"
+              class="pl-field">
+          </label>
+        </div>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Notes</span>
+          <textarea id="swagModalNotes" rows="2" placeholder="Sizes, supplier, delivery date…"
+            class="pl-textarea"></textarea>
+        </label>
+        <label class="flex items-center gap-2 cursor-pointer select-none">
+          <input type="checkbox" id="swagModalDoneCheck" class="h-4 w-4 rounded">
+          <span class="text-sm pl-ink-1">Ordered / completed</span>
+        </label>
+        <div class="pl-divide pt-3">
+          <p class="pl-label">Receipt</p>
+          <div id="swagReceiptStatus" class="flex items-center gap-2 flex-wrap">
+          </div>
+        </div>
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="swagModalDelete"
+          class="pl-btn pl-btn--danger">Remove
+        </button>
+        <button type="button" id="swagModalDone"
+          class="pl-btn pl-btn--primary">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="ticketModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="ticketModalTitle">
+    <div class="pl-modal-card max-w-lg">
+      <div class="pl-modal-head">
+        <span class="pl-itin-badge flex-shrink-0"></span>
+        <h2 id="ticketModalTitle" class="pl-modal-title flex-1 min-w-0">Add Ticket</h2>
+        <button type="button" id="ticketModalClose" aria-label="Close"
+          class="pl-iconbtn flex-shrink-0">&times;</button>
+      </div>
+      <div class="px-6 py-5 space-y-4">
+        <label class="editor-form-field">
+          <span class="editor-field-label">Name / description</span>
+          <input type="text" id="ticketName" placeholder="DrupalCon conference pass"
+            class="jrn-hero-input pl-field">
+        </label>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="editor-form-field">
+            <span class="editor-field-label">Status</span>
+            <select id="ticketStatus" class="pl-field"></select>
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Quantity</span>
+            <input type="number" min="1" step="1" id="ticketQuantity" placeholder="1"
+              class="pl-field">
+          </label>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="editor-form-field">
+            <span class="editor-field-label">Assigned to</span>
+            <select id="ticketAssignedTo" class="pl-field"></select>
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Purchased by</span>
+            <select id="ticketPurchasedBy" class="pl-field"></select>
+          </label>
+        </div>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Notes</span>
+          <textarea id="ticketNotes" rows="2" placeholder="Early bird, workshop access, etc."
+            class="pl-textarea"></textarea>
+        </label>
+        <div class="pl-divide pt-4">
+          <p class="pl-label">Receipt</p>
+          <div id="ticketReceiptStatus" class="flex items-center gap-2 flex-wrap">
+          </div>
+        </div>
+        <div id="ticketDaysWrap" class="hidden">
+          <span class="editor-field-label">Days this ticket covers</span>
+          <div id="ticketDays" class="flex flex-wrap gap-1.5 mt-1"></div>
+          <p class="text-[0.7rem] pl-ink-2 mt-1">Amber dots mark conference days; slate dots are other trip days. Leave all unselected for the full conference. The holder's timeline band reflects your picks.</p>
+          <label class="flex items-center gap-2 mt-3 cursor-pointer select-none">
+            <input type="checkbox" id="ticketShowOnItinerary" class="pl-check">
+            <span class="text-xs pl-ink-1">Show on the itinerary (for standalone events like a workshop or gala — leave off to avoid duplicating the conference).</span>
+          </label>
+        </div>
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="ticketModalDelete"
+          class="hidden pl-btn pl-btn--danger">Remove
+        </button>
+        <div class="ml-auto">
+          <button type="button" id="ticketModalDone"
+            class="jrn-save pl-btn pl-btn--primary">
+            Done
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="personDetailModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="personDetailName">
+    <div class="pl-modal-card max-w-xl">
+      <div class="flex items-start justify-between px-6 py-4 border-b pl-rule">
+        <div class="min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h2 id="personDetailName" class="pl-modal-title"></h2>
+            <span id="personDetailBadges" class="contents"></span>
+          </div>
+          <p id="personDetailSubtitle" class="hidden pl-hint"></p>
+        </div>
+        <button type="button" id="personDetailClose" aria-label="Close"
+          class="ml-3 flex-shrink-0 pl-iconbtn">&times;</button>
+      </div>
+      <div id="personDetailBody" class="px-6 py-5 space-y-5"></div>
+      <div class="pl-modal-foot">
+        <button type="button" id="personDetailClose2"
+          class="pl-btn pl-btn--primary">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="contactModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+    <div class="pl-modal-card max-w-lg">
+      <div class="pl-modal-head">
+        <h2 id="contactModalTitle" class="pl-modal-title">Contact</h2>
+        <button type="button" id="contactModalClose" aria-label="Close"
+          class="pl-iconbtn">&times;</button>
+      </div>
+      <div class="px-6 py-5 grid grid-cols-2 gap-3">
+        <label class="editor-form-field">
+          <span class="editor-field-label">Name</span>
+          <input type="text" id="contactName" placeholder="Full name" class="pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Organisation</span>
+          <input type="text" id="contactOrg" placeholder="Company / team" class="pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Email</span>
+          <input type="email" id="contactEmail" class="pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">LinkedIn URL</span>
+          <input type="url" id="contactLinkedin" class="pl-field">
+        </label>
+        <label class="editor-form-field col-span-2">
+          <span class="editor-field-label">Contact type</span>
+          <select id="contactType" class="pl-field">
+            <option value="">General</option>
+            <option value="organiser">Organiser</option>
+            <option value="media">Media</option>
+            <option value="partner">Partner</option>
+            <option value="vip">VIP</option>
+          </select>
+        </label>
+        <label class="editor-form-field col-span-2">
+          <span class="editor-field-label">Where / how you met</span>
+          <input type="text" id="contactWhereMet" placeholder="e.g. Session on Drupal CMS, hallway track…" class="pl-field">
+        </label>
+        <label class="editor-form-field col-span-2">
+          <span class="editor-field-label">Notes</span>
+          <textarea id="contactNotes" rows="3" class="pl-textarea"></textarea>
+        </label>
+        <label class="col-span-2 inline-flex items-center gap-3 cursor-pointer text-sm pl-ink-1">
+          <input type="checkbox" id="contactFollowUp" class="pl-check">
+          <span class="editor-field-label !mb-0">Follow-up needed</span>
+        </label>
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="contactModalDelete"
+          class="hidden pl-btn pl-btn--danger">Remove
+        </button>
+        <div class="ml-auto">
+          <button type="button" id="contactModalDone"
+            class="pl-btn pl-btn--primary">
+            Done
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="taskModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="taskModalTitle">
+    <div class="pl-modal-card max-w-lg">
+      <div class="pl-modal-head">
+        <h2 id="taskModalTitle" class="pl-modal-title">Task</h2>
+        <button type="button" id="taskModalClose" aria-label="Close"
+          class="pl-iconbtn">&times;</button>
+      </div>
+      <div class="px-6 py-5 space-y-4">
+        <label class="editor-form-field">
+          <span class="editor-field-label">Task</span>
+          <textarea id="taskModalText" rows="3" placeholder="What needs to be done…"
+            class="pl-textarea"></textarea>
+        </label>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <label class="editor-form-field">
+            <span class="editor-field-label">Status</span>
+            <select id="taskModalStatus" class="pl-field">
+              <option value="open">Open</option>
+              <option value="in-progress">In progress</option>
+              <option value="blocked">Blocked</option>
+            </select>
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Priority</span>
+            <select id="taskModalPriority" class="pl-field">
+              <option value="normal">Normal</option>
+              <option value="low">Low</option>
+              <option value="high">High</option>
+              <option value="urgent">Urgent</option>
+            </select>
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Due date</span>
+            <input type="date" id="taskModalDueDate" class="pl-field">
+          </label>
+        </div>
+        <div id="taskModalSessionRow" class="editor-form-field">
+          <span class="editor-field-label">Linked session (optional)</span>
+          <select id="taskModalSession" class="pl-field"></select>
+        </div>
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="taskModalDelete"
+          class="hidden pl-btn pl-btn--danger">Remove
+        </button>
+        <div class="ml-auto">
+          <button type="button" id="taskModalDone"
+            class="pl-btn pl-btn--primary">
+            Done
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="receiptModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="receiptModalTitle">
+    <div class="pl-modal-card max-w-lg">
+      <div class="pl-modal-head">
+        <span class="pl-itin-badge flex-shrink-0"></span>
+        <h2 id="receiptModalTitle" class="pl-modal-title flex-1 min-w-0">Receipt</h2>
+        <button type="button" id="receiptModalClose" aria-label="Close"
+          class="pl-iconbtn flex-shrink-0">&times;</button>
+      </div>
+      <div class="px-6 py-5 grid grid-cols-2 gap-3">
+        <label class="editor-form-field col-span-2">
+          <span class="editor-field-label">Description</span>
+          <input type="text" id="receiptModalName" placeholder="What was this for?" class="jrn-hero-input pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Purchased date</span>
+          <input type="date" id="receiptModalDate" class="jrn-mono-input pl-field"
+            title="The day this was purchased — sets the exchange-rate day for foreign-currency conversion. Blank = event date.">
+          <span class="text-[0.7rem] pl-ink-2 mt-1">Sets the exchange-rate day for foreign currency.</span>
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Amount</span>
+          <input type="text" id="receiptModalAmount" placeholder="0.00" class="jrn-mono-input pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Currency</span>
+          <select id="receiptModalCurrency" class="jrn-mono-input pl-field"></select>
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Category</span>
+          <select id="receiptModalCategory" class="pl-field"></select>
+        </label>
+        <label class="editor-form-field col-span-2">
+          <span class="editor-field-label">Budget item</span>
+          <select id="receiptModalBudgetItem" class="pl-field"></select>
+        </label>
+        <div class="editor-form-field col-span-2">
+          <span class="editor-field-label">File attachment</span>
+          <div class="flex items-center gap-2 mt-1">
+            <span id="receiptModalFileLabel" class="pl-hint flex-1 truncate">No file attached</span>
+            <button type="button" id="receiptModalAttachBtn"
+              class="h-8 px-3 border pl-rule rounded-md text-xs pl-ink-1 transition-colors flex-shrink-0">Attach
+            </button>
+            <button type="button" id="receiptModalRemoveFileBtn"
+              class="hidden h-8 px-2 border pl-rule-bad rounded-md text-xs pl-req transition-colors flex-shrink-0">&times;</button>
+          </div>
+        </div>
+        <label class="editor-form-field col-span-2">
+          <span class="editor-field-label">Notes</span>
+          <textarea id="receiptModalNotes" rows="2" placeholder="Any extra details…"
+            class="pl-textarea"></textarea>
+        </label>
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="receiptModalDelete"
+          class="hidden pl-btn pl-btn--danger">Remove
+        </button>
+        <div class="ml-auto">
+          <button type="button" id="receiptModalDone"
+            class="jrn-save pl-btn pl-btn--primary">
+            Done
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="documentModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="documentModalTitle">
+    <div class="pl-modal-card max-w-md">
+      <div class="pl-modal-head">
+        <span class="pl-itin-badge flex-shrink-0"></span>
+        <h2 id="documentModalTitle" class="pl-modal-title flex-1 min-w-0">Document</h2>
+        <button type="button" id="documentModalClose" aria-label="Close"
+          class="pl-iconbtn flex-shrink-0">&times;</button>
+      </div>
+      <div class="px-6 py-5 space-y-3">
+        <label class="editor-form-field">
+          <span class="editor-field-label">Name</span>
+          <input type="text" id="documentModalName" placeholder="Document name" class="jrn-hero-input pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Description</span>
+          <input type="text" id="documentModalDescription" placeholder="Optional description" class="pl-field">
+        </label>
+        <label class="editor-form-field">
+          <span class="editor-field-label">Category</span>
+          <select id="documentModalCategory" class="pl-field"></select>
+        </label>
+        <div class="editor-form-field">
+          <span class="editor-field-label">File attachment</span>
+          <div class="flex items-center gap-2 mt-1">
+            <span id="documentModalFileLabel" class="pl-hint flex-1 truncate">No file attached</span>
+            <button type="button" id="documentModalAttachBtn"
+              class="h-8 px-3 border pl-rule rounded-md text-xs pl-ink-1 transition-colors flex-shrink-0">Attach
+            </button>
+            <button type="button" id="documentModalRemoveFileBtn"
+              class="hidden h-8 px-2 border pl-rule-bad rounded-md text-xs pl-req transition-colors flex-shrink-0">&times;</button>
+          </div>
+        </div>
+      </div>
+      <div class="pl-modal-foot">
+        <button type="button" id="documentModalDelete"
+          class="hidden pl-btn pl-btn--danger">Remove
+        </button>
+        <div class="ml-auto">
+          <button type="button" id="documentModalDone"
+            class="jrn-save pl-btn pl-btn--primary">
+            Done
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="plannerSaveToast" class="save-toast" role="status" aria-live="polite">Saved</div>
+
+  <nav id="mobileBottomBar" class="sm:hidden" aria-label="Planner sections"></nav>
+
+  <div id="plannerDeleteSheet" class="sm:hidden hidden fixed inset-0 z-[210] flex flex-col justify-end" style="background:rgba(0,0,0,0.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)">
+    <div class="pl-surface rounded-t-[14px] planner-sheet-font">
+      <div class="flex justify-center pt-2.5 pb-2 flex-shrink-0" aria-hidden="true">
+        <div class="w-9 h-[5px] rounded-full pl-surface-2"></div>
+      </div>
+      <div class="px-5 pb-3 border-b pl-rule">
+        <p id="plannerDeleteSheetName" class="text-sm font-semibold pl-ink-0 truncate"></p>
+        <p class="pl-hint">This cannot be undone.</p>
+      </div>
+      <button type="button" id="plannerDeleteSheetConfirm" class="planner-action-row w-full justify-center">
+        <span class="text-[0.9375rem] font-semibold pl-req">Delete planner</span>
+      </button>
+      <div class="border-t pl-rule" style="padding-bottom:max(env(safe-area-inset-bottom,0px),16px)">
+        <button type="button" id="plannerDeleteSheetCancel" class="planner-action-row w-full justify-center">
+          <span class="text-[0.9375rem] font-semibold pl-accent">Cancel</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="plannerActionsSheet" class="pln-actions hidden" role="dialog" aria-modal="true" aria-label="Planner actions">
+    <div class="pln-actions__panel">
+      <div class="pln-actions__head">
+        <p id="plannerActionsSheetTitle" class="pln-actions__title"></p>
+        <button type="button" id="plannerActionsSheetClose" class="pln-actions__close" aria-label="Close menu">Close</button>
+      </div>
+      <div class="pln-actions__group">
+        <a href="planner.html" id="plannerActionsSwitch" class="planner-action-row">
+          <span class="flex-1">All trips</span>
+          <span class="nav-sheet-row-mark" aria-hidden="true">&rsaquo;</span>
+        </a>
+        <button type="button" id="plannerActionsNew" class="planner-action-row">
+          <span class="flex-1">New planner</span>
+          <span class="nav-sheet-row-mark" aria-hidden="true">&rsaquo;</span>
+        </button>
+      </div>
+      <div class="pln-actions__group">
+        <p class="pln-actions__eyebrow">This planner</p>
+        <button type="button" id="plannerActionsSave" class="planner-action-row hidden">
+          <span class="flex-1">Save to file</span>
+          <span class="nav-sheet-row-mark" aria-hidden="true">&rsaquo;</span>
+        </button>
+        <button type="button" id="plannerActionsCalendar" class="planner-action-row">
+          <span class="flex-1">Add to calendar</span>
+          <span class="nav-sheet-row-mark" aria-hidden="true">&rsaquo;</span>
+        </button>
+        <button type="button" id="plannerActionsBackup" class="planner-action-row">
+          <span class="flex-1">Back up</span>
+          <span class="nav-sheet-row-mark" aria-hidden="true">&rsaquo;</span>
+        </button>
+        <button type="button" id="plannerActionsRestore" class="planner-action-row">
+          <span class="flex-1">Restore from backup</span>
+          <span class="nav-sheet-row-mark" aria-hidden="true">&rsaquo;</span>
+        </button>
+      </div>
+      <div class="pln-actions__group">
+        <button type="button" id="plannerActionsDelete" class="planner-action-row pln-actions__row--danger">
+          <span class="flex-1">Delete this planner</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="mobileTabSheet" class="sm:hidden hidden fixed inset-0 z-[200] flex flex-col justify-end" style="background:rgba(0,0,0,0.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)">
+    <div class="pl-surface rounded-t-[14px] max-h-[80vh] flex flex-col">
+      <div class="relative flex justify-center pt-2.5 pb-1 flex-shrink-0">
+        <div class="w-9 h-[5px] rounded-full pl-surface-2" aria-hidden="true"></div>
+        <button type="button" id="mobileTabSheetClose" class="mobile-sheet-close" aria-label="Close menu">&times;</button>
+      </div>
+      <div id="mobileTabSheetList" class="overflow-y-auto overscroll-contain" style="padding-bottom:max(env(safe-area-inset-bottom,0px),16px)"></div>
+    </div>
+  </div>
+
+  <script type="module" src="./js/planner.js"></script>
+<script type="module">
+  import { initS3Settings } from './js/modules/s3Settings.js';
+  initS3Settings();
+</script>
+</body>
+</html>

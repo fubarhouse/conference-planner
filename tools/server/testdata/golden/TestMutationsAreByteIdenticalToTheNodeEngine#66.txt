@@ -1,0 +1,1358 @@
+{
+  "_version": 7,
+  "_plannerKey": "planner-demo-sponsor-acme",
+  "_eventFile": "events/drupalcon/eu/2025-vienna.json",
+  "_displayName": "Acme Digital — DrupalCon EU Vienna 2025",
+  "_lastModified": "2026-08-10T13:39:47.267Z",
+  "mode": "sponsor",
+  "isConference": true,
+  "sessionNotes": {
+    "2025-10-14T11-15-00Z-Auditorium--Hall-D--Driesnote": {
+      "rating": 5,
+      "attended": true,
+      "notes": "Strong messaging around Drupal CMS adoption. Dries' confidence in the headless direction is reassuring. Key quote to use in marketing: 'Drupal is the digital backbone of the modern web.'"
+    },
+    "2025-10-14T12-45-00Z-Auditorium--Hall-D--Drupal-Canvas-unleashed--The-future-of-Drupal-is-here": {
+      "rating": 5,
+      "attended": true,
+      "notes": "This is the demo we've been waiting for. Canvas makes the visual editing story compelling. Aligns perfectly with what our enterprise clients have been asking for. Planning a Canvas pilot with three clients in Q1."
+    },
+    "2025-10-14T12-45-00Z-Exhibition-Hall---Open-Stage-How-to-Thrive-in-AI-Times-as-a-Drupal-Business-Organisation--Sponsored-by-Dropsolid-": {
+      "rating": 4,
+      "attended": true,
+      "notes": "Priya and Sarah both attended. Directly applicable to the performance work we're doing for the NHS contract. Grabbed the slides from the presenter."
+    },
+    "2025-10-14T08-30-00Z-Auditorium--Hall-D--Opening-Ceremony---Women-in-Drupal-Award": {
+      "rating": 4,
+      "attended": true,
+      "notes": "Good practical framework. Their approach to automated security gates in CI/CD mirrors what we're building internally. Worth a deeper conversation with the presenter."
+    },
+    "2025-10-14T15-00-00Z-Session-Room--Hall-G1--Strategies-for-Integrating-Drupal-Canvas-in-Your-Existing-Drupal-Platform": {
+      "rating": 5,
+      "attended": true,
+      "notes": "Exactly the lessons we've learned the hard way on major multi-site projects. Going to use this as the basis for our internal 'how we do Drupal' guidelines update."
+    },
+    "2025-10-14T12-45-00Z-Session-Room---2-43--Accessibility--Sustainability-and-the-Open-Web": {
+      "rating": 4,
+      "attended": true,
+      "notes": "Clarified the roadmap for Drupal CMS vs core. Reassuring for clients nervous about the split. Good ammunition for the next sales cycle."
+    }
+  },
+  "contacts": [
+    {
+      "id": "contact_demo_s01",
+      "name": "Florian Huber",
+      "org": "Lemberg Solutions",
+      "email": "f.huber@lemberg.co",
+      "role": "CTO",
+      "notes": "Warm lead from booth conversation. Interested in headless Drupal for Austrian government client. Follow up with technical proposal.",
+      "linkedIn": "linkedin.com/in/florianhuber-lemberg"
+    },
+    {
+      "id": "contact_demo_s02",
+      "name": "Annika Lindström",
+      "org": "Wunderman Thompson",
+      "email": "a.lindstrom@wundermanthompson.com",
+      "role": "Head of Engineering",
+      "notes": "Met at the client dinner. Partnership opportunity for Nordic market. Wants to explore subcontracting for large Drupal builds.",
+      "linkedIn": "linkedin.com/in/annikalindstrom-wt"
+    },
+    {
+      "id": "contact_demo_s03",
+      "name": "Roberto Bianchi",
+      "org": "Nuvole",
+      "email": "r.bianchi@nuvole.it",
+      "role": "Lead Architect",
+      "notes": "Session presenter (Forks & Features). Willing to review our contribution module architecture. Potential technical advisor.",
+      "linkedIn": "linkedin.com/in/robertobianchi-nuvole"
+    },
+    {
+      "id": "contact_demo_s04",
+      "name": "Miriam Kowalski",
+      "org": "Amazee Labs",
+      "email": "m.kowalski@amazeelabs.com",
+      "role": "Sales Director",
+      "notes": "Competitive intelligence: Amazee is targeting the same enterprise healthcare vertical. Keep tabs on their positioning.",
+      "linkedIn": "linkedin.com/in/miriamkowalski-amazee"
+    },
+    {
+      "id": "contact_demo_s05",
+      "name": "David Chen",
+      "org": "Drupal Association",
+      "email": "d.chen@drupal.org",
+      "role": "Strategic Partnerships",
+      "notes": "Discussed DrupalCon sponsorship trajectory. Suggested we consider Platinum tier for 2026 given our visibility goals. Request pricing breakdown.",
+      "linkedIn": "linkedin.com/in/davidchen-da"
+    },
+    {
+      "title": "A Test Sponsor",
+      "tier": "Gold",
+      "note": "with a comma, a \"quote\" and <html>",
+      "id": "FIXED_ID"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "task_demo_s01",
+      "done": false,
+      "notes": "Headless Drupal proposal for Austrian govt client. Daniel to lead. Target send: Oct 28.",
+      "dueDate": "2025-10-28",
+      "text": "Send technical proposal to Florian Huber (Lemberg)",
+      "status": "open",
+      "priority": "urgent",
+      "sessionId": null
+    },
+    {
+      "id": "task_demo_s02",
+      "done": false,
+      "notes": "Schedule discovery call for week of Nov 3. Marcus to initiate.",
+      "dueDate": "2025-11-01",
+      "text": "Follow up with Annika re: Nordic partnership",
+      "status": "open",
+      "priority": "high",
+      "sessionId": null
+    },
+    {
+      "id": "task_demo_s03",
+      "done": true,
+      "notes": "Agree scope and fee for 2-day review of our multi-site module. Sarah to contact.",
+      "dueDate": "2025-10-31",
+      "text": "Reach out to Roberto Bianchi for architecture review",
+      "status": "open",
+      "priority": "normal",
+      "sessionId": null
+    },
+    {
+      "id": "task_demo_s04",
+      "done": true,
+      "notes": "38 qualified leads entered into HubSpot. 12 marked as high-priority.",
+      "dueDate": "2025-10-20",
+      "text": "Post-event lead scoring and CRM update",
+      "status": "blocked",
+      "priority": "normal",
+      "sessionId": null
+    },
+    {
+      "id": "task_demo_s05",
+      "done": false,
+      "notes": "Chloe to draft, Sarah to review technical claims. Publish within 2 weeks of event.",
+      "dueDate": "2025-10-31",
+      "text": "Write post-event blog: DrupalCon Vienna takeaways",
+      "status": "open",
+      "priority": "low",
+      "sessionId": null
+    },
+    {
+      "id": "task_demo_s06",
+      "done": false,
+      "notes": "Book 90min session. Compare lead volume, brand impressions, and cost vs DrupalCon North America 2025.",
+      "dueDate": "2025-11-07",
+      "text": "Conduct team retrospective on sponsorship ROI",
+      "status": "open",
+      "priority": "normal",
+      "sessionId": null
+    }
+  ],
+  "org": {
+    "boothInfo": "Booth 14 — Exhibition Hall X1, Ground Floor. 3×3m shell scheme. Power: 2×16A. Setup: Monday 13 Oct from 14:00.",
+    "boothNotes": "Key priority: live demo station on the left, branded backdrop centre, brochure display right. Laptop charged and the demo environment pre-loaded before doors. Bob and Sarah run the demo rotation, Marcus leads technical conversations, and Emma owns the team schedule.",
+    "teamAssignments": [
+      {
+        "memberId": "tmb_alice123",
+        "budget": "2400",
+        "budgetActual": "2180",
+        "notes": "Conference lead. Arriving Sunday for setup.",
+        "outboundLegs": [
+          {
+            "id": "leg_demo_s01a",
+            "mode": "flight",
+            "date": "2025-10-12",
+            "from": "LHR",
+            "to": "VIE",
+            "departTime": "07:30",
+            "arriveTime": "10:45",
+            "ref": "OS454",
+            "confirmation": "VKLD92"
+          }
+        ],
+        "returnLegs": [
+          {
+            "id": "leg_demo_s01b",
+            "mode": "flight",
+            "date": "2025-10-18",
+            "from": "VIE",
+            "to": "LHR",
+            "departTime": "14:30",
+            "arriveTime": "16:00",
+            "ref": "OS455",
+            "confirmation": "VKLD92"
+          }
+        ]
+      },
+      {
+        "memberId": "tmb_priya_r",
+        "budget": "2200",
+        "budgetActual": "2150",
+        "notes": "Running UX workshop Thursday.",
+        "outboundLegs": [
+          {
+            "id": "leg_demo_s02a",
+            "mode": "flight",
+            "date": "2025-10-13",
+            "from": "AMS",
+            "to": "VIE",
+            "departTime": "10:00",
+            "arriveTime": "11:30",
+            "ref": "OS381",
+            "confirmation": "PLMQ44"
+          }
+        ],
+        "returnLegs": [
+          {
+            "id": "leg_demo_s02b",
+            "mode": "flight",
+            "date": "2025-10-17",
+            "from": "VIE",
+            "to": "AMS",
+            "departTime": "18:00",
+            "arriveTime": "19:25",
+            "ref": "OS382",
+            "confirmation": "PLMQ44"
+          }
+        ]
+      },
+      {
+        "memberId": "tmb_emma_n",
+        "budget": "2600",
+        "budgetActual": "2400",
+        "notes": "Team coordinator. Managing schedule and logistics.",
+        "outboundLegs": [
+          {
+            "id": "leg_demo_s03a",
+            "mode": "flight",
+            "date": "2025-10-12",
+            "from": "LHR",
+            "to": "VIE",
+            "departTime": "07:30",
+            "arriveTime": "10:45",
+            "ref": "OS454",
+            "confirmation": "VKLD92"
+          }
+        ],
+        "returnLegs": [
+          {
+            "id": "leg_demo_s03b",
+            "mode": "flight",
+            "date": "2025-10-18",
+            "from": "VIE",
+            "to": "LHR",
+            "departTime": "14:30",
+            "arriveTime": "16:00",
+            "ref": "OS455",
+            "confirmation": "VKLD92"
+          }
+        ]
+      },
+      {
+        "memberId": "tmb_carol789",
+        "budget": "2100",
+        "budgetActual": "1950",
+        "notes": "Managing brand presence and social media during event.",
+        "outboundLegs": [
+          {
+            "id": "leg_demo_s04a",
+            "mode": "flight",
+            "date": "2025-10-13",
+            "from": "DUB",
+            "to": "VIE",
+            "departTime": "06:45",
+            "arriveTime": "10:00",
+            "ref": "FR7512",
+            "confirmation": "RYNB82"
+          }
+        ],
+        "returnLegs": [
+          {
+            "id": "leg_demo_s04b",
+            "mode": "flight",
+            "date": "2025-10-17",
+            "from": "VIE",
+            "to": "DUB",
+            "departTime": "20:30",
+            "arriveTime": "22:30",
+            "ref": "FR7513",
+            "confirmation": "RYNB82"
+          }
+        ]
+      },
+      {
+        "memberId": "tmb_bob456",
+        "budget": "1900",
+        "budgetActual": "1820",
+        "notes": "Running live Drupal performance demo at booth.",
+        "outboundLegs": [
+          {
+            "id": "leg_demo_s05a",
+            "mode": "flight",
+            "date": "2025-10-13",
+            "from": "LHR",
+            "to": "VIE",
+            "departTime": "12:00",
+            "arriveTime": "15:15",
+            "ref": "BA701",
+            "confirmation": "MMKP21"
+          }
+        ],
+        "returnLegs": [
+          {
+            "id": "leg_demo_s05b",
+            "mode": "flight",
+            "date": "2025-10-17",
+            "from": "VIE",
+            "to": "LHR",
+            "departTime": "16:45",
+            "arriveTime": "18:05",
+            "ref": "BA702",
+            "confirmation": "MMKP21"
+          }
+        ]
+      },
+      {
+        "memberId": "tmb_marcus_w",
+        "budget": "2300",
+        "budgetActual": "2100",
+        "notes": "Technical pre-sales conversations at booth.",
+        "outboundLegs": [
+          {
+            "id": "leg_demo_s06a",
+            "mode": "flight",
+            "date": "2025-10-13",
+            "from": "CDG",
+            "to": "VIE",
+            "departTime": "08:20",
+            "arriveTime": "10:05",
+            "ref": "OS423",
+            "confirmation": "XKPQ77"
+          }
+        ],
+        "returnLegs": [
+          {
+            "id": "leg_demo_s06b",
+            "mode": "flight",
+            "date": "2025-10-17",
+            "from": "VIE",
+            "to": "CDG",
+            "departTime": "19:00",
+            "arriveTime": "20:45",
+            "ref": "OS424",
+            "confirmation": "XKPQ77"
+          }
+        ]
+      },
+      {
+        "memberId": "tmb_sarah_k",
+        "budget": "1800",
+        "budgetActual": "1700",
+        "notes": "Live blogging sessions and creating social content.",
+        "outboundLegs": [
+          {
+            "id": "leg_demo_s07a",
+            "mode": "flight",
+            "date": "2025-10-13",
+            "from": "MAN",
+            "to": "VIE",
+            "departTime": "09:15",
+            "arriveTime": "12:30",
+            "ref": "OS267",
+            "confirmation": "PQRT59"
+          }
+        ],
+        "returnLegs": [
+          {
+            "id": "leg_demo_s07b",
+            "mode": "flight",
+            "date": "2025-10-17",
+            "from": "VIE",
+            "to": "MAN",
+            "departTime": "17:30",
+            "arriveTime": "19:45",
+            "ref": "OS268",
+            "confirmation": "PQRT59"
+          }
+        ]
+      },
+      {
+        "memberId": "tmb_daniel_o",
+        "budget": "2800",
+        "budgetActual": "2650",
+        "notes": "Executive relationship building. Client dinner Wednesday.",
+        "outboundLegs": [
+          {
+            "id": "leg_demo_s08a",
+            "mode": "flight",
+            "date": "2025-10-12",
+            "from": "LHR",
+            "to": "VIE",
+            "departTime": "07:30",
+            "arriveTime": "10:45",
+            "ref": "OS454",
+            "confirmation": "VKLD92"
+          }
+        ],
+        "returnLegs": [
+          {
+            "id": "leg_demo_s08b",
+            "mode": "flight",
+            "date": "2025-10-18",
+            "from": "VIE",
+            "to": "LHR",
+            "departTime": "19:00",
+            "arriveTime": "20:30",
+            "ref": "OS461",
+            "confirmation": "VKLD93"
+          }
+        ]
+      }
+    ],
+    "accommodations": [
+      {
+        "id": "accom_demo_s01",
+        "name": "NH Vienna City",
+        "address": "Mariahilfer Strasse 1a, 1060 Vienna, Austria",
+        "checkIn": "2025-10-12",
+        "checkOut": "2025-10-18",
+        "confirmation": "NHV-2025-3341",
+        "budget": "",
+        "budgetActual": "",
+        "notes": "Block booking for team. Breakfast included. 15 min walk to ACV.",
+        "assignments": [
+          {
+            "memberId": "tmb_alice123",
+            "checkIn": "2025-10-12",
+            "checkOut": "2025-10-18",
+            "budget": "1050",
+            "budgetActual": "1050"
+          },
+          {
+            "memberId": "tmb_priya_r",
+            "checkIn": "2025-10-13",
+            "checkOut": "2025-10-17",
+            "budget": "600",
+            "budgetActual": "600"
+          },
+          {
+            "memberId": "tmb_bob456",
+            "checkIn": "2025-10-13",
+            "checkOut": "2025-10-17",
+            "budget": "600",
+            "budgetActual": "600"
+          },
+          {
+            "memberId": "tmb_marcus_w",
+            "checkIn": "2025-10-13",
+            "checkOut": "2025-10-17",
+            "budget": "600",
+            "budgetActual": "600"
+          },
+          {
+            "memberId": "tmb_sarah_k",
+            "checkIn": "2025-10-13",
+            "checkOut": "2025-10-17",
+            "budget": "600",
+            "budgetActual": "580"
+          }
+        ]
+      },
+      {
+        "id": "accom_demo_s02",
+        "name": "Hilton Vienna",
+        "address": "Am Stadtpark 1, 1030 Vienna, Austria",
+        "checkIn": "2025-10-12",
+        "checkOut": "2025-10-19",
+        "confirmation": "HLT-2025-9920",
+        "budget": "",
+        "budgetActual": "",
+        "notes": "Closer to conference centre. Marcus, Emma, Liam staying here for client relationship purposes.",
+        "assignments": [
+          {
+            "memberId": "tmb_emma_n",
+            "checkIn": "2025-10-12",
+            "checkOut": "2025-10-18",
+            "budget": "1200",
+            "budgetActual": "1200"
+          },
+          {
+            "memberId": "tmb_carol789",
+            "checkIn": "2025-10-13",
+            "checkOut": "2025-10-17",
+            "budget": "1000",
+            "budgetActual": "1000"
+          },
+          {
+            "memberId": "tmb_daniel_o",
+            "checkIn": "2025-10-12",
+            "checkOut": "2025-10-19",
+            "budget": "1750",
+            "budgetActual": "1750"
+          }
+        ]
+      }
+    ],
+    "timeline": {
+      "startDate": "2025-10-12",
+      "endDate": "2025-10-19"
+    },
+    "swag": [
+      {
+        "id": "swag_demo_s01",
+        "name": "Branded T-Shirts (Organic Cotton)",
+        "quantity": 200,
+        "budget": "2640",
+        "actual": "2640",
+        "currency": "EUR",
+        "done": true,
+        "notes": "200 units. Mix of sizes. All distributed by end of Day 2."
+      },
+      {
+        "id": "swag_demo_s02",
+        "name": "Tote Bags with Logo",
+        "quantity": 300,
+        "budget": "900",
+        "actual": "875",
+        "currency": "EUR",
+        "done": true,
+        "notes": "Canvas totes. Very popular — ran out by Day 3 afternoon."
+      },
+      {
+        "id": "swag_demo_s03",
+        "name": "Sticker Packs (die-cut set of 4)",
+        "quantity": 500,
+        "budget": "250",
+        "actual": "230",
+        "currency": "EUR",
+        "done": true,
+        "notes": "Set includes logo, tagline, Drupal octopus variant, and company mascot."
+      },
+      {
+        "id": "swag_demo_s04",
+        "name": "USB-C Charging Cables (branded)",
+        "quantity": 100,
+        "budget": "400",
+        "actual": "385",
+        "currency": "EUR",
+        "done": false,
+        "notes": "High-value item — distribute selectively to qualified leads only."
+      }
+    ],
+    "deliverables": [
+      {
+        "id": "deliv_demo_s01",
+        "title": "Pre-event social campaign (3 posts/week for 4 weeks)",
+        "done": true,
+        "notes": "Scheduled and posted. Engagement was 40% above baseline."
+      },
+      {
+        "id": "deliv_demo_s02",
+        "title": "Demo environment setup and load testing",
+        "done": true,
+        "notes": "Staging environment provisioned on Upsun. Tested up to 500 concurrent users."
+      },
+      {
+        "id": "deliv_demo_s03",
+        "title": "Booth design finalised and assets sent to printer",
+        "done": true,
+        "notes": "3m backdrop, counter wrap, pull-up banners. Approved by Emma."
+      },
+      {
+        "id": "deliv_demo_s04",
+        "title": "Live session blogging (min. 6 sessions)",
+        "done": true,
+        "notes": "Chloe covered 9 sessions across all days. Published on company blog."
+      },
+      {
+        "id": "deliv_demo_s05",
+        "title": "Lead capture: qualify and tag 50+ prospects",
+        "done": false,
+        "notes": "Marcus has 38 as of Day 3. Final tally after Day 4."
+      },
+      {
+        "id": "deliv_demo_s06",
+        "title": "Post-event wrap-up report to leadership",
+        "done": false,
+        "notes": "Due 1 week after conference. Template shared in Notion."
+      }
+    ],
+    "sponsorBudget": "12500",
+    "sponsorActual": "11800",
+    "sponsorCurrency": "EUR",
+    "sponsorId": "sponsor-11",
+    "trackedSessions": [
+      {
+        "id": "ts_demo_s01",
+        "sessionId": "2025-10-14T11-15-00Z-Auditorium--Hall-D--Driesnote",
+        "sessionTitle": "Driesnote",
+        "sessionTime": "2025-10-14T11:15:00Z",
+        "reason": "attending",
+        "customReason": "",
+        "notes": ""
+      },
+      {
+        "id": "ts_demo_s02",
+        "sessionId": "2025-10-14T12-45-00Z-Auditorium--Hall-D--Drupal-Canvas-unleashed--The-future-of-Drupal-is-here",
+        "sessionTitle": "Drupal Canvas unleashed: The future of Drupal is here",
+        "sessionTime": "2025-10-14T12:45:00Z",
+        "reason": "attending",
+        "customReason": "",
+        "notes": ""
+      },
+      {
+        "id": "ts_demo_s03",
+        "sessionId": "2025-10-14T12-45-00Z-Exhibition-Hall---Open-Stage-How-to-Thrive-in-AI-Times-as-a-Drupal-Business-Organisation--Sponsored-by-Dropsolid-",
+        "sessionTitle": "How to Thrive in AI Times as a Drupal Business Organisation (Sponsored by Dropsolid)",
+        "sessionTime": "2025-10-14T12:45:00Z",
+        "reason": "sponsoring",
+        "customReason": "",
+        "notes": ""
+      },
+      {
+        "id": "ts_demo_s04",
+        "sessionId": "2025-10-14T08-30-00Z-Auditorium--Hall-D--Opening-Ceremony---Women-in-Drupal-Award",
+        "sessionTitle": "Opening Ceremony + Women in Drupal Award",
+        "sessionTime": "2025-10-14T08:30:00Z",
+        "reason": "attending",
+        "customReason": "",
+        "notes": ""
+      },
+      {
+        "id": "ts_demo_s05",
+        "sessionId": "2025-10-14T15-00-00Z-Session-Room--Hall-G1--Strategies-for-Integrating-Drupal-Canvas-in-Your-Existing-Drupal-Platform",
+        "sessionTitle": "Strategies for Integrating Drupal Canvas in Your Existing Drupal Platform",
+        "sessionTime": "2025-10-14T15:00:00Z",
+        "reason": "attending",
+        "customReason": "",
+        "notes": ""
+      },
+      {
+        "id": "ts_demo_s06",
+        "sessionId": "2025-10-14T12-45-00Z-Session-Room---2-43--Accessibility--Sustainability-and-the-Open-Web",
+        "sessionTitle": "Accessibility, Sustainability and the Open Web",
+        "sessionTime": "2025-10-14T12:45:00Z",
+        "reason": "attending",
+        "customReason": "",
+        "notes": ""
+      }
+    ],
+    "autoAddedSponsoredSessions": [],
+    "documents": [
+      {
+        "id": "doc_demo_s01",
+        "name": "sponsorship-agreement-2025.pdf",
+        "filePath": "documents/planner-demo-sponsor-acme/sponsorship-agreement-2025.pdf",
+        "isDirect": true,
+        "notes": "Countersigned 15 March 2025.",
+        "receiptId": "receipt_demo_s01"
+      },
+      {
+        "id": "doc_demo_s02",
+        "name": "booth-14-floorplan.pdf",
+        "filePath": "documents/planner-demo-sponsor-acme/booth-14-floorplan.pdf",
+        "isDirect": true,
+        "notes": "Shell scheme dimensions and power drops.",
+        "receiptId": ""
+      },
+      {
+        "id": "doc_demo_s03",
+        "name": "av-hire-invoice.pdf",
+        "filePath": "documents/planner-demo-sponsor-acme/av-hire-invoice.pdf",
+        "isDirect": true,
+        "notes": "",
+        "receiptId": "receipt_demo_s02"
+      }
+    ],
+    "budgetItems": [
+      {
+        "id": "bi_demo_s01",
+        "name": "Gold Sponsor Package Fee",
+        "category": "sponsor",
+        "budget": "12500",
+        "actual": "12500",
+        "currency": "EUR",
+        "notes": "Paid March 2025. Includes: booth 14, logo in programme, 8 delegate passes."
+      },
+      {
+        "id": "bi_demo_s02",
+        "name": "Booth Equipment Hire (AV & Displays)",
+        "category": "misc",
+        "budget": "1200",
+        "actual": "1050",
+        "currency": "EUR",
+        "notes": "Two 55\" displays, HDMI switches, cable management. Hired from local supplier."
+      },
+      {
+        "id": "bi_demo_s03",
+        "name": "Branded Merchandise — T-Shirts (200 units)",
+        "category": "swag",
+        "budget": "2800",
+        "actual": "2640",
+        "currency": "EUR",
+        "notes": "Organic cotton, sizes S-XL. Arrived at venue pre-conference."
+      },
+      {
+        "id": "bi_demo_s04",
+        "name": "Client Dinner — Wednesday Evening",
+        "category": "customer",
+        "budget": "1800",
+        "actual": "1640",
+        "currency": "EUR",
+        "notes": "14 guests at Meixner's Gastwirtschaft. Marcus hosted."
+      },
+      {
+        "id": "bi_demo_s05",
+        "name": "Printed Marketing Materials (Brochures, Datasheets)",
+        "category": "misc",
+        "budget": "600",
+        "actual": "580",
+        "currency": "EUR",
+        "notes": "1000 brochures, 500 datasheets, 200 case study cards."
+      }
+    ],
+    "budgetCategories": [
+      {
+        "id": "sponsor",
+        "name": "Sponsorship"
+      },
+      {
+        "id": "travel",
+        "name": "Travel"
+      },
+      {
+        "id": "accommodation",
+        "name": "Accommodation"
+      },
+      {
+        "id": "swag",
+        "name": "Swag"
+      },
+      {
+        "id": "customer",
+        "name": "Customer"
+      },
+      {
+        "id": "misc",
+        "name": "Misc"
+      }
+    ],
+    "categoryBudgets": {
+      "sponsor": "12500",
+      "travel": "9500",
+      "accommodation": "6200",
+      "swag": "6500",
+      "customer": "2000",
+      "misc": "16000"
+    },
+    "tickets": [
+      {
+        "id": "tk_demo_s01",
+        "name": "Delegate pass — full conference",
+        "quantity": 6,
+        "status": "assigned",
+        "assignedTo": "tmb_alice123",
+        "purchasedBy": "",
+        "notes": "Included in the Gold package. Collected from registration on Monday.",
+        "days": [
+          "2025-10-14",
+          "2025-10-15",
+          "2025-10-16",
+          "2025-10-17"
+        ],
+        "showOnItinerary": false,
+        "receiptId": "receipt_demo_s01"
+      },
+      {
+        "id": "tk_demo_s02",
+        "name": "Booth staff wristband",
+        "quantity": 8,
+        "status": "purchased",
+        "assignedTo": "",
+        "purchasedBy": "tmb_emma_n",
+        "notes": "Exhibitor access from 07:00 each day. Collect with the booth pack.",
+        "days": [
+          "2025-10-13",
+          "2025-10-14",
+          "2025-10-15",
+          "2025-10-16",
+          "2025-10-17"
+        ],
+        "showOnItinerary": false,
+        "receiptId": ""
+      },
+      {
+        "id": "tk_demo_s03",
+        "name": "Contribution day ticket",
+        "quantity": 2,
+        "status": "pending-purchase",
+        "assignedTo": "tmb_marcus_w",
+        "purchasedBy": "",
+        "notes": "Friday only. Decide by 10 Oct whether Marcus and Priya stay on.",
+        "days": [
+          "2025-10-17"
+        ],
+        "showOnItinerary": false,
+        "receiptId": ""
+      }
+    ],
+    "disabledTabs": [],
+    "tabOrder": [],
+    "itinerary": [
+      {
+        "id": "it_demo_s01",
+        "memberId": null,
+        "memberIds": [
+          "tmb_emma_n",
+          "tmb_marcus_w"
+        ],
+        "date": "2025-10-13",
+        "time": "14:00",
+        "title": "Booth build and AV test",
+        "location": "Exhibition Hall X1 — Booth 14",
+        "notes": "Loading dock open from 14:00.",
+        "done": true,
+        "coords": "",
+        "receiptId": ""
+      },
+      {
+        "id": "it_demo_s02",
+        "memberId": null,
+        "memberIds": [],
+        "date": "2025-10-14",
+        "time": "09:00",
+        "title": "Stand opens — Day 1 rota begins",
+        "location": "Booth 14",
+        "notes": "Bob and Sarah on demo rotation until 13:00.",
+        "done": true,
+        "coords": "",
+        "receiptId": ""
+      },
+      {
+        "id": "it_demo_s03",
+        "memberId": null,
+        "memberIds": [
+          "tmb_priya_r"
+        ],
+        "date": "2025-10-16",
+        "time": "11:00",
+        "title": "UX workshop — \"Designing for editors\"",
+        "location": "Session Room (Hall G1)",
+        "notes": "Priya presenting. 90 minutes.",
+        "done": false,
+        "coords": "",
+        "receiptId": ""
+      },
+      {
+        "id": "it_demo_s04",
+        "memberId": null,
+        "memberIds": [
+          "tmb_daniel_o",
+          "tmb_alice123"
+        ],
+        "date": "2025-10-16",
+        "time": "19:30",
+        "title": "Client dinner",
+        "location": "Meixner's Gastwirtschaft",
+        "notes": "Eight guests. Booked under Acme Digital.",
+        "done": false,
+        "coords": "48.1889, 16.3936",
+        "receiptId": "receipt_demo_s03"
+      },
+      {
+        "id": "it_demo_s05",
+        "memberId": null,
+        "memberIds": [],
+        "date": "2025-10-17",
+        "time": "16:00",
+        "title": "Teardown and freight collection",
+        "location": "Booth 14",
+        "notes": "Hall closes 18:00 sharp.",
+        "done": false,
+        "coords": "",
+        "receiptId": ""
+      }
+    ],
+    "memberItinerary": [
+      {
+        "id": "itin_demo_s01",
+        "date": "2025-10-12",
+        "time": "14:00",
+        "title": "Booth setup — Sarah, Emma, Marcus",
+        "done": true,
+        "notes": "ACV loading dock open from 14:00. AV hire delivery at 15:30.",
+        "memberIds": [
+          "tmb_sarah_k",
+          "tmb_emma_n",
+          "tmb_marcus_w"
+        ],
+        "memberId": "tmb_emma_n",
+        "location": "",
+        "coords": "",
+        "receiptId": ""
+      },
+      {
+        "id": "itin_demo_s02",
+        "date": "2025-10-13",
+        "time": "09:00",
+        "title": "Full team arrival — briefing & dry run",
+        "done": true,
+        "notes": "Meet in hotel lobby at 09:00. Walk to venue. 90-min demo dry run at booth.",
+        "memberIds": [
+          "tmb_alice123",
+          "tmb_priya_r",
+          "tmb_emma_n",
+          "tmb_carol789",
+          "tmb_bob456",
+          "tmb_marcus_w",
+          "tmb_sarah_k",
+          "tmb_daniel_o"
+        ],
+        "memberId": "tmb_emma_n",
+        "location": "",
+        "coords": "",
+        "receiptId": ""
+      },
+      {
+        "id": "itin_demo_s03",
+        "date": "2025-10-14",
+        "time": "08:00",
+        "title": "Conference Day 1 — all hands on deck",
+        "done": true,
+        "notes": "Booth open from 09:00. Sarah running demo 10:00-12:00 and 14:00-16:00.",
+        "memberIds": [
+          "tmb_alice123",
+          "tmb_priya_r",
+          "tmb_emma_n",
+          "tmb_carol789",
+          "tmb_bob456",
+          "tmb_marcus_w",
+          "tmb_sarah_k",
+          "tmb_daniel_o"
+        ],
+        "memberId": "tmb_alice123",
+        "location": "",
+        "coords": "",
+        "receiptId": ""
+      },
+      {
+        "id": "itin_demo_s04",
+        "date": "2025-10-15",
+        "time": "18:30",
+        "title": "Client Dinner — Meixner's (14 guests)",
+        "done": true,
+        "notes": "Address: Kettenbrückengasse 22. Reservation under 'Acme Digital'. Marcus hosting.",
+        "memberIds": [
+          "tmb_daniel_o",
+          "tmb_alice123",
+          "tmb_marcus_w"
+        ],
+        "memberId": "tmb_daniel_o",
+        "location": "Meixner's Gastwirtschaft",
+        "coords": "",
+        "receiptId": "receipt_demo_s03"
+      },
+      {
+        "id": "itin_demo_s05",
+        "date": "2025-10-16",
+        "time": "09:00",
+        "title": "Conference Day 3 — focus on lead conversations",
+        "done": true,
+        "notes": "Daniel and Marcus to prioritise qualified prospects from Days 1-2.",
+        "memberIds": [
+          "tmb_alice123",
+          "tmb_marcus_w",
+          "tmb_daniel_o"
+        ],
+        "memberId": "tmb_marcus_w",
+        "location": "",
+        "coords": "",
+        "receiptId": ""
+      },
+      {
+        "id": "itin_demo_s06",
+        "date": "2025-10-17",
+        "time": "09:00",
+        "title": "Final day — pack down, last sessions",
+        "done": false,
+        "notes": "Booth pack-down at 16:30. AV collection at 17:00. Most team flights from 17:30.",
+        "memberIds": [
+          "tmb_emma_n",
+          "tmb_bob456",
+          "tmb_sarah_k"
+        ],
+        "memberId": "tmb_bob456",
+        "location": "",
+        "coords": "",
+        "receiptId": ""
+      },
+      {
+        "id": "itin_demo_s07",
+        "date": "2025-10-17",
+        "time": "17:30",
+        "title": "Team debrief & early dinner (Vienna Airport)",
+        "done": false,
+        "notes": "Quick debrief before departures. Share first impressions while fresh.",
+        "memberIds": [
+          "tmb_alice123",
+          "tmb_priya_r",
+          "tmb_emma_n",
+          "tmb_carol789",
+          "tmb_bob456",
+          "tmb_marcus_w",
+          "tmb_sarah_k",
+          "tmb_daniel_o"
+        ],
+        "memberId": "tmb_emma_n",
+        "location": "",
+        "coords": "",
+        "receiptId": ""
+      },
+      {
+        "id": "itin_demo_s08",
+        "date": "2025-11-07",
+        "time": "10:00",
+        "title": "Post-event retrospective (remote)",
+        "done": false,
+        "notes": "Zoom call. Marcus to chair. Deck to be prepared by Emma.",
+        "memberIds": [
+          "tmb_alice123",
+          "tmb_priya_r",
+          "tmb_emma_n",
+          "tmb_carol789",
+          "tmb_bob456",
+          "tmb_marcus_w",
+          "tmb_sarah_k",
+          "tmb_daniel_o"
+        ],
+        "memberId": "tmb_alice123",
+        "location": "",
+        "coords": "",
+        "receiptId": ""
+      },
+      {
+        "id": "itin_demo_x01",
+        "memberId": "tmb_bob456",
+        "memberIds": [
+          "tmb_bob456"
+        ],
+        "date": "2025-10-14",
+        "time": "10:00",
+        "title": "Demo rotation — first shift",
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "notes": "",
+        "done": false
+      },
+      {
+        "id": "itin_demo_x02",
+        "memberId": "tmb_sarah_k",
+        "memberIds": [
+          "tmb_sarah_k"
+        ],
+        "date": "2025-10-14",
+        "time": "13:00",
+        "title": "Live-blog: Driesnote write-up",
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "notes": "",
+        "done": false
+      },
+      {
+        "id": "itin_demo_x03",
+        "memberId": "tmb_priya_r",
+        "memberIds": [
+          "tmb_priya_r"
+        ],
+        "date": "2025-10-16",
+        "time": "11:00",
+        "title": "UX workshop — Designing for editors",
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "notes": "",
+        "done": false
+      },
+      {
+        "id": "itin_demo_x04",
+        "memberId": "tmb_marcus_w",
+        "memberIds": [
+          "tmb_marcus_w"
+        ],
+        "date": "2025-10-15",
+        "time": "14:30",
+        "title": "Partner meeting — Lemberg Solutions",
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "notes": "",
+        "done": false
+      },
+      {
+        "id": "itin_demo_x05",
+        "memberId": "tmb_carol789",
+        "memberIds": [
+          "tmb_carol789"
+        ],
+        "date": "2025-10-15",
+        "time": "09:30",
+        "title": "Social: stand photos + posts",
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "notes": "",
+        "done": false
+      },
+      {
+        "id": "itin_demo_x06",
+        "memberId": "tmb_sarah_k",
+        "memberIds": [
+          "tmb_sarah_k"
+        ],
+        "date": "2025-10-16",
+        "time": "15:00",
+        "title": "Live-blog: Canvas session",
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "notes": "",
+        "done": false
+      },
+      {
+        "id": "itin_demo_x07",
+        "memberId": "tmb_bob456",
+        "memberIds": [
+          "tmb_bob456"
+        ],
+        "date": "2025-10-16",
+        "time": "10:00",
+        "title": "Demo rotation — second shift",
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "notes": "",
+        "done": false
+      },
+      {
+        "id": "itin_demo_x08",
+        "memberId": "tmb_daniel_o",
+        "memberIds": [
+          "tmb_daniel_o"
+        ],
+        "date": "2025-10-15",
+        "time": "16:00",
+        "title": "Exec intro — Nordic partnership",
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "notes": "",
+        "done": false
+      }
+    ],
+    "checklists": [
+      {
+        "id": "cl_demo_s01",
+        "title": "Booth build",
+        "items": [
+          {
+            "id": "cli_s01a",
+            "text": "Backdrop and banner stands collected",
+            "done": true
+          },
+          {
+            "id": "cli_s01b",
+            "text": "Two 55\" displays tested with demo laptop",
+            "done": true
+          },
+          {
+            "id": "cli_s01c",
+            "text": "Demo environment pre-loaded and offline-safe",
+            "done": true
+          },
+          {
+            "id": "cli_s01d",
+            "text": "Power strips and cable covers in place",
+            "done": true
+          },
+          {
+            "id": "cli_s01e",
+            "text": "Lead-capture app installed on both phones",
+            "done": false
+          }
+        ]
+      },
+      {
+        "id": "cl_demo_s02",
+        "title": "Swag and print",
+        "items": [
+          {
+            "id": "cli_s02a",
+            "text": "T-shirts unpacked and sorted by size",
+            "done": true
+          },
+          {
+            "id": "cli_s02b",
+            "text": "Tote bags at the front of the stand",
+            "done": true
+          },
+          {
+            "id": "cli_s02c",
+            "text": "Case-study leaflets restocked each morning",
+            "done": false
+          },
+          {
+            "id": "cli_s02d",
+            "text": "Stickers moved to the demo desk",
+            "done": false
+          }
+        ]
+      },
+      {
+        "id": "cl_demo_s03",
+        "title": "Wrap-up",
+        "items": [
+          {
+            "id": "cli_s03a",
+            "text": "Leads exported and shared with sales",
+            "done": false
+          },
+          {
+            "id": "cli_s03b",
+            "text": "Displays returned to the hire company",
+            "done": false
+          },
+          {
+            "id": "cli_s03c",
+            "text": "Post-event blog drafted",
+            "done": false
+          },
+          {
+            "id": "cli_s03d",
+            "text": "Sponsorship review written up for next year",
+            "done": false
+          }
+        ]
+      }
+    ]
+  },
+  "receipts": [
+    {
+      "budgetItemId": "bi_demo_s01",
+      "filePath": "",
+      "fileLabel": "",
+      "id": "receipt_demo_s01",
+      "name": "Gold Sponsorship — DrupalCon EU Vienna 2025",
+      "merchant": "Drupal Association",
+      "date": "2025-03-15",
+      "amount": "12500",
+      "currency": "EUR",
+      "category": "sponsor",
+      "notes": "Invoice DA-2025-0441. Paid via bank transfer."
+    },
+    {
+      "budgetItemId": "bi_demo_s02",
+      "filePath": "",
+      "fileLabel": "",
+      "id": "receipt_demo_s02",
+      "name": "Booth Equipment Hire — Displays & AV",
+      "merchant": "Vienna AV Rentals GmbH",
+      "date": "2025-10-15",
+      "amount": "1050",
+      "currency": "EUR",
+      "category": "misc",
+      "notes": "Invoice VAR-10542. Paid on-site by card."
+    },
+    {
+      "budgetItemId": "",
+      "filePath": "",
+      "fileLabel": "",
+      "id": "receipt_demo_s03",
+      "name": "Client Dinner — Meixner's Gastwirtschaft",
+      "merchant": "Meixner's Gastwirtschaft",
+      "date": "2025-10-15",
+      "amount": "1640",
+      "currency": "EUR",
+      "category": "customer",
+      "notes": "14 guests. Marcus' company card."
+    },
+    {
+      "budgetItemId": "bi_demo_s03",
+      "filePath": "",
+      "fileLabel": "",
+      "id": "receipt_demo_s04",
+      "name": "Branded T-Shirts (200 units)",
+      "merchant": "Merchandise Factory EU",
+      "date": "2025-09-28",
+      "amount": "2640",
+      "currency": "EUR",
+      "category": "swag",
+      "notes": "Delivered to venue pre-conference. Invoice MFE-2025-8831."
+    },
+    {
+      "budgetItemId": "",
+      "filePath": "",
+      "fileLabel": "",
+      "id": "receipt_demo_s05",
+      "name": "Tote Bags (300 units)",
+      "merchant": "Merchandise Factory EU",
+      "date": "2025-09-28",
+      "amount": "875",
+      "currency": "EUR",
+      "category": "swag",
+      "notes": "Same supplier as shirts. Invoice MFE-2025-8832."
+    },
+    {
+      "budgetItemId": "",
+      "filePath": "",
+      "fileLabel": "",
+      "id": "receipt_demo_s06",
+      "name": "Printed Marketing Materials",
+      "merchant": "Flyeralarm GmbH",
+      "date": "2025-10-05",
+      "amount": "580",
+      "currency": "EUR",
+      "category": "misc",
+      "notes": "1000 brochures, 500 datasheets, 200 case study cards."
+    }
+  ],
+  "personal": {
+    "outboundLegs": [],
+    "returnLegs": [],
+    "accommodations": [],
+    "budget": "",
+    "budgetActual": "",
+    "currency": "AUD",
+    "notes": "",
+    "trackedSessions": [],
+    "itinerary": [],
+    "documents": [],
+    "budgetItems": [],
+    "budgetCategories": [],
+    "categoryBudgets": {},
+    "tickets": [],
+    "disabledTabs": [],
+    "tabOrder": [],
+    "tripAssignments": [],
+    "localCompanions": [],
+    "gpxTrack": null,
+    "meContactId": null
+  },
+  "_id": "f0e2c6b4-9a71-4d38-b2c5-7e1a4d9c8b30",
+  "_eventFiles": [
+    "events/drupalcon/eu/2025-vienna.json"
+  ],
+  "displayCurrency": "EUR",
+  "weatherLocation": {
+    "name": "Vienna",
+    "lat": 48.2082,
+    "lon": 16.3738,
+    "label": "Vienna, Austria"
+  }
+}

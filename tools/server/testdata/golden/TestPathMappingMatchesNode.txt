@@ -1,0 +1,1 @@
+["/tmp/roots/public/events/a.json","/tmp/roots/public/catalog.json","/tmp/roots/public/img/logos/x.png","/tmp/roots/private/receipts/r.pdf","/tmp/roots/private/documents/d.pdf","/tmp/roots/private/planners/p.json","/tmp/roots/private/curation/decisions.json",null,null,"/tmp/roots/public","/tmp/roots/private/planners/other/p.json"]

@@ -1,0 +1,92 @@
+{
+  "_comment": [
+    "The contract between app/js/modules/sessionKind.js and",
+    "tools/archive/sessionkind.go. Both test suites read this file; a rule",
+    "changed in one language fails the other's build.",
+    "",
+    "Readers:",
+    "  tools/archive/sessionkind_test.go",
+    "  app/js/modules/__tests__/sessionKindContract.test.js",
+    "",
+    "The word lists ARE the rule, so this does not try to re-list them. It",
+    "carries the titles that discriminate — the ones where a plausible",
+    "implementation would go wrong."
+  ],
+  "agendaTitles": [
+    { "title": "Lunch", "agenda": true },
+    { "title": "Morning Tea", "agenda": true, "why": "modifier plus a logistics word" },
+    { "title": "Registration & Coffee", "agenda": true, "why": "& is a separator" },
+    { "title": "Drinks/Networking", "agenda": true, "why": "so is /" },
+    { "title": "The Lunch Session", "agenda": true, "why": "'the' and 'session' are filler" },
+    { "title": "9:00 Registration", "agenda": true, "why": "digits and punctuation drop out" },
+    { "title": "Closing Remarks", "agenda": true },
+    { "title": "Group Photo", "agenda": true },
+    { "title": "Doors", "agenda": true },
+    {
+      "title": "Rethinking Event Registration",
+      "agenda": false,
+      "why": "one content word rescues the title"
+    },
+    {
+      "title": "Lunch & Learn",
+      "agenda": false,
+      "why": "'learn' is not a logistics word"
+    },
+    {
+      "title": "Morning",
+      "agenda": false,
+      "why": "a modifier alone is not enough — one real logistics word is required"
+    },
+    {
+      "title": "Afternoon Break — Sponsored by Acme",
+      "agenda": false,
+      "why": "a sponsored break reads as a session by title; this is why isAgendaItem exists"
+    },
+    { "title": "Opening Keynote", "agenda": false, "why": "'keynote' is content" },
+    { "title": "", "agenda": false },
+    { "title": "2026", "agenda": false, "why": "digits are dropped, leaving nothing" }
+  ],
+  "kinds": [
+    { "item": { "kind": "workshop" }, "kind": "workshop", "counts": true },
+    { "item": { "kind": "SOCIAL" }, "kind": "social", "counts": false, "why": "case-insensitive" },
+    { "item": { "kind": "agenda" }, "kind": "agenda", "counts": false },
+    { "item": { "kind": "session" }, "kind": "session", "counts": true },
+    {
+      "item": { "kind": "bogus", "title": "Lunch" },
+      "kind": "agenda",
+      "counts": false,
+      "why": "an unknown kind falls through to the older signals"
+    },
+    {
+      "item": { "isAgendaItem": false, "title": "Lunch" },
+      "kind": "session",
+      "counts": true,
+      "why": "the field is the authority in BOTH directions — a sponsored lunch stays a session"
+    },
+    {
+      "item": { "isAgendaItem": true, "title": "Deep dive into render arrays" },
+      "kind": "agenda",
+      "counts": false
+    },
+    {
+      "item": { "isAgendaItem": "true", "title": "Lunch" },
+      "kind": "agenda",
+      "counts": false,
+      "why": "a string is not a boolean, so the title heuristic decides"
+    },
+    { "item": { "title": "Deep dive into render arrays" }, "kind": "session", "counts": true },
+    { "item": {}, "kind": "session", "counts": true },
+    {
+      "item": { "kind": "session", "cancelled": true },
+      "kind": "session",
+      "counts": false,
+      "why": "recorded as evidence, never counted"
+    },
+    {
+      "item": { "kind": "session", "cancelled": "yes" },
+      "kind": "session",
+      "counts": true,
+      "why": "only a literal true cancels"
+    }
+  ]
+}

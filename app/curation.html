@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" style="opacity:0">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="icon" href="./img/app-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+  <meta name="theme-color" content="#f4f5f0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#131614" media="(prefers-color-scheme: dark)">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png">
+  <title>Curation &mdash; Programme</title>
+  <style>html{transition:opacity .15s ease}</style>
+  <noscript><style>html{opacity:1}</style></noscript>
+
+  <link rel="preload" href="./fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./fonts/newsreader-roman.woff2" as="font" type="font/woff2" crossorigin>
+
+  <style>
+    @layer overrides, reset, legacy, tokens, base, composition, section, utility;
+    @import url("./css/utilities.css") layer(legacy);
+  </style>
+  <link rel="stylesheet" href="./css/foundation.css">
+  <link rel="stylesheet" href="./css/section-chrome.css">
+  <link rel="stylesheet" href="./css/section-curation.css">
+</head>
+<body>
+
+  <a class="u-skip" href="#curStage">Skip to the cases</a>
+
+  <header class="app-masthead">
+    <div class="l-center">
+      <div class="app-masthead__bar">
+        <div class="app-lockup">
+          <span class="app-lockup__seal" aria-hidden="true"></span>
+          <div class="app-lockup__title">Curation</div>
+          <p class="app-lockup__place">Who is who, across twenty years</p>
+        </div>
+      </div>
+      <nav class="app-nav" aria-label="Site navigation">
+        <a href="./home.html" class="app-nav__link">Home</a>
+        <a href="./index.html" class="app-nav__link">Schedule</a>
+        <a href="./planner.html" class="app-nav__link">Planner</a>
+        <a href="./archive.html" class="app-nav__link">Archive</a>
+        <a href="./curation.html" class="app-nav__link" aria-current="page">Curation</a>
+        <a id="curationEditorLink" href="./editor.html" class="app-nav__link hidden">Editor</a>
+      </nav>
+      <nav class="app-crumbs" aria-label="Breadcrumb">
+        <a href="./home.html">Home</a><span class="app-crumbs__sep" aria-hidden="true">&rarr;</span><a href="./archive.html">Archive</a><span class="app-crumbs__sep" aria-hidden="true">&rarr;</span><span aria-current="page">Curation</span>
+      </nav>
+    </div>
+  </header>
+
+  <main class="l-center">
+    <div id="curationStudio" class="cur-studio">
+      <div class="cur-head">
+        <div class="cur-head-l">
+          <span class="cur-eyebrow">Archive Curation</span>
+          <h1 class="cur-title">Identity Reconciliation</h1>
+        </div>
+        <div class="cur-stats" id="curStats"></div>
+      </div>
+      <div class="cur-toolbar">
+        <div class="cur-seg">
+          <button type="button" class="cur-seg-btn is-active" data-kind="speaker">Speakers <span class="cur-seg-n" id="curSegSpeaker">0</span></button>
+          <button type="button" class="cur-seg-btn" data-kind="sponsor">Sponsors <span class="cur-seg-n" id="curSegSponsor">0</span></button>
+          <button type="button" class="cur-seg-btn" data-kind="coverage">Coverage <span class="cur-seg-n" id="curSegCoverage">·</span></button>
+          <button type="button" class="cur-seg-btn" data-kind="tips">Suggestions <span class="cur-seg-n" id="curSegTips">·</span></button>
+        </div>
+        <div class="cur-progress" id="curProgress"></div>
+        <button type="button" class="cur-view-btn" id="curViewBtn"><span id="curViewLbl">Overview</span></button>
+      </div>
+      <div class="cur-stage" id="curStage"></div>
+      <div class="cur-foot"><kbd>M</kbd> map · <kbd>N</kbd> not the same · <kbd>&rarr;</kbd> skip · <span class="cur-foot-note">datasets are never changed — mappings stay private</span></div>
+    </div>
+  </main>
+
+  <script type="module" src="./js/curation.js"></script>
+</body>
+</html>

@@ -1,22 +1,66 @@
 {
-  "name": "conference-calendar-planner",
+  "name": "conference-planner",
   "version": "1.0.0",
   "type": "module",
   "description": "Conference calendar data editor with local API server",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js",
+    "audit:a11y": "node scripts/audit-a11y.mjs",
+    "audit:archive": "node --env-file-if-exists=.env scripts/audit-archive.mjs",
+    "audit:css": "node scripts/audit-orphan-css.mjs",
+    "audit:regions": "node --env-file-if-exists=.env scripts/backfill-regions.mjs",
+    "audit:routes": "node scripts/audit-routes.mjs",
+    "audit:sources": "node --env-file-if-exists=.env scripts/audit-sources.mjs",
+    "audit:structure": "node scripts/audit-structural-loss.mjs",
+    "audit:type": "node scripts/audit-type.mjs",
+    "backfill:regions": "node --env-file-if-exists=.env scripts/backfill-regions.mjs --write",
+    "backfill:sources": "node --env-file-if-exists=.env scripts/backfill-sources.mjs",
+    "build:catalog": "node --env-file-if-exists=.env scripts/build-catalog.mjs",
+    "build:css": "unocss 'app/*.html' 'app/js/**/*.js' --out-file app/css/utilities.css",
+    "build:dockerfiles": "node scripts/build-dockerfiles.mjs",
+    "build:fonts": "node scripts/subset-fonts.mjs",
+    "build:icons": "node scripts/build-icons.mjs",
+    "build:og": "node scripts/build-og-card.mjs",
+    "deadcode": "knip",
+    "backend": "cd tools/server && go run ./cmd/server serve",
+    "backend:build": "cd tools/server && go build -o \"$PWD/../../.bin/server\" ./cmd/server",
+    "enrich:ddd-videos": "node --env-file-if-exists=.env scripts/enrich-ddd-youtube-playlists.mjs",
+    "format": "prettier --write \"app/js/**/*.js\" \"scripts/**/*.js\" \"scripts/**/*.mjs\"",
+    "format:check": "prettier --check \"app/js/**/*.js\" \"scripts/**/*.js\" \"scripts/**/*.mjs\"",
+    "geocode:events": "node --env-file-if-exists=.env scripts/geocode-events.mjs",
+    "lint": "eslint app/js scripts",
+    "lint:css": "node scripts/lint-css.mjs",
+    "lint:html": "node scripts/check-html-comments.mjs",
+    "report:coverage": "node --env-file-if-exists=.env scripts/report-coverage.mjs",
+    "report:quality": "node --env-file-if-exists=.env scripts/report-quality.mjs",
+    "report:s3": "node --env-file-if-exists=.env scripts/migrate-s3-private.mjs",
+    "report:sources": "node --env-file-if-exists=.env scripts/report-sources.mjs",
+    "resolve:albums": "node --env-file-if-exists=.env scripts/resolve-album-thumbs.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
-    "validate": "node scripts/validate-data.mjs"
+    "typecheck": "tsc -p jsconfig.json",
+    "validate": "node --env-file-if-exists=.env scripts/validate-data.mjs",
+    "verify:sources": "node --env-file-if-exists=.env scripts/verify-sources.mjs",
+    "watch:css": "unocss 'app/*.html' 'app/js/**/*.js' --out-file app/css/utilities.css --watch"
   },
   "devDependencies": {
-    "ajv": "^6.12.6",
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.7.0",
+    "knip": "^6.26.0",
     "playwright": "^1.60.0",
+    "prettier": "^3.9.4",
+    "subset-font": "^2.5.0",
+    "typescript": "^7.0.2",
+    "unocss": "^0.65.0",
     "vitest": "^2.0.0"
   },
   "dependencies": {
-    "express": "^4.21.2",
-    "multer": "^1.4.5-lts.1"
+    "@aws-sdk/client-s3": "^3.1069.0",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1"
+  },
+  "packageManager": "pnpm@11.3.0",
+  "engines": {
+    "node": ">=22"
   }
 }

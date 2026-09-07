@@ -1,0 +1,18 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "app/*.html",
+    "app/js/app.js",
+    "app/js/planner.js",
+    "app/js/editor.js",
+    "app/js/curation.js",
+    "app/js/archive.js",
+    "scripts/*.mjs",
+    "**/__tests__/**/*.test.js",
+    "app/js/modules/s3Settings.js",
+    "app/js/modules/usersPanel.js"
+  ],
+  "project": ["app/js/**/*.js", "scripts/**/*.js", "scripts/**/*.mjs"],
+  "ignoreDependencies": ["playwright"],
+  "ignoreBinaries": ["go", "unocss"]
+}

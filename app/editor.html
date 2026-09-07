@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en" style="opacity:0">
+<head>
+  <link rel="preload" href="./fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./fonts/newsreader-roman.woff2" as="font" type="font/woff2" crossorigin>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="icon" href="./img/app-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#f4f5f0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#131614" media="(prefers-color-scheme: dark)">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png">
+  <title>Editor &mdash; Programme</title>
+  <style>html{transition:opacity .15s ease}</style>
+  <noscript><style>html{opacity:1}</style></noscript>
+
+  <style>
+    @layer overrides, reset, legacy, tokens, base, composition, section, utility;
+    @import url("./css/utilities.css") layer(legacy);
+</style>
+  <link rel="stylesheet" href="./css/foundation.css">
+  <link rel="stylesheet" href="./css/section-chrome.css">
+  <link rel="stylesheet" href="./css/section-modal.css">
+  <link rel="stylesheet" href="./css/section-venue-map.css">
+  <link rel="stylesheet" href="./css/section-session-detail.css">
+  <link rel="stylesheet" href="./css/section-editor.css">
+</head>
+<body>
+
+  <a class="u-skip" href="#editorMain">Skip to the editor</a>
+
+  <header class="app-masthead">
+    <div class="l-center">
+      <div class="app-masthead__bar">
+        <div class="app-lockup">
+          <span class="app-lockup__seal" aria-hidden="true"></span>
+          <div class="app-lockup__title">Editor</div>
+          <h1 class="app-lockup__place">
+            <span id="editorHeaderEvent">Datasets</span>
+          </h1>
+        </div>
+      </div>
+      <nav class="app-nav" aria-label="Site navigation">
+        <a href="./home.html" class="app-nav__link">Home</a>
+        <a href="./index.html" class="app-nav__link">Schedule</a>
+        <a href="./planner.html" class="app-nav__link">Planner</a>
+        <a href="./archive.html" class="app-nav__link">Archive</a>
+        <a href="./curation.html" class="app-nav__link">Curation</a>
+        <a href="./editor.html" class="app-nav__link" aria-current="page">Editor</a>
+      </nav>
+
+      <nav id="editorCrumbs" class="app-crumbs" aria-label="Breadcrumb"></nav>
+    </div>
+  </header>
+
+  <aside id="editorSidebar" aria-label="Editor navigation">
+    <div class="sidebar-brand">
+      <div class="sidebar-app-icon" aria-hidden="true"></div>
+      <div class="sidebar-brand-text">
+        <span class="sidebar-event-name">Editor</span>
+      </div>
+      <button id="editorSidebarToggleBtn" type="button" class="sidebar-toggle-btn ml-auto" aria-label="Toggle sidebar">
+        <span id="editorSidebarToggleIcon" aria-hidden="true">&laquo;</span>
+      </button>
+    </div>
+
+    <nav id="editorSidebarNav" aria-label="Editor sections">
+      <button type="button" id="editorHomeBtn" class="sidebar-home-btn">
+        <span class="sidebar-label">&larr; All events</span>
+      </button>
+      <div class="sidebar-group">
+        <span class="sidebar-group-label">Content</span>
+        <button type="button" class="sidebar-tab-btn is-active" data-editor-tab="sessions">
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">SE</span>
+          <span class="sidebar-label">Sessions</span>
+        </button>
+        <button type="button" class="sidebar-tab-btn" data-editor-tab="people">
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">PE</span>
+          <span class="sidebar-label">People</span>
+        </button>
+        <button type="button" class="sidebar-tab-btn" data-editor-tab="sponsors">
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">SP</span>
+          <span class="sidebar-label">Sponsors</span>
+        </button>
+        <button type="button" class="sidebar-tab-btn" data-editor-tab="related">
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">RE</span>
+          <span class="sidebar-label">Related events</span>
+        </button>
+      </div>
+      <div class="sidebar-group">
+        <span class="sidebar-group-label">Event</span>
+        <button type="button" class="sidebar-tab-btn" data-editor-tab="event">
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">EV</span>
+          <span class="sidebar-label">Event</span>
+        </button>
+        <button type="button" class="sidebar-tab-btn" data-editor-tab="logo">
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">LG</span>
+          <span class="sidebar-label">Logo</span>
+        </button>
+        <button type="button" class="sidebar-tab-btn" data-editor-tab="flickr">
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">PH</span>
+          <span class="sidebar-label">Photos</span>
+        </button>
+        <button type="button" class="sidebar-tab-btn" data-editor-tab="appearance">
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">AP</span>
+          <span class="sidebar-label">Appearance</span>
+        </button>
+      </div>
+      <div class="sidebar-group">
+        <span class="sidebar-group-label">Reference</span>
+        <button type="button" class="sidebar-tab-btn" data-editor-tab="sitemap">
+          <span class="sidebar-item-icon pln-code" aria-hidden="true">SR</span>
+          <span class="sidebar-label">Sources</span>
+        </button>
+      </div>
+    </nav>
+
+    <div id="editorSidebarFooter">
+      <a href="./curation.html" class="sidebar-tab-btn">
+        <span class="sidebar-item-icon pln-code" aria-hidden="true">CU</span>
+        <span class="sidebar-label">Curation</span>
+      </a>
+      <a href="./archive.html" id="editorObservatoryBtn" class="sidebar-tab-btn">
+        <span class="sidebar-item-icon pln-code" aria-hidden="true">AR</span>
+        <span class="sidebar-label">Archive</span>
+      </a>
+      <a href="./index.html" class="sidebar-tab-btn">
+        <span class="sidebar-item-icon pln-code" aria-hidden="true">SC</span>
+        <span class="sidebar-label">Schedule</span>
+      </a>
+      <a href="./planner.html" class="sidebar-tab-btn">
+        <span class="sidebar-item-icon pln-code" aria-hidden="true">PL</span>
+        <span class="sidebar-label">My Planner</span>
+      </a>
+    </div>
+  </aside>
+
+  <main id="editorMain" class="px-4">
+    <div id="editorBlocked" class="hidden edt-locked">
+      <h2 class="edt-section__title">Editor locked</h2>
+      <p>This endpoint is available only on <code>localhost</code>, <code>127.0.0.1</code> or <code>::1</code>.</p>
+    </div>
+
+    <div id="recoveryBar" class="recovery-bar hidden" role="alert" aria-live="polite">
+      <span id="recoveryBarText" class="recovery-bar-text"></span>
+      <div class="recovery-bar-actions">
+        <button id="recoveryRestore" type="button" class="recovery-bar-btn recovery-bar-btn--primary">Restore</button>
+        <button id="recoveryDismiss" type="button" class="recovery-bar-btn">Dismiss</button>
+      </div>
+    </div>
+
+    <div id="editorHome" class="hidden"></div>
+
+    <div id="editorApp" class="space-y-4">
+      <section id="editorToolbar">
+        <select id="datasetSelect" hidden aria-hidden="true"></select>
+        <div class="edt-strip">
+          <button id="editorBackBtn" type="button" aria-label="Back to all events" class="edt-tbtn">&larr; All events</button>
+          <button id="editorSearchEvents" type="button" class="edt-tbtn">Find event
+          </button>
+          <button id="newDataset" type="button" class="edt-tbtn">New
+          </button>
+          <div class="editor-preview-split" id="saveDatasetGroup">
+            <button id="saveDataset" type="button" title="Save (Ctrl+S)" class="edt-tbtn" disabled>Save
+            </button>
+            <button id="saveDatasetToggle" type="button" aria-label="Save options" aria-haspopup="true" aria-expanded="false" class="edt-tbtn edt-tbtn--more" disabled>&#9662;</button>
+            <div id="saveDatasetDropdown" class="editor-preview-dropdown hidden" role="menu">
+              <button id="saveAsDataset" type="button" role="menuitem" class="editor-preview-dropdown-item">Save As
+              </button>
+            </div>
+          </div>
+          <div class="editor-preview-split" id="previewDatasetGroup">
+            <button id="previewDataset" type="button" class="edt-tbtn" disabled>Preview
+            </button>
+            <button id="previewDatasetToggle" type="button" aria-label="Preview options" aria-haspopup="true" aria-expanded="false" class="edt-tbtn edt-tbtn--more" disabled>&#9662;</button>
+            <div id="previewDatasetDropdown" class="editor-preview-dropdown hidden" role="menu">
+              <button type="button" role="menuitem" data-preview-mode="tab" class="editor-preview-dropdown-item">Open in new tab
+              </button>
+              <button type="button" role="menuitem" data-preview-mode="same" class="editor-preview-dropdown-item">Open in this tab
+              </button>
+            </div>
+          </div>
+          <button id="undoAction" type="button" title="Nothing to undo" class="edt-tbtn" disabled>Undo
+          </button>
+        </div>
+        <div class="edt-strip edt-strip--file">
+          <div id="editorPathChip" class="toolbar-path-chip flex-1 min-w-0" aria-label="Current file">
+            <span class="toolbar-path-text">No file open</span>
+          </div>
+          <div id="dirtyState" class="edt-badge"><span>No changes</span>
+          </div>
+          <button id="revertDataset" type="button" class="h-11 inline-flex items-center justify-center pl-4 pr-3 border edt-rule rounded-md text-sm font-medium edt-ink-1 edt-surface transition-colors whitespace-nowrap disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0" disabled>Revert
+          </button>
+        </div>
+      </section>
+
+      <section class="editor-meta-accordion rounded-lg p-4 space-y-4">
+        <div class="editor-tab-header flex items-center justify-between gap-3 flex-wrap">
+          <div>
+            <h2 class="text-lg font-semibold edt-ink-0">Editor Sections</h2>
+            <p class="edt-muted">Switch between event metadata, assets, sessions, and sponsors.</p>
+          </div>
+          <div class="editor-tab-row" role="tablist" aria-label="Editor sections">
+            <button id="showEventTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="eventWorkspacePanel">Event
+            </button>
+            <button id="showLogoTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="logoWorkspacePanel">Logo
+            </button>
+            <button id="showFlickrTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="flickrWorkspacePanel">Photos
+            </button>
+            <button id="showSessionsTab" type="button" class="editor-tab-button is-active" role="tab" aria-selected="true" aria-controls="sessionWorkspacePanel">Sessions
+            </button>
+            <button id="showSponsorsTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="sponsorWorkspacePanel">Sponsors
+            </button>
+            <button id="showPeopleTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="peopleWorkspacePanel">People
+            </button>
+            <button id="showRelatedTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="relatedWorkspacePanel">Related events
+            </button>
+            <button id="showSitemapTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="sitemapWorkspacePanel">Sources
+            </button>
+            <button id="showAppearanceTab" type="button" class="editor-tab-button" role="tab" aria-selected="false" aria-controls="appearanceWorkspacePanel">Appearance
+            </button>
+            <button id="showUsersTab" type="button" class="editor-tab-button hidden" role="tab" aria-selected="false" aria-controls="usersWorkspacePanel">Users
+            </button>
+          </div>
+        </div>
+
+      <div id="eventWorkspacePanel">
+      <section>
+        <div class="edt-section__head">
+          <div>
+            <p class="edt-eyebrow">Dataset</p>
+            <h2 class="edt-section__title">Event metadata</h2>
+          </div>
+
+        </div>
+        <p class="edt-hint">Core event details used throughout the planner.</p>
+        <div id="eventMetaForm" class="edt-form edt-form--3"></div>
+      </section>
+      </div>
+
+      <div id="sessionWorkspacePanel">
+        <div class="editor-sub-tab-row" role="tablist" aria-label="Sessions sections">
+          <button id="showSessionDetailsSubTab" type="button" class="editor-sub-tab-button is-active" role="tab" aria-selected="true">Details
+          </button>
+          <button id="showSessionTimelineSubTab" type="button" class="editor-sub-tab-button" role="tab" aria-selected="false">Timeline
+          </button>
+        </div>
+        <div id="sessionDetailsPanel">
+      <section id="sessionWorkspace" class="edt-work">
+        <div id="sessionSidebarPanel" class="edt-work__list">
+          <div class="edt-work__head">
+            <h2 class="edt-work__title">Sessions</h2>
+            <div class="edt-work__acts">
+              <button id="toggleQuickSessionEdit" type="button" class="editor-quick-edit-toggle edt-act hidden" disabled><span id="toggleQuickSessionEditLabel">Quick edit</span></button>
+              <button id="toggleSessionWorkspace" type="button" class="edt-act"><span id="toggleSessionWorkspaceLabel">Expand list</span></button>
+              <button id="addSession" type="button" class="edt-act" disabled>Add</button>
+              <button id="deleteSession" type="button" class="edt-act edt-act--del" disabled>Delete</button>
+            </div>
+          </div>
+          <input id="sessionSearchInput" type="text" placeholder="Search session titles&hellip;" class="edt-search">
+          <p class="edt-hint">Drag rows to reorder.</p>
+          <ul id="sessionList" class="edt-rows"></ul>
+        </div>
+
+        <div id="sessionEditorPanel" class="edt-work__form">
+          <div class="edt-work__head">
+            <h2 class="edt-work__title">Session</h2>
+            <div class="edt-work__acts">
+              <span id="sessionIndexBadge" class="edt-badge">No session selected</span>
+              <span id="sessionDirtyState" class="edt-badge"><span>No changes</span></span>
+            </div>
+          </div>
+          <div id="sessionForm" class="edt-form"></div>
+        </div>
+      </section>
+        </div>
+        <div id="timelineWorkspacePanel" class="hidden">
+          <section class="editor-meta-accordion rounded-lg p-4">
+            <div class="mb-3">
+              <h2 class="text-lg font-semibold edt-ink-0">Timeline Editor</h2>
+              <p class="edt-muted">Drag sessions to reschedule. Click an empty slot to add. Drag the bottom handle to resize.</p>
+            </div>
+            <div id="timelineCanvas"></div>
+          </section>
+        </div>
+      </div>
+
+      <div id="logoWorkspacePanel" class="hidden">
+      <section>
+        <div class="edt-section__head">
+          <div>
+            <p class="edt-eyebrow">Dataset</p>
+            <h2 class="edt-section__title">Event logo</h2>
+          </div>
+
+        </div>
+        <p class="edt-hint">Manage the logo shown in the public event header.</p>
+        <div id="logoForm" class="edt-form"></div>
+      </section>
+      </div>
+
+      <div id="flickrWorkspacePanel" class="hidden">
+      <section>
+        <div class="edt-section__head">
+          <div>
+            <p class="edt-eyebrow">Dataset</p>
+            <h2 class="edt-section__title">Photos</h2>
+          </div>
+
+        </div>
+        <p class="edt-hint">Optional photo-sharing callout shown at the bottom of the event page.</p>
+        <div id="flickrForm" class="edt-form"></div>
+      </section>
+      </div>
+
+      <div id="sponsorWorkspacePanel" class="hidden">
+      <section id="sponsorWorkspace" class="edt-work">
+        <div id="sponsorSidebarPanel" class="edt-work__list">
+          <div class="edt-work__head">
+            <h2 class="edt-work__title">Sponsors</h2>
+            <div class="edt-work__acts">
+              <button id="toggleQuickSponsorEdit" type="button" class="editor-quick-edit-toggle edt-act hidden" disabled><span id="toggleQuickSponsorEditLabel">Quick edit</span></button>
+              <button id="toggleSponsorWorkspace" type="button" class="edt-act"><span id="toggleSponsorWorkspaceLabel">Expand list</span></button>
+              <button id="addSponsor" type="button" class="edt-act" disabled>Add</button>
+              <button id="deleteSponsor" type="button" class="edt-act edt-act--del" disabled>Delete</button>
+            </div>
+          </div>
+          <p class="edt-hint">Sponsor assets, placement metadata and session associations. Drag rows to reorder.</p>
+          <label class="src-inline" for="sponsorSourceUrl">
+            <span class="src-inline__label">Sponsor listing page</span>
+            <input id="sponsorSourceUrl" type="text" class="url-multifield-input"
+              placeholder="https://… the page that listed these sponsors">
+          </label>
+          <p class="src-inline__note" id="sponsorSourceNote"></p>
+          <label class="edt-breakglass">
+            <input id="sponsorLogosDisabledToggle" type="checkbox" class="ckl-check">
+            <span><strong>Hide sponsor logos</strong> — break-glass: show each sponsor&rsquo;s name instead of its logo on the public schedule. Off by default.</span>
+          </label>
+          <ul id="sponsorList" class="edt-rows"></ul>
+        </div>
+
+        <div id="sponsorEditorPanel" class="edt-work__form">
+          <div class="edt-work__head">
+            <h2 class="edt-work__title">Sponsor</h2>
+            <div class="edt-work__acts">
+              <span id="sponsorIndexBadge" class="edt-badge">No sponsor selected</span>
+              <span id="sponsorDirtyState" class="edt-badge"><span>No changes</span></span>
+            </div>
+          </div>
+          <div id="sponsorForm" class="edt-form edt-form--3"></div>
+        </div>
+      </section>
+      </div>
+
+      <div id="peopleWorkspacePanel" class="hidden">
+      <section>
+        <div class="edt-section__head">
+          <div>
+            <p class="edt-eyebrow">Dataset</p>
+            <h2 class="edt-section__title">People</h2>
+          </div>
+          <button id="addPersonBtn" type="button" class="edt-act">Add person</button>
+        </div>
+        <p class="edt-hint">Who ran the event and who spoke at it. Organisers and volunteers come from the event's drupal.org community page; speakers are read from the schedule and cannot be edited here.</p>
+
+        <div class="edt-form">
+          <label class="editor-form-field md:col-span-2">
+            <span class="editor-field-label">Community page</span>
+            <span class="editor-field-hint">The drupal.org community event page these credits came from.</span>
+            <input id="communityUrlInput" type="url" placeholder="https://www.drupal.org/community/events/…">
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Captured</span>
+            <span class="editor-field-hint">When the credits were last read from that page.</span>
+            <input id="communityCapturedInput" type="date">
+          </label>
+        </div>
+
+        <div id="peopleGroups"></div>
+      </section>
+      </div>
+
+      <div id="relatedWorkspacePanel" class="hidden">
+      <section>
+        <div class="edt-section__head">
+          <div>
+            <p class="edt-eyebrow">Dataset</p>
+            <h2 class="edt-section__title">Related events</h2>
+          </div>
+          <button id="addRelatedEvent" type="button" class="edt-act">Add related event</button>
+        </div>
+        <p class="edt-hint">Partners, linked conferences or co-located events — grouped by relationship, shown near the sponsors on the schedule.</p>
+        <div class="edt-form">
+          <label class="editor-form-field">
+            <span class="editor-field-label">Umbrella heading</span>
+            <span class="editor-field-hint">Optional — blank hides it.</span>
+            <input id="relatedEventsHeadingInput" type="text" placeholder="e.g. Related events">
+          </label>
+          <label class="editor-form-field">
+            <span class="editor-field-label">Placement</span>
+            <select id="relatedEventsPlacementSelect">
+              <option value="below">Below sponsors</option>
+              <option value="above">Above sponsors</option>
+            </select>
+          </label>
+        </div>
+        <ul id="relatedEventsList" class="rel-list edt-rows"></ul>
+      </section>
+      </div>
+
+      <div id="sitemapWorkspacePanel" class="hidden">
+      <section class="edt-stack">
+        <div class="edt-section__head">
+          <div>
+            <p class="edt-eyebrow">Provenance</p>
+            <h2 class="edt-section__title">Sources</h2>
+          </div>
+        </div>
+        <p class="edt-hint">Every URL this event&rsquo;s data came from, in one register. Paste a URL and it is saved as a link &mdash; an archive.org capture is split into the original address plus its capture automatically. Anything that isn&rsquo;t a URL is saved as a stated source and shown to readers as that text. Recordings, session links and photo albums are not sources: they are what the dataset points at, and they stay on their own tabs.</p>
+        <div id="sourcesEditorContent"></div>
+      </section>
+      <section class="edt-stack">
+        <div class="edt-section__head">
+          <div>
+            <p class="edt-eyebrow">Derived</p>
+            <h2 class="edt-section__title">URL map</h2>
+          </div>
+        </div>
+        <p class="edt-hint">Known URLs for this event&rsquo;s domain, derived from the dataset.</p>
+        <div id="sitemapContent"></div>
+      </section>
+      </div>
+
+      <div id="appearanceWorkspacePanel" class="hidden">
+        <div id="appearanceForm"></div>
+      </div>
+
+      <div id="usersWorkspacePanel" class="hidden">
+        <section>
+          <div class="edt-section__head">
+            <div>
+              <p class="edt-eyebrow">Access</p>
+              <h2 class="edt-section__title">Users</h2>
+            </div>
+          </div>
+          <p class="edt-hint">Admin only. Manage accounts, roles and API tokens.</p>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+              <thead>
+                <tr class="border-b edt-rule">
+                  <th class="edt-eyebrow pb-2 pr-3">Username</th>
+                  <th class="edt-eyebrow pb-2 pr-3">Role</th>
+                  <th class="edt-eyebrow pb-2 pr-3">Token</th>
+                  <th class="pb-2 text-xs font-semibold edt-ink-2 uppercase tracking-wide text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="usersTableBody">
+                <tr><td colspan="4" class="py-4 edt-muted text-center">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div id="usersTokenResult"></div>
+
+          <div class="pt-4 border-t edt-rule space-y-3">
+            <h3 class="text-sm font-semibold edt-ink-1">Add user</h3>
+            <form id="usersAddForm" class="grid grid-cols-1 sm:grid-cols-4 gap-2 items-end">
+              <div>
+                <label class="edt-eyebrow mb-1">Username</label>
+                <input name="username" type="text" required autocomplete="off"
+                  class="edt-field">
+              </div>
+              <div>
+                <label class="edt-eyebrow mb-1">Password</label>
+                <input name="password" type="password" required autocomplete="new-password"
+                  class="edt-field">
+              </div>
+              <div>
+                <label class="edt-eyebrow mb-1">Role</label>
+                <select name="role" class="edt-field">
+                  <option value="viewer">Viewer</option>
+                  <option value="editor">Editor</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <div>
+                <button type="submit"
+                  class="w-full h-9 px-3 rounded border edt-rule text-sm font-medium edt-ink-1 edt-surface transition-colors">Add
+                </button>
+              </div>
+              <p id="usersAddError" class="col-span-full text-xs edt-bad hidden"></p>
+            </form>
+          </div>
+        </section>
+      </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="editorSettingsModal" class="session-modal-overlay hidden" aria-hidden="true">
+    <div id="editorSettingsCard" class="es-modal" role="dialog" aria-modal="true" aria-labelledby="editorSettingsTitle">
+    </div>
+  </div>
+
+  <div id="sponsorSessionPickerModal" class="session-modal-overlay hidden" aria-hidden="true">
+    <div class="session-modal-card" role="dialog" aria-modal="true" aria-labelledby="sponsorSessionPickerTitle">
+      <div class="session-modal-header">
+        <button id="closeSponsorSessionPickerBack" type="button" class="session-modal-back"><span>Back to sponsor</span>
+        </button>
+        <button id="closeSponsorSessionPicker" type="button" class="session-modal-close" aria-label="Close linked session picker">&times;</button>
+      </div>
+      <div class="session-modal-body">
+        <div class="speaker-modal-head">
+          <h2 id="sponsorSessionPickerTitle" class="session-modal-title">Add linked session</h2>
+          <span id="sponsorSessionPickerCount" class="speaker-modal-count-badge">0 available</span>
+        </div>
+        <p class="session-modal-meta">
+          <span class="session-modal-meta-label">Selection</span>
+          <span class="session-modal-meta-value">Choose one session to associate with the selected sponsor for this event.</span>
+        </p>
+        <div id="sponsorSessionPickerList" class="speaker-session-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="sessionSponsorPickerModal" class="session-modal-overlay hidden" aria-hidden="true">
+    <div class="session-modal-card" role="dialog" aria-modal="true" aria-labelledby="sessionSponsorPickerTitle">
+      <div class="session-modal-header">
+        <button id="closeSessionSponsorPickerBack" type="button" class="session-modal-back"><span>Back to session</span>
+        </button>
+        <button id="closeSessionSponsorPicker" type="button" class="session-modal-close" aria-label="Close sponsor picker">&times;</button>
+      </div>
+      <div class="session-modal-body">
+        <div class="speaker-modal-head">
+          <h2 id="sessionSponsorPickerTitle" class="session-modal-title">Add linked sponsor</h2>
+          <span id="sessionSponsorPickerCount" class="speaker-modal-count-badge">0 available</span>
+        </div>
+        <p class="session-modal-meta">
+          <span class="session-modal-meta-label">Selection</span>
+          <span class="session-modal-meta-value">Choose a sponsor to associate with the selected session.</span>
+        </p>
+        <div id="sessionSponsorPickerList" class="speaker-session-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="saveToast" class="save-toast">Saved successfully</div>
+
+  <div id="unsavedChangesModal" class="editor-confirm-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="unsavedChangesTitle">
+    <div class="editor-confirm-card">
+      <div class="editor-confirm-icon" aria-hidden="true">
+      </div>
+      <h2 id="unsavedChangesTitle" class="editor-confirm-title">Unsaved changes</h2>
+      <p class="editor-confirm-body">You have unsaved changes. What would you like to do before switching to <strong id="unsavedChangesTarget" class="editor-confirm-target">another file</strong>?</p>
+      <div class="editor-confirm-actions">
+        <button id="unsavedModalSave" type="button" class="editor-confirm-btn editor-confirm-btn-save">Save &amp; continue
+        </button>
+        <button id="unsavedModalDiscard" type="button" class="editor-confirm-btn editor-confirm-btn-discard">Discard changes
+        </button>
+        <button id="unsavedModalCancel" type="button" class="editor-confirm-btn editor-confirm-btn-cancel">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="staleWriteModal" class="editor-confirm-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="staleWriteTitle">
+    <div class="editor-confirm-card">
+      <div class="editor-confirm-icon" aria-hidden="true">
+      </div>
+      <h2 id="staleWriteTitle" class="editor-confirm-title">This file changed on disk</h2>
+      <p class="editor-confirm-body">
+        <strong id="staleWriteTarget" class="editor-confirm-target">This dataset</strong>
+        was edited elsewhere since you opened it — in another tab, by the server, or by another
+        process. Saving now would overwrite those changes with your version.
+      </p>
+      <div class="editor-confirm-actions">
+        <button id="staleWriteReload" type="button" class="editor-confirm-btn editor-confirm-btn-save">Reload latest
+        </button>
+        <button id="staleWriteOverwrite" type="button" class="editor-confirm-btn editor-confirm-btn-discard">Overwrite anyway
+        </button>
+        <button id="staleWriteCancel" type="button" class="editor-confirm-btn editor-confirm-btn-cancel">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="personModal" class="session-modal-overlay hidden" aria-hidden="true">
+    <div class="session-modal-card" role="dialog" aria-modal="true" aria-labelledby="personModalTitle" style="width: min(520px, 100%)">
+      <div class="session-modal-header">
+        <h2 id="personModalTitle" class="session-modal-title">Add person</h2>
+        <button id="personModalClose" type="button" class="session-modal-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="session-modal-body person-form">
+        <p class="person-form-lead">Organisers and volunteers only. Speakers come from the schedule and cannot be added here.</p>
+        <label class="person-field">
+          <span class="person-field-label">Username</span>
+          <input id="personUsernameInput" type="text" placeholder="jchin1968" autocomplete="off" class="edt-field">
+          <span class="person-field-hint">The <code>/u/&lt;slug&gt;</code> part of their drupal.org profile URL. Paste the whole URL if easier — the slug is taken from it.</span>
+        </label>
+        <label class="person-field">
+          <span class="person-field-label">Name</span>
+          <input id="personNameInput" type="text" placeholder="Optional — as the community page lists them" autocomplete="off" class="edt-field">
+          <span class="person-field-hint">Only stored when it differs from the username.</span>
+        </label>
+        <label class="person-field">
+          <span class="person-field-label">Role</span>
+          <select id="personRoleSelect" class="edt-field">
+            <option value="organiser">Organiser</option>
+            <option value="volunteer">Volunteer</option>
+          </select>
+        </label>
+        <p id="personModalError" class="person-form-error hidden" role="alert"></p>
+        <div class="person-form-actions">
+          <button id="personModalSave" type="button" class="edt-act edt-act--primary">Save</button>
+          <button id="personModalCancel" type="button" class="edt-act">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="apiSettingsModal" class="session-modal-overlay hidden" aria-hidden="true">
+    <div class="session-modal-card" role="dialog" aria-modal="true" aria-labelledby="apiSettingsTitle" style="width: min(520px, 100%)">
+      <div class="session-modal-header">
+        <h2 id="apiSettingsTitle" class="session-modal-title">API Server</h2>
+        <button id="closeApiSettings" type="button" class="session-modal-close" aria-label="Close API settings">&times;</button>
+      </div>
+      <div class="session-modal-body space-y-4">
+        <p class="text-sm edt-ink-2">Connect to a local API server for Firefox-compatible saving and image uploads. Start the server with <code class="text-xs edt-surface-2 px-1.5 py-0.5 rounded font-mono">npm start</code> or <code class="text-xs edt-surface-2 px-1.5 py-0.5 rounded font-mono">docker compose up</code>.</p>
+        <label class="block">
+          <span class="block text-sm font-medium edt-ink-1 mb-1">Server endpoint URL</span>
+          <input id="apiEndpointInput" type="url" placeholder="http://localhost:8080" autocomplete="off"
+            class="edt-field">
+        </label>
+        <div class="flex gap-2 flex-wrap items-center">
+          <button id="apiTestBtn" type="button" class="h-9 px-4 border edt-rule rounded-md text-sm font-medium edt-ink-1 edt-surface transition-colors">Test connection
+          </button>
+          <button id="apiSaveBtn" type="button" class="h-9 px-4 border edt-rule-accent rounded-md text-sm font-medium edt-on-ink edt-surface-accent hover:bg-blue-700 transition-colors">Save
+          </button>
+          <button id="apiClearBtn" type="button" class="h-9 px-4 border edt-rule rounded-md text-sm font-medium edt-bad edt-surface transition-colors">Clear
+          </button>
+        </div>
+        <p id="apiTestResult" class="text-sm hidden"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="./vendor/ajv-6.12.6.min.js"></script>
+  <script type="module" src="./js/editor.js"></script>
+  <script type="module">
+    import { bottomBarHtml, moreSheetHtml } from './js/modules/mobileNav.js';
+    const TAB_BTN_IDS = {
+      event: 'showEventTab', logo: 'showLogoTab', flickr: 'showFlickrTab',
+      sessions: 'showSessionsTab', sponsors: 'showSponsorsTab',
+      people: 'showPeopleTab',
+      related: 'showRelatedTab',
+      sitemap: 'showSitemapTab', appearance: 'showAppearanceTab',
+      users: 'showUsersTab',
+    };
+
+    function syncEditorSidebar() {
+      document.querySelectorAll('#editorSidebarNav [data-editor-tab]').forEach((btn) => {
+        const id = TAB_BTN_IDS[btn.dataset.editorTab];
+        btn.classList.toggle('is-active', !!document.getElementById(id)?.classList.contains('is-active'));
+      });
+    }
+
+    document.addEventListener('editor-tab-changed', syncEditorSidebar);
+
+    document.querySelectorAll('#editorSidebarNav [data-editor-tab]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.getElementById(TAB_BTN_IDS[btn.dataset.editorTab])?.click();
+        syncEditorSidebar();
+      });
+    });
+
+    Object.values(TAB_BTN_IDS).forEach((id) => {
+      document.getElementById(id)?.addEventListener('click', syncEditorSidebar);
+    });
+
+    const sidebar = document.getElementById('editorSidebar');
+    let collapsed = localStorage.getItem('editorSidebarCollapsed') === '1';
+    function applyEditorCollapse() {
+      sidebar?.classList.toggle('sidebar-collapsed', collapsed);
+      const icon = document.getElementById('editorSidebarToggleIcon');
+      if (icon) icon.textContent = collapsed ? '\u00bb' : '\u00ab';
+    }
+    document.getElementById('editorSidebarToggleBtn')?.addEventListener('click', () => {
+      collapsed = !collapsed;
+      localStorage.setItem('editorSidebarCollapsed', collapsed ? '1' : '0');
+      applyEditorCollapse();
+    });
+    applyEditorCollapse();
+    syncEditorSidebar();
+
+    const EDITOR_TAB_BTN = {
+      event: 'showEventTab', logo: 'showLogoTab', flickr: 'showFlickrTab',
+      sessions: 'showSessionsTab', sponsors: 'showSponsorsTab',
+      related: 'showRelatedTab',
+      sitemap: 'showSitemapTab', appearance: 'showAppearanceTab',
+    };
+    const EDITOR_META = {
+      event:      { label: 'Event' },
+      logo:       { label: 'Logo' },
+      flickr:     { label: 'Photos' },
+      sessions:   { label: 'Sessions' },
+      sponsors:   { label: 'Sponsors' },
+      related:    { label: 'Related' },
+      sitemap:    { label: 'Sources' },
+      appearance: { label: 'Appearance' },
+    };
+    const editorMeta = (t) => EDITOR_META[t] || { label: t };
+    const EDITOR_PRIMARY = ['sessions', 'sponsors', 'event', 'appearance'];
+    const EDITOR_GROUPS  = [{ label: 'Assets', tabs: ['logo', 'flickr'] }, { label: '', tabs: ['related', 'sitemap'] }];
+    const EDITOR_FOOTER  = [
+      { href: './index.html',   label: 'Schedule' },
+      { href: './planner.html', label: 'My Planner' },
+    ];
+
+    const activeEditorTab = () =>
+      Object.keys(EDITOR_TAB_BTN).find((t) =>
+        document.getElementById(EDITOR_TAB_BTN[t])?.getAttribute('aria-selected') === 'true') || 'sessions';
+
+    const editorMoreSheet = document.getElementById('editorMoreSheet');
+
+    function renderEditorBottomBar() {
+      const bar = document.getElementById('editorMobileBottomBar');
+      if (bar) bar.innerHTML = bottomBarHtml({ primary: EDITOR_PRIMARY, activeTab: activeEditorTab(), meta: editorMeta });
+    }
+    function renderEditorMoreSheet() {
+      const list = document.getElementById('editorMoreSheetList');
+      if (list) list.innerHTML = moreSheetHtml({ groups: EDITOR_GROUPS, primary: EDITOR_PRIMARY, activeTab: activeEditorTab(), meta: editorMeta, footer: EDITOR_FOOTER });
+    }
+
+    document.getElementById('editorMobileBottomBar')?.addEventListener('click', (e) => {
+      if (e.target.closest('[data-nav-more]')) { renderEditorMoreSheet(); editorMoreSheet?.classList.remove('hidden'); return; }
+      const btn = e.target.closest('[data-nav-tab]');
+      if (!btn) return;
+      editorMoreSheet?.classList.add('hidden');
+      document.getElementById(EDITOR_TAB_BTN[btn.dataset.navTab])?.click();
+    });
+    editorMoreSheet?.addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) { editorMoreSheet.classList.add('hidden'); return; }
+      if (e.target.closest('#editorMoreSheetClose')) { editorMoreSheet.classList.add('hidden'); return; }
+      const btn = e.target.closest('[data-nav-tab]');
+      if (!btn) return; // footer links navigate normally
+      document.getElementById(EDITOR_TAB_BTN[btn.dataset.navTab])?.click();
+      editorMoreSheet.classList.add('hidden');
+    });
+
+    document.addEventListener('editor-tab-changed', renderEditorBottomBar);
+    Object.values(EDITOR_TAB_BTN).forEach((id) =>
+      document.getElementById(id)?.addEventListener('click', renderEditorBottomBar));
+    renderEditorBottomBar();
+</script>
+  <script type="module">
+    import { initUsersPanel } from './js/modules/usersPanel.js';
+    initUsersPanel();
+</script>
+
+  <nav id="editorMobileBottomBar" class="sm:hidden" aria-label="Editor sections"></nav>
+
+  <div id="editorMoreSheet" class="sm:hidden hidden fixed inset-0 z-[200] flex flex-col justify-end" style="background:rgba(0,0,0,0.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)">
+    <div class="edt-surface rounded-t-[14px] max-h-[80vh] flex flex-col">
+      <div class="relative flex justify-center pt-2.5 pb-1 flex-shrink-0">
+        <div class="w-9 h-[5px] rounded-full edt-surface-2" aria-hidden="true"></div>
+        <button type="button" id="editorMoreSheetClose" class="mobile-sheet-close" aria-label="Close menu">&times;</button>
+      </div>
+      <div id="editorMoreSheetList" class="planner-sheet-font overflow-y-auto overscroll-contain" style="padding-bottom:max(env(safe-area-inset-bottom,0px),16px)"></div>
+    </div>
+  </div>
+</body>
+</html>

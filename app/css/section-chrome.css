@@ -1,0 +1,2790 @@
+/* ============================================================================
+   SECTION — SHARED CHROME
+   The furniture every section wears: masthead, nav, breadcrumb, form controls,
+   buttons, the detail rail and its panel.
+
+   It lived in section-schedule.css, which meant the archive loaded the entire
+   schedule sheet to get a masthead — and the planner and editor would have had
+   to do the same or duplicate it. One place, `app-*` prefixed.
+
+   Why `app-` and not `sch-`: `sch-` reads as "schedule", and `planner-design.css`
+   already owns `.sch-*` for its Conference Schedule tab. A neutral prefix keeps
+   the two out of each other's way. See brand/DECISIONS.md.
+   ========================================================================= */
+
+@layer section {
+  /* --- MASTHEAD ---------------------------------------------------------- */
+  .app-masthead {
+    border-block-end: 2px solid var(--ink-0);
+    background: var(--paper-0);
+  }
+
+  .app-masthead__bar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--sp-m);
+    padding-block: var(--sp-m) var(--sp-xs);
+  }
+
+  /* On a narrow screen the lockup's subtitle wraps to three lines, and
+     `align-items: flex-end` then strands the theme picker halfway down the
+     masthead — level with the subtitle, nowhere near the burger it belongs
+     beside. Baseline-align the controls to the top there instead, so every
+     control sits on the wordmark's line. */
+  @media (max-width: 40rem) {
+    .app-masthead__bar {
+      align-items: flex-start;
+    }
+  }
+
+  .app-lockup {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-xs);
+    min-inline-size: 0;
+    flex-wrap: wrap;
+  }
+
+  /* The one element whose job is to BE the brand — raw organiser colour. */
+  .app-lockup__seal {
+    inline-size: 0.5rem;
+    block-size: 2rem;
+    background: var(--brand-1);
+    flex: none;
+    align-self: center;
+  }
+
+  .app-lockup__mark {
+    block-size: 2rem;
+    inline-size: auto;
+    flex: none;
+    align-self: center;
+  }
+
+  .app-lockup__title {
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: var(--display-track);
+  }
+
+  .app-lockup__place {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: var(--step-2);
+    color: var(--ink-1);
+  }
+
+  /* The legacy .header-logo plate (rounded blob, glow, inset shadow) still
+     wraps the seal. Neutralised here rather than unpicked from the legacy
+     sheets, which are pruned wholesale when the last surface converts. */
+  .app-lockup .header-logo {
+    display: contents;
+    background: none;
+    box-shadow: none;
+    border: 0;
+  }
+
+
+  /* --- TOKEN CLASSES FOR CONVERTED MARKUP --------------------------------
+     `planner.html` spelled its colours in Tailwind greys, which only reached a
+     token through app.css's `.theme-dark` remap. These are the same roles named
+     directly, so the markup says what it means and app.css stops being
+     load-bearing. Colour only — width, spacing and layout stay in the utility
+     classes beside them.
+     --------------------------------------------------------------------- */
+  .pl-ink-0 {
+    color: var(--ink-0);
+  }
+
+  .pl-ink-1 {
+    color: var(--ink-1);
+  }
+
+  .pl-ink-2 {
+    color: var(--ink-2);
+  }
+
+  .pl-on-ink {
+    color: var(--paper-1);
+  }
+
+  .pl-accent {
+    color: var(--brand-1-ink);
+  }
+
+  .pl-warn {
+    color: var(--status-warn);
+  }
+
+  .pl-surface {
+    background: var(--paper-1);
+  }
+
+  .pl-surface-2 {
+    background: var(--paper-2);
+  }
+
+  .pl-surface-ink {
+    background: var(--ink-0);
+    color: var(--paper-1);
+  }
+
+  /* Colour only: the `border`/`border-t` utility beside it still owns width, so
+     a rule that had no width class before does not gain one now. */
+  .pl-rule {
+    border-color: var(--rule-0);
+  }
+
+  .pl-rule-bad {
+    border-color: color-mix(in srgb, var(--status-bad) 40%, var(--rule-0));
+  }
+
+  .pl-rule-warn {
+    border-color: color-mix(in srgb, var(--status-warn) 45%, var(--rule-0));
+  }
+
+  /* The tail: variants and states the sweep needed names for. */
+  .pl-rule-none {
+    border-color: transparent;
+  }
+
+  .pl-surface-none {
+    background: none;
+  }
+
+  .pl-placeholder::placeholder {
+    color: var(--ink-2);
+  }
+
+  .hover\:pl-rule:hover {
+    border-color: var(--rule-0);
+  }
+
+  .focus\:pl-rule:focus,
+  .focus-within\:pl-rule:focus-within {
+    border-color: var(--brand-1-ink);
+  }
+
+  .focus\:pl-ink-1:focus {
+    color: var(--ink-1);
+  }
+
+  .hover\:pl-ink-1:hover {
+    color: var(--ink-1);
+  }
+
+  .hover\:pl-accent:hover {
+    color: var(--brand-1-ink);
+  }
+
+  .disabled\:pl-ink-2:disabled {
+    color: var(--ink-2);
+  }
+
+  .pl-ok {
+    color: var(--status-ok);
+  }
+
+  .hover-req:hover {
+    color: var(--status-bad);
+  }
+
+  /* Divider edges for the grid/table markup, colour only — the utility beside
+     them still owns width. */
+  .pl-divide-l {
+    border-inline-start: 1px solid var(--rule-0);
+  }
+
+  .pl-divide-r {
+    border-inline-end: 1px solid var(--rule-0);
+  }
+
+  .pl-bordered {
+    border: 1px solid var(--rule-0);
+  }
+
+  /* Two levels of heading, and they must not look alike. A SECTION ("Travel")
+     is a display-serif title on the page; the groups inside it ("Outbound
+     Travel") are eyebrows — the same pair the schedule uses for a day and the
+     tracks within it.
+
+     This used to hook on `h3.uppercase` from the `overrides` layer, with seven
+     `!important`s to beat the legacy sheets. The utility conversion deleted
+     `uppercase`, the selectors stopped matching, and every section heading
+     silently dropped to eyebrow size. Hooked on `.pl-label` now — a class the
+     markup owns — which also let the overrides go.
+     --------------------------------------------------------------------- */
+  #plannerMain [role='tabpanel'] [data-collapse] > .pl-label,
+  #plannerMain [role='tabpanel'] [data-collapse] > .flex > .pl-label,
+  #plannerMain [role='tabpanel'] [data-collapse] > div > .pl-label {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    letter-spacing: var(--display-track);
+    text-transform: none;
+    color: var(--ink-0);
+  }
+
+  /* The tail: variants and states the sweep needed names for. */
+  .pl-rule-none {
+    border-color: transparent;
+  }
+
+  .pl-surface-none {
+    background: none;
+  }
+
+  .pl-placeholder::placeholder {
+    color: var(--ink-2);
+  }
+
+  .hover\:pl-rule:hover {
+    border-color: var(--rule-0);
+  }
+
+  .focus\:pl-rule:focus,
+  .focus-within\:pl-rule:focus-within {
+    border-color: var(--brand-1-ink);
+  }
+
+  .focus\:pl-ink-1:focus {
+    color: var(--ink-1);
+  }
+
+  .hover\:pl-ink-1:hover {
+    color: var(--ink-1);
+  }
+
+  .hover\:pl-accent:hover {
+    color: var(--brand-1-ink);
+  }
+
+  .disabled\:pl-ink-2:disabled {
+    color: var(--ink-2);
+  }
+
+  /* --- THE WORKSPACE TAB ROW ----------------------------------------------
+     The last of the old dark editor chrome: a floating pill rail whose active
+     tab was a blue gradient with three stacked shadows. It is the same
+     navigation the sidebar already offers, so it should be the quieter of the
+     two — a ruled row of labels with the brand underline the rest of the
+     product uses for "you are here".
+     --------------------------------------------------------------------- */
+  .editor-tab-row {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-m);
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+  }
+
+  .editor-tab-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-block-size: var(--tap);
+    padding: 0;
+    border: 0;
+    border-block-end: 2px solid transparent;
+    border-radius: 0;
+    background: none;
+    font-size: var(--step--1);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+
+  .editor-tab-button:hover {
+    background: none;
+    color: var(--ink-0);
+  }
+
+  .editor-tab-button.is-active {
+    border-block-end-color: var(--brand-1-ink);
+    background: none;
+    box-shadow: none;
+    color: var(--brand-1-ink);
+  }
+
+  .editor-tab-button:focus-visible {
+    outline: 2px solid var(--brand-1-ink);
+    outline-offset: 2px;
+    box-shadow: none;
+  }
+
+  .editor-sub-tab-row {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-s);
+  }
+
+
+  /* ========================================================================
+     THE LAST OF app.css — EDITOR SURFACES
+     Found by `npm run audit:css` when that sheet was unlinked: none of these
+     are on a page the screenshot harness walks, so they had gone unnoticed
+     through the whole rebrand. Ported here, in the editor's own sheet.
+     ===================================================================== */
+
+  /* --- FIND EVENT (the search overlay) ------------------------------------ */
+  .event-search-card {
+    display: flex;
+    flex-direction: column;
+    inline-size: min(620px, 100%);
+    block-size: 82vh;
+  }
+
+  .event-search-title {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ink-0);
+  }
+
+  .event-search-input-wrap {
+    flex-shrink: 0;
+    padding: var(--sp-2xs) var(--sp-s);
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .event-search-input-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .event-search-input-icon {
+    position: absolute;
+    inset-inline-start: 0;
+    color: var(--ink-2);
+    pointer-events: none;
+  }
+
+  .event-search-input {
+    inline-size: 100%;
+    block-size: var(--tap);
+    padding-inline: var(--sp-m) var(--sp-l);
+    border: 0;
+    border-block-end: 1px solid var(--rule-1);
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    color: var(--ink-0);
+    outline: none;
+  }
+
+  .event-search-input:focus {
+    border-block-end-color: var(--brand-1-ink);
+    box-shadow: none;
+  }
+
+  .event-search-clear {
+    position: absolute;
+    inset-inline-end: 0;
+    padding: var(--sp-3xs);
+    appearance: none;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--ink-2);
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .event-search-clear:hover {
+    color: var(--ink-0);
+  }
+
+  .event-search-results-wrap {
+    flex: 1;
+    min-block-size: 0;
+    overflow-y: auto;
+  }
+
+  .event-search-results {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* A result is a row you pick, so it takes the same leading brand rule as
+     every other "this one" in the product. */
+  .event-search-result {
+    display: block;
+    inline-size: 100%;
+    padding: var(--sp-2xs) var(--sp-s);
+    appearance: none;
+    border: 0;
+    border-block-end: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+  }
+
+  .event-search-result:hover,
+  .event-search-result:focus-visible {
+    outline: none;
+    background: var(--paper-2);
+    box-shadow: inset 3px 0 0 var(--brand-1-ink);
+  }
+
+  .event-search-result-title {
+    display: block;
+    font-weight: 600;
+    color: var(--ink-0);
+  }
+
+  .event-search-result-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-3xs);
+    margin-block-start: var(--sp-3xs);
+    margin-inline-end: var(--sp-s);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+
+  .event-search-result-hidden {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-3xs);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--status-warn);
+  }
+
+  .event-search-empty {
+    padding: var(--sp-l) var(--sp-s);
+    text-align: center;
+    font-size: var(--step--1);
+    font-style: italic;
+    color: var(--ink-2);
+  }
+
+  /* --- FORM FIELDS AND ROW GRIDS ------------------------------------------ */
+  .editor-form-field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .editor-form-field.hidden {
+    display: none;
+  }
+
+  .editor-form-field > input:not([type='checkbox']),
+  .editor-form-field > select,
+  .editor-form-field > textarea {
+    margin-block-start: auto;
+  }
+
+  .editor-field-description {
+    display: block;
+    margin-block-end: var(--sp-3xs);
+    font-size: var(--step--2);
+    line-height: 1.35;
+    color: var(--ink-2);
+  }
+
+  .editor-field-description code {
+    padding-inline: var(--sp-3xs);
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+    font-family: var(--font-data);
+  }
+
+  .editor-quick-edit-toggle-active {
+    border-color: var(--ink-0);
+    background: var(--ink-0);
+    color: var(--paper-1);
+    box-shadow: none;
+  }
+
+
+  /* --- THE LAST FONT LEAK -------------------------------------------------
+     `components.css` sets an Apple system stack on every button, on every
+     dialog, and on dialog headings — 42 elements rendering in a family the
+     brand never declared, sitting beside text that is in Public Sans.
+
+     Restated here rather than edited there: `section` outranks `legacy`, so
+     this needs no `!important`, and it disappears with that sheet rather than
+     becoming another thing to unpick.
+     --------------------------------------------------------------------- */
+  button,
+  a[role='button'],
+  [role='dialog'] > div {
+    font-family: var(--font-body);
+  }
+
+  /* A dialog's heading is a heading: display face, like every other title. */
+  [role='dialog'] h2 {
+    font-family: var(--font-display);
+  }
+
+  /* --- SHARED LEFTOVERS FROM app.css --------------------------------------
+     Used by every app, so they belong to the chrome rather than any one
+     section: the focus ring the forms share, and the search-hit mark.
+     --------------------------------------------------------------------- */
+  .drupal-blue-focus:focus {
+    border-color: var(--brand-1-ink);
+    box-shadow: 0 0 0 1px var(--brand-1-ink);
+  }
+
+  .drupal-blue-text {
+    color: var(--brand-1-ink);
+  }
+
+  .drupal-blue-text:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  /* A search hit inside running text. It has to survive both modes and print,
+     so it is the accent at low strength with a rule under the word rather than
+     a highlighter block. */
+  .keyword-highlight {
+    padding-inline: 2px;
+    border-radius: 0;
+    background: color-mix(in srgb, var(--brand-1-ink) 16%, transparent);
+    box-shadow: inset 0 -2px 0 var(--brand-1-ink);
+    color: inherit;
+    font-weight: 600;
+  }
+
+  .header-logo.header-logo-use-plate:has(.header-logo-image:not(.hidden))::before {
+    opacity: 1;
+  }
+
+  /* --- THE SAVE TOAST -----------------------------------------------------
+     Both apps show it, so it belongs to the shared chrome. Its geometry was in
+     planner.css and its skin in section-planner.css, which the EDITOR does not
+     link — so unlinking forms.css left the editor's toast as bare text on the
+     page. Both halves live here now.
+     --------------------------------------------------------------------- */
+  .save-toast {
+    position: fixed;
+    inset-block-end: var(--sp-l);
+    inset-inline-start: 50%;
+    transform: translateX(-50%) translateY(0.5rem);
+    z-index: 9999;
+    padding: var(--sp-2xs) var(--sp-s);
+    border-radius: 0;
+    background: var(--ink-0);
+    color: var(--paper-0);
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    font-weight: 600;
+    box-shadow: none;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .save-toast.is-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* --- THE LOADING OVERLAY -------------------------------------------------
+     Shown until the schedule's data arrives, then given `.is-hidden`. It was
+     the last thing app.css was doing for anyone: without these rules the
+     overlay is an unstyled banner sitting above the masthead, which is exactly
+     how the page looked the moment that sheet was unlinked.
+
+     Every page can use it, so it lives in the shared chrome.
+     --------------------------------------------------------------------- */
+  .page-loading-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--sp-m);
+    background: var(--paper-0);
+    transition:
+      opacity 180ms ease,
+      visibility 180ms ease;
+  }
+
+  .page-loading-overlay.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .page-loading-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-s);
+    min-inline-size: 12rem;
+    padding: var(--sp-m);
+    border: 1px solid var(--rule-0);
+    background: var(--paper-1);
+  }
+
+  /* One turning rule, in the organiser's colour — a spinner does not need to be
+     a shape of its own. */
+  .page-loading-spinner {
+    inline-size: 2rem;
+    block-size: 2rem;
+    border: 2px solid var(--rule-0);
+    border-block-start-color: var(--brand-1-ink);
+    border-radius: 50%;
+    animation: page-loading-spin 0.8s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page-loading-spinner {
+      animation-duration: 2.4s;
+    }
+  }
+
+  @keyframes page-loading-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .page-loading-text {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* --- NAV ----------------------------------------------------------------
+     Sentence-case body sans, sitting under a serif wordmark. Every item is an
+     equal-height 44px target (WCAG 2.5.5).
+     --------------------------------------------------------------------- */
+  .app-nav {
+    display: flex;
+    gap: var(--sp-m);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .app-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .app-nav__link,
+  .app-nav__link.site-nav-link.is-active {
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .app-nav__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    min-block-size: var(--tap);
+    padding-block: var(--sp-xs);
+    border-block-end: 2px solid transparent;
+    font-weight: 500;
+    color: var(--ink-1);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .app-nav__link:hover {
+    color: var(--ink-0);
+    border-block-end-color: var(--rule-1);
+  }
+
+  /* -ink, not raw: a 2px indicator must clear 3:1 (SC 1.4.11) in both modes. */
+  .app-nav__link[aria-current='page'] {
+    color: var(--ink-0);
+    border-block-end-color: var(--brand-1-ink);
+  }
+
+
+  /* ======================================================================
+     APP SHELL — the planner and the editor share it.
+     ====================================================================== */
+  /* --- SHELL GEOMETRY ------------------------------------------------------
+     The planner and the editor are the same shape — a sidebar beside a
+     scrolling panel — so this lives in the shared chrome rather than in either
+     app's sheet. (The editor does not load planner.css; anything both need
+     belongs here. See the CSS-split gotcha in CLAUDE.md.)
+
+     Legacy makes the body a flex ROW: sidebar beside main, each 100dvh. That
+     shape predates the masthead, so a third sibling simply became a third
+     column — which is what squeezed the header into a strip.
+
+     The masthead is section navigation and must span the full width, so the
+     body becomes a two-row grid instead: masthead across the top, then the
+     sidebar and the scrolling panel beneath it. The layer order does the work
+     here — `section` lands after `legacy`, so these win on cascade layer
+     rather than on specificity, and no `!important` is needed.
+     --------------------------------------------------------------------- */
+  @media (min-width: 40rem) {
+    /* The shell owns scrolling: the panel scrolls, the document does not.
+       Stated here rather than left to components.css, which is on its way out,
+       and because the document overflow has to be locked at the root or the
+       panel's overflow leaks back out to the viewport. */
+    html:has(#plannerMain),
+    html:has(#editorMain) {
+      overflow: hidden;
+      block-size: 100%;
+    }
+
+    body:has(#plannerMain),
+    body:has(#editorMain) {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      grid-template-rows: auto minmax(0, 1fr);
+      block-size: 100dvh;
+      overflow: hidden;
+    }
+
+    .app-masthead {
+      grid-column: 1 / -1;
+    }
+
+    /* The breadcrumb is the last line of the masthead, so it needs no rule of
+       its own — the masthead's own bottom border closes it. */
+    #plannerCrumbs,
+    #editorCrumbs {
+      padding-block: var(--sp-2xs) var(--sp-xs);
+    }
+
+    /* The reading measure belongs to a document page. This is an app shell —
+       the masthead runs the full width so its rule meets the sidebar's.
+       SCOPED: without the `body:has()` this hit every page, so the schedule's
+       masthead ran full-bleed on a 21.6px gutter while its content kept the
+       80rem measure on a 16px one — the wordmark and the page it titles sitting
+       on two different left edges. */
+    body:has(#plannerMain) .app-masthead .l-center,
+    body:has(#editorMain) .app-masthead .l-center {
+      inline-size: 100%;
+      max-inline-size: none;
+      padding-inline: var(--sp-m);
+    }
+
+    /* The row track owns the height now; 100dvh on a child would overflow it
+       by exactly the height of the masthead. */
+    #plannerSidebar,
+    #editorSidebar,
+    #plannerMain,
+    #editorMain {
+      block-size: auto;
+      min-block-size: 0;
+    }
+
+    #plannerMain,
+    #editorMain {
+      overflow-y: auto;
+    }
+  }
+
+  /* --- SIDEBAR SIZING -----------------------------------------------------
+     Owned here now that the legacy sheets are going. Both shells are the same
+     shape, so both are sized in one place — 220px expanded, a 56px rail when
+     collapsed, where the two-letter codes take over from the labels.
+     --------------------------------------------------------------------- */
+  #plannerSidebar,
+  #editorSidebar {
+    display: none;
+  }
+
+  @media (min-width: 40rem) {
+    #plannerSidebar,
+    #editorSidebar {
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      inline-size: 13.75rem;
+      overflow: hidden;
+      transition: inline-size 0.2s ease;
+    }
+
+    #plannerSidebar.sidebar-collapsed,
+    #editorSidebar.sidebar-collapsed {
+      inline-size: 3.5rem;
+    }
+
+    #sidebarNav,
+    #editorSidebarNav {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-block: var(--sp-2xs);
+      scrollbar-width: none;
+    }
+
+    #sidebarNav::-webkit-scrollbar,
+    #editorSidebarNav::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  /* Collapsed: labels give way to the codes. */
+  .sidebar-collapsed .sidebar-label,
+  .sidebar-collapsed .sidebar-group-label,
+  .sidebar-collapsed .sidebar-brand-text,
+  .sidebar-collapsed .sidebar-dirty-row {
+    display: none;
+  }
+
+  .sidebar-collapsed .sidebar-tab-btn,
+  .sidebar-collapsed .sidebar-brand,
+  .sidebar-collapsed .sidebar-home-btn {
+    justify-content: center;
+    padding-inline: 0;
+  }
+
+  .sidebar-home-btn {
+    display: flex;
+    align-items: center;
+    inline-size: 100%;
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    background: none;
+    border: 0;
+    border-radius: 0;
+    color: var(--ink-1);
+    font-size: var(--step--1);
+    font-weight: 600;
+    text-align: start;
+    cursor: pointer;
+  }
+
+  .sidebar-home-btn:hover {
+    background: var(--paper-2);
+    color: var(--ink-0);
+  }
+
+  /* --- SIDEBAR -------------------------------------------------------------
+     Within-planner navigation. Section navigation lives in the masthead, so
+     this answers one question only: which part of the trip am I looking at.
+     --------------------------------------------------------------------- */
+  #plannerSidebar,
+  #editorSidebar {
+    background: var(--paper-1);
+    border-inline-end: 1px solid var(--rule-0);
+    box-shadow: none;
+  }
+
+  .sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-xs);
+    padding: var(--sp-s);
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .sidebar-app-icon {
+    inline-size: 0.5rem;
+    block-size: 2rem;
+    flex: none;
+    background: var(--brand-1);
+    border-radius: 0;
+  }
+
+  .sidebar-event-name {
+    font-family: var(--font-display);
+    font-size: var(--step-0);
+    font-weight: 600;
+    color: var(--ink-0);
+  }
+
+  .sidebar-dirty-row {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    margin-block-start: var(--sp-3xs);
+  }
+
+  .sidebar-dirty-dot {
+    inline-size: 0.35rem;
+    block-size: 0.35rem;
+    border-radius: 50%; /* a dot is a shape, not a corner */
+    background: var(--status-ok);
+    flex: none;
+  }
+
+  .sidebar-dirty-dot.is-dirty {
+    background: var(--status-warn);
+  }
+
+  .sidebar-dirty-label {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .sidebar-toggle-btn {
+    min-block-size: var(--tap);
+    min-inline-size: var(--tap);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+
+  .sidebar-toggle-btn:hover {
+    color: var(--ink-0);
+  }
+
+  /* Groups are eyebrows over a ruled list, the same grammar as a day chapter. */
+  .sidebar-group + .sidebar-group {
+    margin-block-start: var(--sp-m);
+  }
+
+  .sidebar-group-label {
+    display: block;
+    padding: 0 var(--sp-s) var(--sp-2xs);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .sidebar-tab-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-xs);
+    inline-size: 100%;
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    background: none;
+    border: 0;
+    border-radius: 0;
+    color: var(--ink-1);
+    font-size: var(--step--1);
+    text-align: start;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .sidebar-tab-btn:hover {
+    background: var(--paper-2);
+    color: var(--ink-0);
+  }
+
+  /* Active is a leading brand rule and full ink — never a filled pill. */
+  .sidebar-tab-btn.is-active,
+  .sidebar-tab-btn[aria-current='page'] {
+    background: var(--paper-2);
+    color: var(--ink-0);
+    font-weight: 600;
+    box-shadow: inset 3px 0 0 var(--brand-1-ink);
+  }
+
+  #sidebarFooter,
+  #editorSidebarFooter {
+    padding-block: var(--sp-xs);
+    border-block-start: 1px solid var(--rule-0);
+  }
+
+
+  /* --- THE TAB CODE -------------------------------------------------------
+     Two mono letters, shown ONLY when the sidebar is collapsed to its 56px
+     rail. Expanded, the label is the identifier and a code beside it is just
+     clutter — a column of initials reads as a control panel, not an editorial
+     app. Collapsed there is no label, and the code is the only thing that can
+     tell IT from TI.
+     --------------------------------------------------------------------- */
+  .pln-code {
+    display: none;
+  }
+
+  .sidebar-collapsed .pln-code {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 100%;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--ink-2);
+  }
+
+  .sidebar-collapsed .sidebar-tab-btn.is-active .pln-code {
+    color: var(--brand-1-ink);
+  }
+
+  /* The sidebar row is now type alone: weight and a leading brand rule carry
+     the active state, the way a running head does. */
+  .sidebar-tab-btn .sidebar-label {
+    font-family: var(--font-body);
+  }
+
+  /* --- BREADCRUMB — the route, rendered ---------------------------------- */
+  .app-crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-block: var(--sp-s);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.03em;
+    color: var(--ink-2);
+  }
+
+  .app-crumbs a {
+    text-decoration: none;
+  }
+
+  .app-crumbs a:hover {
+    color: var(--brand-1-ink);
+    text-decoration: underline;
+  }
+
+  .app-crumbs__sep {
+    padding-inline: var(--sp-2xs);
+    opacity: 0.55;
+  }
+
+
+  .app-field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Labels always sit above their control. `.u-label` is inline by default
+     because it is also used as an inline eyebrow elsewhere. */
+  .app-field > .u-label {
+    display: block;
+    margin-block-end: var(--sp-3xs);
+  }
+
+  .app-control {
+    block-size: 2.4rem;
+    padding: 0 var(--sp-l) 0 0;
+    background: transparent;
+    color: var(--ink-0);
+    border: 0;
+    border-block-end: 1px solid var(--rule-1);
+    border-radius: 0;
+    appearance: none;
+    font-size: var(--step-0);
+  }
+
+  .app-control:hover {
+    border-block-end-color: var(--ink-1);
+  }
+
+  /* A ruled field wants a ruled focus — but `outline: 0` here left the control
+     with NO indicator at all, because the thickened underline it was trading
+     for did not survive the rest of the cascade. Measured: the schedule's and
+     archive's filter rows matched :focus-visible and showed nothing. The
+     underline stays as the field's own emphasis; the product's ring is no
+     longer suppressed, so a keyboard user can always see where they are. */
+  .app-control:focus-visible {
+    border-block-end-color: var(--brand-1-ink);
+    border-block-end-width: 2px;
+  }
+
+  .app-control::placeholder {
+    color: var(--ink-2);
+  }
+
+  select.app-control {
+    background-image:
+      linear-gradient(45deg, transparent 50%, currentColor 50%),
+      linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position:
+      right 0.85rem center,
+      right 0.5rem center;
+    background-size:
+      0.35rem 0.35rem,
+      0.35rem 0.35rem;
+    background-repeat: no-repeat;
+  }
+
+  /* --- BUTTONS ------------------------------------------------------------
+     Primary is solid ink, never a brand fill: organiser colours are arbitrary
+     and cannot guarantee contrast with any fixed foreground.
+     --------------------------------------------------------------------- */
+  .app-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    background: transparent;
+    color: var(--ink-0);
+    border: 1px solid var(--ink-1);
+    border-radius: 0;
+    font-size: var(--step--1);
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .app-btn:hover {
+    background: var(--paper-2);
+    border-color: var(--ink-0);
+  }
+
+  .app-btn[data-variant='key'] {
+    background: var(--ink-0);
+    border-color: var(--ink-0);
+    color: var(--paper-0);
+    font-weight: 600;
+  }
+
+  .app-btn[data-variant='key']:hover {
+    background: var(--ink-1);
+    border-color: var(--ink-1);
+  }
+
+  .app-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+
+  /* --- SHARED PANEL -------------------------------------------------------
+     Same surface as a session detail, for content that must be fetched.
+     Geometry mirrors .sch-entry__detail exactly so the product has one
+     detail surface rather than two that merely look alike.
+     --------------------------------------------------------------------- */
+  .app-panel[hidden] {
+    display: none;
+  }
+
+  .app-panel__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-s);
+    padding-block-end: var(--sp-xs);
+    margin-block-end: var(--sp-m);
+    border-block-end: 1px solid var(--ink-1);
+  }
+
+  .app-panel__eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .app-panel__close {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    background: transparent;
+    border: 1px solid var(--rule-1);
+    border-radius: 0;
+    color: var(--ink-1);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .app-panel__close:hover {
+    color: var(--ink-0);
+    border-color: var(--ink-1);
+  }
+
+  @media (max-width: 85.99rem) {
+    .app-panel {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      background: var(--paper-0);
+      padding:
+        calc(var(--sp-xl) + env(safe-area-inset-top)) var(--sp-m)
+        calc(var(--sp-2xl) + env(safe-area-inset-bottom));
+      transform: none;
+      transition: transform 180ms cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    @starting-style {
+      .app-panel {
+        transform: translateX(100%);
+      }
+    }
+
+    /* The sheet scrolls and the body behind it is locked, so the head carries the
+       only way out — it must not scroll away with the content. Desktop keeps the
+       static head: there the panel is a margin beside the page, not over it. */
+    .app-panel__head {
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 1;
+      background: var(--paper-0);
+      padding-block-start: var(--sp-s);
+    }
+
+    body[data-rail-open] {
+      overflow: hidden;
+    }
+  }
+
+  @media (min-width: 86rem) {
+    .app-panel {
+      position: fixed;
+      inset-block: 0;
+      inset-inline-end: 0;
+      inline-size: var(--rail-w);
+      z-index: 9;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      background: var(--paper-1);
+      border-inline-start: 1px solid var(--rule-1);
+      padding: var(--sp-xl) var(--sp-m) var(--sp-2xl);
+      /* It arrives from the edge it lives on. `@starting-style` is what makes
+         this animate at all: the panel goes from `hidden` to shown, so there is
+         no previous frame to interpolate from unless one is declared. */
+      translate: 0 0;
+      transition: translate 180ms ease;
+    }
+
+    @starting-style {
+      .app-panel {
+        translate: 100% 0;
+      }
+    }
+
+  }
+
+
+  /* --- the margin rail (desktop only) ------------------------------------ */
+  .app-rail {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .app-panel,
+    .sch-entry__disclosure[open] > .sch-entry__detail,
+    body:has(.app-rail) {
+      transition: none;
+    }
+  }
+
+  @media (min-width: 86rem) {
+    :root {
+      /* Fluid: the rail takes a share of the screen, not a fixed slab.
+         ~75px wider than the first pass at every step — the detail was
+         cramped, and the narrower content column pays for it. */
+      --rail-w: clamp(23.7rem, 27vw, 29.7rem);
+    }
+
+    /* Only a page that HAS a rail gives up the width for it — and only while
+       something is actually IN it. Reserving it unconditionally charged every
+       reader ~430px of margin to display one line of hint text they had already
+       read, on a page whose whole job is a wide programme grid.
+       
+       Two things can occupy the margin, and they are independent: the scripted
+       panel (#railPanel, which sets data-rail-open) and the CSS-only session
+       disclosure that lifts its own detail into the margin. Either counts. */
+    body:has(.app-rail):is([data-rail-open], :has(.sch-entry__disclosure[open])) {
+      padding-inline-end: var(--rail-w);
+    }
+
+    /* Reflowing 430px in one frame reads as the page breaking. Match the
+       panel's own entry so the content column yields as the rail arrives. */
+    body:has(.app-rail) {
+      transition: padding-inline-end 180ms ease;
+    }
+
+    /* The strip itself only exists to back the panel. With nothing in it there
+       is nothing to back, and its hint has no room to live in once the margin
+       is no longer reserved. */
+    body:is([data-rail-open], :has(.sch-entry__disclosure[open])) .app-rail {
+      display: block;
+      position: fixed;
+      inset-block: 0;
+      inset-inline-end: 0;
+      inline-size: var(--rail-w);
+      z-index: 8;
+      background: var(--paper-1);
+      border-inline-start: 1px solid var(--rule-1);
+      padding: var(--sp-xl) var(--sp-m);
+    }
+
+    .sch-entry__disclosure[open] .sch-entry__summary-text {
+      display: block;
+    }
+
+    /* lift the open detail out of the grid and into the margin */
+    .sch-entry__disclosure[open] > .sch-entry__detail {
+      position: fixed;
+      inset-block: 0;
+      inset-inline-end: 0;
+      inline-size: var(--rail-w);
+      z-index: 9;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      background: var(--paper-1);
+      border-inline-start: 1px solid var(--rule-1);
+      padding: var(--sp-xl) var(--sp-m) var(--sp-2xl);
+      translate: 0 0;
+      transition: translate 180ms ease;
+    }
+
+    @starting-style {
+      .sch-entry__disclosure[open] > .sch-entry__detail {
+        translate: 100% 0;
+      }
+    }
+
+
+  }
+
+  /* Jump target acknowledgement — a brief brand rule, not a colour wash. */
+  .sch-entry.now-next-flash {
+    box-shadow: -0.7rem 0 0 -0.55rem var(--brand-1-ink);
+    background: var(--paper-2);
+  }
+
+  /* Interstitials (breaks, meals) are not sessions and must not look like one. */
+  .sch-interstitial {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-1);
+    color: var(--ink-1);
+    padding-block: var(--sp-xs);
+  }
+}
+
+/* ============================================================================
+   SHARED HOME LAYOUT (`hl-*`)
+   One module — homeLayout.js — renders the entry screen for the schedule
+   (Browse), the planner (Upcoming trips) and the editor (Datasets). It keeps
+   its class names: they are already section-agnostic, and renaming them would
+   churn three call sites for no gain.
+
+   In the Programme language a home screen is the front of a printed programme:
+   a titled block, a ruled index, and rows you scan. Cards stop being floating
+   objects and become ruled cells.
+   ========================================================================= */
+@layer section {
+  .hl-root {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-l);
+    inline-size: 100%;
+    max-inline-size: var(--center-max);
+    margin-inline: auto;
+    padding-block-end: var(--sp-xl);
+  }
+
+  /* --- HERO ---------------------------------------------------------------
+     The old hero was a gradient slab. A programme's cover is type on paper:
+     a brand rule down the leading edge is the whole decoration.
+     --------------------------------------------------------------------- */
+  .hl-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-3xs);
+    padding: var(--sp-m) var(--sp-m) var(--sp-m) var(--sp-s);
+    border-inline-start: 3px solid var(--brand-1-ink);
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  /* Actions sit at the end of the row. With the hero icon gone this is the
+     only child, and `space-between` would have parked it at the start. */
+  .hl-hero-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    inline-size: 100%;
+    margin-block-end: var(--sp-2xs);
+  }
+
+  .hl-hero-title {
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    font-weight: 600;
+    letter-spacing: var(--display-track);
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .hl-hero-lead {
+    max-inline-size: var(--measure);
+    font-size: var(--step-0);
+    color: var(--ink-1);
+    margin: var(--sp-3xs) 0 0;
+  }
+
+  /* --- CTA ROWS -----------------------------------------------------------
+     Two per row, ruled, flat. Hover states a leading brand rule rather than
+     lifting the card — nothing on this page floats.
+     --------------------------------------------------------------------- */
+  .hl-cta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: var(--sp-s);
+  }
+
+  .hl-cta-card {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-s);
+    inline-size: 100%;
+    padding: var(--sp-s);
+    background: var(--paper-1);
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    text-align: start;
+    cursor: pointer;
+  }
+
+  .hl-cta-card:hover {
+    border-color: var(--ink-1);
+    box-shadow: inset 3px 0 0 var(--brand-1-ink);
+  }
+
+  .hl-cta-card--disabled,
+  .hl-cta-card--disabled:hover {
+    opacity: 0.45;
+    cursor: not-allowed;
+    border-color: var(--rule-0);
+    box-shadow: none;
+  }
+
+  .hl-cta-icon {
+    display: none; /* the title says what the row does; the glyph repeated it */
+  }
+
+  .hl-cta-body {
+    flex: 1;
+    min-inline-size: 0;
+  }
+
+  .hl-cta-title {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--step-0);
+    font-weight: 600;
+    color: var(--ink-0);
+    margin-block-end: var(--sp-3xs);
+  }
+
+  .hl-cta-desc {
+    display: block;
+    font-size: var(--step--1);
+    color: var(--ink-1);
+  }
+
+  .hl-cta-arrow {
+    flex: none;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+
+  /* --- STATUS -------------------------------------------------------------
+     State is real information, so it keeps its colour — but as a mark beside
+     ink, never as a tinted panel.
+     --------------------------------------------------------------------- */
+  .hl-status-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-xs);
+    padding-block: var(--sp-2xs);
+    border-block-end: 1px solid var(--rule-0);
+    font-size: var(--step--1);
+  }
+
+  .hl-status-dot {
+    inline-size: 0.5rem;
+    block-size: 0.5rem;
+    border-radius: 50%;
+    flex: none;
+    background: var(--ink-2);
+  }
+
+  .hl-status-dot--ok {
+    background: var(--status-ok);
+  }
+
+  .hl-status-label {
+    flex: 1;
+    min-inline-size: 0;
+    color: var(--ink-1);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .hl-status-action {
+    background: none;
+    border: 0;
+    padding: 0;
+    color: var(--ink-0);
+    font-size: var(--step--1);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+  }
+
+  /* --- SECTION HEADER ----------------------------------------------------- */
+  .hl-section-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-s);
+    padding-block-end: var(--sp-2xs);
+    border-block-end: 1px solid var(--ink-1);
+  }
+
+  .hl-section-title {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin: 0;
+  }
+
+  .hl-section-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+  }
+
+  /* --- CONTROLS ----------------------------------------------------------- */
+  .hl-primary-btn,
+  .hl-settings-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-2xs);
+    min-block-size: var(--tap);
+    min-inline-size: var(--tap);
+    padding-inline: var(--sp-s);
+    background: var(--ink-0);
+    color: var(--paper-0);
+    border: 1px solid var(--ink-0);
+    border-radius: 0;
+    font-size: var(--step--1);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* Solid buttons lighten their fill on hover, the way .trip-next-open does.
+     This selector used to be glued to the .preview-banner rule below, so
+     hovering the primary button applied the BANNER's styles: an 8% brand tint,
+     dark text on a near-transparent field, banner padding and a stray blue
+     bottom border. The button stopped looking like a button at the moment you
+     reached for it. */
+  .hl-primary-btn:hover {
+    background: var(--ink-1);
+    border-color: var(--ink-1);
+  }
+
+  /* "You are looking at a preview" — the one banner that must not be missed,
+     so it is the full-width rule at the top of the page. */
+  .preview-banner {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    padding: var(--sp-2xs) var(--sp-s);
+    border-block-end: 1px solid var(--brand-1-ink);
+    background: color-mix(in srgb, var(--brand-1-ink) 8%, transparent);
+    font-size: var(--step--1);
+    color: var(--ink-0);
+  }
+
+  .preview-banner-link {
+    color: var(--brand-1-ink);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  /* The body gets this class while the banner is up, so anything pinned to the
+     top of the viewport can make room for it. */
+  body.has-preview-banner {
+    padding-block-start: 0;
+  }
+
+  .hl-settings-btn-label {
+    font-size: var(--step--1);
+    font-weight: 600;
+  }
+
+  .hl-settings-btn:hover {
+    background: var(--ink-1);
+    border-color: var(--ink-1);
+  }
+
+  /* The settings control is secondary — same geometry, quieter treatment.
+     It holds a WORD now, not a gear, so it keeps its horizontal padding;
+     zeroing it was correct only while the content was a single glyph. */
+  .hl-settings-btn {
+    inline-size: auto;
+    block-size: auto;
+    background: transparent;
+    color: var(--ink-1);
+    border-color: var(--rule-1);
+  }
+
+  .hl-settings-btn:hover {
+    background: var(--paper-2);
+    border-color: var(--ink-1);
+    color: var(--ink-0);
+  }
+
+  .hl-search-wrap {
+    position: relative;
+  }
+
+  .hl-search-icon {
+    display: none; /* the placeholder already says what the field is for */
+  }
+
+  .hl-search-input {
+    inline-size: 100%;
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-xs);
+    background: var(--paper-1);
+    border: 1px solid var(--rule-1);
+    border-radius: 0;
+    color: var(--ink-0);
+    font-size: var(--step--1);
+  }
+
+  .hl-search-input::placeholder {
+    color: var(--ink-2);
+  }
+
+  /* --- CARD GRID ---------------------------------------------------------- */
+  .hl-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: var(--sp-s);
+  }
+
+  /* --- BROWSE: counts, filters, and the upcoming/past split ----------------
+     `#eventHomeGrid` is the .hl-card-grid, and these turn it into a column of
+     sections instead — each section carries its own grid. The grid rules stay
+     where they are so nothing else that uses the kit changes.
+     --------------------------------------------------------------------- */
+  #eventHomeGrid {
+    display: block;
+  }
+
+  .hl-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-l);
+    padding-block: var(--sp-m);
+    border-block: 1px solid var(--rule-0);
+    margin-block-end: var(--sp-m);
+  }
+
+  .hl-stat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3xs);
+  }
+
+  .hl-stat-n {
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    font-weight: 600;
+    line-height: 1;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  .hl-stat-label {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* Search + filters as one strip. The search grows into whatever the selects
+     do not need; the selects keep their own width. Below the breakpoint the
+     search takes its own line, because three selects and an input on one row at
+     phone width is four unusable controls rather than one tidy strip. */
+  .hl-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: var(--sp-s);
+    margin-block-end: var(--sp-s);
+  }
+
+  .hl-controls .hl-search-wrap {
+    flex: 1 1 16rem;
+    margin-block-end: 0;
+  }
+
+  .hl-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: var(--sp-s);
+  }
+
+  @media (max-width: 44rem) {
+    .hl-controls .hl-search-wrap {
+      flex-basis: 100%;
+    }
+  }
+
+  .hl-filter {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3xs);
+  }
+
+  .hl-filter-label {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .hl-filter-select {
+    font: inherit;
+    font-size: var(--step--1);
+    color: var(--ink-0);
+    background: var(--paper-1);
+    border: 1px solid var(--rule-1);
+    border-radius: 2px;
+    padding: var(--sp-3xs) var(--sp-2xs);
+    min-inline-size: 9rem;
+  }
+
+  .hl-filter-reset {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-1);
+    background: transparent;
+    border: 1px solid var(--rule-1);
+    border-radius: 2px;
+    padding: var(--sp-2xs) var(--sp-xs);
+    cursor: pointer;
+  }
+
+  .hl-filter-reset:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+
+  .hl-filter-reset:not(:disabled):hover {
+    border-color: var(--ink-2);
+    color: var(--ink-0);
+  }
+
+  .hl-group + .hl-group {
+    margin-block-start: var(--sp-l);
+  }
+
+  .hl-group-title {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-2xs);
+    padding-block-end: var(--sp-2xs);
+    margin-block-end: var(--sp-s);
+    border-block-end: 1px solid var(--ink-0);
+  }
+
+  .hl-group-count {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    font-weight: 400;
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hl-loading,
+  .hl-empty {
+    grid-column: 1 / -1;
+    padding-block: var(--sp-xl);
+    color: var(--ink-2);
+    font-size: var(--step--1);
+    text-align: center;
+  }
+
+  /* --- EVENT / TRIP CARDS -------------------------------------------------- */
+  .hl-event-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2xs);
+    padding: var(--sp-s);
+    background: var(--paper-1);
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    text-align: start;
+    cursor: pointer;
+  }
+
+  .hl-event-card:hover {
+    border-color: var(--ink-1);
+    box-shadow: inset 3px 0 0 var(--brand-1-ink);
+  }
+
+  .hl-event-card.is-hidden {
+    opacity: 0.55;
+    border-style: dashed;
+  }
+
+  .hl-event-card.is-hidden:hover {
+    opacity: 1;
+  }
+
+  .hl-event-card.is-locked,
+  .hl-event-card.is-locked:hover {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: var(--rule-0);
+    box-shadow: none;
+  }
+
+  .hl-event-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-2xs);
+  }
+
+  .hl-event-badge,
+  .hl-event-default,
+  .hl-event-hidden,
+  .hl-showall-count {
+    padding-inline: var(--sp-3xs);
+    background: var(--paper-2);
+    border-radius: 0;
+    color: var(--ink-1);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+  }
+
+  .hl-event-title {
+    font-family: var(--font-display);
+    font-size: var(--step-0);
+    font-weight: 600;
+    color: var(--ink-0);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  /* Dates and counts are machine tokens. */
+  .hl-event-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3xs) var(--sp-s);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-2);
+  }
+
+  .hl-event-flags {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-3xs);
+    flex: none;
+  }
+
+  .hl-showall-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    min-block-size: var(--tap);
+    font-size: var(--step--1);
+    color: var(--ink-1);
+    cursor: pointer;
+  }
+}
+
+@layer overrides {
+  /* Shell chrome shared by the planner and the editor. */
+
+  /* The home layout's legacy block lives in components.css and paints in a blue
+     palette of literal hexes — including a gradient hero, which the brief rules
+     out. Deleted with that sheet. */
+  .hl-hero,
+  .theme-dark .hl-hero {
+    background: none !important;
+    border-radius: 0 !important;
+    color: inherit !important;
+  }
+
+  .hl-settings-btn {
+    inline-size: auto !important;
+    block-size: auto !important;
+    min-block-size: var(--tap) !important;
+  }
+
+  .hl-cta-card,
+  .hl-event-card,
+  .hl-search-input,
+  .hl-status-bar,
+  .hl-primary-btn,
+  .hl-settings-btn,
+  .hl-event-badge,
+  .hl-showall-count {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .hl-status-bar {
+    background: none !important;
+    border-color: var(--rule-0) !important;
+  }
+
+  .theme-dark .hl-cta-card,
+  .theme-dark .hl-event-card {
+    background: var(--paper-1) !important;
+    border-color: var(--rule-0) !important;
+  }
+
+  .theme-dark .hl-primary-btn {
+    background: var(--ink-0) !important;
+    color: var(--paper-0) !important;
+  }
+
+  .theme-dark .hl-section-title,
+  .theme-dark .hl-cta-desc,
+  .theme-dark .hl-status-label,
+  .theme-dark .hl-event-meta,
+  .theme-dark .hl-showall-toggle {
+    color: var(--ink-2) !important;
+  }
+
+  .theme-dark .hl-event-title,
+  .theme-dark .hl-cta-title {
+    color: var(--ink-0) !important;
+  }
+
+  .theme-dark .hl-event-badge,
+  .theme-dark .hl-event-hidden,
+  .theme-dark .hl-showall-count {
+    background: var(--paper-2) !important;
+    color: var(--ink-1) !important;
+  }
+
+  .theme-dark .hl-search-input {
+    background: var(--paper-1) !important;
+    border-color: var(--rule-1) !important;
+    color: var(--ink-0) !important;
+  }
+
+  .theme-dark .hl-cta-card:hover,
+  .theme-dark .hl-event-card:hover {
+    border-color: var(--ink-1) !important;
+  }
+}
+
+/* ============================================================================
+   MODALS
+   Twenty-six dialogs in the planner alone, and the legacy sheets already treat
+   them as ONE component — every rule keys off `[role="dialog"]`. So this does
+   too: one lever, twenty-six surfaces, no markup churn.
+
+   What went wrong before: every field was a filled box with a border and a
+   radius, stacked eight deep inside another filled box inside a third. Three
+   levels of container to hold a form. Here a dialog is a sheet of paper with a
+   rule under its title, and a field is a label over a ruled line — the same
+   `.app-control` the schedule's filter bar uses, so the form vocabulary is the
+   product's, not a framework's.
+   ========================================================================= */
+@layer section {
+  [role='dialog'] {
+    background: color-mix(in srgb, var(--ink-0) 45%, transparent);
+  }
+
+  /* The card. A solid rule rather than a shadow: on paper, edges are drawn. */
+  [role='dialog'] > .bg-white {
+    background: var(--paper-1);
+    border: 1px solid var(--ink-0);
+    border-radius: 0;
+    box-shadow: none;
+    font-family: var(--font-body);
+  }
+
+  /* --- HEAD ---------------------------------------------------------------
+     Title, optional subtitle, and one way out. The badge circle beside the
+     title was an unfilled slot where an icon used to be.
+     --------------------------------------------------------------------- */
+  [role='dialog'] .pl-itin-badge,
+  [role='dialog'] .jrn-empty-badge {
+    display: none;
+  }
+
+  [role='dialog'] h2 {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    letter-spacing: var(--display-track);
+    color: var(--ink-0);
+  }
+
+  [role='dialog'] .border-b.border-gray-200,
+  [role='dialog'] .border-t.border-gray-200 {
+    border-color: var(--rule-0);
+  }
+
+  [role='dialog'] button[aria-label='Close'] {
+    inline-size: var(--tap);
+    block-size: var(--tap);
+    min-block-size: var(--tap);
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    color: var(--ink-2);
+    font-size: var(--step-1);
+  }
+
+  [role='dialog'] button[aria-label='Close']:hover {
+    background: none;
+    color: var(--ink-0);
+  }
+
+  /* --- FIELDS -------------------------------------------------------------
+     Label above, ruled line below, nothing around. Identical geometry to
+     `.app-control` on the schedule, deliberately.
+     --------------------------------------------------------------------- */
+  [role='dialog'] .editor-field-label {
+    display: block;
+    margin-block-end: var(--sp-3xs);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  [role='dialog'] input:not([type='checkbox']):not([type='radio']):not([type='range']),
+  [role='dialog'] select,
+  [role='dialog'] textarea {
+    inline-size: 100%;
+    min-block-size: 2.4rem;
+    padding: var(--sp-3xs) 0;
+    background: transparent;
+    color: var(--ink-0);
+    border: 0;
+    border-block-end: 1px solid var(--rule-1);
+    border-radius: 0;
+    box-shadow: none;
+    appearance: none;
+    font-family: inherit;
+    font-size: var(--step-0);
+  }
+
+  /* Dates, times and references are machine tokens wherever they appear. */
+  [role='dialog'] input[type='date'],
+  [role='dialog'] input[type='time'],
+  [role='dialog'] input[type='number'],
+  [role='dialog'] .jrn-mono-input {
+    font-family: var(--font-data);
+    font-variant-numeric: tabular-nums;
+  }
+
+  [role='dialog'] textarea {
+    padding-block: var(--sp-2xs);
+    resize: vertical;
+  }
+
+  [role='dialog'] :is(input, select, textarea):hover {
+    border-block-end-color: var(--ink-1);
+  }
+
+  [role='dialog'] :is(input, select, textarea):focus-visible {
+    outline: 0;
+    border-block-end-color: var(--brand-1-ink);
+    border-block-end-width: 2px;
+  }
+
+  [role='dialog'] ::placeholder {
+    color: var(--ink-2);
+  }
+
+  /* The same drawn caret as the schedule's selects — never the OS chevron. */
+  [role='dialog'] select {
+    padding-inline-end: var(--sp-l);
+    background-image:
+      linear-gradient(45deg, transparent 50%, currentColor 50%),
+      linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position:
+      right 0.6rem center,
+      right 0.25rem center;
+    background-size:
+      0.35rem 0.35rem,
+      0.35rem 0.35rem;
+    background-repeat: no-repeat;
+  }
+
+  /* The hero field (a modal's one headline input) stays a headline. */
+  [role='dialog'] .jrn-hero-input {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+  }
+
+  /* --- TOGGLE -------------------------------------------------------------
+     A square track with a square knob. A pill switch is the single most
+     recognisable stock control there is.
+     --------------------------------------------------------------------- */
+  .pl-toggle {
+    inline-size: 2.4rem;
+    block-size: 1.25rem;
+    background: transparent;
+    border: 1px solid var(--rule-1);
+    border-radius: 0;
+  }
+
+  .pl-toggle::after {
+    inset-block-start: 2px;
+    inset-inline-start: 2px;
+    inline-size: calc(1.25rem - 6px);
+    block-size: calc(1.25rem - 6px);
+    background: var(--ink-1);
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .pl-toggle:checked {
+    background: transparent;
+    border-color: var(--ink-0);
+  }
+
+  .pl-toggle:checked::after {
+    background: var(--brand-1-ink);
+    transform: translateX(1.15rem);
+  }
+
+  /* --- FOOTER ACTIONS -----------------------------------------------------
+     One primary (solid ink — an organiser's colour cannot guarantee contrast
+     with any fixed foreground), one quiet secondary, one destructive verb.
+     --------------------------------------------------------------------- */
+  [role='dialog'] .border-t button {
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    border-radius: 0;
+    font-size: var(--step--1);
+    font-weight: 600;
+  }
+
+  [role='dialog'] .border-t button:is(.bg-blue-600, .bg-blue-500, .bg-gray-900, .pl-add-btn) {
+    background: var(--ink-0);
+    border: 1px solid var(--ink-0);
+    color: var(--paper-0);
+  }
+
+  [role='dialog'] .border-t button:is(.bg-blue-600, .bg-blue-500, .bg-gray-900, .pl-add-btn):hover {
+    background: var(--ink-1);
+    border-color: var(--ink-1);
+  }
+
+  [role='dialog'] .border-t button:is(.border-gray-300, .border-gray-200) {
+    background: transparent;
+    border: 1px solid var(--ink-1);
+    color: var(--ink-0);
+  }
+
+  [role='dialog'] .border-t button:is(.text-red-600, .text-red-500) {
+    background: transparent;
+    border: 1px solid currentColor;
+    color: var(--status-bad);
+  }
+}
+
+@layer overrides {
+  /* Tailwind's field chrome and the legacy iOS card. All of it goes with the
+     legacy sheets; until then it is beaten here rather than unpicked. */
+  [role='dialog'] > .bg-white {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: var(--paper-1) !important;
+    backdrop-filter: none !important;
+  }
+
+  [role='dialog'] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  [role='dialog'] input:not([type='checkbox']):not([type='radio']):not([type='range']),
+  [role='dialog'] select,
+  [role='dialog'] textarea {
+    background-color: transparent !important;
+    border-block-end: 1px solid var(--rule-1) !important;
+    border-inline: 0 !important;
+    border-block-start: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    color: var(--ink-0) !important;
+  }
+
+  [role='dialog'] :is(input, select, textarea):focus-visible {
+    border-block-end-color: var(--brand-1-ink) !important;
+  }
+
+  [role='dialog'] .pl-itin-badge,
+  [role='dialog'] .jrn-empty-badge {
+    display: none !important;
+  }
+
+  [role='dialog'] button[aria-label='Close'] {
+    background: none !important;
+    border-radius: 0 !important;
+    color: var(--ink-2) !important;
+  }
+
+  [role='dialog'] .border-t button {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Primary actions. `.jrn-save` is the travel record's gold fill and it is
+     already `!important` in the legacy layer, so it can only be beaten here —
+     `overrides` is declared first, and among `!important` rules the FIRST
+     layer wins. Solid ink, never a brand fill: an organiser's colour cannot
+     guarantee contrast with any fixed foreground. */
+  [role='dialog'] button:is(.jrn-save, .bg-gray-800, .bg-gray-900, .bg-blue-600, .pl-add-btn) {
+    background: var(--ink-0) !important;
+    border: 1px solid var(--ink-0) !important;
+    color: var(--paper-0) !important;
+    filter: none !important;
+  }
+
+  [role='dialog']
+    button:is(.jrn-save, .bg-gray-800, .bg-gray-900, .bg-blue-600, .pl-add-btn):hover {
+    background: var(--ink-1) !important;
+    border-color: var(--ink-1) !important;
+  }
+
+  [role='dialog'] button.border-gray-300 {
+    background: transparent !important;
+    border: 1px solid var(--ink-1) !important;
+    color: var(--ink-0) !important;
+  }
+}
+
+/* =========================================================================
+   THE MOBILE MENU
+   At phone width the masthead was over-subscribed: the site nav overflowed
+   (its last links unreachable), Subscribe and the theme picker were crushed to
+   a third of their labels, and the page actions took a row of their own — so
+   the programme began nearly a thousand pixels down. One button now holds all
+   of it. See appMenu.js, which moves the real elements in and out rather than
+   rendering a second copy of each.
+   ========================================================================= */
+@layer section {
+  /* Above the breakpoint the chrome sits in the masthead where it belongs. */
+  .app-burger,
+  .app-menu {
+    display: none;
+  }
+
+  @media (max-width: 52rem) {
+    .app-burger {
+      display: flex;
+      /* Pinned to the top of the bar so it does not move when it becomes the
+         close button. The masthead is bottom-aligned and the lockup's height
+         varies with the title's length, so left alone the control sat 84px
+         down on one page and 98px down on another — a toggle that jumps a
+         different distance each time reads as two different buttons. */
+      align-self: flex-start;
+      align-items: center;
+      gap: var(--sp-2xs);
+      min-block-size: var(--tap);
+      padding-inline: var(--sp-s);
+      background: transparent;
+      border: 1px solid var(--ink-0);
+      color: var(--ink-0);
+      font-family: var(--font-data);
+      font-size: var(--step--1);
+      cursor: pointer;
+    }
+
+    /* Three rules, drawn rather than iconised — the icon font went with the
+       CDN, and this is cheaper than shipping an SVG for one glyph. */
+    .app-burger__bars {
+      inline-size: 1rem;
+      block-size: 2px;
+      background: currentColor;
+      box-shadow:
+        0 -5px 0 currentColor,
+        0 5px 0 currentColor;
+    }
+
+    /* Above everything. The bottom tab bar is z-index 100 and the detail
+       sheets are 200, so at 60 the bar rendered ON TOP of the open menu and
+       took every touch in the lowest 50px of the screen — a drag starting
+       there went to the bar instead of the panel, which is why scrolling the
+       menu only half worked. A navigation overlay outranks the chrome it
+       navigates. */
+    .app-menu {
+      display: block;
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: color-mix(in srgb, var(--ink-0) 45%, transparent);
+    }
+
+    .app-menu[hidden] {
+      display: none;
+    }
+
+    .app-menu__panel {
+      position: absolute;
+      inset-block-start: 0;
+      inset-inline: 0;
+      max-block-size: 100dvh;
+      overflow-y: auto;
+      /* Inline padding matches `.l-center`'s 1rem gutter, not --sp-m, so the
+         close button lands on the same vertical as the burger it replaces. */
+      padding: var(--sp-m) 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-m);
+      background: var(--paper-0);
+      border-block-end: 2px solid var(--ink-0);
+    }
+
+    .app-menu__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-m);
+      padding-block-end: var(--sp-xs);
+      border-block-end: 2px solid var(--ink-0);
+    }
+
+    .app-menu__title {
+      margin: 0;
+      color: var(--ink-1);
+    }
+
+    /* A named button, not a bare glyph — the same call the session rail makes.
+       An × is a guess; "Close" is not. */
+    .app-menu__close {
+      min-block-size: var(--tap);
+      padding-inline: var(--sp-s);
+      background: transparent;
+      border: 1px solid var(--rule-1);
+      color: var(--ink-1);
+      font-family: var(--font-data);
+      font-size: var(--step--1);
+      cursor: pointer;
+    }
+
+    .app-menu__close:hover {
+      border-color: var(--ink-0);
+      color: var(--ink-0);
+    }
+
+    /* The adopted nav stops being a single overflowing line and becomes a list
+       — the shape a menu wants, and the shape that fits every link. */
+    .app-menu__panel .app-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      overflow: visible;
+    }
+
+    .app-menu__panel .app-nav__link {
+      min-block-size: var(--tap);
+      display: flex;
+      align-items: center;
+      padding-inline: 0;
+      border-block-end: 1px solid var(--rule-0);
+    }
+
+    .app-menu__panel .header-actions,
+    .app-menu__panel .l-cluster {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-xs);
+      inline-size: 100%;
+    }
+
+    /* In the masthead these were competing for a 31px slot. Here they have the
+       width to say what they are. */
+    .app-menu__panel .app-btn,
+    .app-menu__panel .sub-wrap,
+    .app-menu__panel .theme-picker {
+      flex: 1 1 auto;
+      min-inline-size: 9rem;
+    }
+
+    .app-menu__panel .theme-picker-btn {
+      inline-size: 100%;
+      justify-content: space-between;
+      min-block-size: var(--tap);
+    }
+
+    /* Legacy schedule.css hides these labels under 480px, which is what turned
+       Subscribe and the theme picker into two blank squares. In the menu there
+       is room for the words, and a button with no label is not a button. */
+    .app-menu__panel .theme-picker-btn-label {
+      display: inline;
+    }
+
+    /* Subscribe and the theme picker open as absolutely-positioned popovers,
+       which is right in a masthead and wrong in a sheet: anchored to a control
+       partway down a scroll container, they hung past the panel's bottom edge
+       and were clipped with no way to reach them — the menu read as unable to
+       scroll. In here they are in flow, so opening one grows the panel and the
+       panel scrolls. */
+    .app-menu__panel .theme-picker-menu,
+    .app-menu__panel .sub-pop {
+      position: static;
+      inline-size: 100%;
+      min-inline-size: 0;
+      margin-block-start: var(--sp-2xs);
+      box-shadow: none;
+      transform: none;
+    }
+
+    .app-menu__panel .theme-picker,
+    .app-menu__panel .sub-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .app-menu__panel {
+      overscroll-behavior: contain;
+    }
+
+    body.app-menu-open {
+      overflow: hidden;
+    }
+  }
+}
+
+/* =========================================================================
+   SR-ONLY, RESTATED
+   `.sr-only` lives in utilities.css, which every page imports at
+   `layer(legacy)` — so any later-layer rule that sizes inputs beats its
+   `width: 1px`. The clip still hid the planner's file input, but its 390px box
+   went on dragging the document 16px wide, which is a page that scrolls
+   sideways on a phone for no visible reason. Restated here, in `section`, so
+   the geometry survives.
+   ========================================================================= */
+@layer section {
+  .sr-only:not(:focus):not(:focus-within) {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    max-inline-size: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
+
+/* =========================================================================
+   THE MODE PICKER, EVERYWHERE
+   `mountThemePicker()` now injects this control on every page, but its only
+   styling lived in schedule.css — which /archive, /curation and /home do not
+   load. There it fell back to the UA button: Chrome's #efefef, which put
+   near-white ink-0 text on a near-white button in dark mode at 1.03:1, i.e.
+   invisible. It belongs here, in the sheet every page loads, in the same
+   language as the burger beside it.
+   ========================================================================= */
+@layer section {
+  .theme-picker {
+    position: relative;
+  }
+
+  .theme-picker-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    background: transparent;
+    border: 1px solid var(--rule-1);
+    border-radius: 0;
+    color: var(--ink-1);
+    /* Body face at 600, matching .hl-settings-btn — the other quiet-tier
+       control it sits beside on the planner dashboard. It was mono at 400,
+       which broke the two rules DECISIONS.md sets for buttons ("never used
+       for … buttons"; "neither uses mono") and made three outlined controls
+       in one row read as three different components. */
+    font-size: var(--step--1);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .theme-picker-btn:hover {
+    border-color: var(--ink-1);
+    color: var(--ink-0);
+  }
+
+  /* Legacy schedule.css hides this label under 480px, which leaves a 31px
+     bordered box with nothing in it — a control that cannot be identified is
+     not a control. On pages with the mobile menu the label is restored inside
+     the sheet; this restores it everywhere else, notably the planner and
+     editor, whose mastheads have no sheet to move it into. */
+  .theme-picker-btn-label {
+    display: inline;
+  }
+
+  .theme-picker-menu {
+    position: absolute;
+    inset-block-start: calc(100% + var(--sp-3xs));
+    inset-inline-end: 0;
+    z-index: 40;
+    min-inline-size: 12rem;
+    padding: var(--sp-3xs);
+    background: var(--paper-0);
+    border: 1px solid var(--ink-0);
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .theme-picker-menu.hidden {
+    display: none;
+  }
+
+  .theme-picker-item {
+    display: block;
+    inline-size: 100%;
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    background: transparent;
+    border: 0;
+    color: var(--ink-1);
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    text-align: start;
+    cursor: pointer;
+  }
+
+  .theme-picker-item:hover {
+    color: var(--ink-0);
+    background: var(--paper-2);
+  }
+
+  /* The mode in force, in the page's selection grammar. */
+  .theme-picker-item[aria-checked='true'],
+  .theme-picker-item.is-active {
+    box-shadow: inset 3px 0 0 var(--brand-1-ink);
+    color: var(--ink-0);
+    font-weight: 600;
+  }
+}
+
+/* =========================================================================
+   THE MOBILE TAB BAR'S LABELS
+   Inactive tabs were a hardcoded rgba(0,0,0,0.38) / rgba(255,255,255,0.38) —
+   38% ink, which measured 3.86:1 and fails AA on the product's primary mobile
+   navigation. Opacity is the wrong tool for a quiet colour: it cannot be
+   reasoned about against a surface. --ink-1 is the token that already means
+   "present but not shouting", and it clears AA on both papers.
+
+   The active tab keeps its accent: that is the one thing on the bar encoding
+   state, and it is the planner's established travel-record gold rather than
+   the brand rule used for selection elsewhere. Deliberate — not unified here.
+   ========================================================================= */
+@layer section {
+  .mobile-bottom-tab {
+    color: var(--ink-1);
+  }
+
+  /* The active tab MUST be restated here. `.mobile-bottom-tab.is-active` lives
+     in components.css (the `legacy` layer), and layer order beats specificity —
+     so the rule above silently flattened it and every tab rendered the same
+     ink. The bar lost its only "you are here" signal.
+     `--gold` is the planner's travel-record accent and is defined by the
+     planner, editor and curation sheets; the SCHEDULE never bridged it, so the
+     legacy rule fell back to a literal brown. Falling back to the brand rule
+     instead keeps the planner gold and gives the schedule the same current-page
+     colour its top nav already uses. */
+  .mobile-bottom-tab.is-active {
+    color: var(--gold, var(--brand-1-ink));
+  }
+
+  .mobile-bottom-tab:active:not(.is-active) {
+    color: var(--ink-0);
+  }
+}
+
+/* =========================================================================
+   TEXT INPUTS DO NOT TRIGGER THE iOS ZOOM
+   Safari on iOS zooms the viewport whenever a focused text field is smaller
+   than 16px, and it does NOT zoom back out afterwards — the reader is left on
+   a magnified page they have to pinch out of. Every other control in the
+   product is already at or above 16px; the shared search bar (--step--1,
+   12.8px) was the one that was not. 1rem exactly, at phone widths only, so the
+   desktop type scale is untouched.
+   ========================================================================= */
+@layer section {
+  @media (max-width: 52rem) {
+    .hl-search-input,
+    .obs-search-input,
+    input[type='text'],
+    input[type='search'],
+    input[type='email'],
+    input[type='url'],
+    input[type='number'],
+    input[type='date'],
+    input[type='time'],
+    textarea,
+    select {
+      font-size: max(1rem, var(--step--1));
+    }
+  }
+}
+
+/* =========================================================================
+   THE FOCUS RING SURVIVES THE LEGACY SHEETS
+   foundation.css defines one focus ring for the whole product. Several legacy
+   rules then set `outline: none` on the controls they styled, so a handful of
+   inputs, selects and buttons matched :focus-visible and showed nothing at all
+   — measured on the schedule's filter row and the archive's, where a keyboard
+   user has no way to tell where they are. Restated here, in `section`, which
+   outranks `legacy` without needing !important.
+   ========================================================================= */
+@layer section {
+  a:focus-visible,
+  button:focus-visible,
+  summary:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    outline: var(--focus-width) solid var(--brand-1-ink);
+    outline-offset: 2px;
+  }
+}
+
+/* =========================================================================
+   THE SELECTION SCREEN HAS NO TABS TO NAVIGATE
+   `#sidebarNav` is filled by renderSidebar() with the open planner's tabs. On
+   the trip-selection screen no planner is open, so it renders empty — leaving
+   a 220px column carrying a brand block and nothing else, beside a page that
+   could have used the width. The sidebar returns the moment a trip is opened.
+   ========================================================================= */
+@layer section {
+  @media (min-width: 40rem) {
+    body:has(#plannerNoEvent:not(.hidden)) #plannerSidebar {
+      display: none;
+    }
+
+    /* The shell is `auto minmax(0,1fr)`. Hiding the sidebar leaves ONE grid
+       item, which then lands in the `auto` column and shrinks to its own
+       content — the page rendered 322px wide in a 1400px window. Collapse the
+       track as well as its occupant. */
+    body:has(#plannerNoEvent:not(.hidden)) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+}
+
+/* =========================================================================
+   PROVENANCE NOTICE
+   What this archive is, where the data came from, and what it is not. It sits
+   at the foot of every public surface.
+
+   Set as a quiet block rather than a warning: a red-bordered alert would imply
+   something is wrong, and nothing is — this is the ordinary statement of a
+   reference work's sources. But it is NOT hidden either. The lead is a ruled
+   small-caps label like every other section heading in the product, and the
+   sentence that matters ("not official, not authoritative, not endorsed") is
+   the only bold text in the block, so a reader skimming sees exactly the claim
+   they need to.
+   ========================================================================= */
+@layer section {
+  .app-provenance {
+    display: block;
+    /* Full container width, matching the credits directly beneath it. It was
+       capped at --measure, which is right for prose but left the notice 496px
+       inside a 989px footer — visibly a different column from the text it sits
+       with, which reads as an inserted box rather than part of the page.
+       Alignment stays `start`: three paragraphs centred like the one-liners
+       below them would be harder to read, not more consistent. */
+    margin-block-start: var(--sp-xl);
+    /* The block had no bottom margin, so it collided with the line below it. */
+    margin-block-end: var(--sp-l);
+    padding-block-start: var(--sp-m);
+    border-block-start: 1px solid var(--rule-0);
+    font-size: var(--step--1);
+    line-height: 1.6;
+    color: var(--ink-2);
+    /* No text-align of its own: it inherits the footer it sits in, so it is
+       centred with the schedule credits and ranged left with the home foot
+       line. Same reasoning as the width above — match the message you are
+       next to, rather than picking one alignment and being wrong on one of
+       the two pages. */
+  }
+
+  .app-provenance__lead {
+    margin-block-end: var(--sp-xs);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-1);
+  }
+
+  .app-provenance p + p {
+    margin-block-start: var(--sp-s);
+  }
+
+  /* The one claim a reader must not miss. */
+  .app-provenance strong {
+    color: var(--ink-0);
+    font-weight: 600;
+  }
+
+  .app-provenance__link {
+    color: var(--brand-1-ink);
+    text-underline-offset: 3px;
+  }
+}

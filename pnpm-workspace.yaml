@@ -1,0 +1,7 @@
+# pnpm blocks dependency install scripts by default — that is the main reason this
+# project uses it. Each exception is listed here deliberately.
+#
+# esbuild (a vitest dependency) downloads its platform binary in a postinstall.
+# Nothing else in the tree may run anything at install time.
+allowBuilds:
+  esbuild: true

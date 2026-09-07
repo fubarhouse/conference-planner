@@ -1,0 +1,2594 @@
+{
+  "event": {
+    "regionCode": "EMEA",
+    "country": "Germany",
+    "designation": "Drupal Dev Days",
+    "ecosystem": "drupal",
+    "location": "Munich",
+    "year": "2010",
+    "region": "Germany",
+    "startDate": "2010-05-07T16:00:00.000Z",
+    "endDate": "2010-05-09T16:00:00.000Z",
+    "venue": "Hochschule München, Campus Lothstraße, Lothstraße 34, 80335 Munich",
+    "timezone": "Europe/Berlin",
+    "columns": 6,
+    "website": "http://www.drupal-dev-days.de",
+    "enabled": true,
+    "scheduleComplete": true,
+    "logo": {
+      "image": "",
+      "imageAlt": "Drupal Developer Days Munich '10",
+      "usePlate": false,
+      "logoDisabled": false,
+      "faIcon": "fa-solid fa-calendar-days"
+    },
+    "scheduleURLs": [
+      "http://www.drupal-dev-days.de/de/program"
+    ],
+    "other_urls": [
+      "http://www.drupal-dev-days.de/de/about",
+      "http://www.drupal-dev-days.de/de/sessions/listing",
+      "http://www.drupal-dev-days.de/de/sponsors",
+      "http://www.drupal-dev-days.de/en/infos",
+      "http://www.drupal-dev-days.de/en/infos/travel",
+      "http://www.drupal-dev-days.de/en/infos/accomodation",
+      "http://www.drupal-dev-days.de/de/attendees",
+      "http://www.drupal-dev-days.de/de/faq",
+      "http://www.drupal-dev-days.de/en/news"
+    ],
+    "flickr": {
+      "enabled": false,
+      "groupUrl": "",
+      "image": "",
+      "imageAlt": "Drupal Developer Days Munich 2010 photos"
+    },
+    "sponsors": [
+      {
+        "id": "attempto",
+        "title": "attempto",
+        "tier": "Gold",
+        "row": 1,
+        "priority": 10,
+        "image": "",
+        "imageAlt": "attempto logo",
+        "link": "http://www.attempto.eu/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd10-sponsors"
+        ]
+      },
+      {
+        "id": "microsoft",
+        "title": "Microsoft",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 10,
+        "image": "",
+        "imageAlt": "Microsoft logo",
+        "link": "http://go.microsoft.com/?linkid=9724546",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd10-sponsors"
+        ]
+      },
+      {
+        "id": "erdfisch",
+        "title": "erdfisch",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 20,
+        "image": "",
+        "imageAlt": "erdfisch logo",
+        "link": "http://www.erdfisch.de",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd10-sponsors"
+        ]
+      },
+      {
+        "id": "mayflower",
+        "title": "Mayflower",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 30,
+        "image": "",
+        "imageAlt": "Mayflower logo",
+        "link": "http://www.mayflower.de",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd10-sponsors"
+        ]
+      },
+      {
+        "id": "stemmer-kuchl",
+        "title": "Stemmer Kuchl",
+        "tier": "Silver",
+        "row": 2,
+        "priority": 40,
+        "image": "",
+        "imageAlt": "Stemmer Kuchl logo",
+        "link": "http://www.stemmerhof.de/markt-suppen.html",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd10-sponsors"
+        ]
+      },
+      {
+        "id": "comm-press",
+        "title": "comm-press",
+        "tier": "Bronze",
+        "row": 3,
+        "priority": 10,
+        "image": "",
+        "imageAlt": "comm-press logo",
+        "link": "http://www.comm-press.de",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd10-sponsors"
+        ]
+      },
+      {
+        "id": "ouest-systemes-informatiques",
+        "title": "Ouest Systemes Informatiques",
+        "tier": "Bronze",
+        "row": 3,
+        "priority": 20,
+        "image": "",
+        "imageAlt": "Ouest Systemes Informatiques logo",
+        "link": "http://www.osinet.eu",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd10-sponsors"
+        ]
+      },
+      {
+        "id": "data-in-transit",
+        "title": "data in transit",
+        "tier": "Bronze",
+        "row": 3,
+        "priority": 30,
+        "image": "",
+        "imageAlt": "data in transit logo",
+        "link": "http://www.dataintransit.com",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd10-sponsors"
+        ]
+      },
+      {
+        "id": "4commerce-ag",
+        "title": "4commerce AG",
+        "tier": "Bronze",
+        "row": 3,
+        "priority": 40,
+        "image": "",
+        "imageAlt": "4commerce AG logo",
+        "link": "http://www.4commerce.de",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd10-sponsors"
+        ]
+      },
+      {
+        "id": "o-reilly",
+        "title": "O'Reilly",
+        "tier": "Bronze",
+        "row": 3,
+        "priority": 50,
+        "image": "",
+        "imageAlt": "O'Reilly logo",
+        "link": "http://www.oreilly.de",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd10-sponsors"
+        ]
+      },
+      {
+        "id": "domainfactory",
+        "title": "domainfactory",
+        "tier": "Bronze",
+        "row": 3,
+        "priority": 60,
+        "image": "",
+        "imageAlt": "domainfactory logo",
+        "link": "http://www.df.eu/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd10-sponsors"
+        ]
+      },
+      {
+        "id": "undpaul-de",
+        "title": "undpaul.de",
+        "tier": "Bronze",
+        "row": 3,
+        "priority": 70,
+        "image": "",
+        "imageAlt": "undpaul.de logo",
+        "link": "http://www.undpaul.de",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd10-sponsors"
+        ]
+      },
+      {
+        "id": "realmaker-de",
+        "title": "realmaker.de",
+        "tier": "Bronze",
+        "row": 3,
+        "priority": 80,
+        "image": "",
+        "imageAlt": "realmaker.de logo",
+        "link": "http://realmaker.de/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd10-sponsors"
+        ]
+      },
+      {
+        "id": "anangu",
+        "title": "anangu",
+        "tier": "Bronze",
+        "row": 3,
+        "priority": 90,
+        "image": "",
+        "imageAlt": "anangu logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd10-sponsors"
+        ]
+      },
+      {
+        "id": "walthers",
+        "title": "walthers",
+        "tier": "Bronze",
+        "row": 3,
+        "priority": 100,
+        "image": "",
+        "imageAlt": "walthers logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "ddd10-sponsors"
+        ]
+      },
+      {
+        "title": "A Test Sponsor",
+        "tier": "Gold",
+        "note": "with a comma, a \"quote\" and <html>",
+        "id": "FIXED_ID"
+      }
+    ],
+    "sources": [
+      {
+        "id": "ddd10-program",
+        "kind": "schedule",
+        "url": "http://www.drupal-dev-days.de/de/program",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20111102155236",
+          "captureUrl": "https://web.archive.org/web/20111102155236/http://www.drupal-dev-days.de/de/program"
+        },
+        "notes": "The whole programme as one grid: a table per day, rooms across the top, the start time down the side, and each cell giving the session’s language, title, presenter and difficulty. Five of the six rooms are named for sponsors — Attempto, Microsoft, Erdfisch, Mayflower and Stemmerkuchl — alongside a Hacker Room. Times are written inconsistently in the source (\"900\" and \"945\" beside \"10:00\") and are normalised here. Only captures from before 2012 are usable: the domain lapsed and every later snapshot is a parking page that still answers 200, which is a trap worth naming."
+      },
+      {
+        "id": "ddd10-about",
+        "kind": "other",
+        "url": "http://www.drupal-dev-days.de/de/about",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100512191629",
+          "captureUrl": "https://web.archive.org/web/20100512191629/http://www.drupal-dev-days.de/de/about"
+        },
+        "notes": "The organisers describe this as \"das erste deutschsprachige DrupalCamp\" — the first German-language DrupalCamp — for developers and theme developers, aimed at strengthening the Drupal network across Germany, Austria and Switzerland, with room for around 350 people. That is worth stating plainly next to two later claims in this series: Brussels 2011 called itself \"the first European Drupal Developer Days conference\", and Barcelona 2012 called itself the second edition, \"the first one took place in Brussels\". Munich predates both and ran under the Developer Days name, but as a German-speaking regional event; the later editions were counting the pan-European series. All three statements are true as written."
+      },
+      {
+        "id": "ddd10-infos",
+        "kind": "venue",
+        "url": "http://www.drupal-dev-days.de/en/infos",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20111118060808",
+          "captureUrl": "https://web.archive.org/web/20111118060808/http://www.drupal-dev-days.de/en/infos"
+        },
+        "notes": "Campus Lothstraße of the Hochschule München, the co-organiser, 8–9 May 2010 — conference rooms for sessions, seminar rooms for ad-hoc sessions, code sprints and workshops, and \"a welcoming foyer in a typical Drupal blue\". Registration opened the evening before at the EineWeltHaus."
+      },
+      {
+        "id": "ddd10-sponsors",
+        "kind": "sponsors",
+        "url": "http://www.drupal-dev-days.de/de/sponsors",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20111222022636",
+          "captureUrl": "https://web.archive.org/web/20111222022636/http://www.drupal-dev-days.de/de/sponsors"
+        },
+        "notes": "Gold, Silver and Bronze tiers, plus a list of individual sponsors given as links to their user profiles rather than as logos. The page shows logos with no company names, so the names here come from each sponsor’s own page on the site. The Gold and Silver sponsors are exactly the five names the session rooms were given. No logo is recorded: the sponsor images live under an unusual path that repeats the hostname (imagecache/sponsor_logo_N/sites/www.drupal-dev-days.de/files/sponsor_logos/…), and every Wayback capture of that directory is a 404 taken in 2012, after the domain had lapsed. The logos were never archived, so the sponsors are recorded by name, tier and website only."
+      },
+      {
+        "id": "ddd10-node_244",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/244",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100325172246",
+          "captureUrl": "https://web.archive.org/web/20100325172246/http://www.drupal-dev-days.de/de/node/244"
+        }
+      },
+      {
+        "id": "ddd10-node_340",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/340",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100508151300",
+          "captureUrl": "https://web.archive.org/web/20100508151300/http://www.drupal-dev-days.de/de/node/340"
+        }
+      },
+      {
+        "id": "ddd10-node_345",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/345",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100909151621",
+          "captureUrl": "https://web.archive.org/web/20100909151621/http://www.drupal-dev-days.de/de/node/345"
+        }
+      },
+      {
+        "id": "ddd10-node_363",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/363",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100325172252",
+          "captureUrl": "https://web.archive.org/web/20100325172252/http://www.drupal-dev-days.de/de/node/363"
+        }
+      },
+      {
+        "id": "ddd10-node_423",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/423",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100508151302",
+          "captureUrl": "https://web.archive.org/web/20100508151302/http://www.drupal-dev-days.de/de/node/423"
+        }
+      },
+      {
+        "id": "ddd10-node_424",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/424",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100509185837",
+          "captureUrl": "https://web.archive.org/web/20100509185837/http://www.drupal-dev-days.de/de/node/424"
+        }
+      },
+      {
+        "id": "ddd10-node_432",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/432",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100506040446",
+          "captureUrl": "https://web.archive.org/web/20100506040446/http://www.drupal-dev-days.de/de/node/432"
+        }
+      },
+      {
+        "id": "ddd10-node_433",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/433",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100828142936",
+          "captureUrl": "https://web.archive.org/web/20100828142936/http://www.drupal-dev-days.de/de/node/433"
+        }
+      },
+      {
+        "id": "ddd10-node_434",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/434",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100330075054",
+          "captureUrl": "https://web.archive.org/web/20100330075054/http://www.drupal-dev-days.de/de/node/434"
+        }
+      },
+      {
+        "id": "ddd10-node_435",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/435",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100510004210",
+          "captureUrl": "https://web.archive.org/web/20100510004210/http://www.drupal-dev-days.de/de/node/435"
+        }
+      },
+      {
+        "id": "ddd10-node_491",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/491",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100415063556",
+          "captureUrl": "https://web.archive.org/web/20100415063556/http://www.drupal-dev-days.de/de/node/491"
+        }
+      },
+      {
+        "id": "ddd10-node_503",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/503",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110507233634",
+          "captureUrl": "https://web.archive.org/web/20110507233634/http://www.drupal-dev-days.de/de/node/503"
+        }
+      },
+      {
+        "id": "ddd10-node_504",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/504",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110831232337",
+          "captureUrl": "https://web.archive.org/web/20110831232337/http://www.drupal-dev-days.de/de/node/504"
+        }
+      },
+      {
+        "id": "ddd10-node_542",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/542",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100510011542",
+          "captureUrl": "https://web.archive.org/web/20100510011542/http://www.drupal-dev-days.de/de/node/542"
+        }
+      },
+      {
+        "id": "ddd10-node_550",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/550",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100422140153",
+          "captureUrl": "https://web.archive.org/web/20100422140153/http://www.drupal-dev-days.de/de/node/550"
+        }
+      },
+      {
+        "id": "ddd10-node_603",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/603",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100510011547",
+          "captureUrl": "https://web.archive.org/web/20100510011547/http://www.drupal-dev-days.de/de/node/603"
+        }
+      },
+      {
+        "id": "ddd10-node_639",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/639",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100509115251",
+          "captureUrl": "https://web.archive.org/web/20100509115251/http://www.drupal-dev-days.de/de/node/639"
+        }
+      },
+      {
+        "id": "ddd10-node_640",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/640",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20111118061055",
+          "captureUrl": "https://web.archive.org/web/20111118061055/http://www.drupal-dev-days.de/de/node/640"
+        }
+      },
+      {
+        "id": "ddd10-node_641",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/641",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110509213742",
+          "captureUrl": "https://web.archive.org/web/20110509213742/http://www.drupal-dev-days.de/de/node/641"
+        }
+      },
+      {
+        "id": "ddd10-node_647",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/647",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100510011557",
+          "captureUrl": "https://web.archive.org/web/20100510011557/http://www.drupal-dev-days.de/de/node/647"
+        }
+      },
+      {
+        "id": "ddd10-node_648",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/648",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100504015338",
+          "captureUrl": "https://web.archive.org/web/20100504015338/http://www.drupal-dev-days.de/de/node/648"
+        }
+      },
+      {
+        "id": "ddd10-node_649",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/649",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100506040506",
+          "captureUrl": "https://web.archive.org/web/20100506040506/http://www.drupal-dev-days.de/de/node/649"
+        }
+      },
+      {
+        "id": "ddd10-node_650",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/650",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100505171201",
+          "captureUrl": "https://web.archive.org/web/20100505171201/http://www.drupal-dev-days.de/de/node/650"
+        }
+      },
+      {
+        "id": "ddd10-node_651",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/651",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100504022318",
+          "captureUrl": "https://web.archive.org/web/20100504022318/http://www.drupal-dev-days.de/de/node/651"
+        }
+      },
+      {
+        "id": "ddd10-node_652",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/652",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100505171206",
+          "captureUrl": "https://web.archive.org/web/20100505171206/http://www.drupal-dev-days.de/de/node/652"
+        }
+      },
+      {
+        "id": "ddd10-node_653",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/653",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20111201145457",
+          "captureUrl": "https://web.archive.org/web/20111201145457/http://www.drupal-dev-days.de/de/node/653"
+        }
+      },
+      {
+        "id": "ddd10-node_655",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/655",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100504022324",
+          "captureUrl": "https://web.archive.org/web/20100504022324/http://www.drupal-dev-days.de/de/node/655"
+        }
+      },
+      {
+        "id": "ddd10-node_657",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/657",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100506040512",
+          "captureUrl": "https://web.archive.org/web/20100506040512/http://www.drupal-dev-days.de/de/node/657"
+        }
+      },
+      {
+        "id": "ddd10-node_658",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/658",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100510032017",
+          "captureUrl": "https://web.archive.org/web/20100510032017/http://www.drupal-dev-days.de/de/node/658"
+        }
+      },
+      {
+        "id": "ddd10-node_659",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/659",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100509011430",
+          "captureUrl": "https://web.archive.org/web/20100509011430/http://www.drupal-dev-days.de/de/node/659"
+        }
+      },
+      {
+        "id": "ddd10-node_660",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/660",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100903155857",
+          "captureUrl": "https://web.archive.org/web/20100903155857/http://www.drupal-dev-days.de/de/node/660"
+        }
+      },
+      {
+        "id": "ddd10-node_661",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/661",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100508150353",
+          "captureUrl": "https://web.archive.org/web/20100508150353/http://www.drupal-dev-days.de/de/node/661"
+        }
+      },
+      {
+        "id": "ddd10-node_662",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/node/662",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100505144948",
+          "captureUrl": "https://web.archive.org/web/20100505144948/http://www.drupal-dev-days.de/de/node/662"
+        }
+      },
+      {
+        "id": "ddd10-sessions_brainstorming-über-dezentrale-systeme",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/brainstorming-%25C3%25BCber-dezentrale-systeme",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100504043247",
+          "captureUrl": "https://web.archive.org/web/20100504043247/http://www.drupal-dev-days.de/de/sessions/brainstorming-%25C3%25BCber-dezentrale-systeme"
+        }
+      },
+      {
+        "id": "ddd10-sessions_d7cx-codesprint",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/d7cx-codesprint",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100904010023",
+          "captureUrl": "https://web.archive.org/web/20100904010023/http://www.drupal-dev-days.de/de/sessions/d7cx-codesprint"
+        }
+      },
+      {
+        "id": "ddd10-sessions_dokumentation-von-drupalprojekten",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/dokumentation-von-drupalprojekten",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100325172307",
+          "captureUrl": "https://web.archive.org/web/20100325172307/http://www.drupal-dev-days.de/de/sessions/dokumentation-von-drupalprojekten"
+        }
+      },
+      {
+        "id": "ddd10-sessions_drupal-and-ubercart-social-commerce-systems",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/drupal-and-ubercart-social-commerce-systems",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100305105032",
+          "captureUrl": "https://web.archive.org/web/20100305105032/http://www.drupal-dev-days.de/de/sessions/drupal-and-ubercart-social-commerce-systems"
+        }
+      },
+      {
+        "id": "ddd10-sessions_drupal-cloud",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/drupal-cloud",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20101116024446",
+          "captureUrl": "https://web.archive.org/web/20101116024446/http://www.drupal-dev-days.de/de/sessions/drupal-cloud"
+        }
+      },
+      {
+        "id": "ddd10-sessions_drupal-enterprise-environment-tragbar-lohnenswert-oder-gar-konkurrenzfähig",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/drupal-enterprise-environment-tragbar-lohnenswert-oder-gar-konkurrenzf%25C3%25A4hig",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100323063251",
+          "captureUrl": "https://web.archive.org/web/20100323063251/http://www.drupal-dev-days.de/de/sessions/drupal-enterprise-environment-tragbar-lohnenswert-oder-gar-konkurrenzf%25C3%25A4hig"
+        }
+      },
+      {
+        "id": "ddd10-sessions_drupal-entwicklung-für-nicht-entwickler",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/drupal-entwicklung-f%25C3%25BCr-nicht-entwickler",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100519111135",
+          "captureUrl": "https://web.archive.org/web/20100519111135/http://www.drupal-dev-days.de/de/sessions/drupal-entwicklung-f%25C3%25BCr-nicht-entwickler"
+        }
+      },
+      {
+        "id": "ddd10-sessions_drupal-seo-suchmaschinen-optimierung-für-google-co",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/drupal-seo-suchmaschinen-optimierung-f%25C3%25BCr-google-co",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20111222022839",
+          "captureUrl": "https://web.archive.org/web/20111222022839/http://www.drupal-dev-days.de/de/sessions/drupal-seo-suchmaschinen-optimierung-f%25C3%25BCr-google-co"
+        }
+      },
+      {
+        "id": "ddd10-sessions_drupal-themes-dynamisch-mit-themekey-steuern",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/drupal-themes-dynamisch-mit-themekey-steuern",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110809120245",
+          "captureUrl": "https://web.archive.org/web/20110809120245/http://www.drupal-dev-days.de/de/sessions/drupal-themes-dynamisch-mit-themekey-steuern"
+        }
+      },
+      {
+        "id": "ddd10-sessions_drupalorg-hardware-software-pläne",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/drupalorg-hardware-software-pl%25C3%25A4ne",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100416203901",
+          "captureUrl": "https://web.archive.org/web/20100416203901/http://www.drupal-dev-days.de/de/sessions/drupalorg-hardware-software-pl%25C3%25A4ne"
+        }
+      },
+      {
+        "id": "ddd10-sessions_drush-und-multisite-drushmulti",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/drush-und-multisite-drushmulti",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100417075414",
+          "captureUrl": "https://web.archive.org/web/20100417075414/http://www.drupal-dev-days.de/de/sessions/drush-und-multisite-drushmulti"
+        }
+      },
+      {
+        "id": "ddd10-sessions_features",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/features",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20101020210511",
+          "captureUrl": "https://web.archive.org/web/20101020210511/http://www.drupal-dev-days.de/de/sessions/features"
+        }
+      },
+      {
+        "id": "ddd10-sessions_git-mal-ganz-einfach-und-praktisch",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/git-mal-ganz-einfach-und-praktisch",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100316052937",
+          "captureUrl": "https://web.archive.org/web/20100316052937/http://www.drupal-dev-days.de/de/sessions/git-mal-ganz-einfach-und-praktisch"
+        }
+      },
+      {
+        "id": "ddd10-sessions_howtodo-impossible-drupal-scalable",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/howtodo-impossible-drupal-scalable",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110110213748",
+          "captureUrl": "https://web.archive.org/web/20110110213748/http://www.drupal-dev-days.de/de/sessions/howtodo-impossible-drupal-scalable"
+        }
+      },
+      {
+        "id": "ddd10-sessions_instant-drupal-auf-amazon-ec2",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/instant-drupal-auf-amazon-ec2",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100509185842",
+          "captureUrl": "https://web.archive.org/web/20100509185842/http://www.drupal-dev-days.de/de/sessions/instant-drupal-auf-amazon-ec2"
+        }
+      },
+      {
+        "id": "ddd10-sessions_jetzt-gibt-es-action-trigger-workflow-und-rules",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/jetzt-gibt-es-action-trigger-workflow-und-rules",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100323001111",
+          "captureUrl": "https://web.archive.org/web/20100323001111/http://www.drupal-dev-days.de/de/sessions/jetzt-gibt-es-action-trigger-workflow-und-rules"
+        }
+      },
+      {
+        "id": "ddd10-sessions_jquery-und-drupal-kleine-library-grosse-wirkung",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/jquery-und-drupal-kleine-library-grosse-wirkung",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100508151325",
+          "captureUrl": "https://web.archive.org/web/20100508151325/http://www.drupal-dev-days.de/de/sessions/jquery-und-drupal-kleine-library-grosse-wirkung"
+        }
+      },
+      {
+        "id": "ddd10-sessions_keynote-warum-php-sich-rechnet",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/keynote-warum-php-sich-rechnet",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110905202344",
+          "captureUrl": "https://web.archive.org/web/20110905202344/http://www.drupal-dev-days.de/de/sessions/keynote-warum-php-sich-rechnet"
+        }
+      },
+      {
+        "id": "ddd10-sessions_khairn-projekte-managen-mit-drupal",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/khairn-projekte-managen-mit-drupal",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100821203403",
+          "captureUrl": "https://web.archive.org/web/20100821203403/http://www.drupal-dev-days.de/de/sessions/khairn-projekte-managen-mit-drupal"
+        }
+      },
+      {
+        "id": "ddd10-sessions_mysql-performance-optimisation-and-scaling",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/mysql-performance-optimisation-and-scaling",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100509185847",
+          "captureUrl": "https://web.archive.org/web/20100509185847/http://www.drupal-dev-days.de/de/sessions/mysql-performance-optimisation-and-scaling"
+        }
+      },
+      {
+        "id": "ddd10-sessions_nicht-englischsprachige-und-mehrsprachige-suche-mit-apache-solr-multilingual",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/nicht-englischsprachige-und-mehrsprachige-suche-mit-apache-solr-multilingual",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20111217043903",
+          "captureUrl": "https://web.archive.org/web/20111217043903/http://www.drupal-dev-days.de/de/sessions/nicht-englischsprachige-und-mehrsprachige-suche-mit-apache-solr-multilingual"
+        }
+      },
+      {
+        "id": "ddd10-sessions_power-panel-der-richtige-einsatz-von-panels",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/power-panel-der-richtige-einsatz-von-panels",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100417073442",
+          "captureUrl": "https://web.archive.org/web/20100417073442/http://www.drupal-dev-days.de/de/sessions/power-panel-der-richtige-einsatz-von-panels"
+        }
+      },
+      {
+        "id": "ddd10-sessions_rein-raus-fertig-datenaustausch-zwischen-drupal-websites",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/rein-raus-fertig-datenaustausch-zwischen-drupal-websites",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110509202117",
+          "captureUrl": "https://web.archive.org/web/20110509202117/http://www.drupal-dev-days.de/de/sessions/rein-raus-fertig-datenaustausch-zwischen-drupal-websites"
+        }
+      },
+      {
+        "id": "ddd10-sessions_scrum-erste-schritte",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/scrum-erste-schritte",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100325172317",
+          "captureUrl": "https://web.archive.org/web/20100325172317/http://www.drupal-dev-days.de/de/sessions/scrum-erste-schritte"
+        }
+      },
+      {
+        "id": "ddd10-sessions_showcase-meinkika-die-kinderkanal-community",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/showcase-meinkika-die-kinderkanal-community",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110518041423",
+          "captureUrl": "https://web.archive.org/web/20110518041423/http://www.drupal-dev-days.de/de/sessions/showcase-meinkika-die-kinderkanal-community"
+        }
+      },
+      {
+        "id": "ddd10-sessions_showcase-schweizer-illustriertech-die-eidgenössische-ausgabe-von-buntede",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/showcase-schweizer-illustriertech-die-eidgen%25C3%25B6ssische-ausgabe-von-buntede",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100422140029",
+          "captureUrl": "https://web.archive.org/web/20100422140029/http://www.drupal-dev-days.de/de/sessions/showcase-schweizer-illustriertech-die-eidgen%25C3%25B6ssische-ausgabe-von-buntede"
+        }
+      },
+      {
+        "id": "ddd10-sessions_usergroups-zusammenschweissen-von-null-auf-drupalcamp-18-monaten",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/usergroups-zusammenschweissen-von-null-auf-drupalcamp-18-monaten",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100409112307",
+          "captureUrl": "https://web.archive.org/web/20100409112307/http://www.drupal-dev-days.de/de/sessions/usergroups-zusammenschweissen-von-null-auf-drupalcamp-18-monaten"
+        }
+      },
+      {
+        "id": "ddd10-sessions_views-2-workshop-für-anfänger",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/views-2-workshop-f%25C3%25BCr-anf%25C3%25A4nger",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20111003204307",
+          "captureUrl": "https://web.archive.org/web/20111003204307/http://www.drupal-dev-days.de/de/sessions/views-2-workshop-f%25C3%25BCr-anf%25C3%25A4nger"
+        }
+      },
+      {
+        "id": "ddd10-sessions_views-3-0",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/views-3-0",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110221044657",
+          "captureUrl": "https://web.archive.org/web/20110221044657/http://www.drupal-dev-days.de/de/sessions/views-3-0"
+        }
+      },
+      {
+        "id": "ddd10-sessions_virtualisierung-software-entwicklung",
+        "kind": "sessions",
+        "url": "http://www.drupal-dev-days.de/de/sessions/virtualisierung-software-entwicklung",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20100506040516",
+          "captureUrl": "https://web.archive.org/web/20100506040516/http://www.drupal-dev-days.de/de/sessions/virtualisierung-software-entwicklung"
+        }
+      },
+      {
+        "id": "ddd10-youtube",
+        "kind": "video",
+        "url": "https://www.youtube.com/playlist?list=PLza5NTXQjgP8B_y9roDvaPbYJOcx2J7q2",
+        "retrievedAt": "2026-08-25",
+        "notes": "The series channel’s 2010 playlist holds one clip and it is not a session: \"Dries, join us at Drupal Developer Days 2010 in Munich!\", an invitation filmed before the event. No talks from this edition appear to have been recorded."
+      }
+    ],
+    "sourceIds": [
+      "ddd10-about",
+      "ddd10-infos",
+      "ddd10-youtube"
+    ],
+    "videoPlaylist": "https://www.youtube.com/playlist?list=PLza5NTXQjgP8B_y9roDvaPbYJOcx2J7q2"
+  },
+  "items": [
+    {
+      "startTime": "2010-05-07T16:00:00.000Z",
+      "endTime": "2010-05-07T17:00:00.000Z",
+      "duration": "P60M",
+      "title": "Registration at EineWeltHaus",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "Kennzeichnung:\n\n                    Freitag\n\n      Slot:\n\n                    18:00\n\nTo avoid long lines an Saturday morning, you can pre-register on Friday, starting 18:30 at the \"WeltWirtschaft\" Pub in the \"EineWeltHaus\", Schwanthalerstraße 80 (*not* the main venue!!!).\n\n18:30 - 21:00\n\nPre-Registration\n\n\"WeltWirtschaft\" Pub in the \"EineWeltHaus\"\n\nSchwanthalerstraße 80\n\nMünchen\n\n[](http://maps.google.de/maps?client=safari&rls=en&oe=UTF-8&redir_esc=&q=schwanthalerstr+80,+münchen&um=1&ie=UTF-8&hq=&hnear=Schwanthalerstraße+80,+D-80336+München&gl=de&ei=PVncS_4Pjfk5zorV7gY&sa=X&oi=geocode_result&ct=image&resnum=1&ved=0CAsQ8gEwAA)\n\n- [ Deutsch](/de/node/655)\n\n- [ English](/en/node/655)\n\n[ Helfer Gesucht!](/de/helfer-anmeldung)\n\n Webseite durchsuchen:\n\nNewsletter\n\n Email: *\n\n  Abonnieren\n\n  Abbestellen\n\nOrganized by\n\n                [](/de/sponsors/squatlabs)\n\n                [](/de/sponsors/now-solutions)\n\n                [](/de/sponsors/gloggworks)\n\n                [](/de/sponsors/jenbach-media)\n\n                [](/de/sponsors/happy-pixels)\n\n                [](/de/sponsors/ramona-fischer)\n\n                [](/de/matuk)\n\n                [](/de/sponsors/design-frei)\n\n                [](/de/sponsors/daniel-nolde-drupal-expertise-muc)\n\n                [](/en/sponsors/hochschule-f%C3%BCr-angewandte-wissenschaften)\n\n                [](/de/sponsors/attempto)\n\n                [](/de/sponsors/erdfisch)\n\n                [](/de/sponsors/microsoft)\n\n                [](/de/sponsors/mayflower)\n\n                [](/de/sponsors/walthers)\n\n                [](/de/sponsors/anangu)\n\n                [](/de/sponsors/ouest-systemes-informatiques)\n\n                [](/de/sponsors/comm-press)\n\n                [](/de/sponsors/4commerce-ag)\n\n                [](/de/sponsors/oreilly)\n\n                [](/de/sponsors/domainfactory)\n\n                [](/de/sponsors/undpaulde)\n\n                [](/de/sponsors/data-transit)\n\n                [](/en/sponsors/acquia)\n\n- [Impressum](/de/impressum)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/655",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_655"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T07:00:00.000Z",
+      "endTime": "2010-05-08T07:45:00.000Z",
+      "duration": "P45M",
+      "title": "Anmeldung / Registration",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "Kennzeichnung:\n\n                    Samstag\n\n      Slot:\n\n                    900\n\n- [ Deutsch](/de/node/648)\n\n- [ English](/en/node/648)\n\n[ Helfer Gesucht!](/de/helfer-anmeldung)\n\n Webseite durchsuchen:\n\nNewsletter\n\n Email: *\n\n  Abonnieren\n\n  Abbestellen\n\nOrganized by\n\n                [](/de/sponsors/squatlabs)\n\n                [](/de/sponsors/jenbach-media)\n\n                [](/de/sponsors/happy-pixels)\n\n                [](/de/sponsors/design-frei)\n\n                [](/de/sponsors/daniel-nolde-drupal-expertise-muc)\n\n                [](/de/sponsors/now-solutions)\n\n                [](/de/sponsors/ramona-fischer)\n\n                [](/de/matuk)\n\n                [](/de/sponsors/gloggworks)\n\n                [](/en/sponsors/hochschule-f%C3%BCr-angewandte-wissenschaften)\n\n                [](/de/sponsors/attempto)\n\n                [](/de/sponsors/erdfisch)\n\n                [](/de/sponsors/microsoft)\n\n                [](/de/sponsors/mayflower)\n\n                [](/de/sponsors/walthers)\n\n                [](/de/sponsors/data-transit)\n\n                [](/de/sponsors/domainfactory)\n\n                [](/en/sponsors/acquia)\n\n                [](/de/sponsors/4commerce-ag)\n\n                [](/de/sponsors/comm-press)\n\n                [](/de/sponsors/undpaulde)\n\n                [](/de/sponsors/anangu)\n\n                [](/de/sponsors/oreilly)\n\n                [](/de/sponsors/ouest-systemes-informatiques)\n\n- [Impressum](/de/impressum)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/648",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_648"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T07:45:00.000Z",
+      "endTime": "2010-05-08T08:00:00.000Z",
+      "duration": "P15M",
+      "title": "Öffnungssession / Opening Session",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "Kennzeichnung:\n\n                    Samstag\n\n      Slot:\n\n                    945\n\n- [ Deutsch](/de/node/651)\n\n- [ English](/en/node/651)\n\n[ Helfer Gesucht!](/de/helfer-anmeldung)\n\n Webseite durchsuchen:\n\nNewsletter\n\n Email: *\n\n  Abonnieren\n\n  Abbestellen\n\nOrganized by\n\n                [](/de/sponsors/now-solutions)\n\n                [](/de/sponsors/jenbach-media)\n\n                [](/de/matuk)\n\n                [](/de/sponsors/daniel-nolde-drupal-expertise-muc)\n\n                [](/de/sponsors/ramona-fischer)\n\n                [](/de/sponsors/happy-pixels)\n\n                [](/de/sponsors/squatlabs)\n\n                [](/de/sponsors/design-frei)\n\n                [](/de/sponsors/gloggworks)\n\n                [](/en/sponsors/hochschule-f%C3%BCr-angewandte-wissenschaften)\n\n                [](/de/sponsors/attempto)\n\n                [](/de/sponsors/erdfisch)\n\n                [](/de/sponsors/mayflower)\n\n                [](/de/sponsors/microsoft)\n\n                [](/de/sponsors/oreilly)\n\n                [](/de/sponsors/domainfactory)\n\n                [](/de/sponsors/comm-press)\n\n                [](/de/sponsors/data-transit)\n\n                [](/en/sponsors/acquia)\n\n                [](/de/sponsors/anangu)\n\n                [](/de/sponsors/ouest-systemes-informatiques)\n\n                [](/de/sponsors/4commerce-ag)\n\n                [](/de/sponsors/undpaulde)\n\n                [](/de/sponsors/walthers)\n\n- [Impressum](/de/impressum)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/651",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_651"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T08:00:00.000Z",
+      "endTime": "2010-05-08T09:00:00.000Z",
+      "duration": "P60M",
+      "title": "BoF / Code Sprint",
+      "location": "Hacker Room",
+      "track": [],
+      "speakers": [],
+      "full_description": "Kennzeichnung:\n\n                    Samstag\n\n      Slot:\n\n                    10:00\n\n                    11:00\n\n                    12:00\n\n                    14:00\n\n                    15:00\n\n                    16:00\n\n                    17:00\n\n- [ Deutsch](/de/node/660)\n\n- [ English](/en/node/660)\n\n Webseite durchsuchen:\n\nNewsletter\n\n Email: *\n\n  Abonnieren\n\n  Abbestellen\n\nOrganized by\n\n                [](/de/sponsors/jenbach-media)\n\n                [](/de/sponsors/squatlabs)\n\n                [](/de/matuk)\n\n                [](/de/sponsors/happy-pixels)\n\n                [](/de/sponsors/ramona-fischer)\n\n                [](/de/sponsors/design-frei)\n\n                [](/de/sponsors/now-solutions)\n\n                [](/de/sponsors/daniel-nolde-drupal-expertise-muc)\n\n                [](/de/sponsors/gloggworks)\n\n                [](/de/sponsors/attempto)\n\n                [](/en/sponsors/hochschule-f%C3%BCr-angewandte-wissenschaften)\n\n                [](/de/sponsors/mayflower)\n\n                [](/de/sponsors/microsoft)\n\n                [](/de/sponsors/stemmer-kuchl)\n\n                [](/de/sponsors/erdfisch)\n\n                [](/de/sponsors/walthers)\n\n                [](/de/sponsors/anangu)\n\n                [](/de/sponsors/undpaulde)\n\n                [](/de/sponsors/oreilly)\n\n                [](/de/sponsors/ouest-systemes-informatiques)\n\n                [](/de/sponsors/realmakerde)\n\n                [](/de/sponsors/4commerce-ag)\n\n                [](/de/sponsors/comm-press)\n\n                [](/de/sponsors/data-transit)\n\n                [](/de/sponsors/domainfactory)\n\n                [](/en/sponsors/acquia)\n\n- [Impressum](/de/impressum)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/660",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_660"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2010-05-08T08:00:00.000Z",
+      "endTime": "2010-05-08T08:45:00.000Z",
+      "duration": "P45M",
+      "title": "Customizing Drupal",
+      "location": "Erdfisch",
+      "track": [],
+      "speakers": [
+        "daniel",
+        "florian"
+      ],
+      "full_description": "There's a common saying among Drupal developers: \"Every time you hack core, god kills a kitten\", but what is the alternative to get 100% of the functionality you need without modifying Drupal core or contrib module? In this presentation I'll show you a few tips and general principles for getting what you want out of Drupal's APIs. There will be lots of examples from real-life cases, feel free to bring your own as well.\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/363",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_363"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T08:00:00.000Z",
+      "endTime": "2010-05-08T08:45:00.000Z",
+      "duration": "P45M",
+      "title": "Drupal in the Cloud",
+      "location": "Mayflower",
+      "track": [],
+      "speakers": [
+        "freistil"
+      ],
+      "full_description": "In dieser Präsentation gebe ich einen Überblick über die Anforderungen und Lösungsansätze für eine hochgradig leistungsfähige und skalierbare Drupal-Umgebung. Daran anknüpfend gebe ich einen Einblick, wie diese Ansätze auf einer Cloud-Plattform wie Amazon Web Services umgesetzt werden können.\n\nDen Vortrag kann ich wahlweise auf Deutsch oder auf Englisch halten.\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/drupal-cloud",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_drupal-cloud"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T08:00:00.000Z",
+      "endTime": "2010-05-08T08:45:00.000Z",
+      "duration": "P45M",
+      "title": "Drupal-Themes dynamisch mit ThemeKey steuern",
+      "location": "Microsoft",
+      "track": [],
+      "speakers": [
+        "mkalkbrenner"
+      ],
+      "full_description": "Mithilfe des Moduls [ThemeKey](http://drupal.org/project/themekey) ist es möglich, Regeln zu erstellen, nach denen eine Webseite dynamisch auf ein anderes Theme umschaltet. In Kombination mit Drupals Theme-Engine und deren Unterstützung von Vererbung innerhalb von Themes lassen sich damit auf einfache Weise interessante Anforderungen umsetzen:\n\n- optisch getrennte Kanäle (z.B. [ellviva.de](http://www.ellviva.de/))\n\n- die Startseite als Sonderfall\n\n- zeitlich begrenzte „Homepage-Einfärbung“ als Werbeform\n\n- ein Homepage-Redesign in einer Produktivumgebung testen\n\n- ein Weihnachts-Theme\n\n- angepasste Themes für mobile Endgeräte\n\n- angepasste Themes für „Problembrowser“\n\n- contenttypspezifische Themes\n\n- für den Nutzer deutlich „sichtbare“ Unterscheidung von Umgebungen wie Production, Staging, Testing, Sandbox, …\n\n- rollenbasierte Themes\n\n- …\n\nNach einer kurzen Vorstellung des Moduls ThemeKey und dessen Historie werden Lösungen für ausgewählte konkrete Anwendungsfälle nach dem Kochbuchprinzip demonstriert.\n\nDiesen Vortrag habe bereits Ende November 2009 beim Drupalcamp Wien gehalten. Zu diesem Zeitpunkt stand die Entwicklung von ThemeKey 6.x-2.x noch am Anfang. Aufgrund der vielen Verbesserungen in ThemeKey könnte der Vortrag also auch interessant sein, wenn man ersten bereits gehört hat ;)\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/drupal-themes-dynamisch-mit-themekey-steuern",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_drupal-themes-dynamisch-mit-themekey-steuern"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T08:00:00.000Z",
+      "endTime": "2010-05-08T09:00:00.000Z",
+      "duration": "P60M",
+      "title": "drupal.org: Hardware, Software, Pläne",
+      "location": "Stemmerkuchl",
+      "track": [],
+      "speakers": [
+        "killes"
+      ],
+      "full_description": "**Language:** Deutsch  \n**Difficulty:** Fortgeschritten",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/drupalorg-hardware-software-pl%C3%A4ne",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_drupalorg-hardware-software-pläne"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T08:00:00.000Z",
+      "endTime": "2010-05-08T08:45:00.000Z",
+      "duration": "P45M",
+      "title": "MySQL performance optimisation and scaling",
+      "location": "Attempto",
+      "track": [],
+      "speakers": [
+        "Johannes Schlüter"
+      ],
+      "full_description": "**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Fortgeschritten",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/mysql-performance-optimisation-and-scaling",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_mysql-performance-optimisation-and-scaling"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T09:00:00.000Z",
+      "endTime": "2010-05-08T10:00:00.000Z",
+      "duration": "P60M",
+      "title": "BoF / Code Sprint",
+      "location": "Hacker Room",
+      "track": [],
+      "speakers": [],
+      "full_description": "Kennzeichnung:\n\n                    Samstag\n\n      Slot:\n\n                    10:00\n\n                    11:00\n\n                    12:00\n\n                    14:00\n\n                    15:00\n\n                    16:00\n\n                    17:00\n\n- [ Deutsch](/de/node/660)\n\n- [ English](/en/node/660)\n\n Webseite durchsuchen:\n\nNewsletter\n\n Email: *\n\n  Abonnieren\n\n  Abbestellen\n\nOrganized by\n\n                [](/de/sponsors/jenbach-media)\n\n                [](/de/sponsors/squatlabs)\n\n                [](/de/matuk)\n\n                [](/de/sponsors/happy-pixels)\n\n                [](/de/sponsors/ramona-fischer)\n\n                [](/de/sponsors/design-frei)\n\n                [](/de/sponsors/now-solutions)\n\n                [](/de/sponsors/daniel-nolde-drupal-expertise-muc)\n\n                [](/de/sponsors/gloggworks)\n\n                [](/de/sponsors/attempto)\n\n                [](/en/sponsors/hochschule-f%C3%BCr-angewandte-wissenschaften)\n\n                [](/de/sponsors/mayflower)\n\n                [](/de/sponsors/microsoft)\n\n                [](/de/sponsors/stemmer-kuchl)\n\n                [](/de/sponsors/erdfisch)\n\n                [](/de/sponsors/walthers)\n\n                [](/de/sponsors/anangu)\n\n                [](/de/sponsors/undpaulde)\n\n                [](/de/sponsors/oreilly)\n\n                [](/de/sponsors/ouest-systemes-informatiques)\n\n                [](/de/sponsors/realmakerde)\n\n                [](/de/sponsors/4commerce-ag)\n\n                [](/de/sponsors/comm-press)\n\n                [](/de/sponsors/data-transit)\n\n                [](/de/sponsors/domainfactory)\n\n                [](/en/sponsors/acquia)\n\n- [Impressum](/de/impressum)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/660",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_660"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2010-05-08T09:00:00.000Z",
+      "endTime": "2010-05-08T09:45:00.000Z",
+      "duration": "P45M",
+      "title": "Drupal 7",
+      "location": "Attempto",
+      "track": [],
+      "speakers": [
+        "macode",
+        "Daniel Wehner"
+      ],
+      "full_description": "Drupal 7 is comming.\n\nThis talk is splited in 2 parts:\n\n- Drupal 7 for the User: redesigned admin UI, CCK in core, rewritten file and image handling and a bunch of former contrib modules in core\n\n- Drupal 7 for the Developer: FieldAPI, new theming engine, database abstration layer, and cleaned up api's!\n\nAnd if you are a developer we would like to invite you to [our D7 code sprint](http://www.drupal-dev-days.de/de/sessions/d7cx-hands-drupal7-codesprint)\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/340",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_340"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T09:00:00.000Z",
+      "endTime": "2010-05-08T09:45:00.000Z",
+      "duration": "P45M",
+      "title": "Instant-Drupal auf Amazon EC2",
+      "location": "Mayflower",
+      "track": [],
+      "speakers": [
+        "freistil"
+      ],
+      "full_description": "In dieser Session möchte ich demonstrieren, wie einfach eine komplette Drupal-Umgebung inklusive Caches und Solr-Suchmaschine auf einem virtuellen Server der Amazon Web Services in Betrieb genommen werden kann.\n\nDiese Demonstration kann ich sowohl auf Deutsch als auch auf Englisch halten.\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/instant-drupal-auf-amazon-ec2",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_instant-drupal-auf-amazon-ec2"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T09:00:00.000Z",
+      "endTime": "2010-05-08T09:45:00.000Z",
+      "duration": "P45M",
+      "title": "Jquery und Drupal: Kleine Library, grosse Wirkung",
+      "location": "Erdfisch",
+      "track": [],
+      "speakers": [
+        "christophe"
+      ],
+      "full_description": "Was ist JQuery? Brauch ich das?\n\nWas kann man damit machen? Lass uns spielen!\n\nDOM, CSS und JQuery: Wie man Seiten manipuliert.\n\nJQuery UI und andere Erweiterungen.\n\nIntegration in Drupal.\n\nAjax oder wie hole ich Daten vom Server, ohne die Seite nue zu laden.\n\nRessourcen und Plugins.\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Fortgeschritten",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/jquery-und-drupal-kleine-library-grosse-wirkung",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_jquery-und-drupal-kleine-library-grosse-wirkung"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T09:00:00.000Z",
+      "endTime": "2010-05-08T09:45:00.000Z",
+      "duration": "P45M",
+      "title": "Take control of your permission system - ACL and content access",
+      "location": "Microsoft",
+      "track": [],
+      "speakers": [
+        "Nick_vh"
+      ],
+      "full_description": "How to take control of the drupal access control mechanism in a easy and unobtrusive way!\n\nWhat will you see :\n\nContent Access module\n\n* Add permissions to content types/nodes for specific roles to view/edit it instead of the less flexible content type permissions\n\n* Some nice tweaks that make life easy\n\n* What are all those settings and why can I not get it?\n\nACL module\n\n* What is it? Why do I need it?\n\n* WHy doesn't it provide a GUI?\n\n* What does it contain and why should I look at this as a Drupal developer\n\n* So, in which case should I use it? For example you have a very fine grained access control system and in some nodes people have different permissions. This and much more!\n\nHands on! Let's take a look at an example module\n\n* Give you the possibility to leverage the drupal system easily\n\nThis and much more\n\nReferences  :\n\n[http://drupal.org/project/acl](http://drupal.org/project/acl)\n\n[http://drupal.org/project/content_access](http://drupal.org/project/content_access)\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Fortgeschritten",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/504",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_504"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T09:00:00.000Z",
+      "endTime": "2010-05-08T10:00:00.000Z",
+      "duration": "P60M",
+      "title": "Views 2 Workshop für Anfänger",
+      "location": "Stemmerkuchl",
+      "track": [],
+      "speakers": [
+        "derhasi"
+      ],
+      "full_description": "**Language:** Deutsch  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/views-2-workshop-f%C3%BCr-anf%C3%A4nger",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_views-2-workshop-für-anfänger"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T10:00:00.000Z",
+      "endTime": "2010-05-08T11:00:00.000Z",
+      "duration": "P60M",
+      "title": "BoF / Code Sprint",
+      "location": "Hacker Room",
+      "track": [],
+      "speakers": [],
+      "full_description": "Kennzeichnung:\n\n                    Samstag\n\n      Slot:\n\n                    10:00\n\n                    11:00\n\n                    12:00\n\n                    14:00\n\n                    15:00\n\n                    16:00\n\n                    17:00\n\n- [ Deutsch](/de/node/660)\n\n- [ English](/en/node/660)\n\n Webseite durchsuchen:\n\nNewsletter\n\n Email: *\n\n  Abonnieren\n\n  Abbestellen\n\nOrganized by\n\n                [](/de/sponsors/jenbach-media)\n\n                [](/de/sponsors/squatlabs)\n\n                [](/de/matuk)\n\n                [](/de/sponsors/happy-pixels)\n\n                [](/de/sponsors/ramona-fischer)\n\n                [](/de/sponsors/design-frei)\n\n                [](/de/sponsors/now-solutions)\n\n                [](/de/sponsors/daniel-nolde-drupal-expertise-muc)\n\n                [](/de/sponsors/gloggworks)\n\n                [](/de/sponsors/attempto)\n\n                [](/en/sponsors/hochschule-f%C3%BCr-angewandte-wissenschaften)\n\n                [](/de/sponsors/mayflower)\n\n                [](/de/sponsors/microsoft)\n\n                [](/de/sponsors/stemmer-kuchl)\n\n                [](/de/sponsors/erdfisch)\n\n                [](/de/sponsors/walthers)\n\n                [](/de/sponsors/anangu)\n\n                [](/de/sponsors/undpaulde)\n\n                [](/de/sponsors/oreilly)\n\n                [](/de/sponsors/ouest-systemes-informatiques)\n\n                [](/de/sponsors/realmakerde)\n\n                [](/de/sponsors/4commerce-ag)\n\n                [](/de/sponsors/comm-press)\n\n                [](/de/sponsors/data-transit)\n\n                [](/de/sponsors/domainfactory)\n\n                [](/en/sponsors/acquia)\n\n- [Impressum](/de/impressum)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/660",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_660"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2010-05-08T10:00:00.000Z",
+      "endTime": "2010-05-08T10:45:00.000Z",
+      "duration": "P45M",
+      "title": "Code You Can Snuggle (following Drupal Coding Standards)",
+      "location": "Mayflower",
+      "track": [],
+      "speakers": [
+        "zzolo"
+      ],
+      "full_description": "I had proposed this session for DrupalCon SF:\n\nI have come across a fair amount of code in my day, and I don't claim perfection for myself, but so often I see code that literally hurts my eyes and makes my brain just go numb. Bad code leads to bugs, confusion, and just plain wastes time. And in case you were not aware, bad code kills badgers (why does it have to be kittens all the time?).\n\nSo, I am here to save the badgers. I, Alan Palazzolo, the Morbus-wanna-be, am going to tell it to you straight: coding standards will get you a hot date (gender indifferent). That's no lie. All you have to do is manage a ticket to DrupalCon San Francisco (and vote for this session), and you will learn how to code wtih Drupal standards, get a date from anyone, and most importantly, save those cuddly badgers.\n\nThe most important thing to remember when writing code is to think: What will I think of this in two year's time? Someone else is probably going to read your code, even if it is not a contributed module. And you could save that person lots of time by just learning some standards and sticking to them. Now think what if YOU were that other person? Yeah, exactly, YOU are that other coder (or will be soon). Isn't that enough to care?\n\nBut wait, there's more! Coding standards allows us, as a Drupal, open-source, community solve problems more effectively. Agreeing on standards helps break down communication barriers and facilitates elegant code. Not to mention, standards really keep the stupid flame wars about dot operators down to a minimum. We all come to Drupal with our previous notions of coding habits, but accepting Drupal coding standards allows us to focus on the important things (not the space before or after the dot operator).\n\nMy talk will be about the current Drupal coding standards and how you can follow them. I will also go into where standards are going and where we could use some help in creating more and better standards, in my opinion. So act now! I promise lots of badly-photoshoped pictures of badgers.\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/423",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_423"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T10:00:00.000Z",
+      "endTime": "2010-05-08T11:00:00.000Z",
+      "duration": "P60M",
+      "title": "Drupal-Entwicklung für Nicht-Entwickler",
+      "location": "Microsoft",
+      "track": [],
+      "speakers": [
+        "MarcoR"
+      ],
+      "full_description": "**Language:** Deutsch  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/drupal-entwicklung-f%C3%BCr-nicht-entwickler",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_drupal-entwicklung-für-nicht-entwickler"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T10:00:00.000Z",
+      "endTime": "2010-05-08T10:45:00.000Z",
+      "duration": "P45M",
+      "title": "How Drupal 7 Fields are changing the way you write modules",
+      "location": "Attempto",
+      "track": [],
+      "speakers": [
+        "Damien Tournoud"
+      ],
+      "full_description": "Drupal 7 introduced the notion of **Fields**, small pieces of data you can add to several kind of **Entities**. In this session we will show how Fields are changing the way we write modules, for the better.\n\nNote: this is an (revised and improved) version of the [session I gave at Drupalcon San Francisco](http://sf2010.drupal.org/conference/sessions/how-drupal-7-fields-are-changing-way-you-write-modules).\n\n**From columns to fields**\n\nIn the beginning, there was tables and columns. Now here are fields, a dynamic way to build data models.\n\n**From nodes, users and comments to entities**\n\nIn the beginning, there was separate realms. The concept of entity unify those realms and bring them to a whole new dimension.\n\n**Case study: A Case Tracker in 100 lines**\n\nSpanning across entities, fields can be used to easily build powerful data models. Here we will see how to rewrite, from the ground up, the Case Tracker module in less then 100 lines.\n\n**Guidelines for using fields and entities efficiently in your modules**\n\nWe will describe how to use fields and entities efficiently in your module, and take the example of Drupal Commerce module as a case study.\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Fortgeschritten",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/640",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_640"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T10:00:00.000Z",
+      "endTime": "2010-05-08T10:45:00.000Z",
+      "duration": "P45M",
+      "title": "MongoDB, it is humongous!",
+      "location": "Erdfisch",
+      "track": [],
+      "speakers": [
+        "Pierre Joye"
+      ],
+      "full_description": "MongoDB is the new star in the Storage business for Web projects, be with PHP, Python Java, Ruby or .Net.\n\nThis presentation will introduce you some of the keys feature of MongoDB:\n\n- Document-oriented storage\n\n- Querying\n\n- Full Index Support\n\n- GridFS\n\nAs well as showing how to use MongoDB for common tasks with PHP.\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/661",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_661"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T10:00:00.000Z",
+      "endTime": "2010-05-08T11:00:00.000Z",
+      "duration": "P60M",
+      "title": "Views 2 Workshop für Anfänger",
+      "location": "Stemmerkuchl",
+      "track": [],
+      "speakers": [
+        "derhasi"
+      ],
+      "full_description": "**Language:** Deutsch  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/views-2-workshop-f%C3%BCr-anf%C3%A4nger",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_views-2-workshop-für-anfänger"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T11:00:00.000Z",
+      "endTime": "2010-05-08T12:00:00.000Z",
+      "duration": "P60M",
+      "title": "Mittagessen / Lunch",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "Kennzeichnung:\n\n                    Samstag\n\n      Slot:\n\n                    13:00\n\n- [ Deutsch](/de/node/649)\n\n- [ English](/en/node/649)\n\n[ Helfer Gesucht!](/de/helfer-anmeldung)\n\n Webseite durchsuchen:\n\nNewsletter\n\n Email: *\n\n  Abonnieren\n\n  Abbestellen\n\nOrganized by\n\n                [](/de/sponsors/design-frei)\n\n                [](/de/matuk)\n\n                [](/de/sponsors/ramona-fischer)\n\n                [](/de/sponsors/now-solutions)\n\n                [](/de/sponsors/happy-pixels)\n\n                [](/de/sponsors/jenbach-media)\n\n                [](/de/sponsors/squatlabs)\n\n                [](/de/sponsors/daniel-nolde-drupal-expertise-muc)\n\n                [](/de/sponsors/gloggworks)\n\n                [](/de/sponsors/attempto)\n\n                [](/en/sponsors/hochschule-f%C3%BCr-angewandte-wissenschaften)\n\n                [](/de/sponsors/erdfisch)\n\n                [](/de/sponsors/microsoft)\n\n                [](/de/sponsors/mayflower)\n\n                [](/de/sponsors/walthers)\n\n                [](/de/sponsors/oreilly)\n\n                [](/de/sponsors/ouest-systemes-informatiques)\n\n                [](/de/sponsors/domainfactory)\n\n                [](/de/sponsors/undpaulde)\n\n                [](/de/sponsors/anangu)\n\n                [](/de/sponsors/data-transit)\n\n                [](/de/sponsors/comm-press)\n\n                [](/en/sponsors/acquia)\n\n                [](/de/sponsors/4commerce-ag)\n\n- [Impressum](/de/impressum)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/649",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_649"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T12:00:00.000Z",
+      "endTime": "2010-05-08T13:00:00.000Z",
+      "duration": "P60M",
+      "title": "BoF / Code Sprint",
+      "location": "Hacker Room",
+      "track": [],
+      "speakers": [],
+      "full_description": "Kennzeichnung:\n\n                    Samstag\n\n      Slot:\n\n                    10:00\n\n                    11:00\n\n                    12:00\n\n                    14:00\n\n                    15:00\n\n                    16:00\n\n                    17:00\n\n- [ Deutsch](/de/node/660)\n\n- [ English](/en/node/660)\n\n Webseite durchsuchen:\n\nNewsletter\n\n Email: *\n\n  Abonnieren\n\n  Abbestellen\n\nOrganized by\n\n                [](/de/sponsors/jenbach-media)\n\n                [](/de/sponsors/squatlabs)\n\n                [](/de/matuk)\n\n                [](/de/sponsors/happy-pixels)\n\n                [](/de/sponsors/ramona-fischer)\n\n                [](/de/sponsors/design-frei)\n\n                [](/de/sponsors/now-solutions)\n\n                [](/de/sponsors/daniel-nolde-drupal-expertise-muc)\n\n                [](/de/sponsors/gloggworks)\n\n                [](/de/sponsors/attempto)\n\n                [](/en/sponsors/hochschule-f%C3%BCr-angewandte-wissenschaften)\n\n                [](/de/sponsors/mayflower)\n\n                [](/de/sponsors/microsoft)\n\n                [](/de/sponsors/stemmer-kuchl)\n\n                [](/de/sponsors/erdfisch)\n\n                [](/de/sponsors/walthers)\n\n                [](/de/sponsors/anangu)\n\n                [](/de/sponsors/undpaulde)\n\n                [](/de/sponsors/oreilly)\n\n                [](/de/sponsors/ouest-systemes-informatiques)\n\n                [](/de/sponsors/realmakerde)\n\n                [](/de/sponsors/4commerce-ag)\n\n                [](/de/sponsors/comm-press)\n\n                [](/de/sponsors/data-transit)\n\n                [](/de/sponsors/domainfactory)\n\n                [](/en/sponsors/acquia)\n\n- [Impressum](/de/impressum)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/660",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_660"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2010-05-08T12:00:00.000Z",
+      "endTime": "2010-05-08T12:45:00.000Z",
+      "duration": "P45M",
+      "title": "Keynote: Warum PHP sich rechnet",
+      "location": "Attempto",
+      "track": [],
+      "speakers": [
+        "Johann-Peter Ha..."
+      ],
+      "full_description": "Wenn man der Gartner Group trauen darf, spielen Scripting-Sprachen wie\n\nPHP zusammen mit agiler Entwicklung in Zukunft eine wichtige Rolle in\n\nUnternehmen. Aber warum rechnet sich der Einsatz von PHP an Stelle von\n\nJava? Warum gewinnen hier die \"Scripter\" vor den klassischen\n\nAnwendungssprachen wie Java oder C#? Der Vortrag nennt die Gründe, warum\n\nPHP mit agilen Methoden häufig nicht nur die preiswertere, sondern auch\n\ndie bessere Wahl ist.\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/keynote-warum-php-sich-rechnet",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_keynote-warum-php-sich-rechnet"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T13:00:00.000Z",
+      "endTime": "2010-05-08T14:00:00.000Z",
+      "duration": "P60M",
+      "title": "BoF / Code Sprint",
+      "location": "Hacker Room",
+      "track": [],
+      "speakers": [],
+      "full_description": "Kennzeichnung:\n\n                    Samstag\n\n      Slot:\n\n                    10:00\n\n                    11:00\n\n                    12:00\n\n                    14:00\n\n                    15:00\n\n                    16:00\n\n                    17:00\n\n- [ Deutsch](/de/node/660)\n\n- [ English](/en/node/660)\n\n Webseite durchsuchen:\n\nNewsletter\n\n Email: *\n\n  Abonnieren\n\n  Abbestellen\n\nOrganized by\n\n                [](/de/sponsors/jenbach-media)\n\n                [](/de/sponsors/squatlabs)\n\n                [](/de/matuk)\n\n                [](/de/sponsors/happy-pixels)\n\n                [](/de/sponsors/ramona-fischer)\n\n                [](/de/sponsors/design-frei)\n\n                [](/de/sponsors/now-solutions)\n\n                [](/de/sponsors/daniel-nolde-drupal-expertise-muc)\n\n                [](/de/sponsors/gloggworks)\n\n                [](/de/sponsors/attempto)\n\n                [](/en/sponsors/hochschule-f%C3%BCr-angewandte-wissenschaften)\n\n                [](/de/sponsors/mayflower)\n\n                [](/de/sponsors/microsoft)\n\n                [](/de/sponsors/stemmer-kuchl)\n\n                [](/de/sponsors/erdfisch)\n\n                [](/de/sponsors/walthers)\n\n                [](/de/sponsors/anangu)\n\n                [](/de/sponsors/undpaulde)\n\n                [](/de/sponsors/oreilly)\n\n                [](/de/sponsors/ouest-systemes-informatiques)\n\n                [](/de/sponsors/realmakerde)\n\n                [](/de/sponsors/4commerce-ag)\n\n                [](/de/sponsors/comm-press)\n\n                [](/de/sponsors/data-transit)\n\n                [](/de/sponsors/domainfactory)\n\n                [](/en/sponsors/acquia)\n\n- [Impressum](/de/impressum)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/660",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_660"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2010-05-08T13:00:00.000Z",
+      "endTime": "2010-05-08T13:45:00.000Z",
+      "duration": "P45M",
+      "title": "Eat your own dog food! Why you should use Open Atrium to manage your projects.",
+      "location": "Erdfisch",
+      "track": [],
+      "speakers": [
+        "kvantomme"
+      ],
+      "full_description": "Are you still not using Drupal to manage your projects? Since July 2009 excuses are running thin. It's time to \"eat your own dog food\"!\n\nIn this session you'll get an introduction to Open Atrium and the tools we are developing for Knowledge and Project management in Open Atrium. I will talk amongst others about:\n\n- Graphmind, a mindmap module for Drupal that allows you to upload mindmaps to your Drupal site and even use data from your site to build mindmaps.\n\n- Faceted insert, an asynchronous faceted search interface that lets you search for text snippets and then add them to the text you are writing\n\n- Bubbletimer: a time tracking solution for Drupal\n\n- Our plans for a unified chat channel for Open Atrium where you can receive near realtime notification from Open Atrium and how we use XMPP to make it scalable.\n\n- a RDFa WYSIWYG editor that allows users to mark up snippets in a text and so indicate the different contexts that the information can be useful in.\n\n- Semantic filters and layers: which let's users change the markup of text depending of the relevancy of their semantic context (e.g. advanced level, knowledge space, etc.).\n\n- a bookmarklet feature for Drupal (javascript snippets that live in your bookmark toolbar) that makes it really simple to submit snippets of text that you encounter on the internet as solutions for a problem you are working on.\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/433",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_433"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T13:00:00.000Z",
+      "endTime": "2010-05-08T15:00:00.000Z",
+      "duration": "P120M",
+      "title": "Howtodo the impossible: Drupal scalable",
+      "location": "Stemmerkuchl",
+      "track": [],
+      "speakers": [
+        "macode",
+        "Daniel Wehner"
+      ],
+      "full_description": "User-interacting Drupal Websites skalierbar zu machen ist ein Krampf, deswegen möchten wir in diesem Vortrag das Thema von 2 Perspektiven beleuchten:\n\n- **Serverseitig:** kann man einiges Rausholen, insbesondere wenn man auf *aegir*  und/oder die \"cloud\" setzt. Wir werden das Setup von aegir mit EC2 Support zeigen und auch einen Blick auf Datenbankreplikation und die ensprechenden Master-Slaves bzw. Master-Master als Failoverlösung werfen\n- Aber auch **Drupalseitig** kann viel getan werden: Das Nadelöhr von Drupal, die mySQL-Datenbank, dient es zu bekämpfen. Hier werden wir Optimierungmöglichkeiten in Views, das Auslagern der Suche nach Solr, sowie Caching von einzelnen Seitenelementen, zeigen.\n\nWir freuen uns auf spannnende Diskussionen.\n\n**Language:** Deutsch  \n**Session type:** Workshop (2 Stunden)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/howtodo-impossible-drupal-scalable",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_howtodo-impossible-drupal-scalable"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T13:00:00.000Z",
+      "endTime": "2010-05-08T13:45:00.000Z",
+      "duration": "P45M",
+      "title": "IIS 7.5 - Microsoft's Webserver Ready For PHP?",
+      "location": "Microsoft",
+      "track": [],
+      "speakers": [
+        "Pierre Joye"
+      ],
+      "full_description": "You say: \"Serving PHP from a Microsoft Webserver? - Only if I have to!\"\n\n**Things have changed!** - make up your own mind.\n\nDemo session why the latest IIS webserver has become a good alternative for serving php content.\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/603",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_603"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T13:00:00.000Z",
+      "endTime": "2010-05-08T13:45:00.000Z",
+      "duration": "P45M",
+      "title": "Power Panel + Der richtige Einsatz von Panels",
+      "location": "Attempto",
+      "track": [],
+      "speakers": [
+        "erik.seifert"
+      ],
+      "full_description": "**Einführung + Erweiterungen von Panels**\n\nInhalt\n\n- Panel Type ( Node Panel , Panel Page,  Mini Panels ) und der richtige Einsatz\n\n- Contexte und Argumente\n\n- Verwendung von Views Content Panes in Panels\n\n- Panels Everywhere\n\n- Ein beispielhafter Aufbau\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/power-panel-der-richtige-einsatz-von-panels",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_power-panel-der-richtige-einsatz-von-panels"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T13:00:00.000Z",
+      "endTime": "2010-05-08T13:45:00.000Z",
+      "duration": "P45M",
+      "title": "Showcase: mein!KI.KA - Die Kinderkanal-Community",
+      "location": "Mayflower",
+      "track": [],
+      "speakers": [
+        "j4h8",
+        "freudenreichmedia"
+      ],
+      "full_description": "Im Frühjahr 2009 startete der Kinderkanal von ARD und ZDF (KI.KA) seine Community \"mein!KI.KA\" auf Drupal-Basis ([http://www.mein-kika.de](http://www.mein-kika.de)).\n\nIn diesem Vortrag berichten die Projektleiter Jutta Horstmann (technische Umsetzung) und Tobias Freudenreich (Konzeption und Gesamtprojektleitung für den KI.KA) über die gewonnenen Erfahrungen.\n\nNach einer Führung durch die Kinder-Community gehen wir auf die Projektanforderungen ein: Die Themen Sicherheit, Datenschutz, Barrierefreiheit sowie Performance-Optimierung standen während der Entwicklungsphase im Vordergrund.\n\nAnhand verschiedener Beispiele stellen wir für mein!KI.KA entwickelte Module vor, u.a.:\n\n- Nutzer können sich selbst löschen (inkl. Anonymisierung und Persistenz)\n\n- \"Öffnungszeiten“ (Login nur zu definierten täglichen Zeiten möglich)\n\n- Features für die Vormoderation der Inhalte (Programmierung von Actions zur Verwendung mit Views Bulk Operations)\n\nSämtliche verwendeten Module wie auch die Eigenentwicklungen wurden strengen Sicherheitstests unterzogen. Wir besprechen die eingesetzten Funktionen (z.B. aus der Forms API und Database API) und Tools (z.B. Coder, Security Scanner), welche Drupal-Module sicherer machen.\n\nIm Anschluss beleuchten wir Stärken und Schwächen von Drupal in der Umsetzung der Anforderungen. Wir erläutern anhand verschiedener Beispiele aus Entwickler- und Kundensicht, in welchen Bereichen Drupal als Web-Framework die Entwicklungsarbeit unterstützte und wo es eher \"im Weg stand\".\n\nInformationen zur Vorgehensweise hinsichtlich Projektmanagement und Softwareentwicklungsprozess runden den Vortrag ab.\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/showcase-meinkika-die-kinderkanal-community",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_showcase-meinkika-die-kinderkanal-community"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T14:00:00.000Z",
+      "endTime": "2010-05-08T15:00:00.000Z",
+      "duration": "P60M",
+      "title": "BoF / Code Sprint",
+      "location": "Hacker Room",
+      "track": [],
+      "speakers": [],
+      "full_description": "Kennzeichnung:\n\n                    Samstag\n\n      Slot:\n\n                    10:00\n\n                    11:00\n\n                    12:00\n\n                    14:00\n\n                    15:00\n\n                    16:00\n\n                    17:00\n\n- [ Deutsch](/de/node/660)\n\n- [ English](/en/node/660)\n\n Webseite durchsuchen:\n\nNewsletter\n\n Email: *\n\n  Abonnieren\n\n  Abbestellen\n\nOrganized by\n\n                [](/de/sponsors/jenbach-media)\n\n                [](/de/sponsors/squatlabs)\n\n                [](/de/matuk)\n\n                [](/de/sponsors/happy-pixels)\n\n                [](/de/sponsors/ramona-fischer)\n\n                [](/de/sponsors/design-frei)\n\n                [](/de/sponsors/now-solutions)\n\n                [](/de/sponsors/daniel-nolde-drupal-expertise-muc)\n\n                [](/de/sponsors/gloggworks)\n\n                [](/de/sponsors/attempto)\n\n                [](/en/sponsors/hochschule-f%C3%BCr-angewandte-wissenschaften)\n\n                [](/de/sponsors/mayflower)\n\n                [](/de/sponsors/microsoft)\n\n                [](/de/sponsors/stemmer-kuchl)\n\n                [](/de/sponsors/erdfisch)\n\n                [](/de/sponsors/walthers)\n\n                [](/de/sponsors/anangu)\n\n                [](/de/sponsors/undpaulde)\n\n                [](/de/sponsors/oreilly)\n\n                [](/de/sponsors/ouest-systemes-informatiques)\n\n                [](/de/sponsors/realmakerde)\n\n                [](/de/sponsors/4commerce-ag)\n\n                [](/de/sponsors/comm-press)\n\n                [](/de/sponsors/data-transit)\n\n                [](/de/sponsors/domainfactory)\n\n                [](/en/sponsors/acquia)\n\n- [Impressum](/de/impressum)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/660",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_660"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2010-05-08T14:00:00.000Z",
+      "endTime": "2010-05-08T15:00:00.000Z",
+      "duration": "P60M",
+      "title": "Drupal in Enterprise Environment - Tragbar, lohnenswert oder gar konkurrenzfähig?",
+      "location": "Attempto",
+      "track": [],
+      "speakers": [
+        "EugenMayer"
+      ],
+      "full_description": "**Language:** Deutsch  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/drupal-enterprise-environment-tragbar-lohnenswert-oder-gar-konkurrenzf%C3%A4hig",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_drupal-enterprise-environment-tragbar-lohnenswert-oder-gar-konkurrenzfähig"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T14:00:00.000Z",
+      "endTime": "2010-05-08T16:00:00.000Z",
+      "duration": "P120M",
+      "title": "Howtodo the impossible: Drupal scalable",
+      "location": "Stemmerkuchl",
+      "track": [],
+      "speakers": [
+        "macode",
+        "Daniel Wehner"
+      ],
+      "full_description": "User-interacting Drupal Websites skalierbar zu machen ist ein Krampf, deswegen möchten wir in diesem Vortrag das Thema von 2 Perspektiven beleuchten:\n\n- **Serverseitig:** kann man einiges Rausholen, insbesondere wenn man auf *aegir*  und/oder die \"cloud\" setzt. Wir werden das Setup von aegir mit EC2 Support zeigen und auch einen Blick auf Datenbankreplikation und die ensprechenden Master-Slaves bzw. Master-Master als Failoverlösung werfen\n- Aber auch **Drupalseitig** kann viel getan werden: Das Nadelöhr von Drupal, die mySQL-Datenbank, dient es zu bekämpfen. Hier werden wir Optimierungmöglichkeiten in Views, das Auslagern der Suche nach Solr, sowie Caching von einzelnen Seitenelementen, zeigen.\n\nWir freuen uns auf spannnende Diskussionen.\n\n**Language:** Deutsch  \n**Session type:** Workshop (2 Stunden)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/howtodo-impossible-drupal-scalable",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_howtodo-impossible-drupal-scalable"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T14:00:00.000Z",
+      "endTime": "2010-05-08T14:45:00.000Z",
+      "duration": "P45M",
+      "title": "Khairn - Projekte managen mit Drupal",
+      "location": "Mayflower",
+      "track": [],
+      "speakers": [
+        "j4h8"
+      ],
+      "full_description": "Erfolgreiches Projektmanagement benötigt ein effizientes Werkzeug, das alle Prozesse eines großen Projekts aus einer Hand unterstützt. Was wäre als Basis eines solchen Tools wohl besser geeignet als Drupal, unser „Schweizer Taschenmesser“?\n\ndata in transit entwickelt unter dem Namen **Khairn** ein Projektmanagement-Tool auf Drupal-Basis, das seine Stärken bereits vielfach im Projektalltag ausspielen konnte.\n\nDer Vortrag gibt eine Einführung in den Aufbau von Khairn und erläutert das Konzept des „Requirement-Driven Project Management“ sowie dessen Vorzüge für die Projektkommunikation.\n\nKhairn zeichnet sich durch folgende Features aus:\n\n- Anforderungsmanagement\n\n- Änderungsmanagement\n\n- Qualitätsmanagement\n\n- Dokumentation und Wissensmanagement\n\n- Kommunikationsmanagement / Berichtswesen\n\n- Aufgabenmanagement / Ticketing / Bugtracking\n\nWir zeigen, wie Khairn mittels Drupal-Standard-Tools (CCK, Views, Workflow, Rules, Book, Taxonomy) sinnvolle Arbeits- und Kommunikationsprozesse generiert und wie diese gewinnbringend genutzt werden können.\n\nDen Abschluss bildet ein Ausblick, um welche Features Khairn in der weiteren Entwicklung ausgebaut werden soll.\n\nLinks:\n\n[http://www.khairn.org](http://www.khairn.org)\n\n[http://twitter.com/khairn](http://twitter.com/khairn)\n\n[http://www.facebook.com/pages/Khairn/112809978749506](http://www.facebook.com/pages/Khairn/112809978749506)\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/khairn-projekte-managen-mit-drupal",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_khairn-projekte-managen-mit-drupal"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T14:00:00.000Z",
+      "endTime": "2010-05-08T14:45:00.000Z",
+      "duration": "P45M",
+      "title": "Let the sun shine! Apache Solr in real life and how to do it!",
+      "location": "Microsoft",
+      "track": [],
+      "speakers": [
+        "Nick_vh"
+      ],
+      "full_description": "This session is an introduction about apache solr/lucene and how to use it in drupal.\n\nRequired?\n\nA bit of drupal knowledge\n\nA good ear\n\nWhat will you learn?\n\n* Why are so many people fan of it?\n\n* Is it expensive?\n\n* When should I use it?\n\n* How can I try it?\n\n* What do I need? Can I set it up without using that acquia service?\n\n* Make your own google subsite?\n\n* Can I integrate ubercart in this?\n\n* Where is this development going to?\n\n* Setting up multiple apache solr in one?\n\n...and much more questions I’ll try to answer!\n\nWhat will you see?\n\n* A working apache solr example\n\n* Good guidelines on how to do it yourself\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Fortgeschritten",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/503",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_503"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T14:00:00.000Z",
+      "endTime": "2010-05-08T14:45:00.000Z",
+      "duration": "P45M",
+      "title": "Multilingual sites",
+      "location": "Erdfisch",
+      "track": [],
+      "speakers": [
+        "antje"
+      ],
+      "full_description": "How to set up multilingual site when you also want to use views, panels, CCK, override taxonomy terms? When you have more then two languages and user generated content?\n\nWhen you want to be able to translate pretty much everything from nodes to field labels, menu items, block titles, mission statement, user profiles... without the site breaking if something hasn't been translated?\n\nAre there moments when you're better of just adding t functions?\n\nModules covered include:\n\n• CCK\n\n• Panels\n\n• Views\n\n• block translation\n\n• cck translation\n\n• content type translation\n\n• i18n\n\n• menu translation\n\n• profile translation\n\n• string translation\n\n• synchronize translation\n\n• taxonomy translation\n\n• views translation\n\n• active translation\n\n• tContact\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/491",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_491"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T15:00:00.000Z",
+      "endTime": "2010-05-08T17:00:00.000Z",
+      "duration": "P120M",
+      "title": "BoF / Code Sprint",
+      "location": "Hacker Room",
+      "track": [],
+      "speakers": [],
+      "full_description": "Kennzeichnung:\n\n                    Samstag\n\n      Slot:\n\n                    10:00\n\n                    11:00\n\n                    12:00\n\n                    14:00\n\n                    15:00\n\n                    16:00\n\n                    17:00\n\n- [ Deutsch](/de/node/660)\n\n- [ English](/en/node/660)\n\n Webseite durchsuchen:\n\nNewsletter\n\n Email: *\n\n  Abonnieren\n\n  Abbestellen\n\nOrganized by\n\n                [](/de/sponsors/jenbach-media)\n\n                [](/de/sponsors/squatlabs)\n\n                [](/de/matuk)\n\n                [](/de/sponsors/happy-pixels)\n\n                [](/de/sponsors/ramona-fischer)\n\n                [](/de/sponsors/design-frei)\n\n                [](/de/sponsors/now-solutions)\n\n                [](/de/sponsors/daniel-nolde-drupal-expertise-muc)\n\n                [](/de/sponsors/gloggworks)\n\n                [](/de/sponsors/attempto)\n\n                [](/en/sponsors/hochschule-f%C3%BCr-angewandte-wissenschaften)\n\n                [](/de/sponsors/mayflower)\n\n                [](/de/sponsors/microsoft)\n\n                [](/de/sponsors/stemmer-kuchl)\n\n                [](/de/sponsors/erdfisch)\n\n                [](/de/sponsors/walthers)\n\n                [](/de/sponsors/anangu)\n\n                [](/de/sponsors/undpaulde)\n\n                [](/de/sponsors/oreilly)\n\n                [](/de/sponsors/ouest-systemes-informatiques)\n\n                [](/de/sponsors/realmakerde)\n\n                [](/de/sponsors/4commerce-ag)\n\n                [](/de/sponsors/comm-press)\n\n                [](/de/sponsors/data-transit)\n\n                [](/de/sponsors/domainfactory)\n\n                [](/en/sponsors/acquia)\n\n- [Impressum](/de/impressum)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/660",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_660"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2010-05-08T15:00:00.000Z",
+      "endTime": "2010-05-08T17:00:00.000Z",
+      "duration": "P120M",
+      "title": "Brainstorming über dezentrale Systeme",
+      "location": "Stemmerkuchl",
+      "track": [],
+      "speakers": [
+        "Schnittmenge"
+      ],
+      "full_description": "**Language:** Deutsch  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/brainstorming-%C3%BCber-dezentrale-systeme",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_brainstorming-über-dezentrale-systeme"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T15:00:00.000Z",
+      "endTime": "2010-05-08T17:00:00.000Z",
+      "duration": "P120M",
+      "title": "Drupal SEO (Suchmaschinen-optimierung für Google & Co)",
+      "location": "Attempto",
+      "track": [],
+      "speakers": [
+        "segments"
+      ],
+      "full_description": "**Language:** Deutsch  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/drupal-seo-suchmaschinen-optimierung-f%C3%BCr-google-co",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_drupal-seo-suchmaschinen-optimierung-für-google-co"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T15:00:00.000Z",
+      "endTime": "2010-05-08T15:45:00.000Z",
+      "duration": "P45M",
+      "title": "Naked truth about (drupal) grids",
+      "location": "Microsoft",
+      "track": [],
+      "speakers": [
+        "betarobot"
+      ],
+      "full_description": "Let's take it from the beginning. The typical Drupal project production team (or actually THE grid) is:\n\nWhen you couple it with very popular XHTML/CSS grid system (say 960.gs) it seems to be a solution. But...\n\nThis might seem to be somewhat a standard nowadays for connecting designers, developers and themers. But actually standard grids can be a trouble for many, many projects. Especially if you plan to monetize the site with some standard IAB ad slots.\n\nIf you developers don't see the lingo, it's your session as anyway you are the core. Let's make Drupal development a jolly land when everybody understand each other at least on XHTML level.\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/639",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_639"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T15:00:00.000Z",
+      "endTime": "2010-05-08T15:45:00.000Z",
+      "duration": "P45M",
+      "title": "Nicht-englischsprachige und mehrsprachige Suche mit Apache Solr Multilingual",
+      "location": "Mayflower",
+      "track": [],
+      "speakers": [
+        "mkalkbrenner"
+      ],
+      "full_description": "Mit der [Integration von Apache Solr](http://drupal.org/project/apachesolr) steht Drupal eine mächtige Suchmaschine zur Verfügung. Leider eignet sich dieses Standardmodul nur bedingt für nicht-englischsprachige Webseiten. Um damit die Suche z.B.für eine deutschsprachige Webseite zu realisieren, ist viel Handarbeit nötig.\n\nAbhilfe verspricht nun das neue Zusatzmodul [Apache Solr Multilingual](http://drupal.org/project/apachesolr_multilingual).\n\nEs vereinfacht die Konfiguration von Apache Solr für nicht-englischsprachige Webseiten erheblich und bietet darüber hinaus auch eine mehrsprachige Suche für mehrsprachige Webseiten.\n\nIn dieser Session werde ich Apache Solr Multilingual vorstellen, kurz auf die grundsätzlichen sprachabhängigen Probleme einer Volltextsuche eingehen und die entsprechenden Features von Apache Solr Multilingual demonstrieren.\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Fortgeschritten",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/nicht-englischsprachige-und-mehrsprachige-suche-mit-apache-solr-multilingual",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_nicht-englischsprachige-und-mehrsprachige-suche-mit-apache-solr-multilingual"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T15:00:00.000Z",
+      "endTime": "2010-05-08T15:45:00.000Z",
+      "duration": "P45M",
+      "title": "Understanding OpenLayers in Drupal",
+      "location": "Erdfisch",
+      "track": [],
+      "speakers": [
+        "zzolo"
+      ],
+      "full_description": "This session is meant for all levels of Drupal users.  I will go through how the OpenLayers 2.x module works from a top level site building perspective to a coding and hook implementation level.  Since this camp is more focused on developers, I will probably spend more time on how the module is written and what hooks are available.\n\n[OpenLayers](http://openlayers.org) is a free, open-source Javascript library that allows for the presentation of mapping data within a website. The Drupal OpenLayers modules provides an API to build, store, and present maps easily from the Drupal interface.\n\nSee [this blog post](http://zzolo.org/thoughts/drupalcamp-spain-and-openlayers-presentation) for a copy of the slides that I will be cleaning up and using.\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/424",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_424"
+      ]
+    },
+    {
+      "startTime": "2010-05-08T17:00:00.000Z",
+      "endTime": "2010-05-08T18:00:00.000Z",
+      "duration": "P60M",
+      "title": "Drinks, Games, Music & Socializing in the \"REPÜBLIK\"",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "Kennzeichnung:\n\n                    Samstag\n\n      Slot:\n\n                    19:00\n\nGRAND DevDays-PARTY in the \"REPÜBLIK\", Ursulastraße 6\n\n* chill location\n\n* drinks\n\n* band, DJ\n\n* Socializing\n\n* beeeeeeeeer and drinks\n\n* kicker table football\n\n* original VCS Video Computer System game console with Donkey Kong\n\nFrom 19:00 to 01:00.\n\n**Important:** The *REPÜBLIK* offers NO Food. We will provide some Snacks and Beagles only. If you are really hungry, check out some of the restaurants nearby. The whole area offers a lot of restaurants for every taste.\n\n[](http://maps.google.de/maps?hl=de&client=safari&q=ursulastra%C3%9Fe+6,+m%C3%BCnchen&ie=UTF8&hq=&hnear=Ursulastra%C3%9Fe+6,+M%C3%BCnchen+80802+M%C3%BCnchen,+Bayern&ll=48.160833,11.591628&spn=0.012452,0.015278&z=16)\n\nUrsulastraße 6\n\n80802 München\n\nNear Tram/(U)nderground Station \"Münchener Freiheit\" (right into Feilitzstraße, then third left into Ursulastraße.\n\n[http://www.die-repueblik.de/](http://www.die-repueblik.de/)\n\n- [ Deutsch](/de/node/662)\n\n- [ English](/en/node/662)\n\n[ Helfer Gesucht!](/de/helfer-anmeldung)\n\n Webseite durchsuchen:\n\nNewsletter\n\n Email: *\n\n  Abonnieren\n\n  Abbestellen\n\nOrganized by\n\n                [](/de/sponsors/ramona-fischer)\n\n                [](/de/sponsors/jenbach-media)\n\n                [](/de/sponsors/happy-pixels)\n\n                [](/de/sponsors/now-solutions)\n\n                [](/de/matuk)\n\n                [](/de/sponsors/squatlabs)\n\n                [](/de/sponsors/gloggworks)\n\n                [](/de/sponsors/daniel-nolde-drupal-expertise-muc)\n\n                [](/de/sponsors/design-frei)\n\n                [](/en/sponsors/hochschule-f%C3%BCr-angewandte-wissenschaften)\n\n                [](/de/sponsors/attempto)\n\n                [](/de/sponsors/erdfisch)\n\n                [](/de/sponsors/microsoft)\n\n                [](/de/sponsors/mayflower)\n\n                [](/en/sponsors/acquia)\n\n                [](/de/sponsors/4commerce-ag)\n\n                [](/de/sponsors/ouest-systemes-informatiques)\n\n                [](/de/sponsors/comm-press)\n\n                [](/de/sponsors/oreilly)\n\n                [](/de/sponsors/domainfactory)\n\n                [](/de/sponsors/anangu)\n\n                [](/de/sponsors/data-transit)\n\n                [](/de/sponsors/undpaulde)\n\n                [](/de/sponsors/walthers)\n\n- [Impressum](/de/impressum)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/662",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_662"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T08:00:00.000Z",
+      "endTime": "2010-05-09T10:00:00.000Z",
+      "duration": "P120M",
+      "title": "#d7cx Codesprint",
+      "location": "Hacker Room",
+      "track": [],
+      "speakers": [
+        "fgm",
+        "macode",
+        "Daniel Wehner"
+      ],
+      "full_description": "As you have learned in [http://www.drupal-dev-days.de/de/sessions/drupal-7](http://www.drupal-dev-days.de/de/sessions/drupal-7) drupal7 needs your help!\n\nThis workshop is not a workshop its a codesprint. Everyone who wants to port a existing module/theme, write documentation or fix some d7 issues etc can come and take part.\n\nThere will be people who will help you directly live with contribution, for example if you have a question how to use cvs or how to make patches.\n\nEvery single thing you can do counts! Be part of the drupal community and contribute!\n\nI plan to do this \"session\" during the whole weekend.\n\nPS:\n\nAre there any other people who want to take part, write a comment.\n\nPS2:\n\nEvery attender will be listed as presenter.\n\n**Session type:** Workshop (2 Stunden)  \n**Difficulty:** Fortgeschritten",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/d7cx-codesprint",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_d7cx-codesprint"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2010-05-09T08:00:00.000Z",
+      "endTime": "2010-05-09T09:00:00.000Z",
+      "duration": "P60M",
+      "title": "Bof",
+      "location": "Stemmerkuchl",
+      "track": [],
+      "speakers": [],
+      "full_description": "Kennzeichnung:\n\n                    Sonntag\n\n      Slot:\n\n                    10:00\n\n- [ Deutsch](/de/node/657)\n\n- [ English](/en/node/657)\n\n[ Helfer Gesucht!](/de/helfer-anmeldung)\n\n Webseite durchsuchen:\n\nNewsletter\n\n Email: *\n\n  Abonnieren\n\n  Abbestellen\n\nOrganized by\n\n                [](/de/sponsors/gloggworks)\n\n                [](/de/sponsors/happy-pixels)\n\n                [](/de/sponsors/now-solutions)\n\n                [](/de/sponsors/jenbach-media)\n\n                [](/de/sponsors/design-frei)\n\n                [](/de/matuk)\n\n                [](/de/sponsors/squatlabs)\n\n                [](/de/sponsors/daniel-nolde-drupal-expertise-muc)\n\n                [](/de/sponsors/ramona-fischer)\n\n                [](/de/sponsors/attempto)\n\n                [](/en/sponsors/hochschule-f%C3%BCr-angewandte-wissenschaften)\n\n                [](/de/sponsors/mayflower)\n\n                [](/de/sponsors/microsoft)\n\n                [](/de/sponsors/erdfisch)\n\n                [](/de/sponsors/domainfactory)\n\n                [](/en/sponsors/acquia)\n\n                [](/de/sponsors/ouest-systemes-informatiques)\n\n                [](/de/sponsors/data-transit)\n\n                [](/de/sponsors/comm-press)\n\n                [](/de/sponsors/walthers)\n\n                [](/de/sponsors/undpaulde)\n\n                [](/de/sponsors/oreilly)\n\n                [](/de/sponsors/4commerce-ag)\n\n                [](/de/sponsors/anangu)\n\n- [Impressum](/de/impressum)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/657",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_657"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T08:00:00.000Z",
+      "endTime": "2010-05-09T08:45:00.000Z",
+      "duration": "P45M",
+      "title": "Drupal distributed architecture: what to do when your site is getting cramped",
+      "location": "Erdfisch",
+      "track": [],
+      "speakers": [
+        "kvantomme"
+      ],
+      "full_description": "This session is a meta session about architecture. In  this presentation you'll learn about the different composite and mixed site architectures solutions in Drupal, their individual (dis)advantages and the technologies you could use to implement them.\n\nArchitectures that will be addressed amongst others are:\n\n- Organic groups\n\n- Domain access\n\n- installation profile powered multi-site setups\n\n- Drupal service clouds, in which features are distributed over more than one specialized site\n\n- Master-servant content propagation through RSS\n\n- Integration with third party services (Apache Solr, Alfresco, etc.)\n\nTechnologies that will be addressed amongst others are:\n\n- Aegir: one site to monitor and update all the other Drupal sites\n\n- Table wizard\n\n- Views 3\n\n- RDF\n\n- Remote blocks, references and views\n\n- Deploy\n\n- Spaces, Context and Features\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/434",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_434"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T08:00:00.000Z",
+      "endTime": "2010-05-09T09:00:00.000Z",
+      "duration": "P60M",
+      "title": "Showcase: schweizer-illustrierte.ch - Die eidgenössische Ausgabe von bunte.de",
+      "location": "Microsoft",
+      "track": [],
+      "speakers": [
+        "mmauch"
+      ],
+      "full_description": "**Language:** Deutsch  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/showcase-schweizer-illustriertech-die-eidgen%C3%B6ssische-ausgabe-von-buntede",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_showcase-schweizer-illustriertech-die-eidgenössische-ausgabe-von-buntede"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T08:00:00.000Z",
+      "endTime": "2010-05-09T08:45:00.000Z",
+      "duration": "P45M",
+      "title": "Views 3",
+      "location": "Attempto",
+      "track": [],
+      "speakers": [
+        "macode",
+        "Daniel Wehner"
+      ],
+      "full_description": "Views 3 (for Drupal 7) brings Views to a new level and open's it up for a bunch of new usecases:\n\nBeside that Views 3 is a massive code cleanup the following features have been added:\n\n- AND/OR support\n\n- GROUPBY support\n\n- better export code\n\n- UI stuff\n\n- exposed forms\n\n- semantic support\n\nBut there is still testing to be done and bugs to be fixed, so we would like to invite you test AND/OR write patches.\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/views-3-0",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_views-3-0"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T08:00:00.000Z",
+      "endTime": "2010-05-09T08:45:00.000Z",
+      "duration": "P45M",
+      "title": "Virtualisierung & Software-entwicklung",
+      "location": "Mayflower",
+      "track": [],
+      "speakers": [
+        "luckow"
+      ],
+      "full_description": "VMware, Virtualbox, Parallels, XEN, KVM, Cloud ...\n\nViel Buzz - viele Möglichkeiten. In diesem kleinen Vortrag möchte ich die Vorteile von Virtualisierung im Kontext von Software Entwicklung aufzeigen. Endlich mal alles ohne Reue kaputt konfigurieren und im Anschluss trotzdem Ergebnisse zeigen.\n\nEntwicklung jenseits von Backup and Migrate.\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/virtualisierung-software-entwicklung",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_virtualisierung-software-entwicklung"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T09:00:00.000Z",
+      "endTime": "2010-05-09T11:00:00.000Z",
+      "duration": "P120M",
+      "title": "#d7cx Codesprint",
+      "location": "Hacker Room",
+      "track": [],
+      "speakers": [
+        "fgm",
+        "macode",
+        "Daniel Wehner"
+      ],
+      "full_description": "As you have learned in [http://www.drupal-dev-days.de/de/sessions/drupal-7](http://www.drupal-dev-days.de/de/sessions/drupal-7) drupal7 needs your help!\n\nThis workshop is not a workshop its a codesprint. Everyone who wants to port a existing module/theme, write documentation or fix some d7 issues etc can come and take part.\n\nThere will be people who will help you directly live with contribution, for example if you have a question how to use cvs or how to make patches.\n\nEvery single thing you can do counts! Be part of the drupal community and contribute!\n\nI plan to do this \"session\" during the whole weekend.\n\nPS:\n\nAre there any other people who want to take part, write a comment.\n\nPS2:\n\nEvery attender will be listed as presenter.\n\n**Session type:** Workshop (2 Stunden)  \n**Difficulty:** Fortgeschritten",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/d7cx-codesprint",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_d7cx-codesprint"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2010-05-09T09:00:00.000Z",
+      "endTime": "2010-05-09T09:45:00.000Z",
+      "duration": "P45M",
+      "title": "Drupal Gardens and the evolving business climate",
+      "location": "Attempto",
+      "track": [],
+      "speakers": [
+        "robertDouglass"
+      ],
+      "full_description": "With nearly 10,000 sites launched before it is even out of beta, [Drupal Gardens](http://drupalgardens.com) is poised to change the shape and scale of the entire Drupal ecosystem. At the same time, more million dollar deals, more national governments, and more multi-billion dollar companies such as Accenture, IBM, and Cap Gemini are turning to Drupal as a solution. What does this mean for existing Drupal businesses? Are these new opportunities, or new risks? How does the little guy avoid being trampled or left behind?\n\nIn this session I'll give you a brief introduction to Drupal Gardens, and highlight some of the other recent business deals that I think are likely to shape the course of Drupal in the near future. Plenty of time will be reserved for your thoughts, comments, and questions.\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/653",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_653"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T09:00:00.000Z",
+      "endTime": "2010-05-09T09:45:00.000Z",
+      "duration": "P45M",
+      "title": "Features",
+      "location": "Erdfisch",
+      "track": [],
+      "speakers": [
+        "stBorchert"
+      ],
+      "full_description": "Dies ist die Wiederholung der Session über das Modul \"Features\", die ich bereits in Essen gehalten habe.\n\nIch werde ein wenig über die Möglichkeiten und den Einsatzzweck von Features erzählen und dann anhand einer Beispielseite die Funktionsweise demonstrieren.\n\nGeneigte Zuhörer sollten schon etwas Basiswissen zu Drupal mitbringen und sich auch nicht vor einem Einsatz von *drush* fürchten.\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/features",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_features"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T09:00:00.000Z",
+      "endTime": "2010-05-09T09:45:00.000Z",
+      "duration": "P45M",
+      "title": "Media with Drupal",
+      "location": "Microsoft",
+      "track": [],
+      "speakers": [
+        "macode"
+      ],
+      "full_description": "Mediahandling in Drupal (6) is like hell.\n\nThere are OOTB-solutions, but if you just wan't one change or one featured added, you have to hack modules.\n\nAfter trial and error, some self hacked modules and stuff i came back to the basics: cck, views and some supporting modules, and gonna show to implement a great looking and flexible, node based multimedia-handling solution with (nearly) no code.\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/550",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_550"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T09:00:00.000Z",
+      "endTime": "2010-05-09T09:45:00.000Z",
+      "duration": "P45M",
+      "title": "Upgrading large & complex sites",
+      "location": "Mayflower",
+      "track": [],
+      "speakers": [
+        "florian"
+      ],
+      "full_description": "Upgrading Drupal websites is often a complicated task, especially for larger websites.\n\nIn this session, we will look at the issues that make these updates problematic and what we can do to migrate large sites without losing data and with minimal downtime.\n\nFor more details, have a look at [http://happypixels.net/blog/upgrading-large-complex-sites](http://happypixels.net/blog/upgrading-large-complex-sites)\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Fortgeschritten",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/244",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_244"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T09:00:00.000Z",
+      "endTime": "2010-05-09T11:00:00.000Z",
+      "duration": "P120M",
+      "title": "Usergroups zusammenschweissen: Von Null auf DrupalCamp in 18 Monaten",
+      "location": "Stemmerkuchl",
+      "track": [],
+      "speakers": [
+        "daniel"
+      ],
+      "full_description": "Wie könnt auch Ihr Eure lokale Usergroup noch mehr zusammenschweissen und dauerhaft stärken?\n\nWas können wir ALLE noch besser machen?\n\nWir wollen Ideen austauschen, wie man Drupal-Usergroups oder regionale Communities nachhaltig und erfolgreich zusammenführen und zusammenHALTEN kann!\n\nUnsere Erfahrungen aus den letzten eineinhalb Jahren Community-Building-Arbeit an und mit der Münchener Drupal Usergroup - von FlashTalks bis Drupal-LAN-Parties, von Durststrecke bis zu gemeinsamer Konferenz-Organisation - Was hat bei uns funktioniert - aber auch: Was hat bei EUCH funktioniert?\n\nEin Workshop zum mitmachen und austauschen!\n\n**Language:** Deutsch  \n**Session type:** Workshop (2 Stunden)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/usergroups-zusammenschweissen-von-null-auf-drupalcamp-18-monaten",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_usergroups-zusammenschweissen-von-null-auf-drupalcamp-18-monaten"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T10:00:00.000Z",
+      "endTime": "2010-05-09T12:00:00.000Z",
+      "duration": "P120M",
+      "title": "#d7cx Codesprint",
+      "location": "Hacker Room",
+      "track": [],
+      "speakers": [
+        "fgm",
+        "macode",
+        "Daniel Wehner"
+      ],
+      "full_description": "As you have learned in [http://www.drupal-dev-days.de/de/sessions/drupal-7](http://www.drupal-dev-days.de/de/sessions/drupal-7) drupal7 needs your help!\n\nThis workshop is not a workshop its a codesprint. Everyone who wants to port a existing module/theme, write documentation or fix some d7 issues etc can come and take part.\n\nThere will be people who will help you directly live with contribution, for example if you have a question how to use cvs or how to make patches.\n\nEvery single thing you can do counts! Be part of the drupal community and contribute!\n\nI plan to do this \"session\" during the whole weekend.\n\nPS:\n\nAre there any other people who want to take part, write a comment.\n\nPS2:\n\nEvery attender will be listed as presenter.\n\n**Session type:** Workshop (2 Stunden)  \n**Difficulty:** Fortgeschritten",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/d7cx-codesprint",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_d7cx-codesprint"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2010-05-09T10:00:00.000Z",
+      "endTime": "2010-05-09T11:00:00.000Z",
+      "duration": "P60M",
+      "title": "BoF",
+      "location": "Erdfisch",
+      "track": [],
+      "speakers": [],
+      "full_description": "Kennzeichnung:\n\n                    Sonntag\n\n      Slot:\n\n                    12:00\n\n- [ Deutsch](/de/node/658)\n\n- [ English](/en/node/658)\n\n[ Helfer Gesucht!](/de/helfer-anmeldung)\n\n Webseite durchsuchen:\n\nNewsletter\n\n Email: *\n\n  Abonnieren\n\n  Abbestellen\n\nOrganized by\n\n                [](/de/sponsors/squatlabs)\n\n                [](/de/sponsors/now-solutions)\n\n                [](/de/sponsors/jenbach-media)\n\n                [](/de/matuk)\n\n                [](/de/sponsors/daniel-nolde-drupal-expertise-muc)\n\n                [](/de/sponsors/ramona-fischer)\n\n                [](/de/sponsors/design-frei)\n\n                [](/de/sponsors/gloggworks)\n\n                [](/de/sponsors/happy-pixels)\n\n                [](/de/sponsors/attempto)\n\n                [](/en/sponsors/hochschule-f%C3%BCr-angewandte-wissenschaften)\n\n                [](/de/sponsors/stemmer-kuchl)\n\n                [](/de/sponsors/microsoft)\n\n                [](/de/sponsors/erdfisch)\n\n                [](/de/sponsors/mayflower)\n\n                [](/de/sponsors/undpaulde)\n\n                [](/de/sponsors/walthers)\n\n                [](/de/sponsors/anangu)\n\n                [](/de/sponsors/comm-press)\n\n                [](/en/sponsors/acquia)\n\n                [](/de/sponsors/oreilly)\n\n                [](/de/sponsors/4commerce-ag)\n\n                [](/de/sponsors/ouest-systemes-informatiques)\n\n                [](/de/sponsors/domainfactory)\n\n                [](/de/sponsors/data-transit)\n\n- [Impressum](/de/impressum)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/658",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_658"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T10:00:00.000Z",
+      "endTime": "2010-05-09T10:45:00.000Z",
+      "duration": "P45M",
+      "title": "Chaos Tools, the theory",
+      "location": "Attempto",
+      "track": [],
+      "speakers": [
+        "zeropaper"
+      ],
+      "full_description": "The Chaos Tools (aka [ctools](http://drupal.org/project/ctools)) are robust and useful tools to extend Drupal. They are used in a growing amount of top quality modules (like Panels) to implement new functionalities.\n\nUsing ctools in your module will make it even more versatile.\n\nIt will be hard to cover all the aspect and possible use cases of ctools. But having an overview might be interesting.\n\nIf wanted (depending on the attendees motivation) we could follow the presentation with a workshop.\n\nIt will also be my first time as speaker (and it won't be my native language) so if someone find enought courage/motivation to assist, I would feel somewhat more confident (yeah, that's an open call).\n\nEdit: I'm starting to harvest ideas on how to organize chaos... And I think it would be a good idea to look at the following sessions (or having a basic knowledge of them) to enjoy the one about Chaos Tools.\n\n[Features](http://www.drupal-dev-days.de/en/node/356)\n\n[Panels](http://www.drupal-dev-days.de/en/node/524)\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Fortgeschritten",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/432",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_432"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T10:00:00.000Z",
+      "endTime": "2010-05-09T10:45:00.000Z",
+      "duration": "P45M",
+      "title": "Mongodb - A other approach to data",
+      "location": "Mayflower",
+      "track": [],
+      "speakers": [
+        "Daniel Wehner"
+      ],
+      "full_description": "If you develop a application with classical sql you have a major problem:\n\nOnce you have related data, you need joins, but indexing on joins does not work that good. So you introduce denormilisation and build extra tables.\n\nNosql tries to fix this problem by storing complete objects into a \"collection\". So for example you would stores the count of comments on a node, on the node document.\n\nThis presentation will explain\n\n- where/why sql has problems\n\n- Design of nosql\n\n- Drupal Integration and how to use it in your code\n\nPS: If you want to be part of the session and present something, feel free to leave a comment.\n\nPS2: Could english-speaking-people leave a comment, whether they attend the session. Its no problem to prepare the session in english/german.\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Fortgeschritten",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/542",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_542"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T10:00:00.000Z",
+      "endTime": "2010-05-09T10:45:00.000Z",
+      "duration": "P45M",
+      "title": "Scrum - Erste Schritte",
+      "location": "Microsoft",
+      "track": [],
+      "speakers": [
+        "luckow",
+        "fl3a"
+      ],
+      "full_description": "Auf dem Drupalcamp Essen ist mir in Gesprächen aufgefallen, wie viel \"Respekt\" Scrum gegenüber gebracht wird. Dabei habt ihr das alle irgendwie schon einmal so oder anders gemacht. Mit Florian zusammen werden wir euch die Philosophie von Scrum näher bringen und hoffentlich genug motivieren, bei einem eurer nächsten Projekte Scrum mal in die Tat umzusezten.\n\nHier einmal der grobe, geplante Ablauf der Session:\n\nScrum\n\n* Scrum historisch (woher kommt es)\n\nDie verschiedenen Rollen  (und deren Aufgaben) in Scrum\n\n* Product-Owner\n\n* Scrum Master\n\n* Team\n\nScrum Zeremonien\n\n* Sprint-Planning\n\n* Daily Scrum\n\n* Sprint-Review\n\n* Retrospektiven\n\nScrum Artefakte\n\n* Product Backlog\n\n* Sprint Backlog\n\n* Burndown-Diagramm\n\nRede und Antwort\n\n* Scrum in der Praxis\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/scrum-erste-schritte",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_scrum-erste-schritte"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T10:00:00.000Z",
+      "endTime": "2010-05-09T12:00:00.000Z",
+      "duration": "P120M",
+      "title": "The strength of (common or international) european DrupalCamps",
+      "location": "Stemmerkuchl",
+      "track": [],
+      "speakers": [
+        "narres"
+      ],
+      "full_description": "DrupalCamps are getting stronger and bigger over time. Let's share ideas how to improve quality and using synergies.\n\n**Language:** English  \n**Session type:** Workshop (2 Stunden)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/641",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_641"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T11:00:00.000Z",
+      "endTime": "2010-05-09T12:00:00.000Z",
+      "duration": "P60M",
+      "title": "Mittagessen / Lunch",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "Kennzeichnung:\n\n                    Sonntag\n\n      Slot:\n\n                    13:00\n\n- [ Deutsch](/de/node/650)\n\n- [ English](/en/node/650)\n\n[ Helfer Gesucht!](/de/helfer-anmeldung)\n\n Webseite durchsuchen:\n\nNewsletter\n\n Email: *\n\n  Abonnieren\n\n  Abbestellen\n\nOrganized by\n\n                [](/de/sponsors/gloggworks)\n\n                [](/de/sponsors/now-solutions)\n\n                [](/de/sponsors/happy-pixels)\n\n                [](/de/sponsors/jenbach-media)\n\n                [](/de/sponsors/daniel-nolde-drupal-expertise-muc)\n\n                [](/de/sponsors/squatlabs)\n\n                [](/de/matuk)\n\n                [](/de/sponsors/design-frei)\n\n                [](/de/sponsors/ramona-fischer)\n\n                [](/de/sponsors/attempto)\n\n                [](/en/sponsors/hochschule-f%C3%BCr-angewandte-wissenschaften)\n\n                [](/de/sponsors/microsoft)\n\n                [](/de/sponsors/mayflower)\n\n                [](/de/sponsors/erdfisch)\n\n                [](/de/sponsors/walthers)\n\n                [](/en/sponsors/acquia)\n\n                [](/de/sponsors/data-transit)\n\n                [](/de/sponsors/ouest-systemes-informatiques)\n\n                [](/de/sponsors/oreilly)\n\n                [](/de/sponsors/undpaulde)\n\n                [](/de/sponsors/domainfactory)\n\n                [](/de/sponsors/comm-press)\n\n                [](/de/sponsors/anangu)\n\n                [](/de/sponsors/4commerce-ag)\n\n- [Impressum](/de/impressum)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/650",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_650"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T12:00:00.000Z",
+      "endTime": "2010-05-09T14:00:00.000Z",
+      "duration": "P120M",
+      "title": "#d7cx Codesprint",
+      "location": "Hacker Room",
+      "track": [],
+      "speakers": [
+        "fgm",
+        "macode",
+        "Daniel Wehner"
+      ],
+      "full_description": "As you have learned in [http://www.drupal-dev-days.de/de/sessions/drupal-7](http://www.drupal-dev-days.de/de/sessions/drupal-7) drupal7 needs your help!\n\nThis workshop is not a workshop its a codesprint. Everyone who wants to port a existing module/theme, write documentation or fix some d7 issues etc can come and take part.\n\nThere will be people who will help you directly live with contribution, for example if you have a question how to use cvs or how to make patches.\n\nEvery single thing you can do counts! Be part of the drupal community and contribute!\n\nI plan to do this \"session\" during the whole weekend.\n\nPS:\n\nAre there any other people who want to take part, write a comment.\n\nPS2:\n\nEvery attender will be listed as presenter.\n\n**Session type:** Workshop (2 Stunden)  \n**Difficulty:** Fortgeschritten",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/d7cx-codesprint",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_d7cx-codesprint"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2010-05-09T12:00:00.000Z",
+      "endTime": "2010-05-09T12:45:00.000Z",
+      "duration": "P45M",
+      "title": "Keynote: From Zero to 1 Billion $ & Drizzle/MariaDB/...",
+      "location": "Attempto",
+      "track": [],
+      "speakers": [
+        "david.axmark"
+      ],
+      "full_description": "Will cover a short history of MySQL and how it grew from a few users to millions and also the MySQL AB company that got sold for a billion $. And a short version of what is happening now with a number of forks/branches of MySQL with a focus on Drizzle and MariaDB.\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/647",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_647"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T13:00:00.000Z",
+      "endTime": "2010-05-09T15:00:00.000Z",
+      "duration": "P120M",
+      "title": "#d7cx Codesprint",
+      "location": "Hacker Room",
+      "track": [],
+      "speakers": [
+        "fgm",
+        "macode",
+        "Daniel Wehner"
+      ],
+      "full_description": "As you have learned in [http://www.drupal-dev-days.de/de/sessions/drupal-7](http://www.drupal-dev-days.de/de/sessions/drupal-7) drupal7 needs your help!\n\nThis workshop is not a workshop its a codesprint. Everyone who wants to port a existing module/theme, write documentation or fix some d7 issues etc can come and take part.\n\nThere will be people who will help you directly live with contribution, for example if you have a question how to use cvs or how to make patches.\n\nEvery single thing you can do counts! Be part of the drupal community and contribute!\n\nI plan to do this \"session\" during the whole weekend.\n\nPS:\n\nAre there any other people who want to take part, write a comment.\n\nPS2:\n\nEvery attender will be listed as presenter.\n\n**Session type:** Workshop (2 Stunden)  \n**Difficulty:** Fortgeschritten",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/d7cx-codesprint",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_d7cx-codesprint"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2010-05-09T13:00:00.000Z",
+      "endTime": "2010-05-09T14:00:00.000Z",
+      "duration": "P60M",
+      "title": "BoF",
+      "location": "Mayflower",
+      "track": [],
+      "speakers": [],
+      "full_description": "Kennzeichnung:\n\n                    Sonntag\n\n      Slot:\n\n                    15:00",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/659",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_659"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T13:00:00.000Z",
+      "endTime": "2010-05-09T13:45:00.000Z",
+      "duration": "P45M",
+      "title": "Drupal and the semantic web",
+      "location": "Erdfisch",
+      "track": [],
+      "speakers": [
+        "kvantomme"
+      ],
+      "full_description": "As of Drupal 7 we'll have RDFa markup in core, in this session I will:\n\n- explain what the implications are of this and why this matters\n\n- give a short introduction to the Semantic web, RDF, RDFa and SPARQL in human language\n\n- give a short overview of the RDF modules that are available in contrib\n\n- talk about some of the potential use cases of all these magical technologies\n\nSlides for a former incarnation of this presentation are up at:\n\n[http://www.slideshare.net/kvantomme/semantic-web-and-drupal-an-introduction](http://www.slideshare.net/kvantomme/semantic-web-and-drupal-an-introduction)\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/435",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_435"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T13:00:00.000Z",
+      "endTime": "2010-05-09T14:00:00.000Z",
+      "duration": "P60M",
+      "title": "Drupal and Ubercart = Social Commerce Systems",
+      "location": "Attempto",
+      "track": [],
+      "speakers": [
+        "Tom Freudenberg"
+      ],
+      "full_description": "In mehreren Sessions habe ich bereits die Grundfunktionen von Ubercart vorgestellt habe, biete ich für die Dev-Days mal eine Session zum heutigen Mode-Wort \"Social-Commerce\".\n\nNeben der Funktionalität von Ubercart als E-Commerce und Shop-System, wird der Rahmen erweitert um die Elemente, die es für den Bereich \"Social-Commerce\" noch braucht. Zu gut deutsch ist dies \"Empfehlungsmarketing und Vetrieb\".\n\nHierzu ein erster Eindruck auf Wikipedia: [http://de.wikipedia.org/wiki/Social_Commerce](http://de.wikipedia.org/wiki/Social_Commerce).\n\nWeitere Links zu den früheren Session:\n\n[http://www.drupaletics.de/sessions/ubercart-shop-und-e-commerce-drupal-6](http://www.drupaletics.de/sessions/ubercart-shop-und-e-commerce-drupal-6)\n\n[http://www.drupaletics.de/sessions/ubercart-details](http://www.drupaletics.de/sessions/ubercart-details)\n\n[http://www.drupaletics.de/sessions/multisite-hosting-updates-patches-sou...](http://www.drupaletics.de/sessions/multisite-hosting-updates-patches-sourcen)\n\n[http://drupalcamp.de/node/83](http://drupalcamp.de/node/83) (Ubercart - Shopping und mehr mit Drupal)\n\n**Language:** Deutsch  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/drupal-and-ubercart-social-commerce-systems",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_drupal-and-ubercart-social-commerce-systems"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T13:00:00.000Z",
+      "endTime": "2010-05-09T15:00:00.000Z",
+      "duration": "P120M",
+      "title": "Drupal Themes Workshop",
+      "location": "Stemmerkuchl",
+      "track": [],
+      "speakers": [
+        "segments"
+      ],
+      "full_description": "This workshop helps to improve your skills building Drupal themes.\n\nDuring this presentation / workshop you can learn how to build a basic theme for a company or personal website.\n\n- Structure of a Drupal Theme\n\n- How to install and modify Themes\n\n- Theme engines\n\n- PHPTemplate Engine\n\n- Theming Blocks and Content Types\n\n- CSS\n\n- theme from scratch\n\n- Firefox, Firebug and other tools\n\npresented by Radulovski Ivo, [www.segments.at](http://www.segments.at)\n\n**Language:** English  \n**Session type:** Workshop (2 Stunden)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/345",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_345"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2010-05-09T13:00:00.000Z",
+      "endTime": "2010-05-09T14:00:00.000Z",
+      "duration": "P60M",
+      "title": "Git - mal ganz einfach und praktisch!",
+      "location": "Microsoft",
+      "track": [],
+      "speakers": [
+        "EugenMayer"
+      ],
+      "full_description": "Auf dem Drupal-Camp in Essen beim selbigen Vortrag ist mir aufgefallen, welch verschobene Meinungen es von Git gibt.\n\nDie typischen Dinge wie:\n\n- Es sei zu kompliziert zu benutzen.\n\n- Es hat keinen wirklichen Mehrwert verglichen zu SVN/CVS\n\n- Man müsste viel neues lernen\n\n- Es sei \"nur dezentral\" und kann nicht zentral Benutzt werden\n\n- Es gibt keine grafischen Tools\n\n- Es gibt keine Integrationen in IDEs wie Eclipse, Komodo etc.\n\nIch möchte nicht nur mit diesen Vorurteilen aufräumen sondern erklären, wie man Git benutztz. Hierbei werde ich ganz am Anfang starten, ihr braucht also keine Vorkenntnisse.\n\nZiel:\n\nIhr geht aus dieser Session raus und habt das Gefühl, dass ihr Git beherrscht (und nicht anders herum). Ihr sollt direkt Anfangen können, Git produktiv einsetzen zu können und damit sozusagen \"morgen CVS oder SVN\" zu ersetzen. Ihr werde wissen, was \"mit Git arbeiten\" bedeutet und was eigentlich der wahre nutzen von Dingen wie \"Short Topic Branch, Long Topic branch, Merge, Branch, Remotes\" ist.\n\nKein Ziel ist:\n\nEin religiöse Diskussion ob Git, Bzr, Mercurial oder andere neuzeitliche SCM-Systeme. Ich denke, egal welches Ihr von diesen SCM nehmt, ihr habt so oder so enorm einen enormen Vorteil gegenüber CVS und SVN. Nehmt als bitte einfach eines von diesen - mir ist nicht wichtig welches.\n\n**Language:** Deutsch  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/git-mal-ganz-einfach-und-praktisch",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_git-mal-ganz-einfach-und-praktisch"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T14:00:00.000Z",
+      "endTime": "2010-05-09T16:00:00.000Z",
+      "duration": "P120M",
+      "title": "#d7cx Codesprint",
+      "location": "Hacker Room",
+      "track": [],
+      "speakers": [
+        "fgm",
+        "macode",
+        "Daniel Wehner"
+      ],
+      "full_description": "As you have learned in [http://www.drupal-dev-days.de/de/sessions/drupal-7](http://www.drupal-dev-days.de/de/sessions/drupal-7) drupal7 needs your help!\n\nThis workshop is not a workshop its a codesprint. Everyone who wants to port a existing module/theme, write documentation or fix some d7 issues etc can come and take part.\n\nThere will be people who will help you directly live with contribution, for example if you have a question how to use cvs or how to make patches.\n\nEvery single thing you can do counts! Be part of the drupal community and contribute!\n\nI plan to do this \"session\" during the whole weekend.\n\nPS:\n\nAre there any other people who want to take part, write a comment.\n\nPS2:\n\nEvery attender will be listed as presenter.\n\n**Session type:** Workshop (2 Stunden)  \n**Difficulty:** Fortgeschritten",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/d7cx-codesprint",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_d7cx-codesprint"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2010-05-09T14:00:00.000Z",
+      "endTime": "2010-05-09T14:45:00.000Z",
+      "duration": "P45M",
+      "title": "Dokumentation von Drupalprojekten",
+      "location": "Microsoft",
+      "track": [],
+      "speakers": [
+        "luckow"
+      ],
+      "full_description": "Jeder hasst es, jeder braucht es.\n\nHier möchte ich weniger einen Vortrag halten, als vielmehr mit euch zusammen im Rahmen eines Talks herausfinden, wer wie Drupal Projekte dokumentiert. Muss es Atrium, Redmine, OTRS, Notepad oder irgendein anderes x-beliebiges Softwaretool sein? Und wenn ja, welches nutzt ihr?\n\nWas dokumentiert ihr und wie? Diese Fragen interessieren mich in diesem Talk.\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/dokumentation-von-drupalprojekten",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_dokumentation-von-drupalprojekten"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T14:00:00.000Z",
+      "endTime": "2010-05-09T16:00:00.000Z",
+      "duration": "P120M",
+      "title": "Drupal Themes Workshop",
+      "location": "Stemmerkuchl",
+      "track": [],
+      "speakers": [
+        "segments"
+      ],
+      "full_description": "This workshop helps to improve your skills building Drupal themes.\n\nDuring this presentation / workshop you can learn how to build a basic theme for a company or personal website.\n\n- Structure of a Drupal Theme\n\n- How to install and modify Themes\n\n- Theme engines\n\n- PHPTemplate Engine\n\n- Theming Blocks and Content Types\n\n- CSS\n\n- theme from scratch\n\n- Firefox, Firebug and other tools\n\npresented by Radulovski Ivo, [www.segments.at](http://www.segments.at)\n\n**Language:** English  \n**Session type:** Workshop (2 Stunden)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/345",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_345"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2010-05-09T14:00:00.000Z",
+      "endTime": "2010-05-09T14:45:00.000Z",
+      "duration": "P45M",
+      "title": "Drush und Multisite : drush_multi",
+      "location": "Mayflower",
+      "track": [],
+      "speakers": [
+        "fl3a"
+      ],
+      "full_description": "[drush_multi](http://drupal.org/project/drush_multi) ist ein Erweiterung für die Drupal Shell aka [drush](http://drupal.org/project/drush),\n\nwelche ich für ein spezielles Setup von Drupal-Multisites[1] geschrieben habe.\n\nIm Grunde genommen, die gleiche Session wie auf dem DrupalCampVienna 2009[2],\n\nmit dem Unterschied,\n\ndass seit dem ca. 70 Commits erfolgten,\n\ndass drush_multi mittlerweile drush v.3.x kompatibel ist\n\nund dass weitere Funktionen, Optionen und Features hinzugekommen sind.\n\nMehr Informationen zu drush_multi unter [3], der mit Doxygen erzeugten Dokumentation.\n\n**Mehr...**\n\n[1] [Drupal-Multisites, drush_multi Introduction](http://is-loesungen.de/docu/drush_multi/intro.html)\n\n[2] [drush_multi @ DrupalCampVienna 2009](http://www.drupalcamp.at/de/sessions/drupal-shell-und-multisites-drushmulti)\n\n[3] [drush_multi Doxygen Dokumentation](http://is-loesungen.de/docu/drush_multi/)\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Fortgeschritten",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/drush-und-multisite-drushmulti",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_drush-und-multisite-drushmulti"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T14:00:00.000Z",
+      "endTime": "2010-05-09T15:00:00.000Z",
+      "duration": "P60M",
+      "title": "Jetzt gibt es Action: Trigger, Workflow und Rules",
+      "location": "Attempto",
+      "track": [],
+      "speakers": [
+        "narres"
+      ],
+      "full_description": "- Ein Node-Lifecycle vom \"anonymen Post\", über Freigabe bis zum \"Delete\"\n\n- Konzepte der \"ereignisgesteuerten Programmierung\" mit Drupal\n\n- Programmieren ohne Module\n\n**Language:** Deutsch  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/jetzt-gibt-es-action-trigger-workflow-und-rules",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_jetzt-gibt-es-action-trigger-workflow-und-rules"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T14:00:00.000Z",
+      "endTime": "2010-05-09T14:45:00.000Z",
+      "duration": "P45M",
+      "title": "Rein, raus, fertig - Datenaustausch zwischen Drupal-Websites",
+      "location": "Erdfisch",
+      "track": [],
+      "speakers": [
+        "Reinhard Glogge..."
+      ],
+      "full_description": "Es gibt viele Wege, um Daten zwischen Drupal-Websites auszutauschen. Von einfachen Multisite-Installationen mit gemeinsam genutzten Node-Tabellen bis hin zur automatisierten Synchronisierung über RSS-Feeds oder Webservices. Auch unterschiedliche Modelle des Austauschs wie zentrale Websites, die Inhalte an Affiliates senden oder Netzwerke von Sites, die Daten untereinander austauschen, sind möglich.\n\nDiese Session versucht einen Überblick über die verschiedenen Methoden zu geben, beleuchtet die dafür jeweils notwendigen Module und Konfigurationen und zeigt Best Practices auf. Vor- und Nachteile der jeweiligen Ansätze werden diskutiert.\n\nJe nach Teilnehmerwunsch kann auch auf den Datenimport von externen Quellen wie Flickr, RSS-Feeds oder Youtube eingegangen werden.\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/sessions/rein-raus-fertig-datenaustausch-zwischen-drupal-websites",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-sessions_rein-raus-fertig-datenaustausch-zwischen-drupal-websites"
+      ]
+    },
+    {
+      "startTime": "2010-05-09T15:00:00.000Z",
+      "endTime": "2010-05-09T16:00:00.000Z",
+      "duration": "P60M",
+      "title": "Closing Session",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "Kennzeichnung:\n\n                    Sonntag\n\n      Slot:\n\n                    17:00\n\n- [ Deutsch](/de/node/652)\n\n- [ English](/en/node/652)\n\n[ Helfer Gesucht!](/de/helfer-anmeldung)\n\n Webseite durchsuchen:\n\nNewsletter\n\n Email: *\n\n  Abonnieren\n\n  Abbestellen\n\nOrganized by\n\n                [](/de/sponsors/daniel-nolde-drupal-expertise-muc)\n\n                [](/de/sponsors/happy-pixels)\n\n                [](/de/sponsors/ramona-fischer)\n\n                [](/de/sponsors/design-frei)\n\n                [](/de/sponsors/squatlabs)\n\n                [](/de/sponsors/jenbach-media)\n\n                [](/de/sponsors/gloggworks)\n\n                [](/de/matuk)\n\n                [](/de/sponsors/now-solutions)\n\n                [](/en/sponsors/hochschule-f%C3%BCr-angewandte-wissenschaften)\n\n                [](/de/sponsors/attempto)\n\n                [](/de/sponsors/microsoft)\n\n                [](/de/sponsors/erdfisch)\n\n                [](/de/sponsors/mayflower)\n\n                [](/en/sponsors/acquia)\n\n                [](/de/sponsors/data-transit)\n\n                [](/de/sponsors/anangu)\n\n                [](/de/sponsors/walthers)\n\n                [](/de/sponsors/comm-press)\n\n                [](/de/sponsors/undpaulde)\n\n                [](/de/sponsors/4commerce-ag)\n\n                [](/de/sponsors/ouest-systemes-informatiques)\n\n                [](/de/sponsors/oreilly)\n\n                [](/de/sponsors/domainfactory)\n\n- [Impressum](/de/impressum)",
+      "video_url": "",
+      "link": "http://www.drupal-dev-days.de/de/node/652",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "ddd10-program",
+        "ddd10-node_652"
+      ]
+    }
+  ],
+  "result": "manual",
+  "url": "http://www.drupal-dev-days.de/de/program"
+}

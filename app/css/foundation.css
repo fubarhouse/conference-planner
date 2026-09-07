@@ -1,0 +1,534 @@
+/* ============================================================================
+   FOUNDATION
+   The shared base for every section (schedule, planner, archive, editor).
+   Contains: font faces, tokens, reset, base type, composition primitives.
+   Contains NO component styles — those live in the per-section stylesheets.
+
+   Architecture: CUBE CSS (Composition, Utility, Block, Exception).
+   This file is C + the token layer. See brand/DECISIONS.md.
+
+   RULES ENFORCED HERE
+   - No font-size may be a literal; everything resolves to a --step-* token.
+   - No gradient backgrounds, anywhere, ever.
+   - Raw brand colour never becomes a background for text, and never a UI
+     indicator — use the -ink derivations for both.
+   ========================================================================= */
+
+@layer reset, tokens, base, composition, utility;
+
+/* --- FONT FACES ------------------------------------------------------------
+   Self-hosted, latin subset, variable (one file covers the weight range).
+   No third-party origin in the critical path: a blocked CDN on constrained
+   conference Wi-Fi must never cost us the page.
+   Mono is a system stack by design — it carries only durations, counts and
+   the breadcrumb, which did not justify a third download.
+   ------------------------------------------------------------------------ */
+/* The three faces are subset and their weight axis narrowed to the range the
+   @font-face below already declared — see scripts/subset-fonts.mjs, and rerun
+   `npm run build:fonts` after changing either. 106.7 KB -> 82.8 KB on every
+   page.
+
+   `unicode-range` MUST mirror the ranges in that script. It is not a hint: the
+   browser trusts it, so a character the descriptor claims but the file lacks
+   renders as fallback, and one the file has but the descriptor omits never
+   downloads the font at all. The datasets carry Japanese (the DrupalCamp Japan
+   events) which these Latin faces never covered — that text falls back to a
+   system font exactly as it always has, and now does so without downloading a
+   webfont first. */
+
+@font-face {
+  font-family: 'Newsreader';
+  src: url('../fonts/newsreader-roman.woff2') format('woff2-variations');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range:
+    U+20-FF, U+100-17F, U+180-24F, U+2000-206F, U+20A0-20BF, U+2190-21FF,
+    U+2200-22FF, U+2713-2717, U+2605-2606, U+26A0-26A1, U+2122;
+}
+@font-face {
+  font-family: 'Newsreader';
+  src: url('../fonts/newsreader-italic.woff2') format('woff2-variations');
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+  unicode-range:
+    U+20-FF, U+100-17F, U+180-24F, U+2000-206F, U+20A0-20BF, U+2190-21FF,
+    U+2200-22FF, U+2713-2717, U+2605-2606, U+26A0-26A1, U+2122;
+}
+@font-face {
+  font-family: 'Public Sans';
+  src: url('../fonts/publicsans.woff2') format('woff2-variations');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range:
+    U+20-FF, U+100-17F, U+180-24F, U+2000-206F, U+20A0-20BF, U+2190-21FF,
+    U+2200-22FF, U+2713-2717, U+2605-2606, U+26A0-26A1, U+2122;
+}
+
+@layer tokens {
+  :root {
+    /* --- type ------------------------------------------------------------ */
+    --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --font-body: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-data: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    /* Modular scale, ratio 1.25. Six steps, no strays. Every font-size in
+       the product must resolve to one of these. */
+    --step--2: 0.64rem;
+    --step--1: 0.8rem;
+    --step-0: 1rem;
+    --step-1: 1.25rem;
+    --step-2: 1.5625rem;
+    --step-3: 1.9531rem;
+
+    /* Semantic alias — must alias a step, never introduce a number. */
+    --label-size: var(--step--2);
+    /* Display type is set tight; one value, so a 20px heading reads the same
+       wherever it appears. */
+    --display-track: -0.015em;
+    --label-track: 0.1em;
+
+    /* --- space ------------------------------------------------------------
+       Ramp of 1.5 from 0.2rem. Bespoke: not a framework ramp. */
+    --sp-3xs: 0.2rem;
+    --sp-2xs: 0.4rem;
+    --sp-xs: 0.6rem;
+    --sp-s: 0.9rem;
+    --sp-m: 1.35rem;
+    --sp-l: 2.025rem;
+    --sp-xl: 3.04rem;
+    --sp-2xl: 4.56rem;
+
+    /* --- silver ------------------------------------------------------------
+       The neutral ramp is warm (greenish). Silver is a deliberately COOL
+       neutral used for data marks and instrument surfaces, so charts and
+       controls read as a different material from the paper they sit on rather
+       than as more of the same grey. Never used for body text. */
+    --silver-0: #c9d0cf;
+    --silver-1: #9aa6a5;
+    --silver-2: #6f7c7b;
+
+    /* --- logo plates ------------------------------------------------------
+       Deliberately mode-independent: these exist to host arbitrary third-party
+       marks (sponsors, partners), which are supplied as fixed artwork and need
+       a predictable surface to stay legible. Flat fills — the legacy versions
+       were near-white gradients. */
+    --plate-light: #f7f9fb;
+    --plate-dark: #14181a;
+
+    /* --- misc ------------------------------------------------------------ */
+    --focus-width: 2px;
+    --measure: 62ch;
+    /* The product's page measure. 1000px keeps line lengths sane and leaves room
+       for the detail rail. Lived in section-schedule.css, which meant any other
+       section silently fell back to the 80rem default. */
+    --center-max: 62.5rem;
+    --tap: 2.75rem; /* 44px — WCAG 2.5.5 minimum target */
+  }
+
+  /* --- MODE ----------------------------------------------------------------
+     Two palettes, and nothing else in the product may define a surface or a
+     text colour. Dark is the default; an explicit pick wins over the OS,
+     and the OS wins over the default.
+     ---------------------------------------------------------------------- */
+  :root,
+  :root[data-mode='dark'] {
+    /* Tells the browser which palette its OWN widgets belong to. Without it
+       every native control — select menus, their options, unstyled buttons,
+       scrollbars, autofill — kept rendering light over dark paper, which is
+       where the last of the unreadable text was coming from. */
+    color-scheme: dark;
+    --paper-0: #131614;
+    --paper-1: #1a1e1b;
+    --paper-2: #222724;
+    --rule-0: #2e332f;
+    --rule-1: #434941;
+    --ink-0: #eaede6;
+    --ink-1: #adb3a9;
+    /* --ink-2 is the quietest ink: eyebrows, labels, rooms, durations, meta.
+       Measured against --paper-0 it was 4.35:1 (light) and 4.32:1 (dark) — just
+       under AA's 4.5 — across ~900 nodes, all at --step--2. It also has to
+       clear 4.5 on --paper-2, the secondary surface it sits on inside stat
+       plates and field rows, which is the tighter of the two constraints:
+
+         light #616858 — 5.28:1 on paper-0, 4.85:1 on paper-2
+         dark  #8b928a — 5.71:1 on paper-0, 4.75:1 on paper-2
+
+       Do not lighten them back toward the old greys without re-measuring
+       against BOTH papers; paper-0 alone will pass and paper-2 will not. */
+    --ink-2: #8b928a;
+    --brand-l-min: 0.74;
+    --brand-l-max: 0.95;
+    /* Status is the one place colour encodes state rather than identity.
+       Stepped per mode so both clear 4.5:1 as text on their own paper. */
+    --status-ok: #6fbf7e;
+    --status-warn: #d9a441;
+    --status-bad: #f08b80;
+  }
+
+  :root[data-mode='light'] {
+    --silver-0: #7b8a89;
+    --silver-1: #9aa6a5;
+    --silver-2: #b9c3c2;
+    color-scheme: light;
+    --paper-0: #f4f5f0;
+    --paper-1: #ffffff;
+    --paper-2: #eaece4;
+    --rule-0: #dbded3;
+    --rule-1: #b6bbac;
+    --ink-0: #1a1e1b;
+    --ink-1: #4c524a;
+    --ink-2: #616858; /* AA on both papers — see note above */
+    --brand-l-min: 0.05;
+    --brand-l-max: 0.46;
+    --status-ok: #2f6b3a;
+    --status-warn: #7f5310;
+    --status-bad: #a32a20;
+  }
+
+  /* Respect the OS only when the viewer has not chosen. */
+  @media (prefers-color-scheme: light) {
+    :root:not([data-mode]) {
+      --silver-0: #7b8a89;
+      --silver-1: #9aa6a5;
+      --silver-2: #b9c3c2;
+      color-scheme: light;
+      --paper-0: #f4f5f0;
+      --paper-1: #ffffff;
+      --paper-2: #eaece4;
+      --rule-0: #dbded3;
+      --rule-1: #b6bbac;
+      --ink-0: #1a1e1b;
+      --ink-1: #4c524a;
+      --ink-2: #616858; /* AA on both papers — see note above */
+      --brand-l-min: 0.05;
+      --brand-l-max: 0.46;
+      --status-ok: #2f6b3a;
+      --status-warn: #7f5310;
+      --status-bad: #a32a20;
+    }
+  }
+
+  /* --- CATEGORICAL DATA RAMP ----------------------------------------------
+     Eleven hues in a FIXED order, never cycled, validated with the dataviz
+     skill's checker in both modes (adjacent-pair CVD separation, chroma floor,
+     contrast). Twelve did not pass — an olive/brown pair came out at ΔE 1.6
+     under deuteranopia — so eleven it is, with `--viz-overflow` for the rest.
+
+     It lives here, not in a section sheet, because a categorical scale is a
+     product-wide instrument: the archive plots topics with it and the planner
+     keys its accommodation legend to it. One validated scale, one meaning for
+     "the third colour".
+     ---------------------------------------------------------------------- */
+  :root {
+    --viz-9: #0e8f9e;
+    --viz-10: #6b8f00;
+    --viz-11: #a45cd6;
+    --viz-1: #2a78d6;
+    --viz-2: #eb6834;
+    --viz-3: #1baf7a;
+    --viz-4: #eda100;
+    --viz-5: #e87ba4;
+    --viz-6: #008300;
+    --viz-7: #4a3aa7;
+    --viz-8: #e34948;
+    --viz-overflow: #6e7568;
+  }
+
+  :root[data-mode='dark'] {
+    --viz-9: #0e9aab;
+    --viz-10: #7d9c00;
+    --viz-11: #a06fd0;
+    --viz-1: #3987e5;
+    --viz-2: #d95926;
+    --viz-3: #199e70;
+    --viz-4: #c98500;
+    --viz-5: #d55181;
+    --viz-6: #008300;
+    --viz-7: #9085e9;
+    --viz-8: #e66767;
+    --viz-overflow: #7c837a;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-mode]) {
+      --viz-9: #0e9aab;
+      --viz-10: #7d9c00;
+      --viz-11: #a06fd0;
+      --viz-1: #3987e5;
+      --viz-2: #d95926;
+      --viz-3: #199e70;
+      --viz-4: #c98500;
+      --viz-5: #d55181;
+      --viz-6: #008300;
+      --viz-7: #9085e9;
+      --viz-8: #e66767;
+      --viz-overflow: #7c837a;
+    }
+  }
+
+  /* --- ACCENT --------------------------------------------------------------
+     Three organiser colours, set from event data as --brand-1/2/3.
+     Defaults below are neutral placeholders only.
+
+     --brand-N      the organiser's EXACT hex. Only for elements whose job is
+                    to *be* the brand (the masthead seal, logos, swatches).
+     --brand-N-ink  lightness-clamped in OKLCH, same hue and chroma. For ALL
+                    text, icons and UI indicators — including non-text ones
+                    like active underlines and checkbox accents, which fail
+                    SC 1.4.11 at 3:1 with raw values in light mode.
+     ---------------------------------------------------------------------- */
+  :root {
+    --brand-1: #58b2f8;
+    --brand-2: #1a5ebb;
+    --brand-3: #124a9e;
+  }
+
+  :root {
+    --brand-1-ink: var(--brand-1);
+    --brand-2-ink: var(--brand-2);
+    --brand-3-ink: var(--brand-3);
+  }
+
+  @supports (color: oklch(from #fff l c h)) {
+    :root {
+      --brand-1-ink: oklch(from var(--brand-1) clamp(var(--brand-l-min), l, var(--brand-l-max)) c h);
+      --brand-2-ink: oklch(from var(--brand-2) clamp(var(--brand-l-min), l, var(--brand-l-max)) c h);
+      --brand-3-ink: oklch(from var(--brand-3) clamp(var(--brand-l-min), l, var(--brand-l-max)) c h);
+    }
+  }
+}
+
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    margin: 0;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+
+  img,
+  picture,
+  svg,
+  video {
+    display: block;
+    max-inline-size: 100%;
+  }
+
+  /* One emphasis weight. The browser's default 700 on strong/b is a weight the
+     type system never declared, and it turns up mid-sentence. */
+  strong,
+  b {
+    font-weight: 600;
+  }
+
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: var(--font-data);
+  }
+
+  input,
+  button,
+  select,
+  textarea {
+    font: inherit;
+    color: inherit;
+  }
+
+  :where(a) {
+    color: inherit;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 600;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: var(--focus-width) solid var(--brand-1-ink);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer base {
+  /* The page surface lives here, not in `reset`: `legacy` is ordered after
+     `reset` so legacy utility classes still beat our element resets, which
+     would otherwise let a legacy mobile rule (components.css:1271 sets a black
+     body) win. `base` sits after `legacy`, so the surface is always ours. */
+  body {
+    min-block-size: 100vh;
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    line-height: 1.55;
+    color: var(--ink-0);
+    background: var(--paper-0); /* flat. no gradients. */
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Italic carries one meaning across the product: a person, or an aside.
+     Never decoration, never emphasis in running text. */
+  .u-aside {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--ink-1);
+  }
+
+  /* The shared small-caps label treatment. Every taxonomy label, field
+     label and column header uses this — one voice, not many. */
+  .u-label {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* Numerals and machine tokens only: times, durations, counts, paths. */
+  .u-figure {
+    font-family: var(--font-data);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer composition {
+  /* Every Layout primitives. Structure only — no colour, no type. */
+
+  .l-center {
+    inline-size: min(100% - 2rem, var(--center-max, 80rem));
+    margin-inline: auto;
+  }
+
+  .l-stack > * + * {
+    margin-block-start: var(--stack-space, var(--sp-m));
+  }
+
+  .l-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--cluster-space, var(--sp-xs));
+    align-items: var(--cluster-align, center);
+  }
+
+  .l-switcher {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--switcher-space, var(--sp-s));
+  }
+
+  .l-switcher > * {
+    flex: 1 1 var(--switcher-basis, 12rem);
+  }
+
+  .l-sidebar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sidebar-space, var(--sp-m));
+  }
+
+  .l-sidebar > :first-child {
+    flex-basis: var(--sidebar-basis, 16rem);
+    flex-grow: 1;
+  }
+
+  .l-sidebar > :last-child {
+    flex-basis: 0;
+    flex-grow: 999;
+    min-inline-size: var(--sidebar-min, 50%);
+  }
+
+  .l-box {
+    padding: var(--box-space, var(--sp-s));
+  }
+
+  .l-measure {
+    max-inline-size: var(--measure);
+  }
+}
+
+@layer utility {
+  .u-visually-hidden {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Keyboard users land here first. */
+  .u-skip {
+    position: absolute;
+    inset-block-start: var(--sp-2xs);
+    inset-inline-start: var(--sp-2xs);
+    z-index: 100;
+    padding: var(--sp-2xs) var(--sp-s);
+    background: var(--paper-1);
+    border: 1px solid var(--ink-0);
+    transform: translateY(-200%);
+  }
+
+  .u-skip:focus {
+    transform: none;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  /* `.hidden` is the app's show/hide contract — nearly every module toggles it,
+     and six elements on the schedule pair it with an `sch-*` class that sets
+     `display`. It is declared here, in the last layer, so it outranks those:
+     in `legacy` it lost to `section` and #jumpToNow rendered permanently.
+     The responsive pairs (`hidden sm:block`) must survive that, so the two
+     `sm:` display utilities this page actually uses are restated alongside it
+     — same layer, source order decides, which restores the pair semantics. */
+  .hidden {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .sm\:block {
+      display: block;
+    }
+
+    .sm\:hidden {
+      display: none;
+    }
+  }
+
+}

@@ -1,0 +1,1570 @@
+{
+  "query": "ai",
+  "terms": [
+    "ai"
+  ],
+  "mode": "exact",
+  "facets": {
+    "series": "All",
+    "region": "All",
+    "country": "All",
+    "year": "All"
+  },
+  "total": 66,
+  "offset": 0,
+  "byYear": {
+    "2023": 1,
+    "2024": 5,
+    "2025": 7,
+    "2026": 53
+  },
+  "byTerm": {
+    "ai": {
+      "2023": 1,
+      "2024": 5,
+      "2025": 7,
+      "2026": 53
+    }
+  },
+  "breakdown": {
+    "series": [
+      {
+        "name": "DrupalCon",
+        "count": 48,
+        "total": 136
+      },
+      {
+        "name": "DrupalCamp",
+        "count": 7,
+        "total": 63
+      },
+      {
+        "name": "Drupal Camp Delhi",
+        "count": 5,
+        "total": 17
+      },
+      {
+        "name": "Drupal Dev Days",
+        "count": 5,
+        "total": 117
+      },
+      {
+        "name": "DrupalSouth Community Day",
+        "count": 1,
+        "total": 8
+      }
+    ],
+    "region": [
+      {
+        "name": "EMEA",
+        "count": 60,
+        "total": 278
+      },
+      {
+        "name": "APAC",
+        "count": 6,
+        "total": 96
+      }
+    ],
+    "country": [
+      {
+        "name": "Netherlands",
+        "count": 48,
+        "total": 107
+      },
+      {
+        "name": "Italy",
+        "count": 7,
+        "total": 14
+      },
+      {
+        "name": "Bulgaria",
+        "count": 5,
+        "total": 50
+      },
+      {
+        "name": "India",
+        "count": 5,
+        "total": 24
+      },
+      {
+        "name": "Australia",
+        "count": 1,
+        "total": 23
+      }
+    ],
+    "city": [
+      {
+        "name": "Rotterdam",
+        "count": 48,
+        "total": 98
+      },
+      {
+        "name": "Rome",
+        "count": 7,
+        "total": 14
+      },
+      {
+        "name": "Burgas",
+        "count": 5,
+        "total": 50
+      },
+      {
+        "name": "New Delhi",
+        "count": 5,
+        "total": 17
+      },
+      {
+        "name": "Canberra",
+        "count": 1,
+        "total": 8
+      }
+    ],
+    "speakers": [
+      {
+        "name": "marcusjohansson",
+        "count": 3,
+        "total": 3
+      },
+      {
+        "name": "wouters_f",
+        "count": 3,
+        "total": 3
+      },
+      {
+        "name": "Dr. Christoph Breidert",
+        "count": 2,
+        "total": 2
+      },
+      {
+        "name": "Emma Horrell",
+        "count": 2,
+        "total": 2
+      },
+      {
+        "name": "Raffaele Chiocca",
+        "count": 2,
+        "total": 2
+      },
+      {
+        "name": "Roberto Peruzzo",
+        "count": 2,
+        "total": 2
+      },
+      {
+        "name": "yautja_cetanu",
+        "count": 2,
+        "total": 3
+      },
+      {
+        "name": "Adam Nagy",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Aidan Foster",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Ajit Chandrakant Shinde",
+        "count": 1,
+        "total": 1
+      }
+    ],
+    "events": 5,
+    "eventsTotal": 16,
+    "span": {
+      "min": 2023,
+      "max": 2026
+    }
+  },
+  "results": [
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "From local voices to global impact: Powering World Cancer Day with Drupal and AI",
+      "description": "Each year, World Cancer Day becomes a global surge of participation, with communities activating worldwide, hundreds of personal stories shared in over 60 languages, and traffic peaking at more than 500,000 requests per hour. Learn how UICC uses Drupal as the long‑term backbone of the campaign, keeping the platform resilient and inclusive at its busiest moment — with AI helping remove friction in moderation and publishing, not replace the people behind the stories.\n\n**Prerequisite**\n\nAn interest in digital strategy, global campaign management, or high-traffic architecture. No deep technical expertise is required, though an interest in AI and CMS scalability is beneficial.\n\n**Target Audience**\n\nProduct owners, Digital strategists, Marketing managers, NGO leaders, and Project Managers looking for a roadmap on scaling impact. It also appeals to Architects interested in AI integration and high-traffic performance.\n\n**Outline**\n\nEvery 4 February, World Cancer Day mobilises action against the global cancer epidemic. As the digital heart of this movement, the worldcancerday.org website manages over 500,000 requests per hour, serving as the staging ground for 900+ activities in 100+ countries.\n\nCharles Andrew Revkin (Senior Digital Strategy Manager, UICC) shares how the site serves as the backbone of their mission. We explore the strategic \"pillars\" that allow a lean NGO team to manage a massive global campaign.\n\nWe will dive deep into five key areas:\n\n* Global user-generated content visibility: Empowering members to submit local activities visualised on a real-time global map.  \n\n* AI-powered storytelling: Solving the \"moderation bottleneck\" with Azure-based AI to summarise and moderate hundreds of stories in real-time.  \n\n* The multilingual challenge: Balancing human-vetted content and machine translation to support resources in 60+ languages.  \n\n* Infrastructure for the peak: Utilising Fastly CDN, WAF, and predictive scaling to ensure 100% uptime during the 500k req/hour peak.  \n\n* Campaign innovation: Insights into a three-year strategy and building interactive features like custom poster generators and social media challenges.\n\nLearn why a global organisation has remained committed to Drupal for over a decade.\n\n**Learning Objectives**\n\nOperational excellence: How to prepare for \"Flash Traffic\" events without maintaining a massive year-round infrastructure cost.  \n\nResponsible AI integration: A business blueprint for using AI to handle sensitive, high-volume user content without losing the human touch.  \n\nGlobal content strategy: Techniques for supporting 60+ languages and localised campaign materials within a manageable editorial workflow.  \n\nThe strategic ROI of Drupal: Why a global membership organisation has remained committed to Drupal for over a decade (from version 6 to 11).\n\n**Experience level**  \nAnyone",
+      "speakers": "Charles Andrew Revkin, Diego Costa",
+      "track": "success stories & innovation",
+      "location": "Mees Room II",
+      "startTime": "2026-09-30T15:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/local-voices-global-impact-powering-world-cancer-day-drupal-and-ai",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "How Marketers Win in an AI‑First Search World (AEO & GEO Playbook)",
+      "description": "“If your traffic is down but your work is solid—this isn’t a failure.\n\nIt’s a signal that your customers found their answers before they found you.”  \n\nAI-driven search has quietly stolen the front door to your brand.  \n\nThis session shows you how to get it back—by becoming the source AI trusts, not just the page Google ranks.\n\n**Prerequisite**\n\nTo get the most value from this session, participants should have:\n\nA basic understanding of SEO and content marketing fundamentals  \n\nFamiliarity with Google Analytics and Google Search Console  \n\nExperience managing or influencing website content, structure, or strategy  \n\n(No AI or technical deep expertise required)\n\n**Target Audience**\n\n1. Digital Marketing Leaders Working with Drupal - Heads of Marketing / Digital / Growth Digital Transformation Leads SEO & Content Strategy Leads Performance Marketing Managers in Drupal-based organizations 2. Agency Leaders & Client-Facing Strategists Who they are Agency founders and partners Account directors Strategy leads SEO / Content / Experience consultants working with Drupal clients 3. Product Owners & Platform Managers - Digital Product Owners Platform Managers Web Program Managers\n\n**Outline**\n\nOrganic traffic is dropping - but not because your marketing is failing.  \n\nIt’s because search itself has fundamentally changed.  \n\nWhile most of the marketing teams today are seeing traffic drops in Google Analytics and don’t understand why.  \n\nAI Overviews, conversational search, and LLM-driven discovery (Google AI Overviews, ChatGPT, Perplexity, Copilot) are now the first touchpoint in the buyer and user journey. Users increasingly get answers before they click—often without ever seeing traditional search results.  \n\nIn this session, you’ll learn why Google Analytics is lying to you, how AI-driven answer engines decide who gets cited, and what marketers must do differently to regain visibility, authority, and high-intent traffic that actually converts.  \n\nDrawing on real-world work optimising 180+ global websites for UNICEF, this session introduces a practical AEO/GEO framework that helps marketing teams, agencies, and brand leaders adapt from “ranking pages” to earning citations, mentions, and trust inside AI systems.  \n\nThis is not theory. It’s a clear, actionable operating model for winning customers in the AI-powered discovery era.\n\n**Learning Objectives**\n\nBy the end of this session, participants will be able to:\n\n1. Explain why organic traffic is declining even when SEO fundamentals are strong for their brand  \n\n2. Understand how AI-driven search and LLMs evaluate and cite their content  \n\n3. Identify the difference between ranking for keywords and being cited by AI  \n\n4. Apply a practical AEO/GEO framework to their existing websites and brands which is proven to work for large enterprises like UNICEF  \n\n5. Align content, technical teams, and leadership around AI-era discovery  \n\n6. Shift success metrics from clicks to authority, visibility, and intent\n\n**Experience level**  \nIntermediate",
+      "speakers": "reena tripathi, Anubhav Gupta",
+      "track": "agency, business & marketing",
+      "location": "Goudriaan Room I&II",
+      "startTime": "2026-09-30T15:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/how-marketers-win-ai-first-search-world-aeo-geo-playbook",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Okay, Houston, we've had a problem here — Wiring Drupal into a Full-Scale Agentic Operations Platfor",
+      "description": "What if your Drupal site could talk to your project management, ticketing, CRM, email, calendar, voice assistant, and smart home — through one AI-orchestrated workflow? We built exactly that. This session shows how a small agency wired Drupal into a full-scale agentic operations platform using MCP, CLI tools, and a Rust core engine — and runs it in production every day.\n\n**Prerequisite**\n\nComfortable with Drupal development (module installation, configuration, basic architecture). Familiarity with APIs and command-line tools is helpful. No AI/ML background required — we'll explain the agentic patterns from the ground up.\n\n**Target Audience**\n\nDevelopers, technical leads, and agency CTOs who want to see what a production agentic platform looks like when built around Drupal's MCP ecosystem. Ideal for anyone evaluating how to connect Drupal with external systems through AI orchestration.\n\n**Outline**\n\nOur agency built Houston - an agentic AI operations platform in Rust that puts Drupal at the center of a 10+ system constellation. Through MCP servers, CLI tools, and custom integrations, an AI assistant can create Drupal content, book time in OpenProject, triage Zammad tickets, generate CRM invoices, search emails, check calendars, query public transport, control smart home, and read vehicle status - all from a single message in Mattermost.\n\nHouston also closes the loop from ticket to Drupal code: an OpenProject ticket for a new content type, field, view, custom module, or theme tweak is read as spec, a feature branch is created in Git, the Drupal code is written against the project's codebase, and a merge request is opened. A confidence score decides whether Houston asks for review or flags uncertainty.\n\nThe core includes a scheduler running 50+ tasks, vector memory for prompt injection, a learning engine, and a real-time voice pipeline (Whisper → AI → Piper) with German and English voices.\n\nWe'll cover: mcp_server and mcp_tools in production - what works and what doesn't. The integration stack beyond Drupal. The autonomous ticket-to-Drupal-code pipeline with confidence gating. GDPR-compliant model routing with EU models (Mistral) and local inference (Gemma4, Phi-4) on Apple Silicon. Interfaces - Mattermost, web, voice, CLI, REST, mobile GPS. The open/commercial boundary: building blocks are open, orchestration is ours.\n\nIt all runs daily. Expect a live demo.\n\n**Learning Objectives**\n\n1. How to expose a Drupal site as an MCP server and what AI agents can do with it today  \n\n2. A production architecture for orchestrating Drupal alongside 10+ systems using MCP servers, CLI tools, and a Rust-based core engine  \n\n3. How voice interfaces, scheduled automation, and semantic memory transform an AI assistant from a chatbot into an operations platform  \n\n4. Strategies for GDPR-compliant AI deployment with EU-hosted and local models  \n\n5. Where the line is between community contribution and commercial product — and why that's healthy for the Drupal ecosystem\n\n**Experience level**  \nAnyone",
+      "speakers": "Roland Obermair",
+      "track": "development, ai & agentic architecture",
+      "location": "Penn Room I&II",
+      "startTime": "2026-09-30T15:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/okay-houston-weve-had-problem-here-wiring-drupal-full-scale-agentic",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "AI Assists, Humans Decide: Agentic Workflows in Drupal - A Drupal AI Hackathon Story",
+      "description": "Content editors at the European Commission manage hundreds of websites in 24 languages. Every publication needs to be accurate, readable, and compliant with policy, and it needs to stay that way as policies change. Doing that manually across thousands of pages does not scale. During the EC's Drupal AI Hackathon, our team built an AI content validation engine that helps editors run structured checks, review AI suggestions in an isolated environment, and approve changes on their terms. No auto-changes, no data leaving the stack. This session walks through the problem, a demo, and the architectural decisions behind a solution where AI assists and humans stay in control.\n\n**Prerequisite**\n\n- General knowledge of Drupal site building and content editing  \n\n- Basic concepts of AI and Agentic AI  \n\n- Familiarity with concepts like entities, forms, or APIs  \n\n- No prior experience with AI required\n\n**Target Audience**\n\nAgency leaders, solution architects, innovation teams, technical strategists\n\n**Outline**\n\nAt the European Commission, content editors manage hundreds of websites in 24 official languages. The real challenge is not creating content but validating it: checking facts against policy, enforcing SEO standards, maintaining accessibility, and ensuring consistency.  \n\nDuring the EC's Drupal AI Hackathon in January 2026, our team built an AI-powered content validation engine that helps editors validate, improve, and monitor content across its lifecycle. The solution won first place.  \n\nThis session covers the problem, the hackathon challenge, a demo, and a technical walkthrough of the architecture behind it.\n\nYou will see how we built an AI assistant that evaluates content against configurable editorial rules covering fact accuracy, readability, SEO, and policy alignment. The assistant works in an isolated environment where editors review suggestions before anything touches published content. Every change requires explicit human approval, enforced deterministically outside the AI layer.\n\nOn the architecture side, we explain why we chose to let Drupal orchestrate the AI steps rather than delegating that to an LLM agent and how that decision shaped the entire solution. We also cover async execution, vendor-independent model integration, and data sovereignty by design.  \n\nIf you are building agentic AI workflows in Drupal, this session gives you a practical inspiration: what worked, what didn't, and the principles.\n\n**Learning Objectives**\n\n- How to architect agentic AI workflows in Drupal where the CMS orchestrates the process and the LLM executes discrete steps, and why this matters for cost, speed, and reliability  \n\n  - A practical approach to human-in-the-loop design that is enforced deterministically, not by prompting an AI to \"always ask for approval\"  \n\n  - How to build AI content validation that combines rule-based checks with contextual AI evaluation, using each where it performs best.  \n\n  - Strategies for keeping agentic workflows data sovereign.\n\n**Experience level**  \nIntermediate",
+      "speakers": "David Galeano, Adam Nagy",
+      "track": "development, ai & agentic architecture",
+      "location": "Mees Room I",
+      "startTime": "2026-09-30T14:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/ai-assists-humans-decide-agentic-workflows-drupal-drupal-ai-hackathon-story",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "AI-Powered Site Building in Drupal: From Blank Site to Styled Pages in a Conversation",
+      "description": "Building a complete Drupal site demands expertise across content types, taxonomy, menus, block configuration, and styling. What if a non-technical user could describe what they need in plain language and get back fully structured, styled pages, then refine everything through conversation? This session presents a Drupal 11 architecture that turns page building into a conversational AI experience, empowering non-technical users to create and iterate on complete sites without writing code or navigating complex admin interfaces.\n\n**Prerequisite**\n\nFamiliarity with Drupal's editorial interface and content architecture (content types, blocks, menus, taxonomy). A general awareness of how LLM tool-calling works is helpful but not required: the session explains the relevant concepts as they arise.\n\n**Target Audience**\n\nA Drupal developer or technical architect who builds or maintains component-driven sites (Layout Builder, Drupal Canvas, or similar) and wants to understand how to layer AI-assisted authoring on top of existing page-building infrastructure.\n\n**Outline**\n\nThe session opens with a ten-minute live demo: building a complete site from a blank installation using natural-language prompts, homepage, about page, taxonomy-driven blog listing, navigation menu, styled footer, and AI-generated images, then refining it through contextual chat. The demo concludes by showing all changes staged inside a Workspaces Extra workspace for editorial review before publishing.\n\nThe tooling segment explains the discovery-first architecture: function-call tools that let the AI introspect component schemas, layouts, design tokens, and site structure, adapting automatically to any page-building approach without hardcoded lists.\n\nThe workflow segment covers creation and editing: AI-proposed structures validated against Drupal definitions, a self-correction loop for automatic error repair, context-aware editing of existing pages, asynchronous image generation, and persistent conversational memory across sessions.\n\nThe styling segment details the per-component CSS cascade across four levels (global tokens, component defaults, per-page overrides, and per-instance styles) and how design-system introspection keeps AI output on-brand.\n\nThe final segment discusses provider portability via the contrib AI module, editorial governance through Workspaces Extra, honest limitations around prompt sensitivity and generation cost, and where human editors still do better.\n\n**Learning Objectives**\n\nAttendees will leave with a concrete understanding of what AI-assisted site building can deliver in Drupal today, including: the architectural patterns behind a reliable conversational page-building system (validation, self-correction, discovery-first tooling); how to design a per-component styling cascade that keeps AI output within a site's design system; how Workspaces Extra provides editorial governance for AI-generated content; how the same approach adapts across page builders (Layout Builder, Drupal Canvas, and others); and a realistic assessment of when this approach adds value versus when traditional editing is the better choice.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Marco Molinari, Francesco Pesenti, Francesco Quagliati",
+      "track": "development, ai & agentic architecture",
+      "location": "Leeuwen Room I&II",
+      "startTime": "2026-09-30T14:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/ai-powered-site-building-drupal-blank-site-styled-pages-conversation",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Building for Drupal Canvas: Lessons Learned from Real-World Use",
+      "description": "Drupal Canvas introduces a major shift in how Drupal sites are assembled, giving editors unprecedented flexibility and control. But building components that truly work well in this new paradigm requires a different way of thinking.\n\nIn this session, I’ll share practical, real-world lessons from developing components specifically for Drupal Canvas. You’ll learn what works, what breaks, and how to design systems that feel seamless for both developers and content editors.\n\n**Prerequisite**\n\nThis session is ideal for frontend developers, themers, and anyone building design systems in Drupal.\n\n**Target Audience**\n\nThis session is ideal for frontend developers, themers, and anyone building design systems in Drupal.\n\n**Outline**\n\nDrupal Canvas introduces a major shift in how Drupal sites are assembled, giving editors unprecedented flexibility and control. But building components that truly work well in this new paradigm requires a different way of thinking.\n\nIn this session, I’ll share practical, real-world lessons from developing components specifically for Drupal Canvas. You’ll learn what works, what breaks, and how to design systems that feel seamless for both developers and content editors.\n\n - Creating editor-friendly enhancements that reduce friction and improve usability  \n\n - Applying modern CSS design system practices to build resilient components that work anywhere  \n\n - Designing flexible layout systems with consistent spacing and predictable behavior  \n\n - Working with global regions and content templates  \n\n - Handling images in Canvas while playing nice with Drupal’s rendering system  \n\n - Structuring components for the right level of granularity and long-term scalability  \n\n - Optimizing components for performance and AI-assisted content workflows  \n\n - Understanding where Canvas works well today and where it does not\n\nWe’ll also take a look at where Drupal Canvas is headed and how to future-proof your approach so your components continue to work as the ecosystem evolves.\n\nThis session is ideal for frontend developers, themers, and anyone building design systems in Drupal.\n\n**Learning Objectives**\n\nIn this session, I’ll share practical, real-world lessons from developing components specifically for Drupal Canvas. You’ll learn what works, what breaks, and how to design systems that feel seamless for both developers and content editors.\n\n - Creating editor-friendly enhancements that reduce friction and improve usability  \n\n - Applying modern CSS design system practices to build resilient components that work anywhere  \n\n - Designing flexible layout systems with consistent spacing and predictable behavior  \n\n - Working with global regions and content templates  \n\n - Handling images in Canvas while playing nice with Drupal’s rendering system  \n\n - Structuring components for the right level of granularity and long-term scalability  \n\n - Optimizing components for performance and AI-assisted content workflows  \n\n - Understanding where Canvas works well today and where it does not\n\n**Experience level**  \nIntermediate",
+      "speakers": "Mike Herchel",
+      "track": "drupal cms",
+      "location": "Rotterdam Room I&II",
+      "startTime": "2026-09-30T14:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/building-drupal-canvas-lessons-learned-real-world-use",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "From Drupal Content to AI Answers: Learnings from EPSY",
+      "description": "What if the best AI chatbot is not a chatbot at all, but a constrained search engine?\n\n**Prerequisite**\n\nBasic understanding of:  \n\nDrupal content architecture  \n\nSearch concepts (Solr, Elasticsearch, or similar)  \n\nGeneral awareness of LLMs\n\n**Target Audience**\n\nDrupal site builders, webmasters, content managers, and developers working with Drupal as a CMS for public or private sector websites. It is especially relevant for professionals interested in understanding how AI can support content management, editorial workflows, accessibility, and user experience within Drupal-based platforms. Attendees looking for practical ideas to integrate AI into existing digital ecosystems will benefit most.\n\n**Outline**\n\nEPSO’s AI assistant EPSY is not a chatbot in the usual sense. It is a constrained AI search interface designed for public sector use.\n\nIn this session, we explain EPSY, the assistant of the European Personnel Selection Office, and show how it solves a hard problem: guiding tens of thousands of candidates through complex, multilingual recruitment flows without breaking trust or compliance.\n\nWe analyze its design choices: prompting, strict query framing, and controlled outputs.  \n\nKey topics include AI search vs chat, designing for accuracy over fluency, and how to operate AI in regulated environments.\n\nYou will leave with a clear mental model and practical patterns to implement AI-assisted search in Drupal projects.\n\n**Learning Objectives**\n\nLearning Objectives  \n\nUnderstand the difference between chat UX and AI search UX  \n\nLearn how EPSY reduces hallucination risk through design  \n\nIdentify when to use stateless vs conversational AI  \n\nMap RAG patterns to Drupal architectures  \n\nApply guardrails for AI in regulated environments\n\n**Experience level**  \nIntermediate",
+      "speakers": "Antonella Picarella",
+      "track": "development, ai & agentic architecture",
+      "location": "Penn Room I&II",
+      "startTime": "2026-09-30T14:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/drupal-content-ai-answers-learnings-epsy",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "From SEO to GEO: What Changes, What Doesn’t",
+      "description": "AI-powered search is taking over... or is it? Is SEO really dead? Do we need a whole new playbook?\n\n**Prerequisite**\n\nParticipants should have a basic understanding of how search engines (like Google) work and a general familiarity with the concept of LLMs (Large Language Models) like ChatGPT or Gemini. Basic knowledge of SEO is useful, though not a must.\n\n**Target Audience**\n\nPrimary: marketeers, webmasters. Secondary: developers\n\n**Outline**\n\nGenerative Engine Optimization (GEO) is quickly becoming the new buzzword. In this session, we take a step back from the hype.\n\nDrawing on over 15 years of hands-on SEO experience, I’ll separate myth from reality and show what actually changes in the shift from traditional search engines to AI-driven answer engines, and what fundamentally stays the same.\n\nWe’ll explore:  \n\n- The biggest misconceptions about GEO  \n\n- Where AI search truly impacts visibility and traffic  \n\n- Why technical foundations and high-quality content matter more than ever  \n\n- The significant overlap between SEO and GEO  \n\n- Practical adjustments that make sense\n\nRather than chasing the latest acronym, this talk provides a clear view for navigating AI-powered search with confidence.\n\nWhether you're a marketer, strategist, developer, or product owner, you’ll leave with a grounded understanding of how to evolve your search strategy without overreacting to the noise.\n\nBecause in the end, GEO isn’t a replacement for SEO. It’s an evolution.\n\n**Learning Objectives**\n\nBy the end of this session, attendees will be able to:  \n\n- Differentiate between traditional SEO and Generative Engine Optimization (GEO) to prioritize marketing efforts effectively.  \n\n- Identify which areas of their current site strategy are \"AI-proof\" and which require immediate adjustment for generative search.  \n\n- Implement practical content and technical tweaks that improve visibility in both traditional and AI-driven search engines.  \n\n- Communicate a clear, hype-free search evolution strategy to stakeholders, avoiding unnecessary pivots based on industry buzzwords.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Wouter De Bruycker",
+      "track": "agency, business & marketing",
+      "location": "Mees Room II",
+      "startTime": "2026-09-30T14:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/seo-geo-what-changes-what-doesnt",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Getting the most out of Editoria11y v3",
+      "description": "Drupal CMS's accessibility recipe \"just works\"...most of the time. When you want it to work better, you find that there are more than 130 fields spread across three settings tabs! Learn how we got here from the project lead, and get practical tips on configuration and customization.\n\n**Prerequisite**\n\nNone\n\n**Target Audience**\n\nAnyone who cares about quality assurance. Typically site owners, QA managers, and/or developers responsible for improving the site editing experience\n\n**Outline**\n\nEditoria11y was conceived as a deeply integrated Drupal accessibility checker in 2019:\n\n-- v1 introduced automatic, inline alerts for accessibility issues on published pages.\n\n-- v2 added an as-you-type checker for CKEditor and Gutenberg, as well as site-wide dismissals and reports.\n\n-- v3 work is currently focused on building a full quality assurance suite. There are already 3x as many checks as v2, and 3x as much to configure!\n\nWe will explore what a well-configured site looks like, and present best practices for your site settings and themes:  \n\n-- Preventing false positives and annoying or repetitive alerts.  \n\n-- Splitting configuration between content authors and developers.  \n\n-- Writing custom tests.  \n\n-- Optimizing tip placement for dynamic or clipped content.  \n\n-- Using the new report maintenance tools and crawlers.  \n\n-- Adding Views relationships to customize filters, reports and exports.  \n\n-- Integrating the European Commission's new \"AI: Editoria11y\" module.\n\nWe will end with a look at what’s next, and how the community can guide and contribute to this project's roadmap.\n\n**Learning Objectives**\n\nLearners should:  \n\n-- Be able to optimize their checker to catch the specific issues common to their theme and editors.  \n\n-- Know where to find documentation and code samples for extending and modifying the checker.  \n\n-- Not feel overwhelmed by 130+ fields spread across 3 configuration tabs!\n\n**Experience level**  \nAnyone",
+      "speakers": "John Jameson",
+      "track": "user experience, accessibility & design",
+      "location": "Goudriaan Room I&II",
+      "startTime": "2026-09-30T14:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/getting-most-out-editoria11y-v3",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "163 → 42: Dismantling and Reassembling a Drupal Migration with AI",
+      "description": "What happens when your migration source has 163 paragraph types — some containing entire pages of mixed HTML in a single field — and your destination architecture has 42 typed paragraph bundles? It's a fascinating transformation problem that invites you to rethink how migrations can work.\n\nInstead of the traditional one-to-one mapping approach, we explored a different path: first, deeply understand your source data with AI-assisted analysis. Then, decompose monolithic content into typed fragments. Finally, derive and assemble the destination content from multiple source streams.\n\nWe applied this approach to a large website migration from Drupal 10 to Drupal 11, making AI a first-class participant in the process — not for code generation, but for source data analysis at scale. An AI agent with 12 atomic skills (database discovery, orphan detection, field population measurement, cross-reference tracing) turned source analysis into a repeatable, on-demand capability that the entire team could leverage from the very first sprint.\n\nJoin us to explore this end-to-end approach — analyse, decompose, implement, assemble — and discover how rethinking the migration process can open up new possibilities for your own projects.\n\n**Prerequisite**\n\nBasic understanding of Drupal's Migrate API (source, process, destination plugins)\n\nFamiliarity with paragraph-based content architectures\n\nGeneral awareness of what AI agents and LLM-based tools can do (no deep AI expertise needed)\n\n**Target Audience**\n\nDrupal developers, architects, and technical leads involved in content migrations\n\n**Outline**\n\nLet’s be honest: content migrations are one of the most fascinating challenges in Drupal. You’re reverse-engineering years of content architecture, understanding how a site evolved, and designing a pipeline to reshape everything into a new structure.\n\nOur challenge: a Drupal 10 site with 163 paragraph types — many acting as rich HTML containers mixing headings, images, documents, and embeds — to be transformed into 42 clean, typed bundles in Drupal 11. A 4:1 compression that raised a key question: what if, instead of mapping content one-to-one, we decompose it into atomic fragments and reassemble it into something new?\n\nFirst, we needed visibility. Analysing 163 paragraph types, tracing references, and measuring field usage across thousands of items is complex. So we built an AI agent with 12 atomic skills to query the source database, analyse bundles on demand, detect orphans, verify usage, and generate structured issues — turning weeks of exploration into repeatable analysis.\n\nThen came the engineering: a system to split HTML into typed fragments via DOM traversal, a deriver pipeline to fan out migrations, and a content assembler to rebuild paragraph fields by probing multiple migration maps with fallback logic.\n\nThis is a different approach to complex migrations — combining AI-assisted analysis with creative engineering from day one.\n\n**Learning Objectives**\n\nLearn how to build a reusable AI agent with atomic skills for systematic migration source analysis — including orphan detection, field population measurement, and cross-reference tracing.\n\nUnderstand the fragment decomposition pattern: how to split monolithic HTML content into typed, discrete paragraph entities using DOM traversal and deterministic UUIDs.\n\nMaster the deriver/assembler architecture for N-to-M paragraph type mapping — including fan-out derivation, multi-map probing, and cross-parent fallback assembly.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Roberto Peruzzo",
+      "track": "development, ai & agentic architecture",
+      "location": "Leeuwen Room I&II",
+      "startTime": "2026-09-30T13:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/163-42-dismantling-and-reassembling-drupal-migration-ai",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "AI Mid-Life Crisis: failure stories from the silent majority",
+      "description": "It's important to tell that (sometimes) AI fails for us too - and what we do about it.\n\n**Prerequisite**\n\nNo prerequisities\n\n**Target Audience**\n\nDevelopers who want to learn AI tools but are scared by the quick paces of changes\n\n**Outline**\n\nDeveloper community is currently split into three uneven camps:\n\n* The Skeptics who refuse to touch AI on principle.  \n\n* The Champions who seem to be rewriting Facebook every afternoon just to prove a point.  \n\n* The Silent Majority - those who want to use new tools but feel so far behind the \"Champions\" that it’s discouraging to even start.\n\nIf you belong to that third group, you’re likely suffering from an AI Mid-Life Crisis. You’ve seen the polished stage demos where AI generates a perfect migration script, but when you tried it, you got a hallucinated mess of Drupal 7 hooks and broken YAMLs.\n\nIt’s time to talk about the \"Failure Stories.\"\n\nThis session isn't a \"how-to\" on prompt engineering.  \n\nIt's an honest discussion on what happens when AI fails in the real world of Drupal development - and what we can do about this.  \n\nWe’ll discuss why feeling \"behind\" is a trap, why the 10x developer myth is toxic for team morale, and how we can bridge the gap by being more transparent about our struggles.\n\n**Learning Objectives**\n\nNormalize the Struggle: Break down the psychological barrier of \"Champion Insecurity\" that keeps developers from experimenting.\n\nThe Anatomy of an AI Fail: Look at specific examples of where LLMs struggle with Drupal’s complexity (and why that's okay).\n\nBuilding a Failure Library: How teams can share their AI \"blooper reels\" to actually learn faster than a solo \"superstar\" would.\n\n**Experience level**  \nBeginner",
+      "speakers": "Dieter Blomme, Valery Lourie",
+      "track": "community health",
+      "location": "Penn Room I&II",
+      "startTime": "2026-09-30T13:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/ai-mid-life-crisis-failure-stories-silent-majority",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Drupal Canvas Code Components: Modern JavaScript, agentic engineering, and the road ahead",
+      "description": "Modern JavaScript with agentic engineering meets Drupal via Drupal Canvas Code Components. Learn what’s possible today, and what comes next.\n\n**Prerequisite**\n\nAttendees will get the most out of this session by being familiar with working with a modern JavaScript UI framework codebase.\n\n**Target Audience**\n\nThis session is for frontend engineers who would consider building UI components using React for Drupal Canvas.\n\n**Outline**\n\nUI for the web in 2026 is largely written in JavaScript, backed by an exciting open source ecosystem and a wide pool of available talent. Drupal Canvas supports Drupal core's Twig-based Single-Directory Components, but also offers Code Components for projects that choose to author components in JavaScript and React — managed in a separate codebase, with no Drupal experience required.\n\nCode Components were introduced at DrupalCon Atlanta. The approach was unconventional: people need a code editor and previews, so why not ship all that in the Canvas module? The result was an out-of-the-box code editor, previews, and support for React and Tailwind CSS. Drupal CMS 2 includes Canvas, so you get all this by default.\n\n*Act 1* was the browser. Instant iterations with zero setup.\n\n*Act 2* brought a CLI tool to sync components to and from a local codebase, extending the audience to engineers who preferred their own environment.\n\n*Act 3* fully unlocked the JavaScript ecosystem and AI coding agent harnesses. A Code Components codebase is now just a JavaScript project — one you can even use as your decoupled frontend. We expanded the scope to include pages, content templates, and global regions. Canvas Workbench, a local preview environment, debuted at DrupalCon Chicago earlier this year.\n\nJoin the technical lead of Code Components to learn where Act 3 has landed, how you can leverage all the capabilities in your projects today, and to hear about the plans for the next act.\n\n**Learning Objectives**\n\nAt the end of this session, attendees will understand where Code Components in Drupal Canvas are headed, and how they can be integrated today into a standard JavaScript codebase with agentic tooling.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Bálint Kléri",
+      "track": "drupal cms",
+      "location": "Rotterdam Room I&II",
+      "startTime": "2026-09-30T13:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/drupal-canvas-code-components-modern-javascript-agentic-engineering-and-road",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Scolta: Drop-in AI Search Without a Search Server",
+      "description": "What if you could replace Solr with something that runs in the browser, costs almost nothing, and delivers better results out of the box? Scolta is an open-source search toolkit that does exactly that: client-side search powered by Pagefind, with an AI layer for query expansion and summaries. No search server, no vector database, no complex infrastructure. Already deployed on production Drupal sites. Live demo included.\n\n**Prerequisite**\n\nFamiliarity with Drupal's search landscape (core search, Search API, Solr) is helpful but not required. No Rust or WebAssembly experience needed.\n\n**Target Audience**\n\nDevelopers, site builders, and technical leads evaluating search solutions for Drupal sites. Also relevant for anyone managing search infrastructure costs or navigating GDPR/data sovereignty requirements.\n\n**Outline**\n\nMost websites that need decent search end up running  something like Solr or Elasticsearch. It works, but it's a lot of infrastructure for \"let people find things on my website.\" And when you want AI features, the conventional path gets heavy fast: RAG pipelines, vector databases, embedding models, and the infrastructure to run all of it.\n\nScolta takes a different approach. Search runs entirely in the browser using Pagefind, which indexes your content and serves the index as a static asset. No search server. Results in milliseconds. Queries never leave the browser. Scolta then layers AI on top: an LLM handles query expansion, result summarization, and conversational followups.\n\nThe architecture is a shared Rust/WASM core compiled to WebAssembly, with a PHP bridge and thin CMS adapters for Drupal, Laravel, and WordPress. One core, three platforms, same behavior.\n\nThis session covers:  \n\n - How Scolta compares to Solr: what changes, what you drop, where Solr may still fit  \n\n - Architecture: why WASM, what the PHP bridge does, how CMS adapters stay thin  \n\n - Live demo: browser-side search with zero backend, then AI features turned on  \n\n - AI costs: model choice, caching strategies, optimization. Tag1.com runs AI search for under $5/month  \n\n - Data sovereignty: search queries stay in the browser (GDPR, HIPAA). AI calls an LLM, so model provider and regional hosting matter  \n\n - The Drupal module in depth, plus how the same core serves Laravel and WordPress\n\n**Learning Objectives**\n\n - Evaluate whether client-side search is a viable replacement for Solr, Elasticsearch or SASS search on their Drupal site  \n\n - Understand the Scolta architecture and how a shared Rust/WASM core serves multiple CMS platforms  \n\n - Make informed decisions about adding AI search features — cost, data sovereignty, and model selection — to a Drupal site\n\n**Experience level**  \nIntermediate",
+      "speakers": "Jeremy Andrews",
+      "track": "development, ai & agentic architecture",
+      "location": "Mees Room II",
+      "startTime": "2026-09-30T13:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/scolta-drop-ai-search-without-search-server",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "SDCs, Canvas, and the Agent That Builds With Them",
+      "description": "You already know how to build an SDC. Now what if your agent knew how to build one too — then dropped it into a page, verified it rendered correctly in the browser, and asked you to review the diff? This session walks through a page-building workflow driven by an AI agent that speaks your component system.\n\n**Prerequisite**\n\nFamiliarity with Drupal theme development  \n\nWorking knowledge of SDCs (structure, YAML schema, Twig templates)  \n\nBasic comfort with CLI tools; no prior AI agent experience required\n\n**Target Audience**\n\nDrupal theme and front-end developers\n\n**Outline**\n\nSDCs are a natural primitive for AI-assisted generation: self-contained, schema-driven, and with a predictable file layout. Drupal Canvas uses them as the building blocks for page composition. MCP tooling gives an agent direct read and write access for content creation and site building. Browser automation closes the loop by verifying rendered output without manual testing.\n\nWhy the SDC file layout maps cleanly to what an agent can generate reliably, including a skill that produces a complete SDC bundle (Twig, YAML, CSS) from a natural language description.\n\nHow an MCP server lets an agent read, create, and update content directly and where it needs guardrails.\n\nUsing a browser agent to catch layout regressions without writing a single test.\n\nA live demo threading SDC generation, MCP page assembly, and browser verification, including where the workflow breaks down and what you still own as a developer.\n\n**Learning Objectives**\n\nGenerate production-ready SDC file bundles using an AI agent skill tuned for Drupal's component format.  \n\nUnderstand how MCP tooling gives an agent direct access to Drupal's page management layer.  \n\nApply browser automation to verify rendered output during the component development loop.  \n\nIdentify where human judgment remains essential in an agent-assisted front-end workflow.\n\n**Experience level**  \nAnyone",
+      "speakers": "Matt Glaman",
+      "track": "development, ai & agentic architecture",
+      "location": "Van Oldenbarnevelt Room",
+      "startTime": "2026-09-30T13:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/sdcs-canvas-and-agent-builds-them",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "From Overwhelm to Opportunity: Designing a Personalised Career Journey for 350+ NHS Roles",
+      "description": "How do you help someone choose a career when you offer 350 options? This talk shows how we turned overwhelming NHS career data into a guided, personalised journey ,using Drupal to model complexity and design for uncertainty.  \n\n**Prerequisite**\n\nNo specific prerequisites are required. Familiarity with CMS platforms and how digital teams use them to serve diverse user audiences will help attendees get the most from this session. Some experience with Drupal content modelling or UX design is beneficial but not essential.  \n\n**Target Audience**\n\nAnyone curious about how Drupal is used to solve real,world problems at scale, whether you work in development, design, strategy, or just want to see what a complex public sector Drupal project looks like in practice.  \n\n**Outline**\n\nHow do you help someone choose a career when you offer 350 options?  \n\nNHS Health Careers serves one of the UK's most diverse digital audiences, from a 14-year-old picking GCSEs to a clinician pivoting careers. With 350+ roles, 1,000+ courses, and five legacy sites being merged into one, the challenge wasn't building a platform. It was designing a system that helps people answer: \"What should I do with my life?\"  \n\nThis talk walks through how we approached that problem, and built the answer in Drupal.  \n\nWe'll cover how we structured complex content relationships to make personalisation possible, designed guided discovery tools that replace overwhelming choice with intentional journeys, and integrated an external career-matching quiz API for both anonymous and authenticated users.  \n\nThe result: a personalised careers hub with a gamified career planner, contextual content filtering, and a homepage that adapts to each user's goals, interests, and qualifications.  \n\nThe lessons are transferable:  \n\nStructure your content model before you design personalisation  \n\nReduce cognitive load; more options rarely mean a better experience  \n\nDrupal is strongest when it's modelling complexity, not just rendering pages  \n\nWhether you work in public sector, education, or any large-scale content platform, this session will show you how Drupal can turn structural complexity into human clarity.  \n\n**Learning Objectives**\n\nAttendees will see how:  \n\nDrupal's content modelling made personalisation possible ,How structuring careers, courses, and progression pathways as related entities gave the platform the foundation to serve each user differently.  \n\nDrupal powered guided discovery at scale ,How Search API, Solr, faceted filtering, and Paragraphs replaced 350+ career listings with intentional, contextual user journeys.  \n\nA custom Drupal module bridged an external career-matching API ,How we integrated the CASCAID quiz API for both anonymous and authenticated users, handling identity, session state, and frontend data delivery end-to-end.  \n\nDrupal enabled personalisation without AI ,How well-structured content and deliberate UX ,not machine learning ,powered a homepage and career planner that adapted to each user's goals and qualifications.  \n\nDrupal brought five legacy sites into one coherent platform ,How Drupal's flexibility and scalability made it the right choice for a public sector organisation managing a diverse, ever-growing national audience.\n\n**Experience level**  \nBeginner",
+      "speakers": "Vijay Mani",
+      "track": "success stories & innovation",
+      "location": "Van Oldenbarnevelt Room",
+      "startTime": "2026-09-30T12:05:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/overwhelm-opportunity-designing-personalised-career-journey-350-nhs-roles",
+      "video": "",
+      "minutes": 20
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "The Reality of Accessibility Automation",
+      "description": "Lighthouse gives you 100. The European Accessibility Act expects more.\n\n**Prerequisite**\n\nNothing, I'll explain everything from scratch.\n\n**Target Audience**\n\nQAs engineers, team leads, architects, business owners, compliance officers.\n\n**Outline**\n\nAccessibility automation is often seen as the silver bullet for building inclusive digital products. With tools like axe, Lighthouse, and CI-integrated scanners becoming standard in modern development workflows, many teams assume that automated testing ensures accessibility compliance. The reality, however, is more complex.  \n\nIn this session, we'll explore the true capabilities and limitations of accessibility automation. We'll break down what automated tools can reliably detect, where they fall short, and why a significant portion of WCAG success criteria still require human judgment. Through practical examples, I'll highlight the critical gap between rule-based validation and real user experience - particularly for screen reader users, keyboard-only users, and people with cognitive disabilities.  \n\nThe session also examines the emerging role of AI in accessibility testing. Can AI help bridge the semantic and contextual gaps that traditional automation cannot cover? Where does it add value, and where does it still fall short?  \n\nAttendees will leave with a realistic understanding for accessibility quality - combining automation, AI augmentation, and human expertise. This talk challenges common misconceptions and provides a practical framework for building scalable, responsible accessibility testing strategies in modern teams.\n\n**Learning Objectives**\n\nBy the end of this session, participants will be able to:  \n\nExplain what automated accessibility tools can reliably detect - and what they fundamentally cannot  \n\nDescribe why accessibility automation typically covers only 20-40% of WCAG success criteria  \n\nDistinguish between rule-based validation and real user experience validation  \n\nEvaluate where AI can meaningfully enhance accessibility testing and where human judgment remains essential\n\n**Experience level**  \nBeginner",
+      "speakers": "Daniel Angelov",
+      "track": "user experience, accessibility & design",
+      "location": "Penn Room I&II",
+      "startTime": "2026-09-30T12:05:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/reality-accessibility-automation",
+      "video": "",
+      "minutes": 20
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Drupal AI Product Update: From Foundation to Agentic Workflows",
+      "description": "Join the Product Managers of the Drupal AI Initiative for the official update on Drupal's transformation into a production-ready Agentic CMS. Discover how the latest suite of AI Recipes, robust guardrails, and automated content reviews allow you to safely deploy advanced AI workflows in minutes.\n\n**Prerequisite**\n\nA basic understanding of Drupal site building and a general familiarity with AI/LLM concepts. No advanced AI engineering or Python experience is require\n\n**Target Audience**\n\n Developers, Site Builders, and Agency Leaders who are evaluating or ready to implement AI workflows.\n\n**Outline**\n\nDrupal has made a massive commitment to AI, backed by over 30 leading ecosystem companies, and the foundational architecture is now ready. Over the last year, the Drupal AI Initiative has built the core governance and abstractions that make a production-ready, agentic infrastructure possible. In this presentation, the Product Managers of the Drupal AI Initiative will take you under the hood to demonstrate why Drupal is now the most powerful open-source, provider-agnostic platform for AI-driven content management.\n\nWe will dive deep into the new ecosystem of AI Recipes – a suite of turnkey solutions tailored for different site-building use cases – and explore the robust governance layer securing it all: AI Guardrails, AI Observability, and the Context Control Center. You will see live demonstrations of the newly shipped 'AI Content Reviews' framework, semantic search capabilities, and embedded AI assistants that empower both human editors and autonomous agents to safely manage content at scale.\n\n**Learning Objectives**\n\n- Install and utilize the latest suite of Drupal AI Recipes to instantly activate tailored, provider-agnostic AI capabilities.\n\n- Understand the governance layer (Guardrails, Observability, Context Control) securing Drupal's AI infrastructure.\n\n- Implement production-ready features like AI Content Reviews and Semantic Search, while gaining exclusive clarity on the future roadma\n\n**Experience level**  \nIntermediate",
+      "speakers": "Niels Aers, Dr. Christoph Breidert",
+      "track": "development, ai & agentic architecture",
+      "location": "Mees Room II",
+      "startTime": "2026-09-30T11:40:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/drupal-ai-product-update-foundation-agentic-workflows",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "From Chatbots to AI Experiences: The Next Evolution of the Website",
+      "description": "Your website isn’t dead, but it's evolving.\n\nInstead of static pages and navigation, visitors are beginning to interact with websites conversationally. The next generation of digital experiences will combine AI assistants, real-time personalization, and dynamic page assembly to guide users through complete journeys rather than just deliver information.\n\nPrerequisite\n\nThis session is meant for marketers, developers, designers, and agencies.\n\nTarget Audience\n\nMarketers, Agencies, Digital Strategists, CTOs\n\nOutline\n\nWebsites are entering a new phase. Visitors no longer just browse pages. They expect to interact with websites conversationally and receive immediate responses.\n\nEarly implementations of AI on websites focused primarily on chatbots or AI-powered search. While useful, these approaches only scratch the surface of what AI can enable in modern digital experiences.\n\nWe’ll explore how digital assistants on websites are evolving into an experience layer capable of assembling personalized journeys.\n\nInstead of just answering questions, be able to guide visitors through actions, surface relevant content, trigger forms or widgets, and even reshape the surrounding page experience based on what a user asks.\n\nWe’ll discuss how this model works alongside Drupal and how AI can orchestrate multiple components of a digital experience, from conversational interfaces to dynamic UI elements and backend integrations.\n\nKey topics include:  \n\n• The evolution from chatbots and AI search to AI-driven web experiences  \n\n• How the conversation can drive real-time personalization on websites  \n\n• Forms, widgets, CTAs, and guided journeys within an assistant experience  \n\n• How digital assistants interact with CMS content, APIs, and enterprise systems\n\nLearning Objectives\n\n• Understand how AI assistants are evolving beyond chatbots into dynamic experience layers  \n\n• Learn how a conversational can drive personalization and user journeys on websites  \n\n• Identify opportunities to incorporate AI-driven experiences onto your website\nExperience level  \n\nIntermediate",
+      "speakers": "Nicole Rogers",
+      "track": "agency, business & marketing",
+      "location": "Goudriaan Room I&II",
+      "startTime": "2026-09-30T11:40:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/chatbots-ai-experiences-next-evolution-website",
+      "video": "",
+      "minutes": 20
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Page Builder Deathmatch: Canvas vs Display Builder in a Real World Project",
+      "description": "Canvas or Display Builder? Which one is the right tool for your job? And what may explode i if you install both?\n\n**Prerequisite**\n\nThe session is suitable for all experience levels:  \n\n- No prior knowledge of Canvas or Display Builder required: I start from zero and pull no punches  \n\n- I also don't assume you know the difference between slots and props, but the explanation will be very short\n\nWhat helps maximize your takeaways:  \n\n- Basic familiarity with Drupal's content model  \n\n- Knowledge of Drupal's theming or layout system (SDCs, layout builder, paragraphs, or block layout)  \n\n- Experiences with other page builders\n\n**Target Audience**\n\nDrupal developers, site builders, and technical architects evaluating modern page-building approaches for real projects. Ideal for teams working with Layout Builder, Paragraphs, or SDCs who need to decide between Canvas and Display Builder. Especially valuable for those responsible for architecture decisions, editor experience, and long-term maintainability in complex Drupal implementations.\n\n**Outline**\n\nTwo contenders. One Drupal site. And the wrong choice for your task can cost you  days or weeks.\n\nCanvas and Display Builder are both approaching production maturity. And both promise to revolutionize how editors, site builders, and designers work with Drupal. But they are built on fundamentally different assumptions, and choosing between them is a critical architectural decision.\n\nIn this session we put them through their paces across three rounds:\n\nRound 1: Page Layout  \n\nCan they replace Drupals fragmented theming approach consisting of block layout, theme regions and templates? What does setup actually involve, and what trade-offs emerge?\n\nRound 2: Managing Displays  \n\nHow do they handle Drupal’s data model (entities, fields, formatters, widgets) and map to component \"slots and props\"?\n\nRound 3: Frontpage Gauntlet  \n\nFlexible landing pages like a Frontpage require editorial autonomy, multilingual content, media handling, and AI-assisted workflows. Which approach works out with that?\n\nEach round is fought in real projects' requirements. Gotchas, workarounds, and limitations are pointed out. The session closes with a practical decision framework so you leave the arena knowing which tool is suitable for the given requirements of your next project and how upcoming roadmap developments may influence that choice.\n\nLet's get ready to rumble.\n\n**Learning Objectives**\n\nAfter this session, you have:  \n\n- A clear understanding of the underlying assumptions of Canvas or Display Builder  \n\n- A checklist to guide your next project decision  \n\n- Awareness of real-world pitfalls before you hit them\n\n**Experience level**  \nAnyone",
+      "speakers": "Merlin A. Rutz, Andreas Rüther",
+      "track": "development, ai & agentic architecture",
+      "location": "Leeuwen Room I&II",
+      "startTime": "2026-09-30T11:40:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/page-builder-deathmatch-canvas-vs-display-builder-real-world-project",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Skin in the game: Digital Sovereignty, AI and Sustainability in Drupal",
+      "description": "As AI adoption accelerates and SaaS platforms dominate the digital landscape, organisations—especially in the public sector—are increasingly faced with a critical question: who really owns and controls their digital future?\n\nThis interactive workshop explores the concept of digital sovereignty in the context of Drupal, AI, and sustainable web governance. Drawing on real-world experience from the University of Edinburgh’s EdWeb2 platform and the Edinburgh Language Model (ELM), we will examine how institutions can retain control over their content, data, and AI capabilities—while still delivering modern, scalable digital services.\n\n**Prerequisite**\n\nThis session is open to everyone\n\n**Target Audience**\n\nDigital leads and web managers, Drupal architects and technical leads, Higher education and public sector professionals, Anyone exploring AI integration in a Drupal environment  \n\n**Outline**\n\nDigital platforms are no longer just delivery mechanisms—they are strategic assets. Yet many organisations are drifting toward increased dependency on external SaaS providers and opaque AI systems.\n\nAt the University of Edinburgh, initiatives such as the EdWeb2 platform and the Edinburgh Language Model (ELM) reflect a different approach: one grounded in digital sovereignty, institutional control, and long-term sustainability.\n\nThis workshop will:\n\n• Introduce the concept of digital sovereignty in a Drupal context  \n\n• Explore the risks and trade-offs of AI adoption, including data privacy, vendor lock-in, and governance  \n\n• Examine how platform strategy (like EdWeb2) can reduce duplication and improve sustainability  \n\n• Discuss the environmental and organisational dimensions of sustainable digital ecosystems  \n\nInteractive Activities\n\nParticipants will work in small groups on:\n\n• Scenario exercises: Responding to real-world challenges (e.g. “Your organisation wants to deploy AI assistants—what are your options?”)  \n\n• Sovereignty mapping: Assessing where control currently sits across platforms, data, and AI  \n\n• Architecture sketching: Designing a “sovereign Drupal + AI” approach  \n\nGroups will share insights, compare approaches, and reflect on trade-offs.\n\n**Learning Objectives**\n\nBy the end of this workshop, participants will:\n\n• Understand the concept of digital sovereignty and why it matters for Drupal organisations  \n\n• Be able to identify risks associated with AI adoption in terms of data, governance, and control  \n\n• Gain practical frameworks for evaluating build vs buy vs hybrid approaches  \n\n• Learn how platform strategies like EdWeb2 can support sustainability and governance  \n\n• Leave with actionable ideas to apply within their own organisations\n\n**Experience level**  \nAnyone",
+      "speakers": "John Lockhart",
+      "track": "digital sovereignty & open web",
+      "location": "Rotterdam Room I&II",
+      "startTime": "2026-09-30T11:40:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/skin-game-digital-sovereignty-ai-and-sustainability-drupal",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Clean Code in the Age of AI: Writing for Humans When Machines Write the Code",
+      "description": "When AI writes the code, clean code becomes the developer’s most important job.\n\n**Prerequisite**\n\nBasic Drupal development knowledge  \n\nExperience reading and reviewing code  \n\nSome exposure to AI coding tools is helpful but not required\n\n**Target Audience**\n\nDevelopers working with AI assistance\n\n**Outline**\n\nAI tools can generate working code faster than ever—but working code is no longer always the hard part. The real challenge is reading, reviewing, and maintaining code that humans can understand and trust.  \n\nIn this session, we’ll revisit the principles of clean code through a modern lens: a world where developers increasingly review AI‑generated code instead of writing every line by hand. We’ll explore what “clean code” means when the author might be a machine, and why readability, intent, and consistency matter more than ever.  \n\nUsing Drupal backend examples, we’ll look at common issues introduced by AI‑assisted development and how to refactor them into code that communicates clearly. The focus is not on style rules, but on writing code that makes reviews faster, safer, and more effective.  \n\nAttendees will leave with practical guidelines for evaluating, refactoring, and enforcing clean code standards in AI‑assisted Drupal projects and an understanding why this matters more than ever.\n\n**Learning Objectives**\n\nAfter this session, participants will be able to:\n\nUnderstand why clean code is critical in AI‑assisted development  \n\nEvaluate AI‑generated code for clarity, intent, and maintainability  \n\nRecognize common clean‑code violations introduced by AI tools  \n\nRefactor Drupal backend code to improve readability and reviewability  \n\nAdopt a “review‑first” mindset for modern development workflows\n\n**Experience level**  \nIntermediate",
+      "speakers": "Len Swaneveld",
+      "track": "development, ai & agentic architecture",
+      "location": "Mees Room II",
+      "startTime": "2026-09-30T09:40:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/clean-code-age-ai-writing-humans-when-machines-write-code",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Democratizing Enterprise Applications: Positioning Drupal as a Strategic Low-Code Framework",
+      "description": "Why pay rent for a \"black-box\" solution when you can own the foundation? Discover how to transform Drupal from a CMS into a sovereign Low-Code powerhouse that rivals proprietary enterprise systems while maintaining 100% data ownership.\n\n**Prerequisite**\n\nNo programming skills are required, as the focus is on Low-Code and No-Code capabilities.\n\n**Target Audience**\n\nSite builders and Decision Makers interested in open-source Low-Code frameworks.\n\n**Outline**\n\nDrupal is often pigeonholed as \"just a CMS\", especially in enterprise environments. However, it has evolved into a strategic Low-Code framework capable of replacing complex proprietary business applications and specialized procedures. This session challenges the status quo by demonstrating how to build a sovereign, cost-effective alternative to proprietary tools using Drupal’s open source ecosystem.\n\nWe explore the synergy of three core pillars that transform Drupal into a \"digital factory\":  \n\n1. Webform: A builder for complex, accessible multi-step forms with conditional logic—entirely without code.  \n\n2. ECA: Visual process automation using the BPMN standard. We show how business rules and \"Event-Condition-Action\" workflows are modeled directly in the browser to orchestrate backend processes.  \n\n3. Drupal AI: Using native AI integration for intelligent workflows. We showcase examples for AI assistance to drastically reduce setup times and speed up transaction processing.\n\nWe will compare this approach head-to-head with proprietary market leaders like Civento, analyzing the ROI of € 0 license fees versus the total cost of ownership and the strategic value of Open Source ownership.\n\n**Learning Objectives**\n\nArchitectural Insight:  \n\nLearn how to structure Drupal as a Low-Code platform using Webform and ECA.\n\nBusiness Case Strategy:  \n\nGain arguments for the ROI of Open Source (zero license fees) vs. proprietary vendor lock-in.\n\nAI Integration:  \n\nUnderstand how to use Drupal AI for practical backend process acceleration.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Anne, Giles Mccormick Smith",
+      "track": "digital sovereignty & open web",
+      "location": "Leeuwen Room I&II",
+      "startTime": "2026-09-30T09:40:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/democratizing-enterprise-applications-positioning-drupal-strategic-low-code",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "One Brand Voice from 35 Sources: How We Rebuilt VisitEurope.com and How Drupal AI Unifies Its Tone",
+      "description": "How do you unify 35 distinct national voices into one cohesive European travel brand? Discover how Brainsum combined content strategy, Drupal's robust architecture, and generative AI to transform VisitEurope.com from a legacy site into a lightning-fast, unified editorial platform.\n\n**Prerequisite**\n\nA basic familiarity with Drupal migrations, or editorial workflows will help, but no advanced technical or AI background is required.\n\n**Target Audience**\n\nThis session is ideal for Drupal site owners, digital content leads, content strategists, marketers, editors, product owners, and agency/client teams who manage large, multi-source websites and need to improve consistency, governance, and publishing efficiency without losing editorial control.\n\n**Outline**\n\nVisitEurope.com, The Official Travel Portal of Europe, is managed by the European Travel Commission (ETC), which brings together 35 national tourism organisations across Europe.  \n\nThe Challenge: By 2025, the platform had severely outgrown its legacy WordPress setup. It suffered from poor mobile responsiveness, 600+ redundant interest tags, and load times frequently exceeding 10 seconds. More critically, it had to manage over 2000 pages fed by a constant stream of heterogeneous content from 35 different national agencies, each using its own voice.\n\nThe Solution: We started with a comprehensive content strategy analysis - defining tone of voice, editorial principles, and content hierarchy. This strategic foundation made AI genuinely useful inside Drupal. Instead of manual rewrites, Drupal AI now aligns and standardizes incoming content from all 35 heterogeneous sources to perfectly match the VisitEurope brand voice before publication.\n\nThe Results: Beyond a unified brand tone, the technical gains were massive. Following the Drupal migration, load times dropped from over 10s to under 200ms, and zero pages now fail Core Web Vitals.\n\n**Learning Objectives**\n\n- Learn how to leverage a foundational content strategy to make AI tools genuinely effective and safe within Drupal.  \n\n- Discover automated editorial workflows that standardize multi-source, heterogeneous content into a single, cohesive brand voice at scale.  \n\n- See the architectural and strategic choices that drove a massive performance boost (from 10-second load times to under 200ms).\n\n**Experience level**  \nIntermediate",
+      "speakers": "Krisztián Kása, Zsófia Alföldi",
+      "track": "success stories & innovation",
+      "location": "Mees Room I",
+      "startTime": "2026-09-30T09:40:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/one-brand-voice-35-sources-how-we-rebuilt-visiteuropecom-and-how-drupal-ai",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "AI-assisted site migration to Drupal Canvas: a real-world case study",
+      "description": "AI coding agents are changing how we build software, but can they migrate a real production site to Drupal Canvas? We put it to the test on a live project and share what worked, what didn't, and what the numbers actually say.\n\n**Prerequisite**\n\nFamiliarity with Drupal site building, Drupal Canvas and content modelling. Basic awareness of decoupled Drupal architectures and AI coding agents is helpful but not required.\n\n**Target Audience**\n\nDevelopers, tech leads, architects, and agency decision-makers who are evaluating Drupal Canvas, decoupled architectures, or AI-assisted development workflows. Anyone planning a migration to Drupal Canvas, or curious whether AI coding agents are ready for production Drupal work, will benefit from this session.\n\n**Outline**\n\nMigrating an existing site to Drupal Canvas is a significant undertaking. What if you could bring an AI coding agent along for the ride?\n\nIn this session, we share a real-world case study of migrating a live site to a  Drupal Canvas installation using decoupled rendering, with an AI coding agent driving a large portion of the work. We will walk through:\n\nThe starting point: the legacy site, its content model, and the goals of the migration\n\nWhy Drupal Canvas and why decoupled: the architectural decisions behind the project\n\nAI driven: how we planned the the task to be AI agent led\n\nWhat worked well: the tasks where the AI agent was genuinely productive\n\nWhat needs improvement: the pitfalls, dead ends, and places where the human had to take over\n\nMeasuring efficiency: KPIs, time saved (or not), and honest numbers from the project\n\nYou will leave with a realistic picture of what an AI-assisted Drupal Canvas migration looks like today — the opportunities, the risks, and a practical framework you can apply to your own projects.\n\n**Learning Objectives**\n\nUnderstand how to scope a site migration for an AI coding agent: what to delegate, what to keep\n\nLearn the architectural decisions involved in moving to a decoupled Drupal Canvas setup\n\nSee a real-world efficiency comparison: where AI agents saved time and where they slowed it down\n\nTake away a practical framework for evaluating AI-assisted migrations on your own projects\n\nRecognize the common pitfalls and failure modes when mixing AI agents with Drupal development\n\n**Experience level**  \nIntermediate",
+      "speakers": "Wolfgang Ziegler, Jeremy Chinquist",
+      "track": "development, ai & agentic architecture",
+      "location": "Van Oldenbarnevelt Room",
+      "startTime": "2026-09-30T08:45:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/ai-assisted-site-migration-drupal-canvas-real-world-case-study",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "AI-Augmented Accessibility: From Automated Alt-Text to Governance Gates",
+      "description": "Stop reacting to accessibility errors and start automating inclusive governance. Learn how to use AI to find accessibility errors earlier and fix them faster. We’ll bridge the gaps between AI, code, and humans with clear guidance for everyone.\n\n**Prerequisite**\n\nIt would be useful to be familiar with some basics of accessibility. This is not a 101.\n\n**Target Audience**\n\nAnyone working to meet accessibility targets.\n\n**Outline**\n\nAccessibility is often the last gate in a project. Like many bugs the longer they wait, the more difficult they are to fix. Learn how we can \"shift left\" by using AI not just to find errors, but to build better systems. This session provides a practical roadmap for integrating AI into the full Drupal lifecycle:\n\n* Content: Automating descriptive alt-text & transcripts using Drupal AI Core.  \n\n * Infrastructure: Using LLMs to architect & configure CI/CD accessibility gates (Axe-core/Playwright).  \n\n * Triage: Leveraging GitHub’s AI-powered accessibility toos to turn scans into Pull Requests.  \n\n * Governance: Implementing ACCESSIBILITY.md or Claude skills to produce better results.  \n\n * Hierarchy of Truth: Adding AI roles to that of other automated tools & humans—why the user remains the ultimate source of truth.\n\nJoin us to move beyond \"compliance checklists\" & toward a scalable, AI-assisted inclusive web.\n\nMike will also be tying this into the book he recently co-authored. Digital Accessibility Ethics: Disability Inclusion in All Things Tech,  \n\n**Learning Objectives**\n\n * Automate Content Workflows: Set up the Drupal AI module for automated, human-verified media accessibility.  \n\n * Architect Testing Gates: Use AI assistants to write configuration for robust CI/CD frameworks.  \n\n * Implement Modern Standards: Learn to use ACCESSIBILITY.md & Claude Skills to keep projects transparent and compliant.  \n\n * Validate Strategically: Understand the \"Hierarchy of Truth\" to know when to trust what.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Mike Gifford",
+      "track": "user experience, accessibility & design",
+      "location": "Leeuwen Room I&II",
+      "startTime": "2026-09-30T08:45:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/ai-augmented-accessibility-automated-alt-text-governance-gates",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Nobody Asked for a CMS: From Content Management to Answer Delivery in the Age of AI",
+      "description": "Nobody asked for a CMS. Organisations needed to share knowledge; users needed answers they could trust. AI is making that original purpose impossible to ignore and it may be exactly where Drupal becomes more valuable, not less.\n\n**Prerequisite**\n\nBasic familiarity with Drupal as a CMS or content platform is helpful. No coding or AI implementation experience is required. This is a strategic and practical session, not a step-by-step technical build tutorial.\n\n**Target Audience**\n\nDigital leaders, product owners, solution architects, agency leaders, technical strategists, and content/search owners in higher education, public sector or complex enterprise environments.  This session is especially useful for people who use Drupal or are evaluating Drupal as part of a wider digital ecosystem, and who need to understand how AI, search, content governance and composable architectures fit together. It is not primarily aimed for a code-level RAG implementat  \n\n**Outline**\n\nNobody asked for a CMS. Organisations needed to share knowledge; users needed answers they could trust. Yet many digital projects still revolve around the CMS itself: content types, workflows, menus, permissions and publishing models while users remain stuck between search results, intranets, PDFs and support channels.\n\nThis session uses Helsinki Uni Help, a Finnish university/public-service AI search project, as the main proof point for a wider shift: content management is moving from page publishing toward governed knowledge flow. We will show how Drupal can act as the trusted content and governance layer behind an AI answer experience: structured source material, editorial ownership, multilingual content, integrations, retrieval, citations and feedback loops.\n\nWe will also briefly contrast this with our own Astro + LLM publishing experiment, where the traditional CMS UI is no longer the primary editing interface. The point is not that CMSs are dying. The point is that AI changes what the CMS is for.\n\nAttendees will leave with a practical model for deciding when Drupal should be the editing interface, when it should be the content infrastructure, and how to think about AI, search and content governance beyond “which CMS should we use?” And even further, can content governance learn - and even teach - organizations to find the true gaps that keep them from reaching their goals?\n\n**Learning Objectives**\n\nAfter this session, participants will be able to:\n\n- Explain why AI shifts CMS value from page publishing toward governed knowledge flow.  \n\n- Identify the parts of a Drupal ecosystem that matter for AI answer delivery: structured content, ownership, APIs, retrieval, citations, feedback loops and governance.  \n\n- Use lessons from HelsinkiUni Help to evaluate when Drupal should be the editing interface and when it should act as content infrastructure.  \n\n- Ask better discovery questions before starting CMS, search, content strategy or AI projects.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Tomi Mikola, Ulla Koho",
+      "track": "success stories & innovation",
+      "location": "Penn Room I&II",
+      "startTime": "2026-09-30T08:45:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/nobody-asked-cms-content-management-answer-delivery-age-ai",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Shipping products with confidence: how we rebuilt our testing tools for velocity",
+      "description": "Confidence in shipping a Drupal-based product shouldn't take 6 days of GitHub runner time, only to be greeted by flaky tests in some of our 500+ jobs. This is the story of how we migrated from Behat and PHPUnit to custom tooling on top of Playwright to reclaim velocity and confidence in our testing suite.\n\n**Prerequisite**\n\nBasic programming understanding and a familiarity with testing in PHP will help you get the most out of this session.\n\n**Target Audience**\n\nA medior developer with an interest in testing or a QA person who is responsible for continuous integration\n\n**Outline**\n\nEvery project accumulates complexity. After 10 years, Open Social's test suite demanded 500 CI runners and hours of waiting, sometimes stumbling on flaky tests. This is the story of how we revisited that foundation and rebuilt our testing tooling on top of Playwright to reclaim velocity and confidence.\n\nIn this session I'll use the testing pyramid to audit a test suite: what are you testing, at what cost, is the confidence worth it.\n\nFrom there, I'll explain the three concrete building blocks of our new tooling:\n\nQA API or Test Control Interface (TCI) – a hidden, environment-gated HTTP API inside Drupal that provides attribute-driven PHP operations. Modules declare QA operations; the TCI publishes them as an OpenAPI spec. This decouples test data setup from the test runner entirely and allows tooling to reach into your product in a version agnostic way.\n\nPlaywright as the harness – unlocks first-class trace files, automatic retries, and parallel execution that actually scales. We'll cover how Playwright's test insights changed how we debug failures.\n\nHuman-readable specs – Using the TCI, Cucumber makes UI tests readable by non-engineers and increasingly useful as context for AI tooling. For GraphQL, a new Markdown-based spec format lets you embed queries, variables, and expectations in a file that doubles as documentation.\n\nYou'll leave with a concrete mental model and a replicable architecture for rebuilding test confidence without rebuilding your entire stack at once.\n\n**Learning Objectives**\n\nYou'll learn to critically evaluate your testing suite by and thinking about tests according to the testing pyramid.  \n\nYou'll learn about Playwright's amazing testing insights for integration and end-to-end testing to help solve bugs sooner.  \n\nYou'll learn about how we use Cucumber and Markdown to create human readable UI and API tests on top of Playwright.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Fedor ZZZ_CLX_KUONI",
+      "track": "development, ai & agentic architecture",
+      "location": "Goudriaan Room I&II",
+      "startTime": "2026-09-30T08:45:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/shipping-products-confidence-how-we-rebuilt-our-testing-tools-velocity",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "From Fork to Force: Open Source, Ownership, and the Fight for Digital Sovereignty",
+      "description": "Ten years ago, I did something most founders would call unthinkable: I walked away from the company I had built and forked my own project, code, and all. That decision became Nextcloud, today one of the world's largest self-hosted collaboration platforms, used by tens of millions of people and thousands of organizations, from schools to governments.\n\nIn this keynote, I'll share the honest story behind that fork: why company structure, investor incentives, and community governance can drift apart, what it takes to realign them, and the lessons for anyone building on open source — lessons the Drupal community knows well.\n\nBut the story is bigger than one company. Open source has become a geopolitical issue. Across Europe and beyond, governments are asking who controls their data, their infrastructure, and increasingly their AI. I'll talk about how we've worked with policymakers, initiatives like EuroStack, and public sector organizations to turn \"Digital Sovereignty\" from a buzzword into procurement decisions, legislation, and real migrations away from Big Tech — and why open source communities like Drupal and Nextcloud are the foundation this movement is built on.  \n\nThe fork was never just about a product. It was about who technology should serve. Ten years in, that question matters more than ever.\n\nBiography:  \n\nFrank Karlitschek is a long time open source contributor and former board member of the KDE e.V. He founded ownCloud in 2010 and the successor Nextcloud in 2016 to create a fully open source and decentralized alternative to big centralized cloud companies. Frank was an invited expert at the W3C to help to create the ActivityPub standard. Frank has spoken at MIT, CERN, Harvard and ETH and keynoted many conferences. Frank is the founder and CEO of Nextcloud GmbH. He is also a fellow of Open Forum Europe and an advisor to the United Nations regarding Open Source. Frank won the European SFS Free Software Award 2023 and the Acteurs du Libre European Award 2023.",
+      "speakers": "Frank Karlitschek",
+      "track": "keynote",
+      "location": "Rotterdam Room I&II",
+      "startTime": "2026-09-30T07:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/keynote",
+      "video": "",
+      "minutes": 75
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "A developer is more than their code: growing the seniors of 2031",
+      "description": "AI can write your code. But can it make you a better developer? Junior developers today ship faster than ever, but many struggle with the skills that matter most: debugging, collaborating, thinking through hard problems, and growing into the kind of people who carry open-source projects forward. This session shares real lessons from mentoring dozens of junior developers, and asks a question every team and every community needs to face.\n\n**Prerequisite**\n\nNo technical knowledge is needed. This session is for anyone who works with developers, hires developers, mentors developers, or cares about the future of open-source communities. Whether you lead a team of two or a department of two hundred, the challenges we discuss will be familiar.\n\n**Target Audience**\n\nTeam leads, development managers, and mentors who work with junior developers every day. Agency owners and hiring managers who are trying to figure out how to grow talent when AI changes everything. Community members and organizers who want more people contributing to Drupal and worry about where the next generation will come from. No matter your role, if you care about people in open source, this session is for you.\n\n**Outline**\n\nAI tools help developers write code faster. But writing code is only a small part of what makes someone a good developer. Problem-solving, teamwork, clear communication, taking ownership... these skills take time to grow. AI can't teach them.\n\nAt Agiledrop, a 70+ engineer company, we mentor junior developers through a structured onboarding that lasts 1–3 months. Over time, we noticed something worrying. Juniors who leaned too hard on AI tools learned less deeply. They skipped the struggle that builds real understanding. They asked AI before asking their team. They lost the joy of solving something on their own.\n\nThis session shares what we learned and how we changed our mentoring. We talk about what works: real projects, real mentors, real conversations. We also talk about what doesn't work: copy-paste coding, skipping documentation, and treating AI as a senior colleague.\n\nThis matters beyond any single company. New developers today don't start with Drupal. They reach for whatever AI suggests. If we want Drupal to have a future, we need people who understand it deeply, not just people who can prompt their way through it. That means investing in mentorship, in community, and in the slow, human work of growing developers who care.\n\nThis is not an anti-AI talk. AI is here to stay. But tools don't build communities. People do.\n\n**Learning Objectives**\n\n1. Understand why the skills that make a great developer (problem-solving, communication, ownership, teamwork) cannot be built through AI tools alone  \n\n2. Learn a practical onboarding approach tested across dozens of junior developers at a 70+ person engineering company  \n\n3. Recognize the early signs that a junior developer is relying on AI in ways that slow their real growth  \n\n4. See how junior developer mentorship connects directly to the health and future of open-source communities like Drupal\n\n**Experience level**  \nAnyone",
+      "speakers": "Janez Zibelnik",
+      "track": "community health",
+      "location": "Mees Room I",
+      "startTime": "2026-09-29T15:35:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/developer-more-their-code-growing-seniors-2031",
+      "video": "",
+      "minutes": 20
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Can AI Fix the Web? The Promises and Perils of \"Automated\" Accessibility",
+      "description": "We are increasingly asking AI to fix our WCAG errors, but algorithms operate on probability, not empathy. If you are using AI coding assistants to write your front-end components, you might be shipping hallucinated ARIA labels and broken accessibility without knowing it. Join me to explore the promises and perils of automated accessibility, and learn how to use AI as a testing partner rather than a replacement for inclusive design.\n\n**Prerequisite**\n\nBasic understanding of web accessibility principles (WCAG, ARIA, Semantic HTML).  \n\nFamiliarity with using AI coding assistants (like Claude, ChatGPT, or GitHub Copilot) in a development workflow.\n\n**Target Audience**\n\nDevelopers, UX/UI designers or acceccibility advocates\n\n**Outline**\n\nWe are entering a dangerous new era of web development where teams are asking Generative AI to \"fix my WCAG errors.\" On the surface, it sounds like a utopia: pass your broken DOM to a Large Language Model (LLM) and get a perfectly accessible component returned in seconds.\n\nHowever, AI operates on statistical probability, not human empathy. When we rely on AI to automatically patch accessibility, we often end up with hallucinated ARIA labels, nonsensical focus trapping, and fundamentally broken screen-reader experiences that technically pass automated audits but fail actual users.\n\nThis session explores the intersection of Generative AI and Web Accessibility. We will look at exactly where AI fails spectacularly at inclusive design. More importantly, we will cover how engineering teams can pragmatically use AI as an assistive testing and ideation tool rather than an automated fix. As developers, we cannot outsource human empathy to an algorithm.\n\n**Learning Objectives**\n\nUnderstand why LLMs fail at complex inclusive design and how to spot \"fake\" accessibility fixes in AI-generated code.\n\nLearn how to write specific, context-aware prompts that force AI to act as a rigorous accessibility auditor rather than an automated code generator.\n\nGrasp the ethical implications of outsourcing digital inclusion to algorithms, and establish team guardrails for AI use in front-end development.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Junaid Masoodi",
+      "track": "development, ai & agentic architecture",
+      "location": "Mees Room II",
+      "startTime": "2026-09-29T15:35:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/can-ai-fix-web-promises-and-perils-automated-accessibility",
+      "video": "",
+      "minutes": 20
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Drupal CMS by design: How continuous UX research is building a product you can depend on",
+      "description": "Every feature in Drupal CMS has earned its place. Future versions are evolving through research, evidence, and a relentless focus on what people actually need. This session tells the story of how that works in practice, and how the community is part of it.  \n\n**Prerequisite**\n\nNo prior knowledge is needed for this session, however, attendees will get the most out of this session if they have a working familiarity with Drupal CMS, to know what the product is about and the audiences it is aimed at. The session may appeal to those interested in using Drupal CMS in the context of a project or organisation, and more broadly, to those with a curiosity about UX research and its role in product development and decision-making in Drupal.  \n\n**Target Audience**\n\nAnyone with an interest in Drupal CMS, whether they are an existing Drupal CMS user, or a prospective user, or someone keen to know the way Drupal CMS is shaping up and what it stands to offer them. Will also appeal to those with feedback, comments and questions about Drupal CMS, whether they are site builders, content creators, developers or contributors.  \n\n**Outline**\n\nDrupal CMS encapsulates the best of Drupal, it’s Drupal’s signature product that will bring Drupal to new audiences and break new ground in site building, content management and digital experience orchestration. But when there’s so much innovation in Drupal, how do you choose what to include? Short answer: UX research.  \n\nAs UX Research Lead for Drupal CMS, it's my job to make sure Drupal CMS keeps getting better and better, in an agile, evidence-led way. In this session I’ll bring you the latest developments from the research-led roadmap of Drupal CMS. You'll learn how research threads from Drupal Marketplace, the AI Initiative and ECA next generation are being woven into the fabric of Drupal CMS — not as bolt-on features, but as part of a coherent product vision that's grounded in what users actually need. Expect to hear about: site templates, onboarding, content and editorial workflows, migration, integrations, to name a few.  \n\nDrupal CMS is for the community by the community so I’ll also share findings from a survey of current users and those who haven't yet made the switch. You’ll understand what those insights mean for every major decision we're making over the coming months and have your chance to feed into future of Drupal CMS.  \n\n**Learning Objectives**\n\nAfter attending this session attendees will be able to:  \n\n-Understand the ‘why’ behind the features in Drupal CMS, making the connection between features and audience needs and expectations  \n\n-Engage directly with the person behind the UX research of Drupal CMS – to give feedback, propose needs and ask questions  \n\n-Appreciate the evidence-led approach and process to developing Drupal CMS as a viable product  \n\n-Contribute meaningfully to the future direction of Drupal CMS\n\n**Experience level**  \nBeginner",
+      "speakers": "Emma Horrell",
+      "track": "drupal cms",
+      "location": "Van Oldenbarnevelt Room",
+      "startTime": "2026-09-29T15:35:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/drupal-cms-design-how-continuous-ux-research-building-product-you-can-depend",
+      "video": "",
+      "minutes": 20
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "From Legacy Chaos to Drupal CMS: AI-Assisted Content Modeling & Migration",
+      "description": "This session focuses on how AI can support site builders and product teams in making faster, more confident decisions, improving collaboration, and enabling iterative migrations with safer rollbacks.\n\n**Prerequisite**\n\nAttendees will get the most out of this session if they have:\n\nA basic understanding of Drupal's content architecture (content types, fields, and the entity system)  \n\nFamiliarity with the concept of content migration in Drupal (awareness of the Migrate API is helpful but not mandatory)  \n\nA general awareness of how AI tools (LLMs) work as assistants, at a conceptual level - no machine learning background required\n\n**Target Audience**\n\nSomeone who is mid-planning or about to start a migration from a legacy websites into Drupal CMS. Ambitious Site Builders, Drupal Developers, Solution Architects, Technical Project Managers, Product Owners of digital platforms that really want to scale.\n\n**Outline**\n\nMigrating content into Drupal CMS is not just about moving data - it's about understanding it.  \n\nBefore writing a single migration, teams spend weeks analyzing legacy pages, defining content models, mapping fields, and dealing with inconsistencies. This session introduces a new approach: using AI to accelerate content discovery and streamline the path to a clean Drupal CMS implementation.  \n\nThrough the AI Content Migrate module, we’ll explore how AI can analyze legacy HTML, detect repeatable structures, and propose Drupal content types and fields aligned with modern Drupal CMS best practices. The system suggests mappings, extracts structured data using generated selectors, and prepares migration configurations ready for execution.  \n\nThis session focuses on how AI can support site builders and product teams in making faster, more confident decisions, improving collaboration, and enabling iterative migrations with safer rollbacks.\n\n**Learning Objectives**\n\nBy the end of the session, attendees will be able to:\n\nUnderstand how AI can be applied to content discovery: analyzing legacy HTML to detect recurring structures and implicit content models  \n\nRecognize how the AI Content Migrate module bridges the gap between unstructured legacy content and Drupal CMS content types and fields  \n\nEvaluate AI-generated content type and field suggestions critically, understanding where human judgment remains essential  \n\nApply a more efficient, iterative workflow for content modeling and migration planning, reducing time spent in the discovery and mapping phase\n\n**Experience level**  \nIntermediate",
+      "speakers": "Raffaele Chiocca",
+      "track": "drupal cms",
+      "location": "Penn Room I&II",
+      "startTime": "2026-09-29T15:35:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/legacy-chaos-drupal-cms-ai-assisted-content-modeling-migration",
+      "video": "",
+      "minutes": 20
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Take Back Your Autonomy",
+      "description": "In an AI-driven development world, speed is easy to gain but control is easy to lose. This session shows how to stay in charge of your code and your craft.\n\n**Prerequisite**\n\nBasic experience with modern development workflows and an interest in using AI tools such as Claude or Cursor. No advanced AI knowledge required.  \n\n**Target Audience**\n\nMid-level and senior PHP/Drupal developers who are already using or experimenting with AI tools like Claude or Cursor in their daily workflow. Also relevant for team leads and architects who want to keep strong technical ownership while benefiting from AI productivity gains. Anyone who has felt “the code works but I don’t fully own it anymore” will get the most value.\n\n**Outline**\n\nAI tools like Claude and ChatGPT are changing how we build software at high speed. We ship more with less effort, follow our intuition, and let AI fill in the gaps. It feels powerful.  \n\nBut there is a downside we rarely discuss. We are no longer just handing over repetitive tasks — we are also delegating understanding. Code appears before we fully grasp it. Architectures emerge that we didn’t consciously design. Everything works, yet we risk losing our grip on what we are building.  \n\nThis talk explores how to reclaim your autonomy as a developer in an AI-accelerated world, without rejecting the tools that boost productivity.  \n\nVibe coding lets us move fast and trust our gut, but when speed becomes the default we lose real ownership. Can you explain the code you shipped? Do you understand the trade-offs? Would you feel confident maintaining this system in six months? And if it breaks, can you take responsibility?  \n\nThese questions matter especially in Drupal, where long-term maintainability, collaboration and transparency are essential.  \n\nThis is not an anti-AI talk. It is about developing with intention.  \n\nWe will look at how AI-assisted workflows shift responsibility away from the developer, why “it works” is no longer enough, and the risk of losing architectural awareness. Most importantly, we cover practical strategies to stay accountable: how to critically evaluate AI-generated code and integrate AI without outsourcing your own judgment.\n\n**Learning Objectives**\n\nUnderstand the hidden trade-offs of relying heavily on AI-assisted coding  \n\nRecognize when you are losing architectural awareness and ownership  \n\nLearn practical techniques to validate, challenge, and deeply understand AI-generated code  \n\nBuild habits that keep you accountable and in control of your codebase  \n\nUse AI tools more critically and effectively without giving up your autonomy\n\n**Experience level**  \nIntermediate",
+      "speakers": "Valerie Valkenburg-Gibson",
+      "track": "development, ai & agentic architecture",
+      "location": "Leeuwen Room I&II",
+      "startTime": "2026-09-29T15:35:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/take-back-your-autonomy",
+      "video": "",
+      "minutes": 20
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Help shape Drupal’s story: A global marketing call to action",
+      "description": "What if Drupal marketed itself as powerfully as it’s built? Join us to help shape the future of Drupal’s global story.\n\n**Prerequisite**\n\nBasic familiarity with Drupal and the open-source community. An interest in marketing, business strategy, or community collaboration is helpful but not required.\n\n**Target Audience**\n\nAgency leaders, marketers, business developers, Drupal contributors, and anyone interested in growing Drupal’s market presence and adoption.\n\n**Outline**\n\nDrupal is entering a new era of marketing momentum.\n\nOver the past year, Drupal AI has sparked a redoubling of marketing efforts, driving visibility through external events, webinars, award wins, and reaching entirely new audiences. It has shown what’s possible when the community aligns around a clear story and shared ambition.\n\nSo the question is: what if we could scale that success across all of Drupal?\n\nDrupal has a huge opportunity to amplify what’s already working. Agencies are already driving strong marketing independently, but by aligning around shared messaging and campaigns, we can expand reach, unlock more enterprise opportunities, and strengthen Drupal’s position.  \n\nBuilding on the momentum of the Drupal AI initiative, the Drupal Association is growing coordinated marketing efforts in new areas, opening the door for more people to get involved and make a visible contribution.\n\nWe’ll share how the initiative is taking shape, why they’re gaining traction, and what makes them different. We’ll show how marketing in Drupal is becoming one of the most accessible and high-impact ways to contribute, where individuals and organizations alike can raise their profile, earn recognition, and help shape Drupal’s future.\n\nThis is not just an update, it’s an invitation. If Drupal AI proved anything, it’s that momentum builds quickly when people rally around something exciting. This session is about how we create more of that energy, and how you can be part of it.\n\n**Learning Objectives**\n\n- Understand the goals and structure of Drupal’s latest global marketing initiative  \n\n- Learn from recent efforts, including Drupal AI marketing campaigns  \n\n- Identify opportunities to contribute to shared marketing efforts  \n\n- Gain practical ways to support and amplify Drupal’s positioning\n\n**Experience level**  \nAnyone",
+      "speakers": "Maya Schaeffer, Ryan Witcombe, Will Huggins, Rosie Gladden",
+      "track": "agency, business & marketing",
+      "location": "Goudriaan Room I&II",
+      "startTime": "2026-09-29T14:40:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/help-shape-drupals-story-global-marketing-call-action",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "How Drupal drives Pinball Machines",
+      "description": "Let's play Pinball!\n\nGet to know the open source pinball community. And because this is Drupal Con, see what part is Drupal playing in that game.\n\n**Prerequisite**\n\nYou should have heard of Drupal. If you don't know what pinball machine is, you will know it after the session ;-)\n\n**Target Audience**\n\nPeople interested in Open Source and Pinball\n\n**Outline**\n\nFive years ago I started ppuc.org, the Pinball Power-Up Community to develop open source hardware and software to keep old pinball machines alive and to extend their capabilities. Furthermore, we enable people to build their own homebrew pinball machines.  \n\nOne part of it is that sophisticated game, hardware and effect configurations must be managed.  And collaboration on these topics must be possible. That is where Drupal becomes relevant as a (small) piece of the entire eco-system, especially some contrib modules like Default Content Deploy to share content between mutiple installations or AI to extract information from old manuals.  \n\nFor sure, I will talk about these Drupal specific stuff, but a significant part of the session will be be about the other open source parts and simply about ... Pinball.  \n\nJust enjoy to see something different - with a bit of Drupal ;-)\n\n**Learning Objectives**\n\nDrupal can be embedded as tool into a larger eco-system to ease parts of it.  \n\nBut even more important, you will learn some basics about pinball machines and how open source software and hardware became relevant in that crazy community in general.\n\n**Experience level**  \nBeginner",
+      "speakers": "Markus Kalkbrenner",
+      "track": "success stories & innovation",
+      "location": "Penn Room I&II",
+      "startTime": "2026-09-29T14:40:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/how-drupal-drives-pinball-machines",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Your Dashboard Is Lying: Goodhart's Law and the Metrics Crisis in AI-Era Drupal Delivery",
+      "description": "Your delivery metrics have never looked better. Your AI tools are closing tickets, boosting velocity, and painting every dashboard green. So why did the client just escalate? Goodhart's Law has an uncomfortable answer and this session will make you rethink every metric you report.\n\n**Prerequisite**\n\nExperience managing or delivering Drupal projects in an agency or client-services context. Working familiarity with common Agile delivery metrics velocity, burndown, SLAs at a practical level, not theoretical. No economics or statistics background needed. If you've ever written a weekly status report or reviewed a sprint dashboard, you have all the context required.\n\n**Target Audience**\n\nAgency Owners, Project Managers, Account Managers, Scrum Master, Agile Coach, operation Leads\n\n**Outline**\n\nYour sprint velocity is up. Tickets are closing faster than ever. The dashboard is green. AI tools are generating code, drafting content, and accelerating throughput. Three weeks later, the release is a mess and the client is blindsided. What happened?  \n\nGoodhart's Law happened: \"When a measure becomes a target, it ceases to be a good measure.\" The moment your team is judged on velocity, they inflate story points. When ticket close rate becomes a KPI, tickets get closed without real resolution. When SLA response time is tracked, clients get acknowledgment emails that say nothing useful.  \n\nAI makes it worse dramatically. AI can generate code that inflates velocity without improving quality. It can close tickets and surface green metrics faster than any human. Your dashboard looks healthy while delivery quietly drifts.  \n\nThis talk walks through four metrics every Drupal agency tracks velocity, ticket resolution time, SLA response rate, and sprint burndown and shows how each gets gamed when AI enters the workflow. More importantly, it introduces what to measure instead: leading indicators of actual delivery health that resist gaming.  \n\nYou'll leave with a measurement hygiene framework that separates vanity metrics from signals that actually predict whether your project is heading toward success or a client escalation.  \n\nThis isn't anti-AI. It's anti-autopilot. AI makes delivery faster. Goodhart's Law asks: faster toward what?\n\n**Learning Objectives**\n\nAttendees will learn to identify which delivery metrics are vulnerable to gaming especially when AI accelerates the distortion. They'll understand Goodhart's Law as a practical diagnostic tool, not just an economics concept, and see it applied to four common Drupal delivery metrics: velocity, ticket resolution time, SLA response rate, and sprint burndown. They'll leave with a measurement hygiene framework that distinguishes vanity metrics from genuine delivery health signals including leading indicators like decision-log freshness, dependency resolution rate, client question turnaround, and risk-to-mitigation ratio. The goal is not to abandon metrics but to stop trusting the wrong ones.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Ulka Neil",
+      "track": "agency, business & marketing",
+      "location": "Mees Room I",
+      "startTime": "2026-09-29T14:40:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/your-dashboard-lying-goodharts-law-and-metrics-crisis-ai-era-drupal-delivery",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Agentic Debugging: Teaching AI to Step Through Your Code",
+      "description": "\"Your AI can read every line of your code — but it has never watched it run. Until now.\"\n\nDebugging is the last frontier of AI-assisted development. Code generation, refactoring, and test writing are solved problems — but when a bug hides in runtime state, your AI assistant is blind. Agentic Debugging gives AI agents eyes into the running process: breakpoints, call stacks, variables, and expression evaluation — all controlled programmatically through open protocols. Come see what happens when an AI doesn't just read your code, but steps through it.  \n\nSession Outline:  \n\n1. The Problem — AI assistants can read code but cannot observe runtime state. They guess at bugs instead of proving them. We close this gap.  \n\n2. Architecture Deep-Dive — Two delivery modes sharing one backend-agnostic tool layer:  \n\nVS Code LM Tools — 16 tools registered via vscode.lm.registerTool(), Copilot agent mode controls breakpoints, stepping, variables, and expression evaluation while the developer sees the full native debug UI.  \n\nMCP Server — 20 tools over stdio/Streamable HTTP for CLI clients, Cursor, Windsurf, and any MCP-compatible host. Multi-instance management with heartbeat monitoring.  \n\n3. Strict Debug Flow & Tool Schema — Custom debug agent with enforced state-machine transitions (launch → listen → connect → pause → inspect → step → terminate), typed JSON schemas, and efficiency-optimized tool descriptions that eliminate wasted LLM calls.  \n\n4. Multi-Language & CLI Bridge — Extending beyond PHP/Xdebug to Node.js, Python, and Go through the DebugBackend interface abstraction and a CLI bridge for headless environments.  \n\n5. Agent Skills, Playwright Integration & MCP Resources — Agent instruction sets that encode debugging heuristics, Playwright-driven HTTP request triggering so the agent completes the full debug cycle autonomously, and MCP Resources exposing breakpoints, call stacks, and session state as read-only context.  \n\n6. Live Demo — Agent autonomously reproduces a bug, sets strategic breakpoints, inspects runtime state, and reports root cause.\n\n**Prerequisite**\n\nFamiliarity with VS Code debugging — you've used breakpoints, the call stack panel, and the variables view at least a few times  \n\nBasic understanding of what LLMs/AI agents are — no ML expertise needed, just awareness that tools like Copilot and Cursor exist and can call functions  \n\nOptional but helpful: exposure to the Model Context Protocol (MCP) or Debug Adapter Protocol (DAP) concepts; we'll explain both from first principles during the session  \n\nNo specific language expertise required — demos use PHP and Drupal but the architecture is language-agnostic\n\n**Target Audience**\n\nDevelopers\n\n**Outline**\n\nDebugging is no longer a solo activity. This session introduces Agentic Debugging — an open-source architecture that gives AI agents first-class access to the Debug Adapter Protocol (DAP) through VS Code Language Model Tools and the Model Context Protocol (MCP).\n\n**Learning Objectives**\n\n1. Understand the Agentic Debugging architecture — how Language Model Tools and MCP bridge the gap between AI agents and runtime debugging  \n\n2. Design strict tool schemas for reliable agent behavior — learn how enforced state-machine flows, typed JSON input schemas, and efficiency-focused modelDescription prompts reduce wasted LLM calls and prevent invalid tool sequences  \n\n3. Implement a debug session lifecycle controlled by an AI agent — from launch through breakpoint placement, event-driven waiting, variable inspection, and hypothesis-driven stepping to termination  \n\n4. Extend the approach to your own stack — apply the DebugBackend interface pattern, CLI bridge, Playwright request triggering, and MCP Resources to add agentic debugging for any language supported by DAP (Node.js, Python, Java, etc.)\n\n**Experience level**  \nAdvanced",
+      "speakers": "Kiril Lazur",
+      "track": "development, ai & agentic architecture",
+      "location": "Penn Room I&II",
+      "startTime": "2026-09-29T13:45:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/agentic-debugging-teaching-ai-step-through-your-code",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "AI-Assisted Contrib Module Maintenance",
+      "description": "Turn your Drupal issue queue into a smarter, faster workflow with open source coding agents that reduce maintainer workload and improve contribution quality.\n\n**Prerequisite**\n\n* Basic understanding of Drupal module development (issues, merge requests, code reviews)  \n\n* Familiarity with maintainer workflows on Drupal.org or GitLab  \n\n* High-level idea of what a coding agent is (AI tool that can read, analyze, and suggest code or workflow actions)  \n\n* Awareness of CI pipelines and automated testing (helpful but not required)\n\n**Target Audience**\n\nDevelopers, Maintainers\n\n**Outline**\n\nMaintaining a Drupal module often means juggling triage, reviews, contributor guidance, and releases - all within an ever-growing issue queue. In this session, we’ll explore how coding agents with deterministic code can act as helper tools, reducing this burden while improving quality and consistency. We’ll showcase an open source tool already used in practice to automate tasks like duplicate detection, pre-reviewing code, effort estimation, and suggesting next steps before work even begins.\n\nWe'll then expand into a broader vision where these tools go beyond triage: summarizing complex issue threads, proposing reproduction steps, analyzing patch impact, and identifying missing tests or potential BC breaks. The result is a smarter issue queue where maintainers can focus on high-value decisions instead of repetitive work, and contributors get clearer guidance from the start.\n\nA unique part of this workflow is how we handle validation and collaboration. As part of CI, functional testing is automatically recorded as video, giving maintainers and contributors a clear, visual way to verify changes after code is pushed. We offer skills for contributors to create these functional tests.\n\nBy the end of this session, you’ll see how open source AI tooling and coding agents can help, but not replace maintainers.\n\n**Learning Objectives**\n\n* Understand how coding agents can support Drupal maintenance workflows  \n\n* Learn how to automate issue triage, code review, and prioritization tasks  \n\n* Explore practical use cases for improving issue queue quality and contributor experience  \n\n* Discover how automated functional testing videos can improve validation and collaboration\n\n**Experience level**  \nAdvanced",
+      "speakers": "Marcus Johansson",
+      "track": "development, ai & agentic architecture",
+      "location": "Rotterdam Room I&II",
+      "startTime": "2026-09-29T13:45:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/ai-assisted-contrib-module-maintenance",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Beyond content staging: where Drupal Workspaces is heading",
+      "description": "Workspaces is no longer only about staging content. It is becoming part of how Drupal can handle governed change across content, config, and AI-assisted workflows.\n\n**Prerequisite**\n\nParticipants will get the most value from this session if they already have some familiarity with:  \n\n* Drupal core concepts such as entities, configuration, and editorial workflows  \n\n* Content Moderation and basic publishing workflows in Drupal  \n\n* General awareness of AI tooling in Drupal, even if they are not using it yet\n\n**Target Audience**\n\nThis session is aimed at Drupal developers, technical leads, solution architects, and experienced site builders who are working on enterprise Drupal platforms with complex publishing needs or who are already using, evaluating, or extending Workspaces, Content Moderation, or related contrib modules\n\n**Outline**\n\nWorkspaces was mostly viewed as a content staging feature. That is still true, but it is no longer the whole story.\n\nWorkspaces is now stable in Drupal core and already useful for real publishing workflows. What makes it more interesting now is how it connects with Content Moderation, contrib experimentation, and AI governance.\n\nThis session will start with why content staging is still a core enterprise CMS need and what Workspaces in core already gives Drupal teams today. From there, it will look at the current direction around Content Moderation, especially where Workspaces can support more complete publishing flows when changes involve more than one entity.\n\nThe session will also cover the role of the Workspaces Extra module as a place to extend and experiment on top of core. Topics will include configuration staging with `wse_config`, workspace previews with `wse_preview`, revert options as a practical fallback, and future plans for these features. Hint: Some of them may even reach Drupal core by Rotterdam! ;)\n\nThe final part of the session will look at AI governance. If agents help make content or config changes, those changes should not go directly to live unless intended. This is where Workspaces, Workspaces Extra, and `tool_workspace` can support a more governed, human-in-the-loop workflow.\n\nThe session will close with the direction around conflict management, what is already usable today, and what Drupal developers should be watching next across core and contrib.\n\n**Learning Objectives**\n\nBy the end of this session, participants should be able to:  \n\n* Understand where Drupal Workspaces fits today in core  \n\n* Identify where contrib, especially Workspaces Extra, extends the Workspaces model in practical ways  \n\n* Understand why config staging matters for AI governance  \n\n* See how Workspaces can support a human-in-the-loop approach for AI and tool-driven changes  \n\n* Evaluate which parts of this space are ready now and which parts are still evolving\n\n**Experience level**  \nAnyone",
+      "speakers": "Ajit Chandrakant Shinde",
+      "track": "development, ai & agentic architecture",
+      "location": "Leeuwen Room I&II",
+      "startTime": "2026-09-29T13:45:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/beyond-content-staging-where-drupal-workspaces-heading",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Building Production-Ready AI Applications Using Curated Drupal Recipes",
+      "description": "Move your Drupal projects from AI experimentation to enterprise-ready implementation. This workshop provides hands-on experience deploying secure, agentic AI features and automated content workflows using curated, official tools.\n\n**Prerequisite**\n\nAttendees should be familiar with Drupal site building (content types, fields) and basic DDEV/Composer usage. No programming experience is required; this workshop is strictly focused on applying and configuring existing functionality.\n\n**Target Audience**\n\nSite builders, developers, and digital strategists who want to implement reliable, curated AI features in real-world Drupal projects.\n\n**Outline**\n\nTransform your Drupal projects into intelligent applications using curated tools from the Drupal AI Initiative. This hands-on workshop focuses on applying ready-to-use Drupal recipes, not writing custom code. We use Drupal CMS as our pre-configured foundation, though every recipe easily applies to your existing sites.\n\nYou will follow a professional workflow to implement enterprise-grade AI. We begin with the foundation: installing the AI module, configuring providers, and setting up context management for highly relevant results. Next, we secure operations by implementing AI Guardrails to protect PII, establishing AI Observability, and exploring Drupal AI's built-in debugging tools.\n\nWith governance in place, we deploy autonomous capabilities. You will configure AI Content Reviews to flag brand/SEO issues, integrate native AI assistants, and build semantic search. Finally, we configure Drupal as a Model Context Protocol (MCP) server, allowing external agents to securely read information and push content changes back to the CMS in an auditable way.\n\nSession Outline:\n\nFoundation: Drupal CMS setup, AI providers, and context management.\n\nGovernance: Guardrails (PII protection), Observability, and debugging tools.\n\nAssistants: AI Content Reviews, QA automation, and native AI tools.\n\nSearch: RAG-powered semantic search.\n\nMCP: Bi-directional communication with external agents.\n\n**Learning Objectives**\n\n- Deploy a secure AI foundation by configuring AI providers, managing context, and implementing AI Guardrails alongside Observability and debugging tools.\n\n- Configure AI Content Reviews and native editorial assistants to automate quality assurance—without writing custom code.\n\n- Implement semantic search and configure Drupal as a secure MCP server to enable bi-directional, auditable interactions with external agents.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Dr. Christoph Breidert",
+      "track": "development, ai & agentic architecture",
+      "location": "Mees Room II",
+      "startTime": "2026-09-29T13:45:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/building-production-ready-ai-applications-using-curated-drupal-recipes",
+      "video": "",
+      "minutes": 100
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Context Control Center: Bringing AI Context Natively to Drupal CMS",
+      "description": "Your AI features are only as good as the knowledge behind them. Context Control Center is how Drupal CMS keeps that knowledge structured, scoped, and ready for every agent and request. Whether you are powering help desks, personalized experiences, automated emails, or site search, the same governed library feeds them all.\n\n**Prerequisite**\n\n- Familiarity with Drupal CMS (or comparable website site building) at a site builder or digital strategist level: admin UI, configuration, and how content and structure fit together. No PHP or custom module knowledge expected.\n\n- A basic sense that Drupal AI can power different jobs (for example assistance in the admin UI, support-style answers, or search help) through agents or similar configuration. You do not need to have installed any AI module or recipe beforehand.\n\n**Target Audience**\n\nSite builders, CMS administrators, digital strategists, and technical leads who shape AI-enabled experiences on Drupal CMS. These roles turn organizational knowledge into structured context, decide how it is scoped across agents and site sections, and keep AI aligned with the organization without custom development.\n\n**Outline**\n\nAI in Drupal only looks “smart” when the model knows your organization’s facts, policies, and constraints. That knowledge typically lives in Slack threads, PDFs, and ad-hoc prompts, so outputs can drift and contradict each other. The hard problem is not picking an AI model; it is keeping truth structured, current, and attached to the right workflow.\n\nContext Control Center (CCC) is the native context layer in Drupal CMS: a place to author, review, translate, and reuse context items for AI features and agents. Instead of everyone pasting their own detailed prompt, Drupal assembles the right context from one governed library per agent and request. That same library can power help desks with accurate facts and escalation rules, automated emails with required policy text, personalized experiences with region-appropriate guidance, forms where AI follows shared definitions, and site search with clear terms and synonyms.\n\nWe’ll cover:\n\n- Context scopes, such as language, site section, and use case, that ensure the right context is applied, so support answers never mix with marketing messaging and personalization doesn’t affect the wrong experience\n\n- Remote context sources (documentation sites, analytics summaries, trusted APIs) that keep context fresh while flowing through CCC governance, scoping, and token limits\n\n- Best practices for structuring, sizing, and maintaining context so it stays usable and effective alongside Drupal’s AI safety and monitoring tools\n\n**Learning Objectives**\n\nAfter this session, participants will be able to:\n\n1. Explain why Context Control Center is the native context layer in Drupal CMS and how it replaces scattered prompts, PDFs, and wikis with one governed library.\n\n2. Identify how context scopes, like language, site section, and use case, control which context reaches each request, and why that prevents support answers from mixing with marketing messaging and other domain areas.\n\n3. Apply practical patterns for a maintainable library: sizing entries, deciding when to split or merge items, avoiding duplicate or conflicting guidance, and clarifying who owns what.\n\n4. Summarize how dynamic and remote context keeps the library current and how CCC fits alongside Drupal's other AI safety and monitoring capabilities rather than replacing them.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Emma Horrell, James Abrahams",
+      "track": "drupal cms",
+      "location": "Van Oldenbarnevelt Room",
+      "startTime": "2026-09-29T12:25:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/context-control-center-bringing-ai-context-natively-drupal-cms",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Drupal as an MCP Server: Making Your CMS a First-Class Citizen in the Agentic Web",
+      "description": "AI agents are becoming the new users of the web, and most CMSes are invisible to them. What if Drupal could speak the language of AI agents natively? This session shows you how to expose Drupal as an MCP server, turning your content infrastructure into something AI agents can reason about, query, and act on, in production.\n\n**Prerequisite**\n\n- Familiarity with Drupal's REST or JSON:API modules  \n\n- No prior MCP experience required\n\n**Target Audience**\n\nBackend and full-stack Drupal developers and solution architects who are building or evaluating AI-assisted content workflows, and who want to future-proof their Drupal infrastructure for a world where AI agents are active participants in content systems, not just sideline tools.\n\n**Outline**\n\nThe Model Context Protocol (MCP) is rapidly becoming the standard interface layer between AI agents and external systems. It is how tools like Claude, Cursor, and autonomous coding agents connect to APIs, databases, and services in a structured, safe, and composable way.\n\nMost Drupal sites are built for human browsers. But the next wave of users will be AI agents: automated pipelines, LLM-powered assistants, and agentic workflows that need to read, create, and manage structured content. Drupal's entity system, typed fields, REST and JSON:API layers make it uniquely well-suited to serve this role, but only if you bridge it deliberately.  \n\nThis session walks through the architecture and implementation of a Drupal MCP server: exposing content types, taxonomy, media, and workflows as MCP tools and resources that AI agents can discover and use. We will cover the protocol fundamentals, how to map Drupal's data model onto MCP primitives, authentication and permission scoping, and where the sharp edges are in production.\n\nYou will leave with a concrete architectural blueprint and the mental model to make any Drupal site agent-ready, not as a marketing claim, but as a working system.\n\n**Learning Objectives**\n\n- Understand what MCP is and why it matters for CMS platforms specifically\n\n- Map Drupal's entity and field model onto MCP tools and resources\n\n- Design authentication and permission scoping for agent access\n\n- Identify the production pitfalls of exposing a CMS to autonomous agents\n\n- Walk away with a reusable architectural blueprint for an MCP-enabled Drupal site\n\n**Experience level**  \nIntermediate",
+      "speakers": "Sepehr Samadi",
+      "track": "development, ai & agentic architecture",
+      "location": "Mees Room I",
+      "startTime": "2026-09-29T12:25:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/drupal-mcp-server-making-your-cms-first-class-citizen-agentic-web",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Encoding Expertise: How UX Research Powers Human-First AI",
+      "description": "UX research practices matter more than ever in the age of AI slop. AI content tools produce generic output because nobody has told them what \"good\" means for your organization, and getting at that is exactly what UX researchers are trained to do.  \n\nInterviews, comparative evaluation, rubric design: your existing toolkit, applied to a new and urgent problem. The organizations that get this right will outcompete the ones still generating slop.\n\n**Prerequisite**\n\nNo technical prerequisites. Attendees will get the most value if they work with web content in some capacity: content strategists, UX researchers, marketers, editorial leads, or Drupal site owners thinking about AI content tools.  \n\nBasic experience with brand writing guidelines, editorial style guides, or content strategy work is helpful but not required, and will let you apply the session's methods faster to your own team.\n\n**Target Audience**\n\nContent strategists, editorial leads, UX researchers, marketers, brand managers, and Drupal site owners responsible for content quality across multiple sites or contributors, especially those evaluating or already using AI content tools.\n\n**Outline**\n\nThe problem\n\nYour team's real quality standards aren't the documented ones. The brand PDF nobody opens. The style guide written ten years ago. The vague \"be professional, be clear\" that nobody can act on. Meanwhile the team ships content daily using tacit knowledge: the unwritten rules the editor with good taste has worked out over years. When those rules stay in people's heads, every decision is a negotiation, onboarding is slow, and stakeholders disagree in reviews without realizing they're applying different criteria.\n\nThe method\n\nThis is a content strategy problem, and UX research methods are the best way to solve it. We'll walk through how to extract tacit quality knowledge and encode it into structured evaluation criteria using stakeholder interviews, comparative page scoring, and collaborative rubric design. Examples come from real engagements with university & B2B content teams managing content at scale.\n\nThe payoff: Aligned Teams + Human-first AI\n\nEncoded standards give your team a shared reference point for collaboration. They also give AI exactly what it needs to be useful.  \n\nFor Drupal teams, the output plugs into the Context Control Center, feeding Canvas AI for content creation and AI Review for sitewide audits. Do the work for humans first and the AI benefits come with it: higher-quality content, and clear visibility into what existing content needs fixing.\n\n**Learning Objectives**\n\n1. Recognize the gap between documented content standards and the unspoken rules teams actually follow day to day  \n\n2. Techniques and templates for capturing tone and voice  \n\n3. How to use UX research methods to build better content guidelines  \n\n4. Templates and structures for organizing brand rules to use in the AI Context Control Center\n\n**Experience level**  \nIntermediate",
+      "speakers": "Aidan Foster",
+      "track": "user experience, accessibility & design",
+      "location": "Goudriaan Room I&II",
+      "startTime": "2026-09-29T12:25:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/encoding-expertise-how-ux-research-powers-human-first-ai",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Culture mapping the human side of AI — A workshop to meet your people where they are",
+      "description": "AI moves fast. People don't. You're supposed to be the guide, but you're also navigating the change. Now what?  \n\n**Prerequisite**\n\nThe session is most useful for people in leadership roles and for business owners with teams.  \n\n**Target Audience**\n\nagency leaders, executives, managers, team leaders, team coaches and agile coaches\n\n**Outline**\n\nHuman consciousness doesn't change as quickly as AI. As a leader, you might face the challenge that AI adoption is not only disrupting your business but also your company culture and your colleagues. Some feel distressed or remain in denial, while others thrive. Work becomes unsettled. There is no clear guidance on how to make the best decisions for your business, organization, and people. The change is affecting you, too, even though you should be the guide.\n\nIn this workshop, you'll use a culture mapping tool to reflect on where your people are in their change and AI adoption. You'll gain insight into what we know about the journey to becoming an agentic organization. By the end of our time, you'll have taken a step towards clarity: how to meet your colleagues where they're at in AI adoption.  \n\nYour guide in this workshop will be a seasoned culture development consultant with more than 10 years of consulting and leadership-coaching experience across diverse sectors, and a certified expert in the Reinventing Organizations Map. The ROM is a framework that comprehensively shows an organization’s position and state across behavior, culture, systems, and mindset — from a founder-centric operation to today’s most advanced functioning.\n\nThe map is licensed under Creative Commons, so you can use it for free even after the session. If reflecting on your people and culture matters to you, this session offers helpful insights to make change more manageable.\n\n**Learning Objectives**\n\n1. Reflect on where your people are. Use a culture mapping tool to gain insight into where your colleagues are in their change and AI adoption journey.\n\n2. Understand the journey to an agentic organization. Gain insight into what we know about what this shift actually involves — across behavior, culture, systems, and mindset.\n\n3. Take a step towards clarity. Leave with a concrete direction for how to meet your colleagues where they're at and make change more manageable — for them and for you.\n\n**Experience level**  \nAdvanced",
+      "speakers": "Timi Csontos",
+      "track": "agency, business & marketing",
+      "location": "Mees Room II",
+      "startTime": "2026-09-29T11:30:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/culture-mapping-human-side-ai-workshop-meet-your-people-where-they-are",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Reviewer-Friendly AI: A Practical Drupal Contribution Workshop",
+      "description": "Bring a Drupal contribution idea - or use one of ours - and work through a practical AI-assisted workflow that turns it into a review-ready contribution designed to earn maintainer trust and accelerate the review process.\n\nThis workshop is facilitated by Product and Innovation Leads of the Drupal AI Initiative, and is designed to field-test practical patterns that will inform official AI-assisted contribution guidelines.\n\n**Prerequisite**\n\nBring a laptop, a contribution idea if you have one, and access to an AI assistant you are comfortable using. Browser-based tools are enough for most lanes. Attendees should be comfortable with basic Drupal concepts, Git, and reading issue queues or project documentation. No prior AI experience is required. Curated issues, templates, checkpoint branches, and a browser-based fallback environment will be provided.\n\n**Target Audience**\n\nDrupal users and contributors (developers, testers, and technical writers) looking for a responsible, field-tested workflow for using AI to create reviewer-friendly contributions.\n\n**Outline**\n\nAI can draft a patch in minutes. Crafting a contribution that maintainers can easily verify, trust, and confidently merge is the actual skill.\n\nThis workshop gives Drupal contributors a practical workflow for using AI as a tool for high-value, maintainer-friendly collaboration. Participants bring a contribution idea - or choose from a curated list - and move through the same structured sequence: understand the issue and prior discussion, write a human task brief with acceptance criteria, add project instructions that constrain the assistant, use AI to draft analysis, docs, tests, or a small code change in reviewable increments, verify the result, disclose AI use clearly, and write a maintainer-friendly handoff comment.\n\nThe goal is not to show off a coding tool. The goal is to practice contributing with AI in a way that makes the human value visible: context, judgment, scope, verification, and collaboration. Attendees leave with a reusable workflow and a reviewer-ready contribution bundle they can keep developing after the session. The room also surfaces field-tested patterns that can inform future community guidance. No product demos. No magic prompts. Just practical contribution skills.\n\n**Learning Objectives**\n\n- Turn a Drupal idea or existing issue into a human-authored task brief with context, scope, and acceptance criteria.  \n\n- Write project instructions, such as an AGENTS.md, that constrain AI output to Drupal and project-specific expectations.  \n\n- Use AI to draft analysis, documentation, tests, or a small code change in reviewable increments instead of dumping a patch.  \n\n- Verify AI-generated work for correctness, dependencies, security, licensing, and disclosure.  \n\n- Write a maintainer-friendly handoff comment that explains what was done, what was verified, and what feedback is needed.\n\nWhat attendees leave with\n\n- A human-authored task brief  \n\n- Project instructions / AGENTS.md  \n\n- One scoped artifact: issue analysis, docs, tests, or a small code change  \n\n- A verification and disclosure checklist  \n\n- A maintainer-friendly handoff comment  \n\n- A reusable workflow they can bring back to their team\n\n**Experience level**  \nIntermediate",
+      "speakers": "Scott Falconer",
+      "track": "development, ai & agentic architecture",
+      "location": "Van Oldenbarnevelt Room",
+      "startTime": "2026-09-29T11:30:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/reviewer-friendly-ai-practical-drupal-contribution-workshop",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Why Your AI Agent Hallucinates: Engineering Lessons From a Production Workflow Builder in Drupal",
+      "description": "LLMs are now table stakes in Drupal. Modules like AI, ECA, and a growing set of agentic tools make it trivial to wire a model into a site. What's not trivial is making that integration trustworthy enough to put in front of a real editor or site builder.\n\nOver the last several months, building FlowDrop's chat-based workflow editor, we collected a set of failure modes that recur across every LLM-driven Drupal feature we've seen: hallucinated field names, half-applied state changes, prompt-injection through user content, runaway token costs as state grows, and the \"what ID did you just create?\" round-trip problem.\n\nThis session is the post-mortem. It's the engineering log of what we changed, why each change mattered, and how each pattern generalises beyond FlowDrop. Every claim is backed by code/data we'll show on screen.\n\n---\n\nSession is not for: attendees looking for a vendor comparison of LLM providers, or a pure prompt-engineering talk with no code. This is an engineering session about the system around the prompt.\n\n**Prerequisite**\n\nAttendees should be comfortable with:\n\n- Drupal module development (services, plugins, config entities)  \n\n- Basic LLM concepts: system prompts, context windows, tool/function calling. You do not need to have built an agent before.  \n\n- PHP 8.2+ syntax (readonly properties, attributes, enums)\n\nNo prior FlowDrop knowledge is required. The patterns are framed in general terms; FlowDrop is the case study.\n\n**Target Audience**\n\nModule developers building AI-powered features (content assistants, agents, workflow tools, chatbots) who have hit the \"demo works, production doesn't\" wall.\n\n**Outline**\n\nMost \"AI agent\" demos look great in a screencast and fall apart the moment a real user touches them. They invent fields, corrupt state, and forget what they did two turns ago. The fix isn't a smarter model -- it's the boring engineering around the model.\n\nThis session is a code-level walkthrough of FlowDrop Chat, a production AI agent that builds and modifies visual workflows inside Drupal from natural-language chat. It works reliably not because of the LLM choice, but because of seven specific architectural decisions: a tiny domain-specific language instead of JSON tool calls, aggressive context slimming, predictable IDs the model can plan against, prompt-injection hardening, atomic batched commands with rollback, and a self-hosted prompt pipeline that ships as a workflow rather than as code.\n\nYou'll leave with concrete patterns you can apply to any Drupal AI feature -- whether you're building an agent, a content assistant, or just trying to keep an LLM from melting your editorial workflow.\n\n**Learning Objectives**\n\nBy the end of this session, attendees will be able to:\n\n1. Choose the right LLM output format for their use case -- and explain why a small DSL often beats JSON tool-calling for editor-style agents (token economy, atomic batching, deterministic parsing, undoability).\n\n2. Slim context aggressively by separating what the LLM needs to know from what the system needs to store -- including a reusable pattern for reducing Drupal config schemas, entity references, and plugin metadata for prompt injection.\n\n3. Defend against prompt injection in chat history and user-supplied state with concrete, copy-pastable techniques (XML wrapping, JSON validation gates, never echoing raw user input into system instructions).\n\n4. Design predictable identifiers so the LLM can plan multi-step changes in a single response without round-trips; and recognise where this pattern applies outside agents (slugs, machine names, batch operations).\n\n5. Make agent actions atomic and reversible, turning \"the model needs to be right\" into \"the model needs to be right or recoverable\" (a dramatically lower bar).\n\n6. Encode prior failures into the system prompt as worked examples and explicit anti-patterns, instead of hoping a bigger model will figure it out.\n\n7. Dogfood the agent through their own platform so improvements ship as configuration, not code deploys.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Shibin Devadas Kakanat",
+      "track": "development, ai & agentic architecture",
+      "location": "Mees Room I",
+      "startTime": "2026-09-29T11:30:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/why-your-ai-agent-hallucinates-engineering-lessons-production-workflow",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "AI Dev Summit",
+      "description": "If you’re a Drupal developer interested in AI, this day is all about getting you up to speed. Discover AI tools for coding, AI in frameworks (PHP, Symfony, Drupal), and Drupal-specific innovations such as Canvas, Drupal CMS, and much more.",
+      "speakers": "",
+      "track": "summit",
+      "location": "Postillion Hotel & Convention Centre WTC Rotterdam",
+      "startTime": "2026-09-28T07:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/ai-dev-summit",
+      "video": "",
+      "minutes": 540
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Enterprise Drupal AI Summit",
+      "description": "The Enterprise Drupal AI Summit is an executive-focused event bringing together CXOs, Heads of Digital, and enterprise leaders with curated Drupal AI partners in a world-class conference setting.\n\nDesigned for senior decision makers, the summit focuses on AI, digital transformation, and the future of enterprise Drupal, featuring high-profile speakers, special guests, and a premium programme experience.",
+      "speakers": "",
+      "track": "summit",
+      "location": "SS Rotterdam",
+      "startTime": "2026-09-28T07:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/enterprise-drupal-ai-summit",
+      "video": "",
+      "minutes": 540
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "AI-Assisted Editorial Workflows in Drupal with ECA & Easy Email",
+      "description": "",
+      "speakers": "",
+      "track": "Session",
+      "location": "Hall 1",
+      "startTime": "2026-03-14T09:50:00Z",
+      "year": 2026,
+      "event": "Drupal Camp Delhi New Delhi 2026",
+      "series": "Drupal Camp Delhi",
+      "region": "APAC",
+      "country": "India",
+      "city": "New Delhi",
+      "file": "events/drupalcamp/delhi/2026.json",
+      "link": "",
+      "video": "",
+      "minutes": 20
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Is There a Future in Drupal AI?",
+      "description": "",
+      "speakers": "James Jackson Abrahams",
+      "track": "Keynote",
+      "location": "",
+      "startTime": "2026-03-14T07:00:00Z",
+      "year": 2026,
+      "event": "Drupal Camp Delhi New Delhi 2026",
+      "series": "Drupal Camp Delhi",
+      "region": "APAC",
+      "country": "India",
+      "city": "New Delhi",
+      "file": "events/drupalcamp/delhi/2026.json",
+      "link": "",
+      "video": "",
+      "minutes": 60
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Fireside Chat with Jacob Singh – AI, Automation, and the Future of Work, What Changes (and What Doesn’t)",
+      "description": "",
+      "speakers": "Jacob Singh",
+      "track": "Keynote",
+      "location": "",
+      "startTime": "2026-03-14T06:15:00Z",
+      "year": 2026,
+      "event": "Drupal Camp Delhi New Delhi 2026",
+      "series": "Drupal Camp Delhi",
+      "region": "APAC",
+      "country": "India",
+      "city": "New Delhi",
+      "file": "events/drupalcamp/delhi/2026.json",
+      "link": "",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Design to Deploy in Minutes: Mastering the Lovable AI + Drupal Canvas Workflow",
+      "description": "",
+      "speakers": "",
+      "track": "Session",
+      "location": "Hall 1",
+      "startTime": "2026-03-14T04:15:00Z",
+      "year": 2026,
+      "event": "Drupal Camp Delhi New Delhi 2026",
+      "series": "Drupal Camp Delhi",
+      "region": "APAC",
+      "country": "India",
+      "city": "New Delhi",
+      "file": "events/drupalcamp/delhi/2026.json",
+      "link": "",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Breaking Free from Cron: Asynchronous AI Agent Processing in Drupal with Symfony Messenger",
+      "description": "",
+      "speakers": "",
+      "track": "Session",
+      "location": "Hall 2",
+      "startTime": "2026-03-14T03:45:00Z",
+      "year": 2026,
+      "event": "Drupal Camp Delhi New Delhi 2026",
+      "series": "Drupal Camp Delhi",
+      "region": "APAC",
+      "country": "India",
+      "city": "New Delhi",
+      "file": "events/drupalcamp/delhi/2026.json",
+      "link": "",
+      "video": "",
+      "minutes": 20
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "AI Content Migrate for Drupal - Automating Large-Scale Content Migrations with AI",
+      "description": "Speed up website migrations and cut costs: discover how AI can automate content analysis, simplify workflows, and help you migrate your old Drupal website into a new one faster and smarter. The AI Content Migrate module helps you drastically reduce repetitive tasks, time and costs associated with migrations. By leveraging AI to automatically analyze the structure of an existing website, this module can suggest appropriate Drupal content types and fields.",
+      "speakers": "Raffaele Chiocca",
+      "track": "Session",
+      "location": "Sala A",
+      "startTime": "2025-11-14T16:00:00Z",
+      "year": 2025,
+      "event": "DrupalCamp Rome 2025",
+      "series": "DrupalCamp",
+      "region": "EMEA",
+      "country": "Italy",
+      "city": "Rome",
+      "file": "events/drupalcamp/italy/2025-rome.json",
+      "link": "",
+      "video": "",
+      "minutes": 60
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Drupal Canvas APIs: how to integrate and extend Canvas",
+      "description": "Drupal Canvas will revolutionize the way you enable your editors and marketers to create sites with Drupal. But this might not be enough and you'll want to provide guidelines, extend or improve your developers' experience. In this talk we'll explore: what is Drupal Canvas, how to migrate from Layout Builder to Canvas, using Paragraphs in Canvas, syncing Figma components with Canvas via AI, the backend and client data model, how to provide your own building blocks with ComponentSources, how to interact with the internal API and create UI extensions.",
+      "speakers": "Emanuel Righetto",
+      "track": "Session",
+      "location": "Sala B",
+      "startTime": "2025-11-14T16:00:00Z",
+      "year": 2025,
+      "event": "DrupalCamp Rome 2025",
+      "series": "DrupalCamp",
+      "region": "EMEA",
+      "country": "Italy",
+      "city": "Rome",
+      "file": "events/drupalcamp/italy/2025-rome.json",
+      "link": "",
+      "video": "",
+      "minutes": 60
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Behind Artificial Intelligence: How Machine/Deep Learning Works. The example of Large Language Model (LLM)",
+      "description": "This talk explores the science of machine/deep learning, demystifying how algorithms learn from data to solve complex tasks. It introduces Large Language Models (LLMs), transformer-based systems trained on vast text, and explains their architecture, capabilities, and limitations. A focus is placed on Retrieval-Augmented Generation (RAG), a technique enabling LLMs to access dynamic external knowledge for accurate responses. The session surveys cutting-edge models in the LLM landscape, including multimodal variants capable of processing diverse data types like text, images, and audio. Finally, it demonstrates practical integration with DrupalAI, showcasing how RAG can enhance content management systems through AI-driven features such as personalized search, Q&A, or chatbots.",
+      "speakers": "Marco Raoul Marini",
+      "track": "Session",
+      "location": "Sala B",
+      "startTime": "2025-11-14T14:30:00Z",
+      "year": 2025,
+      "event": "DrupalCamp Rome 2025",
+      "series": "DrupalCamp",
+      "region": "EMEA",
+      "country": "Italy",
+      "city": "Rome",
+      "file": "events/drupalcamp/italy/2025-rome.json",
+      "link": "",
+      "video": "",
+      "minutes": 60
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Schema.org e GEO: strategie drupal per contenuti che parlano ai motori generativi",
+      "description": "In the era of Artificial Intelligence, online visibility is redefined by Generative Engine Optimization (GEO). The goal is no longer just positioning, but being cited as a reliable source by generative engines like ChatGPT and Gemini. AIs semantically analyze content and select it for their responses. The Schema.org-first approach is the strategic response to this challenge. Using the universal Schema.org standard as a blueprint for content modeling, we ensure our content is machine-readable. The talk explores how the Schema.org Blueprints module enables building Drupal architectures that guarantee three crucial results: perfect data structures (Schema.org), high-quality APIs (JSON:API), and excellent SEO/GEO (JSON-LD).",
+      "speakers": "Roberto Mariani",
+      "track": "Session",
+      "location": "Sala A",
+      "startTime": "2025-11-14T14:30:00Z",
+      "year": 2025,
+      "event": "DrupalCamp Rome 2025",
+      "series": "DrupalCamp",
+      "region": "EMEA",
+      "country": "Italy",
+      "city": "Rome",
+      "file": "events/drupalcamp/italy/2025-rome.json",
+      "link": "",
+      "video": "",
+      "minutes": 60
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Agenti AI in Drupal: dall'idea all'implementazione",
+      "description": "AI Agents represent an evolution over simple conversational interfaces: they are intelligent modules capable of planning actions, orchestrating external tools, and interacting autonomously. In the Drupal context, agents open scenarios for advanced automation, editorial support, and integration with external systems. In this presentation I will offer a complete overview of how to integrate AI agents in Drupal, with two modes: 1) Creation via Web UI - how to leverage modules and configurations to create agents without code. 2) Building via code - technical approach with custom plugins, services, and APIs for extensive customization.",
+      "speakers": "Roberto Peruzzo",
+      "track": "Session",
+      "location": "Sala A",
+      "startTime": "2025-11-14T11:30:00Z",
+      "year": 2025,
+      "event": "DrupalCamp Rome 2025",
+      "series": "DrupalCamp",
+      "region": "EMEA",
+      "country": "Italy",
+      "city": "Rome",
+      "file": "events/drupalcamp/italy/2025-rome.json",
+      "link": "",
+      "video": "",
+      "minutes": 60
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Unlocking New Capabilities in Drupal with OpenAI Integration",
+      "description": "In this session, I will demonstrate how to use the GPT model to generate and summarise content and complete tasks such as answering questions. The integration can be done using the Drupal AI and OpenAI API Provider modules. Additionally, I will show how to store our content as embedded objects in a vector database to provide a ChatGPT-like search experience for the user as an alternative to fine-tuning. This integration of Drupal and ChatGPT has the potential to revolutionise user interaction with websites and web applications by providing a more natural and intuitive experience.",
+      "speakers": "Vincenzo Gambino, Rachael Censuales",
+      "track": "Session",
+      "location": "Sala A",
+      "startTime": "2025-11-14T10:30:00Z",
+      "year": 2025,
+      "event": "DrupalCamp Rome 2025",
+      "series": "DrupalCamp",
+      "region": "EMEA",
+      "country": "Italy",
+      "city": "Rome",
+      "file": "events/drupalcamp/italy/2025-rome.json",
+      "link": "",
+      "video": "",
+      "minutes": 60
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "A che punto siamo con la AI initiative",
+      "description": "It's been just a few months since many Drupal AI module maintainers joined forces to develop the best artificial intelligence support for an open-source CMS. The AI initiative is moving fast, releasing new versions of the AI module and other ecosystem modules at a dizzying pace. What was new yesterday is probably already outdated today, and keeping up with all the various developments is practically impossible. In this talk we'll discuss what's new, what's there and what's coming, revealing the behind-the-scenes of what's happening in the initiative, told by someone who is part of the team actively working to bring AI to Drupal.",
+      "speakers": "Luca Lusso",
+      "track": "Session",
+      "location": "Sala A",
+      "startTime": "2025-11-14T08:50:00Z",
+      "year": 2025,
+      "event": "DrupalCamp Rome 2025",
+      "series": "DrupalCamp",
+      "region": "EMEA",
+      "country": "Italy",
+      "city": "Rome",
+      "file": "events/drupalcamp/italy/2025-rome.json",
+      "link": "",
+      "video": "",
+      "minutes": 60
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "AI Automation Pipelines using Drupal",
+      "description": "[AI Interpolator](https://www.drupal.org/project/ai_interpolator) is a no-code AI chaining tool working together with over 20 services to make Drupal a powerhouse for setting up workflows, where your imagination is the limit of what is possible to do. Examples of workflows can be found on [workflows-of-ai.com](https://workflows-of-ai.com/).\n\nIts built on a plugin system making it possible for developers to extend it with their custom logics in the workflows.\n\nThis presentation will go through the following topics:\n\n**Experience level:** Intermediate",
+      "speakers": "marcusjohansson",
+      "track": "Innovation & The future",
+      "location": "Room 207 (1xINTERNET)",
+      "startTime": "2024-06-28T13:25:00.000Z",
+      "year": 2024,
+      "event": "Drupal Dev Days Burgas 2024",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Bulgaria",
+      "city": "Burgas",
+      "file": "events/ddd/2024-burgas.json",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/ai-automation-pipelines-using-drupal",
+      "video": "https://youtu.be/0KeRQHmd4YI",
+      "minutes": 50
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "AI in Starshot",
+      "description": "What AI functionality would you love to see in Starshot? Want simple content editing tools? Summarise Translate? Or want to see something more advanced? Like create a whole Drupal site from a prompt or picture? Become THE Ai Orchestration platform? Come and explore with us.\n\n**Experience level:** Beginner",
+      "speakers": "yautja_cetanu, wouters_f, marcusjohansson, Lauri Timmanee",
+      "track": "Innovation & The future",
+      "location": "Room 208 (Jakala)",
+      "startTime": "2024-06-28T07:20:00.000Z",
+      "year": 2024,
+      "event": "Drupal Dev Days Burgas 2024",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Bulgaria",
+      "city": "Burgas",
+      "file": "events/ddd/2024-burgas.json",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/ai-starshot",
+      "video": "",
+      "minutes": 50
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "AI Initiative",
+      "description": "A place to discuss the AI initiative and the AI module. Come to learn how to use it and our plans for it or bring us ideas of what you’d like to see in it, how you’d like to contribute or build on top of it.\n\n**Experience level:** Beginner",
+      "speakers": "yautja_cetanu, wouters_f, marcusjohansson",
+      "track": "Innovation & The future",
+      "location": "Room 218 (BoFs & Workshops)",
+      "startTime": "2024-06-27T13:00:00.000Z",
+      "year": 2024,
+      "event": "Drupal Dev Days Burgas 2024",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Bulgaria",
+      "city": "Burgas",
+      "file": "events/ddd/2024-burgas.json",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/ai-initiative",
+      "video": "",
+      "minutes": 55
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "AI with Drupal - Using LLM technology is easy, but how do you actually build useful applications?",
+      "description": "Using AI applications such as ChatGPT from OpenAI is easy and many have already gained experience using it. Obvious applications like creating or re-writing text already have a nice integration with Drupal.\n\nHowever, the real value of “Large Language Models” (LLMs) lies in building custom applications for clients using their data and tailoring the applications to their business processes.\n\n**Experience level:** Beginner",
+      "speakers": "breidert",
+      "track": "Project Management & Business",
+      "location": "Room 207 (1xINTERNET)",
+      "startTime": "2024-06-27T08:25:00.000Z",
+      "year": 2024,
+      "event": "Drupal Dev Days Burgas 2024",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Bulgaria",
+      "city": "Burgas",
+      "file": "events/ddd/2024-burgas.json",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/ai-drupal-using-llm-technology-easy-how-do-you-actually-build-useful",
+      "video": "https://youtu.be/_yOjahh5wJM",
+      "minutes": 50
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "AI and Drupal: Build smarter systems",
+      "description": "See some of the coolest AI modules that improve Drupal right now. I'll also be giving a simple explanation of the basics of retrieval augmented generation and how to it is applied on Drupal.\n\nWith this knowledge you'll understand how AI can help you free up time and resources in your organization, so it can focus on the things that really matter.\n\nImagine being able to automate routine tasks, or having a system that can give you intelligent insights and recommendations. That's the power of AI in Drupal.\n\nYou'll never look at AI in Drupal the same way again!\n\n**Experience level:** Beginner",
+      "speakers": "wouters_f",
+      "track": "Innovation & The future",
+      "location": "Room 207 (1xINTERNET)",
+      "startTime": "2024-06-27T06:15:00.000Z",
+      "year": 2024,
+      "event": "Drupal Dev Days Burgas 2024",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Bulgaria",
+      "city": "Burgas",
+      "file": "events/ddd/2024-burgas.json",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/ai-and-drupal-build-smarter-systems",
+      "video": "https://youtu.be/5-9Yp7ZaWzM",
+      "minutes": 50
+    },
+    {
+      "matched": [
+        "ai"
+      ],
+      "title": "Future roadmap including AI: Get hands on with generative AI",
+      "description": "Get hands on with generative AI\nThis session will provide a practical introduction to generative AI systems such as ChatGPT and will demonstrate how they can be leveraged in Drupal. This session will be hands on - participants will be given access to a demo Drupal site where they can build their own integrations to AI tools and expose them to editors via the UI. By the end of the session, participants should be aware of the possibilities and have a good insight as to how that can practically be introduced to Drupal.\nAn outline of the session is as follows:\nBrief introduction to generative AI and relevance to CMS.\nBrief introduction to the Augmentor module and the pricnples behind it.\nDemonstration of a simple Augmentor in the editor interface.\nIdeation session where particiapnts design an Augmentor for themselves.\nPractical session\nGetting everyone logged in\nWalking through the Augmentor interface\nTroubleshooting help will be available in a slack channel and also via Zoom\nDemonstration of some of the Augmentors which have been created.\nRecap of what was done and discussion of some of the findings.\nHopefully we will come up with some interesting things together!\nAudience requirements:\nNo prior knowledge\nOwn laptop",
+      "speakers": "Murray Woodman",
+      "track": "Technical",
+      "location": "Room 3",
+      "startTime": "2023-11-23T02:00:00Z",
+      "year": 2023,
+      "event": "DrupalSouth Community Day Canberra 2023",
+      "series": "DrupalSouth Community Day",
+      "region": "APAC",
+      "country": "Australia",
+      "city": "Canberra",
+      "file": "events/drupalsouth/community-day/2023-canberra.json",
+      "link": "https://drupalsouth.org/events/drupalsouth-community-day-2023/schedule#future",
+      "video": "",
+      "minutes": 180
+    }
+  ]
+}

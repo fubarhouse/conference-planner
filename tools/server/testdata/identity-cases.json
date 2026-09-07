@@ -1,0 +1,119 @@
+{
+  "_comment": [
+    "The contract between normName()/fingerprint() in lib/archiveAudit.js and",
+    "NormName()/Fingerprint() in tools/archive/identity.go.",
+    "",
+    "These decide IDENTITY, not presentation: the curation ledger is keyed by",
+    "fingerprint, so two implementations that disagree by one character decide",
+    "that one person is two. Both suites read this file.",
+    "",
+    "Readers:",
+    "  tools/archive/identity_test.go",
+    "  lib/__tests__/identityContract.test.js",
+    "",
+    "Expectations were generated from the JavaScript implementation, not written",
+    "by hand — they record what it DOES, which is what the Go copy has to match."
+  ],
+  "cases": [
+    {
+      "input": "Gábor Hojtsy",
+      "normName": "gabor hojtsy",
+      "fingerprint": "gabor hojtsy",
+      "why": "accents are folded away"
+    },
+    {
+      "input": "Hojtsy Gábor",
+      "normName": "hojtsy gabor",
+      "fingerprint": "gabor hojtsy",
+      "why": "reversed order fingerprints the same"
+    },
+    {
+      "input": "Acquia Inc.",
+      "normName": "acquia",
+      "fingerprint": "acquia",
+      "why": "company suffix dropped"
+    },
+    {
+      "input": "acquia",
+      "normName": "acquia",
+      "fingerprint": "acquia",
+      "why": "and matches the bare name"
+    },
+    {
+      "input": "Müller GmbH",
+      "normName": "muller",
+      "fingerprint": "muller",
+      "why": "German suffix"
+    },
+    {
+      "input": "Example B.V.",
+      "normName": "example",
+      "fingerprint": "example",
+      "why": "Dutch suffix, with and without the dots"
+    },
+    {
+      "input": "Example BV",
+      "normName": "example",
+      "fingerprint": "example"
+    },
+    {
+      "input": "Widgets Pty Ltd",
+      "normName": "widgets",
+      "fingerprint": "widgets",
+      "why": "two suffixes"
+    },
+    {
+      "input": "Ærø Kommune",
+      "normName": "r kommune",
+      "fingerprint": "kommune r",
+      "why": "a ligature has no NFKD decomposition — it is simply dropped"
+    },
+    {
+      "input": "ＦＵＬＬＷＩＤＴＨ",
+      "normName": "fullwidth",
+      "fingerprint": "fullwidth",
+      "why": "compatibility decomposition folds full-width forms"
+    },
+    {
+      "input": "O’Brien",
+      "normName": "o brien",
+      "fingerprint": "brien o",
+      "why": "a curly apostrophe is punctuation, not a letter"
+    },
+    {
+      "input": "van den Berg, Jan",
+      "normName": "van den berg jan",
+      "fingerprint": "berg den jan van"
+    },
+    {
+      "input": "  spaced   out  ",
+      "normName": "spaced out",
+      "fingerprint": "out spaced",
+      "why": "runs of separators collapse"
+    },
+    {
+      "input": "日本語",
+      "normName": "",
+      "fingerprint": "",
+      "why": "non-Latin scripts survive normalisation but not the a-z filter"
+    },
+    {
+      "input": "",
+      "normName": "",
+      "fingerprint": "",
+      "why": "empty in, empty out"
+    },
+    {
+      "input": "Company Co",
+      "normName": "company",
+      "fingerprint": "company",
+      "why": "the bare \"co\" suffix"
+    },
+    {
+      "input": "Coca Cola",
+      "normName": "coca cola",
+      "fingerprint": "coca cola",
+      "why": "but not when it is part of a word"
+    }
+  ]
+}

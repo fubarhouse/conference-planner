@@ -1,0 +1,505 @@
+/* ============================================================================
+   SHARED — SESSION / SPEAKER / SPONSOR DETAIL
+   The dialog CONTENTS: a session's description and links, a speaker's list of
+   talks, a sponsor's history. Shared because the schedule shows these to a
+   reader and the editor shows the same shapes while editing them.
+
+   These were ported out of the legacy schedule.css for the editor first, and
+   converted then — font sizes onto the --step-* scale, radii to 2px. They moved
+   here rather than being ported a second time for the schedule, so there is one
+   copy to change. Same reason as section-modal.css and section-venue-map.css.
+   ========================================================================= */
+
+@layer section {
+  .sponsor-logo-surface-text {
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .event-promo-image-frame.is-loading::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(226, 232, 240, 0.65);
+  }
+
+  .event-promo-image-frame.is-loading .event-promo-image {
+    opacity: 0;
+  }
+
+  .design-primary .event-promo-action {
+    background: var(--surface-2);
+    border-color: var(--line-0);
+    color: var(--text-1);
+  }
+
+  .design-primary .event-promo-action:focus-visible {
+    background: var(--surface-1);
+    border-color: var(--accent);
+    color: var(--text-0);
+  }
+
+  .speaker-modal-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 0.7rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .speaker-modal-head .session-modal-title {
+    margin-bottom: 0;
+    flex: 1 1 100%;
+  }
+
+  .speaker-modal-head .session-modal-subtitle {
+    margin-bottom: 0;
+    flex: 1 1 100%;
+  }
+
+  .speaker-modal-head .speaker-modal-count-badge {
+    align-self: flex-start;
+  }
+
+  .session-modal-meta {
+    color: var(--text-2);
+    font-size: var(--step-0);
+    margin-bottom: 0.28rem;
+    display: grid;
+    grid-template-columns: 6.7rem minmax(0, 1fr);
+    align-items: start;
+    column-gap: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .speaker-session-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 0.7rem;
+  }
+
+  .speaker-session-title {
+    margin: 0 0 0.35rem 0;
+    font-size: var(--step-0);
+    line-height: 1.35;
+    color: var(--text-0);
+  }
+
+  .speaker-session-meta {
+    margin: 0 0 0.25rem 0;
+    font-size: var(--step--1);
+    color: var(--text-2);
+  }
+
+  .speaker-session-summary {
+    margin: 0.45rem 0 0.15rem 0;
+    font-size: var(--step--1);
+    color: var(--text-1);
+    line-height: 1.45;
+  }
+
+  .sponsor-history-copy .speaker-session-title {
+    margin-bottom: 0.25rem;
+  }
+
+  .sponsor-history-actions .session-modal-link {
+    font-size: var(--step--1);
+    color: var(--text-2);
+  }
+
+  .sponsor-history-actions .session-modal-link:hover {
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  .sponsor-history-logo.sponsor-logo-surface-text .sponsor-logo-name {
+    font-size: var(--step--2);
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  .session-modal-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin: 0.75rem 0;
+  }
+
+  .session-modal-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0;
+    border: none;
+    background: transparent;
+    color: var(--accent);
+    font-size: var(--step--1);
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+    transition:
+      color 120ms ease,
+      opacity 120ms ease;
+  }
+
+  button.session-modal-link {
+    appearance: none;
+    cursor: pointer;
+    font: inherit;
+  }
+
+  .session-modal-link:hover {
+    color: var(--accent-strong);
+    opacity: 0.8;
+  }
+
+  .session-modal-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .session-description-preview p {
+    margin: 0 0 0.35rem 0;
+  }
+
+  .session-description-preview h6 {
+    margin: 0.7rem 0 0.38rem 0;
+    line-height: 1.3;
+    font-weight: 700;
+    color: var(--text-0);
+  }
+
+  .session-description-preview h1 {
+    font-size: var(--step-1);
+  }
+
+  .session-description-preview h2 {
+    font-size: var(--step-1);
+  }
+
+  .session-description-preview h3 {
+    font-size: var(--step-0);
+  }
+
+  .session-description-preview h4 {
+    font-size: var(--step-0);
+  }
+
+  .session-description-preview h5 {
+    font-size: var(--step--1);
+  }
+
+  .session-description-preview h6 {
+    font-size: var(--step--1);
+  }
+
+  .session-description-preview h6 {
+    border-left: 2px solid var(--line-0);
+    padding-left: 0.5rem;
+  }
+
+  .session-description-preview a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1.4px;
+    text-underline-offset: 2px;
+    font-weight: 500;
+  }
+
+  .session-description-preview a:hover {
+    color: var(--accent-strong);
+  }
+
+  .session-description-preview table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0 0.95rem 0;
+    border: 1px solid var(--line-0);
+    border-radius: 2px;
+    overflow: hidden;
+    font-size: var(--step--1);
+  }
+
+  .session-description-preview th {
+    text-align: left;
+    background: var(--surface-2);
+    color: var(--text-0);
+    font-weight: 700;
+    padding: 0.45rem 0.55rem;
+    border-bottom: 1px solid var(--line-0);
+  }
+
+  .session-description-preview td {
+    padding: 0.45rem 0.55rem;
+    border-bottom: 1px solid var(--line-0);
+    color: var(--text-1);
+    vertical-align: top;
+  }
+
+  .session-description-preview tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .session-description-preview p:last-child {
+    margin-bottom: 0;
+  }
+
+  .session-description-preview blockquote {
+    margin: 0.7rem 0 0.9rem 0;
+    padding: 0.5rem 0.75rem;
+    border-left: 3px solid var(--line-0);
+    background: var(--surface-2);
+    border-radius: 2px;
+    color: var(--text-1);
+  }
+
+  .session-description-preview blockquote p {
+    margin: 0;
+  }
+
+  .session-description-preview ul {
+    margin: 0.2rem 0 0.45rem 1.1rem;
+  }
+
+  .session-description-preview ul {
+    list-style: disc;
+  }
+
+  .session-description-preview li {
+    margin: 0 0 0.2rem 0;
+  }
+
+  .session-description-preview ul:last-child {
+    margin-bottom: 0;
+  }
+
+  .session-description-preview pre {
+    margin: 0.75rem 0 0.95rem 0;
+    padding: 0.75rem 0.9rem;
+    border-radius: 2px;
+    border: 1px solid var(--line-0);
+    background: var(--surface-2);
+    color: var(--text-0);
+    overflow-x: auto;
+    line-height: 1.45;
+    font-size: var(--step--1);
+  }
+
+  .session-description-preview pre:last-child {
+    margin-bottom: 0;
+  }
+
+  .session-description-preview pre code {
+    display: block;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: inherit;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  }
+
+  .session-description-preview code {
+    background: var(--surface-2);
+    border: 1px solid var(--line-0);
+    border-radius: 2px;
+    padding: 0.08rem 0.28rem;
+    color: var(--text-0);
+    font-size: var(--step--1);
+  }
+
+  .sponsor-modal-body .speaker-session-grid {
+    margin-top: 0;
+  }
+
+  .now-next-dot.is-live {
+    background: #16a34a;
+    box-shadow: 0 0 0 3px color-mix(in srgb, #16a34a 25%, transparent);
+    animation: now-pulse 1.8s ease-in-out infinite;
+  }
+
+  .session-modal-meta {
+    grid-template-columns: 1fr;
+    row-gap: 0.08rem;
+  }
+
+  /* --- SPONSOR TILES - RESTORED STRUCTURE -----------------------------------
+     A regression, and an instructive one. The converted sheets had rules for
+     these tiles, but only the DECORATION: border, radius, shadow, colour. The
+     STRUCTURE - the 184px card, the 104px plate, the grid and flex layout that
+     centres a logo inside it - lived only in the legacy schedule.css, so pruning
+     that sheet took the tiles apart on both the schedule and the editor.
+
+     The plate matters for a reason that is easy to miss: sponsor logos are mostly
+     white or transparent, and it is what gives them a uniform surface to sit on.
+     Without it they float on the page background at whatever size they happen to
+     be.
+
+     This is defect class 7 in docs/todo.md - the override rules came across and
+     the structure did not. The port repeated it, because the analysis asked
+     whether a CLASS was styled elsewhere, not whether the DECLARATIONS were.
+
+     Converted on restore: sizes onto the --step-* scale, the plate's gradient to
+     a flat --paper-1, the blue-grey hairline to --rule-0, radius and shadow
+     dropped. The schedule scopes its own overrides under .sch-sponsors and still
+     wins over these.
+     ---------------------------------------------------------------------- */
+
+  .sponsor-tier-section {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .sponsor-tier-heading {
+    margin: 0;
+    color: var(--text-2);
+    font-size: var(--step--1);
+    font-weight: 800;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+
+  .sponsor-logo-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.85rem;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .sponsor-card {
+    display: grid;
+    gap: 0.55rem;
+    justify-items: center;
+    flex: 0 0 184px;
+    width: 184px;
+    max-width: 184px;
+    align-content: start;
+    text-align: center;
+  }
+
+  .sponsor-logo-surface {
+    width: 100%;
+    min-height: 104px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-1);
+    text-decoration: none;
+  }
+
+  button.sponsor-logo-surface {
+    appearance: none;
+    cursor: pointer;
+    font: inherit;
+  }
+
+  .sponsor-logo-surface:hover,
+  .sponsor-logo-surface:focus-visible {
+    transform: translateY(-1px);
+    border-color: rgba(126, 167, 205, 0.95);
+    outline: none;
+  }
+
+  .sponsor-logo-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 148px;
+    max-height: 68px;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  /* Text fallback when a sponsor has no logo file: name on the first line,
+  subtitle on a second. */
+  .sponsor-logo-surface-text {
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  /* Fixed dark ink — the sponsor plate is a light card in every theme, so
+  theme text tokens (near-white in the dark design) would be invisible. */
+  .sponsor-logo-name {
+    color: #12263c;
+    font-size: var(--step-0);
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .sponsor-logo-subtitle {
+    color: #56697d;
+    font-size: var(--step--1);
+    font-weight: 500;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .sponsor-card-title {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    color: var(--text-1);
+    font-size: var(--step--1);
+    font-weight: 650;
+    line-height: 1.35;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  button.sponsor-card-title {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
+    text-align: center;
+  }
+
+  .sponsor-card-title:hover,
+  .sponsor-card-title:focus-visible {
+    color: var(--text-0);
+    outline: none;
+  }
+
+  .design-primary .sponsor-tier-heading {
+    color: var(--text-2);
+  }
+
+  .design-primary .sponsor-logo-surface {
+    background: var(--surface-2);
+    border-color: var(--line-0);
+  }
+
+  .design-primary .sponsor-logo-surface:hover,
+  .design-primary .sponsor-logo-surface:focus-visible {
+    border-color: var(--accent);
+  }
+
+  .design-primary .sponsor-card-title {
+    color: var(--text-1);
+  }
+
+  .design-primary .sponsor-card-title:hover,
+  .design-primary .sponsor-card-title:focus-visible {
+    color: var(--text-0);
+  }
+
+  /* Name-tile fallback in the small history box: shrink to fit and wrap. */
+  .sponsor-history-logo.sponsor-logo-surface-text .sponsor-logo-name {
+    font-size: var(--step--2);
+    line-height: 1.2;
+    word-break: break-word;
+  }
+}

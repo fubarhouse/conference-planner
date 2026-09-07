@@ -1,0 +1,10 @@
+{
+  "status": 404,
+  "headers": {
+    "Cache-Control": "public, max-age=60, stale-while-revalidate=300",
+    "Content-Type": "application/json; charset=utf-8",
+    "X-Cache": "",
+    "X-Curation-Version": ""
+  },
+  "body": "eyJlcnJvciI6Ik5vdCBmb3VuZCJ9"
+}

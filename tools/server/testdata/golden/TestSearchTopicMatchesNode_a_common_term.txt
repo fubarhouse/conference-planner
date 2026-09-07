@@ -1,0 +1,1241 @@
+{
+  "term": "drupal",
+  "byYear": {
+    "2008": 20,
+    "2010": 53,
+    "2011": 5,
+    "2014": 13,
+    "2015": 36,
+    "2017": 16,
+    "2018": 4,
+    "2020": 16,
+    "2023": 6,
+    "2024": 34,
+    "2025": 12,
+    "2026": 87
+  },
+  "byYearDescribed": {
+    "2008": 16,
+    "2010": 53,
+    "2011": 5,
+    "2014": 13,
+    "2015": 36,
+    "2017": 1,
+    "2018": 1,
+    "2023": 6,
+    "2024": 34,
+    "2025": 12,
+    "2026": 77
+  },
+  "sessions": [
+    {
+      "year": 2010,
+      "title": "BoF / Code Sprint"
+    },
+    {
+      "year": 2010,
+      "title": "Customizing Drupal"
+    },
+    {
+      "year": 2010,
+      "title": "Drupal in the Cloud"
+    },
+    {
+      "year": 2010,
+      "title": "Drupal-Themes dynamisch mit ThemeKey steuern"
+    },
+    {
+      "year": 2010,
+      "title": "drupal.org: Hardware, Software, Pläne"
+    },
+    {
+      "year": 2010,
+      "title": "BoF / Code Sprint"
+    },
+    {
+      "year": 2010,
+      "title": "Drupal 7"
+    },
+    {
+      "year": 2010,
+      "title": "Instant-Drupal auf Amazon EC2"
+    },
+    {
+      "year": 2010,
+      "title": "Jquery und Drupal: Kleine Library, grosse Wirkung"
+    },
+    {
+      "year": 2010,
+      "title": "Take control of your permission system - ACL and content access"
+    },
+    {
+      "year": 2010,
+      "title": "BoF / Code Sprint"
+    },
+    {
+      "year": 2010,
+      "title": "Code You Can Snuggle (following Drupal Coding Standards)"
+    },
+    {
+      "year": 2010,
+      "title": "Drupal-Entwicklung für Nicht-Entwickler"
+    },
+    {
+      "year": 2010,
+      "title": "How Drupal 7 Fields are changing the way you write modules"
+    },
+    {
+      "year": 2010,
+      "title": "BoF / Code Sprint"
+    },
+    {
+      "year": 2010,
+      "title": "BoF / Code Sprint"
+    },
+    {
+      "year": 2010,
+      "title": "Eat your own dog food! Why you should use Open Atrium to manage your projects."
+    },
+    {
+      "year": 2010,
+      "title": "Howtodo the impossible: Drupal scalable"
+    },
+    {
+      "year": 2010,
+      "title": "Showcase: mein!KI.KA - Die Kinderkanal-Community"
+    },
+    {
+      "year": 2010,
+      "title": "BoF / Code Sprint"
+    },
+    {
+      "year": 2010,
+      "title": "Drupal in Enterprise Environment - Tragbar, lohnenswert oder gar konkurrenzfähig?"
+    },
+    {
+      "year": 2010,
+      "title": "Howtodo the impossible: Drupal scalable"
+    },
+    {
+      "year": 2010,
+      "title": "Khairn - Projekte managen mit Drupal"
+    },
+    {
+      "year": 2010,
+      "title": "Let the sun shine! Apache Solr in real life and how to do it!"
+    },
+    {
+      "year": 2010,
+      "title": "BoF / Code Sprint"
+    },
+    {
+      "year": 2010,
+      "title": "Drupal SEO (Suchmaschinen-optimierung für Google & Co)"
+    },
+    {
+      "year": 2010,
+      "title": "Naked truth about (drupal) grids"
+    },
+    {
+      "year": 2010,
+      "title": "Nicht-englischsprachige und mehrsprachige Suche mit Apache Solr Multilingual"
+    },
+    {
+      "year": 2010,
+      "title": "Understanding OpenLayers in Drupal"
+    },
+    {
+      "year": 2010,
+      "title": "#d7cx Codesprint"
+    },
+    {
+      "year": 2010,
+      "title": "Drupal distributed architecture: what to do when your site is getting cramped"
+    },
+    {
+      "year": 2010,
+      "title": "Views 3"
+    },
+    {
+      "year": 2010,
+      "title": "#d7cx Codesprint"
+    },
+    {
+      "year": 2010,
+      "title": "Drupal Gardens and the evolving business climate"
+    },
+    {
+      "year": 2010,
+      "title": "Features"
+    },
+    {
+      "year": 2010,
+      "title": "Media with Drupal"
+    },
+    {
+      "year": 2010,
+      "title": "Upgrading large & complex sites"
+    },
+    {
+      "year": 2010,
+      "title": "Usergroups zusammenschweissen: Von Null auf DrupalCamp in 18 Monaten"
+    },
+    {
+      "year": 2010,
+      "title": "#d7cx Codesprint"
+    },
+    {
+      "year": 2010,
+      "title": "Chaos Tools, the theory"
+    },
+    {
+      "year": 2010,
+      "title": "Mongodb - A other approach to data"
+    },
+    {
+      "year": 2010,
+      "title": "#d7cx Codesprint"
+    },
+    {
+      "year": 2010,
+      "title": "#d7cx Codesprint"
+    },
+    {
+      "year": 2010,
+      "title": "Drupal and the semantic web"
+    },
+    {
+      "year": 2010,
+      "title": "Drupal and Ubercart = Social Commerce Systems"
+    },
+    {
+      "year": 2010,
+      "title": "Drupal Themes Workshop"
+    },
+    {
+      "year": 2010,
+      "title": "Git - mal ganz einfach und praktisch!"
+    },
+    {
+      "year": 2010,
+      "title": "#d7cx Codesprint"
+    },
+    {
+      "year": 2010,
+      "title": "Dokumentation von Drupalprojekten"
+    },
+    {
+      "year": 2010,
+      "title": "Drupal Themes Workshop"
+    },
+    {
+      "year": 2010,
+      "title": "Drush und Multisite : drush_multi"
+    },
+    {
+      "year": 2010,
+      "title": "Jetzt gibt es Action: Trigger, Workflow und Rules"
+    },
+    {
+      "year": 2010,
+      "title": "Rein, raus, fertig - Datenaustausch zwischen Drupal-Websites"
+    },
+    {
+      "year": 2024,
+      "title": "Shaping Tomorrow: Drupal's Blueprint for Innovation"
+    },
+    {
+      "year": 2024,
+      "title": "Drupal Starshot"
+    },
+    {
+      "year": 2024,
+      "title": "Navigation changes in Drupal’s Admin UI"
+    },
+    {
+      "year": 2024,
+      "title": "Unleashing the Potential of Semantic Search: Enhancing OpenSearch in Drupal with Machine Learning"
+    },
+    {
+      "year": 2024,
+      "title": "D7Security - Drupal 7 long term support"
+    },
+    {
+      "year": 2024,
+      "title": "Microsites: Groups & Domain - LocalGov Drupal Microsites A Case Study"
+    },
+    {
+      "year": 2024,
+      "title": "Revisiting: Is ChatGPT coming for your Job?:- The Unchanged Need for Developers in Enhancing ChatGPT with Drupal, RAG, & Chained Models"
+    },
+    {
+      "year": 2024,
+      "title": "Splash Awards Germany & Austria: What to learn from 6 years hosting award ceremonies"
+    },
+    {
+      "year": 2024,
+      "title": "Streamline local development with ddev"
+    },
+    {
+      "year": 2024,
+      "title": "Enhanced content accessibility with CKEditor OpenAI"
+    },
+    {
+      "year": 2024,
+      "title": "How to achieve 100% performance Google Lighthouse score with Drupal"
+    },
+    {
+      "year": 2024,
+      "title": "AI and Drupal: Build smarter systems"
+    },
+    {
+      "year": 2024,
+      "title": "An Introduction to Caches in Drupal"
+    },
+    {
+      "year": 2024,
+      "title": "Drupal 11 deep dive: what's new, how to prepare"
+    },
+    {
+      "year": 2024,
+      "title": "Drupal and Next: practical workshop"
+    },
+    {
+      "year": 2024,
+      "title": "Open meeting of Drupal Bulgaria Association"
+    },
+    {
+      "year": 2024,
+      "title": "AI with Drupal - Using LLM technology is easy, but how do you actually build useful applications?"
+    },
+    {
+      "year": 2024,
+      "title": "UI Patterns 2: Unleash SDC power, plug your components directly in Drupal UI."
+    },
+    {
+      "year": 2024,
+      "title": "Custom Elements UI: quicker changes to your decoupled Drupal site"
+    },
+    {
+      "year": 2024,
+      "title": "Fancy Frontend Features"
+    },
+    {
+      "year": 2024,
+      "title": "Getting Started with Drupal: A Hands-On Workshop"
+    },
+    {
+      "year": 2024,
+      "title": "Crafting Tomorrow: Key Learnings from Building a free Drupal Academy"
+    },
+    {
+      "year": 2024,
+      "title": "Drupal's Alternate Realities"
+    },
+    {
+      "year": 2024,
+      "title": "Navigating complex B2B landscapes: The BikeAlert story through Drupal Commerce"
+    },
+    {
+      "year": 2024,
+      "title": "Next.js and Headless Drupal: Unleashing Advanced Web Solution Strategies"
+    },
+    {
+      "year": 2024,
+      "title": "хоро (Horo) dance lesson"
+    },
+    {
+      "year": 2024,
+      "title": "AI in Starshot"
+    },
+    {
+      "year": 2024,
+      "title": "First Time Contributor Workshop"
+    },
+    {
+      "year": 2024,
+      "title": "Not everything is a node! Create custom entity types the way YOU like them"
+    },
+    {
+      "year": 2024,
+      "title": "Choosing the right tool for the automated testing"
+    },
+    {
+      "year": 2024,
+      "title": "The end of Drupal? A look at the future"
+    },
+    {
+      "year": 2024,
+      "title": "WissKI - Virtual Research Environment and Linked Open Data Management System"
+    },
+    {
+      "year": 2024,
+      "title": "Running Drupal on AWS"
+    },
+    {
+      "year": 2024,
+      "title": "AI Automation Pipelines using Drupal"
+    },
+    {
+      "year": 2011,
+      "title": "Migrating content into Drupal"
+    },
+    {
+      "year": 2011,
+      "title": "Multimedia in Drupal 7"
+    },
+    {
+      "year": 2011,
+      "title": "Magento integration with Drupal"
+    },
+    {
+      "year": 2011,
+      "title": "Git with Drupal"
+    },
+    {
+      "year": 2011,
+      "title": "Domain access in Drupal"
+    },
+    {
+      "year": 2026,
+      "title": "Vulnerability Assessment & Penetration Testing (VAPT) in Drupal 11"
+    },
+    {
+      "year": 2026,
+      "title": "Breaking Free from Cron: Asynchronous AI Agent Processing in Drupal with Symfony Messenger"
+    },
+    {
+      "year": 2026,
+      "title": "Design to Deploy in Minutes: Mastering the Lovable AI + Drupal Canvas Workflow"
+    },
+    {
+      "year": 2026,
+      "title": "Building API-Driven Components with SDC & Canvas in Drupal CMS 2.0"
+    },
+    {
+      "year": 2026,
+      "title": "Event Start - Introduction to Drupal Camp Delhi"
+    },
+    {
+      "year": 2026,
+      "title": "Is There a Future in Drupal AI?"
+    },
+    {
+      "year": 2026,
+      "title": "Scaling Drupal to the Limit: Real-World Performance Optimization Strategies"
+    },
+    {
+      "year": 2026,
+      "title": "From Dockerfile to Live Drupal - Deploying Containers on Azure App Service"
+    },
+    {
+      "year": 2026,
+      "title": "Power of Participation: How Drupal community involvement became a catalyst to achieve a career milestone"
+    },
+    {
+      "year": 2026,
+      "title": "AI-Assisted Editorial Workflows in Drupal with ECA & Easy Email"
+    },
+    {
+      "year": 2018,
+      "title": "The future of experiences and Drupal"
+    },
+    {
+      "year": 2018,
+      "title": "Drupal on Kubernates"
+    },
+    {
+      "year": 2018,
+      "title": "Drupal 情報カタログ 2018（Drupal Info Catalog 2018）"
+    },
+    {
+      "year": 2018,
+      "title": "Drupal IoTの可能性～ハードウェアベンダーから見るDrupalの魅力～"
+    },
+    {
+      "year": 2025,
+      "title": "A che punto siamo con la AI initiative"
+    },
+    {
+      "year": 2025,
+      "title": "Contribution Room (open all day)"
+    },
+    {
+      "year": 2025,
+      "title": "Freedom to Code | Reclaiming Time and Mental Health by Automating the 7 Biggest Burdens of Drupal DevOps"
+    },
+    {
+      "year": 2025,
+      "title": "Geomapping in Drupal CMS: from Basics to Advanced with Geofield Stack"
+    },
+    {
+      "year": 2025,
+      "title": "Unlocking New Capabilities in Drupal with OpenAI Integration"
+    },
+    {
+      "year": 2025,
+      "title": "Agenti AI in Drupal: dall'idea all'implementazione"
+    },
+    {
+      "year": 2025,
+      "title": "Mangias.com: Drupal come centro di comando per un ecosistema di minisiti React"
+    },
+    {
+      "year": 2025,
+      "title": "Display Builder, the design system native visual builder by UI Suite"
+    },
+    {
+      "year": 2025,
+      "title": "Evoluzione dell'ecosistema Drupal Sapienza"
+    },
+    {
+      "year": 2025,
+      "title": "Schema.org e GEO: strategie drupal per contenuti che parlano ai motori generativi"
+    },
+    {
+      "year": 2025,
+      "title": "AI Content Migrate for Drupal - Automating Large-Scale Content Migrations with AI"
+    },
+    {
+      "year": 2025,
+      "title": "Drupal Canvas APIs: how to integrate and extend Canvas"
+    },
+    {
+      "year": 2014,
+      "title": "Keynote (held in Auditorium)"
+    },
+    {
+      "year": 2014,
+      "title": "Create a High-Traffic Site with Drupal 8 and Varnish"
+    },
+    {
+      "year": 2014,
+      "title": "Drupal for Event and Conference Sites"
+    },
+    {
+      "year": 2014,
+      "title": "Have a university? Run it on Drupal!"
+    },
+    {
+      "year": 2014,
+      "title": "Introduction to Drupal 8 Theming"
+    },
+    {
+      "year": 2014,
+      "title": "How to pitch Drupal and achieve end user love with Demo Framework"
+    },
+    {
+      "year": 2014,
+      "title": "Setting up SSO for Drupal using OpenAM and SAML"
+    },
+    {
+      "year": 2014,
+      "title": "Agile Drupal Development"
+    },
+    {
+      "year": 2014,
+      "title": "Creating CKEditor plugins on Drupal and Using JQuery inside your plugin"
+    },
+    {
+      "year": 2014,
+      "title": "CMI: Configuration Management Initiative (D8)"
+    },
+    {
+      "year": 2014,
+      "title": "Get Your Modules Ready for Drupal 8"
+    },
+    {
+      "year": 2014,
+      "title": "Drupal Deployment Automation using AWS Elastic Beanstalk for Docker"
+    },
+    {
+      "year": 2014,
+      "title": "How I Learned to Stop Worrying and Love Drupal 8"
+    },
+    {
+      "year": 2026,
+      "title": "AI Dev Summit"
+    },
+    {
+      "year": 2026,
+      "title": "Government Summit"
+    },
+    {
+      "year": 2026,
+      "title": "Higher Education Summit"
+    },
+    {
+      "year": 2026,
+      "title": "Open Social Summit"
+    },
+    {
+      "year": 2026,
+      "title": "Enterprise Drupal AI Summit"
+    },
+    {
+      "year": 2026,
+      "title": "Drupal Association Partner Summit Lunch"
+    },
+    {
+      "year": 2026,
+      "title": "The joy and power of SDC, finally for form inputs"
+    },
+    {
+      "year": 2026,
+      "title": "Accessibility Worst Practices"
+    },
+    {
+      "year": 2026,
+      "title": "Why Your AI Agent Hallucinates: Engineering Lessons From a Production Workflow Builder in Drupal"
+    },
+    {
+      "year": 2026,
+      "title": "From Ajax API to HTMX: Evolving Drupal Interactions"
+    },
+    {
+      "year": 2026,
+      "title": "Reviewer-Friendly AI: A Practical Drupal Contribution Workshop"
+    },
+    {
+      "year": 2026,
+      "title": "PHP Packages as Drupal Extensions"
+    },
+    {
+      "year": 2026,
+      "title": "Encoding Expertise: How UX Research Powers Human-First AI"
+    },
+    {
+      "year": 2026,
+      "title": "Drupal in a Days: One Year Later"
+    },
+    {
+      "year": 2026,
+      "title": "Drupal as an MCP Server: Making Your CMS a First-Class Citizen in the Agentic Web"
+    },
+    {
+      "year": 2026,
+      "title": "One Portal, 16 Markets: How Sharp Built a Pan-European Partner Ecosystem on Drupal"
+    },
+    {
+      "year": 2026,
+      "title": "When the roadmap is a battleground: building a shared Drupal platform for government"
+    },
+    {
+      "year": 2026,
+      "title": "Drupal Association Public Board Meeting"
+    },
+    {
+      "year": 2026,
+      "title": "Context Control Center: Bringing AI Context Natively to Drupal CMS"
+    },
+    {
+      "year": 2026,
+      "title": "Beyond content staging: where Drupal Workspaces is heading"
+    },
+    {
+      "year": 2026,
+      "title": "From Vendor Lock-In to Digital Sovereignty: A Practical Roadmap for Governments & EU Institutions"
+    },
+    {
+      "year": 2026,
+      "title": "Building Production-Ready AI Applications Using Curated Drupal Recipes"
+    },
+    {
+      "year": 2026,
+      "title": "Agentic Debugging: Teaching AI to Step Through Your Code"
+    },
+    {
+      "year": 2026,
+      "title": "AI-Assisted Contrib Module Maintenance"
+    },
+    {
+      "year": 2026,
+      "title": "Drupal CMS spotlights"
+    },
+    {
+      "year": 2026,
+      "title": "Help shape Drupal’s story: A global marketing call to action"
+    },
+    {
+      "year": 2026,
+      "title": "Beyond the CMS: Drupal as the Backbone of an Open Health Platform"
+    },
+    {
+      "year": 2026,
+      "title": "Your Dashboard Is Lying: Goodhart's Law and the Metrics Crisis in AI-Era Drupal Delivery"
+    },
+    {
+      "year": 2026,
+      "title": "How Drupal drives Pinball Machines"
+    },
+    {
+      "year": 2026,
+      "title": "You can (and should!) build a site template"
+    },
+    {
+      "year": 2026,
+      "title": "Gander in the Wild: How We Built a Performance Safety Net into Our CI/CD Pipeline"
+    },
+    {
+      "year": 2026,
+      "title": "Take Back Your Autonomy"
+    },
+    {
+      "year": 2026,
+      "title": "A developer is more than their code: growing the seniors of 2031"
+    },
+    {
+      "year": 2026,
+      "title": "From Legacy Chaos to Drupal CMS: AI-Assisted Content Modeling & Migration"
+    },
+    {
+      "year": 2026,
+      "title": "Drupal CMS by design: How continuous UX research is building a product you can depend on"
+    },
+    {
+      "year": 2026,
+      "title": "From Fork to Force: Open Source, Ownership, and the Fight for Digital Sovereignty"
+    },
+    {
+      "year": 2026,
+      "title": "#IAmRemarkable  Workshop"
+    },
+    {
+      "year": 2026,
+      "title": "Shipping products with confidence: how we rebuilt our testing tools for velocity"
+    },
+    {
+      "year": 2026,
+      "title": "AI-Augmented Accessibility: From Automated Alt-Text to Governance Gates"
+    },
+    {
+      "year": 2026,
+      "title": "Rebuilding the LMS Mid-Flight: A Drupal Success Story with AFT and AFL-CIO"
+    },
+    {
+      "year": 2026,
+      "title": "Nobody Asked for a CMS: From Content Management to Answer Delivery in the Age of AI"
+    },
+    {
+      "year": 2026,
+      "title": "Advanced Site Building with Drupal Canvas"
+    },
+    {
+      "year": 2026,
+      "title": "AI-assisted site migration to Drupal Canvas: a real-world case study"
+    },
+    {
+      "year": 2026,
+      "title": "Drupal.org Engineering Panel"
+    },
+    {
+      "year": 2026,
+      "title": "Democratizing Enterprise Applications: Positioning Drupal as a Strategic Low-Code Framework"
+    },
+    {
+      "year": 2026,
+      "title": "One Brand Voice from 35 Sources: How We Rebuilt VisitEurope.com and How Drupal AI Unifies Its Tone"
+    },
+    {
+      "year": 2026,
+      "title": "Clean Code in the Age of AI: Writing for Humans When Machines Write the Code"
+    },
+    {
+      "year": 2026,
+      "title": "Inside the Pyramid - A path to faster, clearer Drupal testing"
+    },
+    {
+      "year": 2026,
+      "title": "Drupal CMS, site templates and beyond"
+    },
+    {
+      "year": 2026,
+      "title": "Next Generation ECA - Vision and Progress update"
+    },
+    {
+      "year": 2026,
+      "title": "From Chatbots to AI Experiences: The Next Evolution of the Website"
+    },
+    {
+      "year": 2026,
+      "title": "Page Builder Deathmatch: Canvas vs Display Builder in a Real World Project"
+    },
+    {
+      "year": 2026,
+      "title": "Drupal AI Product Update: From Foundation to Agentic Workflows"
+    },
+    {
+      "year": 2026,
+      "title": "A joyful tour through the CLI now in Drupal Core"
+    },
+    {
+      "year": 2026,
+      "title": "Skin in the game: Digital Sovereignty, AI and Sustainability in Drupal"
+    },
+    {
+      "year": 2026,
+      "title": "From Passion to Pressure: Rethinking Sustainability in Open Source Communities"
+    },
+    {
+      "year": 2026,
+      "title": "Applying Web Sustainability Guidelines to Drupal Projects: From Design to Refactoring"
+    },
+    {
+      "year": 2026,
+      "title": "From Overwhelm to Opportunity: Designing a Personalised Career Journey for 350+ NHS Roles"
+    },
+    {
+      "year": 2026,
+      "title": "163 → 42: Dismantling and Reassembling a Drupal Migration with AI"
+    },
+    {
+      "year": 2026,
+      "title": "Super charging SDC design systems with Web Components"
+    },
+    {
+      "year": 2026,
+      "title": "Scolta: Drop-in AI Search Without a Search Server"
+    },
+    {
+      "year": 2026,
+      "title": "AI Mid-Life Crisis: failure stories from the silent majority"
+    },
+    {
+      "year": 2026,
+      "title": "Drupal Canvas Code Components: Modern JavaScript, agentic engineering, and the road ahead"
+    },
+    {
+      "year": 2026,
+      "title": "SDCs, Canvas, and the Agent That Builds With Them"
+    },
+    {
+      "year": 2026,
+      "title": "Getting the most out of Editoria11y v3"
+    },
+    {
+      "year": 2026,
+      "title": "AI-Powered Site Building in Drupal: From Blank Site to Styled Pages in a Conversation"
+    },
+    {
+      "year": 2026,
+      "title": "AI Assists, Humans Decide: Agentic Workflows in Drupal - A Drupal AI Hackathon Story"
+    },
+    {
+      "year": 2026,
+      "title": "From Drupal Content to AI Answers: Learnings from EPSY"
+    },
+    {
+      "year": 2026,
+      "title": "Building for Drupal Canvas: Lessons Learned from Real-World Use"
+    },
+    {
+      "year": 2026,
+      "title": "Reinventing the Editorial Experience: How Mars Innovated with Drupal Canvas at Enterprise Scale"
+    },
+    {
+      "year": 2026,
+      "title": "How Marketers Win in an AI‑First Search World (AEO & GEO Playbook)"
+    },
+    {
+      "year": 2026,
+      "title": "Modern Video in Drupal: AV1, Responsive Sources, CDN Providers, and a Better Contrib Architecture"
+    },
+    {
+      "year": 2026,
+      "title": "Supply Chain Security in Drupal and Composer"
+    },
+    {
+      "year": 2026,
+      "title": "From local voices to global impact: Powering World Cancer Day with Drupal and AI"
+    },
+    {
+      "year": 2026,
+      "title": "Okay, Houston, we've had a problem here — Wiring Drupal into a Full-Scale Agentic Operations Platfor"
+    },
+    {
+      "year": 2026,
+      "title": "How we made the biggest performance gains in a decade in Drupal core"
+    },
+    {
+      "year": 2026,
+      "title": "Drupal in a Day Seminar"
+    },
+    {
+      "year": 2015,
+      "title": "Drupal 8 CMI on Managed Workflow"
+    },
+    {
+      "year": 2015,
+      "title": "Understanding Drupal"
+    },
+    {
+      "year": 2015,
+      "title": "The Art of Start - How to build a DrupalShop with no money but with a lots of desire."
+    },
+    {
+      "year": 2015,
+      "title": "DevOps, por donde comenzar?"
+    },
+    {
+      "year": 2015,
+      "title": "Getting Content to a Phone in less than 1000ms"
+    },
+    {
+      "year": 2015,
+      "title": "Drupal 8 Console (scaffolding module generator)"
+    },
+    {
+      "year": 2015,
+      "title": "Contribuyendo al core en tiempos de Drupal 8"
+    },
+    {
+      "year": 2015,
+      "title": "Drupal.org in 2015: What's coming next?"
+    },
+    {
+      "year": 2015,
+      "title": "Best practices for Continuous Deployment with Drupal."
+    },
+    {
+      "year": 2015,
+      "title": "CiviCRM Overview and Case Studies"
+    },
+    {
+      "year": 2015,
+      "title": "Design Systems and Drupal"
+    },
+    {
+      "year": 2015,
+      "title": "Capture the (D8) Flag"
+    },
+    {
+      "year": 2015,
+      "title": "Headless Drupal is now \"a thing\""
+    },
+    {
+      "year": 2015,
+      "title": "Buenos Aires - Ciudad abierta por default"
+    },
+    {
+      "year": 2015,
+      "title": "What to measure and why to obtain the best customer satisfaction in Drupal support"
+    },
+    {
+      "year": 2015,
+      "title": "El proceso del theming, UI & UX junto al cliente."
+    },
+    {
+      "year": 2015,
+      "title": "Un mejor CSS, planeando hoy para no sufrir en el futuro."
+    },
+    {
+      "year": 2015,
+      "title": "Drupal in the Post-PHP-Renaissance World"
+    },
+    {
+      "year": 2015,
+      "title": "Drupal + MySQL in Colombia & beyond: real life examples of Site Builds"
+    },
+    {
+      "year": 2015,
+      "title": "#d8rules - Web-automation with Rules in Drupal 8"
+    },
+    {
+      "year": 2015,
+      "title": "Drupal 8 multilingual hands-on"
+    },
+    {
+      "year": 2015,
+      "title": "Selling the open-source philosophy"
+    },
+    {
+      "year": 2015,
+      "title": "Designing Drupal 8"
+    },
+    {
+      "year": 2015,
+      "title": "An Overview of the Drupal 8 Plugin System"
+    },
+    {
+      "year": 2015,
+      "title": "Persiguiendo el unicornio: Por más mujeres en tecnología"
+    },
+    {
+      "year": 2015,
+      "title": "Growing a Drupal Based Product Business"
+    },
+    {
+      "year": 2015,
+      "title": "AngularJS + Drupal =  Un Dúo Superheróico!"
+    },
+    {
+      "year": 2015,
+      "title": "Migrating into Drupal 8"
+    },
+    {
+      "year": 2015,
+      "title": "Conversion Rate Optimization"
+    },
+    {
+      "year": 2015,
+      "title": "Setting up a Reusable and Durable Drupal Lean Process Factory"
+    },
+    {
+      "year": 2015,
+      "title": "The Future of Commerce on Drupal 8 (and beyond)"
+    },
+    {
+      "year": 2015,
+      "title": "Drupal for Non-Profits: Case Study of Ojo al Voto in Costa Rica"
+    },
+    {
+      "year": 2015,
+      "title": "SEO for Drupal"
+    },
+    {
+      "year": 2015,
+      "title": "First-Time Sprinter Workshop"
+    },
+    {
+      "year": 2015,
+      "title": "Mentored Core Sprint"
+    },
+    {
+      "year": 2015,
+      "title": "Contribution Sprints"
+    },
+    {
+      "year": 2020,
+      "title": "jGrants: Drupal-based grants management system for the Ministry of Economy, Trade and Industry of Japan"
+    },
+    {
+      "year": 2020,
+      "title": "The future of Drupal MultiSites"
+    },
+    {
+      "year": 2020,
+      "title": "Facelift your administrative experience - the future of Drupal Admin UI"
+    },
+    {
+      "year": 2020,
+      "title": "Lego up a bootstrap Drupal theme"
+    },
+    {
+      "year": 2020,
+      "title": "DruxtJS; An introduction to decoupling with Nuxt and Drupal"
+    },
+    {
+      "year": 2020,
+      "title": "Drupal 9 and CiviCRM"
+    },
+    {
+      "year": 2020,
+      "title": "Drupal Security Panel"
+    },
+    {
+      "year": 2020,
+      "title": "Rapid Response: How we build some of Australia's most important COVID websites with Drupal"
+    },
+    {
+      "year": 2020,
+      "title": "Strategies for Managing a Fleet of Drupal Projects"
+    },
+    {
+      "year": 2020,
+      "title": "Decoupled Drupal with JSON:API"
+    },
+    {
+      "year": 2020,
+      "title": "Drupal and InfoSec Assurance"
+    },
+    {
+      "year": 2020,
+      "title": "Securing and Scaling Drupal with Kubernetes Panel"
+    },
+    {
+      "year": 2020,
+      "title": "Integrating Lunr.js into Drupal for fast and fuzzy client side search"
+    },
+    {
+      "year": 2020,
+      "title": "Understanding Automated Tests in Drupal"
+    },
+    {
+      "year": 2020,
+      "title": "GovCMS and Drupal 9, roadmap and Q&A"
+    },
+    {
+      "year": 2020,
+      "title": "Why Drupal accelerates digital transformation in the WA Public Service"
+    },
+    {
+      "year": 2008,
+      "title": "Kennismakingsworkshop Drupal"
+    },
+    {
+      "year": 2008,
+      "title": "Showcase(s) Drupal project"
+    },
+    {
+      "year": 2008,
+      "title": "Module bespreking en presentatie"
+    },
+    {
+      "year": 2008,
+      "title": "Voortgangs bespreking \"Drupal.be+nl\""
+    },
+    {
+      "year": 2008,
+      "title": "Discussie- en expert-forum"
+    },
+    {
+      "year": 2008,
+      "title": "Status presentate Drupal.be/nl revamp"
+    },
+    {
+      "year": 2008,
+      "title": "Accessibility en Webdevelopment, over toegankelijkheid van websites voor visueel gehandicapten"
+    },
+    {
+      "year": 2017,
+      "title": "Getting up to speed with testing on Drupal 8"
+    },
+    {
+      "year": 2017,
+      "title": "Drupal 8 and Symfony"
+    },
+    {
+      "year": 2017,
+      "title": "Women in Tech/Drupal (15 min)"
+    },
+    {
+      "year": 2017,
+      "title": "Drupal 8 Component Based Theming"
+    },
+    {
+      "year": 2017,
+      "title": "Drupal 8's Multilingual APIs: Building for the Entire World"
+    },
+    {
+      "year": 2017,
+      "title": "In the bag: how Drupal and Drupal Commerce are taking Freitag to the next level of online branding and customer engagement"
+    },
+    {
+      "year": 2017,
+      "title": "Drupal isn't enough anymore"
+    },
+    {
+      "year": 2017,
+      "title": "API-first Drupal and the future of the CMS"
+    },
+    {
+      "year": 2017,
+      "title": "Turning Drupal into a GraphQL API"
+    },
+    {
+      "year": 2017,
+      "title": "Drupal 8 Initiatives"
+    },
+    {
+      "year": 2017,
+      "title": "NP8 a Drupal 8 Project from alpha to final release"
+    },
+    {
+      "year": 2017,
+      "title": "Personal knowledge management with Drupal (15min)"
+    },
+    {
+      "year": 2017,
+      "title": "A year of gaming on drupal.stackexchange.com: More than a fun passtime? (15min)"
+    },
+    {
+      "year": 2017,
+      "title": "Deploying Drupal: Patterns and Antipatterns"
+    },
+    {
+      "year": 2017,
+      "title": "The curse of big open source initiatives - how to finance big improvements in Drupal and make them sustainable in the long run"
+    },
+    {
+      "year": 2017,
+      "title": "Drupal 8 Caching overview"
+    },
+    {
+      "year": 2008,
+      "title": "Drupal vs the rest"
+    },
+    {
+      "year": 2008,
+      "title": "Drupal and the Encyclopedia of Life - True Taxonomy"
+    },
+    {
+      "year": 2008,
+      "title": "Drupal and CiviCRM for campaigns"
+    },
+    {
+      "year": 2008,
+      "title": "JQuery UI interface development for Drupal"
+    },
+    {
+      "year": 2008,
+      "title": "OpenID with Drupal"
+    },
+    {
+      "year": 2008,
+      "title": "Google Maps in Drupal; The Hub Map"
+    },
+    {
+      "year": 2008,
+      "title": "Managing Drupal with Drupal"
+    },
+    {
+      "year": 2008,
+      "title": "Drupal in Education"
+    },
+    {
+      "year": 2008,
+      "title": "Drupal on Postgres"
+    },
+    {
+      "year": 2008,
+      "title": "NZ Government web standards and Drupal"
+    },
+    {
+      "year": 2008,
+      "title": "Drupal Basics"
+    },
+    {
+      "year": 2008,
+      "title": "Multi-Site Drupal"
+    },
+    {
+      "year": 2008,
+      "title": "Maintaining Drupal with Git"
+    },
+    {
+      "year": 2023,
+      "title": "Contributing to Drupal"
+    },
+    {
+      "year": 2023,
+      "title": "ECA deep dive: Rules replacement for Drupal 10"
+    },
+    {
+      "year": 2023,
+      "title": "Onboarding a new PaaS Site"
+    },
+    {
+      "year": 2023,
+      "title": "Advanced dev - modern/headless"
+    },
+    {
+      "year": 2023,
+      "title": "CivicTheme design system for Drupal 10"
+    },
+    {
+      "year": 2023,
+      "title": "Future roadmap including AI: Get hands on with generative AI"
+    }
+  ],
+  "year": null
+}

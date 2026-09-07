@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <link rel="icon" href="./img/app-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#f4f5f0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#131614" media="(prefers-color-scheme: dark)">
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png">
+    <title>Drupal Event Schedule Builder</title>
+  <meta name="description" content="Every session for an event, filterable by day, track and room. Open one to read it, tick the ones you want, and take them with you.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Programme">
+  <meta property="og:title" content="Conference schedule">
+  <meta property="og:description" content="Every session for an event, filterable by day, track and room. Open one to read it, tick the ones you want, and take them with you.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Conference schedule">
+  <meta name="twitter:description" content="Every session for an event, filterable by day, track and room. Open one to read it, tick the ones you want, and take them with you.">
+
+    <link rel="preload" href="./fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./fonts/newsreader-roman.woff2" as="font" type="font/woff2" crossorigin>
+
+    <style>
+      @layer overrides, reset, legacy, tokens, base, composition, section, utility;
+      @import url("./css/utilities.css") layer(legacy);
+      @import url("./css/embed.css") layer(legacy);
+    </style>
+    <link rel="stylesheet" href="./css/foundation.css">
+    <link rel="stylesheet" href="./css/section-chrome.css">
+    <link rel="stylesheet" href="./css/section-session-detail.css">
+    <link rel="stylesheet" href="./css/section-schedule.css">
+</head>
+<body>
+    <div id="ariaStatus" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+    <div id="pageLoadingOverlay" class="page-loading-overlay" role="status" aria-live="polite" aria-label="Loading schedule">
+        <div class="page-loading-card">
+            <div class="page-loading-spinner" aria-hidden="true"></div>
+            <div class="page-loading-text">Loading schedule...</div>
+        </div>
+    </div>
+    <a class="u-skip" href="#scheduleMain">Skip to the schedule</a>
+    <header class="app-masthead">
+        <div class="l-center">
+            <div class="app-masthead__bar">
+                <div class="app-lockup">
+                    <div id="headerLogo" class="header-logo brand-drupalsouth">
+                        <img id="headerLogoImage" class="app-lockup__mark header-logo-image hidden" src="" alt="Event logo">
+                        <i id="headerLogoIcon" class="app-lockup__seal" aria-hidden="true"></i>
+                    </div>
+                    <div id="headerKicker" class="app-lockup__title">Conference Schedule</div>
+                    <img id="headerFlag" class="header-flag hidden" src="" alt="">
+                    <h1 id="pageTitle" class="app-lockup__place">
+                        <span class="header-event">Custom Schedule Builder</span>
+                    </h1>
+                </div>
+                <div class="header-actions l-cluster">
+                    <div id="scheduleSubscribe" class="sub-wrap">
+                        <button id="scheduleSubscribeBtn" type="button" class="theme-picker-btn" aria-haspopup="dialog" aria-expanded="false" title="Subscribe to the full schedule">
+                            <span class="theme-picker-btn-label">Subscribe</span>
+                        </button>
+                        <div id="scheduleSubscribePop" class="sub-pop hidden" role="dialog" aria-label="Subscribe to schedule">
+                            <p class="sub-pop-title">Subscribe to every session</p>
+                            <p class="sub-pop-desc">A live calendar that auto-refreshes as the programme changes — the whole event's schedule in your own calendar app.</p>
+                            <a id="subOpen" class="sub-pop-primary" href="#">Add to calendar app</a>
+                            <div class="sub-pop-row">
+                                <input id="subUrl" type="text" readonly class="sub-pop-url" aria-label="Subscribe URL">
+                                <button id="subCopy" type="button" class="sub-pop-copy">Copy</button>
+                            </div>
+                            <p class="sub-pop-note"><span>New subscriptions can take a few minutes to fill in — that's your calendar app catching up, not a problem. <a id="subPreview" href="#" target="_blank" rel="noopener">Preview the feed</a> to check it's the right event.</span></p>
+                        </div>
+                    </div>
+                    <div id="themePicker" class="theme-picker">
+                        <button id="themePickerBtn" type="button" class="theme-picker-btn" aria-haspopup="true" aria-expanded="false" title="Change theme">
+                            <span class="theme-picker-btn-label">Theme</span>
+                            </button>
+                        <div id="themePickerMenu" class="theme-picker-menu hidden" role="menu"></div>
+                    </div>
+                </div>
+            </div>
+            <nav class="app-nav site-nav" aria-label="Site navigation">
+                <a href="./home.html" class="app-nav__link site-nav-link">Home</a>
+                <a href="./index.html" class="app-nav__link site-nav-link is-active" aria-current="page">Schedule</a>
+                <a href="./planner.html" class="app-nav__link site-nav-link">Planner</a>
+                <a href="./archive.html" class="app-nav__link site-nav-link">Archive</a>
+                <a id="curationNavLink" href="./curation.html" class="app-nav__link site-nav-link hidden">Curation</a>
+                <a id="editorNavLink" href="./editor.html" class="app-nav__link site-nav-link hidden">Editor</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="l-center">
+        <nav id="scheduleCrumbs" class="app-crumbs" aria-label="Breadcrumb">
+            <a href="./home.html">Home</a><span class="app-crumbs__sep" aria-hidden="true">→</span><a href="./index.html">Schedules</a>
+        </nav>
+    </div>
+
+    <main id="scheduleMain" class="l-center">
+        <div id="eventHomeView" class="hidden"></div>
+        <div id="filtersPanel" class="sch-toolbar">
+            <div class="l-cluster">
+                <button id="searchEvents" type="button" class="app-btn">
+                    Browse events
+                </button>
+                <button id="shareSchedule" type="button" class="app-btn">
+                    Share schedule
+                </button>
+                <button id="jumpToNow" type="button" class="app-btn hidden now-jump-btn">
+                    Jump to now
+                </button>
+            </div>
+            <div id="eventMediaPromo" class="hidden mt-4"></div>
+        </div>
+
+        <div id="nowNextPanel" class="now-next-panel hidden" aria-live="polite"></div>
+
+        <div id="usageInstructionsPanel" class="sch-usage mobile-instructions-panel">
+            <button
+                id="usageInstructionsToggle"
+                type="button"
+                class="mobile-accordion-toggle sm:hidden w-full"
+                aria-expanded="false"
+                aria-controls="usageInstructionsContent"
+            >
+                <span>Usage Instructions</span>
+                </button>
+            <button id="dismissInstructions" type="button" class="instructions-dismiss" aria-label="Dismiss usage instructions">
+                </button>
+            <div id="usageInstructionsContent" class="mobile-accordion-content hidden sm:block">
+                <h2 class="sch-usage__title">Usage Instructions</h2>
+                <ul class="sch-usage__list">
+                    <li>Browse and filter sessions and events to find the ones you want to attend.</li>
+                    <li>Open a session card for details, and use the checkbox on each card to quickly select sessions. Your selections are automatically saved to your browser.</li>
+                    <li>Use the download button of prefernce to download your personalized schedule and import it into your calendar application.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="sessionFiltersPanel" class="sch-toolbar">
+            <button
+                id="sessionFiltersToggle"
+                type="button"
+                class="mobile-accordion-toggle sm:hidden w-full"
+                aria-expanded="false"
+                aria-controls="sessionFiltersContent"
+            >
+                <span>Filters</span>
+                </button>
+            <div id="sessionFiltersContent" class="mobile-accordion-content hidden sm:block">
+            <div class="space-y-4">
+                <div class="app-field">
+                    <label class="u-label">Keywords</label>
+                    <div class="relative">
+                        <input type="text" id="keywordsFilter" placeholder="Search by title, speaker, track..." class="app-control">
+                        <button id="clearKeywords" class="absolute right-4 top-1/2 transform -translate-y-1/2 pl-ink-2 hover:pl-ink-1 focus:outline-none hidden" title="Clear search">
+                            </button>
+                    </div>
+                </div>
+
+                <div class="l-switcher">
+                    <div class="app-field">
+                        <label class="u-label">Day</label>
+                        <select id="dateFilter" class="app-control">
+                            <option value="">All Days</option>
+                        </select>
+                    </div>
+                    <div class="app-field">
+                        <label class="u-label">Track</label>
+                        <select id="trackFilter" class="app-control">
+                            <option value="">All Tracks</option>
+                        </select>
+                    </div>
+                    <div class="app-field">
+                        <label class="u-label">Show</label>
+                        <select id="selectionFilter" class="app-control">
+                            <option value="all">All</option>
+                            <option value="selected">Selected only</option>
+                            <option value="unselected">Unselected only</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2 pt-2 border-t pl-rule">
+                    <button id="resetFilters" class="app-btn">
+                        Reset filters
+                    </button>
+                    <button id="selectAllDisplayed" class="app-btn">
+                        Select all
+                    </button>
+                    <button id="deselectAllDisplayed" class="app-btn">
+                        Deselect all
+                    </button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div id="selectionOverview" class="sch-dock selection-overview">
+            <div class="selection-overview-inner l-center">
+                <div class="selection-overview-summary p-0">
+                    <button id="toggleDetails" type="button" class="selection-overview-toggle sch-dock__toggle" aria-expanded="false" aria-controls="stageDetails">
+                        <span>Selected: <span id="totalEvents">0</span> <span id="totalEventsLabel">sessions</span> in <span id="totalDuration">0 hours</span> (expand to see details)</span>
+                        <span class="sch-dock__caret" aria-hidden="true">▾</span>
+                        </button>
+                </div>
+                <div id="stageDetails" class="selection-overview-details overflow-y-auto flex-1 mt-4 px-4 hidden">
+                    <div class="selection-overview-details-inner border-t pl-rule py-4">
+                        <div id="stageStats" class="space-y-2">
+                        </div>
+                    </div>
+                </div>
+                <div class="selection-overview-actions p-4 border-t pl-rule">
+                    <div class="selection-overview-actions-row l-cluster">
+                        <button id="downloadIcs" class="app-btn selection-overview-action" data-variant="key" disabled>
+                            Add to Calendar
+                        </button>
+                        <button id="addGoogleCalendar" class="app-btn selection-overview-action" disabled>
+                            Add to Google Calendar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav id="dayNav" class="sch-daynav day-nav hidden" aria-label="Jump to day"></nav>
+
+        <div id="eventsContainer">
+        </div>
+        <section id="sponsorsContainer" class="sch-sponsors hidden" aria-labelledby="sponsorsHeading">
+            <div class="sponsors-shell">
+                <div class="sch-sponsors__head">
+                    <div class="u-label">Event Sponsors</div>
+                    <h2 id="sponsorsHeading" class="sch-sponsors__title">Sponsors</h2>
+                </div>
+                <div id="sponsorsContent" class="sponsors-content"></div>
+            </div>
+        </section>
+        <section id="relatedEventsContainer" class="sch-related hidden">
+            <div class="related-shell">
+                <div id="relatedEventsHeadingWrap" class="related-heading-wrap hidden">
+                    <h2 id="relatedEventsHeading" class="sch-related__title related-heading"></h2>
+                </div>
+                <div id="relatedEventsContent" class="related-content"></div>
+            </div>
+        </section>
+        <div id="creditsContainer" class="sch-credits">
+            <!--provenance-->
+            <p id="creditsEventLink"></p>
+            <p>❤️ Please support <a href="https://www.drupal.org/u/aboros" target="_blank" class="sch-credits__link">aboros</a> who inspired this from his own work, built proudly from pure love of <a href="https://www.drupal.org" target="_blank" class="sch-credits__link">Drupal</a>. ❤️</p>
+            <p>No tracking, no cookies, no data collection. 100% privacy-first analytics.</p>
+        </div>
+    </main>
+
+    <aside class="app-rail" aria-hidden="true">
+    </aside>
+
+    <div id="railPanel" class="app-panel" hidden></div>
+
+    <nav id="scheduleBottomBar" class="sm:hidden" aria-label="Site navigation">
+      <a href="./index.html" class="mobile-bottom-tab is-active" aria-label="Schedule" aria-current="page">
+        <span class="mobile-bottom-tab-label">Schedule</span>
+      </a>
+      <button type="button" id="scheduleEventFinderTab" class="mobile-bottom-tab" aria-label="Browse events">
+        <span class="mobile-bottom-tab-label">Browse</span>
+      </button>
+      <a href="./planner.html" class="mobile-bottom-tab" aria-label="My Planner">
+        <span class="mobile-bottom-tab-label">My Planner</span>
+      </a>
+      <a id="scheduleEditorTab" href="./editor.html" class="mobile-bottom-tab hidden" aria-label="Editor">
+        <span class="mobile-bottom-tab-label">Editor</span>
+      </a>
+    </nav>
+    <script>
+      document.getElementById('scheduleEventFinderTab')?.addEventListener('click', () => {
+        document.getElementById('searchEvents')?.click();
+      });
+    </script>
+
+    <script type="module" src="./js/app.js"></script>
+    <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+</body>
+</html>

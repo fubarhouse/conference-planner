@@ -1,0 +1,515 @@
+{
+  "_comment": [
+    "The contract between app/js/modules/sources.js and tools/archive/sources.go.",
+    "",
+    "summarizeSources() and friends now have two implementations — the browser/Node one and a",
+    "Go one — which is exactly the drift risk the single-implementation rule in",
+    "sources.js exists to prevent. This file is what replaces that rule: BOTH",
+    "sides read it and assert against it, so a change to the rule in one language",
+    "fails the other's test suite.",
+    "",
+    "Readers:",
+    "  tools/archive/sources_test.go",
+    "  app/js/modules/__tests__/sourcesSummaryContract.test.js",
+    "",
+    "Extend this file when you extend the rule. Adding a case is how you make the",
+    "other language implement it."
+  ],
+  "summaries": [
+    {
+      "name": "an event with no sources",
+      "dataset": {
+        "event": {}
+      },
+      "expected": {
+        "count": 0,
+        "kinds": {},
+        "wayback": false,
+        "stated": 0,
+        "oldestCapture": null,
+        "retrievedFrom": null,
+        "retrievedTo": null
+      }
+    },
+    {
+      "name": "sources that is not an array is treated as none",
+      "dataset": {
+        "event": {
+          "sources": "nope"
+        }
+      },
+      "expected": {
+        "count": 0,
+        "kinds": {},
+        "wayback": false,
+        "stated": 0,
+        "oldestCapture": null,
+        "retrievedFrom": null,
+        "retrievedTo": null
+      }
+    },
+    {
+      "name": "kinds are counted in first-seen order, not alphabetically",
+      "dataset": {
+        "event": {
+          "sources": [
+            {
+              "id": "a",
+              "kind": "schedule"
+            },
+            {
+              "id": "b",
+              "kind": "sponsors"
+            },
+            {
+              "id": "c",
+              "kind": "schedule"
+            },
+            {
+              "id": "d",
+              "kind": "video"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "count": 4,
+        "kinds": {
+          "schedule": 2,
+          "sponsors": 1,
+          "video": 1
+        },
+        "kindOrder": [
+          "schedule",
+          "sponsors",
+          "video"
+        ],
+        "wayback": false,
+        "stated": 0,
+        "oldestCapture": null,
+        "retrievedFrom": null,
+        "retrievedTo": null
+      }
+    },
+    {
+      "name": "a source with no kind still counts toward the total",
+      "dataset": {
+        "event": {
+          "sources": [
+            {
+              "id": "a"
+            },
+            {
+              "id": "b",
+              "kind": "other"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "count": 2,
+        "kinds": {
+          "other": 1
+        },
+        "wayback": false,
+        "stated": 0,
+        "oldestCapture": null,
+        "retrievedFrom": null,
+        "retrievedTo": null
+      }
+    },
+    {
+      "name": "the oldest wayback capture wins",
+      "dataset": {
+        "event": {
+          "sources": [
+            {
+              "id": "a",
+              "kind": "schedule",
+              "via": {
+                "provider": "wayback",
+                "timestamp": "20130826155852"
+              }
+            },
+            {
+              "id": "b",
+              "kind": "sponsors",
+              "via": {
+                "provider": "wayback",
+                "timestamp": "20090101000000"
+              }
+            }
+          ]
+        }
+      },
+      "expected": {
+        "count": 2,
+        "kinds": {
+          "schedule": 1,
+          "sponsors": 1
+        },
+        "wayback": true,
+        "stated": 0,
+        "oldestCapture": "2009-01-01",
+        "retrievedFrom": null,
+        "retrievedTo": null
+      }
+    },
+    {
+      "name": "an unparseable capture stamp does not clear the wayback flag",
+      "dataset": {
+        "event": {
+          "sources": [
+            {
+              "id": "a",
+              "kind": "schedule",
+              "via": {
+                "provider": "wayback",
+                "timestamp": "abc"
+              }
+            }
+          ]
+        }
+      },
+      "expected": {
+        "count": 1,
+        "kinds": {
+          "schedule": 1
+        },
+        "wayback": true,
+        "stated": 0,
+        "oldestCapture": null,
+        "retrievedFrom": null,
+        "retrievedTo": null
+      }
+    },
+    {
+      "name": "stated sources are counted separately",
+      "dataset": {
+        "event": {
+          "sources": [
+            {
+              "id": "a",
+              "kind": "stats",
+              "via": {
+                "provider": "stated"
+              }
+            },
+            {
+              "id": "b",
+              "kind": "community",
+              "via": {
+                "provider": "stated"
+              }
+            },
+            {
+              "id": "c",
+              "kind": "schedule"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "count": 3,
+        "kinds": {
+          "stats": 1,
+          "community": 1,
+          "schedule": 1
+        },
+        "wayback": false,
+        "stated": 2,
+        "oldestCapture": null,
+        "retrievedFrom": null,
+        "retrievedTo": null
+      }
+    },
+    {
+      "name": "retrievedAt spans the range, and a datetime is cut to its date",
+      "dataset": {
+        "event": {
+          "sources": [
+            {
+              "id": "a",
+              "kind": "schedule",
+              "retrievedAt": "2026-04-28"
+            },
+            {
+              "id": "b",
+              "kind": "sponsors",
+              "retrievedAt": "2020-01-02T10:00:00Z"
+            },
+            {
+              "id": "c",
+              "kind": "video",
+              "retrievedAt": "2023-06-15"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "count": 3,
+        "kinds": {
+          "schedule": 1,
+          "sponsors": 1,
+          "video": 1
+        },
+        "wayback": false,
+        "stated": 0,
+        "oldestCapture": null,
+        "retrievedFrom": "2020-01-02",
+        "retrievedTo": "2026-04-28"
+      }
+    }
+  ],
+  "waybackTimestamps": [
+    {
+      "input": "20130826155852",
+      "expected": "2013-08-26"
+    },
+    {
+      "input": "2013",
+      "expected": "2013-01-01"
+    },
+    {
+      "input": "201306",
+      "expected": "2013-06-01"
+    },
+    {
+      "input": "20130615",
+      "expected": "2013-06-15"
+    },
+    {
+      "input": "20131332",
+      "expected": null
+    },
+    {
+      "input": "abc",
+      "expected": null
+    },
+    {
+      "input": "202",
+      "expected": null
+    },
+    {
+      "input": "",
+      "expected": null
+    },
+    {
+      "input": "999999999999999",
+      "expected": null
+    }
+  ],
+  "confidence": [
+    {
+      "source": {
+        "id": "a"
+      },
+      "tier": "live",
+      "why": "no evidence recorded — a live fetch"
+    },
+    {
+      "source": {
+        "id": "a",
+        "capture": "cache/x.html"
+      },
+      "tier": "captured",
+      "why": "a kept copy is a capture"
+    },
+    {
+      "source": {
+        "id": "a",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20130826155852"
+        }
+      },
+      "tier": "captured",
+      "why": "so is archive.org"
+    },
+    {
+      "source": {
+        "id": "a",
+        "via": {
+          "provider": "stated"
+        }
+      },
+      "tier": "stated",
+      "why": "a statement is its own tier"
+    },
+    {
+      "source": {
+        "id": "a",
+        "verifiedAt": "2026-01-01"
+      },
+      "tier": "verified",
+      "why": "somebody looked"
+    },
+    {
+      "source": {
+        "id": "a",
+        "verifiedAt": "2026-01-01",
+        "verifiedBy": "policy"
+      },
+      "tier": "accepted",
+      "why": "nobody looked — policy decided the check was unnecessary"
+    },
+    {
+      "source": {
+        "id": "a",
+        "verifiedAt": "2026-01-01",
+        "verifiedBy": "human",
+        "via": {
+          "provider": "wayback"
+        }
+      },
+      "tier": "verified",
+      "why": "verification outranks the capture"
+    }
+  ],
+  "attribution": [
+    {
+      "record": {
+        "title": "x"
+      },
+      "sources": [],
+      "strength": "none",
+      "why": "nothing cited"
+    },
+    {
+      "record": {
+        "title": "x",
+        "sourceIds": [
+          "a"
+        ]
+      },
+      "sources": [
+        {
+          "id": "a",
+          "url": "https://example.org/s"
+        }
+      ],
+      "strength": "page",
+      "why": "cited, but the record has no link of its own"
+    },
+    {
+      "record": {
+        "title": "x",
+        "sourceIds": [
+          "a"
+        ],
+        "link": "https://example.org/s"
+      },
+      "sources": [
+        {
+          "id": "a",
+          "url": "https://example.org/s"
+        }
+      ],
+      "strength": "exact",
+      "why": "the record IS that page"
+    },
+    {
+      "record": {
+        "title": "x",
+        "sourceIds": [
+          "a"
+        ],
+        "link": "  https://example.org/s  "
+      },
+      "sources": [
+        {
+          "id": "a",
+          "url": "https://example.org/s"
+        }
+      ],
+      "strength": "exact",
+      "why": "the link is trimmed before comparison"
+    },
+    {
+      "record": {
+        "title": "x",
+        "sourceIds": [
+          "a"
+        ],
+        "link": "https://example.org/other"
+      },
+      "sources": [
+        {
+          "id": "a",
+          "url": "https://example.org/s"
+        }
+      ],
+      "strength": "page",
+      "why": "a different page is inference, not evidence"
+    },
+    {
+      "record": {
+        "title": "x",
+        "sourceIds": [
+          "missing"
+        ],
+        "link": "https://example.org/s"
+      },
+      "sources": [
+        {
+          "id": "a",
+          "url": "https://example.org/s"
+        }
+      ],
+      "strength": "page",
+      "why": "a dangling id cannot be exact"
+    }
+  ],
+  "reach": {
+    "dataset": {
+      "event": {
+        "sourceIds": [
+          "a"
+        ],
+        "attendance": {
+          "count": 100,
+          "sourceIds": [
+            "b"
+          ]
+        },
+        "community": {
+          "sourceIds": [
+            "b"
+          ],
+          "people": [
+            {
+              "name": "p",
+              "sourceIds": [
+                "a",
+                "b"
+              ]
+            }
+          ]
+        },
+        "sponsors": [
+          {
+            "title": "s",
+            "sourceIds": [
+              "a"
+            ]
+          }
+        ]
+      },
+      "items": [
+        {
+          "title": "t",
+          "sourceIds": [
+            "a"
+          ]
+        },
+        {
+          "title": "u"
+        }
+      ]
+    },
+    "expected": {
+      "a": 4,
+      "b": 3
+    }
+  }
+}

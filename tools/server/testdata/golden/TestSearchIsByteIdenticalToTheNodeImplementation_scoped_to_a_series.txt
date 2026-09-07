@@ -1,0 +1,302 @@
+{
+  "query": "accessibility",
+  "terms": [
+    "accessibility"
+  ],
+  "mode": "exact",
+  "facets": {
+    "series": "DrupalCon",
+    "region": "All",
+    "country": "All",
+    "year": "All"
+  },
+  "total": 9,
+  "offset": 0,
+  "byYear": {
+    "2026": 9
+  },
+  "byTerm": {
+    "accessibility": {
+      "2026": 9
+    }
+  },
+  "breakdown": {
+    "series": [
+      {
+        "name": "DrupalCon",
+        "count": 9,
+        "total": 136
+      }
+    ],
+    "region": [
+      {
+        "name": "EMEA",
+        "count": 9,
+        "total": 94
+      }
+    ],
+    "country": [
+      {
+        "name": "Netherlands",
+        "count": 9,
+        "total": 94
+      }
+    ],
+    "city": [
+      {
+        "name": "Rotterdam",
+        "count": 9,
+        "total": 94
+      }
+    ],
+    "speakers": [
+      {
+        "name": "Adam Nagy",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Antonella Picarella",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Christopher Torgalson",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Daniel Angelov",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "David Galeano",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "John Albin Wilkins",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "John Jameson",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Junaid Masoodi",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Jürgen Haas",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Mike Gifford",
+        "count": 1,
+        "total": 2
+      }
+    ],
+    "events": 1,
+    "eventsTotal": 2,
+    "span": {
+      "min": 2026,
+      "max": 2026
+    }
+  },
+  "results": [
+    {
+      "matched": [
+        "accessibility"
+      ],
+      "title": "AI Assists, Humans Decide: Agentic Workflows in Drupal - A Drupal AI Hackathon Story",
+      "description": "Content editors at the European Commission manage hundreds of websites in 24 languages. Every publication needs to be accurate, readable, and compliant with policy, and it needs to stay that way as policies change. Doing that manually across thousands of pages does not scale. During the EC's Drupal AI Hackathon, our team built an AI content validation engine that helps editors run structured checks, review AI suggestions in an isolated environment, and approve changes on their terms. No auto-changes, no data leaving the stack. This session walks through the problem, a demo, and the architectural decisions behind a solution where AI assists and humans stay in control.\n\n**Prerequisite**\n\n- General knowledge of Drupal site building and content editing  \n\n- Basic concepts of AI and Agentic AI  \n\n- Familiarity with concepts like entities, forms, or APIs  \n\n- No prior experience with AI required\n\n**Target Audience**\n\nAgency leaders, solution architects, innovation teams, technical strategists\n\n**Outline**\n\nAt the European Commission, content editors manage hundreds of websites in 24 official languages. The real challenge is not creating content but validating it: checking facts against policy, enforcing SEO standards, maintaining accessibility, and ensuring consistency.  \n\nDuring the EC's Drupal AI Hackathon in January 2026, our team built an AI-powered content validation engine that helps editors validate, improve, and monitor content across its lifecycle. The solution won first place.  \n\nThis session covers the problem, the hackathon challenge, a demo, and a technical walkthrough of the architecture behind it.\n\nYou will see how we built an AI assistant that evaluates content against configurable editorial rules covering fact accuracy, readability, SEO, and policy alignment. The assistant works in an isolated environment where editors review suggestions before anything touches published content. Every change requires explicit human approval, enforced deterministically outside the AI layer.\n\nOn the architecture side, we explain why we chose to let Drupal orchestrate the AI steps rather than delegating that to an LLM agent and how that decision shaped the entire solution. We also cover async execution, vendor-independent model integration, and data sovereignty by design.  \n\nIf you are building agentic AI workflows in Drupal, this session gives you a practical inspiration: what worked, what didn't, and the principles.\n\n**Learning Objectives**\n\n- How to architect agentic AI workflows in Drupal where the CMS orchestrates the process and the LLM executes discrete steps, and why this matters for cost, speed, and reliability  \n\n  - A practical approach to human-in-the-loop design that is enforced deterministically, not by prompting an AI to \"always ask for approval\"  \n\n  - How to build AI content validation that combines rule-based checks with contextual AI evaluation, using each where it performs best.  \n\n  - Strategies for keeping agentic workflows data sovereign.\n\n**Experience level**  \nIntermediate",
+      "speakers": "David Galeano, Adam Nagy",
+      "track": "development, ai & agentic architecture",
+      "location": "Mees Room I",
+      "startTime": "2026-09-30T14:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/ai-assists-humans-decide-agentic-workflows-drupal-drupal-ai-hackathon-story",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "accessibility"
+      ],
+      "title": "From Drupal Content to AI Answers: Learnings from EPSY",
+      "description": "What if the best AI chatbot is not a chatbot at all, but a constrained search engine?\n\n**Prerequisite**\n\nBasic understanding of:  \n\nDrupal content architecture  \n\nSearch concepts (Solr, Elasticsearch, or similar)  \n\nGeneral awareness of LLMs\n\n**Target Audience**\n\nDrupal site builders, webmasters, content managers, and developers working with Drupal as a CMS for public or private sector websites. It is especially relevant for professionals interested in understanding how AI can support content management, editorial workflows, accessibility, and user experience within Drupal-based platforms. Attendees looking for practical ideas to integrate AI into existing digital ecosystems will benefit most.\n\n**Outline**\n\nEPSO’s AI assistant EPSY is not a chatbot in the usual sense. It is a constrained AI search interface designed for public sector use.\n\nIn this session, we explain EPSY, the assistant of the European Personnel Selection Office, and show how it solves a hard problem: guiding tens of thousands of candidates through complex, multilingual recruitment flows without breaking trust or compliance.\n\nWe analyze its design choices: prompting, strict query framing, and controlled outputs.  \n\nKey topics include AI search vs chat, designing for accuracy over fluency, and how to operate AI in regulated environments.\n\nYou will leave with a clear mental model and practical patterns to implement AI-assisted search in Drupal projects.\n\n**Learning Objectives**\n\nLearning Objectives  \n\nUnderstand the difference between chat UX and AI search UX  \n\nLearn how EPSY reduces hallucination risk through design  \n\nIdentify when to use stateless vs conversational AI  \n\nMap RAG patterns to Drupal architectures  \n\nApply guardrails for AI in regulated environments\n\n**Experience level**  \nIntermediate",
+      "speakers": "Antonella Picarella",
+      "track": "development, ai & agentic architecture",
+      "location": "Penn Room I&II",
+      "startTime": "2026-09-30T14:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/drupal-content-ai-answers-learnings-epsy",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "accessibility"
+      ],
+      "title": "Getting the most out of Editoria11y v3",
+      "description": "Drupal CMS's accessibility recipe \"just works\"...most of the time. When you want it to work better, you find that there are more than 130 fields spread across three settings tabs! Learn how we got here from the project lead, and get practical tips on configuration and customization.\n\n**Prerequisite**\n\nNone\n\n**Target Audience**\n\nAnyone who cares about quality assurance. Typically site owners, QA managers, and/or developers responsible for improving the site editing experience\n\n**Outline**\n\nEditoria11y was conceived as a deeply integrated Drupal accessibility checker in 2019:\n\n-- v1 introduced automatic, inline alerts for accessibility issues on published pages.\n\n-- v2 added an as-you-type checker for CKEditor and Gutenberg, as well as site-wide dismissals and reports.\n\n-- v3 work is currently focused on building a full quality assurance suite. There are already 3x as many checks as v2, and 3x as much to configure!\n\nWe will explore what a well-configured site looks like, and present best practices for your site settings and themes:  \n\n-- Preventing false positives and annoying or repetitive alerts.  \n\n-- Splitting configuration between content authors and developers.  \n\n-- Writing custom tests.  \n\n-- Optimizing tip placement for dynamic or clipped content.  \n\n-- Using the new report maintenance tools and crawlers.  \n\n-- Adding Views relationships to customize filters, reports and exports.  \n\n-- Integrating the European Commission's new \"AI: Editoria11y\" module.\n\nWe will end with a look at what’s next, and how the community can guide and contribute to this project's roadmap.\n\n**Learning Objectives**\n\nLearners should:  \n\n-- Be able to optimize their checker to catch the specific issues common to their theme and editors.  \n\n-- Know where to find documentation and code samples for extending and modifying the checker.  \n\n-- Not feel overwhelmed by 130+ fields spread across 3 configuration tabs!\n\n**Experience level**  \nAnyone",
+      "speakers": "John Jameson",
+      "track": "user experience, accessibility & design",
+      "location": "Goudriaan Room I&II",
+      "startTime": "2026-09-30T14:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/getting-most-out-editoria11y-v3",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "accessibility"
+      ],
+      "title": "Super charging SDC design systems with Web Components",
+      "description": "The age of React.js is over. Web Components have arrived. Learn practical tips to building or reusing design systems with Web Component APIs and SDC.\n\n**Prerequisite**\n\nDevelopers should be familiar with SDC and JavaScript; expert knowledge is not required.\n\n**Target Audience**\n\nFrontend developers and designers\n\n**Outline**\n\nIn the past several years, JavaScript frameworks, like React, have introduced server-side rendering to improve front-end performance metrics. All while browser-native Web Components have been stuck with client-side rendering only. But in August 2026, server-side rending Web Components became Widely Available in all major browsers. The age of React.js is coming to an end.\n\nWith browser-native APIs, aka The Platform, we can use the full range of vanilla JavaScript, HTML and CSS to create design systems that don’t need extra frameworks or bundlers. And using native JavaScript APIs instead of front-end frameworks is fast. Really fast.\n\nWhat's best is that Drupal’s SDC, Single Directory Components, make building out these kind of components a breeze. So come and learn practical tips to building or reusing design systems with Web Component APIs and SDC.\n\nIn this session, we will:  \n\n• Briefly review the three APIs of Web Components: Custom Elements, Templates and Slots, Shadow DOM  \n\n• Discuss the accessibility issues with Shadow DOM  \n\n• Compare components with declarative Shadow DOM vs Light DOM  \n\n• Techniques for using SDC to build Light DOM and Shadow DOM web components\n\n**Learning Objectives**\n\nIn this session, we will:  \n\n• Briefly review the three APIs of Web Components: Custom Elements, Templates and Slots, Shadow DOM  \n\n• Discuss the accessibility issues with Shadow DOM  \n\n• Compare components with declarative Shadow DOM vs Light DOM  \n\n• Techniques for using SDC to build Light DOM and Shadow DOM web components\n\n**Experience level**  \nIntermediate",
+      "speakers": "John Albin Wilkins",
+      "track": "development, ai & agentic architecture",
+      "location": "Mees Room I",
+      "startTime": "2026-09-30T13:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/super-charging-sdc-design-systems-web-components",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "accessibility"
+      ],
+      "title": "The Reality of Accessibility Automation",
+      "description": "Lighthouse gives you 100. The European Accessibility Act expects more.\n\n**Prerequisite**\n\nNothing, I'll explain everything from scratch.\n\n**Target Audience**\n\nQAs engineers, team leads, architects, business owners, compliance officers.\n\n**Outline**\n\nAccessibility automation is often seen as the silver bullet for building inclusive digital products. With tools like axe, Lighthouse, and CI-integrated scanners becoming standard in modern development workflows, many teams assume that automated testing ensures accessibility compliance. The reality, however, is more complex.  \n\nIn this session, we'll explore the true capabilities and limitations of accessibility automation. We'll break down what automated tools can reliably detect, where they fall short, and why a significant portion of WCAG success criteria still require human judgment. Through practical examples, I'll highlight the critical gap between rule-based validation and real user experience - particularly for screen reader users, keyboard-only users, and people with cognitive disabilities.  \n\nThe session also examines the emerging role of AI in accessibility testing. Can AI help bridge the semantic and contextual gaps that traditional automation cannot cover? Where does it add value, and where does it still fall short?  \n\nAttendees will leave with a realistic understanding for accessibility quality - combining automation, AI augmentation, and human expertise. This talk challenges common misconceptions and provides a practical framework for building scalable, responsible accessibility testing strategies in modern teams.\n\n**Learning Objectives**\n\nBy the end of this session, participants will be able to:  \n\nExplain what automated accessibility tools can reliably detect - and what they fundamentally cannot  \n\nDescribe why accessibility automation typically covers only 20-40% of WCAG success criteria  \n\nDistinguish between rule-based validation and real user experience validation  \n\nEvaluate where AI can meaningfully enhance accessibility testing and where human judgment remains essential\n\n**Experience level**  \nBeginner",
+      "speakers": "Daniel Angelov",
+      "track": "user experience, accessibility & design",
+      "location": "Penn Room I&II",
+      "startTime": "2026-09-30T12:05:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/reality-accessibility-automation",
+      "video": "",
+      "minutes": 20
+    },
+    {
+      "matched": [
+        "accessibility"
+      ],
+      "title": "Next Generation ECA - Vision and Progress update",
+      "description": "This session details the future roadmap for ECA, aiming to broaden its accessibility and impact within the Drupal community by making it usable for all users, regardless of technical expertise, and expanding its capabilities beyond just developers and site builders. The session outlines the progress made and the plans for the next generation of this popular Drupal workflow automation tool.\n\n**Prerequisite**\n\nI am interested in Drupal's future and have ideas on how it can be improved by providing the best tools to generate new business opportunities.\n\n**Target Audience**\n\nThis session is for developers, site builders, project managers, and management alike.\n\n**Outline**\n\nECA (the Event, Condition, Action module) for modern Drupal has established itself as the go-to tool for automating Drupal workflows with a no-code/low-code approach. After several years in production and with the benefit of experience and feedback from hundreds of power users, the time has come to plan and execute the future of ECA and make an even bigger difference for Drupal and all its users.\n\nECA's future vision is to accomplish the following goals:\n\n1. Currently, ECA is used by only 1% of Drupal users; the next generation of ECA will be suitable for all Drupal users, including those with little or no experience of the platform.  \n\n2. Getting started with ECA currently requires users to have a basic understanding of Drupal and its workflow. The next-generation ECA will be intuitive for all users, enabling them to achieve success with ECA in minutes.  \n\n3. The next-generation ECA will guide users, helping them to elevate their skills and achieve more as they progress.  \n\n4. Personas: currently, ECA caters for developers, site builders and project managers. This will be extended to enable all users to build their own workflows and automations.\n\nThis session will outline how the maintainers and the Drupal community are planning to achieve these goals and how much progress has been made so far.\n\n**Learning Objectives**\n\nAt the end of this session, attendees will be able to articulate how ECA is unlocking significantly larger business opportunities for Drupal and identify ways to actively contribute to the ambitious goals of the next generation of the ECA module.\n\n**Experience level**  \nAnyone",
+      "speakers": "Jürgen Haas",
+      "track": "development, ai & agentic architecture",
+      "location": "Van Oldenbarnevelt Room",
+      "startTime": "2026-09-30T09:40:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/next-generation-eca-vision-and-progress-update",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "accessibility"
+      ],
+      "title": "AI-Augmented Accessibility: From Automated Alt-Text to Governance Gates",
+      "description": "Stop reacting to accessibility errors and start automating inclusive governance. Learn how to use AI to find accessibility errors earlier and fix them faster. We’ll bridge the gaps between AI, code, and humans with clear guidance for everyone.\n\n**Prerequisite**\n\nIt would be useful to be familiar with some basics of accessibility. This is not a 101.\n\n**Target Audience**\n\nAnyone working to meet accessibility targets.\n\n**Outline**\n\nAccessibility is often the last gate in a project. Like many bugs the longer they wait, the more difficult they are to fix. Learn how we can \"shift left\" by using AI not just to find errors, but to build better systems. This session provides a practical roadmap for integrating AI into the full Drupal lifecycle:\n\n* Content: Automating descriptive alt-text & transcripts using Drupal AI Core.  \n\n * Infrastructure: Using LLMs to architect & configure CI/CD accessibility gates (Axe-core/Playwright).  \n\n * Triage: Leveraging GitHub’s AI-powered accessibility toos to turn scans into Pull Requests.  \n\n * Governance: Implementing ACCESSIBILITY.md or Claude skills to produce better results.  \n\n * Hierarchy of Truth: Adding AI roles to that of other automated tools & humans—why the user remains the ultimate source of truth.\n\nJoin us to move beyond \"compliance checklists\" & toward a scalable, AI-assisted inclusive web.\n\nMike will also be tying this into the book he recently co-authored. Digital Accessibility Ethics: Disability Inclusion in All Things Tech,  \n\n**Learning Objectives**\n\n * Automate Content Workflows: Set up the Drupal AI module for automated, human-verified media accessibility.  \n\n * Architect Testing Gates: Use AI assistants to write configuration for robust CI/CD frameworks.  \n\n * Implement Modern Standards: Learn to use ACCESSIBILITY.md & Claude Skills to keep projects transparent and compliant.  \n\n * Validate Strategically: Understand the \"Hierarchy of Truth\" to know when to trust what.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Mike Gifford",
+      "track": "user experience, accessibility & design",
+      "location": "Leeuwen Room I&II",
+      "startTime": "2026-09-30T08:45:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/ai-augmented-accessibility-automated-alt-text-governance-gates",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "accessibility"
+      ],
+      "title": "Can AI Fix the Web? The Promises and Perils of \"Automated\" Accessibility",
+      "description": "We are increasingly asking AI to fix our WCAG errors, but algorithms operate on probability, not empathy. If you are using AI coding assistants to write your front-end components, you might be shipping hallucinated ARIA labels and broken accessibility without knowing it. Join me to explore the promises and perils of automated accessibility, and learn how to use AI as a testing partner rather than a replacement for inclusive design.\n\n**Prerequisite**\n\nBasic understanding of web accessibility principles (WCAG, ARIA, Semantic HTML).  \n\nFamiliarity with using AI coding assistants (like Claude, ChatGPT, or GitHub Copilot) in a development workflow.\n\n**Target Audience**\n\nDevelopers, UX/UI designers or acceccibility advocates\n\n**Outline**\n\nWe are entering a dangerous new era of web development where teams are asking Generative AI to \"fix my WCAG errors.\" On the surface, it sounds like a utopia: pass your broken DOM to a Large Language Model (LLM) and get a perfectly accessible component returned in seconds.\n\nHowever, AI operates on statistical probability, not human empathy. When we rely on AI to automatically patch accessibility, we often end up with hallucinated ARIA labels, nonsensical focus trapping, and fundamentally broken screen-reader experiences that technically pass automated audits but fail actual users.\n\nThis session explores the intersection of Generative AI and Web Accessibility. We will look at exactly where AI fails spectacularly at inclusive design. More importantly, we will cover how engineering teams can pragmatically use AI as an assistive testing and ideation tool rather than an automated fix. As developers, we cannot outsource human empathy to an algorithm.\n\n**Learning Objectives**\n\nUnderstand why LLMs fail at complex inclusive design and how to spot \"fake\" accessibility fixes in AI-generated code.\n\nLearn how to write specific, context-aware prompts that force AI to act as a rigorous accessibility auditor rather than an automated code generator.\n\nGrasp the ethical implications of outsourcing digital inclusion to algorithms, and establish team guardrails for AI use in front-end development.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Junaid Masoodi",
+      "track": "development, ai & agentic architecture",
+      "location": "Mees Room II",
+      "startTime": "2026-09-29T15:35:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/can-ai-fix-web-promises-and-perils-automated-accessibility",
+      "video": "",
+      "minutes": 20
+    },
+    {
+      "matched": [
+        "accessibility"
+      ],
+      "title": "Accessibility Worst Practices",
+      "description": "Learn how to make your web content more accessible by studying the worst practices from WebAIM's Million survey!\n\n**Prerequisite**\n\nAttendees should have a good grasp of\n\n- why accessibility matters  \n\n- the purpose of the WCAG  \n\n- HTML and some CSS\n\n**Target Audience**\n\nDevelopers, editors, site-builders: both people building sites in Drupal, and people creating content in Drupal\n\n**Outline**\n\nHTML has good accessibility by default, but with a little extra effort, we can make our web content less easily available to everyone.\n\nIf you'd rather make your content more accessible instead, join us for a look at a few of the worst practices revealed by the 2026 WebAIM Million survey, what to do about them, and better development approaches to accessibility in general\n\n**Learning Objectives**\n\nAttendees can expect to:\n\n- identify some of the most common accessibility problems  \n\n- understand what options are available in Drupal to address  \n\n- understand the WCAG success criteria used to evaluate improvements\n\n**Experience level**  \nIntermediate",
+      "speakers": "Christopher Torgalson",
+      "track": "user experience, accessibility & design",
+      "location": "Leeuwen Room I&II",
+      "startTime": "2026-09-29T11:30:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/accessibility-worst-practices",
+      "video": "",
+      "minutes": 45
+    }
+  ]
+}

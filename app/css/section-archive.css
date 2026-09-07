@@ -1,0 +1,4449 @@
+/* ============================================================================
+   SECTION — ARCHIVE (the former "Observatory")
+
+   The dashboard markup is produced by editorObservatory.js, which was written
+   as a full-screen overlay inside the editor. As a first-class page it must sit
+   in normal flow instead, beneath the shared masthead.
+
+   Only the container is addressed here. Converting the dashboard's own
+   components (panels, bar charts, the topic trend SVG) to the brand is the next
+   step; they still carry editor styling.
+   ========================================================================= */
+
+@layer section {
+  /* ═══════════════════════════════════════════════════════════════════════════
+     Archive Observatory — the data-viz dashboard: 19 years of the community at a
+     glance, drillable. Shares the Curation Studio's dark focus aesthetic. .obs-*
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .obs-studio {
+    position: fixed;
+    inset: 0;
+    z-index: 4000;
+    overflow-y: auto;
+    background: var(--paper-0);
+    color: var(--ink-0);
+    /* Was `'Inter', system-ui` — a fourth family, left from the overlay days and
+       never loaded, so the whole archive body quietly rendered in the system
+       stack instead of the brand's. */
+    font-family: var(--font-body);
+  }
+  .obs-studio.hidden {
+    display: none;
+  }
+  /* The archive's own column. Its 2rem side padding sets the content 32px
+     inside the masthead that titles it — the same misalignment the schedule
+     had. Left as-is deliberately: removing the padding widens the column by
+     64px, which reflows the filter bar (search and the four selects collapse
+     onto one row). Aligning the archive is a filter-bar layout decision, not a
+     padding removal, so it is its own piece of work. */
+  .obs-inner {
+    max-width: 76rem;
+    margin: 0 auto;
+    padding: 1.6rem 2rem 4rem;
+  }
+  .obs-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 1.6rem;
+  }
+  .obs-eyebrow {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--brand-1-ink);
+  }
+  .obs-title {
+    margin: 0.25rem 0 0;
+    font-size: var(--step-2);
+    font-weight: 600;
+    letter-spacing: var(--display-track);
+    color: var(--ink-0);
+  }
+  .obs-sub {
+    margin: 0.3rem 0 0;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+  .obs-close {
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+    color: var(--ink-1);
+    cursor: pointer;
+    font-size: var(--step-0);
+  }
+  .obs-close:hover {
+    background: var(--rule-0);
+    color: var(--ink-0);
+  }
+  /* Hero stat tiles */
+  .obs-hero {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+  }
+  .obs-tile {
+    padding: 1.1rem 1.2rem;
+    border-radius: 0;
+    border: 1px solid var(--paper-2);
+    background: var(--paper-2);
+  }
+  .obs-tile-n {
+    font-family: var(--font-data);
+    font-size: var(--step-3);
+    font-weight: 600;
+    color: var(--ink-0);
+    line-height: 1;
+  }
+  .obs-tile--gold .obs-tile-n {
+    color: var(--brand-1-ink);
+  }
+  .obs-tile-l {
+    margin-top: 0.4rem;
+    font-size: var(--step--2);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .obs-tile-s {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    margin-top: 0.15rem;
+  }
+  /* Sections + panels */
+  .obs-section {
+    margin-bottom: 1.8rem;
+  }
+  .obs-section-t {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin: 0 0 0.9rem;
+    font-size: var(--step--2);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  /* The heading itself, now that `.obs-section-t` is the row rather than the
+     heading. It carries no type of its own — the row already sets it — so the
+     tag change is invisible. */
+  .obs-section-h {
+    margin: 0;
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    color: inherit;
+  }
+
+  .obs-section-t i {
+    color: var(--brand-1-ink);
+    font-size: var(--step--1);
+  }
+  /* A note beside a heading names the heading — that is the label role. */
+  .obs-section-note {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .obs-panel {
+    padding: 1.3rem 1.4rem;
+    border-radius: 0;
+    border: 1px solid var(--paper-2);
+    background: var(--paper-2);
+  }
+  .obs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 800px) {
+    .obs-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  /* Per-year bar chart (the archive's spine) */
+  .obs-years {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.4rem;
+    height: 12rem;
+    padding-top: 1rem;
+  }
+  .obs-ycol {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    height: 100%;
+    justify-content: flex-end;
+  }
+  .obs-ybar {
+    position: relative;
+    width: 100%;
+    max-width: 2rem;
+    border-radius: 0;
+    background: var(--brand-1-ink);
+    min-height: 2px;
+    transition: filter 0.15s;
+  }
+  .obs-ycol:hover .obs-ybar {
+    filter: brightness(1.2);
+  }
+  .obs-ybar-n {
+    position: absolute;
+    top: -1.1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .obs-ylabel {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+  .obs-ycol--empty .obs-ybar {
+    background: var(--paper-2);
+  }
+  /* "What survives" — three short rows sharing the year axis above. Each row is
+     scaled to its own maximum: 63 galleries against 9,904 sessions on one scale
+     would be a flat line. */
+  .obs-survival-row {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    align-items: end;
+    gap: 0.7rem;
+  }
+  .obs-survival-row + .obs-survival-row {
+    margin-top: 0.9rem;
+  }
+  .obs-survival-label {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    padding-bottom: 1.35rem;
+  }
+  .obs-years--short {
+    height: 5.5rem;
+  }
+  /* Colour separates the three readings; it is not carrying any other meaning. */
+  .obs-ybar--videos {
+    background: var(--brand-2-ink, var(--brand-1-ink));
+  }
+  .obs-ybar--albums {
+    background: var(--ink-2);
+  }
+  @media (max-width: 640px) {
+    .obs-survival-row {
+      grid-template-columns: 1fr;
+      gap: 0.2rem;
+    }
+    .obs-survival-label {
+      padding-bottom: 0;
+    }
+  }
+  /* Horizontal bars (series, tiers) */
+  .obs-hbars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .obs-hbar {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr auto;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .obs-hbar-l {
+    font-size: var(--step--1);
+    color: var(--ink-2);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .obs-hbar-track {
+    height: 0.7rem;
+    border-radius: 0;
+    background: var(--paper-2);
+    overflow: hidden;
+  }
+  .obs-hbar-fill {
+    height: 100%;
+    border-radius: 0;
+    background: var(--brand-1-ink);
+  }
+  .obs-hbar-v {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    min-width: 2rem;
+    text-align: right;
+  }
+  /* A series/row with no events in the current scope — kept visible, greyed, marked 0 */
+  .obs-hbar--zero {
+    opacity: 0.42;
+  }
+  .obs-hbar--zero .obs-hbar-l {
+    color: var(--ink-2);
+  }
+  .obs-hbar--zero .obs-hbar-v {
+    color: var(--ink-2);
+  }
+  /* Ranked lists (speakers / sponsors) with appearance timelines */
+  .obs-rank {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .obs-rankrow {
+    display: grid;
+    grid-template-columns: 1.6rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.5rem 0.5rem;
+    border-radius: 0;
+    cursor: default;
+    transition: background 0.13s;
+  }
+  .obs-rankrow:hover {
+    background: var(--paper-2);
+  }
+  .obs-rank-i {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    text-align: right;
+  }
+  .obs-rank-main {
+    min-width: 0;
+  }
+  .obs-rank-name {
+    font-size: var(--step--1);
+    color: var(--ink-0);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .obs-rank-meta {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+  .obs-tl {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5px;
+    height: 1.5rem;
+  }
+  .obs-tl i {
+    width: 3px;
+    height: 35%;
+    border-radius: 0;
+    background: var(--paper-2);
+  }
+  .obs-tl i.on {
+    height: 100%;
+    background: var(--brand-1-ink);
+  }
+  .obs-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.7rem 1.3rem;
+    border-radius: 0;
+    border: 0;
+    background: var(--brand-1-ink);
+    color: var(--paper-1);
+    font-weight: 600;
+    font-size: var(--step--1);
+    cursor: pointer;
+  }
+  .obs-cta:hover {
+    filter: brightness(1.07);
+  }
+  /* Observatory drill-down (clickable rows/bars → a detail view with a back button) */
+  .obs-clickable {
+    cursor: pointer;
+  }
+  .obs-clickable:hover {
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    border-radius: 0;
+  }
+  .obs-ycol[data-drill] {
+    cursor: pointer;
+  }
+  .obs-ycol[data-drill]:hover .obs-ybar {
+    filter: brightness(1.35);
+  }
+  .obs-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.2rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+    color: var(--ink-1);
+    font-size: var(--step--1);
+    cursor: pointer;
+  }
+  .obs-back:hover {
+    border-color: var(--brand-1-ink);
+    color: var(--ink-0);
+  }
+  .obs-drill-head {
+    padding-bottom: 1.2rem;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid var(--paper-2);
+  }
+  .obs-drill-name {
+    margin: 0.25rem 0 0;
+    font-size: var(--step-2);
+    font-weight: 600;
+    color: var(--ink-0);
+  }
+  .obs-drill-note {
+    color: var(--ink-2);
+    padding: 2rem;
+  }
+  .obs-evlist {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .obs-ev {
+    display: grid;
+    grid-template-columns: 3.2rem 1fr;
+    align-items: baseline;
+    gap: 0.9rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 0;
+    border: 1px solid var(--paper-2);
+    background: var(--paper-2);
+  }
+  .obs-ev-y {
+    font-family: var(--font-data);
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--brand-1-ink);
+  }
+  .obs-ev-main {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .obs-ev-t {
+    font-size: var(--step-0);
+    color: var(--ink-0);
+  }
+  .obs-ev-s {
+    font-size: var(--step--1);
+    color: var(--ink-2);
+    line-height: 1.4;
+  }
+  /* Observatory drill-down map (Leaflet, dark) */
+  .obs-map-wrap {
+    margin: 0 0 1.4rem;
+  }
+  .obs-map {
+    height: 21rem;
+    border-radius: 0;
+    overflow: hidden;
+    border: 1px solid var(--rule-0);
+  }
+  .obs-map .leaflet-container {
+    background: var(--paper-1);
+  }
+  .obs-map-note {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    margin: 0.45rem 0 0;
+  }
+  .obs-map-none {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1.3rem;
+    padding: 0.8rem 1rem;
+    border-radius: 0;
+    border: 1px dashed var(--rule-0);
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+  .obs-map-none i {
+    color: var(--brand-1-ink);
+  }
+  .obs-map-none code {
+    font-family: var(--font-data);
+    background: var(--paper-2);
+    padding: 0.05rem 0.35rem;
+    border-radius: 0;
+    color: var(--brand-1-ink);
+  }
+  /* Observatory — archive-wide search */
+  .obs-search {
+    position: relative;
+    margin: 0 0 1.6rem;
+  }
+  .obs-search > i {
+    position: absolute;
+    left: 1rem;
+    top: 0.98rem;
+    color: var(--ink-2);
+    font-size: var(--step--1);
+    pointer-events: none;
+  }
+  .obs-search-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.8rem 1rem 0.8rem 2.5rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+    color: var(--ink-0);
+    font-size: var(--step-0);
+    font-family: inherit;
+  }
+  .obs-search-input::placeholder {
+    color: var(--ink-2);
+  }
+  .obs-search-input:focus {
+    outline: none;
+    border-color: var(--brand-1-ink);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+  }
+  .obs-results {
+    position: absolute;
+    z-index: 20;
+    left: 0;
+    right: 0;
+    top: calc(100% + 0.4rem);
+    max-height: 22rem;
+    overflow-y: auto;
+    display: none;
+    flex-direction: column;
+    padding: 0.35rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-1);
+    box-shadow: 0 24px 60px -20px var(--paper-2);
+  }
+  .obs-results.is-open {
+    display: flex;
+  }
+  .obs-result {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    width: 100%;
+    text-align: left;
+    padding: 0.5rem 0.6rem;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink-0);
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .obs-result:hover,
+  .obs-result:focus-visible,
+  /* Arrow-key selection. Focus stays in the input (this is a combobox), so the
+     highlight has to be painted rather than inherited from :focus. */
+  .obs-result.is-active {
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    outline: none;
+  }
+  /* A 12% background tint alone is well under the 3:1 that WCAG 1.4.11 asks of
+     a focus indicator, and this rule cancels the global outline — so the bar
+     has to carry it. On both the keyboard highlight and real focus. */
+  .obs-result.is-active,
+  .obs-result:focus-visible {
+    box-shadow: inset 3px 0 0 var(--brand-1-ink);
+  }
+  .obs-result-badge {
+    flex: none;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.16rem 0.4rem;
+    border-radius: 0;
+    color: var(--ink-2);
+    background: var(--paper-2);
+    min-width: 3.4rem;
+    text-align: center;
+  }
+  .obs-result-badge--speaker {
+    color: var(--viz-3);
+    background: color-mix(in srgb, var(--viz-3) 16%, transparent);
+  }
+  /* Credited organisers/volunteers. Ink rather than a hue: the viz ramp is for
+     data marks, and this badge is a category label. */
+  .obs-result-badge--person {
+    color: var(--ink-1);
+    background: color-mix(in srgb, var(--ink-1) 12%, transparent);
+  }
+  .obs-result-badge--sponsor {
+    color: var(--brand-1-ink);
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+  }
+  .obs-result-badge--series {
+    color: var(--viz-7);
+    background: color-mix(in srgb, var(--viz-7) 16%, transparent);
+  }
+  .obs-result-badge--year {
+    color: var(--viz-2);
+    background: color-mix(in srgb, var(--viz-2) 16%, transparent);
+  }
+  .obs-result-main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .obs-result-name {
+    font-size: var(--step--1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .obs-result-meta {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+  .obs-result-none,
+  .obs-result-more {
+    padding: 0.7rem 0.6rem;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+  .obs-result-more {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    text-align: center;
+  }
+  /* Observatory — topic trend line chart */
+  .obs-topic-units {
+    float: right;
+    display: inline-flex;
+    gap: 0;
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    overflow: hidden;
+  }
+  .obs-topic-unit {
+    padding: 0.26rem 0.7rem;
+    border: 0;
+    background: transparent;
+    color: var(--ink-2);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    cursor: pointer;
+  }
+  .obs-topic-unit + .obs-topic-unit {
+    border-left: 1px solid var(--rule-0);
+  }
+  .obs-topic-unit.is-on {
+    background: var(--brand-1-ink);
+    color: var(--paper-1);
+  }
+  /* View + unit toggles share one right-aligned control cluster */
+  .obs-topic-controls {
+    float: right;
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .obs-topic-controls .obs-topic-units {
+    float: none;
+  }
+  .obs-topic-views {
+    display: inline-flex;
+    gap: 0;
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    overflow: hidden;
+  }
+  .obs-topic-view {
+    padding: 0.26rem 0.7rem;
+    border: 0;
+    background: transparent;
+    color: var(--ink-2);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    cursor: pointer;
+  }
+  .obs-topic-view + .obs-topic-view {
+    border-left: 1px solid var(--rule-0);
+  }
+  .obs-topic-view.is-on {
+    background: var(--brand-1-ink);
+    color: var(--paper-1);
+  }
+  .obs-topic-chart {
+    width: 100%;
+  }
+  .obs-tc {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+  }
+  .obs-tc-grid {
+    stroke: var(--paper-2);
+    stroke-width: 1;
+  }
+  .obs-tc-ylab,
+  .obs-tc-xlab {
+    fill: var(--ink-2);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+  }
+  /* --- the rise ------------------------------------------------------------
+     Both charts draw their data marks inside one <g class="obs-rise">, which
+     grows out of the zero line on first paint. Scaling the GROUP, not each mark,
+     is what keeps every point in step: they all leave the baseline together and
+     arrive together, which reads as the data being drawn rather than as a
+     collection of things sliding independently.
+
+     `--rise-base` is the baseline in viewBox units — the two charts have
+     different heights, and the transform-origin has to be the zero line or the
+     lines would grow out of the middle of the panel.
+
+     Only the marks move: grid, axis labels and the year highlight are outside
+     the group and stay put, so the frame is there to grow into.
+
+     `non-scaling-stroke` is already on the line classes, so a 2px stroke stays
+     2px while the group is squashed; without it the lines would fade in from
+     hairlines. */
+  @keyframes obs-rise {
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+
+  /* The DEFAULT is drawn. `is-armed` (added by JS, see armRise) is what collapses
+     a chart to its baseline and holds it there, and `is-rising` releases it once
+     the chart is on screen. That order matters: if the script never runs, or the
+     browser has no IntersectionObserver, the charts are simply drawn rather than
+     stuck at zero height. */
+  .obs-rise {
+    transform-box: view-box;
+    transform-origin: 0 var(--rise-base, 100%);
+  }
+
+  .obs-rise.is-armed {
+    /* 500ms, decelerating: long enough to read the shape being drawn, short
+       enough that it is over before you start looking for a peak. */
+    animation: obs-rise 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-play-state: paused;
+  }
+
+  .obs-rise.is-rising {
+    animation-play-state: running;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .obs-rise.is-armed {
+      animation: none;
+    }
+  }
+
+  .obs-tc-line {
+    fill: none;
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+  .obs-tc-line--lead {
+    stroke-width: 2.6;
+  }
+  .obs-tc-area {
+    fill: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    stroke: none;
+  }
+  .obs-tc-yearhi {
+    stroke: var(--brand-1-ink);
+    stroke-width: 1.5;
+    stroke-dasharray: 4 3;
+    vector-effect: non-scaling-stroke;
+  }
+  .obs-tc-dot {
+    r: 3;
+    stroke: var(--paper-1);
+    stroke-width: 1;
+  }
+  .obs-tc-dot:hover {
+    r: 5;
+  }
+  /* A register year resting on a single event: same position, weaker claim. The
+     ring reads as "measured, but thinly" without pretending the value is wrong.
+     The inline style supplies the series colour as the stroke. */
+  .obs-tc-dot--thin {
+    stroke-width: 2;
+  }
+  .obs-topic-empty {
+    padding: 3rem 1rem;
+    text-align: center;
+    color: var(--ink-2);
+    font-size: var(--step--1);
+  }
+  .obs-topic-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.5rem;
+    margin-top: 1rem;
+  }
+  .obs-topic-chip {
+    display: inline-flex;
+    align-items: stretch;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+    overflow: hidden;
+    transition: border-color 0.15s;
+  }
+  .obs-topic-chip.is-on {
+    border-color: var(--ink-2);
+  }
+  .obs-topic-chip.is-pinned {
+    border-color: var(--brand-1-ink);
+  }
+  /* Switched on but not drawable in this view (one year of data under % of peak):
+     present and counted, visibly not plotted. */
+  .obs-topic-chip.is-muted {
+    border-style: dashed;
+  }
+  .obs-topic-chip.is-muted .obs-topic-tog {
+    color: var(--ink-2);
+  }
+  .obs-topic-pin {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.28rem 0.3rem 0.28rem 0.5rem;
+    border: 0;
+    background: transparent;
+    color: var(--ink-2);
+    font-size: var(--step--2);
+    cursor: pointer;
+    transition: color 0.13s;
+  }
+  .obs-topic-pin:hover {
+    color: var(--brand-1-ink);
+  }
+  .obs-topic-chip.is-pinned .obs-topic-pin {
+    color: var(--brand-1-ink);
+  }
+  .obs-topic-tog {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.28rem 0.6rem 0.28rem 0.2rem;
+    border: 0;
+    background: transparent;
+    color: var(--ink-2);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+  /* The chart's control bar: a line of its own, below the heading. Modes left,
+     views right — the left group never changes, so it can be aimed at from memory;
+     the right group changes with the mode and is kept away from that aim. */
+  .obs-chart-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-xs);
+    align-items: center;
+    justify-content: space-between;
+    margin-block: var(--sp-xs) var(--sp-s);
+  }
+
+  .obs-chart-bar .obs-topic-views,
+  .obs-chart-bar .obs-topic-units {
+    float: none;
+    margin: 0;
+  }
+
+  /* Both groups wear the same chrome — they are the same kind of control, and
+     looking different implied one of them did something else. */
+  .obs-chart-bar .obs-topic-unit,
+  .obs-chart-bar .obs-topic-view {
+    padding: 0.26rem 0.7rem;
+    border: 0;
+    background: transparent;
+    color: var(--ink-2);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    cursor: pointer;
+  }
+
+  .obs-chart-bar .obs-topic-unit.is-on,
+  .obs-chart-bar .obs-topic-view.is-on {
+    background: var(--ink-0);
+    color: var(--paper-0);
+  }
+
+  /* Small multiples: one panel per length bracket. A grid rather than a row, so
+     the six read as one figure — and `auto-fit` means the comparison survives a
+     phone, where they stack into a single column instead of shrinking to
+     illegible. */
+  .obs-sm {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--sp-m);
+  }
+
+  .obs-sm-cell {
+    margin: 0;
+  }
+
+  .obs-sm-cap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--sp-2xs);
+    font-size: var(--step--1);
+    color: var(--ink-1);
+    margin-block-end: 0.2rem;
+  }
+
+  .obs-sm-cap .obs-rank-count {
+    margin: 0;
+  }
+
+  .obs-sm-svg {
+    inline-size: 100%;
+    block-size: auto;
+  }
+
+  /* The panels share one tooltip, positioned against the grid rather than a
+     single plot — so it can sit over a neighbouring panel when the cursor is at
+     the edge of one, instead of being clipped inside a 320-unit box. */
+  .obs-sm {
+    position: relative;
+  }
+
+  .obs-sm-tip {
+    position: absolute;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* The tooltip's footnote — what a share was measured over. Quieter than the
+     rows above it: it qualifies the number rather than being one. */
+  .obs-tc-tip-note {
+    margin-block-start: 0.3rem;
+    padding-block-start: 0.3rem;
+    border-block-start: 1px solid var(--rule-0);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+
+  .obs-sm-line {
+    fill: none;
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+
+  /* "Shared a stage with": a wrap of names, each with the number of sessions they
+     did together. Chips rather than a ranked list — the interesting thing is the
+     circle of people, and a top-to-bottom ranking would imply a precision that
+     "3 sessions vs 2" does not have. */
+  .obs-cospk {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2xs);
+    align-items: center;
+  }
+
+  .obs-cospk-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-xs);
+    border: 1px solid var(--rule-1);
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink-0);
+    font-family: inherit;
+    font-size: var(--step--1);
+    cursor: pointer;
+  }
+
+  .obs-cospk-chip:hover {
+    border-color: var(--ink-1);
+    background: var(--paper-2);
+  }
+
+  .obs-cospk-n {
+    font-family: var(--font-data);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-2);
+  }
+
+  /* People mode's legend states what the two colours mean; there is nothing to
+     toggle, so it must not offer a pointer or a hover state. */
+  .obs-topic-chip.is-static {
+    cursor: default;
+    padding-inline: var(--sp-xs);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+  }
+
+  .obs-topic-chip.is-on .obs-topic-tog {
+    color: var(--ink-0);
+  }
+  .obs-topic-tog:hover {
+    color: var(--ink-0);
+  }
+  /* Observatory — rank-row + result breathing room (name vs. its counter) */
+  .obs-rank {
+    gap: 0.3rem;
+  }
+  .obs-rankrow {
+    gap: 0.9rem;
+    padding: 0.55rem 0.5rem;
+  }
+  .obs-rank-main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .obs-result-main {
+    gap: 0.18rem;
+  }
+  /* Observatory — topic series filter */
+  .obs-topic-controls {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .obs-topic-units {
+    float: none;
+  }
+  .obs-topic-series {
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 0.28rem 1.7rem 0.28rem 0.7rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2)
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23e2ac57' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
+      no-repeat right 0.6rem center;
+    color: var(--ink-0);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.02em;
+    cursor: pointer;
+  }
+  .obs-topic-series:focus {
+    outline: none;
+    border-color: var(--brand-1-ink);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+  }
+  .obs-topic-series option {
+    background: var(--paper-1);
+    color: var(--ink-0);
+  }
+  .obs-topic-sub {
+    margin: -0.4rem 0 1.1rem;
+  }
+  /* Observatory — add-a-keyword control in the topic legend */
+  .obs-topic-add {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.28rem 0.6rem;
+    border-radius: 0;
+    border: 1px dashed var(--rule-0);
+    color: var(--ink-2);
+  }
+  .obs-topic-add > i {
+    font-size: var(--step--2);
+    color: var(--brand-1-ink);
+  }
+  .obs-topic-add-input {
+    border: 0;
+    background: transparent;
+    color: var(--ink-0);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    width: 8.5rem;
+  }
+  .obs-topic-add-input::placeholder {
+    color: var(--ink-2);
+  }
+  .obs-topic-add-input:focus {
+    outline: none;
+  }
+  .obs-topic-add:focus-within {
+    border-color: var(--brand-1-ink);
+    border-style: solid;
+  }
+  /* Observatory — top bar: search + global series scope */
+  .obs-topbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    /* Bottom-aligned, not centred: every control in this row is a label stacked
+       over a ruled line, and centring them made the rules disagree. */
+    align-items: end;
+    margin: 0 0 1.6rem;
+  }
+  .obs-topbar .obs-search {
+    flex: 1;
+    min-width: 14rem;
+    margin: 0;
+  }
+  .obs-scopes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  /* Year filter — highlight the selected year's bar in the "over time" chart. */
+  .obs-ycol--sel .obs-ybar {
+    box-shadow:
+      0 0 0 2px var(--brand-1-ink),
+      0 0 14px var(--brand-1-ink);
+    filter: brightness(1.28);
+  }
+  .obs-ycol--sel .obs-ylabel {
+    color: var(--brand-1-ink);
+    font-weight: 600;
+  }
+  .obs-scope {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: none;
+  }
+  .obs-scope-l {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .obs-series-filter {
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 0.55rem 2rem 0.55rem 0.9rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2)
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23e2ac57' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
+      no-repeat right 0.75rem center;
+    color: var(--ink-0);
+    font-family: var(--font-data);
+    font-size: var(--step--1);
+    cursor: pointer;
+    max-width: 15rem;
+  }
+  .obs-series-filter:focus {
+    outline: none;
+    border-color: var(--brand-1-ink);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+  }
+  .obs-series-filter option {
+    background: var(--paper-1);
+    color: var(--ink-0);
+  }
+  /* Observatory — expandable ranked lists */
+  /* Expanded rank lists grow inline (the whole overlay scrolls) rather than turning
+     into a fixed-height scroll box — clicking "Show more" shouldn't resize the panel. */
+  .obs-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 0.7rem;
+    padding: 0.55rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+    color: var(--ink-2);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition:
+      background 0.13s,
+      color 0.13s;
+  }
+  .obs-more:hover {
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    color: var(--ink-0);
+    border-color: var(--brand-1-ink);
+  }
+  .obs-more-c {
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+  /* Observatory — topic chart hover guide + tooltip + clickable points */
+  .obs-topic-chart {
+    position: relative;
+  }
+  .obs-tc {
+    cursor: crosshair;
+  }
+  .obs-tc-dot {
+    transition: r 0.1s;
+  }
+  .obs-tc-guide {
+    position: absolute;
+    top: 0;
+    bottom: 1.6rem;
+    width: 1px;
+    background: var(--brand-1-ink);
+    pointer-events: none;
+  }
+  .obs-tc-tip {
+    position: absolute;
+    z-index: 8;
+    min-width: 8rem;
+    max-width: 15rem;
+    padding: 0.55rem 0.7rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-1);
+    box-shadow: 0 16px 40px -14px var(--paper-2);
+    pointer-events: none;
+  }
+  .obs-tc-tip-y {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    font-weight: 600;
+    color: var(--ink-0);
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.04em;
+  }
+  .obs-tc-tip-row {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    padding: 0.08rem 0;
+  }
+  .obs-tc-tip-sw {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 0;
+    flex: none;
+  }
+  .obs-tc-tip-t {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .obs-tc-tip-row b {
+    color: var(--ink-0);
+    font-family: var(--font-data);
+  }
+  /* The headcount behind an indexed value — subordinate to the % it explains,
+     never absent from it. */
+  .obs-tc-tip-raw {
+    color: var(--ink-2);
+    font-weight: 400;
+  }
+  .obs-tc-tip-raw::before {
+    content: '(';
+  }
+  .obs-tc-tip-raw::after {
+    content: ')';
+  }
+  /* Observatory — "map to another identity" control on a speaker/sponsor drill */
+  .obs-mapid {
+    margin: 0 0 1.4rem;
+  }
+  .obs-mapid-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 0;
+    border: 1px dashed var(--brand-1-ink);
+    background: transparent;
+    color: var(--brand-1-ink);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.02em;
+    cursor: pointer;
+  }
+  .obs-mapid-toggle:hover {
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    border-color: var(--brand-1-ink);
+  }
+  .obs-mapid-form {
+    margin-top: 0.7rem;
+    padding: 0.9rem 1rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+  }
+  .obs-mapid-lead {
+    display: block;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+    margin-bottom: 0.6rem;
+  }
+  .obs-mapid-lead b {
+    color: var(--ink-0);
+  }
+  .obs-mapid-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+  .obs-mapid-input {
+    flex: 1;
+    min-width: 0;
+    height: 2.6rem;
+    padding: 0 0.8rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+    color: var(--ink-0);
+    font-size: var(--step--1);
+    font-family: inherit;
+  }
+  .obs-mapid-input:focus {
+    outline: none;
+    border-color: var(--brand-1-ink);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+  }
+  .obs-mapid-go {
+    flex: none;
+    height: 2.6rem;
+    padding: 0 1.5rem;
+    border-radius: 0;
+    border: 0;
+    background: var(--brand-1-ink);
+    color: var(--paper-1);
+    font-weight: 600;
+    font-size: var(--step--1);
+    letter-spacing: 0.01em;
+    text-shadow: 0 1px 0 var(--ink-2);
+    cursor: pointer;
+    box-shadow: 0 6px 16px -8px var(--brand-1-ink);
+  }
+  .obs-mapid-go:hover {
+    filter: brightness(1.05);
+  }
+  .obs-mapid-note {
+    margin: 0.55rem 0 0;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+  /* Observatory — expandable event rows + full-width per-talk detail (speaker journey) */
+  .obs-ev--exp {
+    cursor: pointer;
+    align-items: center;
+    gap: 0.9rem;
+    transition: background 0.12s;
+  }
+  .obs-ev--exp:hover {
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+  }
+  .obs-ev--exp:focus-visible {
+    outline: 2px solid var(--brand-1-ink);
+    outline-offset: -2px;
+  }
+  .obs-ev-caret {
+    flex: none;
+    color: var(--ink-2);
+    font-size: var(--step--2);
+    transition:
+      transform 0.18s,
+      color 0.12s;
+  }
+  .obs-ev--exp.is-open .obs-ev-caret {
+    transform: rotate(180deg);
+    color: var(--brand-1-ink);
+  }
+  .obs-ev--exp.is-open {
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+  }
+  /* Gate `display` on :not([hidden]) so the `hidden` attribute actually collapses the
+     accordion (a bare `display:flex` would override [hidden]'s display:none). */
+  .obs-ev-detail {
+    flex-direction: column;
+    gap: 0.7rem;
+    margin: 0.1rem 0 0.9rem 3rem;
+    padding-left: 1rem;
+    border-left: 2px solid color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+  }
+  .obs-ev-detail:not([hidden]) {
+    display: flex;
+  }
+  .obs-talk-load {
+    padding: 1.4rem;
+    text-align: center;
+    color: var(--ink-2);
+  }
+  .obs-talk-none {
+    padding: 0.8rem;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+  .obs-talk {
+    padding: 1rem 1.1rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+  }
+  .obs-talk-title {
+    margin: 0 0 0.5rem;
+    font-size: var(--step-0);
+    font-weight: 600;
+    color: var(--ink-0);
+    line-height: 1.3;
+  }
+  .obs-talk-metarow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .obs-talk-m {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+  .obs-talk-m i {
+    color: var(--brand-1-ink);
+    font-size: var(--step--2);
+  }
+  .obs-talk-desc {
+    margin: 0;
+    font-size: var(--step--1);
+    line-height: 1.6;
+    color: var(--ink-2);
+    white-space: pre-wrap;
+  }
+  .obs-talk-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+  }
+  .obs-talk-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 0;
+    border: 1px solid var(--brand-1-ink);
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    color: var(--brand-1-ink);
+    font-size: var(--step--1);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .obs-talk-link:hover {
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    border-color: var(--brand-1-ink);
+  }
+  /* Observatory — "not on the map" disclosure under drill maps */
+  .obs-map-unmapped {
+    margin-top: 0.55rem;
+  }
+  .obs-map-unmapped summary {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.02em;
+    color: var(--ink-2);
+    list-style: none;
+  }
+  .obs-map-unmapped summary::-webkit-details-marker {
+    display: none;
+  }
+  .obs-map-unmapped summary::before {
+    content: '▸';
+    font-size: var(--step--2);
+    transition: transform 0.15s;
+  }
+  .obs-map-unmapped[open] summary::before {
+    transform: rotate(90deg);
+  }
+  .obs-map-unmapped summary:hover {
+    color: var(--brand-1-ink);
+  }
+  .obs-map-unmapped ul {
+    margin: 0.5rem 0 0;
+    padding: 0 0 0 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.22rem;
+  }
+  .obs-map-unmapped li {
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+  .obs-map-unmapped li span {
+    color: var(--ink-2);
+  }
+  /* Observatory — global footprint strip (world map + a "global reach" stats panel) */
+  .obs-stripmap-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin: 0 0 1.6rem;
+  }
+  .obs-stripmap-wrap[hidden] {
+    display: none;
+  }
+  /* bg on the element itself — Leaflet adds `.leaflet-container` to #obsStripMap directly
+     (a descendant selector wouldn't match), and its stylesheet loads AFTER ours, so we
+     need the compound selector to outrank Leaflet's default var(--rule-0) gutter. */
+  .obs-stripmap-map {
+    position: relative;
+    flex: 1;
+    min-width: 18rem;
+  }
+  .obs-stripmap {
+    width: 100%;
+    height: 15rem;
+    border-radius: 0;
+    overflow: hidden;
+    border: 1px solid var(--paper-2);
+    background: var(--paper-1);
+    cursor: default;
+  }
+  .obs-stripmap.leaflet-container {
+    background: var(--paper-1);
+  }
+  /* Loading state. The strip's height is fixed above, so this occupies exactly
+     the space the map will, and swapping one for the other shifts nothing. */
+  .obs-stripmap-loading {
+    display: grid;
+    place-items: center;
+  }
+
+  .obs-stripmap-skeleton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-xs);
+  }
+
+  .obs-stripmap-skeleton-bar {
+    inline-size: 9rem;
+    block-size: 2px;
+    background: linear-gradient(90deg, var(--paper-2), var(--ink-3), var(--paper-2));
+    background-size: 200% 100%;
+    animation: obs-strip-sweep 1.4s ease-in-out infinite;
+  }
+
+  .obs-stripmap-skeleton-text {
+    font-family: var(--font-data);
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+
+  @keyframes obs-strip-sweep {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  /* A sweeping bar is decoration; the text already says what is happening. */
+  @media (prefers-reduced-motion: reduce) {
+    .obs-stripmap-skeleton-bar {
+      animation: none;
+    }
+  }
+
+  .obs-stripmap-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .obs-stripmap-none {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 1rem;
+    color: var(--ink-2);
+  }
+  .obs-stripmap-none i {
+    font-size: var(--step-2);
+    color: var(--brand-1-ink);
+    margin-bottom: 0.15rem;
+  }
+  .obs-stripmap-none b {
+    font-family: var(--mono, var(--font-data));
+    font-size: var(--step--2);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .obs-stripmap-none span {
+    font-size: var(--step--1);
+    max-width: 20rem;
+  }
+  /* "Now viewing" card floating over the map's empty gutter */
+  .obs-mapfilters {
+    position: absolute;
+    top: 0.7rem;
+    left: 0.7rem;
+    z-index: 500;
+    max-width: 14rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    padding: 0.7rem 0.8rem;
+    border-radius: 0;
+    border: 1px solid var(--rule-0);
+    background: color-mix(in srgb, var(--paper-1) 92%, transparent);
+    backdrop-filter: blur(3px);
+  }
+  .obs-mapfilter-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .obs-mapfilter-eyebrow i {
+    color: var(--brand-1-ink);
+  }
+  .obs-mapfilter-all {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+  .obs-mapfilter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.26rem 0.55rem;
+    border-radius: 0;
+    border: 1px solid var(--brand-1-ink);
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    color: var(--ink-2);
+    font-size: var(--step--2);
+    cursor: pointer;
+  }
+  .obs-mapfilter-chip:hover {
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    border-color: var(--brand-1-ink);
+  }
+  .obs-mapfilter-chip span {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .obs-mapfilter-chip b {
+    color: var(--ink-0);
+    font-weight: 600;
+  }
+  .obs-mapfilter-chip i {
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+  .obs-mapfilter-chip:hover i {
+    color: var(--brand-1-ink);
+  }
+  .obs-globe {
+    flex: none;
+    width: 12.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 1.1rem 1.2rem;
+    border-radius: 0;
+    border: 1px solid var(--paper-2);
+    background: var(--paper-2);
+  }
+  .obs-globe-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 0.3rem;
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--brand-1-ink);
+  }
+  .obs-globe-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .obs-globe-stat b {
+    font-family: var(--font-data);
+    font-size: var(--step-2);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--ink-0);
+  }
+  .obs-globe-stat span {
+    font-size: var(--step--2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .obs-globe-foot {
+    margin-top: 0.35rem;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    color: var(--ink-2);
+  }
+  @media (max-width: 640px) {
+    .obs-globe {
+      width: 100%;
+    }
+  }
+
+  /* --- DASHBOARD CHROME ---------------------------------------------------
+     The dashboard was built for the editor's dark studio: pill controls, gold
+     gradients, and text colours that vanish on our surfaces.
+     --------------------------------------------------------------------- */
+  .obs-search {
+    position: relative;
+  }
+
+  .obs-topbar,
+  .obs-scopes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-s);
+    align-items: end;
+  }
+
+  /* The rule belongs to the filter BLOCK, not to each row inside it. When the
+     scopes were the whole row the two were the same thing; now that search sits
+     above them, giving both a rule drew a second, shorter line that stopped
+     halfway across and read as a mistake. */
+  .obs-topbar {
+    padding-block: var(--sp-m);
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .obs-scopes {
+    padding-block-start: var(--sp-2xs);
+  }
+
+  /* Equal columns, not content-sized tiles. As a flex row the stations were
+     five different widths and the row's geometry depended on how long the
+     numbers happened to be — 7,891 sessions with a programme-mix sub-line was
+     enough to push Sponsors onto a second row. auto-fit keeps them evenly
+     spaced at any width and still reflows on a narrow screen. */
+  .obs-hero {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+    gap: var(--sp-l) var(--sp-m);
+    padding-block: var(--sp-l);
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  /* A stat tile is a figure and a label — no card, no fill. */
+  .obs-tile-n {
+    display: block;
+    font-family: var(--font-data);
+    font-size: var(--step-3);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    color: var(--ink-0);
+  }
+
+  .obs-tile-l {
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin-block-start: var(--sp-2xs);
+  }
+
+  .obs-tile-s {
+    display: block;
+    font-size: var(--step--1);
+    color: var(--ink-1);
+  }
+
+  /* The programme mix, on its own line under the hours. Same reasoning as
+     .obs-people below: the hero is a flex row of content-sized tiles, so this
+     has to be prevented from setting the tile's width. */
+  .obs-tile-mix {
+    display: block;
+    color: var(--ink-2);
+  }
+
+  /* Segments of a stat sub-line. Breaking inside one strands its separator. */
+  .obs-nw {
+    white-space: nowrap;
+  }
+
+  /* The People tile's role split. FIXED width: the hero is a flex row of
+     content-sized tiles, so a breakdown that grew with its numbers would widen
+     this tile and wrap the row. 4.5rem is about as wide as the longest sub-line
+     the other tiles carry ("2007–2026"), so the row's geometry is unchanged. */
+  .obs-people {
+    display: flex;
+    inline-size: 4.5rem;
+    block-size: 0.42rem;
+    margin-block-start: 0.35rem;
+    gap: 2px; /* surface gap, so two segments never read as one bar */
+  }
+
+  .obs-people-seg {
+    display: block;
+    block-size: 100%;
+    min-inline-size: 2px; /* a role with one person is still a visible sliver */
+  }
+
+  .obs-eyebrow,
+  .obs-mapfilter-eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .obs-section-t {
+    padding-block: var(--sp-xl) var(--sp-xs);
+    margin-block-end: var(--sp-s);
+    border-block-end: 1px solid var(--ink-1);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .obs-title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 600;
+    letter-spacing: var(--display-track);
+    color: var(--ink-0);
+  }
+
+  .obs-sub {
+    font-size: var(--step--1);
+    color: var(--ink-1);
+    max-inline-size: var(--measure);
+  }
+}
+
+@layer section {
+  /* --- EMPHASIS -----------------------------------------------------------
+     Highlight one, grey the rest. The palette is validated; the problem with
+     six overlapping saturated lines is the count, not the hues. */
+  .obs-topic-chart[data-emph] :is(.obs-tc-line, .obs-tc-dot) {
+    opacity: 0.12;
+    transition: opacity 120ms ease;
+  }
+
+  .obs-topic-chart[data-emph] :is(.obs-tc-line, .obs-tc-dot).is-emph {
+    opacity: 1;
+  }
+
+  /* --- LEGEND AS TEXT TOGGLES ---------------------------------------------
+     Not pills. The same grammar as the filter row: a small mark carrying the
+     series colour, a text label, and a rule under the active ones. */
+  .obs-topic-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2xs) var(--sp-m);
+    padding-block: var(--sp-s);
+    border-block-start: 1px solid var(--rule-0);
+  }
+
+  /* The shared legend swatch: a short rule drawn in the series' own colour AND
+     dash. Past eleven keywords the hues repeat by design (the ramp is validated
+     at eleven), so the dash is what tells two same-hue lines apart — which means
+     the legend has to show it too, or the disambiguation only exists on the
+     chart. Sized to the line it stands for: 2.5px stroke inside an 8-unit box. */
+  .obs-sw {
+    inline-size: 1.25rem;
+    block-size: 0.5rem;
+    overflow: visible;
+    flex: none;
+  }
+
+  .obs-sw.is-off {
+    opacity: 0.42;
+  }
+
+  .obs-topic-chip.is-on .obs-topic-tog {
+    color: var(--ink-0);
+    box-shadow: inset 0 -1px 0 var(--ink-1);
+  }
+
+  /* --- HORIZONTAL BARS ----------------------------------------------------
+     Inline data indicators, not geometric blocks: a thin track with the count
+     set right beside the label. */
+  .obs-hbar {
+    display: grid;
+    grid-template-columns: minmax(6rem, 12rem) 1fr auto;
+    gap: var(--sp-s);
+    align-items: center;
+    padding-block: var(--sp-2xs);
+  }
+
+  .obs-hbar-l {
+    font-size: var(--step--1);
+    color: var(--ink-1);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .obs-hbar-track {
+    block-size: 6px;
+    background: var(--rule-0);
+  }
+
+  .obs-hbar-v {
+    font-family: var(--font-data);
+    font-size: var(--step--1);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-1);
+    text-align: end;
+  }
+}
+
+@layer section {
+  /* --- MAP ----------------------------------------------------------------
+     `noWrap` stops the world repeating, which leaves gutters when the map is
+     wider than one Earth. They were white; they are a surface now. */
+  .obs-studio ::placeholder {
+    color: var(--ink-2);
+    opacity: 1;
+  }
+
+  /* No bleed. The map keeps the same measure as everything else — the cover
+     zoom below makes it fill whatever width it is given, so it does not need
+     extra room to avoid letterboxing. */
+
+  /* Bottom-left, inset from both edges: at the top it sat over the northern
+     hemisphere, which is where most of the pins are. */
+  .obs-stripmap,
+  .obs-mapfilters {
+    inset-inline-start: var(--sp-m);
+    inset-block-start: auto;
+    inset-block-end: var(--sp-m);
+    background: color-mix(in srgb, var(--paper-0) 86%, transparent);
+    border: 1px solid var(--rule-1);
+    border-radius: 0;
+    padding: var(--sp-2xs) var(--sp-xs);
+    color: var(--ink-0);
+  }
+
+  .obs-map-pin {
+    fill: var(--silver-0);
+    stroke: var(--silver-2);
+  }
+
+  /* --- SEARCH RESULTS ------------------------------------------------------
+     A ruled list on the page's own surface, not a floating dark dropdown. */
+  .obs-results.is-open {
+    position: absolute;
+    /* Above Leaflet, whose panes start at 400 — the map was covering results. */
+    z-index: 800;
+    inline-size: 100%;
+    max-block-size: 60vh;
+    overflow-y: auto;
+    background: var(--paper-1);
+    border: 1px solid var(--rule-1);
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  /* Badge first, then the name — it was `1fr auto`, which stretched the badge
+     into a full-width bar and pushed the name to the right edge. */
+  .obs-result {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--sp-s);
+    align-items: baseline;
+    inline-size: 100%;
+    padding: var(--sp-xs) var(--sp-s);
+    border-block-end: 1px solid var(--rule-0);
+    background: none;
+    color: var(--ink-0);
+    text-align: start;
+  }
+
+  .obs-result:hover {
+    background: var(--paper-2);
+  }
+
+  .obs-result-badge {
+    align-self: center;
+    min-inline-size: 5rem;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+    text-align: start;
+  }
+
+  .obs-result-main {
+    display: grid;
+    gap: var(--sp-3xs);
+  }
+
+  .obs-result-name {
+    color: var(--ink-0);
+  }
+
+  .obs-result-meta,
+  .obs-result-kind {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* (6) The row is a three-column grid — year, content, chevron — so the caret
+     sits on the row rather than dropping to its own line and doubling the
+     height. */
+  .obs-ev {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr auto;
+    gap: var(--sp-s);
+    align-items: baseline;
+    padding-block: var(--sp-xs);
+    cursor: pointer;
+  }
+
+  .obs-ev-y {
+    font-family: var(--font-data);
+    font-size: var(--step--1);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-2);
+  }
+
+  .obs-ev-main {
+    display: grid;
+    gap: var(--sp-3xs);
+    min-inline-size: 0;
+  }
+
+  .obs-ev-t {
+    color: var(--ink-0);
+  }
+
+  .obs-ev-s {
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+
+  .obs-ev-caret {
+    align-self: center;
+    color: var(--ink-2);
+    transition: transform 150ms ease;
+  }
+
+  .obs-ev.is-open .obs-ev-caret {
+    transform: rotate(180deg);
+  }
+
+  /* Aligned under the title, with air above it — the description opened flush
+     against the row it belongs to and read as part of the heading. */
+  .obs-ev-detail {
+    padding: var(--sp-s) 0 var(--sp-m) calc(3.5rem + var(--sp-s));
+  }
+
+  /* On a phone that indent is a quarter of the screen spent saying "this
+     belongs to the row above", which the reader already knows because they
+     just tapped it. Give the width back: 70px of gutter turned a session
+     title, its time and its room into three wrapped lines each. The rule that
+     draws the connecting line keeps the relationship legible without it. */
+  @media (max-width: 40rem) {
+    /* The year column is sized for the widest year the archive will ever hold,
+       which is four digits — so let it be exactly that instead of 3.5rem. On a
+       294px column the reserved slot plus its gap was 70px, a quarter of the
+       width, spent on "2025". */
+    .obs-ev {
+      grid-template-columns: min-content 1fr auto;
+      column-gap: var(--sp-xs);
+    }
+
+    .obs-ev-detail {
+      /* Two indents stack here: a 3rem margin from the rule that draws the
+         connecting line, and this padding, which aligns the panel under the
+         title column. 48px + 70px is 40% of a 294px column. */
+      margin-inline-start: 0;
+      padding-inline-start: var(--sp-s);
+    }
+  }
+
+  /* Matching sessions per year. Recessive axis, 2px line, dots only where there
+     is data, and one direct label on the peak rather than a number on every
+     point. */
+  .obs-st {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+    max-block-size: 11rem;
+    overflow: visible;
+  }
+
+  .obs-st-line {
+    fill: none;
+    stroke: var(--viz-1);
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .obs-st-dot {
+    fill: var(--viz-1);
+  }
+
+  .obs-st-axis {
+    stroke: var(--rule-1);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .obs-st-lab {
+    fill: var(--ink-2);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+  }
+
+  .obs-st-peak {
+    fill: var(--ink-0);
+    font-family: var(--font-body);
+    font-size: var(--step--2);
+    font-weight: 600;
+  }
+
+  .obs-st-wrap {
+    margin-block: var(--sp-m) var(--sp-s);
+  }
+
+  .obs-st-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2xs) var(--sp-m);
+    padding-block-start: var(--sp-2xs);
+  }
+
+  .obs-st-key {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2xs);
+    font-size: var(--step--1);
+    color: var(--ink-1);
+  }
+
+  .obs-st-key b {
+    font-family: var(--font-data);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-0);
+  }
+
+  /* Each matched term wears its own line's colour, so a result says which of
+     your words it answered. The swatch carries the colour, not the text — a
+     word tinted to match a chart line is a word you have to squint at. */
+  .obs-ev-term {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--sp-3xs);
+  }
+
+  .obs-ev-term + .obs-ev-term {
+    margin-inline-start: var(--sp-s);
+  }
+
+  .obs-ev-term::before {
+    content: '';
+    align-self: center;
+    inline-size: 0.5rem;
+    block-size: 0.5rem;
+    flex: none;
+    background: var(--term, var(--ink-2));
+  }
+
+  .obs-ev-match {
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin-block-start: var(--sp-3xs);
+  }
+
+  /* Breakdown rows: name, proportional bar, count — the bar is a reading aid,
+     so it is a thin silver track like every other inline indicator. */
+  .obs-bd-row {
+    display: grid;
+    grid-template-columns: 1fr 4rem auto;
+    gap: var(--sp-xs);
+    align-items: center;
+    padding-block: var(--sp-2xs);
+  }
+
+  .obs-bd-name {
+    font-size: var(--step--1);
+    color: var(--ink-1);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .obs-bd-bar {
+    block-size: 4px;
+    background: var(--rule-0);
+  }
+
+  .obs-bd-bar > i {
+    display: block;
+    block-size: 100%;
+    background: var(--silver-0);
+  }
+
+  .obs-sess-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-xs);
+    align-items: end;
+    margin-block-start: var(--sp-s);
+  }
+
+  .obs-sess-input {
+    flex: 1 1 18rem;
+  }
+
+  /* The Contains / Whole words pair. Borrowed the chart's `obs-topic-view` chrome
+     at first, which is a small control for a chart legend and read as a stray
+     next to the Search and Breakdown buttons. It is a segmented pair now, built
+     to .app-btn's geometry (same tap height, same border, same type) so the whole
+     row is one set of controls rather than two vocabularies side by side. */
+  .obs-sess-mode {
+    display: inline-flex;
+  }
+
+  .obs-sess-mode__btn {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-s);
+    border: 1px solid var(--ink-1);
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink-2);
+    font-family: inherit;
+    font-size: var(--step--1);
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  /* One shared edge, so the pair reads as one control with two states. */
+  .obs-sess-mode__btn + .obs-sess-mode__btn {
+    border-inline-start: 0;
+  }
+
+  .obs-sess-mode__btn:hover {
+    background: var(--paper-2);
+    color: var(--ink-0);
+  }
+
+  .obs-sess-mode__btn.is-on {
+    background: var(--ink-0);
+    border-color: var(--ink-0);
+    color: var(--paper-0);
+    font-weight: 600;
+  }
+
+  /* Why this row matched. Gold-tinted rather than the usual highlighter yellow:
+     the archive marks what matters in gold everywhere else, and a second accent
+     for the same job would read as a different kind of thing. */
+  .obs-hl {
+    background: color-mix(in srgb, var(--brand-1-ink) 22%, transparent);
+    color: inherit;
+    padding-inline: 0.1em;
+  }
+
+  /* The matched-context line, shown only when the match is invisible on the row
+     itself — i.e. it landed in the description. */
+  .obs-ev-why {
+    display: block;
+    margin-block-start: 0.15rem;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+    font-style: italic;
+  }
+
+  /* The Show-more footer. Centred under the list, with the remainder beside it —
+     the count is the part that explains why the breakdown's tallies are larger
+     than what you have scrolled past. */
+  .obs-sess-more {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-s);
+    align-items: baseline;
+    justify-content: center;
+    margin-block-start: var(--sp-m);
+  }
+
+  .obs-sess-more .obs-rank-count {
+    margin: 0;
+  }
+
+  /* Its own class: `obs-kw-add` is the discover ROW button, and reusing the
+     name collapsed the form into a two-column grid. */
+  .obs-kw-form {
+    display: block;
+    margin-block-end: var(--sp-l);
+  }
+
+  /* A ruled line, like every other field in the product — the datalist chrome
+     and the boxed control it inherited both read as someone else's UI. */
+  .obs-kw-input {
+    inline-size: 100%;
+    block-size: 2.4rem;
+    margin-block-start: var(--sp-2xs);
+    padding: 0;
+    background: transparent;
+    color: var(--ink-0);
+    border: 0;
+    border-block-end: 1px solid var(--rule-1);
+    border-radius: 0;
+    appearance: none;
+    font-size: var(--step-0);
+  }
+
+  .obs-kw-input::placeholder {
+    color: var(--ink-2);
+  }
+
+  .obs-kw-input:hover {
+    border-block-end-color: var(--ink-1);
+  }
+
+  .obs-kw-input:focus-visible {
+    outline: 0;
+    border-block-end-color: var(--brand-1-ink);
+    border-block-end-width: 2px;
+  }
+
+  .obs-kw-input::-webkit-search-cancel-button {
+    appearance: none;
+  }
+
+  /* Map beside its figures, like the overview — the map no longer has to carry
+     the whole story, so it takes less room. */
+  .obs-map-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-m);
+    align-items: stretch;
+    margin-block: var(--sp-m);
+  }
+
+  .obs-map-row .obs-map-wrap {
+    flex: 1 1 24rem;
+    min-inline-size: 0;
+  }
+
+  .obs-globe--drill {
+    flex: 0 1 13rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2xs);
+    justify-content: center;
+    padding-inline-start: var(--sp-m);
+    border-inline-start: 1px solid var(--rule-0);
+  }
+
+  .obs-globe-stat {
+    display: flex;
+    align-items: baseline;
+    gap: var(--sp-2xs);
+  }
+
+  .obs-globe-stat b {
+    font-family: var(--font-data);
+    font-size: var(--step-1);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-0);
+  }
+
+  .obs-globe-stat span,
+  .obs-globe-foot {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* Facets get the full ruled-line control treatment. Legacy strips the native
+     appearance but never draws a replacement, so these had NO caret — an
+     appearance:none select with no chevron does not read as a dropdown at all. */
+  .obs-scopes select,
+  .obs-topbar select {
+    min-inline-size: 9rem;
+    block-size: 2.4rem;
+    padding: 0 var(--sp-l) 0 0;
+    background-color: transparent;
+    color: var(--ink-0);
+    border: 0;
+    border-block-end: 1px solid var(--rule-1);
+    border-radius: 0;
+    appearance: none;
+    font-size: var(--step-0);
+    background-image:
+      linear-gradient(45deg, transparent 50%, currentColor 50%),
+      linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position:
+      right 0.85rem center,
+      right 0.5rem center;
+    background-size:
+      0.35rem 0.35rem,
+      0.35rem 0.35rem;
+    background-repeat: no-repeat;
+  }
+
+  .obs-scopes select:hover,
+  .obs-topbar select:hover {
+    border-block-end-color: var(--ink-1);
+  }
+
+  /* Same trade as the schedule's .app-control, and the same outcome: the
+     underline did not survive the cascade, so dropping the outline left these
+     selects with no focus indicator at all. Underline kept, ring no longer
+     suppressed. */
+  .obs-scopes select:focus-visible,
+  .obs-topbar select:focus-visible {
+    border-block-end-color: var(--brand-1-ink);
+    border-block-end-width: 2px;
+  }
+
+  /* The left inset was reserving room for a search icon that no longer exists. */
+  #obsSearch {
+    inline-size: 100%;
+    /* Same height and ruled underline as the four facets beside it, so all five
+       controls sit on ONE baseline. It used to be 2.75rem against their 2.4rem,
+       which dropped the search line below the row. */
+    block-size: 2.4rem;
+    padding: 0 var(--sp-s) 0 0;
+    font-size: var(--step-0);
+    border: 0;
+    border-block-end: 1px solid var(--rule-1);
+    border-radius: 0;
+    background-color: transparent;
+  }
+
+  #obsSearch:hover {
+    border-block-end-color: var(--ink-1);
+  }
+
+  #obsSearch:focus,
+  #obsSearch:focus-visible {
+    border-block-end-color: var(--brand-1-ink);
+    border-block-end-width: 2px;
+    box-shadow: none;
+  }
+
+  /* Search is a filter like the rest of the row, so it is labelled like the rest
+     of the row. Given a label it also stops being a lone control floating beside
+     four captioned ones. */
+  .obs-topbar .obs-search {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    /* Long enough for the placeholder. At the old 14rem the four facets pushed
+       it down to a stub that truncated mid-word ("Search speakers, spo"). */
+    min-inline-size: 18rem;
+  }
+
+  /* A facet needs a name, not just a value — "All years" alone reads as a
+     stray control until you know what it filters. */
+  .obs-scopes {
+    align-items: end;
+  }
+
+  .obs-scope {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: start;
+  }
+
+  .obs-scope-l {
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin-block-end: var(--sp-3xs);
+  }
+
+  .obs-sess-desc {
+    font-size: var(--step--1);
+    line-height: 1.62;
+    color: var(--ink-1);
+    max-inline-size: var(--measure);
+  }
+
+  .obs-sess-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-m);
+    margin-block-start: var(--sp-s);
+    font-size: var(--step--1);
+  }
+
+  .obs-sess-links a {
+    color: var(--brand-1-ink);
+  }
+
+  .obs-rank-count {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    padding-block-start: var(--sp-2xs);
+  }
+
+  /* --- KEYWORD MANAGER (rail) ---------------------------------------------
+     A ranked list, not a chip cloud: term on the left, its figure on the right,
+     so the panel answers "what was popular" by being read top-down.
+     --------------------------------------------------------------------- */
+  .obs-kw-group + .obs-kw-group {
+    margin-block-start: var(--sp-l);
+  }
+
+  .obs-kw-h {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+    padding-block-end: var(--sp-2xs);
+    border-block-end: 1px solid var(--ink-1);
+  }
+
+  .obs-kw-note {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+    margin-block: var(--sp-2xs) var(--sp-xs);
+  }
+
+  .obs-kw-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  /* A rule under every row turned the list into a ledger of hairlines. Rhythm
+     comes from spacing; the only rule is under the group heading. */
+  .obs-kw-add {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--sp-s);
+    align-items: baseline;
+    inline-size: 100%;
+    min-block-size: var(--tap);
+    padding: var(--sp-xs) 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    color: var(--ink-1);
+    text-align: start;
+    cursor: pointer;
+  }
+
+  .obs-kw-add:hover {
+    color: var(--ink-0);
+  }
+
+  .obs-kw-add.is-on {
+    color: var(--ink-0);
+    font-weight: 600;
+    box-shadow: inset 3px 0 0 var(--brand-1-ink);
+    padding-inline-start: var(--sp-xs);
+  }
+
+  .obs-kw-val {
+    font-family: var(--font-data);
+    font-size: var(--step--1);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-2);
+  }
+
+  /* In the rail the legend is a list, not an inline cloud. */
+  #railPanel .obs-topic-legend {
+    display: block;
+    border: 0;
+    padding: 0;
+  }
+
+  #railPanel .obs-topic-chip {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--sp-2xs);
+    align-items: center;
+    padding-block: var(--sp-3xs);
+  }
+
+  .obs-kw-manage {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: var(--sp-xs);
+    align-items: center;
+    padding-block: var(--sp-xs);
+  }
+
+  .obs-kw-sw {
+    inline-size: 0.75rem;
+    block-size: 2px;
+  }
+
+  .obs-kw-btn {
+    min-block-size: var(--tap);
+    padding-inline: var(--sp-xs);
+    background: none;
+    border: 0;
+    color: var(--ink-2);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .obs-kw-btn:hover {
+    color: var(--ink-0);
+  }
+
+  .obs-kw-btn[aria-pressed='true'] {
+    color: var(--brand-1-ink);
+  }
+
+  .obs-rail-triggers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-xs);
+    padding-block: var(--sp-s);
+  }
+
+  .obs-kw-more {
+    margin-block-start: var(--sp-s);
+  }
+}
+
+@layer overrides {
+  /* The modal-input rule in section-schedule.css matches `.app-panel input`,
+     which now includes the rail — it filled this field with a panel colour.
+     This sheet loads later in the same layer, so an explicit rule wins. */
+  /* Specificity, not source order, settles two !important rules in one layer —
+     the schedule's `:is(.app-panel) :is(input)` outranks a bare class. */
+  #railPanel .obs-kw-input {
+    background: transparent !important;
+    border: 0 !important;
+    border-block-end: 1px solid var(--rule-1) !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+  }
+
+  #railPanel .obs-kw-input:focus-visible {
+    border-block-end-color: var(--brand-1-ink) !important;
+    border-block-end-width: 2px !important;
+  }
+
+  /* Legacy pins this card to the top of the map. */
+  .obs-mapfilters {
+    inset-block-start: auto !important;
+    inset-block-end: var(--sp-m) !important;
+    inset-inline-start: var(--sp-m) !important;
+    background: color-mix(in srgb, var(--paper-0) 86%, transparent) !important;
+    border: 1px solid var(--rule-1) !important;
+    border-radius: 0 !important;
+  }
+
+  /* Legacy centres the facet row; a field label belongs over its control's
+     left edge, not floating above the middle of it. */
+  .obs-scopes,
+  .obs-scope,
+  .obs-scope-l {
+    text-align: start !important;
+  }
+
+  /* Square corners are the product default; legacy rounds these. */
+  #railPanel :is(.obs-kw-add, .obs-kw-btn, .obs-topic-chip, .obs-topic-tog, .obs-kw-manage, li),
+  .obs-studio :is(.obs-result, .obs-result-badge, .obs-results) {
+    border-radius: 0 !important;
+  }
+
+  /* Search must read as a panel, not a translucent overlay. */
+  .obs-results.is-open {
+    background: var(--paper-1) !important;
+    border: 1px solid var(--rule-1) !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .obs-result {
+    background: none !important;
+    border-block-end: 1px solid var(--rule-0) !important;
+  }
+
+  /* Leaflet's stylesheet is loaded from a CDN and is UNLAYERED, so a layered
+     rule cannot beat its `background: #ddd`. `noWrap` leaves gutters when the
+     map is wider than one Earth; they take a surface instead of grey. */
+  .leaflet-container {
+    background: var(--paper-2) !important;
+  }
+
+  /* Legacy makes this a fixed, dark, scroll-locking overlay. Here it is the
+     page, so it must not cover the masthead or paint its own backdrop. */
+  .obs-studio {
+    position: static !important;
+    inset: auto !important;
+    z-index: auto !important;
+    background: none !important;
+    backdrop-filter: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+
+  /* Gold gradients on bars, gauges and chips — gradients are ruled out, and
+     magnitude is one hue anyway. Flattened to a single ink so height carries
+     the value, not a sheen. */
+  .obs-studio
+    :is(
+      .obs-ybar,
+      .obs-hbar-fill,
+      .on,
+      .obs-bar,
+      .obs-bar-fill,
+      .obs-rankbar,
+      .obs-rankbar-fill,
+      .obs-meter,
+      .obs-meter-fill,
+      .obs-spark
+    ) {
+    background-image: none !important;
+    background-color: var(--silver-0) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Controls: ruled lines and flat buttons, not dark pills. */
+  /* background-COLOR, not the shorthand: `background: transparent` also wipes
+     background-image, which is how the select carets are drawn. */
+  .obs-studio :is(.obs-search-input, .obs-series-filter, select, input) {
+    background-color: transparent !important;
+    color: var(--ink-0) !important;
+    border: 0 !important;
+    border-block-end: 1px solid var(--rule-1) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Legend entries are text toggles, so they must shed the pill chrome. */
+  .obs-studio :is(.obs-topic-chip, .obs-topic-tog, .obs-topic-pin, .obs-topic-add) {
+    background: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    color: var(--ink-2) !important;
+  }
+
+  .obs-studio .obs-topic-tog {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: var(--sp-2xs) !important;
+    min-block-size: var(--tap) !important;
+    cursor: pointer !important;
+  }
+
+  /* Topic buttons are excluded: they are text toggles, and this generic rule
+     would otherwise re-apply the boxes the rule above just removed (two
+     !important declarations in one layer — source order decides).
+     The home view-mode tabs are excluded for the same reason: a tab strip marks
+     its live tab with an underline, and a box round all three says nothing. */
+  .obs-studio
+    :is(.obs-chip, .obs-toggle, .obs-seg, .obs-mapfilter-all, button):not(
+      .obs-topic-tog,
+      .obs-topic-pin,
+      .obs-subtab
+    ) {
+    background: transparent !important;
+    color: var(--ink-0) !important;
+    border: 1px solid var(--rule-1) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  .obs-studio
+    :is(.obs-chip, .obs-toggle, .obs-seg, button):not(
+      .obs-topic-tog,
+      .obs-topic-pin,
+      .obs-subtab
+    ).is-active,
+  .obs-studio
+    :is(.obs-chip, .obs-toggle, .obs-seg, button):not(
+      .obs-topic-tog,
+      .obs-topic-pin,
+      .obs-subtab
+    )[aria-pressed='true'] {
+    border-color: var(--ink-1) !important;
+    box-shadow: inset 3px 0 0 var(--brand-1-ink) !important;
+  }
+
+  /* Panels are ruled regions, not filled cards. */
+  /* `.obs-results` is deliberately NOT in this list: it is a floating panel and
+     needs a surface. It used to be, and — sitting later in the same layer than
+     the rule that fills it — source order silently won. */
+  .obs-studio :is(.obs-panel, .obs-card, .obs-tile, .obs-globe, .obs-stripmap-wrap, .obs-rankrow) {
+    background: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Editor ink on our surfaces reads as invisible; descendants inherit. */
+  .obs-studio
+    :is(h1, h2, h3, h4, p, span, li, td, th, dt, dd, label, small, strong, em, b, i, u, code, div) {
+    color: inherit !important;
+    text-shadow: none !important;
+  }
+
+  .obs-studio {
+    color: var(--ink-0) !important;
+  }
+
+  .obs-studio a {
+    color: var(--brand-1-ink) !important;
+  }
+
+  /* …except in the provenance lists, which are mostly links — seventy of them
+     on a busy event. Brand blue reads well for the two or three in an expanded
+     session row and as a wall in a bibliography, so these are set as text and
+     the ↗ plus the hover state carry the affordance. */
+  .obs-studio .obs-ev--link .obs-ev-t,
+  .obs-studio .obs-src-body a {
+    color: var(--ink-0) !important;
+  }
+
+  .obs-studio .obs-ev--link:hover .obs-ev-t,
+  .obs-studio .obs-ev--link:focus-visible .obs-ev-t,
+  .obs-studio .obs-src-body a:hover,
+  .obs-studio .obs-src-body a:focus-visible {
+    color: var(--brand-1-ink) !important;
+  }
+
+  .obs-studio .obs-inner {
+    background: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    max-inline-size: none !important;
+    block-size: auto !important;
+    max-block-size: none !important;
+    overflow: visible !important;
+  }
+}
+
+@layer section {
+  .obs-studio {
+    padding-block: var(--sp-l) var(--sp-2xl);
+  }
+}
+
+/* =========================================================================
+   MOBILE — THE SECTION HEADER WRAPS
+   `.obs-section-t` is a heading and its controls on one nowrap line. At 390px
+   the controls (277px) plus the title do not fit, so they ran 17px past the
+   viewport and the whole page scrolled sideways. The controls take their own
+   line instead.
+   ========================================================================= */
+@layer section {
+  @media (max-width: 52rem) {
+    .obs-section-t {
+      flex-wrap: wrap;
+      row-gap: var(--sp-xs);
+    }
+
+    .obs-topic-controls {
+      float: none;
+      margin-inline-start: 0;
+      flex-wrap: wrap;
+      row-gap: var(--sp-2xs);
+    }
+  }
+}
+
+/* =========================================================================
+   FOCUS RINGS ON THE ARCHIVE'S CONTROLS
+   Several rules above set `outline: none` on these fields, some trading it for
+   a border-and-shadow treatment that no longer applies. Measured, the search
+   box and all four filter selects matched :focus-visible and showed nothing at
+   all — a keyboard user tabbing the filter row had no idea where they were.
+   Last in the file, so it settles the question at equal specificity.
+   ========================================================================= */
+@layer section {
+  .obs-search-input:focus-visible,
+  .obs-series-filter:focus-visible,
+  .obs-region-filter:focus-visible,
+  .obs-country-filter:focus-visible,
+  .obs-year-filter:focus-visible,
+  .obs-filters select:focus-visible,
+  .obs-filters input:focus-visible {
+    outline: var(--focus-width) solid var(--brand-1-ink);
+    outline-offset: 2px;
+  }
+}
+
+/* =========================================================================
+   LEAFLET'S LABELS — DELIBERATELY UNLAYERED
+   The strip map's place tooltips and the drill map's popups were WHITE TEXT ON
+   A WHITE PLATE in dark mode. Two rules met:
+
+     • Leaflet's stylesheet is injected at runtime as a plain <link>, so it is
+       UNLAYERED and its `.leaflet-tooltip { background: #fff }` outranks every
+       layered rule however late the layer is declared;
+     • `.obs-studio :is(…, div) { color: inherit !important }` in the overrides
+       layer DOES reach these — a tooltip is a div inside the studio — so the
+       ink followed the theme to near-white while the plate stayed Leaflet's.
+
+   Only the ink was themed, so the two faces of the label came from different
+   places. Giving the plate the paper that matches that ink fixes it in both
+   modes at once, rather than pinning a colour for the dark one.
+
+   Unlayered, like the schedule page's venue tip and for the same reason:
+   `!important` is meant to reach zero here, not grow, and importing Leaflet
+   into a layer would change how the planner and editor maps cascade too.
+   Unlayered against unlayered is decided on specificity, and
+   `.obs-studio .leaflet-tooltip` (0,2,0) beats `.leaflet-tooltip` (0,1,0)
+   regardless of load order. `color` is restated even though the overrides rule
+   currently wins with the same value — so the label survives that rule being
+   narrowed later.
+   ========================================================================= */
+.obs-studio .leaflet-tooltip,
+.obs-studio .leaflet-popup-content-wrapper,
+.obs-studio .leaflet-popup-tip {
+  background: var(--paper-0);
+  color: var(--ink-0);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.obs-studio .leaflet-tooltip,
+.obs-studio .leaflet-popup-content-wrapper {
+  border: 1px solid var(--ink-0);
+  font-family: var(--font-body);
+}
+
+/* The tail. Leaflet gives one triangle; filled with ink it reads as a dark blob
+   detached from the plate. Two make it the plate's own point: `::before` is
+   Leaflet's, recoloured to the border, and `::after` is a paper triangle 1px
+   inside it. Only `top` is treated because that is the only direction the
+   Observatory binds. */
+.obs-studio .leaflet-tooltip-top::before {
+  border-top-color: var(--ink-0);
+}
+
+.obs-studio .leaflet-tooltip-top::after {
+  content: '';
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-start: 50%;
+  margin-inline-start: -5px;
+  margin-block-end: -10px;
+  border: 5px solid transparent;
+  border-block-start-color: var(--paper-0);
+}
+
+/* Zoom buttons: the same white chrome, and `.obs-studio a` paints their glyphs
+   brand ink — gold on white, on a page that is neither. */
+.obs-studio .leaflet-bar,
+.obs-studio .leaflet-bar a {
+  background: var(--paper-0);
+  border-color: var(--rule-1);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.obs-studio .leaflet-bar a:hover {
+  background: var(--paper-1);
+}
+
+@layer section {
+  /* ── Home view modes — Overview · Videos · Photo albums ──────────────────────
+     Sub-tabs, not pages: the filter bar above them keeps its scope when you
+     switch, so these read as three views of one archive rather than three
+     destinations. Gold marks the live one, the same as every other selected
+     state in the archive. */
+  .obs-subtabs {
+    display: flex;
+    gap: 0.4rem;
+    margin: -0.9rem 0 1.4rem;
+    border-bottom: 1px solid var(--rule-0);
+  }
+  .obs-subtab {
+    appearance: none;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: none;
+    padding: 0.55rem 0.9rem;
+    font-family: var(--font-data);
+    font-size: var(--step--1);
+    letter-spacing: 0.04em;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition:
+      color 0.13s,
+      border-color 0.13s;
+  }
+  .obs-subtab:hover {
+    color: var(--ink-0);
+  }
+  .obs-subtab.is-on {
+    color: var(--brand-1-ink);
+    border-bottom-color: var(--brand-1-ink);
+  }
+
+  /* ── Videos ──────────────────────────────────────────────────────────────── */
+  .obs-vid-search {
+    margin: 0 0 1rem;
+  }
+  .obs-vid-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1.1rem;
+    margin: 1.2rem 0;
+  }
+  .obs-vid {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+    transition:
+      border-color 0.13s,
+      transform 0.13s;
+  }
+  .obs-vid:hover {
+    border-color: var(--brand-1-ink);
+    transform: translateY(-2px);
+  }
+  .obs-vid-thumb {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--paper-3, var(--paper-1));
+  }
+  .obs-vid-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* archive.org and the handful of other hosts have no thumbnail to fetch —
+     name the host rather than showing a broken frame. */
+  .obs-vid-thumb--none {
+    display: grid;
+    place-items: center;
+  }
+  .obs-vid-host {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .obs-vid-play {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    display: grid;
+    place-items: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    background: color-mix(in srgb, var(--paper-0) 82%, transparent);
+    color: var(--brand-1-ink);
+    font-size: 0.8rem;
+    line-height: 1;
+  }
+  .obs-vid-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.7rem 0.8rem 0.85rem;
+  }
+  .obs-vid-title {
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .obs-vid-speakers {
+    font-size: var(--step--1);
+    color: var(--ink-1);
+  }
+  .obs-vid-meta,
+  .obs-vid-track {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+    letter-spacing: 0.03em;
+  }
+  .obs-vid-track {
+    text-transform: uppercase;
+  }
+  .obs-more-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 1.4rem 0 0;
+  }
+  .obs-more-wrap .obs-more {
+    width: auto;
+    min-width: 14rem;
+  }
+
+  /* ── Photo albums ────────────────────────────────────────────────────────── */
+  .obs-album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 0.9rem;
+    margin: 1.2rem 0;
+  }
+  .obs-album {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.9rem 1rem;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+    transition:
+      border-color 0.13s,
+      transform 0.13s;
+  }
+  .obs-album:hover {
+    border-color: var(--brand-1-ink);
+    transform: translateY(-2px);
+  }
+  .obs-album-year {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--brand-1-ink);
+    letter-spacing: 0.08em;
+  }
+  .obs-album-name {
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .obs-album-meta {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+}
+
+@layer section {
+  /* The video search is submitted, not typed — so it needs the furniture of a
+     form: a button to run it, and a way back to nothing. */
+  .obs-vid-search {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1rem;
+  }
+  .obs-vid-search .obs-search-input {
+    flex: 1;
+    min-width: 14rem;
+  }
+  .obs-vid-go,
+  .obs-vid-reset {
+    appearance: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--rule-0);
+    background: var(--paper-2);
+    color: var(--ink-1);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition:
+      background 0.13s,
+      color 0.13s,
+      border-color 0.13s;
+  }
+  .obs-vid-go {
+    border-color: var(--brand-1-ink);
+    color: var(--brand-1-ink);
+  }
+  .obs-vid-go:hover,
+  .obs-vid-reset:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--brand-1-ink) 12%, transparent);
+    color: var(--ink-0);
+    border-color: var(--brand-1-ink);
+  }
+  /* Nothing to reset is not a button worth pressing. */
+  .obs-vid-reset:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+}
+
+@layer section {
+  /* Album covers arrive after the cards do, so the slot holds its space from the
+     start — the grid must not jump as each picture lands. */
+  .obs-album {
+    padding: 0;
+    overflow: hidden;
+  }
+  .obs-album-cover {
+    /* Covers come from other people's photo hosts at whatever shape they like, so
+       the slot fixes the ratio and the picture is cropped into it. The image is
+       positioned rather than sized: `height: 100%` against an auto-height parent
+       resolves to auto, which let a tall photo stretch its own card and left the
+       grid ragged. */
+    position: relative;
+    display: block;
+    flex: none;
+    aspect-ratio: 16 / 9;
+    background: var(--paper-3, var(--paper-1));
+    border-bottom: 1px solid var(--rule-0);
+  }
+  .obs-album-cover img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .obs-album-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.8rem 1rem 0.9rem;
+  }
+}
+
+@layer section {
+  /* ── Sources (provenance) ──────────────────────────────────────────────────
+     A bibliography, so it reads as one: quiet type, hairline rules, and colour
+     only where it means something a reader should weigh. Two levels — an
+     overview that explains itself, and one page per event. */
+  /* Full width, like the note on the drill. This is the page's standing
+     explanation of itself, not a column of body copy. */
+  .obs-src-intro {
+    margin: 0.4rem 0 1.2rem;
+    padding: 0.7rem 0.9rem;
+    border-inline-start: 2px solid var(--gold);
+    background: var(--paper-2);
+    color: var(--ink-1);
+  }
+
+  .obs-src-intro p:last-child {
+    margin-block-end: 0;
+  }
+
+  /* Inside the intro the archive.org line is a second paragraph, not a second
+     panel — it must not draw its own border on top of the one around it. */
+  .obs-src-intro .obs-src-lede {
+    margin: 0.5rem 0 0;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+
+  .obs-src-intro p {
+    margin: 0 0 0.5rem;
+  }
+
+  /* Full width on purpose. It is a standing caveat about every link on the
+     page, not a paragraph of body copy, so it spans the column the links do. */
+  .obs-src-lede {
+    margin: 0.6rem 0 1.2rem;
+    padding: 0.7rem 0.9rem;
+    border-inline-start: 2px solid var(--gold);
+    background: var(--paper-2);
+    color: var(--ink-1);
+  }
+
+  .obs-src-lede a {
+    color: inherit;
+  }
+
+  .obs-src-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: 0.9rem;
+    margin: 1.2rem 0 1.6rem;
+  }
+
+  .obs-src-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.8rem 0 0;
+    border-block-start: 2px solid var(--rule-1);
+  }
+
+  .obs-src-stat-v {
+    font-family: var(--font-data);
+    font-size: var(--step-2);
+    line-height: 1;
+  }
+
+  .obs-src-stat-l {
+    font-size: var(--step--1);
+  }
+
+  .obs-src-stat-n {
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+
+  .obs-src-h {
+    margin: 1.4rem 0 0.5rem;
+    font-size: var(--step-0);
+  }
+
+  /* The line under a Sources heading that says what the chart beneath measures. */
+  .obs-src-note {
+    max-inline-size: 62ch;
+    margin: 0 0 0.9rem;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+
+  .obs-ev--muted {
+    opacity: 0.6;
+  }
+
+  /* The sentence that says what the percentages mean. Worth more than a chip. */
+  .obs-src-claim {
+    position: relative;
+    max-inline-size: 62ch;
+    margin: 1rem 0 0;
+    padding-inline-start: 0.9rem;
+    border-inline-start: 2px solid var(--gold);
+    color: var(--ink-1);
+  }
+
+  .obs-src-claim-pct {
+    font-family: var(--font-data);
+    color: var(--ink-2);
+  }
+
+  /* One group per kind: the label is said once, in the heading, instead of
+     repeating down the left margin. Five schedule pages are one thing with five
+     parts, and the old flat list made them read as five different things. */
+  .obs-src-group {
+    margin-block: 1rem 1.4rem;
+  }
+
+  .obs-src-group-h {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.6rem;
+    margin: 0 0 0.1rem;
+    font-size: var(--step--1);
+    font-weight: 600;
+  }
+
+  /* The count sits opposite its label, so a column of groups reads as a table
+     of contents rather than a run of headings with numbers trailing off them. */
+  .obs-src-group-n {
+    flex: 0 0 auto;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    font-weight: 400;
+    color: var(--ink-2);
+  }
+
+  .obs-src-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-block-start: 1px solid var(--rule-0);
+  }
+
+  .obs-src-line {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding-block: 0.35rem;
+    border-block-end: 1px solid var(--rule-0);
+    font-size: var(--step--1);
+  }
+
+  .obs-src-body {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+  }
+
+  .obs-src-body a {
+    color: inherit;
+    overflow-wrap: anywhere;
+  }
+
+  .obs-src-when {
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .obs-src-when {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  /* A stated source is prose, not a broken link — so it is set as prose. */
+  .obs-src-stated {
+    font-style: italic;
+    color: var(--ink-1);
+  }
+
+  .obs-src-more {
+    margin: 0.4rem 0 0;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+
+  .obs-src-more a {
+    color: inherit;
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 40rem) {
+    /* The host is the first thing to go when there is no room: the title is
+       what a reader is scanning for, and the arrow already says "off-site".
+       The rule itself sits with `.obs-ev--link` at the foot of this file — see
+       the note there for why it cannot live in this block. */
+
+    .obs-src-line {
+      gap: 0.2rem;
+    }
+
+    .obs-src-kind {
+      min-inline-size: 0;
+    }
+  }
+}
+
+@layer section {
+  /* A long group folds away. Native <details>, so the keyboard and screen
+     readers get it for free and it still works with no JavaScript. */
+  .obs-src-details > summary {
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .obs-src-details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .obs-src-details > summary .obs-src-group-t::before {
+    content: '▸ ';
+    color: var(--ink-2);
+  }
+
+  .obs-src-details[open] > summary .obs-src-group-t::before {
+    content: '▾ ';
+  }
+
+  .obs-src-details > summary:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  /* Records' outbound links reuse the archive's own event row, so they read as
+     the same product as the session search rather than a second one. */
+  .obs-evlist--links {
+    margin-block-start: 0.5rem;
+  }
+
+  /* Inherits .obs-ev's three-column grid — host, title, marker — so these read
+     as the same rows the session search uses. Overriding `display` here is what
+     made them look like a different component. */
+  .obs-ev--link {
+    /* Same three columns as the session search, but the leading one holds a
+       hostname rather than a four-digit year — 3.5rem would clip every one. */
+    grid-template-columns: 9rem 1fr auto;
+    color: inherit;
+    text-decoration: none;
+    border-block-end: 1px solid var(--rule-0);
+  }
+
+  .obs-ev--link:hover,
+  .obs-ev--link:focus-visible {
+    background: var(--paper-2);
+  }
+
+  .obs-ev--link:hover .obs-ev-t,
+  .obs-ev--link:focus-visible .obs-ev-t {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  /* The host, set small and quiet — it answers "where does this go" without
+     competing with the title. */
+  .obs-ev--link .obs-ev-y {
+    font-size: var(--step--2);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .obs-ev--link .obs-ev-caret {
+    transition: none;
+  }
+
+  /* Narrow screens: two columns, and the host goes.
+     This lives HERE, after `.obs-ev--link`, and not in the phone block a few
+     hundred lines up where it started. Both selectors are one class in the same
+     layer, so the later one wins at every width — the mobile rule was overruled
+     by the desktop rule it was written to override, and the symptom was not a
+     rule that did nothing. `.obs-ev-y` was still hidden, so the title slid into
+     the 9rem host track and the arrow inherited the 1fr: on a 390px phone that
+     is 144px of title wrapping to six lines beside 90px of empty space, in
+     every row of a 102-row list. */
+  @media (max-width: 40rem) {
+    .obs-ev--link {
+      grid-template-columns: 1fr auto;
+      column-gap: var(--sp-s);
+    }
+
+    .obs-ev--link .obs-ev-y {
+      display: none;
+    }
+  }
+}
+
+@layer section {
+  /* ── "Tell us about a conference" ─────────────────────────────────────────
+     The reader's suggestion box. Built from the archive's own vocabulary —
+     `obs-panel` surfaces, `obs-more` buttons, the mono eyebrow — because the
+     archive does not load planner.css and `.pl-modal-*` is not reachable here.
+     See the CSS split note in CLAUDE.md. */
+  .obs-tip-cta {
+    margin-block: 2rem 0;
+    padding: 1.3rem 1.4rem;
+    border: 1px solid var(--paper-2);
+    background: var(--paper-2);
+    text-align: center;
+  }
+
+  .obs-tip-cta-t {
+    margin: 0;
+    font-size: var(--step-1);
+    font-weight: 600;
+    color: var(--ink-0);
+  }
+
+  .obs-tip-cta-s {
+    margin: 0.25rem 0 0;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+
+  /* The button is full-width by default (it lives in a card elsewhere); here it
+     should be the size of its own words. */
+  .obs-tip-cta .obs-more {
+    width: auto;
+    margin-inline: auto;
+    padding-inline: 1.2rem;
+  }
+
+  /* A native <dialog>: focus trapping, Escape, the backdrop and `inert` on the
+     page behind all come from the browser, and each is a thing a hand-rolled
+     modal gets subtly wrong. */
+  .obs-tip {
+    width: min(30rem, calc(100vw - 2rem));
+    /* A modal <dialog> is centred by the UA with `inset: 0; margin: auto`. The
+       reset layer's `* { margin: 0 }` wins over the UA sheet and takes that
+       away, which pins the dialog to the top-left corner of the viewport — so
+       the centring has to be asked for again here. */
+    margin: auto;
+    /* A long note plus an error message can outgrow a short window; scroll the
+       dialog rather than letting it run off the screen with the buttons on it. */
+    max-height: min(90dvh, 44rem);
+    overscroll-behavior: contain;
+    padding: 0;
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: var(--paper-1);
+    color: var(--ink-0);
+  }
+
+  .obs-tip::backdrop {
+    background: color-mix(in srgb, var(--ink-0) 45%, transparent);
+  }
+
+  .obs-tip-form {
+    display: flex;
+    flex-direction: column;
+    padding: 1.4rem;
+  }
+
+  .obs-tip-head {
+    margin-block-end: 1rem;
+  }
+
+  .obs-tip-title {
+    margin: 0.2rem 0 0;
+    font-size: var(--step-2);
+  }
+
+  .obs-tip-lede {
+    margin: 0.4rem 0 0;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+
+  .obs-tip-l {
+    margin-block-start: 0.8rem;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .obs-tip-opt {
+    text-transform: none;
+    letter-spacing: 0;
+    opacity: 0.75;
+  }
+
+  .obs-tip-input {
+    margin-block-start: 0.25rem;
+    padding: 0.5rem 0.6rem;
+    border: 1px solid var(--rule-0);
+    border-radius: 0;
+    background: var(--paper-0, var(--paper-1));
+    color: var(--ink-0);
+    font: inherit;
+    font-size: var(--step--1);
+  }
+
+  .obs-tip-input:focus-visible {
+    outline: 2px solid var(--brand-1-ink);
+    outline-offset: 1px;
+  }
+
+  .obs-tip-area {
+    resize: vertical;
+    min-height: 4.5rem;
+  }
+
+  .obs-tip-count {
+    margin-block-start: 0.3rem;
+    text-align: right;
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+    color: var(--ink-2);
+  }
+
+  /* Only speaks up near the limit — a counter that shouts from the first
+     keystroke is noise. */
+  .obs-tip-count.is-tight {
+    color: var(--brand-1-ink);
+  }
+
+  .obs-tip-msg {
+    margin: 0.6rem 0 0;
+    min-height: 1.2em;
+    font-size: var(--step--1);
+    color: var(--ink-2);
+  }
+
+  .obs-tip-msg.is-bad {
+    color: var(--bad, #b3261e);
+  }
+
+  .obs-tip-msg.is-good {
+    color: var(--brand-1-ink);
+  }
+
+  .obs-tip-foot {
+    display: flex;
+    gap: 0.6rem;
+    margin-block-start: 1rem;
+  }
+
+  .obs-tip-foot .obs-more {
+    margin-top: 0;
+  }
+
+  .obs-more--go {
+    border-color: var(--brand-1-ink);
+    color: var(--ink-0);
+  }
+}
+
+@layer section {
+  /* A year the current scope has no events for. Hatched rather than filled: a
+     solid band reads as a value, and this is the absence of one. */
+  .obs-tc-gap {
+    fill: var(--ink-2);
+    opacity: 0.08;
+  }
+
+  .obs-tc-gaplab {
+    fill: var(--ink-2);
+    font-family: var(--font-data);
+    font-size: var(--step--2);
+  }
+}
+
+@layer section {
+  /* --- ANNOTATIONS --------------------------------------------------------
+     The reader's own notes on the time axis, drawn on every chart that plots
+     years. See app/js/modules/archiveAnnotations.js.
+
+     Each note takes a hue from the shared categorical scale (--viz-*), set
+     inline by annotationMarks() — so colour says WHICH note. What stays here is
+     the WEIGHT, which is the part that keeps a note behind the data: a wash for
+     the band, a dashed hairline for the edges.
+
+     Never brand gold. On these charts gold already means "the year you filtered
+     to" (.obs-tc-yearhi), and a second gold band would be read as a second
+     selection rather than as a note. */
+  .obs-ann-band {
+    /* Low enough that a plotted line stays legible straight through it, high
+       enough to read as a deliberate region rather than a rendering artefact.
+       The hue arrives inline; only the transparency is decided here. */
+    fill-opacity: 0.14;
+  }
+
+  .obs-ann-rule {
+    stroke-width: 1.5;
+    stroke-dasharray: 2 3;
+    stroke-opacity: 0.85;
+    vector-effect: non-scaling-stroke;
+  }
+
+  /* The note's words in the tooltip, under a rule — they are a different KIND
+     of statement from the rows above them: everything above is measured from
+     the archive, this is something the reader wrote down. */
+  .obs-tc-tip-ann {
+    margin-block-start: var(--sp-2xs);
+    padding-block-start: var(--sp-2xs);
+    border-block-start: 1px solid var(--rule-1);
+  }
+
+  /* The whole layer yields while a series is being emphasised — hovering a
+     legend chip greys every line but the one you asked for, and a note left at
+     full strength then out-shouts the only thing on the chart you wanted. */
+  [data-emph] .obs-ann-layer {
+    opacity: 0.4;
+  }
+
+  /* The year bars are flex columns, not SVG, so an annotated year is marked on
+     its own column: a wash behind the bar and a ruled label under it. */
+  .obs-ycol {
+    position: relative;
+  }
+
+  .obs-ymark {
+    position: absolute;
+    inset-block: 0;
+    inset-inline: -0.2rem;
+    /* Same wash as the SVG band, same hue, set inline from the note. */
+    background: var(--ann-color, var(--viz-overflow));
+    opacity: 0.14;
+    pointer-events: none;
+  }
+
+  /* The label's rule is the one place the note's own colour reaches full
+     strength on this chart — the wash alone is too faint to tell two adjacent
+     notes apart, and the bars themselves must not be recoloured (their colour
+     already means something else). */
+  .obs-ycol--ann .obs-ylabel {
+    color: var(--ink-1);
+    border-block-end: 2px solid var(--ann-color, var(--viz-overflow));
+  }
+
+  /* Room for that rule. The columns are `height: 100%` of a fixed 12rem box, so
+     a 2px border on the last child pushed the bottom of the label out of the
+     container and the rule was sliced in half. Reserved unconditionally rather
+     than only when a note exists — the bars must not shift by 2px the moment
+     you add one. */
+  .obs-years {
+    padding-block-end: 2px;
+  }
+
+  /* --- the annotations rail ----------------------------------------------- */
+  .obs-ann-form {
+    margin-block: var(--sp-s) var(--sp-l);
+  }
+
+  .obs-ann-l {
+    display: block;
+    margin-block-start: var(--sp-s);
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 600;
+    letter-spacing: var(--label-track);
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* The two years are one thought, so they share a row — "from" above "to" read
+     as two unrelated questions. */
+  .obs-ann-years {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-s);
+  }
+
+  .obs-ann-text {
+    block-size: auto;
+    padding-block: var(--sp-2xs);
+    resize: vertical;
+    font-family: inherit;
+    line-height: 1.4;
+  }
+
+  .obs-ann-err {
+    margin-block-start: var(--sp-xs);
+    color: var(--bad, #b3261e);
+    font-size: var(--step--1);
+  }
+
+  .obs-ann-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-xs);
+    margin-block-start: var(--sp-m);
+  }
+
+  /* Eleven swatches wrap rather than scroll — a colour you have to scroll to
+     find is one you will never pick. */
+  .obs-ann-swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2xs);
+    margin-block: var(--sp-2xs) var(--sp-s);
+  }
+
+  .obs-ann-sw {
+    position: relative;
+    inline-size: 1.5rem;
+    /* Full tap target on a phone, where this is a sheet and the swatch is the
+       smallest thing on it. */
+    block-size: var(--tap);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  /* The colour itself is a chip inside the tap target, not the target — an
+     eleven-across row of 44px blocks of solid hue is a paint chart, not a
+     control. */
+  .obs-ann-sw::before {
+    content: '';
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    background: var(--ann-color);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+
+  .obs-ann-sw input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  /* Selection is a ring in the ink, not a change of the swatch's own colour —
+     the swatch has to keep showing the hue it stands for. */
+  .obs-ann-sw.is-on::before,
+  .obs-ann-sw:has(input:checked)::before {
+    outline-color: var(--ink-0);
+  }
+
+  .obs-ann-sw:has(input:focus-visible)::before {
+    outline-color: var(--brand-1-ink);
+  }
+
+  .obs-ann-row {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: var(--sp-2xs) var(--sp-s);
+    align-items: baseline;
+    padding-block: var(--sp-xs);
+  }
+
+  /* The colour chip IS the switch. It already stands for the note on every
+     chart, so making it the thing you press keeps one mark for one meaning
+     rather than adding an eye icon beside it. */
+  .obs-ann-eye {
+    position: relative;
+    display: block;
+    inline-size: 0.75rem;
+    block-size: 0.75rem;
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    align-self: center;
+  }
+
+  /* The tap target is an invisible overlay, not the button's own box. Sizing
+     the button to 44px would have widened the row's first grid column to 44px
+     and pushed every year and title across — the target has to be reachable
+     without being measurable. */
+  .obs-ann-eye::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    translate: -50% -50%;
+    inline-size: var(--tap);
+    block-size: var(--tap);
+  }
+
+  /* The same identity the chart draws, so the rail row and the band on the plot
+     are recognisably the same note. */
+  .obs-ann-chip {
+    /* `display: block` is load-bearing: the chip used to be a direct grid item
+       of the row and was blockified by that, but inside the toggle button it is
+       an ordinary inline span, where inline-size/block-size do not apply — it
+       collapsed to nothing. */
+    display: block;
+    inline-size: 0.75rem;
+    block-size: 0.75rem;
+    background: var(--ann-color);
+    align-self: center;
+  }
+
+  /* Switched off: the chip hollows out to an outline. The hue stays — it is
+     still which note this is — but an outline reads as "not currently drawn"
+     where a filled square reads as "on the chart". */
+  .obs-ann-row.is-off .obs-ann-chip {
+    background: none;
+    box-shadow: inset 0 0 0 2px var(--ann-color);
+  }
+
+  .obs-ann-row.is-off .obs-ann-name,
+  .obs-ann-row.is-off .obs-ann-years-l,
+  .obs-ann-row.is-off .obs-ann-detail {
+    color: var(--ink-2);
+  }
+
+  .obs-ann-eye:focus-visible .obs-ann-chip {
+    outline: var(--focus-width) solid var(--brand-1-ink);
+    outline-offset: 3px;
+  }
+
+  /* The one thing in the rail that is a number about time — set in the data
+     face, like every year on every chart it appears on. */
+  .obs-ann-years-l {
+    font-family: var(--font-data);
+    font-size: var(--step--1);
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+
+  .obs-ann-name {
+    font-weight: 600;
+  }
+
+  .obs-ann-detail,
+  .obs-ann-row-actions {
+    grid-column: 2 / -1;
+  }
+
+  .obs-ann-detail {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step--1);
+    color: var(--ink-1);
+  }
+
+  .obs-ann-row-actions {
+    display: flex;
+    gap: var(--sp-xs);
+    margin-inline-start: -0.4rem;
+  }
+
+  .obs-ann-row[data-ann-editing] {
+    box-shadow: -0.4rem 0 0 -0.25rem var(--brand-1-ink);
+  }
+
+  /* The masthead's controls pack to the right, whatever else gets appended to
+     the bar (the theme picker mounts itself there; so does the burger). Without
+     this, space-between spread three items across the width and the annotations
+     button landed in the middle of the masthead. */
+  .app-masthead__bar > .header-actions {
+    margin-inline-start: auto;
+  }
+}
+
+/* ── Stacked year trends (by country / by series) ──────────────────────────── */
+/* One bar per year, split by community. Colour is the encoding here — it is the
+   only thing telling one country from another — so this is the one place in the
+   archive that legitimately runs a full categorical palette rather than the
+   gold/mono identity. */
+/* ⚠ THE BASE .obs-panel RULE SETS NO POSITION, so the absolutely-positioned
+   maximise button would otherwise escape to the nearest positioned ancestor and
+   land in the wrong corner of the page — on every panel at once. This is what
+   makes the button sit in its own panel. */
+.obs-panel {
+  position: relative;
+}
+.obs-stk {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.obs-stk-grid {
+  stroke: var(--pl-line, rgb(0 0 0 / 0.12));
+  stroke-width: 1;
+}
+.obs-stk-ytick,
+.obs-stk-xtick {
+  fill: var(--ink-3, #6b7280);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.obs-stk-total {
+  fill: var(--ink-2, #374151);
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.obs-stk-seg {
+  cursor: pointer;
+  transition:
+    opacity 0.12s ease,
+    filter 0.12s ease;
+}
+.obs-stk-seg:hover,
+.obs-stk-seg:focus-visible {
+  filter: brightness(1.15);
+  outline: none;
+}
+/* Dimmed rather than hidden: the bar keeps its full height, so picking one
+   country out does not make the year look smaller than it was. */
+.obs-stk-seg.is-dim {
+  opacity: 0.18;
+}
+
+.obs-stk-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+  margin-top: 0.75rem;
+}
+.obs-stk-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.45rem;
+  border: 1px solid var(--pl-line, rgb(0 0 0 / 0.12));
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: var(--step--2, 0.78rem);
+  cursor: pointer;
+  line-height: 1.5;
+}
+.obs-stk-key:hover,
+.obs-stk-key:focus-visible {
+  border-color: var(--gold, #b8860b);
+}
+.obs-stk-key i {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 2px;
+  flex: none;
+}
+.obs-stk-key-n {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.65;
+}
+
+/* ── Maximise ──────────────────────────────────────────────────────────────── */
+.obs-max-btn {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: 1px solid var(--pl-line, rgb(0 0 0 / 0.12));
+  border-radius: 6px;
+  background: var(--surface-1, rgb(255 255 255 / 0.75));
+  color: var(--ink-3, #6b7280);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+/* Revealed on hover so it stays out of the way, but always reachable by keyboard
+   — and always visible once maximised, or there would be no way back out on a
+   touch device. */
+.obs-panel:hover > .obs-max-btn,
+.obs-max-btn:focus-visible,
+.obs-panel--max > .obs-max-btn {
+  opacity: 1;
+}
+.obs-max-btn svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+.obs-max-btn:hover {
+  color: var(--gold, #b8860b);
+  border-color: var(--gold, #b8860b);
+}
+
+/* The two archive maps are not `.obs-panel`s — they live in their own wrappers —
+   so they opt in with `.obs-maxable`. They need the same positioning context the
+   panel gives, and their button has to clear Leaflet's panes, which sit at
+   z-index 400–700 and would otherwise swallow a z-index:2 control entirely. */
+.obs-maxable {
+  position: relative;
+}
+.obs-maxable > .obs-max-btn {
+  z-index: 1000;
+}
+/* The reset control exists in the markup always and is shown only while the
+   wrapper is maximised — the inline strip keeps its clean edge, and the control
+   appears exactly when there is a view worth resetting. It sits left of the
+   maximise button so the two never overlap. */
+.obs-map-reset {
+  position: absolute;
+  top: 0.4rem;
+  right: 2.55rem;
+  z-index: 1000;
+  display: none;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: 1px solid var(--pl-line, rgb(0 0 0 / 0.12));
+  border-radius: 6px;
+  background: var(--surface-1, rgb(255 255 255 / 0.75));
+  color: inherit;
+  cursor: pointer;
+}
+.obs-panel--max > .obs-map-reset {
+  display: grid;
+}
+.obs-map-reset svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+.obs-map-reset:hover {
+  color: var(--gold, #b8860b);
+  border-color: var(--gold, #b8860b);
+}
+/* Leaflet's own zoom control is added only while maximised; keep it clear of
+   the two buttons in the opposite corner. */
+.obs-panel--max .leaflet-top.leaflet-left {
+  top: 0.3rem;
+  left: 0.3rem;
+}
+/* Inline, the strip is not draggable, so the grab cursor would be a lie. */
+.obs-panel--max .obs-stripmap {
+  cursor: grab;
+}
+.obs-panel--max .obs-stripmap:active {
+  cursor: grabbing;
+}
+.obs-maxable:hover > .obs-max-btn,
+.obs-maxable.obs-panel--max > .obs-max-btn {
+  opacity: 1;
+}
+/* A positioned box around the drill map alone, so maximising frames the map and
+   not the "unmapped events" list printed beneath it. */
+.obs-map-box {
+  position: relative;
+}
+/* Maximised, a map should use the whole frame: the height cap that keeps it a
+   band in the page is exactly what must not survive fullscreen. */
+.obs-panel--max.obs-maxable .obs-map,
+.obs-panel--max.obs-maxable .obs-stripmap,
+.obs-panel--max .obs-map-box .obs-map {
+  height: 100%;
+  max-height: none;
+}
+.obs-panel--max.obs-maxable {
+  padding: 0;
+}
+.obs-panel--max.obs-maxable .leaflet-container {
+  height: 100%;
+}
+
+/* The class does the filling, not the Fullscreen API — so the panel still fills
+   the viewport when the request is refused (an iframe without allow=fullscreen,
+   older iOS Safari). Fullscreen only removes the browser's own chrome on top. */
+.obs-panel--max {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  margin: 0;
+  border-radius: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 3rem);
+  background: var(--surface-0, #fff);
+}
+.obs-panel--max .obs-stk {
+  max-height: 78vh;
+}
+:root.obs-maxed {
+  overflow: hidden;
+}
+.obs-panel--max:fullscreen {
+  background: var(--surface-0, #fff);
+}
+
+@media (prefers-color-scheme: dark) {
+  .obs-panel--max,
+  .obs-panel--max:fullscreen {
+    background: var(--surface-0, #12141a);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .obs-stk-seg,
+  .obs-max-btn {
+    transition: none;
+  }
+}
+
+/* ── "Year still in progress" wash ─────────────────────────────────────────── */
+/* The newest year is always under-counted — events still to come, and speaker
+   assignments that land last. Marked on both chart idioms so the final column
+   is never read as a decline. */
+.obs-stk-prov,
+.obs-tc-prov {
+  fill: url(#obsStkHatch);
+  color: var(--ink-3, #6b7280);
+  pointer-events: none;
+}
+.obs-tc-prov {
+  fill: var(--ink-3, #6b7280);
+  opacity: 0.07;
+}
+.obs-stk-provl,
+.obs-tc-provl {
+  fill: var(--ink-3, #6b7280);
+  font-size: 10px;
+  font-style: italic;
+  pointer-events: none;
+}
+
+/* ── Grouped subject tabs ──────────────────────────────────────────────────── */
+/* Eight flat tabs do not scan. The split is real: the first group counts EVENTS
+   and works on a record with no programme at all; the second reads what was
+   INSIDE them. */
+.obs-mode-group-l {
+  font-size: var(--step--2, 0.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.55;
+  margin-right: 0.35rem;
+  align-self: center;
+  white-space: nowrap;
+}
+.obs-chart-bar .obs-topic-views {
+  flex-wrap: wrap;
+}
+@media (max-width: 700px) {
+  .obs-mode-group-l {
+    flex-basis: 100%;
+    margin: 0 0 0.15rem;
+  }
+}
+
+/* ── Mobile: the subject/view controls ─────────────────────────────────────── */
+/* ⚠ `.obs-topic-views` is an inline-flex segmented control with `overflow:
+   hidden`. That is right on a wide screen and wrong on a narrow one: the group
+   cannot shrink below its content, so the buttons past the edge were CLIPPED
+   rather than wrapped — with eight subjects in two groups, most of them were
+   simply unreachable on a phone.
+
+   Below 700px the segmented look is dropped for wrapped pills. Joinery that
+   depends on "the button before me is on the same row" cannot survive wrapping,
+   so it is replaced rather than patched. */
+@media (max-width: 700px) {
+  .obs-chart-bar {
+    justify-content: flex-start;
+  }
+  .obs-chart-bar .obs-topic-views,
+  .obs-chart-bar .obs-topic-units {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    border: 0;
+    overflow: visible;
+    width: 100%;
+  }
+  .obs-chart-bar .obs-topic-view,
+  .obs-chart-bar .obs-topic-unit {
+    border: 1px solid var(--rule-0);
+    border-radius: 999px;
+    /* ~40px tall: a real tap target, not a 24px desktop control. */
+    padding: 0.5rem 0.85rem;
+    line-height: 1.15;
+  }
+  /* The segmented separator is meaningless once the group wraps. */
+  .obs-chart-bar .obs-topic-view + .obs-topic-view,
+  .obs-chart-bar .obs-topic-unit + .obs-topic-unit {
+    border-left: 1px solid var(--rule-0);
+  }
+  .obs-mode-group-l {
+    flex-basis: 100%;
+    margin: 0.15rem 0 0.1rem;
+  }
+}
+
+/* ── Mobile: the charts themselves ─────────────────────────────────────────── */
+@media (max-width: 700px) {
+  /* ⚠ THE TWO CHART IDIOMS NEED OPPOSITE TREATMENT HERE.
+     The line chart already handles narrow screens in JS: chartGeom() returns a
+     SMALLER viewBox below 560px, sized so `font-size: var(--step--2)` is that
+     many real pixels. Forcing a min-width on it would stretch that drawing and
+     defeat the tuning — so it is left to size itself.
+     The stacked chart has no responsive variant: one fixed 1000×340 viewBox
+     whose 11px labels turn to mush at 360px. It gets a minimum width and the
+     panel scrolls. */
+  .obs-panel--stk {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .obs-stk {
+    min-width: 560px;
+  }
+  /* The stacked legend can run to 39 chips; cap it and let it scroll rather
+     than pushing the chart off the top of a phone screen. */
+  .obs-stk-legend {
+    max-height: 9.5rem;
+    overflow-y: auto;
+  }
+  .obs-max-btn {
+    /* Always visible on touch: there is no hover to reveal it with. */
+    opacity: 1;
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+}
+
+/* A maximised panel on a phone should use the whole screen, and the chart
+   inside it no longer needs the min-width crutch — that is the point of it. */
+@media (max-width: 700px) {
+  .obs-panel--max {
+    padding: 0.6rem;
+  }
+  .obs-panel--max .obs-stk {
+    min-width: 0;
+  }
+  .obs-panel--max .obs-stk-legend {
+    max-height: 40vh;
+  }
+}

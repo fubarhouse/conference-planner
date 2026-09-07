@@ -1,0 +1,596 @@
+{
+  "event": {
+    "regionCode": "APAC",
+    "country": "New Zealand",
+    "designation": "DrupalSouth",
+    "ecosystem": "drupal",
+    "location": "Christchurch",
+    "year": "2008",
+    "website": "http://christchurch2008.drupalsouth.net.nz",
+    "region": "New Zealand – Christchurch",
+    "venue": "The Twisted Hop, Christchurch",
+    "timezone": "Pacific/Auckland",
+    "enabled": true,
+    "startDate": "2008-10-31T20:00:00Z",
+    "endDate": "2008-11-02T05:15:00Z",
+    "sourceCache": "cache/wayback/drupalsouth-2009/raw",
+    "logo": {
+      "image": "./img/logos/drupalsouth/2008-christchurch.png",
+      "imageAlt": "DrupalSouth logo",
+      "usePlate": false
+    },
+    "flickr": {
+      "enabled": false,
+      "groupUrl": "",
+      "image": "",
+      "imageAlt": ""
+    },
+    "sponsors": [
+      {
+        "id": "sponsor-2",
+        "title": "Signify",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 20,
+        "image": "./img/sponsors/drupalsouth/2008-christchurch/sponsor-2.png",
+        "imageAlt": "Signify logo",
+        "link": "http://drupalsouth.net.nz/sponsor/signify",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "christchurch2008-drupalsouth-net-nz-programme"
+        ]
+      },
+      {
+        "id": "sponsor-3",
+        "title": "Civic Actions",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 30,
+        "image": "./img/sponsors/drupalsouth/2008-christchurch/sponsor-3.png",
+        "imageAlt": "Civic Actions logo",
+        "link": "http://drupalsouth.net.nz/sponsor/civicactions",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "christchurch2008-drupalsouth-net-nz-programme"
+        ]
+      },
+      {
+        "id": "sponsor-4",
+        "title": "egressive",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 40,
+        "image": "",
+        "imageAlt": "",
+        "link": "http://drupalsouth.net.nz/sponsor/egressive",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "christchurch2008-drupalsouth-net-nz-programme"
+        ]
+      },
+      {
+        "id": "sponsor-5",
+        "title": "encode",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 50,
+        "image": "./img/sponsors/drupalsouth/2008-christchurch/sponsor-5.png",
+        "imageAlt": "encode logo",
+        "link": "http://drupalsouth.net.nz/sponsor/encode",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "christchurch2008-drupalsouth-net-nz-programme"
+        ]
+      },
+      {
+        "id": "sponsor-6",
+        "title": "Evolved Development",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 60,
+        "image": "./img/sponsors/drupalsouth/2008-christchurch/sponsor-6.png",
+        "imageAlt": "Evolved Development logo",
+        "link": "http://drupalsouth.net.nz/sponsor/evolved-development",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "christchurch2008-drupalsouth-net-nz-programme"
+        ]
+      }
+    ],
+    "columns": 3,
+    "scheduleURLs": [
+      "http://christchurch2008.drupalsouth.net.nz/programme"
+    ],
+    "other_urls": [],
+    "sources": [
+      {
+        "id": "christchurch2008-drupalsouth-net-nz-programme",
+        "kind": "schedule",
+        "url": "http://christchurch2008.drupalsouth.net.nz/programme",
+        "verifiedAt": "2026-08-23",
+        "verifiedBy": "policy"
+      },
+      {
+        "id": "christchurch2008-drupalsouth-net-nz",
+        "kind": "other",
+        "url": "http://christchurch2008.drupalsouth.net.nz",
+        "verifiedAt": "2026-08-23",
+        "verifiedBy": "policy"
+      }
+    ],
+    "sourceIds": [
+      "christchurch2008-drupalsouth-net-nz-programme",
+      "christchurch2008-drupalsouth-net-nz"
+    ]
+  },
+  "items": [
+    {
+      "startTime": "2008-10-31T20:00:00Z",
+      "endTime": "2008-10-31T20:30:00Z",
+      "duration": "P30M",
+      "title": "Setup",
+      "location": "Saturday",
+      "link": "",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-10-31T20:30:00Z",
+      "endTime": "2008-10-31T21:00:00Z",
+      "duration": "P30M",
+      "title": "Registration, coffee",
+      "location": "Saturday",
+      "link": "",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-10-31T21:00:00Z",
+      "endTime": "2008-10-31T21:30:00Z",
+      "duration": "P30M",
+      "title": "Welcome",
+      "location": "Saturday",
+      "link": "http://drupalsouth.net.nz/session/welcome",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "jonathan.hunt"
+      ],
+      "full_description": "Welcome to DrupalSouth. Introductions, house keeping, scene setting.",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-10-31T21:30:00Z",
+      "endTime": "2008-10-31T22:00:00Z",
+      "duration": "P30M",
+      "title": "Drupal vs the rest",
+      "location": "Saturday",
+      "link": "http://drupalsouth.net.nz/session/drupal-vs-the-rest",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Julian Carver"
+      ],
+      "full_description": "Having conducted multiple RFPs where Drupal was offered as a solution, Julian can offer some insight into how Drupal stacks up against competing offerings such as Silverstripe, Alfresco, Episerver and others. How credible is Drupal in the enterprise? What does it do well? What needs to improve?",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-10-31T22:00:00Z",
+      "endTime": "2008-10-31T22:30:00Z",
+      "duration": "P30M",
+      "title": "Drupal and the Encyclopedia of Life - True Taxonomy",
+      "location": "Saturday",
+      "link": "http://drupalsouth.net.nz/session/something-about-drupal",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Dan dman"
+      ],
+      "full_description": "The Encyclopedia of Life is a fascinating project investing big money and brainpower into Drupal. It is, or will be, a catalog of every single organism on Earth, something like 3 to 7 million taxons. They are distributing branches of this global tree to registered scientists as their own Drupal subsite, each maintaining and sharing a clade of the web of life.",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-10-31T22:30:00Z",
+      "endTime": "2008-10-31T23:00:00Z",
+      "duration": "P30M",
+      "title": "Drupal and CiviCRM for campaigns",
+      "location": "Saturday",
+      "link": "http://drupalsouth.net.nz/session/drupal-and-civicrm-for-campaigns",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Chris Burgess"
+      ],
+      "full_description": "Reach your audience with effective campaigns using Drupal and CiviCRM, based on experience with the NZ Greens and other advocacy organisations. The archived session page also notes it had not yet been allocated a slot at that capture date.",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-10-31T23:00:00Z",
+      "endTime": "2008-10-31T23:30:00Z",
+      "duration": "P30M",
+      "title": "JQuery UI interface development for Drupal",
+      "location": "Saturday",
+      "link": "http://drupalsouth.net.nz/session/cool-user-interfaces-using-jquery-ui",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "David Thomas"
+      ],
+      "full_description": "Using jQuery UI to easily create modern eye-catching widgets and effects for Drupal.",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-10-31T23:30:00Z",
+      "endTime": "2008-11-01T00:00:00Z",
+      "duration": "P30M",
+      "title": "OpenID with Drupal",
+      "location": "Saturday",
+      "link": "http://drupalsouth.net.nz/session/openid-with-drupal",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Marek Kuziel"
+      ],
+      "full_description": "During this session you will find out answers for the following questions:\n\n- What is OpenID?\n- What is current state of OpenID in Drupal?\n- How can I use OpenID at my Drupal based website today?",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-11-01T00:00:00Z",
+      "endTime": "2008-11-01T01:00:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "Saturday",
+      "link": "",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-11-01T01:00:00Z",
+      "endTime": "2008-11-01T03:30:00Z",
+      "duration": "P150M",
+      "title": "Unconference - Adhoc talks, demos, tutorials, hacking",
+      "location": "Saturday",
+      "link": "",
+      "track": [
+        "Unconference"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-11-01T03:45:00Z",
+      "endTime": "2008-11-01T04:00:00Z",
+      "duration": "P15M",
+      "title": "Wrap up",
+      "location": "Saturday",
+      "link": "",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-11-01T04:00:00Z",
+      "endTime": "2008-11-01T05:00:00Z",
+      "duration": "P60M",
+      "title": "Refreshments",
+      "location": "Saturday",
+      "link": "",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-11-01T05:00:00Z",
+      "endTime": "2008-11-01T05:15:00Z",
+      "duration": "P15M",
+      "title": "Cleanup",
+      "location": "Saturday",
+      "link": "",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-11-01T20:30:00Z",
+      "endTime": "2008-11-01T21:00:00Z",
+      "duration": "P30M",
+      "title": "Welcome",
+      "location": "Sunday",
+      "link": "http://drupalsouth.net.nz/session/welcome",
+      "track": [
+        "General"
+      ],
+      "speakers": [
+        "jonathan.hunt"
+      ],
+      "full_description": "Welcome to DrupalSouth. Introductions, house keeping, scene setting.",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-11-01T21:00:00Z",
+      "endTime": "2008-11-01T21:30:00Z",
+      "duration": "P30M",
+      "title": "Google Maps in Drupal; The Hub Map",
+      "location": "Sunday",
+      "link": "http://drupalsouth.net.nz/session/google-maps-in-drupal-the-hub-map",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Bevan Rudge"
+      ],
+      "full_description": "Demonstrate features of the Hub Map, talk briefly about how it was built, current issues and developments, and plans for the future. This will be followed up with a \"Drupal+GoogleMaps mashup in 30 minutes\" tutorial.",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-11-01T21:30:00Z",
+      "endTime": "2008-11-01T22:00:00Z",
+      "duration": "P30M",
+      "title": "Managing Drupal with Drupal",
+      "location": "Sunday",
+      "link": "http://drupalsouth.net.nz/session/managing-drupal-with-drupal",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Dave Lane"
+      ],
+      "full_description": "Using CaseTracker, organic groups, custom code to manage Drupal projects from requirements capture, development, testing and support.",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-11-01T22:00:00Z",
+      "endTime": "2008-11-01T22:30:00Z",
+      "duration": "P30M",
+      "title": "Drupal in Education",
+      "location": "Sunday",
+      "link": "http://drupalsouth.net.nz/session/drupal-in-education",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Josh Campbell"
+      ],
+      "full_description": "Twice nominated for NZ Open Source Awards, Josh Campbell is at the forefront of teaching computing using open source tools. Find out how Drupal has been used at Hagley Community College.",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-11-01T22:30:00Z",
+      "endTime": "2008-11-01T23:00:00Z",
+      "duration": "P30M",
+      "title": "Drupal on Postgres",
+      "location": "Sunday",
+      "link": "http://drupalsouth.net.nz/session/drupal-on-postgres",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Brenda Shiny"
+      ],
+      "full_description": "Usually Drupal is deployed on MySQL. What does Postgres bring to the table and what do you need to look out for?",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-11-01T23:00:00Z",
+      "endTime": "2008-11-01T23:30:00Z",
+      "duration": "P30M",
+      "title": "NZ Government web standards and Drupal",
+      "location": "Sunday",
+      "link": "http://drupalsouth.net.nz/session/nz-government-web-standards-and-drupal",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Jonathan Hunt"
+      ],
+      "full_description": "Sites for NZ Government agencies are required to meet NZ Government Web Standards and Recommendations. These guidelines are generally good practice for all websites. Find out how to alter Drupal to match NZ web standards.",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-11-01T23:30:00Z",
+      "endTime": "2008-11-02T00:30:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "Sunday",
+      "link": "",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-11-02T00:30:00Z",
+      "endTime": "2008-11-02T03:30:00Z",
+      "duration": "P180M",
+      "title": "Unconference",
+      "location": "Sunday",
+      "link": "",
+      "track": [
+        "Unconference"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-11-02T03:45:00Z",
+      "endTime": "2008-11-02T04:00:00Z",
+      "duration": "P15M",
+      "title": "Wrap up/Farewell",
+      "location": "Sunday",
+      "link": "",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-11-02T04:00:00Z",
+      "endTime": "2008-11-02T04:30:00Z",
+      "duration": "P30M",
+      "title": "Refreshments",
+      "location": "Sunday",
+      "link": "",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    },
+    {
+      "startTime": "2008-11-02T05:00:00Z",
+      "endTime": "2008-11-02T05:15:00Z",
+      "duration": "P15M",
+      "title": "Cleanup",
+      "location": "Sunday",
+      "link": "",
+      "track": [
+        "General"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "christchurch2008-drupalsouth-net-nz-programme"
+      ]
+    }
+  ]
+}

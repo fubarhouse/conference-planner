@@ -1,0 +1,13 @@
+{
+  "_plannerKey": "planner-vanuatu-cruise2-2027",
+  "_lastModified": "2026-08-04T10:33:15.878Z",
+  "_id": "4547c412-c7f2-4507-b2fb-e0447530b56a",
+  "contacts": [
+    {
+      "title": "A Test Sponsor",
+      "tier": "Gold",
+      "note": "with a comma, a \"quote\" and <html>",
+      "id": "FIXED_ID"
+    }
+  ]
+}

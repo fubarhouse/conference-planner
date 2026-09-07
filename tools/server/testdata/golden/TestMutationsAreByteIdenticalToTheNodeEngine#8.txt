@@ -1,0 +1,350 @@
+{
+  "event": {
+    "regionCode": "APAC",
+    "country": "India",
+    "designation": "DrupalCamp New Delhi",
+    "ecosystem": "drupal",
+    "location": "Gurgaon",
+    "year": "2011",
+    "website": "http://drupalcampdelhi.in",
+    "region": "India",
+    "startDate": "2011-04-16T04:30:00Z",
+    "endDate": "2011-04-16T11:15:00Z",
+    "venue": "303, 3rd Floor, Solitaire Plaza, near Guru Dronacharya Metro Station, Gurgaon",
+    "timezone": "Asia/Kolkata",
+    "enabled": true,
+    "flickr": {
+      "enabled": false,
+      "provider": "",
+      "groupUrl": "",
+      "image": "",
+      "imageAlt": ""
+    },
+    "logo": {
+      "image": "",
+      "imageAlt": "DrupalCamp New Delhi 2011 logo",
+      "usePlate": false,
+      "logoDisabled": false,
+      "faIcon": ""
+    },
+    "sponsors": [
+      {
+        "id": "sponsor-2",
+        "title": "Monsoon Consulting",
+        "tier": "Platinum",
+        "row": 1,
+        "priority": 2,
+        "image": "",
+        "imageAlt": "Monsoon Consulting logo",
+        "link": "",
+        "bgStyle": "light-plate",
+        "aspect": "auto",
+        "enabled": true
+      }
+    ],
+    "sponsorRecord": {
+      "state": "logos-lost",
+      "checkedAt": "2026-08-26",
+      "note": "Both sponsors and their tier are recorded, but no logo survives — every imagecache path on both domains returns \"not archived\".",
+      "sourceIds": [
+        "dcd-apr11-sponsors"
+      ]
+    },
+    "columns": 3,
+    "scheduleURLs": [
+      "http://drupalcampdelhi.in/presentations"
+    ],
+    "other_urls": [
+      "http://www.drupalcampdelhi.com/content/program",
+      "http://www.drupalcampdelhi.com/sponsors",
+      "http://drupalcampdelhi.in/program/sessions"
+    ],
+    "sources": [
+      {
+        "id": "dcd-apr11-presentations",
+        "kind": "schedule",
+        "url": "http://drupalcampdelhi.in/presentations",
+        "retrievedAt": "2026-08-26",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110415063654",
+          "captureUrl": "https://web.archive.org/web/20110415063654/http://drupalcampdelhi.in/presentations"
+        },
+        "notes": "Captured the day before the event. A plain three-column table — Sessions | Presenter(s) | Time slot — and the ONLY timed programme this edition has. It lives on drupalcampdelhi.IN; the .com domain carries only /content/program, which gives day-level shape (\"9:30 AM to 6:00 PM\", \"5/6 presentations\") and no per-session times, which is why this edition was twice ruled out. ⚠️ Its Time slot column is NOT authoritative: it puts \"Magento integration with Drupal.\" at 17:00 - 17:30, but that session node references slot /content/16-april-1330-1400 and no 17:00 slot node exists. Times here come from the nodereferences. Both drupalcampdelhi.com and drupalcampdelhi.in are defunct; the .com domain now serves an unrelated squatter page."
+      },
+      {
+        "id": "dcd-apr11-slots",
+        "kind": "schedule",
+        "url": "http://drupalcampdelhi.in/content/16-april-1330-1400",
+        "retrievedAt": "2026-08-26",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110606111710",
+          "captureUrl": "https://web.archive.org/web/20110606111710/http://drupalcampdelhi.in/content/16-april-1330-1400"
+        },
+        "notes": "One of seven COD time-slot nodes (1000, 1100, 1200, 1330, 1400, 1500, 1600). Each is an EMPTY container — title plus \"Date and time\" and nothing else — so they look worthless on their own; their value is that each session node references one, which is what resolves the Magento time conflict above. Both drupalcampdelhi.com and drupalcampdelhi.in are defunct; the .com domain now serves an unrelated squatter page."
+      },
+      {
+        "id": "dcd-apr11-venue",
+        "kind": "venue",
+        "url": "http://www.drupalcampdelhi.com/content/program",
+        "retrievedAt": "2026-08-26",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110423022906",
+          "captureUrl": "https://web.archive.org/web/20110423022906/http://www.drupalcampdelhi.com/content/program"
+        },
+        "notes": "Venue and running order: \"303, 3rd Floor, Solitaire Plaza, Near Guru Dronacharya Metro station, Gurgaon, India\", 9:30 AM to 6:00 PM, presentations from 10 AM, 30 minutes each plus 15-20 minutes Q&A. Hashtag #dcd11. Both drupalcampdelhi.com and drupalcampdelhi.in are defunct; the .com domain now serves an unrelated squatter page."
+      },
+      {
+        "id": "dcd-apr11-sponsors",
+        "kind": "sponsors",
+        "url": "http://www.drupalcampdelhi.com/sponsors",
+        "retrievedAt": "2026-08-26",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110423022947",
+          "captureUrl": "https://web.archive.org/web/20110423022947/http://www.drupalcampdelhi.com/sponsors"
+        },
+        "notes": "Two Platinum sponsors, Srijan and Monsoon Consulting. The two captures list them in opposite orders, so placement is not data. Monsoon Consulting's logo is also a different file in each (minnelli_logo_1.png on 15 April, monsoon_consulting_0.jpg on 23 April). Neither logo survives: every imagecache/preset_test path returns \"not archived\". Both drupalcampdelhi.com and drupalcampdelhi.in are defunct; the .com domain now serves an unrelated squatter page."
+      },
+      {
+        "id": "dcd-apr11-migrating",
+        "kind": "sessions",
+        "url": "http://drupalcampdelhi.in/sessions/migrating-content-drupal",
+        "retrievedAt": "2026-08-26",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110415063933",
+          "captureUrl": "https://web.archive.org/web/20110415063933/http://drupalcampdelhi.in/sessions/migrating-content-drupal"
+        },
+        "notes": "Drupal 6 / COD markup: fields are `field-field-<name>` (doubled \"field-\") and the page flattens to a single text run, so values must be read off the field wrappers, not line boundaries. Both drupalcampdelhi.com and drupalcampdelhi.in are defunct; the .com domain now serves an unrelated squatter page."
+      },
+      {
+        "id": "dcd-apr11-multimedia",
+        "kind": "sessions",
+        "url": "http://drupalcampdelhi.in/sessions/multimedia-drupal-7",
+        "retrievedAt": "2026-08-26",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110408004937",
+          "captureUrl": "https://web.archive.org/web/20110408004937/http://drupalcampdelhi.in/sessions/multimedia-drupal-7"
+        },
+        "notes": "Drupal 6 / COD markup: fields are `field-field-<name>` (doubled \"field-\") and the page flattens to a single text run, so values must be read off the field wrappers, not line boundaries. Both drupalcampdelhi.com and drupalcampdelhi.in are defunct; the .com domain now serves an unrelated squatter page."
+      },
+      {
+        "id": "dcd-apr11-openpublish",
+        "kind": "sessions",
+        "url": "http://drupalcampdelhi.in/sessions/introduction-open-publish",
+        "retrievedAt": "2026-08-26",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110408004925",
+          "captureUrl": "https://web.archive.org/web/20110408004925/http://drupalcampdelhi.in/sessions/introduction-open-publish"
+        },
+        "notes": "Drupal 6 / COD markup: fields are `field-field-<name>` (doubled \"field-\") and the page flattens to a single text run, so values must be read off the field wrappers, not line boundaries. Both drupalcampdelhi.com and drupalcampdelhi.in are defunct; the .com domain now serves an unrelated squatter page."
+      },
+      {
+        "id": "dcd-apr11-hudson",
+        "kind": "sessions",
+        "url": "http://drupalcampdelhi.in/sessions/hudsonjenkins-your-development-process",
+        "retrievedAt": "2026-08-26",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110408004919",
+          "captureUrl": "https://web.archive.org/web/20110408004919/http://drupalcampdelhi.in/sessions/hudsonjenkins-your-development-process"
+        },
+        "notes": "Drupal 6 / COD markup: fields are `field-field-<name>` (doubled \"field-\") and the page flattens to a single text run, so values must be read off the field wrappers, not line boundaries. Both drupalcampdelhi.com and drupalcampdelhi.in are defunct; the .com domain now serves an unrelated squatter page."
+      },
+      {
+        "id": "dcd-apr11-git",
+        "kind": "sessions",
+        "url": "http://drupalcampdelhi.in/sessions/git-drupal",
+        "retrievedAt": "2026-08-26",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110408004904",
+          "captureUrl": "https://web.archive.org/web/20110408004904/http://drupalcampdelhi.in/sessions/git-drupal"
+        },
+        "notes": "Drupal 6 / COD markup: fields are `field-field-<name>` (doubled \"field-\") and the page flattens to a single text run, so values must be read off the field wrappers, not line boundaries. Both drupalcampdelhi.com and drupalcampdelhi.in are defunct; the .com domain now serves an unrelated squatter page."
+      },
+      {
+        "id": "dcd-apr11-domain",
+        "kind": "sessions",
+        "url": "http://drupalcampdelhi.in/sessions/domain-access-drupal",
+        "retrievedAt": "2026-08-26",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110417084053",
+          "captureUrl": "https://web.archive.org/web/20110417084053/http://drupalcampdelhi.in/sessions/domain-access-drupal"
+        },
+        "notes": "Drupal 6 / COD markup: fields are `field-field-<name>` (doubled \"field-\") and the page flattens to a single text run, so values must be read off the field wrappers, not line boundaries. Both drupalcampdelhi.com and drupalcampdelhi.in are defunct; the .com domain now serves an unrelated squatter page."
+      },
+      {
+        "id": "dcd-apr11-magento",
+        "kind": "sessions",
+        "url": "http://drupalcampdelhi.in/sessions/magento-integration-drupal",
+        "retrievedAt": "2026-08-26",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20110430060840",
+          "captureUrl": "https://web.archive.org/web/20110430060840/http://drupalcampdelhi.in/sessions/magento-integration-drupal"
+        },
+        "notes": "Drupal 6 / COD markup: fields are `field-field-<name>` (doubled \"field-\") and the page flattens to a single text run, so values must be read off the field wrappers, not line boundaries. Both drupalcampdelhi.com and drupalcampdelhi.in are defunct; the .com domain now serves an unrelated squatter page."
+      }
+    ],
+    "sourceIds": [
+      "dcd-apr11-presentations",
+      "dcd-apr11-venue"
+    ]
+  },
+  "items": [
+    {
+      "startTime": "2011-04-16T04:30:00Z",
+      "endTime": "2011-04-16T05:15:00Z",
+      "duration": "P45M",
+      "title": "Migrating content into Drupal",
+      "location": "",
+      "link": "http://drupalcampdelhi.in/sessions/migrating-content-drupal",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Ishan Mahajan"
+      ],
+      "full_description": "The presentation is on migrating content into Drupal from other sources using the migrate module( http://drupal.org/project/migrate ). In this presentation, we would demonstrate how to use the migrate module to convert a web site built in TYPO3 cms to Drupal.",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd-apr11-presentations",
+        "dcd-apr11-migrating"
+      ]
+    },
+    {
+      "startTime": "2011-04-16T05:30:00Z",
+      "endTime": "2011-04-16T06:15:00Z",
+      "duration": "P45M",
+      "title": "Multimedia in Drupal 7",
+      "location": "",
+      "link": "http://drupalcampdelhi.in/sessions/multimedia-drupal-7",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Jacob Singh"
+      ],
+      "full_description": "The Media module and the modules which interact with seek to deliver a usable, extendable and consistent platform for handling images, video, audio and other filetypes from your local files and 3rd party services like Youtube and Flickr.\n\nThis functionality is the result of more than two years of development by over a dozen developers during several sprints. Come see a demo of what the module does now, its goals for the future and what you can do to get involved.",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd-apr11-presentations",
+        "dcd-apr11-multimedia"
+      ]
+    },
+    {
+      "startTime": "2011-04-16T06:30:00Z",
+      "endTime": "2011-04-16T07:15:00Z",
+      "duration": "P45M",
+      "title": "Introduction to Open Publish",
+      "location": "",
+      "link": "http://drupalcampdelhi.in/sessions/introduction-open-publish",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Shashank Merothiya"
+      ],
+      "full_description": "The presentation is on why OpenPublish is a perfect choice for magazines, newspapers, journals, trade publications, broadcast, wire service, membership publications and other media outlets? And why its perfect for YOUR business?\n\nOpenPublish has been designed to meet the needs of any publisher – whether large newspaper, TV news site, niche information publication or something in between. It is a flexible solution easily tailored to fit any organization’s needs.\n\nIn this presentation, we would take a popular media website as part of example and try and explain how it can be bettered and even implemented in 2/3rds of the time then it originally took. Yes it was built by us so we know it!\n\nWe would show how various ways of monetizing like Ad Serving / Premium Content / and Content Sponsorship can be handled easily through the use of OpenPublish. How being intuitive, powerful and extensible makes it the best choice for your media website.",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd-apr11-presentations",
+        "dcd-apr11-openpublish"
+      ]
+    },
+    {
+      "startTime": "2011-04-16T08:00:00Z",
+      "endTime": "2011-04-16T08:30:00Z",
+      "duration": "P30M",
+      "title": "Magento integration with Drupal",
+      "location": "",
+      "link": "http://drupalcampdelhi.in/sessions/magento-integration-drupal",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Piyush Poddar"
+      ],
+      "full_description": "Magento is a very famous e-commerce solution. The presentation would cover how the integration of magento with drupal would take place.",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd-apr11-presentations",
+        "dcd-apr11-magento"
+      ]
+    },
+    {
+      "startTime": "2011-04-16T08:30:00Z",
+      "endTime": "2011-04-16T09:15:00Z",
+      "duration": "P45M",
+      "title": "Hudson/Jenkins in your development process",
+      "location": "",
+      "link": "http://drupalcampdelhi.in/sessions/hudsonjenkins-your-development-process",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Ritesh Gurung"
+      ],
+      "full_description": "Hudson - the swiss knife for continuous integration is used for continuous integration (CI) implements which is a continuous processes of applying quality control — small pieces of effort, applied frequently. Continuous integration aims to improve the quality of software, and to reduce the time taken to deliver it, by replacing the traditional practice of applying quality control after completing all development",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd-apr11-presentations",
+        "dcd-apr11-hudson"
+      ]
+    },
+    {
+      "startTime": "2011-04-16T09:30:00Z",
+      "endTime": "2011-04-16T10:15:00Z",
+      "duration": "P45M",
+      "title": "Git with Drupal",
+      "location": "",
+      "link": "http://drupalcampdelhi.in/sessions/git-drupal",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Pratul Kalia"
+      ],
+      "full_description": "Drupal recently moved to the Git distributed VCS, retiring the ages-old CVS repository. One of the largest Git migrations ever done, it shows the strength and passion of the Drupal community. All old excuses for not contributing to Drupal (\"CVS is hard and crappy!!!\") are now invalid. Get started with this session!",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd-apr11-presentations",
+        "dcd-apr11-git"
+      ]
+    },
+    {
+      "startTime": "2011-04-16T10:30:00Z",
+      "endTime": "2011-04-16T11:15:00Z",
+      "duration": "P45M",
+      "title": "Domain access in Drupal",
+      "location": "",
+      "link": "http://drupalcampdelhi.in/sessions/domain-access-drupal",
+      "track": [
+        "Session"
+      ],
+      "speakers": [
+        "Vidhatanand Sharma"
+      ],
+      "full_description": "Drupal rocks for the speed at which we create gorgeous sites. It’s even better when it comes to a \"network\". For a network of institution where each \"node\" of the network has same workflow, generates and publishes content in same data structure but they need a dedicated website. Its idealcase to leverage domain access to cut down the development cost and delivery time amazingly.\n\nThe Domain Access project is a suite of modules that provide tools for running a group of affiliated sites from one Drupal installation and a single shared database.\n\nThe session will cover:\n\n1. Business point of view on where you can implement it.\n\n2. A “application and config” to show how to set it up, configure and quick look on how it works.\n\n3. Difficulties which may arise and the solution from our experiences. Also issues like how to handle must have features (SEO/Multilingual) with domain access.\n\nIntended Audiences:\n\nThe session would be great if you have a drupal business or plan to have business around drupal. We will explain how domain access can create your most profitable project. Another class of audience to benefit will be intermediate Drupal site builders and developers. While we won't jump into code at all, we will be demonstrating and explaining configurations and setup.\n\nQuestions answered in the session:\n\n1. What is domain access and what are the possibilities of what i can develop with domain access? 2. How and in what case exactly i can offer such solution to my client? 3. How to configure and setup domain access? 4. What are problems i may face while implementing this for a serious project and their solution? 5. Ok, i understand these things now. Any tips and tricks or any leftovers?",
+      "video_url": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "dcd-apr11-presentations",
+        "dcd-apr11-domain"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "name": "Nobody At All",
+  "sessions": 0,
+  "partners": []
+}

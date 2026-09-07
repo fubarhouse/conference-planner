@@ -1,0 +1,474 @@
+{
+  "query": "testing",
+  "terms": [
+    "testing"
+  ],
+  "mode": "exact",
+  "facets": {
+    "series": "All",
+    "region": "EMEA",
+    "country": "All",
+    "year": "All"
+  },
+  "total": 15,
+  "offset": 0,
+  "byYear": {
+    "2010": 2,
+    "2017": 1,
+    "2024": 4,
+    "2026": 8
+  },
+  "byTerm": {
+    "testing": {
+      "2010": 2,
+      "2017": 1,
+      "2024": 4,
+      "2026": 8
+    }
+  },
+  "breakdown": {
+    "series": [
+      {
+        "name": "DrupalCon",
+        "count": 8,
+        "total": 94
+      },
+      {
+        "name": "Drupal Dev Days",
+        "count": 6,
+        "total": 117
+      },
+      {
+        "name": "Drupal Mountain Camp",
+        "count": 1,
+        "total": 40
+      }
+    ],
+    "region": [
+      {
+        "name": "EMEA",
+        "count": 15,
+        "total": 278
+      }
+    ],
+    "country": [
+      {
+        "name": "Netherlands",
+        "count": 8,
+        "total": 107
+      },
+      {
+        "name": "Bulgaria",
+        "count": 4,
+        "total": 50
+      },
+      {
+        "name": "Germany",
+        "count": 2,
+        "total": 67
+      },
+      {
+        "name": "Switzerland",
+        "count": 1,
+        "total": 40
+      }
+    ],
+    "city": [
+      {
+        "name": "Rotterdam",
+        "count": 8,
+        "total": 98
+      },
+      {
+        "name": "Burgas",
+        "count": 4,
+        "total": 50
+      },
+      {
+        "name": "Munich",
+        "count": 2,
+        "total": 67
+      },
+      {
+        "name": "Davos",
+        "count": 1,
+        "total": 40
+      }
+    ],
+    "speakers": [
+      {
+        "name": "Daniel Angelov",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Daniel Wehner",
+        "count": 1,
+        "total": 11
+      },
+      {
+        "name": "erikerskine",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Fedor ZZZ_CLX_KUONI",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Francesco Placella",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "jjchinquist",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Julien Joye",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Junaid Masoodi",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "macode",
+        "count": 1,
+        "total": 11
+      },
+      {
+        "name": "Marcus Johansson",
+        "count": 1,
+        "total": 1
+      }
+    ],
+    "events": 4,
+    "eventsTotal": 7,
+    "span": {
+      "min": 2010,
+      "max": 2026
+    }
+  },
+  "results": [
+    {
+      "matched": [
+        "testing"
+      ],
+      "title": "SDCs, Canvas, and the Agent That Builds With Them",
+      "description": "You already know how to build an SDC. Now what if your agent knew how to build one too — then dropped it into a page, verified it rendered correctly in the browser, and asked you to review the diff? This session walks through a page-building workflow driven by an AI agent that speaks your component system.\n\n**Prerequisite**\n\nFamiliarity with Drupal theme development  \n\nWorking knowledge of SDCs (structure, YAML schema, Twig templates)  \n\nBasic comfort with CLI tools; no prior AI agent experience required\n\n**Target Audience**\n\nDrupal theme and front-end developers\n\n**Outline**\n\nSDCs are a natural primitive for AI-assisted generation: self-contained, schema-driven, and with a predictable file layout. Drupal Canvas uses them as the building blocks for page composition. MCP tooling gives an agent direct read and write access for content creation and site building. Browser automation closes the loop by verifying rendered output without manual testing.\n\nWhy the SDC file layout maps cleanly to what an agent can generate reliably, including a skill that produces a complete SDC bundle (Twig, YAML, CSS) from a natural language description.\n\nHow an MCP server lets an agent read, create, and update content directly and where it needs guardrails.\n\nUsing a browser agent to catch layout regressions without writing a single test.\n\nA live demo threading SDC generation, MCP page assembly, and browser verification, including where the workflow breaks down and what you still own as a developer.\n\n**Learning Objectives**\n\nGenerate production-ready SDC file bundles using an AI agent skill tuned for Drupal's component format.  \n\nUnderstand how MCP tooling gives an agent direct access to Drupal's page management layer.  \n\nApply browser automation to verify rendered output during the component development loop.  \n\nIdentify where human judgment remains essential in an agent-assisted front-end workflow.\n\n**Experience level**  \nAnyone",
+      "speakers": "Matt Glaman",
+      "track": "development, ai & agentic architecture",
+      "location": "Van Oldenbarnevelt Room",
+      "startTime": "2026-09-30T13:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/sdcs-canvas-and-agent-builds-them",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "testing"
+      ],
+      "title": "The Reality of Accessibility Automation",
+      "description": "Lighthouse gives you 100. The European Accessibility Act expects more.\n\n**Prerequisite**\n\nNothing, I'll explain everything from scratch.\n\n**Target Audience**\n\nQAs engineers, team leads, architects, business owners, compliance officers.\n\n**Outline**\n\nAccessibility automation is often seen as the silver bullet for building inclusive digital products. With tools like axe, Lighthouse, and CI-integrated scanners becoming standard in modern development workflows, many teams assume that automated testing ensures accessibility compliance. The reality, however, is more complex.  \n\nIn this session, we'll explore the true capabilities and limitations of accessibility automation. We'll break down what automated tools can reliably detect, where they fall short, and why a significant portion of WCAG success criteria still require human judgment. Through practical examples, I'll highlight the critical gap between rule-based validation and real user experience - particularly for screen reader users, keyboard-only users, and people with cognitive disabilities.  \n\nThe session also examines the emerging role of AI in accessibility testing. Can AI help bridge the semantic and contextual gaps that traditional automation cannot cover? Where does it add value, and where does it still fall short?  \n\nAttendees will leave with a realistic understanding for accessibility quality - combining automation, AI augmentation, and human expertise. This talk challenges common misconceptions and provides a practical framework for building scalable, responsible accessibility testing strategies in modern teams.\n\n**Learning Objectives**\n\nBy the end of this session, participants will be able to:  \n\nExplain what automated accessibility tools can reliably detect - and what they fundamentally cannot  \n\nDescribe why accessibility automation typically covers only 20-40% of WCAG success criteria  \n\nDistinguish between rule-based validation and real user experience validation  \n\nEvaluate where AI can meaningfully enhance accessibility testing and where human judgment remains essential\n\n**Experience level**  \nBeginner",
+      "speakers": "Daniel Angelov",
+      "track": "user experience, accessibility & design",
+      "location": "Penn Room I&II",
+      "startTime": "2026-09-30T12:05:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/reality-accessibility-automation",
+      "video": "",
+      "minutes": 20
+    },
+    {
+      "matched": [
+        "testing"
+      ],
+      "title": "Inside the Pyramid - A path to faster, clearer Drupal testing",
+      "description": "Your Drupal test suite is slow and it doesn't have to be. The test pyramid has been a cornerstone of software quality for decades, yet Drupal core has no formal guidelines instructing contributors how to write automated tests. This session will cover both the current state – discussing techniques to write faster tests – and how to change Drupal to make these improvements structural.\n\n**Prerequisite**\n\nAttendees will get the most out of this session if they:  \n\n- Have written at least one PHPUnit test in a Drupal context (any type)  \n\n- Are familiar with the distinction between `UnitTestCase`, `KernelTestBase`, and `BrowserTestBase`  \n\n- Have a basic sense of what mocking is (full familiarity with PHPUnit mocks not required)\n\n**Target Audience**\n\nCore and module contributors/owners, Developers\n\n**Outline**\n\nDrupal's automated test suite is a huge achievement – literally – but it is slow, and one of the reasons is structural: there are no official guidelines prescribing which test type to use for which scenario. People default to Kernel or Functional tests because the Drupal architecture and the test tooling have historically made those easiest to write, even when, in principle, a Unit test would have been faster, cheaper, and equally valid.  \n\nThis session makes the case for adopting the test pyramid as an explicit, community-endorsed strategy for Drupal core, contrib, and custom code: this will require both coming up with precise guidelines and designing our code with better unit testability in mind. We have been working towards this goal since Drupal 8, we may finally be at a stage where we can reap the benefits of this monumental effort.  \n\nDuring the session we will review the current state and go over some concrete proposals to change our strategy, tooling, and documentation in order to improve the quality, consistency, and speed of our test suite(s) – and write cleaner code in the process.\n\n**Learning Objectives**\n\nBy the end of this session, attendees will:  \n\n- Understand the test pyramid and how Drupal's four test types map onto it  \n\n- Recognize the structural and tooling reasons Drupal's test suite is weighted toward slower test types — and why that's a solvable problem, not a fixed constraint  \n\n- Know the current drupal.org issues and contrib tools already moving in this direction  \n\n- Be equipped to reason through which test type to write for common Drupal scenarios  \n\n- Leave with a clear picture of what a formal test pyramid initiative for Drupal core could look like, and how to contribute to it\n\n**Experience level**  \nIntermediate",
+      "speakers": "Francesco Placella",
+      "track": "development, ai & agentic architecture",
+      "location": "Penn Room I&II",
+      "startTime": "2026-09-30T09:40:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/inside-pyramid-path-faster-clearer-drupal-testing",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "testing"
+      ],
+      "title": "AI-Augmented Accessibility: From Automated Alt-Text to Governance Gates",
+      "description": "Stop reacting to accessibility errors and start automating inclusive governance. Learn how to use AI to find accessibility errors earlier and fix them faster. We’ll bridge the gaps between AI, code, and humans with clear guidance for everyone.\n\n**Prerequisite**\n\nIt would be useful to be familiar with some basics of accessibility. This is not a 101.\n\n**Target Audience**\n\nAnyone working to meet accessibility targets.\n\n**Outline**\n\nAccessibility is often the last gate in a project. Like many bugs the longer they wait, the more difficult they are to fix. Learn how we can \"shift left\" by using AI not just to find errors, but to build better systems. This session provides a practical roadmap for integrating AI into the full Drupal lifecycle:\n\n* Content: Automating descriptive alt-text & transcripts using Drupal AI Core.  \n\n * Infrastructure: Using LLMs to architect & configure CI/CD accessibility gates (Axe-core/Playwright).  \n\n * Triage: Leveraging GitHub’s AI-powered accessibility toos to turn scans into Pull Requests.  \n\n * Governance: Implementing ACCESSIBILITY.md or Claude skills to produce better results.  \n\n * Hierarchy of Truth: Adding AI roles to that of other automated tools & humans—why the user remains the ultimate source of truth.\n\nJoin us to move beyond \"compliance checklists\" & toward a scalable, AI-assisted inclusive web.\n\nMike will also be tying this into the book he recently co-authored. Digital Accessibility Ethics: Disability Inclusion in All Things Tech,  \n\n**Learning Objectives**\n\n * Automate Content Workflows: Set up the Drupal AI module for automated, human-verified media accessibility.  \n\n * Architect Testing Gates: Use AI assistants to write configuration for robust CI/CD frameworks.  \n\n * Implement Modern Standards: Learn to use ACCESSIBILITY.md & Claude Skills to keep projects transparent and compliant.  \n\n * Validate Strategically: Understand the \"Hierarchy of Truth\" to know when to trust what.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Mike Gifford",
+      "track": "user experience, accessibility & design",
+      "location": "Leeuwen Room I&II",
+      "startTime": "2026-09-30T08:45:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/ai-augmented-accessibility-automated-alt-text-governance-gates",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "testing"
+      ],
+      "title": "Shipping products with confidence: how we rebuilt our testing tools for velocity",
+      "description": "Confidence in shipping a Drupal-based product shouldn't take 6 days of GitHub runner time, only to be greeted by flaky tests in some of our 500+ jobs. This is the story of how we migrated from Behat and PHPUnit to custom tooling on top of Playwright to reclaim velocity and confidence in our testing suite.\n\n**Prerequisite**\n\nBasic programming understanding and a familiarity with testing in PHP will help you get the most out of this session.\n\n**Target Audience**\n\nA medior developer with an interest in testing or a QA person who is responsible for continuous integration\n\n**Outline**\n\nEvery project accumulates complexity. After 10 years, Open Social's test suite demanded 500 CI runners and hours of waiting, sometimes stumbling on flaky tests. This is the story of how we revisited that foundation and rebuilt our testing tooling on top of Playwright to reclaim velocity and confidence.\n\nIn this session I'll use the testing pyramid to audit a test suite: what are you testing, at what cost, is the confidence worth it.\n\nFrom there, I'll explain the three concrete building blocks of our new tooling:\n\nQA API or Test Control Interface (TCI) – a hidden, environment-gated HTTP API inside Drupal that provides attribute-driven PHP operations. Modules declare QA operations; the TCI publishes them as an OpenAPI spec. This decouples test data setup from the test runner entirely and allows tooling to reach into your product in a version agnostic way.\n\nPlaywright as the harness – unlocks first-class trace files, automatic retries, and parallel execution that actually scales. We'll cover how Playwright's test insights changed how we debug failures.\n\nHuman-readable specs – Using the TCI, Cucumber makes UI tests readable by non-engineers and increasingly useful as context for AI tooling. For GraphQL, a new Markdown-based spec format lets you embed queries, variables, and expectations in a file that doubles as documentation.\n\nYou'll leave with a concrete mental model and a replicable architecture for rebuilding test confidence without rebuilding your entire stack at once.\n\n**Learning Objectives**\n\nYou'll learn to critically evaluate your testing suite by and thinking about tests according to the testing pyramid.  \n\nYou'll learn about Playwright's amazing testing insights for integration and end-to-end testing to help solve bugs sooner.  \n\nYou'll learn about how we use Cucumber and Markdown to create human readable UI and API tests on top of Playwright.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Fedor ZZZ_CLX_KUONI",
+      "track": "development, ai & agentic architecture",
+      "location": "Goudriaan Room I&II",
+      "startTime": "2026-09-30T08:45:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/shipping-products-confidence-how-we-rebuilt-our-testing-tools-velocity",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "testing"
+      ],
+      "title": "Can AI Fix the Web? The Promises and Perils of \"Automated\" Accessibility",
+      "description": "We are increasingly asking AI to fix our WCAG errors, but algorithms operate on probability, not empathy. If you are using AI coding assistants to write your front-end components, you might be shipping hallucinated ARIA labels and broken accessibility without knowing it. Join me to explore the promises and perils of automated accessibility, and learn how to use AI as a testing partner rather than a replacement for inclusive design.\n\n**Prerequisite**\n\nBasic understanding of web accessibility principles (WCAG, ARIA, Semantic HTML).  \n\nFamiliarity with using AI coding assistants (like Claude, ChatGPT, or GitHub Copilot) in a development workflow.\n\n**Target Audience**\n\nDevelopers, UX/UI designers or acceccibility advocates\n\n**Outline**\n\nWe are entering a dangerous new era of web development where teams are asking Generative AI to \"fix my WCAG errors.\" On the surface, it sounds like a utopia: pass your broken DOM to a Large Language Model (LLM) and get a perfectly accessible component returned in seconds.\n\nHowever, AI operates on statistical probability, not human empathy. When we rely on AI to automatically patch accessibility, we often end up with hallucinated ARIA labels, nonsensical focus trapping, and fundamentally broken screen-reader experiences that technically pass automated audits but fail actual users.\n\nThis session explores the intersection of Generative AI and Web Accessibility. We will look at exactly where AI fails spectacularly at inclusive design. More importantly, we will cover how engineering teams can pragmatically use AI as an assistive testing and ideation tool rather than an automated fix. As developers, we cannot outsource human empathy to an algorithm.\n\n**Learning Objectives**\n\nUnderstand why LLMs fail at complex inclusive design and how to spot \"fake\" accessibility fixes in AI-generated code.\n\nLearn how to write specific, context-aware prompts that force AI to act as a rigorous accessibility auditor rather than an automated code generator.\n\nGrasp the ethical implications of outsourcing digital inclusion to algorithms, and establish team guardrails for AI use in front-end development.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Junaid Masoodi",
+      "track": "development, ai & agentic architecture",
+      "location": "Mees Room II",
+      "startTime": "2026-09-29T15:35:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/can-ai-fix-web-promises-and-perils-automated-accessibility",
+      "video": "",
+      "minutes": 20
+    },
+    {
+      "matched": [
+        "testing"
+      ],
+      "title": "Gander in the Wild: How We Built a Performance Safety Net into Our CI/CD Pipeline",
+      "description": "Performance regressions are silent killers — they sneak in one commit at a time, and by the time someone notices, the debt is enormous. Gander, shipped with Drupal core since 10.2, gives us the tools to catch them at the earliest possible stage: the merge request.\n\nIn 20 minutes, I'll show you how we integrated Gander's performance assertions into our CI/CD pipeline to make every build fail when performance budgets are exceeded — no dedicated infrastructure required. You'll walk away with a proven pattern, real configuration files, and a checklist to get started by next sprint.\n\n**Prerequisite**\n\nParticipants should be comfortable writing PHPUnit tests in Drupal (functional or kernel tests) and have a basic understanding of how a CI/CD pipeline works (e.g., GitLab CI, GitHub Actions, or similar).  \n\n**Target Audience**\n\nBackend Developers or Technical Leads who already faced performance issues and thought \"\"we should have caught this earlier\"\"\n\n**Outline**\n\nThis talk is structured as a practical, step-by-step journey — from understanding why we need proactive performance testing to having Gander assertions running in your CI/CD pipeline. Here's the outline:\n\n1. The \"\"Shift Left\"\" Case (3 min) — Why retroactive tools like Lighthouse aren't enough during development. A real-world example of a regression that slipped through to production.\n\n2. Gander's Assertion Model (2 min) — What Gander measures, how performance assertions extend PHPUnit functional tests, and why this pass/fail approach requires zero infrastructure overhead.\n\n3. From Local to Pipeline (10 min) — Step-by-step walkthrough: writing your first performance test, defining performance budgets per content type and user role, configuring the CI runner, and reading the results when a build fails.\n\n4. Lessons Learned the Hard Way (3 min) — Budgets that need iteration, flaky metrics in CI environments, and getting the team to actually care.\n\n5. Going Further (2 min) — A roadmap beyond assertions: OpenTelemetry integration, long-term monitoring with Grafana, and distributed tracing with Grafana Tempo.\n\n**Learning Objectives**\n\nUnderstand why proactive performance testing at the CI/CD level catches regressions that retroactive tools like Lighthouse miss.\n\nWrite Gander performance assertions in PHPUnit tests and define meaningful performance budgets for a Drupal project.\n\nConfigure a CI/CD pipeline to run Gander tests and fail builds when performance thresholds are exceeded — without any dedicated monitoring infrastructure.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Julien Joye",
+      "track": "development, ai & agentic architecture",
+      "location": "Goudriaan Room I&II",
+      "startTime": "2026-09-29T15:35:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/gander-wild-how-we-built-performance-safety-net-our-cicd-pipeline",
+      "video": "",
+      "minutes": 20
+    },
+    {
+      "matched": [
+        "testing"
+      ],
+      "title": "AI-Assisted Contrib Module Maintenance",
+      "description": "Turn your Drupal issue queue into a smarter, faster workflow with open source coding agents that reduce maintainer workload and improve contribution quality.\n\n**Prerequisite**\n\n* Basic understanding of Drupal module development (issues, merge requests, code reviews)  \n\n* Familiarity with maintainer workflows on Drupal.org or GitLab  \n\n* High-level idea of what a coding agent is (AI tool that can read, analyze, and suggest code or workflow actions)  \n\n* Awareness of CI pipelines and automated testing (helpful but not required)\n\n**Target Audience**\n\nDevelopers, Maintainers\n\n**Outline**\n\nMaintaining a Drupal module often means juggling triage, reviews, contributor guidance, and releases - all within an ever-growing issue queue. In this session, we’ll explore how coding agents with deterministic code can act as helper tools, reducing this burden while improving quality and consistency. We’ll showcase an open source tool already used in practice to automate tasks like duplicate detection, pre-reviewing code, effort estimation, and suggesting next steps before work even begins.\n\nWe'll then expand into a broader vision where these tools go beyond triage: summarizing complex issue threads, proposing reproduction steps, analyzing patch impact, and identifying missing tests or potential BC breaks. The result is a smarter issue queue where maintainers can focus on high-value decisions instead of repetitive work, and contributors get clearer guidance from the start.\n\nA unique part of this workflow is how we handle validation and collaboration. As part of CI, functional testing is automatically recorded as video, giving maintainers and contributors a clear, visual way to verify changes after code is pushed. We offer skills for contributors to create these functional tests.\n\nBy the end of this session, you’ll see how open source AI tooling and coding agents can help, but not replace maintainers.\n\n**Learning Objectives**\n\n* Understand how coding agents can support Drupal maintenance workflows  \n\n* Learn how to automate issue triage, code review, and prioritization tasks  \n\n* Explore practical use cases for improving issue queue quality and contributor experience  \n\n* Discover how automated functional testing videos can improve validation and collaboration\n\n**Experience level**  \nAdvanced",
+      "speakers": "Marcus Johansson",
+      "track": "development, ai & agentic architecture",
+      "location": "Rotterdam Room I&II",
+      "startTime": "2026-09-29T13:45:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/ai-assisted-contrib-module-maintenance",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "testing"
+      ],
+      "title": "Retrofitting tests to an existing project",
+      "description": "Do you find yourself working on an existing site, but wishing you had written automated tests earlier? It's not too late.\n\nAutomated testing is universally seen as a good thing, but often doesn't happen. There's a lot of code out there that works, but that can't be verified.\n\n**Experience level:** Beginner",
+      "speakers": "erikerskine",
+      "track": "Backend development",
+      "location": "Room 208 (Jakala)",
+      "startTime": "2024-06-28T12:20:00.000Z",
+      "year": 2024,
+      "event": "Drupal Dev Days Burgas 2024",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Bulgaria",
+      "city": "Burgas",
+      "file": "events/ddd/2024-burgas.json",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/retrofitting-tests-existing-project",
+      "video": "",
+      "minutes": 50
+    },
+    {
+      "matched": [
+        "testing"
+      ],
+      "title": "Choosing the right tool for the automated testing",
+      "description": "The [automated testing](https://www.drupal.org/docs/develop/automated-testing) page of Drupal documentation is huge, but unfortunately, it leaves so many questions.\n\nThere are different *types* of automated testing - unit, kernel, functional. Do I need them all? Do I run them all? If there so many tests *in* the core, do I need to add my own? When to run the tests? Why are there tools that reside in the core, others must be installed separately (behat, cypress). How do I choose the right tool to write client-specific tests?\n\n**Experience level:** Beginner",
+      "speakers": "valthebald",
+      "track": "DevOps & Quality Assurance",
+      "location": "Room 208 (Jakala)",
+      "startTime": "2024-06-28T08:25:00.000Z",
+      "year": 2024,
+      "event": "Drupal Dev Days Burgas 2024",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Bulgaria",
+      "city": "Burgas",
+      "file": "events/ddd/2024-burgas.json",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/choosing-right-tool-automated-testing",
+      "video": "https://youtu.be/4Wrx6wCoFxg",
+      "minutes": 50
+    },
+    {
+      "matched": [
+        "testing"
+      ],
+      "title": "Keys and Voices: The Limits of automated Accessibility Testing Tools",
+      "description": "Workshop Time: wave says OK! Is my website save?\nLet's find out where users with disabilities get trapped although you get 0 Errors from automated testing tools like wave, axe or lighthouse.\nWe will have a look at the vital role of simple keyboard navigation and some enhanced manual accessibility testing, including screen readers.\n\n**Experience level:** Intermediate",
+      "speakers": "tomrenner",
+      "track": "Accessibility, User Experience & Marketing",
+      "location": "Room 208 (Jakala)",
+      "startTime": "2024-06-27T11:15:00.000Z",
+      "year": 2024,
+      "event": "Drupal Dev Days Burgas 2024",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Bulgaria",
+      "city": "Burgas",
+      "file": "events/ddd/2024-burgas.json",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/keys-and-voices-limits-automated-accessibility-testing-tools",
+      "video": "",
+      "minutes": 50
+    },
+    {
+      "matched": [
+        "testing"
+      ],
+      "title": "Stop making your own life difficult. Integrate your CI/CD Pipeline with these monitoring tools",
+      "description": "If you do not use a CI/CD pipeline, we highly recommend it. For the past several years our team has set up projects in a CI/CD pipeline using Jenkins or Github actions. The tools that we will present in this session have proven to be a good set of automated testing tools for several projects. Over time we have chosen to move away from previous solutions and to new testing frameworks. As part of our commitment to high standards of performance and quality, we are always on the lookout for the best tools available on the market.\n\n**Experience level:** Beginner",
+      "speakers": "sindurig, jjchinquist",
+      "track": "Clients & Industry Experiences",
+      "location": "Room 207 (1xINTERNET)",
+      "startTime": "2024-06-26T14:10:00.000Z",
+      "year": 2024,
+      "event": "Drupal Dev Days Burgas 2024",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Bulgaria",
+      "city": "Burgas",
+      "file": "events/ddd/2024-burgas.json",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/stop-making-your-own-life-difficult-integrate-your-cicd-pipeline-these",
+      "video": "https://youtu.be/H3zgaR6bYAA",
+      "minutes": 30
+    },
+    {
+      "matched": [
+        "testing"
+      ],
+      "title": "Getting up to speed with testing on Drupal 8",
+      "description": "",
+      "speakers": "Pieter Frenssen",
+      "track": "Session",
+      "location": "Parsenn",
+      "startTime": "2017-02-16T13:00:00Z",
+      "year": 2017,
+      "event": "Drupal Mountain Camp Davos 2017",
+      "series": "Drupal Mountain Camp",
+      "region": "EMEA",
+      "country": "Switzerland",
+      "city": "Davos",
+      "file": "events/drupalmountaincamp/2017-davos.json",
+      "link": "https://drupalmountaincamp.ch/sessions/getting-speed-testing-drupal-8",
+      "video": "",
+      "minutes": 240
+    },
+    {
+      "matched": [
+        "testing"
+      ],
+      "title": "Views 3",
+      "description": "Views 3 (for Drupal 7) brings Views to a new level and open's it up for a bunch of new usecases:\n\nBeside that Views 3 is a massive code cleanup the following features have been added:\n\n- AND/OR support\n\n- GROUPBY support\n\n- better export code\n\n- UI stuff\n\n- exposed forms\n\n- semantic support\n\nBut there is still testing to be done and bugs to be fixed, so we would like to invite you test AND/OR write patches.\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "speakers": "macode, Daniel Wehner",
+      "track": "",
+      "location": "Attempto",
+      "startTime": "2010-05-09T08:00:00.000Z",
+      "year": 2010,
+      "event": "Drupal Dev Days Munich 2010",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Germany",
+      "city": "Munich",
+      "file": "events/ddd/2010-munich.json",
+      "link": "http://www.drupal-dev-days.de/de/sessions/views-3-0",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "testing"
+      ],
+      "title": "Drupal-Themes dynamisch mit ThemeKey steuern",
+      "description": "Mithilfe des Moduls [ThemeKey](http://drupal.org/project/themekey) ist es möglich, Regeln zu erstellen, nach denen eine Webseite dynamisch auf ein anderes Theme umschaltet. In Kombination mit Drupals Theme-Engine und deren Unterstützung von Vererbung innerhalb von Themes lassen sich damit auf einfache Weise interessante Anforderungen umsetzen:\n\n- optisch getrennte Kanäle (z.B. [ellviva.de](http://www.ellviva.de/))\n\n- die Startseite als Sonderfall\n\n- zeitlich begrenzte „Homepage-Einfärbung“ als Werbeform\n\n- ein Homepage-Redesign in einer Produktivumgebung testen\n\n- ein Weihnachts-Theme\n\n- angepasste Themes für mobile Endgeräte\n\n- angepasste Themes für „Problembrowser“\n\n- contenttypspezifische Themes\n\n- für den Nutzer deutlich „sichtbare“ Unterscheidung von Umgebungen wie Production, Staging, Testing, Sandbox, …\n\n- rollenbasierte Themes\n\n- …\n\nNach einer kurzen Vorstellung des Moduls ThemeKey und dessen Historie werden Lösungen für ausgewählte konkrete Anwendungsfälle nach dem Kochbuchprinzip demonstriert.\n\nDiesen Vortrag habe bereits Ende November 2009 beim Drupalcamp Wien gehalten. Zu diesem Zeitpunkt stand die Entwicklung von ThemeKey 6.x-2.x noch am Anfang. Aufgrund der vielen Verbesserungen in ThemeKey könnte der Vortrag also auch interessant sein, wenn man ersten bereits gehört hat ;)\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "speakers": "mkalkbrenner",
+      "track": "",
+      "location": "Microsoft",
+      "startTime": "2010-05-08T08:00:00.000Z",
+      "year": 2010,
+      "event": "Drupal Dev Days Munich 2010",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Germany",
+      "city": "Munich",
+      "file": "events/ddd/2010-munich.json",
+      "link": "http://www.drupal-dev-days.de/de/sessions/drupal-themes-dynamisch-mit-themekey-steuern",
+      "video": "",
+      "minutes": 45
+    }
+  ]
+}

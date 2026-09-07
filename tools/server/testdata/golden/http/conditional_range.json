@@ -1,0 +1,12 @@
+{
+  "status": 206,
+  "headers": {
+    "Accept-Ranges": "bytes",
+    "Cache-Control": "public, max-age=60, stale-while-revalidate=300",
+    "Content-Length": "10",
+    "Content-Range": "bytes 0-9/13095",
+    "Content-Type": "application/json; charset=UTF-8",
+    "ETag": "W/\"3327-19b7ca98c88\""
+  },
+  "body": "ewogICJnZW5lcg=="
+}

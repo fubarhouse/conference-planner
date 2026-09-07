@@ -1,0 +1,39 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Embed mode — a chrome-less, single-schedule render for iframing on external
+   sites. Activated by `?embed=1` (adds body.embed-mode; see events.js). Keeps the
+   schedule, its day nav, and the session filters; strips all app chrome.
+   ──────────────────────────────────────────────────────────────────────────── */
+
+/* NOTE: shared chrome is `.app-*` since the redesign; `.header-shell` no longer
+   exists. Both are listed so an un-migrated page still strips its chrome. */
+body.embed-mode .app-masthead,
+body.embed-mode .header-shell,
+body.embed-mode .app-crumbs,
+body.embed-mode .app-rail,
+body.embed-mode .app-panel,
+body.embed-mode #filtersPanel,
+body.embed-mode #usageInstructionsPanel,
+body.embed-mode #selectionOverview,
+body.embed-mode #creditsContainer,
+body.embed-mode #scheduleBottomBar,
+body.embed-mode #pageLoadingOverlay {
+  display: none !important;
+}
+
+/* Fill the frame: no site max-width/margins, trimmed padding. The host page owns
+   the outer chrome, so keep our own background transparent to blend in. */
+body.embed-mode {
+  background: transparent;
+  /* The rail reserves a column on wide viewports; an embed has no rail. */
+  padding-inline-end: 0 !important;
+}
+body.embed-mode #scheduleMain {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0.75rem;
+}
+/* No fixed bottom bar in embed → drop the large bottom gutter the schedule reserves. */
+body.embed-mode #eventsContainer {
+  margin-bottom: 0.75rem !important;
+}

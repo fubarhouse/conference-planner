@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Planner",
+  "description": "Per-event planner blob (personal or sponsor mode). Deliberately PERMISSIVE: nothing is required and additionalProperties is allowed everywhere, so migration-era / evolving planners are never rejected. It types the known fields and enforces that collections are arrays (of objects or strings) — catching gross structural corruption without breaking valid saves. `id` on collection elements is typed when present but NOT required (legacy elements may predate ids). Tighten later once validated against real planner data.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_version": { "type": "number" },
+    "_plannerKey": { "type": "string" },
+    "_eventFile": { "type": "string" },
+    "_eventFiles": { "$ref": "#/definitions/stringArray" },
+    "_displayName": { "type": "string" },
+    "_lastModified": { "type": "string" },
+    "mode": { "type": "string", "enum": ["personal", "sponsor"] },
+    "isConference": { "type": "boolean" },
+    "sessionNotes": { "type": "object" },
+    "contacts": { "$ref": "#/definitions/objectArray" },
+    "tasks": { "$ref": "#/definitions/objectArray" },
+    "receipts": { "$ref": "#/definitions/objectArray" },
+    "personal": { "$ref": "#/definitions/personal" },
+    "org": { "$ref": "#/definitions/org" }
+  },
+  "definitions": {
+    "objectArray": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": { "id": { "type": "string" } }
+      }
+    },
+    "stringArray": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "personal": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "outboundLegs": { "$ref": "#/definitions/objectArray" },
+        "returnLegs": { "$ref": "#/definitions/objectArray" },
+        "accommodations": { "$ref": "#/definitions/objectArray" },
+        "budget": { "type": "string" },
+        "budgetActual": { "type": "string" },
+        "currency": { "type": "string" },
+        "notes": { "type": "string" },
+        "noteList": { "$ref": "#/definitions/objectArray" },
+        "trackedSessions": { "$ref": "#/definitions/objectArray" },
+        "itinerary": { "$ref": "#/definitions/objectArray" },
+        "documents": { "$ref": "#/definitions/objectArray" },
+        "budgetItems": { "$ref": "#/definitions/objectArray" },
+        "budgetCategories": { "$ref": "#/definitions/objectArray" },
+        "categoryBudgets": { "type": "object" },
+        "tickets": { "$ref": "#/definitions/objectArray" },
+        "disabledTabs": { "$ref": "#/definitions/stringArray" },
+        "tabOrder": { "$ref": "#/definitions/stringArray" },
+        "tripAssignments": { "$ref": "#/definitions/objectArray" },
+        "localCompanions": { "$ref": "#/definitions/objectArray" },
+        "splitExpenses": { "$ref": "#/definitions/objectArray" },
+        "checklists": { "$ref": "#/definitions/objectArray" },
+        "gpxTrack": { "type": ["object", "null"] },
+        "meContactId": { "type": ["string", "null"] }
+      }
+    },
+    "org": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "boothInfo": { "type": "string" },
+        "boothNotes": { "type": "string" },
+        "teamAssignments": { "$ref": "#/definitions/objectArray" },
+        "accommodations": { "$ref": "#/definitions/objectArray" },
+        "timeline": { "type": "object" },
+        "swag": { "$ref": "#/definitions/objectArray" },
+        "deliverables": { "$ref": "#/definitions/objectArray" },
+        "sponsorBudget": { "type": "string" },
+        "sponsorActual": { "type": "string" },
+        "sponsorCurrency": { "type": "string" },
+        "sponsorId": { "type": "string" },
+        "trackedSessions": { "$ref": "#/definitions/objectArray" },
+        "autoAddedSponsoredSessions": { "$ref": "#/definitions/stringArray" },
+        "documents": { "$ref": "#/definitions/objectArray" },
+        "budgetItems": { "$ref": "#/definitions/objectArray" },
+        "budgetCategories": { "$ref": "#/definitions/objectArray" },
+        "categoryBudgets": { "type": "object" },
+        "tickets": { "$ref": "#/definitions/objectArray" },
+        "disabledTabs": { "$ref": "#/definitions/stringArray" },
+        "tabOrder": { "$ref": "#/definitions/stringArray" },
+        "itinerary": { "$ref": "#/definitions/objectArray" },
+        "memberItinerary": { "$ref": "#/definitions/objectArray" },
+        "checklists": { "$ref": "#/definitions/objectArray" }
+      }
+    }
+  }
+}

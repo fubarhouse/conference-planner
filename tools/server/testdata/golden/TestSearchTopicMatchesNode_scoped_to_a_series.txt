@@ -1,0 +1,48 @@
+{
+  "term": "accessibility",
+  "byYear": {
+    "2026": 9
+  },
+  "byYearDescribed": {
+    "2026": 9
+  },
+  "sessions": [
+    {
+      "year": 2026,
+      "title": "Accessibility Worst Practices"
+    },
+    {
+      "year": 2026,
+      "title": "Can AI Fix the Web? The Promises and Perils of \"Automated\" Accessibility"
+    },
+    {
+      "year": 2026,
+      "title": "AI-Augmented Accessibility: From Automated Alt-Text to Governance Gates"
+    },
+    {
+      "year": 2026,
+      "title": "Next Generation ECA - Vision and Progress update"
+    },
+    {
+      "year": 2026,
+      "title": "The Reality of Accessibility Automation"
+    },
+    {
+      "year": 2026,
+      "title": "Super charging SDC design systems with Web Components"
+    },
+    {
+      "year": 2026,
+      "title": "Getting the most out of Editoria11y v3"
+    },
+    {
+      "year": 2026,
+      "title": "AI Assists, Humans Decide: Agentic Workflows in Drupal - A Drupal AI Hackathon Story"
+    },
+    {
+      "year": 2026,
+      "title": "From Drupal Content to AI Answers: Learnings from EPSY"
+    }
+  ],
+  "year": null
+}

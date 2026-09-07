@@ -1,0 +1,9 @@
+{
+  "body": "TW92ZWQgUGVybWFuZW50bHkuIFJlZGlyZWN0aW5nIHRvIC9hcmNoaXZl",
+  "headers": {
+    "Content-Type": "text/plain; charset=utf-8",
+    "ETag": "",
+    "Location": "/archive"
+  },
+  "status": 301
+}

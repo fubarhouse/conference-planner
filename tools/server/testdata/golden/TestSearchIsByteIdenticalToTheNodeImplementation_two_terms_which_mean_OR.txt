@@ -1,0 +1,761 @@
+{
+  "query": "views, paragraphs",
+  "terms": [
+    "views",
+    "paragraphs"
+  ],
+  "mode": "exact",
+  "facets": {
+    "series": "All",
+    "region": "All",
+    "country": "All",
+    "year": "All"
+  },
+  "total": 26,
+  "offset": 0,
+  "byYear": {
+    "2010": 11,
+    "2015": 5,
+    "2017": 2,
+    "2018": 1,
+    "2024": 1,
+    "2025": 1,
+    "2026": 5
+  },
+  "byTerm": {
+    "views": {
+      "2010": 11,
+      "2015": 5,
+      "2017": 1,
+      "2018": 1,
+      "2024": 1,
+      "2026": 3
+    },
+    "paragraphs": {
+      "2017": 1,
+      "2025": 1,
+      "2026": 2
+    }
+  },
+  "breakdown": {
+    "series": [
+      {
+        "name": "Drupal Dev Days",
+        "count": 12,
+        "total": 117
+      },
+      {
+        "name": "DrupalCon",
+        "count": 10,
+        "total": 136
+      },
+      {
+        "name": "Drupal Mountain Camp",
+        "count": 2,
+        "total": 40
+      },
+      {
+        "name": "DrupalCamp",
+        "count": 2,
+        "total": 63
+      }
+    ],
+    "region": [
+      {
+        "name": "EMEA",
+        "count": 20,
+        "total": 278
+      },
+      {
+        "name": "LATAM",
+        "count": 5,
+        "total": 42
+      },
+      {
+        "name": "APAC",
+        "count": 1,
+        "total": 96
+      }
+    ],
+    "country": [
+      {
+        "name": "Germany",
+        "count": 11,
+        "total": 67
+      },
+      {
+        "name": "Colombia",
+        "count": 5,
+        "total": 42
+      },
+      {
+        "name": "Netherlands",
+        "count": 5,
+        "total": 107
+      },
+      {
+        "name": "Switzerland",
+        "count": 2,
+        "total": 40
+      },
+      {
+        "name": "Bulgaria",
+        "count": 1,
+        "total": 50
+      },
+      {
+        "name": "Italy",
+        "count": 1,
+        "total": 14
+      },
+      {
+        "name": "Japan",
+        "count": 1,
+        "total": 19
+      }
+    ],
+    "city": [
+      {
+        "name": "Munich",
+        "count": 11,
+        "total": 67
+      },
+      {
+        "name": "Bogotá",
+        "count": 5,
+        "total": 42
+      },
+      {
+        "name": "Rotterdam",
+        "count": 5,
+        "total": 98
+      },
+      {
+        "name": "Davos",
+        "count": 2,
+        "total": 40
+      },
+      {
+        "name": "Burgas",
+        "count": 1,
+        "total": 50
+      },
+      {
+        "name": "Rome",
+        "count": 1,
+        "total": 14
+      },
+      {
+        "name": "Tokyo",
+        "count": 1,
+        "total": 19
+      }
+    ],
+    "speakers": [
+      {
+        "name": "macode",
+        "count": 4,
+        "total": 11
+      },
+      {
+        "name": "Daniel Wehner",
+        "count": 3,
+        "total": 11
+      },
+      {
+        "name": "derhasi",
+        "count": 2,
+        "total": 2
+      },
+      {
+        "name": "j4h8",
+        "count": 2,
+        "total": 2
+      },
+      {
+        "name": "Andreas Rüther",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "antje",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "Crell",
+        "count": 1,
+        "total": 2
+      },
+      {
+        "name": "Emanuel Righetto",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "eojthebrave",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "erik.seifert",
+        "count": 1,
+        "total": 1
+      }
+    ],
+    "events": 7,
+    "eventsTotal": 16,
+    "span": {
+      "min": 2010,
+      "max": 2026
+    }
+  },
+  "results": [
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "Getting the most out of Editoria11y v3",
+      "description": "Drupal CMS's accessibility recipe \"just works\"...most of the time. When you want it to work better, you find that there are more than 130 fields spread across three settings tabs! Learn how we got here from the project lead, and get practical tips on configuration and customization.\n\n**Prerequisite**\n\nNone\n\n**Target Audience**\n\nAnyone who cares about quality assurance. Typically site owners, QA managers, and/or developers responsible for improving the site editing experience\n\n**Outline**\n\nEditoria11y was conceived as a deeply integrated Drupal accessibility checker in 2019:\n\n-- v1 introduced automatic, inline alerts for accessibility issues on published pages.\n\n-- v2 added an as-you-type checker for CKEditor and Gutenberg, as well as site-wide dismissals and reports.\n\n-- v3 work is currently focused on building a full quality assurance suite. There are already 3x as many checks as v2, and 3x as much to configure!\n\nWe will explore what a well-configured site looks like, and present best practices for your site settings and themes:  \n\n-- Preventing false positives and annoying or repetitive alerts.  \n\n-- Splitting configuration between content authors and developers.  \n\n-- Writing custom tests.  \n\n-- Optimizing tip placement for dynamic or clipped content.  \n\n-- Using the new report maintenance tools and crawlers.  \n\n-- Adding Views relationships to customize filters, reports and exports.  \n\n-- Integrating the European Commission's new \"AI: Editoria11y\" module.\n\nWe will end with a look at what’s next, and how the community can guide and contribute to this project's roadmap.\n\n**Learning Objectives**\n\nLearners should:  \n\n-- Be able to optimize their checker to catch the specific issues common to their theme and editors.  \n\n-- Know where to find documentation and code samples for extending and modifying the checker.  \n\n-- Not feel overwhelmed by 130+ fields spread across 3 configuration tabs!\n\n**Experience level**  \nAnyone",
+      "speakers": "John Jameson",
+      "track": "user experience, accessibility & design",
+      "location": "Goudriaan Room I&II",
+      "startTime": "2026-09-30T14:00:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/getting-most-out-editoria11y-v3",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "paragraphs"
+      ],
+      "title": "From Overwhelm to Opportunity: Designing a Personalised Career Journey for 350+ NHS Roles",
+      "description": "How do you help someone choose a career when you offer 350 options? This talk shows how we turned overwhelming NHS career data into a guided, personalised journey ,using Drupal to model complexity and design for uncertainty.  \n\n**Prerequisite**\n\nNo specific prerequisites are required. Familiarity with CMS platforms and how digital teams use them to serve diverse user audiences will help attendees get the most from this session. Some experience with Drupal content modelling or UX design is beneficial but not essential.  \n\n**Target Audience**\n\nAnyone curious about how Drupal is used to solve real,world problems at scale, whether you work in development, design, strategy, or just want to see what a complex public sector Drupal project looks like in practice.  \n\n**Outline**\n\nHow do you help someone choose a career when you offer 350 options?  \n\nNHS Health Careers serves one of the UK's most diverse digital audiences, from a 14-year-old picking GCSEs to a clinician pivoting careers. With 350+ roles, 1,000+ courses, and five legacy sites being merged into one, the challenge wasn't building a platform. It was designing a system that helps people answer: \"What should I do with my life?\"  \n\nThis talk walks through how we approached that problem, and built the answer in Drupal.  \n\nWe'll cover how we structured complex content relationships to make personalisation possible, designed guided discovery tools that replace overwhelming choice with intentional journeys, and integrated an external career-matching quiz API for both anonymous and authenticated users.  \n\nThe result: a personalised careers hub with a gamified career planner, contextual content filtering, and a homepage that adapts to each user's goals, interests, and qualifications.  \n\nThe lessons are transferable:  \n\nStructure your content model before you design personalisation  \n\nReduce cognitive load; more options rarely mean a better experience  \n\nDrupal is strongest when it's modelling complexity, not just rendering pages  \n\nWhether you work in public sector, education, or any large-scale content platform, this session will show you how Drupal can turn structural complexity into human clarity.  \n\n**Learning Objectives**\n\nAttendees will see how:  \n\nDrupal's content modelling made personalisation possible ,How structuring careers, courses, and progression pathways as related entities gave the platform the foundation to serve each user differently.  \n\nDrupal powered guided discovery at scale ,How Search API, Solr, faceted filtering, and Paragraphs replaced 350+ career listings with intentional, contextual user journeys.  \n\nA custom Drupal module bridged an external career-matching API ,How we integrated the CASCAID quiz API for both anonymous and authenticated users, handling identity, session state, and frontend data delivery end-to-end.  \n\nDrupal enabled personalisation without AI ,How well-structured content and deliberate UX ,not machine learning ,powered a homepage and career planner that adapted to each user's goals and qualifications.  \n\nDrupal brought five legacy sites into one coherent platform ,How Drupal's flexibility and scalability made it the right choice for a public sector organisation managing a diverse, ever-growing national audience.\n\n**Experience level**  \nBeginner",
+      "speakers": "Vijay Mani",
+      "track": "success stories & innovation",
+      "location": "Van Oldenbarnevelt Room",
+      "startTime": "2026-09-30T12:05:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/overwhelm-opportunity-designing-personalised-career-journey-350-nhs-roles",
+      "video": "",
+      "minutes": 20
+    },
+    {
+      "matched": [
+        "paragraphs"
+      ],
+      "title": "Page Builder Deathmatch: Canvas vs Display Builder in a Real World Project",
+      "description": "Canvas or Display Builder? Which one is the right tool for your job? And what may explode i if you install both?\n\n**Prerequisite**\n\nThe session is suitable for all experience levels:  \n\n- No prior knowledge of Canvas or Display Builder required: I start from zero and pull no punches  \n\n- I also don't assume you know the difference between slots and props, but the explanation will be very short\n\nWhat helps maximize your takeaways:  \n\n- Basic familiarity with Drupal's content model  \n\n- Knowledge of Drupal's theming or layout system (SDCs, layout builder, paragraphs, or block layout)  \n\n- Experiences with other page builders\n\n**Target Audience**\n\nDrupal developers, site builders, and technical architects evaluating modern page-building approaches for real projects. Ideal for teams working with Layout Builder, Paragraphs, or SDCs who need to decide between Canvas and Display Builder. Especially valuable for those responsible for architecture decisions, editor experience, and long-term maintainability in complex Drupal implementations.\n\n**Outline**\n\nTwo contenders. One Drupal site. And the wrong choice for your task can cost you  days or weeks.\n\nCanvas and Display Builder are both approaching production maturity. And both promise to revolutionize how editors, site builders, and designers work with Drupal. But they are built on fundamentally different assumptions, and choosing between them is a critical architectural decision.\n\nIn this session we put them through their paces across three rounds:\n\nRound 1: Page Layout  \n\nCan they replace Drupals fragmented theming approach consisting of block layout, theme regions and templates? What does setup actually involve, and what trade-offs emerge?\n\nRound 2: Managing Displays  \n\nHow do they handle Drupal’s data model (entities, fields, formatters, widgets) and map to component \"slots and props\"?\n\nRound 3: Frontpage Gauntlet  \n\nFlexible landing pages like a Frontpage require editorial autonomy, multilingual content, media handling, and AI-assisted workflows. Which approach works out with that?\n\nEach round is fought in real projects' requirements. Gotchas, workarounds, and limitations are pointed out. The session closes with a practical decision framework so you leave the arena knowing which tool is suitable for the given requirements of your next project and how upcoming roadmap developments may influence that choice.\n\nLet's get ready to rumble.\n\n**Learning Objectives**\n\nAfter this session, you have:  \n\n- A clear understanding of the underlying assumptions of Canvas or Display Builder  \n\n- A checklist to guide your next project decision  \n\n- Awareness of real-world pitfalls before you hit them\n\n**Experience level**  \nAnyone",
+      "speakers": "Merlin A. Rutz, Andreas Rüther",
+      "track": "development, ai & agentic architecture",
+      "location": "Leeuwen Room I&II",
+      "startTime": "2026-09-30T11:40:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/page-builder-deathmatch-canvas-vs-display-builder-real-world-project",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "Advanced Site Building with Drupal Canvas",
+      "description": "Learn how Drupal Canvas gives even more power to Drupal Site Builders!\n\n**Prerequisite**\n\nThis session is ideal for Drupal site builders, developers, and architects who are looking to enhance their site-building capabilities, improve development workflows, and deliver richer user experiences. A basic understanding of Drupal concepts and site building is recommended.\n\n**Target Audience**\n\nThis session is ideal for Drupal site builders, developers, and architects who are looking to enhance their site-building capabilities, improve development workflows, and deliver richer user experiences. A basic understanding of Drupal concepts and site building is recommended.\n\n**Outline**\n\nEnabling ambitious site builders has always been a superpower of Drupal and the introduction of Drupal Canvas has taken this to another level. Attendees will learn how to combine the power of Canvas with existing core modules like Views and popular contrib modules, all without writing any code!\n\nWe will demonstrate how to build a demo site that leverages Drupal's robust information architecture capabilities alongside the streamlined user experience offered by Drupal Canvas.\n\nAttendees will learn how to:  \n\n* Create dynamic landing pages  \n\n* Use Canvas templates to format all your structured content (nodes, terms, users, etc.)  \n\n* Link field data inside templates to SDC and Code Component properties  \n\n* Display related content on Canvas templates, for example displaying content linked by entity reference fields or the author  \n\n* Use Canvas to control how the related content is displayed  \n\n* Manage permissions to tailor the user experience of Canvas for different user groups  \n\n* Build Views to showcase related content and author details inside Canvas templates.  \n\n* Translate Canvas Pages and templates for multi-lingual support\n\nThe site building techniques covered in this session are applicable whether you are using Canvas with SDC’s, Code Components or a combination of both.\n\nAs Drupal Canvas is rapidly evolving, we will cover the latest site building related Canvas features at the time of DrupalCon. See the Canvas road map at [https://drupal-canvas.com/](https://drupal-canvas.com/)\n\n**Learning Objectives**\n\nUnderstand the core functionalities and benefits of the Drupal Canvas module.  \n\nLearn to build complex page layouts and content structures using Canvas's visual editor.  \n\nDiscover strategies for creating reusable components and templates within Canvas.  \n\nExplore integration patterns for Canvas with existing Drupal modules and custom code.  \n\nGain insights into best practices for collaboration and governance in a Canvas-driven development environment.\n\n**Experience level**  \nIntermediate",
+      "speakers": "Ted Bowman",
+      "track": "drupal cms",
+      "location": "Rotterdam Room I&II",
+      "startTime": "2026-09-30T08:45:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/advanced-site-building-drupal-canvas",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "The joy and power of SDC, finally for form inputs",
+      "description": "We can never get enough of SDC, the front-dev friendly API to implement and share UI components for Drupal. So, let’s rejoice together by discovering the biggest improvement since the introduction of the API: we will soon be able to implement form elements directly with SDC, only with UI logic and front technologies, without messing with backend APIs.\n\nPierre, one of the maintainers of SDC in Core, will show you all the cool stuff which can be done with this addition.\n\n**Prerequisite**\n\nKnowledge about SDC and components-based theming.  \n\nAnd/or about Drupal Admin UI, especially display building tasks (Block Layout, Layout Builder, Views...)\n\n**Target Audience**\n\nFront developers, design system owners, ambitious site builders\n\n**Outline**\n\nThe introduction of SDC to Core in 2023 had a significant impact on the Drupal ecosystem by starting a movement to embrace design system methodology, helping the front-designers to implement ambitious shareable designs, and bringing display building back to the forefront.\n\nHowever, the UI components related to form inputs can’t be implemented as SDC yet and are still managed the old way, with abstruse PHP classes.\n\nDate picker, interactive data table, file uploader, slider, toggle, draggable tree view… they often constitute around 20% of design system scopes and their absence is felt heavily by project teams and the contrib space.\n\nGood news! We will land support to form elements in SDC in 2026 and it will be a game changer. Full component libraries will be packageable as Drupal themes and shared between projects, and front devs will finally get the full ownership of design implementations.\n\nIt will also be the opportunity to clean large parts of the rendering pipeline by finalizing the split between UI logic and business logic.\n\nWe will explore together how we can use those new UI components programmatically in front and back development.  \n\nAnd we will discover exciting demos about their use from Admin UI, leveraging them as Field Widgets to build an Entity Form Display.\n\n**Learning Objectives**\n\nHow to build and share UI components for form inputs  \n\nHow to use them in projects, both programmatically and from Admin UI\n\n**Experience level**  \nIntermediate",
+      "speakers": "Pierre Dureau",
+      "track": "development, ai & agentic architecture",
+      "location": "Goudriaan Room I&II",
+      "startTime": "2026-09-29T11:30:00Z",
+      "year": 2026,
+      "event": "DrupalCon Rotterdam 2026",
+      "series": "DrupalCon",
+      "region": "EMEA",
+      "country": "Netherlands",
+      "city": "Rotterdam",
+      "file": "events/drupalcon/eu/2026-rotterdam.json",
+      "link": "https://events.drupal.org/rotterdam2026/session/joy-and-power-sdc-finally-form-inputs",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "paragraphs"
+      ],
+      "title": "Drupal Canvas APIs: how to integrate and extend Canvas",
+      "description": "Drupal Canvas will revolutionize the way you enable your editors and marketers to create sites with Drupal. But this might not be enough and you'll want to provide guidelines, extend or improve your developers' experience. In this talk we'll explore: what is Drupal Canvas, how to migrate from Layout Builder to Canvas, using Paragraphs in Canvas, syncing Figma components with Canvas via AI, the backend and client data model, how to provide your own building blocks with ComponentSources, how to interact with the internal API and create UI extensions.",
+      "speakers": "Emanuel Righetto",
+      "track": "Session",
+      "location": "Sala B",
+      "startTime": "2025-11-14T16:00:00Z",
+      "year": 2025,
+      "event": "DrupalCamp Rome 2025",
+      "series": "DrupalCamp",
+      "region": "EMEA",
+      "country": "Italy",
+      "city": "Rome",
+      "file": "events/drupalcamp/italy/2025-rome.json",
+      "link": "",
+      "video": "",
+      "minutes": 60
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "UI Patterns 2: Unleash SDC power, plug your components directly in Drupal UI.",
+      "description": "Since 2017, UI Patterns is a popular (5000+ installations in March 2024) modules ecosystem to manage UI components and use them in Drupal : with Blocks, Layouts, Entity fields, Views...\n\nStarting summer 2023, Drupal Core has now its own UI components API, SDC, which was met with well-deserved success. However, there is no solution yet to make the integration between the components and Drupal as easy and flexible as what UI Patterns is providing.\n\n**Experience level:** Intermediate",
+      "speakers": "pdureau",
+      "track": "Innovation & The future",
+      "location": "Room 208 (Jakala)",
+      "startTime": "2024-06-27T08:25:00.000Z",
+      "year": 2024,
+      "event": "Drupal Dev Days Burgas 2024",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Bulgaria",
+      "city": "Burgas",
+      "file": "events/ddd/2024-burgas.json",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/ui-patterns-2-unleash-sdc-power-plug-your-components-directly-drupal",
+      "video": "https://youtu.be/2tkuMlzMT84",
+      "minutes": 50
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "一歩進んだ Views の使い方",
+      "description": "",
+      "speakers": "スタジオ・ウミ 山中 麻千子",
+      "track": "Track A",
+      "location": "Track A — 1F A会議室",
+      "startTime": "2018-11-17T07:00:00Z",
+      "year": 2018,
+      "event": "DrupalCamp Tokyo 2018",
+      "series": "DrupalCamp",
+      "region": "APAC",
+      "country": "Japan",
+      "city": "Tokyo",
+      "file": "events/drupalcamp/den/2018-tokyo.json",
+      "link": "https://drupal-camp2018.den-japan.org/sessions/",
+      "video": "https://youtu.be/CRt95Lwfqo4",
+      "minutes": 20
+    },
+    {
+      "matched": [
+        "paragraphs"
+      ],
+      "title": "Content Experience with Paragraphs",
+      "description": "",
+      "speakers": "Miro Dietiker, Nemanja Drobnjak",
+      "track": "Session",
+      "location": "Jakobshorn",
+      "startTime": "2017-02-18T15:30:00Z",
+      "year": 2017,
+      "event": "Drupal Mountain Camp Davos 2017",
+      "series": "Drupal Mountain Camp",
+      "region": "EMEA",
+      "country": "Switzerland",
+      "city": "Davos",
+      "file": "events/drupalmountaincamp/2017-davos.json",
+      "link": "https://drupalmountaincamp.ch/sessions/content-experience-paragraphs",
+      "video": "",
+      "minutes": 60
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "Drupal 8 Initiatives",
+      "description": "What drives the development of Drupal 8 core and contributed modules? It's thousands of contributors all over the world. Many work in their free time, many work paid by their employees - all together driving the Drupal project forward via open source contribution. With Drupal 8, so called initiatives were founded to focus development of Drupal in areas such as Configuration Management (CMI) , Layouts (SCOTCH) , Multilingual (D8MI) , Migrate or Views in Drupal Core (VDC) . Recently, new initiatives have been formed around topics like Content Workflow , API-first or creating a new core theme . Curious about what's going on in Drupal 8 initiatives? Join me to",
+      "speakers": "Josef Dabernig",
+      "track": "Session",
+      "location": "Pischa",
+      "startTime": "2017-02-18T10:00:00Z",
+      "year": 2017,
+      "event": "Drupal Mountain Camp Davos 2017",
+      "series": "Drupal Mountain Camp",
+      "region": "EMEA",
+      "country": "Switzerland",
+      "city": "Davos",
+      "file": "events/drupalmountaincamp/2017-davos.json",
+      "link": "https://drupalmountaincamp.ch/sessions/drupal-8-initiatives",
+      "video": "",
+      "minutes": 60
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "The Future of Commerce on Drupal 8 (and beyond)",
+      "description": "Drupal Commerce was developed from the ground up on Drupal 7, both benefiting from and contributing to the development of the Entity API, Views, and Rules modules. It redefined what Drupal can do in the eCommerce space, empowering businesses to sell physical products, event registrations, reservations, and digital products. Its ecosystem of contributed modules supports recurring billing with all of its complexities in addition to complex tax, multilingual, multi-currency, and omnichannel configurations.\n\nMoving forward to Drupal 8, we're reevaluating our feature set and architecture to make Commerce easier to use and to develop for. Starting with sprints at DrupalCon Austin and in Paris during the Summer of 2014, we began developing a generic set of libraries solving price and address management to share with the rest of the PHP community. These libraries are then used by our Drupal 8 modules along with a fresh implementation of the various entity types and subsystems that make up the Drupal Commerce framework.\n\nIn this session, you will learn about:\n\n- The generic PHP libraries we are developing for handling prices, taxes, discounts, and addresses and our efforts to see them adopted by other PHP based eCommerce projects\n- The key features of Drupal 8 we’re taking advantage of\n- How changes to our architecture and user interfaces address the most common frustrations developers and merchants have with\n- Drupal Commerce 1.x frustrations, and how we’ve addressed them\n- What Commerce 2.x is capable of today and how our roadmap compares to the Drupal 8 release schedule\n\nLet’s talk architecture, look at a demo, get excited, and start bidding on our first eCommerce projects powered by Drupal 8.",
+      "speakers": "rszrama",
+      "track": "Coding and Development",
+      "location": "Salon Ceiba - Acquia",
+      "startTime": "2015-02-11T20:45:00Z",
+      "year": 2015,
+      "event": "DrupalCon Bogotá 2015",
+      "series": "DrupalCon",
+      "region": "LATAM",
+      "country": "Colombia",
+      "city": "Bogotá",
+      "file": "events/drupalcon/la/2015-bogota.json",
+      "link": "https://latinamerica2015.drupal.org/session/future-commerce-drupal-8-and-beyond.html",
+      "video": "https://youtu.be/YdBHpbOs1ZU",
+      "minutes": 60
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "An Overview of the Drupal 8 Plugin System",
+      "description": "Goodbye hook_block_info(), hello Block Plugins.\n\nThe Drupal 8 plugin system provides a set of guidelines and reusable code components that allow developers to expose pluggable functionality within their code and (as needed) support managing these components through the user interface. Understanding the ins and outs of the plugin system will be critical for anyone developing modules for Drupal 8. Blocks, field types, widgets, and views displays are just some of the places you’ll encounter plugins in D8.\n\nIn this presentation Joe will draw on [his experience working with Drupal 8 plugins](https://drupalize.me/blog/201409/unravelling-drupal-8-plugin-system) in order to write about and helping document the plugin system,  and walk through:\n\n- What are plugins and why, when, where are they used?\n\n- How Drupal discovers plugins.\n\n- Annotations and how they relate to plugins.\n\n- Defining a plugin.\n\n- Using plugin derivatives to allow for many instances of a single plugin.\n\n- Defining new plugin types in your own module.\n\nThis presentation will be useful for anyone who will be writing new Drupal 8 modules or porting existing code from Drupal 7 to Drupal 8. It will help developers to better understand where plugins fit in the architecture of a Drupal module, and help to map your Drupal 7 knowledge about info hooks and callback functions to Drupal 8 plugins.",
+      "speakers": "eojthebrave",
+      "track": "Coding and Development",
+      "location": "Salon Auditorium - Just Digital",
+      "startTime": "2015-02-11T18:00:00Z",
+      "year": 2015,
+      "event": "DrupalCon Bogotá 2015",
+      "series": "DrupalCon",
+      "region": "LATAM",
+      "country": "Colombia",
+      "city": "Bogotá",
+      "file": "events/drupalcon/la/2015-bogota.json",
+      "link": "https://latinamerica2015.drupal.org/session/overview-drupal-8-plugin-system.html",
+      "video": "https://youtu.be/9pVg2-5dcVg",
+      "minutes": 60
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "Designing Drupal 8",
+      "description": "Drupal 8 includes some major changes to the administrative interface. This session explores the purpose and details behind many of the main UI overhauls in Drupal 8.\n\nThis session is presented by Lewis Nyman (maintainer of the Seven theme) and Bojhan Somers (UX maintainer).\n\nThe presentation covers:\n\nThe toolbar; building a responsive menu\n\nThe content creation page; overhauling Drupal's bland look\n\nThe style guide; improving the visual design of Seven\n\nMuch more; module page, inline editing, making Drupal responsive, integrating views into core.\n\nDesigning in the community is hard, we take a closer look at a few of these initiatives to show the process from exploration, proposal, to implementation that takes place in the community.\n\nWe're also going to look towards the future, to expand the Seven style guide beyond core to better serve the needs of contrib developers and create a more seemless experience for site builders.",
+      "speakers": "LewisNyman",
+      "track": "Core Conversations",
+      "location": "Salon Clavelles - Softlite Solutions",
+      "startTime": "2015-02-11T15:45:00Z",
+      "year": 2015,
+      "event": "DrupalCon Bogotá 2015",
+      "series": "DrupalCon",
+      "region": "LATAM",
+      "country": "Colombia",
+      "city": "Bogotá",
+      "file": "events/drupalcon/la/2015-bogota.json",
+      "link": "https://latinamerica2015.drupal.org/session/designing-drupal-8.html",
+      "video": "https://youtu.be/e5MAptNlJzo",
+      "minutes": 60
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "Un mejor CSS, planeando hoy para no sufrir en el futuro.",
+      "description": "No importa el tamaño del proyecto en el que estemos trabajando, desgraciadamente siempre es posible terminar con CSS poco mantenible, difícil de debuggear y en el que repetimos una y otra vez las mismas reglas.\n\nEl objetivo de esta charla es, que nuestro “yo” del futuro no nos odie ;)\n\nLa sesión incluye temas como:\n\n- Como organizar nuestro CSS/Sass\n\n- La idea de componentes en CSS\n\n- CSS naming conventions\n\n- Crear layouts y componentes reutilizables con Views y Display Suite.\n\n- Extra tips, Grunt JS para que nuestros Sass sea más limpio\n\nSlides: [http://www.slideshare.net/leivajd/planeand](http://www.slideshare.net/leivajd/planeand)\n\nEgo title\n\nJose Leiva, Front-End Developer en [Backcountry.com](http://www.backcountry.com/). He hablado en diferentes conferencias sobre CSS, Sass y Drupal Theming. Durante 4 años he trabajado para diferentes Drupal Shop en Costa Rica como Drupal Themer.",
+      "speakers": "jleiva",
+      "track": "Frontend",
+      "location": "Salon Ceiba - Acquia",
+      "startTime": "2015-02-10T22:00:00Z",
+      "year": 2015,
+      "event": "DrupalCon Bogotá 2015",
+      "series": "DrupalCon",
+      "region": "LATAM",
+      "country": "Colombia",
+      "city": "Bogotá",
+      "file": "events/drupalcon/la/2015-bogota.json",
+      "link": "https://latinamerica2015.drupal.org/session/un-mejor-css-planeando-hoy-para-no-sufrir-en-el-futuro.html",
+      "video": "https://youtu.be/VTCUnGmijDQ",
+      "minutes": 60
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "Design Systems and Drupal",
+      "description": "Modern Web design demands visual systems that ensure content is delivered to our myriad devices, from smartphones to tablets to desktop displays and beyond, in usable ways. It requires thinking in terms of content that gets presented, often in a variety of different ways, rather than simply presentation.\n\nDrupal has for years handled content independent of a particular design, in a sort of platonic content ideal.  That makes designing for a Drupal development project is a perfect fit  for design systems-thinking and results in greater efficiency and better quality. Using a smart design systems approach paired with good content strategy results in a project that fits amazingly well with Drupal's own design and capabilities... if we can recognize how to unify them.\n\nIn this session, Larry Garfield, Palantir's Senior Architect and Community Lead, will provide practical examples for how modern, modular design systems and practices can map directly to Drupal’s Views module, view modes, image styles, panels and other common site building tools. You’ll walk away with information that will help you leverage Drupal’s strengths through leading edge Web design, to see design systems, content strategy, and Drupal as a unified worldview that results in better sites, faster, and with more consistency.\n\nSlides are available here: [http://www.palantir.net/presentations/dcbogota2015-design-systems/](http://www.palantir.net/presentations/dcbogota2015-design-systems/)",
+      "speakers": "Crell",
+      "track": "Frontend",
+      "location": "Salon Auditorium - Just Digital",
+      "startTime": "2015-02-10T19:15:00Z",
+      "year": 2015,
+      "event": "DrupalCon Bogotá 2015",
+      "series": "DrupalCon",
+      "region": "LATAM",
+      "country": "Colombia",
+      "city": "Bogotá",
+      "file": "events/drupalcon/la/2015-bogota.json",
+      "link": "https://latinamerica2015.drupal.org/session/design-systems-and-drupal.html",
+      "video": "https://youtu.be/7-BZTvFXETg",
+      "minutes": 60
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "Media with Drupal",
+      "description": "Mediahandling in Drupal (6) is like hell.\n\nThere are OOTB-solutions, but if you just wan't one change or one featured added, you have to hack modules.\n\nAfter trial and error, some self hacked modules and stuff i came back to the basics: cck, views and some supporting modules, and gonna show to implement a great looking and flexible, node based multimedia-handling solution with (nearly) no code.\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "speakers": "macode",
+      "track": "",
+      "location": "Microsoft",
+      "startTime": "2010-05-09T09:00:00.000Z",
+      "year": 2010,
+      "event": "Drupal Dev Days Munich 2010",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Germany",
+      "city": "Munich",
+      "file": "events/ddd/2010-munich.json",
+      "link": "http://www.drupal-dev-days.de/de/node/550",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "Drupal distributed architecture: what to do when your site is getting cramped",
+      "description": "This session is a meta session about architecture. In  this presentation you'll learn about the different composite and mixed site architectures solutions in Drupal, their individual (dis)advantages and the technologies you could use to implement them.\n\nArchitectures that will be addressed amongst others are:\n\n- Organic groups\n\n- Domain access\n\n- installation profile powered multi-site setups\n\n- Drupal service clouds, in which features are distributed over more than one specialized site\n\n- Master-servant content propagation through RSS\n\n- Integration with third party services (Apache Solr, Alfresco, etc.)\n\nTechnologies that will be addressed amongst others are:\n\n- Aegir: one site to monitor and update all the other Drupal sites\n\n- Table wizard\n\n- Views 3\n\n- RDF\n\n- Remote blocks, references and views\n\n- Deploy\n\n- Spaces, Context and Features\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "speakers": "kvantomme",
+      "track": "",
+      "location": "Erdfisch",
+      "startTime": "2010-05-09T08:00:00.000Z",
+      "year": 2010,
+      "event": "Drupal Dev Days Munich 2010",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Germany",
+      "city": "Munich",
+      "file": "events/ddd/2010-munich.json",
+      "link": "http://www.drupal-dev-days.de/de/node/434",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "Views 3",
+      "description": "Views 3 (for Drupal 7) brings Views to a new level and open's it up for a bunch of new usecases:\n\nBeside that Views 3 is a massive code cleanup the following features have been added:\n\n- AND/OR support\n\n- GROUPBY support\n\n- better export code\n\n- UI stuff\n\n- exposed forms\n\n- semantic support\n\nBut there is still testing to be done and bugs to be fixed, so we would like to invite you test AND/OR write patches.\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "speakers": "macode, Daniel Wehner",
+      "track": "",
+      "location": "Attempto",
+      "startTime": "2010-05-09T08:00:00.000Z",
+      "year": 2010,
+      "event": "Drupal Dev Days Munich 2010",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Germany",
+      "city": "Munich",
+      "file": "events/ddd/2010-munich.json",
+      "link": "http://www.drupal-dev-days.de/de/sessions/views-3-0",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "Howtodo the impossible: Drupal scalable",
+      "description": "User-interacting Drupal Websites skalierbar zu machen ist ein Krampf, deswegen möchten wir in diesem Vortrag das Thema von 2 Perspektiven beleuchten:\n\n- **Serverseitig:** kann man einiges Rausholen, insbesondere wenn man auf *aegir*  und/oder die \"cloud\" setzt. Wir werden das Setup von aegir mit EC2 Support zeigen und auch einen Blick auf Datenbankreplikation und die ensprechenden Master-Slaves bzw. Master-Master als Failoverlösung werfen\n- Aber auch **Drupalseitig** kann viel getan werden: Das Nadelöhr von Drupal, die mySQL-Datenbank, dient es zu bekämpfen. Hier werden wir Optimierungmöglichkeiten in Views, das Auslagern der Suche nach Solr, sowie Caching von einzelnen Seitenelementen, zeigen.\n\nWir freuen uns auf spannnende Diskussionen.\n\n**Language:** Deutsch  \n**Session type:** Workshop (2 Stunden)  \n**Difficulty:** Anfänger",
+      "speakers": "macode, Daniel Wehner",
+      "track": "",
+      "location": "Stemmerkuchl",
+      "startTime": "2010-05-08T14:00:00.000Z",
+      "year": 2010,
+      "event": "Drupal Dev Days Munich 2010",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Germany",
+      "city": "Munich",
+      "file": "events/ddd/2010-munich.json",
+      "link": "http://www.drupal-dev-days.de/de/sessions/howtodo-impossible-drupal-scalable",
+      "video": "",
+      "minutes": 120
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "Khairn - Projekte managen mit Drupal",
+      "description": "Erfolgreiches Projektmanagement benötigt ein effizientes Werkzeug, das alle Prozesse eines großen Projekts aus einer Hand unterstützt. Was wäre als Basis eines solchen Tools wohl besser geeignet als Drupal, unser „Schweizer Taschenmesser“?\n\ndata in transit entwickelt unter dem Namen **Khairn** ein Projektmanagement-Tool auf Drupal-Basis, das seine Stärken bereits vielfach im Projektalltag ausspielen konnte.\n\nDer Vortrag gibt eine Einführung in den Aufbau von Khairn und erläutert das Konzept des „Requirement-Driven Project Management“ sowie dessen Vorzüge für die Projektkommunikation.\n\nKhairn zeichnet sich durch folgende Features aus:\n\n- Anforderungsmanagement\n\n- Änderungsmanagement\n\n- Qualitätsmanagement\n\n- Dokumentation und Wissensmanagement\n\n- Kommunikationsmanagement / Berichtswesen\n\n- Aufgabenmanagement / Ticketing / Bugtracking\n\nWir zeigen, wie Khairn mittels Drupal-Standard-Tools (CCK, Views, Workflow, Rules, Book, Taxonomy) sinnvolle Arbeits- und Kommunikationsprozesse generiert und wie diese gewinnbringend genutzt werden können.\n\nDen Abschluss bildet ein Ausblick, um welche Features Khairn in der weiteren Entwicklung ausgebaut werden soll.\n\nLinks:\n\n[http://www.khairn.org](http://www.khairn.org)\n\n[http://twitter.com/khairn](http://twitter.com/khairn)\n\n[http://www.facebook.com/pages/Khairn/112809978749506](http://www.facebook.com/pages/Khairn/112809978749506)\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "speakers": "j4h8",
+      "track": "",
+      "location": "Mayflower",
+      "startTime": "2010-05-08T14:00:00.000Z",
+      "year": 2010,
+      "event": "Drupal Dev Days Munich 2010",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Germany",
+      "city": "Munich",
+      "file": "events/ddd/2010-munich.json",
+      "link": "http://www.drupal-dev-days.de/de/sessions/khairn-projekte-managen-mit-drupal",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "Multilingual sites",
+      "description": "How to set up multilingual site when you also want to use views, panels, CCK, override taxonomy terms? When you have more then two languages and user generated content?\n\nWhen you want to be able to translate pretty much everything from nodes to field labels, menu items, block titles, mission statement, user profiles... without the site breaking if something hasn't been translated?\n\nAre there moments when you're better of just adding t functions?\n\nModules covered include:\n\n• CCK\n\n• Panels\n\n• Views\n\n• block translation\n\n• cck translation\n\n• content type translation\n\n• i18n\n\n• menu translation\n\n• profile translation\n\n• string translation\n\n• synchronize translation\n\n• taxonomy translation\n\n• views translation\n\n• active translation\n\n• tContact\n\n**Language:** English  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "speakers": "antje",
+      "track": "",
+      "location": "Erdfisch",
+      "startTime": "2010-05-08T14:00:00.000Z",
+      "year": 2010,
+      "event": "Drupal Dev Days Munich 2010",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Germany",
+      "city": "Munich",
+      "file": "events/ddd/2010-munich.json",
+      "link": "http://www.drupal-dev-days.de/de/node/491",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "Howtodo the impossible: Drupal scalable",
+      "description": "User-interacting Drupal Websites skalierbar zu machen ist ein Krampf, deswegen möchten wir in diesem Vortrag das Thema von 2 Perspektiven beleuchten:\n\n- **Serverseitig:** kann man einiges Rausholen, insbesondere wenn man auf *aegir*  und/oder die \"cloud\" setzt. Wir werden das Setup von aegir mit EC2 Support zeigen und auch einen Blick auf Datenbankreplikation und die ensprechenden Master-Slaves bzw. Master-Master als Failoverlösung werfen\n- Aber auch **Drupalseitig** kann viel getan werden: Das Nadelöhr von Drupal, die mySQL-Datenbank, dient es zu bekämpfen. Hier werden wir Optimierungmöglichkeiten in Views, das Auslagern der Suche nach Solr, sowie Caching von einzelnen Seitenelementen, zeigen.\n\nWir freuen uns auf spannnende Diskussionen.\n\n**Language:** Deutsch  \n**Session type:** Workshop (2 Stunden)  \n**Difficulty:** Anfänger",
+      "speakers": "macode, Daniel Wehner",
+      "track": "",
+      "location": "Stemmerkuchl",
+      "startTime": "2010-05-08T13:00:00.000Z",
+      "year": 2010,
+      "event": "Drupal Dev Days Munich 2010",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Germany",
+      "city": "Munich",
+      "file": "events/ddd/2010-munich.json",
+      "link": "http://www.drupal-dev-days.de/de/sessions/howtodo-impossible-drupal-scalable",
+      "video": "",
+      "minutes": 120
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "Power Panel + Der richtige Einsatz von Panels",
+      "description": "**Einführung + Erweiterungen von Panels**\n\nInhalt\n\n- Panel Type ( Node Panel , Panel Page,  Mini Panels ) und der richtige Einsatz\n\n- Contexte und Argumente\n\n- Verwendung von Views Content Panes in Panels\n\n- Panels Everywhere\n\n- Ein beispielhafter Aufbau\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "speakers": "erik.seifert",
+      "track": "",
+      "location": "Attempto",
+      "startTime": "2010-05-08T13:00:00.000Z",
+      "year": 2010,
+      "event": "Drupal Dev Days Munich 2010",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Germany",
+      "city": "Munich",
+      "file": "events/ddd/2010-munich.json",
+      "link": "http://www.drupal-dev-days.de/de/sessions/power-panel-der-richtige-einsatz-von-panels",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "Showcase: mein!KI.KA - Die Kinderkanal-Community",
+      "description": "Im Frühjahr 2009 startete der Kinderkanal von ARD und ZDF (KI.KA) seine Community \"mein!KI.KA\" auf Drupal-Basis ([http://www.mein-kika.de](http://www.mein-kika.de)).\n\nIn diesem Vortrag berichten die Projektleiter Jutta Horstmann (technische Umsetzung) und Tobias Freudenreich (Konzeption und Gesamtprojektleitung für den KI.KA) über die gewonnenen Erfahrungen.\n\nNach einer Führung durch die Kinder-Community gehen wir auf die Projektanforderungen ein: Die Themen Sicherheit, Datenschutz, Barrierefreiheit sowie Performance-Optimierung standen während der Entwicklungsphase im Vordergrund.\n\nAnhand verschiedener Beispiele stellen wir für mein!KI.KA entwickelte Module vor, u.a.:\n\n- Nutzer können sich selbst löschen (inkl. Anonymisierung und Persistenz)\n\n- \"Öffnungszeiten“ (Login nur zu definierten täglichen Zeiten möglich)\n\n- Features für die Vormoderation der Inhalte (Programmierung von Actions zur Verwendung mit Views Bulk Operations)\n\nSämtliche verwendeten Module wie auch die Eigenentwicklungen wurden strengen Sicherheitstests unterzogen. Wir besprechen die eingesetzten Funktionen (z.B. aus der Forms API und Database API) und Tools (z.B. Coder, Security Scanner), welche Drupal-Module sicherer machen.\n\nIm Anschluss beleuchten wir Stärken und Schwächen von Drupal in der Umsetzung der Anforderungen. Wir erläutern anhand verschiedener Beispiele aus Entwickler- und Kundensicht, in welchen Bereichen Drupal als Web-Framework die Entwicklungsarbeit unterstützte und wo es eher \"im Weg stand\".\n\nInformationen zur Vorgehensweise hinsichtlich Projektmanagement und Softwareentwicklungsprozess runden den Vortrag ab.\n\n**Language:** Deutsch  \n**Session type:** Vortrag (45 Minuten)  \n**Difficulty:** Anfänger",
+      "speakers": "j4h8, freudenreichmedia",
+      "track": "",
+      "location": "Mayflower",
+      "startTime": "2010-05-08T13:00:00.000Z",
+      "year": 2010,
+      "event": "Drupal Dev Days Munich 2010",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Germany",
+      "city": "Munich",
+      "file": "events/ddd/2010-munich.json",
+      "link": "http://www.drupal-dev-days.de/de/sessions/showcase-meinkika-die-kinderkanal-community",
+      "video": "",
+      "minutes": 45
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "Views 2 Workshop für Anfänger",
+      "description": "**Language:** Deutsch  \n**Difficulty:** Anfänger",
+      "speakers": "derhasi",
+      "track": "",
+      "location": "Stemmerkuchl",
+      "startTime": "2010-05-08T10:00:00.000Z",
+      "year": 2010,
+      "event": "Drupal Dev Days Munich 2010",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Germany",
+      "city": "Munich",
+      "file": "events/ddd/2010-munich.json",
+      "link": "http://www.drupal-dev-days.de/de/sessions/views-2-workshop-f%C3%BCr-anf%C3%A4nger",
+      "video": "",
+      "minutes": 60
+    },
+    {
+      "matched": [
+        "views"
+      ],
+      "title": "Views 2 Workshop für Anfänger",
+      "description": "**Language:** Deutsch  \n**Difficulty:** Anfänger",
+      "speakers": "derhasi",
+      "track": "",
+      "location": "Stemmerkuchl",
+      "startTime": "2010-05-08T09:00:00.000Z",
+      "year": 2010,
+      "event": "Drupal Dev Days Munich 2010",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Germany",
+      "city": "Munich",
+      "file": "events/ddd/2010-munich.json",
+      "link": "http://www.drupal-dev-days.de/de/sessions/views-2-workshop-f%C3%BCr-anf%C3%A4nger",
+      "video": "",
+      "minutes": 60
+    }
+  ]
+}

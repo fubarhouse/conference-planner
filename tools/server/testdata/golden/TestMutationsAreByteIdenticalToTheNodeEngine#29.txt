@@ -1,0 +1,418 @@
+{
+  "result": "manual",
+  "url": "https://drupaljam.nl/programma-breda",
+  "event": {
+    "regionCode": "EMEA",
+    "country": "Netherlands",
+    "designation": "DrupalJam",
+    "ecosystem": "drupal",
+    "location": "Breda",
+    "year": "2008",
+    "website": "https://drupaljam.nl/",
+    "region": "Netherlands – Breda",
+    "timezone": "Europe/Amsterdam",
+    "enabled": true,
+    "scheduleComplete": true,
+    "columns": 2,
+    "startDate": "2008-10-31T09:00:00Z",
+    "endDate": "2008-10-31T20:00:00Z",
+    "scheduleURLs": [
+      "https://drupaljam.nl/programma-breda"
+    ],
+    "other_urls": [
+      "https://drupaljam.nl/sponsoren",
+      "http://drupaljam.nl/vorige-drupaljams"
+    ],
+    "venue": "Avans Hogeschool",
+    "logo": {
+      "image": "",
+      "imageAlt": "DrupalJam logo",
+      "usePlate": false,
+      "logoDisabled": true,
+      "faIcon": "fa-solid fa-calendar-days"
+    },
+    "flickr": {
+      "enabled": true,
+      "provider": "Flickr",
+      "groupUrl": "http://www.flickr.com/photos/batigolix/sets/72157608538492012/",
+      "image": "",
+      "imageAlt": "DrupalJam 3 Breda photos"
+    },
+    "sponsors": [
+      {
+        "title": "A Test Sponsor",
+        "tier": "Gold",
+        "note": "with a comma, a \"quote\" and <html>",
+        "id": "avans-hogeschool-breda"
+      },
+      {
+        "id": "one-shoe",
+        "title": "One Shoe",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 20,
+        "image": "",
+        "imageAlt": "One Shoe logo",
+        "link": "http://www.oneshoe.nl/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupaljam-sponsoren"
+        ]
+      },
+      {
+        "id": "byelex-multimedia-products",
+        "title": "Byelex Multimedia Products",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 30,
+        "image": "",
+        "imageAlt": "Byelex Multimedia Products logo",
+        "link": "http://www.byelex.nl/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupaljam-sponsoren"
+        ]
+      },
+      {
+        "id": "krimson",
+        "title": "Krimson",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 40,
+        "image": "",
+        "imageAlt": "Krimson logo",
+        "link": "http://www.krimson.be/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupaljam-sponsoren"
+        ]
+      },
+      {
+        "id": "merge",
+        "title": "Merge",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 50,
+        "image": "",
+        "imageAlt": "Merge logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupaljam-sponsoren"
+        ]
+      },
+      {
+        "id": "qrios",
+        "title": "Qrios",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 60,
+        "image": "",
+        "imageAlt": "Qrios logo",
+        "link": "http://www.qrios.nl/",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupaljam-sponsoren"
+        ]
+      },
+      {
+        "id": "packt-publishing",
+        "title": "Packt Publishing",
+        "tier": "Sponsor",
+        "row": 1,
+        "priority": 70,
+        "image": "",
+        "imageAlt": "Packt Publishing logo",
+        "link": "",
+        "bgStyle": "auto",
+        "aspect": "auto",
+        "enabled": true,
+        "sourceIds": [
+          "drupaljam-sponsoren"
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "drupaljam-programma-breda",
+        "kind": "schedule",
+        "url": "https://drupaljam.nl/programma-breda",
+        "verifiedAt": "2026-08-23",
+        "verifiedBy": "policy"
+      },
+      {
+        "id": "drupaljam-sponsoren",
+        "kind": "sponsors",
+        "url": "https://drupaljam.nl/sponsoren",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20090414114518",
+          "captureUrl": "https://web.archive.org/web/20090414114518/http://drupaljam.nl/sponsoren"
+        },
+        "retrievedAt": "2026-08-20"
+      },
+      {
+        "id": "drupaljam",
+        "kind": "other",
+        "url": "https://drupaljam.nl/",
+        "verifiedAt": "2026-08-23",
+        "verifiedBy": "policy"
+      },
+      {
+        "id": "drupaljam-vorige-drupaljams",
+        "kind": "photos",
+        "url": "http://drupaljam.nl/vorige-drupaljams",
+        "retrievedAt": "2026-08-24",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20090419231618",
+          "captureUrl": "https://web.archive.org/web/20090419231618/http://drupaljam.nl/vorige-drupaljams"
+        },
+        "notes": "The site’s own list of past editions, which is where this event’s photo set comes from — a Flickr set in a personal account (batigolix), not an official group. Flickr answers browsers but refuses scripted requests, so the set was not re-checked here; the address is the one the organisers published."
+      }
+    ],
+    "sourceIds": [
+      "drupaljam-programma-breda",
+      "drupaljam",
+      "drupaljam-vorige-drupaljams"
+    ]
+  },
+  "items": [
+    {
+      "startTime": "2008-10-31T09:00:00Z",
+      "endTime": "2008-10-31T11:00:00Z",
+      "duration": "P120M",
+      "title": "Kennismakingsworkshop Drupal",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "Beginners Workshop Omdat er belangstelling is vanuit Hogeschool studenten zal de workshop zich richten op 'absolute beginners'. De deelnemers zullen een persoonlijke blogsite bouwen; de eerste pagina's aanmaken, Drupal-configuratie en vormging aanpassen. Door Bèr Kessels (Webschuur) en Erik Stielstra (Link3 Webservice) met assistentie van Roel de Meester (Krimson) en Niels Bom.",
+      "video_url": "",
+      "link": "http://drupaljam.nl/programma-breda#workshop",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "drupaljam-programma-breda"
+      ]
+    },
+    {
+      "startTime": "2008-10-31T11:30:00Z",
+      "endTime": "2008-10-31T13:00:00Z",
+      "duration": "P90M",
+      "title": "Workshop vervolg",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "link": "",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "drupaljam-programma-breda"
+      ],
+      "kind": "workshop"
+    },
+    {
+      "startTime": "2008-10-31T13:00:00Z",
+      "endTime": "2008-10-31T14:00:00Z",
+      "duration": "P60M",
+      "title": "Bespreking \"Drupalcon Maastricht 2009\"",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "link": "",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "drupaljam-programma-breda"
+      ]
+    },
+    {
+      "startTime": "2008-10-31T13:30:00Z",
+      "endTime": "2008-10-31T14:00:00Z",
+      "duration": "P30M",
+      "title": "Ontvangst met koffie/thee",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "link": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupaljam-programma-breda"
+      ]
+    },
+    {
+      "startTime": "2008-10-31T14:00:00Z",
+      "endTime": "2008-10-31T14:30:00Z",
+      "duration": "P30M",
+      "title": "Introductie en kennismaking",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "link": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupaljam-programma-breda"
+      ]
+    },
+    {
+      "startTime": "2008-10-31T14:30:00Z",
+      "endTime": "2008-10-31T15:15:00Z",
+      "duration": "P45M",
+      "title": "Showcase(s) Drupal project",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "Showcase Dupal project Binnenkort introduceert GroenLinks haar nieuwe website. Deze website is gerealiseerd met Drupal en biedt zowel landelijke ondersteuning als voor 300 subsites. In een presentatie wordt uitgelegd hoe de multidomainstructuur tot stand is gekomen en verteld worden over de specifieke kenmerken van het platform. Daarnaast zal een korte uitleg worden gegeven over het verloop van een project van dit formaat. Door Floris Derksen en Thijs Zoon van OneShoe.",
+      "video_url": "",
+      "link": "http://drupaljam.nl/programma-breda#showcase",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "drupaljam-programma-breda"
+      ]
+    },
+    {
+      "startTime": "2008-10-31T15:15:00Z",
+      "endTime": "2008-10-31T16:00:00Z",
+      "duration": "P45M",
+      "title": "Module bespreking en presentatie",
+      "location": "",
+      "track": [
+        "Hoofd event"
+      ],
+      "speakers": [],
+      "full_description": "Module bespreking en presentatie Over commandline besturing van drupal met php-cli, drush en drush_mm. Welke mogelijkheden zijn er om drupal te besturen en te automatiseren? Door Clemens Tolboom van Build2be .",
+      "video_url": "",
+      "link": "http://drupaljam.nl/programma-breda#module",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "drupaljam-programma-breda"
+      ]
+    },
+    {
+      "startTime": "2008-10-31T15:15:00Z",
+      "endTime": "2008-10-31T16:00:00Z",
+      "duration": "P45M",
+      "title": "Voortgangs bespreking \"Drupal.be+nl\"",
+      "location": "",
+      "track": [
+        "Parallel event"
+      ],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "link": "",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "drupaljam-programma-breda"
+      ]
+    },
+    {
+      "startTime": "2008-10-31T16:00:00Z",
+      "endTime": "2008-10-31T16:15:00Z",
+      "duration": "P15M",
+      "title": "Korte pauze",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "link": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupaljam-programma-breda"
+      ]
+    },
+    {
+      "startTime": "2008-10-31T16:15:00Z",
+      "endTime": "2008-10-31T17:00:00Z",
+      "duration": "P45M",
+      "title": "Discussie- en expert-forum",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "Discussie- en expert-forum Dit wordt een ad hoc vraag- en antwoord sessie. Heb je een Drupal vraag of probleem? Wil je weten of Drupal capabel is voor uw/jouw project? Wat gaat Drupal 7 ons brengen? Neem je vragen mee en stel ze hier. Ben je ervaren met Drupal? Dan ben jij expert en kan je mee helpen de vragen te beantwoorden!",
+      "video_url": "",
+      "link": "http://drupaljam.nl/programma-breda#expert",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "drupaljam-programma-breda"
+      ]
+    },
+    {
+      "startTime": "2008-10-31T17:00:00Z",
+      "endTime": "2008-10-31T18:00:00Z",
+      "duration": "P60M",
+      "title": "Eten",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "link": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupaljam-programma-breda"
+      ]
+    },
+    {
+      "startTime": "2008-10-31T18:00:00Z",
+      "endTime": "2008-10-31T18:15:00Z",
+      "duration": "P15M",
+      "title": "Status presentate Drupal.be/nl revamp",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "Status Drupal nl/be revamp Achter de schermen wordt gewerkt aan een nieuwe website voor drupal.be en drupal.nl. Roel de Meester vertelt hoe het er mee staat.",
+      "video_url": "",
+      "link": "http://drupaljam.nl/programma-breda#revamp",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "drupaljam-programma-breda"
+      ]
+    },
+    {
+      "startTime": "2008-10-31T18:15:00Z",
+      "endTime": "2008-10-31T20:00:00Z",
+      "duration": "P105M",
+      "title": "Accessibility en Webdevelopment, over toegankelijkheid van websites voor visueel gehandicapten",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "Accessibility en Webdevelopment Hoe ervaart iemand met visueel handicap een bezoek aan een website? Waar kun je als webdeveloper rekening mee houden om websites toegankelijk te maken voor deze bezoekers? Welke technieken zijn beschikbaar? Door een expert van stichting Drempelvrij en iemand met een visuele handicap. Creative Commons - Website sponsored by Qbset | Powered by Drupal",
+      "video_url": "",
+      "link": "http://drupaljam.nl/programma-breda#accessibility",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "drupaljam-programma-breda"
+      ]
+    }
+  ]
+}

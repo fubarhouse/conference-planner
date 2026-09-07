@@ -1,0 +1,98 @@
+{
+  "name": "Daniel Wehner",
+  "sessions": 10,
+  "partners": [
+    {
+      "name": "macode",
+      "count": 10,
+      "sessions": [
+        {
+          "title": "Drupal 7",
+          "event": "Drupal Dev Days Munich 2010",
+          "year": 2010
+        },
+        {
+          "title": "Howtodo the impossible: Drupal scalable",
+          "event": "Drupal Dev Days Munich 2010",
+          "year": 2010
+        },
+        {
+          "title": "Howtodo the impossible: Drupal scalable",
+          "event": "Drupal Dev Days Munich 2010",
+          "year": 2010
+        },
+        {
+          "title": "#d7cx Codesprint",
+          "event": "Drupal Dev Days Munich 2010",
+          "year": 2010
+        },
+        {
+          "title": "Views 3",
+          "event": "Drupal Dev Days Munich 2010",
+          "year": 2010
+        },
+        {
+          "title": "#d7cx Codesprint",
+          "event": "Drupal Dev Days Munich 2010",
+          "year": 2010
+        },
+        {
+          "title": "#d7cx Codesprint",
+          "event": "Drupal Dev Days Munich 2010",
+          "year": 2010
+        },
+        {
+          "title": "#d7cx Codesprint",
+          "event": "Drupal Dev Days Munich 2010",
+          "year": 2010
+        },
+        {
+          "title": "#d7cx Codesprint",
+          "event": "Drupal Dev Days Munich 2010",
+          "year": 2010
+        },
+        {
+          "title": "#d7cx Codesprint",
+          "event": "Drupal Dev Days Munich 2010",
+          "year": 2010
+        }
+      ]
+    },
+    {
+      "name": "fgm",
+      "count": 6,
+      "sessions": [
+        {
+          "title": "#d7cx Codesprint",
+          "event": "Drupal Dev Days Munich 2010",
+          "year": 2010
+        },
+        {
+          "title": "#d7cx Codesprint",
+          "event": "Drupal Dev Days Munich 2010",
+          "year": 2010
+        },
+        {
+          "title": "#d7cx Codesprint",
+          "event": "Drupal Dev Days Munich 2010",
+          "year": 2010
+        },
+        {
+          "title": "#d7cx Codesprint",
+          "event": "Drupal Dev Days Munich 2010",
+          "year": 2010
+        },
+        {
+          "title": "#d7cx Codesprint",
+          "event": "Drupal Dev Days Munich 2010",
+          "year": 2010
+        },
+        {
+          "title": "#d7cx Codesprint",
+          "event": "Drupal Dev Days Munich 2010",
+          "year": 2010
+        }
+      ]
+    }
+  ]
+}

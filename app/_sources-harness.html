@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="/css/foundation.css">
+<link rel="stylesheet" href="/css/utilities.css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/section-chrome.css">
+<link rel="stylesheet" href="/css/section-editor.css">
+<style>body{padding:32px;max-width:1100px;margin:0 auto;}</style>
+</head><body class="theme-light"><div id="editorMain">
+<section class="edt-stack">
+  <div class="edt-section__head"><div>
+    <p class="edt-eyebrow">Provenance</p><h2 class="edt-section__title">Sources</h2>
+  </div></div>
+  <div id="sourcesEditorContent"></div>
+</section>
+<script type="module">
+import { initSources, renderSourcesEditor } from '/js/modules/editorSources.js';
+const dataset = await (await fetch(window.FIXTURE || '/fixture.json')).json();
+const state = { dataset, file: 'harness' };
+initSources({ state, markDirty(){}, escapeHtml: s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])), escapeAttr: s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])) });
+renderSourcesEditor();
+window.__ready = true;
+</script>
+</div></body></html>

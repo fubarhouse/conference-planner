@@ -1,0 +1,36 @@
+{
+  "term": "layout builder",
+  "byYear": {
+    "2024": 1,
+    "2025": 1,
+    "2026": 3
+  },
+  "byYearDescribed": {
+    "2024": 1,
+    "2025": 1,
+    "2026": 3
+  },
+  "sessions": [
+    {
+      "year": 2024,
+      "title": "Drupal's Alternate Realities"
+    },
+    {
+      "year": 2025,
+      "title": "Drupal Canvas APIs: how to integrate and extend Canvas"
+    },
+    {
+      "year": 2026,
+      "title": "The joy and power of SDC, finally for form inputs"
+    },
+    {
+      "year": 2026,
+      "title": "Page Builder Deathmatch: Canvas vs Display Builder in a Real World Project"
+    },
+    {
+      "year": 2026,
+      "title": "AI-Powered Site Building in Drupal: From Blank Site to Styled Pages in a Conversation"
+    }
+  ],
+  "year": null
+}

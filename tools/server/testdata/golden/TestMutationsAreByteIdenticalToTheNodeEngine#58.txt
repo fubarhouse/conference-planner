@@ -1,0 +1,755 @@
+{
+  "_version": 7,
+  "_plannerKey": "planner-demo-personal-alex",
+  "_eventFile": "events/drupalsouth/2026-wellington.json",
+  "_displayName": "Alex Chen — DrupalSouth Wellington 2026",
+  "_lastModified": "2026-08-11T11:02:54.203Z",
+  "mode": "personal",
+  "sessionNotes": {
+    "2026-05-12T21-30-00Z-Te-Aro-Death-to-the-Black-Box--Winning-in-2026-through-personal-agency--financial-prudence-and-community": {
+      "rating": 5,
+      "attended": true,
+      "notes": "One of the most energising keynotes in years. The framing around personal agency and community as competitive advantages really landed. Standing ovation was well deserved."
+    },
+    "2026-05-12T23-00-00Z-Te-Aro-Keywords-to-Context--Semantic-Search-and-Retrieval-Augmented-Generation-with-OpenSearch": {
+      "rating": 5,
+      "attended": true,
+      "notes": "Excellent practical demo of OpenSearch vector search in Drupal. The RAG pipeline walkthrough was exactly what our team needs. Grabbed the speaker's contact afterwards."
+    },
+    "2026-05-12T23-40-00Z-Te-Aro-From-Prompt-to-Pull-Request--Human-led--AI-assisted-workflows-for-building-Drupal-features": {
+      "rating": 4,
+      "attended": true,
+      "notes": "Good overview of AI-assisted dev workflows. A bit surface-level for experienced devs but the live coding demo was genuinely impressive. Would recommend to mid-level devs."
+    },
+    "2026-05-13T02-30-00Z-Loft-AI-Can-Do-My-Job-Now--Sort-Of---Not-Really---It-s-Complicated---A-user-researcher-s-complicated-relationship-with-AI": {
+      "rating": 5,
+      "attended": true,
+      "notes": "Best talk of the conference for me. The honest, self-critical take on AI limitations from a UX researcher perspective was refreshing. So much nuance that's usually missing from these conversations."
+    },
+    "2026-05-13T21-00-00Z-Te-Aro-The-Case-for-Drupal-CMS--Growing-adoption-and-expanding-our-focus-for-a-new-digital-era": {
+      "rating": 4,
+      "attended": true,
+      "notes": "Good but felt like a product pitch at times. The adoption numbers were encouraging. Excited to see where Canvas goes."
+    },
+    "2026-05-13T22-30-00Z-Waterfront-Rethinking-the-JavaScript-Reflex": {
+      "rating": 5,
+      "attended": true,
+      "notes": "Brilliantly argued. The case for native browser APIs over JS frameworks was well-evidenced. Changed how I'll approach the next project."
+    },
+    "2026-05-14T01-20-00Z-Waterfront-Vibe-Coding---Introducing-vulnerabilities-at-pace-to-your-clients": {
+      "rating": 5,
+      "attended": true,
+      "notes": "Hilarious and terrifying in equal measure. Every project manager in the room needed to hear this. Shared immediately with our leadership team."
+    },
+    "2026-05-14T02-40-00Z-Te-Aro-Practical-Performance-Testing": {
+      "rating": 4,
+      "attended": true,
+      "notes": "Solid practical content. The lighthouse CI GitHub Actions pipeline walkthrough was directly applicable. Taking the approach back to the team next sprint."
+    },
+    "2026-05-11T21-00-00Z-93E-Cuba-St--Te-Aro--Wellington-Code-Contribution-Sprint": {
+      "rating": 4,
+      "attended": true,
+      "notes": "Good to give back. Focused on recipe documentation — merged 3 PRs over the day."
+    }
+  },
+  "contacts": [
+    {
+      "id": "contact_demo_p01",
+      "name": "Jordan Park",
+      "org": "Catalyst IT",
+      "email": "jordan.park@catalyst.net.nz",
+      "role": "Platform Engineer",
+      "notes": "Met at the keynote. Interested in the same semantic search patterns. Connect about DrupalGovCon.",
+      "linkedIn": "linkedin.com/in/jordanpark-catalyst"
+    },
+    {
+      "id": "contact_demo_p02",
+      "name": "Yuki Tanaka",
+      "org": "amazee.io",
+      "email": "yuki.tanaka@amazee.io",
+      "role": "Developer Relations",
+      "notes": "Networking drinks. Very knowledgeable about Lagoon hosting. Wants to compare notes on automated deployment.",
+      "linkedIn": "linkedin.com/in/yukitanaka-lagoon"
+    },
+    {
+      "id": "contact_demo_p03",
+      "name": "Marcus Webb",
+      "org": "Freelance",
+      "email": "marcus@webbconsulting.nz",
+      "role": "Security Consultant",
+      "notes": "Presented the Security on Autopilot session. Offered to do a free security review of our main client site. Follow up!",
+      "linkedIn": "linkedin.com/in/marcuswebb-security"
+    },
+    {
+      "id": "contact_demo_p04",
+      "name": "Sophie Lewis",
+      "org": "NZ Digital Government",
+      "email": "s.lewis@govt.nz",
+      "role": "Digital Transformation Lead",
+      "notes": "Met during the government-track lunch table. Really interesting work on CWA compliance. Want to understand their Drupal-first approach.",
+      "linkedIn": "linkedin.com/in/sophielewis-nzdg"
+    }
+  ],
+  "tasks": [
+    {
+      "title": "A Test Sponsor",
+      "tier": "Gold",
+      "note": "with a comma, a \"quote\" and <html>",
+      "id": "task_demo_p01"
+    },
+    {
+      "id": "task_demo_p02",
+      "done": false,
+      "notes": "Topic idea: practical AI workflow integration for mid-sized agencies. Deadline likely August.",
+      "dueDate": "2026-08-01",
+      "text": "Submit session proposal for DrupalSouth 2027",
+      "status": "open",
+      "priority": "normal",
+      "sessionId": null
+    },
+    {
+      "id": "task_demo_p03",
+      "done": true,
+      "notes": "Published on company blog. Good engagement.",
+      "dueDate": "2026-06-01",
+      "text": "Write blog post: Semantic Search in Drupal — what we learned",
+      "status": "open",
+      "priority": "normal",
+      "sessionId": null
+    },
+    {
+      "id": "task_demo_p04",
+      "done": true,
+      "notes": "Sent Loom recording link and summary to team Slack.",
+      "dueDate": "2026-05-20",
+      "text": "Share Vibe Coding talk with leadership team",
+      "status": "open",
+      "priority": "normal",
+      "sessionId": null
+    },
+    {
+      "id": "task_demo_p05",
+      "done": false,
+      "notes": "Based on the Keywords to Context talk — real potential here for client search upgrades.",
+      "dueDate": "2026-07-01",
+      "text": "Review OpenSearch Drupal module and test on staging",
+      "status": "open",
+      "priority": "normal",
+      "sessionId": null
+    }
+  ],
+  "org": {
+    "boothInfo": "",
+    "boothNotes": "",
+    "teamAssignments": [],
+    "accommodations": [],
+    "timeline": {
+      "startDate": "",
+      "endDate": ""
+    },
+    "swag": [],
+    "deliverables": [],
+    "sponsorBudget": "",
+    "sponsorActual": "",
+    "sponsorCurrency": "AUD",
+    "sponsorId": "",
+    "trackedSessions": [],
+    "autoAddedSponsoredSessions": [],
+    "documents": [],
+    "budgetItems": []
+  },
+  "itinerary": [],
+  "receipts": [
+    {
+      "budgetItemId": "bi_demo_p02",
+      "filePath": "",
+      "fileLabel": "",
+      "id": "receipt_demo_p01",
+      "name": "QF153/QF728 Return Flights CBR–WLG",
+      "merchant": "Qantas",
+      "date": "2026-04-15",
+      "amount": "1089",
+      "currency": "AUD",
+      "category": "travel",
+      "notes": "Booked 3 months in advance for best price."
+    },
+    {
+      "budgetItemId": "",
+      "filePath": "",
+      "fileLabel": "",
+      "id": "receipt_demo_p02",
+      "name": "QT Wellington — 2 nights",
+      "merchant": "QT Hotels",
+      "date": "2026-05-12",
+      "amount": "578",
+      "currency": "NZD",
+      "category": "accommodation",
+      "notes": "Room 1204. Great views."
+    },
+    {
+      "budgetItemId": "",
+      "filePath": "",
+      "fileLabel": "",
+      "id": "receipt_demo_p03",
+      "name": "InterContinental Wellington — 3 nights",
+      "merchant": "InterContinental",
+      "date": "2026-05-15",
+      "amount": "990",
+      "currency": "NZD",
+      "category": "accommodation",
+      "notes": "Conference rate. Breakfast not included."
+    },
+    {
+      "budgetItemId": "",
+      "filePath": "",
+      "fileLabel": "",
+      "id": "receipt_demo_p04",
+      "name": "Ortega Fish Shack — pre-conference dinner",
+      "merchant": "Ortega Fish Shack",
+      "date": "2026-05-10",
+      "amount": "125",
+      "currency": "NZD",
+      "category": "food",
+      "notes": "Shared with 3 others — this is my share."
+    },
+    {
+      "budgetItemId": "bi_demo_p01",
+      "filePath": "",
+      "fileLabel": "",
+      "id": "receipt_demo_p05",
+      "name": "Wellington Airport taxi",
+      "merchant": "Corporate Cabs",
+      "date": "2026-05-10",
+      "amount": "55",
+      "currency": "NZD",
+      "category": "travel",
+      "notes": ""
+    },
+    {
+      "budgetItemId": "",
+      "filePath": "",
+      "fileLabel": "",
+      "id": "receipt_demo_p06",
+      "name": "DrupalSouth 2026 Conference Registration",
+      "merchant": "DrupalSouth",
+      "date": "2026-04-01",
+      "amount": "595",
+      "currency": "AUD",
+      "category": "misc",
+      "notes": "Reimbursed by employer — see budget line item."
+    }
+  ],
+  "personal": {
+    "outboundLegs": [
+      {
+        "id": "leg_demo_p01",
+        "mode": "flight",
+        "date": "2026-05-10",
+        "from": "CBR",
+        "to": "SYD",
+        "departTime": "06:10",
+        "arriveTime": "07:20",
+        "ref": "QF728",
+        "confirmation": "AXKP3M",
+        "notes": "Connecting to international"
+      },
+      {
+        "id": "leg_demo_p02",
+        "mode": "flight",
+        "date": "2026-05-10",
+        "from": "SYD",
+        "to": "WLG",
+        "departTime": "09:00",
+        "arriveTime": "14:15",
+        "ref": "QF153",
+        "confirmation": "AXKP3M",
+        "notes": "Main leg — window seat booked"
+      }
+    ],
+    "returnLegs": [
+      {
+        "id": "leg_demo_p03",
+        "mode": "flight",
+        "date": "2026-05-15",
+        "from": "WLG",
+        "to": "SYD",
+        "departTime": "08:30",
+        "arriveTime": "09:45",
+        "ref": "QF154",
+        "confirmation": "AXKP3M",
+        "notes": ""
+      },
+      {
+        "id": "leg_demo_p04",
+        "mode": "flight",
+        "date": "2026-05-15",
+        "from": "SYD",
+        "to": "CBR",
+        "departTime": "11:30",
+        "arriveTime": "12:35",
+        "ref": "QF729",
+        "confirmation": "AXKP3M",
+        "notes": ""
+      }
+    ],
+    "accommodations": [
+      {
+        "id": "accom_demo_p01",
+        "name": "QT Wellington",
+        "address": "90 Cable Street, Te Aro, Wellington 6011",
+        "checkIn": "2026-05-10",
+        "checkOut": "2026-05-12",
+        "confirmation": "QT-2026-88420",
+        "budget": "600",
+        "budgetActual": "578",
+        "currency": "NZD",
+        "notes": "Great location near waterfront. Ask for high floor."
+      },
+      {
+        "id": "accom_demo_p02",
+        "name": "InterContinental Wellington",
+        "address": "2 Grey Street, Wellington 6011",
+        "checkIn": "2026-05-12",
+        "checkOut": "2026-05-15",
+        "confirmation": "IHG-2026-44891",
+        "budget": "990",
+        "budgetActual": "990",
+        "currency": "NZD",
+        "notes": "Closest hotel to venue. Conference rate applied."
+      }
+    ],
+    "budget": "1092",
+    "budgetActual": "1089",
+    "currency": "AUD",
+    "notes": "",
+    "trackedSessions": [
+      {
+        "id": "ts_demo_p01",
+        "sessionId": "2026-05-12T21-30-00Z-Te-Aro-Death-to-the-Black-Box--Winning-in-2026-through-personal-agency--financial-prudence-and-community",
+        "sessionTitle": "Death to the Black Box: Winning in 2026 through personal agency, financial prudence and community",
+        "sessionTime": "2026-05-12T21:30:00Z",
+        "reason": "attending",
+        "customReason": "",
+        "notes": ""
+      },
+      {
+        "id": "ts_demo_p02",
+        "sessionId": "2026-05-12T23-00-00Z-Te-Aro-Keywords-to-Context--Semantic-Search-and-Retrieval-Augmented-Generation-with-OpenSearch",
+        "sessionTitle": "Keywords to Context: Semantic Search and Retrieval-Augmented Generation with OpenSearch",
+        "sessionTime": "2026-05-12T23:00:00Z",
+        "reason": "attending",
+        "customReason": "",
+        "notes": ""
+      },
+      {
+        "id": "ts_demo_p03",
+        "sessionId": "2026-05-12T23-40-00Z-Te-Aro-From-Prompt-to-Pull-Request--Human-led--AI-assisted-workflows-for-building-Drupal-features",
+        "sessionTitle": "From Prompt to Pull Request: Human-led, AI-assisted workflows for building Drupal features",
+        "sessionTime": "2026-05-12T23:40:00Z",
+        "reason": "speaking",
+        "customReason": "",
+        "notes": ""
+      },
+      {
+        "id": "ts_demo_p04",
+        "sessionId": "2026-05-13T02-30-00Z-Loft-AI-Can-Do-My-Job-Now--Sort-Of---Not-Really---It-s-Complicated---A-user-researcher-s-complicated-relationship-with-AI",
+        "sessionTitle": "AI Can Do My Job Now (Sort Of) (Not Really) (It's Complicated): A user researcher's complicated relationship with AI",
+        "sessionTime": "2026-05-13T02:30:00Z",
+        "reason": "attending",
+        "customReason": "",
+        "notes": ""
+      },
+      {
+        "id": "ts_demo_p05",
+        "sessionId": "2026-05-13T21-00-00Z-Te-Aro-The-Case-for-Drupal-CMS--Growing-adoption-and-expanding-our-focus-for-a-new-digital-era",
+        "sessionTitle": "The Case for Drupal CMS: Growing adoption and expanding our focus for a new digital era",
+        "sessionTime": "2026-05-13T21:00:00Z",
+        "reason": "attending",
+        "customReason": "",
+        "notes": ""
+      },
+      {
+        "id": "ts_demo_p06",
+        "sessionId": "2026-05-13T22-30-00Z-Waterfront-Rethinking-the-JavaScript-Reflex",
+        "sessionTitle": "Rethinking the JavaScript Reflex",
+        "sessionTime": "2026-05-13T22:30:00Z",
+        "reason": "attending",
+        "customReason": "",
+        "notes": ""
+      },
+      {
+        "id": "ts_demo_p07",
+        "sessionId": "2026-05-14T01-20-00Z-Waterfront-Vibe-Coding---Introducing-vulnerabilities-at-pace-to-your-clients",
+        "sessionTitle": "Vibe Coding - Introducing vulnerabilities at pace to your clients",
+        "sessionTime": "2026-05-14T01:20:00Z",
+        "reason": "speaking",
+        "customReason": "",
+        "notes": ""
+      },
+      {
+        "id": "ts_demo_p08",
+        "sessionId": "2026-05-14T02-40-00Z-Te-Aro-Practical-Performance-Testing",
+        "sessionTitle": "Practical Performance Testing",
+        "sessionTime": "2026-05-14T02:40:00Z",
+        "reason": "attending",
+        "customReason": "",
+        "notes": ""
+      }
+    ],
+    "itinerary": [
+      {
+        "memberId": null,
+        "memberIds": [],
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "id": "itin_demo_p01",
+        "date": "2026-05-10",
+        "time": "15:00",
+        "title": "Explore Cuba Street & Te Aro",
+        "done": true,
+        "notes": "Incredible street art. Found great coffee at Prefab."
+      },
+      {
+        "memberId": null,
+        "memberIds": [],
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "id": "itin_demo_p02",
+        "date": "2026-05-10",
+        "time": "18:30",
+        "title": "Pre-conference dinner with Wellington crew",
+        "done": true,
+        "notes": "Ortega Fish Shack — book ahead, gets busy."
+      },
+      {
+        "memberId": null,
+        "memberIds": [],
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "id": "itin_demo_p03",
+        "date": "2026-05-11",
+        "time": "21:00",
+        "title": "Code Contribution Sprint",
+        "done": true,
+        "notes": "Worked on Drupal CMS recipe documentation."
+      },
+      {
+        "memberId": null,
+        "memberIds": [],
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "id": "itin_demo_p04",
+        "date": "2026-05-12",
+        "time": "21:30",
+        "title": "Opening Keynote — Death to the Black Box",
+        "done": true,
+        "notes": "Standing room only. Incredible energy."
+      },
+      {
+        "memberId": null,
+        "memberIds": [],
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "id": "itin_demo_p05",
+        "date": "2026-05-13",
+        "time": "05:00",
+        "title": "Splash Awards & Networking Drinks",
+        "done": true,
+        "notes": "Shed 22 venue was perfect. Met so many great people."
+      },
+      {
+        "memberId": null,
+        "memberIds": [],
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "id": "itin_demo_p06",
+        "date": "2026-05-14",
+        "time": "03:30",
+        "title": "Visit Te Papa Museum",
+        "done": false,
+        "notes": "Make time before the flight tomorrow."
+      },
+      {
+        "memberId": null,
+        "memberIds": [],
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "id": "itin_demo_p07",
+        "date": "2026-05-14",
+        "time": "04:00",
+        "title": "Closing Remarks",
+        "done": false,
+        "notes": ""
+      },
+      {
+        "memberId": null,
+        "memberIds": [],
+        "location": "",
+        "coords": "",
+        "receiptId": "",
+        "id": "itin_demo_p08",
+        "date": "2026-05-15",
+        "time": "06:00",
+        "title": "Airport transfer — allow extra time",
+        "done": false,
+        "notes": "Uber or taxi — don't rely on public transport with luggage."
+      }
+    ],
+    "documents": [
+      {
+        "id": "doc_demo_p01",
+        "name": "qantas-itinerary.pdf",
+        "filePath": "documents/planner-demo-personal-alex/qantas-itinerary.pdf",
+        "isDirect": true,
+        "notes": "CBR–SYD–WLG return.",
+        "receiptId": "receipt_demo_p01"
+      },
+      {
+        "id": "doc_demo_p02",
+        "name": "qt-wellington-confirmation.pdf",
+        "filePath": "documents/planner-demo-personal-alex/qt-wellington-confirmation.pdf",
+        "isDirect": true,
+        "notes": "QT-2026-88420",
+        "receiptId": "receipt_demo_p02"
+      }
+    ],
+    "budgetItems": [
+      {
+        "id": "bi_demo_p01",
+        "name": "Conference Registration (Employer)",
+        "category": "misc",
+        "budget": "-595",
+        "actual": "-595",
+        "currency": "AUD",
+        "notes": "Fully reimbursed by employer on expense claim"
+      },
+      {
+        "id": "bi_demo_p02",
+        "name": "Speaker Green Room Meal Credit",
+        "category": "food",
+        "budget": "-80",
+        "actual": "-60",
+        "currency": "NZD",
+        "notes": "Credit provided by organisers for speaker session"
+      }
+    ],
+    "noteList": [
+      {
+        "id": "note_demo_p01",
+        "title": "How it went",
+        "body": "Had a fantastic time at DrupalSouth 2026. Wellington delivered — the harbour views from Harbourside Function Venue were stunning, the programme was tight and well-curated, and the community energy was the best I've experienced at a local conference.",
+        "emoji": "🇳🇿"
+      },
+      {
+        "id": "note_demo_p02",
+        "title": "Highlights",
+        "body": "Highlight sessions: the AI researcher's honest take on AI limitations (AI Can Do My Job Now), and the JavaScript Reflex talk — both challenged assumptions in a useful way.",
+        "emoji": "⭐"
+      },
+      {
+        "id": "note_demo_p03",
+        "title": "The sprint",
+        "body": "The code contribution sprint pre-conference was a great way to warm up and meet contributors I'd only known online. Will definitely make this a regular part of my conference preparation.",
+        "emoji": "🛠️"
+      },
+      {
+        "id": "note_demo_p04",
+        "title": "Next year",
+        "body": "Weather cooperated — not something Wellington can always promise! Next year I'd stay an extra day for Te Papa and Zealandia.",
+        "emoji": "📅"
+      }
+    ],
+    "tickets": [
+      {
+        "id": "tk_demo_p01",
+        "name": "DrupalSouth 2026 — full conference",
+        "quantity": 1,
+        "status": "assigned",
+        "assignedTo": "__me__",
+        "purchasedBy": "",
+        "notes": "Employer-funded. Reimbursed on expense claim.",
+        "days": [
+          "2026-05-13",
+          "2026-05-14"
+        ],
+        "showOnItinerary": false,
+        "receiptId": "receipt_demo_p05"
+      },
+      {
+        "id": "tk_demo_p02",
+        "name": "Contribution sprint (free)",
+        "quantity": 1,
+        "status": "assigned",
+        "assignedTo": "__me__",
+        "purchasedBy": "",
+        "notes": "Pre-conference. Bring a laptop with a working local environment.",
+        "days": [
+          "2026-05-12"
+        ],
+        "showOnItinerary": true,
+        "receiptId": ""
+      }
+    ],
+    "checklists": [
+      {
+        "id": "cl_demo_p01",
+        "title": "Before I fly",
+        "items": [
+          {
+            "id": "cli_p01a",
+            "text": "Passport / ID",
+            "done": true
+          },
+          {
+            "id": "cli_p01b",
+            "text": "NZ travel declaration submitted",
+            "done": true
+          },
+          {
+            "id": "cli_p01c",
+            "text": "Laptop + charger + adapter",
+            "done": true
+          },
+          {
+            "id": "cli_p01d",
+            "text": "Local dev environment working offline",
+            "done": true
+          },
+          {
+            "id": "cli_p01e",
+            "text": "Download the schedule for the flight",
+            "done": false
+          }
+        ]
+      },
+      {
+        "id": "cl_demo_p02",
+        "title": "Wellington",
+        "items": [
+          {
+            "id": "cli_p02a",
+            "text": "Snapper card for the buses",
+            "done": true
+          },
+          {
+            "id": "cli_p02b",
+            "text": "Book Zealandia for the Saturday",
+            "done": false
+          },
+          {
+            "id": "cli_p02c",
+            "text": "Coffee at Prefab",
+            "done": true
+          },
+          {
+            "id": "cli_p02d",
+            "text": "Te Papa — Gallipoli exhibition",
+            "done": false
+          }
+        ]
+      }
+    ],
+    "budgetCategories": [
+      {
+        "id": "travel",
+        "name": "Travel"
+      },
+      {
+        "id": "accommodation",
+        "name": "Accommodation"
+      },
+      {
+        "id": "food",
+        "name": "Food & Drink"
+      },
+      {
+        "id": "tickets",
+        "name": "Tickets"
+      },
+      {
+        "id": "misc",
+        "name": "Misc"
+      }
+    ],
+    "categoryBudgets": {
+      "travel": "1200",
+      "accommodation": "650",
+      "food": "400",
+      "tickets": "600"
+    },
+    "meContactId": "",
+    "localCompanions": [
+      {
+        "id": "cmp_demo_p1",
+        "name": "Nadia Rahman",
+        "role": "Colleague",
+        "notes": "Same flight out, staying at QT too."
+      },
+      {
+        "id": "cmp_demo_p2",
+        "name": "Tom Baker",
+        "role": "Friend",
+        "notes": "Wellington local. Knows the good coffee."
+      }
+    ],
+    "splitExpenses": [
+      {
+        "id": "se_demo_p01",
+        "description": "Airport taxi (shared)",
+        "amount": "78",
+        "currency": "NZD",
+        "paidBy": "me",
+        "sharedWith": [
+          "me",
+          "cmp_demo_p1"
+        ],
+        "date": "2026-05-12",
+        "category": "travel"
+      },
+      {
+        "id": "se_demo_p02",
+        "description": "Dinner at Logan Brown",
+        "amount": "246",
+        "currency": "NZD",
+        "paidBy": "cmp_demo_p2",
+        "sharedWith": [
+          "me",
+          "cmp_demo_p1",
+          "cmp_demo_p2"
+        ],
+        "date": "2026-05-13",
+        "category": "food"
+      }
+    ],
+    "hostedEvents": [
+      {
+        "id": "he_demo_p01",
+        "title": "Lightning talk: shipping a static planner",
+        "date": "2026-05-13",
+        "time": "17:30",
+        "location": "Harbourside — Meeting Room 2",
+        "anchorTitle": "Closing remarks",
+        "notes": "Five minutes, no slides."
+      }
+    ],
+    "disabledTabs": []
+  },
+  "_eventFiles": [
+    "events/drupalsouth/2026-wellington.json"
+  ],
+  "_id": "7c4b1d92-3f60-4a85-9e11-2d8c7b5a6f04",
+  "displayCurrency": "AUD",
+  "weatherLocation": {
+    "name": "Wellington",
+    "lat": -41.2865,
+    "lon": 174.7762,
+    "label": "Wellington, New Zealand"
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "query": "performance",
+  "terms": [
+    "performance"
+  ],
+  "mode": "exact",
+  "facets": {
+    "series": "All",
+    "region": "All",
+    "country": "All",
+    "year": "2024"
+  },
+  "total": 2,
+  "offset": 0,
+  "byYear": {
+    "2024": 2
+  },
+  "byTerm": {
+    "performance": {
+      "2024": 2
+    }
+  },
+  "breakdown": {
+    "series": [
+      {
+        "name": "Drupal Dev Days",
+        "count": 2,
+        "total": 50
+      }
+    ],
+    "region": [
+      {
+        "name": "EMEA",
+        "count": 2,
+        "total": 50
+      }
+    ],
+    "country": [
+      {
+        "name": "Bulgaria",
+        "count": 2,
+        "total": 50
+      }
+    ],
+    "city": [
+      {
+        "name": "Burgas",
+        "count": 2,
+        "total": 50
+      }
+    ],
+    "speakers": [
+      {
+        "name": "aldunchev",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "jjchinquist",
+        "count": 1,
+        "total": 1
+      },
+      {
+        "name": "sindurig",
+        "count": 1,
+        "total": 1
+      }
+    ],
+    "events": 1,
+    "eventsTotal": 1,
+    "span": {
+      "min": 2024,
+      "max": 2024
+    }
+  },
+  "results": [
+    {
+      "matched": [
+        "performance"
+      ],
+      "title": "How to achieve 100% performance Google Lighthouse score with Drupal",
+      "description": "This presentation focuses on the front-end performance optimization of a Drupal site.\n\nI have worked on a campaign site for a client with landing pages, which had to be very fast, so I will share how I managed to get a 100% Google Lighthouse Score.\n\nKey points:\n\n**Experience level:** Intermediate",
+      "speakers": "aldunchev",
+      "track": "Decoupled & Frontend Development",
+      "location": "Room 208 (Jakala)",
+      "startTime": "2024-06-26T14:10:00.000Z",
+      "year": 2024,
+      "event": "Drupal Dev Days Burgas 2024",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Bulgaria",
+      "city": "Burgas",
+      "file": "events/ddd/2024-burgas.json",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/how-achieve-100-performance-google-lighthouse-score-drupal",
+      "video": "https://youtu.be/e9gLOot04RM",
+      "minutes": 30
+    },
+    {
+      "matched": [
+        "performance"
+      ],
+      "title": "Stop making your own life difficult. Integrate your CI/CD Pipeline with these monitoring tools",
+      "description": "If you do not use a CI/CD pipeline, we highly recommend it. For the past several years our team has set up projects in a CI/CD pipeline using Jenkins or Github actions. The tools that we will present in this session have proven to be a good set of automated testing tools for several projects. Over time we have chosen to move away from previous solutions and to new testing frameworks. As part of our commitment to high standards of performance and quality, we are always on the lookout for the best tools available on the market.\n\n**Experience level:** Beginner",
+      "speakers": "sindurig, jjchinquist",
+      "track": "Clients & Industry Experiences",
+      "location": "Room 207 (1xINTERNET)",
+      "startTime": "2024-06-26T14:10:00.000Z",
+      "year": 2024,
+      "event": "Drupal Dev Days Burgas 2024",
+      "series": "Drupal Dev Days",
+      "region": "EMEA",
+      "country": "Bulgaria",
+      "city": "Burgas",
+      "file": "events/ddd/2024-burgas.json",
+      "link": "https://ddd2024.drupalcamp.bg/drupal-dev-days-2024/session/stop-making-your-own-life-difficult-integrate-your-cicd-pipeline-these",
+      "video": "https://youtu.be/H3zgaR6bYAA",
+      "minutes": 30
+    }
+  ]
+}

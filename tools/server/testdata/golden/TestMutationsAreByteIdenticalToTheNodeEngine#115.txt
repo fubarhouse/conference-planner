@@ -1,0 +1,70 @@
+{
+  "_version": 3,
+  "_plannerKey": "planner-drupalsouth-sydney-2024",
+  "_eventFile": "events/drupalsouth/2024-sydney.json",
+  "_displayName": "DrupalSouth Sydney 2024",
+  "_lastModified": "2026-08-04T10:33:20.102Z",
+  "mode": "personal",
+  "isConference": true,
+  "sessionNotes": {},
+  "contacts": [],
+  "tasks": [],
+  "org": {
+    "boothInfo": "",
+    "boothNotes": "",
+    "teamAssignments": [],
+    "accommodations": [],
+    "timeline": {
+      "startDate": "",
+      "endDate": ""
+    },
+    "swag": [],
+    "deliverables": [],
+    "sponsorBudget": "",
+    "sponsorActual": "",
+    "sponsorCurrency": "AUD",
+    "sponsorId": "",
+    "trackedSessions": [],
+    "autoAddedSponsoredSessions": [],
+    "documents": [],
+    "budgetItems": [],
+    "budgetCategories": [],
+    "categoryBudgets": {},
+    "tickets": [],
+    "disabledTabs": [],
+    "tabOrder": [],
+    "itinerary": [],
+    "memberItinerary": []
+  },
+  "receipts": [],
+  "personal": {
+    "outboundLegs": [
+      {
+        "title": "A Test Sponsor",
+        "tier": "Gold",
+        "note": "with a comma, a \"quote\" and <html>",
+        "id": "FIXED_ID"
+      }
+    ],
+    "returnLegs": [],
+    "accommodations": [],
+    "budget": "",
+    "budgetActual": "",
+    "currency": "AUD",
+    "notes": "",
+    "trackedSessions": [],
+    "itinerary": [],
+    "documents": [],
+    "budgetItems": [],
+    "budgetCategories": [],
+    "categoryBudgets": {},
+    "tickets": [],
+    "disabledTabs": [],
+    "tabOrder": [],
+    "tripAssignments": [],
+    "localCompanions": [],
+    "gpxTrack": null,
+    "meContactId": null
+  },
+  "_id": "46eac7a5-fc6d-47c6-ba6d-97542e96ca2c"
+}

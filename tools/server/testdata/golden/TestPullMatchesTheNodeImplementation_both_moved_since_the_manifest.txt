@@ -1,0 +1,1 @@
+{"pulled":[],"skipped":[],"conflicts":[{"path":"data/events/a.json","reason":"both-changed","localHash":"875e88b5901e0460d1235e93eab23665","s3Etag":"6699889d692008589ee9c6781a54f42e","manifestEtag":"9d4d9d1b0e05e0e0e0e0e0e0e0e0e0e0"}],"errors":[]}

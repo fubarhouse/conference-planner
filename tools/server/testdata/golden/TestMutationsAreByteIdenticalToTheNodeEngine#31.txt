@@ -1,0 +1,276 @@
+{
+  "result": "manual",
+  "url": "https://drupaljam.nl/",
+  "event": {
+    "regionCode": "EMEA",
+    "country": "Netherlands",
+    "designation": "DrupalJam",
+    "ecosystem": "drupal",
+    "location": "Rotterdam",
+    "year": "2026",
+    "website": "https://drupaljam.nl/",
+    "region": "Netherlands – Rotterdam",
+    "timezone": "Europe/Amsterdam",
+    "enabled": false,
+    "scheduleComplete": false,
+    "columns": 6,
+    "startDate": "2026-10-01T07:00:00Z",
+    "endDate": "2026-10-01T16:00:00Z",
+    "scheduleURLs": [
+      "https://drupaljam.nl/"
+    ],
+    "other_urls": [
+      "https://events.drupal.org/rotterdam2026"
+    ],
+    "venue": "Postillion Hotel & Convention Centre WTC Rotterdam",
+    "logo": {
+      "image": "./img/logos/drupaljam/2026-rotterdam.svg",
+      "imageAlt": "DrupalJam logo",
+      "usePlate": false,
+      "logoDisabled": true,
+      "faIcon": "fa-solid fa-calendar-days"
+    },
+    "flickr": {
+      "enabled": false,
+      "provider": "",
+      "groupUrl": "",
+      "image": "",
+      "imageAlt": ""
+    },
+    "sponsors": [
+      {
+        "title": "A Test Sponsor",
+        "tier": "Gold",
+        "note": "with a comma, a \"quote\" and <html>",
+        "id": "FIXED_ID"
+      }
+    ],
+    "relatedEvents": [
+      {
+        "id": "drupalcon-rotterdam-2026",
+        "name": "DrupalCon Rotterdam 2026",
+        "relationship": "Partner",
+        "scheduleId": "drupalcon-europe-2026-rotterdam",
+        "website": "https://events.drupal.org/rotterdam2026",
+        "image": "",
+        "imageAlt": "",
+        "description": "",
+        "priority": 10,
+        "featured": true,
+        "enabled": true
+      }
+    ],
+    "relatedEventsPlacement": "above",
+    "latitude": 51.9225,
+    "longitude": 4.47917,
+    "sources": [
+      {
+        "id": "drupaljam",
+        "kind": "schedule",
+        "url": "https://drupaljam.nl/",
+        "verifiedAt": "2026-08-23",
+        "verifiedBy": "policy"
+      },
+      {
+        "id": "events-drupal-rotterdam2026",
+        "kind": "other",
+        "url": "https://events.drupal.org/rotterdam2026",
+        "verifiedAt": "2026-08-23",
+        "verifiedBy": "policy"
+      }
+    ],
+    "sourceIds": [
+      "drupaljam",
+      "events-drupal-rotterdam2026"
+    ]
+  },
+  "items": [
+    {
+      "startTime": "2026-10-01T07:00:00Z",
+      "endTime": "2026-10-01T07:30:00Z",
+      "duration": "P30M",
+      "title": "Registration & Coffee",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "link": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupaljam"
+      ]
+    },
+    {
+      "startTime": "2026-10-01T07:30:00Z",
+      "endTime": "2026-10-01T07:45:00Z",
+      "duration": "P15M",
+      "title": "Opening",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "link": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupaljam"
+      ]
+    },
+    {
+      "startTime": "2026-10-01T07:45:00Z",
+      "endTime": "2026-10-01T08:30:00Z",
+      "duration": "P45M",
+      "title": "Opening keynote (TBA)",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "link": "",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "drupaljam"
+      ]
+    },
+    {
+      "startTime": "2026-10-01T08:30:00Z",
+      "endTime": "2026-10-01T09:00:00Z",
+      "duration": "P30M",
+      "title": "Coffee break",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "link": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupaljam"
+      ]
+    },
+    {
+      "startTime": "2026-10-01T09:00:00Z",
+      "endTime": "2026-10-01T10:30:00Z",
+      "duration": "P90M",
+      "title": "Sessions (TBA)",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "link": "",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "drupaljam"
+      ]
+    },
+    {
+      "startTime": "2026-10-01T10:30:00Z",
+      "endTime": "2026-10-01T11:30:00Z",
+      "duration": "P60M",
+      "title": "Lunch Break",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "link": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupaljam"
+      ]
+    },
+    {
+      "startTime": "2026-10-01T11:30:00Z",
+      "endTime": "2026-10-01T13:30:00Z",
+      "duration": "P120M",
+      "title": "Sessions (TBA)",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "link": "",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "drupaljam"
+      ]
+    },
+    {
+      "startTime": "2026-10-01T13:30:00Z",
+      "endTime": "2026-10-01T14:00:00Z",
+      "duration": "P30M",
+      "title": "Coffee break",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "link": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupaljam"
+      ]
+    },
+    {
+      "startTime": "2026-10-01T14:00:00Z",
+      "endTime": "2026-10-01T14:45:00Z",
+      "duration": "P45M",
+      "title": "Closing keynote (TBA)",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "link": "",
+      "sponsorIds": "",
+      "isAgendaItem": false,
+      "sourceIds": [
+        "drupaljam"
+      ]
+    },
+    {
+      "startTime": "2026-10-01T14:45:00Z",
+      "endTime": "2026-10-01T15:00:00Z",
+      "duration": "P15M",
+      "title": "Closing",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "link": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupaljam"
+      ]
+    },
+    {
+      "startTime": "2026-10-01T15:00:00Z",
+      "endTime": "2026-10-01T16:00:00Z",
+      "duration": "P60M",
+      "title": "Networking & Drinks",
+      "location": "",
+      "track": [],
+      "speakers": [],
+      "full_description": "",
+      "video_url": "",
+      "link": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupaljam"
+      ]
+    }
+  ]
+}

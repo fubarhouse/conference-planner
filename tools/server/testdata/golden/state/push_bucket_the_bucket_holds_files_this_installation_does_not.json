@@ -1,0 +1,7 @@
+{
+  "data/curation/decisions.json": "{\"aliases\":{}}",
+  "data/events/b.json": "{\"b\":1}",
+  "img/logo.png": "not really a png",
+  "receipts/r1.pdf": "not really a pdf",
+  "unrelated/thing.json": "{\"ignored\":true}"
+}

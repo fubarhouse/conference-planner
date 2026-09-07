@@ -1,0 +1,474 @@
+{
+  "event": {
+    "regionCode": "APAC",
+    "country": "Singapore",
+    "designation": "DrupalCamp",
+    "ecosystem": "drupal",
+    "name": "DrupalCamp Singapore 2014",
+    "location": "Singapore",
+    "year": "2014",
+    "website": "http://www.drupalcamp.sg",
+    "region": "Singapore",
+    "startDate": "2014-06-14T00:30:00Z",
+    "endDate": "2014-06-14T09:45:00Z",
+    "venue": "Singapore Management University",
+    "timezone": "Asia/Singapore",
+    "columns": 2,
+    "enabled": false,
+    "scheduleComplete": true,
+    "logo": {
+      "image": "",
+      "imageAlt": "",
+      "usePlate": false
+    },
+    "sponsors": [],
+    "flickr": {
+      "enabled": false,
+      "provider": "",
+      "groupUrl": "",
+      "image": "",
+      "imageAlt": ""
+    },
+    "scheduleURLs": [
+      "http://www.drupalcamp.sg/schedule"
+    ],
+    "other_urls": [
+      "http://www.drupalcamp.sg/about",
+      "http://www.drupalcamp.sg/sessions"
+    ],
+    "sources": [
+      {
+        "id": "drupalcamp-sg-2014-schedule",
+        "kind": "schedule",
+        "url": "http://www.drupalcamp.sg/schedule",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20160320044933",
+          "captureUrl": "https://web.archive.org/web/20160320044933/http://www.drupalcamp.sg/quicktabs/ajax/schedule/1/view/sessions/schedule_b/2/schedule"
+        },
+        "notes": "Read from the quicktabs AJAX endpoints, not the /schedule page. Two reasons. The page only ever contains tab 0, because the second room is fetched over AJAX — reading the page alone loses Room 2 entirely. And the only capture of /schedule is from 8 June 2014, SIX DAYS BEFORE the event: it shows an earlier draft with different times and one session (\"Search Engine Optimization for Drupal 8\") that the final programme does not contain. The AJAX captures agree with each other, carry explicit Room 1 / Room 2 tracks, and every slug in them resolves to a real 2014 session page. Only start times were published; each end time is the next start in the same room, and the last row of each room falls back to 45 minutes, the length every full session in the grid runs. Abstracts come from each session's own page. ONE exception: \"Setting up SSO for Drupal using OpenAM and SAML\" has no archived page at all, so its description is the schedule teaser and stops mid-sentence — that is the whole of what survives, not a truncation of ours. The two sponsor talks (iMoney, Acquia) never had a description or a named speaker."
+      },
+      {
+        "id": "drupalcamp-sg-2014-about",
+        "kind": "other",
+        "url": "http://www.drupalcamp.sg/about",
+        "retrievedAt": "2026-08-25",
+        "via": {
+          "provider": "wayback",
+          "timestamp": "20140522055216",
+          "captureUrl": "https://web.archive.org/web/20140522055216/http://www.drupalcamp.sg/about"
+        },
+        "notes": "States the date and venue: \"When: 14 June 2014, Saturday. Where: Singapore Management University\"."
+      }
+    ],
+    "sourceIds": [
+      "drupalcamp-sg-2014-schedule",
+      "drupalcamp-sg-2014-about"
+    ],
+    "sponsorRecord": {
+      "state": "none",
+      "note": "No sponsor page for this edition was ever archived: the only sponsor captures on the domain belong to the 2012 site, which had moved to its own subdomain by then. The schedule names an iMoney and an Acquia sponsor talk, so the event certainly had sponsors — but the list itself is not recoverable.",
+      "checkedAt": "2026-08-25",
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    }
+  },
+  "items": [
+    {
+      "startTime": "2014-06-14T00:30:00Z",
+      "endTime": "2014-06-14T01:30:00Z",
+      "duration": "P60M",
+      "title": "Registration",
+      "location": "Room 1",
+      "link": "http://www.drupalcamp.sg/schedule",
+      "track": [],
+      "speakers": [],
+      "video_url": "",
+      "full_description": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T01:30:00Z",
+      "endTime": "2014-06-14T01:45:00Z",
+      "duration": "P15M",
+      "title": "Opening (held in Auditorium)",
+      "location": "Room 1",
+      "link": "http://www.drupalcamp.sg/schedule",
+      "track": [],
+      "speakers": [],
+      "video_url": "",
+      "full_description": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T01:45:00Z",
+      "endTime": "2014-06-14T02:30:00Z",
+      "duration": "P45M",
+      "title": "Keynote (held in Auditorium)",
+      "location": "Room 1",
+      "link": "http://www.drupalcamp.sg/sessions/keynote-held-auditorium",
+      "track": [],
+      "speakers": [
+        "Nick Schuch"
+      ],
+      "video_url": "",
+      "full_description": "With the latest iteration of Drupal, not only do we get a new code base, but also a new motto of \"Proudly found elsewhere\", leveraging on the code base of various other established open-source PHP projects. The keynote will share about the \"tools\" you are getting in your \"belt\" as well as an overview of the other initiatives in the community such as the Modernizing Testbot initiative and so on.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T02:30:00Z",
+      "endTime": "2014-06-14T02:45:00Z",
+      "duration": "P15M",
+      "title": "iMoney Sponsor Talk",
+      "location": "Room 1",
+      "link": "http://www.drupalcamp.sg/schedule",
+      "track": [],
+      "speakers": [],
+      "video_url": "",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T02:45:00Z",
+      "endTime": "2014-06-14T03:00:00Z",
+      "duration": "P15M",
+      "title": "Tea Break",
+      "location": "Room 1",
+      "link": "http://www.drupalcamp.sg/schedule",
+      "track": [],
+      "speakers": [],
+      "video_url": "",
+      "full_description": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T03:00:00Z",
+      "endTime": "2014-06-14T03:45:00Z",
+      "duration": "P45M",
+      "title": "Create a High-Traffic Site with Drupal 8 and Varnish",
+      "location": "Room 2",
+      "link": "http://www.drupalcamp.sg/sessions/create-high-traffic-site-drupal-8-and-varnish",
+      "track": [
+        "Advanced"
+      ],
+      "speakers": [
+        "Joe Chin"
+      ],
+      "video_url": "",
+      "full_description": "This session introduces you to Varnish and how it can be use with Drupal 8 to create a high-traffic site able to handle 1,000's of hits per minute on a low-end cloud server.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T03:00:00Z",
+      "endTime": "2014-06-14T03:45:00Z",
+      "duration": "P45M",
+      "title": "Drupal for Event and Conference Sites",
+      "location": "Room 1",
+      "link": "http://www.drupalcamp.sg/sessions/drupal-event-and-conference-sites",
+      "track": [
+        "All levels"
+      ],
+      "speakers": [
+        "Mark Koester"
+      ],
+      "video_url": "",
+      "full_description": "Drupal as an Open Source Eventbrite or Meetup.com replacement? This session will look at the how to setup a Drupal site to handle events and conferences.\n\n- **Modules and Techniques for an Events Site:**In particular, we'll look at how to handle paid registration, session submission, schedule management and sponsorship pages using Drupal Commerce, Registration module and a few others.\n\n- **Customized Needs:** We'll look at some [examples and case studies](http://int3c.com/grl-retreat-2013-paid-registration-conference-site) of how I've handled project specific challenges on some of some of recent projects, including customized registration types, dynamic scheduling, scaling for rapid registrations, and even appointment based scheduling.\n\n- **Event Distribution:** I'm also so the lead on the [\"Events\" project](https://drupal.org/project/events), which is a distribution aimed to help in organizing various conferences, camps, clubs and events in general (hence the name, Events!). So, we'll look at how this project aims to make it easier to handle common registration site needs as well as maximize flexiblity for dealing with event-specific customizations.\n\n*We'll hopefully be able to have the first alpha release before DrupalCamp Singapore too!*",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T03:45:00Z",
+      "endTime": "2014-06-14T04:30:00Z",
+      "duration": "P45M",
+      "title": "Have a university? Run it on Drupal!",
+      "location": "Room 2",
+      "link": "http://www.drupalcamp.sg/sessions/have-university-run-it-drupal",
+      "track": [
+        "All levels"
+      ],
+      "speakers": [
+        "Azhan Moin"
+      ],
+      "video_url": "",
+      "full_description": "Drupal can be used to run anything big or small, including a university!Find out how Singapore Management University does it to keep the web team’s sanity in check managing the 6 schools, 1 library, 9 Institutes, 21 centres, 23 offices and hundreds of microsites within SMU",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T03:45:00Z",
+      "endTime": "2014-06-14T04:30:00Z",
+      "duration": "P45M",
+      "title": "Introduction to Drupal 8 Theming",
+      "location": "Room 1",
+      "link": "http://www.drupalcamp.sg/sessions/introduction-drupal-8-theming",
+      "track": [
+        "Intermediate"
+      ],
+      "speakers": [
+        "Suryanto Rachmat"
+      ],
+      "video_url": "",
+      "full_description": "This session will introduce you to Drupal 8 theme, how it works, and how to make a theme.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T04:30:00Z",
+      "endTime": "2014-06-14T05:30:00Z",
+      "duration": "P60M",
+      "title": "Lunch",
+      "location": "Room 1",
+      "link": "http://www.drupalcamp.sg/schedule",
+      "track": [],
+      "speakers": [],
+      "video_url": "",
+      "full_description": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T05:30:00Z",
+      "endTime": "2014-06-14T06:15:00Z",
+      "duration": "P45M",
+      "title": "How to pitch Drupal and achieve end user love with Demo Framework",
+      "location": "Room 1",
+      "link": "http://www.drupalcamp.sg/sessions/how-pitch-drupal-and-achieve-end-user-love-demo-framework",
+      "track": [
+        "All levels"
+      ],
+      "speakers": [
+        "Tine Sørensen"
+      ],
+      "video_url": "",
+      "full_description": "Demo Framework is a powerful presentation of what Drupal can do. Here I will provide tips on how we present with Demo Framework and promote Drupal as Enterprise ready.\n\nIn the Drupal community we do awesome stuff, but often we could tell the story better. Setting up demos takes time and effort each time, so Acquia has created Demo Framework which we use for presentations ourselves. Show off Drupal with features such as inline editing, mobile preview, fully responsive theme, moderation workflows, commerce and more. Built entirely from contributed modules it is readily available on Drupal.org to use for presentations or as a base install for building sites your customers and editors will love to use.\n\nIf time allows, I will show how to easily set this up on free Acquia Cloud to have a free presentation site or a developer site with built in deployment.\n\nDemo Framework:\n[https://drupal.org/project/df](https://drupal.org/project/df)",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T05:30:00Z",
+      "endTime": "2014-06-14T06:15:00Z",
+      "duration": "P45M",
+      "title": "Setting up SSO for Drupal using OpenAM and SAML",
+      "location": "Room 2",
+      "link": "http://www.drupalcamp.sg/sessions/setting-sso-drupal-using-openam-and-saml",
+      "track": [
+        "All levels"
+      ],
+      "speakers": [
+        "Dishan Philips"
+      ],
+      "video_url": "",
+      "full_description": "Are you running multiple instances of Drupal or any other applications for that matter, in your organization? Have you gotten into a big mess trying to manage users individually on...",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T06:15:00Z",
+      "endTime": "2014-06-14T07:00:00Z",
+      "duration": "P45M",
+      "title": "Agile Drupal Development",
+      "location": "Room 1",
+      "link": "http://www.drupalcamp.sg/sessions/agile-drupal-development",
+      "track": [
+        "All levels"
+      ],
+      "speakers": [
+        "Eugene Yang"
+      ],
+      "video_url": "",
+      "full_description": "With the pace of change happening so fast in the digital landscape, running projects using waterfall methodologies have become too slow and cumbersome. 6 months to a year project cycles are a thing of the past. Websites will need to constantly evolve with the change in user behaviour or latest trends. By leveraging off an agile methodolgy, clients are able to deliver improvements and enhancements to their users in an iterative process.Learn how sprints are executed during the development phases and how tasks and clients can be better managed using this methodology.     **Topics we'll be covering:**\n\n- **Agile Methodolgies** - Which methodology works?\n\n- **Team division -**How do I need to structure my team for this methodoly?\n\n- **Sprints management** - How do i plan the sprints?\n\n- **Task management** - Best practices for managing the tasks.\n\n- **Client involvement** - How deep does the client need ot be involved in the sprint cycles?",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T06:15:00Z",
+      "endTime": "2014-06-14T07:00:00Z",
+      "duration": "P45M",
+      "title": "Creating CKEditor plugins on Drupal and Using JQuery inside your plugin",
+      "location": "Room 2",
+      "link": "http://www.drupalcamp.sg/sessions/creating-ckeditor-plugins-drupal-and-using-jquery-inside-your-plugin",
+      "track": [
+        "All levels"
+      ],
+      "speakers": [
+        "Niraj Meegama"
+      ],
+      "video_url": "",
+      "full_description": "This session will include methods tips and tricks to create plugins with CKEditor. Why CKEditor? It is because CKEditor willl be included inside Drupal 8 ([http://ckeditor.com/blog/CKEditor-Joins-Drupal](http://ckeditor.com/blog/CKEditor-Joins-Drupal), [http://buytaert.net/from-aloha-to-ckeditor](http://buytaert.net/from-aloha-to-ckeditor)), So I think its important for developers as well as Drupal ehthusiasts to learn how CKEditor works and how we can customize and even add or own plugins to CKEditor. Also I will feature how we can get help from JQuery to build our own plugins because JQuery is the most famous and most comonly used Javascript Framework out there. I will also teach you how to hide and remove what we dont want using your own plugin and make sure What you see IS really what you GET .....!!!!!",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T07:00:00Z",
+      "endTime": "2014-06-14T07:45:00Z",
+      "duration": "P45M",
+      "title": "CMI: Configuration Management Initiative (D8)",
+      "location": "Room 2",
+      "link": "http://www.drupalcamp.sg/sessions/cmi-configuration-management-initiative-d8",
+      "track": [
+        "All levels"
+      ],
+      "speakers": [
+        "Jonathan Himbing"
+      ],
+      "video_url": "",
+      "full_description": "Too much headache for the Drupal 7 Features module?\n\nThis session will walkthrough the advantage and rich features of the Configuration Management Initiative. The Features module lets you export  database stored configuration through code. To make things updated from one site to another site we need to make update and re-create them. The CMI eliminate this kind of issues, all configuration settings are no longer stored in the database, but rather in configuration files.\n\nExpectation: At the end of the session we should know how to ship a module and loaded with configuration once enabled.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T07:00:00Z",
+      "endTime": "2014-06-14T07:45:00Z",
+      "duration": "P45M",
+      "title": "Get Your Modules Ready for Drupal 8",
+      "location": "Room 1",
+      "link": "http://www.drupalcamp.sg/sessions/get-your-modules-ready-drupal-8",
+      "track": [
+        "Intermediate"
+      ],
+      "speakers": [
+        "Sven Berg Ryen"
+      ],
+      "video_url": "",
+      "full_description": "How do you convert your Drupal 7 modules to work on a Drupal 8 web site?\n\nHands-on, this session includes a live demo that takes you through the module conversion process step by step.\n\nWe will transform an existing function-based Drupal 7 module, using hook_menu, Forms and Database APIs to work smoothly and follow the new Class/object-oriented approach that you will take when coding for Drupal 8.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T07:45:00Z",
+      "endTime": "2014-06-14T08:00:00Z",
+      "duration": "P15M",
+      "title": "Tea Break",
+      "location": "Room 1",
+      "link": "http://www.drupalcamp.sg/schedule",
+      "track": [],
+      "speakers": [],
+      "video_url": "",
+      "full_description": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T08:00:00Z",
+      "endTime": "2014-06-14T08:45:00Z",
+      "duration": "P45M",
+      "title": "Drupal Deployment Automation using AWS Elastic Beanstalk for Docker",
+      "location": "Room 2",
+      "link": "http://www.drupalcamp.sg/sessions/drupal-deployment-automation-using-aws-elastic-beanstalk-docker",
+      "track": [
+        "Intermediate"
+      ],
+      "speakers": [
+        "paul de paula"
+      ],
+      "video_url": "",
+      "full_description": "This topic will discuss about drupal deployment using AWS elastic beanstalk for docker. Will demonsatrate how to deploy drupal with an architecture that canhandle hundreds of thousands of users.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T08:00:00Z",
+      "endTime": "2014-06-14T08:45:00Z",
+      "duration": "P45M",
+      "title": "How I Learned to Stop Worrying and Love Drupal 8",
+      "location": "Room 1",
+      "link": "http://www.drupalcamp.sg/sessions/how-i-learned-stop-worrying-and-love-drupal-8",
+      "track": [
+        "All levels"
+      ],
+      "speakers": [
+        "Adam Malone"
+      ],
+      "video_url": "",
+      "full_description": "At first glance, Drupal 8 (D8) seems far removed from all versions of Drupal before it. In D8, the Drupal community has moved away from our traditional practice of creating everything from scratch; instead, D8 borrows from other sources, integrating code from other Open Source projects.\n\nThis session considers both the practical and philosophical implications of our shifting values as a community and as developers in a D8 world. We’ll take a look at some of the API differences resulting from Drupal 8's use of Symfony for its routing system, Guzzle for an HTTP client, Twig as a template engine and soon, PSR-4 for its autoloader. Through these, we will also talk about how these changes reflect a shift in Drupal thinking to create a stronger community tool for us all.\n\nProgress on Drupal 8 is continuing rapidly. With the Drupal 8 release getting closer by the day, now’s the time to stop worrying and fall in love with D8.",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T08:45:00Z",
+      "endTime": "2014-06-14T09:00:00Z",
+      "duration": "P15M",
+      "title": "Acquia Sponsor Talk",
+      "location": "Room 1",
+      "link": "http://www.drupalcamp.sg/schedule",
+      "track": [],
+      "speakers": [],
+      "video_url": "",
+      "full_description": "",
+      "sponsorIds": "",
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    },
+    {
+      "startTime": "2014-06-14T09:00:00Z",
+      "endTime": "2014-06-14T09:45:00Z",
+      "duration": "P45M",
+      "title": "Closing / Lucky Draw",
+      "location": "Room 1",
+      "link": "http://www.drupalcamp.sg/schedule",
+      "track": [],
+      "speakers": [],
+      "video_url": "",
+      "full_description": "",
+      "sponsorIds": "",
+      "isAgendaItem": true,
+      "sourceIds": [
+        "drupalcamp-sg-2014-schedule"
+      ]
+    }
+  ],
+  "result": "manual",
+  "url": "http://www.drupalcamp.sg/schedule"
+}

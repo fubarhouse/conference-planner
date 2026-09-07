@@ -1,11 +1,51 @@
-node_modules/*
-cache/*
-.codegraph/*
-.idea/*
-documents/*
-scripts/*
-!scripts/validate-data.mjs
-planner/*
-receipts/*
-package.json
-package-lock.json
+/*
+
+!/.github/
+!/.github/**
+!/.githooks/
+!/.githooks/**
+!/app/
+!/app/**
+/app/data/
+!/docs/
+!/docs/**
+!/scripts/
+!/scripts/**
+/scripts/import-*
+/scripts/enrich-*
+/scripts/resume-*
+/scripts/update-*
+!/terraform/
+!/terraform/**
+# The Go backend, vendor directory included: the Docker build runs offline, so
+# the dependencies have to be in the tree rather than fetched at build time.
+!/tools/
+!/tools/**
+/tools/*/vendor
+# …but not the compiled binaries, which are ~18 MB each and are named after
+# the cmd/ directory they are built from.
+/tools/*/server
+/tools/*/cmd/*/server
+/tools/*/drupalcon-sync
+# …nor the one `pnpm run backend:build` writes.
+/.bin/
+
+!/.docker/
+!/.docker/**
+!/.dockerignore
+!/.env.example
+!/.gitignore
+!/.prettierignore
+!/.prettierrc
+!/docker-compose.yml
+!/Dockerfile
+!/eslint.config.js
+!/jsconfig.json
+!/knip.json
+!/LICENSE
+!/package.json
+!/pnpm-lock.yaml
+!/pnpm-workspace.yaml
+!/README.md
+!/server.js
+!/uno.config.js

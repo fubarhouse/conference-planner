@@ -1,0 +1,649 @@
+// Archive Observatory data — aggregates the whole 19-year archive into viz-ready
+// stats: events/sessions per year, per series, top speakers + sponsors (each with
+// their appearance years for a timeline), tier mix, coverage. Applies the curation
+// decisions (aliases) so speaker/sponsor tallies get CLEANER as you reconcile —
+// the payoff loop for the Curation Studio. Read-only.
+
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { fingerprint, str, has, loadDecisions } from './archiveAudit.js';
+import { attributionStrength, sourceConfidence, sourceReach } from './sources.js';
+import { countsAsSession, isAgendaTitle, itemKind } from '../../app/js/modules/sessionKind.js';
+
+// Words that carry no topic signal — generic English + Drupal-conference noise
+// ("drupal"/"session" are in every title, so they'd swamp the real trends).
+const STOPWORDS = new Set(
+  (
+    'the a an and or of to for with your you our we it is are be in on at by from as ' +
+    'how what why when who your yours this that these those into out up down over under ' +
+    'via using use used get getting make making build building do does doing let lets ' +
+    'new all more most best good great better than then them they i my me us not no yes ' +
+    'can will just like about across through within between one two three first ' +
+    'drupal drupalcon drupalcamp drupals session sessions talk talks keynote workshop bof ' +
+    'intro introduction guide overview part vol case study panel qa live demo lightning ' +
+    // agenda/schedule filler — not topics
+    'break lunch coffee tea breakfast dinner drinks registration opening closing welcome ' +
+    'networking social party sprint sprints reception keynotes closing prenote prenotes ' +
+    'sponsored room hall stage track day days morning afternoon evening lunchbreak wrap ' +
+    // common English prose words (descriptions are full sentences, so we need a
+    // heavier stoplist than titles alone would)
+    'have has had having but their some also been being were their them our he she his ' +
+    'her hers now well back even still way ways thing things lot lots really want wants ' +
+    'wanted need needs needed know knows see look looking comes come coming goes going ' +
+    'take takes taking made give gives given show shows showing find finds finding help ' +
+    'helps helping around during before after while because since again once other others ' +
+    'each any many much every own such would could should might must may shall lets ' +
+    'people work works working world worlds without within upon among per instead due ' +
+    'able youll youre well many time times learn learning learned really lot lots things ' +
+    'thing today tomorrow yesterday something anything everything nothing someone everyone ' +
+    'there here where theres heres wheres youve weve theyre youre isnt dont doesnt wont cant'
+  ).split(' '),
+);
+// Short tokens are usually noise — but these are real topics worth tracking.
+const SHORT_ALLOW = new Set(['ai', 'ux', 'ci', 'cd', 'js', 'go', 'ml', 'ar', 'vr', 'db', 'cms']);
+
+// Agenda-vs-session lives in app/js/modules/sessionKind.js so the archive's
+// client can read it too — only `app/` is served. Re-exported here because
+// this module has always been where the rest of the codebase imports it from.
+export { countsAsSession, isAgendaTitle, itemKind };
+
+/** Split a session title into distinct, meaningful topic tokens (deduped per title). */
+export function titleTokens(title) {
+  const seen = new Set();
+  for (const raw of String(title || '')
+    .toLowerCase()
+    .split(/[^a-z0-9+#]+/)) {
+    if (!raw || /^\d+$/.test(raw)) continue;
+    if (raw.length < 3 && !SHORT_ALLOW.has(raw)) continue;
+    if (STOPWORDS.has(raw)) continue;
+    seen.add(raw);
+  }
+  return [...seen];
+}
+
+/**
+ * Adjacent word pairs, so the vocabulary can carry phrases as well as words.
+ * Community interest is often two words — "display suite", "layout builder",
+ * "site building" — and a unigram vocabulary can only ever show the halves.
+ *
+ * Pairs are built from the RAW word sequence, then rejected if either half is a
+ * stopword, so "the display" never becomes a term while "display suite" does.
+ */
+// Fragments that only ever appear because descriptions carry URLs and a session
+// template ("Key topics include…", "Target audience…"). They form high-frequency
+// pairs that are about the CMS's form fields, not the community's interests, and
+// they crowd genuine phrases out of the ranking.
+const PHRASE_NOISE = new Set([
+  'https',
+  'http',
+  'www',
+  'com',
+  'org',
+  'net',
+  'html',
+  'topics',
+  'topic',
+  'include',
+  'includes',
+  'included',
+  'target',
+  'audience',
+  'key',
+  'level',
+  'levelbeginner',
+  'levelintermediate',
+  'levaladvanced',
+  'covered',
+  'takeaways',
+]);
+
+export function titleBigrams(title) {
+  const words = String(title || '')
+    .toLowerCase()
+    .split(/[^a-z0-9+#]+/)
+    .filter(Boolean);
+  const seen = new Set();
+  for (let i = 0; i < words.length - 1; i += 1) {
+    const a = words[i];
+    const b = words[i + 1];
+    if (STOPWORDS.has(a) || STOPWORDS.has(b)) continue;
+    if (PHRASE_NOISE.has(a) || PHRASE_NOISE.has(b)) continue;
+    if (/^\d+$/.test(a) || /^\d+$/.test(b)) continue;
+    if ((a.length < 3 && !SHORT_ALLOW.has(a)) || (b.length < 3 && !SHORT_ALLOW.has(b))) continue;
+    seen.add(`${a} ${b}`);
+  }
+  return [...seen];
+}
+
+/**
+ * Keyword-frequency-over-time from session titles. Returns the top `topN` terms,
+ * each with its total mentions and a per-year count map — the shape the Observatory
+ * line chart plots (as a share of that year's sessions).
+ * Accepts `text` (title + description) or falls back to `title`.
+ * @param {{text?:string, title?:string, year:number}[]} sessions
+ */
+export function buildTopics(sessions, topN = 24) {
+  const terms = new Map(); // term → { term, total, byYear }
+  for (const { text, title, year } of sessions) {
+    if (!year) continue;
+    for (const t of titleTokens(text ?? title)) {
+      let rec = terms.get(t);
+      if (!rec) terms.set(t, (rec = { term: t, total: 0, byYear: {} }));
+      rec.total++;
+      rec.byYear[year] = (rec.byYear[year] || 0) + 1;
+    }
+  }
+  return [...terms.values()].sort((a, b) => b.total - a.total).slice(0, topN);
+}
+
+// Canonical macro-regions. These FOUR partition the whole inhabited globe with no gaps:
+// EMEA (Europe, Middle East & Africa), APAC (Asia + Oceania), AMER (North America),
+// LATAM (Mexico, Central/South America + Caribbean).
+//
+// EMEA is deliberately ONE region and not a locally-invented EUR/MEA split. These are
+// an international standard used far outside this project, and a bucket the rest of the
+// world does not recognise makes the archive's numbers incomparable with everyone
+// else's. A region staying empty is fine and expected — it is a true statement about
+// where the community has held events, not a reason to redraw the map.
+//
+// An event's authored `regionCode` wins;
+// else we DERIVE from the free-text `region` field (more reliable than the geocoded coords,
+// which occasionally false-match — Athens→Georgia, Nara→DC); else, for placeless online
+// events, we fall back to the organising community's home region.
+export const REGION_CODES = ['EMEA', 'APAC', 'AMER', 'LATAM'];
+// Friendly labels for facet dropdowns / editor selects.
+export const REGION_LABELS = {
+  EMEA: 'Europe, Middle East & Africa',
+  APAC: 'Asia-Pacific',
+  AMER: 'North America',
+  LATAM: 'Latin America',
+};
+// Tested in this order (first match wins): LATAM before AMER ("Latin America" ⊃ "America").
+// EMEA keeps two patterns purely for readability — Europe and Middle East/Africa are long
+// enough lists that one regex would be unreadable — but they resolve to the same region.
+const REGION_RE = {
+  LATAM:
+    /\b(latin america|south america|central america|caribbean|latam|mexico|méxico|colombia|brazil|brasil|argentina|chile|peru|perú|uruguay|ecuador|bolivia|venezuela|paraguay|costa rica|guatemala|panama|cuba|dominican|honduras|nicaragua|el salvador|puerto rico|belize|jamaica|trinidad)\b/i,
+  EMEA_MEA:
+    /\b(middle east|africa|uae|united arab emirates|dubai|abu dhabi|saudi|qatar|kuwait|bahrain|oman|yemen|israel|palestine|jordan|lebanon|syria|iraq|iran|egypt|morocco|tunisia|algeria|libya|sudan|nigeria|kenya|ghana|south africa|ethiopia|tanzania|uganda|senegal|cameroon|ivory coast|côte d'ivoire|rwanda|zambia|zimbabwe|angola|mozambique|botswana|namibia|mali|mauritius)\b/i,
+  APAC: /\b(asia|pacific|oceania|australia|new zealand|aotearoa|japan|nippon|china|india|singapore|korea|indonesia|thailand|malaysia|philippines|taiwan|vietnam|hong kong|pakistan|bangladesh|sri lanka|nepal|myanmar|cambodia|laos|mongolia|fiji|papua new guinea|brunei|kazakhstan|uzbekistan)\b/i,
+  AMER: /\b(north america|usa|u\.s\.a|united states|america|canada)\b/i,
+  EMEA_EUR:
+    /\b(europe|european|netherlands|nederland|holland|belgium|belgi|germany|deutschland|austria|österreich|czech|cesko|czechia|denmark|danmark|united kingdom|great britain|britain|england|scotland|wales|northern ireland|ireland|eire|france|hungary|magyar|spain|espana|españa|italy|italia|poland|polska|switzerland|schweiz|suisse|greece|hellas|norway|norge|sweden|sverige|finland|suomi|portugal|iceland|luxembourg|slovakia|slovenia|croatia|serbia|bosnia|montenegro|macedonia|albania|kosovo|bulgaria|romania|lithuania|latvia|estonia|ukraine|belarus|moldova|malta|cyprus|monaco|liechtenstein|andorra|san marino|russia|turkey|türkiye|georgia|armenia|azerbaijan)\b/i,
+};
+// Placeless (online) events → the organising community's home region.
+const SERIES_REGION = {
+  DrupalCon: 'AMER',
+  'DrupalCon Europe': 'EMEA',
+  DrupalSouth: 'APAC',
+  'DrupalSouth Community Day': 'APAC',
+  // Marketed name of the 2011/2012 DrupalSouth editions; both have a location so
+  // this only matters if a placeless one ever turns up under the old branding.
+  'Drupal Downunder': 'APAC',
+  DrupalJam: 'EMEA',
+  DrupalGov: 'AMER',
+  'Drupal Dev Days': 'EMEA',
+};
+// Pure derivation (ignores any authored regionCode) — used by the backfill script too.
+export function deriveRegion(ev) {
+  const r = String(ev?.region || '');
+  if (REGION_RE.LATAM.test(r)) return 'LATAM'; // before AMER: "Latin America" ⊃ "America"
+  if (REGION_RE.EMEA_MEA.test(r)) return 'EMEA'; // before APAC: "Georgia"/"Turkey" straddle
+  if (REGION_RE.APAC.test(r)) return 'APAC';
+  if (REGION_RE.AMER.test(r)) return 'AMER';
+  if (REGION_RE.EMEA_EUR.test(r)) return 'EMEA';
+  return SERIES_REGION[String(ev?.designation || '').trim()] || '';
+}
+// Authored regionCode wins (if still a valid code — a legacy "EUR"/"MEA" re-derives to
+// EMEA), else derive.
+function regionOf(ev) {
+  const code = String(ev?.regionCode || '').toUpperCase();
+  return REGION_CODES.includes(code) ? code : deriveRegion(ev);
+}
+const COUNTRY_CANON = {
+  netherlands: 'Netherlands',
+  belgium: 'Belgium',
+  japan: 'Japan',
+  india: 'India',
+  singapore: 'Singapore',
+  'new zealand': 'New Zealand',
+  australia: 'Australia',
+  greece: 'Greece',
+  germany: 'Germany',
+  austria: 'Austria',
+  france: 'France',
+  spain: 'Spain',
+  ireland: 'Ireland',
+  'united kingdom': 'United Kingdom',
+  denmark: 'Denmark',
+  hungary: 'Hungary',
+  colombia: 'Colombia',
+  czechia: 'Czechia',
+};
+const COUNTRY_EN = {
+  nederland: 'Netherlands',
+  españa: 'Spain',
+  日本: 'Japan',
+  česko: 'Czechia',
+  österreich: 'Austria',
+  magyarország: 'Hungary',
+  danmark: 'Denmark',
+  deutschland: 'Germany',
+  'éire / ireland': 'Ireland',
+  'belgië / belgique / belgien': 'Belgium',
+  'new zealand / aotearoa': 'New Zealand',
+};
+export function deriveCountry(regionStr, geoDisplay) {
+  for (const p of String(regionStr || '').split(/[–\-/]/)) {
+    const c = COUNTRY_CANON[p.trim().toLowerCase()];
+    if (c) return c;
+  }
+  if (geoDisplay) {
+    const last = geoDisplay.split(',').pop().trim();
+    const en = COUNTRY_EN[last.toLowerCase()] || last;
+    // Continents aren't countries — keep them out of the country facet.
+    if (/^((north |south |latin )?america|europe|asia|africa|oceania|global)$/i.test(en)) return '';
+    return en;
+  }
+  return '';
+}
+
+/**
+ * Session lengths, bucketed the way a programme is actually built.
+ *
+ * The archive holds 51 distinct durations, but they pile up at six shapes: the
+ * lightning slot, the half hour, the 45-minute talk, the hour, the workshop, and
+ * the day-long contribution room. Bucketing on those boundaries is what lets
+ * "how many hour-long sessions this year vs half-hour ones last year" be a
+ * question with an answer, instead of 51 lines nobody can read.
+ *
+ * Boundaries sit BETWEEN the clusters (a 50-minute talk belongs with the 45s, not
+ * with the hours), so a programme that runs 50-minute slots does not read as an
+ * hour of content it never had.
+ */
+export const LENGTH_BUCKETS = [
+  { key: 'lightning', label: 'Lightning · ≤20 min', max: 20 },
+  { key: 'half', label: 'Half hour · 21–35', max: 35 },
+  { key: 'short', label: '45 min · 36–50', max: 50 },
+  { key: 'hour', label: 'An hour · 51–70', max: 70 },
+  { key: 'workshop', label: 'Workshop · 71–120', max: 120 },
+  { key: 'day', label: 'Half day or more', max: Infinity },
+];
+
+/** Which bucket a length falls in, or '' for a session with no duration recorded. */
+export function lengthBucket(minutes) {
+  const n = Number(minutes) || 0;
+  if (n <= 0) return '';
+  return (LENGTH_BUCKETS.find((b) => n <= b.max) || LENGTH_BUCKETS[LENGTH_BUCKETS.length - 1]).key;
+}
+
+/**
+ * A session's length in minutes.
+ *
+ * Every one of the 6,930 items in the archive stores `P<n>M` — ISO-8601 with a
+ * minutes component and nothing else — so this parses that and refuses to guess
+ * at anything it has not seen. A wrong number here would quietly inflate a
+ * headline figure, which is worse than reporting nothing.
+ */
+export function sessionMinutes(item) {
+  const m = /^P(\d+)M$/i.exec(String(item?.duration || '').trim());
+  return m ? Number(m[1]) : 0;
+}
+
+// "Online"/"Global"/etc. are placeless — Nominatim happily matches them to a
+// random building, so never map them (guards both live data + stale geocache).
+const PLACELESS = /^(online|global|virtual|remote|worldwide|anywhere|tbd|tba|n\/?a)$/i;
+
+/**
+ * Event coordinates: the dataset's own lat/lon, else the geocode cache (see
+ * scripts/geocode-events.mjs). Shared, because every drill that draws a map has
+ * to agree about which events HAVE a place — a topic drill that mapped "Online"
+ * would put a keyword on a random building.
+ *
+ * @param {Record<string, {lat?: number, lon?: number}>} geo geocache.json
+ */
+function makeCoordsFor(geo) {
+  return (ev) => {
+    if (PLACELESS.test(str(ev.location))) return null;
+    if (Number.isFinite(ev.latitude) && Number.isFinite(ev.longitude))
+      return { lat: ev.latitude, lon: ev.longitude };
+    const g = geo?.[str(ev.location)];
+    return g && Number.isFinite(g.lat) ? { lat: g.lat, lon: g.lon } : null;
+  };
+}
+
+/**
+ * One event's provenance, condensed for the archive's Sources view.
+ *
+ * Reports evidence and claim separately, because they fail independently: a
+ * perfect archived capture can still be backing a row it was only inferred to
+ * support. Collapsing them into one score hides whichever is worse, which is
+ * the opposite of what a transparency view is for.
+ *
+ * @param {any} dataset a full event dataset
+ */
+export function provenanceSummary(dataset) {
+  const sources = Array.isArray(dataset?.event?.sources) ? dataset.event.sources : [];
+  const byId = new Map(sources.map((s) => [s?.id, s]));
+  /** @type {Record<string, number>} */
+  const tiers = {};
+  let wayback = 0;
+  let stated = 0;
+  let undated = 0;
+  let oldestCapture = null;
+  for (const source of sources) {
+    const tier = sourceConfidence(source);
+    tiers[tier] = (tiers[tier] ?? 0) + 1;
+    if (source?.via?.provider === 'wayback') {
+      wayback += 1;
+      const stamp = str(source.via.timestamp);
+      const iso =
+        stamp.length >= 8 ? `${stamp.slice(0, 4)}-${stamp.slice(4, 6)}-${stamp.slice(6, 8)}` : '';
+      if (iso && (!oldestCapture || iso < oldestCapture)) oldestCapture = iso;
+    }
+    if (source?.via?.provider === 'stated') stated += 1;
+    if (!source?.retrievedAt) undated += 1;
+  }
+
+  let exact = 0;
+  let cited = 0;
+  let uncited = 0;
+  // Lunch, registration and the closing drinks are on the schedule but they are
+  // not the programme. Counting them as sessions inflated every figure on this
+  // page — and 384 of them carry a page URL, which put "Registration" in a list
+  // headed Session pages. They are counted, and shown, separately.
+  let agenda = 0;
+  // Sessions that carry their own page URL. For a scraped dataset this IS the
+  // page that session was read from — the scraper records it in `link` — so it
+  // is traceability whether or not a registry entry also names it. Counting
+  // only registry entries reported 1% for an archive where 89% of sessions link
+  // to their own page, which was a fact about the backfill, not about the data.
+  let ownPage = 0;
+  for (const item of Array.isArray(dataset?.items) ? dataset.items : []) {
+    if (!countsAsSession(item)) {
+      agenda += 1;
+      continue;
+    }
+    if (str(item?.link)) ownPage += 1;
+    const strength = attributionStrength(item, byId);
+    if (strength === 'none') {
+      uncited += 1;
+      continue;
+    }
+    cited += 1;
+    if (strength === 'exact') exact += 1;
+  }
+  // How much rests on each source, so a reader can tell the page the whole
+  // event was read off from a footnote backing one row.
+  const reach = sourceReach(dataset);
+
+  // Every distinct page this event points at — the registry PLUS the addresses
+  // its own records carry. This is the honest count of an event's provenance,
+  // and the only one that compares across events.
+  //
+  // The registry count alone does not: an event scraped from captures has a
+  // source per session (DrupalSouth 2010: 33) while one scraped live has three
+  // and keeps its session pages in `items[].link` (DrupalSouth 2019: 1 source,
+  // 59 pages). Ranked on registry size the well-captured event looks like a
+  // wild outlier when it is in fact slightly below average. That measured our
+  // scraping method, not the archive.
+  const referenced = new Set();
+  for (const source of sources) if (str(source?.url)) referenced.add(str(source.url));
+  for (const item of Array.isArray(dataset?.items) ? dataset.items : []) {
+    if (str(item?.link)) referenced.add(str(item.link));
+    if (str(item?.video_url)) referenced.add(str(item.video_url));
+  }
+  const ev = dataset?.event ?? {};
+  if (str(ev.flickr?.groupUrl)) referenced.add(str(ev.flickr.groupUrl));
+  if (str(ev.videoPlaylist)) referenced.add(str(ev.videoPlaylist));
+
+  return {
+    count: sources.length,
+    references: referenced.size,
+    tiers,
+    wayback,
+    stated,
+    undated,
+    oldestCapture,
+    exact,
+    cited,
+    uncited,
+    ownPage,
+    sessions: (Array.isArray(dataset?.items) ? dataset.items : []).filter(countsAsSession).length,
+    agenda,
+    // How many sponsors this page vouches for. A sponsor's OWN website is not
+    // provenance — it is the sponsor, and half of them are dead or repointed
+    // by now — so the view states the count against the page that listed them
+    // rather than linking 21 unrelated companies.
+    sponsorCount: Array.isArray(dataset?.event?.sponsors) ? dataset.event.sponsors.length : 0,
+    // The bibliography itself, so the view needs no second request. A dataset
+    // has a handful of sources, not hundreds.
+    //
+    // No `captureUrl`: the reader-facing view links the ORIGINAL address and
+    // carries one standing note about archive.org, so shipping a second URL per
+    // source paid for nothing. `wayback` and `oldestCapture` above are what that
+    // note is written from.
+    list: sources.map((s) => ({
+      id: str(s?.id),
+      kind: str(s?.kind),
+      url: str(s?.url) || null,
+      title: str(s?.title) || null,
+      retrievedAt: str(s?.retrievedAt) || null,
+      tier: sourceConfidence(s),
+      stated: s?.via?.provider === 'stated',
+      records: reach.get(str(s?.id)) || 0,
+    })),
+  };
+}
+
+// buildInsights() used to live here. It was the reference implementation for the
+// Observatory payload, and the Go port in tools/server/internal/archive was held
+// byte-identical to it by a test that shelled out to this file.
+//
+// It has been removed. Go is now the only implementation, and the payload is
+// pinned instead by a recorded answer at
+// tools/server/testdata/golden/insights-fixture.json — taken at the moment the
+// two were verified identical over the whole archive, so the recording IS this
+// function’s output. Nothing else imported it; the helpers below and above
+// (deriveRegion, countsAsSession, termPattern, coSpeakers, searchTopic) are
+// still used and stay.
+
+/**
+ * Who has shared a session with this person.
+ *
+ * 27% of the archive's sessions have more than one speaker — 4,354 distinct pairs
+ * — and nothing read them. A conference programme is a record of collaboration as
+ * much as of subjects, and this is the only place that fact is written down.
+ *
+ * Computed on demand rather than shipped in the insights payload: the full pair
+ * list is a five-figure structure the dashboard would download to answer a
+ * question about one person.
+ *
+ * Names are canonicalised through the curation ledger on BOTH sides, so a partner
+ * who appears as `nick_schuch` in one programme and `Nick Schuch` in another is
+ * one collaborator with two sessions, not two collaborators with one each.
+ *
+ * @param {string} dataDir
+ * @param {string} name canonical display name
+ * @param {{series?: string, region?: string, country?: string}} [facets]
+ * @param {*} [store] decisions store (the server passes its S3-backed one)
+ */
+export async function coSpeakers(dataDir, name, facets = {}, store) {
+  const { series = 'All', region = 'All', country = 'All' } = facets;
+  const target = str(name);
+  if (!target) return { name: '', sessions: 0, partners: [] };
+  const { aliases, series: seriesOf } = await loadDecisions(store);
+  const canon = (n) => aliases[fingerprint(n)] || n;
+  const seriesFor = (file, ev) => (seriesOf || {})[file] || str(ev.designation) || 'Other';
+  const catalog = JSON.parse(await readFile(join(dataDir, 'catalog.json'), 'utf8'));
+  const files = (catalog.events || []).map((e) => e.file).filter(Boolean);
+  /** @type {Map<string, {name: string, count: number, sessions: Array<{title: string, event: string, year: number|null}>}>} */
+  const partners = new Map();
+  let shared = 0;
+  for (const file of files) {
+    let data;
+    try {
+      data = JSON.parse(await readFile(join(dataDir, file), 'utf8'));
+    } catch {
+      continue;
+    }
+    const ev = data.event || {};
+    if (series !== 'All' && seriesFor(file, ev) !== series) continue;
+    if (region !== 'All' && regionOf(ev) !== region) continue;
+    if (country !== 'All' && str(ev.country) !== country) continue;
+    const label = [ev.designation, ev.location, ev.year].filter(Boolean).join(' ');
+    const year = Number(ev.year) || null;
+    for (const item of data.items || []) {
+      if (!countsAsSession(item)) continue;
+      const names = [...new Set((item.speakers || []).map((n) => canon(str(n))).filter(Boolean))];
+      if (names.length < 2 || !names.includes(target)) continue;
+      shared += 1;
+      for (const other of names) {
+        if (other === target) continue;
+        if (!partners.has(other)) partners.set(other, { name: other, count: 0, sessions: [] });
+        const rec = partners.get(other);
+        rec.count += 1;
+        if (rec.sessions.length < 12)
+          rec.sessions.push({ title: str(item.title), event: label, year });
+      }
+    }
+  }
+  return {
+    name: target,
+    sessions: shared,
+    partners: [...partners.values()].sort(
+      (a, b) => b.count - a.count || a.name.localeCompare(b.name),
+    ),
+  };
+}
+
+/**
+ * A keyword as a WHOLE-WORD pattern — the only way the chart matches.
+ *
+ * The chart plots a term over twenty years, so a substring reading would not be a
+ * softer answer, it would be a different and wrong one: "ai" inside "maintain"
+ * and "email" would draw a line about nothing. There is deliberately no
+ * "contains" option here, unlike the session search where a reader can see the
+ * rows and judge them.
+ *
+ * A multi-word term is still a phrase, joined by "any run of non-word
+ * characters", so "layout builder" matches "Layout-Builder" and "layout  builder".
+ *
+ * Letters and digits are Unicode, not [a-z0-9]. Under the ASCII classes an accent
+ * counted as a word boundary: "gábor" compiled to "g" + separator + "bor", which
+ * matched the name but would equally have matched "g bor", and "café" also matched
+ * the bare word "caf". `+` and `#` stay word characters, so "c++" and "c#" survive
+ * as terms. This is the boundary rule the session search uses in its exact mode
+ * (lib/archiveSessions.js), so the two agree on what a word is.
+ *
+ * @param {string} term
+ * @returns {RegExp|null} null when the term has no word characters at all
+ */
+export function termPattern(term) {
+  const words = String(term || '')
+    .toLowerCase()
+    .split(/[^\p{L}\p{N}+#]+/u)
+    .filter(Boolean);
+  if (!words.length) return null;
+  const esc = (w) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(
+    `(?<![\\p{L}\\p{N}])${words.map(esc).join('[^\\p{L}\\p{N}]+')}(?![\\p{L}\\p{N}])`,
+    'iu',
+  );
+}
+
+/**
+ * Search title + full_description across the archive for ANY keyword/phrase, scoped
+ * to a series. Whole-word / phrase match (see termPattern). Returns per-year counts +
+ * the matching session titles (for the chart's click-drill). Agenda items excluded;
+ * same session universe as the chart.
+ */
+export async function searchTopic(
+  dataDir,
+  term,
+  series = 'All',
+  region = 'All',
+  country = 'All',
+  { year: onlyYear = null } = {},
+  store,
+) {
+  const re = termPattern(term);
+  if (!re) return { term, byYear: {}, sessions: [] };
+  // Series here must mean what it means on the chart that opened this drill, so
+  // the same per-event lineage mapping applies.
+  const { series: seriesOf } = await loadDecisions(store);
+  const seriesFor = (file, ev) => (seriesOf || {})[file] || str(ev.designation) || 'Other';
+  const catalog = JSON.parse(await readFile(join(dataDir, 'catalog.json'), 'utf8'));
+  const files = (catalog.events || []).map((e) => e.file).filter(Boolean);
+  // The chart asks for every year and needs only counts; the drill asks for ONE
+  // year and needs the sessions themselves — who spoke, at which event, what it
+  // was about. Same matcher either way, so a drill can never disagree with the
+  // point that opened it.
+  const detail = Number.isFinite(Number(onlyYear)) && onlyYear !== null;
+  const want = detail ? Number(onlyYear) : null;
+  let geo = {};
+  try {
+    geo = JSON.parse(await readFile(join(dataDir, 'geocache.json'), 'utf8'));
+  } catch {
+    /* no geocache → country derives from the region field only, maps stay empty */
+  }
+  const coordsFor = makeCoordsFor(geo);
+  const byYear = {};
+  const byYearDescribed = {};
+  const sessions = [];
+  for (const file of files) {
+    let data;
+    try {
+      data = JSON.parse(await readFile(join(dataDir, file), 'utf8'));
+    } catch {
+      continue;
+    }
+    const ev = data.event || {};
+    const year = Number(ev.year) || null;
+    if (!year) continue;
+    if (series !== 'All' && seriesFor(file, ev) !== series) continue;
+    // Same geographic facets as the mined lines, so custom keywords filter identically.
+    if (region !== 'All' && regionOf(ev) !== region) continue;
+    if (
+      country !== 'All' &&
+      (str(ev.country) || deriveCountry(ev.region, geo[str(ev.location)]?.display)) !== country
+    )
+      continue;
+    const label = [ev.designation, ev.location, ev.year].filter(Boolean).join(' ');
+    const coords = detail ? coordsFor(ev) : null;
+    for (const s of data.items || []) {
+      if (!countsAsSession(s)) continue;
+      if (!re.test(`${str(s.title)} ${str(s.full_description)}`.toLowerCase())) continue;
+      byYear[year] = (byYear[year] || 0) + 1;
+      // The same split the mined index carries: matches among sessions that HAVE a
+      // description, so a custom keyword's share is measured against the same
+      // readable population as a mined one.
+      if (has(s.full_description)) byYearDescribed[year] = (byYearDescribed[year] || 0) + 1;
+      if (detail && year !== want) continue;
+      if (sessions.length >= 800) continue;
+      sessions.push(
+        detail
+          ? {
+              year,
+              title: str(s.title),
+              description: str(s.full_description),
+              speakers: (s.speakers || []).join(', '),
+              location: str(s.location),
+              startTime: str(s.startTime),
+              link: str(s.link),
+              video: str(s.video_url),
+              event: label,
+              series: str(ev.designation),
+              region: str(ev.regionCode),
+              country: str(ev.country),
+              city: str(ev.location),
+              file,
+              lat: coords?.lat,
+              lon: coords?.lon,
+            }
+          : { year, title: str(s.title) },
+      );
+    }
+  }
+  return { term, byYear, byYearDescribed, sessions, year: want };
+}

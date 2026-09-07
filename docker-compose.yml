@@ -1,10 +1,36 @@
 services:
-  editor:
-    build: .
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./data:/app/data
-      - ./img:/app/img
+  backend:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile.backend
+    labels:
+      lagoon.type: basic-persistent
+      lagoon.service.port: '3000'
+      lagoon.persistent: /storage
+      lagoon.persistent.name: backend
+      lagoon.persistent.size: 5Gi
+      lagoon.persistent.class: bulk
     environment:
-      PORT: "8080"
+      # NODE_ENV is read by the GO server, which has no JavaScript in it: it is
+      # how `production` turns on the Secure flag on the session cookie. Kept
+      # under its old name because it is already set in every environment, and
+      # renaming a variable that controls a cookie flag is a way to ship an
+      # insecure cookie to somebody who did not read the changelog.
+      NODE_ENV: production
+      PORT: '3000'
+      CONTENT_PATH: /storage
+      # /app, not /app/app: the backend image carries the FRONTEND at /app and
+      # nothing else — no repository, no Node. See .docker/backend.tail.dockerfile.
+      APP_ROOT: /app
+
+  cli:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile.cli
+    labels:
+      lagoon.type: cli-persistent
+      lagoon.persistent: /storage
+      lagoon.persistent.name: backend
+    environment:
+      NODE_ENV: production
+      CONTENT_PATH: /storage

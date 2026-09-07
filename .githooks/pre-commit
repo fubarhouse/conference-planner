@@ -1,13 +1,46 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Keep the generated event catalog in step with the dataset files being committed.
+#
+# This hook used to call `scripts/sync-data-index.mjs` and stage `data/index.json`.
+# Neither has existed for a long time — the catalog moved to
+# `app/data/catalog.json`, built by `scripts/build-catalog.mjs`. Because the hook
+# runs under `set -e`, the missing script meant it exited 1 and BLOCKED every
+# commit that did not pass `--no-verify`.
+
 repo_root="$(git rev-parse --show-toplevel)"
 cd "$repo_root"
 
-echo "[pre-commit] Syncing data/index.json"
-node scripts/sync-data-index.mjs
-git add data/index.json
+# Via the pnpm script, NOT `node scripts/build-catalog.mjs` directly: the script
+# loads `.env`, which is where DATA_ROOT lives. Calling node straight would fall
+# back to the in-repo default and write an EMPTY catalog to a path the archive no
+# longer occupies — then stage it.
+echo "[pre-commit] Rebuilding the event catalog"
+pnpm run --silent build:catalog
 
-echo "[pre-commit] Verifying generated catalog"
-node --input-type=module -e "JSON.parse(await (await import('node:fs/promises')).readFile('data/index.json', 'utf8'))"
+# Where the catalog actually landed, asked of the same module the app uses rather
+# than assumed, since DATA_ROOT may point outside this repository entirely.
+catalog="$(node --env-file-if-exists=.env --input-type=module -e "
+  const { DATA_ROOT } = await import('./lib/roots.js');
+  const { relative, join } = await import('node:path');
+  const abs = join(DATA_ROOT, 'catalog.json');
+  const rel = relative(process.cwd(), abs);
+  process.stdout.write(rel.startsWith('..') ? abs : rel);
+")"
 
+# Stage it only while it is tracked. The plan is for the catalog to leave source
+# control (it is generated, and the data repo regenerates it on deploy), and once
+# it does, `git add` on an ignored path would fail and block commits all over
+# again — the exact failure this hook is being repaired from.
+if git ls-files --error-unmatch "$catalog" >/dev/null 2>&1; then
+  git add "$catalog"
+else
+  echo "[pre-commit] $catalog is not tracked — rebuilt but not staged"
+fi
+
+echo "[pre-commit] Verifying it parses"
+node --input-type=module -e "
+  const { readFile } = await import('node:fs/promises');
+  JSON.parse(await readFile('$catalog', 'utf8'));
+"
