@@ -6,13 +6,6 @@
   <title>Sign in — Conference Planner</title>
   <link rel="icon" href="/img/app-icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-  <!-- /css/app.css was linked here and DELETED during the legacy prune, so
-       every sign-in fetched a 404. The two CDN links went with it: this page
-       pulled IBM Plex from Google Fonts and the whole Font Awesome bundle for a
-       single decorative glyph, on the one page a visitor sees before they have
-       any reason to trust the site. Everything below is inline or self-hosted.
-       Converting the page to the design system proper is still a separate job —
-       see brand/DECISIONS.md. -->
   <link rel="stylesheet" href="/css/foundation.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; }
@@ -132,7 +125,7 @@
 <body>
   <div class="lp-hero header-shell">
     <div class="header-logo brand-drupalsouth lp-logo">
-      
+
     </div>
     <h1 class="lp-title">Conference Planner</h1>
     <p class="lp-sub">Sign in to continue</p>
@@ -149,12 +142,11 @@
           <input id="pwd" class="lf-input" type="password" name="password"
             autocomplete="current-password"<!--PWD_AUTOFOCUS--> required>
         </div>
-        <!--ERROR-->
         <button class="lf-btn" type="submit">
           <i class="fas fa-arrow-right-to-bracket" style="margin-right:0.5rem"></i>Sign in
         </button>
       </form>
-      <p class="lf-mode"><!--MODE--></p>
+      <p class="lf-mode"></p>
     </div>
   </div>
 

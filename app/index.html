@@ -13,13 +13,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png">
     <title>Drupal Event Schedule Builder</title>
   <meta name="description" content="Every session for an event, filterable by day, track and room. Open one to read it, tick the ones you want, and take them with you.">
-  <!-- og:url and og:image are injected per request by ogTags() in server.js,
-       from the Host the browser actually asked for. They are NOT written here
-       on purpose: anyone can host this, and a domain compiled into the markup
-       would point every share on their deployment at somebody else's site.
-       Served as plain static files there is no server to inject them, so those
-       deployments ship without the absolute pair — which is correct, and better
-       than a confidently wrong URL. -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Programme">
   <meta property="og:title" content="Conference schedule">
@@ -28,20 +21,9 @@
   <meta name="twitter:title" content="Conference schedule">
   <meta name="twitter:description" content="Every session for an event, filterable by day, track and room. Open one to read it, tick the ones you want, and take them with you.">
 
-    <!-- Self-hosted, latin subset. No third-party origin in the critical path:
-         a blocked CDN on constrained conference Wi-Fi must not cost us the page.
-         Only the two faces needed for first paint are preloaded; italic arrives
-         late and `font-display: swap` paints in the fallback meanwhile. -->
     <link rel="preload" href="./fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="./fonts/newsreader-roman.woff2" as="font" type="font/woff2" crossorigin>
 
-    <!-- Layer order decides the cascade. Legacy sheets are unlayered by nature,
-         which would beat every layered rule, so they are imported INTO a layer.
-         `legacy` sits AFTER `reset` so legacy utility classes (.hidden and the
-         `hidden sm:block` pairs this codebase relies on) still beat our element
-         resets — but BEFORE our token/section layers so `sch-*` always wins.
-         `overrides` is first because !important reverses layer order.
-         See brand/DECISIONS.md. -->
     <style>
       @layer overrides, reset, legacy, tokens, base, composition, section, utility;
       @import url("./css/utilities.css") layer(legacy);
@@ -60,7 +42,6 @@
             <div class="page-loading-text">Loading schedule...</div>
         </div>
     </div>
-    <!-- Header with Navigation -->
     <a class="u-skip" href="#scheduleMain">Skip to the schedule</a>
     <header class="app-masthead">
         <div class="l-center">
@@ -111,9 +92,6 @@
         </div>
     </header>
 
-    <!-- Breadcrumb = the route, rendered. Root is always Home. Populated from
-         the loaded event by events.js; static fallback keeps it meaningful
-         before the dataset resolves and on the no-JS static deployment. -->
     <div class="l-center">
         <nav id="scheduleCrumbs" class="app-crumbs" aria-label="Breadcrumb">
             <a href="./home.html">Home</a><span class="app-crumbs__sep" aria-hidden="true">→</span><a href="./index.html">Schedules</a>
@@ -121,9 +99,7 @@
     </div>
 
     <main id="scheduleMain" class="l-center">
-        <!-- Browse home (flat searchable event list) — populated by scheduleHome.js -->
         <div id="eventHomeView" class="hidden"></div>
-        <!-- Event Selector -->
         <div id="filtersPanel" class="sch-toolbar">
             <div class="l-cluster">
                 <button id="searchEvents" type="button" class="app-btn">
@@ -139,7 +115,6 @@
             <div id="eventMediaPromo" class="hidden mt-4"></div>
         </div>
 
-        <!-- Now / Up next companion — populated by nowNext.js, shown only during the event -->
         <div id="nowNextPanel" class="now-next-panel hidden" aria-live="polite"></div>
 
         <div id="usageInstructionsPanel" class="sch-usage mobile-instructions-panel">
@@ -164,7 +139,6 @@
             </div>
         </div>
 
-        <!-- Filters and Controls -->
         <div id="sessionFiltersPanel" class="sch-toolbar">
             <button
                 id="sessionFiltersToggle"
@@ -177,7 +151,6 @@
                 </button>
             <div id="sessionFiltersContent" class="mobile-accordion-content hidden sm:block">
             <div class="space-y-4">
-                <!-- Keywords filter - full width on its own row -->
                 <div class="app-field">
                     <label class="u-label">Keywords</label>
                     <div class="relative">
@@ -186,8 +159,7 @@
                             </button>
                     </div>
                 </div>
-                
-                <!-- Other filters in a row -->
+
                 <div class="l-switcher">
                     <div class="app-field">
                         <label class="u-label">Day</label>
@@ -210,8 +182,7 @@
                         </select>
                     </div>
                 </div>
-                
-                <!-- Action buttons -->
+
                 <div class="flex flex-wrap gap-2 pt-2 border-t pl-rule">
                     <button id="resetFilters" class="app-btn">
                         Reset filters
@@ -227,25 +198,20 @@
             </div>
         </div>
 
-        <!-- Selection Overview Panel -->
         <div id="selectionOverview" class="sch-dock selection-overview">
             <div class="selection-overview-inner l-center">
-                <!-- Sticky top bar -->
                 <div class="selection-overview-summary p-0">
                     <button id="toggleDetails" type="button" class="selection-overview-toggle sch-dock__toggle" aria-expanded="false" aria-controls="stageDetails">
                         <span>Selected: <span id="totalEvents">0</span> <span id="totalEventsLabel">sessions</span> in <span id="totalDuration">0 hours</span> (expand to see details)</span>
                         <span class="sch-dock__caret" aria-hidden="true">▾</span>
                         </button>
                 </div>
-                <!-- Scrollable content area (only expanded details) -->
                 <div id="stageDetails" class="selection-overview-details overflow-y-auto flex-1 mt-4 px-4 hidden">
                     <div class="selection-overview-details-inner border-t pl-rule py-4">
                         <div id="stageStats" class="space-y-2">
-                            <!-- Stage statistics will be inserted here -->
                         </div>
                     </div>
                 </div>
-                <!-- Sticky button area -->
                 <div class="selection-overview-actions p-4 border-t pl-rule">
                     <div class="selection-overview-actions-row l-cluster">
                         <button id="downloadIcs" class="app-btn selection-overview-action" data-variant="key" disabled>
@@ -259,12 +225,9 @@
             </div>
         </div>
 
-        <!-- Day quick-nav (sticky) — populated by displayListView() -->
         <nav id="dayNav" class="sch-daynav day-nav hidden" aria-label="Jump to day"></nav>
 
-        <!-- Events Display -->
         <div id="eventsContainer">
-            <!-- Events will be dynamically inserted here -->
         </div>
         <section id="sponsorsContainer" class="sch-sponsors hidden" aria-labelledby="sponsorsHeading">
             <div class="sponsors-shell">
@@ -291,20 +254,11 @@
         </div>
     </main>
 
-    <!-- Margin rail (desktop). The open session's detail is lifted into this
-         reserved column by CSS; the rail itself only holds the empty-state hint.
-         The closer is an empty <details> in the SAME name group — opening it
-         closes whichever session was open, so "Close" needs no script. -->
     <aside class="app-rail" aria-hidden="true">
     </aside>
 
-    <!-- Shared detail surface for content that cannot be pre-rendered into a
-         <details> (sponsor history is assembled asynchronously across every
-         event). Same geometry as a session detail: the margin on desktop, a
-         full sheet on mobile. -->
-    <div id="railPanel" class="app-panel" hidden aria-live="polite"></div>
+    <div id="railPanel" class="app-panel" hidden></div>
 
-    <!-- iOS bottom tab bar (mobile only) -->
     <nav id="scheduleBottomBar" class="sm:hidden" aria-label="Site navigation">
       <a href="./index.html" class="mobile-bottom-tab is-active" aria-label="Schedule" aria-current="page">
         <span class="mobile-bottom-tab-label">Schedule</span>
@@ -326,7 +280,6 @@
     </script>
 
     <script type="module" src="./js/app.js"></script>
-    <!-- 100% privacy-first analytics -->
     <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 </body>
-</html> 
+</html>

@@ -1,22 +1,3 @@
-<!--
-  THE PROVENANCE NOTICE — one wording, used verbatim on every public surface.
-
-  This file is the source. `lib/provenance.js` reads it and the server injects it
-  wherever a page leaves the marker, so the notice cannot say one thing on the
-  home page and another on a schedule. `lib/__tests__/provenance.test.js` asserts
-  the claims below still appear, so an edit that quietly drops "not official"
-  fails the suite rather than shipping.
-
-  Deliberately does NOT name the product. The rename to Conference Almanac is
-  pending, and a notice that hardcodes a name becomes wrong the moment it lands —
-  or adds a thirty-seventh naming inconsistency in the meantime.
-
-  The canonical home defaults to drupal-almanac.com and is overridable with
-  ALMANAC_HOME, so a different deployment points at its own. It is substituted
-  through the {{ALMANAC_HOME}} / {{ALMANAC_LABEL}} tokens rather than by pattern
-  matching the markup — the formatter wraps long tags across lines, which broke
-  two regexes that tried to read them.
--->
 <aside class="app-provenance" aria-label="About this archive">
   <p class="app-provenance__lead">About this archive</p>
   <p>

@@ -1,0 +1,28 @@
+services:
+  backend:
+    env_file:
+      - path: .env
+        format: raw
+    ports:
+      - '8080:3000'
+    volumes:
+      - ${CONTENT_PATH:-./.local-content}:/storage
+      # The backend image BAKES the frontend in at /app (see
+      # .docker/backend.tail.dockerfile), which is right for a deployment and
+      # wrong for editing one. Without this, `/storage` is live — so a new
+      # dataset appears the moment it is written — while every CSS and JS change
+      # needs an image rebuild. That asymmetry is invisible and costs an hour the
+      # first time you meet it: the page updates, so the server looks fine, and
+      # only the stylesheet is a month old.
+      - ./app:/app
+    environment:
+      NODE_ENV: development
+
+  cli:
+    env_file:
+      - path: .env
+        format: raw
+    volumes:
+      - ${CONTENT_PATH:-./.local-content}:/storage
+    environment:
+      NODE_ENV: development

@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" style="opacity:0">
 <head>
-  <!-- Self-hosted, latin subset. No third-party origin in the critical path.
-       Safe as static <link>s: on a deep route the server ships `<base href="/">`
-       ahead of them, so the preload scanner resolves them correctly. -->
   <link rel="preload" href="./fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="./fonts/newsreader-roman.woff2" as="font" type="font/woff2" crossorigin>
   <meta charset="UTF-8">
@@ -17,20 +14,9 @@
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png">
   <title>Trip Planner - Drupal Event Schedule Builder</title>
-  <!-- Only the reveal transition lives here. This block is UNLAYERED, so it
-       beats every cascade layer: the `overflow-y: scroll; scrollbar-gutter:
-       stable` it used to carry silently defeated the app shell's document
-       scroll-lock, leaving a phantom scrollbar as tall as the tab's content
-       that scrolled the whole shell away. Scroll behaviour is the shell's, in
-       section-chrome.css. -->
   <style>html { transition: opacity .15s ease }</style>
   <noscript><style>html{opacity:1}</style></noscript>
-  <!-- Self-hosted, latin subset. No third-party origin in the critical path. -->
 
-  <!-- Layer order matches every other section. `legacy` sits after `reset` so
-       legacy utility classes still beat our element resets, but before our own
-       layers so `app-*`/`pln-*` always win. `overrides` is first because
-       !important reverses layer order. See brand/DECISIONS.md. -->
   <style>
     @layer overrides, reset, legacy, tokens, base, composition, section, utility;
     @import url("./css/utilities.css") layer(legacy);
@@ -45,9 +31,6 @@
 
   <a class="u-skip" href="#plannerMain">Skip to the planner</a>
 
-  <!-- Shared masthead + section nav, the same as every other section. The
-       sidebar below is WITHIN-planner navigation; this is between sections.
-       Two levels, each answering a different question. -->
   <header class="app-masthead">
     <div class="l-center">
       <div class="app-masthead__bar">
@@ -73,17 +56,12 @@
         <a id="plannerEditorNavLink" href="./editor.html" class="app-nav__link hidden">Editor</a>
       </nav>
 
-      <!-- The route, rendered. Filled by renderPlannerCrumbs() in planner.js.
-           It sits INSIDE the masthead: the shell below is a two-column grid, and
-           a sibling here would claim the sidebar's cell. -->
       <nav id="plannerCrumbs" class="app-crumbs" aria-label="Breadcrumb"></nav>
     </div>
   </header>
 
-  <!-- Sidebar (desktop only, hidden on mobile) -->
   <aside id="plannerSidebar" aria-label="Planner navigation">
 
-    <!-- Brand / event identity -->
     <div class="sidebar-brand">
       <div class="sidebar-app-icon flex-shrink-0 flex items-center justify-center">
       </div>
@@ -94,17 +72,13 @@
           <span id="sidebarDirtyText" class="sidebar-dirty-label">Saved</span>
         </div>
       </div>
-      <!-- Collapse toggle: toolbar-style button, not a nav item -->
       <button id="sidebarToggleBtn" type="button" class="sidebar-toggle-btn" aria-label="Toggle sidebar">
         <span id="sidebarToggleIcon" aria-hidden="true">«</span>
       </button>
     </div>
 
-    <!-- Tab groups (populated by renderSidebar()) -->
     <nav id="sidebarNav" aria-label="Planner tabs"></nav>
 
-    <!-- Footer. Section navigation moved to the masthead — this is the
-         planner's own footer only. -->
     <div id="sidebarFooter">
       <a id="sidebarEditorLink" href="./editor.html" class="sidebar-tab-btn hidden">
         <span class="sidebar-label">Editor</span>
@@ -115,20 +89,14 @@
 
   <main id="plannerMain" class="sm:w-[90%] sm:mx-auto px-4 py-4 sm:py-8 space-y-4">
 
-    <!-- No-event state: trip dashboard (filled by renderTripDashboard()) -->
     <div id="plannerNoEvent" class="hidden">
       <div class="py-12 text-center pl-ink-2">
         <p class="text-sm">Loading your trips…</p>
       </div>
     </div>
 
-    <!-- Main planner app -->
     <div id="plannerApp" class="space-y-4">
 
-      <!-- The control strip states WHERE you are and WHETHER it is saved.
-           Everything you can DO lives in the Actions menu in the masthead. The
-           four utility buttons that used to sit here are kept below, hidden:
-           they hold the implementations the menu rows click. -->
       <section id="plannerToolbar" aria-label="Planner status">
         <div class="pln-strip">
           <a href="planner.html" id="plannerHomeBtn" class="pln-strip__back">All trips</a>
@@ -153,13 +121,11 @@
         </div>
       </section>
 
-      <!-- localStorage notice -->
       <div id="storageNotice" class="hidden flex items-start gap-3 rounded-lg border pl-rule-warn pl-surface-2 px-4 py-3 text-sm pl-warn">
         <span>Your planner is saved in this browser only. Use <strong>Back up</strong> to keep a copy you can restore later or use on another device.</span>
         <button id="storageNoticeDismiss" type="button" class="ml-auto shrink-0 pl-warn" aria-label="Dismiss">&times;</button>
       </div>
 
-      <!-- Tab container -->
       <section class="editor-meta-accordion rounded-lg p-4 space-y-4">
         <div id="accordionHeaderRow" class="flex items-center justify-between gap-3 flex-wrap">
           <div class="planner-accordion-title">
@@ -167,7 +133,6 @@
             <p id="plannerModeSubtitle" class="text-sm pl-ink-2">Your personal notebook for this event.</p>
           </div>
 
-          <!-- Mobile tab picker button (< sm) -->
           <button id="mobileTabMenuBtn" type="button" aria-haspopup="true" aria-expanded="false"
             class="mobile-tab-nav-btn sm:hidden flex-1 flex items-center justify-between gap-2 h-10 px-3 rounded-md border pl-rule text-sm pl-ink-0 pl-surface/10 transition-colors">
             <div class="flex items-center gap-2 min-w-0">
@@ -175,7 +140,6 @@
             </div>
           </button>
 
-          <!-- Desktop tab bar (≥ sm) -->
           <div id="plannerTabBar" class="editor-tab-row planner-tab-row hidden" role="tablist" aria-label="Planner sections">
             <div id="tabBarMain" class="flex items-center gap-0.5 flex-1 min-w-0"></div>
             <div id="tabBarMoreWrap" class="relative hidden flex-shrink-0">
@@ -189,67 +153,48 @@
           </div>
         </div>
 
-        <!-- Contacts panel -->
         <div id="plannerContactsPanel" class="hidden" role="tabpanel" aria-labelledby="showContactsTab"></div>
 
-        <!-- Tasks panel -->
-        <!-- Tasks panel shell injected from plannerTasks.js (tasksPanelHtml) at boot -->
         <div id="plannerTasksPanel" class="hidden" role="tabpanel" aria-labelledby="showTasksTab"></div>
         <div id="plannerChecklistsPanel" class="hidden" role="tabpanel" aria-labelledby="showChecklistsTab"></div>
 
-        <!-- Sponsor panel -->
         <div id="plannerSponsorPanel" class="hidden" role="tabpanel" aria-labelledby="showSponsorTab"></div>
 
-        <!-- Personal panel -->
         <div id="plannerPersonalPanel" role="tabpanel" aria-labelledby="showPersonalTab"></div>
 
-        <!-- Notes panel -->
         <div id="plannerNotesPanel" class="hidden" role="tabpanel" aria-labelledby="showNotesTab"></div>
 
-        <!-- Team panel -->
         <div id="plannerTeamPanel" class="hidden" role="tabpanel" aria-labelledby="showTeamTab"></div>
 
-        <!-- Documents panel -->
         <div id="plannerDocumentsPanel" class="hidden" role="tabpanel" aria-labelledby="showDocumentsTab"></div>
 
-        <!-- Receipts panel -->
         <div id="plannerReceiptsPanel" class="hidden" role="tabpanel" aria-labelledby="showReceiptsTab"></div>
 
-        <!-- Tickets panel -->
         <div id="plannerTicketsPanel" class="hidden" role="tabpanel" aria-labelledby="showTicketsTab"></div>
 
-        <!-- Budget panel -->
         <div id="plannerBudgetPanel" class="hidden" role="tabpanel" aria-labelledby="showBudgetTab"></div>
         <div id="plannerSplitPanel" class="hidden" role="tabpanel" aria-labelledby="showSplitTab"></div>
 
-        <!-- Companions panel -->
         <div id="plannerCompanionsPanel" class="hidden" role="tabpanel" aria-labelledby="showCompanionsTab"></div>
 
-        <!-- Map panel -->
         <div id="plannerMapPanel" class="hidden" role="tabpanel" aria-labelledby="showMapTab"></div>
         <div id="plannerWeatherPanel" class="hidden" role="tabpanel" aria-labelledby="showWeatherTab"></div>
 
-        <!-- My Schedule panel (session picks + custom events) -->
         <div id="plannerSchedulePanel" class="hidden" role="tabpanel" aria-labelledby="showScheduleTab"></div>
 
-        <!-- Itinerary panel (mobile-first day view) -->
         <div id="plannerItineraryPanel" class="hidden" role="tabpanel" aria-labelledby="showItineraryTab"></div>
 
-        <!-- Summary panel -->
         <div id="plannerSummaryPanel" class="hidden" role="tabpanel" aria-labelledby="showSummaryTab"></div>
 
-        <!-- Settings panel -->
         <div id="plannerSettingsPanel" class="hidden" role="tabpanel" aria-labelledby="showSettingsTab"></div>
 
       </section>
     </div>
 
-    <!-- Hidden file input for import -->
     <input id="plannerImportInput" type="file" accept=".json" class="sr-only" aria-label="Choose a planner JSON file to import">
 
   </main>
 
-  <!-- Budget Item modal (shared personal / sponsor) -->
   <div id="budgetItemModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="budgetItemModalTitle">
     <div class="pl-modal-card max-w-md">
       <div class="pl-modal-head">
@@ -291,7 +236,6 @@
         <div class="pl-divide pt-4">
           <p class="pl-label">Receipts</p>
           <div id="budgetItemReceiptStatus" class="flex items-center gap-2 flex-wrap">
-            <!-- populated by renderBudgetItemReceiptStatus() -->
           </div>
         </div>
       </div>
@@ -307,7 +251,6 @@
     </div>
   </div>
 
-  <!-- Create Planner modal -->
   <div id="createPlannerModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="createPlannerModalTitle">
     <div class="pl-surface rounded-xl w-full max-w-lg flex flex-col" style="max-height:90dvh">
       <div class="pl-modal-head flex-shrink-0">
@@ -344,7 +287,6 @@
           </div>
         </div>
 
-        <!-- Planner mode -->
         <div class="space-y-2">
           <p class="pl-label">Planner mode</p>
           <div class="set-cards set-cards--2">
@@ -367,7 +309,6 @@
           </div>
         </div>
 
-        <!-- Preferred currency for rolled-up totals -->
         <div class="space-y-2">
           <label class="block pl-label" for="createPlannerCurrency">Report totals in</label>
           <select id="createPlannerCurrency"
@@ -375,7 +316,6 @@
           <p class="pl-hint">Totals roll up into this currency. Each item is still entered in its own currency. Change it anytime in Settings.</p>
         </div>
 
-        <!-- Features -->
         <div class="space-y-2">
           <p class="pl-label">Features <span class="pl-hint">— you can change these anytime in Settings</span></p>
           <div class="set-cards">
@@ -422,7 +362,6 @@
     </div>
   </div>
 
-  <!-- Dashboard planner edit modal -->
   <div id="dashboardPlannerEditModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="dashboardEditTitle">
     <div class="pl-surface rounded-xl w-full max-w-sm flex flex-col" style="max-height:90dvh">
       <div class="pl-modal-head flex-shrink-0">
@@ -470,7 +409,6 @@
     </div>
   </div>
 
-  <!-- Shared cog dropdown for trip cards on the dashboard -->
   <div id="tripCogMenu" class="trip-cog-menu hidden">
     <a id="tripCogSettings" href="#" class="trip-cog-item">Settings
     </a>
@@ -481,20 +419,16 @@
     </button>
   </div>
 
-  <!-- Global (dashboard) settings modal -->
   <div id="globalSettingsModal" class="hidden fixed inset-0 z-50 gs-page flex flex-col" role="dialog" aria-modal="true" aria-labelledby="globalSettingsTitle">
 
-    <!-- Header -->
     <div class="flex items-center justify-between px-5 sm:px-8 py-4 border-b pl-rule pl-surface flex-shrink-0">
       <div class="rcpt-head" style="margin:0"><span class="rcpt-eyebrow" id="globalSettingsTitle">Settings</span></div>
       <button type="button" id="globalSettingsClose" aria-label="Close" class="iv-close">&times;</button>
     </div>
 
-    <!-- Scrollable body -->
     <div class="flex-1 overflow-y-auto">
       <div class="max-w-5xl mx-auto px-5 sm:px-8 py-6 space-y-8">
 
-        <!-- Top row: Defaults · Companions · Team (3 columns) -->
         <div class="gs-top">
           <div>
             <div class="doc-divider"><span>Defaults</span></div>
@@ -547,11 +481,9 @@
           </div>
         </div>
 
-        <!-- Cloud Backup -->
         <div>
           <div class="doc-divider"><span>Cloud backup</span></div>
 
-          <!-- Status banner — clear for the whole section whether S3 is configured/connected -->
           <div id="s3StatusChip" class="s3-status s3-status--off">
             <span class="s3-status-ic"></span>
             <span class="s3-status-label">Checking…</span>
@@ -562,7 +494,6 @@
           </div>
 
           <div class="s3-grid">
-            <!-- Actions -->
             <div class="s3-actions">
               <button type="button" id="s3SaveBtn" class="s3-act s3-act--primary" disabled>
                 <span class="s3-act-ic"></span>
@@ -587,7 +518,6 @@
               </button>
             </div>
 
-            <!-- Activity log console -->
             <div class="s3-logs-wrap">
               <div class="s3-logs-head">
                 <span class="s3-logs-title">Activity log</span>
@@ -605,25 +535,21 @@
       </div>
     </div>
 
-    <!-- Footer -->
     <div class="flex justify-end gap-2 px-5 sm:px-8 py-4 border-t pl-rule pl-surface flex-shrink-0">
       <button type="button" id="globalSettingsDone" class="iv-btn iv-btn--gold">Done</button>
     </div>
 
   </div>
 
-  <!-- Event Association / Switch modal -->
   <div id="eventAssocModal" class="hidden fixed inset-0 z-50 flex justify-center" role="dialog" aria-modal="true" aria-labelledby="eventAssocModalTitle">
     <div class="pl-surface w-full flex flex-col">
 
-      <!-- Header -->
       <div class="flex items-center justify-between px-5 py-4 border-b pl-rule flex-shrink-0">
         <h2 id="eventAssocModalTitle" class="pl-modal-title">Manage Planner</h2>
         <button type="button" id="eventAssocModalClose" aria-label="Close"
           class="assoc-modal-close flex items-center justify-center rounded-full pl-ink-2 hover:pl-ink-1 transition-colors">&times;</button>
       </div>
 
-      <!-- Tabs -->
       <div class="assoc-tabs-wrap border-b pl-rule flex-shrink-0">
         <div class="flex" role="tablist">
           <button type="button" role="tab" data-assoc-tab="planners" aria-selected="true"
@@ -637,7 +563,6 @@
         </div>
       </div>
 
-      <!-- Search (events tab only) -->
       <div id="assocSearchWrap" class="hidden px-4 py-2.5 border-b pl-rule flex-shrink-0">
         <div class="relative">
           <input type="text" id="assocSearchInput" placeholder="Search events…"
@@ -646,10 +571,8 @@
         </div>
       </div>
 
-      <!-- Results -->
       <div id="assocModalResults" class="overflow-y-auto flex-1 min-h-0"></div>
 
-      <!-- Footer -->
       <div id="assocModalFooter" class="flex items-center gap-2 px-4 py-3 border-t pl-rule flex-shrink-0">
         <button type="button" id="managePlannerNewBtn"
           class="h-10 flex-1 inline-flex items-center justify-center gap-2 rounded-lg border pl-rule text-sm font-medium pl-ink-1 pl-surface transition-colors">New planner
@@ -662,7 +585,6 @@
     </div>
   </div>
 
-  <!-- Team Member modal (global) -->
   <div id="teamMemberModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="teamMemberModalTitle">
     <div class="pl-modal-card max-w-lg">
       <div class="pl-modal-head">
@@ -716,7 +638,6 @@
     </div>
   </div>
 
-  <!-- Personal Contact modal (global trip companions) -->
   <div id="personalContactModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="personalContactModalTitle">
     <div class="pl-modal-card max-w-md">
       <div class="pl-modal-head">
@@ -750,7 +671,6 @@
     </div>
   </div>
 
-  <!-- Assignment modal (per-event travel & budget for a team member) -->
   <div id="assignmentModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="assignmentModalTitle">
     <div class="pl-modal-card max-w-2xl">
       <div class="pl-modal-head">
@@ -767,7 +687,6 @@
       </div>
       <div class="px-6 py-5 space-y-5 overflow-y-auto" style="max-height:72vh">
 
-        <!-- Outbound journey -->
         <section>
           <div class="flex items-center justify-between mb-2">
             <p class="pl-label">Outbound Journey</p>
@@ -785,7 +704,6 @@
           </div>
         </section>
 
-        <!-- Return journey -->
         <section>
           <div class="flex items-center justify-between mb-2">
             <p class="pl-label">Return Journey</p>
@@ -803,11 +721,7 @@
           </div>
         </section>
 
-        <!-- Cost (companions only) + Notes + Receipt (org team assignments) -->
         <section class="space-y-3 pt-1 border-t pl-rule">
-          <!-- Companion travel cost: shown for personal/local-companion assignments,
-               which aren't receipt-backed. Org team assignments hide this and use the
-               Receipt section below instead. -->
           <div id="assignmentCostSection" class="space-y-3">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <label class="editor-form-field">
@@ -842,7 +756,6 @@
           <div id="assignmentReceiptSection" class="pl-divide pt-3">
             <p class="pl-label">Receipt</p>
             <div id="assignmentReceiptStatus" class="flex items-center gap-2 flex-wrap">
-              <!-- populated by renderAssignmentReceiptStatus() -->
             </div>
           </div>
         </section>
@@ -857,7 +770,6 @@
     </div>
   </div>
 
-  <!-- Accommodation modal -->
   <div id="accommodationModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="accommodationModalTitle">
     <div class="pl-modal-card max-w-2xl">
       <div class="pl-modal-head">
@@ -866,7 +778,6 @@
           class="pl-iconbtn">&times;</button>
       </div>
       <div class="px-6 py-5 space-y-5">
-        <!-- Property details -->
         <section>
           <p class="pl-label mb-3">Property</p>
           <div class="grid grid-cols-2 gap-3">
@@ -902,7 +813,6 @@
             </label>
           </div>
         </section>
-        <!-- Waypoint itinerary (only shown when type = waypoints) -->
         <section id="accomWaypointStopsSection" class="hidden pl-divide pt-4">
           <div class="flex items-center justify-between mb-3">
             <p class="pl-label">Waypoint Itinerary</p>
@@ -914,13 +824,11 @@
           <div id="accomWaypointStopsList" class="space-y-1.5"></div>
         </section>
 
-        <!-- Booking receipt -->
         <section class="pl-divide pt-4">
           <p class="pl-label">Booking Receipt</p>
           <div id="accomDocStatus" class="flex items-center gap-2"></div>
         </section>
 
-        <!-- Member assignments -->
         <section>
           <p class="pl-label mb-3">Member Stays</p>
           <p id="accomNoMembers" class="hidden pl-hint py-2">No team members assigned to this event yet. Add them in the <strong>Org</strong> tab first.</p>
@@ -949,7 +857,6 @@
               <div class="col-span-2 border-t pl-rule pt-2 mt-1">
                 <p class="pl-label">Receipt</p>
                 <div id="accomMemberReceiptStatus" class="flex items-center gap-2 flex-wrap">
-                  <!-- populated by renderAccomStayReceiptStatus() -->
                 </div>
               </div>
             </div>
@@ -968,7 +875,6 @@
     </div>
   </div>
 
-  <!-- Itinerary Day modal -->
   <div id="itineraryDayModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="itineraryDayModalTitle">
     <div class="pl-modal-card max-w-lg">
       <div class="pl-modal-head">
@@ -984,16 +890,13 @@
         <button type="button" id="addItineraryItemBtn"
           class="h-8 inline-flex items-center px-3 border pl-rule rounded-md text-xs pl-ink-1 transition-colors">Add item
         </button>
-        <!-- Add/edit item form (hidden by default) -->
         <div id="itineraryAddForm" class="hidden rounded-lg border pl-rule pl-surface-2 p-4 space-y-3">
-          <!-- Org mode: date only (no member) -->
           <div id="itineraryOrgDateRow" class="hidden">
             <label class="editor-form-field">
               <span class="editor-field-label">Date</span>
               <input type="date" id="itineraryOrgDate" class="pl-field">
             </label>
           </div>
-          <!-- Standalone mode: member + date selectors (hidden when opened from a grid cell) -->
           <div id="itineraryFormMemberRow" class="hidden grid grid-cols-2 gap-3">
             <label class="editor-form-field">
               <span class="editor-field-label">Team member</span>
@@ -1022,9 +925,6 @@
             <span class="editor-field-label">Notes (optional)</span>
             <textarea id="itineraryFormNotes" rows="2" class="pl-textarea" placeholder="Any extra details…"></textarea>
           </label>
-          <!-- Cost inputs: used for personal day-items / member itineraries, which
-               aren't receipt-backed. Org events hide these and use the Receipt section
-               below (toggled by _syncOrgEventFinancialSections). -->
           <div id="itineraryFormCostSection" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <label class="editor-form-field">
               <span class="editor-field-label">Currency</span>
@@ -1051,7 +951,6 @@
           <div id="itineraryFormReceiptSection" class="hidden border-t pl-rule pt-3">
             <p class="pl-label">Receipt</p>
             <div id="itineraryFormReceiptStatus" class="flex items-center gap-2 flex-wrap">
-              <!-- populated by renderOrgEventReceiptStatus() -->
             </div>
           </div>
           <div class="flex gap-2 justify-end">
@@ -1069,7 +968,6 @@
     </div>
   </div>
 
-  <!-- Personal itinerary single-item editor -->
   <div id="personalItineraryItemModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="personalItinModalTitle">
     <div class="pl-modal-card max-w-lg">
       <div class="pl-modal-head">
@@ -1134,7 +1032,6 @@
         <div class="pl-divide pt-4 mt-1">
           <p class="pl-label">Receipt</p>
           <div id="personalItinReceiptStatus" class="flex items-center gap-2 flex-wrap">
-            <!-- populated by renderPersonalItinReceiptStatus() -->
           </div>
         </div>
         <label class="flex items-center justify-between gap-3 pt-1 cursor-pointer">
@@ -1154,7 +1051,6 @@
     </div>
   </div>
 
-  <!-- Hosted event modal (My Schedule) — an event you run, optionally alongside a session -->
   <div id="hostedEventModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="hostedEventModalTitle">
     <div class="pl-modal-card max-w-lg">
       <div class="pl-modal-head">
@@ -1231,7 +1127,6 @@
     </div>
   </div>
 
-  <!-- Itinerary detail (read-only view) modal -->
   <div id="itineraryViewModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="ivTitle">
     <div class="pl-modal-card max-w-lg">
       <div class="iv-head">
@@ -1255,7 +1150,6 @@
     </div>
   </div>
 
-  <!-- Add-to-calendar (whole-trip .ics) modal -->
   <div id="calendarExportModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="calExportTitle">
     <div class="pl-surface rounded-xl w-full max-w-md flex flex-col">
       <div class="iv-head">
@@ -1283,7 +1177,6 @@
           password to this trip, and is not stored anywhere it could be read back.
         </p>
 
-        <!-- The one moment the token exists in readable form. Hidden until a mint. -->
         <div id="calSubNew" class="cal-sub-new hidden">
           <p class="cal-sub-new-label">Copy this now — it will not be shown again</p>
           <div class="cal-sub-row">
@@ -1306,7 +1199,6 @@
     </div>
   </div>
 
-  <!-- Summary drilldown modal -->
   <div id="summaryDrilldownModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="drilldownTitle">
     <div class="pl-modal-card max-w-lg">
       <div class="pl-modal-head">
@@ -1318,7 +1210,6 @@
     </div>
   </div>
 
-  <!-- Tracked Session modal -->
   <div id="trackedSessionModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="trackedSessionModalTitle">
     <div class="pl-modal-card max-w-lg">
       <div class="pl-modal-head">
@@ -1327,12 +1218,10 @@
           class="pl-iconbtn">&times;</button>
       </div>
       <div class="px-6 py-5 space-y-5">
-        <!-- Session info (read-only) -->
         <div id="trackedSessionInfo" class="rounded-md border pl-rule pl-surface-2 px-4 py-3">
           <p id="trackedSessionInfoTitle" class="text-sm font-semibold pl-ink-0"></p>
           <p id="trackedSessionInfoTime" class="text-xs pl-ink-2 mt-0.5"></p>
         </div>
-        <!-- Reason -->
         <div>
           <p class="text-xs font-semibold pl-ink-2 uppercase tracking-widest mb-3">Reason for tracking</p>
           <div class="space-y-2.5">
@@ -1358,7 +1247,6 @@
           <input type="text" id="trackedSessionCustomReason" placeholder="Describe the reason…"
             class="hidden mt-3 pl-field">
         </div>
-        <!-- Notes -->
         <label class="editor-form-field">
           <span class="editor-field-label">Notes</span>
           <textarea id="trackedSessionNotes" rows="3" placeholder="Additional context, goals, talking points…"
@@ -1377,7 +1265,6 @@
     </div>
   </div>
 
-  <!-- Local Companion modal (trip-specific, not global) -->
   <div id="localCompanionModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="localCompanionModalTitle">
     <div class="pl-modal-card max-w-md">
       <div class="pl-modal-head">
@@ -1414,7 +1301,6 @@
     </div>
   </div>
 
-  <!-- Personal Leg edit modal -->
   <div id="personalLegModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="personalLegModalTitle">
     <div class="pl-modal-card max-w-lg">
       <div class="pl-modal-head">
@@ -1472,7 +1358,6 @@
         <div class="pl-divide pt-4 mt-3">
           <p class="pl-label">Receipt</p>
           <div id="personalLegReceiptStatus" class="flex items-center gap-2 flex-wrap">
-            <!-- populated by renderPersonalLegReceiptStatus() -->
           </div>
         </div>
       </div>
@@ -1488,7 +1373,6 @@
     </div>
   </div>
 
-  <!-- Personal Accommodation modal -->
   <div id="personalAccomModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="personalAccomModalTitle">
     <div class="pl-modal-card max-w-lg">
       <div class="pl-modal-head">
@@ -1552,10 +1436,8 @@
         <div class="pl-divide pt-3">
           <p class="pl-label">Receipt</p>
           <div id="personalAccomReceiptStatus" class="flex items-center gap-2 flex-wrap">
-            <!-- populated by renderPersonalAccomReceiptStatus() -->
           </div>
         </div>
-        <!-- Waypoint itinerary (only shown when type = waypoints) -->
         <section id="personalAccomWaypointStopsSection" class="hidden pl-divide pt-3">
           <div class="flex items-center justify-between mb-2">
             <p class="pl-label">Waypoint Itinerary</p>
@@ -1567,7 +1449,6 @@
           <div id="personalAccomWaypointStopsList" class="space-y-1.5"></div>
         </section>
 
-        <!-- Who's staying (companions only) -->
         <section id="personalAccomCompanionSection" class="hidden pl-divide pt-3">
           <p class="pl-label">Who's Staying</p>
           <p id="personalAccomNoCompanions" class="hidden pl-hint">No companions on this trip yet — add them in Settings.</p>
@@ -1626,7 +1507,6 @@
     </div>
   </div>
 
-  <!-- Swag modal -->
   <div id="noteModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="noteModalTitleHeading">
     <div class="pl-modal-card max-w-md">
       <div class="pl-modal-head">
@@ -1706,7 +1586,6 @@
         <div class="pl-divide pt-3">
           <p class="pl-label">Receipt</p>
           <div id="swagReceiptStatus" class="flex items-center gap-2 flex-wrap">
-            <!-- populated by renderSwagReceiptStatus() -->
           </div>
         </div>
       </div>
@@ -1722,7 +1601,6 @@
     </div>
   </div>
 
-  <!-- Ticket modal -->
   <div id="ticketModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="ticketModalTitle">
     <div class="pl-modal-card max-w-lg">
       <div class="pl-modal-head">
@@ -1766,7 +1644,6 @@
         <div class="pl-divide pt-4">
           <p class="pl-label">Receipt</p>
           <div id="ticketReceiptStatus" class="flex items-center gap-2 flex-wrap">
-            <!-- populated by renderTicketReceiptStatus() -->
           </div>
         </div>
         <div id="ticketDaysWrap" class="hidden">
@@ -1793,9 +1670,6 @@
     </div>
   </div>
 
-  <!-- Team member detail modal -->
-  <!-- Person detail modal — shared read-only view for team members (sponsor) and
-       companions (personal). Populated by plannerPersonDetail.openPersonDetail(). -->
   <div id="personDetailModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="personDetailName">
     <div class="pl-modal-card max-w-xl">
       <div class="flex items-start justify-between px-6 py-4 border-b pl-rule">
@@ -1819,7 +1693,6 @@
     </div>
   </div>
 
-  <!-- Contact modal -->
   <div id="contactModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
     <div class="pl-modal-card max-w-lg">
       <div class="pl-modal-head">
@@ -1881,7 +1754,6 @@
     </div>
   </div>
 
-  <!-- Task modal -->
   <div id="taskModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="taskModalTitle">
     <div class="pl-modal-card max-w-lg">
       <div class="pl-modal-head">
@@ -1937,7 +1809,6 @@
     </div>
   </div>
 
-  <!-- Receipt modal -->
   <div id="receiptModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="receiptModalTitle">
     <div class="pl-modal-card max-w-lg">
       <div class="pl-modal-head">
@@ -2004,7 +1875,6 @@
     </div>
   </div>
 
-  <!-- Document modal -->
   <div id="documentModal" class="hidden fixed inset-0 z-50 flex items-start justify-center p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="documentModalTitle">
     <div class="pl-modal-card max-w-md">
       <div class="pl-modal-head">
@@ -2054,10 +1924,8 @@
 
   <div id="plannerSaveToast" class="save-toast" role="status" aria-live="polite">Saved</div>
 
-  <!-- iOS bottom tab bar (mobile only, populated by renderMobileBottomBar()) -->
   <nav id="mobileBottomBar" class="sm:hidden" aria-label="Planner sections"></nav>
 
-  <!-- Delete confirmation sheet -->
   <div id="plannerDeleteSheet" class="sm:hidden hidden fixed inset-0 z-[210] flex flex-col justify-end" style="background:rgba(0,0,0,0.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)">
     <div class="pl-surface rounded-t-[14px] planner-sheet-font">
       <div class="flex justify-center pt-2.5 pb-2 flex-shrink-0" aria-hidden="true">
@@ -2078,13 +1946,6 @@
     </div>
   </div>
 
-  <!-- Planner actions.
-       ONE menu for both viewports: a bottom sheet on narrow screens, a panel
-       anchored under the masthead button on desktop. It replaced a row of four
-       outline buttons in the toolbar — Save / Back up / Add to calendar /
-       Restore — which put four equal-weight controls in front of a reader who
-       needs one of them rarely. The buttons still exist, hidden, because they
-       carry the implementations these rows click. -->
   <div id="plannerActionsSheet" class="pln-actions hidden" role="dialog" aria-modal="true" aria-label="Planner actions">
     <div class="pln-actions__panel">
       <div class="pln-actions__head">
@@ -2128,7 +1989,6 @@
     </div>
   </div>
 
-  <!-- Mobile tab bottom sheet -->
   <div id="mobileTabSheet" class="sm:hidden hidden fixed inset-0 z-[200] flex flex-col justify-end" style="background:rgba(0,0,0,0.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)">
     <div class="pl-surface rounded-t-[14px] max-h-[80vh] flex flex-col">
       <div class="relative flex justify-center pt-2.5 pb-1 flex-shrink-0">

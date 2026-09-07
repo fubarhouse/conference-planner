@@ -21,6 +21,7 @@
 # the dependencies have to be in the tree rather than fetched at build time.
 !/tools/
 !/tools/**
+/tools/*/vendor
 # …but not the compiled binaries, which are ~18 MB each and are named after
 # the cmd/ directory they are built from.
 /tools/*/server

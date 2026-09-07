@@ -8,13 +8,11 @@
     <title>Not found · Programme</title>
     <style>
       @layer overrides, reset, legacy, tokens, base, composition, section, utility;
-    </style>
+</style>
     <link rel="stylesheet" href="/css/foundation.css" />
     <link rel="stylesheet" href="/css/section-chrome.css" />
     <style>
-      /* Error pages are served when something has already gone wrong, so they
-         carry no script and depend on nothing but the foundation sheet. If even
-         that fails to load the markup still reads top to bottom. */
+
       .err {
         display: flex;
         flex-direction: column;
@@ -66,20 +64,13 @@
       .err__link:hover {
         background: var(--paper-2);
       }
-    </style>
+</style>
     <script>
-      // Inline and dependency-free on purpose: these pages load when something
-      // has already failed, so they must not need the app's JS. This is only
-      // enough to honour a colour mode the reader already chose — without it an
-      // error page arrives in the opposite scheme to the site they were just
-      // reading, which reads as a different site entirely.
       try {
         var m = localStorage.getItem('scheduleColourMode');
         if (m === 'light' || m === 'dark') document.documentElement.dataset.mode = m;
-      } catch (e) {
-        /* private mode, storage disabled — fall through to the OS preference */
-      }
-    </script>
+      } catch (e) {}
+</script>
   </head>
   <body>
     <main class="err">

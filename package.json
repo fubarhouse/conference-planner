@@ -29,6 +29,7 @@
     "geocode:events": "node --env-file-if-exists=.env scripts/geocode-events.mjs",
     "lint": "eslint app/js scripts",
     "lint:css": "node scripts/lint-css.mjs",
+    "lint:html": "node scripts/check-html-comments.mjs",
     "report:coverage": "node --env-file-if-exists=.env scripts/report-coverage.mjs",
     "report:quality": "node --env-file-if-exists=.env scripts/report-quality.mjs",
     "report:s3": "node --env-file-if-exists=.env scripts/migrate-s3-private.mjs",

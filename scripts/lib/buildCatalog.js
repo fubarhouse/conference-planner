@@ -16,6 +16,29 @@
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { join, relative, sep } from 'node:path';
 import { summarizeSources } from './sources.js';
+import { CURATION_ROOT } from './roots.js';
+
+// An event's NAME and the series it BELONGS TO are separate facts. `designation`
+// is what it was marketed as and lives in the dataset; the series it is grouped
+// under is a curation decision and lives in the private ledger — so DrupalSouth
+// Community Day groups under DrupalSouth, and Drupal Camp Delhi under DrupalCamp,
+// without either losing its own name.
+//
+// The catalog carries the RESOLVED series so the browse page can group by it
+// without reading a private file or calling an API — which is what keeps the
+// static deployment working. Only events whose series differs from their
+// designation get the key, so the file stays lean and adding this changed
+// nothing for the 199 events that map to themselves.
+async function readSeriesMap() {
+  try {
+    const raw = await readFile(join(CURATION_ROOT, 'decisions.json'), 'utf8');
+    const series = JSON.parse(raw)?.series;
+    return series && typeof series === 'object' ? series : {};
+  } catch {
+    // No ledger is the normal case for a static build, and not an error.
+    return {};
+  }
+}
 
 // Only the fields the client reads (getSearchableEvents + visibility/category +
 // home cards). Keeping the subset small keeps catalog.json lean. `default` is
@@ -74,6 +97,7 @@ export async function buildCatalog(dataDir) {
   const files = (await collectEventFiles(join(dataDir, EVENTS_SUBDIR), dataDir)).sort((a, b) =>
     a.localeCompare(b),
   );
+  const seriesOf = await readSeriesMap();
 
   const events = [];
   const skipped = [];
@@ -90,9 +114,11 @@ export async function buildCatalog(dataDir) {
       // by loading 90 datasets would defeat the point of having a catalog.
       // Omitted entirely when an event has no sources, to keep the file lean.
       const sources = summarizeSources(data);
+      const series = String(seriesOf[file] || '').trim();
       events.push({
         file,
         event: pickEventFields(event),
+        ...(series && series !== event.designation ? { series } : {}),
         ...(sources.count ? { sources } : {}),
       });
     } catch (err) {

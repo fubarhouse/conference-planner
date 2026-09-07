@@ -720,8 +720,6 @@
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "startTime",
-          "endTime",
           "duration",
           "title",
           "location",
@@ -732,16 +730,39 @@
           "link",
           "sponsorIds"
         ],
+        "allOf": [
+          {
+            "description": "A time is required unless the item is explicitly unscheduled. Barcamps publish sessions with no slot at all — the programme is made in the room on the morning — so an item may say `unscheduled: true` and omit the times INSTEAD of carrying invented ones. Nothing else may omit them. See docs/todo.md section 2.6.",
+            "if": {
+              "not": {
+                "properties": { "unscheduled": { "const": true } },
+                "required": ["unscheduled"]
+              }
+            },
+            "then": { "required": ["startTime", "endTime"] },
+            "else": {
+              "description": "An unscheduled item must NOT carry a time. Half-stating it is worse than not stating it.",
+              "not": {
+                "anyOf": [{ "required": ["startTime"] }, { "required": ["endTime"] }]
+              }
+            }
+          }
+        ],
         "properties": {
+          "unscheduled": {
+            "type": "boolean",
+            "const": true,
+            "description": "This session was offered but never placed in a slot, and no timetable assigning it one was ever published. It still carries a duration (the slot length the organisers advertised) and belongs to the event's session block. Set ONLY when the times genuinely never existed — not when a timetable exists and simply was not archived, which is a capture gap and a different problem."
+          },
           "startTime": {
             "type": "string",
             "format": "date-time",
-            "description": "ISO 8601 UTC start time of the session."
+            "description": "ISO 8601 UTC start time of the session. Omitted only when `unscheduled` is true."
           },
           "endTime": {
             "type": "string",
             "format": "date-time",
-            "description": "ISO 8601 UTC end time of the session."
+            "description": "ISO 8601 UTC end time of the session. Omitted only when `unscheduled` is true."
           },
           "duration": {
             "type": "string",

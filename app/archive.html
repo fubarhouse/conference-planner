@@ -7,21 +7,8 @@
   <link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
     <meta name="theme-color" content="#f4f5f0" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#131614" media="(prefers-color-scheme: dark)">
-    <!-- Every drill-down lives at a deeper path (/archive/speaker/<slug>),
-         where a relative "./css/…" resolves against that path and 404s — the
-         page would load with no styles and no script. A base makes every
-         relative URL on the page, including the @import list below, resolve
-         from the app root. -->
-    <base href="/">
     <title>Archive — Conference Planner</title>
   <meta name="description" content="Twenty years of community events in one place. Follow a speaker across a decade, see which topics rose and fell, and search every session ever given.">
-  <!-- og:url and og:image are injected per request by ogTags() in server.js,
-       from the Host the browser actually asked for. They are NOT written here
-       on purpose: anyone can host this, and a domain compiled into the markup
-       would point every share on their deployment at somebody else's site.
-       Served as plain static files there is no server to inject them, so those
-       deployments ship without the absolute pair — which is correct, and better
-       than a confidently wrong URL. -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Programme">
   <meta property="og:title" content="Archive">
@@ -33,9 +20,6 @@
     <link rel="preload" href="./fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="./fonts/newsreader-roman.woff2" as="font" type="font/woff2" crossorigin>
 
-    <!-- Same layer order as the schedule: `overrides` first (important reverses
-         layer order), `legacy` after `reset` so legacy utility classes still
-         beat our element resets, ours last. See brand/DECISIONS.md. -->
     <style>
       @layer overrides, reset, legacy, tokens, base, composition, section, utility;
       @import url("./css/utilities.css") layer(legacy);
@@ -55,9 +39,6 @@
                     <div class="app-lockup__title">Archive</div>
                     <h1 id="archiveSubtitle" class="app-lockup__place">The whole community, year by year</h1>
                 </div>
-                <!-- Above the masthead's rule and clear of the view switches
-                     below it: annotations are not a filter on the archive,
-                     they are the reader's own layer over all of it. -->
                 <div class="header-actions l-cluster">
                     <button id="archiveAnnotationsBtn" type="button" class="theme-picker-btn"
                             title="Add notes to the years — the events around the events">
@@ -82,30 +63,19 @@
         </nav>
     </div>
 
-    <!-- Container IDs match the editor's overlay so archiveDashboard.js can
-         render here unchanged. -->
     <main id="archiveObservatory" class="obs-studio">
         <div class="obs-inner l-center">
             <div id="obsBody"></div>
         </div>
     </main>
 
-    <!-- Deliberately OUTSIDE #obsBody: archiveDashboard.js replaces that
-         container wholesale for every view, so a notice placed inside it would
-         survive the overview and vanish the moment you searched sessions or
-         drilled into a speaker — the views where the provenance of the data
-         matters most. Out here it is part of the page shell and shows on all
-         of them. -->
-    <!-- `obs-inner`, not `l-center`: the archive's own column carries side
-         padding, and a plain l-center footer ran 64px wider than every row it
-         sat beneath. -->
     <footer class="obs-inner l-center">
       <!--provenance-->
     </footer>
 
     <aside class="app-rail" aria-hidden="true">
     </aside>
-    <div id="railPanel" class="app-panel" hidden aria-live="polite"></div>
+    <div id="railPanel" class="app-panel" hidden></div>
 
     <script type="module" src="./js/archive.js"></script>
 </body>

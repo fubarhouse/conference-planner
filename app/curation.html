@@ -16,9 +16,6 @@
   <link rel="preload" href="./fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="./fonts/newsreader-roman.woff2" as="font" type="font/woff2" crossorigin>
 
-  <!-- Like home.html, written after the rebrand: no legacy sheet, no overrides
-       layer. `utilities.css` is imported only for `.hidden`, which the studio's
-       own JS toggles. -->
   <style>
     @layer overrides, reset, legacy, tokens, base, composition, section, utility;
     @import url("./css/utilities.css") layer(legacy);

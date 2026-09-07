@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" style="opacity:0">
 <head>
-  <!-- Self-hosted, latin subset. No third-party origin in the critical path.
-       Safe as static <link>s: on a deep route the server ships `<base href="/">`
-       ahead of them, so the preload scanner resolves them correctly. -->
   <link rel="preload" href="./fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="./fonts/newsreader-roman.woff2" as="font" type="font/woff2" crossorigin>
   <meta charset="UTF-8">
@@ -20,14 +17,10 @@
   <style>html{transition:opacity .15s ease}</style>
   <noscript><style>html{opacity:1}</style></noscript>
 
-  <!-- Layer order matches every other section. `legacy` sits after `reset` so
-       legacy utility classes still beat our element resets, but before our own
-       layers so `app-*`/`edt-*` always win. `overrides` is first because
-       !important reverses layer order. See brand/DECISIONS.md. -->
   <style>
     @layer overrides, reset, legacy, tokens, base, composition, section, utility;
     @import url("./css/utilities.css") layer(legacy);
-  </style>
+</style>
   <link rel="stylesheet" href="./css/foundation.css">
   <link rel="stylesheet" href="./css/section-chrome.css">
   <link rel="stylesheet" href="./css/section-modal.css">
@@ -39,8 +32,6 @@
 
   <a class="u-skip" href="#editorMain">Skip to the editor</a>
 
-  <!-- Shared masthead + section nav, the same as every other section. The
-       sidebar below is WITHIN-editor navigation; this is between sections. -->
   <header class="app-masthead">
     <div class="l-center">
       <div class="app-masthead__bar">
@@ -61,7 +52,6 @@
         <a href="./editor.html" class="app-nav__link" aria-current="page">Editor</a>
       </nav>
 
-      <!-- The route, rendered. Filled by renderEditorCrumbs() in editor.js. -->
       <nav id="editorCrumbs" class="app-crumbs" aria-label="Breadcrumb"></nav>
     </div>
   </header>
@@ -244,7 +234,7 @@
             <p class="edt-eyebrow">Dataset</p>
             <h2 class="edt-section__title">Event metadata</h2>
           </div>
-          
+
         </div>
         <p class="edt-hint">Core event details used throughout the planner.</p>
         <div id="eventMetaForm" class="edt-form edt-form--3"></div>
@@ -259,9 +249,6 @@
           </button>
         </div>
         <div id="sessionDetailsPanel">
-      <!-- List beside form. Sessions and Sponsors are the SAME component with
-           different records, so they share `edt-work*` rather than each having
-           a private copy of the same idea. -->
       <section id="sessionWorkspace" class="edt-work">
         <div id="sessionSidebarPanel" class="edt-work__list">
           <div class="edt-work__head">
@@ -289,7 +276,7 @@
           <div id="sessionForm" class="edt-form"></div>
         </div>
       </section>
-        </div><!-- /sessionDetailsPanel -->
+        </div>
         <div id="timelineWorkspacePanel" class="hidden">
           <section class="editor-meta-accordion rounded-lg p-4">
             <div class="mb-3">
@@ -298,8 +285,8 @@
             </div>
             <div id="timelineCanvas"></div>
           </section>
-        </div><!-- /timelineWorkspacePanel -->
-      </div><!-- /sessionWorkspacePanel -->
+        </div>
+      </div>
 
       <div id="logoWorkspacePanel" class="hidden">
       <section>
@@ -308,7 +295,7 @@
             <p class="edt-eyebrow">Dataset</p>
             <h2 class="edt-section__title">Event logo</h2>
           </div>
-          
+
         </div>
         <p class="edt-hint">Manage the logo shown in the public event header.</p>
         <div id="logoForm" class="edt-form"></div>
@@ -322,7 +309,7 @@
             <p class="edt-eyebrow">Dataset</p>
             <h2 class="edt-section__title">Photos</h2>
           </div>
-          
+
         </div>
         <p class="edt-hint">Optional photo-sharing callout shown at the bottom of the event page.</p>
         <div id="flickrForm" class="edt-form"></div>
@@ -461,7 +448,6 @@
           </div>
           <p class="edt-hint">Admin only. Manage accounts, roles and API tokens.</p>
 
-          <!-- User list -->
           <div class="overflow-x-auto">
             <table class="w-full text-left text-sm">
               <thead>
@@ -478,10 +464,8 @@
             </table>
           </div>
 
-          <!-- Token result (shown after generation) -->
           <div id="usersTokenResult"></div>
 
-          <!-- Add user form -->
           <div class="pt-4 border-t edt-rule space-y-3">
             <h3 class="text-sm font-semibold edt-ink-1">Add user</h3>
             <form id="usersAddForm" class="grid grid-cols-1 sm:grid-cols-4 gap-2 items-end">
@@ -516,7 +500,6 @@
       </section>
     </div>
   </main>
-
 
   <div id="editorSettingsModal" class="session-modal-overlay hidden" aria-hidden="true">
     <div id="editorSettingsCard" class="es-modal" role="dialog" aria-modal="true" aria-labelledby="editorSettingsTitle">
@@ -585,7 +568,6 @@
     </div>
   </div>
 
-  <!-- Stale-write (file changed on disk) confirmation -->
   <div id="staleWriteModal" class="editor-confirm-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="staleWriteTitle">
     <div class="editor-confirm-card">
       <div class="editor-confirm-icon" aria-hidden="true">
@@ -608,19 +590,12 @@
     </div>
   </div>
 
-  <!-- API Server Settings Modal -->
   <div id="personModal" class="session-modal-overlay hidden" aria-hidden="true">
     <div class="session-modal-card" role="dialog" aria-modal="true" aria-labelledby="personModalTitle" style="width: min(520px, 100%)">
       <div class="session-modal-header">
         <h2 id="personModalTitle" class="session-modal-title">Add person</h2>
         <button id="personModalClose" type="button" class="session-modal-close" aria-label="Close">&times;</button>
       </div>
-      <!-- Own layout classes, not the legacy `space-y-4`/`block` utilities. This
-           guarded against a legacy sheet laying .session-modal-body out as a
-           grid, which put every label beside its own input. The editor imports
-           neither schedule.css nor components.css now, so nothing does that any
-           more — but .person-form still states its own layout, which is why the
-           prune did not disturb it. -->
       <div class="session-modal-body person-form">
         <p class="person-form-lead">Organisers and volunteers only. Speakers come from the schedule and cannot be added here.</p>
         <label class="person-field">
@@ -675,15 +650,10 @@
     </div>
   </div>
 
-  <!-- Vendored, not loaded from a CDN: this page is auth-gated and writes to disk,
-       so a third party being able to change the script it runs is not a risk worth
-       carrying for a file that never changes. Update by replacing the file. -->
   <script src="./vendor/ajv-6.12.6.min.js"></script>
   <script type="module" src="./js/editor.js"></script>
   <script type="module">
     import { bottomBarHtml, moreSheetHtml } from './js/modules/mobileNav.js';
-    // Editor sidebar: route clicks to existing tab buttons, sync active state.
-    // Runs after editor.js (module scripts execute in source order).
     const TAB_BTN_IDS = {
       event: 'showEventTab', logo: 'showLogoTab', flickr: 'showFlickrTab',
       sessions: 'showSessionsTab', sponsors: 'showSponsorsTab',
@@ -709,18 +679,15 @@
       });
     });
 
-    // Keep sidebar in sync when the original tab bar buttons are clicked.
     Object.values(TAB_BTN_IDS).forEach((id) => {
       document.getElementById(id)?.addEventListener('click', syncEditorSidebar);
     });
 
-    // Collapse toggle.
     const sidebar = document.getElementById('editorSidebar');
     let collapsed = localStorage.getItem('editorSidebarCollapsed') === '1';
     function applyEditorCollapse() {
       sidebar?.classList.toggle('sidebar-collapsed', collapsed);
       const icon = document.getElementById('editorSidebarToggleIcon');
-      // A drawn chevron, matching the planner's.
       if (icon) icon.textContent = collapsed ? '\u00bb' : '\u00ab';
     }
     document.getElementById('editorSidebarToggleBtn')?.addEventListener('click', () => {
@@ -731,17 +698,12 @@
     applyEditorCollapse();
     syncEditorSidebar();
 
-    // ── iOS bottom tab bar + grouped "More" sheet (mobile) ──────────────────────
-    // Rendered via the shared mobileNav.js builders (same as the planner) so the
-    // two surfaces can't drift. Clicks route to the existing showXTab buttons.
     const EDITOR_TAB_BTN = {
       event: 'showEventTab', logo: 'showLogoTab', flickr: 'showFlickrTab',
       sessions: 'showSessionsTab', sponsors: 'showSponsorsTab',
       related: 'showRelatedTab',
       sitemap: 'showSitemapTab', appearance: 'showAppearanceTab',
     };
-    // `meta(tab)` returns `{label}` only — mobileNav.js dropped the icon and
-    // per-tab colour when the planner did, and the two surfaces share it.
     const EDITOR_META = {
       event:      { label: 'Event' },
       logo:       { label: 'Logo' },
@@ -791,21 +753,18 @@
       editorMoreSheet.classList.add('hidden');
     });
 
-    // Re-render the bar (and its current-location "More" label) on every tab change.
     document.addEventListener('editor-tab-changed', renderEditorBottomBar);
     Object.values(EDITOR_TAB_BTN).forEach((id) =>
       document.getElementById(id)?.addEventListener('click', renderEditorBottomBar));
     renderEditorBottomBar();
-  </script>
+</script>
   <script type="module">
     import { initUsersPanel } from './js/modules/usersPanel.js';
     initUsersPanel();
-  </script>
+</script>
 
-  <!-- iOS bottom tab bar (mobile only) — populated by renderEditorBottomBar() -->
   <nav id="editorMobileBottomBar" class="sm:hidden" aria-label="Editor sections"></nav>
 
-  <!-- Grouped "More" sheet — populated by renderEditorMoreSheet() -->
   <div id="editorMoreSheet" class="sm:hidden hidden fixed inset-0 z-[200] flex flex-col justify-end" style="background:rgba(0,0,0,0.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)">
     <div class="edt-surface rounded-t-[14px] max-h-[80vh] flex flex-col">
       <div class="relative flex justify-center pt-2.5 pb-1 flex-shrink-0">
